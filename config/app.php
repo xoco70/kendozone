@@ -144,7 +144,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
+	    'Cartalyst\Sentinel\Laravel\SentinelServiceProvider',
+	    Webpatser\Countries\CountriesServiceProvider::class,
     ],
 
     /*
@@ -195,6 +196,10 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+	'Countries' => 'Webpatser\Countries\CountriesFacade',
+        'Activation' => 'Cartalyst\Sentinel\Laravel\Facades\Activation',
+        'Reminder'   => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
+        'Sentinel'   => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
 
     ],
 
