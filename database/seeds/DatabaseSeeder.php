@@ -13,5 +13,12 @@ class DatabaseSeeder extends Seeder {
 		$this->command->info('Seeded the countries!');
 		$this->call('GradeSeeder');
 		$this->command->info('Seeded the grades!');
+		$this->call(SentinelRoleSeeder::class);
+	        $this->call(SentinelUserSeeder::class);
+	        $this->call(SentinelUserRoleSeeder::class);
+
+	        $this->command->info('All tables seeded!');
+
+	        Model::reguard();
 	}
 }

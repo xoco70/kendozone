@@ -14,48 +14,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 
-
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class User extends \Cartalyst\Sentinel\Users\EloquentUser implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, CanResetPassword;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'Users';
-    public $timestamps = true;
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'gradeId',
-        'countryId',
-        'picture',
-
-    ];
-
-
-    public function Country()
-    {
-        return $this->hasOne('Country');
-    }
-
-    public function Grade()
-    {
-        return $this->hasOne('Grade');
-    }
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    // protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -64,6 +39,7 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /* 
     public function rules()
     {
         return [
@@ -80,4 +56,5 @@ class User extends Model implements AuthenticatableContract,
 //    public function getPictureAttribute($picture){
 //        return is_null($picture) ? 'avatar.png' : $picture;
 //    }
+*/
 }
