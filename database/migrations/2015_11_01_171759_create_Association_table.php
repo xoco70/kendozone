@@ -12,6 +12,8 @@ class CreateAssociationTable extends Migration {
 			$table->string('name')->unique();
 //			$table->integer('adminId')->unsigned();
 			$table->timestamps();
+			$table->engine = 'InnoDB';
+
 		});
 	}
 

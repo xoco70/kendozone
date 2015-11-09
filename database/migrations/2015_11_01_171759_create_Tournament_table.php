@@ -33,6 +33,7 @@ class CreateTournamentTable extends Migration {
 
 
 			$table->timestamps();
+			$table->engine = 'InnoDB';
 
 
 

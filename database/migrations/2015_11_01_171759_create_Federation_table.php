@@ -13,6 +13,8 @@ class CreateFederationTable extends Migration {
 //			$table->integer('adminId')->unsigned();
 			$table->integer('countryId');
 			$table->timestamps();
+			$table->engine = 'InnoDB';
+
 		});
 	}
 

@@ -12,6 +12,8 @@ class CreateGradeTable extends Migration {
             $table->string("name")->unique();
             $table->tinyInteger("order");
 			$table->timestamps();
+			$table->engine = 'InnoDB';
+
 
 		});
 	}

@@ -33,6 +33,8 @@ class SetupCountriesTable extends Migration {
 		    $table->string('flag', 6)->nullable();
 		    
 		    $table->primary('id');
+			$table->engine = 'InnoDB';
+
 		});
 	}
 

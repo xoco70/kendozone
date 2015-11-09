@@ -15,6 +15,8 @@ class CreatePlaceTable extends Migration {
             $table->string("state");
             $table->integer("countryId");
 			$table->timestamps();
+			$table->engine = 'InnoDB';
+
 		});
 	}
 
