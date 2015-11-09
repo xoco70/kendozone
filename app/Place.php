@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model {
 
-	protected $table = 'Place';
+	protected $table = 'place';
 	public $timestamps = true;
 	protected $fillable = ['name','coords','city','state','countryId'];
     protected $attributes = array(

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShiaiCategory extends Model {
 
-	protected $table = 'ShiaiCategory';
+	protected $table = 'shiaiCategory';
 	public $timestamps = true;
 
 	protected $fillable = [

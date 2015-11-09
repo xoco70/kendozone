@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Competitor extends Model {
 
-	protected $table = 'Competitor';
+	protected $table = 'competitor';
 	public $timestamps = true;
 
 	public function User()

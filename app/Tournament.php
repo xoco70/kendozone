@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tournament extends Model
 {
 
-    protected $table = 'Tournament';
+    protected $table = 'tournament';
     public $timestamps = true;
 
     protected $fillable = [

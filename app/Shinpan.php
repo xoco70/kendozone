@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shinpan extends Model {
 
-	protected $table = 'Shinpan';
+	protected $table = 'shinpan';
 	public $timestamps = true;
 
 	public function User()

@@ -7,7 +7,7 @@ class CreateAssociationTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('Association', function(Blueprint $table) {
+		Schema::create('association', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name')->unique();
 //			$table->integer('adminId')->unsigned();
@@ -19,6 +19,6 @@ class CreateAssociationTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('Association');
+		Schema::drop('association');
 	}
 }

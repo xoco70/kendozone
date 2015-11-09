@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Federation extends Model {
 
-	protected $table = 'Federation';
+	protected $table = 'federation';
 	public $timestamps = true;
 
 	protected $fillable = [

@@ -7,7 +7,7 @@ class CreatePlaceTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('Place', function(Blueprint $table) {
+		Schema::create('place', function(Blueprint $table) {
 			$table->increments('id');
             $table->string("name");
             $table->string("coords");
@@ -22,6 +22,6 @@ class CreatePlaceTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('Place');
+		Schema::drop('place');
 	}
 }

@@ -7,7 +7,7 @@ class CreateFederationTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('Federation', function(Blueprint $table) {
+		Schema::create('federation', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name')->unique();
 //			$table->integer('adminId')->unsigned();
@@ -20,6 +20,6 @@ class CreateFederationTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('Federation');
+		Schema::drop('federation');
 	}
 }
