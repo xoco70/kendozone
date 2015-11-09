@@ -1,4 +1,12 @@
 /vendor
+/build/logs
+/build/coverage
+/app/tests/_log
+composer.phar
+.DS_Store
+/_ide_helper.php
+/app/config/packages
+/public/packages
 /node_modules
 Homestead.yaml
 Homestead.json
@@ -6,4 +14,5 @@ Homestead.json
 /bootstrap/compiled.php
 .env.*.php
 .env.php
-.idea
+/.idea
+public/images/avatar/
