@@ -34,10 +34,7 @@ class CompetitorController extends Controller
      */
     public function index()
     {
-        $competitors = DB::table('competitor')
-            ->leftJoin('countries', 'competitor.countryId', '=', 'countries.id')
-            ->select('competitor.*','countries.name as country')
-            ->get(); //
+        $competitors = Competitor::all();
         return view('competitors.index', compact('competitors'));
     }
 

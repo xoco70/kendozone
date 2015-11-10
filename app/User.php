@@ -30,7 +30,7 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser implements Authenticat
      *
      * @var array
      */
-    // protected $fillable = ['name', 'email', 'password'];
+     protected $fillable = ['name', 'email', 'password','gradeId'.'countryId','picture'];
 
     /**
      * The attributes excluded from the model's JSON form.

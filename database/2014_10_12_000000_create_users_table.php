@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->integer('gradeId')->unsigned();
-            $table->integer('countryId')->unsigned();
-            $table->string('picture');
+            $table->integer('gradeId')->unsigned()->default(1);
+            $table->integer('countryId')->unsigned()->default(484);
+            $table->string('picture')->default("avatar.png");
             $table->rememberToken();
             $table->timestamps();
         });

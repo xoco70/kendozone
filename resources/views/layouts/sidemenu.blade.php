@@ -12,7 +12,10 @@
                         {{--<img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"--}}
                              {{--class="profile_pic"/>--}}
 				<span class="clear">
-                    <span class="block m-t-xs"> <strong class="font-bold">{{ Sentinel::getUser()->email }}</strong>
+                    <span class="block m-t-xs">
+                            @if (Sentinel::check())
+                        <strong class="font-bold">{{ Sentinel::getUser()->email }}</strong>
+                            @endif
 				 <br/>
                         {{--We could put UserType here--}}
                         {{--{{ Lang::get('core.lastlogin') }} : <br />--}}
