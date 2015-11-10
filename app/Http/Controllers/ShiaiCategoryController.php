@@ -34,9 +34,9 @@ class ShiaiCategoryController extends Controller
      */
     public function index()
     {
-        $shiaiCategories = DB::table('ShiaiCategory')
-            ->leftJoin('countries', 'ShiaiCategory.countryId', '=', 'countries.id')
-            ->select('ShiaiCategory.*','countries.name as country')
+        $shiaiCategories = DB::table('shiaiCategory')
+            ->leftJoin('countries', 'shiaiCategory.countryId', '=', 'countries.id')
+            ->select('shiaiCategory.*','countries.name as country')
             ->get(); //
         return view('shiaiCategories.index', compact('shiaiCategories'));
     }

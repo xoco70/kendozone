@@ -33,8 +33,8 @@
 		</li>
 		<li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)"  data-toggle="dropdown"><i class="fa fa-user"></i> <span>{!! Lang::get('core.myaccount') !!}</span><i class="caret"></i></a>
 		  <ul class="dropdown-menu dropdown-menu-right icons-right">
-			<li><a href="{!! URL::to('users/'.Auth::user()->id) !!}"><i class="fa fa-user"></i> {!! Lang::get('core.profile') !!}</a></li>
-			<li><a href="{!!   URL::action('Auth\AuthController@getLogout') !!}"><i class="fa fa-sign-out"></i> {!! Lang::get('core.logout') !!}</a></li>
+			<li><a href="{!! URL::to('users/'.Sentinel::getUser()->id) !!}"><i class="fa fa-user"></i> {!! Lang::get('core.profile') !!}</a></li>
+			<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {!! Lang::get('core.logout') !!}</a></li>
 		  </ul>
 		</li>
 

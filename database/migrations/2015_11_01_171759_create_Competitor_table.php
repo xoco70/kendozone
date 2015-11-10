@@ -8,7 +8,7 @@ class CreateCompetitorTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('Competitor', function(Blueprint $table) {
+		Schema::create('competitor', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('surname');
@@ -44,6 +44,6 @@ class CreateCompetitorTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('Competitor');
+		Schema::drop('competitor');
 	}
 }

@@ -33,9 +33,9 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = DB::table('Tournament')
-            ->leftJoin('Place', 'Place.id', '=', 'Tournament.placeId')
-            ->select('Tournament.*','Place.name as place')
+        $tournaments = DB::table('tournament')
+            ->leftJoin('place', 'place.id', '=', 'tournament.placeId')
+            ->select('tournament.*','place.name as place')
             ->get(); //
         return view('tournaments.index', compact('tournaments'));
     }

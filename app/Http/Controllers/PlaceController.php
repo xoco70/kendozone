@@ -35,9 +35,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = DB::table('Place')
-            ->leftJoin('countries', 'Place.countryId', '=', 'countries.id')
-            ->select('Place.*','countries.name as country')
+        $places = DB::table('place')
+            ->leftJoin('countries', 'place.countryId', '=', 'countries.id')
+            ->select('place.*','countries.name as country')
             ->get(); //
         return view('places.index', compact('places'));
     }

@@ -34,9 +34,9 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = DB::table('Federation')
+        $federations = DB::table('federation')
             ->leftJoin('countries', 'Federation.countryId', '=', 'countries.id')
-            ->select('Federation.*','countries.name as country')
+            ->select('federation.*','countries.name as country')
             ->get(); //
         return view('federations.index', compact('federations'));
     }

@@ -30,19 +30,16 @@
                             <!-- Email field -->
                             <div class="form-group">
                                 {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])!!}
-                                {!! errors_for('email', $errors) !!}
                             </div>
 
                             <!-- Password field -->
                             <div class="form-group">
                                 {!! Form::password('password', ['placeholder' => 'Password','class' => 'form-control', 'required' => 'required'])!!}
-                                {!! errors_for('password', $errors) !!}
                             </div>
 
                             <!-- Password confirmation field -->
                             <div class="form-group">
                                 {!! Form::password('password_confirmation', ['placeholder' => 'Password confirmation','class' => 'form-control', 'required' => 'required'])!!}
-                                {!! errors_for('password', $errors) !!}
                             </div>
 
                             <!-- Hidden Token field -->
