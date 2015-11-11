@@ -18,7 +18,7 @@ class SentinelRedirectAdmin
     {
         if (Sentinel::check()) {
             $user = Sentinel::getUser();
-            $admin = Sentinel::findRoleByName('Admins');
+            $admin = Sentinel::findRoleByName('Admin');
 
             if ($user->inRole($admin)) {
                 return redirect()->intended('admin');

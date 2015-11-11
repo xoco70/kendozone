@@ -17,7 +17,7 @@ class SentinelAdminUser
     public function handle($request, Closure $next)
     {
         $user = Sentinel::getUser();
-        $admin = Sentinel::findRoleByName('Admins');
+        $admin = Sentinel::findRoleByName('Admin');
 
         if (!$user->inRole($admin)) {
             return redirect('login');

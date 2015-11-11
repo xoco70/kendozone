@@ -29,14 +29,14 @@ class SentinelRoleSeeder extends Seeder
             'slug' => 'admin',
         ]);
         Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Users',
-            'slug' => 'users',
+            'name' => 'Moderator',
+            'slug' => 'moderator',
         ]);
-//
-//        Sentinel::getRoleRepository()->createModel()->create([
-//            'name' => 'Admins',
-//            'slug' => 'admins',
-//        ]);
+        Sentinel::getRoleRepository()->createModel()->create([
+            'name' => 'User',
+            'slug' => 'user',
+        ]);
+
 
         $this->command->info('Roles seeded!');
     }

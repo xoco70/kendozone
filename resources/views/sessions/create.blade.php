@@ -25,33 +25,33 @@
                                 <div class="alert alert-danger">
                                     {{ session()->get('error_message') }}
                                 </div>
-                            @endif
+                                @endif
 
-                            <!-- Email field -->
-                            <div class="form-group">
-                                {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])!!}
-
-                            </div>
-
-                            <!-- Password field -->
-                            <div class="form-group">
-                                {!! Form::password('password', ['placeholder' => 'Password','class' => 'form-control', 'required' => 'required'])!!}
-
-                            </div>
-
-                            <div class="checkbox">
-                                <!-- Remember me field -->
+                                        <!-- Email field -->
                                 <div class="form-group">
-                                    <label>
-                                        {!! Form::checkbox('remember', 'remember') !!} Remember me
-                                    </label>
-                                </div>
-                            </div>
+                                    {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])!!}
 
-                            <!-- Submit field -->
-                            <div class="form-group">
-                                {!! Form::submit('Login', ['class' => 'btn btn btn-lg btn-success btn-block']) !!}
-                            </div>
+                                </div>
+
+                                <!-- Password field -->
+                                <div class="form-group">
+                                    {!! Form::password('password', ['placeholder' => 'Password','class' => 'form-control', 'required' => 'required'])!!}
+
+                                </div>
+
+                                <div class="checkbox">
+                                    <!-- Remember me field -->
+                                    <div class="form-group">
+                                        <label>
+                                            {!! Form::checkbox('remember', 'remember') !!} Remember me
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Submit field -->
+                                <div class="form-group">
+                                    {!! Form::submit('Login', ['class' => 'btn btn btn-lg btn-success btn-block']) !!}
+                                </div>
                         </fieldset>
                         {!! Form::close() !!}
                     </div>
@@ -59,11 +59,22 @@
                 <div style="text-align:center">
                     <p><a href="{{ url('forgot_password') }}">Forgot Password?</a></p>
 
-                    <p><strong>Standard User:</strong> user@user.com<br>
-                    <strong>Standard User Password:</strong> sentineluser</p>
+
+                    <p><strong>Super Admin User:</strong> superadmin@admin.com<br>
+                        <strong>Super User Password:</strong> superadmin</p>
+
+                    <p><strong>Owner User:</strong> owner@admin.com<br>
+                        <strong>Owner Password:</strong> owner</p>
 
                     <p><strong>Admin User:</strong> admin@admin.com<br>
-                    <strong>Admin Password:</strong> sentineladmin</p>
+                        <strong>Admin Password:</strong> sentineladmin</p>
+
+                    <p><strong>Moderator User:</strong> moderator@admin.com<br>
+                        <strong>Moderator Password:</strong> moderator</p>
+
+                    <p><strong>Standard User:</strong> user@user.com<br>
+                        <strong>Standard User Password:</strong> sentineluser</p>
+
                 </div>
 
 

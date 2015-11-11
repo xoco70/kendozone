@@ -49,8 +49,8 @@ class SessionsController extends Controller
     {
         // Logged in successfully - redirect based on type of user
         $user = Sentinel::getUser();
-        $admin = Sentinel::findRoleByName('Admins');
-        $users = Sentinel::findRoleByName('Users');
+        $admin = Sentinel::findRoleByName('Admin');
+        $users = Sentinel::findRoleByName('User');
 
         if ($user->inRole($admin)) {
             return redirect()->intended('admin');

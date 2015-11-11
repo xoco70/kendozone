@@ -79,7 +79,31 @@ class PlaceTest extends TestCase
     }
 
 
+    protected function login_superadmin_user()
+    {
+        return $this->visit('login')
+            ->type('admin@admin.com', 'email')
+            ->type('sentineladmin', 'password')
+            ->press('Login');
+    }
+
+    protected function login_owner_user()
+    {
+        return $this->visit('login')
+            ->type('admin@admin.com', 'email')
+            ->type('sentineladmin', 'password')
+            ->press('Login');
+    }
+
     protected function login_admin_user()
+    {
+        return $this->visit('login')
+            ->type('admin@admin.com', 'email')
+            ->type('sentineladmin', 'password')
+            ->press('Login');
+    }
+
+    protected function login_moderator_user()
     {
         return $this->visit('login')
             ->type('admin@admin.com', 'email')
