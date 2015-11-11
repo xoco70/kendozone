@@ -39,8 +39,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="{{ set_active_admin('admin') }}"><a href="/">Home</a></li>
-                <li class="{{ set_active_admin('admin/profiles') }}"><a href="/admin/profiles">List Users</a></li>
+                <li ><a href="/">Home</a></li>
+                <li ><a href="/admin/profiles">List Users</a></li>
 
 
               </ul>

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TournamentType extends Model
 {
 
-    protected $table = 'tournamenTypet';
-    public $timestamps = true;
+    protected $table = 'tournamentType';
 
     protected $fillable = [
+        'id',
         'name',
     ];
 

@@ -31,7 +31,7 @@ class AdminUsersEditFormRequest extends Request
     public function rules()
     {
         return [
-            'account_type' => 'integer|between:1,2',
+            'account_type' => 'integer|between:1,6',
             'email' => 'required|email|unique:users,email,'. $this->route('profiles'),
             'first_name' => 'required',
             'last_name' => 'required',

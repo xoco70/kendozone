@@ -66,5 +66,5 @@
             </div>
         </div>
     </div>
-
+        @include("errors.list")
 @endsection

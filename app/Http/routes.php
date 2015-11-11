@@ -15,7 +15,7 @@ use App\Grade;
 # Static Pages. Redirecting admin so admin cannot access these pages.
 Route::group(['middleware' => ['redirectAdmin']], function()
 {
-    Route::get('/', ['as' => 'home', 'uses' => 'DashboardController@index']);
+    Route::get('/', ['as' => 'home','middleware' => 'auth', 'uses' => 'DashboardController@index']);
     Route::get('about', ['as' => 'about', 'uses' => 'PagesController@getAbout']);
     Route::get('contact', ['as' => 'contact', 'uses' => 'PagesController@getContact']);
 });

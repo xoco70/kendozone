@@ -84,7 +84,8 @@ class AdminUsersController extends Controller
         if (! $request->has("password")) {
             $input = $request->only('email', 'first_name', 'last_name');
 
-            $user->fill($input)->save();
+            $user->fill($input);
+            $user->save();
 
             $this->user->updateRole($id, $request->input('account_type'));
 

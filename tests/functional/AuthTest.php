@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Sentinel;
 
 class AuthTest extends TestCase
 {
@@ -35,7 +34,8 @@ class AuthTest extends TestCase
              ->type('Madarang', 'last_name')
              ->press('Create Account')
              ->seePageIs('register')
-             ->see('email has already been taken');
+             ->see(trans('validation.unique',['attribute'=>'email']));
+
     }
 
     // removed because mailer might not be setup on most people's local machine
@@ -78,49 +78,48 @@ class AuthTest extends TestCase
     public function it_logs_in_a_standard_user()
     {
         $this->login_standard_user()
-             ->click('Registered Users Only')
-             ->see('This is for standard users only');
+             ->see('user@user.com');
     }
 
-    /** @test */
-    public function it_allows_a_standard_user_to_edit_own_information()
-    {
+//    /** @test */ To add to check EDIT MY OWN PROFILE
+//    public function it_allows_a_standard_user_to_edit_own_information()
+//    {
+//
+//        $this->login_standard_user()
+//             ->click('My Profile')
+//             ->click('Edit your Profile')
+//             ->type('firstChanged', 'first_name')
+//             ->type('lastChanged', 'last_name')
+//             ->press('Update Profile')
+//             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
+//             ->see('User has been updated successfully');
+//    }
 
-        $this->login_standard_user()
-             ->click('My Profile')
-             ->click('Edit your Profile')
-             ->type('firstChanged', 'first_name')
-             ->type('lastChanged', 'last_name')
-             ->press('Update Profile')
-             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
-             ->see('User has been updated successfully');
-    }
+//    /** @test */
+//    public function it_allows_a_standard_user_to_edit_own_information_and_password()
+//    {
+//        $this->login_standard_user()
+//             ->click('My Profile')
+//             ->click('Edit your Profile')
+//             ->type('firstChanged', 'first_name')
+//             ->type('lastChanged', 'last_name')
+//             ->type('passwordnew', 'password')
+//             ->type('passwordnew', 'password_confirmation')
+//             ->press('Update Profile')
+//             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
+//             ->see('User (and password) has been updated successfully');
+//    }
 
-    /** @test */
-    public function it_allows_a_standard_user_to_edit_own_information_and_password()
-    {
-        $this->login_standard_user()
-             ->click('My Profile')
-             ->click('Edit your Profile')
-             ->type('firstChanged', 'first_name')
-             ->type('lastChanged', 'last_name')
-             ->type('passwordnew', 'password')
-             ->type('passwordnew', 'password_confirmation')
-             ->press('Update Profile')
-             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
-             ->see('User (and password) has been updated successfully');
-    }
-
-    /** @test */
-    public function it_denies_a_standard_user_access_to_another_account()
-    {
-        $this->login_standard_user()
-             ->click('My Profile')
-             ->visit('profiles/2')
-             ->seePageIs('profiles/' . Sentinel::getUser()->id)
-             ->visit('profiles/2/edit')
-             ->seePageIs('profiles/' . Sentinel::getUser()->id);
-    }
+//    /** @test */
+//    public function it_denies_a_standard_user_access_to_another_account()
+//    {
+//        $this->login_standard_user()
+//             ->click('My Profile')
+//             ->visit('profiles/2')
+//             ->seePageIs('profiles/' . Sentinel::getUser()->id)
+//             ->visit('profiles/2/edit')
+//             ->seePageIs('profiles/' . Sentinel::getUser()->id);
+//    }
 
     /** @test */
     public function it_denies_a_standard_user_access_to_admin_account()
@@ -183,13 +182,13 @@ class AuthTest extends TestCase
              ->click('List Users')
              ->click('user@user.com')
              ->click('Edit Profile')
-             ->select('2', 'account_type')
+             ->select('4', 'account_type')
              ->type('user@user.com', 'email')
              ->type('firstChanged', 'first_name')
              ->type('lastChanged', 'last_name')
              ->press('Update Profile')
              ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
-             ->seeInDatabase('role_users', ['user_id' => 1, 'role_id' => 2])
+             ->seeInDatabase('role_users', ['user_id' => 3, 'role_id' => 4])
              ->see('User has been updated successfully');
     }
 

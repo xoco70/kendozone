@@ -8,7 +8,6 @@
     @if (session()->has('flash_message'))
         <div class="alert alert-success">{{ session()->get('flash_message') }}</div>
     @endif
-
     {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.profiles.update', $user->id]]) !!}
 
         <div class="form-group">
@@ -55,5 +54,5 @@
             {!! Form::submit('Update Profile', ['class' => 'btn btn-primary']) !!}
         </div>
     {!! Form::close() !!}
-
+@include("errors.list")
 @endsection

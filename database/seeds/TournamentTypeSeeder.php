@@ -17,13 +17,14 @@ class TournamentTypeSeeder extends Seeder {
         //Empty the Grade table
 //        DB::table('Grade')->delete();
         TournamentType::truncate();
-        TournamentType::create(['name' => "local"]);
-        TournamentType::create(['name' => "districtal"]);
-        TournamentType::create(['name' => "regional"]);
-        TournamentType::create(['name' => "state"]);
-        TournamentType::create(['name' => "national"]);
-        TournamentType::create(['name' => "continental"]);
-        TournamentType::create(['name' => "world"]);
+        TournamentType::create(['id' => '1','name' => "local"]);
+        TournamentType::create(['id' => '2','name' => "districtal"]);
+        TournamentType::create(['id' => '3','name' => "city"]);
+        TournamentType::create(['id' => '4','name' => "regional"]);
+        TournamentType::create(['id' => '5','name' => "state"]);
+        TournamentType::create(['id' => '6','name' => "national"]);
+        TournamentType::create(['id' => '7','name' => "continental"]);
+        TournamentType::create(['id' => '8','name' => "world"]);
 
     }
 }
