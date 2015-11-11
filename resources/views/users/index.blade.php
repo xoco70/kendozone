@@ -13,19 +13,20 @@
                 <a href="{!!   URL::action('UserController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
                 <tr>
                     <th>ID</th>
-                    <th>{{ trans('crud.name') }}</th>
+                    <th>{{ trans('crud.first_name') }}</th>
+                    <th>{{ trans('crud.last_name') }}</th>
                     <th>{{ trans('crud.email') }}</th>
                     <th>{{ trans('crud.grade') }}</th>
                     <th>{{ trans('crud.picture') }}</th>
                     <th>{{ trans('crud.country') }}</th>
-
                     <th class="text-center">{{ trans('crud.action') }}</th>
                 </tr>
                 </thead>
                 @foreach($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->first_name }}</td>
+                        <td>{{ $user->last_name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->gradeId }}</td>
                         <td>
@@ -33,8 +34,9 @@
                                 <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="mini_profile_pic" />
                             @else
                                 <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="mini_profile_pic" />
-                             @endif
+                            @endif
                         </td>
+
                         <td>{{ $user->country }}</td>
 
                         <td class="text-center">

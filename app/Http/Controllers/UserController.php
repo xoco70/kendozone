@@ -40,9 +40,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('Users')
-            ->leftJoin('countries', 'Users.countryId', '=', 'countries.id')
-            ->select('Users.*', 'countries.name as country', 'countries.flag')
+        $users = DB::table('users')
+            ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
+            ->select('users.*', 'countries.name as country', 'countries.flag')
             ->get();
 
         return view('users.index', compact('users'));
