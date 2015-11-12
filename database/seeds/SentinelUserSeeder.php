@@ -12,13 +12,20 @@ class SentinelUserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        DB::table('users')->truncate();
 
         Sentinel::registerAndActivate([
-            'email'    => 'user@user.com',
-            'password' => 'sentineluser',
-            'first_name' => 'UserFirstName',
-            'last_name' => 'UserLastName',
+            'email'    => 'superadmin@admin.com',
+            'password' => 'superadmin',
+            'first_name' => 'SuperAdminFirstName',
+            'last_name' => 'SuperAdminLastName',
+        ]);
+
+        Sentinel::registerAndActivate([
+            'email'    => 'owner@admin.com',
+            'password' => 'owner',
+            'first_name' => 'OwnerFirstName',
+            'last_name' => 'OwnerLastName',
         ]);
 
         Sentinel::registerAndActivate([
@@ -27,6 +34,22 @@ class SentinelUserSeeder extends Seeder
             'first_name' => 'AdminFirstName',
             'last_name' => 'AdminLastName',
         ]);
+
+        Sentinel::registerAndActivate([
+            'email'    => 'moderator@admin.com',
+            'password' => 'moderator',
+            'first_name' => 'ModeratorFirstName',
+            'last_name' => 'ModeratorLastName',
+        ]);
+
+        Sentinel::registerAndActivate([
+            'email'    => 'user@user.com',
+            'password' => 'sentineluser',
+            'first_name' => 'UserFirstName',
+            'last_name' => 'UserLastName',
+        ]);
+
+
 
         $this->command->info('Users seeded!');
 

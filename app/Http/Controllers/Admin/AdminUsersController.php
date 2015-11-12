@@ -30,7 +30,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = $this->user->getAll();
-        $admin = Sentinel::findRoleByName('Admins');
+        $admin = Sentinel::findRoleByName('Admin');
         return view('protected.admin.list_users')->withUsers($users)->withAdmin($admin);
     }
 

@@ -13,28 +13,28 @@ class AuthTest extends TestCase
     public function it_registers_a_user()
     {
         $this->visit('register')
-             ->type('blah@blah.com', 'email')
-             ->type('password', 'password')
-             ->type('password', 'password_confirmation')
-             ->type('Andre', 'first_name')
-             ->type('Madarang', 'last_name')
-             ->press('Create Account')
-             ->seeInDatabase('users', ['email' => 'blah@blah.com'])
-             ->seePageIs('login');
+            ->type('blah@blah.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->type('Andre', 'first_name')
+            ->type('Madarang', 'last_name')
+            ->press('Create Account')
+            ->seeInDatabase('users', ['email' => 'blah@blah.com'])
+            ->seePageIs('login');
     }
 
     /** @test */
     public function it_does_not_register_an_exisiting_user()
     {
         $this->visit('register')
-             ->type('user@user.com', 'email')
-             ->type('password', 'password')
-             ->type('password', 'password_confirmation')
-             ->type('Andre', 'first_name')
-             ->type('Madarang', 'last_name')
-             ->press('Create Account')
-             ->seePageIs('register')
-             ->see(trans('validation.unique',['attribute'=>'email']));
+            ->type('user@user.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->type('Andre', 'first_name')
+            ->type('Madarang', 'last_name')
+            ->press('Create Account')
+            ->seePageIs('register')
+            ->see(trans('validation.unique', ['attribute' => 'email']));
 
     }
 
@@ -61,16 +61,15 @@ class AuthTest extends TestCase
     // }
 
 
-
     /** @test */
     public function it_denies_an_incorrect_login()
     {
         $this->visit('login')
-             ->type('nouser@nouser.com', 'email')
-             ->type('password', 'password')
-             ->press('Login')
-             ->seePageIs('login')
-             ->see('Invalid Credentials Provided');
+            ->type('nouser@nouser.com', 'email')
+            ->type('password', 'password')
+            ->press('Login')
+            ->seePageIs('login')
+            ->see('Invalid Credentials Provided');
 
     }
 
@@ -78,7 +77,7 @@ class AuthTest extends TestCase
     public function it_logs_in_a_standard_user()
     {
         $this->login_standard_user()
-             ->see('user@user.com');
+            ->see('user@user.com');
     }
 
 //    /** @test */ To add to check EDIT MY OWN PROFILE
@@ -125,53 +124,53 @@ class AuthTest extends TestCase
     public function it_denies_a_standard_user_access_to_admin_account()
     {
         $this->login_standard_user()
-             ->visit('admin')
-             ->seePageIs('/');
+            ->visit('admin')
+            ->seePageIs('/');
     }
 
     /** @test */
     public function it_denies_a_standard_user_access_to_login_page()
     {
         $this->login_standard_user()
-             ->visit('login')
-             ->seePageIs('/');
+            ->visit('login')
+            ->seePageIs('/');
     }
 
     /** @test */
     public function it_denies_a_standard_user_access_to_register_page()
     {
         $this->login_standard_user()
-             ->visit('register')
-             ->seePageIs('/');
+            ->visit('register')
+            ->seePageIs('/');
     }
 
     /** @test */
     public function it_denies_a_standard_user_access_to_forgot_password_page()
     {
         $this->login_standard_user()
-             ->visit('forgot_password')
-             ->seePageIs('/');
+            ->visit('forgot_password')
+            ->seePageIs('/');
     }
 
     /** @test */
     public function it_logs_in_an_admin_user()
     {
         $this->login_admin_user()
-             ->seePageIs('admin');
+            ->seePageIs('admin');
     }
 
     /** @test */
     public function it_allows_an_admin_user_to_edit_own_information()
     {
         $this->login_admin_user()
-             ->click('List Users')
-             ->click('admin@admin.com')
-             ->click('Edit Profile')
-             ->type('firstChanged', 'first_name')
-             ->type('lastChanged', 'last_name')
-             ->press('Update Profile')
-             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
-             ->see('User has been updated successfully');
+            ->click('List Users')
+            ->click('admin@admin.com')
+            ->click('Edit Profile')
+            ->type('firstChanged', 'first_name')
+            ->type('lastChanged', 'last_name')
+            ->press('Update Profile')
+            ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
+            ->see('User has been updated successfully');
 
     }
 
@@ -179,59 +178,87 @@ class AuthTest extends TestCase
     public function it_allows_an_admin_user_to_edit_another_users_information()
     {
         $this->login_admin_user()
-             ->click('List Users')
-             ->click('user@user.com')
-             ->click('Edit Profile')
-             ->select('4', 'account_type')
-             ->type('user@user.com', 'email')
-             ->type('firstChanged', 'first_name')
-             ->type('lastChanged', 'last_name')
-             ->press('Update Profile')
-             ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
-             ->seeInDatabase('role_users', ['user_id' => 3, 'role_id' => 4])
-             ->see('User has been updated successfully');
+            ->click('List Users')
+            ->click('user@user.com')
+            ->click('Edit Profile')
+            ->select('4', 'account_type')
+            ->type('user@user.com', 'email')
+            ->type('firstChanged', 'first_name')
+            ->type('lastChanged', 'last_name')
+            ->press('Update Profile')
+            ->seeInDatabase('users', ['first_name' => 'firstChanged', 'last_name' => 'lastChanged'])
+            ->seeInDatabase('role_users', ['user_id' => 5, 'role_id' => 4])
+            ->see('User has been updated successfully');
     }
 
     /** @test */
     public function it_denies_an_admin_user_access_to_home_page()
     {
         $this->login_admin_user()
-             ->visit('/')
-             ->seePageIs('admin');
+            ->visit('/')
+            ->seePageIs('admin');
     }
 
     /** @test */
     public function it_denies_an_admin_user_access_to_about_page()
     {
         $this->login_admin_user()
-             ->visit('about')
-             ->seePageIs('admin');
+            ->visit('about')
+            ->seePageIs('admin');
     }
 
     /** @test */
     public function it_denies_an_admin_user_access_to_contact_page()
     {
         $this->login_admin_user()
-             ->visit('contact')
-             ->seePageIs('admin');
+            ->visit('contact')
+            ->seePageIs('admin');
+    }
+
+
+    protected function login_superadmin_user()
+    {
+        return $this->visit('login')
+            ->type('superadmin@admin.com', 'email')
+            ->type('superadmin', 'password')
+            ->press('Login');
+    }
+
+    protected function login_owner_user()
+    {
+        return $this->visit('login')
+            ->type('owner@admin.com', 'email')
+            ->type('owner', 'password')
+            ->press('Login');
+    }
+
+    protected function login_admin_user()
+    {
+        return $this->visit('login')
+            ->type('admin@admin.com', 'email')
+            ->type('sentineladmin', 'password')
+            ->press('Login');
+    }
+
+    protected function login_moderator_user()
+    {
+        return $this->visit('login')
+            ->type('moderator@admin.com', 'email')
+            ->type('moderator', 'password')
+            ->press('Login');
     }
 
 
     protected function login_standard_user()
     {
         return $this->visit('login')
-                    ->type('user@user.com', 'email')
-                    ->type('sentineluser', 'password')
-                    ->press('Login');
+            ->type('user@user.com', 'email')
+            ->type('sentineluser', 'password')
+            ->press('Login');
     }
 
-    protected function login_admin_user()
-    {
-        return $this->visit('login')
-                    ->type('admin@admin.com', 'email')
-                    ->type('sentineladmin', 'password')
-                    ->press('Login');
-    }
+
+
 
 
 }

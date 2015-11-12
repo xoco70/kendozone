@@ -44,7 +44,7 @@ class RegistrationController extends Controller
         $user = Sentinel::registerAndActivate($input);
 
         // Find the role using the role name
-        $usersRole = Sentinel::findRoleByName('Users');
+        $usersRole = Sentinel::findRoleByName('Owner');
 
         // Assign the role to the users
         $usersRole->users()->attach($user);
