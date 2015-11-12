@@ -13,9 +13,8 @@
                              {{--class="profile_pic"/>--}}
 				<span class="clear">
                     <span class="block m-t-xs">
-                            @if (Sentinel::check())
-                        <strong class="font-bold">{{ Sentinel::getUser()->email }}</strong>
-                            @endif
+                        <strong class="font-bold">EMAIL</strong>
+
 				 <br/>
                         {{--We could put UserType here--}}
                         {{--{{ Lang::get('core.lastlogin') }} : <br />--}}

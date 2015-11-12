@@ -52,10 +52,10 @@
 
                     <div class="control-group">
                         <!-- Password -->
-                        <label class="control-label" for="password_confirm">Password (Confirm)</label>
+                        <label class="control-label" for="password_confirmation">Password (Confirm)</label>
 
                         <div class="controls">
-                            <input type="password" id="password_confirm" name="password_confirm" placeholder=""
+                            <input type="password" id="password_confirmation" name="password_confirmation" placeholder=""
                                    class="form-control">
 
                             <p class="help-block">Please confirm password</p>
