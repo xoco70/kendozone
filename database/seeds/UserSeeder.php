@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class SentinelUserSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,19 +14,19 @@ class SentinelUserSeeder extends Seeder
     {
         DB::table('users')->truncate();
 
-        Sentinel::registerAndActivate([
-            'email'    => 'superadmin@admin.com',
-            'password' => 'superadmin',
-            'first_name' => 'SuperAdminFirstName',
-            'last_name' => 'SuperAdminLastName',
-        ]);
+//        Sentinel::registerAndActivate([
+//            'email'    => 'superadmin@admin.com',
+//            'password' => 'superadmin',
+//            'first_name' => 'SuperAdminFirstName',
+//            'last_name' => 'SuperAdminLastName',
+//        ]);
 
-        Sentinel::registerAndActivate([
-            'email'    => 'owner@admin.com',
-            'password' => 'owner',
-            'first_name' => 'OwnerFirstName',
-            'last_name' => 'OwnerLastName',
-        ]);
+//        Sentinel::registerAndActivate([
+//            'email'    => 'owner@admin.com',
+//            'password' => 'owner',
+//            'first_name' => 'OwnerFirstName',
+//            'last_name' => 'OwnerLastName',
+//        ]);
 
         Sentinel::registerAndActivate([
             'email'    => 'admin@admin.com',
@@ -35,12 +35,12 @@ class SentinelUserSeeder extends Seeder
             'last_name' => 'AdminLastName',
         ]);
 
-        Sentinel::registerAndActivate([
-            'email'    => 'moderator@admin.com',
-            'password' => 'moderator',
-            'first_name' => 'ModeratorFirstName',
-            'last_name' => 'ModeratorLastName',
-        ]);
+//        Sentinel::registerAndActivate([
+//            'email'    => 'moderator@admin.com',
+//            'password' => 'moderator',
+//            'first_name' => 'ModeratorFirstName',
+//            'last_name' => 'ModeratorLastName',
+//        ]);
 
         Sentinel::registerAndActivate([
             'email'    => 'user@user.com',

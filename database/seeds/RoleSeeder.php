@@ -1,9 +1,10 @@
 <?php
 
+use App\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class SentinelRoleSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,29 +15,11 @@ class SentinelRoleSeeder extends Seeder
     {
 
         DB::table('roles')->truncate();
-
-
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'SuperAdmin',
-            'slug' => 'superadmin',
-        ]);
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Owner',
-            'slug' => 'owner',
-        ]);
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Admin',
-            'slug' => 'admin',
-        ]);
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Moderator',
-            'slug' => 'moderator',
-        ]);
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'User',
-            'slug' => 'user',
-        ]);
-
+        Role::create(['name' => "SuperAdmin",'label' => 'SuperAdmin']);
+        Role::create(['name' => "Owner",'label' => 'Owner']);
+        Role::create(['name' => "Admin",'label' => 'Admin']);
+        Role::create(['name' => "Moderator",'label' => 'Moderator']);
+        Role::create(['name' => "User",'label' => 'User']);
 
         $this->command->info('Roles seeded!');
     }
