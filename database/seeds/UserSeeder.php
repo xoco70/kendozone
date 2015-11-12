@@ -1,7 +1,7 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class UserSeeder extends Seeder
 {
@@ -28,11 +28,10 @@ class UserSeeder extends Seeder
 //            'last_name' => 'OwnerLastName',
 //        ]);
 
-        Sentinel::registerAndActivate([
+        User::create([
             'email'    => 'admin@admin.com',
-            'password' => 'sentineladmin',
-            'first_name' => 'AdminFirstName',
-            'last_name' => 'AdminLastName',
+            'password' => 'admin',
+            'name' => 'AdminFirstName',
         ]);
 
 //        Sentinel::registerAndActivate([
@@ -42,11 +41,11 @@ class UserSeeder extends Seeder
 //            'last_name' => 'ModeratorLastName',
 //        ]);
 
-        Sentinel::registerAndActivate([
+        User::create([
             'email'    => 'user@user.com',
-            'password' => 'sentineluser',
-            'first_name' => 'UserFirstName',
-            'last_name' => 'UserLastName',
+            'password' => 'user',
+            'name' => 'UserFirstName',
+
         ]);
 
 

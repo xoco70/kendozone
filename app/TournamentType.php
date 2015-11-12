@@ -9,6 +9,7 @@ class TournamentType extends Model
 {
 
     protected $table = 'tournamentType';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',

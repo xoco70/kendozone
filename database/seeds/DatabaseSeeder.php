@@ -14,9 +14,11 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeded the countries!');
         $this->call('GradeSeeder');
         $this->command->info('Seeded the grades!');
-        $this->call(SentinelRoleSeeder::class);
-        $this->call(SentinelUserSeeder::class);
-        $this->call(SentinelUserRoleSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(PermissionRoleSeeder::class);
+//        $this->call(UserRoleSeeder::class);
         $this->command->info('Seeded the Users!');
         $this->call('TournamentTypeSeeder');
         $this->command->info('Seeded the TournamentType!');

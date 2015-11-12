@@ -3,6 +3,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
+
+    protected $fillable = ['name','label'];
     /**
      * A permission can be applied to roles.
      *
