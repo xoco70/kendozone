@@ -35,7 +35,7 @@
 		  <ul class="dropdown-menu dropdown-menu-right icons-right">
 
 {{--			<li><a href="{!! URL::to('users/'.Sentinel::getUser()->id) !!}"><i class="fa fa-user"></i> {!! Lang::get('core.profile') !!}</a></li>--}}
-			<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {!! Lang::get('core.logout') !!}</a></li>
+			<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i> {!! Lang::get('core.logout') !!}</a></li>
 		  </ul>
 		</li>
 

@@ -8,12 +8,12 @@
             </li>
             <li class="nav-header">
                 <div class="dropdown profile-element" style="text-align:center;">
-                    {{--<a href="{!! URL::to('users/'.Sentinel::getUser()->id) !!}">--}}
-                        {{--<img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"--}}
-                             {{--class="profile_pic"/>--}}
+                    <a href="{!! URL::to('users/'.Auth::user()->id) !!}">
+                        <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
+                             class="profile_pic"/>
 				<span class="clear">
                     <span class="block m-t-xs">
-                        <strong class="font-bold">EMAIL</strong>
+                        <strong class="font-bold">{{  Auth::user()->email }}</strong>
 
 				 <br/>
                         {{--We could put UserType here--}}
@@ -23,9 +23,10 @@
 				 </span>
                     </a>
                 </div>
-                {{--<div class="photo-header "><img--}}
-                            {{--src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"--}}
-                            {{--class="mini_profile_pic"/></div>--}}
+                <div class="photo-header ">
+                    <img
+                            src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
+                            class="mini_profile_pic"/></div>
 
             </li>
             <li>
