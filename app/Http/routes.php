@@ -30,7 +30,7 @@
     Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'auth'], function () { // 'middleware' => ['auth', 'roles'],'roles' => ['administrator', 'manager']    Only an administrator, or a manager can access this route
         Route::get('/', 'DashboardController@index');
         Route::resource('tournaments', 'TournamentController');
         Route::resource('competitors', 'CompetitorController');

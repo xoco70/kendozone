@@ -67,6 +67,11 @@
                         {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                     </div>
 
+                    <div class="form-group">
+                        {!!  Form::label('gradeId', trans('crud.grade')) !!}
+                        {!!  Form::select('gradeId', $grades,8, ['class' => 'form-control']) !!} <!-- Default 1st Dan-->
+                    </div>
+
 
                     <div class="control-group">
                         <!-- Button -->

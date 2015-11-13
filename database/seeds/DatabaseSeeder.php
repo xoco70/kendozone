@@ -2,12 +2,16 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
 
     public function run()
     {
+        if (App::environment() === 'production') {
+            exit('Te acabo de salvar el pellejo. Estas en produccion pend***.');
+        }
         Model::unguard();
         //Seed the countries
         $this->call('CountriesSeeder');
