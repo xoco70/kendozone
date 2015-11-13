@@ -21,7 +21,7 @@ class TournamentController extends Controller
     public function __construct()
     {
         // Fetch the Site Settings object
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->currentModelName = Lang::get('crud.tournament');
         View::share('currentModelName', $this->currentModelName);
     }

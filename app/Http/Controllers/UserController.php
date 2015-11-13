@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         // Fetch the Site Settings object
         $this->currentModelName = Lang::get('crud.user');
         View::share('currentModelName', $this->currentModelName);
@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
-        return view('users.edit', compact('user', 'countries', 'grades'));
+        return view('users.show', compact('user', 'countries', 'grades'));
     }
 
     /**

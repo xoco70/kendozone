@@ -20,7 +20,7 @@ class CompetitorController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         // Fetch the Site Settings object
         $this->currentModelName = Lang::get('crud.competitor');
         View::share('currentModelName', $this->currentModelName);
