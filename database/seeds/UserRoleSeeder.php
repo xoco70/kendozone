@@ -26,9 +26,8 @@ class UserRoleSeeder extends Seeder
 
         // Assign the roles to the users
 
-        $adminRole->users()->attach($adminUser);
-        $userRole->users()->attach($userUser);
-
+        $adminUser->roles()->save($adminRole);
+        $userUser->roles()->save($userRole);
 
         $this->command->info('Users assigned to roles seeded!');
     }

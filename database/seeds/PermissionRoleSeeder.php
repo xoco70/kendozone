@@ -38,6 +38,7 @@ class PermissionRoleSeeder extends Seeder
         $CanInviteCompetitor = Permission::find(14);
         $CanBanCompetitor = Permission::find(15);
 
+        // Assign the roles to the users
 
         $adminRole->givePermissionTo($CanEditProfile);
         $adminRole->givePermissionTo($CanDeleteProfile);
@@ -56,7 +57,14 @@ class PermissionRoleSeeder extends Seeder
         $adminRole->givePermissionTo($CanBanCompetitor);
 
 
-        // Assign the roles to the users
+        $userRole->givePermissionTo($CanEditProfile);
+        $userRole->givePermissionTo($CanDeleteProfile);
+        $userRole->givePermissionTo($CanChangeSettings);
+        $userRole->givePermissionTo($CanAccessDashboard);
+        $userRole->givePermissionTo($CanSeeTournaments);
+
+
+
 
 
         $this->command->info('Permission assigned to roles seeded!');
