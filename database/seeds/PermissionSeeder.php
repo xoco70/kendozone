@@ -29,7 +29,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => "CanEditPlace",'label' => '']);
         Permission::create(['name' => "CanDeletePlace",'label' => '']);
 
-        Permission::create(['name' => "CanRegisterCompetitor",'label' => '']);
+        Permission::create(['name' => "CanRegisterUser",'label' => '']);
         Permission::create(['name' => "CanInviteCompetitor",'label' => '']);
         Permission::create(['name' => "CanBanCompetitor",'label' => '']);
 

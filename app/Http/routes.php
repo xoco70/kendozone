@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+//    Auth::loginUsingId(2);
     // Authentication routes...
     Route::get('auth/login', 'Auth\AuthController@getLogin');
     Route::post('auth/login', 'Auth\AuthController@postLogin');

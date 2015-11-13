@@ -34,7 +34,7 @@ class PermissionRoleSeeder extends Seeder
         $CanCreatePlace = Permission::find(10);
         $CanEditPlace = Permission::find(11);
         $CanDeletePlace = Permission::find(12);
-        $CanRegisterCompetitor = Permission::find(13);
+        $CanRegisterUser = Permission::find(13);
         $CanInviteCompetitor = Permission::find(14);
         $CanBanCompetitor = Permission::find(15);
 
@@ -52,7 +52,7 @@ class PermissionRoleSeeder extends Seeder
         $adminRole->givePermissionTo($CanCreatePlace);
         $adminRole->givePermissionTo($CanEditPlace);
         $adminRole->givePermissionTo($CanDeletePlace);
-        $adminRole->givePermissionTo($CanRegisterCompetitor);
+        $adminRole->givePermissionTo($CanRegisterUser);
         $adminRole->givePermissionTo($CanInviteCompetitor);
         $adminRole->givePermissionTo($CanBanCompetitor);
 
