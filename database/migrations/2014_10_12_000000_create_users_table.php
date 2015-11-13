@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->integer('gradeId')->unsigned()->default(1);
             $table->integer('countryId')->unsigned()->default(484);
+            $table->integer('roleId')->unsigned();
             $table->string('picture')->default("avatar.png");
             $table->rememberToken();
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Grade;
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
@@ -63,11 +64,11 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'roleId' => $data['roleId'],
             'countryId' => $data['countryId']
 
         ]);
@@ -75,9 +76,12 @@ class AuthController extends Controller
 
     public function getRegister()
     {
+        $role = Role::where('name', '=', "Admin")->firstOrFail();
+        $roleId = $role->id;
+//        dd($roleObj);
         $countries = Countries::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
-        return view('auth.register', compact('countries','grades'));
+        return view('auth.register', compact('countries','grades', 'roleId'));
 
 
     }

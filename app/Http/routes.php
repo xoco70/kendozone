@@ -10,7 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//    Auth::loginUsingId(2);
+use Illuminate\Support\Facades\Auth;
+
+    Auth::loginUsingId(5);
+
     // Authentication routes...
     Route::get('auth/login', 'Auth\AuthController@getLogin');
     Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -30,7 +33,7 @@
     Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
-    Route::group(['middleware' => 'auth'], function () { // 'middleware' => ['auth', 'roles'],'roles' => ['administrator', 'manager']    Only an administrator, or a manager can access this route
+    Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'DashboardController@index');
         Route::resource('tournaments', 'TournamentController');
         Route::resource('competitors', 'CompetitorController');

@@ -72,6 +72,8 @@
                         {!!  Form::select('gradeId', $grades,8, ['class' => 'form-control']) !!} <!-- Default 1st Dan-->
                     </div>
 
+                    {!!   Form::hidden('roleId', $roleId) !!}
+
 
                     <div class="control-group">
                         <!-- Button -->

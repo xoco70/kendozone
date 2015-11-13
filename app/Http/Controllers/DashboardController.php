@@ -34,6 +34,9 @@ class DashboardController extends Controller
     public function index()
     {
 //        dd(Sentinel::getUser());
+//        $user = Auth::getUser();
+//        dd($user->role);
+//        dd($user);
         return view('/dashboard');
     }
 
