@@ -9,7 +9,7 @@ trait HasRole
      */
     public function role()
     {
-        return $this->belongsTo(Role::class,'id');
+        return $this->belongsTo(Role::class,'roleId', 'id');
     }
     /**
      * Assign the given role to the user.
@@ -34,16 +34,24 @@ trait HasRole
      */
     public function hasRole($role)
     {
-        //	public function hasRole($role)
-        {
-            if (is_string($role)) {
-                return $this->role->equals('name', $role);
-            }
-            return $role->contains($this->role);
 
-
-
+        if (is_string($role)) {
+            return $this->role->equals('name', $role);
         }
+
+//        dd($role->contains($this->role->name));
+
+//        var_dump($role->contains($this->role->name));
+//        echo "<br/>hasRole<br/>";
+//        var_dump($role);
+//        echo"<br>";
+//        var_dump($this->role->name);
+//        echo"<br>";
+        // Convert array to collection
+//        $role = collect($role);
+
+        return  $role->contains($this->role);
+
     }
 
     /**
@@ -54,7 +62,9 @@ trait HasRole
      */
     public function hasPermission(Permission $permission)
     {
-//        echo($permission);
+//        echo($permission->name);
+//        echo $permission->name." hasPermission";
+//        var_dump($this->hasRole($permission->roles));
         return $this->hasRole($permission->roles);
     }
 }

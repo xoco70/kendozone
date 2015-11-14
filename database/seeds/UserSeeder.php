@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
             'email'    => 'admin@admin.com',
             'password' => bcrypt('admin'),
             'name' => 'AdminFirstName',
+            'roleId' => '3'
         ]);
 
 //        Sentinel::registerAndActivate([
@@ -45,6 +46,7 @@ class UserSeeder extends Seeder
             'email'    => 'user@user.com',
             'password' => bcrypt('user'),
             'name' => 'UserFirstName',
+            'roleId' => '5'
 
         ]);
 

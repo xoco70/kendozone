@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
 
-        \App\Place::class => \App\Policies\PlacePolicy::class,
+//        \App\Place::class => \App\Policies\PlacePolicy::class,
     ];
 
     /**
@@ -30,6 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         // Dynamically register permissions with Laravel's Gate.
         foreach ($this->getPermissions() as $permission) {
             $gate->define($permission->name, function ($user) use ($permission) {
+//                echo $permission->name;
+//                var_dump($user->hasPermission($permission));
                 return $user->hasPermission($permission);
             });
         }

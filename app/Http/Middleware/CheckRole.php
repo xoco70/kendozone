@@ -1,6 +1,9 @@
 <?php namespace App\Http\Middleware;
 
+use App\Role;
 use Closure;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -15,9 +18,11 @@ class CheckRole
     {
         // Get the required roles from the route
         $roles = $this->getRequiredRoleForRoute($request->route());
+//        dd(Auth::getUser()->role);
+//        dd($roles);
         // Check if a role is required for the route, and
         // if so, ensure that the user has that role.
-        if ($request->user()->hasRole($roles) || !$roles) {
+        if (Auth::getUser()->hasRole($roles) || !$roles) {
             return $next($request);
         }
         return response([
@@ -31,6 +36,17 @@ class CheckRole
     private function getRequiredRoleForRoute($route)
     {
         $actions = $route->getAction();
-        return isset($actions['roles']) ? $actions['roles'] : null;
+//        dd($actions);
+        $roles = new Collection;
+        if (isset($actions['roles'])){
+            $result = $actions['roles'];
+            foreach ($result as $action){
+                $role = Role::where('name', '=', $action)->firstOrFail();
+                $roles->add($role);
+            }
+        }else{
+            $roles = null;
+        }
+        return $roles;
     }
 }
