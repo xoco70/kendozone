@@ -36,17 +36,20 @@ class CheckRole
     private function getRequiredRoleForRoute($route)
     {
         $actions = $route->getAction();
-//        dd($actions);
-        $roles = new Collection;
         if (isset($actions['roles'])){
-            $result = $actions['roles'];
-            foreach ($result as $action){
-                $role = Role::where('name', '=', $action)->firstOrFail();
-                $roles->add($role);
-            }
-        }else{
-            $roles = null;
+            $roles = Role::whereIn('name', $actions['roles'])->get();
         }
+//        dd($actions);
+//        $roles = new Collection;
+//        if (isset($actions['roles'])){
+//            $result = $actions['roles'];
+//            foreach ($result as $action){
+//                $role = Role::where('name', '=', $action)->firstOrFail();
+//                $roles->add($role);
+//            }
+//        }else{
+//            $roles = null;
+//        }
         return $roles;
     }
 }
