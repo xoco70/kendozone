@@ -43,7 +43,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function rules()
     {
         return [
-            'image'       => 'mimes:png,jpg, jpeg, gif'
+            'image' => 'mimes:png,jpg, jpeg, gif'
         ];
     }
     public function setPictureAttribute($picture){

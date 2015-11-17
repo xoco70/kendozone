@@ -8,7 +8,7 @@
             </li>
             <li class="nav-header">
                 <div class="dropdown profile-element" style="text-align:center;">
-                    <a href="{!! URL::to('users/'.Auth::user()->id) !!}">
+                    <a href="{!! URL::to('users/profile/'.Auth::user()->id) !!}">
                         <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
                              class="profile_pic"/>
 				<span class="clear">
@@ -24,9 +24,11 @@
                     </a>
                 </div>
                 <div class="photo-header ">
-                    <img
-                            src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
-                            class="mini_profile_pic"/></div>
+                    <a href="{!! URL::to('users/profile/'.Auth::user()->id) !!}">
+                        <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
+                                class="mini_profile_pic"/>
+                    </a>
+                </div>
 
             </li>
             @can('CanSeeTournaments')
@@ -50,7 +52,7 @@
             @can('CanSeeCompetitor')
             <li>
                 <a href="{!!   URL::action('CompetitorController@index') !!}" class="expand level-closed ">
-                    <div align="center"><i class="fa fa-user" ></i></div>
+                    <div align="center"><i class="fa fa-user"></i></div>
                     <div class="nav-label" align="center">{{ trans('crud.competitor') }}</div>
                 </a>
             </li>

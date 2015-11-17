@@ -33,6 +33,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('/', 'DashboardController@index')->middleware(['auth']);
+Route::get('/users/profile/{id}', 'UserController@showProfile')->middleware(['auth']);
 
 //Route::resource('places', [
 //    'middleware' => ['auth', 'roles'],
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['auth', 'roles'],'roles' => ['SuperAdmin', 'Owner
         Route::resource('country', 'CountryController');
         Route::resource('places', 'PlaceController');
     });
+
 
 
 //Route::resource('shinpan', 'ShinpanController');
