@@ -16,8 +16,8 @@
     {!!  Form::select('gradeId', $grades ,null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-{!!  Form::label('countryId', trans('crud.country')) !!}
-{!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+{!!  Form::label('roleId', trans('crud.role')) !!}
+{!!  Form::select('roleId', $roles,old('roleId'), ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group" >

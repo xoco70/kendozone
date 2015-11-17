@@ -13,8 +13,7 @@
                 <a href="{!!   URL::action('UserController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
                 <tr>
                     <th>ID</th>
-                    <th>{{ trans('crud.first_name') }}</th>
-                    <th>{{ trans('crud.last_name') }}</th>
+                    <th>{{ trans('crud.username') }}</th>
                     <th>{{ trans('crud.email') }}</th>
                     <th>{{ trans('crud.grade') }}</th>
                     <th>{{ trans('crud.picture') }}</th>
@@ -25,15 +24,14 @@
                 @foreach($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->last_name }}</td>
+                        <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->gradeId }}</td>
                         <td>
                             @if (!is_null($user->picture))
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="mini_profile_pic" />
+                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="small_profile_pic" />
                             @else
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="mini_profile_pic" />
+                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="small_profile_pic" />
                             @endif
                         </td>
 

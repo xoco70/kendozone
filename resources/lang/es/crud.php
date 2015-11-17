@@ -56,6 +56,12 @@ return [
     'grade' => 'Grado',
     'picture' => 'Foto',
     'email' => 'Email',
+    'firstname' => 'Nombre',
+    'lastname' => 'Appellido',
+    'newpassword' => 'Nueva contraseña',
+    'conewpassword' => 'Confirma la nueva contraseña',
+    'lastname' => 'Appellido',
+
 
 
     // Competitor

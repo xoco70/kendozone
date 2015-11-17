@@ -27,7 +27,7 @@
 </div>
 <div class="form-group">
     {!!  Form::label('hasRoundRobin', trans('crud.hasRoundRobin')) !!}
-    {!!  Form::checkbox('hasRoundRobin', 1, true) !!}
+    {!!  Form::checkbox('hasRoundRobin', old('hasRoundRobin')) !!}
 </div>
 <div class="form-group">
     {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
@@ -39,11 +39,11 @@
 </div>
 <div class="form-group">
     {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!}
-    {!!  Form::checkbox('hasEncho', 1, true) !!}
+    {!!  Form::checkbox('hasEncho',  old('hasEncho')) !!}
 </div>
 <div class="form-group">
     {!!  Form::label('type', trans('crud.tournamentType')) !!}
-    {!!  Form::select('type',$types, 1,  ['class' => 'form-control']) !!}
+    {!!  Form::select('type',$types, old('type'),  ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">

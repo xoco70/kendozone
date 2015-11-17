@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('content')
 
     <h1>@lang('crud.editModel', ['currentModelName' => $currentModelName])</h1>

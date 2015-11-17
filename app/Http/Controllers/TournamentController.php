@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TournamentRequest;
 use App\Place;
 use App\Tournament;
+use App\TournamentType;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -47,8 +48,9 @@ class TournamentController extends Controller
      */
     public function create()
     {
+        $types = TournamentType::lists('name', 'id');
         $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('places'));
+        return view('tournaments.create', compact('places','types'));
     }
 
     /**
@@ -73,7 +75,9 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        return view('tournaments.show', compact('tournament'));
+        $tournament->delete();
+        return redirect("tournaments");
+//        return view('tournaments.show', compact('tournament'));
     }
 
     /**
@@ -84,9 +88,10 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
+        $types = TournamentType::lists('name', 'id');
         $places = Place::lists('name', 'id');
 //        dd($tournaments);
-        return view('tournaments.edit', compact('tournament', 'places'));
+        return view('tournaments.edit', compact('tournament', 'places','types'));
     }
 
     /**
@@ -110,7 +115,6 @@ class TournamentController extends Controller
      */
     public function destroy(Tournament $tournament)
     {
-        $tournament->delete();
-        return redirect("tournaments");
+
     }
 }

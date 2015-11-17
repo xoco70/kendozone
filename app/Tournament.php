@@ -39,12 +39,12 @@ class Tournament extends Model
 
     public function geTournamentDateAttribute($date)
     {
-        return $date == "0000-00-00 00:00:00" ? "0000-00-00 00:00:00" : $date;
+        return $date == "0000-00-00 00:00:00" ? "0000-00-00" : $date;
     }
 
     public function getLimitRegisterDateAttribute($date)
     {
-        return $date == "0000-00-00 00:00:00" ? "0000-00-00 00:00:00" : $date;
+        return $date == "0000-00-00 00:00:00" ? "0000-00-00" : $date;
     }
 
     public function setTournamentDateAttribute($date)

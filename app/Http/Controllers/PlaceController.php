@@ -78,7 +78,15 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        return view('places.show', compact('place'));
+//        return view('places.show', compact('place'));
+        if ($place->delete()){
+            Session::flash('flash_message', 'Operación Exitosa!');
+        }else{
+            Session::flash('flash_message', 'Operación No realizada!');
+        }
+
+
+        return redirect("places");
     }
 
     /**

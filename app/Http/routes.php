@@ -12,7 +12,7 @@
 */
 use Illuminate\Support\Facades\Auth;
 
-Auth::loginUsingId(5); // 6 Admin, 5 User
+//Auth::loginUsingId(5); // 6 Admin, 5 User
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

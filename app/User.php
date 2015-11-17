@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-     protected $fillable = ['name','email', 'password','gradeId','countryId','picture', 'roleId'];
+     protected $fillable = ['name','firstname','lastname','email', 'password','gradeId','countryId','picture', 'roleId'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    /* 
+
     public function rules()
     {
         return [
@@ -53,8 +53,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $fileName = $timestamp.'.'.$extension; // renameing image
         $this->attributes['picture'] = $fileName;
     }
-//    public function getPictureAttribute($picture){
-//        return is_null($picture) ? 'avatar.png' : $picture;
-//    }
-*/
+    public function getPictureAttribute($picture){
+        return is_null($picture) ? 'avatar.png' : $picture;
+    }
+
 }

@@ -5,7 +5,7 @@
     <hr/>
     {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
 
-    @include("users.form", ["submitButton" => "@lang('crud.addModel', ['currentModelName' => $currentModelName])" ])
+    @include("users.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
 
 
     {!! Form::close()!!}

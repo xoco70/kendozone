@@ -62,9 +62,6 @@ trait HasRole
      */
     public function hasPermission(Permission $permission)
     {
-//        echo($permission->name);
-//        echo $permission->name." hasPermission";
-//        var_dump($this->hasRole($permission->roles));
         return $this->hasRole($permission->roles);
     }
 }

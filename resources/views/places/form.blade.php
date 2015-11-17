@@ -1,6 +1,6 @@
 <div class="form-group">
     {!!  Form::label('name', trans('crud.name')) !!}
-    {!!  Form::text('name', '', ['class' => 'form-control']) !!}
+    {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!!  Form::label('coords', trans('crud.coords')) !!}
@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 {!!  Form::label('countryId', trans('crud.country')) !!}
-{!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+{!!  Form::select('countryId', $countries,old('countryId'), ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
 </div>
 <div class="form-group">
     {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}

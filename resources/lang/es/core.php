@@ -18,9 +18,16 @@ return [
     'groups' => 'Grupos de usuarios',
     'blastmail' => 'Correo Másivo',
     'logs' => 'Logs',
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Panel de control',
     'profile' => 'Perfil',
     'logout' => 'Desconectar',
+    'home' => 'Inicio',
+    'personalinfo' => 'Información personal',
+    'changepassword' => 'Cambiar mi contraseña  ',
+    'email' => 'Correo electrónico',
+    'savechanges' => 'Guardar cambios',
+
+
 
     // Left menu
     'lastlogin' => 'Ultima conexión',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Grade;
+use App\Role;
 use App\User;
 use Carbon\Carbon;
 use DateTime;
@@ -56,10 +57,11 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
+        $roles = Role::lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.create', compact('user', 'countries', 'grades'));
+        return view('users.create', compact('user', 'countries', 'grades','roles'));
     }
 
     /**
@@ -94,9 +96,8 @@ class UserController extends Controller
      */
     public function show($user)
     {
-        $grades = Grade::lists('name', 'id');
-        $countries = Countries::lists('name', 'id');
-        return view('users.show', compact('user', 'countries', 'grades'));
+        $user->delete();
+        return redirect("users");
     }
 
     /**
@@ -106,10 +107,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $roles = Role::lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user', 'countries', 'grades'));
+        return view('users.edit', compact('user', 'countries', 'grades','roles'));
     }
 
     /**
@@ -141,9 +143,10 @@ class UserController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy(User $user)
+    public function showProfile(User $user)
     {
-        $user->delete();
-        return redirect("users");
+        $grades = Grade::lists('name', 'id');
+        $countries = Countries::lists('name', 'id');
+        return view('users.show', compact('user', 'countries', 'grades'));
     }
 }
