@@ -43,13 +43,19 @@
 <div class="form-group" >
     <div class="fileinput fileinput-new" data-provides="fileinput">
         <span class="btn btn-primary btn-file">
+
 			  	<span class="fileinput-new">Upload Avatar Image</span><span class="fileinput-exists">Change</span>
+
 					<input type="file" name="picture">
+
 				</span>
+
             <span class="fileinput-filename"></span>
             <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
         </div>
+    {!!   SiteHelpers::showUploadedFile(Auth::getUser()->picture,'/images/avatar/') !!}
     </div>
+
 <div class="form-group">
     {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
 </div>
