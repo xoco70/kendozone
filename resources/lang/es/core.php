@@ -34,4 +34,6 @@ return [
     'users' => 'Usuarios',
     'state' => 'Estado',
     'country' => 'País',
+    'statistics' => 'Estadisticas',
+
 ];

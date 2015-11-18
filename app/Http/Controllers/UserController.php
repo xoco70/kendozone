@@ -108,8 +108,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+//        $user = User::findOrFail($id);
         $roles = Role::lists('name', 'id');
-        $grades = Grade::lists('name', 'id');
+        $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
         return view('users.edit', compact('user', 'countries', 'grades', 'roles'));
@@ -132,12 +133,15 @@ class UserController extends Controller
             $fileName = $timestamp . '.' . $extension; // renameing image
             Input::file('picture')->move($destinationPath, $fileName); // uploading file to given path
         }
-        if (trim(Input::get('password')) == '') {
-            $data = $request->except('password');
-        } else {
-            $data = $request->all();
+        $except = [];
+        if (trim(Input::get('roleId')) == '') {
+            array_push($except,'roleId');
         }
+        if (trim(Input::get('password')) == '') {
+            array_push($except,'password');
 
+        }
+        $data = $request->except($except);
         if ($user->update($data)) {
             Session::flash('flash_message', 'Operación Exitosa!');
         } else {
@@ -154,11 +158,11 @@ class UserController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function showProfile($id)
-    {
-        $user = User::findOrFail($id);
-        $grades = Grade::lists('name', 'id');
-        $countries = Countries::lists('name', 'id');
-        return view('users.show', compact('user', 'countries', 'grades'));
-    }
+//    public function showProfile($id)
+//    {
+//        $user = User::findOrFail($id);
+//        $grades = Grade::lists('name', 'id');
+//        $countries = Countries::lists('name', 'id');
+//        return view('users.show', compact('user', 'countries', 'grades'));
+//    }
 }

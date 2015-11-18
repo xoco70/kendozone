@@ -8,7 +8,7 @@
             </li>
             <li class="nav-header">
                 <div class="dropdown profile-element" style="text-align:center;">
-                    <a href="{!! URL::to('users/profile/'.Auth::user()->id) !!}">
+                    <a href="{!! URL::to('users/'.Auth::user()->id).'/edit' !!}">
                         <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
                              class="profile_pic"/>
 				<span class="clear">
@@ -24,7 +24,7 @@
                     </a>
                 </div>
                 <div class="photo-header ">
-                    <a href="{!! URL::to('users/profile/'.Auth::user()->id) !!}">
+                    <a href="{!! URL::to('users/'.Auth::user()->id).'/edit' !!}">
                         <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). Auth::user()->picture) }}"
                                 class="mini_profile_pic"/>
                     </a>
@@ -60,8 +60,8 @@
             @can('CanSeeStatistics')
             <li>
                 <a href="#" class="expand level-closed ">
-                    <div align="center"><i class="fa-line-chart "></i></div>
-                    <div class="nav-label" align="center">{{ trans('crud.statistics') }}</div>
+                    <div align="center"><i class="fa fa-line-chart "></i></div>
+                    <div class="nav-label" align="center">{{ trans('core.statistics') }}</div>
                 </a>
             </li>
             @endcan

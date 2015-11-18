@@ -25,8 +25,7 @@ return [
     'updateModel' => 'Actualizar :currentModelName',
 
     //Common
-    'name' => 'Nombre',
-    'username' => 'Nombre de usuario',
+
 
 
     //Tournament
@@ -52,17 +51,21 @@ return [
     'country' => 'País',
 
     // User
-
+    'name' => 'Nombre',
+    'username' => 'Nombre de usuario',
     'user' => 'Usuario',
     'profile' => 'Perfil',
     'grade' => 'Grado',
     'picture' => 'Foto',
     'email' => 'Email',
+    'role' => 'Role',
     'firstname' => 'Nombre',
     'lastname' => 'Appellido',
+    'password' => 'Contraseña',
     'newpassword' => 'Nueva contraseña',
     'conewpassword' => 'Confirma la nueva contraseña',
     'without_grade' => 'Sin grado',
+    'left_password_blank' => 'Deja la contraseña vacia si no desea cambiarla',
 
 
 

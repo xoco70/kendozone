@@ -30,7 +30,7 @@ class UserTest extends TestCase
         $this->visit('auth/login')
             ->type('nouser@nouser.com', 'email')
             ->type('password', 'password')
-            ->press('Sign in')
+            ->press(Lang::get('auth.signin'))
             ->seePageIs('auth/login')
             ->see('Estas credenciales no coinciden con nuestros registros.');
 

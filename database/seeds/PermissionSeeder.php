@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => "CanSeeGroup",'label' => '']);
         Permission::create(['name' => "CanSeeLogs",'label' => '']);
         Permission::create(['name' => "CanDeleteAccount",'label' => '']);
-
+        Permission::create(['name' => "CanChangeRole",'label' => '']);
 
 
 
