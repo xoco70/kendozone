@@ -4,25 +4,26 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AuthTest extends TestCase
+class UserTest extends TestCase
 {
-//
-//    use DatabaseTransactions;
-//
-//    /** @test */
-//    public function it_registers_a_user()
-//    {
-//        $this->visit('register')
-//            ->type('blah@blah.com', 'email')
-//            ->type('password', 'password')
-//            ->type('password', 'password_confirmation')
-//            ->type('Andre', 'first_name')
-//            ->type('Madarang', 'last_name')
-//            ->press('Create Account')
-//            ->seeInDatabase('users', ['email' => 'blah@blah.com'])
-//            ->seePageIs('login');
-//    }
-//
+
+    use DatabaseTransactions;
+
+    /** @test */
+    public function it_registers_a_user()
+    {
+        $this->visit('auth/register')
+            ->type('usuario', 'name')
+            ->type('blah@blah.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->select('32', 'countryId')
+            ->select('2', 'gradeId')
+            ->press('Register');
+//            ->seeInDatabase('users', ['email' => 'blah@blah.com']);
+//            ->seePageIs('/');
+    }
+
 //    /** @test */
 //    public function it_does_not_register_an_exisiting_user()
 //    {
@@ -191,29 +192,7 @@ class AuthTest extends TestCase
 //            ->see('User has been updated successfully');
 //    }
 //
-//    /** @test */
-//    public function it_denies_an_admin_user_access_to_home_page()
-//    {
-//        $this->login_admin_user()
-//            ->visit('/')
-//            ->seePageIs('admin');
-//    }
-//
-//    /** @test */
-//    public function it_denies_an_admin_user_access_to_about_page()
-//    {
-//        $this->login_admin_user()
-//            ->visit('about')
-//            ->seePageIs('admin');
-//    }
-//
-//    /** @test */
-//    public function it_denies_an_admin_user_access_to_contact_page()
-//    {
-//        $this->login_admin_user()
-//            ->visit('contact')
-//            ->seePageIs('admin');
-//    }
+
 //
 //
 //    protected function login_superadmin_user()

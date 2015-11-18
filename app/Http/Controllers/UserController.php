@@ -44,7 +44,7 @@ class UserController extends Controller
         $users = DB::table('users')
             ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
             ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')
-            ->select('users.*', 'grade.name as grade','countries.name as country', 'countries.flag')
+            ->select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
             ->get();
 
         return view('users.index', compact('users'));
@@ -62,7 +62,7 @@ class UserController extends Controller
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.create', compact('user', 'countries', 'grades','roles'));
+        return view('users.create', compact('user', 'countries', 'grades', 'roles'));
     }
 
     /**
@@ -73,12 +73,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (Input::file('picture')!=null && Input::file('picture')->isValid()) {
+        if (Input::file('picture') != null && Input::file('picture')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
             $extension = Input::file('picture')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
-            $timestamp =  $date->getTimestamp();
-            $fileName = $timestamp.'.'.$extension; // renameing image
+            $timestamp = $date->getTimestamp();
+            $fileName = $timestamp . '.' . $extension; // renameing image
             Input::file('picture')->move($destinationPath, $fileName); // uploading file to given path
         }
 
@@ -112,7 +112,7 @@ class UserController extends Controller
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user', 'countries', 'grades','roles'));
+        return view('users.edit', compact('user', 'countries', 'grades', 'roles'));
     }
 
     /**
@@ -124,18 +124,28 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (Input::file('picture')!= null && Input::file('picture')->isValid()) {
+        if (Input::file('picture') != null && Input::file('picture')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
             $extension = Input::file('picture')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
-            $timestamp =  $date->getTimestamp();
-            $fileName = $timestamp.'.'.$extension; // renameing image
+            $timestamp = $date->getTimestamp();
+            $fileName = $timestamp . '.' . $extension; // renameing image
             Input::file('picture')->move($destinationPath, $fileName); // uploading file to given path
         }
+        if (trim(Input::get('password')) == '') {
+            $data = $request->except('password');
+        } else {
+            $data = $request->all();
+        }
 
-        $user->update($request->all());
+        if ($user->update($data)) {
+            Session::flash('flash_message', 'Operación Exitosa!');
+        } else {
+            Session::flash('flash_message', 'Operación No realizada!');
+        }
 
-        return redirect("users");
+
+        return redirect("/");
     }
 
     /**

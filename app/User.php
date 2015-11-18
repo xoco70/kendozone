@@ -47,11 +47,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         ];
     }
     public function setPictureAttribute($picture){
-        $extension = $picture->getClientOriginalExtension(); // getting image extension
-        $date = new DateTime();
-        $timestamp =  $date->getTimestamp();
-        $fileName = $timestamp.'.'.$extension; // renameing image
-        $this->attributes['picture'] = $fileName;
+        if (!is_null($picture)){
+            $extension = $picture->getClientOriginalExtension(); // getting image extension
+            $date = new DateTime();
+            $timestamp =  $date->getTimestamp();
+            $fileName = $timestamp.'.'.$extension; // renameing image
+            $this->attributes['picture'] = $fileName;
+        }
     }
     public function getPictureAttribute($picture){
         return is_null($picture) ? 'avatar.png' : $picture;

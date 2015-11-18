@@ -102,19 +102,30 @@
                 {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id),'class'=>'form-horizontal ')) !!}
 
                 <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.newpassword') }} </label>
+                    {!!  Form::label('password', trans('crud.password'), ['class' => 'control-label col-md-4']) !!}
                     <div class="col-md-8">
-                        <input name="password" type="password" id="password" class="form-control input-sm" value="" />
+                        {!!  Form::password('password', ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
                     </div>
                 </div>
+                {{--<div class="form-group">--}}
+                    {{--<label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.newpassword') }} </label>--}}
+                    {{--<div class="col-md-8">--}}
+                        {{--<input name="password" type="password" id="password" class="form-control input-sm" value="" />--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
+                {{--<div class="form-group">--}}
+                    {{--<label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.conewpassword') }}  </label>--}}
+                    {{--<div class="col-md-8">--}}
+                        {{--<input name="password_confirmation" type="password" id="password_confirmation" class="form-control input-sm" value="" />--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.conewpassword') }}  </label>
+                    {!!  Form::label('password_confirmation', trans('crud.password_confirmation'), ['class' => 'control-label col-md-4']) !!}
                     <div class="col-md-8">
-                        <input name="password_confirmation" type="password" id="password_confirmation" class="form-control input-sm" value="" />
+                        {!!  Form::password('password_confirmation', ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <label for="ipt" class=" control-label col-md-4">&nbsp;</label>
