@@ -43,7 +43,8 @@ class UserController extends Controller
     {
         $users = DB::table('users')
             ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
-            ->select('users.*', 'countries.name as country', 'countries.flag')
+            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')
+            ->select('users.*', 'grade.name as grade','countries.name as country', 'countries.flag')
             ->get();
 
         return view('users.index', compact('users'));
@@ -123,7 +124,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (Input::file('picture')->isValid()) {
+        if (Input::file('picture')!= null && Input::file('picture')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
             $extension = Input::file('picture')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
@@ -143,8 +144,9 @@ class UserController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function showProfile(User $user)
+    public function showProfile($id)
     {
+        $user = User::findOrFail($id);
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
         return view('users.show', compact('user', 'countries', 'grades'));

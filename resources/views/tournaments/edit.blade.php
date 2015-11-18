@@ -7,7 +7,7 @@
 
     {!! Form::model($tournament, ['method'=>"PATCH", "action" => ["TournamentController@update", $tournament->id]]) !!}
 
-    @include("users.form", ["submitButton" => trans('crud.updateModel',['currentModelName' => $currentModelName]) ])
+    @include("tournament.form", ["submitButton" => trans('crud.updateModel',['currentModelName' => $currentModelName]) ])
 
     {!! Form::close()!!}
 

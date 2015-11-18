@@ -5,9 +5,8 @@
     <hr/>
     {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
 
-    @include("users.form", ["submitButton" => "@lang('crud.updateModel', ['currentModelName' => $currentModelName])"])
 
-
+    @include("users.form", ["submitButton" => trans('crud.updateModel',['currentModelName' => $currentModelName]) ])
     {!! Form::close()!!}
 
 

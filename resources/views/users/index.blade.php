@@ -26,7 +26,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->gradeId }}</td>
+                        <td align="center">{{ $user->grade }}</td>
                         <td>
                             @if (!is_null($user->picture))
                                 <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="small_profile_pic" />

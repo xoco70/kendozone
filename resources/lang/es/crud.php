@@ -26,6 +26,8 @@ return [
 
     //Common
     'name' => 'Nombre',
+    'username' => 'Nombre de usuario',
+
 
     //Tournament
     'tournament' => 'Torneo',
@@ -60,7 +62,7 @@ return [
     'lastname' => 'Appellido',
     'newpassword' => 'Nueva contraseña',
     'conewpassword' => 'Confirma la nueva contraseña',
-    'lastname' => 'Appellido',
+    'without_grade' => 'Sin grado',
 
 
 

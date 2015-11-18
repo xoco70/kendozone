@@ -37,33 +37,40 @@
 
         <div class="tab-content">
             <div class="tab-pane active m-t" id="info">
-                {!!   Form::open(array('url'=>'user/saveprofile/', 'class'=>'form-horizontal ' ,'files' => true)) !!}
+                {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id),'class'=>'form-horizontal ', 'enctype' => 'multipart/form-data')) !!}
+{{--                {!!   Form::open(array('url'=>'user/saveprofile/', 'class'=>'form-horizontal ' ,'files' => true)) !!}--}}
+
                 <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.username') }} </label>
+                    {!!  Form::label('name', trans('crud.user'), ['class' => 'control-label col-md-4']) !!}
                     <div class="col-md-8">
-                        <input name="username" type="text" id="username" disabled="disabled" class="form-control input-sm" required  value="{{ $user->username }}" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4">{{ Lang::get('crud.email') }} </label>
-                    <div class="col-md-8">
-                        <input name="email" type="text" id="email"  class="form-control input-sm" value="{{ $user->email }}" />
+                        {!!  Form::text('name', old('name'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4">{{ Lang::get('crud.firstname') }} </label>
+                    {!!  Form::label('name', trans('crud.email'), ['class' => 'control-label col-md-4']) !!}
                     <div class="col-md-8">
-                        <input name="first_name" type="text" id="first_name" class="form-control input-sm" required value="{{ $user->name }}" />
+                        {!!  Form::email('email', old('email'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
                     </div>
                 </div>
 
+
                 <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4">{{ Lang::get('crud.lastname') }} </label>
+                    {!!  Form::label('name', trans('crud.firstname'), ['class' => 'control-label col-md-4']) !!}
                     <div class="col-md-8">
-                        <input name="last_name" type="text" id="last_name" class="form-control input-sm" required value="{{ $user->last_name }}" />
+                        {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
                     </div>
                 </div>
+
+
+                <div class="form-group">
+                    {!!  Form::label('name', trans('crud.lastname'), ['class' => 'control-label col-md-4']) !!}
+                    <div class="col-md-8">
+                        {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
+                    </div>
+                </div>
+
+
 
                 <div class="form-group  " >
                     <label for="ipt" class=" control-label col-md-4 text-right"> Avatar </label>
@@ -71,7 +78,7 @@
                         <div class="fileinput fileinput-new" data-provides="fileinput">
 			  <span class="btn btn-primary btn-file">
 			  	<span class="fileinput-new">Upload Avatar Image</span><span class="fileinput-exists">Change</span>
-					<input type="file" name="avatar">
+					<input type="file" name="picture">
 				</span>
                             <span class="fileinput-filename"></span>
                             <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
@@ -92,7 +99,7 @@
             </div>
 
             <div class="tab-pane  m-t" id="pass">
-                {!!   Form::open(array('url'=>'user/savepassword/', 'class'=>'form-horizontal ')) !!}
+                {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id),'class'=>'form-horizontal ')) !!}
 
                 <div class="form-group">
                     <label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.newpassword') }} </label>
@@ -112,7 +119,7 @@
                 <div class="form-group">
                     <label for="ipt" class=" control-label col-md-4">&nbsp;</label>
                     <div class="col-md-8">
-                        <button class="btn btn-danger" type="submit"> {{ Lang::get('core.sb_savechanges') }} </button>
+                        <button class="btn btn-danger" type="submit"> {{ Lang::get('core.savechanges') }} </button>
                     </div>
                 </div>
                 {!!   Form::close() !!}
