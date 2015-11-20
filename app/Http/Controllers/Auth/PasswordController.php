@@ -23,7 +23,7 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectPath = "login";
+    protected $redirectPath = "auth/login";
     protected $subject = "Your Password Reset Link for kendoOnline.com";
 
     /**
