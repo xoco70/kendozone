@@ -69,3 +69,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
 //Route::resource('shiaicategory', 'ShiaiCategoryController');
 //Route::resource('associations', 'AssociationController');
 //Route::resource('federations', 'FederationController');
+Route::get('sendemail', function () {
+
+    Mail::send('emails.master', [], function ($message) {
+        $message->to('flordcactus@gmail.com')->subject('Learning Laravel test email');
+    });
+    return "Your email has been sent successfully";
+
+});

@@ -8,68 +8,68 @@ class CreateForeignKeys extends Migration {
 
 	public function up()
 	{
-		Schema::table('Shinpan', function(Blueprint $table) {
-			$table->foreign('userId')->references('id')->on('Users')
+		Schema::table('shinpan', function(Blueprint $table) {
+			$table->foreign('userId')->references('id')->on('users')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Shinpan', function(Blueprint $table) {
-			$table->foreign('shiaiCategoryId')->references('id')->on('ShiaiCategory')
+		Schema::table('shinpan', function(Blueprint $table) {
+			$table->foreign('shiaiCategoryId')->references('id')->on('shiaiCategory')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Tournament', function(Blueprint $table) {
-			$table->foreign('placeId')->references('id')->on('Place')
+		Schema::table('tournament', function(Blueprint $table) {
+			$table->foreign('placeId')->references('id')->on('place')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Users', function(Blueprint $table) {
-			$table->foreign('gradeId')->references('id')->on('Grade')
+		Schema::table('users', function(Blueprint $table) {
+			$table->foreign('gradeId')->references('id')->on('grade')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Users', function(Blueprint $table) {
-			$table->foreign('countryId')->references('id')->on('Country')
+		Schema::table('users', function(Blueprint $table) {
+			$table->foreign('countryId')->references('id')->on('country')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
-			$table->foreign('userId')->references('id')->on('Users')
+		Schema::table('competitor', function(Blueprint $table) {
+			$table->foreign('userId')->references('id')->on('users')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
-			$table->foreign('shiaiCategoryId')->references('id')->on('ShiaiCategory')
+		Schema::table('competitor', function(Blueprint $table) {
+			$table->foreign('shiaiCategoryId')->references('id')->on('shiaiCategory')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
+		Schema::table('competitor', function(Blueprint $table) {
 			$table->foreign('clubId')->references('id')->on('Club')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Fight', function(Blueprint $table) {
-			$table->foreign('shiaiCategoryId')->references('id')->on('ShiaiCategory')
+		Schema::table('fight', function(Blueprint $table) {
+			$table->foreign('shiaiCategoryId')->references('id')->on('shiaiCategory')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Team', function(Blueprint $table) {
-			$table->foreign('shiaiCategoryId')->references('id')->on('ShiaiCategory')
+		Schema::table('team', function(Blueprint $table) {
+			$table->foreign('shiaiCategoryId')->references('id')->on('shiaiCategory')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('ShiaiCategory', function(Blueprint $table) {
-			$table->foreign('tournamentId')->references('id')->on('Tournament')
+		Schema::table('shiaiCategory', function(Blueprint $table) {
+			$table->foreign('tournamentId')->references('id')->on('tournament')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Association', function(Blueprint $table) {
-			$table->foreign('adminId')->references('id')->on('Users')
+		Schema::table('association', function(Blueprint $table) {
+			$table->foreign('adminId')->references('id')->on('users')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('Club', function(Blueprint $table) {
-			$table->foreign('asocId')->references('id')->on('Association')
+		Schema::table('club', function(Blueprint $table) {
+			$table->foreign('asocId')->references('id')->on('association')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -77,43 +77,43 @@ class CreateForeignKeys extends Migration {
 
 	public function down()
 	{
-		Schema::table('Shinpan', function(Blueprint $table) {
+		Schema::table('shinpan', function(Blueprint $table) {
 			$table->dropForeign('Shinpan_userId_foreign');
 		});
-		Schema::table('Shinpan', function(Blueprint $table) {
+		Schema::table('shinpan', function(Blueprint $table) {
 			$table->dropForeign('Shinpan_shiaiCategoryId_foreign');
 		});
-		Schema::table('Tournament', function(Blueprint $table) {
+		Schema::table('tournament', function(Blueprint $table) {
 			$table->dropForeign('Tournament_placeId_foreign');
 		});
-		Schema::table('Users', function(Blueprint $table) {
+		Schema::table('users', function(Blueprint $table) {
 			$table->dropForeign('Users_gradeId_foreign');
 		});
-		Schema::table('Users', function(Blueprint $table) {
+		Schema::table('users', function(Blueprint $table) {
 			$table->dropForeign('Users_countryId_foreign');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
+		Schema::table('competitor', function(Blueprint $table) {
 			$table->dropForeign('Competitor_userId_foreign');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
+		Schema::table('competitor', function(Blueprint $table) {
 			$table->dropForeign('Competitor_shiaiCategoryId_foreign');
 		});
-		Schema::table('Competitor', function(Blueprint $table) {
+		Schema::table('competitor', function(Blueprint $table) {
 			$table->dropForeign('Competitor_clubId_foreign');
 		});
-		Schema::table('Fight', function(Blueprint $table) {
+		Schema::table('fight', function(Blueprint $table) {
 			$table->dropForeign('Fight_shiaiCategoryId_foreign');
 		});
-		Schema::table('Team', function(Blueprint $table) {
+		Schema::table('team', function(Blueprint $table) {
 			$table->dropForeign('Team_shiaiCategoryId_foreign');
 		});
-		Schema::table('ShiaiCategory', function(Blueprint $table) {
+		Schema::table('shiaiCategory', function(Blueprint $table) {
 			$table->dropForeign('ShiaiCategory_tournamentId_foreign');
 		});
-		Schema::table('Association', function(Blueprint $table) {
+		Schema::table('association', function(Blueprint $table) {
 			$table->dropForeign('Association_adminId_foreign');
 		});
-		Schema::table('Club', function(Blueprint $table) {
+		Schema::table('club', function(Blueprint $table) {
 			$table->dropForeign('Club_asocId_foreign');
 		});
 	}

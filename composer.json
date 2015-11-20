@@ -11,6 +11,7 @@
     "php": ">=5.5.9",
     "laravel/framework": "5.1.*",
     "laravelcollective/html": "5.1.*",
+    "guzzlehttp/guzzle": "~4.0",
     "webpatser/laravel-countries": "dev-master"
   },
   "require-dev": {

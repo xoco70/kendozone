@@ -24,7 +24,7 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     protected $redirectPath = "login";
-    protected $subject = "Your Password Reset Link for website.com";
+    protected $subject = "Your Password Reset Link for kendoOnline.com";
 
     /**
      * Create a new password controller instance.
@@ -37,11 +37,11 @@ class PasswordController extends Controller
     }
 
 
-//    /**
-//     * Display the form to request a password reset link.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
 //    public function getEmail()
 //    {
 //        return view('password.email');
@@ -55,6 +55,7 @@ class PasswordController extends Controller
 //     */
 //    public function postEmail(Request $request)
 //    {
+//
 //        $this->validate($request, ['email' => 'required|email']);
 //
 //        $response = Password::sendResetLink($request->only('email'), function (Message $message) {

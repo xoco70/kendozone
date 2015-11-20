@@ -1,8 +1,16 @@
-@extends('master')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo Online</title>
 
-@section('title', 'Password Reset Email')
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link media="all" type="text/css" rel="stylesheet" href="http://atekokolli.org/laravel/public/css/login.css">
 
-@section('content')
+
+</head>
+<body>
+
 
         <div class="container">
         <div class="row">
@@ -50,5 +58,5 @@
             </div>
         </div>
     </div>
-
-@endsection
+</body>
+</html>

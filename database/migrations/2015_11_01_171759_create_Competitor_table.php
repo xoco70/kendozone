@@ -19,12 +19,12 @@ class CreateCompetitorTable extends Migration {
 
 			$table->foreign('userId')
 				->references('id')
-				->on('Users')
+				->on('users')
 				->onDelete('cascade');
 
 			$table->foreign('clubId')
 					->references('id')
-					->on('Club')
+					->on('club')
 					->onDelete('cascade');
 
 //
