@@ -46,6 +46,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'image' => 'mimes:png,jpg, jpeg, gif'
         ];
     }
+    /**
+     * Boot the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            $user->token = str_random(30);
+        });
+    }
+    /**
+     * Confirm the user.
+     *
+     * @return void
+     */
+    public function confirmEmail()
+    {
+        $this->verified = true;
+        $this->token = null;
+        $this->save();
+    }
     public function setPictureAttribute($picture){
         if (!is_null($picture)){
             $extension = $picture->getClientOriginalExtension(); // getting image extension
@@ -55,8 +78,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $this->attributes['picture'] = $fileName;
         }
     }
+
     public function getPictureAttribute($picture){
         return is_null($picture) ? 'avatar.png' : $picture;
     }
+    /**
+     * Set the password attribute.
+     *
+     * @param string $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
 
 }

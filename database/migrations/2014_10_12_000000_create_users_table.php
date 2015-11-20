@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->integer('countryId')->unsigned()->default(484);
             $table->integer('roleId')->unsigned();
             $table->string('picture')->default("avatar.png");
+            $table->boolean('verified')->default(false);
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

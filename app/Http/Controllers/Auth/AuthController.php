@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Grade;
+use App\Mailers\AppMailer;
 use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -81,26 +82,68 @@ class AuthController extends Controller
 //        dd($roleObj);
         $countries = Countries::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
-        return view('auth.register', compact('countries','grades', 'roleId'));
+        return view('auth.register', compact('countries', 'grades', 'roleId'));
 
 
     }
 
-    public function postRegister(Request $request)
+    /**
+     * Perform the registration.
+     *
+     * @param  Request $request
+     * @param  AppMailer $mailer
+     * @return \Redirect
+     */
+    public function postRegister(Request $request, AppMailer $mailer)
     {
-        $validator = $this->validator($request->all());
-
-        if ($validator->fails()) {
-            dd($validator);
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }
-
-        Auth::login($this->create($request->all()));
-
-        return redirect($this->redirectPath());
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+        $user = User::create($request->all());
+        $mailer->sendEmailConfirmationTo($user);
+        flash('Please confirm your email address.');
+        return redirect()->back();
     }
 
+    /**
+     * Confirm a user's email address.
+     *
+     * @param  string $token
+     * @return mixed
+     */
+    public function confirmEmail($token)
+    {
+        User::whereToken($token)->firstOrFail()->confirmEmail();
+        flash('You are now confirmed. Please login.');
+        return redirect('auth/login');
+    }
+
+    /**
+     * Attempt to sign in the user.
+     *
+     * @param  Request $request
+     * @return boolean
+     */
+    protected function signIn(Request $request)
+    {
+        return Auth::attempt($this->getCredentials($request), $request->has('remember'));
+    }
+
+    /**
+     * Get the login credentials and requirements.
+     *
+     * @param  Request $request
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+        return [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'verified' => true
+        ];
+    }
 
 }

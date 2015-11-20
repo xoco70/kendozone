@@ -1,7 +1,215 @@
 <?php
-class SiteHelpers
-{
-//	public static function menus( $position ='top',$active = '1')
+/**
+ * Set a flash message in the session.
+ *
+ * @param  string $message
+ * @return void
+ */
+function flash($message) {
+    session()->flash('message', $message);
+}
+
+
+	function showNotification()
+	{
+		$status = Session::get('msgstatus');
+		if(Session::has('msgstatus')): ?>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					toastr.<?php echo $status;?>("success", "<?php echo Session::get('messagetext');?>");
+					toastr.options = {
+						"closeButton": true,
+						"debug": false,
+						"positionClass": "toast-bottom-right",
+						"onclick": null,
+						"showDuration": "300",
+						"hideDuration": "1000",
+						"timeOut": "5000",
+						"extendedTimeOut": "1000",
+						"showEasing": "swing",
+						"hideEasing": "linear",
+						"showMethod": "fadeIn",
+						"hideMethod": "fadeOut"
+
+					}
+				});
+			</script>
+		<?php endif;
+	}
+
+	 function alert( $task , $message)
+	{
+		if($task =='error') {
+			$alert ='
+			<div class="alert alert-danger  fade in block-inner">
+				<button data-dismiss="alert" class="close" type="button"> x </button>
+			<i class="icon-cancel-circle"></i> '. $message.' </div>
+			';
+		} elseif ($task =='success') {
+			$alert ='
+			<div class="alert alert-success fade in block-inner">
+				<button data-dismiss="alert" class="close" type="button"> x </button>
+			<i class="icon-checkmark-circle"></i> '. $message.' </div>
+			';
+		} elseif ($task =='warning') {
+			$alert ='
+			<div class="alert alert-warning fade in block-inner">
+				<button data-dismiss="alert" class="close" type="button"> x </button>
+			<i class="icon-warning"></i> '. $message.' </div>
+			';
+		} else {
+			$alert ='
+			<div class="alert alert-info  fade in block-inner">
+				<button data-dismiss="alert" class="close" type="button"> x </button>
+			<i class="icon-info"></i> '. $message.' </div>
+			';
+		}
+		return $alert;
+
+	}
+
+	 function _sort($a, $b) {
+
+		if ($a['sortlist'] == $a['sortlist']) {
+			return strnatcmp($a['sortlist'], $b['sortlist']);
+		}
+		return strnatcmp($a['sortlist'], $b['sortlist']);
+	}
+
+
+	function cropImage($nw, $nh, $source, $stype, $dest)
+	{
+		$size = getimagesize($source); // ukuran gambar
+		$w = $size[0];
+		$h = $size[1];
+		switch($stype)
+		{ // format gambar
+			case 'gif':
+				$simg = imagecreatefromgif($source);
+				break;
+			case 'jpg':
+				$simg = imagecreatefromjpeg($source);
+				break;
+			case 'png':
+				$simg = imagecreatefrompng($source);
+				break;
+		}
+		$dimg = imagecreatetruecolor($nw, $nh); // menciptakan image baru
+		$wm = $w/$nw;
+		$hm = $h/$nh;
+		$h_height = $nh/2;
+		$w_height = $nw/2;
+		if($w> $h)
+		{
+			$adjusted_width = $w / $hm;
+			$half_width = $adjusted_width / 2;
+			$int_width = $half_width - $w_height;
+			imagecopyresampled($dimg,$simg,-$int_width,0,0,0,$adjusted_width,$nh,$w,$h);
+		}
+		elseif(($w <$h) || ($w == $h))
+		{
+			$adjusted_height = $h / $wm;
+			$half_height = $adjusted_height / 2;
+			$int_height = $half_height - $h_height;
+			imagecopyresampled($dimg,$simg,0,-$int_height,0,0,$nw,$adjusted_height,$w,$h);
+		}
+		else
+		{
+			imagecopyresampled($dimg,$simg,0,0,0,0,$nw,$nh,$w,$h);
+		}
+		imagejpeg($dimg,$dest,100);
+	}
+
+
+	 function showUploadedFile($file,$path , $width = 50) {
+
+		$files =  public_path().str_replace('.','',$path). $file ;
+
+//		if(file_exists('./'.$files ) && $file !="") {
+		if(file_exists($files ) && $file !="") {
+			$info = pathinfo($files);
+			if($info['extension'] == "jpg" || $info['extension'] == "jpeg" ||  $info['extension'] == "png" || $info['extension'] == "gif")
+			{
+				$path_file = str_replace("./","",$path);
+				return '<p><a href="'.URL::to(''). $path_file . $file.'" target="_blank" class="previewImage">
+				<img src="'.URL::to(''). $path_file . $file.'" border="0" width="'. $width .'" class="img-circle" /></a></p>';
+			} else {
+				$path_file = str_replace("./","",$path);
+				return '<p> <a href="'.URL::to($path_file . $file).'" target="_blank"> '.$file.' </a>';
+			}
+
+		} else {
+			$info = pathinfo($files);
+			if(isset($info['extension']))
+			{
+				if($info['extension'] == "jpg" || $info['extension'] == "jpeg" ||  $info['extension'] == "png"
+						|| $info['extension'] == "gif")
+				{
+					$path_file = str_replace("./","",$path);
+					return "<img src='".URL::to('')."/images/avatar/avatar.png' border='0' width='".$width."' class='img-circle' /></a>";
+				}
+			} else {
+
+			}
+		}
+
+	}
+
+
+	 function langOption()
+	{
+		$lang = scandir(app_path().'/lang/');
+		$t = array();
+		foreach($lang as $value) {
+			if($value === '.' || $value === '..') {continue;}
+			if(is_dir(app_path().'/lang/' . $value))
+			{
+				$fp = file_get_contents(app_path().'/lang/'.$value.'/info.json');
+				$fp = json_decode($fp,true);
+				$t[] =  $fp ;
+			}
+
+		}
+		return $t;
+	}
+
+
+	 function themeOption()
+	{
+		$lang = scandir(app_path().'/views/layouts/');
+		$t = array();
+		foreach($lang as $value) {
+			if($value === '.' || $value === '..') {continue;}
+			if(is_dir(app_path().'/views/layouts/' . $value))
+			{
+				$fp = file_get_contents(app_path().'/views/layouts/'.$value.'/info.json');
+				$fp = json_decode($fp,true);
+				$t[] =  $fp ;
+			}
+
+		}
+		return $t;
+	}
+
+	 function avatar( $width =75)
+	{
+		$avatar = '<img alt="" src="http://www.gravatar.com/avatar/'.md5(Session::get('email')).'" class="img-circle" width="'.$width.'" />';
+		$Q = DB::table("tb_users")->where("id",'=',Session::get('uid'))->get();
+		$row = $Q[0];
+		$files =  './uploads/users/'.$row->avatar ;
+		if($row->avatar !='' )
+		{
+			if( file_exists($files))
+			{
+				return  '<img src="'.URL::to('uploads/users').'/'.$row->avatar.'" border="0" width="'.$width.'" class="img-circle" />';
+			} else {
+				return $avatar;
+			}
+		} else {
+			return $avatar;
+		}
+	}
+//	 function menus( $position ='top',$active = '1')
 //	{
 //		$data = array();
 //		$menu = self::nestedMenu(0,$position ,$active);
@@ -105,7 +313,7 @@ class SiteHelpers
 //		return $data;
 //	}
 //
-//	public static function nestedMenu($parent=0,$position ='top',$active = '1')
+//	 function nestedMenu($parent=0,$position ='top',$active = '1')
 //	{
 //		$group_sql = " AND tb_menu_access.group_id ='".Session::get('gid')."' ";
 //		$active 	=  ($active =='all' ? "" : "AND active ='1' ");
@@ -118,14 +326,14 @@ class SiteHelpers
 //		return $Q;
 //	}
 //
-//	public static function CF_encode_json($arr) {
+//	 function CF_encode_json($arr) {
 //	  $str = json_encode( $arr );
 //	  $enc = base64_encode($str );
 //	  $enc = strtr( $enc, 'poligamI123456', '123456poligamI');
 //	  return $enc;
 //	}
 //
-//	public static function CF_decode_json($str) {
+//	 function CF_decode_json($str) {
 //	  $dec = strtr( $str , '123456poligamI', 'poligamI123456');
 //	  $dec = base64_decode( $dec );
 //	  $obj = json_decode( $dec ,true);
@@ -133,7 +341,7 @@ class SiteHelpers
 //	}
 //
 //
-//	public static function columnTable( $table )
+//	 function columnTable( $table )
 //	{
 //        $columns = array();
 //	    foreach(DB::select("SHOW COLUMNS FROM $table") as $column)
@@ -146,7 +354,7 @@ class SiteHelpers
 //        return $columns;
 //	}
 //
-//	public static function encryptID($id,$decript=false,$pass='',$separator='-', & $data=array()) {
+//	 function encryptID($id,$decript=false,$pass='',$separator='-', & $data=array()) {
 //		$pass = $pass?$pass:Config::get('app.key');
 //		$pass2 = Config::get('app.url');;
 //		$bignum = 200000000;
@@ -171,7 +379,7 @@ class SiteHelpers
 //		return $out;
 //	}
 //
-//public static function alphaID($in, $to_num = false, $pad_up = false, $passKey = null)
+// function alphaID($in, $to_num = false, $pad_up = false, $passKey = null)
 //{
 //    $index = "abcdefghijkmnpqrstuvwxyz23456789ABCDEFGHIJKLMNPQRSTUVWXYZ";
 //    if ($passKey !== null) {
@@ -241,7 +449,7 @@ class SiteHelpers
 //}
 //
 //
-//	public static function toForm($forms,$layout)
+//	 function toForm($forms,$layout)
 //	{
 //		$f = '';
 //	//	echo '<pre>'; print_r($forms);echo '</pre>';
@@ -347,7 +555,7 @@ class SiteHelpers
 //		return $f;
 //
 //	}
-//	public static function gridClass( $layout )
+//	 function gridClass( $layout )
 //	{
 //		$column = $layout['column'];
 //		$format = $layout['format'];
@@ -382,7 +590,7 @@ class SiteHelpers
 //
 
 //
-//	public static function toView( $grids )
+//	 function toView( $grids )
 //	{
 //		$f = '';
 //		foreach($grids as $grid)
@@ -419,7 +627,7 @@ class SiteHelpers
 //		return $f;
 //	}
 //
-//	public static  function transForm( $field, $forms = array(),$bulk=false , $value ='')
+//	  function transForm( $field, $forms = array(),$bulk=false , $value ='')
 //	{
 //		$type = '';
 //		$bulk = ($bulk == true ? '[]' : '');
@@ -521,7 +729,7 @@ class SiteHelpers
 //		return $form;
 //	}
 //
-//	public static function viewColSpan( $grid )
+//	 function viewColSpan( $grid )
 //	{
 //		$i =0;
 //		foreach ($grid as $t):
@@ -530,7 +738,7 @@ class SiteHelpers
 //		return $i;
 //	}
 //
-//	public static function blend($str,$data) {
+//	 function blend($str,$data) {
 //		$src = $rep = array();
 //
 //		foreach($data as $k=>$v){
@@ -550,7 +758,7 @@ class SiteHelpers
 //
 //	}
 //
-//	public static function toJavascript( $forms , $app , $class )
+//	 function toJavascript( $forms , $app , $class )
 //	{
 //		$f = '';
 //		foreach($forms as $form){
@@ -578,7 +786,7 @@ class SiteHelpers
 //
 //	}
 //
-//	public static function createPreCombo( $field , $table , $key ,  $val ,$app ,$class ,$lookey = null)
+//	 function createPreCombo( $field , $table , $key ,  $val ,$app ,$class ,$lookey = null)
 //	{
 //
 //
@@ -597,213 +805,15 @@ class SiteHelpers
 //		return $pre_jCombo;
 //	}
 
-	static public function showNotification()
-	{
-		$status = Session::get('msgstatus');
-		if(Session::has('msgstatus')): ?>	  
-		<script type="text/javascript">
-            $(document).ready(function(){
-			toastr.<?php echo $status;?>("success", "<?php echo Session::get('messagetext');?>");
-			toastr.options = {
-				  "closeButton": true,
-				  "debug": false,
-				  "positionClass": "toast-bottom-right",
-				  "onclick": null,
-				  "showDuration": "300",
-				  "hideDuration": "1000",
-				  "timeOut": "5000",
-				  "extendedTimeOut": "1000",
-				  "showEasing": "swing",
-				  "hideEasing": "linear",
-				  "showMethod": "fadeIn",
-				  "hideMethod": "fadeOut"
 
-				}
-			});
-		</script>		
-		<?php endif;	
-	}
-
-	public static function alert( $task , $message)
-	{
-		if($task =='error') {
-			$alert ='
-			<div class="alert alert-danger  fade in block-inner">
-				<button data-dismiss="alert" class="close" type="button"> x </button>
-			<i class="icon-cancel-circle"></i> '. $message.' </div>
-			';			
-		} elseif ($task =='success') {
-			$alert ='
-			<div class="alert alert-success fade in block-inner">
-				<button data-dismiss="alert" class="close" type="button"> x </button>
-			<i class="icon-checkmark-circle"></i> '. $message.' </div>
-			';			
-		} elseif ($task =='warning') {
-			$alert ='
-			<div class="alert alert-warning fade in block-inner">
-				<button data-dismiss="alert" class="close" type="button"> x </button>
-			<i class="icon-warning"></i> '. $message.' </div>
-			';			
-		} else {
-			$alert ='
-			<div class="alert alert-info  fade in block-inner">
-				<button data-dismiss="alert" class="close" type="button"> x </button>
-			<i class="icon-info"></i> '. $message.' </div>
-			';			
-		}
-		return $alert;
-	
-	} 		
-
-	public static function _sort($a, $b) {
-	 
-		if ($a['sortlist'] == $a['sortlist']) {
-		return strnatcmp($a['sortlist'], $b['sortlist']);
-		}
-		return strnatcmp($a['sortlist'], $b['sortlist']);
-	}
-
-	
-	static public function cropImage($nw, $nh, $source, $stype, $dest) 
-	{
-		$size = getimagesize($source); // ukuran gambar
-		$w = $size[0];
-		$h = $size[1];
-		switch($stype) 
-		{ // format gambar
-			case 'gif':
-				$simg = imagecreatefromgif($source);
-				break;
-			case 'jpg':
-				$simg = imagecreatefromjpeg($source);
-				break;
-			case 'png':
-				$simg = imagecreatefrompng($source);
-				break;
-		}
-		$dimg = imagecreatetruecolor($nw, $nh); // menciptakan image baru
-		$wm = $w/$nw;
-		$hm = $h/$nh;
-		$h_height = $nh/2;
-		$w_height = $nw/2;
-		if($w> $h) 
-		{
-			$adjusted_width = $w / $hm;
-			$half_width = $adjusted_width / 2;
-			$int_width = $half_width - $w_height;
-			imagecopyresampled($dimg,$simg,-$int_width,0,0,0,$adjusted_width,$nh,$w,$h);
-		}
-		elseif(($w <$h) || ($w == $h)) 
-		{
-			$adjusted_height = $h / $wm;
-			$half_height = $adjusted_height / 2;
-			$int_height = $half_height - $h_height;
-			imagecopyresampled($dimg,$simg,0,-$int_height,0,0,$nw,$adjusted_height,$w,$h);
-		}
-		else
-		{
-			imagecopyresampled($dimg,$simg,0,0,0,0,$nw,$nh,$w,$h);
-		}
-		imagejpeg($dimg,$dest,100);
-	}	
-		
-	
-	public static function showUploadedFile($file,$path , $width = 50) {
-	
-		$files =  public_path().str_replace('.','',$path). $file ;
-
-//		if(file_exists('./'.$files ) && $file !="") {
-        if(file_exists($files ) && $file !="") {
-			$info = pathinfo($files);
-			if($info['extension'] == "jpg" || $info['extension'] == "jpeg" ||  $info['extension'] == "png" || $info['extension'] == "gif") 
-			{
-				$path_file = str_replace("./","",$path);
-				return '<p><a href="'.URL::to(''). $path_file . $file.'" target="_blank" class="previewImage">
-				<img src="'.URL::to(''). $path_file . $file.'" border="0" width="'. $width .'" class="img-circle" /></a></p>';
-			} else {
-				$path_file = str_replace("./","",$path);
-				return '<p> <a href="'.URL::to($path_file . $file).'" target="_blank"> '.$file.' </a>';
-			}
-	
-		} else {
-			$info = pathinfo($files);
-			if(isset($info['extension']))
-			{
-				if($info['extension'] == "jpg" || $info['extension'] == "jpeg" ||  $info['extension'] == "png" 
-				|| $info['extension'] == "gif") 
-				{
-					$path_file = str_replace("./","",$path);
-					return "<img src='".URL::to('')."/images/avatar/avatar.png' border='0' width='".$width."' class='img-circle' /></a>";
-				} 	
-			} else {
-				
-			}	
-		}
-
-	}	
-
-
-public static function langOption()
-	{
-		$lang = scandir(app_path().'/lang/');
-		$t = array();
-		foreach($lang as $value) {
-			if($value === '.' || $value === '..') {continue;}
-				if(is_dir(app_path().'/lang/' . $value))
-				{
-					$fp = file_get_contents(app_path().'/lang/'.$value.'/info.json');
-					$fp = json_decode($fp,true);
-					$t[] =  $fp ;
-				}
-
-		}
-		return $t;
-	}
-
-
-	public static function themeOption()
-	{
-		$lang = scandir(app_path().'/views/layouts/');
-		$t = array();
-		foreach($lang as $value) {
-			if($value === '.' || $value === '..') {continue;}
-				if(is_dir(app_path().'/views/layouts/' . $value))
-				{
-					$fp = file_get_contents(app_path().'/views/layouts/'.$value.'/info.json');
-					$fp = json_decode($fp,true);
-					$t[] =  $fp ;
-				}
-
-		}
-		return $t;
-	}
-
-	public static function avatar( $width =75)
-	{
-		$avatar = '<img alt="" src="http://www.gravatar.com/avatar/'.md5(Session::get('email')).'" class="img-circle" width="'.$width.'" />';
-		$Q = DB::table("tb_users")->where("id",'=',Session::get('uid'))->get();
-		$row = $Q[0];
-		$files =  './uploads/users/'.$row->avatar ;
-		if($row->avatar !='' )
-		{
-			if( file_exists($files))
-			{
-				return  '<img src="'.URL::to('uploads/users').'/'.$row->avatar.'" border="0" width="'.$width.'" class="img-circle" />';
-			} else {
-				return $avatar;
-			}
-		} else {
-			return $avatar;
-		}
-	}
-//	public static function globalXssClean()
+//	 function globalXssClean()
 //	{
 //	    // Recursive cleaning for array [] inputs, not just strings.
 //	    $sanitized = static::arrayStripTags(Input::get());
 //	    Input::merge($sanitized);
 //	}
 //
-//	public static function arrayStripTags($array)
+//	 function arrayStripTags($array)
 //	{
 //	    $result = array();
 //
@@ -826,15 +836,15 @@ public static function langOption()
 //	    return $result;
 //	}
 //
-//	public static function writeEncoder($val) {
+//	 function writeEncoder($val) {
 //		return base64_encode($val);
 //	}
 //
-//	public static function readEncoder($val) {
+//	 function readEncoder($val) {
 //		return base64_decode($val);
 //	}
 //
-//	public static function gridDisplay($val , $field, $arr) {
+//	 function gridDisplay($val , $field, $arr) {
 //		if(isset($arr['valid']) && $arr['valid'] ==1)
 //		{
 //			$fields = str_replace("|",",",$arr['display']);
@@ -857,7 +867,7 @@ public static function langOption()
 //			return $val;
 //		}
 //	}
-//	public static function gridDisplayView($val , $field, $arr) {
+//	 function gridDisplayView($val , $field, $arr) {
 //		$arr = explode(':',$arr);
 //
 //		if(isset($arr['0']) && $arr['0'] ==1)
@@ -883,7 +893,7 @@ public static function langOption()
 
 
 	
-//	public static function BBCode2Html($text) {
+//	 function BBCode2Html($text) {
 //
 //		$emotion =  URL::to('sximo/js/plugins/markitup/images/emoticons/');
 //
@@ -974,7 +984,7 @@ public static function langOption()
 //		return $text;
 //	}
 //
-//	public static function seoUrl($str, $separator = 'dash', $lowercase = FALSE)
+//	 function seoUrl($str, $separator = 'dash', $lowercase = FALSE)
 //	{
 //		if ($separator == 'dash')
 //		{
@@ -1050,7 +1060,7 @@ public static function langOption()
 //	}
 //
 
-//	static public function initMarkitUp()
+//	function initMarkitUp()
 //	{
 //		$html =  HTML::style('sximo/js/plugins/markitup/skins/simple/style.css');
 //		$html .=  HTML::style('sximo/js/plugins/markitup/sets/default/style.css');
@@ -1061,6 +1071,6 @@ public static function langOption()
 //	}
 
 
-	 	 		
-			
-}
+
+
+//
