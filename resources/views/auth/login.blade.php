@@ -149,18 +149,14 @@
                                     {{--href="login_advanced.html#">Terms &amp; Conditions</a> and <a--}}
                                     {{--href="login_advanced.html#">Cookie Policy</a></span>--}}
                     </div>
+                    @include('errors.list')
+
                 </form>
-                @include('errors.list')
 
                         <!-- /advanced login -->
 
 
-                <!-- Footer -->
-                <div class="footer text-muted">
-                    &copy; 2015. <a href="login_advanced.html#">Kendonline</a> by <a
-                            href="mailto:contact@kendonline.com" target="_blank">Juliatzin</a>
-                </div>
-                <!-- /footer -->
+                @include('layouts.footer')
 
             </div>
             <!-- /content area -->

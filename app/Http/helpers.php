@@ -5,8 +5,8 @@
  * @param  string $message
  * @return void
  */
-function flash($message) {
-    session()->flash('message', $message);
+function flash($state, $message) {
+    session()->flash($state, $message);
 }
 
 

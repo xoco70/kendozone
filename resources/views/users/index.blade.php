@@ -2,12 +2,11 @@
 
 @section('content')
 
-    <h1>{{$currentModelName}}s</h1>
 
     <hr/>
 
     <div class="container">
-        <div class="row col-md-8 custyle">
+        <div class="row col-md-10 custyle">
             <table class="table table-striped custab">
                 <thead>
                 <a href="{!!   URL::action('UserController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
@@ -29,9 +28,9 @@
                         <td align="center">{{ $user->grade }}</td>
                         <td>
                             @if (!is_null($user->picture))
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="small_profile_pic" />
+                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="img-circle img-sm" />
                             @else
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="small_profile_pic" />
+                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="img-circle img-sm" />
                             @endif
                         </td>
 

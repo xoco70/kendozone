@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+    <title>Kendonline</title>
 
 
     <!-- Global stylesheets -->
@@ -32,7 +32,6 @@
 </head>
 
 <body>
-
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
@@ -80,14 +79,16 @@
 
             <!-- Content area -->
             <div class="content">
-
                 <!-- Registration form -->
                 {!! Form::open(['url'=>URL::to('/auth/register') , 'class'=> "form-signin"]) !!}
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
+                            @include('layouts.flash')
+
                             <div class="panel registration-form">
                                 <div class="panel-body">
                                     <div class="text-center">
+
                                         <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
                                         <h5 class="content-group-lg">{{  Lang::get('auth.title_register') }} <small class="display-block">{{  Lang::get('core.all_fields_required') }}</small></h5>
                                     </div>
@@ -105,7 +106,7 @@
                                                     {{--{!!  Form::label('countryId', trans('crud.country')) !!}--}}
                                                     {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                                 <div class="form-control-feedback">
-                                                    <i class="icon-user-check text-muted"></i>
+                                                    <i class=" icon-earth text-muted"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,10 +114,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group has-feedback">
                                                 {{--{!!  Form::label('gradeId', trans('crud.grade')) !!}--}}
-                                                {!!  Form::select('gradeId', $grades,8, ['class' => 'form-control']) !!} <!-- Default 1st Dan-->
+                                                {!!  Form::select('gradeId', $grades,9, ['class' => 'form-control']) !!} <!-- Default 1st Dan-->
 
                                                 <div class="form-control-feedback">
-                                                    <i class="icon-user-check text-muted"></i>
+                                                    <i class="icon-medal-star text-muted"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +155,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group has-feedback">
-                                                <input type="email" id="repeat_email" name="repeat_email" class="form-control" placeholder="{{  Lang::get('auth.repeat_email') }}">
+                                                <input type="email" id="email_confirmation" name="email_confirmation" class="form-control" placeholder="{{  Lang::get('auth.repeat_email') }}">
                                                 <div class="form-control-feedback">
                                                     <i class="icon-mention text-muted"></i>
                                                 </div>
@@ -192,18 +193,15 @@
                                     </div>
                                 </div>
                             </div>
+                            @include("errors.list")
                         </div>
                     </div>
 
                 {!! Form::close()!!}
                         <!-- /registration form -->
-                @include("errors.list")
 
-                <!-- Footer -->
-                <div class="footer text-muted">
-                    &copy; 2015. <a href="login_advanced.html#">Kendonline</a> by <a href="mailto:contact@kendonline.com" target="_blank">Juliatzin</a>
-                </div>
-                <!-- /footer -->
+
+                @include('layouts.footer')
 
             </div>
             <!-- /content area -->

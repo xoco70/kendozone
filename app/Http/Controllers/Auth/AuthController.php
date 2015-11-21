@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -50,7 +51,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'password_confirmation' => 'required|min:6'
@@ -98,12 +99,12 @@ class AuthController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required'
+            'email' => 'required|email|unique:users|confirmed',
+            'password' => 'required|confirmed'
         ]);
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);
-        flash('Please confirm your email address.');
+        flash('success', Lang::get('auth.check_your_email'));
         return redirect()->back();
     }
 

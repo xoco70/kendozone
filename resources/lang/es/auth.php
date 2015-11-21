@@ -18,7 +18,7 @@ return [
     'grade' => 'Grado',
     'signin' => 'Iniciar sesión',
     'remember' => 'No cerrar sesión',
-    'lost_password' => 'Has perdido tu contraseña?',
+    'lost_password' => 'Contraseña perdida?',
     'create_account' => 'Crear cuenta',
     'title_login' => 'Conectate a Kendo Online',
     'title_register' => 'Registrate en Kendo Online',
@@ -37,6 +37,8 @@ return [
     'we_will_send_instructions' => 'Te inviaremos instrucciones en un correo electrónico',
     'password_recovery' => 'Recupera tu contraseña',
     'send_password' => 'Reinitializar la contraseña',
+    'check_your_email' => 'Te hemos enviado un correo a tu cuenta de correo con un link de activación.',
+
 
 
 

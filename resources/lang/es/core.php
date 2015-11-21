@@ -27,6 +27,10 @@ return [
     'email' => 'Correo electrónico',
     'savechanges' => 'Guardar cambios',
     'all_fields_required' => 'Todos los campos son obligatorios',
+    'error' => 'Error ',
+    'warning' => 'Atención',
+    'success' => 'Exito',
+    'info' => 'Info',
 
 
     // Left menu

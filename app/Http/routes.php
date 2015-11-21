@@ -38,7 +38,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 //    return Redirect::to('/frontend');
 //});
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
 

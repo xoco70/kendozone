@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>{!! $currentModelName !!}s</h1>
+
     <hr/>
     <div class="container">
         <div class="row col-md-8 custyle">

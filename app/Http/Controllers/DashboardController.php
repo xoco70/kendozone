@@ -23,7 +23,8 @@ class DashboardController extends Controller
     {
 //        $this->middleware('auth');
         // Fetch the Site Settings object
-
+        $this->currentModelName = Lang::get('core.dashboard');
+        View::share('currentModelName', $this->currentModelName);
     }
 
     /**

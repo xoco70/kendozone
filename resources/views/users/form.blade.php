@@ -53,7 +53,7 @@
             <span class="fileinput-filename"></span>
             <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
         </div>
-    {!!   SiteHelpers::showUploadedFile(Auth::getUser()->picture,'/images/avatar/') !!}
+{{--    {!!   SiteHelpers::showUploadedFile(Auth::getUser()->picture,'/images/avatar/') !!}--}}
     </div>
 
 <div class="form-group">

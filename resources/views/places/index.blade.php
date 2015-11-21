@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <h1>{!! $currentModelName !!}es</h1>
 
     <hr/>
     <div class="container">

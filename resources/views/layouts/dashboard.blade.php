@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+    <title>Kendonline</title>
 
 
     <!-- Global stylesheets -->
@@ -63,7 +63,7 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> -
-                            Dashboard</h4>
+                            {!! $currentModelName !!}s</h4>
                     </div>
                 </div>
 
@@ -77,11 +77,7 @@
                 @include('layouts.flash')
                 @yield('content')
 
-                        <!-- Footer -->
-                <div class="footer text-muted">
-                    &copy; 2015. <a href="login_advanced.html#">Kendonline</a> by <a href="mailto:contact@kendonline.com" target="_blank">Juliatzin</a>
-                </div>
-                <!-- /footer -->
+                @include('layouts.footer')
 
             </div>
             <!-- /content area -->

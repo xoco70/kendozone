@@ -6,9 +6,10 @@
         <div class="sidebar-user">
             <div class="category-content">
                 <div class="media">
-                    <a href="##" class="media-left"><img src="images/demo/users/face11.jpg" class="img-circle img-sm" alt=""></a>
+
+                    <a href="##" class="media-left"><img src="/images/avatar/{!! Auth::getUser()->picture !!}" class="img-circle img-sm" alt=""></a>
                     <div class="media-body">
-                        <span class="media-heading text-semibold">Victoria Baker</span>
+                        <span class="media-heading text-semibold">{!! Auth::getUser()->name !!}</span>
                         <div class="text-size-mini text-muted">
                             <i class="icon-pin text-size-small"></i> &nbsp;Santa Ana, CA
                         </div>
@@ -34,10 +35,10 @@
 
                     <!-- Main -->
                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                    <li class="active"><a href="#"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                    <li ><a href="#"><i class="icon-trophy2"></i> <span>Torneos</span></a></li>
-                    <li ><a href="#"><i class="icon-location4"></i> <span>Lugares</span></a></li>
-                    <li ><a href="#"><i class="icon-user"></i> <span>Competidores</span></a></li>
+                    <li class="active"><a href="/"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    <li ><a href="/tournaments"><i class="icon-trophy2"></i> <span>Torneos</span></a></li>
+                    <li ><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>
+                    <li ><a href="competitors"><i class="icon-user"></i> <span>Competidores</span></a></li>
 
                     {{--<li>--}}
                         {{--<a href="##"><i class="icon-stack2"></i> <span>Page layouts</span></a>--}}
