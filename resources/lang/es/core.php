@@ -26,7 +26,7 @@ return [
     'changepassword' => 'Cambiar mi contraseña  ',
     'email' => 'Correo electrónico',
     'savechanges' => 'Guardar cambios',
-
+    'all_fields_required' => 'Todos los campos son obligatorios',
 
 
     // Left menu

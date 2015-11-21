@@ -42,10 +42,10 @@ class PasswordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//    public function getEmail()
-//    {
-//        return view('password.email');
-//    }
+    public function getEmail()
+    {
+        return view('password.email');
+    }
 //
 //    /**
 //     * Send a reset link to the given user.

@@ -12,7 +12,7 @@
 */
 use Illuminate\Support\Facades\Auth;
 
-//Auth::loginUsingId(5); // 6 Admin, 5 User
+//Auth::loginUsingId(6); // 6 Admin, 5 User
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -34,8 +34,12 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
+//Route::get('/', function () {
+//    return Redirect::to('/frontend');
+//});
 
-Route::get('/', 'DashboardController@index')->middleware(['auth']);
+Route::get('/', 'DashboardController@index');
+//Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
 
 //Route::resource('places', [

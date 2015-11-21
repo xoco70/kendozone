@@ -137,13 +137,13 @@ class AuthController extends Controller
      * @param  Request $request
      * @return array
      */
-    protected function getCredentials(Request $request)
-    {
-        return [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            'verified' => true
-        ];
-    }
+//    protected function getCredentials(Request $request)
+//    {
+//        return [
+//            'email' => $request->input('email'),
+//            'password' => $request->input('password'),
+//            'verified' => true
+//        ];
+//    }
 
 }
