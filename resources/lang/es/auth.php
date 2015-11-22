@@ -17,6 +17,7 @@ return [
     'throttle' => 'Demasiados intentos de inicio de sesión. Vuelva a intentarlo en :seconds segundos.',
     'grade' => 'Grado',
     'signin' => 'Iniciar sesión',
+    'signup' => 'Crea tu cuenta',
     'remember' => 'No cerrar sesión',
     'lost_password' => 'Contraseña perdida?',
     'create_account' => 'Crear cuenta',
@@ -25,6 +26,7 @@ return [
     'register' => 'Registro',
     'username_tip' => 'El nombre de usuario solo puede contener letras y numeros sin espacios',
     'email_tip' => 'Por favor ingrese su email',
+    'password' => 'Contraseña',
     'password_tip' => 'La contraseña debe de ser al menos de 4 caracteres',
     'password_confirmation' => 'Contraseña ( Confirmación )',
     'password_confirmation2' => 'Confirme la contraseña',
@@ -38,6 +40,12 @@ return [
     'password_recovery' => 'Recupera tu contraseña',
     'send_password' => 'Reinitializar la contraseña',
     'check_your_email' => 'Te hemos enviado un correo a tu cuenta de correo con un link de activación.',
+    'account_already_exists' => 'El correo electrónico ya ha sido usado para otra cuenta',
+    'login_to_your_account' => 'Conectate a tu cuenta',
+    'credentials' => 'Ingresa tus datos',
+    'signin_with' => 'O conectate con',
+    'no_account' => 'Aún no tienes cuenta?',
+
 
 
 

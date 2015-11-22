@@ -33,7 +33,9 @@ class UserSeeder extends Seeder
             'password' => bcrypt('admin'),
             'name' => 'AdminFirstName',
             'verified' => '1',
-            'roleId' => '3'
+            'roleId' => '3',
+            'provider' => 'seed',
+            'provider_id' => '1'
         ]);
 
 //        Sentinel::registerAndActivate([
@@ -48,7 +50,10 @@ class UserSeeder extends Seeder
             'password' => bcrypt('user'),
             'name' => 'UserFirstName',
             'verified' => '1',
-            'roleId' => '5'
+            'roleId' => '5',
+            'provider' => 'seed',
+            'provider_id' => '2'
+
 
         ]);
 

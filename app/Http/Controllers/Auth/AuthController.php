@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AuthenticateUser;
 use App\Grade;
 use App\Mailers\AppMailer;
 use App\Role;
@@ -10,6 +11,9 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
+
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -30,6 +34,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+
+
     /**
      * Create a new authentication controller instance.
      *
@@ -37,8 +43,10 @@ class AuthController extends Controller
      */
     private $redirectTo = '/';
 
-    public function __construct()
+    public function __construct(Socialite $socialite)
     {
+
+        $this->socialite = $socialite;
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -132,6 +140,30 @@ class AuthController extends Controller
         return Auth::attempt($this->getCredentials($request), $request->has('remember'));
     }
 
+    public function login()
+    {
+
+    }
+
+
+    public function getSocialAuth(AuthenticateUser $authenticateUser, Request $request, $provider = null)
+    {
+
+        return $authenticateUser->execute($request->all(), $this, $provider);
+    }
+    public function userHasLoggedIn($user)
+    {
+        Session::flash('info', 'Welcome, ' . $user->username);
+        return redirect('/');
+    }
+//    public function getSocialAuthCallback($provider=null)
+//    {
+//        if($user = $this->socialite->with($provider)->user()){
+//            dd($user);
+//        }else{
+//            return 'something went wrong';
+//        }
+//    }
     /**
      * Get the login credentials and requirements.
      *

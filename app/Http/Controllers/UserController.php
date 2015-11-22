@@ -73,13 +73,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (Input::file('picture') != null && Input::file('picture')->isValid()) {
+        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
-            $extension = Input::file('picture')->getClientOriginalExtension(); // getting image extension
+            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
             $fileName = $timestamp . '.' . $extension; // renameing image
-            Input::file('picture')->move($destinationPath, $fileName); // uploading file to given path
+            Input::file('avatar')->move($destinationPath, $fileName); // uploading file to given path
         }
 
         if (User::create($request->all())) {
@@ -125,13 +125,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (Input::file('picture') != null && Input::file('picture')->isValid()) {
+        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
-            $extension = Input::file('picture')->getClientOriginalExtension(); // getting image extension
+            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
             $fileName = $timestamp . '.' . $extension; // renameing image
-            Input::file('picture')->move($destinationPath, $fileName); // uploading file to given path
+            Input::file('avatar')->move($destinationPath, $fileName); // uploading file to given path
         }
         $except = [];
         if (trim(Input::get('roleId')) == '') {

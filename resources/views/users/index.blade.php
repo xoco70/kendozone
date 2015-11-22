@@ -15,7 +15,7 @@
                     <th>{{ trans('crud.username') }}</th>
                     <th>{{ trans('crud.email') }}</th>
                     <th>{{ trans('crud.grade') }}</th>
-                    <th>{{ trans('crud.picture') }}</th>
+                    <th>{{ trans('crud.avatar') }}</th>
                     <th>{{ trans('crud.country') }}</th>
                     <th class="text-center">{{ trans('crud.action') }}</th>
                 </tr>
@@ -27,8 +27,8 @@
                         <td>{{ $user->email }}</td>
                         <td align="center">{{ $user->grade }}</td>
                         <td>
-                            @if (!is_null($user->picture))
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->picture) }}" class="img-circle img-sm" />
+                            @if (!is_null($user->avatar))
+                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->avatar) }}" class="img-circle img-sm" />
                             @else
                                 <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="img-circle img-sm" />
                             @endif

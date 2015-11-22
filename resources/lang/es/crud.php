@@ -56,7 +56,7 @@ return [
     'user' => 'Usuario',
     'profile' => 'Perfil',
     'grade' => 'Grado',
-    'picture' => 'Foto',
+    'avatar' => 'Foto',
     'email' => 'Email',
     'role' => 'Role',
     'firstname' => 'Nombre',

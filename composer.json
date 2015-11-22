@@ -12,7 +12,8 @@
     "laravel/framework": "5.1.*",
     "laravelcollective/html": "5.1.*",
     "guzzlehttp/guzzle": "~4.0",
-    "webpatser/laravel-countries": "dev-master"
+    "webpatser/laravel-countries": "dev-master",
+    "laravel/socialite": "~2.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

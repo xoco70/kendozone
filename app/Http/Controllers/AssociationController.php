@@ -59,9 +59,9 @@ class AssociationController extends Controller
     {
         $association = $request->all();
         if (Association::create($association))
-            Session::flash('flash_message', 'Operación Exitosa!');
+            Session::flash('success', 'Operación Exitosa!');
         else
-            Session::flash('flash_message', 'Operación No realizada!');
+            Session::flash('error', 'Operación No realizada!');
         return redirect('associations');
     }
 

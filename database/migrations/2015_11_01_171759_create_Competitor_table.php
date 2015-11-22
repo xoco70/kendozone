@@ -14,7 +14,7 @@ class CreateCompetitorTable extends Migration {
 			$table->string('surname');
 			$table->integer('userId')->unsigned();
 			$table->integer('clubId')->unsigned();
-			$table->string('picture');
+//			$table->string('picture');
 			$table->timestamps();
 
 			$table->foreign('userId')

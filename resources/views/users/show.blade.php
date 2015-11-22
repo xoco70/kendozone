@@ -78,7 +78,7 @@
                         <div class="fileinput fileinput-new" data-provides="fileinput">
 			  <span class="btn btn-primary btn-file">
 			  	<span class="fileinput-new">Upload Avatar Image</span><span class="fileinput-exists">Change</span>
-					<input type="file" name="picture">
+					<input type="file" name="avatar">
 				</span>
                             <span class="fileinput-filename"></span>
                             <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>

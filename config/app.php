@@ -146,6 +146,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 		Webpatser\Countries\CountriesServiceProvider::class,
         App\Providers\BackendServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -197,6 +198,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
 		'Countries' => Webpatser\Countries\CountriesFacade::class,
+        'Socialize' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
