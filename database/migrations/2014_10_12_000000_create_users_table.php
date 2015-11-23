@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->string('token')->nullable();
             $table->string('provider');
-            $table->string('provider_id')->unique();
+            $table->string('provider_id')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

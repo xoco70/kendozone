@@ -4,6 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class Authenticate
 {
@@ -17,7 +21,7 @@ class Authenticate
     /**
      * Create a new filter instance.
      *
-     * @param  Guard  $auth
+     * @param  Guard $auth
      * @return void
      */
     public function __construct(Guard $auth)
@@ -28,8 +32,8 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -39,6 +43,16 @@ class Authenticate
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('auth/login');
+            }
+        }
+        else {
+            // If the user is not active any more, immidiately log out.
+            if (Auth::check() && !Auth::user()->verified) {
+                Auth::logout();
+//                Session::flash('success', 'La cuenta no esta activa');
+                Session::flash('error', Lang::get('auth.account_not_activated'));
+
+                return redirect('/auth/login');
             }
         }
 

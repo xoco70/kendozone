@@ -35,7 +35,6 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
 
-
     /**
      * Create a new authentication controller instance.
      *
@@ -58,6 +57,7 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
@@ -65,6 +65,50 @@ class AuthController extends Controller
             'password_confirmation' => 'required|min:6'
         ]);
     }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+//    public function postLogin(Request $request)
+//    {
+//        $this->validate($request, [
+//            $this->loginUsername() => 'required', 'password' => 'required',
+//        ]);
+//
+//
+//        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+//        // the login attempts for this application. We'll key this by the username and
+//        // the IP address of the client making these requests into this application.
+//        $throttles = $this->isUsingThrottlesLoginsTrait();
+//
+//        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+//            return $this->sendLockoutResponse($request);
+//        }
+//
+//        $credentials = $this->getCredentials($request);
+////        dd($credentials);
+////        dd(Auth::attempt($credentials, $request->has('remember')));
+//
+//        if (Auth::attempt($credentials)) {
+//            return $this->handleUserWasAuthenticated($request, $throttles);
+//        }
+//
+//        // If the login attempt was unsuccessful we will increment the number of attempts
+//        // to login and redirect the user back to the login form. Of course, when this
+//        // user surpasses their maximum number of attempts they will get locked out.
+//        if ($throttles) {
+//            $this->incrementLoginAttempts($request);
+//        }
+//
+//        return redirect($this->loginPath())
+//            ->withInput($request->only($this->loginUsername(), 'remember'))
+//            ->withErrors([
+//                $this->loginUsername() => $this->getFailedLoginMessage(),
+//            ]);
+//    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -79,10 +123,13 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'roleId' => $data['roleId'],
-            'countryId' => $data['countryId']
+            'countryId' => $data['countryId'],
+            'provider' => 'manual',
+            'provider_id' => $data['email']
 
         ]);
     }
+
 
     public function getRegister()
     {
@@ -125,7 +172,7 @@ class AuthController extends Controller
     public function confirmEmail($token)
     {
         User::whereToken($token)->firstOrFail()->confirmEmail();
-        flash('You are now confirmed. Please login.');
+        flash('success',Lang::get('auth.tx_for_confirm'));
         return redirect('auth/login');
     }
 
@@ -135,15 +182,15 @@ class AuthController extends Controller
      * @param  Request $request
      * @return boolean
      */
-    protected function signIn(Request $request)
-    {
-        return Auth::attempt($this->getCredentials($request), $request->has('remember'));
-    }
-
-    public function login()
-    {
-
-    }
+//    protected function signIn(Request $request)
+//    {
+//        return Auth::attempt($this->getCredentials($request), $request->has('remember'));
+//    }
+////
+//    public function login()
+//    {
+//
+//    }
 
 
     public function getSocialAuth(AuthenticateUser $authenticateUser, Request $request, $provider = null)
@@ -151,32 +198,26 @@ class AuthController extends Controller
 
         return $authenticateUser->execute($request->all(), $this, $provider);
     }
+
     public function userHasLoggedIn($user)
     {
-        Session::flash('info', 'Welcome, ' . $user->username);
+        flash('info', 'Welcome, ' . $user->username);
         return redirect('/');
     }
-//    public function getSocialAuthCallback($provider=null)
-//    {
-//        if($user = $this->socialite->with($provider)->user()){
-//            dd($user);
-//        }else{
-//            return 'something went wrong';
-//        }
-//    }
+
     /**
      * Get the login credentials and requirements.
      *
      * @param  Request $request
      * @return array
      */
-//    protected function getCredentials(Request $request)
-//    {
-//        return [
-//            'email' => $request->input('email'),
-//            'password' => $request->input('password'),
+    protected function getCredentials(Request $request)
+    {
+        return [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
 //            'verified' => true
-//        ];
-//    }
+        ];
+    }
 
 }

@@ -28,15 +28,15 @@ class UserSeeder extends Seeder
 //            'last_name' => 'OwnerLastName',
 //        ]);
 
-        User::create([
-            'email'    => 'admin@admin.com',
-            'password' => bcrypt('admin'),
-            'name' => 'AdminFirstName',
-            'verified' => '1',
-            'roleId' => '3',
-            'provider' => 'seed',
-            'provider_id' => '1'
-        ]);
+//        User::create([
+//            'email'    => 'admin@admin.com',
+//            'password' => bcrypt('111111'),
+//            'name' => 'AdminFirstName',
+//            'verified' => '1',
+//            'roleId' => '3',
+//            'provider' => 'seed',
+//            'provider_id' => '1'
+//        ]);
 
 //        Sentinel::registerAndActivate([
 //            'email'    => 'moderator@admin.com',
@@ -45,17 +45,17 @@ class UserSeeder extends Seeder
 //            'last_name' => 'ModeratorLastName',
 //        ]);
 
-        User::create([
-            'email'    => 'user@user.com',
-            'password' => bcrypt('user'),
-            'name' => 'UserFirstName',
-            'verified' => '1',
-            'roleId' => '5',
-            'provider' => 'seed',
-            'provider_id' => '2'
-
-
-        ]);
+//        User::create([
+//            'email'    => 'user@user.com',
+//            'password' => bcrypt('111111'),
+//            'name' => 'UserFirstName',
+//            'verified' => '1',
+//            'roleId' => '5',
+//            'provider' => 'seed',
+//            'provider_id' => '2'
+//
+//
+//        ]);
 
 
 

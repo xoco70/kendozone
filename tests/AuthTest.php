@@ -9,6 +9,7 @@ class AuthTest extends TestCase
 {
     use DatabaseTransactions;
 
+
     /** @test */
     public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
     {
@@ -17,9 +18,9 @@ class AuthTest extends TestCase
             ->type('JohnDoe', 'name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
-            ->press(Lang::get('auth.register'));
+            ->press(Lang::get('auth.create_account'));
         // We should have an account - but one that is not yet confirmed/verified.
-        $this->see('Please confirm your email address.')
+        $this->see(Lang::get('auth.check_your_email'))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
         $user = User::whereName('JohnDoe')->first();
         // You can't login until you confirm your email address.
@@ -30,20 +31,25 @@ class AuthTest extends TestCase
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
     }
 
-    /** @test */
-    public function a_user_may_login()
-    {
-        $this->login()->see('Lesson complete. Good job!')->onPage('dashboard');
-    }
+    // Register con Facebook
+    // Register con Facebook and there is another user using same email
+    // Register con Facebook and already registered
 
-    protected function login($user = null)
-    {
-        $user = $user ?: $this->factory->create('App\User', ['password' => 'password']);
-        return $this->visit('login')
-            ->type($user->email, 'email')
-            ->type('password', 'password')// You might want to change this.
-            ->press(Lang::get('auth.signin'));
-    }
+
+//    /** @test */
+//    public function a_user_may_login()
+//    {
+//        $this->login()->see('Lesson complete. Good job!')->onPage('dashboard');
+//    }
+
+//    protected function login($user = null)
+//    {
+//        $user = $user ?: $this->factory->create('App\User', ['password' => 'password']);
+//        return $this->visit('login')
+//            ->type($user->email, 'email')
+//            ->type('password', 'password')// You might want to change this.
+//            ->press(Lang::get('auth.signin'));
+//    }
 
     /** @test */
     public function login_standard_user()
