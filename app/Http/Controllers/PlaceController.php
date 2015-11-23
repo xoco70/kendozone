@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use App\Http\Requests\PlaceRequest;
 use App\Place;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
@@ -23,8 +21,11 @@ class PlaceController extends Controller
     {
 //        $this->middleware('auth');
         // Fetch the Site Settings object
-        $this->currentModelName = Lang::get('crud.place');
+        $this->currentModelName = trans_choice('crud.place', 1);
+        $this->modelPlural = trans_choice('crud.place', 2);
         View::share('currentModelName', $this->currentModelName);
+        View::share('modelPlural', $this->modelPlural);
+
 
     }
 
@@ -37,7 +38,7 @@ class PlaceController extends Controller
     {
         $places = DB::table('place')
             ->leftJoin('countries', 'place.countryId', '=', 'countries.id')
-            ->select('place.*','countries.name as country')
+            ->select('place.*', 'countries.name as country')
             ->get(); //
         return view('places.index', compact('places'));
     }
@@ -49,15 +50,15 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        $place=new Place();
+        $place = new Place();
         $countries = Countries::lists('name', 'id');
-        return view('places.create', compact('place','countries'));
+        return view('places.create', compact('place', 'countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return Response
      */
     public function store(PlaceRequest $request)
@@ -79,9 +80,9 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
 //        return view('places.show', compact('place'));
-        if ($place->delete()){
+        if ($place->delete()) {
             Session::flash('flash_message', 'Operación Exitosa!');
-        }else{
+        } else {
             Session::flash('flash_message', 'Operación No realizada!');
         }
 
@@ -100,7 +101,7 @@ class PlaceController extends Controller
 
         $countries = Countries::lists('name', 'id');
 
-        return view('places.edit', compact('place','countries'));
+        return view('places.edit', compact('place', 'countries'));
     }
 
     /**
@@ -110,7 +111,7 @@ class PlaceController extends Controller
      * @param Place $place
      * @return Response
      */
-    public function update(Request $request,Place $place)
+    public function update(Request $request, Place $place)
     {
         $place->update($request->all());
         return redirect("places");
@@ -119,7 +120,7 @@ class PlaceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy(Place $place)

@@ -29,7 +29,7 @@ return [
 
 
     //Tournament
-    'tournament' => 'Torneo',
+    'tournament' => 'Torneo|Torneos',
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'limitDateRegistration' => 'Registro',
@@ -44,16 +44,16 @@ return [
 
 
     // Places
-    'place' => 'Lugar',
+    'place' => 'Lugar|Lugares',
     'coords' => 'Coords',
     'city' => 'Ciudad',
     'state' => 'Estado',
     'country' => 'País',
 
     // User
+    'user' => 'Usuario|Usuarios',
     'name' => 'Nombre',
     'username' => 'Nombre de usuario',
-    'user' => 'Usuario',
     'profile' => 'Perfil',
     'grade' => 'Grado',
     'avatar' => 'Foto',
@@ -70,7 +70,7 @@ return [
 
 
     // Competitor
-    'competitor' => 'Competidor',
+    'competitor' => 'Competidor|Competidores',
 
 
 

@@ -29,8 +29,11 @@ class UserController extends Controller
     {
 //        $this->middleware('auth');
         // Fetch the Site Settings object
-        $this->currentModelName = Lang::get('crud.user');
+        $this->currentModelName = trans_choice('crud.user', 1);
+        $this->modelPlural = trans_choice('crud.user', 1);
         View::share('currentModelName', $this->currentModelName);
+        View::share('modelPlural', $this->modelPlural);
+
 
     }
 
