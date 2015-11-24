@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 /**
  * Created by PhpStorm.
@@ -10,14 +11,22 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class PlaceTest extends TestCase
 {
     use DatabaseTransactions;
-
-    // FOR THE MOMENT, WE USE JUST 3 ROLES - SUPERADMIN, ADMIN, USER
-    // READ
+//    use WithoutMiddleware;
 
     /** @test */
-//    public function it_see_all_places_as_superadmin(){
-//        $this->visit('places');
-//    }
+    public function it_create_place()
+    {
+        $place = trans_choice('crud.place', 1);
+        $places = trans_choice('crud.place', 2);
+
+        $this->login_admin_user()
+            ->click($places)
+            ->see($places)
+            ->click(Lang::get('crud.addModel', ['currentModelName' => $place])
+            );
+
+
+    }
 
     /** @test */
 //    public function it_see_my_places_as_admin(){
@@ -78,14 +87,14 @@ class PlaceTest extends TestCase
 //            ->seePageIs('login');
 //    }
 
-    /** @test */
-    public function it_edit_place_as_admin(){
-
-    }
-    /** @test */
-    public function it_denies_edit_place_as_user(){
-
-    }
+//    /** @test */
+//    public function it_edit_place_as_admin(){
+//
+//    }
+//    /** @test */
+//    public function it_denies_edit_place_as_user(){
+//
+//    }
     /** @test */
 //    public function it_denies_edit_place_as_guest(){
 //
@@ -131,4 +140,13 @@ class PlaceTest extends TestCase
 //            ->type('sentineluser', 'password')
 //            ->press('Login');
 //    }
+
+    /** @test */
+    public function login_admin_user()
+    {
+        return $this->visit('auth/login')
+            ->type('john@example.com', 'email')
+            ->type('password', 'password')
+            ->press(Lang::get('auth.signin'));
+    }
 }

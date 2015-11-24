@@ -40,7 +40,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    private $redirectTo = '/';
+    private $redirectTo = '/admin';
+    private $redirectAfterLogout = '/auth/login';
+
 
     public function __construct(Socialite $socialite)
     {
@@ -202,7 +204,7 @@ class AuthController extends Controller
     public function userHasLoggedIn($user)
     {
         flash('info', 'Welcome, ' . $user->username);
-        return redirect('/');
+        return redirect('/admin');
     }
 
     /**

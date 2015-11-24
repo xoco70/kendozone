@@ -31,6 +31,22 @@
                 ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
         }
 
+        /** @test */
+        public function register_but_error_in_confirmations()
+        {
+            // When we register...
+            $this->visit('/auth/register')
+                ->type('JohnDoe', 'name')
+                ->type('john2@example.com', 'email')
+                ->type('john2@example.com2', 'email_confirmation')
+                ->type('password', 'password')
+                ->type('password2', 'password_confirmation')
+                ->press(Lang::get('auth.create_account'));
+            $this->see(htmlentities(Lang::get('validation.confirmed',  ['attribute' => 'email'])))
+                 ->see(htmlentities(Lang::get('validation.confirmed',['attribute' => 'password'])))
+                ->NotseeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
+        }
+
 
 
         protected function login($user = null)
@@ -59,4 +75,9 @@
                 ->type('admin', 'password')
                 ->press(Lang::get('auth.signin'));
         }
+
+        // I'm not sure how to Test Conexion Facebook
+
+
+
     }

@@ -15,7 +15,7 @@ class AppMailer
      *
      * @var string
      */
-    protected $from = 'admin@example.com';
+    protected $from = 'admin@atekokolli.com';
     /**
      * The recipient of the email.
      *
@@ -52,6 +52,7 @@ class AppMailer
     public function sendEmailConfirmationTo(User $user)
     {
         $this->to = $user->email;
+        $this->subjet = 'Activación de tu cuenta Kendonline';
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
@@ -64,7 +65,7 @@ class AppMailer
     public function deliver()
     {
         $this->mailer->send($this->view, $this->data, function ($message) {
-            $message->from($this->from, 'Administrator')
+            $message->from($this->from, 'Kendonline')
                 ->to($this->to);
         });
     }

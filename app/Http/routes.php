@@ -47,7 +47,7 @@ Route::get('/login/callback/{provider?}',[
 //    return Redirect::to('/frontend');
 //});
 
-Route::get('/', 'DashboardController@index')->middleware(['auth']);
+Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
 

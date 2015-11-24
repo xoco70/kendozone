@@ -38,7 +38,7 @@ return [
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => 'http://yourwebsite.com/login/twitter',
+        'redirect' => 'http://localhost:8888/login/twitter',
     ],
 
     'facebook' => [
