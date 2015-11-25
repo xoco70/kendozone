@@ -5,10 +5,10 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class TournamentType extends Model
+class TournamentLevel extends Model
 {
 
-    protected $table = 'tournamentType';
+    protected $table = 'tournamentLevel';
     public $timestamps = false;
 
     protected $fillable = [

@@ -57,6 +57,20 @@ class Tournament extends Model
         $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date);
     }
 
+
+    public function sethasRoundRobin($hasRoundRobin)
+    {
+        if ($hasRoundRobin == "on")
+            $this->attributes['$hasRoundRobin'] = 1;
+    }
+    public function sethasEncho($hasEncho)
+    {
+        if ($hasEncho == "on")
+            $this->attributes['$hasEncho'] = 1;
+    }
+
+
+
 //	public function setplaceId($id){
 //		$this->attributes['placeId'] = $id;
 //	}

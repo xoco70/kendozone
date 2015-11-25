@@ -11,6 +11,7 @@
                 @can('CanCreateTournament')
                 <a href="{!!   URL::action('TournamentController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
                 @endcan
+
                 <tr>
                     <th>ID</th>
                     <th>{{ trans('crud.name') }}</th>

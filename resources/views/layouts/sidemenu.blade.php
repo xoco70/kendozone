@@ -38,7 +38,7 @@
 
                     <!-- Main -->
                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                    <li {{ (Request::is('admin') ? 'class=active' : '') }}><a href="/admin"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    <li {{ ((Request::is('admin') || Request::is('/')) ? 'class=active' : '') }}><a href="/admin"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}><a href="/tournaments"><i class="icon-trophy2"></i> <span>Torneos</span></a></li>
                     <li {{ (Request::is('places') ? 'class=active' : '') }}><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>
                     <li {{ (Request::is('competitors') ? 'class=active' : '') }}><a href="competitors"><i class="icon-user"></i> <span>Competidores</span></a></li>

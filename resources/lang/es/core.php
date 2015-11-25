@@ -31,6 +31,8 @@ return [
     'warning' => 'Atención',
     'success' => 'Exito',
     'info' => 'Info',
+    'operation_successful' => ' Operación exitosa',
+    'operation_failed' => ' Hubo un problema',
 
 
     // Left menu

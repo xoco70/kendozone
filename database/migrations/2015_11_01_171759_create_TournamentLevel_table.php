@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTournamentTypeTable extends Migration {
+class CreateTournamentLevelTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('tournamentType', function(Blueprint $table) {
+		Schema::create('tournamentLevel', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->engine = 'InnoDB';
@@ -19,6 +19,6 @@ class CreateTournamentTypeTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('tournamentType');
+		Schema::drop('tournamentLevel');
 	}
 }

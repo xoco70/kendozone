@@ -6,6 +6,7 @@
     <hr/>
     <div class="container">
         <div class="row col-md-8 custyle">
+
             {!! Form::open(['url'=>"tournaments"]) !!}
 
             @include("tournaments.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])

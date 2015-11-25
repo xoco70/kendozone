@@ -27,25 +27,19 @@
     {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
     {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    <div class="checkbox checkbox-switchery">
-        <label>
-            <input type="checkbox" name="hasRoundRobin" value="{!! old('hasRoundRobin') !!}" id="hasRoundRobin"
-                   class="switchery" checked="checked" data-switchery="true" style="display: none;">
-                <span class="switchery switchery-default"
-                      style="border-color: rgb(100, 189, 99); box-shadow: rgb(100, 189, 99) 0px 0px 0px 12px inset; transition: border 0.4s, box-shadow 0.4s, background-color 1.2s; background-color: rgb(100, 189, 99);"><small
-                            style="left: 22px; transition: background-color 0.4s, left 0.2s; background-color: rgb(255, 255, 255);"></small></span>
-            {!! trans('crud.hasRoundRobin') !!}
-        </label>
-    </div>
-</div>
+
 
 <div class="checkbox checkbox-switchery">
     <label>
-        <input type="checkbox" class="switchery-primary" checked="checked" data-switchery="true" style="display: none;"><span class="switchery switchery-default" style="border-color: rgb(33, 150, 243); box-shadow: rgb(33, 150, 243) 0px 0px 0px 12px inset; transition: border 0.4s, box-shadow 0.4s, background-color 1.2s; background-color: rgb(33, 150, 243);"><small style="left: 22px; transition: background-color 0.4s, left 0.2s; background-color: rgb(255, 255, 255);"></small></span>
-        Switch in <span class="text-semibold">primary</span> context
+        <input name ="hasRoundRobin" id="hasRoundRobin" type="checkbox" class="switchery" checked="checked">
+        {!! trans('crud.hasRoundRobin') !!}
+    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>
+        <input name ="hasEncho" id="hasEncho" value type="checkbox" class="switchery" checked="checked">
+        {!! trans('crud.hasEncho') !!}
     </label>
 </div>
+
 
 <div class="form-group">
     {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
@@ -56,12 +50,13 @@
     {!!  Form::input('number','fightDuration', old('fightDuration'), ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!}
-    {!!  Form::checkbox('hasEncho',  old('hasEncho')) !!}
-</div>
-<div class="form-group">
     {!!  Form::label('type', trans('crud.tournamentType')) !!}
-    {!!  Form::select('type',$types, old('type'),  ['class' => 'form-control']) !!}
+    {!!  Form::select('type',['0' => 'abierto','1' => 'cerrado'], old('type'),  ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+    {!!  Form::label('level', trans('crud.tournamentLevel')) !!}
+    {!!  Form::select('level',$levels, old('level'),  ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">

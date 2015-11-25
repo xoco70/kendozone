@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TournamentRequest;
 use App\Place;
 use App\Tournament;
-use App\TournamentType;
+use App\TournamentLevel;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -50,9 +50,9 @@ class TournamentController extends Controller
      */
     public function create()
     {
-        $types = TournamentType::lists('name', 'id');
+        $levels = TournamentLevel::lists('name', 'id');
         $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('places','types'));
+        return view('tournaments.create', compact('places','levels'));
     }
 
     /**
@@ -63,9 +63,11 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
+
         $tournament = $request->all();
-        Tournament::create($tournament);
-        Session::flash('flash_message', 'Operación Exitosa!');
+        dd($tournament);
+        if (Tournament::create($tournament)) flash('success', 'operation_successful!');
+        else flash('error', 'operation_failed!');
         return redirect('tournaments');
     }
 
@@ -90,10 +92,10 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
-        $types = TournamentType::lists('name', 'id');
+        $levels = TournamentLevel::lists('name', 'id');
         $places = Place::lists('name', 'id');
 //        dd($tournaments);
-        return view('tournaments.edit', compact('tournament', 'places','types'));
+        return view('tournaments.edit', compact('tournament', 'places','levels'));
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
 use App\Grade;
-use App\TournamentType;
+use App\TournamentLevel;
 use Illuminate\Database\Seeder;
 
-class TournamentTypeSeeder extends Seeder {
+class TournamentLevelSeeder extends Seeder {
 
     /**
      * Run the database seeds.
@@ -16,14 +16,14 @@ class TournamentTypeSeeder extends Seeder {
     {
         //Empty the Grade table
 //        DB::table('Grade')->delete();
-        TournamentType::truncate();        TournamentType::create(['name' => "local"]);
-        TournamentType::create(['name' => "districtal"]);
-        TournamentType::create(['name' => "city"]);
-        TournamentType::create(['name' => "regional"]);
-        TournamentType::create(['name' => "state"]);
-        TournamentType::create(['name' => "national"]);
-        TournamentType::create(['name' => "continental"]);
-        TournamentType::create(['name' => "world"]);
+        TournamentLevel::truncate();        TournamentLevel::create(['name' => "local"]);
+        TournamentLevel::create(['name' => "districtal"]);
+        TournamentLevel::create(['name' => "city"]);
+        TournamentLevel::create(['name' => "regional"]);
+        TournamentLevel::create(['name' => "state"]);
+        TournamentLevel::create(['name' => "national"]);
+        TournamentLevel::create(['name' => "continental"]);
+        TournamentLevel::create(['name' => "world"]);
 
     }
 }
