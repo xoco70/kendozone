@@ -65,9 +65,9 @@ class PlaceController extends Controller
     {
         $place = $request->all();
         if (Place::create($place))
-            Session::flash('flash_message', 'Operación Exitosa!');
+            flash('success', 'Operación Exitosa!');
         else
-            Session::flash('flash_message', 'Operación No realizada!');
+            flash('error', 'Operación No realizada!');
         return redirect('places');
     }
 
@@ -81,9 +81,9 @@ class PlaceController extends Controller
     {
 //        return view('places.show', compact('place'));
         if ($place->delete()) {
-            Session::flash('flash_message', 'Operación Exitosa!');
+            flash('success', 'Operación Exitosa!');
         } else {
-            Session::flash('flash_message', 'Operación No realizada!');
+            flash('error', 'Operación No realizada!');
         }
 
 

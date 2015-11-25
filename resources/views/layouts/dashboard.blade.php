@@ -33,6 +33,9 @@
     {!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}
     {!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}
     {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
+    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
+    {!! Html::script('js/pages/form_checkboxes_radios.js') !!}
+
     {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
     {!! Html::script('js/plugins/forms/selects/bootstrap_multiselect.js') !!}
     {!! Html::script('js/plugins/ui/moment/moment.min.js') !!}

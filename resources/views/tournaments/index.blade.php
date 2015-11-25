@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <hr/>
+
     <div class="container">
         <div class="row col-md-8 custyle">
             <table class="table table-striped custab">
@@ -14,7 +14,7 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ trans('crud.name') }}</th>
-                    <th>{{ trans('crud.place') }}</th>
+                    <th>{{ trans_choice('crud.place',1) }}</th>
                     <th>{{ trans('crud.date') }}</th>
                     <th>{{ trans('crud.limitDateRegistration') }}</th>
 
