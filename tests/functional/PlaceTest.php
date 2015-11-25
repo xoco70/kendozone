@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Created by PhpStorm.
@@ -13,20 +14,69 @@ class PlaceTest extends TestCase
     use DatabaseTransactions;
 //    use WithoutMiddleware;
 
+
     /** @test */
     public function it_create_place()
     {
         $place = trans_choice('crud.place', 1);
         $places = trans_choice('crud.place', 2);
 
+        $addPlace = Lang::get('crud.addModel', ['currentModelName' => $place]);
+
         $this->login_admin_user()
             ->click($places)
             ->see($places)
-            ->click(Lang::get('crud.addModel', ['currentModelName' => $place])
-            );
+            ->click($addPlace)
+            ->type('My Place', 'name')
+            ->type('2', 'coords')
+            ->type('3', 'city')
+            ->type('4', 'state')
+            ->select('10','countryId')
+            ->press($addPlace)
+            ->seePageIs('/places')
+            ->seeInDatabase('place',['name' => 'My Place']);
+
+    }
+
+    /** @test */
+    public function it_edit_place()
+    {
+        $place = trans_choice('crud.place', 1);
+
+        $editPlace = Lang::get('crud.updateModel', ['currentModelName' => $place]);
+        $edit = Lang::get('crud.edit');
+        $this->it_create_place();
+
+        $this->visit('/places')
+            ->click($edit)
+            ->type('My Place', 'name')
+            ->type('22', 'coords')
+            ->type('33', 'city')
+            ->type('44', 'state')
+            ->select('36','countryId')
+            ->press($editPlace)
+            ->seePageIs('/places')
+            ->seeInDatabase('place',['name' => 'My Place', 'coords' => '22']);
 
 
     }
+
+    /** @test */
+    public function it_delete_place()
+    {
+
+
+        $delete = Lang::get('crud.delete');
+        $this->it_create_place();
+
+        $this->visit('/places')
+            ->click($delete)
+            ->seePageIs('/places')
+            ->dontSee('My Place')
+            ->notSeeInDatabase('place', ['name' => 'My Place']);
+    }
+
+
 
     /** @test */
 //    public function it_see_my_places_as_admin(){
