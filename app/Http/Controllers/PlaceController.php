@@ -111,7 +111,7 @@ class PlaceController extends Controller
      * @param Place $place
      * @return Response
      */
-    public function update(Request $request, Place $place)
+    public function update(PlaceRequest $request, Place $place)
     {
         $place->update($request->all());
         return redirect("places");

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('gradeId')->unsigned()->default(1);
             $table->integer('countryId')->unsigned()->default(484);
             $table->integer('roleId')->unsigned();
-            $table->string('avatar')->default("avatar.png");
+            $table->string('avatar')->nullable()->default("avatar.png");
             $table->boolean('verified')->default(false);
             $table->string('token')->nullable();
             $table->string('provider');

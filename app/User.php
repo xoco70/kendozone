@@ -43,7 +43,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function rules()
     {
         return [
-            'image' => 'mimes:png,jpg, jpeg, gif'
+            'name' => 'required|max:255|unique:users',
+            'email' => 'required|max:255|unique:users',
+            'avatar' => 'mimes:png,jpg, jpeg, gif'
         ];
     }
     /**

@@ -14,40 +14,24 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->truncate();
 
-//        Sentinel::registerAndActivate([
-//            'email'    => 'superadmin@admin.com',
-//            'password' => 'superadmin',
-//            'first_name' => 'SuperAdminFirstName',
-//            'last_name' => 'SuperAdminLastName',
-//        ]);
 
-//        Sentinel::registerAndActivate([
-//            'email'    => 'owner@admin.com',
-//            'password' => 'owner',
-//            'first_name' => 'OwnerFirstName',
-//            'last_name' => 'OwnerLastName',
-//        ]);
+        User::create([
+            'name' => 'xoco',
+            'email'    => 'xoco70@hotmail.com1',
+            'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
+            'gradeId' => '9',
+            'countryId' => '484',
+            'roleId' => '3',
+            'avatar' => 'avatar.png',
+            'verified' => '1',
+            'provider' => '',
+            'provider_id' => '1'
+        ]);
 
-//        User::create([
-//            'email'    => 'admin@admin.com',
-//            'password' => bcrypt('111111'),
-//            'name' => 'AdminFirstName',
-//            'verified' => '1',
-//            'roleId' => '3',
-//            'provider' => 'seed',
-//            'provider_id' => '1'
-//        ]);
-
-//        Sentinel::registerAndActivate([
-//            'email'    => 'moderator@admin.com',
-//            'password' => 'moderator',
-//            'first_name' => 'ModeratorFirstName',
-//            'last_name' => 'ModeratorLastName',
-//        ]);
 
 //        User::create([
 //            'email'    => 'user@user.com',
-//            'password' => bcrypt('111111'),
+//            'password' => '$2y$10$ZkpACe1Xq7OblA2Jvb5CiO2gFw7716X7HdnHexPMAEMKvHlj7fIWu', // 111111
 //            'name' => 'UserFirstName',
 //            'verified' => '1',
 //            'roleId' => '5',

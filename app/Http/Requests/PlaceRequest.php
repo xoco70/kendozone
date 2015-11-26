@@ -23,8 +23,9 @@ class PlaceRequest extends Request
      */
     public function rules()
     {
-        return [
 
+        return [
+            'name' => 'required|min:3'
         ];
     }
 }

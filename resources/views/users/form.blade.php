@@ -1,5 +1,5 @@
 <div class="form-group">
-    {!!  Form::label('name', trans('crud.user')) !!}
+    {!!  Form::label('name', trans('crud.username')) !!}
     {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!} <!-- ,'disabled' => 'disabled' -->
 </div>
 <div class="form-group">

@@ -2,6 +2,7 @@
 
     use App\User;
     use Illuminate\Foundation\Testing\DatabaseTransactions;
+    use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Lang;
 
     class AuthTest extends TestCase
@@ -9,6 +10,18 @@
         use DatabaseTransactions;
 
 
+
+        public function setUp()
+        {
+            parent::setUp();
+
+        }
+
+        public function tearDown()
+        {
+            DB::rollBack();
+
+        }
         /** @test */
         public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
         {
@@ -29,6 +42,10 @@
             $this->visit("auth/register/confirm/{$user->token}")
                 ->see(Lang::get('auth.tx_for_confirm'))
                 ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
+
+            // Reset this user
+            $user->delete();
+
         }
 
         /** @test */
@@ -57,24 +74,24 @@
                 ->type('password', 'password')
                 ->press(Lang::get('auth.signin'));
         }
-
-        /** @test */
-        public function login_standard_user()
-        {
-            return $this->visit('auth/login')
-                ->type('user@user.com', 'email')
-                ->type('user', 'password')
-                ->press(Lang::get('auth.signin'));
-        }
-
-        /** @test */
-        public function login_admin_user()
-        {
-            return $this->visit('auth/login')
-                ->type('admin@admin.com', 'email')
-                ->type('admin', 'password')
-                ->press(Lang::get('auth.signin'));
-        }
+//
+//        /** @test */
+//        public function login_standard_user()
+//        {
+//            return $this->visit('auth/login')
+//                ->type('user@user.com', 'email')
+//                ->type('user', 'password')
+//                ->press(Lang::get('auth.signin'));
+//        }
+//
+//        /** @test */
+//        public function login_admin_user()
+//        {
+//            return $this->visit('auth/login')
+//                ->type('admin@admin.com', 'email')
+//                ->type('admin', 'password')
+//                ->press(Lang::get('auth.signin'));
+//        }
 
         // I'm not sure how to Test Conexion Facebook
 

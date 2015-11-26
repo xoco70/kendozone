@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\Grade;
+use App\Http\Requests;
 use App\Role;
 use App\User;
-use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -86,9 +83,9 @@ class UserController extends Controller
         }
 
         if (User::create($request->all())) {
-            Session::flash('flash_message', 'Operación Exitosa!');
+            flash('success', Lang::get('core.success'));
         } else
-            Session::flash('flash_message', 'Operación No realizada!');
+            flash('error', Lang::get('core.fail'));
         return redirect('users');
     }
 
@@ -138,21 +135,23 @@ class UserController extends Controller
         }
         $except = [];
         if (trim(Input::get('roleId')) == '') {
-            array_push($except,'roleId');
+            array_push($except, 'roleId');
         }
         if (trim(Input::get('password')) == '') {
-            array_push($except,'password');
+            array_push($except, 'password');
 
         }
         $data = $request->except($except);
+
+
+
         if ($user->update($data)) {
-            Session::flash('flash_message', 'Operación Exitosa!');
-        } else {
-            Session::flash('flash_message', 'Operación No realizada!');
-        }
+            flash('success', Lang::get('core.success'));
+        } else
+            flash('error', Lang::get('core.fail'));
 
 
-        return redirect("/");
+        return redirect("/users");
     }
 
     /**

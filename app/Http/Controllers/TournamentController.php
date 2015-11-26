@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Place;
 use App\Tournament;
 use App\TournamentLevel;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class TournamentController extends Controller
@@ -38,7 +33,7 @@ class TournamentController extends Controller
     {
         $tournaments = DB::table('tournament')
             ->leftJoin('place', 'place.id', '=', 'tournament.placeId')
-            ->select('tournament.*','place.name as place')
+            ->select('tournament.*', 'place.name as place')
             ->get(); //
         return view('tournaments.index', compact('tournaments'));
     }
@@ -52,20 +47,19 @@ class TournamentController extends Controller
     {
         $levels = TournamentLevel::lists('name', 'id');
         $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('places','levels'));
+        return view('tournaments.create', compact('places', 'levels'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(TournamentRequest $request)
     {
 
         $tournament = $request->all();
-        dd($tournament);
         if (Tournament::create($tournament)) flash('success', 'operation_successful!');
         else flash('error', 'operation_failed!');
         return redirect('tournaments');
@@ -74,7 +68,7 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Tournament $tournament)
@@ -95,17 +89,17 @@ class TournamentController extends Controller
         $levels = TournamentLevel::lists('name', 'id');
         $places = Place::lists('name', 'id');
 //        dd($tournaments);
-        return view('tournaments.edit', compact('tournament', 'places','levels'));
+        return view('tournaments.edit', compact('tournament', 'places', 'levels'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TournamentRequest $request,Tournament $tournament)
+    public function update(TournamentRequest $request, Tournament $tournament)
     {
         $tournament->update($request->all());
         return redirect("tournaments");
@@ -114,7 +108,7 @@ class TournamentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tournament $tournament)
