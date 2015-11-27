@@ -45,6 +45,25 @@
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
 
+    @if (Request::is("places/*"))
+        {!! Html::script('http://maps.google.com/maps/api/js?sensor=false&amp;libraries=places') !!}
+        {!! Html::script('js/core/libraries/jquery_ui/autocomplete.min.js') !!}
+        {!! Html::script('js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') !!}
+        {!! Html::script('js/plugins/pickers/location/typeahead_addresspicker.js') !!}
+        {!! Html::script('js/plugins/pickers/location/autocomplete_addresspicker.js') !!}
+        {!! Html::script('js/plugins/pickers/location/location.js') !!}
+        {!! Html::script('js/plugins/ui/prism.min.js') !!}
+        {!! Html::script('js/pages/picker_location.js') !!}
+    @endif
+    @if (Request::is("/") || Request::is("admin"))
+    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
+    {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
+    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
+    {!! Html::script('js/core/libraries/jasny_bootstrap.min.js') !!}
+    {!! Html::script('js/plugins/forms/validation/validate.min.js') !!}
+    {!! Html::script('js/pages/wizard_stepy.js') !!}
+    @endif
+
 
 
 </head>

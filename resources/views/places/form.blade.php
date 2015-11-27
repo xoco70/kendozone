@@ -3,8 +3,9 @@
     {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!!  Form::label('coords', trans('crud.coords')) !!}
-    {!!  Form::text('coords',old('coords'), ['class' => 'form-control']) !!}
+    {!!  Form::label('name', trans('crud.coords')) !!}
+    <div class="map-wrapper locationpicker-default"></div>
+    {!!  Form::hidden('coords',old('coords')) !!}
 </div>
 
 <div class="form-group">
