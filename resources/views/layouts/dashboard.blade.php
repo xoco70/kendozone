@@ -8,9 +8,8 @@
 
 
     <!-- Global stylesheets -->
-
-    {!! Html::style('css/icons/icomoon/styles.css')!!}
     {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
+    {!! Html::style('css/icons/icomoon/styles.css')!!}
     {!! Html::style('css/bootstrap.css')!!}
     {!! Html::style('css/core.css')!!}
     {!! Html::style('css/components.css')!!}
@@ -24,22 +23,31 @@
     {!! Html::script('js/plugins/loaders/blockui.min.js') !!}
     {{--<!-- /core JS files -->--}}
     {{--<!-- Theme JS files -->--}}
-    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
+    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
     {!! Html::script('js/core/app.js') !!}
     {{--{!! Html::script('js/pages/dashboard.js') !!}--}}
 
 
             <!-- Theme JS files -->
-    {!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}
-    {!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}
-    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
-    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
-    {!! Html::script('js/pages/form_checkboxes_radios.js') !!}
+    {{--{!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/styling/switch.min.js') !!}--}}
+    {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
-    {!! Html::script('js/plugins/forms/selects/bootstrap_multiselect.js') !!}
-    {!! Html::script('js/plugins/ui/moment/moment.min.js') !!}
-    {!! Html::script('js/plugins/pickers/daterangepicker.js') !!}
+    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/selects/bootstrap_multiselect.js') !!}--}}
+    {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
+
+
+    {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
+    {!! Html::script('js/pages/uploader_bootstrap.js') !!}
+
+            <!-- Inlcuye este js solo para esta pagina-->
+    {{--{{ ((Request::is('/users')) ?  : '') }}--}}
+
+
 
             <!-- /theme JS files -->
 

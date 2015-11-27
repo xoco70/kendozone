@@ -7,7 +7,7 @@
             <div class="category-content">
                 <div class="media">
 
-                    <a href="##" class="media-left"><img src="/images/avatar/{!! Auth::getUser()->picture !!}"
+                    <a href="##" class="media-left"><img src="{!! Auth::getUser()->avatar !!}"
                                                          class="img-circle img-sm" alt=""></a>
 
                     <div class="media-body">

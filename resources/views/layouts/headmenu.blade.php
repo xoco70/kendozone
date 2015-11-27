@@ -36,7 +36,7 @@
 
 			<li class="dropdown dropdown-user">
 				<a class="dropdown-toggle" data-toggle="dropdown">
-					<img src="/images/avatar/{!! Auth::getUser()->picture !!}" alt="">
+					<img src="{!! Auth::getUser()->avatar !!}" alt="">
 					<span>{!! Auth::getUser()->name !!}</span>
 					<i class="caret"></i>
 				</a>

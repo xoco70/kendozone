@@ -52,6 +52,12 @@ class UserTest extends TestCase
     /** @test */
     public function it_create_user()
     {
+//given
+        $test_file_path = base_path().'/avatar2.png';
+//        dd($test_file_path);
+        $this->assertTrue(file_exists($test_file_path), 'Test file does not exist');
+
+
 
         $this->visit('/')
             ->click($this->users)
@@ -66,7 +72,7 @@ class UserTest extends TestCase
             ->select('3', 'roleId')
             ->select('111111', 'password')
             ->select('111111', 'password_confirmation')
-            ->select('avatar.png', 'avatar')
+            ->attach($test_file_path,'avatar')
 //            //File input avatar
             ->press($this->addUser)
             ->seePageIs('/users')
@@ -77,35 +83,35 @@ class UserTest extends TestCase
         $user->delete();
     }
 
-    /** @test */
-    public function it_edit_user()
-    {
-        $user = trans_choice('crud.user', 1);
-
-        $editUser = Lang::get('crud.updateModel', ['currentModelName' => $user]);
-        $edit = Lang::get('crud.edit');
-        $this->it_create_user();
-
-        $this->visit('/users')
-            ->click($edit)
-            ->type('juju', 'name')
-            ->type('juju@juju.com', 'email')
-            ->type('may', 'firstname')
-            ->type('1', 'lastname')
-            ->select('36','countryId')
-            ->select('1', 'gradeId')
-            ->select('3', 'roleId')
-            ->type('222222', 'password')
-            ->type('222222', 'password_confirmation')
-            ->type('44', 'avatar')
-
-
-            ->press($editUser)
-            ->seePageIs('/users')
-            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
-
-
-    }
+//    /** @test */
+//    public function it_edit_user()
+//    {
+//        $user = trans_choice('crud.user', 1);
+//
+//        $editUser = Lang::get('crud.updateModel', ['currentModelName' => $user]);
+//        $edit = Lang::get('crud.edit');
+//        $this->it_create_user();
+//
+//        $this->visit('/users')
+//            ->click($edit)
+//            ->type('juju', 'name')
+//            ->type('juju@juju.com', 'email')
+//            ->type('may', 'firstname')
+//            ->type('1', 'lastname')
+//            ->select('36','countryId')
+//            ->select('1', 'gradeId')
+//            ->select('3', 'roleId')
+//            ->type('222222', 'password')
+//            ->type('222222', 'password_confirmation')
+//            ->type('44', 'avatar')
+//
+//
+//            ->press($editUser)
+//            ->seePageIs('/users')
+//            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+//
+//
+//    }
 
     /** @test */
 //    public function it_delete_user()

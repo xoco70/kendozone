@@ -11,10 +11,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Webpatser\Countries\Countries;
 
@@ -41,11 +39,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')
+//        $users = User::first();
+//        dd($users);
+
+//        $users = User::select('users')
+//            ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
+//            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')
+//            ->select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
+//            ->get();
+
+        $users = User::select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
             ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
-            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')
-            ->select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
-            ->get();
+            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')->get();
 
         return view('users.index', compact('users'));
     }
@@ -73,16 +78,37 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
+
+        $data = $request->only(['name', 'firstname', 'lastname', 'email', 'password', 'avatar', 'gradeId', 'countryId', 'roleId', 'avatar', 'provider', 'provider_id', 'verified']);
+
+        if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
             $destinationPath = Config::get('constants.AVATAR_PATH');
             $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
-            $fileName = $timestamp . '.' . $extension; // renameing image
-            Input::file('avatar')->move($destinationPath, $fileName); // uploading file to given path
+            $fileName = $data['name'] . "_" . $timestamp . '.' . $extension; // renameing image
+
+            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
+                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
+            } else {
+                $data['avatar'] = $fileName;
+
+            }
+        }
+//        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
+        if ($request->is("users")) {
+            $data['provider'] = "created";
+        } else {
+            $data['provider'] = "register";
         }
 
-        if (User::create($request->all())) {
+        $data['provider_id'] = $data['email'];
+        $data['verified'] = 1;
+//        dd($data);
+//        $user =
+//        $user->avatar = $fileName;
+
+        if (User::create($data)) {
             flash('success', Lang::get('core.success'));
         } else
             flash('error', Lang::get('core.fail'));
@@ -95,7 +121,8 @@ class UserController extends Controller
      * @param User $user
      * @return Response
      */
-    public function show($user)
+    public
+    function show($user)
     {
         $user->delete();
         return redirect("users");
@@ -106,7 +133,8 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function edit(User $user)
+    public
+    function edit(User $user)
     {
 //        $user = User::findOrFail($id);
         $roles = Role::lists('name', 'id');
@@ -125,14 +153,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
-            $destinationPath = Config::get('constants.AVATAR_PATH');
-            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
-            $date = new DateTime();
-            $timestamp = $date->getTimestamp();
-            $fileName = $timestamp . '.' . $extension; // renameing image
-            Input::file('avatar')->move($destinationPath, $fileName); // uploading file to given path
-        }
         $except = [];
         if (trim(Input::get('roleId')) == '') {
             array_push($except, 'roleId');
@@ -143,6 +163,20 @@ class UserController extends Controller
         }
         $data = $request->except($except);
 
+
+        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
+            $destinationPath = Config::get('constants.AVATAR_PATH');
+            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
+            $date = new DateTime();
+            $timestamp = $date->getTimestamp();
+            $fileName = $timestamp . '.' . $extension; // renameing image
+            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
+                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
+            } else {
+                $data['avatar'] = $fileName;
+
+            }
+        }
 
 
         if ($user->update($data)) {

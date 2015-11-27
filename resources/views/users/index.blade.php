@@ -27,11 +27,7 @@
                         <td>{{ $user->email }}</td>
                         <td align="center">{{ $user->grade }}</td>
                         <td>
-                            @if (!is_null($user->avatar))
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). $user->avatar) }}" class="img-circle img-sm" />
-                            @else
-                                <img src="{{ URL::to(Config::get('constants.AVATAR_PATH'). "avatar.png") }}" class="img-circle img-sm" />
-                            @endif
+                            <img src="{{ $user->avatar }}" class="img-circle img-sm" />
                         </td>
 
                         <td>{{ $user->country }}</td>
