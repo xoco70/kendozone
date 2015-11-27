@@ -3,6 +3,8 @@
 
     <h1>@lang('crud.editModel', ['currentModelName' => $currentModelName])</h1>
     <hr/>
+    @include("errors.list")
+
     <div class="container">
         <div class="row col-md-8 custyle">
 
@@ -14,5 +16,4 @@
 
         </div>
     </div>
-    @include("errors.list")
 @stop

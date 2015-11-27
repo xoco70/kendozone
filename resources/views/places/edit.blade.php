@@ -5,6 +5,7 @@
     <hr/>
     <div class="container">
         <div class="row col-md-8 custyle">
+            @include("errors.list")
 
             {!! Form::model($place, array('method'=>"PATCH",'route' => array('places.update', $place->id))) !!}
 
@@ -14,5 +15,4 @@
             {!! Form::close()!!}
         </div>
     </div>
-    @include("errors.list")
 @stop

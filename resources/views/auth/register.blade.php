@@ -80,6 +80,7 @@
             <!-- Content area -->
             <div class="content">
                 <!-- Registration form -->
+                @include("errors.list")
                 {!! Form::open(['url'=>URL::to('/auth/register') , 'class'=> "form-signin"]) !!}
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
@@ -193,7 +194,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @include("errors.list")
+
                         </div>
                     </div>
 

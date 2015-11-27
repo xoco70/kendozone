@@ -40,7 +40,7 @@
     {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
-    @if (Request::is("users/create"))
+    @if (Request::is("users/*"))
         {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 
         $data = User::uploadPic($request,null);
@@ -108,8 +109,7 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public
-    function edit(User $user)
+    public function edit(User $user)
     {
 //        $user = User::findOrFail($id);
         $roles = Role::lists('name', 'id');

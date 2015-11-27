@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
-
+    @include("errors.list")
 MAIN DASHBOARD
 
-    @include("errors.list")
+
 @stop

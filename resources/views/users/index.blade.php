@@ -33,7 +33,7 @@
                         <td>{{ $user->country }}</td>
 
                         <td class="text-center">
-                            <a class="btn btn-danger btn-xs "
+                            <a class=" text-danger "
                                href="{!! URL::action('UserController@destroy',  $user->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
                                 <span class="glyphicon glyphicon-remove"></span></a>
                         </td>

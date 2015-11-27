@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
 use App\Grade;
+use App\Http\Requests\UserRequest;
 use App\Mailers\AppMailer;
 use App\Role;
 use App\User;
@@ -152,13 +153,9 @@ class AuthController extends Controller
      * @param  AppMailer $mailer
      * @return \Redirect
      */
-    public function postRegister(Request $request, AppMailer $mailer)
+    public function postRegister(UserRequest $request, AppMailer $mailer)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users|confirmed',
-            'password' => 'required|confirmed'
-        ]);
+
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);
         flash('success', Lang::get('auth.check_your_email'));
