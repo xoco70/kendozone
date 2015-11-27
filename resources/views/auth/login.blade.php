@@ -138,9 +138,9 @@
                             <li><a href="{!! URL::to('/auth/login/facebook') !!}"
                                    class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded"><i
                                             class="icon-facebook"></i></a></li>
-                            <li><a href="{!! URL::to('/auth/login/twitter') !!}"
-                                   class="btn border-info text-info btn-flat btn-icon btn-rounded"><i
-                                            class="icon-twitter"></i></a></li>
+                            <li><a href="{!! URL::to('/auth/login/google') !!}"
+                                   class="btn border-danger text-danger btn-flat btn-icon btn-rounded"><i
+                                            class="icon-google"></i></a></li>
                         </ul>
 
                         <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.no_account') }}</span></div>

@@ -22,22 +22,20 @@
                 </thead>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->id }}</a></td>
+                        <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
                         <td align="center">{{ $user->grade }}</td>
                         <td>
-                            <img src="{{ $user->avatar }}" class="img-circle img-sm" />
+                            <a href="{!!   URL::action('UserController@edit',  $user->id) !!}"><img src="{{ $user->avatar }}" class="img-circle img-sm" /></a>
                         </td>
 
                         <td>{{ $user->country }}</td>
 
                         <td class="text-center">
-                            <a class='btn btn-info btn-xs' href="{!!   URL::action('UserController@edit',  $user->id) !!}">
-                                <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
-                            <a class="btn btn-danger btn-xs"
+                            <a class="btn btn-danger btn-xs "
                                href="{!! URL::action('UserController@destroy',  $user->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
+                                <span class="glyphicon glyphicon-remove"></span></a>
                         </td>
                     </tr>
 

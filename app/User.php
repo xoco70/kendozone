@@ -10,7 +10,9 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 //use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
 
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Config;
@@ -72,6 +74,34 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->verified = true;
         $this->token = null;
         $this->save();
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public static function uploadPic(Request $request, $except=null)
+    {
+//        if (is_null($data))
+        $data = $request->except($except);
+
+        if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
+            $destinationPath = Config::get('constants.AVATAR_PATH');
+            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
+            $date = new DateTime();
+            $timestamp = $date->getTimestamp();
+            $fileName = $data['name'] . "_" . $timestamp . '.' . $extension; // renameing image
+
+            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
+                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
+                return $data;
+            } else {
+                $data['avatar'] = $fileName;
+                return $data;
+
+            }
+        }
+        return $data;
     }
 //    public function setAvatarAttribute($avatar){
 //

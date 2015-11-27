@@ -40,16 +40,12 @@
     {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
-
-    {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
-    {!! Html::script('js/pages/uploader_bootstrap.js') !!}
-
-            <!-- Inlcuye este js solo para esta pagina-->
-    {{--{{ ((Request::is('/users')) ?  : '') }}--}}
+    @if (Request::is("users/create"))
+        {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
+        {!! Html::script('js/pages/uploader_bootstrap.js') !!}
+    @endif
 
 
-
-            <!-- /theme JS files -->
 
 </head>
 

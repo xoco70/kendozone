@@ -7,10 +7,8 @@ use App\Grade;
 use App\Http\Requests;
 use App\Role;
 use App\User;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
@@ -39,14 +37,6 @@ class UserController extends Controller
      */
     public function index()
     {
-//        $users = User::first();
-//        dd($users);
-
-//        $users = User::select('users')
-//            ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
-//            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')
-//            ->select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
-//            ->get();
 
         $users = User::select('users.*', 'grade.name as grade', 'countries.name as country', 'countries.flag')
             ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
@@ -79,22 +69,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->only(['name', 'firstname', 'lastname', 'email', 'password', 'avatar', 'gradeId', 'countryId', 'roleId', 'avatar', 'provider', 'provider_id', 'verified']);
-
-        if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
-            $destinationPath = Config::get('constants.AVATAR_PATH');
-            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
-            $date = new DateTime();
-            $timestamp = $date->getTimestamp();
-            $fileName = $data['name'] . "_" . $timestamp . '.' . $extension; // renameing image
-
-            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
-                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
-            } else {
-                $data['avatar'] = $fileName;
-
-            }
-        }
+        $data = User::uploadPic($request,null);
 //        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
         if ($request->is("users")) {
             $data['provider'] = "created";
@@ -161,22 +136,9 @@ class UserController extends Controller
             array_push($except, 'password');
 
         }
-        $data = $request->except($except);
+        $data = User::uploadPic($request, $except);
 
 
-        if (Input::file('avatar') != null && Input::file('avatar')->isValid()) {
-            $destinationPath = Config::get('constants.AVATAR_PATH');
-            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
-            $date = new DateTime();
-            $timestamp = $date->getTimestamp();
-            $fileName = $timestamp . '.' . $extension; // renameing image
-            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
-                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
-            } else {
-                $data['avatar'] = $fileName;
-
-            }
-        }
 
 
         if ($user->update($data)) {
@@ -187,6 +149,8 @@ class UserController extends Controller
 
         return redirect("/users");
     }
+
+
 
     /**
      * Remove the specified resource from storage.
