@@ -24,6 +24,7 @@ class UserTest extends TestCase
         $this->user = trans_choice('crud.user', 1);
         $this->users = trans_choice('crud.user', 2);
         $this->addUser = Lang::get('crud.addModel', ['currentModelName' => $this->user]);
+        $this->editUser = Lang::get('crud.updateModel', ['currentModelName' => $this->user]);
 
         Auth::loginUsingId(1);
     }
@@ -37,6 +38,7 @@ class UserTest extends TestCase
             ->seePageIs('/users/create')
             ->see(Lang::get('validation.filled', ['attribute' => "name"]))
             ->see(Lang::get('validation.filled', ['attribute' => "email"]))
+            ->see(Lang::get('validation.filled', ['attribute' => "password"]))
 
             ->notSeeInDatabase('users', ['name' => '']);
 
@@ -83,35 +85,32 @@ class UserTest extends TestCase
         $user->delete();
     }
 
-//    /** @test */
-//    public function it_edit_user()
-//    {
-//        $user = trans_choice('crud.user', 1);
-//
-//        $editUser = Lang::get('crud.updateModel', ['currentModelName' => $user]);
-//        $edit = Lang::get('crud.edit');
-//        $this->it_create_user();
-//
-//        $this->visit('/users')
-//            ->click($edit)
-//            ->type('juju', 'name')
-//            ->type('juju@juju.com', 'email')
-//            ->type('may', 'firstname')
-//            ->type('1', 'lastname')
-//            ->select('36','countryId')
-//            ->select('1', 'gradeId')
-//            ->select('3', 'roleId')
-//            ->type('222222', 'password')
-//            ->type('222222', 'password_confirmation')
-//            ->type('44', 'avatar')
-//
-//
-//            ->press($editUser)
-//            ->seePageIs('/users')
-//            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
-//
-//
-//    }
+    /** @test */
+    public function it_edit_user()
+    {
+        $edit = Lang::get('crud.edit');
+        $this->it_create_user();
+
+        $this->visit('/users')
+            ->click($edit)
+            ->type('juju', 'name')
+            ->type('juju@juju.com', 'email')
+            ->type('may', 'firstname')
+            ->type('1', 'lastname')
+            ->select('36','countryId')
+            ->select('1', 'gradeId')
+            ->select('3', 'roleId')
+            ->type('222222', 'password')
+            ->type('222222', 'password_confirmation')
+            ->type('44', 'avatar')
+
+
+            ->press("juju@juju.com")
+            ->seePageIs('/users')
+            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+
+
+    }
 
     /** @test */
 //    public function it_delete_user()

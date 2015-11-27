@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
+use GeoIP;
 use Webpatser\Countries\Countries;
 
 class DashboardController extends Controller
@@ -40,6 +41,9 @@ class DashboardController extends Controller
 //        $user = Auth::getUser();
 //        dd($user->role);
 //        dd($user);
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $location = GeoIP::getLocation($ip);
+        dd($location);
         return view('/dashboard');
     }
 

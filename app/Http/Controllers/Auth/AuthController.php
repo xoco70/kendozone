@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
 use App\Grade;
+use App\Http\Requests\AuthRequest;
 use App\Http\Requests\UserRequest;
 use App\Mailers\AppMailer;
 use App\Role;
@@ -153,8 +154,9 @@ class AuthController extends Controller
      * @param  AppMailer $mailer
      * @return \Redirect
      */
-    public function postRegister(UserRequest $request, AppMailer $mailer)
+    public function postRegister(AuthRequest $request, AppMailer $mailer)
     {
+
 
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);

@@ -12,7 +12,11 @@ class CreateTournamentTable extends Migration {
 			$table->string('name');
             $table->date('tournamentDate');
             $table->date('registerDateLimit');
-            $table->integer('placeId')->unsigned(); // Mandatory to know limits of shiaijo
+            $table->tinyInteger('cost');
+
+			$table->string('placeName');
+			$table->double('longitude');
+			$table->double('latitude');
             $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
             $table->tinyInteger('fightingAreas')->unsigned()->nullable();
             $table->boolean('hasRoundRobin')->default(true);
@@ -20,6 +24,7 @@ class CreateTournamentTable extends Migration {
             $table->tinyInteger('fightDuration')->unsigned()->default(3);
             $table->boolean('hasEncho')->default(true);
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
+            $table->boolean('mustPay');
 
 //			$table->string('banner');
 //			$table->string('PassingTeams');

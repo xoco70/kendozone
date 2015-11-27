@@ -13,7 +13,8 @@
     "laravelcollective/html": "5.1.*",
     "guzzlehttp/guzzle": "~4.0",
     "webpatser/laravel-countries": "dev-master",
-    "laravel/socialite": "~2.0"
+    "laravel/socialite": "~2.0",
+    "torann/geoip": "0.2.*@dev"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
