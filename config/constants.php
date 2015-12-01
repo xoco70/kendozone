@@ -6,7 +6,7 @@
  * Time: 20:45
  */
 return [
-    'AVATAR_PATH' => 'images/avatar/',
+    'AVATAR_PATH' => '/images/avatar/',
     'AVATAR_UPLOAD_PATH' => 'public/images/avatar/',
     'ROLE_ADMIN' => '3'
 ];

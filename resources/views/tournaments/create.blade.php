@@ -7,14 +7,13 @@
     @include("errors.list")
 
     <div class="container">
-        <div class="row col-md-8 custyle">
 
-            {!! Form::open(['url'=>"tournaments"]) !!}
+            {!! Form::open(['url'=>"tournaments", 'class'=>'stepy-basic']) !!}
 
             @include("tournaments.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
 
 
             {!! Form::close()!!}
-        </div>
+
     </div>
 @stop

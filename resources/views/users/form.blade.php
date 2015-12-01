@@ -14,10 +14,10 @@
     {!!  Form::label('lastname', trans('crud.lastname')) !!}
     {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    {!!  Form::label('countryId', trans('crud.country')) !!}
-    {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
-</div>
+{{--<div class="form-group">--}}
+    {{--{!!  Form::label('countryId', trans('crud.country')) !!}--}}
+    {{--{!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->--}}
+{{--</div>--}}
 <div class="form-group">
     {!!  Form::label('gradeId', trans('crud.grade')) !!}
     {!!  Form::select('gradeId', $grades ,null, ['class' => 'form-control']) !!}

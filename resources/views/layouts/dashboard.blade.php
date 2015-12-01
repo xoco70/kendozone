@@ -29,10 +29,10 @@
 
 
             <!-- Theme JS files -->
-    {{--{!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}--}}
-    {{--{!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/forms/styling/switch.min.js') !!}--}}
+    {!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}
+    {!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}
+    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
+    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
     {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
@@ -45,7 +45,7 @@
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
 
-    @if (Request::is("places/*"))
+    @if (Request::is("tournaments/*"))
         {!! Html::script('http://maps.google.com/maps/api/js?sensor=false&amp;libraries=places') !!}
         {!! Html::script('js/core/libraries/jquery_ui/autocomplete.min.js') !!}
         {!! Html::script('js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') !!}
@@ -53,9 +53,13 @@
         {!! Html::script('js/plugins/pickers/location/autocomplete_addresspicker.js') !!}
         {!! Html::script('js/plugins/pickers/location/location.js') !!}
         {!! Html::script('js/plugins/ui/prism.min.js') !!}
-        {!! Html::script('js/pages/picker_location.js') !!}
+        {{--{!! Html::script('js/pages/picker_location.js') !!}--}}
     @endif
-    @if (Request::is("/") || Request::is("admin"))
+    @if (Request::is("/")
+        || Request::is("admin")
+        || Request::is("tournaments/*")
+        || Request::is("places/*")
+        )
     {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
     {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
     {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}

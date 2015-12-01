@@ -30,7 +30,7 @@
                             <a href="{!!   URL::action('UserController@edit',  $user->id) !!}"><img src="{{ $user->avatar }}" class="img-circle img-sm" /></a>
                         </td>
 
-                        <td>{{ $user->country }}</td>
+                        <td><img src="/images/flags/{{ $user->countryCode }}.png" alt="{{ $user->country }}"</td>
 
                         <td class="text-center">
                             <a class=" text-danger "

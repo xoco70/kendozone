@@ -31,10 +31,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = DB::table('tournament')
-            ->leftJoin('place', 'place.id', '=', 'tournament.placeId')
-            ->select('tournament.*', 'place.name as place')
-            ->get(); //
+        $tournaments = Tournament::all();
         return view('tournaments.index', compact('tournaments'));
     }
 
@@ -46,8 +43,8 @@ class TournamentController extends Controller
     public function create()
     {
         $levels = TournamentLevel::lists('name', 'id');
-        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('places', 'levels'));
+//        $places = Place::lists('name', 'id');
+        return view('tournaments.create', compact( 'levels'));
     }
 
     /**
@@ -87,9 +84,9 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
         $levels = TournamentLevel::lists('name', 'id');
-        $places = Place::lists('name', 'id');
+//        $places = Place::lists('name', 'id');
 //        dd($tournaments);
-        return view('tournaments.edit', compact('tournament', 'places', 'levels'));
+        return view('tournaments.edit', compact('tournament', 'levels'));
     }
 
     /**

@@ -40,6 +40,16 @@ return [
     'hasRoundRobin' => 'Round Robin?',
     'roundRobinWinner' => 'Cuantos competidores salen del Round Robin',
     'hasEncho' => 'Encho?',
+    'hasHantei' => 'Hantei?',
+    'general_data' => 'Datos generales',
+    'level' => 'Nivel',
+    'cost' => 'Costo',
+    'pay4register' => 'Es necesario cumplir el pago para registarse en el torneo?',
+    'settings' => 'Parametros',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+
+
 
 
 
