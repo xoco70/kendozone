@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
+use GeoIP;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -122,12 +123,17 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'roleId' => $data['roleId'],
-            'countryId' => $data['countryId'],
+            'country' => $location['country'],
+            'isoCode' => $location['isoCode'],
+            'city' => $location['city'],
+            'latitude' => $location['lat'],
+            'longitude' => $location['lon'],
             'provider' => 'manual',
             'provider_id' => $data['email']
 
@@ -156,7 +162,6 @@ class AuthController extends Controller
      */
     public function postRegister(AuthRequest $request, AppMailer $mailer)
     {
-
 
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);

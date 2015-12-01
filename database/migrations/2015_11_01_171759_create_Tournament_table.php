@@ -14,9 +14,6 @@ class CreateTournamentTable extends Migration {
             $table->date('registerDateLimit');
             $table->tinyInteger('cost');
 
-			$table->string('placeName');
-			$table->double('longitude');
-			$table->double('latitude');
             $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
             $table->tinyInteger('fightingAreas')->unsigned()->nullable();
             $table->boolean('hasRoundRobin')->default(true);
@@ -25,6 +22,10 @@ class CreateTournamentTable extends Migration {
             $table->boolean('hasEncho')->default(true);
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
             $table->boolean('mustPay');
+
+            $table->string("place");
+            $table->string("latitude");
+            $table->string("longitude");
 
 //			$table->string('banner');
 //			$table->string('PassingTeams');

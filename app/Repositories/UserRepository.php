@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use GeoIP;
 
 class UserRepository
 {
@@ -15,13 +16,20 @@ class UserRepository
             $user = User::where('email', '=', $userData->email)->first();
 //            dd($user);
             if (!$user){
-//                dd($userData->id);
+
+
+                $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
                 $user = User::create([
                     'provider' => $provider,
                     'provider_id' => $userData->id,
                     'name' => $userData->name,
                     'username' => $userData->nickname,
                     'email' => $userData->email,
+                    'country' => $location['country'],
+                    'countryCode' => $location['isoCode'],
+                    'city' => $location['city'],
+                    'latitude' => $location['lat'],
+                    'longitude' => $location['lon'],
                     'avatar' => $userData->avatar,
                     'roleId' => Config::get('constants.ROLE_ADMIN'),
                     'verified' => 1,

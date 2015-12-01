@@ -104,13 +104,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group has-feedback">
-                                                    {{--{!!  Form::label('countryId', trans('crud.country')) !!}--}}
-                                                    {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
-                                                <div class="form-control-feedback">
-                                                    <i class=" icon-earth text-muted"></i>
+                                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="{{  Lang::get('auth.your_email') }}">                                                <div class="form-control-feedback">
+                                                    <i class="icon-mention text-muted"></i>
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <div class="col-md-6">
                                             <div class="form-group has-feedback">
@@ -145,24 +144,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group has-feedback">
-                                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="{{  Lang::get('auth.your_email') }}">                                                <div class="form-control-feedback">
-                                                    <i class="icon-mention text-muted"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group has-feedback">
-                                                <input type="email" id="email_confirmation" name="email_confirmation" class="form-control" placeholder="{{  Lang::get('auth.repeat_email') }}">
-                                                <div class="form-control-feedback">
-                                                    <i class="icon-mention text-muted"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     {{--<div class="form-group">--}}
                                         {{--<div class="checkbox">--}}

@@ -22,7 +22,6 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.dashboard', 1);
         $this->modelPlural = trans_choice('core.dashboard', 1);
@@ -37,13 +36,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-//        dd(Sentinel::getUser());
-//        $user = Auth::getUser();
-//        dd($user->role);
-//        dd($user);
         $ip = $_SERVER["REMOTE_ADDR"];
-        $location = GeoIP::getLocation($ip);
-        dd($location);
+        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+//        dd($location['isoCode']);
+//        dd($location);
         return view('/dashboard');
     }
 

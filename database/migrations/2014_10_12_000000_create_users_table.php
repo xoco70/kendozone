@@ -20,9 +20,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->integer('gradeId')->unsigned()->default(1);
-            $table->integer('countryId')->unsigned()->default(484);
+            $table->string('country')->nullable();
+            $table->string('countryCode')->nullable();
+            $table->string('city')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
+
             $table->integer('roleId')->unsigned();
-            $table->string('avatar')->nullable()->default("avatar.png");
+            $table->string('avatar')->nullable();
             $table->boolean('verified')->default(false);
             $table->string('token')->nullable();
             $table->string('provider');
