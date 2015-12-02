@@ -23,51 +23,57 @@
     {!! Html::script('js/plugins/loaders/blockui.min.js') !!}
     {{--<!-- /core JS files -->--}}
     {{--<!-- Theme JS files -->--}}
-    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
+
+    {{--{!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
+    {{--{!! Html::script('js/core/libraries/jquery_ui/effects.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/notifications/jgrowl.min.js') !!}--}}
+    {{--    {!! Html::script('js/plugins/pickers/anytime.min.js') !!}--}}
+    {{--    {!! Html::script('js/plugins/pickers/pickadate/picker.time.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/legacy.js') !!}--}}
+
+    {!! Html::script('js/plugins/ui/moment/moment.min.js') !!}
+    {!! Html::script('js/plugins/pickers/daterangepicker.js') !!}
+
+    {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
+    {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+    {!! Html::script('js/pages/picker_date.js') !!}
+
+
+
+
     {!! Html::script('js/core/app.js') !!}
-    {{--{!! Html::script('js/pages/dashboard.js') !!}--}}
+
+
+    @if (Request::is("/")
+         || Request::is("admin")
+         || Request::is("tournaments/*")
+         )
+    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
+    {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
+    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
+    {!! Html::script('js/pages/wizard_stepy.js') !!}
+    @endif
 
 
             <!-- Theme JS files -->
-    {!! Html::script('js/plugins/visualization/d3/d3.min.js') !!}
-    {!! Html::script('js/plugins/visualization/d3/d3_tooltip.js') !!}
-    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
-    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
-    {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/forms/selects/bootstrap_multiselect.js') !!}--}}
-    {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
     @if (Request::is("users/*"))
         {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
 
-    @if (Request::is("tournaments/*"))
-        {!! Html::script('http://maps.google.com/maps/api/js?sensor=false&amp;libraries=places') !!}
-        {!! Html::script('js/core/libraries/jquery_ui/autocomplete.min.js') !!}
-        {!! Html::script('js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') !!}
-        {!! Html::script('js/plugins/pickers/location/typeahead_addresspicker.js') !!}
-        {!! Html::script('js/plugins/pickers/location/autocomplete_addresspicker.js') !!}
-        {!! Html::script('js/plugins/pickers/location/location.js') !!}
-        {!! Html::script('js/plugins/ui/prism.min.js') !!}
-        {{--{!! Html::script('js/pages/picker_location.js') !!}--}}
-    @endif
-    @if (Request::is("/")
-        || Request::is("admin")
-        || Request::is("tournaments/*")
-        || Request::is("places/*")
-        )
-    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
-    {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
-    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
-    {!! Html::script('js/core/libraries/jasny_bootstrap.min.js') !!}
-    {!! Html::script('js/plugins/forms/validation/validate.min.js') !!}
-    {!! Html::script('js/pages/wizard_stepy.js') !!}
-    @endif
 
+
+
+
+    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
+    {!! Html::script('js/pages/form_checkboxes_radios.js') !!}
+
+    @if (Request::is("tournaments/*"))
+        {!! Html::script('http://maps.google.com/maps/api/js') !!}
+        {!! Html::script('js/plugins/pickers/location/location.js') !!}
+    @endif
 
 
 </head>

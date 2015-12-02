@@ -12,9 +12,12 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    {!!  Form::label('tournamentDate', trans('crud.eventDate')) !!}
-                    {!!  Form::input('date', 'tournamentDate', old('date'), ['class' => 'form-control']) !!}
+
+                {!!  Form::label('tournamentDate', trans('crud.eventDate')) !!}
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                    {!!  Form::input('text', 'tournamentDate', old('date'), ['class' => 'form-control pickadate-limits']) !!}
                 </div>
             </div>
 
@@ -38,10 +41,10 @@
 
 
             <div class="col-md-6">
-                <div class="checkbox checkbox-switchery">
-                    {!!  Form::label('pay4register', trans('crud.pay4register')) !!}
-                    {!!  Form::checkbox('pay4register', old('pay4register'), ['class' => 'switchery']) !!}
-                </div>
+                <p>&nbsp;</p><label>
+                    <input name ="pay4register" id="pay4register" value type="checkbox" class="switchery" checked="checked">
+                    {!! trans('crud.pay4register') !!}
+                </label>
             </div>
         </div>
 
@@ -52,14 +55,11 @@
     <fieldset title="2">
         <legend class="text-semibold">{{trans_choice('crud.place',1)}}</legend>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 {!!  Form::label('name', trans('crud.name')) !!}
                 {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
             </div>
-        </div>
-
-        <div class="col-md-6">
             <div class="form-group">
                 {!!  Form::label('latitude', trans('crud.latitude'),'') !!}
                 {!!  Form::text('latitude', old('latitude'), ['class' => 'form-control', 'id' => 'lat',  'disabled' => 'disabled']) !!}
@@ -82,7 +82,6 @@
             <div class="form-group">
                 {!!  Form::label('name', trans('crud.coords')) !!}
                 <div class="map-wrapper locationpicker-default" id="locationpicker-default"></div>
-                {!!  Form::hidden('coords',old('coords')) !!}
             </div>
         </div>
         <script>$('#locationpicker-default').locationpicker({
@@ -103,6 +102,11 @@
 
         <div class="row">
             <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                    {!!  Form::input('text', 'limitRegistrationDate', old('limitRegistrationDate'), ['class' => 'form-control pickadate-limits']) !!}
+                </div>
+
                 <div class="form-group">
                     {!!  Form::label('limitRegistrationDate', trans('crud.fullLimitDateRegistration')) !!}
                     {!!  Form::input('date', 'limitRegistrationDate', old('limitRegistrationDate'), ['class' => 'form-control']) !!}
