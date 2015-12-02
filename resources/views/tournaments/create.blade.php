@@ -6,7 +6,7 @@
     <hr/>
     @include("errors.list")
 
-    <div class="container">
+    <div class="container-fluid">
 
             {!! Form::open(['url'=>"tournaments", 'class'=>'stepy-basic']) !!}
 

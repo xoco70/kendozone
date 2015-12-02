@@ -4,50 +4,59 @@
 
 
 
-    <div class="container">
-        <div class="row col-md-8 custyle">
-            <table class="table table-striped custab">
-                <thead>
-                @can('CanCreateTournament')
-                <a href="{!!   URL::action('TournamentController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
-                @endcan
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
 
-                <tr>
-                    <th>ID</th>
-                    <th>{{ trans('crud.name') }}</th>
-                    <th>{{ trans_choice('crud.place',1) }}</th>
-                    <th>{{ trans('crud.date') }}</th>
-                    <th>{{ trans('crud.limitDateRegistration') }}</th>
+                {{--<div class="row col-md-10 custyle">--}}
+                <table class="table table-striped custab">
+                    <thead>
+                    @can('CanCreateTournament')
+                    <a href="{!!   URL::action('TournamentController@create') !!}"
+                       class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                    </a>
+                    @endcan
 
-                    <th class="text-center">{{ trans('crud.action') }}</th>
-                </tr>
-                </thead>
-                @foreach($tournaments as $tournament)
                     <tr>
-                        <td>{{ $tournament->id }}</td>
-                        <td>{{ $tournament->name }}</td>
-                        <td>{{ $tournament->place }}</td>
-                        <td>{{ $tournament->tournamentDate }}</td>
-                        <td>{{ $tournament->tournamentDate }}</td>
+                        <th>ID</th>
+                        <th>{{ trans('crud.name') }}</th>
+                        <th>{{ trans_choice('crud.place',1) }}</th>
+                        <th>{{ trans('crud.date') }}</th>
+                        <th>{{ trans('crud.limitDateRegistration') }}</th>
 
-                        <td class="text-center">
-                            @can('CanEditTournament')
-                            <a class='btn btn-info btn-xs' href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">
-                                <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
-                            @endcan
-                            {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
-                            @can('CanDeleteTournament')
-                            <a class="btn btn-danger btn-xs" href="{!! URL::action('TournamentController@destroy',  $tournament->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
-                            @endcan
-                        </td>
+                        <th class="text-center">{{ trans('crud.action') }}</th>
                     </tr>
+                    </thead>
+                    @foreach($tournaments as $tournament)
+                        <tr>
+                            <td>{{ $tournament->id }}</td>
+                            <td>{{ $tournament->name }}</td>
+                            <td>{{ $tournament->place }}</td>
+                            <td>{{ $tournament->tournamentDate }}</td>
+                            <td>{{ $tournament->tournamentDate }}</td>
 
-                @endforeach
+                            <td class="text-center">
+                                @can('CanEditTournament')
+                                <a class='btn btn-info btn-xs'
+                                   href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">
+                                    <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
+                                @endcan
+                                {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
+                                @can('CanDeleteTournament')
+                                <a class="btn btn-danger btn-xs"
+                                   href="{!! URL::action('TournamentController@destroy',  $tournament->id) !!}"
+                                   data-method="delete" data-token="{{csrf_token()}}">
+                                    <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
+                                @endcan
+                            </td>
+                        </tr>
 
-            </table>
+                    @endforeach
+
+                </table>
+            </div>
         </div>
     </div>
     @include("errors.list")
-    @stop
+@stop
 

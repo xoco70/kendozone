@@ -31,12 +31,12 @@
     {{--    {!! Html::script('js/plugins/pickers/pickadate/picker.time.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/pickadate/legacy.js') !!}--}}
 
-    {!! Html::script('js/plugins/ui/moment/moment.min.js') !!}
-    {!! Html::script('js/plugins/pickers/daterangepicker.js') !!}
+    {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
-    {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
-    {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
-    {!! Html::script('js/pages/picker_date.js') !!}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
+    {{--{!! Html::script('js/pages/picker_date.js') !!}--}}
 
 
 
@@ -44,36 +44,36 @@
     {!! Html::script('js/core/app.js') !!}
 
 
-    @if (Request::is("/")
-         || Request::is("admin")
-         || Request::is("tournaments/*")
-         )
-    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
-    {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
-    {!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}
-    {!! Html::script('js/pages/wizard_stepy.js') !!}
-    @endif
+    {{--@if (Request::is("/")--}}
+         {{--|| Request::is("admin")--}}
+         {{--|| Request::is("tournaments/*")--}}
+         {{--)--}}
+    {{--{!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
+    {{--{!! Html::script('js/pages/wizard_stepy.js') !!}--}}
+    {{--@endif--}}
 
 
             <!-- Theme JS files -->
 
 
-    @if (Request::is("users/*"))
-        {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
-        {!! Html::script('js/pages/uploader_bootstrap.js') !!}
-    @endif
+    {{--@if (Request::is("users/*"))--}}
+        {{--{!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}--}}
+        {{--{!! Html::script('js/pages/uploader_bootstrap.js') !!}--}}
+    {{--@endif--}}
 
 
 
 
 
-    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
-    {!! Html::script('js/pages/form_checkboxes_radios.js') !!}
+    {{--{!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}--}}
+    {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    @if (Request::is("tournaments/*"))
-        {!! Html::script('http://maps.google.com/maps/api/js') !!}
-        {!! Html::script('js/plugins/pickers/location/location.js') !!}
-    @endif
+    {{--@if (Request::is("tournaments/*"))--}}
+        {{--{!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/location/location.js') !!}--}}
+    {{--@endif--}}
 
 
 </head>
