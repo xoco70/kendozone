@@ -88,7 +88,7 @@ class UserController extends Controller
             flash('success', Lang::get('core.success'));
         } else
             flash('error', Lang::get('core.fail'));
-        return redirect('users');
+        return redirect('/users');
     }
 
     /**
@@ -126,20 +126,17 @@ class UserController extends Controller
      * @param User $profile
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $except = [];
         if (trim(Input::get('roleId')) == '') {
             array_push($except, 'roleId');
         }
-        if (trim(Input::get('password')) == '') {
+        if (trim(Input::get('password')) == '' && trim(Input::get('password_confirmation')) == '') {
             array_push($except, 'password');
 
         }
         $data = User::uploadPic($request, $except);
-
-
-
 
         if ($user->update($data)) {
             flash('success', Lang::get('core.success'));

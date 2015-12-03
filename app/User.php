@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\UserRequest;
 use DateTime;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
 
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Config;
@@ -44,14 +46,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
 
 
-    public function rules()
-    {
-        return [
-            'name' => 'required|max:255|unique:users',
-            'email' => 'required|max:255|unique:users',
-            'avatar' => 'mimes:png,jpg, jpeg, gif'
-        ];
-    }
+//    public function rules()
+//    {
+//        return [
+//            'name' => 'required|max:255|unique:users',
+//            'email' => 'required|max:255|unique:users',
+//            'avatar' => 'mimes:png,jpg, jpeg, gif'
+//        ];
+//    }
     /**
      * Boot the model.
      *
@@ -80,18 +82,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param Request $request
      * @return array
      */
-    public static function uploadPic(Request $request, $except=null)
+    public static function uploadPic(UserRequest $request, $except=null)
     {
 //        if (is_null($data))
         $data = $request->except($except);
 
         if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
-            $destinationPath = Config::get('constants.AVATAR_PATH');
+            $destinationPath = Config::get('constants.RELATIVE_AVATAR_PATH');
             $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
-            $fileName = $data['name'] . "_" . $timestamp . '.' . $extension; // renameing image
-
+            $fileName = trim($data['name']) . "_" . $timestamp ; // renameing image
+            $fileName = Str::slug($fileName, '-'). '.' . $extension;
+//            dd($destinationPath, $fileName);
             if (!Input::file('avatar')->move($destinationPath, $fileName)) {
                 flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;

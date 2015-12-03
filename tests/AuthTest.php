@@ -29,7 +29,6 @@
             $this->visit('/auth/register')
                 ->type('JohnDoe', 'name')
                 ->type('john@example.com', 'email')
-                ->type('john@example.com', 'email_confirmation')
                 ->type('password', 'password')
                 ->type('password', 'password_confirmation')
                 ->press(Lang::get('auth.create_account'));
@@ -55,12 +54,10 @@
             $this->visit('/auth/register')
                 ->type('JohnDoe', 'name')
                 ->type('john2@example.com', 'email')
-                ->type('john2@example.com2', 'email_confirmation')
                 ->type('password', 'password')
                 ->type('password2', 'password_confirmation')
                 ->press(Lang::get('auth.create_account'));
-            $this->see(htmlentities(Lang::get('validation.confirmed',  ['attribute' => 'email'])))
-                 ->see(htmlentities(Lang::get('validation.confirmed',['attribute' => 'password'])))
+            $this->see(htmlentities(Lang::get('validation.confirmed',['attribute' => 'password'])))
                 ->NotseeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
         }
 

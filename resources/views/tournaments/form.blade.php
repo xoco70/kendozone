@@ -138,7 +138,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            It could be great to use : jquery MultiSelect Option groups support
+            It could be great to use : form_dual_listboxes.html basic
 
             {{--<div class="form-group">--}}
             {{--{!!  Form::label('limitRegistrationDate', trans('crud.fullLimitDateRegistration')) !!}--}}

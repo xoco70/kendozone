@@ -36,8 +36,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $ip = $_SERVER["REMOTE_ADDR"];
-        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+//        $ip = $_SERVER["REMOTE_ADDR"];
+//        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
 //        dd($location['isoCode']);
 //        dd($location);
         return view('/dashboard');

@@ -44,7 +44,7 @@ class UserTest extends TestCase
 
     }
 
-    public function testMustBeAuthenticated()
+    public function mustBeAuthenticated()
     {
         Auth::logout();
         $this->visit('/users')
@@ -52,7 +52,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_create_user()
+    public function it_create_user($delete = true)
     {
 //given
         $test_file_path = base_path().'/avatar2.png';
@@ -65,11 +65,10 @@ class UserTest extends TestCase
             ->click($this->users)
             ->see($this->users)
             ->click($this->addUser)
-            ->type('My User', 'name')
-            ->type('julien@cappiello.fr', 'email')
+            ->type('MyUser', 'name')
+            ->type('julien@cappiello.fr2', 'email')
             ->type('julien', 'firstname')
             ->type('cappiello', 'lastname')
-            ->select('10', 'countryId')
             ->select('4', 'gradeId')
             ->select('3', 'roleId')
             ->select('111111', 'password')
@@ -79,36 +78,34 @@ class UserTest extends TestCase
             ->press($this->addUser)
             ->seePageIs('/users')
             ->see(Lang::get('core.success'))
-            ->seeInDatabase('users',['name' => 'My User']);
+            ->seeInDatabase('users',['name' => 'MyUser']);
 
-        $user = User::where('email', '=', "julien@cappiello.fr");
-        $user->delete();
+        $user = User::where('email', '=', "julien@cappiello.fr2");
+        if ($delete) $user->delete();
     }
 
     /** @test */
     public function it_edit_user()
     {
-        $edit = Lang::get('crud.edit');
-        $this->it_create_user();
+        $this->it_create_user(false);
 
         $this->visit('/users')
-            ->click($edit)
+            ->click("MyUser")
             ->type('juju', 'name')
             ->type('juju@juju.com', 'email')
             ->type('may', 'firstname')
             ->type('1', 'lastname')
-            ->select('36','countryId')
             ->select('1', 'gradeId')
             ->select('3', 'roleId')
             ->type('222222', 'password')
             ->type('222222', 'password_confirmation')
             ->type('44', 'avatar')
-
-
-            ->press("juju@juju.com")
+            ->press($this->editUser)
             ->seePageIs('/users')
             ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
 
+        $user = User::where('email', '=', "juju@juju.com");
+        $user->delete();
 
     }
 
@@ -166,7 +163,6 @@ class UserTest extends TestCase
 //            ->type('2', 'coords')
 //            ->type('3', 'city')
 //            ->type('4', 'state')
-//            ->select('36', 'countryId')
 //            ->press('Agregar Lugar')
 //            ->seeInDatabase('user', ['name' => '1', 'coords' => '2','city' => '3', 'state' => '4', 'countryId' => '36'])
 //            ->see('Operación Exitosa!');

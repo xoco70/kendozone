@@ -1,8 +1,8 @@
 <?php
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
+//use Illuminate\Foundation\Testing\DatabaseTransactions;
+//use Illuminate\Foundation\Testing\WithoutMiddleware;
+//use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Lang;
 
 /**
  * Created by PhpStorm.
@@ -10,81 +10,81 @@ use Illuminate\Support\Facades\Lang;
  * Date: 10/11/2015
  * Time: 23:14
  */
-class PlaceTest extends TestCase
-{
-    use DatabaseTransactions;
-//    use WithoutMiddleware;
-
-    protected  $place,$places, $addPlace, $editPlace;
-    public function setUp()
-    {
-        parent::setUp();
-        $this->place = trans_choice('crud.place', 1);
-        $this->places = trans_choice('crud.place', 2);
-        $this->addPlace = Lang::get('crud.addModel', ['currentModelName' => $this->place]);
-        $this->editPlace= Lang::get('crud.updateModel', ['currentModelName' => $this->place]);
-        Auth::loginUsingId(1);
-
-    }
-
-
-    public function mustBeAuthenticated()
-    {
-        Auth::logout();
-        $this->visit('/places')
-            ->seePageIs('/auth/login');
-    }
-
-
-    public function it_denies_creating_an_empty_place(){
-        $this->click($this->places)
-            ->see($this->places)
-            ->click($this->place)
-            ->press("+ ".$this->addPlace)
-            ->seePageIs('/places/create')
-            ->see(Lang::get('validation.filled', ['attribute' => "name"]))
-            ->notSeeInDatabase('place',['name' => 'My Place']);
-
-    }
-
-    /** @test */
-    public function it_create_place()
-    {
-        $this->visit("/")
-            ->click($this->places)
-            ->see($this->places)
-            ->click("+ ".$this->addPlace)
-            ->type('My Place', 'name')
-            ->type('2', 'coords')
-            ->type('3', 'city')
-            ->type('4', 'state')
-            ->select('10','countryId')
-            ->press($this->addPlace)
-            ->seePageIs('/places')
-            ->seeInDatabase('place',['name' => 'My Place']);
-
-    }
-
-    /** @test */
-    public function it_edit_place()
-    {
-        $place = trans_choice('crud.place', 1);
-
-        $edit = Lang::get('crud.edit');
-        $this->it_create_place();
-
-        $this->visit('/places')
-            ->click($edit)
-            ->type('My Place', 'name')
-            ->type('22', 'coords')
-            ->type('33', 'city')
-            ->type('44', 'state')
-            ->select('36','countryId')
-            ->press($this->editPlace)
-            ->seePageIs('/places')
-            ->seeInDatabase('place',['name' => 'My Place', 'coords' => '22']);
-
-    }
+//class PlaceTest extends TestCase
+//{
+//    use DatabaseTransactions;
+////    use WithoutMiddleware;
+//
+//    protected  $place,$places, $addPlace, $editPlace;
+//    public function setUp()
+//    {
+//        parent::setUp();
+//        $this->place = trans_choice('crud.place', 1);
+//        $this->places = trans_choice('crud.place', 2);
+//        $this->addPlace = Lang::get('crud.addModel', ['currentModelName' => $this->place]);
+//        $this->editPlace= Lang::get('crud.updateModel', ['currentModelName' => $this->place]);
+//        Auth::loginUsingId(1);
+//
+//    }
+//
+//
+//    public function mustBeAuthenticated()
+//    {
+//        Auth::logout();
+//        $this->visit('/places')
+//            ->seePageIs('/auth/login');
+//    }
+//
+//
+//    public function it_denies_creating_an_empty_place(){
+//        $this->click($this->places)
+//            ->see($this->places)
+//            ->click($this->place)
+//            ->press("+ ".$this->addPlace)
+//            ->seePageIs('/places/create')
+//            ->see(Lang::get('validation.filled', ['attribute' => "name"]))
+//            ->notSeeInDatabase('place',['name' => 'My Place']);
+//
+//    }
+//
+//    /** @test */
+//    public function it_create_place()
+//    {
+//        $this->visit("/")
+//            ->click($this->places)
+//            ->see($this->places)
+//            ->click("+ ".$this->addPlace)
+//            ->type('My Place', 'name')
+//            ->type('2', 'coords')
+//            ->type('3', 'city')
+//            ->type('4', 'state')
+//            ->select('10','countryId')
+//            ->press($this->addPlace)
+//            ->seePageIs('/places')
+//            ->seeInDatabase('place',['name' => 'My Place']);
+//
+//    }
+//
+//    /** @test */
+//    public function it_edit_place()
+//    {
+//        $place = trans_choice('crud.place', 1);
+//
+//        $edit = Lang::get('crud.edit');
+//        $this->it_create_place();
+//
+//        $this->visit('/places')
+//            ->click($edit)
+//            ->type('My Place', 'name')
+//            ->type('22', 'coords')
+//            ->type('33', 'city')
+//            ->type('44', 'state')
+//            ->select('36','countryId')
+//            ->press($this->editPlace)
+//            ->seePageIs('/places')
+//            ->seeInDatabase('place',['name' => 'My Place', 'coords' => '22']);
+//
+//    }
 
 // No se porque funciona
 
@@ -225,4 +225,4 @@ class PlaceTest extends TestCase
 //            ->type('password', 'password')
 //            ->press(Lang::get('auth.signin'));
 //    }
-}
+//}

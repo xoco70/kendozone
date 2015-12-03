@@ -62,10 +62,10 @@
             <!-- Theme JS files -->
 
 
-    {{--@if (Request::is("users/*"))--}}
-        {{--{!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}--}}
-        {{--{!! Html::script('js/pages/uploader_bootstrap.js') !!}--}}
-    {{--@endif--}}
+    @if (Request::is("users/*"))
+        {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
+        {!! Html::script('js/pages/uploader_bootstrap.js') !!}
+    @endif
 
 
 

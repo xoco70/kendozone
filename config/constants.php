@@ -7,6 +7,7 @@
  */
 return [
     'AVATAR_PATH' => '/images/avatar/',
-    'AVATAR_UPLOAD_PATH' => 'public/images/avatar/',
+    'RELATIVE_AVATAR_PATH' => 'images/avatar/',
+//    'AVATAR_UPLOAD_PATH' => 'public/images/avatar/',
     'ROLE_ADMIN' => '3'
 ];
