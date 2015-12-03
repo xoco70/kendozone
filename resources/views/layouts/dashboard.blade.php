@@ -16,6 +16,7 @@
     {!! Html::style('css/colors.css')!!}
             <!-- /global stylesheets -->
 
+
     <!-- Core JS files -->
     {!! Html::script('js/plugins/loaders/pace.min.js') !!}
     {!! Html::script('js/core/libraries/jquery.min.js') !!}
@@ -23,25 +24,28 @@
     {!! Html::script('js/plugins/loaders/blockui.min.js') !!}
     {{--<!-- /core JS files -->--}}
     {{--<!-- Theme JS files -->--}}
+    {!! Html::script('js/core/app.js') !!}
 
-    {{--{!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
+
+     {{--This conflict with menu minimizing       --}}
+{{--    {!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/effects.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/notifications/jgrowl.min.js') !!}--}}
-    {{--    {!! Html::script('js/plugins/pickers/anytime.min.js') !!}--}}
-    {{--    {!! Html::script('js/plugins/pickers/pickadate/picker.time.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/anytime.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.time.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/pickadate/legacy.js') !!}--}}
 
     {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
-    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
+    {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
+    {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
     {{--{!! Html::script('js/pages/picker_date.js') !!}--}}
 
 
 
 
-    {!! Html::script('js/core/app.js') !!}
+
 
 
     {{--@if (Request::is("/")--}}
@@ -67,13 +71,13 @@
 
 
 
-    {{--{!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}--}}
+    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    {{--@if (Request::is("tournaments/*"))--}}
-        {{--{!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
-        {{--{!! Html::script('js/plugins/pickers/location/location.js') !!}--}}
-    {{--@endif--}}
+    @if (Request::is("tournaments/*"))
+        {!! Html::script('http://maps.google.com/maps/api/js') !!}
+        {!! Html::script('js/plugins/pickers/location/location.js') !!}
+    @endif
 
 
 </head>

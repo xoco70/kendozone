@@ -15,36 +15,42 @@ class Tournament extends Model
         'name',
         'tournamentDate',
         'registerDateLimit',
-        'placeId',
+        'sport',
+        'cost',
+        'mustPay',
+        'place',
+        'latitude',
+        'longitude',
         'teamSize',
         'fightingAreas',
         'hasRoundRobin',
         'roundRobinWinner',
         'fightDuration',
         'hasEncho',
-        'type'
+        'type',
+
     ];
 
     protected $dates = ['tournamentDate', 'registerDateLimit'];
 
-    public function place()
-    {
-        return $this->hasOne('Place');
-    }
+//    public function place()
+//    {
+//        return $this->hasOne('Place');
+//    }
 
     public function shiaiCategory()
     {
         return $this->hasMany('ShiaiCategory');
     }
 
-    public function geTournamentDateAttribute($date)
+    public function getTournamentDateAttribute($date)
     {
-        return $date == "0000-00-00 00:00:00" ? "0000-00-00" : $date;
+        return $date;
     }
 
-    public function getLimitRegisterDateAttribute($date)
+    public function getRegisterDateLimitAttribute($date)
     {
-        return $date == "0000-00-00 00:00:00" ? "0000-00-00" : $date;
+        return $date;
     }
 
     public function setTournamentDateAttribute($date)
@@ -58,16 +64,16 @@ class Tournament extends Model
     }
 
 
-    public function sethasRoundRobin($hasRoundRobin)
-    {
-        if ($hasRoundRobin == "on")
-            $this->attributes['$hasRoundRobin'] = 1;
-    }
-    public function sethasEncho($hasEncho)
-    {
-        if ($hasEncho == "on")
-            $this->attributes['$hasEncho'] = 1;
-    }
+//    public function sethasRoundRobin($hasRoundRobin)
+//    {
+//        if ($hasRoundRobin == "on")
+//            $this->attributes['$hasRoundRobin'] = 1;
+//    }
+//    public function sethasEncho($hasEncho)
+//    {
+//        if ($hasEncho == "on")
+//            $this->attributes['$hasEncho'] = 1;
+//    }
 
 
 
@@ -75,28 +81,28 @@ class Tournament extends Model
 //		$this->attributes['placeId'] = $id;
 //	}
 
-    public function scopeIsFuture($query)
-    {
-        $query->where('tournamentDate', '>=', Carbon::now());
-
-    }
-
-    public function scopeIsPast($query)
-    {
-        $query->where('tournamentDate', '<=', Carbon::now());
-
-    }
-
-    public function scopeIsTooLate($query)
-    {
-        $query->where('registerDateLimit', '<=', Carbon::now());
-
-    }
-
-    public function scopeIsOnTime($query)
-    {
-        $query->where('registerDateLimit', '>=', Carbon::now());
-
-    }
+//    public function scopeIsFuture($query)
+//    {
+//        $query->where('tournamentDate', '>=', Carbon::now());
+//
+//    }
+//
+//    public function scopeIsPast($query)
+//    {
+//        $query->where('tournamentDate', '<=', Carbon::now());
+//
+//    }
+//
+//    public function scopeIsTooLate($query)
+//    {
+//        $query->where('registerDateLimit', '<=', Carbon::now());
+//
+//    }
+//
+//    public function scopeIsOnTime($query)
+//    {
+//        $query->where('registerDateLimit', '>=', Carbon::now());
+//
+//    }
 
 }

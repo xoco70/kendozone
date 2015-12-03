@@ -13,6 +13,7 @@ class CreateTournamentTable extends Migration {
             $table->date('tournamentDate');
             $table->date('registerDateLimit');
             $table->tinyInteger('cost');
+            $table->tinyInteger('sport')->unsigned()->default(1); // Default is Kendo for now
 
             $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
             $table->tinyInteger('fightingAreas')->unsigned()->nullable();

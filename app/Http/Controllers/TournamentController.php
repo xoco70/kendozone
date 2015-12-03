@@ -56,8 +56,10 @@ class TournamentController extends Controller
     public function store(TournamentRequest $request)
     {
 
+
         $tournament = $request->all();
-        if (Tournament::create($tournament)) flash('success', 'operation_successful!');
+//        dd($tournament);
+        if (Tournament::create($tournament)) flash('success', trans('operation_successful'));
         else flash('error', 'operation_failed!');
         return redirect('tournaments');
     }

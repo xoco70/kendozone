@@ -33,8 +33,8 @@ return [
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'limitDateRegistration' => 'Registro',
-    'fullLimitDateRegistration' => 'Registro',
-    'teamsize' => 'Cantidad de competidores',
+    'fullLimitDateRegistration' => 'Fecha limite de registro',
+    'teamsize' => 'Tamaño de equipos',
     'fightingAreas' => 'Cantidad de areas de combate',
     'fightDuration' =>'Duración del combate',
     'hasRoundRobin' => 'Round Robin?',
@@ -44,13 +44,15 @@ return [
     'general_data' => 'Datos generales',
     'level' => 'Nivel',
     'cost' => 'Costo',
-    'pay4register' => 'Es necesario cumplir el pago para registarse en el torneo?',
     'settings' => 'Parametros',
+    'pay4register' => '¿Pago para registrarse?',
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
+    'tournamentType' => 'Tipo de torneo',
 
 
-
+    // Categories
+    'category' => 'Categoria|Categorias',
 
 
     // Places
@@ -59,6 +61,17 @@ return [
     'city' => 'Ciudad',
     'state' => 'Estado',
     'country' => 'País',
+
+    // Nivel
+    'local' => 'Local',
+    'district' => 'Distrital',
+    'level_city' => 'Municipal',
+    'regional' => 'Regional',
+    'level_state' => 'Estatal',
+    'national' => 'Nacional',
+    'international' => 'Internacional',
+
+
 
     // User
     'user' => 'Usuario|Usuarios',

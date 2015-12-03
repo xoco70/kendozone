@@ -6,6 +6,12 @@ use App\Http\Requests\Request;
 
 class TournamentRequest extends Request
 {
+
+    public function __construct(\Illuminate\Http\Request $request)
+    {
+        $request->request->add(['sport' => 1]);
+
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,6 +29,7 @@ class TournamentRequest extends Request
      */
     public function rules()
     {
+
         return [
             'name' => 'required|min:6',
             'tournamentDate' => 'required|date',
