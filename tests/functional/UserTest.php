@@ -34,7 +34,7 @@ class UserTest extends TestCase
         $this->addUser = Lang::get('crud.addModel', ['currentModelName' => $this->user]);
         $this->editUser = Lang::get('crud.updateModel', ['currentModelName' => $this->user]);
 
-        Auth::loginUsingId(1);
+        Auth::loginUsingId(1); 
     }
 
     public function it_denies_creating_an_empty_user()
