@@ -17,7 +17,7 @@ class GradeSeeder extends Seeder {
 //        DB::table('Grade')->delete();
 
         Grade::truncate();
-        Grade::create(['name' => trans('crud.without_grade'),'order' => 0]);
+        Grade::create(['name' => 'crud.without_grade','order' => 0]);
         Grade::create(['name' => "7 Kyu",'order' => 1]);
         Grade::create(['name' => "6 Kyu",'order' => 2]);
         Grade::create(['name' => "5 Kyu",'order' => 3]);

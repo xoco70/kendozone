@@ -137,8 +137,20 @@
     <legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend>
 
     <div class="row">
-        <div class="col-md-6">
-            It could be great to use : form_dual_listboxes.html basic
+        <div class="col-md-12">
+            <div class="panel-body">
+                <p class="coutent-group">Seleccione las categorias abiertas para su torneo</p>
+
+
+
+                {!!  Form::select('categoryId', $categories,null, ['class' => 'form-control listbox', 'multiple'=>"multiple"]) !!} <!-- Default 1st Dan-->
+                {{--<select multiple="multiple" class="form-control listbox">--}}
+                    {{--@foreach($categories as $category)--}}
+                        {{--<option value="{!!$category->id!!}">{!!$category->name!!}</option>--}}
+                    {{--@endforeach--}}
+                {{--</select>--}}
+            </div>
+            {{--It could be great to use : form_dual_listboxes.html basic--}}
 
             {{--<div class="form-group">--}}
             {{--{!!  Form::label('limitRegistrationDate', trans('crud.fullLimitDateRegistration')) !!}--}}
@@ -213,5 +225,11 @@ $day = $now->day;
             min: [{{$year}}, {{$month}}, {{$day}}],
             format: 'yyyy-mm-dd'
         });
+
+
+        // Basic Dual select example
+        $('.listbox').bootstrapDualListbox();
+
+
     });
 </script>

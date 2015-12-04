@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Place;
 use App\Tournament;
+use App\TournamentCategory;
 use App\TournamentLevel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -43,8 +44,10 @@ class TournamentController extends Controller
     public function create()
     {
         $levels = TournamentLevel::lists('name', 'id');
+        $categories = TournamentCategory::lists('name', 'id');
+//        dd($categories);
 //        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact( 'levels'));
+        return view('tournaments.create', compact( 'levels', 'categories'));
     }
 
     /**

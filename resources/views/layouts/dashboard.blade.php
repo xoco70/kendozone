@@ -42,8 +42,8 @@
     {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
     {{--{!! Html::script('js/pages/picker_date.js') !!}--}}
 
-
-
+    {{--Dual Box select--}}
+    {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
 
 
 
