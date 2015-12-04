@@ -1,8 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
 
-    <h1>@lang('crud.editModel', ['currentModelName' => $currentModelName])</h1>
-    <hr/>
     @include("errors.list")
 
     <div class="container">

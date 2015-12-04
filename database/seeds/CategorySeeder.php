@@ -12,6 +12,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        Category::truncate();
+
         Category::create(['name' => 'categories.man_first_force']);
         Category::create(['name' => 'categories.man_second_force']);
 

@@ -27,8 +27,8 @@
     {!! Html::script('js/core/app.js') !!}
 
 
-     {{--This conflict with menu minimizing       --}}
-{{--    {!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
+    {{--This conflict with menu minimizing       --}}
+    {{--    {!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/effects.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/notifications/jgrowl.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/anytime.min.js') !!}--}}
@@ -46,13 +46,11 @@
     {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
 
 
-
-
     {{--@if (Request::is("/")--}}
-         {{--|| Request::is("admin")--}}
-         {{--|| Request::is("tournaments/*")--}}
-         {{--)--}}
-    {{--{!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}--}}
+    {{--|| Request::is("admin")--}}
+    {{--|| Request::is("tournaments/*")--}}
+    {{--)--}}
+    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
     {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
     {{--{!! Html::script('js/pages/wizard_stepy.js') !!}--}}
@@ -71,7 +69,7 @@
 
 
 
-    {!! Html::script('js/plugins/forms/styling/switchery.min.js') !!}
+    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
     @if (Request::is("tournaments/*"))
@@ -94,7 +92,6 @@
         @include('layouts.sidemenu')
 
 
-
                 <!-- Main content -->
         <div class="content-wrapper">
 
@@ -102,8 +99,10 @@
             <div class="page-header">
                 <div class="page-header-content">
                     <div class="page-title">
-                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> -
-                            {!! $modelPlural !!}</h4>
+                        <h1><span class="text-semibold">
+                                @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                            </span>
+                        </h1>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
 
             {!!  Form::label('tournamentDate', trans('crud.eventDate')) !!}
 
@@ -24,7 +24,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             {!!  Form::label('limitRegistrationDate', trans('crud.limitDateRegistration')) !!}
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon-calendar5"></i></span>
@@ -34,25 +34,40 @@
 
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
 
 
-            <p>&nbsp;</p><label>
-                {!!   Form::checkbox('mustPay', old('mustPay'), null, ['class' => 'switchery', 'checked' => 'checked']) !!}
-                {!! trans('crud.pay4register') !!}
-            </label>
+            <div class="checkbox-switch">
+                <label>
+                    {!!  Form::label('mustPay', trans('crud.pay4register'))  !!} <br/>
+                    {!!   Form::checkbox('mustPay', old('mustPay'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+
+                </label>
+            </div>
         </div>
+        <div class="col-md-3">
+
+            <div class="checkbox-switch">
+                <label>
+                    {!!  Form::label('type', trans('crud.tournamentType')) !!} <br/>
+                    {!!   Form::checkbox('mustPay', old('mustPay'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado"]) !!}
+
+                </label>
+            </div>
+
+        </div>
+
 
 
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 {!!  Form::label('cost', trans('crud.cost')) !!}
                 {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
@@ -60,17 +75,11 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="form-group">
                 {!!  Form::label('levelId', trans('crud.level')) !!}
                 {!!  Form::select('levelId', $levels,null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                {!!  Form::label('type', trans('crud.tournamentType')) !!}
-                {!!  Form::select('type',['0' => 'abierto','1' => 'cerrado'], old('type'),  ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>
@@ -142,12 +151,11 @@
                 <p class="coutent-group">Seleccione las categorias abiertas para su torneo</p>
 
 
-
                 {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                 {{--<select multiple="multiple" class="form-control listbox">--}}
-                    {{--@foreach($categories as $category)--}}
-                        {{--<option value="{!!$category->id!!}">{!!$category->name!!}</option>--}}
-                    {{--@endforeach--}}
+                {{--@foreach($categories as $category)--}}
+                {{--<option value="{!!$category->id!!}">{!!$category->name!!}</option>--}}
+                {{--@endforeach--}}
                 {{--</select>--}}
             </div>
             {{--It could be great to use : form_dual_listboxes.html basic--}}
@@ -232,6 +240,19 @@ $day = $now->day;
         $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false
         });
+
+        // Stepy settings
+        // Override defaults
+        $.fn.stepy.defaults.legend = false;
+        $.fn.stepy.defaults.transition = 'fade';
+        $.fn.stepy.defaults.duration = 150;
+        $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
+        $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
+        $(".stepy-validation").stepy({});
+        // Apply "Back" and "Next" button styling
+        $('.stepy-step').find('.button-next').addClass('btn btn-primary');
+        $('.stepy-step').find('.button-back').addClass('btn btn-default');
+        $(".switch").bootstrapSwitch();
 
 
     });
