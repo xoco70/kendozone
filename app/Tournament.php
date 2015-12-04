@@ -38,9 +38,33 @@ class Tournament extends Model
 //        return $this->hasOne('Place');
 //    }
 
-    public function shiaiCategory()
+    /**
+     * A tournament is owned by a user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
     {
-        return $this->hasMany('ShiaiCategory');
+        return $this->belongsTo('App\User');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
+
+    // We can use $tournament->categories()->attach(id);
+    // Or         $tournament->categories()->sync([1, 2, 3]);
+    // I'm not sure about the name
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category')->withTimestamps();
+    }
+
+    public function getCategoryList()
+    {
+        return $this->categories->lists('id')->all();
     }
 
     public function getTournamentDateAttribute($date)

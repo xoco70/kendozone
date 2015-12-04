@@ -11,7 +11,7 @@ class CreateFederationTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->unique();
 //			$table->integer('adminId')->unsigned();
-			$table->integer('countryId');
+//			$table->integer('countryId');
 			$table->timestamps();
 			$table->engine = 'InnoDB';
 

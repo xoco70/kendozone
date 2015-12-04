@@ -6,8 +6,9 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Place;
 use App\Tournament;
-use App\TournamentCategory;
+use App\Category;
 use App\TournamentLevel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
@@ -44,10 +45,11 @@ class TournamentController extends Controller
     public function create()
     {
         $levels = TournamentLevel::lists('name', 'id');
-        $categories = TournamentCategory::lists('name', 'id');
+        $categories = Category::lists('name', 'id');
+        $tournament = new Tournament();
 //        dd($categories);
 //        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact( 'levels', 'categories'));
+        return view('tournaments.create', compact( 'levels', 'categories','tournament'));
     }
 
     /**
@@ -58,12 +60,10 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
-
-
-        $tournament = $request->all();
-//        dd($tournament);
-        if (Tournament::create($tournament)) flash('success', trans('operation_successful'));
-        else flash('error', 'operation_failed!');
+        $tournament = Auth::user()->tournaments()->create($request->all());
+        $tournament->categories()->sync($request->input('category'));
+        flash('success', trans('core.operation_successful'));
+//        else flash('error', 'operation_failed!');
         return redirect('tournaments');
     }
 
@@ -88,10 +88,9 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
+        $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
-//        $places = Place::lists('name', 'id');
-//        dd($tournaments);
-        return view('tournaments.edit', compact('tournament', 'levels'));
+        return view('tournaments.edit', compact('tournament', 'levels','categories'));
     }
 
     /**
@@ -103,7 +102,9 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, Tournament $tournament)
     {
+
         $tournament->update($request->all());
+        $tournament->categories()->sync($request->input('category'));
         return redirect("tournaments");
     }
 

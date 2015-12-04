@@ -143,7 +143,7 @@
 
 
 
-                {!!  Form::select('categoryId', $categories,null, ['class' => 'form-control listbox', 'multiple'=>"multiple"]) !!} <!-- Default 1st Dan-->
+                {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                 {{--<select multiple="multiple" class="form-control listbox">--}}
                     {{--@foreach($categories as $category)--}}
                         {{--<option value="{!!$category->id!!}">{!!$category->name!!}</option>--}}
@@ -228,7 +228,10 @@ $day = $now->day;
 
 
         // Basic Dual select example
-        $('.listbox').bootstrapDualListbox();
+        // Disable filtering
+        $('.listbox-filter-disabled').bootstrapDualListbox({
+            showFilterInputs: false
+        });
 
 
     });

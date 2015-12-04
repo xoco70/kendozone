@@ -9,6 +9,7 @@ class CreateTournamentTable extends Migration {
 	{
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
+            $table->bigInteger('user_id');
 			$table->string('name');
             $table->date('tournamentDate');
             $table->date('registerDateLimit');
