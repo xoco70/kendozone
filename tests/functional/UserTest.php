@@ -5,7 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
 /**
- * Created by PhpStorm.
+ * List of User Test
+ *
+ * it_denies_creating_an_empty_user()
+ * mustBeAuthenticated()
+ * it_create_user($delete = true)
+ * it_edit_user()
+ * it_denies_creating_user_without_password()
+ * it_allow_editing_user_without_password()
+ *
  * User: juliatzin
  * Date: 10/11/2015
  * Time: 23:14
@@ -80,7 +88,7 @@ class UserTest extends TestCase
             ->see(Lang::get('core.success'))
             ->seeInDatabase('users',['name' => 'MyUser']);
 
-        $user = User::where('email', '=', "julien@cappiello.fr2");
+        $user = User::where('email', '=', "julien@cappiello.fr2")->first();
         if ($delete) $user->delete();
     }
 
@@ -104,8 +112,56 @@ class UserTest extends TestCase
             ->seePageIs('/users')
             ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
 
-        $user = User::where('email', '=', "juju@juju.com");
+        $user = User::where('email', '=', "juju@juju.com")->first();
         $user->delete();
+
+    }
+
+
+    /** @test */
+    public function it_denies_creating_user_without_password()
+    {
+
+        $this->visit('/')
+            ->click($this->users)
+            ->see($this->users)
+            ->click($this->addUser)
+            ->type('MyUser', 'name')
+            ->type('julien@cappiello.fr2', 'email')
+            ->type('julien', 'firstname')
+            ->type('cappiello', 'lastname')
+            ->select('4', 'gradeId')
+            ->select('3', 'roleId')
+//            //File input avatar
+            ->press($this->addUser)
+            ->seePageIs('/users/create')
+            ->see(Lang::get('validation.required', ['attribute' => "password"]))
+            ->notSeeInDatabase('users',['name' => 'MyUser']);
+
+    }
+
+    /** @test */
+    public function it_allow_editing_user_without_password()
+    {
+        $this->it_create_user(false);
+        $usuario = User::where('email', '=', "julien@cappiello.fr2")->first();
+        $oldPass = $usuario->password;
+        $this->visit('/users')
+            ->click("MyUser")
+            ->type('juju', 'name')
+            ->type('juju@juju.com', 'email')
+            ->type('may', 'firstname')
+            ->type('1', 'lastname')
+            ->select('1', 'gradeId')
+            ->select('3', 'roleId')
+            ->press($this->editUser)
+            ->seePageIs('/users')
+            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+
+        $usuario = User::where('email', '=', "juju@juju.com")->first();
+        $newPass = $usuario->password;
+        assert($oldPass == $newPass, true);
+        $usuario->delete();
 
     }
 
