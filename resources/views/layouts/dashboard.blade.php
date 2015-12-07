@@ -38,12 +38,7 @@
     {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
 
-    {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
-    {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
-    {{--{!! Html::script('js/pages/picker_date.js') !!}--}}
 
-    {{--Dual Box select--}}
-    {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
 
 
     {{--@if (Request::is("/")--}}
@@ -72,7 +67,12 @@
     {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    @if (Request::is("tournaments/*"))
+    @if (Request::is("tournaments/create") || Request::is("tournaments/edit"))
+        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
+        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+
+        {{--Dual Box select--}}
+        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
         {!! Html::script('http://maps.google.com/maps/api/js') !!}
         {!! Html::script('js/plugins/pickers/location/location.js') !!}
     @endif

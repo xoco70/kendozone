@@ -106,7 +106,7 @@ $(function() {
         },
         rules: {
             email: {
-                email: true
+                email: false
             }
         }
     }

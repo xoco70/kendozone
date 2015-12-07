@@ -14,7 +14,10 @@
                         <span class="media-heading text-semibold">{!! Auth::getUser()->name !!}</span>
 
                         <div class="text-size-mini text-muted">
-                            <i class="icon-pin text-size-small"></i> &nbsp;Santa Ana, CA
+                            <i class="icon-pin text-size-small"></i>
+                            @if (!is_null(Auth::getUser()->city ))
+                                {!!Auth::getUser()->city !!}, {!!Auth::getUser()->countryCode !!}
+                            @endif
                         </div>
                     </div>
 

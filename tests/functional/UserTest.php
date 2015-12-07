@@ -37,21 +37,21 @@ class UserTest extends TestCase
         Auth::loginUsingId(1); 
     }
 
+    /** @test */
     public function it_denies_creating_an_empty_user()
     {
-        $this->click($this->users)
+        $this->visit("/users")
             ->see($this->users)
             ->click("+ ".$this->addUser)
             ->press($this->user)
             ->seePageIs('/users/create')
-            ->see(Lang::get('validation.filled', ['attribute' => "name"]))
-            ->see(Lang::get('validation.filled', ['attribute' => "email"]))
-            ->see(Lang::get('validation.filled', ['attribute' => "password"]))
-
+            ->see("El campo name es obligatorio") // Lang::get('validation.filled', ['attribute' => "name"])
+            ->see("El campo email es obligatorio") // Lang::get('validation.filled', ['attribute' => "email"])
+            ->see("El campo password es obligatorio") //Lang::get('validation.filled', ['attribute' => "password"])
             ->notSeeInDatabase('users', ['name' => '']);
 
     }
-
+    /** @test */
     public function mustBeAuthenticated()
     {
         Auth::logout();

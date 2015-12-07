@@ -50,7 +50,7 @@
             <div class="checkbox-switch">
                 <label>
                     {!!  Form::label('type', trans('crud.tournamentType')) !!} <br/>
-                    {!!   Form::checkbox('mustPay', old('mustPay'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado"]) !!}
+                    {!!   Form::checkbox('type', old('type'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado"]) !!}
 
                 </label>
             </div>
@@ -248,7 +248,16 @@ $day = $now->day;
         $.fn.stepy.defaults.duration = 150;
         $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
         $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
-        $(".stepy-validation").stepy({});
+        $(".stepy-validation").stepy({
+
+
+
+        });
+
+
+
+
+
         // Apply "Back" and "Next" button styling
         $('.stepy-step').find('.button-next').addClass('btn btn-primary');
         $('.stepy-step').find('.button-back').addClass('btn btn-default');
