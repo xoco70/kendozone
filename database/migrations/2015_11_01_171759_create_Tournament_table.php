@@ -16,12 +16,12 @@ class CreateTournamentTable extends Migration {
             $table->tinyInteger('cost');
             $table->tinyInteger('sport')->unsigned()->default(1); // Default is Kendo for now
 
-            $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
+//            $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
             $table->tinyInteger('fightingAreas')->unsigned()->nullable();
-            $table->boolean('hasRoundRobin')->default(true);
-            $table->tinyInteger('roundRobinWinner')->unsigned()->default(1); // How much competitor get out of round robin
-            $table->tinyInteger('fightDuration')->unsigned()->default(3);
-            $table->boolean('hasEncho')->default(true);
+//            $table->boolean('hasRoundRobin')->default(true);
+//            $table->tinyInteger('roundRobinWinner')->unsigned()->default(1); // How much competitor get out of round robin
+//            $table->tinyInteger('fightDuration')->unsigned()->default(3);
+//            $table->boolean('hasEncho')->default(true);
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
             $table->boolean('mustPay');
 

@@ -45,7 +45,6 @@
     {{--|| Request::is("admin")--}}
     {{--|| Request::is("tournaments/*")--}}
     {{--)--}}
-    {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
     {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
     {{--{!! Html::script('js/pages/wizard_stepy.js') !!}--}}
@@ -67,7 +66,8 @@
     {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    @if (Request::is("tournaments/create") || Request::is("tournaments/edit"))
+    @if (Request::is("tournaments/*"))
+        {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 

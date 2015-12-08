@@ -60,6 +60,7 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
+//        dd($request);
         $tournament = Auth::user()->tournaments()->create($request->all());
         $tournament->categories()->sync($request->input('category'));
         flash('success', trans('core.operation_successful'));
@@ -90,6 +91,7 @@ class TournamentController extends Controller
     {
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
+//        dd($tournament);
         return view('tournaments.edit', compact('tournament', 'levels','categories'));
     }
 

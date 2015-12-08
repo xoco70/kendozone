@@ -88,16 +88,19 @@ class Tournament extends Model
     }
 
 
-//    public function sethasRoundRobin($hasRoundRobin)
-//    {
-//        if ($hasRoundRobin == "on")
-//            $this->attributes['$hasRoundRobin'] = 1;
-//    }
-//    public function sethasEncho($hasEncho)
-//    {
-//        if ($hasEncho == "on")
-//            $this->attributes['$hasEncho'] = 1;
-//    }
+    public function setMustPayAttribute($mustPay)
+    {
+
+        if ($mustPay == "on") {
+            dd($mustPay);
+            $this->attributes['mustPay'] = 1;
+        }
+    }
+    public function setTypeAttribute($type)
+    {
+        if ($type == "on")
+            $this->attributes['type'] = 1;
+    }
 
 
 

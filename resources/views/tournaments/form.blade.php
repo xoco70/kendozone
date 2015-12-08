@@ -39,8 +39,12 @@
 
             <div class="checkbox-switch">
                 <label>
+                    <?php $old = $tournament->mustPay;
+                    $checked = $old ? 'checked' : '';
+                    ?>
+
                     {!!  Form::label('mustPay', trans('crud.pay4register'))  !!} <br/>
-                    {!!   Form::checkbox('mustPay', old('mustPay'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                    {!!   Form::checkbox('mustPay', $old, $old , ['class' => 'switch', $checked , 'data-on-text'=>"Si", 'data-off-text'=>"No", "value" => "true"]) !!}
 
                 </label>
             </div>
@@ -49,8 +53,12 @@
 
             <div class="checkbox-switch">
                 <label>
+                    <?php  $old = $tournament->type == "" ? 0 : 1;
+                        $checked = $old ? 'checked' : '';
+                    ?>
+
                     {!!  Form::label('type', trans('crud.tournamentType')) !!} <br/>
-                    {!!   Form::checkbox('type', old('type'), null, ['class' => 'switch', 'checked' => 'checked', 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado"]) !!}
+                    {!!   Form::checkbox('type', $old, $old, ['class' => 'switch', $checked, 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado", "value" => "true"]) !!}
 
                 </label>
             </div>
@@ -262,6 +270,14 @@ $day = $now->day;
         $('.stepy-step').find('.button-next').addClass('btn btn-primary');
         $('.stepy-step').find('.button-back').addClass('btn btn-default');
         $(".switch").bootstrapSwitch();
+
+        // Manipulating from callback
+        // Basic functionality
+        $('.locationpicker-default').locationpicker({
+            radius: 150,
+            scrollwheel: false,
+            zoom: 10
+        });
 
 
     });
