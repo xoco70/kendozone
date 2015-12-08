@@ -11,6 +11,10 @@
                 {{--<div class="row col-md-10 custyle">--}}
                 <table class="table table-striped custab">
                     <thead>
+                    {{--@can('CanDeleteTournament')--}}
+                    {{--<a id="delete" href="{!!   URL::action('TournamentController@create') !!}">@lang('crud.deleteAllElements')</a>--}}
+                    {{--@endcan--}}
+
                     @can('CanCreateTournament')
                     <a href="{!!   URL::action('TournamentController@create') !!}"
                        class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
@@ -18,6 +22,7 @@
                     @endcan
 
                     <tr>
+                        {{--<th><input type="checkbox" id="checkAll"/></th>--}}
                         <th>ID</th>
                         <th>{{ trans('crud.name') }}</th>
                         <th>{{ trans_choice('crud.place',1) }}</th>
@@ -30,6 +35,7 @@
                     </thead>
                     @foreach($tournaments as $tournament)
                         <tr>
+{{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->id }}@can('CanEditTournament')</a>@endCan</td>
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->name }}@can('CanEditTournament')</a>@endCan</td>
                             <td>{{ $tournament->place }}</td>
@@ -52,6 +58,15 @@
             </div>
         </div>
     </div>
+    {{--<script type="text/javascript">--}}
+        {{--$("#checkAll").change(function () {--}}
+            {{--$("input:checkbox").prop('checked', $(this).prop("checked"));--}}
+        {{--});--}}
+        {{--var checkboxes = $("input[type='checkbox']");--}}
+        {{--checkboxes.click(function() {--}}
+            {{--$('#delete').attr("show", !checkboxes.is(":checked"));--}}
+        {{--});--}}
+    {{--</script>--}}
     @include("errors.list")
 @stop
 

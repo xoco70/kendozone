@@ -56,7 +56,7 @@
 
                     {!!  Form::label('type', trans('crud.tournamentType')) !!} <br/>
                     {!!   Form::hidden('type', 0) !!}
-                    {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                    {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Abierto", 'data-off-text'=>"Invitación"]) !!}
 
                 </label>
             </div>

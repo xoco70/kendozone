@@ -23,6 +23,8 @@ return [
     'addModel' => 'Agregar :currentModelName',
     'editModel' => 'Editar :currentModelName',
     'updateModel' => 'Actualizar :currentModelName',
+    'deleteAllElements' => 'Borrar los elementos seleccionados',
+
 
     //Common
 
@@ -32,8 +34,7 @@ return [
     'tournament' => 'Torneo|Torneos',
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
-    'limitDateRegistration' => 'Registro',
-    'fullLimitDateRegistration' => 'Fecha limite de registro',
+    'limitDateRegistration' => 'Fecha limite de registro',
     'teamsize' => 'Tamaño de equipos',
     'fightingAreas' => 'Cantidad de areas de combate',
     'fightDuration' =>'Duración del combate',
