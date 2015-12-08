@@ -39,12 +39,12 @@
 
             <div class="checkbox-switch">
                 <label>
-                    <?php $old = $tournament->mustPay;
-                    $checked = $old ? 'checked' : '';
-                    ?>
 
-                    {!!  Form::label('mustPay', trans('crud.pay4register'))  !!} <br/>
-                    {!!   Form::checkbox('mustPay', $old, $old , ['class' => 'switch', $checked , 'data-on-text'=>"Si", 'data-off-text'=>"No", "value" => "true"]) !!}
+                    {!!     Form::label('mustPay', trans('crud.pay4register'))  !!} <br/>
+                    {!!     Form::hidden('mustPay', 0) !!}
+                    {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+
+    {{--                    {!!   Form::checkbox('mustPay', $old, $old , ['class' => 'switch', $checked , 'data-on-text'=>"Si", 'data-off-text'=>"No", "value" => "true"]) !!}--}}
 
                 </label>
             </div>
@@ -53,12 +53,10 @@
 
             <div class="checkbox-switch">
                 <label>
-                    <?php  $old = $tournament->type == "" ? 0 : 1;
-                        $checked = $old ? 'checked' : '';
-                    ?>
 
                     {!!  Form::label('type', trans('crud.tournamentType')) !!} <br/>
-                    {!!   Form::checkbox('type', $old, $old, ['class' => 'switch', $checked, 'data-on-text'=>"Abierto", 'data-off-text'=>"Cerrado", "value" => "true"]) !!}
+                    {!!   Form::hidden('type', 0) !!}
+                    {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
 
                 </label>
             </div>
