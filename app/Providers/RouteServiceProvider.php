@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('competitors','App\Competitor');
         $router->model('federations','App\Federation');
         $router->model('associations','App\Association');
+        $router->model('settings','App\Settings');
         $router->model('users','App\User');
     }
 

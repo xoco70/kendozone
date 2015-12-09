@@ -24,7 +24,7 @@
                     <div class="media-right media-middle">
                         <ul class="icons-list">
                             <li>
-                                <a href="##"><i class="icon-cog3"></i></a>
+                                <a href="{!! URL::to('/settings')!!}"><i class="icon-cog3"></i></a>
                             </li>
                         </ul>
                     </div>

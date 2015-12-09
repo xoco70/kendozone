@@ -27,31 +27,11 @@
     {!! Html::script('js/core/app.js') !!}
 
 
-    {{--This conflict with menu minimizing       --}}
-    {{--    {!! Html::script('js/core/libraries/jquery_ui/datepicker.min.js') !!}--}}
-    {{--{!! Html::script('js/core/libraries/jquery_ui/effects.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/notifications/jgrowl.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/anytime.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.time.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/pickadate/legacy.js') !!}--}}
+    {{--Slider libs--}}
+    {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
+    {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
 
-    {{--{!! Html::script('js/plugins/ui/moment/moment.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/pickers/daterangepicker.js') !!}--}}
-
-
-
-
-    {{--@if (Request::is("/")--}}
-    {{--|| Request::is("admin")--}}
-    {{--|| Request::is("tournaments/*")--}}
-    {{--)--}}
-    {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/forms/styling/uniform.min.js') !!}--}}
-    {{--{!! Html::script('js/pages/wizard_stepy.js') !!}--}}
-    {{--@endif--}}
-
-
-            <!-- Theme JS files -->
 
 
     @if (Request::is("users/*"))
@@ -100,7 +80,7 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                @if (Request::is("/") || Request::is("admin") || Request::is("config") )
+                                @if (Request::is("/") || Request::is("admin") || Request::is("settings") )
                                     {!!  $currentModelName !!}
                                 @else
                                     @lang('crud.addModel', ['currentModelName' => $currentModelName])

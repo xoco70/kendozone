@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Settings;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
-class ConfigController extends Controller
+class SettingsController extends Controller
 {
     protected $currentModelName;
 
@@ -26,7 +28,8 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        return view('config.index');
+        $settings = Auth::getUser()->settings()->first();
+        return view('settings.index', compact('settings'));
     }
 
     /**
@@ -47,7 +50,10 @@ class ConfigController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->settings()->create($request->all());
+        flash('success', trans('core.operation_successful'));
+//        else flash('error', 'operation_failed!');
+        return redirect('settings');
     }
 
     /**
@@ -79,9 +85,10 @@ class ConfigController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Settings $settings)
     {
-        //
+        $settings->update($request->all());
+        return redirect("settings");
     }
 
     /**

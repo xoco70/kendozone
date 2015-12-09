@@ -2,9 +2,6 @@
 
 @section('content')
 
-
-    <hr/>
-
     <div class="container">
         <div class="row col-md-10 custyle">
             <table class="table table-striped custab">

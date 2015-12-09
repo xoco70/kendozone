@@ -21,7 +21,7 @@
             <li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)"  data-toggle="dropdown"><i class="icon-cog"></i> </a>
                 <ul class="dropdown-menu dropdown-menu-right icons-right">
 
-                    <li><a href="{!! URL::to('config')!!}"><i class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>
+                    <li><a href="{!! URL::to('/settings')!!}"><i class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>
 
 
                     @can('CanRegisterUser')<li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!} </a></li>@endcan

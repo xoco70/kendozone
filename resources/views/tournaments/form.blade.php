@@ -4,7 +4,7 @@
     <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-lg-6 col-lg-offset-3">
             <div class="form-group">
                 {!!  Form::label('name', trans('crud.name')) !!}
                 {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
@@ -39,13 +39,9 @@
 
             <div class="checkbox-switch">
                 <label>
-
                     {!!     Form::label('mustPay', trans('crud.pay4register'))  !!} <br/>
                     {!!     Form::hidden('mustPay', 0) !!}
                     {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
-
-    {{--                    {!!   Form::checkbox('mustPay', $old, $old , ['class' => 'switch', $checked , 'data-on-text'=>"Si", 'data-off-text'=>"No", "value" => "true"]) !!}--}}
-
                 </label>
             </div>
         </div>
@@ -158,56 +154,16 @@
 
 
                 {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
-                {{--<select multiple="multiple" class="form-control listbox">--}}
-                {{--@foreach($categories as $category)--}}
-                {{--<option value="{!!$category->id!!}">{!!$category->name!!}</option>--}}
-                {{--@endforeach--}}
-                {{--</select>--}}
             </div>
-            {{--It could be great to use : form_dual_listboxes.html basic--}}
 
-            {{--<div class="form-group">--}}
-            {{--{!!  Form::label('limitRegistrationDate', trans('crud.fullLimitDateRegistration')) !!}--}}
-            {{--{!!  Form::input('date', 'limitRegistrationDate', old('limitRegistrationDate'), ['class' => 'form-control']) !!}--}}
-            {{--</div>--}}
 
-            {{--<div class="form-group">--}}
-            {{--{!!  Form::label('teamSize', trans('crud.teamsize')) !!}--}}
-            {{--{!!  Form::input('number','teamSize', old('teamSize'), ['class' => 'form-control','size']) !!}--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-            {{--{!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}--}}
-            {{--{!!  Form::input('number','roundRobinWinner', old('roundRobinWinner'), ['class' => 'form-control']) !!}--}}
-            {{--</div>--}}
         </div>
         {{--<div class="row">--}}
         {{--<div class="col-md-6">--}}
 
-        {{--<div class="form-group">--}}
-        {{--{!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}--}}
-        {{--{!!  Form::input('number','fightDuration', old('fightDuration'), ['class' => 'form-control']) !!}--}}
-        {{--</div>--}}
-        {{----}}
-        {{--<div class="form-group">--}}
-        {{--{!!  Form::label('level', trans('crud.tournamentLevel')) !!}--}}
-        {{--{!!  Form::select('level',$levels, old('level'),  ['class' => 'form-control']) !!}--}}
-        {{--</div>--}}
-        {{--<div class="checkbox checkbox-switchery">--}}
-        {{--<label>--}}
-        {{--<input name="hasRoundRobin" id="hasRoundRobin" type="checkbox" class="switchery"--}}
-        {{--checked="checked">--}}
-        {{--{!! trans('crud.hasRoundRobin') !!}--}}
-        {{--</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}}
-        {{--<label>--}}
-        {{--<input name="hasEncho" id="hasEncho" value type="checkbox" class="switchery" checked="checked">--}}
-        {{--{!! trans('crud.hasEncho') !!}--}}
-        {{--</label>--}}
-        {{--<label>--}}
-        {{--<input name="hasHantei" id="hasHantei" value type="checkbox" class="switchery"--}}
-        {{--checked="checked">--}}
-        {{--{!! trans('crud.hasHantei') !!}--}}
-        {{--</label>--}}
-        {{--</div>--}}
+
+
+
         {{--EnchoQty 2--}}
         {{--EnchoDuration 90--}}
         {{--</div>--}}
@@ -257,12 +213,7 @@ $day = $now->day;
         $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
         $(".stepy-validation").stepy({
 
-
-
         });
-
-
-
 
 
         // Apply "Back" and "Next" button styling
