@@ -100,7 +100,11 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                                @if (Request::is("/") || Request::is("admin") || Request::is("config") )
+                                    {!!  $currentModelName !!}
+                                @else
+                                    @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                                @endif
                             </span>
                         </h1>
                     </div>

@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
         Route::resource('tournaments', 'TournamentController');
         Route::resource('competitors', 'CompetitorController');
         Route::resource('grade', 'GradeController');
-
+        Route::resource('config', 'ConfigController');
         Route::resource('country', 'CountryController');
         Route::resource('places', 'PlaceController');
     });

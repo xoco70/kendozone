@@ -24,9 +24,7 @@ class DashboardController extends Controller
     {
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.dashboard', 1);
-        $this->modelPlural = trans_choice('core.dashboard', 1);
         View::share('currentModelName', $this->currentModelName);
-        View::share('modelPlural', $this->modelPlural);
     }
 
     /**
@@ -40,7 +38,13 @@ class DashboardController extends Controller
 //        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
 //        dd($location['isoCode']);
 //        dd($location);
+
+//        $myTournament = Auth::getUser()->hasAtLeastOneTournament();
+//        $activeTournament = Auth::getUser()->tournaments()->where("");
+//        $incompleteTournament = Auth::getUser()->tournaments()->where("");
+//        dd($myTournament);
         return view('/dashboard');
+
     }
 
     /**

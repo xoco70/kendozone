@@ -168,4 +168,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
+
+    public function hasAtLeastOneTournament(){
+
+        return $this->tournaments()->first(); // Where not finished
+    }
+
+
 }
