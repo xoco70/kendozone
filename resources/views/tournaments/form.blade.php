@@ -216,7 +216,7 @@
 </fieldset>
 
 
-<button type="submit" class="btn btn-primary stepy-finish">Submit <i class="icon-check position-right"></i>
+<button type="submit" class="btn btn-primary stepy-finish" id="block-panel">Submit <i class="icon-check position-right"></i>
 </button>
 
 
@@ -230,6 +230,7 @@ $day = $now->day;
 
         <!-- Theme JS files -->
 <script>
+
     $(function () {
         $('.datetournament').pickadate({
             min: [{{$year}}, {{$month}}, {{$day}}],
@@ -275,6 +276,25 @@ $day = $now->day;
             radius: 150,
             scrollwheel: false,
             zoom: 10
+        });
+
+
+        $('#block-panel').on('click', function() {
+            var block = $(this).parent().parent();
+            $(block).block({
+                message: '<i class="icon-spinner4 spinner"></i>',
+                timeout: 2000, //unblock after 2 seconds
+                overlayCSS: {
+                    backgroundColor: '#fff',
+                    opacity: 0.8,
+                    cursor: 'wait'
+                },
+                css: {
+                    border: 0,
+                    padding: 0,
+                    backgroundColor: 'transparent'
+                }
+            });
         });
 
 
