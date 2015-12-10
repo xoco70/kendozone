@@ -11,7 +11,7 @@
         <div class="container-detached">
             <div class="content-detached">
 
-                <!-- Simple panel -->
+                <!-- Simple panel 1 : General Data-->
                 <div class="panel panel-flat">
                     {{--<div class="panel-heading " >--}}
                     {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
@@ -210,59 +210,200 @@
 
                 </div>
                 <!-- /simple panel -->
+                <!-- Simple panel 2 : Venue -->
 
-            </div>
-        </div>
-        <!-- /detached content -->
+                <div class="panel panel-flat">
+                    {{--<div class="panel-heading " >--}}
+                    {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+                    {{--</div>--}}
+
+                    <div class="panel-body">
+                        <div class="container-fluid">
 
 
-        <!-- Detached sidebar -->
-        <div class="sidebar-detached">
-            <div class="sidebar sidebar-default">
-                <div class="sidebar-content">
+                            <fieldset title="Venue">
+                                <legend class="text-semibold">{{Lang::get('crud.venue')}}</legend>
 
-                    <!-- Sub navigation -->
-                    <div class="sidebar-category">
-                        <div class="category-title">
-                            <span>{{ $tournament->name }}</span>
-                            <ul class="icons-list">
-                                <li><a href="#" data-action="collapse"></a></li>
-                            </ul>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('place', trans('crud.name'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('place', $tournament->place) !!}
+
+                                    </div>
+                                    <div class="form-group">
+                                        {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('latitude', $tournament->latitude) !!}
+
+                                    </div>
+                                    <div class="form-group">
+                                        {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('longitude', $tournament->longitude) !!}
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!!  Form::label('country', trans('crud.country'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('country', $tournament->country) !!}
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('name', trans('crud.coords')) !!}
+                                        <div class="map-wrapper locationpicker-default"
+                                             id="locationpicker-default"></div>
+                                    </div>
+                                </div>
+                                <script>$('#locationpicker-default').locationpicker({
+                                        location: {latitude: 46.15242437752303, longitude: 2.7470703125},
+                                        radius: 300,
+                                        inputBinding: {
+                                            latitudeInput: $('#lat'),
+                                            longitudeInput: $('#lng'),
+                                            radiusInput: $('#us2-radius'),
+                                            locationNameInput: $('#city')
+                                        }
+                                    });
+                                </script>
+
+
+                            </fieldset>
+
+
+
                         </div>
-
-                        <div class="category-content no-padding">
-                            <ul class="navigation navigation-alt navigation-accordion">
-                                <li class="navigation-header">¡Proximos pasos!</li>
-                                <li><a href="#"><i class="icon-trophy2"></i> General</a></li>
-                                <li><a href="#"><i class="icon-location4"></i> Lugar</a></li>
-                                <li><a href="#"><i class="icon-cog2"></i> Categorías</a></li>
-                                <li><a href="#"><i class="icon-user-plus"></i>Invitar usuarios</a>
-                                <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
-                                <li><a href="#"><i class="icon-certificate"></i>Acreditación</a>
-                                <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
-                                <li><a href="#"><i class="icon-share"></i>Publicar</a>
-
-                                </li>
-                                {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
-                                {{--class="label bg-success-400">Online</span></a></li>--}}
-                                {{--<li class="navigation-divider"></li>--}}
-
-                            </ul>
+                        <div align="right">
+                            <button type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </div>
-                    <!-- /sub navigation -->
+
+
+                </div>
+                <!-- /simple panel -->
+                <div class="panel panel-flat">
+                    {{--<div class="panel-heading " >--}}
+                    {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+                    {{--</div>--}}
+
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <fieldset title="{{trans_choice('crud.category',2)}}">
+                                <legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend>
+                            </fieldset>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <p class="coutent-group">Seleccione las categorias abiertas para su torneo</p>
+
+
+                                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple", "disabled"]) !!} <!-- Default 1st Dan-->
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <div align="right">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- /simple panel -->
+                </div>
+
+                <!-- /simple panel -->
+                <div class="panel panel-flat">
+                    {{--<div class="panel-heading " >--}}
+                    {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+                    {{--</div>--}}
+
+                    <div class="panel-body">
+                        <div class="container-fluid">
+
+
+                            <fieldset title="1">
+                                <legend class="text-semibold">{{Lang::get('crud.share')}}</legend>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group text-center">
+                                            {!!  Form::label('share', trans('crud.share'),['class' => 'text-bold' ]) !!}
+                                            <br/>
+                                            <a href="#">Share tournament</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
 
 
                 </div>
             </div>
+            <!-- /detached content -->
+
+
+            <!-- Detached sidebar -->
+            <div class="sidebar-detached">
+                <div class="sidebar sidebar-default">
+                    <div class="sidebar-content">
+
+                        <!-- Sub navigation -->
+                        <div class="sidebar-category">
+                            <div class="category-title">
+                                <span>{{ $tournament->name }}</span>
+                                <ul class="icons-list">
+                                    <li><a href="#" data-action="collapse"></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="category-content no-padding">
+                                <ul class="navigation navigation-alt navigation-accordion">
+                                    <li class="navigation-header">¡Proximos pasos!</li>
+                                    <li><a href="#"><i class="icon-trophy2"></i> General</a></li>
+                                    <li><a href="#"><i class="icon-location4"></i> Lugar</a></li>
+                                    <li><a href="#"><i class="icon-cog2"></i> Categorías</a></li>
+                                    <li><a href="#"><i class="icon-user-plus"></i>Invitar usuarios</a>
+                                    <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
+                                    <li><a href="#"><i class="icon-certificate"></i>Acreditación</a>
+                                    <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
+                                    <li><a href="#"><i class="icon-share"></i>Publicar</a>
+
+                                    </li>
+                                    {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
+                                    {{--class="label bg-success-400">Online</span></a></li>--}}
+                                    {{--<li class="navigation-divider"></li>--}}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /sub navigation -->
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- /detached sidebar -->
         </div>
-        <!-- /detached sidebar -->
-    </div>
-    <!-- /content area -->
+        <!-- /content area -->
 
 
+        <script>
 
-
+            $(function () {
+                $('.listbox-filter-disabled').bootstrapDualListbox({
+                    showFilterInputs: false
+                });
+            });
+        </script>
 
 
 

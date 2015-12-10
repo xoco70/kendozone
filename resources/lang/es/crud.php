@@ -59,6 +59,7 @@ return [
 
 
     // Places
+    'venue' => 'Lugar del encuentro',
     'place' => 'Lugar|Lugares',
     'coords' => 'Coords',
     'city' => 'Ciudad',
