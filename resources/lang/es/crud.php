@@ -32,6 +32,7 @@ return [
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
+    'newTournament' => 'Nuevo Torneo',
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'limitDateRegistration' => 'Fecha limite de registro',
@@ -50,6 +51,7 @@ return [
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
     'tournamentType' => 'Tipo de torneo',
+    'owner' => 'Dueño',
 
 
     // Categories

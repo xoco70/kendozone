@@ -10,7 +10,7 @@ class CreateTournamentTable extends Migration {
 	{
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
-            $table->bigInteger('user_id');
+            $table->Integer('user_id')->unsigned();
 			$table->string('name');
             $table->date('date');
             $table->date('registerDateLimit');
@@ -29,7 +29,13 @@ class CreateTournamentTable extends Migration {
             $table->string("venue");
             $table->string("latitude");
             $table->string("longitude");
-			$table->integer("level_id")->unsigned();
+			$table->integer("level_id")->unsigned()->default(1);
+
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
 			$table->foreign('level_id')
 					->references('id')

@@ -38,7 +38,7 @@ class TournamentRequest extends Request
             'date' => 'required|date',
 //            'limitRegistrationDate' => 'date',
 //            'venue' => 'required',
-//            'category' => 'required', // Disabled for Phpunit
+            'category' => 'required', // Disabled for Phpunit
 
         ];
     }

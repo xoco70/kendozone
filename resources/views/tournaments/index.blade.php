@@ -6,9 +6,9 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                {{--<div class="row col-md-10 custyle">--}}
+            {{--<div class="row col-md-10 custyle">--}}
                 <table class="table table-striped custab">
                     <thead>
                     {{--@can('CanDeleteTournament')--}}
@@ -23,11 +23,12 @@
 
                     <tr>
                         {{--<th><input type="checkbox" id="checkAll"/></th>--}}
-                        <th>ID</th>
+                        <th>#</th>
                         <th>{{ trans('crud.name') }}</th>
-                        <th>{{ trans_choice('crud.place',1) }}</th>
+                        {{--<th>{{ trans_choice('crud.place',1) }}</th>--}}
                         <th>{{ trans('crud.date') }}</th>
-                        <th>{{ trans('crud.limitDateRegistration') }}</th>
+                        {{--<th>{{ trans('crud.limitDateRegistration') }}</th>--}}
+                        <th>{{ trans('crud.owner') }}</th>
                         @can('CanDeleteTournament')
                         <th class="text-center">{{ trans('crud.action') }}</th>
                         @endcan
@@ -38,10 +39,10 @@
 {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->id }}@can('CanEditTournament')</a>@endCan</td>
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->name }}@can('CanEditTournament')</a>@endCan</td>
-                            <td>{{ $tournament->place }}</td>
+                            {{--<td>{{ $tournament->place }}</td>--}}
                             <td>{{ $tournament->date }}</td>
 {{--                            <td>{{ $tournament->registerDateLimit }}</td>--}}
-
+                            <td>{{ $tournament->user->name}}</td>
                             <td class="text-center">
                                 {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                 @can('CanDeleteTournament')

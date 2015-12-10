@@ -16,6 +16,7 @@ class CreateCompetitorTable extends Migration {
 			$table->integer('club_id')->unsigned();
 //			$table->string('picture');
 			$table->timestamps();
+			$table->engine = 'InnoDB';
 
 			$table->foreign('user_id')
 				->references('id')

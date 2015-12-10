@@ -20,14 +20,14 @@
     </div>
 
 
-    <div class="col-md-12 col-lg-6 col-lg-offset-3">
-        <div class="col-md-6">
-            <div class="form-group">
-                {!!  Form::label('level_id', trans('crud.level')) !!}
-                {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-    </div>
+    {{--<div class="col-md-12 col-lg-6 col-lg-offset-3">--}}
+        {{--<div class="col-md-6">--}}
+            {{--<div class="form-group">--}}
+                {{--{!!  Form::label('level_id', trans('crud.level')) !!}--}}
+                {{--{!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
 </div>
 {{--<div class="row">--}}

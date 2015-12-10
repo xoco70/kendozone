@@ -17,6 +17,8 @@ class CreateRolesTables extends Migration
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
+            $table->engine = 'InnoDB';
+
         });
 //        Schema::create('role_user', function (Blueprint $table) {
 //            $table->integer('role_id')->unsigned();

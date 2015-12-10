@@ -35,6 +35,7 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::all();
 
+//        dd($tournaments->first()->user->name);
         return view('tournaments.index', compact('tournaments'));
     }
 
