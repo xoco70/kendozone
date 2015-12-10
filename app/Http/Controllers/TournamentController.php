@@ -34,6 +34,7 @@ class TournamentController extends Controller
     public function index()
     {
         $tournaments = Tournament::all();
+
         return view('tournaments.index', compact('tournaments'));
     }
 
@@ -65,7 +66,7 @@ class TournamentController extends Controller
         $tournament->categories()->sync($request->input('category'));
         flash('success', trans('core.operation_successful'));
 //        else flash('error', 'operation_failed!');
-        return redirect('tournaments');
+        return view('tournaments.show', compact('tournament'));
     }
 
     /**
@@ -76,9 +77,12 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        $tournament->delete();
-        return redirect("tournaments");
-//        return view('tournaments.show', compact('tournament'));
+//        dd($tournament);
+        $categories = Category::lists('name', 'id');
+
+//        $tournament->delete();
+//        return redirect("tournaments");
+        return view('tournaments.show', compact('tournament','categories'));
     }
 
     /**
@@ -107,7 +111,7 @@ class TournamentController extends Controller
 
         $tournament->update($request->all());
         $tournament->categories()->sync($request->input('category'));
-        return redirect("tournaments");
+        return view('tournaments.show', compact('tournament'));
     }
 
     /**

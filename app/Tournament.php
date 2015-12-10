@@ -28,6 +28,7 @@ class Tournament extends Model
         'fightDuration',
         'hasEncho',
         'type',
+        'level_id',
 
     ];
 
@@ -48,6 +49,10 @@ class Tournament extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function level()
+    {
+        return $this->belongsTo('App\TournamentLevel');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

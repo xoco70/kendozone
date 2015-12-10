@@ -22,4 +22,10 @@ class TournamentLevel extends Model
         return Lang::get($name);
     }
 
+    public function tournaments()
+    {
+        return $this->hasMany('App\Tournament');
+    }
+
+
 }

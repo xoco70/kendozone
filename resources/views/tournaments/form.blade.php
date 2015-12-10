@@ -80,8 +80,8 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                {!!  Form::label('levelId', trans('crud.level')) !!}
-                {!!  Form::select('levelId', $levels,null, ['class' => 'form-control']) !!}
+                {!!  Form::label('level_id', trans('crud.level')) !!}
+                {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>

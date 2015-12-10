@@ -60,7 +60,7 @@
 
 </head>
 
-<body>
+<body class="sidebar-xs has-detached-right">
 @include('layouts.headmenu')
 
 

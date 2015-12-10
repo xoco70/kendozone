@@ -28,6 +28,12 @@ class CreateTournamentTable extends Migration {
             $table->string("place");
             $table->string("latitude");
             $table->string("longitude");
+			$table->tinyInteger("level_id");
+
+//			$table->foreign('level_id')
+//					->references('id')
+//					->on('tournamentLevel')
+//					->onDelete('cascade');
 
 //			$table->string('banner');
 //			$table->string('PassingTeams');
