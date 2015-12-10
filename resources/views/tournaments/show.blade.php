@@ -21,7 +21,7 @@
                         <div class="container-fluid">
 
 
-                            <fieldset title="1">
+                            <fieldset title="{{Lang::get('crud.general_data')}}">
                                 <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
 
                                 <div class="row">
@@ -29,27 +29,35 @@
                                         <div class="form-group">
                                             {!!  Form::label('name', trans('crud.name'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('name', $tournament->name) !!}
+                                            {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
+                                        {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
+                                        {{--<br/>--}}
+
+
                                         <div class="input-group">
-                                            {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
-                                            <br/>
-                                            {!!  Form::label('date', $tournament->date) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                            {!!  Form::input('text', 'date', old('date'), ['class' => 'form-control datetournament']) !!}
                                         </div>
+
+
                                     </div>
 
 
                                     <div class="col-md-3">
+                                        {!!  Form::label('limitRegistrationDate', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                        <br/>
 
                                         <div class="input-group">
-                                            {!!  Form::label('limitRegistrationDate', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
-                                            <br/>
-                                            {!!  Form::label('limitRegistrationDate', $tournament->registerDateLimit) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
+
                                         </div>
                                         <br/>
 
@@ -58,13 +66,16 @@
                                     <div class="col-md-3">
 
 
+                                        {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
+                                        <br/>
+
                                         <div class="checkbox-switch">
                                             <label>
-                                                {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
-                                                <br/>
-                                                {!!  Form::label('mustPay', $tournament->mustPay ? "Si" : "No") !!}
+                                                {!!     Form::hidden('mustPay', 0) !!}
+                                                {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
                                             </label>
                                         </div>
+
                                     </div>
                                     <div class="col-md-3">
 
@@ -73,7 +84,9 @@
 
                                                 {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
                                                 <br/>
-                                                {!!  Form::label('type', $tournament->type ? "Abierto" : "Cerrado") !!}
+                                                {!!   Form::hidden('type', 0) !!}
+                                                {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Abierto", 'data-off-text'=>"Invitación"]) !!}
+
                                             </label>
                                         </div>
 
@@ -85,14 +98,15 @@
                                         <div class="form-group">
                                             {!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('mustPay',"$ ". $tournament->cost) !!}
+                                            {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             {!!  Form::label('fightingAreas', trans('crud.fightingAreas'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('mustPay', $tournament->fightingAreas) !!}
+                                            {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
+
                                         </div>
 
                                     </div>
@@ -102,8 +116,7 @@
                                         <div class="form-group">
                                             {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('level_id', $tournament->level->name) !!}
-                                        </div>
+                                            {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -271,7 +284,6 @@
                             </fieldset>
 
 
-
                         </div>
                         <div align="right">
                             <button type="submit" class="btn btn-success">Guardar</button>
@@ -402,6 +414,9 @@
                 $('.listbox-filter-disabled').bootstrapDualListbox({
                     showFilterInputs: false
                 });
+
+                        $(".switch").bootstrapSwitch();
+
             });
         </script>
 

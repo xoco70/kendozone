@@ -158,7 +158,9 @@
             {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
         </div>
 
-
+        <div class="form-group">
+            {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
+        </div>
     </div>
     {{--<div class="row">--}}
     {{--<div class="col-md-6">--}}
@@ -168,12 +170,14 @@
     {{--EnchoDuration 90--}}
     {{--</div>--}}
     {{--</div>--}}
+
+
 </div>
 {{--</fieldset>--}}
 
 
-<button type="submit" class="btn btn-primary " id="block-panel">Submit <i class="icon-check position-right"></i>
-</button>
+{{--<button type="submit" class="btn btn-primary " id="block-panel">Submit <i class="icon-check position-right"></i>--}}
+{{--</button>--}}
 
 
 <?php
