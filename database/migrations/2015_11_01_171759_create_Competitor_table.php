@@ -12,20 +12,20 @@ class CreateCompetitorTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('surname');
-			$table->integer('userId')->unsigned();
-			$table->integer('clubId')->unsigned();
+			$table->integer('user_id')->unsigned();
+			$table->integer('club_id')->unsigned();
 //			$table->string('picture');
 			$table->timestamps();
 
-			$table->foreign('userId')
+			$table->foreign('user_id')
 				->references('id')
 				->on('users')
 				->onDelete('cascade');
 
-			$table->foreign('clubId')
-					->references('id')
-					->on('club')
-					->onDelete('cascade');
+//			$table->foreign('club_id')
+//					->references('id')
+//					->on('club')
+//					->onDelete('cascade');
 
 //
 //			$table->foreign('shiaiCategoryId')

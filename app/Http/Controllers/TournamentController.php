@@ -79,10 +79,10 @@ class TournamentController extends Controller
     {
 //        dd($tournament);
         $categories = Category::lists('name', 'id');
-
+        $level = TournamentLevel::where("id","=",$tournament->level_id)->first();
 //        $tournament->delete();
 //        return redirect("tournaments");
-        return view('tournaments.show', compact('tournament','categories'));
+        return view('tournaments.show', compact('tournament','categories','level'));
     }
 
     /**

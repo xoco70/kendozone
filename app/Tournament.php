@@ -49,10 +49,10 @@ class Tournament extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function level()
-    {
-        return $this->belongsTo('App\TournamentLevel');
-    }
+//    public function level()
+//    {
+//        return $this->hasOne('App\TournamentLevel');
+//    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
