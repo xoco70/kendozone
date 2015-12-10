@@ -24,7 +24,7 @@ class TournamentLevel extends Model
 
     public function tournaments()
     {
-        return $this->hasMany('App\Tournament');
+        return $this->hasMany('App\Tournament', 'level_id', 'id');
     }
 
 

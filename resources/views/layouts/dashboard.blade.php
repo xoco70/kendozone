@@ -80,11 +80,11 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                @if (Request::is("/") || Request::is("admin") || Request::is("settings") )
+                                {{--@if (Request::is("/") || Request::is("admin") || Request::is("settings") )--}}
                                     {!!  $currentModelName !!}
-                                @else
-                                    @lang('crud.addModel', ['currentModelName' => $currentModelName])
-                                @endif
+                                {{--@else--}}
+                                    {{--@lang('crud.addModel', ['currentModelName' => $currentModelName])--}}
+                                {{--@endif--}}
                             </span>
                         </h1>
                     </div>

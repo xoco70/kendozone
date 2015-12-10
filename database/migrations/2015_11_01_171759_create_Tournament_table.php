@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreateTournamentTable extends Migration {
 
@@ -11,10 +12,10 @@ class CreateTournamentTable extends Migration {
 			$table->increments('id');
             $table->bigInteger('user_id');
 			$table->string('name');
-            $table->date('tournamentDate');
+            $table->date('date');
             $table->date('registerDateLimit');
-            $table->tinyInteger('cost');
-            $table->tinyInteger('sport')->unsigned()->default(1); // Default is Kendo for now
+            $table->tinyInteger('cost')->unsigned()->nullable();
+            $table->Integer('sport')->unsigned()->default(1); // Default is Kendo for now
 
 //            $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
             $table->tinyInteger('fightingAreas')->unsigned()->nullable();
@@ -25,7 +26,7 @@ class CreateTournamentTable extends Migration {
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
             $table->boolean('mustPay');
 
-            $table->string("place");
+            $table->string("venue");
             $table->string("latitude");
             $table->string("longitude");
 			$table->integer("level_id")->unsigned();
@@ -56,5 +57,9 @@ class CreateTournamentTable extends Migration {
 
 	public function down()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+		Schema::dropIfExists('tournament');
+		Schema::dropIfExists('tournamentLevel');
+		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 }

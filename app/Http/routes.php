@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
         Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');
         Route::resource('country', 'CountryController');
-        Route::resource('places', 'PlaceController');
+//        Route::resource('places', 'PlaceController');
     });
 
 

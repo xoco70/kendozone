@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreateTournamentLevelTable extends Migration {
 
@@ -19,6 +20,9 @@ class CreateTournamentLevelTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('tournamentLevel');
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+		Schema::dropIfExists('tournament');
+		Schema::dropIfExists('tournamentLevel');
+		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 }

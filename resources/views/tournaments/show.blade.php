@@ -13,10 +13,9 @@
 
                 <!-- Simple panel -->
                 <div class="panel panel-flat">
-                    <div class="panel-heading ">
-                        <button type="submit" class="btn btn-info text-right">Editar</button>
-                        {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                    </div>
+                    {{--<div class="panel-heading " >--}}
+                    {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+                    {{--</div>--}}
 
                     <div class="panel-body">
                         <div class="container-fluid">
@@ -38,9 +37,9 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="input-group">
-                                            {!!  Form::label('tournamentDate', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('tournamentDate', $tournament->tournamentDate) !!}
+                                            {!!  Form::label('date', $tournament->date) !!}
                                         </div>
                                     </div>
 
@@ -103,7 +102,7 @@
                                         <div class="form-group">
                                             {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
                                             <br/>
-                                            {!!  Form::label('level_id', $level->name) !!}
+                                            {!!  Form::label('level_id', $tournament->level->name) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -121,53 +120,53 @@
 
                             </fieldset>
 
-                            <fieldset title="2">
-                                <legend class="text-semibold">{{trans_choice('crud.place',1)}}</legend>
+                            {{--<fieldset title="2">--}}
+                            {{--<legend class="text-semibold">{{trans_choice('crud.place',1)}}</legend>--}}
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!!  Form::label('place', trans('crud.name'),['class' => 'text-bold' ]) !!}
-                                        {!!  Form::label('place', $tournament->place) !!}
+                            {{--<div class="col-md-6">--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('place', trans('crud.name'),['class' => 'text-bold' ]) !!}--}}
+                            {{--{!!  Form::label('place', $tournament->place) !!}--}}
 
-                                    </div>
-                                    <div class="form-group">
-                                        {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
-                                        {!!  Form::label('latitude', $tournament->latitude) !!}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}--}}
+                            {{--{!!  Form::label('latitude', $tournament->latitude) !!}--}}
 
-                                    </div>
-                                    <div class="form-group">
-                                        {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
-                                        {!!  Form::label('longitude', $tournament->longitude) !!}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}--}}
+                            {{--{!!  Form::label('longitude', $tournament->longitude) !!}--}}
 
-                                    </div>
+                            {{--</div>--}}
 
-                                    <div class="form-group">
-                                        {!!  Form::label('country', trans('crud.country'),['class' => 'text-bold' ]) !!}
-                                        {!!  Form::label('country', $tournament->country) !!}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('country', trans('crud.country'),['class' => 'text-bold' ]) !!}--}}
+                            {{--{!!  Form::label('country', $tournament->country) !!}--}}
 
-                                    </div>
-                                    {{--<div class="form-group">--}}
-                                    {{--{!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}--}}
-                                    {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}--}}
+                            {{--</div>--}}
 
-                                </div>
-                                {{--<div class="col-md-6">--}}
-                                {{--<div class="form-group">--}}
-                                {{--{!!  Form::label('name', trans('crud.coords')) !!}--}}
-                                {{--<div class="map-wrapper locationpicker-default" id="locationpicker-default"></div>--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<script>$('#locationpicker-default').locationpicker({--}}
-                                {{--location: {latitude: 46.15242437752303, longitude: 2.7470703125},--}}
-                                {{--radius: 300,--}}
-                                {{--inputBinding: {--}}
-                                {{--latitudeInput: $('#lat'),--}}
-                                {{--longitudeInput: $('#lng'),--}}
-                                {{--radiusInput: $('#us2-radius'),--}}
-                                {{--locationNameInput: $('#city')--}}
-                                {{--}--}}
-                                {{--});--}}
-                                {{--</script>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-6">--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('name', trans('crud.coords')) !!}--}}
+                            {{--<div class="map-wrapper locationpicker-default" id="locationpicker-default"></div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<script>$('#locationpicker-default').locationpicker({--}}
+                            {{--location: {latitude: 46.15242437752303, longitude: 2.7470703125},--}}
+                            {{--radius: 300,--}}
+                            {{--inputBinding: {--}}
+                            {{--latitudeInput: $('#lat'),--}}
+                            {{--longitudeInput: $('#lng'),--}}
+                            {{--radiusInput: $('#us2-radius'),--}}
+                            {{--locationNameInput: $('#city')--}}
+                            {{--}--}}
+                            {{--});--}}
+                            {{--</script>--}}
                             </fieldset>
 
                             {{--<fieldset title="3">--}}
@@ -203,7 +202,12 @@
 
 
                         </div>
+                        <div align="right">
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
                     </div>
+
+
                 </div>
                 <!-- /simple panel -->
 
@@ -229,20 +233,24 @@
                         <div class="category-content no-padding">
                             <ul class="navigation navigation-alt navigation-accordion">
                                 <li class="navigation-header">¡Proximos pasos!</li>
+                                <li><a href="#"><i class="icon-trophy2"></i> General</a></li>
+                                <li><a href="#"><i class="icon-location4"></i> Lugar</a></li>
                                 <li><a href="#"><i class="icon-cog2"></i> Categorías</a></li>
                                 <li><a href="#"><i class="icon-user-plus"></i>Invitar usuarios</a>
+                                <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
+                                <li><a href="#"><i class="icon-certificate"></i>Acreditación</a>
+                                <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
                                 <li><a href="#"><i class="icon-share"></i>Publicar</a>
+
                                 </li>
                                 {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
-                                                {{--class="label bg-success-400">Online</span></a></li>--}}
+                                {{--class="label bg-success-400">Online</span></a></li>--}}
                                 {{--<li class="navigation-divider"></li>--}}
 
                             </ul>
                         </div>
                     </div>
                     <!-- /sub navigation -->
-
-
 
 
                 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
-use App\Place;
+//use App\Place;
 use App\Tournament;
 use App\Category;
 use App\TournamentLevel;
@@ -79,10 +79,10 @@ class TournamentController extends Controller
     {
 //        dd($tournament);
         $categories = Category::lists('name', 'id');
-        $level = TournamentLevel::where("id","=",$tournament->level_id)->first();
+//        $level = TournamentLevel::where("id","=",$tournament->level_id)->first();
 //        $tournament->delete();
 //        return redirect("tournaments");
-        return view('tournaments.show', compact('tournament','categories','level'));
+        return view('tournaments.show', compact('tournament','categories'));
     }
 
     /**

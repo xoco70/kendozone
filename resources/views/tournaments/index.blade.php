@@ -39,8 +39,8 @@
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->id }}@can('CanEditTournament')</a>@endCan</td>
                             <td>@can('CanEditTournament')<a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->name }}@can('CanEditTournament')</a>@endCan</td>
                             <td>{{ $tournament->place }}</td>
-                            <td>{{ $tournament->tournamentDate }}</td>
-                            <td>{{ $tournament->registerDateLimit }}</td>
+                            <td>{{ $tournament->date }}</td>
+{{--                            <td>{{ $tournament->registerDateLimit }}</td>--}}
 
                             <td class="text-center">
                                 {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}

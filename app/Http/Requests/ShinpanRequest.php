@@ -24,9 +24,9 @@ class ShinpanRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:6',
-            'tournamentDate' => 'required|date',
-            'limitRegistrationDate' => 'date',
+//            'name' => 'required|min:6',
+//            'tournamentDate' => 'required|date',
+//            'limitRegistrationDate' => 'date',
         ];
     }
 }

@@ -53,7 +53,7 @@ class TournamentTest extends TestCase
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")  //Lang::get('validation.filled', ['attribute' => "name"])
             ->see("El campo name es obligatorio")  //Lang::get('validation.filled', ['attribute' => "tournament"])
-            ->see("El campo place es obligatorio")  //Lang::get('validation.filled', ['attribute' => "place"])
+            ->see("El campo venue es obligatorio")  //Lang::get('validation.filled', ['attribute' => "place"])
 //            ->see("El campo category es obligatorio")  //Lang::get('validation.filled', ['attribute' => "category"])
 
             ->notSeeInDatabase('tournament', ['name' => '']);
@@ -75,7 +75,7 @@ class TournamentTest extends TestCase
             ->see($this->tournaments)
             ->click($this->addTournament)
             ->type('MyTournament', 'name')
-            ->type('2015-12-12', 'tournamentDate')
+            ->type('2015-12-12', 'date')
             ->type('2015-12-13', 'registerDateLimit')
             ->type('on', 'mustPay')
             ->type('on', 'type')
@@ -83,7 +83,7 @@ class TournamentTest extends TestCase
             ->type('2', 'fightingAreas')
             ->type('2', 'levelId')
 //            ->press("Next")
-            ->type('CDOM', 'place')
+            ->type('CDOM', 'venue')
             ->type('1.11111', 'latitude')
             ->type('2.22222', 'longitude')
             ->type('Mexico', 'country')

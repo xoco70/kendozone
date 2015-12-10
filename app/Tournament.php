@@ -13,12 +13,12 @@ class Tournament extends Model
 
     protected $fillable = [
         'name',
-        'tournamentDate',
+        'date',
         'registerDateLimit',
         'sport',
         'cost',
         'mustPay',
-        'place',
+        'venue',
         'latitude',
         'longitude',
         'teamSize',
@@ -32,7 +32,7 @@ class Tournament extends Model
 
     ];
 
-    protected $dates = ['tournamentDate', 'registerDateLimit'];
+    protected $dates = ['date', 'registerDateLimit'];
 
 //    public function place()
 //    {
@@ -49,10 +49,10 @@ class Tournament extends Model
         return $this->belongsTo('App\User');
     }
 
-//    public function level()
-//    {
-//        return $this->hasOne('App\TournamentLevel');
-//    }
+    public function level()
+    {
+        return $this->belongsTo('App\TournamentLevel', 'level_id', 'id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -72,7 +72,7 @@ class Tournament extends Model
         return $this->categories->lists('id')->all();
     }
 
-    public function getTournamentDateAttribute($date)
+    public function getDateAttribute($date)
     {
         return $date;
     }
@@ -82,9 +82,9 @@ class Tournament extends Model
         return $date;
     }
 
-    public function setTournamentDateAttribute($date)
+    public function setDateAttribute($date)
     {
-        $this->attributes['tournamentDate'] = Carbon::createFromFormat('Y-m-d', $date);
+        $this->attributes['date'] = Carbon::createFromFormat('Y-m-d', $date);
     }
 
     public function setLimitRegisterDateAttribute($date)
