@@ -62,12 +62,11 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
-//        dd($request);
         $tournament = Auth::user()->tournaments()->create($request->all());
         $tournament->categories()->sync($request->input('category'));
         flash('success', trans('core.operation_successful'));
 //        else flash('error', 'operation_failed!');
-        return view('tournaments.show', compact('tournament'));
+        return redirect("tournaments/$tournament->id/edit");
     }
 
     /**
@@ -78,6 +77,7 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
+        dd("show");
 //        dd($tournament);
         $levels = TournamentLevel::lists('name', 'id');
 
@@ -96,6 +96,7 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
+//        dd($tournament);
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
 //        dd($tournament);
@@ -114,7 +115,8 @@ class TournamentController extends Controller
 
         $tournament->update($request->all());
         $tournament->categories()->sync($request->input('category'));
-        return view('tournaments.show', compact('tournament'));
+        flash('success', trans('core.operation_successful'));
+        return redirect("tournaments/$tournament->id/edit");
     }
 
     /**
