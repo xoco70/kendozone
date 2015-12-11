@@ -99,7 +99,14 @@ return [
     // Competitor
     'competitor' => 'Competidor|Competidores',
 
-
+    // Invitation
+    'tournament_invitations' => 'Invita competidores ',
+    'invite_send' => 'Invita competidores al torneo: :tournament',
+    'recipients' => 'Destinatarios',
+    'invite_recipients' => 'Escriba los destinatarios separados por comas',
+    'invite_message' => 'Mensaje de invitación',
+    'invite_template' => "Pica el link que sigue para registrarse al torneo :tournament \n :link ",
+    'send_invites' => 'Mandar Invitaciones',
 
 
 ];

@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'],
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
     function () {
         Route::resource('tournaments', 'TournamentController');
+        Route::resource('invite', 'InviteController');
+
         Route::resource('competitors', 'CompetitorController');
         Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');

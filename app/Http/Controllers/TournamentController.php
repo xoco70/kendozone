@@ -118,6 +118,20 @@ class TournamentController extends Controller
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournament->id/edit");
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sendInvite(Request $request, Tournament $tournament)
+    {
+        dd($request);
+
+        flash('success', trans('core.operation_successful'));
+        return redirect("tournaments/$tournament->id/edit");
+    }
 
     /**
      * Remove the specified resource from storage.
