@@ -76,6 +76,13 @@
 
         {!! Form::close()!!}
 
+        <script>
+            $('#recipients').multiple_emails({
+                position: 'top', // Display the added emails above the input
+                theme: 'bootstrap', // Bootstrap is the default theme
+                checkDupEmail: true // Should check for duplicate emails added
+            });
+        </script>
     </div>
 @stop
 

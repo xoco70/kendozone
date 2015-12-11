@@ -57,6 +57,11 @@
         {!! Html::script('js/plugins/pickers/location/location.js') !!}
     @endif
 
+    @if (Request::is("invite/*"))
+        {!! Html::script('js/plugins/multiple-emails.js') !!}
+        {!! Html::style('css/multiple-emails.css') !!}
+    @endif
+
 
 </head>
 

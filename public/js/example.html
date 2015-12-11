@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Multiple Emails</title>
+	
+	<!-- For the plug-in dependencies -->
+	<script type="text/javascript" src='http://code.jquery.com/jquery-latest.min.js'></script>
+	
+	<!-- For Semantic UI Button -->
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.js"></script>
+	
+	<!-- For Bootstrap UI Button -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+	
+	<script type="text/javascript" src="./multiple-emails.js"></script>
+	<link type="text/css" rel="stylesheet" href="./multiple-emails.css" />
+
+	<script type="text/javascript">
+	
+		//Plug-in function for the bootstrap version of the multiple email
+		$(function() {
+			//To render the input device to multiple email input using BootStrap icon
+			$('#example_emailBS').multiple_emails({position: "bottom"});
+			//OR $('#example_emailBS').multiple_emails("Bootstrap");
+			
+			//Shows the value of the input device, which is in JSON format
+			$('#current_emailsBS').text($('#example_emailBS').val());
+			$('#example_emailBS').change( function(){
+				$('#current_emailsBS').text($(this).val());
+			});
+		});
+		
+		//Plug-in function for the Semantic UI version of the multiple email
+		$(function() {
+			//To render the input device to multiple email input using SemanticUI icon
+			$('#example_emailSUI').multiple_emails({theme: "SemanticUI"});
+			
+			//Shows the value of the input device, which is in JSON format
+			$('#current_emailsSUI').text($('#example_emailSUI').val());
+			$('#example_emailSUI').change( function(){
+				$('#current_emailsSUI').text($(this).val());
+			});
+		});
+
+		//Plug-in function for the bootstrap version of the multiple email
+		$(function() {
+			//To render the input device to multiple email input using a simple hyperlink text
+			$('#example_emailB').multiple_emails({theme: "Basic"});
+			
+			//Shows the value of the input device, which is in JSON format
+			$('#current_emailsB').text($('#example_emailB').val());
+			$('#example_emailB').change( function(){
+				$('#current_emailsB').text($(this).val());
+			});
+		});
+	</script>
+</head>
+<body>
+	
+	<!-- The container class CSS is specified in bootstrap. It is just there for the presentation. -->
+	<div class='container'>
+		<div class='row'>
+			<h2>Bootstrap Example</h2>
+			<div class='form-group'>
+				<div class='col-sm-4'>
+					<h4 for='example_emailBS'>Input email addresses</h4>
+					<input type='text' id='example_emailBS' name='example_emailBS' class='form-control' value='["hello@git.com","tom@net.com"]'>
+				</div>
+				<div class='col-sm-offset-2 col-sm-4'>
+					<h4>Current email addresses</h4>
+					<pre id='current_emailsBS'></pre>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<!-- The container class CSS is specified in bootstrap. It is just there for the presentation. -->
+	<div class='container'>
+		<div class="ui grid two column">
+				<div class="row">
+					<div class="sixteen wide column"><h2>SemanticUI Example</h2></div>		
+				</div>
+			
+				<div class="row">
+					<div class="column">
+						<h4 for='example_emailSUI'>Input email addresses</h4>
+						<input type='text' id='example_emailSUI' name='example_emailSUI' class='form-control' value='["hello@git.com","tom@net.com"]'>
+					</div>
+					<div class="column">
+						<h4>Current email addresses</h4>
+						<pre id='current_emailsSUI'></pre>
+					</div>
+				</div>
+		</div>
+	</div>
+	<br/>
+	<!-- The container class CSS is specified in bootstrap. It is just there for the presentation. -->
+	<div class='container'>
+		
+			<h2>Basic Example</h2>
+				<div>
+					<h4 for='example_emailB'>Input email addresses</h4>
+					<input type='text' id='example_emailB' name='example_emailB' class='form-control' value='["hello@git.com","tom@net.com"]'>
+				</div>
+				<div>
+					<h4>Current email addresses</h4>
+					<pre id='current_emailsB'></pre>
+				</div>
+	</div>
+	
+</body>
+</html>
