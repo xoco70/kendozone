@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InviteRequest;
 use App\Tournament;
 use Illuminate\Http\Request;
 
@@ -47,9 +48,17 @@ class InviteController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InviteRequest $request)
     {
-        //
+        $recipients = json_decode($request->get("recipients"));
+        $message = $request->get("message");
+        foreach ( $recipients as $recipient){
+            // Mail to Recipients
+            var_dump($message);
+        }
+        return redirect('/');
+
+//        dd($recipients);
     }
 
     /**
