@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use App\Http\Requests\InviteRequest;
+use App\Invite;
+use App\Mailers\AppMailer;
 use App\Tournament;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 
 class InviteController extends Controller
@@ -45,18 +45,25 @@ class InviteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param InviteRequest|Request $request
+     * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(InviteRequest $request)
+    public function store(InviteRequest $request, AppMailer $mailer)
     {
+        $tournament = Tournament::findOrFail($request->get("tournamentId"));
         $recipients = json_decode($request->get("recipients"));
         $message = $request->get("message");
-        foreach ( $recipients as $recipient){
+        foreach ($recipients as $recipient) {
             // Mail to Recipients
-            var_dump($message);
+            $invite = new Invite();
+            $invite->generate($recipient, $tournament);
+            $mailer->sendEmailInvitationTo("Jesus Maya", $recipient, "Nacional de Kendo");
+
         }
-        return redirect('/');
+        flash('success', trans('core.operation_successful'));
+        return view('invitation.show', compact('tournament'));
+
 
 //        dd($recipients);
     }
@@ -69,8 +76,8 @@ class InviteController extends Controller
      */
     public function show($id)
     {
-        $tournament = Tournament::where("id", "=", $id)->first();
-        return view('invitation.show', compact('tournament'));
+//        $tournament = Tournament::where("id", "=", $id)->first();
+        return redirect('invitation.show');
     }
 
     /**

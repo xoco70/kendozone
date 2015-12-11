@@ -57,6 +57,16 @@ class AppMailer
         $this->data = compact('user');
         $this->deliver();
     }
+
+    public function sendEmailInvitationTo($admin, $email, $tournamentName)
+    {
+        $this->to = $email;
+        $this->subjet = 'Invitación al torneo $tournamentName';
+        $this->view = 'emails.invite';
+        $this->data = compact('user','admin','tournamentName');
+        $this->deliver();
+    }
+
     /**
      * Deliver the email.
      *

@@ -12,10 +12,18 @@ class CreateInvitationTable extends Migration
      */
     public function up()
     {
+        Schema::drop('invitation');
         Schema::create('invitation', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->text('code', 255);
             $table->string('email');
+            $table->integer('tournament_id')->unsigned();
+
+            $table->foreign('tournament_id')
+                ->references('id')
+                ->on('tournament')
+                ->onDelete('cascade');
+
             $table->date('expiration');
             $table->boolean('active');
             $table->boolean('used')->default(False);

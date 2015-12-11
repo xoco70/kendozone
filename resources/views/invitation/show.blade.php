@@ -39,10 +39,8 @@
                                                     {!!  Form::label('recipients', trans('crud.recipients')) !!}
                                                     {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
                                                 </div>
-                                                <div class=" form-group">
-                                                    {!!  Form::label('message', trans('crud.invite_message')) !!}
-                                                    {!!  Form::textarea('message',nl2br(e($message)), ['class' => 'form-control', 'placeholder'=>trans('crud.invite_message_indication')]) !!}
-                                                </div>
+                                                {!!  Form::hidden('tournamentId', $tournament->id) !!}
+
                                                 <div class="form-group">
                                                     {!!  Form::submit(trans('crud.send_invites'), ['class' => 'btn btn-primary form-control']) !!}
                                                 </div>

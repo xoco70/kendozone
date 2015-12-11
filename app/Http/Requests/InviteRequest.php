@@ -34,7 +34,6 @@ class InviteRequest extends Request
 
         return [
             'recipients' => 'required',
-            'message' => 'required',
 
         ];
     }

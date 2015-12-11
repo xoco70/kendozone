@@ -19,32 +19,31 @@ class Invite extends Model
     ];
 
 
-    public function generate($email,$expire,$active)
+    public function generate($email,$tournament)
     {
-        if($this->checkEmail($email))
-        {
-            $now = strtotime($this->sql_timestamp());
-            $format = 'Y-m-d H:i:s ';
-            $expiration = date($format, strtotime('+ '.$expire, $now));
+//        if($this->checkEmail($email))
+//        {
+//            $now = strtotime($this->sql_timestamp());
+//            $format = 'Y-m-d H:i:s ';
             $code = $this->hash_split(hash('sha256',$email)) . $this->hash_split(hash('sha256',time()));
             $newInvi = array(
                 "code"	=> $code,
                 "email"	=> $email,
-                "expiration"	=> $expiration,
-                "active"	=> $active,
+                "tournament_id" => $tournament->id,
+                "expiration"	=> $tournament->registerDateLimit,
+                "active"	=> true,
                 "used"	=> "0",
-                "created_at"	=> $this->sql_timestamp(),
-                "updated_at"	=> $this->sql_timestamp(),
             );
+
             DB::connection()
                 ->table('invitation')
                 ->insert($newInvi);
             return json_encode($newInvi);
-        }
-        else
-        {
-            return "This email address has an invitation.";
-        }
+//        }
+//        else
+//        {
+//            return "This email address has an invitation.";
+//        }
 
     }
 
@@ -113,24 +112,26 @@ class Invite extends Model
         else
             return False;
     }
-    public function delete($code,$email)
-    {
-        $temp = DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email','=',$email)
-            ->delete();
-    }
-    protected function checkEmail($email)
-    {
-        $temp = DB::connection()
-            ->table('invitation')
-            ->where('email', '=', $email)
-            ->first();
-        if($temp)
-            return False;
-        else
-            return True;
-    }
+//    public function delete($code,$email)
+//    {
+//        $temp = DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email','=',$email)
+//            ->delete();
+//    }
+//    protected function checkEmail($email, $tournament)
+//    {
+//        $temp = DB::connection()
+//            ->table('invitation')
+//            ->where('email', '=', $email)
+//            ->and('tournament_id', " = ", $tournament->id)
+//            ->and('used','=', 1)
+//            ->first();
+//        if($temp)
+//            return False;
+//        else
+//            return True;
+//    }
     protected function hash_split($hash)
     {
         $output = str_split($hash,8);
