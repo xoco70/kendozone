@@ -160,47 +160,67 @@
 
 
                                 <fieldset title="Venue">
-                                    <a name="place"><legend class="text-semibold">{{Lang::get('crud.venue')}}</legend></a>
+                                    <a name="place">
+                                        <legend class="text-semibold">{{Lang::get('crud.venue')}}</legend>
+                                    </a>
                                 </fieldset>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('venue', trans('crud.name'),['class' => 'text-bold' ]) !!}
-                                            {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
-                                        </div>
-                                        <div class="form-group">
-                                            {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
-                                            {!!  Form::text('latitude', old('latitude'), ['class' => 'form-control']) !!}
-
-                                        </div>
-                                        <div class="form-group">
-                                            {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
-                                            {!!  Form::text('longitude', old('longitude'), ['class' => 'form-control']) !!}
-
-                                        </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('venue', trans('crud.name'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::text('latitude', old('latitude'), ['class' => 'form-control']) !!}
 
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('name', trans('crud.coords')) !!}
-                                            <div class="map-wrapper locationpicker-default"
-                                                 id="locationpicker-default"></div>
-                                        </div>
+                                    <div class="form-group">
+                                        {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::text('longitude', old('longitude'), ['class' => 'form-control']) !!}
+
                                     </div>
-                                    <script>$('#locationpicker-default').locationpicker({
-                                            location: {latitude: 46.15242437752303, longitude: 2.7470703125},
-                                            radius: 300,
-                                            inputBinding: {
-                                                latitudeInput: $('#latitude'),
-                                                longitudeInput: $('#longitude'),
-                                                radiusInput: $('#us2-radius'),
-                                                locationNameInput: $('#city')
-                                            }
-                                        });
-                                    </script>
 
 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('name', trans('crud.coords')) !!}
+                                        <div class="map-wrapper locationpicker-default"
+                                             id="locationpicker-default"></div>
+                                    </div>
+                                </div>
+                                <?php
+                                $userLat = Auth::getUser()->latitude;
+                                $userLng = Auth::getUser()->longitude;
+                                $oldLatitude = $tournament->latitude;
+                                $oldLongitude = $tournament->longitude;
 
+                                if (!isNullOrEmptyString($oldLongitude) && !isNullOrEmptyString($oldLongitude)) {
+                                    $latitude = $oldLatitude;
+                                    $longitude = $oldLongitude;
+
+                                } else if (!isNullOrEmptyString($userLat) && !isNullOrEmptyString($userLng)) {
+                                    $latitude = $userLat;
+                                    $longitude = $userLng;
+                                } else {
+                                    // Should popup for user localization
+                                    $latitude = 0;
+                                    $longitude = 0;
+                                }
+                                ?>
+
+
+                                <script>$('#locationpicker-default').locationpicker({
+                                        location: {latitude: {{$latitude }}  , longitude: {{$longitude }} },
+                                        radius: 300,
+                                        inputBinding: {
+                                            latitudeInput: $('#latitude'),
+                                            longitudeInput: $('#longitude'),
+                                            radiusInput: $('#us2-radius'),
+                                            locationNameInput: $('#city')
+                                        }
+                                    });
+                                </script>
 
 
                             </div>
@@ -220,7 +240,9 @@
                         <div class="panel-body">
                             <div class="container-fluid">
                                 <fieldset title="{{trans_choice('crud.category',2)}}">
-                                    <a name="categories"><legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend></a>
+                                    <a name="categories">
+                                        <legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend>
+                                    </a>
                                 </fieldset>
 
 
@@ -282,10 +304,15 @@
                 </div>
                 <!-- /detached content -->
 
-            @include("layouts.tournament_menu")
+                @include("layouts.tournament_menu")
             </div>
             <!-- /content area -->
-
+            <?php
+            $now = Carbon\Carbon::now();
+            $year = $now->year;
+            $month = $now->month;
+            $day = $now->day;
+            ?>
 
             <script>
 
@@ -295,6 +322,15 @@
                     });
 
                     $(".switch").bootstrapSwitch();
+
+                    $('.datetournament').pickadate({
+                        min: [<?php echo e($year); ?>, <?php echo e($month); ?>, <?php echo e($day); ?>],
+                        format: 'yyyy-mm-dd'
+                    });
+                    $('.datelimit').pickadate({
+                        min: [<?php echo e($year); ?>, <?php echo e($month); ?>, <?php echo e($day); ?>],
+                        format: 'yyyy-mm-dd'
+                    });
 
                 });
             </script>

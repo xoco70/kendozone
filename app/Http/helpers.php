@@ -8,7 +8,9 @@
 function flash($state, $message) {
     session()->flash($state, $message);
 }
-
+function isNullOrEmptyString($question){
+	return (!isset($question) || trim($question)==='');
+}
 
 	function showNotification()
 	{

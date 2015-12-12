@@ -53,16 +53,15 @@ class InviteController extends Controller
     {
         $tournament = Tournament::findOrFail($request->get("tournamentId"));
         $recipients = json_decode($request->get("recipients"));
-        $message = $request->get("message");
         foreach ($recipients as $recipient) {
             // Mail to Recipients
             $invite = new Invite();
-            $invite->generate($recipient, $tournament);
-            $mailer->sendEmailInvitationTo("Jesus Maya", $recipient, "Nacional de Kendo");
+            $code = $invite->generate($recipient, $tournament);
+            $mailer->sendEmailInvitationTo($recipient, $tournament, $code);
 
         }
         flash('success', trans('core.operation_successful'));
-        return view('invitation.show', compact('tournament'));
+        return redirect("tournaments/$tournament->id/edit");
 
 
 //        dd($recipients);
@@ -76,8 +75,8 @@ class InviteController extends Controller
      */
     public function show($id)
     {
-//        $tournament = Tournament::where("id", "=", $id)->first();
-        return redirect('invitation.show');
+        $tournament = Tournament::where("id", "=", $id)->first();
+        return view('invitation.show', compact('tournament'));
     }
 
     /**

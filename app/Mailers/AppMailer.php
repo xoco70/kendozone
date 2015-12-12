@@ -22,6 +22,8 @@ class AppMailer
      * @var string
      */
     protected $to;
+
+    protected $subject;
     /**
      * The view for the email.
      *
@@ -52,18 +54,18 @@ class AppMailer
     public function sendEmailConfirmationTo(User $user)
     {
         $this->to = $user->email;
-        $this->subjet = 'Activación de tu cuenta Kendonline';
+        $this->subject = 'Activación de tu cuenta Kendonline';
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
     }
 
-    public function sendEmailInvitationTo($admin, $email, $tournamentName)
+    public function sendEmailInvitationTo( $email , $tournament, $code)
     {
         $this->to = $email;
-        $this->subjet = 'Invitación al torneo $tournamentName';
+        $this->subject = 'Invitación al torneo: '.$tournament->name;
         $this->view = 'emails.invite';
-        $this->data = compact('user','admin','tournamentName');
+        $this->data = compact('tournament','code');
         $this->deliver();
     }
 
@@ -76,7 +78,8 @@ class AppMailer
     {
         $this->mailer->send($this->view, $this->data, function ($message) {
             $message->from($this->from, 'Kendonline')
-                ->to($this->to);
+                ->to($this->to)
+                ->subject($this->subject);
         });
     }
 }
