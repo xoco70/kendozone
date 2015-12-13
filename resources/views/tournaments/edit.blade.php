@@ -211,7 +211,7 @@
 
 
                                 <script>$('#locationpicker-default').locationpicker({
-                                        location: {latitude: {{$latitude }}  , longitude: {{$longitude }} },
+                                        location: {latitude:{{$latitude }}  , longitude:{{$longitude }} },
                                         radius: 300,
                                         inputBinding: {
                                             latitudeInput: $('#latitude'),

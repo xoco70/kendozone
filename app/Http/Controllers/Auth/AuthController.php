@@ -183,25 +183,14 @@ class AuthController extends Controller
      * @param  AppMailer $mailer
      * @return \Redirect
      */
-    public function postInvite(Request $request)
+    public function postInvite(AuthRequest $request)
     {
 
         //Check token
         $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
-//        dd("2");
-
         if (!is_null($invite)) {
-
-            if (!$request->has('email')) {
-                $request->request->add(['email' => $invite->email]);
-                $request->request->add(['verified' => 1]);
-                // Meter geoIP
-            }
-            $this->validate($request, [
-                $this->loginUsername() => 'required|min:6', 'password' => 'required|confirmed|min:6',
-            ]);
 
             $user = User::create($request->all());
             $invite->consume();

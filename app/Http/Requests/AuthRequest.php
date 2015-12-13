@@ -10,13 +10,31 @@ class AuthRequest  extends Request
 
     public function __construct(\Illuminate\Http\Request $request)
     {
-        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+        $token = $request->get("token");
+        if (!isNullOrEmptyString($token)){
+            $invite = Invite::getActiveInvite($token);
+            if (!$request->has('email')) {
+                $request->request->add(['email' => $invite->email]);
+                $request->request->add(['verified' => 1]);
+            }
+        }
 
-        $request->request->add(['country' => $location['country'] ]);
-        $request->request->add(['countryCode' => $location['isoCode'] ]);
-        $request->request->add(['city' => $location['city'] ]);
-        $request->request->add(['latitude' => $location['lat'] ]);
-        $request->request->add(['longitude' => $location['lon'] ]);
+
+
+        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+        if (!is_null($location)){
+            $request->request->add(['country' => $location['country'] ]);
+            $request->request->add(['countryCode' => $location['isoCode'] ]);
+            $request->request->add(['city' => $location['city'] ]);
+            $request->request->add(['latitude' => $location['lat'] ]);
+            $request->request->add(['longitude' => $location['lon'] ]);
+        }else{
+            $request->request->add(['country' => "France" ]);
+            $request->request->add(['countryCode' => "FR" ]);
+            $request->request->add(['city' => "Paris" ]);
+            $request->request->add(['latitude' => "48.858222" ]);
+            $request->request->add(['longitude' => "2.2945" ]);
+        }
 
     }
 

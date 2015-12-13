@@ -15,9 +15,18 @@
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
                         <li class="navigation-header">¡Proximos pasos!</li>
-                        <li><a href="#"><i class="icon-trophy2"></i> General</a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#place"><i class="icon-location4"></i> Lugar</a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i class="icon-cog2"></i> Categorías</a></li>
+                        <li><a href="#"><i class="icon-trophy2"></i> General
+                                @if(!isNullOrEmptyString($tournament->registerDateLimit) && !isNullOrEmptyString($tournament->fightingAreas) && $tournament->level_id!=1)
+                                    <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
+                                @endif
+                            </a></li>
+                        <li><a href="/tournaments/{{$tournament->id}}/edit#place"><i class="icon-location4"></i> Lugar
+                                @if(!isNullOrEmptyString($tournament->venue) && $tournament->latitude!=0 && $tournament->longitude!=0)
+                                    <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
+                                @endif
+                            </a></li>
+                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i class="icon-cog2"></i>Categorías</a></li>
+                        <!-- badge-flat border-success text-success-600-->
                         <li><a href="/invite/{{$tournament->id}}"><i class="icon-user-plus"></i>Invitar usuarios</a>
                         <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
                         <li><a href="#"><i class="icon-user-lock"></i>Acreditación</a>
