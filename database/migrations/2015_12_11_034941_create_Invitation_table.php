@@ -12,7 +12,6 @@ class CreateInvitationTable extends Migration
      */
     public function up()
     {
-        Schema::drop('invitation');
         Schema::create('invitation', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->text('code', 255);
@@ -39,6 +38,6 @@ class CreateInvitationTable extends Migration
      */
     public function down()
     {
-        Schema::drop('invitation');
+        Schema::dropIfExists('invitation');
     }
 }

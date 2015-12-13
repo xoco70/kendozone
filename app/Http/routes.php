@@ -50,6 +50,8 @@ Route::get('/', 'DashboardController@index')->middleware(['auth']);
 Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
+Route::get('invite/register/{token}', 'InviteController@register');
+Route::post('auth/invite', 'Auth\AuthController@postInvite');
 
 //Route::resource('places', [
 //    'middleware' => ['auth', 'roles'],

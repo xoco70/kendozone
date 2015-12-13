@@ -6,6 +6,7 @@ use App\AuthenticateUser;
 use App\Grade;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\UserRequest;
+use App\Invite;
 use App\Mailers\AppMailer;
 use App\Role;
 use App\User;
@@ -163,9 +164,44 @@ class AuthController extends Controller
     public function postRegister(AuthRequest $request, AppMailer $mailer)
     {
 
+
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);
         flash('success', Lang::get('auth.check_your_email'));
+        return redirect()->back();
+    }
+
+
+    /**
+     * Perform the registration.
+     *
+     * @param  Request $request
+     * @param  AppMailer $mailer
+     * @return \Redirect
+     */
+    public function postInvite(Request $request)
+    {
+        //Check token
+        $token = $request->get("token");
+        $invite = Invite::getActiveInvite($token);
+
+        if (!is_null($invite)) {
+            if (!$request->has('email')) {
+                $request->request->add(['email' => $invite->email]);
+            }
+            $this->validate($request, [
+                $this->loginUsername() => 'required', 'password' => 'required|confirmed',
+            ]);
+
+            User::create($request->all());
+            $invite->consume();
+            flash('success', Lang::get('auth.registration_completed'));
+
+        } else {
+            flash('error', Lang::get('auth.no_invite'));
+        }
+
+
         return redirect()->back();
     }
 
@@ -178,7 +214,7 @@ class AuthController extends Controller
     public function confirmEmail($token)
     {
         User::whereToken($token)->firstOrFail()->confirmEmail();
-        flash('success',Lang::get('auth.tx_for_confirm'));
+        flash('success', Lang::get('auth.tx_for_confirm'));
         return redirect('auth/login');
     }
 

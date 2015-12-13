@@ -7,6 +7,7 @@ use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -21,6 +22,8 @@ class InviteController extends Controller
         View::share('currentModelName', $this->currentModelName);
 
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -40,6 +43,36 @@ class InviteController extends Controller
     public function create()
     {
         //
+    }
+
+    public function register($token)
+    {
+        // Get available invitation
+        $invite = Invite::getActiveInvite($token);
+
+        // Check if user is already registered
+        if (!is_null($invite)) {
+//            $tournament = Tournament::findOrFail($invite->tournament_id);
+            $user = User::where('email', $invite->email)->first();
+            if (is_null($user)) {
+                // Redirect to user creation --
+                return view('auth/invite', compact('token'));
+            } else {
+                $invite->consume();
+                flash("success", "Registro completo");
+                return view('auth/login');
+
+
+            }
+        } else {
+            $invite = Invite::where('code', $token)->first();
+            if (is_null($invite)) {
+                dd("No invitation");
+
+            } else {
+                dd("invitation used");
+            }
+        }
     }
 
     /**

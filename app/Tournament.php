@@ -49,6 +49,11 @@ class Tournament extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function competitors()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
+
     public function level()
     {
         return $this->belongsTo('App\TournamentLevel', 'level_id', 'id');

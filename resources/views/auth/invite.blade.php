@@ -83,7 +83,7 @@
             <div class="content">
                 <!-- Registration form -->
                 @include("errors.list")
-                {!! Form::open(['url'=>URL::to('/auth/register') , 'class'=> "form-signin"]) !!}
+                {!! Form::open(['url'=>URL::to('/auth/invite') , 'class'=> "form-signin"]) !!}
                 <div class="row">
                     <div class="col-lg-4 col-lg-offset-4">
                         @include('layouts.flash')
@@ -113,20 +113,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-lg-offset-3">
-                                        <div class="form-group has-feedback">
-                                            <input type="email" id="email" name="email" class="form-control"
-                                                   value="{{ old('email') }}"
-                                                   placeholder="{{  Lang::get('auth.your_email') }}">
-
-                                            <div class="form-control-feedback">
-                                                <i class="icon-mention text-muted"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                {!!   Form::hidden('token', $token) !!}
 
 
                                 <div class="row">
@@ -158,12 +145,9 @@
                                     </div>
                                 </div>
 
-                                {!!   Form::hidden('roleId', $roleId) !!}
+                                {{--{!!   Form::hidden('roleId', $roleId) !!}--}}
 
                                 <div class="text-right">
-                                    <a href="{!! URL::to('auth/login') !!}" class="btn btn-link"><i
-                                                class="icon-arrow-left13 position-left"></i> {{  Lang::get('auth.back_to_login_form') }}
-                                    </a>
                                     <button type="submit"
                                             class="btn bg-teal-400 btn-labeled btn-labeled-right ml-10">
                                         <b><i class="icon-plus3"></i></b>{{  Lang::get('auth.create_account') }}

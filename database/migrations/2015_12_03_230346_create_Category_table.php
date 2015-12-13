@@ -43,8 +43,8 @@ class CreateCategoryTable extends Migration
      public function down()
     {
 
-        Schema::drop('category_tournament');
-        Schema::drop('category');
+        Schema::dropIfExists('category_tournament');
+        Schema::dropIfExists('category');
 
 
     }

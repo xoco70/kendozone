@@ -15,9 +15,8 @@
     <strong>Costo:</strong> {{ $tournament->cost }}<br/>
     <strong>Fecha Limite de Registro:</strong> {{ $tournament->registerDateLimit }}<br/>
     Por favor pica el link de pre-registro: <br/>
-    <a href='http://localhost:8888/preregister/token={{ $code }}'>link de preregistro</a>
+    <a href='http://localhost:8888/invite/register/{{ $code }}'>http://localhost:8888/invite/register/{{ $code }}</a>
 
 <p>Gracias</p>
-</p>
 </body>
 </html>

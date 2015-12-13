@@ -20,6 +20,6 @@ class CreateGradeTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('grade');
+		Schema::dropIfExists('grade');
 	}
 }

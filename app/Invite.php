@@ -18,6 +18,9 @@ class Invite extends Model
         'used',
     ];
 
+    public function tournament(){
+        return $this->belongsTo('App\Tournament');
+    }
 
     public function generate($email, $tournament)
     {
@@ -37,7 +40,33 @@ class Invite extends Model
             return null;
 
     }
+    /**
+     * @param $tournament
+     * @param $user
+     * @param $invite
+     */
+    public function consume()
+    {
+// User exists, just add it to tournament
+        // And update invite
+        $user = User::where('email', $this->email)->first();
 
+//        dd($this->tournament);
+//
+        if (!$this->tournament->competitors->contains($user->id)) {
+            $this->tournament->competitors()->attach($user->id);
+        }
+        // Use the invitation
+        $this->update(['used' => 1]);
+    }
+    public static function getActiveInvite($token)
+    {
+        $invite = Invite::where('code', $token)
+            ->where('active', 1)
+            ->where('used', 0)
+            ->first();
+        return $invite;
+    }
 
     public function active($code, $email)
     {
@@ -75,7 +104,8 @@ class Invite extends Model
     {
         $temp = DB::connection()
             ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
+            ->where('code', '=', $code)
+            ->where('email', '=', $email)
             ->first();
         if ($temp) {
             if (!$temp->active)
