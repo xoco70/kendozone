@@ -171,6 +171,10 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+    public function getInvite(Request $request)
+    {
+        return view('auth.invite');
+    }
 
     /**
      * Perform the registration.
@@ -181,28 +185,37 @@ class AuthController extends Controller
      */
     public function postInvite(Request $request)
     {
+
         //Check token
+        $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
+//        dd("2");
 
         if (!is_null($invite)) {
+
             if (!$request->has('email')) {
                 $request->request->add(['email' => $invite->email]);
+                $request->request->add(['verified' => 1]);
+                // Meter geoIP
             }
             $this->validate($request, [
-                $this->loginUsername() => 'required', 'password' => 'required|confirmed',
+                $this->loginUsername() => 'required|min:6', 'password' => 'required|confirmed|min:6',
             ]);
 
-            User::create($request->all());
+            $user = User::create($request->all());
             $invite->consume();
             flash('success', Lang::get('auth.registration_completed'));
 
         } else {
+            dd("yes is null");
             flash('error', Lang::get('auth.no_invite'));
         }
 
-
-        return redirect()->back();
+        if (!is_null($user)) {
+            Auth::loginUsingId($user->id);
+        }
+        return redirect("/")->with('status', 'success');
     }
 
     /**

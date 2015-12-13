@@ -82,8 +82,13 @@ class InviteController extends Controller
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(InviteRequest $request, AppMailer $mailer)
+    public function store(Request $request, AppMailer $mailer)
     {
+        $this->validate($request, [
+            'recipients' => 'required'
+        ]);
+
+
         $tournament = Tournament::findOrFail($request->get("tournamentId"));
         $recipients = json_decode($request->get("recipients"));
         foreach ($recipients as $recipient) {
