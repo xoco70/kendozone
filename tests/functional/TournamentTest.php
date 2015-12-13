@@ -1,4 +1,5 @@
 <?php
+use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Lang;
  */
 class TournamentTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 //    use WithoutMiddleware;
 
     protected $tournament, $tournaments, $addTournament, $editTournament;
@@ -49,16 +50,31 @@ class TournamentTest extends TestCase
             ->click("+ ".$this->addTournament)
 //            ->press("Next")
 //            ->press("Next")
-            ->press("Submit")
+            ->press($this->addTournament)
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")  //Lang::get('validation.filled', ['attribute' => "name"])
-            ->see("El campo name es obligatorio")  //Lang::get('validation.filled', ['attribute' => "tournament"])
-            ->see("El campo venue es obligatorio")  //Lang::get('validation.filled', ['attribute' => "place"])
-//            ->see("El campo category es obligatorio")  //Lang::get('validation.filled', ['attribute' => "category"])
+            ->see("El campo date es obligatorio")  //Lang::get('validation.filled', ['attribute' => "tournament"])
+//            ->see("El campo venue es obligatorio")  //Lang::get('validation.filled', ['attribute' => "place"])
+            ->see("El campo category es obligatorio")  //Lang::get('validation.filled', ['attribute' => "category"])
 
             ->notSeeInDatabase('tournament', ['name' => '']);
 
     }
+    /** @test */
+    public function it_denies_editing_an_invalid_tournament()
+    {
+        $this->it_create_tournament();
+        $tournament = Tournament::where("name","MyTournament")->first();
+        $this->visit('/tournaments/'.$tournament->id.'/edit')
+            ->see($this->tournaments)
+            ->type('1111', 'name')
+            ->press(Lang::get('core.save'))
+            ->see("El campo name debe contener al menos 6 caracteres.")  //Lang::get('validation.filled', ['attribute' => "category"])
+            ->notSeeInDatabase('tournament',
+                ['name' => '1111',
+                ]);
+    }
+
     /** @test */
     public function mustBeAuthenticated()
     {
@@ -68,7 +84,7 @@ class TournamentTest extends TestCase
     }
 
     /** @test */
-    public function it_create_tournament($delete = true)
+    public function it_create_tournament()
     {
         $this->visit('/')
             ->click($this->tournaments)
@@ -76,28 +92,77 @@ class TournamentTest extends TestCase
             ->click($this->addTournament)
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'date')
-            ->type('2015-12-13', 'registerDateLimit')
-            ->type('on', 'mustPay')
-            ->type('on', 'type')
-            ->type('300', 'cost')
+            ->storeInput('category', [1, 2], true)
+            ->press($this->addTournament)
+            ->see(Lang::get('core.operation_successful'))
+            ->seeInDatabase('tournament',['name' => 'MyTournament']);
+    }
+
+    public function storeInput($element, $text, $force = false)
+    {
+        if ($force) {
+            $this->inputs[$element] = $text;
+            return $this;
+        }
+        else {
+            return parent::storeInput($element, $text);
+        }
+    }
+
+    /** @test */
+    public function it_edit_tournament()
+    {
+        $this->it_create_tournament();
+        $tournament = Tournament::where("name","MyTournament")->first();
+        $this->visit('/tournaments/'.$tournament->id.'/edit')
+            ->see($this->tournaments)
+            ->type('MyTournament', 'name')
+            ->type('2015-12-15', 'date')
+            ->type('2015-12-16', 'registerDateLimit')
+            ->type('1', 'mustPay')
+            ->type('1', 'type')
+            ->type('5000', 'cost')
             ->type('2', 'fightingAreas')
-            ->type('2', 'levelId')
-//            ->press("Next")
+            ->type('2', 'level_id')
             ->type('CDOM', 'venue')
             ->type('1.11111', 'latitude')
             ->type('2.22222', 'longitude')
-            ->type('Mexico', 'country')
-//            ->press("Next")
-//            ->select('[1,2]', 'category[]')
-            ->press("Submit")
-//            ->dump();
-            ->seePageIs('/tournaments')
-            ->see(Lang::get('core.success'))
-            ->seeInDatabase('tournaments',['name' => 'MyUser']);
-
-        $tournament = User::where('email', '=', "julien@cappiello.fr2")->first();
-        if ($delete) $tournament->delete();
+            ->press("Guardar")
+            ->see(Lang::get('core.operation_successful'))
+            ->seeInDatabase('tournament',
+                ['name' => 'MyTournament',
+                    'date' => '2015-12-15',
+                    'registerDateLimit' => '2015-12-16',
+                    'mustPay' => '1',
+                    'type' => '1',
+                    'cost' => '5000',
+                    'fightingAreas' => '2',
+                    'level_id' => '2',
+                    'venue' => 'CDOM',
+                    'latitude' => '1.11111',
+                    'longitude' => '2.22222',
+                ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    /** @test */
 //    public function it_edit_tournament()

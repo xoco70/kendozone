@@ -13,8 +13,8 @@
 
         <ul class="nav nav-tabs nav-tabs-bottom bottom-divided nav-justified">
             <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-            <li><a href="#category" data-toggle="tab">Categorias</a></li>
-            <li><a href="#bottom-justified-divided-tab3" data-toggle="tab">Usuario</a></li>
+            <li><a href="#category" data-toggle="tab">{{Lang::get('core.social_networks')}}</a></li>
+            <li><a href="#bottom-justified-divided-tab3" data-toggle="tab">{{Lang::get('core.social_networks')}}</a></li>
         </ul>
         <div class="row">
             <div class="col-md-12 col-lg-6 col-lg-offset-3">

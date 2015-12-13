@@ -33,7 +33,9 @@ return [
     'info' => 'Info',
     'operation_successful' => ' Operación exitosa',
     'operation_failed' => ' Hubo un problema',
-
+    'save' => 'Guardar',
+    'edit' => 'Editar',
+    'delete' => 'Borrar',
 
     // Left menu
     'lastlogin' => 'Ultima conexión',
