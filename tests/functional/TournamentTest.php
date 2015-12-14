@@ -4,6 +4,7 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 
 /**
@@ -96,6 +97,16 @@ class TournamentTest extends TestCase
             ->press($this->addTournament)
             ->see(Lang::get('core.operation_successful'))
             ->seeInDatabase('tournament',['name' => 'MyTournament']);
+
+        $categoriesAdded = [1,2];
+        // See categories is added
+        $tournament = Tournament::where("name","MyTournament")->first();
+        $categories = DB::table("category_tournament")->where("tournament_id",'=',$tournament->id)->get();
+        foreach ($categories as $item){
+            $this->assertContains( $item->category_id, $categoriesAdded );
+
+        }
+
     }
 
     public function storeInput($element, $text, $force = false)
