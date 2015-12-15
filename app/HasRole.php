@@ -9,7 +9,7 @@ trait HasRole
      */
     public function role()
     {
-        return $this->belongsTo(Role::class,'roleId', 'id');
+        return $this->belongsTo(Role::class,'role_id', 'id');
     }
     /**
      * Assign the given role to the user.

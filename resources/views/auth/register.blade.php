@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
 
-                                {!!   Form::hidden('roleId', $roleId) !!}
+                                {!!   Form::hidden('role_id', $roleId) !!}
 
                                 <div class="text-right">
                                     <a href="{!! URL::to('auth/login') !!}" class="btn btn-link"><i

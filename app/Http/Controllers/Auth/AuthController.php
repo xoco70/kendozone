@@ -129,7 +129,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'roleId' => $data['roleId'],
+            'role_id' => $data['role_id'],
             'country' => $location['country'],
             'isoCode' => $location['isoCode'],
             'city' => $location['city'],
@@ -145,11 +145,11 @@ class AuthController extends Controller
     public function getRegister()
     {
         $role = Role::where('name', '=', "Admin")->firstOrFail();
-        $roleId = $role->id;
+        $role_id = $role->id;
 //        dd($roleObj);
         $countries = Countries::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
-        return view('auth.register', compact('countries', 'grades', 'roleId'));
+        return view('auth.register', compact('countries', 'grades', 'role_id'));
 
 
     }

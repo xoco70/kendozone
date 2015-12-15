@@ -39,9 +39,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::select('users.*', 'grade.name as grade') // ', 'countries.name as country', 'countries.flag
-//            ->leftJoin('countries', 'users.countryId', '=', 'countries.id')
-            ->leftJoin('grade', 'users.gradeId', '=', 'grade.id')->get();
+        $users = User::all();
 
         return view('users.index', compact('users'));
     }
@@ -129,8 +127,8 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $except = [];
-        if (trim(Input::get('roleId')) == '') {
-            array_push($except, 'roleId');
+        if (trim(Input::get('role_id')) == '') {
+            array_push($except, 'role_id');
         }
         if (trim(Input::get('password')) == '' && trim(Input::get('password_confirmation')) == '') {
             array_push($except, 'password');

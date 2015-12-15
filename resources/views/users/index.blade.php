@@ -11,7 +11,7 @@
                     <th>ID</th>
                     <th>{{ trans('crud.username') }}</th>
                     <th>{{ trans('crud.email') }}</th>
-                    <th>{{ trans('crud.grade') }}</th>
+                    <th>{{ trans('crud.role') }}</th>
                     <th>{{ trans('crud.avatar') }}</th>
                     <th>{{ trans('crud.country') }}</th>
                     <th class="text-center">{{ trans('crud.action') }}</th>
@@ -22,7 +22,7 @@
                         <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->id }}</a></td>
                         <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
-                        <td align="center">{{ $user->grade }}</td>
+                        <td align="center">{{ $user->role->name }}</td>
                         <td>
                             <a href="{!!   URL::action('UserController@edit',  $user->id) !!}"><img src="{{ $user->avatar }}" class="img-circle img-sm" /></a>
                         </td>

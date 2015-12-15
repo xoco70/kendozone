@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-     protected $fillable = ['name','firstname','lastname','email', 'password','avatar','gradeId','country','countryCode','city','latitude','longitude', 'roleId','avatar','provider','provider_id','verified'];
+     protected $fillable = ['name','firstname','lastname','email', 'password','avatar','grade_id','country','countryCode','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -156,6 +156,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function grade()
     {
         return $this->hasOne('App\Grade');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
     }
 
     public function settings()

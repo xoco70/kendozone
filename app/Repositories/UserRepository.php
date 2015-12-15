@@ -31,7 +31,7 @@ class UserRepository
                     'latitude' => $location['lat'],
                     'longitude' => $location['lon'],
                     'avatar' => $userData->avatar,
-                    'roleId' => Config::get('constants.ROLE_ADMIN'),
+                    'role_id' => Config::get('constants.ROLE_ADMIN'),
                     'verified' => 1,
                 ]);
             }
