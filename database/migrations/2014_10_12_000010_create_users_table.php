@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
                 ->on('grade')
                 ->onDelete('cascade');
 
-            $table->string('country')->nullable();
-            $table->string('countryCode')->nullable();
+//            $table->string('country')->nullable();
+//            $table->string('countryCode')->nullable();
             $table->string('city')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
@@ -35,6 +35,12 @@ class CreateUsersTable extends Migration
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles')
+                ->onDelete('cascade');
+
+            $table->integer('country_id')->unsigned();
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
                 ->onDelete('cascade');
 
             $table->string('avatar')->nullable();

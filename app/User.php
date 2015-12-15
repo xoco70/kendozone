@@ -168,6 +168,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasOne('App\Settings');
     }
 
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
     /**
      * A user can have many tournaments
      *

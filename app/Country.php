@@ -9,4 +9,6 @@ class Country extends Model {
 	protected $table = 'countries';
 	public $timestamps = true;
 
+
+
 }

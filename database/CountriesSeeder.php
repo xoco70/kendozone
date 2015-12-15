@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
+use Webpatser\Countries\Countries;
 
 class CountriesSeeder extends Seeder {
 
@@ -16,7 +17,9 @@ class CountriesSeeder extends Seeder {
         DB::table(\Config::get('countries.table_name'))->delete();
 
         //Get all of the countries
-        $countries = Countries::getList();
+        $countries = new Countries();
+
+        $countries = $countries->getList();
         foreach ($countries as $countryId => $country){
             DB::table(\Config::get('countries.table_name'))->insert(array(
                 'id' => $countryId,

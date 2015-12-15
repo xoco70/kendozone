@@ -20,8 +20,7 @@ class UserSeeder extends Seeder
             'email'    => 'xoco70@hotmail.com1',
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
             'grade_id' => '9',
-            'country' => 'Mexico',
-            'countryCode' => 'MX',
+            'country_id' => '4',
             'city' => 'Mexico City',
             'latitude' => '19.4342',
             'longitude' => '-99.1386',
