@@ -2,7 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
-
+use Faker\Factory as Faker;
 class UserSeeder extends Seeder
 {
     /**
@@ -30,6 +30,25 @@ class UserSeeder extends Seeder
             'provider' => '',
             'provider_id' => '1'
         ]);
+
+        $faker = Faker::create();
+
+        foreach ( range(1,30) as $index){
+            User::create([
+                'name' => $faker->name,
+                'email'    => $faker->email,
+                'password' => bcrypt('secret'), // 111111
+                'grade_id' => $faker->numberBetween(1,5),
+                'country_id' => 4,
+                'city' => $faker->city,
+                'latitude' => $faker->randomDigit,
+                'longitude' => $faker->randomDigit,
+                'role_id' => $faker->numberBetween(1,3),
+                'verified' => $faker->numberBetween(0,1),
+                'provider' => '',
+                'provider_id' => '1'
+            ]);
+        }
 
 
 //        User::create([
