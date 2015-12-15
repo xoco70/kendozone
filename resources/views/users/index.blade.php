@@ -22,7 +22,7 @@
                         <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->id }}</a></td>
                         <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
-                        <td align="center">{{ $user->role->name }}</td>
+                        <td>{{ $user->role->name }}</td>
                         <td>
                             <a href="{!!   URL::action('UserController@edit',  $user->id) !!}"><img src="{{ $user->avatar }}" class="img-circle img-sm" /></a>
                         </td>

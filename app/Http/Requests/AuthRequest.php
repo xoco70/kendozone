@@ -19,7 +19,7 @@ class AuthRequest  extends Request
             }
         }
 
-
+// TODO RElation with countryId
 
         $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
         if (!is_null($location)){

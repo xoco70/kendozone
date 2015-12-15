@@ -1,4 +1,4 @@
-{{--TODO PREFENCIAS CURRENCY--}}
+
 
 <h2 align="center">{{Lang::get('crud.newTournament')}}</h2>
 
