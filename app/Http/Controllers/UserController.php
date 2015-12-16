@@ -10,6 +10,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
@@ -39,7 +40,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::all();
+        $users = User::paginate(Config::get('constants.PAGINATION'));
 
         return view('users.index', compact('users'));
     }

@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-     protected $fillable = ['name','firstname','lastname','email', 'password','avatar','grade_id','country','countryCode','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
+     protected $fillable = ['name','firstname','lastname','email', 'password','avatar','grade_id','country_id','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -170,7 +170,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function country()
     {
-        return $this->belongsTo('App\Country');
+        return $this->belongsTo('Webpatser\Countries\Countries');
     }
 
     /**

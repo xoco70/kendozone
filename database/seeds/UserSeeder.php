@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 
         $faker = Faker::create();
 
-        foreach ( range(1,30) as $index){
+        foreach ( range(2,100) as $index){
             User::create([
                 'name' => $faker->name,
                 'email'    => $faker->email,
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
                 'role_id' => $faker->numberBetween(1,3),
                 'verified' => $faker->numberBetween(0,1),
                 'provider' => '',
-                'provider_id' => '1'
+                'provider_id' => $index
             ]);
         }
 

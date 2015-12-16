@@ -16,7 +16,7 @@
                         <div class="text-size-mini text-muted">
                             <i class="icon-pin text-size-small"></i>
                             @if (!is_null(Auth::getUser()->city ))
-                                {!!Auth::getUser()->city !!}, {!!Auth::getUser()->countryCode !!}
+                                {!!Auth::getUser()->city !!}, {!!Auth::getUser()->country->iso_3166_2!!}
                             @endif
                         </div>
                     </div>

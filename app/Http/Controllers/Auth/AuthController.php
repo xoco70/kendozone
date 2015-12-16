@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
+use App\Country;
 use App\Grade;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\UserRequest;
@@ -124,14 +125,18 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+        $location = GeoIP::getLocation($_SERVER['REMOTE_ADDR']); // Simulating IP in Mexico DF
+        $country = $location['country'];
+        // Get id from country
+        $country = Countries::where('name','=',$country)->first();
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'country_id' => $country->id,
             'role_id' => $data['role_id'],
-            'country' => $location['country'],
-            'isoCode' => $location['isoCode'],
             'city' => $location['city'],
             'latitude' => $location['lat'],
             'longitude' => $location['lon'],

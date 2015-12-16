@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use GeoIP;
+use Webpatser\Countries\Countries;
 
 class UserRepository
 {
@@ -18,15 +19,18 @@ class UserRepository
             if (!$user){
 
 
-                $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+                $location = GeoIP::getLocation($_SERVER['REMOTE_ADDR']); // Simulating IP in Mexico DF
+                $country = $location['country'];
+                // Get id from country
+                $country = Countries::where('name','=',$country)->first();
+
                 $user = User::create([
                     'provider' => $provider,
                     'provider_id' => $userData->id,
                     'name' => $userData->name,
                     'username' => $userData->nickname,
                     'email' => $userData->email,
-                    'country' => $location['country'],
-                    'countryCode' => $location['isoCode'],
+                    'country_id' => $country->id,
                     'city' => $location['city'],
                     'latitude' => $location['lat'],
                     'longitude' => $location['lon'],
