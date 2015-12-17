@@ -52,6 +52,8 @@ return [
     'longitude' => 'Longitude',
     'tournamentType' => 'Tipo de torneo',
     'owner' => 'Dueño',
+    'see_competitors' => 'Ver competidores',
+
 
 
     // Categories
@@ -107,6 +109,11 @@ return [
     'invite_message' => 'Mensaje de invitación',
     'invite_template' => "Pica el link que sigue para registrarse al torneo :tournament \n :link ",
     'send_invites' => 'Mandar Invitaciones',
+
+    'confirmed' => 'Confirmado',
+    'results' => 'resultados',
+    'latest_competitors' => 'Ultimos registros',
+
 
 
 ];

@@ -40,7 +40,7 @@
     @endif
 
 
-
+    {{--{!! Html::script('js/jquery.infinitescroll.min.js') !!}--}}
 
 
     {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}

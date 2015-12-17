@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Webpatser\Countries\Countries;
 
 class UserController extends Controller
@@ -99,7 +100,8 @@ class UserController extends Controller
     public
     function show($user)
     {
-        $user->delete();
+//        $user->delete();
+        flash("info", "not implemented yet");
         return redirect("users");
     }
 
@@ -161,4 +163,21 @@ class UserController extends Controller
 //        $countries = Countries::lists('name', 'id');
 //        return view('users.show', compact('user', 'countries', 'grades'));
 //    }
+
+    public function exportExcel(Request $request){
+        Excel::create('Filename', function($excel) {
+
+            // Set the title
+            $excel->setTitle('Our new awesome title');
+
+            // Chain the setters
+            $excel->setCreator('Maatwebsite')
+                ->setCompany('Maatwebsite');
+
+            // Call them separately
+            $excel->setDescription('A demonstration to change the file properties');
+
+        })->export('xls')
+        ;
+    }
 }

@@ -6,6 +6,9 @@
         <div class="row col-md-10 custyle">
             <table class="table table-striped custab">
                 <thead>
+                <a href="{!!   URL::action('UserController@exportExcel') !!}"
+                   class="btn btn-primary btn-xs pull-right">Export to Excel
+                </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{!!   URL::action('UserController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
                 <tr>
                     <th>ID</th>

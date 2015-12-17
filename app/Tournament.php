@@ -44,14 +44,17 @@ class Tournament extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id','id');
     }
 
     public function competitors()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+
+        return $this->belongsToMany('App\User')
+            ->withPivot('tournament_id', 'confirmed')
+            ->withTimestamps();
     }
 
     public function level()

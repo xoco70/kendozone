@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
@@ -125,7 +126,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $location = GeoIP::getLocation($_SERVER['REMOTE_ADDR']); // Simulating IP in Mexico DF
+        $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
         $country = $location['country'];
         // Get id from country
         $country = Countries::where('name','=',$country)->first();
@@ -135,7 +136,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country_id' => $country->id,
+            'country_id' => $countryid,
             'role_id' => $data['role_id'],
             'city' => $location['city'],
             'latitude' => $location['lat'],
@@ -190,7 +191,7 @@ class AuthController extends Controller
      */
     public function postInvite(AuthRequest $request)
     {
-
+        $request->request->add(['role_id' => Config::get('constants.ROLE_COMPETITOR')]);
         //Check token
         $user = null;
         $token = $request->get("token");

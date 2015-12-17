@@ -8,7 +8,9 @@ use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\Category;
 use App\TournamentLevel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
@@ -33,7 +35,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = Tournament::all();
+        $tournaments = Tournament::paginate(Config::get('constants.PAGINATION'));
 
 //        dd($tournaments->first()->user->name);
         return view('tournaments.index', compact('tournaments'));
@@ -118,21 +120,29 @@ class TournamentController extends Controller
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournament->id/edit");
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function sendInvite(Request $request, Tournament $tournament)
+//    /**
+//     * Update the specified resource in storage.
+//     *
+//     * @param  \Illuminate\Http\Request $request
+//     * @param  int $id
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function sendInvite(Request $request, Tournament $tournament)
+//    {
+//        dd($request);
+//
+//        flash('success', trans('core.operation_successful'));
+//        return redirect("tournaments/$tournament->id/edit");
+//    }
+
+    public function getUsers($tournamentId)
     {
-        dd($request);
+        $tournament = Tournament::find($tournamentId)->first();
+        $users = $tournament->competitors;
 
-        flash('success', trans('core.operation_successful'));
-        return redirect("tournaments/$tournament->id/edit");
+
+        return view("tournaments/users", compact('users'));
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -143,4 +153,6 @@ class TournamentController extends Controller
     {
 
     }
+
+
 }

@@ -47,7 +47,7 @@ return [
     'signin_with' => 'O conectate con',
     'no_account' => 'Aún no tienes cuenta?',
     'tx_for_confirm' => 'Gracias por verificar tu email',
-
+    'registration_completed' => 'Gracias por registarte',
 
 
 

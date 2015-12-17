@@ -19,7 +19,7 @@ class UserRepository
             if (!$user){
 
 
-                $location = GeoIP::getLocation($_SERVER['REMOTE_ADDR']); // Simulating IP in Mexico DF
+                $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
                 $country = $location['country'];
                 // Get id from country
                 $country = Countries::where('name','=',$country)->first();

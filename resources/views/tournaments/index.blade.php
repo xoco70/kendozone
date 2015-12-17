@@ -42,7 +42,7 @@
                             {{--<td>{{ $tournament->place }}</td>--}}
                             <td>{{ $tournament->date }}</td>
 {{--                            <td>{{ $tournament->registerDateLimit }}</td>--}}
-                            <td>{{ $tournament->user->name}}</td>
+                            <td>{{ $tournament->owner->name}}</td>
                             <td class="text-center">
                                 {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                 @can('CanDeleteTournament')

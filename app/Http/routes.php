@@ -67,10 +67,14 @@ Route::post('auth/invite', 'Auth\AuthController@postInvite');
 Route::group(['middleware' => 'auth'],
     function () {
         Route::resource('users', 'UserController');
+        Route::get('users/exportExcel', 'UserController@exportExcel');
+
     });
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
     function () {
         Route::resource('tournaments', 'TournamentController');
+        Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
+
         Route::resource('invite', 'InviteController');
 
         Route::resource('competitors', 'CompetitorController');

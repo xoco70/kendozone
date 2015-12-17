@@ -148,6 +148,7 @@ return [
         App\Providers\BackendServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -201,6 +202,7 @@ return [
 		'Countries' => Webpatser\Countries\CountriesFacade::class,
         'Socialize' => Laravel\Socialite\Facades\Socialite::class,
         'GeoIP' => Torann\GeoIP\GeoIPFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

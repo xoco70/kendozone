@@ -5,11 +5,11 @@
     <title>Invitación</title>
 </head>
 <body>
-<h2>{{ $tournament->user->name  }} te ha invitado al torneo: {{ $tournament->name }} </h2>
+<h2>{{ $tournament->owner->name  }} te ha invitado al torneo: {{ $tournament->name }} </h2>
 
 <p>Estimado Kenshi,<br/>
 
-    {{ $tournament->user->name  }} te ha invitado al torneo: {{ $tournament->name }} <BR/>
+    {{ $tournament->owner->name  }} te ha invitado al torneo: {{ $tournament->name }} <BR/>
     <strong>Lugar:</strong> {{ $tournament->venue }}<br/>
     <strong>Fecha:</strong> {{ $tournament->date }}<br/>
     <strong>Costo:</strong> {{ $tournament->cost }}<br/>
