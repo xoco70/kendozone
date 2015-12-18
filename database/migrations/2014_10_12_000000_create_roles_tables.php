@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
 class CreateRolesTables extends Migration
 {
     /**
@@ -10,6 +12,8 @@ class CreateRolesTables extends Migration
      */
     public function up()
     {
+//        $output = new ConsoleOutput();
+//        $output->writeln('Converting of 50000');
 
 
         Schema::create('roles', function (Blueprint $table) {

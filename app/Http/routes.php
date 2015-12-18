@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use Illuminate\Support\Facades\Auth;
+
 
 //Auth::loginUsingId(6); // 6 Admin, 5 User
 
