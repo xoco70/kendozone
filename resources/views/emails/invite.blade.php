@@ -15,7 +15,7 @@
     <strong>Costo:</strong> {{ $tournament->cost }}<br/>
     <strong>Fecha Limite de Registro:</strong> {{ $tournament->registerDateLimit }}<br/>
     Por favor pica el link de pre-registro: <br/>
-    <a href='http://localhost:8888/invite/register/{{ $code }}'>http://localhost:8888/invite/register/{{ $code }}</a>
+    <a href='{{getenv('URL_BASE')}}invite/register/{{ $code }}'>{{getenv('URL_BASE')}}invite/register/{{ $code }}</a>
 
 <p>Gracias</p>
 </body>
