@@ -61,8 +61,8 @@
 
             {{--Get the last 10 user registration--}}
             <?php
-                    $latestUsers = $tournament->competitors->orderBy('created_at', 'desc')->take(10);
-                    dd($latestUsers);
+//                    $latestUsers = $tournament->competitors->orderBy('created_at', 'desc')->take(10);
+//                    dd($latestUsers);
 
                     ?>
 

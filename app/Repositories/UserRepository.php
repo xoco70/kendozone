@@ -18,12 +18,14 @@ class UserRepository
 //            dd($user);
             if (!$user){
 
-
+//                dd("IP:".Config::get('constants.CLIENT_IP')); // 10.0.2.2
                 $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+
                 $country = $location['country'];
                 // Get id from country
-                $country = Countries::where('name','=',$country)->first();
 
+                $country = Countries::where('name','=',$country)->first();
+//                dd($country);
                 $user = User::create([
                     'provider' => $provider,
                     'provider_id' => $userData->id,
