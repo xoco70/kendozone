@@ -2,7 +2,8 @@
 <div class="sidebar-detached">
     <div class="row">
         <div class="col-md-12">
-            <p><a href="/invite/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg" style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
+            <p><a href="/invite/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
+                  style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
 
         </div>
     </div>
@@ -33,9 +34,11 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i class="icon-cog2"></i>{{trans_choice('crud.category',2)}}</a></li>
+                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i
+                                        class="icon-cog2"></i>{{trans_choice('crud.category',2)}}</a></li>
                         <!-- badge-flat border-success text-success-600-->
-                        <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>{{Lang::get("crud.see_competitors")}}</a>
+                        <li><a href="/tournaments/{{$tournament->id}}/users"><i
+                                        class="icon-users"></i>{{Lang::get("crud.see_competitors")}}</a>
                         <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
                         <li><a href="#"><i class="icon-user-lock"></i>Acreditación</a>
                         <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
@@ -54,19 +57,19 @@
 
         </div>
     </div>
-<br/>
+    <br/>
     <div class="sidebar sidebar-default">
 
         <div class="sidebar-content">
 
             {{--Get the last 10 user registration--}}
             <?php
-//                    $latestUsers = $tournament->competitors->orderBy('created_at', 'desc')->take(10);
-//                    dd($latestUsers);
+            //                    $latestUsers = $tournament->competitors->orderBy('created_at', 'desc')->take(10);
+            //                    dd($latestUsers);
 
-                    ?>
+            ?>
 
-            <!-- Sub navigation -->
+                    <!-- Sub navigation -->
             <div class="sidebar-category">
                 <div class="category-title">
                     <span>{{ Lang::get("crud.latest_competitors") }}</span>
@@ -77,11 +80,9 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-
-
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i class="icon-cog2"></i>{{trans_choice('crud.category',2)}}</a></li>
-                        <!-- badge-flat border-success text-success-600-->
-                        <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>{{Lang::get("crud.see_competitors")}}</a>
+                        @foreach($tournament->competitors()->where("confirmed", "1")->orderBy('pivot_created_at', 'desc')->get() as $competitor)
+                            <li><a href="#"><i class="icon-user"></i>{{$competitor->name}}</a>
+                        @endforeach
 
                     </ul>
                 </div>
