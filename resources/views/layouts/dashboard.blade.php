@@ -31,6 +31,8 @@
     {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
+    {!! Html::script('http://maps.google.com/maps/api/js') !!}
+    {!! Html::script('js/plugins/pickers/location/location.js') !!}
 
 
 
@@ -54,7 +56,6 @@
         {{--Dual Box select--}}
         {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
         {!! Html::script('http://maps.google.com/maps/api/js') !!}
-        {!! Html::script('js/plugins/pickers/location/location.js') !!}
     @endif
 
     @if (Request::is("invite/*"))
@@ -85,11 +86,7 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                {{--@if (Request::is("/") || Request::is("admin") || Request::is("settings") )--}}
                                     {!!  $currentModelName !!}
-                                {{--@else--}}
-                                    {{--@lang('crud.addModel', ['currentModelName' => $currentModelName])--}}
-                                {{--@endif--}}
                             </span>
                         </h1>
                     </div>

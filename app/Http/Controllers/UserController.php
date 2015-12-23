@@ -100,9 +100,8 @@ class UserController extends Controller
     public
     function show($user)
     {
-//        $user->delete();
-        flash("info", "not implemented yet");
-        return redirect("users");
+
+        return view('users.show', compact('user'));
     }
 
     /**

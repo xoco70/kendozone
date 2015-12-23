@@ -155,7 +155,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //    }
     public function grade()
     {
-        return $this->hasOne('App\Grade');
+        return $this->belongsTo('App\Grade');
     }
 
     public function role()

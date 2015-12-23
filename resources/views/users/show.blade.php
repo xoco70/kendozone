@@ -1,146 +1,151 @@
 @extends('layouts.dashboard')
+
 @section('content')
 
-        <!-- Page header -->
-<div class="page-header">
-    <div class="page-title">
-        <h3> Account  <small>View Detail My Info</small></h3>
-    </div>
-
-    <ul class="breadcrumb">
-        <li><a href="{{ URL::to('dashboard') }}">{{ Lang::get('core.home') }}</a></li>
-        <li class="active">Account</li>
-    </ul>
-</div>
-
-
-
-
-
-
-<div class="page-content row">
-
-
-    <div class="page-content-wrapper">
-        @if(Session::has('message'))
-            {{ Session::get('message') }}
-        @endif
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        <ul class="nav nav-tabs" >
-            <li class="active"><a href="#info" data-toggle="tab"> {{ Lang::get('core.personalinfo') }} </a></li>
-            <li ><a href="#pass" data-toggle="tab">{{ Lang::get('core.changepassword') }} </a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane active m-t" id="info">
-                {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id),'class'=>'form-horizontal ', 'enctype' => 'multipart/form-data')) !!}
-{{--                {!!   Form::open(array('url'=>'user/saveprofile/', 'class'=>'form-horizontal ' ,'files' => true)) !!}--}}
-
-                <div class="form-group">
-                    {!!  Form::label('name', trans('crud.user'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::text('name', old('name'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    {!!  Form::label('name', trans('crud.email'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::email('email', old('email'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    {!!  Form::label('name', trans('crud.firstname'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    {!!  Form::label('name', trans('crud.lastname'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
-                    </div>
-                </div>
-
-
-
-                <div class="form-group  " >
-                    <label for="ipt" class=" control-label col-md-4 text-right"> Avatar </label>
-                    <div class="col-md-8">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-			  <span class="btn btn-primary btn-file">
-			  	<span class="fileinput-new">Upload Avatar Image</span><span class="fileinput-exists">Change</span>
-					<input type="file" name="avatar">
-				</span>
-                            <span class="fileinput-filename"></span>
-                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                        </div>
-                        <br />
-{{--                        {{ SiteHelpers::showUploadedFile($user->avatar,'/uploads/users/') }}--}}
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4">&nbsp;</label>
-                        <button class="btn btn-success" type="submit"> {{ Lang::get('core.savechanges') }}</button>
-
-                </div>
-
-                {!!   Form::close() !!}
-            </div>
-
-            <div class="tab-pane  m-t" id="pass">
-                {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id),'class'=>'form-horizontal ')) !!}
-
-                <div class="form-group">
-                    {!!  Form::label('password', trans('crud.password'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::password('password', ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
-                    </div>
-                </div>
-                {{--<div class="form-group">--}}
-                    {{--<label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.newpassword') }} </label>--}}
-                    {{--<div class="col-md-8">--}}
-                        {{--<input name="password" type="password" id="password" class="form-control input-sm" value="" />--}}
-                    {{--</div>--}}
+    <div class="container">
+        <div class="row col-md-10 custyle">
+            <div class="panel panel-flat">
+                {{--<div class="panel-heading " >--}}
+                {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
                 {{--</div>--}}
 
-                {{--<div class="form-group">--}}
-                    {{--<label for="ipt" class=" control-label col-md-4"> {{ Lang::get('crud.conewpassword') }}  </label>--}}
-                    {{--<div class="col-md-8">--}}
-                        {{--<input name="password_confirmation" type="password" id="password_confirmation" class="form-control input-sm" value="" />--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                <div class="form-group">
-                    {!!  Form::label('password_confirmation', trans('crud.password_confirmation'), ['class' => 'control-label col-md-4']) !!}
-                    <div class="col-md-8">
-                        {!!  Form::password('password_confirmation', ['class' => 'form-control input-sm']) !!} <!-- ,'disabled' => 'disabled' -->
+                <div class="panel-body">
+                    <div class="container-fluid">
+
+
+                        <fieldset title="{{Lang::get('crud.general_data')}}">
+                            <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                {!!  Form::label('name', trans('crud.username'), ['class' => 'text-bold']) !!}
+                                                <BR/>
+                                                {!!  $user->name !!}
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {!!  Form::label('grade_id', trans('crud.grade'), ['class' => 'text-bold']) !!}
+                                                <BR/>
+                                                {!!  trans($user->grade->name)!!}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                {!!  Form::label('name', trans('crud.firstname'), ['class' => 'text-bold']) !!}
+                                                <BR/>
+                                                {!!  $user->firstName !!}
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {!!  Form::label('grade_id', trans('crud.lastname'), ['class' => 'text-bold']) !!}
+                                                <BR/>
+                                                {!!  $user->lastName!!}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {!!  Form::label('email', trans('crud.email'), ['class' => 'text-bold']) !!}
+                                            <BR/>
+                                            {!!  $user->email !!}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!!  Form::label('role', trans('crud.role'), ['class' => 'text-bold']) !!}
+                                            <BR/>
+                                            {!!  $user->role->name !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <img src="{{ $user->avatar }}" width="200" height="200"/>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="ipt" class=" control-label col-md-4">&nbsp;</label>
-                    <div class="col-md-8">
-                        <button class="btn btn-danger" type="submit"> {{ Lang::get('core.savechanges') }} </button>
-                    </div>
-                </div>
-                {!!   Form::close() !!}
+
+                <!-- /simple panel -->
+                <!-- Simple panel 2 : Account Settings -->
             </div>
+            <div class="panel panel-flat">
+                {{--<div class="panel-heading " >--}}
+                {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+                {{--</div>--}}
+
+                <div class="panel-body">
+                    <div class="container-fluid">
 
 
+                        <fieldset title="{{Lang::get('crud.location')}}">
+                            <legend class="text-semibold">{{Lang::get('crud.location')}}</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+
+                                        {!!  Form::label('name', trans('crud.city'), ['class' => 'text-bold']) !!}
+                                        <BR/>
+                                        {!!  $user->city !!}
+
+
+                                    </div><br/>
+                                    <div class="row">
+
+                                            {!!  Form::label('country', trans('crud.country'), ['class' => 'text-bold']) !!}
+                                            <BR/>
+                                            {!!  trans($user->country->name)!!} <img
+                                                    src="/images/flags/{{$user->country->flag}}"/></div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="map-wrapper locationpicker-default"
+                                         id="locationpicker-default"></div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+                <!-- /simple panel -->
+                <!-- Simple panel 2 : Account Settings -->
+            </div>
 
         </div>
+
     </div>
 
-</div>
-    @include("errors.list")
+
+
+
+
+    <script>$('#locationpicker-default').locationpicker({
+            location: {latitude:{{$user->latitude }}  , longitude:{{$user->longitude }} },
+            radius: 300,
+            inputBinding: {
+                latitudeInput: $('#latitude'),
+                longitudeInput: $('#longitude'),
+                radiusInput: $('#us2-radius'),
+                locationNameInput: $('#city')
+            }
+        });
+    </script>
+
 @stop
+

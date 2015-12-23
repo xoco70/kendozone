@@ -80,8 +80,8 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        @foreach($tournament->competitors()->where("confirmed", "1")->orderBy('pivot_created_at', 'desc')->get() as $competitor)
-                            <li><a href="#"><i class="icon-user"></i>{{$competitor->name}}</a>
+                        @foreach($tournament->competitors()->where("confirmed", "1")->orderBy('pivot_updated_at', 'desc')->take(5)->get() as $competitor)
+                            <li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}</a>
                         @endforeach
 
                     </ul>

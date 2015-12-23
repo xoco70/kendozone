@@ -67,6 +67,7 @@ return [
     'city' => 'Ciudad',
     'state' => 'Estado',
     'country' => 'País',
+    'location' => 'Ubicación',
 
     // Nivel
     'local' => 'Local',
