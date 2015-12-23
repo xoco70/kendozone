@@ -23,6 +23,8 @@ class CreateSettingsTable extends Migration
             $table->tinyInteger('cat_fightDuration');
             $table->tinyInteger('cat_hasRoundRobin');
             $table->tinyInteger('cat_hasEncho');
+            $table->tinyInteger('cat_encho_qty');
+            $table->tinyInteger('cat_encho_duration');
             $table->tinyInteger('cat_hasHantei');
 
             $table->timestamps();

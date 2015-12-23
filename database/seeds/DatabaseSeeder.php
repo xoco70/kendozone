@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         }
         Model::unguard();
         //Seed the countries
-//        $this->call('CountriesSeeder');
-//        $this->command->info('Seeded the countries!');
+        $this->call('CountriesSeeder');
+        $this->command->info('Seeded the countries!');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call(GradeSeeder::class);
         $this->call(RoleSeeder::class);

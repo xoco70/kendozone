@@ -58,6 +58,12 @@ return [
 
     // Categories
     'category' => 'Categoria|Categorias',
+    'encho_qty' => '¿Cuantos encho habrá?',
+    'encho_infinite' => '0 para infinito',
+    'encho_duration' => '¿Cuanto dura cada encho?',
+
+
+
 
 
     // Places
