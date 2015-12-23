@@ -113,8 +113,7 @@
 
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="map-wrapper locationpicker-default"
-                                         id="locationpicker-default"></div>
+                                    <div class="map-container map-basic" ></div>
 
                                 </div>
                             </div>
@@ -132,19 +131,44 @@
     </div>
 
 
+<script>
+
+    $(function() {
+
+        // Setup map
+        function initialize() {
+
+            // Set coordinates
+            var myLatlng = new google.maps.LatLng({{$user->latitude}}, {{$user->longitude}});
+
+            // Options
+            var mapOptions = {
+                zoom: 5,
+                center: myLatlng
+            };
+
+            // Apply options
+            var map = new google.maps.Map($('.map-basic')[0], mapOptions);
 
 
+            // Add marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map
+            });
 
-    <script>$('#locationpicker-default').locationpicker({
-            location: {latitude:{{$user->latitude }}  , longitude:{{$user->longitude }} },
-            radius: 300,
-            inputBinding: {
-                latitudeInput: $('#latitude'),
-                longitudeInput: $('#longitude'),
-                radiusInput: $('#us2-radius'),
-                locationNameInput: $('#city')
-            }
-        });
+            // Attach click event
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+            });
+
+        };
+
+        // Initialize map on window load
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    });
+
     </script>
 
 @stop
