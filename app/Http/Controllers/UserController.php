@@ -70,7 +70,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
 
-        $data = User::uploadPic($request,null);
+        $data = User::uploadPic($request, null);
 //        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
         if ($request->is("users")) {
             $data['provider'] = "created";
@@ -116,7 +116,7 @@ class UserController extends Controller
         $grades = Grade::orderBy('order')->lists('name', 'id');
 //        $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user',  'grades', 'roles')); // 'countries',
+        return view('users.edit', compact('user', 'grades', 'roles')); // 'countries',
     }
 
     /**
@@ -163,20 +163,25 @@ class UserController extends Controller
 //        return view('users.show', compact('user', 'countries', 'grades'));
 //    }
 
-    public function exportExcel(Request $request){
-        Excel::create('Filename', function($excel) {
+    public function exportUsersExcel()
+    {
+        Excel::create(trans_choice('crud.user', 2), function ($excel) {
 
             // Set the title
-            $excel->setTitle('Our new awesome title');
+            $excel->setTitle(trans_choice('crud.user', 2));
 
             // Chain the setters
-            $excel->setCreator('Maatwebsite')
-                ->setCompany('Maatwebsite');
+            $excel->setCreator('Kendonline')
+                ->setCompany('Kendonline');
 
             // Call them separately
-            $excel->setDescription('A demonstration to change the file properties');
+            $excel->setDescription('A list of users');
+            $excel->sheet(trans_choice('crud.user', 2), function ($sheet) {
+                $users = User::all();
+                $sheet->fromArray($users);
+            });
 
-        })->export('xls')
-        ;
+
+        })->export('xls');
     }
 }

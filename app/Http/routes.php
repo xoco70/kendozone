@@ -67,7 +67,7 @@ Route::post('auth/invite', 'Auth\AuthController@postInvite');
 Route::group(['middleware' => 'auth'],
     function () {
         Route::resource('users', 'UserController');
-        Route::get('users/exportExcel', 'UserController@exportExcel');
+        Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
     });
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],

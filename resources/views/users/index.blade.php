@@ -12,7 +12,7 @@
                                     </a>
 
 </span>
-                <a href="{!!   URL::action('UserController@exportExcel') !!}" class="btn btn-success btn-xs pull-right"><i class="icon-file-excel position-left"></i>Export
+                <a href="{!!   URL::action('UserController@exportUsersExcel') !!}" class="btn btn-success btn-xs pull-right"><i class="icon-file-excel position-left"></i>Export
                     to Excel</a>
 
                 <tr>
