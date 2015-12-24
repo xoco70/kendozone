@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
     function () {
         Route::resource('tournaments', 'TournamentController');
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
+        Route::get('tournaments/{tournamentId}/categories', 'TournamentController@getCategories');
+        Route::post('tournaments/categories', 'TournamentController@postCategory');
 
         Route::resource('invite', 'InviteController');
 

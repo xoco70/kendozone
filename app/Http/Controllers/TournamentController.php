@@ -143,6 +143,29 @@ class TournamentController extends Controller
 
         return view("tournaments/users", compact('users'));
     }
+
+    public function getCategories($tournamentId)
+    {
+        $tournament = Tournament::find($tournamentId)->first();
+        $categories = $tournament->categories;
+
+//        $users = $tournament->competitors;
+
+
+        return view("tournaments/categories", compact('categories'));
+    }
+
+    public function postCategory(Request $request)
+    {
+        dd($request);
+//        $tournament = Tournament::find($tournamentId)->first();
+//        $categories = $tournament->categories;
+
+//        $users = $tournament->competitors;
+
+
+        return view("tournaments/categories", compact('categories'));
+    }
     /**
      * Remove the specified resource from storage.
      *
