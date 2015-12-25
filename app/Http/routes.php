@@ -73,9 +73,15 @@ Route::group(['middleware' => 'auth'],
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
     function () {
         Route::resource('tournaments', 'TournamentController');
+
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
-        Route::get('tournaments/{tournamentId}/categories', 'TournamentController@getCategories');
-        Route::post('tournaments/categories', 'TournamentController@postCategory');
+
+
+        Route::resource('tournaments/{tournamentId}/categorySettings', 'CategorySettingsController');
+
+//        Route::get('tournaments/{tournamentId}/categorySetting', 'TournamentController@getCategories');
+//        Route::post('tournaments/{tournamentId}/categorySetting', 'TournamentController@postCategory');
+//        Route::patch('tournaments/{tournamentId}/categorySetting/{categorySettingId}', 'TournamentController@updateCategory');
 
         Route::resource('invite', 'InviteController');
 
@@ -86,7 +92,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
 //        Route::resource('places', 'PlaceController');
     });
 
-
+//Event::listen('illuminate.query', function($query)
+//{
+//        var_dump($query);
+//});
 
 //Route::resource('shinpan', 'ShinpanController');
 //Route::resource('clubs', 'ClubController');

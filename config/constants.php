@@ -15,8 +15,20 @@ return [
     'ROLE_PRESIDENT' => '4',
     'ROLE_COMPETITOR' => '5',
 
+    'CAT_FIGHT_DURATION' => '180',
+    'CAT_ISTEAM' => '0',
+    'CAT_TEAM' => '0',
+    'CAT_HASROUNDROBIN' => '1',
+    'CAT_ROUNDROBINWINNER' => '1',
+    'CAT_HASENCHO' => '1',
+    'CAT_ENCHO_QTY' => '2',
+    'CAT_ENCHO_DURATION' => '90',
+    'CAT_HASHANTEI' => '0',
+
+
     'CLIENT_IP' => $_SERVER['REMOTE_ADDR'],
     'COUNTRY_ID_DEFAULT' => '250', // France
     'PAGINATION' => '20'
+
 
 ];

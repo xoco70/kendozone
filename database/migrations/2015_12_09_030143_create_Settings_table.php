@@ -18,14 +18,15 @@ class CreateSettingsTable extends Migration
             // General Section
 
             // Category Section
-            $table->tinyInteger('cat_teamsize');
-            $table->tinyInteger('cat_roundRobinWinner');
-            $table->tinyInteger('cat_fightDuration');
-            $table->tinyInteger('cat_hasRoundRobin');
-            $table->tinyInteger('cat_hasEncho');
-            $table->tinyInteger('cat_encho_qty');
-            $table->tinyInteger('cat_encho_duration');
-            $table->tinyInteger('cat_hasHantei');
+            $table->tinyInteger('isteam');
+            $table->tinyInteger('teamsize');
+            $table->tinyInteger('fightDuration');
+            $table->tinyInteger('hasRoundRobin');
+            $table->tinyInteger('roundRobinWinner');
+            $table->tinyInteger('hasEncho');
+            $table->tinyInteger('encho_qty');
+            $table->tinyInteger('encho_duration');
+            $table->tinyInteger('hasHantei');
 
             $table->timestamps();
             $table->engine = 'InnoDB';

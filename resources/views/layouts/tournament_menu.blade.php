@@ -34,7 +34,7 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/categories"><i
+                        <li><a href="/tournaments/{{$tournament->id}}/categorySettings"><i
                                         class="icon-cog2"></i>{{trans_choice('crud.category',2)}}</a></li>
                         <!-- badge-flat border-success text-success-600-->
                         <li><a href="/tournaments/{{$tournament->id}}/users"><i

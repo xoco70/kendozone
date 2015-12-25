@@ -44,4 +44,7 @@ return [
     'country' => 'País',
     'statistics' => 'Estadisticas',
 
+    //Settings
+
+    'isTeam' => '¿Por equipo?',
 ];

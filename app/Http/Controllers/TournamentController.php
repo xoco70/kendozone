@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategorySettings;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 //use App\Place;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 
 class TournamentController extends Controller
@@ -53,7 +55,7 @@ class TournamentController extends Controller
         $tournament = new Tournament();
 //        dd($categories);
 //        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact( 'levels', 'categories','tournament'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament'));
     }
 
     /**
@@ -87,7 +89,7 @@ class TournamentController extends Controller
 //        $level = TournamentLevel::where("id","=",$tournament->level_id)->first();
 //        $tournament->delete();
 //        return redirect("tournaments");
-        return view('tournaments.show', compact('tournament','categories','levels'));
+        return view('tournaments.show', compact('tournament', 'categories', 'levels'));
     }
 
     /**
@@ -102,7 +104,7 @@ class TournamentController extends Controller
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
 //        dd($tournament);
-        return view('tournaments.edit', compact('tournament', 'levels','categories'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories'));
     }
 
     /**
@@ -144,28 +146,34 @@ class TournamentController extends Controller
         return view("tournaments/users", compact('users'));
     }
 
-    public function getCategories($tournamentId)
-    {
-        $tournament = Tournament::find($tournamentId)->first();
-        $categories = $tournament->categories;
-
-//        $users = $tournament->competitors;
-
-
-        return view("tournaments/categories", compact('categories'));
-    }
-
-    public function postCategory(Request $request)
-    {
-        dd($request);
+//    public function getCategories($tournamentId)
+//    {
 //        $tournament = Tournament::find($tournamentId)->first();
 //        $categories = $tournament->categories;
+//
+////        $users = $tournament->competitors;
+//
+//
+//        return view("tournaments.categories", compact('categories', 'tournamentId'));
+//    }
 
-//        $users = $tournament->competitors;
+//    public function postCategory(Request $request)
+//    {
+//
+//        CategorySettings::create($request->all());
+//        flash("success",Lang::get('core.operation_successfull'));
+//        return view("tournaments/categories", compact('categories'));
+//    }
 
-
+    public function updateCategory(Request $request, $categorySettingsId)
+    {
+        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
+        $categorySettings->update($request->all());
+        flash("success",Lang::get('core.operation_successfull'));
         return view("tournaments/categories", compact('categories'));
     }
+
+
     /**
      * Remove the specified resource from storage.
      *

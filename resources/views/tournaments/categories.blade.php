@@ -20,9 +20,22 @@
                     <?php  $first = true ?>
                     @foreach($categories as $category)
                     <div class="tab-pane {{$first ? 'active':'' }}" id="{{$category->id}}">
-                        <?php $first = false ?>
+                        <?php $first = false;
+                        $categorySettings = DB::table('category_settings')
+                                ->where("tournament_id",$tournamentId)
+                                ->where("category_id",$category->id)
+                                ->first();
+
+                        ?>
                         <!-- TAB CATEGORIES DEFAULT SETTING -->
-                        {!! Form::model($category, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@postCategory", $category->id]]) !!}
+                        @if (is_null($categorySettings))
+                            {!! Form::open(["url" => "tournaments/categorySettings"]) !!}
+                        @else
+                        {!! Form::model($categorySettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $categorySettings->id), 'method' => 'PATCH')) !!}
+                        @endif
+
+                        {!! Form::hidden('tournament_id', $tournamentId) !!}
+                        {!! Form::hidden('category_id', $category->id) !!}
                         @include('layouts.categorySettings')
                         {!! Form::close() !!}
                         <!-- END TAB CATEGORIES DEFAULT SETTING -->

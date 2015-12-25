@@ -17,22 +17,18 @@ class Category extends Model
 
     public function getNameAttribute($name)
     {
-
         return Lang::get($name);
     }
 
-//    protected $fillable = [
-//        'category',
-//        'tournamentId',
-//
-//    ];
-
-//
     public function tournaments()
     {
         return $this->belongsToMany('App\Tournament');
     }
 
+    public function settings()
+    {
+        return $this->hasOne('App\CategorySettings');
+    }
 
     public function shinpans()
     {

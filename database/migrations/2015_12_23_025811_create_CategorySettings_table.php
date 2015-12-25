@@ -19,11 +19,14 @@ class CreateCategorySettingsTable extends Migration
             // General Section
 
             // Category Section
+            $table->tinyInteger('isTeam');
             $table->tinyInteger('teamsize');
-            $table->tinyInteger('roundRobinWinner');
             $table->tinyInteger('fightDuration');
             $table->tinyInteger('hasRoundRobin');
+            $table->tinyInteger('roundRobinWinner');
             $table->tinyInteger('hasEncho');
+            $table->tinyInteger('encho_qty');
+            $table->tinyInteger('encho_duration');
             $table->tinyInteger('hasHantei');
 
             $table->timestamps();

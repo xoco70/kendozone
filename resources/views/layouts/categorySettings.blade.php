@@ -1,21 +1,30 @@
 
 <div class="tab-pane" id="category">
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
+        <div class="col-md-2">
+            <div class="checkbox-switch ">
+                <label>
 
-                {!!  Form::label('teamsize', trans('crud.teamsize')) !!}
-                {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
-                {!!  Form::input('number','teamsize', old('teamSize'), ['class' => 'form-control','size']) !!}
+                    {!!  Form::label('isTeam', trans('core.isTeam')) !!} <br/>
+                    {!!   Form::hidden('isTeam', 0) !!}
+                    {!!   Form::checkbox('isTeam', 1, old('isTeam'), ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+
+                </label>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
+            {!!  Form::label('teamsize', trans('crud.teamsize')) !!}
+            {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
+            {!!  Form::input('number','teamsize', old('teamSize'), ['class' => 'form-control','size']) !!}
+        </div>
+        <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
                 {!!  Form::input('number','fightDuration', old('fightDuration'), ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-2">
             <div class="checkbox-switch">
