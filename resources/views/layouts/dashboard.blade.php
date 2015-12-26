@@ -86,7 +86,7 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                    {!!  $currentModelName !!}
+                                    {!!  isset($currentModelName) ? $currentModelName :"" !!}
                             </span>
                         </h1>
                     </div>

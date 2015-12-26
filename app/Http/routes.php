@@ -70,7 +70,8 @@ Route::group(['middleware' => 'auth'],
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
     });
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
+//Route::group(['middleware' => ['auth', 'roles', 'ownTournament'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
+Route::group(['middleware' => ['auth', 'ownTournament']],
     function () {
         Route::resource('tournaments', 'TournamentController');
 
@@ -78,11 +79,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['SuperAdmin', 'Owne
 
         Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
-
-//        Route::get('tournaments/{tournamentId}/categorySetting', 'TournamentController@getCategories');
-//        Route::post('tournaments/{tournamentId}/categorySetting', 'TournamentController@postCategory');
-//        Route::patch('tournaments/{tournamentId}/categorySetting/{categorySettingId}', 'TournamentController@updateCategory');
-
         Route::resource('invite', 'InviteController');
 
         Route::resource('competitors', 'CompetitorController');
