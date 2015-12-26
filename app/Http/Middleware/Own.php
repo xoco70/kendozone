@@ -35,7 +35,14 @@ class Own
                 $user = $request->users;
                 // User is superadmin, or is the user himself
                 if ($userLogged->role->name != "SuperAdmin" && $userLogged->id != $user->id) {
-                    return view('errors.general');
+                    return view('errors.general',
+                        ['code' => '403',
+                            'message' => 'Forbidden!',
+                            'quote' => '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”',
+                            'author' => 'Tabitha Suzuma',
+                            'source' => 'Forbidden',
+                        ]
+                    );
                 }
             }
 

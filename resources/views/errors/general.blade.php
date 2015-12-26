@@ -15,11 +15,11 @@
 
                     <!-- Error wrapper -->
                     <div class="container-fluid text-center">
-                        <h1 class="error-title">403</h1>
-                        <h6 class="text-semibold content-group">Forbidden!</h6>
+                        <h1 class="error-title">{{$code}}</h1>
+                        <h6 class="text-semibold content-group">{{$message}}</h6>
                         <blockquote class="no-margin">
-                            “And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”
-                            <footer>Tabitha Suzuma, <cite title="Source Title">Forbidden</cite></footer>
+                            {{$quote}}
+                            <footer>{{$author}} ,<cite title="Source Title">{{$source}}</cite></footer>
                         </blockquote>
 
                         <blockquote><br/>
