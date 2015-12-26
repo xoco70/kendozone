@@ -14,11 +14,11 @@ class CategorySettings extends Model
         "tournament_id",
         "category_id",
         "isTeam",
-        "teamsize",
+        "teamSize",
         "fightDuration",
         "hasEncho",
-        "encho_qty",
-        "encho_duration",
+        "enchoQty",
+        "enchoDuration",
         "hasRoundRobin",
         "roundRobinWinner",
         "hasHantei",
@@ -27,34 +27,38 @@ class CategorySettings extends Model
 
     public static function getDefaultSettings()
     {
-        $categorySetting = Auth::getUser()->settings;
-        if ($categorySetting == null) {
-            $categorySetting = new CategorySettings();
-            $categorySetting->fightDuration = Config::get('constants.CAT_FIGHT_DURATION');
-            $categorySetting->isTeam = Config::get('constants.CAT_ISTEAM');
-            $categorySetting->teamsize = Config::get('constants.CAT_TEAMSIZE');
-            $categorySetting->hasRoundRobin = Config::get('constants.CAT_HASROUNDROBIN');
-            $categorySetting->roundRobinWinner = Config::get('constants.CAT_ROUNDROBINWINNER');
-            $categorySetting->hasEncho = Config::get('constants.CAT_HASENCHO');
-            $categorySetting->encho_qty = Config::get('constants.CAT_ENCHO_QTY');
-            $categorySetting->encho_duration = Config::get('constants.CAT_ENCHO_DURATION');
-            $categorySetting->hasHantei = Config::get('constants.CAT_HASHANTEI');
+        if (Auth::check()) {
+            $user = Auth::user();
+            $categorySetting = $user->settings;
 
-        } else {
-            if ($categorySetting->fightDuration  == 0)
-                $categorySetting->fightDuration = Config::get('CAT_FIGHT_DURATION');
+            if ($categorySetting == null) {
+                $categorySetting = new CategorySettings();
+                $categorySetting->fightDuration = Config::get('constants.CAT_FIGHT_DURATION');
+                $categorySetting->isTeam = Config::get('constants.CAT_ISTEAM');
+                $categorySetting->teamSize = Config::get('constants.CAT_TEAMSIZE');
+                $categorySetting->hasRoundRobin = Config::get('constants.CAT_HASROUNDROBIN');
+                $categorySetting->roundRobinWinner = Config::get('constants.CAT_ROUNDROBINWINNER');
+                $categorySetting->hasEncho = Config::get('constants.CAT_HASENCHO');
+                $categorySetting->enchoQty = Config::get('constants.CAT_enchoQty');
+                $categorySetting->enchoDuration = Config::get('constants.CAT_ENCHO_DURATION');
+                $categorySetting->hasHantei = Config::get('constants.CAT_HASHANTEI');
 
-            if ($categorySetting->hasRoundRobin && $categorySetting->roundRobinWinner == 0)
-                $categorySetting->roundRobinWinner = Config::get('CAT_ROUNDROBINWINNER');
+            } else {
+                if ($categorySetting->fightDuration == 0)
+                    $categorySetting->fightDuration = Config::get('CAT_FIGHT_DURATION');
 
-            if ($categorySetting->hasEncho && $categorySetting->encho_qty == 0)
-                $categorySetting->encho_qty = Config::get('CAT_ENCHO_QTY');
+                if ($categorySetting->hasRoundRobin && $categorySetting->roundRobinWinner == 0)
+                    $categorySetting->roundRobinWinner = Config::get('CAT_ROUNDROBINWINNER');
 
-            if ($categorySetting->hasEncho && $categorySetting->encho_duration == 0)
-                $categorySetting->encho_duration = Config::get('CAT_ENCHO_DURATION');
+                if ($categorySetting->hasEncho && $categorySetting->enchoQty == 0)
+                    $categorySetting->enchoQty = Config::get('CAT_enchoQty');
 
+                if ($categorySetting->hasEncho && $categorySetting->enchoDuration == 0)
+                    $categorySetting->enchoDuration = Config::get('CAT_ENCHO_DURATION');
+
+            }
+            return $categorySetting;
         }
-    return $categorySetting;
     }
 
 }

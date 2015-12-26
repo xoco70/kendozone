@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
     protected $table = 'settings';
-    protected $fillable = ['cat_teamsize','cat_roundRobinWinner','cat_fightDuration','cat_hasRoundRobin','cat_hasEncho','cat_hasHantei'];
+    protected $fillable = ['isTeam','teamSize','fightDuration','hasRoundRobin','roundRobinWinner','hasEncho','enchoQty','enchoDuration', 'hasHantei'];
     public $timestamps = true;
 
 
-
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
 }

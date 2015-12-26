@@ -49,7 +49,7 @@
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
     @if (Request::is("tournaments/*"))
-        {!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}
+        {{--{!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}--}}
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 

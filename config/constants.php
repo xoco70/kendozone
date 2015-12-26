@@ -21,7 +21,7 @@ return [
     'CAT_HASROUNDROBIN' => '1',
     'CAT_ROUNDROBINWINNER' => '1',
     'CAT_HASENCHO' => '1',
-    'CAT_ENCHO_QTY' => '2',
+    'CAT_enchoQty' => '2',
     'CAT_ENCHO_DURATION' => '90',
     'CAT_HASHANTEI' => '0',
 

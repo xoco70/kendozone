@@ -36,10 +36,10 @@ return [
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'limitDateRegistration' => 'Fecha limite de registro',
-    'teamsize' => 'Tamaño de equipos',
-    'fightingAreas' => 'Cantidad de areas de combate',
-    'fightDuration' =>'Duración del combate',
-    'hasRoundRobin' => 'Round Robin?',
+    'teamSize' => 'Tamaño de equipos',
+    'fightingAreas' => 'Areas',
+    'fightDuration' =>'Duración',
+    'hasRoundRobin' => 'RRobin?',
     'roundRobinWinner' => 'Cuantos competidores salen del Round Robin',
     'hasEncho' => 'Encho?',
     'hasHantei' => 'Hantei?',
@@ -58,9 +58,9 @@ return [
 
     // Categories
     'category' => 'Categoria|Categorias',
-    'encho_qty' => '¿Cuantos encho habrá?',
+    'enchoQty' => '¿Cuantos encho habrá?',
     'encho_infinite' => '0 para infinito',
-    'encho_duration' => '¿Cuanto dura cada encho?',
+    'enchoDuration' => '¿Cuanto dura cada encho?',
 
 
 

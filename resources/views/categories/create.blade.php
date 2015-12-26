@@ -4,16 +4,21 @@
     @include("errors.list")
 
     <div class="container">
-        <div class="row col-md-8 custyle">
+        <div class="row col-md-10 custyle">
 
-            {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url'=>"tournaments/$tournamentId/categories/$categoryId/settings", 'enctype' => 'multipart/form-data']) !!}
 
-            @include("users.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
-
+                @include('layouts.categorySettings')
 
             {!! Form::close()!!}
         </div>
     </div>
+    <script>
+
+        $(function () {
+            $(".switch").bootstrapSwitch();
+        });
+    </script>
 
 @stop
 

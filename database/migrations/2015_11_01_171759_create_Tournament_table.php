@@ -11,6 +11,11 @@ class CreateTournamentTable extends Migration {
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
             $table->Integer('user_id')->unsigned();
+			$table->foreign('user_id')
+					->references('id')
+					->on('users')
+					->onDelete('cascade');
+
 			$table->string('name');
             $table->date('date');
             $table->date('registerDateLimit');
@@ -30,13 +35,6 @@ class CreateTournamentTable extends Migration {
             $table->string("latitude");
             $table->string("longitude");
 			$table->integer("level_id")->unsigned()->default(1);
-
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-
 			$table->foreign('level_id')
 					->references('id')
 					->on('tournamentLevel')

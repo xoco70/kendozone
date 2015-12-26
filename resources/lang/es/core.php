@@ -46,5 +46,5 @@ return [
 
     //Settings
 
-    'isTeam' => '¿Por equipo?',
+    'isTeam' => 'Equipo',
 ];

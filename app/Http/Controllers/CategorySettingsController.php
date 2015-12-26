@@ -15,40 +15,27 @@ use Illuminate\Support\Facades\View;
 class CategorySettingsController extends Controller
 {
 
-    protected $currentModelName;
+    protected $currentModelName,$defaultSettings;
 
     public function __construct()
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-        $this->currentModelName = trans_choice('crud.categorySettings', 1);
-        $this->modelPlural = trans_choice('crud.categorySettings', 2);
+        $this->currentModelName = trans_choice('crud.categorySettings', 2);
         View::share('currentModelName', $this->currentModelName);
-        View::share('modelPlural', $this->modelPlural);
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($tournamentId)
-    {
-        $tournament = Tournament::find($tournamentId)->first();
-        $categories = $tournament->categories;
-        $defaultSettings = CategorySettings::getDefaultSettings();
-//        dd($defaultSettings);
-        return view("categories.index", compact('categories','defaultSettings'));
-    }
+        $this->defaultSettings = CategorySettings::getDefaultSettings();
 
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($tournamentId, $categoryId)
     {
-        //
+        $defaultSettings =  $this->defaultSettings;
+        return view("categories.create", compact('tournamentId','categoryId','defaultSettings'));
     }
 
     /**
@@ -57,14 +44,14 @@ class CategorySettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$tournamentId, $categoryId)
     {
+        $request->request->add(['tournament_id' => $tournamentId ]);
+        $request->request->add(['category_id' => $categoryId ]);
         CategorySettings::create($request->all());
-        $tournamentId = $request->get("tournament_id");
-        $tournament = Tournament::findOrFail($tournamentId);
-        $categories = $tournament->categories;
+
         flash("success",Lang::get('core.operation_successfull'));
-        return view("tournaments/categories", compact('categories'));
+        return redirect("tournaments/$tournamentId/categories");
     }
 
     /**
@@ -84,9 +71,11 @@ class CategorySettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($categorySettingsId)
     {
-        //
+        dd($categorySettingsId);
+        $defaultSettings =  $this->defaultSettings;
+        return view("categories.create", compact('tournamentId','categoryId','defaultSettings'));
     }
 
     /**

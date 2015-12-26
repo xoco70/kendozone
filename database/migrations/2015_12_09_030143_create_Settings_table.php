@@ -12,20 +12,24 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('settings', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            // General Section
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             // Category Section
-            $table->tinyInteger('isteam');
-            $table->tinyInteger('teamsize');
+            $table->tinyInteger('isTeam');
+            $table->tinyInteger('teamSize');
             $table->tinyInteger('fightDuration');
             $table->tinyInteger('hasRoundRobin');
             $table->tinyInteger('roundRobinWinner');
             $table->tinyInteger('hasEncho');
-            $table->tinyInteger('encho_qty');
-            $table->tinyInteger('encho_duration');
+            $table->tinyInteger('enchoQty');
+            $table->tinyInteger('enchoDuration');
             $table->tinyInteger('hasHantei');
 
             $table->timestamps();
