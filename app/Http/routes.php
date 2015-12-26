@@ -34,15 +34,15 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 //Social Login
-Route::get('auth/login/{provider?}',[
+Route::get('auth/login/{provider?}', [
     'uses' => 'Auth\AuthController@getSocialAuth',
-    'as'   => 'auth.getSocialAuth'
+    'as' => 'auth.getSocialAuth'
 ]);
 
 
-Route::get('/login/callback/{provider?}',[
+Route::get('/login/callback/{provider?}', [
     'uses' => 'Auth\AuthController@getSocialAuthCallback',
-    'as'   => 'auth.getSocialAuthCallback'
+    'as' => 'auth.getSocialAuthCallback'
 ]);//Route::get('/', function () {
 //    return Redirect::to('/frontend');
 //});
@@ -64,16 +64,13 @@ Route::post('auth/invite', 'Auth\AuthController@postInvite');
 //    'uses' => 'PlaceController@index',
 //    'roles' => ['Admin', 'manager']
 //]);
-Route::group(['middleware' => 'auth'],
-    function () {
-        Route::resource('users', 'UserController');
-        Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
-    });
 //Route::group(['middleware' => ['auth', 'roles', 'ownTournament'], 'roles' => ['SuperAdmin', 'Owner', 'Admin', 'Moderator']],
-Route::group(['middleware' => ['auth', 'ownTournament']],
+Route::group(['middleware' => ['auth', 'own']],
     function () {
         Route::resource('tournaments', 'TournamentController');
+        Route::resource('users', 'UserController');
+        Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
 
@@ -85,6 +82,7 @@ Route::group(['middleware' => ['auth', 'ownTournament']],
         Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');
         Route::resource('country', 'CountryController');
+
 //        Route::resource('places', 'PlaceController');
     });
 

@@ -1,7 +1,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="#"><img src="/images/logo_light.png" alt=""></a>
+		<a class="navbar-brand" href="/"><img src="/images/logo_light.png" alt=""></a>
 
 		<ul class="nav navbar-nav visible-xs-block">
 			<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>

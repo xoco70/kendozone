@@ -58,39 +58,43 @@
         </div>
     </div>
     <br/>
-    <div class="sidebar sidebar-default">
+    <?php
+    $competitors = $tournament->competitors()->where("confirmed", "1")->orderBy('pivot_updated_at', 'desc')->take(5)->get();
+    ?>
+    @if (sizeof($competitors)>0)
 
-        <div class="sidebar-content">
+        <div class="sidebar sidebar-default">
 
-            {{--Get the last 10 user registration--}}
-            <?php
-            //                    $latestUsers = $tournament->competitors->orderBy('created_at', 'desc')->take(10);
-            //                    dd($latestUsers);
+            <div class="sidebar-content">
 
-            ?>
 
-                    <!-- Sub navigation -->
-            <div class="sidebar-category">
-                <div class="category-title">
-                    <span>{{ Lang::get("crud.latest_competitors") }}</span>
-                    <ul class="icons-list">
-                        <li><a href="#" data-action="collapse"></a></li>
-                    </ul>
+                <!-- Sub navigation -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>{{ Lang::get("crud.latest_competitors") }}</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="category-content no-padding">
+                        <ul class="navigation navigation-alt navigation-accordion">
+                            @foreach($competitors as $competitor)
+                                <li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}
+                                    </a>
+                            @endforeach
+
+                        </ul>
+                    </div>
+
                 </div>
 
-                <div class="category-content no-padding">
-                    <ul class="navigation navigation-alt navigation-accordion">
-                        @foreach($tournament->competitors()->where("confirmed", "1")->orderBy('pivot_updated_at', 'desc')->take(5)->get() as $competitor)
-                            <li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}</a>
-                        @endforeach
+                <!-- /sub navigation -->
 
-                    </ul>
-                </div>
+
             </div>
-            <!-- /sub navigation -->
-
-
         </div>
-    </div>
+    @endif
 </div>
 <!-- /detached sidebar -->

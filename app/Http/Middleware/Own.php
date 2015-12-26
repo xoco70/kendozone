@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use stdClass;
 
-class OwnTournament
+class Own
 {
     /**
      * Check the ownership of tournaments
@@ -19,17 +19,27 @@ class OwnTournament
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            $user = Auth::user();
-            $tournaments = $user->tournaments;
-            $tournament = null;
+            $userLogged = Auth::user();
+
+            // Check if user own tournament
             if ($request->tournaments != null || $request->tournamentId != null) {
+                $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournaments;
                 if ($tournament != null) {
                     if (!$tournaments->contains($tournament)) {
                         return view('errors.general');
                     }
                 }
+            }// Check if user own user
+            else if ($request->users != null || $request->userId != null) {
+                $user = $request->users;
+                // User is superadmin, or is the user himself
+                if ($userLogged->role->name != "SuperAdmin" && $userLogged->id != $user->id) {
+                    return view('errors.general');
+                }
             }
+
+
         }
 
 
