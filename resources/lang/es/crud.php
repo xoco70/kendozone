@@ -62,7 +62,8 @@ return [
     'encho_infinite' => '0 para infinito',
     'enchoDuration' => '¿Cuanto dura cada encho?',
 
-
+    // CategorySetting
+    'categorySettings' => 'Configuración de categorias',
 
 
 

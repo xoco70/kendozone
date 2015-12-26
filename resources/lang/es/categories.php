@@ -12,7 +12,7 @@ return [
     'man_second_force' => 'Varonil Segunda Fuerza',
     'woman_first_force' => 'Feminil Primera Fuerza',
     'woman_second_force' => 'Feminil Segunda Fuerza',
-    'man_team' => 'Varonil por equpo',
+    'man_team' => 'Varonil por equipo',
     'woman_team' => 'Feminil por equipo',
     'mixed_team' => 'Mixto por equipo',
     '1dan' => 'Primer Dan',

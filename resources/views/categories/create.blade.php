@@ -5,7 +5,10 @@
 
     <div class="container">
         <div class="row col-md-10 custyle">
-
+            <?php
+                $category = \App\Category::findOrFail($categoryId);
+            ?>
+            <h2 align="center">{{ $category->name }}</h2>
             {!! Form::open(['url'=>"tournaments/$tournamentId/categories/$categoryId/settings", 'enctype' => 'multipart/form-data']) !!}
 
                 @include('layouts.categorySettings')
@@ -13,12 +16,7 @@
             {!! Form::close()!!}
         </div>
     </div>
-    <script>
 
-        $(function () {
-            $(".switch").bootstrapSwitch();
-        });
-    </script>
 
 @stop
 

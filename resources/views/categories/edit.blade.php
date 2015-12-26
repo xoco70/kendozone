@@ -4,14 +4,22 @@
     @include("errors.list")
 
     <div class="container">
-        <div class="row col-md-8 custyle">
+        <div class="row col-md-10 custyle">
+            <?php
+            $category = \App\Category::findOrFail($categoryId);
+            ?>
+            <h2 align="center">{{ $category->name }}</h2>
+                {!! Form::model($categorySetting,
+                    ['method'=>"PATCH",
+                     "action" => ["CategorySettingsController@update",
+                     $tournamentId,
+                     $categoryId,
+                     $categorySetting->id]]) !!}
 
-            {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
+            @include('layouts.categorySettings')
 
-
-            @include("users.form", ["submitButton" => trans('crud.updateModel',['currentModelName' => $currentModelName]) ])
             {!! Form::close()!!}
-
         </div>
     </div>
+
 @stop

@@ -29,12 +29,14 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 //        $router->model('places','App\Place');
         $router->model('tournaments','App\Tournament');
+        $router->model('users','App\User');
+
         $router->model('competitors','App\Competitor');
         $router->model('federations','App\Federation');
         $router->model('associations','App\Association');
-        $router->model('settings','App\Settings');
-        $router->model('users','App\User');
-    }
+//        $router->model('settings','App\Settings');
+
+     }
 
     /**
      * Define the routes for the application.

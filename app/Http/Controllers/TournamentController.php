@@ -24,10 +24,10 @@ class TournamentController extends Controller
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-        $this->currentModelName = trans_choice('crud.tournament', 1);
-        $this->modelPlural = trans_choice('crud.tournament', 2);
+//        $this->currentModelName = trans_choice('crud.tournament', 1);
+        $this->currentModelName = trans_choice('crud.tournament', 2);
         View::share('currentModelName', $this->currentModelName);
-        View::share('modelPlural', $this->modelPlural);
+//        View::share('modelPlural', $this->modelPlural);
     }
 
     /**
@@ -169,7 +169,7 @@ class TournamentController extends Controller
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
         $categorySettings->update($request->all());
-        flash("success",Lang::get('core.operation_successfull'));
+        flash("success",Lang::get('core.operation_successful'));
         return view("tournaments/categories", compact('categories'));
     }
 

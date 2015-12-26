@@ -18,10 +18,8 @@ class CategoryController extends Controller
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-        $this->currentModelName = trans_choice('crud.category', 1);
-        $this->modelPlural = trans_choice('crud.category', 2);
+        $this->currentModelName = trans_choice('crud.category', 2);
         View::share('currentModelName', $this->currentModelName);
-        View::share('modelPlural', $this->modelPlural);
         $this->defaultSettings = CategorySettings::getDefaultSettings();
 
     }
@@ -37,4 +35,18 @@ class CategoryController extends Controller
         $defaultSettings =  $this->defaultSettings;
         return view("categories.index", compact('categories','defaultSettings'));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($categorySettingsId)
+    {
+        dd("CC");
+
+    }
+
+
 }

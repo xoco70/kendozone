@@ -93,3 +93,9 @@
     </div>
 
 </div>
+<script>
+
+    $(function () {
+        $(".switch").bootstrapSwitch();
+    });
+</script>
