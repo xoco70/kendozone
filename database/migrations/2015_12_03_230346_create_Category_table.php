@@ -20,14 +20,16 @@ class CreateCategoryTable extends Migration
         });
 
         Schema::create('category_tournament', function (Blueprint $table) {
-            $table->increments('id');
+
             $table->integer('tournament_id')->unsigned()->index();
+            $table->integer('category_id')->unsigned()->index();
+
+            $table->primary(array('tournament_id', 'category_id'));
             $table->foreign('tournament_id')
                 ->references('id')
                 ->on('tournament')
                 ->onDelete('cascade');
 
-            $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')
                 ->references('id')
                 ->on('category')

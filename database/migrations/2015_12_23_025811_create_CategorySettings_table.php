@@ -26,6 +26,13 @@ class CreateCategorySettingsTable extends Migration
                 ->on('category')
                 ->onDelete('cascade');
 
+            // Foreign key on the 2 fields in pivot table
+            $table
+                ->foreign(array('category_id', 'tournament_id'))
+                ->references(array('category_id', 'tournament_id'))
+                ->on('category_tournament');
+
+
             $table->unique(array('tournament_id', 'category_id'));
             // General Section
 
