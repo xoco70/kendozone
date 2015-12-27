@@ -40,35 +40,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof NotFoundHttpException) {
-            return response()->view('errors.general',
-                ['code' => '404',
-                    'message' => 'Server Error',
-                    'quote' => 'I will search for you through 1000 worlds and 10000 lifetimes!',
-                    'author' => 'Kai',
-                    'source' => '47 Ronin',
-                ]
-            );
-        }else if ($e instanceof HttpException){
-            return response()->view('errors.general',
-                ['code' => '500',
-                    'message' => 'Server Error',
-                    'quote' => 'Failure is the key to success; each mistake teaches us something',
-                    'author' => 'Morihei Ueshiba',
-                    'source' => '',
-                ]
-            );
-        }
-
-
-
-
-
-//        .
-//
-
-
-
+//        if ($e instanceof NotFoundHttpException) {
+//            return response()->view('errors.general',
+//                ['code' => '404',
+//                    'message' => 'Not Found',
+//                    'quote' => 'I will search for you through 1000 worlds and 10000 lifetimes!',
+//                    'author' => 'Kai',
+//                    'source' => '47 Ronin',
+//                ]
+//            );
+//        }else if ($e instanceof HttpException){
+//            return response()->view('errors.general',
+//                ['code' => '500',
+//                    'message' => 'Server Error',
+//                    'quote' => 'Failure is the key to success; each mistake teaches us something',
+//                    'author' => 'Morihei Ueshiba',
+//                    'source' => '',
+//                ]
+//            );
+//        }
 
         return parent::render($request, $e);
     }

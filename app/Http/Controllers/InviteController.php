@@ -44,7 +44,12 @@ class InviteController extends Controller
     {
         //
     }
-
+    /**
+     * Triggered when User click Activation Link received in mail
+     *
+     * @param  Request $request
+     * @param  AppMailer $mailer
+     */
     public function register($token)
     {
         // Get available invitation

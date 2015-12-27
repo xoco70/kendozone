@@ -15,7 +15,8 @@
     "webpatser/laravel-countries": "dev-master",
     "laravel/socialite": "~2.0",
     "torann/geoip": "0.2.*@dev",
-    "maatwebsite/excel": "~2.0.0"
+    "maatwebsite/excel": "~2.0.0",
+    "barryvdh/laravel-debugbar": "^2.1"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

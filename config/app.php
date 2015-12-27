@@ -149,6 +149,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -203,6 +204,7 @@ return [
         'Socialize' => Laravel\Socialite\Facades\Socialite::class,
         'GeoIP' => Torann\GeoIP\GeoIPFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

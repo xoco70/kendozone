@@ -52,9 +52,7 @@ class AuthController extends Controller
 
     public function __construct(Socialite $socialite)
     {
-
         $this->socialite = $socialite;
-        $this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
@@ -136,7 +134,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country_id' => $countryid,
+            'country_id' => $country->id,
             'role_id' => $data['role_id'],
             'city' => $location['city'],
             'latitude' => $location['lat'],
@@ -182,13 +180,7 @@ class AuthController extends Controller
         return view('auth.invite');
     }
 
-    /**
-     * Perform the registration.
-     *
-     * @param  Request $request
-     * @param  AppMailer $mailer
-     * @return \Redirect
-     */
+
     public function postInvite(AuthRequest $request)
     {
         $request->request->add(['role_id' => Config::get('constants.ROLE_COMPETITOR')]);
@@ -197,21 +189,27 @@ class AuthController extends Controller
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
         if (!is_null($invite)) {
+//            $user = User::create($request->all());
+//            if (!is_null($user)) {
+                Auth::loginUsingId(1);
+//            }
+            $tournamentId = $invite->tournament_id;
+//            $invite->consume();
 
-            $user = User::create($request->all());
-            $invite->consume();
             flash('success', Lang::get('auth.registration_completed'));
+            return redirect("/auth/register/users/1/tournaments/$tournamentId/categories");
 
         } else {
             dd("yes is null");
             flash('error', Lang::get('auth.no_invite'));
+            return redirect("/")->with('status', 'success');
         }
-
-        if (!is_null($user)) {
-            Auth::loginUsingId($user->id);
-        }
-        return redirect("/")->with('status', 'success');
     }
+    public function getCategories($userId, $tournamentId)
+    {
+        dd("hola");
+    }
+
 
     /**
      * Confirm a user's email address.
