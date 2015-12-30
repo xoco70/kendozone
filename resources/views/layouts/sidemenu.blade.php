@@ -49,8 +49,8 @@
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}><a href="/tournaments"><i
                                     class="icon-trophy2"></i> <span>Torneos</span></a></li>
                     {{--                    <li {{ (Request::is('places') ? 'class=active' : '') }}><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>--}}
-                    <li {{ (Request::is('competitors') ? 'class=active' : '') }}><a href="competitors"><i
-                                    class="icon-user"></i> <span>Competidores</span></a></li>
+                    <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
+                                    class="icon-mail5"></i> <span>{{trans_choice('crud.invite',2)}}</span></a></li>
 
                 </ul>
             </div>

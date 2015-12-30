@@ -53,10 +53,11 @@
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 
-        {{--Dual Box select--}}
-        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
-        {!! Html::script('http://maps.google.com/maps/api/js') !!}
+
     @endif
+    {{--Dual Box select--}}
+    {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
+    {!! Html::script('http://maps.google.com/maps/api/js') !!}
 
     @if (Request::is("invite/*"))
         {!! Html::script('js/plugins/multiple-emails.js') !!}

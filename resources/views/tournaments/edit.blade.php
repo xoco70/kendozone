@@ -229,10 +229,6 @@
                     </div>
                     <!-- /simple panel -->
                     <div class="panel panel-flat">
-                        {{--<div class="panel-heading " >--}}
-                        {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                        {{--</div>--}}
-
                         <div class="panel-body">
                             <div class="container-fluid">
                                 <fieldset title="{{trans_choice('crud.category',2)}}">

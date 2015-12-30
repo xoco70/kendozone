@@ -52,8 +52,8 @@ class Tournament extends Model
     public function competitors()
     {
 
-        return $this->belongsToMany('App\User')
-            ->withPivot('tournament_id', 'confirmed')
+        return $this->belongsToMany('App\User', 'category_tournament_user')
+            ->withPivot('tournament_id', 'category_id','confirmed')
             ->withTimestamps();
     }
 
@@ -76,10 +76,22 @@ class Tournament extends Model
                     ->withTimestamps();
     }
 
+    // We can use $tournament->category_user()->attach(id);
+    // Or         $tournament->category_user()->sync([1, 2, 3]);
+    // I'm not sure about the name
+
+    public function categories_user()
+    {
+        return $this->belongsToMany('App\Category','category_tournament_user',['tournament_id','user_id'])
+            ->withTimestamps();
+    }
+
+
     public function getCategoryList()
     {
         return $this->categories->lists('id')->all();
     }
+
 
     public function getDateAttribute($date)
     {

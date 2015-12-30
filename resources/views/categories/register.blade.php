@@ -16,16 +16,22 @@
                     <div class="container-fluid">
 
 
-                        {{--{!! Form::open(['url'=>"tournaments/", 'enctype' => 'multipart/form-data']) !!}--}}
-                        @foreach($tournament->categories as $key => $category)
+                        {!! Form::open(['url'=>"tournaments/", 'enctype' => 'multipart/form-data']) !!}
+                        <h6 class="coutent-group">Selecciona las categorias del torneo en las cuales deseas
+                            participar</h6>
+
+
+
+
+                    @foreach($tournament->categories as $key => $category)
                             @if ($key % 4 == 0)
                                 <div class="row">
                                     @endif
                                     <div class="col-md-3">
                                         <p>
-                                            {!!  Form::label($category->name, trans($category->name)) !!} <br/>
-                                            {!!   Form::hidden($category->name, 0) !!}
-                                            {!!   Form::checkbox($category->name, 0,0, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                            {!!  Form::label($category->id, trans($category->name)) !!} <br/>
+                                            {!!   Form::hidden($category->id, 0) !!}
+                                            {!!   Form::checkbox($category->id, 0,0, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>
                                     @if ($key % 3 == 0 && $key != 0)
@@ -40,7 +46,7 @@
 
                 </div>
             </div>
-            {{--{!! Form::close()!!}--}}
+            {!! Form::close()!!}
         </div>
     </div>
     <script>

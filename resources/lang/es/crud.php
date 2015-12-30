@@ -119,8 +119,10 @@ return [
     'send_invites' => 'Mandar Invitaciones',
 
     'confirmed' => 'Confirmado',
+    'used' => 'Usada',
     'results' => 'resultados',
     'latest_competitors' => 'Ultimos registros',
+    'organizer' => 'Organizador',
 
 
 

@@ -9,6 +9,8 @@ use App\Mailers\AppMailer;
 use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 
 class InviteController extends Controller
@@ -32,7 +34,9 @@ class InviteController extends Controller
      */
     public function index()
     {
+        $invites = Auth::user()->invites()->paginate(Config::get('constants.PAGINATION'));
 
+        return view('invitation.index', compact('invites'));
     }
 
     /**

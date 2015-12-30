@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth', 'own']],
 
         Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
-        Route::resource('invite', 'InviteController');
+        Route::resource('invites', 'InviteController');
 
         Route::resource('competitors', 'CompetitorController');
         Route::resource('grade', 'GradeController');
@@ -83,6 +83,8 @@ Route::group(['middleware' => ['auth', 'own']],
 
 //        Route::resource('places', 'PlaceController');
     });
+//        invite/{userId}/register/
+        Route::post('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@postCategories');
 
 //Event::listen('illuminate.query', function($query)
 //{

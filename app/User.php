@@ -168,6 +168,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasOne('App\Settings');
     }
 
+    public function invites()
+    {
+        return $this->hasMany('App\Invite', 'email','email');
+    }
+
     public function country()
     {
         return $this->belongsTo('Webpatser\Countries\Countries');

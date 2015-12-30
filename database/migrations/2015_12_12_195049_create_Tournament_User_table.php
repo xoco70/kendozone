@@ -12,12 +12,25 @@ class CreateTournamentUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('tournament_user', function (Blueprint $table) {
+        Schema::create('category_tournament_user', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('category_id')->unsigned()->index();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('category')
+                ->onDelete('cascade');
+
             $table->integer('tournament_id')->unsigned()->index();
             $table->foreign('tournament_id')
                 ->references('id')
                 ->on('tournament')
+                ->onDelete('cascade');
+
+            $table
+                ->foreign(array('category_id', 'tournament_id'))
+                ->references(array('category_id', 'tournament_id'))
+                ->on('category_tournament')
                 ->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->index();
@@ -42,6 +55,6 @@ class CreateTournamentUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tournament_user');
+        Schema::dropIfExists('category_tournament_user');
     }
 }

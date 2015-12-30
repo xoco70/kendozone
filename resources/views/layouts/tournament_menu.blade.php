@@ -59,7 +59,7 @@
     </div>
     <br/>
     <?php
-    $competitors = $tournament->competitors()->where("confirmed", "1")->orderBy('pivot_updated_at', 'desc')->take(5)->get();
+    $competitors = $tournament->competitors()->get();
     ?>
     @if (sizeof($competitors)>0)
 
