@@ -43,7 +43,7 @@ Route::group(['middleware' => ['guest']],
         // Registration routes...
         Route::get('auth/register', 'Auth\AuthController@getRegister');
         Route::post('auth/register', 'Auth\AuthController@postRegister');
-        get('auth/register/confirm/{token}', 'Auth\AuthController@confirmEmail');
+        Route::get('auth/register/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
 
         //Social Login
@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth', 'own']],
 //        Route::resource('places', 'PlaceController');
     });
 //        invite/{userId}/register/
-        Route::post('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@postCategories');
+        Route::post('invite/{inviteId}/categories', 'InviteController@registerCategories');
 
 //Event::listen('illuminate.query', function($query)
 //{

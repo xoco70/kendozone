@@ -26,7 +26,7 @@ return [
     'CAT_HASHANTEI' => '0',
 
 
-    'CLIENT_IP' => $_SERVER['REMOTE_ADDR'],
+    'CLIENT_IP' => '201.141.101.190',//$_SERVER['REMOTE_ADDR'],
     'COUNTRY_ID_DEFAULT' => '250', // France
     'PAGINATION' => '20'
 
