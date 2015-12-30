@@ -36,7 +36,7 @@
 
                         {!! Form::hidden('tournament_id', $tournamentId) !!}
                         {!! Form::hidden('category_id', $category->id) !!}
-                        @include('layouts.categorySettings')
+                        @include('categories.categorySettings')
                         {!! Form::close() !!}
                         <!-- END TAB CATEGORIES DEFAULT SETTING -->
                     </div>

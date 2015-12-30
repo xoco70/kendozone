@@ -63,9 +63,12 @@ class InviteController extends Controller
                 // Redirect to user creation --
                 return view('auth/invite', compact('token'));
             } else {
-                $invite->consume();
-                flash("success", "Registro completo");
-                return view('auth/login');
+//                $invite->consume();
+//                flash("success", "Registro completo");
+                $userId = $user->id;
+                $tournamentId = $invite->tournament_id;
+                return view("categories.register", compact('userId','tournamentId'));
+
 
 
             }

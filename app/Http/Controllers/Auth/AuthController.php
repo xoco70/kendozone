@@ -127,7 +127,7 @@ class AuthController extends Controller
         $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
         $country = $location['country'];
         // Get id from country
-        $country = Countries::where('name','=',$country)->first();
+        $country = Countries::where('name', '=', $country)->first();
 
 
         return User::create([
@@ -189,15 +189,16 @@ class AuthController extends Controller
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
         if (!is_null($invite)) {
-//            $user = User::create($request->all());
-//            if (!is_null($user)) {
+            $user = User::create($request->all());
+            if (!is_null($user)) {
                 Auth::loginUsingId(1);
-//            }
+            }
             $tournamentId = $invite->tournament_id;
+            $userId = $user->id;
 //            $invite->consume();
 
             flash('success', Lang::get('auth.registration_completed'));
-            return redirect("/auth/register/users/1/tournaments/$tournamentId/categories");
+            return view("categories.register", compact('userId','tournamentId'));
 
         } else {
             dd("yes is null");
@@ -205,6 +206,7 @@ class AuthController extends Controller
             return redirect("/")->with('status', 'success');
         }
     }
+
     public function getCategories($userId, $tournamentId)
     {
         dd("hola");

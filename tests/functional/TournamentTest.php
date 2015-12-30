@@ -138,7 +138,7 @@ class TournamentTest extends TestCase
             ->type('CDOM', 'venue')
             ->type('1.11111', 'latitude')
             ->type('2.22222', 'longitude')
-            ->press("Guardar")
+            ->press(trans("core.save"))
             ->see(Lang::get('core.operation_successful'))
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournament',

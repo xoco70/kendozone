@@ -9,17 +9,25 @@
             $category = \App\Category::findOrFail($categoryId);
             ?>
             <h2 align="center">{{ $category->name }}</h2>
-                {!! Form::model($categorySetting,
-                    ['method'=>"PATCH",
-                     "action" => ["CategorySettingsController@update",
-                     $tournamentId,
-                     $categoryId,
-                     $categorySetting->id]]) !!}
+            {!! Form::model($categorySetting,
+                ['method'=>"PATCH",
+                 "action" => ["CategorySettingsController@update",
+                 $tournamentId,
+                 $categoryId,
+                 $categorySetting->id]]) !!}
 
-            @include('layouts.categorySettings')
+            <div class="panel panel-flat">
 
-            {!! Form::close()!!}
+                <div class="panel-body">
+                    <div class="container-fluid">
+
+
+                        @include('categories.categorySettings')
+
+                        {!! Form::close()!!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 @stop

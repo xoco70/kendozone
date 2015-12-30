@@ -88,8 +88,8 @@
     {{--{!!   Form::hidden('tournament_id', $tournamentId) !!}--}}
     {{--{!!   Form::hidden('category_id', $categoryId) !!}--}}
 
-    <div class="form-group">
-        {!!  Form::submit("Submit", ['class' => 'btn btn-primary form-control']) !!}
+    <div align="right">
+        <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
     </div>
 
 </div>

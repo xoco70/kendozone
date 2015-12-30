@@ -61,7 +61,7 @@ Route::group(['middleware' => ['guest']],
 
 
 
-Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
+//Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
 
 Route::group(['middleware' => ['auth', 'own']],
     function () {

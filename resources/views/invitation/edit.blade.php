@@ -141,7 +141,7 @@
 
                             </div>
                             <div align="right">
-                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
 
@@ -205,7 +205,7 @@
 
                             </div>
                             <div align="right">
-                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
 
@@ -240,7 +240,7 @@
 
                                 </div>
                                 <div align="right">
-                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                    <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
                                 </div>
                             </div>
 

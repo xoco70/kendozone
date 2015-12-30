@@ -37,12 +37,12 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = Auth::user()->tournaments;
+        $tournaments = Auth::user()->tournaments()->paginate(Config::get('constants.PAGINATION'));
 //        $tournaments = Tournament::paginate(Config::get('constants.PAGINATION'));
 //
 //        dd($tournaments);
-        $tournaments = Tournament::where('user_id',Auth::user()->id)
-            ->paginate(Config::get('constants.PAGINATION'));;
+//        $tournaments = Tournament::where('user_id',Auth::user()->id)
+//            ->paginate(Config::get('constants.PAGINATION'));;
 //        $tournaments = Tournament::
 
 //        dd($tournaments->first()->user->name);

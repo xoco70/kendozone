@@ -27,7 +27,14 @@ class Own
                 $tournament = $request->tournaments;
                 if ($tournament != null) {
                     if (!$tournaments->contains($tournament)) {
-                        return view('errors.general');
+                        return view('errors.general',
+                            ['code' => '403',
+                                'message' => 'Forbidden!',
+                                'quote' => '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”',
+                                'author' => 'Tabitha Suzuma',
+                                'source' => 'Forbidden',
+                            ]
+                        );
                     }
                 }
             }// Check if user own user

@@ -27,7 +27,7 @@
                     @else
                         {!! Form::model($settings, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["SettingsController@update", $settings->id]]) !!}
                     @endif
-                    @include('layouts.categorySettings')
+                    @include('categories.categorySettings')
                     {!! Form::close() !!}
     <!-- END TAB CATEGORIES DEFAULT SETTING -->
 <div class="tab-pane" id="bottom-justified-divided-tab3">

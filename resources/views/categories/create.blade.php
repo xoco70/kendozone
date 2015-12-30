@@ -11,7 +11,7 @@
             <h2 align="center">{{ $category->name }}</h2>
             {!! Form::open(['url'=>"tournaments/$tournamentId/categories/$categoryId/settings", 'enctype' => 'multipart/form-data']) !!}
 
-                @include('layouts.categorySettings')
+                @include('categories.categorySettings')
 
             {!! Form::close()!!}
         </div>
