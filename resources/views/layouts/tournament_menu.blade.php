@@ -53,7 +53,7 @@
     <br/>
     <div class="row">
         <div class="col-md-12">
-            <p><a href="/invite/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
+            <p><a href="/invites/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
                   style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
 
         </div>

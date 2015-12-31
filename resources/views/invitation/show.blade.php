@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
 
-        {!! Form::open(['url'=>"invite"]) !!}
+
 
 
         <div class="content">
@@ -34,7 +34,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                                                {!! Form::open(['url'=>"/invite"]) !!}
+                                                {!! Form::open(['url'=>"/invites"]) !!}
                                                 <div class=" form-group">
                                                     {!!  Form::label('recipients', trans('crud.recipients')) !!}
                                                     {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
@@ -72,7 +72,7 @@
         </div>
 
 
-        {!! Form::close()!!}
+
 
         <script>
             $('#recipients').multiple_emails({

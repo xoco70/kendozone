@@ -31,6 +31,7 @@ class CreateSettingsTable extends Migration
             $table->tinyInteger('enchoQty');
             $table->tinyInteger('enchoDuration');
             $table->tinyInteger('hasHantei');
+            $table->smallInteger('cost');
 
             $table->timestamps();
             $table->engine = 'InnoDB';

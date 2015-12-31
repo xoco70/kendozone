@@ -72,7 +72,7 @@ class Tournament extends Model
     // I'm not sure about the name
     public function categories()
     {
-        return $this->belongsToMany('App\Category','category_tournament','tournament_id')
+        return $this->belongsToMany('App\Category')
                     ->withTimestamps();
     }
 

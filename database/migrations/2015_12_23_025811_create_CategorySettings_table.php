@@ -46,6 +46,7 @@ class CreateCategorySettingsTable extends Migration
             $table->tinyInteger('enchoQty');
             $table->smallInteger('enchoDuration');
             $table->tinyInteger('hasHantei');
+            $table->smallInteger('cost');
 
             $table->timestamps();
             $table->engine = 'InnoDB';

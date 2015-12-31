@@ -30,15 +30,16 @@ class Category extends Model
         return $this->hasOne('App\CategorySettings');
     }
 
+
 //    public function shinpans()
 //    {
 //        return $this->hasMany('App\Shinpan');
 //    }
 
-    public function competitors()
-    {
-        return $this->hasMany('App\Competitor');
-    }
+//    public function competitors()
+//    {
+//        return $this->hasMany('App\Competitor');
+//    }
 
 //    public function teams()
 //    {

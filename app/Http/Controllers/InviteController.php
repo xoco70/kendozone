@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class InviteController extends Controller
@@ -24,7 +25,6 @@ class InviteController extends Controller
         View::share('currentModelName', $this->currentModelName);
 
     }
-
 
 
     /**
@@ -48,6 +48,7 @@ class InviteController extends Controller
     {
         //
     }
+
     /**
      * Triggered when User click Activation Link received in mail
      *
@@ -58,21 +59,21 @@ class InviteController extends Controller
     {
         // Get available invitation
         $invite = Invite::getActiveInvite($token);
-        $currentModelName = trans('crud.select_categories');
+        $currentModelName = trans('crud.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
 //            $tournament = Tournament::findOrFail($invite->tournament_id);
             $user = User::where('email', $invite->email)->first();
             if (is_null($user)) {
                 // Redirect to user creation --
+                dd("pas de chance");
                 return view('auth/invite', compact('token'));
             } else {
 //                $invite->consume();
 //                flash("success", "Registro completo");
                 $userId = $user->id;
                 $tournamentId = $invite->tournament_id;
-                return view("categories.register", compact('userId','tournamentId','invite','currentModelName'));
-
+                return view("categories.register", compact('userId', 'tournamentId', 'invite', 'currentModelName'));
 
 
             }
@@ -86,18 +87,39 @@ class InviteController extends Controller
             }
         }
     }
+
     public function registerCategories(Request $request)
     {
         $categories = $request->get('cat');
+//        dd($categories);
         $inviteId = $request->inviteId;
         $invite = Invite::findOrFail($inviteId);
         $tournament = $invite->tournament;
-        $my = Auth::user()->categories;
-        dd($my);
-        dd($tournament->categories_user);
-        $tournament->categories_user()->sync($categories);
+
+
+        // Register Categories for the user
+        // Reset all categories, and then update selected values
+        DB::table('category_tournament_user')
+            ->where('tournament_id', $invite->tournament_id)
+            ->where('user_id', Auth::user()->id)
+            ->where('confirmed', 0)
+            ->delete();
+
+        if (sizeof($categories) > 0)
+            foreach ($categories as $categoryId) {
+                DB::table('category_tournament_user')->insert([
+                    ['tournament_id' => $invite->tournament_id,
+                        'category_id' => $categoryId,
+                        'user_id' => Auth::user()->id,
+                    ]
+
+                ]);
+            }
+
+
 //        $invite->consume();
-        flash("success", "Op exitosa");
+        flash("success", trans('core.operation_successful'));
+        return redirect("/invites");
 
     }
 

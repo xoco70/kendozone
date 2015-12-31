@@ -21,15 +21,26 @@
 
 
 
-
+                        {{--{{--}}
+                        {{--dd($tournament->categories)--}}
+                        {{--}}--}}
                     @foreach($tournament->categories as $key => $category)
+                        <?php
+                                $old = DB::table('category_tournament_user')
+                                    ->where('tournament_id',$tournament->id)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->where('category_id',$category->id)
+                                    ->count();
+
+                        ?>
                             @if ($key % 4 == 0)
                                 <div class="row">
                                     @endif
                                     <div class="col-md-3">
                                         <p>
+
                                             {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
-                                            {!!   Form::checkbox('cat['.$key.']', $category->id,null, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                            {!!   Form::checkbox('cat['.$key.']', $category->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>
                                     @if ($key % 3 == 0 && $key != 0)

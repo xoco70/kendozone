@@ -22,7 +22,7 @@ class CategorySettings extends Model
         "hasRoundRobin",
         "roundRobinWinner",
         "hasHantei",
-        "price",
+        "cost",
     ];
 
 

@@ -15,7 +15,7 @@ class Invite extends Model
         'email',
         'expiration',
         'active',
-        'used',
+//        'used',
     ];
 
     public function tournament(){
@@ -32,7 +32,7 @@ class Invite extends Model
         $invite->tournament_id = $tournament->id;
         $invite->expiration = $tournament->registerDateLimit;
         $invite->active = true;
-        $invite->used = false;
+//        $invite->used = false;
 
         if ($invite->save())
             return $code;
@@ -45,95 +45,95 @@ class Invite extends Model
      * @param $user
      * @param $invite
      */
-    public function consume()
-    {
-// User exists, just add it to tournament
-        // And update invite
-        $user = User::where('email', $this->email)->first();
-
-//        dd($this->tournament);
+//    public function consume()
+//    {
+//// User exists, just add it to tournament
+//        // And update invite
+//        $user = User::where('email', $this->email)->first();
 //
-        if (!$this->tournament->competitors->contains($user->id)) {
-            $this->tournament->competitors()->attach($user->id);
-        }
-        // Use the invitation
-        $this->update(['used' => 1]);
-    }
+////        dd($this->tournament);
+////
+//        if (!$this->tournament->competitors->contains($user->id)) {
+//            $this->tournament->competitors()->attach($user->id);
+//        }
+//        // Use the invitation
+//        $this->update(['used' => 1]);
+//    }
     public static function getActiveInvite($token)
     {
         $invite = Invite::where('code', $token)
             ->where('active', 1)
-            ->where('used', 0)
+//            ->where('used', 0)
             ->first();
         return $invite;
     }
 
-    public function active($code, $email)
-    {
-        DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
-            ->update(array('active' => True));
-    }
+//    public function active($code, $email)
+//    {
+//        DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email', '=', $email)
+//            ->update(array('active' => True));
+//    }
+//
+//    public function deactive($code, $email)
+//    {
+//        DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email', '=', $email)
+//            ->update(array('active' => False));
+//    }
 
-    public function deactive($code, $email)
-    {
-        DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
-            ->update(array('active' => False));
-    }
+//    public function used($code, $email)
+//    {
+//        DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email', '=', $email)
+//            ->update(array('used' => True));
+//    }
+//
+//    public function unuse($code, $email)
+//    {
+//        DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email', '=', $email)
+//            ->update(array('used' => False));
+//    }
 
-    public function used($code, $email)
-    {
-        DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
-            ->update(array('used' => True));
-    }
+//    public function status($code, $email)
+//    {
+//        $temp = DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)
+//            ->where('email', '=', $email)
+//            ->first();
+//        if ($temp) {
+//            if (!$temp->active)
+//                return "deactive";
+//            else if ($temp->used)
+//                return "used";
+//            else if ($this->sql_timestamp() > $temp->expiration)
+//                return "expired";
+//            else
+//                return "valid";
+//        } else
+//            return "not exist";
+//    }
 
-    public function unuse($code, $email)
-    {
-        DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
-            ->update(array('used' => False));
-    }
-
-    public function status($code, $email)
-    {
-        $temp = DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)
-            ->where('email', '=', $email)
-            ->first();
-        if ($temp) {
-            if (!$temp->active)
-                return "deactive";
-            else if ($temp->used)
-                return "used";
-            else if ($this->sql_timestamp() > $temp->expiration)
-                return "expired";
-            else
-                return "valid";
-        } else
-            return "not exist";
-    }
-
-    public function check($code, $email)
-    {
-        $temp = DB::connection()
-            ->table('invitation')
-            ->where('code', '=', $code)->where('email', '=', $email)
-            ->first();
-        if ($temp) {
-            if (!$temp->active or $temp->used or $this->sql_timestamp() > $temp->expiration)
-                return False;
-            else
-                return True;
-        } else
-            return False;
-    }
+//    public function check($code, $email)
+//    {
+//        $temp = DB::connection()
+//            ->table('invitation')
+//            ->where('code', '=', $code)->where('email', '=', $email)
+//            ->first();
+//        if ($temp) {
+//            if (!$temp->active or $temp->used or $this->sql_timestamp() > $temp->expiration)
+//                return False;
+//            else
+//                return True;
+//        } else
+//            return False;
+//    }
 //    public function delete($code,$email)
 //    {
 //        $temp = DB::connection()
