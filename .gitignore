@@ -13,6 +13,7 @@ Homestead.json
 /bootstrap/compiled.php
 .env.*.php
 .env.php
+.env
 /.idea/
 /.idea/workspace.xml
 public/images/avatar/
