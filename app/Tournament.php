@@ -80,11 +80,11 @@ class Tournament extends Model
     // Or         $tournament->category_user()->sync([1, 2, 3]);
     // I'm not sure about the name
 
-    public function categories_user()
-    {
-        return $this->belongsToMany('App\Category','category_tournament_user',['tournament_id','user_id'])
-            ->withTimestamps();
-    }
+//    public function categories_user()
+//    {
+//        return $this->belongsToMany('App\Category','category_tournament_user')
+//            ->withTimestamps();
+//    }
 
 
     public function getCategoryList()

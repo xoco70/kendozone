@@ -189,10 +189,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    public function hasAtLeastOneTournament(){
-
-        return $this->tournaments()->first(); // Where not finished
+    public function categories(){
+        return $this->belongsToMany('App\TournamentCategories','category_tournament_user','tournament_id', 'category_id', 'user_id')
+            ->withPivot('tournament_id', 'category_id', 'user_id')
+            ->withTimestamps();
     }
+
+
+
+//    public function hasAtLeastOneTournament(){
+//
+//        return $this->tournaments()->first(); // Where not finished
+//    }
 
 
 }

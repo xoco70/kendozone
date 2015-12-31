@@ -15,4 +15,10 @@ class Grade extends Model {
         'order'
     ];
 
+    public function getNameAttribute($name)
+    {
+
+        return trans($name);
+    }
+
 }

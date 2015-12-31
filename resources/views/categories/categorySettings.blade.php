@@ -1,4 +1,3 @@
-
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">
@@ -69,6 +68,12 @@
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
                 {!!  Form::input('number','roundRobinWinner', old('roundRobinWinner'), ['class' => 'form-control', 'placeholder' => $defaultSettings->roundRobinWinner]) !!}
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                {!!  Form::label('cost', trans('crud.cost')) !!}
+                {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'placeholder' => $defaultSettings->cost]) !!}
             </div>
         </div>
     </div>

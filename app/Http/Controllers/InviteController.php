@@ -58,7 +58,7 @@ class InviteController extends Controller
     {
         // Get available invitation
         $invite = Invite::getActiveInvite($token);
-
+        $currentModelName = trans('crud.select_categories');
         // Check if user is already registered
         if (!is_null($invite)) {
 //            $tournament = Tournament::findOrFail($invite->tournament_id);
@@ -71,7 +71,7 @@ class InviteController extends Controller
 //                flash("success", "Registro completo");
                 $userId = $user->id;
                 $tournamentId = $invite->tournament_id;
-                return view("categories.register", compact('userId','tournamentId'));
+                return view("categories.register", compact('userId','tournamentId','invite','currentModelName'));
 
 
 
@@ -85,6 +85,20 @@ class InviteController extends Controller
                 dd("invitation used");
             }
         }
+    }
+    public function registerCategories(Request $request)
+    {
+        $categories = $request->get('cat');
+        $inviteId = $request->inviteId;
+        $invite = Invite::findOrFail($inviteId);
+        $tournament = $invite->tournament;
+        $my = Auth::user()->categories;
+        dd($my);
+        dd($tournament->categories_user);
+        $tournament->categories_user()->sync($categories);
+//        $invite->consume();
+        flash("success", "Op exitosa");
+
     }
 
     /**

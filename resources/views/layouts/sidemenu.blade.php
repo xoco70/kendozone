@@ -50,7 +50,7 @@
                                     class="icon-trophy2"></i> <span>Torneos</span></a></li>
                     {{--                    <li {{ (Request::is('places') ? 'class=active' : '') }}><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>--}}
                     <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
-                                    class="icon-mail5"></i> <span>{{trans_choice('crud.invite',2)}}</span></a></li>
+                                    class="icon-mail5"></i> <span>{{trans_choice('crud.invitation',2)}}</span></a></li>
 
                 </ul>
             </div>

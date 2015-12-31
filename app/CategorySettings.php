@@ -22,6 +22,7 @@ class CategorySettings extends Model
         "hasRoundRobin",
         "roundRobinWinner",
         "hasHantei",
+        "price",
     ];
 
 
@@ -42,6 +43,8 @@ class CategorySettings extends Model
                 $categorySetting->enchoQty = Config::get('constants.CAT_enchoQty');
                 $categorySetting->enchoDuration = Config::get('constants.CAT_ENCHO_DURATION');
                 $categorySetting->hasHantei = Config::get('constants.CAT_HASHANTEI');
+                $categorySetting->cost = Config::get('constants.CAT_COST');
+
 
             } else {
                 if ($categorySetting->fightDuration == 0)

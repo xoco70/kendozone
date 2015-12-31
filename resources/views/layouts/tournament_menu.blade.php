@@ -1,12 +1,6 @@
 <!-- Detached sidebar -->
 <div class="sidebar-detached">
-    <div class="row">
-        <div class="col-md-12">
-            <p><a href="/invite/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
-                  style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
 
-        </div>
-    </div>
     <div class="sidebar sidebar-default">
 
         <div class="sidebar-content">
@@ -23,7 +17,6 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        <li class="navigation-header"></li>
                         <li><a href="#"><i class="icon-trophy2"></i> General
                                 @if(!isNullOrEmptyString($tournament->registerDateLimit) && !isNullOrEmptyString($tournament->fightingAreas) && $tournament->level_id!=1)
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
@@ -54,6 +47,14 @@
             </div>
             <!-- /sub navigation -->
 
+
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <p><a href="/invite/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
+                  style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
 
         </div>
     </div>

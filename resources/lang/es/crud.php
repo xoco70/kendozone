@@ -110,6 +110,8 @@ return [
     'competitor' => 'Competidor|Competidores',
 
     // Invitation
+
+    'invitation' => 'Invitación|Invitaciones',
     'tournament_invitations' => 'Invita competidores ',
     'invite_send' => 'Invita competidores al torneo: :tournament',
     'recipients' => 'Destinatarios',
@@ -123,6 +125,8 @@ return [
     'results' => 'resultados',
     'latest_competitors' => 'Ultimos registros',
     'organizer' => 'Organizador',
+    'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
+
 
 
 

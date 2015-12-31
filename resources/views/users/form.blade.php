@@ -53,7 +53,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6" >
+                                                <div class="col-md-6">
                                                     {!!  Form::label('avatar', trans('crud.avatar')) !!}
 
                                                     <input type="file" id="avatar" name="avatar"
@@ -62,8 +62,6 @@
 
                                                 </div>
                                             </div>
-
-
 
 
                                             {{--<div class="form-group">--}}
@@ -137,7 +135,8 @@
                                         </div>
 
                                         <div align="right">
-                                            <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                                            <button type="submit"
+                                                    class="btn btn-success">{{trans("core.save")}}</button>
                                         </div>
                                     </div>
 
@@ -145,7 +144,6 @@
                                 </div>
 
                             </div>
-                            <>
                         </div>
                         @include("layouts.users_menu")
                     </div>
@@ -158,11 +156,8 @@
             </div>
             @stop
 
-
-            --------
-
-
             <div class="form-group">
                 {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
             </div>
-
+        </div>
+    </div>
