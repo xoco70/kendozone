@@ -157,9 +157,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {!!   Form::hidden('role_id', $roleId) !!}
-
+                                
                                 <div class="text-right">
                                     <a href="{!! URL::to('auth/login') !!}" class="btn btn-link"><i
                                                 class="icon-arrow-left13 position-left"></i> {{  Lang::get('auth.back_to_login_form') }}
