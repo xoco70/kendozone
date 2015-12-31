@@ -13,6 +13,9 @@ class AuthRequest  extends Request
 
     public function __construct(\Illuminate\Http\Request $request)
     {
+        // add roleId
+        $request->request->add(['role_id' => 3]);
+
         $token = $request->get("token");
         if (!isNullOrEmptyString($token)){
             $invite = Invite::getActiveInvite($token);
