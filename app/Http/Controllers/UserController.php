@@ -171,8 +171,8 @@ class UserController extends Controller
             $excel->setTitle(trans_choice('crud.user', 2));
 
             // Chain the setters
-            $excel->setCreator('Kendonline')
-                ->setCompany('Kendonline');
+            $excel->setCreator(getenv('APP_NAME'))
+                ->setCompany(getenv('APP_NAME'));
 
             // Call them separately
             $excel->setDescription('A list of users');

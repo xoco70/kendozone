@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kendonline</title>
+    <title>{{ getenv('APP_NAME') }}</title>
 
     <!-- Global stylesheets -->
 
@@ -105,7 +105,7 @@
 
                 <!-- Footer -->
                 <div class="footer text-muted">
-                    &copy; 2015. <a href="login_advanced.html#">Kendonline</a> by <a href="mailto:contact@kendonline.com" target="_blank">Juliatzin</a>
+                    &copy; 2015. <a href="login_advanced.html#">{{ getenv('APP_NAME') }}</a> by <a href="mailto:contact@kendonline.com" target="_blank">Juliatzin</a>
                 </div>
                 <!-- /footer -->
 

@@ -54,7 +54,7 @@ class AppMailer
     public function sendEmailConfirmationTo(User $user)
     {
         $this->to = $user->email;
-        $this->subject = 'Activación de tu cuenta Kendonline';
+        $this->subject = 'Activación de tu cuenta '.getenv('APP_NAME');
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
@@ -77,7 +77,7 @@ class AppMailer
     public function deliver()
     {
         $this->mailer->send($this->view, $this->data, function ($message) {
-            $message->from($this->from, 'Kendonline')
+            $message->from($this->from, getenv('APP_NAME'))
                 ->to($this->to)
                 ->subject($this->subject);
         });
