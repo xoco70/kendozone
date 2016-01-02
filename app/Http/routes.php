@@ -67,10 +67,13 @@ Route::group(['middleware' => ['auth', 'own']],
     function () {
 
         Route::resource('tournaments', 'TournamentController');
+        Route::get('tournaments/{tournamentId}/delete', 'TournamentController@destroyTournament');
+
         Route::resource('users', 'UserController');
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
+        Route::get('tournaments/{tournamentId}/users/{userId}/delete', 'TournamentController@deleteUser');
 
         Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');

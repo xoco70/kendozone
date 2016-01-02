@@ -87,6 +87,13 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
+                                @if (!Request::is("/") && !Request::is("/dashboard")
+                                     && !Request::is("tournaments")
+                                     && !Request::is("invites")
+                                     && !Request::is("users")
+                                     )
+                                <a href="{!! URL::previous() !!}"><i class="icon-arrow-left8 text-default"></i></a>
+                                @endif
                                     {!!  isset($currentModelName) ? $currentModelName :"" !!}
                             </span>
                         </h1>

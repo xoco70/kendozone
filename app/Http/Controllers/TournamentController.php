@@ -154,6 +154,15 @@ class TournamentController extends Controller
         return view("tournaments/users", compact('users','currentModelName'));
     }
 
+    public function deleteUser($tournamentId,$userId)
+    {
+
+        $tournament = Tournament::find($tournamentId)->first();
+        $tournament->competitors()->detach($userId);
+
+        return redirect("tournaments/$tournamentId/users");
+    }
+
 //    public function getCategories($tournamentId)
 //    {
 //        $tournament = Tournament::find($tournamentId)->first();
@@ -188,9 +197,11 @@ class TournamentController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tournament $tournament)
+    public function destroyTournament($tournamentId)
     {
-
+        Tournament::destroy($tournamentId);
+        flash("success",Lang::get('core.operation_successful'));
+        return redirect("tournaments");
     }
 
 

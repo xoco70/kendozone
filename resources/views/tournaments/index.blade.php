@@ -47,7 +47,7 @@
                                 {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                 @can('CanDeleteTournament')
                                 <a class=" text-danger "
-                                   href="{!! URL::action('TournamentController@destroy',  $tournament->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
+                                   href="{!! URL::action('TournamentController@destroyTournament',  ['tournamentId' => $tournament->id]) !!}" data-method="delete" data-token="{{csrf_token()}}">
                                     <span class="glyphicon glyphicon-remove"></span></a>
                                 @endcan
                             </td>

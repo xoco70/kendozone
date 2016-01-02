@@ -47,8 +47,9 @@
 
                         <td class="text-center">
                             <a class=" text-danger "
-                               href="{!! URL::action('UserController@destroy',  $user->id) !!}" data-method="delete"
-                               data-token="{{csrf_token()}}">
+                               href="{!! URL::action('TournamentController@deleteUser',
+                                                    ['tournamentId'=>$user->pivot->category_tournament_id,
+                                                    'userId'=>$user->id])  !!}">
                                 <span class="glyphicon glyphicon-remove"></span></a>
                         </td>
                     </tr>
