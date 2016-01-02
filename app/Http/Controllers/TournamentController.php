@@ -145,11 +145,13 @@ class TournamentController extends Controller
 
     public function getUsers($tournamentId)
     {
+
         $tournament = Tournament::find($tournamentId)->first();
-        $users = $tournament->competitors;
+        $currentModelName = trans_choice('crud.competitor',2). " - ". trans_choice('crud.tournament',1). " : ".  $tournament->name;
+        $users = $tournament->competitors()->paginate(Config::get('constants.PAGINATION'));
 
 
-        return view("tournaments/users", compact('users'));
+        return view("tournaments/users", compact('users','currentModelName'));
     }
 
 //    public function getCategories($tournamentId)

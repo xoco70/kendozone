@@ -66,11 +66,10 @@ class InviteController extends Controller
             $user = User::where('email', $invite->email)->first();
             if (is_null($user)) {
                 // Redirect to user creation --
-                dd("pas de chance");
                 return view('auth/invite', compact('token'));
             } else {
 //                $invite->consume();
-//                flash("success", "Registro completo");
+
                 $userId = $user->id;
                 $tournamentId = $invite->tournament_id;
                 return view("categories.register", compact('userId', 'tournamentId', 'invite', 'currentModelName'));
@@ -95,26 +94,8 @@ class InviteController extends Controller
         $inviteId = $request->inviteId;
         $invite = Invite::findOrFail($inviteId);
         $tournament = $invite->tournament;
+        $tournament->categories_user()->sync($categories);
 
-
-        // Register Categories for the user
-        // Reset all categories, and then update selected values
-        DB::table('category_tournament_user')
-            ->where('tournament_id', $invite->tournament_id)
-            ->where('user_id', Auth::user()->id)
-            ->where('confirmed', 0)
-            ->delete();
-
-        if (sizeof($categories) > 0)
-            foreach ($categories as $categoryId) {
-                DB::table('category_tournament_user')->insert([
-                    ['tournament_id' => $invite->tournament_id,
-                        'category_id' => $categoryId,
-                        'user_id' => Auth::user()->id,
-                    ]
-
-                ]);
-            }
 
 
 //        $invite->consume();

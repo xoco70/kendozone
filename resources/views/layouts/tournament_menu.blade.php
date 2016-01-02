@@ -27,11 +27,26 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/categories"><i
-                                        class="icon-cog2"></i>{{trans_choice('crud.category',2)}}</a></li>
-                        <!-- badge-flat border-success text-success-600-->
-                        <li><a href="/tournaments/{{$tournament->id}}/users"><i
-                                        class="icon-users"></i>{{Lang::get("crud.see_competitors")}}</a>
+                        <li><a href="/tournaments/{{$tournament->id}}/categories"><i class="icon-cog2"></i>{{trans_choice('crud.category',2)}}
+                                <?php
+                                    $settingSize = sizeof($tournament->settings($tournament->id));
+                                    $categorySize = sizeof($tournament->categories);
+                                    if ($settingSize > 0 && $settingSize == $categorySize)
+                                        $class="badge-success";
+                                    else
+                                        $class="badge-warning";
+                                    ?>
+                                <span class="badge {!! $class !!}">
+                                {{ $settingSize  }} / {{$categorySize}}</span>
+                            </a></li>
+
+                        <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>
+                                {{trans_choice("crud.competitor",2)}}
+                                @if((sizeof($tournament->competitors))>8)
+                                    <span class="badge badge-success">{{sizeof($tournament->competitors)}}</span>
+                                @endif
+
+                            </a>
                         <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
                         <li><a href="#"><i class="icon-user-lock"></i>Acreditación</a>
                         <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
@@ -60,7 +75,7 @@
     </div>
     <br/>
     <?php
-    $competitors = $tournament->competitors()->get();
+    $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();
     ?>
     @if (sizeof($competitors)>0)
 

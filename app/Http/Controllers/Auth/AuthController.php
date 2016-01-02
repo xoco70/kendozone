@@ -185,20 +185,21 @@ class AuthController extends Controller
     {
         $request->request->add(['role_id' => Config::get('constants.ROLE_COMPETITOR')]);
         //Check token
+//        dd($request);
         $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
         if (!is_null($invite)) {
             $user = User::create($request->all());
             if (!is_null($user)) {
-                Auth::loginUsingId(1);
+                Auth::loginUsingId($user->id);
             }
             $tournamentId = $invite->tournament_id;
             $userId = $user->id;
 //            $invite->consume();
 
             flash('success', Lang::get('auth.registration_completed'));
-            return view("categories.register", compact('userId','tournamentId'));
+            return view("categories.register", compact('userId','tournamentId','invite'));
 
         } else {
             dd("yes is null");

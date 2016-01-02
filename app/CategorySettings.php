@@ -11,8 +11,7 @@ class CategorySettings extends Model
     protected $table = 'category_settings';
     public $timestamps = true;
     protected $fillable = [
-        "tournament_id",
-        "category_id",
+        "category_tournament_id",
         "isTeam",
         "teamSize",
         "fightDuration",
@@ -25,6 +24,7 @@ class CategorySettings extends Model
         "cost",
     ];
 
+    //option to seed competitors
 
     public static function getDefaultSettings()
     {

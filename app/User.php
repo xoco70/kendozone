@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-     protected $fillable = ['name','firstname','lastname','email', 'password','avatar','grade_id','country_id','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
+     protected $fillable = ['name','firstname','lastname','email', 'password','grade_id','country_id','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -188,13 +188,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
-
-    public function categories(){
-        return $this->belongsToMany('App\TournamentCategories','category_tournament_user','tournament_id', 'category_id', 'user_id')
-            ->withPivot('tournament_id', 'category_id', 'user_id')
-            ->withTimestamps();
+    public function registered()
+    {
+        return $this->belongsToMany('App\Tournament');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id','category_tournament_id');
+    }
 
 
 //    public function hasAtLeastOneTournament(){

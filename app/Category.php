@@ -30,6 +30,10 @@ class Category extends Model
         return $this->hasOne('App\CategorySettings');
     }
 
+    public function user(){
+        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id');
+    }
+
 
 //    public function shinpans()
 //    {

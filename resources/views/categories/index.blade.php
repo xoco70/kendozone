@@ -28,48 +28,66 @@
                                 </tr>
                                 </thead>
                                 @foreach($categories as $category)
+                                    <?php
+                                     $categoryTournament = DB::table('category_tournament')
+                                                            ->where('category_id',$category->id)
+                                                            ->where('tournament_id',$category->pivot->tournament_id)
+                                                            ->first();
 
-                                    @if ($category->settings !=null)
+                                     $settings = DB::table('category_settings')
+                                             ->where('category_tournament_id',$categoryTournament->id)
+                                             ->first();
+
+                                        
+
+                                    ?>
+                                    @if ($settings !=null)
 
                                         <tr>
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
-                                    'categoryId' => $category->id,
-                                    'settings' => $category->settings->id
+                                    'category_tournament_id' => $categoryTournament->id,
+                                    'settings' => $settings->id
                                     ]) !!}">
                                                     {{ $category->id }}</a>
                                             </td>
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@edit',
                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                     'categoryId' => $category->id,
-                                     'settings' => $category->settings->id]) !!}">
+                                     'category_tournament_id' => $categoryTournament->id,
+                                     'settings' => $settings->id]) !!}">
                                                     {{ $category->name }}</a>
 
                                             </td>
-                                            <td class="text-center">{!! $category->settings->isTeam == 1 ? $ok : $nok !!}</td>
-                                            <td class="text-center">{!! $category->settings->fightDuration !!}</td>
-                                            <td class="text-center">{!! $category->settings->hasRoundRobin == 1 ? $ok : $nok !!}</td>
-                                            <td class="text-center">{!! $category->settings->hasEncho == 1 ? $ok : $nok !!}</td>
-                                            <td class="text-center">{!! $category->settings->hasHantei == 1 ? $ok : $nok !!}</td>
+                                            <td class="text-center">{!! $settings->isTeam == 1 ? $ok : $nok !!}</td>
+                                            <td class="text-center">{!! $settings->fightDuration !!}</td>
+                                            <td class="text-center">{!! $settings->hasRoundRobin == 1 ? $ok : $nok !!}</td>
+                                            <td class="text-center">{!! $settings->hasEncho == 1 ? $ok : $nok !!}</td>
+                                            <td class="text-center">{!! $settings->hasHantei == 1 ? $ok : $nok !!}</td>
 
                                             <td class="text-center">
                                                 <a class=" text-info "
                                                    href="{!! URL::action('CategorySettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
-                                   'categoryId' => $category->id,
-                                   'settings' => $category->settings->id]) !!}">
+                                   'category_tournament_id' => $categoryTournament->id,
+                                   'settings' => $settings->id]) !!}">
                                                     <span class="text-slate glyphicon glyphicon-cog"></span></a>
                                             </td>
                                         </tr>
                                     @else
                                         <tr>
                                             <td>
-                                                <a href="{!!   URL::action('CategorySettingsController@create', ['tournamentId'=> $category->pivot->tournament_id, 'categoryId'=>$category->id]) !!}">{{ $category->id }}</a>
+                                                <a href="{!!   URL::action('CategorySettingsController@create',
+                                                    ['tournamentId'=> $category->pivot->tournament_id,
+                                                     'category_tournament_id' => $categoryTournament->id]) !!}">
+                                                    {{ $category->id }}</a>
                                             </td>
                                             <td>
-                                                <a href="{!!   URL::action('CategorySettingsController@create', ['tournamentId'=> $category->pivot->tournament_id, 'categoryId'=>$category->id]) !!}">{{ $category->name }}</a>
+                                                <a href="{!!   URL::action('CategorySettingsController@create',
+                                                 ['tournamentId'=> $category->pivot->tournament_id,
+                                                  'category_tournament_id' => $categoryTournament->id]) !!}">
+                                                    {{ $category->name }}</a>
                                             </td>
                                             <td class="text-center">{!!  $defaultSettings->isTeam == 1 ? $ok : $nok!!}</td>
                                             <td class="text-center">{!!  $defaultSettings->fightDuration!!}</td>
@@ -79,7 +97,9 @@
 
                                             <td class="text-center">
                                                 <a class=" text-info "
-                                                   href="{!! URL::action('CategorySettingsController@create', ['tournamentId'=> $category->pivot->tournament_id, 'categoryId'=>$category->id]) !!}"><span
+                                                   href="{!! URL::action('CategorySettingsController@create',
+                                                    ['tournamentId'=> $category->pivot->tournament_id,
+                                                     'category_tournament_id' => $categoryTournament->id]) !!}"><span
                                                             class="text-slate glyphicon glyphicon-cog"></span></a>
                                             </td>
                                         </tr>

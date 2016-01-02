@@ -59,7 +59,7 @@
     {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
     {!! Html::script('http://maps.google.com/maps/api/js') !!}
 
-    @if (Request::is("invite/*"))
+    @if (Request::is("invites/*"))
         {!! Html::script('js/plugins/multiple-emails.js') !!}
         {!! Html::style('css/multiple-emails.css') !!}
     @endif

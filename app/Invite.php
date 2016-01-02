@@ -45,20 +45,20 @@ class Invite extends Model
      * @param $user
      * @param $invite
      */
-//    public function consume()
-//    {
-//// User exists, just add it to tournament
-//        // And update invite
-//        $user = User::where('email', $this->email)->first();
+    public function consume($categories)
+    {
+// User exists, just add it to tournament
+        // And update invite
+        $user = User::where('email', $this->email)->first();
+
+        dd($this->tournament->categories);
 //
-////        dd($this->tournament);
-////
 //        if (!$this->tournament->competitors->contains($user->id)) {
 //            $this->tournament->competitors()->attach($user->id);
 //        }
-//        // Use the invitation
-//        $this->update(['used' => 1]);
-//    }
+        // Use the invitation
+        $this->update(['used' => 1]);
+    }
     public static function getActiveInvite($token)
     {
         $invite = Invite::where('code', $token)

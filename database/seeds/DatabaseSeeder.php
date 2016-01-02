@@ -15,17 +15,19 @@ class DatabaseSeeder extends Seeder
         }
         Model::unguard();
         //Seed the countries
-        $this->call('CountriesSeeder');
         $this->command->info('Seeded the countries!');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        $this->call(CountriesSeeder::class);
         $this->call(GradeSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(PermissionRoleSeeder::class);
         $this->call(UserRoleSeeder::class);
-        $this->call('TournamentLevelSeeder');
-        $this->call('CategorySeeder');
+        $this->call(TournamentLevelSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(TournamentSeeder::class);
         $this->command->info('All tables seeded!');
 
 

@@ -52,8 +52,8 @@ class Tournament extends Model
     public function competitors()
     {
 
-        return $this->belongsToMany('App\User', 'category_tournament_user')
-            ->withPivot('tournament_id', 'category_id','confirmed')
+        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id', 'user_id' )
+            ->withPivot('confirmed')
             ->withTimestamps();
     }
 
@@ -76,15 +76,28 @@ class Tournament extends Model
                     ->withTimestamps();
     }
 
+    public function settings($tournamentId)
+    {
+        $arrTc = TournamentCategory::select('id')->where('tournament_id',$tournamentId)->get();
+        $settings = CategorySettings::whereIn('category_tournament_id',$arrTc)->get();
+        return $settings;
+    }
+
+//    public function tournamentCategory()
+//    {
+//        return $this->belongsToMany('App\TournamentCategory', 'category_tournament', 'tournament_id', 'category_id');
+//    }
+
     // We can use $tournament->category_user()->attach(id);
     // Or         $tournament->category_user()->sync([1, 2, 3]);
     // I'm not sure about the name
 
 //    public function categories_user()
 //    {
-//        return $this->belongsToMany('App\Category','category_tournament_user')
+//        return $this->belongsToMany('App\Category','category_tournament_user', 'user_id', 'category_tournament_id')
 //            ->withTimestamps();
 //    }
+
 
 
     public function getCategoryList()

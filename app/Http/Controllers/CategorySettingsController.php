@@ -44,10 +44,10 @@ class CategorySettingsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $tournamentId, $categoryId)
+    public function store(Request $request, $tournamentId,$categoryTournamentId)
     {
-        $request->request->add(['tournament_id' => $tournamentId]);
-        $request->request->add(['category_id' => $categoryId]);
+        $request->request->add(['category_tournament_id' => $categoryTournamentId]);
+//        dd($request);
         CategorySettings::create($request->all());
         flash("success", Lang::get('core.operation_successful'));
         return redirect("tournaments/$tournamentId/categories");

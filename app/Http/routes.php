@@ -86,10 +86,10 @@ Route::group(['middleware' => ['auth', 'own']],
 //        invite/{userId}/register/
         Route::post('invite/{inviteId}/categories', 'InviteController@registerCategories');
 
-//Event::listen('illuminate.query', function($query)
-//{
-//        var_dump($query);
-//});
+Event::listen('illuminate.query', function($query)
+{
+        var_dump($query);
+});
 
 //Route::resource('shinpan', 'ShinpanController');
 //Route::resource('clubs', 'ClubController');

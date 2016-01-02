@@ -7,6 +7,7 @@
         <div class="row col-md-10 custyle">
             <?php
             $tournament = \App\Tournament::findOrFail($tournamentId);
+
             ?>
             <h2 align="center">{{ $tournament->name }}</h2>
 
@@ -25,14 +26,18 @@
                         {{--dd($tournament->categories)--}}
                         {{--}}--}}
                     @foreach($tournament->categories as $key => $category)
-                        <?php
-                                $old = DB::table('category_tournament_user')
-                                    ->where('tournament_id',$tournament->id)
-                                    ->where('user_id',Auth::user()->id)
-                                    ->where('category_id',$category->id)
-                                    ->count();
 
+                        <?php
+                                $tournamentCategory = DB::table('category_tournament')
+                                    ->where('tournament_id',$tournament->id)
+                                    ->where('category_id',$category->id)
+                                    ->first();
+                            $old = DB::table('category_tournament_user')
+                                    ->where('category_tournament_id',$tournamentCategory->id)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->count();
                         ?>
+
                             @if ($key % 4 == 0)
                                 <div class="row">
                                     @endif
@@ -40,7 +45,7 @@
                                         <p>
 
                                             {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
-                                            {!!   Form::checkbox('cat['.$key.']', $category->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                            {!!   Form::checkbox('cat['.$key.']', $tournamentCategory->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>
                                     @if ($key % 3 == 0 && $key != 0)
