@@ -1,4 +1,4 @@
-    @extends('layouts.dashboard')
+@extends('layouts.dashboard')
 
 @section('content')
 
@@ -20,39 +20,43 @@
                             .bottom-divided</code>
                         classes.
                     </div>
-                    <!-- TAB CATEGORIES DEFAULT SETTING -->
-                    @if (is_null($settings))
-                        {!! Form::open(['url'=>"settings"]) !!}
-                        <?php $settings = new App\Settings; ?>
-                    @else
-                        {!! Form::model($settings, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["SettingsController@update", $settings->id]]) !!}
-                    @endif
-                    @include('categories.categorySettings')
-                    {!! Form::close() !!}
-    <!-- END TAB CATEGORIES DEFAULT SETTING -->
-<div class="tab-pane" id="bottom-justified-divided-tab3">
-DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg whatever.
-</div>
+                    <div  class="tab-pane" id="category">
+                        <!-- TAB CATEGORIES DEFAULT SETTING -->
+                        @if (is_null($settings))
+                            {!! Form::open(['url'=>"settings"]) !!}
+                            <?php $settings = new App\Settings; ?>
+                        @else
+                            {!! Form::model($settings, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["SettingsController@update", $settings->id]]) !!}
+                        @endif
+                        @include('categories.categorySettings')
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="tab-pane" id="bottom-justified-divided-tab3">
+                        DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg whatever.
+                    </div>
+                </div>
+                <!-- END TAB CATEGORIES DEFAULT SETTING -->
 
-</div>
-</div>
-<script>
-$(".switch").bootstrapSwitch();
-</script>
 
-@include("errors.list")
-</div>
-</div>
-{{--<script>--}}
-{{--// Label with pips--}}
-{{--$(".ui-slider-labels").slider({--}}
-{{--max: 8,--}}
-{{--value: 4--}}
-{{--});--}}
-{{--$(".ui-slider-labels").slider("pips", {--}}
-{{--rest: "label"--}}
-{{--});--}}
+            </div>
+        </div>
+        <script>
+            $(".switch").bootstrapSwitch();
+        </script>
 
-{{--</script>--}}
+        @include("errors.list")
+    </div>
+    </div>
+    {{--<script>--}}
+    {{--// Label with pips--}}
+    {{--$(".ui-slider-labels").slider({--}}
+    {{--max: 8,--}}
+    {{--value: 4--}}
+    {{--});--}}
+    {{--$(".ui-slider-labels").slider("pips", {--}}
+    {{--rest: "label"--}}
+    {{--});--}}
+
+    {{--</script>--}}
 @stop
 

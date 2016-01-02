@@ -17,7 +17,7 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        <li><a href="#"><i class="icon-trophy2"></i> General
+                        <li><a href="#"><i class="icon-trophy2"></i> {{ trans('crud.general') }}
                                 @if(!isNullOrEmptyString($tournament->registerDateLimit) && !isNullOrEmptyString($tournament->fightingAreas) && $tournament->level_id!=1)
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
@@ -47,10 +47,10 @@
                                 @endif
 
                             </a>
-                        <li><a href="#"><i class="icon-certificate"></i>Certificados</a>
-                        <li><a href="#"><i class="icon-user-lock"></i>Acreditación</a>
-                        <li><a href="#"><i class="icon-feed"></i>Transmisión</a>
-                        <li><a href="#"><i class="icon-share"></i>Publicar</a>
+                        <li><a href="#"><i class="icon-certificate"></i>{{ trans('crud.certificates') }}</a>
+                        <li><a href="#"><i class="icon-user-lock"></i>{{ trans('crud.acredit') }}</a>
+                        <li><a href="#"><i class="icon-feed"></i>{{ trans('crud.broadcast') }}</a>
+                        <li><a href="#"><i class="icon-share"></i>{{ trans('crud.publish') }}</a>
 
                         </li>
                         {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
@@ -69,12 +69,21 @@
     <div class="row">
         <div class="col-md-12">
             <p><a href="/invites/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
-                  style="width: 100%;"><b><i class="icon-envelope"></i></b>Invita competidores</a></p>
+                  style="width: 100%;"><b><i class="icon-envelope"></i></b>{{ trans('crud.invite_competitors') }}</a></p>
 
         </div>
     </div>
     <br/>
-    <?php
+    <div class="row">
+        <div class="col-md-12">
+            <p><a href="#" type="button" class="btn btn-warning btn-labeled btn-xlg"
+                  style="width: 100%;"><b><i class="icon-envelope"></i></b>{{ trans('crud.generate_trees') }}</a></p>
+
+        </div>
+    </div>
+    <br/>
+
+<?php
     $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();
     ?>
     @if (sizeof($competitors)>0)

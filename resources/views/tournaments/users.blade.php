@@ -7,7 +7,7 @@
             <table class="table table-striped custab">
                 <thead>
                 <a href="{!!   URL::action('UserController@create') !!}"
-                   class="btn btn-warning btn-xs pull-right ml-20"><b>Generar Arboles
+                   class="btn btn-warning btn-xs pull-right ml-20"><b>{{ trans('crud.generate_trees') }}
                 </a>
                 <a href="{!!   URL::action('UserController@create') !!}"
                    class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])

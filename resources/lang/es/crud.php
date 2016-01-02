@@ -53,6 +53,13 @@ return [
     'tournamentType' => 'Tipo de torneo',
     'owner' => 'Dueño',
     'see_competitors' => 'Ver competidores',
+    'general' => 'General',
+    'certificates' => 'Certificados',
+    'acredit' => 'Acreditaciones',
+    'broadcast' => 'Transmitir',
+    'publish' => 'Publicat',
+    'invite_competitors' => 'Invitar competidores',
+    'generate_trees' => 'Generar Arboles',
 
 
 
@@ -126,6 +133,8 @@ return [
     'latest_competitors' => 'Ultimos registros',
     'organizer' => 'Organizador',
     'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
+
+
 
 
 

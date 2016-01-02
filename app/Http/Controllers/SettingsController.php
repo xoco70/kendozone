@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategorySettings;
 use App\Settings;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = Auth::getUser()->settings()->first();
-        return view('settings.index', compact('settings'));
+        $defaultSettings = CategorySettings::getDefaultSettings();
+        return view('settings.index', compact('settings','defaultSettings'));
     }
 
     /**
