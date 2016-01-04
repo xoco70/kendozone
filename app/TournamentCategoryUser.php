@@ -17,14 +17,27 @@ class TournamentCategoryUser extends Model
     ];
 
 
-    public static function category($ctuId)
+    public function categoryTournament($ctId)
     {
-        $tcu = TournamentCategoryUser::find($ctuId);
+        $tcu = TournamentCategoryUser::where('category_tournament_id', $ctId)->first();
         $tournamentCategoryId = $tcu->category_tournament_id;
         $tc = TournamentCategory::find($tournamentCategoryId);
+
+        return $tc;
+    }
+    public function category($ctuId)
+    {
+        $tc = $this->categoryTournament($ctuId);
         $categoryId = $tc->category_id;
         $cat = Category::find($categoryId);
         return $cat;
+    }
+
+    public function tournament($ctuId){
+        $tc = $this->categoryTournament($ctuId);
+        $tourmanentId = $tc->tournament_id;
+        $tour = Tournament::findOrNew($tourmanentId);
+        return $tour;
     }
 
 }

@@ -15,18 +15,24 @@ class Invite extends Model
         'email',
         'expiration',
         'active',
-//        'used',
+        'used',
     ];
 
     public function tournament(){
         return $this->belongsTo('App\Tournament');
     }
 
+    /**
+     * Send an email to competitor and generate or update invite
+     * @param $email
+     * @param $tournament
+     * @return String Invitation code | null
+     */
     public function generate($email, $tournament)
     {
 
         $code = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
-        $invite = new Invite();
+        $invite = Invite::firstOrNew(['email' => $email]);
         $invite->code = $code;
         $invite->email = $email;
         $invite->tournament_id = $tournament->id;
@@ -45,18 +51,10 @@ class Invite extends Model
      * @param $user
      * @param $invite
      */
-    public function consume($categories)
+    public function consume()
     {
-// User exists, just add it to tournament
-        // And update invite
-        $user = User::where('email', $this->email)->first();
-
-        dd($this->tournament->categories);
-//
-//        if (!$this->tournament->competitors->contains($user->id)) {
-//            $this->tournament->competitors()->attach($user->id);
-//        }
         // Use the invitation
+
         $this->update(['used' => 1]);
     }
     public static function getActiveInvite($token)

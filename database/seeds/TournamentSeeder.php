@@ -56,6 +56,21 @@ class TournamentSeeder extends Seeder
             ]);
         }
 
+        foreach (range(1, 10) as $index) {
+            TournamentCategoryUser::create([
+                'category_tournament_id' => 2,
+                'user_id' => $index,
+                'confirmed' => $faker->numberBetween(0, 1),
+            ]);
+        }
+
+        foreach (range(20, 40) as $index) {
+            TournamentCategoryUser::create([
+                'category_tournament_id' => 3,
+                'user_id' => $index,
+                'confirmed' => $faker->numberBetween(0, 1),
+            ]);
+        }
 
     }
 }

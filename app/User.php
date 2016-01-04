@@ -188,11 +188,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
-    public function registered()
-    {
-        return $this->belongsToMany('App\Tournament');
-    }
-
     public function categories()
     {
         return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id','category_tournament_id');

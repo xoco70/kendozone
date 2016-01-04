@@ -128,27 +128,14 @@ class TournamentController extends Controller
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournament->id/edit");
     }
-//    /**
-//     * Update the specified resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request $request
-//     * @param  int $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function sendInvite(Request $request, Tournament $tournament)
-//    {
-//        dd($request);
-//
-//        flash('success', trans('core.operation_successful'));
-//        return redirect("tournaments/$tournament->id/edit");
-//    }
+
 
     public function getUsers($tournamentId)
     {
 
         $tournament = Tournament::find($tournamentId)->first();
         $currentModelName = trans_choice('crud.competitor',2). " - ". trans_choice('crud.tournament',1). " : ".  $tournament->name;
-        $users = $tournament->competitors()->paginate(Config::get('constants.PAGINATION'));
+        $users = $tournament->competitors()->orderby('category_tournament_id')->paginate(Config::get('constants.PAGINATION'));
 
 
         return view("tournaments/users", compact('users','currentModelName'));
@@ -162,25 +149,6 @@ class TournamentController extends Controller
 
         return redirect("tournaments/$tournamentId/users");
     }
-
-//    public function getCategories($tournamentId)
-//    {
-//        $tournament = Tournament::find($tournamentId)->first();
-//        $categories = $tournament->categories;
-//
-////        $users = $tournament->competitors;
-//
-//
-//        return view("tournaments.categories", compact('categories', 'tournamentId'));
-//    }
-
-//    public function postCategory(Request $request)
-//    {
-//
-//        CategorySettings::create($request->all());
-//        flash("success",Lang::get('core.operation_successfull'));
-//        return view("tournaments/categories", compact('categories'));
-//    }
 
     public function updateCategory(Request $request, $categorySettingsId)
     {

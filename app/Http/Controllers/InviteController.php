@@ -7,7 +7,10 @@ use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
+use App\TournamentCategory;
+use App\TournamentCategoryUser;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -57,19 +60,22 @@ class InviteController extends Controller
      */
     public function register($token)
     {
+
+
         // Get available invitation
         $invite = Invite::getActiveInvite($token);
+        // Check if invitation is expired
+        if ($invite->expiration < Carbon::now())
+            dd ("Expired Invitation");
         $currentModelName = trans('crud.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
-//            $tournament = Tournament::findOrFail($invite->tournament_id);
             $user = User::where('email', $invite->email)->first();
             if (is_null($user)) {
-                // Redirect to user creation --
+                // Redirect to user creation
                 return view('auth/invite', compact('token'));
             } else {
-//                $invite->consume();
-
+                // Redirect to register category Screen
                 $userId = $user->id;
                 $tournamentId = $invite->tournament_id;
                 return view("categories.register", compact('userId', 'tournamentId', 'invite', 'currentModelName'));
@@ -89,23 +95,38 @@ class InviteController extends Controller
 
     public function registerCategories(Request $request)
     {
+        //TODO Check if catgory has been paid. if so, can't change
+
         $categories = $request->get('cat');
-//        dd($categories);
         $inviteId = $request->inviteId;
         $invite = Invite::findOrFail($inviteId);
         $tournament = $invite->tournament;
-        $tournament->categories_user()->sync($categories);
 
+        // Get all TournamentCategories Related to this tournament
 
+        $tcats = TournamentCategory::where('tournament_id', $tournament->id)->lists('id');
 
-//        $invite->consume();
+        // Delete All Registered category that has not been paid
+        TournamentCategoryUser::whereIn('category_tournament_id', $tcats)
+            ->where('user_id', Auth::user()->id)
+            ->delete();
+
+        //Create new ones
+        $arrToSave = array();
+        foreach ($categories as $cat) {
+            array_push($arrToSave, ['category_tournament_id' => $cat, 'user_id' => Auth::user()->id, 'confirmed' => 0]);
+        }
+
+        TournamentCategoryUser::insert($arrToSave);
+
+        $invite->consume();
         flash("success", trans('core.operation_successful'));
         return redirect("/invites");
 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Send an email to competitor and store invitation.
      *
      * @param InviteRequest|Request $request
      * @param AppMailer $mailer

@@ -21,22 +21,18 @@
                         <h6 class="coutent-group"></h6>
 
 
+                        @foreach($tournament->categories as $key => $category)
 
-                        {{--{{--}}
-                        {{--dd($tournament->categories)--}}
-                        {{--}}--}}
-                    @foreach($tournament->categories as $key => $category)
-
-                        <?php
-                                $tournamentCategory = DB::table('category_tournament')
-                                    ->where('tournament_id',$tournament->id)
-                                    ->where('category_id',$category->id)
+                            <?php
+                            $tournamentCategory = DB::table('category_tournament')
+                                    ->where('tournament_id', $tournament->id)
+                                    ->where('category_id', $category->id)
                                     ->first();
                             $old = DB::table('category_tournament_user')
-                                    ->where('category_tournament_id',$tournamentCategory->id)
-                                    ->where('user_id',Auth::user()->id)
+                                    ->where('category_tournament_id', $tournamentCategory->id)
+                                    ->where('user_id', Auth::user()->id)
                                     ->count();
-                        ?>
+                            ?>
 
                             @if ($key % 4 == 0)
                                 <div class="row">

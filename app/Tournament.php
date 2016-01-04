@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 class Tournament extends Model
 {
@@ -51,10 +52,13 @@ class Tournament extends Model
 
     public function competitors()
     {
+//        User::join('category_tournament_user', 'user.id','user_id' )
 
-        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id', 'user_id' )
-            ->withPivot('confirmed')
-            ->withTimestamps();
+
+
+//        return $this->belongsToMany('App\User', 'category_tournament', 'category_tournament_id', 'user_id' )
+//            ->withPivot('confirmed')
+//            ->withTimestamps();
     }
 
     public function level()
@@ -73,6 +77,7 @@ class Tournament extends Model
     public function categories()
     {
         return $this->belongsToMany('App\Category')
+                    ->withPivot('id')
                     ->withTimestamps();
     }
 
@@ -92,11 +97,16 @@ class Tournament extends Model
     // Or         $tournament->category_user()->sync([1, 2, 3]);
     // I'm not sure about the name
 
-//    public function categories_user()
-//    {
-//        return $this->belongsToMany('App\Category','category_tournament_user', 'user_id', 'category_tournament_id')
-//            ->withTimestamps();
-//    }
+    public function tournament_categories()
+    {
+        return $this->belongsToMany('App\TournamentCategory','category_tournament');
+    }
+
+    public function categories_user()
+    {
+        return $this->belongsToMany('App\TournamentCategory','category_tournament_user', 'user_id', 'category_tournament_id')
+            ->withTimestamps();
+    }
 
 
 

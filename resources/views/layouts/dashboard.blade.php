@@ -87,7 +87,7 @@
                 <div class="page-header-content">
                     <div class="page-title">
                         <h1><span class="text-semibold">
-                                @if (!Request::is("/") && !Request::is("/dashboard")
+                                @if (!Request::is("/") && !Request::is("admin")
                                      && !Request::is("tournaments")
                                      && !Request::is("invites")
                                      && !Request::is("users")

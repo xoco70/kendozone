@@ -17,7 +17,7 @@
 
                     @can('CanCreateTournament')
                     <a href="{!!   URL::action('TournamentController@create') !!}"
-                       class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                       class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
                     </a>
                     @endcan
 

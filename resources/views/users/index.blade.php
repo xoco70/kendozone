@@ -8,7 +8,7 @@
                 <thead>
                 <span class="pl-10 pull-right">
                                     <a href="{!!   URL::action('UserController@create') !!}"
-                                       class="btn btn-primary btn-xs "><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
                                     </a>
 
 </span>

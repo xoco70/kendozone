@@ -9,7 +9,7 @@
             <table class="table table-striped custab">
                 <thead>
                 @can('CanCreatePlace')
-                <a href="{!!   URL::action('PlaceController@create') !!}" class="btn btn-primary btn-xs pull-right"><b>+</b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
+                <a href="{!!   URL::action('PlaceController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
                 @endcan
                 <tr>
                     <th>ID</th>
