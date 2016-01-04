@@ -4,7 +4,8 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class Tournament extends Model
 {
@@ -47,19 +48,35 @@ class Tournament extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('App\User', 'user_id','id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function competitors()
+    public function competitors($tournamentCategoryId = null)
     {
 //        User::join('category_tournament_user', 'user.id','user_id' )
+        $users = DB::table('users')
+            ->join('category_tournament_user as ctu', 'ctu.user_id', '=', 'users.id')
+            ->join('category_tournament as ct', 'ctu.category_tournament_id', '=', 'ct.id')
+            ->join('category', 'ct.category_id', '=', 'category.id')
+            ->where('ct.tournament_id', '=', $this->id);
 
+        if ($tournamentCategoryId != null)
+            $users->where('ct.id', '=', $tournamentCategoryId);
 
-
-//        return $this->belongsToMany('App\User', 'category_tournament', 'category_tournament_id', 'user_id' )
+        $users = $users->select('users.id','ct.tournament_id', 'users.name','email','avatar','country_id',
+                                'category.id as cat_id','category.name as cat_name', 'ct.tournament_id','ct.id as tcId','ctu.confirmed')->get();
+        $users = User::hydrate($users);
+//        $users->paginate(Config::get('constants.PAGINATION'));
+        return $users;
+//        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id', 'user_id' )
 //            ->withPivot('confirmed')
 //            ->withTimestamps();
     }
+    public function deleteUser($categoryTournamentId, $userId){
+
+
+    }
+
 
     public function level()
     {
@@ -77,16 +94,21 @@ class Tournament extends Model
     public function categories()
     {
         return $this->belongsToMany('App\Category')
-                    ->withPivot('id')
-                    ->withTimestamps();
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function settings($tournamentId)
     {
-        $arrTc = TournamentCategory::select('id')->where('tournament_id',$tournamentId)->get();
-        $settings = CategorySettings::whereIn('category_tournament_id',$arrTc)->get();
+        $arrTc = TournamentCategory::select('id')->where('tournament_id', $tournamentId)->get();
+        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
         return $settings;
     }
+
+//    public function ct(){
+//        return $this->hasMany('App\TournamentCategory');
+//    }
+
 
 //    public function tournamentCategory()
 //    {
@@ -99,15 +121,14 @@ class Tournament extends Model
 
     public function tournament_categories()
     {
-        return $this->belongsToMany('App\TournamentCategory','category_tournament');
+        return $this->belongsToMany('App\TournamentCategory', 'category_tournament');
     }
 
     public function categories_user()
     {
-        return $this->belongsToMany('App\TournamentCategory','category_tournament_user', 'user_id', 'category_tournament_id')
+        return $this->belongsToMany('App\TournamentCategory', 'category_tournament_user', 'user_id', 'category_tournament_id')
             ->withTimestamps();
     }
-
 
 
     public function getCategoryList()
@@ -150,7 +171,6 @@ class Tournament extends Model
 //        if ($type == "on")
 //            $this->attributes['type'] = 1;
 //    }
-
 
 
 //	public function setplaceId($id){

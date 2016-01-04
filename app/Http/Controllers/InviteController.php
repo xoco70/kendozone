@@ -78,6 +78,8 @@ class InviteController extends Controller
                 // Redirect to register category Screen
                 $userId = $user->id;
                 $tournamentId = $invite->tournament_id;
+//                $tournament = Tournament::findOrFail($tournamentId);
+
                 return view("categories.register", compact('userId', 'tournamentId', 'invite', 'currentModelName'));
 
 

@@ -63,6 +63,8 @@
         {!! Html::script('js/plugins/multiple-emails.js') !!}
         {!! Html::style('css/multiple-emails.css') !!}
     @endif
+    {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
+    {!! Html::style('js/plugins/tables/datatables/extensions/responsive.min.js') !!}
 
 
 </head>
@@ -92,9 +94,9 @@
                                      && !Request::is("invites")
                                      && !Request::is("users")
                                      )
-                                <a href="{!! URL::previous() !!}"><i class="icon-arrow-left8 text-default"></i></a>
+                                    <a href="{!! URL::previous() !!}"><i class="icon-arrow-left8 text-default"></i></a>
                                 @endif
-                                    {!!  isset($currentModelName) ? $currentModelName :"" !!}
+                                {!!  isset($currentModelName) ? $currentModelName :"" !!}
                             </span>
                         </h1>
                     </div>

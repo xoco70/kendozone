@@ -42,8 +42,8 @@
 
                         <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
-                                @if((sizeof($tournament->competitors))>8)
-                                    <span class="badge badge-success">{{sizeof($tournament->competitors)}}</span>
+                                @if((sizeof($tournament->competitors()))>8)
+                                    <span class="badge badge-success">{{sizeof($tournament->competitors())}}</span>
                                 @endif
 
                             </a>
@@ -84,42 +84,42 @@
     <br/>
 
 <?php
-    $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();
-    ?>
-    @if (sizeof($competitors)>0)
+//    $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();
+//    ?>
+    {{--@if (sizeof($competitors)>0)--}}
 
-        <div class="sidebar sidebar-default">
+        {{--<div class="sidebar sidebar-default">--}}
 
-            <div class="sidebar-content">
-
-
-                <!-- Sub navigation -->
-                <div class="sidebar-category">
-                    <div class="category-title">
-                        <span>{{ Lang::get("crud.latest_competitors") }}</span>
-                        <ul class="icons-list">
-                            <li><a href="#" data-action="collapse"></a></li>
-                        </ul>
-                    </div>
+            {{--<div class="sidebar-content">--}}
 
 
-                    <div class="category-content no-padding">
-                        <ul class="navigation navigation-alt navigation-accordion">
-                            @foreach($competitors as $competitor)
-                                <li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}
-                                    </a>
-                            @endforeach
-
-                        </ul>
-                    </div>
-
-                </div>
-
-                <!-- /sub navigation -->
+                {{--<!-- Sub navigation -->--}}
+                {{--<div class="sidebar-category">--}}
+                    {{--<div class="category-title">--}}
+                        {{--<span>{{ Lang::get("crud.latest_competitors") }}</span>--}}
+                        {{--<ul class="icons-list">--}}
+                            {{--<li><a href="#" data-action="collapse"></a></li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
 
 
-            </div>
-        </div>
-    @endif
+                    {{--<div class="category-content no-padding">--}}
+                        {{--<ul class="navigation navigation-alt navigation-accordion">--}}
+                            {{--@foreach($competitors as $competitor)--}}
+                                {{--<li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}--}}
+                                    {{--</a>--}}
+                            {{--@endforeach--}}
+
+                        {{--</ul>--}}
+                    {{--</div>--}}
+
+                {{--</div>--}}
+
+                {{--<!-- /sub navigation -->--}}
+
+
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--@endif--}}
 </div>
 <!-- /detached sidebar -->

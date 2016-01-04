@@ -135,17 +135,19 @@ class TournamentController extends Controller
 
         $tournament = Tournament::find($tournamentId)->first();
         $currentModelName = trans_choice('crud.competitor',2). " - ". trans_choice('crud.tournament',1). " : ".  $tournament->name;
-        $users = $tournament->competitors()->orderby('category_tournament_id')->paginate(Config::get('constants.PAGINATION'));
+        $users = $tournament->competitors();
+
 
 
         return view("tournaments/users", compact('users','currentModelName'));
     }
 
-    public function deleteUser($tournamentId,$userId)
+    public function deleteUser($tournamentId,$tcId)
     {
 
         $tournament = Tournament::find($tournamentId)->first();
-        $tournament->competitors()->detach($userId);
+
+        $tournament->competitors();
 
         return redirect("tournaments/$tournamentId/users");
     }
