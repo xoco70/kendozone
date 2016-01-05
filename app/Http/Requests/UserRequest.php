@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use GeoIP;
+use Webpatser\Countries\Countries;
 
 class UserRequest  extends Request
 {
@@ -18,11 +19,11 @@ class UserRequest  extends Request
     public function __construct(\Illuminate\Http\Request $request)
     {
 //        dd($request);
-        $method= $request->method;
+//        $method= $request->method;
 //        dd($request->method);
         $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
-
-        $request->request->add(['country' => $location['country'] ]);
+        $country = Countries::where('name','=',$location['country'])->first();
+        $request->request->add(['country_id' => $country->id ]);
         $request->request->add(['countryCode' => $location['isoCode'] ]);
         $request->request->add(['city' => $location['city'] ]);
         $request->request->add(['latitude' => $location['lat'] ]);

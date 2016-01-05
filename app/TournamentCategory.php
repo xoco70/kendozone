@@ -21,6 +21,10 @@ class TournamentCategory extends Model
         return $this->hasMany('App\TournamentCategoryUser', 'category_tournament_id','id');
     }
 
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
+
 
 
 }

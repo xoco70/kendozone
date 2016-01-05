@@ -8,7 +8,7 @@
 
             {!! Form::open(['url'=>"tournaments/$tournament->id/users/"]) !!}
 
-            @include("errors.list")
+
 
             <div class="container-fluid">
 

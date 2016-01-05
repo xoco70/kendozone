@@ -6,7 +6,10 @@ use App\Category;
 use App\CategorySettings;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
+use App\Invite;
+use App\Mailers\AppMailer;
 use App\Tournament;
+use App\TournamentCategory;
 use App\TournamentCategoryUser;
 use App\TournamentLevel;
 use App\User;
@@ -15,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+use GeoIP;
+use Webpatser\Countries\Countries;
 
 //use App\Place;
 
@@ -146,24 +151,83 @@ class TournamentController extends Controller
     public function createUser($tournamentId)
     {
 
+
         $tournament = Tournament::findOrFail($tournamentId);
-        return view("tournaments/create_user", compact('tournament')); //, compact('currentModelName')
+        $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
+        return view("tournaments/create_user", compact('tournament', 'currentModelName')); //, compact()
     }
 
-    public function postUser(Request $request,$tournamentId)
+    public function postUser(Request $request, $tournamentId, AppMailer $mailer)
     {
-        // TODO Validate Request ( email not empty + cat not empty )
+
+        $this->validate($request, [
+            'username' => 'required|max:255',
+            'email' => 'required',
+            'cat' => 'required|array'
+
+        ]);
+
+        $tcat = $request->cat;
         $email = $request->email;
-        $user = User::where('email',$email)->first();
-        if (!is_nan($user)){
+        $username = $request->username;
+
+        $tournament = Tournament::findOrFail($tournamentId);
+        $user = User::where('email', $email)->first();
+        $password = null;
+        if (is_null($user)) {
+            //Create user first
+            $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+            $country = Countries::where('name','=',$location['country'])->first();
+            $password = User::generatePassword();
+
+            User::create(['email' => $email,
+                'name' => $username,
+                'password' => $password,
+                'country_id' => $country->id,
+                'countryCode' => $location['isoCode'],
+                'city' => $location['city'],
+                'latitude' => $location['lat'],
+                'longitude' => $location['lon']
+
+            ]);
+        } else {
+
             // User already exists
-        }else{
-            // Create user
+            // We check that this user isn't registered in this tournament
+
+            if ($user->isRegisteredInTournament($tournamentId)) {
+                // If so, send alert, must edit user instead of create
+                flash('warning', trans('flash.user_already_registered_in_tournament'));
+//                $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
+                return redirect("tournaments/$tournamentId/users/create"); //, compact()
+
+            } else {
+                // We add him to the different categor
+                $tcus = array();
+                $categories = array();
+                foreach ($tcat as $tCategoryId) {
+                    array_push($tcus, ['category_tournament_id' => $tCategoryId,
+                        'user_id' => $user->id]);
+
+//                    dd(trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
+                    array_push($categories, trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
+                }
+
+                TournamentCategoryUser::insert($tcus);
+                // We send him an email with detail ( and user /password if new)
+                $invite = new Invite();
+                $code = $invite->generate($user->email, $tournament);
+//                dd($code."-".$user->email);
+                $mailer->sendEmailInvitationTo($user->email, $tournament,$code, $categories,$password);
+                flash('success', trans('core.operation_successful'));
+                return redirect("tournaments/$tournamentId/users");
+            }
+
+
         }
-//      just add him to tournament and email him
-        dd($user);
-        flash('success', trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/users");
+
+
+
     }
 
 

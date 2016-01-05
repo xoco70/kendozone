@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
-use App\Country;
 use App\Grade;
 use App\Http\Requests\AuthRequest;
-use App\Http\Requests\UserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Role;

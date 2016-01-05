@@ -9,16 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-//use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
-
-//use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Config;
-//use Illuminate\Support\Facades\Input;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -188,6 +184,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
+    public function isRegisteredInTournament($tournamentId)
+    {
+        $count = DB::table('category_tournament_user as ctu')
+            ->join('category_tournament as ct', 'ct.id', '=', 'ctu.category_tournament_id')
+            ->where('ctu.user_id',$this->id)
+            ->where('ct.tournament_id',$tournamentId)
+            ->count();
+//        dd($count);
+        return $count > 0 ;
+    }
+
     public function categories()
     {
         return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id','category_tournament_id');
@@ -199,5 +206,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //        return $this->tournaments()->first(); // Where not finished
 //    }
 
+    public static function generatePassword(){
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            return implode($pass); //turn the array into a string
+    }
 
 }

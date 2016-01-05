@@ -15,7 +15,7 @@ class AppMailer
      *
      * @var string
      */
-    protected $from = 'admin@atekokolli.com';
+    protected $from = 'admin@kendozone.com';
     /**
      * The recipient of the email.
      *
@@ -60,12 +60,12 @@ class AppMailer
         $this->deliver();
     }
 
-    public function sendEmailInvitationTo( $email , $tournament, $code)
+    public function sendEmailInvitationTo( $email , $tournament, $code, $categories = null, $password = null)
     {
         $this->to = $email;
         $this->subject = 'Invitación al torneo: '.$tournament->name;
         $this->view = 'emails.invite';
-        $this->data = compact('tournament','code');
+        $this->data = compact('tournament','code','categories','email', 'password');
         $this->deliver();
     }
 
