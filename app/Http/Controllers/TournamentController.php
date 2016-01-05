@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\CategorySettings;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
-//use App\Place;
 use App\Tournament;
-use App\Category;
+use App\TournamentCategoryUser;
 use App\TournamentLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+
+//use App\Place;
 
 class TournamentController extends Controller
 {
@@ -134,21 +135,21 @@ class TournamentController extends Controller
     {
 
         $tournament = Tournament::find($tournamentId)->first();
-        $currentModelName = trans_choice('crud.competitor',2). " - ". trans_choice('crud.tournament',1). " : ".  $tournament->name;
+        $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
         $users = $tournament->competitors();
 
 
-
-        return view("tournaments/users", compact('users','currentModelName'));
+        return view("tournaments/users", compact('users', 'currentModelName'));
     }
 
-    public function deleteUser($tournamentId,$tcId)
+    public function deleteUser($tournamentId, $tcId, $userId)
     {
+//        $tournament = Tournament::find($tournamentId)->first();
 
-        $tournament = Tournament::find($tournamentId)->first();
-
-        $tournament->competitors();
-
+        TournamentCategoryUser::where('category_tournament_id', $tcId)
+            ->where('user_id', $userId)
+            ->delete();
+        flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
 
@@ -156,7 +157,7 @@ class TournamentController extends Controller
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
         $categorySettings->update($request->all());
-        flash("success",Lang::get('core.operation_successful'));
+        flash("success", Lang::get('core.operation_successful'));
         return view("tournaments/categories", compact('categories'));
     }
 
@@ -170,7 +171,7 @@ class TournamentController extends Controller
     public function destroyTournament($tournamentId)
     {
         Tournament::destroy($tournamentId);
-        flash("success",Lang::get('core.operation_successful'));
+        flash("success", Lang::get('core.operation_successful'));
         return redirect("tournaments");
     }
 

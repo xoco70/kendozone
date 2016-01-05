@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth', 'own']],
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
-        Route::get('tournaments/{tournamentId}/users/{userId}/delete', 'TournamentController@deleteUser');
+        Route::get('tournaments/{tournamentId}/categories/{tournamentCategoryId}/users/{userId}/delete', 'TournamentController@deleteUser');
 
         Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
