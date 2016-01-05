@@ -35,6 +35,7 @@ return [
     'newTournament' => 'Nuevo Torneo',
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
+    'account' => 'Cuenta',
     'limitDateRegistration' => 'Fecha limite de registro',
     'teamSize' => 'Tamaño de equipos',
     'fightingAreas' => 'Areas',
@@ -115,6 +116,9 @@ return [
 
     // Competitor
     'competitor' => 'Competidor|Competidores',
+    'add_competitor' => 'Agregar Competidor',
+    'select_competitor_categories' => 'Selecciona las categorias en la cual quieres registrar al competidor',
+
 
     // Invitation
 

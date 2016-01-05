@@ -13,7 +13,8 @@
                        class="btn btn-warning btn-xs pull-right ml-20"><b><i
                                     class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
                     </a>
-                    <a href="{!!   URL::action('UserController@create') !!}"
+                    <a href="{!!   URL::action('TournamentController@createUser',
+                                                    ['tournamentId'=>$users[0]->tournament_id]) !!}"
                        class="btn btn-primary btn-xs pull-right"><b><i
                                     class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
                     </a>
@@ -34,9 +35,7 @@
                             <th class="text-center">{{ trans('crud.action') }}</th>
                         </tr>
                         </thead>
-                        <?php
-                        $tcu = new \App\TournamentCategoryUser();
-                        ?>
+
                         @foreach($users as $user)
                             <tr>
                                 <td class="text-center"><a

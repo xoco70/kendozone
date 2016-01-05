@@ -9,6 +9,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\TournamentCategoryUser;
 use App\TournamentLevel;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -142,6 +143,30 @@ class TournamentController extends Controller
         return view("tournaments/users", compact('users', 'currentModelName'));
     }
 
+    public function createUser($tournamentId)
+    {
+
+        $tournament = Tournament::findOrFail($tournamentId);
+        return view("tournaments/create_user", compact('tournament')); //, compact('currentModelName')
+    }
+
+    public function postUser(Request $request,$tournamentId)
+    {
+        // TODO Validate Request ( email not empty + cat not empty )
+        $email = $request->email;
+        $user = User::where('email',$email)->first();
+        if (!is_nan($user)){
+            // User already exists
+        }else{
+            // Create user
+        }
+//      just add him to tournament and email him
+        dd($user);
+        flash('success', trans('core.operation_successful'));
+        return redirect("tournaments/$tournamentId/users");
+    }
+
+
     public function deleteUser($tournamentId, $tcId, $userId)
     {
 //        $tournament = Tournament::find($tournamentId)->first();
@@ -152,6 +177,7 @@ class TournamentController extends Controller
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
+
 
     public function updateCategory(Request $request, $categorySettingsId)
     {

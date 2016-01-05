@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'own']],
 
         Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
         Route::get('tournaments/{tournamentId}/categories/{tournamentCategoryId}/users/{userId}/delete', 'TournamentController@deleteUser');
+        Route::get('tournaments/{tournamentId}/users/create', 'TournamentController@createUser', ['as' => 'tournaments.users.create']);
+        Route::post('tournaments/{tournamentId}/users/', 'TournamentController@postUser');
 
         Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');

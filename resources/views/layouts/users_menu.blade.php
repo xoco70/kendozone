@@ -14,7 +14,6 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        <li class="navigation-header"></li>
                         <li><a href="#"><i class="icon-trophy2"></i> General</span>
 
                             </a></li>
