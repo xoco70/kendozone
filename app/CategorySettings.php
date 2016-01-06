@@ -14,6 +14,7 @@ class CategorySettings extends Model
         "category_tournament_id",
         "isTeam",
         "teamSize",
+        "fightingAreas",
         "fightDuration",
         "hasEncho",
         "enchoQty",

@@ -15,6 +15,7 @@ return [
     'ROLE_PRESIDENT' => '4',
     'ROLE_COMPETITOR' => '5',
 
+    'CAT_FIGHTING_AREAS' => '1',
     'CAT_FIGHT_DURATION' => '180',
     'CAT_ISTEAM' => '0',
     'CAT_TEAM' => '0',

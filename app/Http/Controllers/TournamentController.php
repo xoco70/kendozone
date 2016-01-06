@@ -137,112 +137,6 @@ class TournamentController extends Controller
     }
 
 
-    public function getUsers($tournamentId)
-    {
-
-        $tournament = Tournament::find($tournamentId)->first();
-        $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-        $users = $tournament->competitors();
-
-
-        return view("tournaments/users", compact('users', 'currentModelName'));
-    }
-
-    public function createUser($tournamentId)
-    {
-
-
-        $tournament = Tournament::findOrFail($tournamentId);
-        $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/create_user", compact('tournament', 'currentModelName')); //, compact()
-    }
-
-    public function postUser(Request $request, $tournamentId, AppMailer $mailer)
-    {
-
-        $this->validate($request, [
-            'username' => 'required|max:255',
-            'email' => 'required',
-            'cat' => 'required|array'
-
-        ]);
-
-        $tcat = $request->cat;
-        $email = $request->email;
-        $username = $request->username;
-
-        $tournament = Tournament::findOrFail($tournamentId);
-        $user = User::where('email', $email)->first();
-        $password = null;
-        if (is_null($user)) {
-            //Create user first
-            $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
-            $country = Countries::where('name','=',$location['country'])->first();
-            $password = User::generatePassword();
-
-            User::create(['email' => $email,
-                'name' => $username,
-                'password' => $password,
-                'country_id' => $country->id,
-                'countryCode' => $location['isoCode'],
-                'city' => $location['city'],
-                'latitude' => $location['lat'],
-                'longitude' => $location['lon']
-
-            ]);
-        } else {
-
-            // User already exists
-            // We check that this user isn't registered in this tournament
-
-            if ($user->isRegisteredInTournament($tournamentId)) {
-                // If so, send alert, must edit user instead of create
-                flash('warning', trans('flash.user_already_registered_in_tournament'));
-//                $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-                return redirect("tournaments/$tournamentId/users/create"); //, compact()
-
-            } else {
-                // We add him to the different categor
-                $tcus = array();
-                $categories = array();
-                foreach ($tcat as $tCategoryId) {
-                    array_push($tcus, ['category_tournament_id' => $tCategoryId,
-                        'user_id' => $user->id]);
-
-//                    dd(trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
-                    array_push($categories, trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
-                }
-
-                TournamentCategoryUser::insert($tcus);
-                // We send him an email with detail ( and user /password if new)
-                $invite = new Invite();
-                $code = $invite->generate($user->email, $tournament);
-//                dd($code."-".$user->email);
-                $mailer->sendEmailInvitationTo($user->email, $tournament,$code, $categories,$password);
-                flash('success', trans('core.operation_successful'));
-                return redirect("tournaments/$tournamentId/users");
-            }
-
-
-        }
-
-
-
-    }
-
-
-    public function deleteUser($tournamentId, $tcId, $userId)
-    {
-//        $tournament = Tournament::find($tournamentId)->first();
-
-        TournamentCategoryUser::where('category_tournament_id', $tcId)
-            ->where('user_id', $userId)
-            ->delete();
-        flash('success', trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/users");
-    }
-
-
     public function updateCategory(Request $request, $categorySettingsId)
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
@@ -263,6 +157,31 @@ class TournamentController extends Controller
         Tournament::destroy($tournamentId);
         flash("success", Lang::get('core.operation_successful'));
         return redirect("tournaments");
+    }
+
+
+    public function generateTrees($tournamentId){
+        $tournament = Tournament::findOrFail($tournamentId);
+        $competitors = $tournament->competitors();
+        $tournamentCategories = TournamentCategory::where('tournament_id',$tournamentId)->get();
+        foreach ($tournamentCategories as $cat){
+            // Get number of area for this category
+            $fightingAreas  = null;
+            $settings = CategorySettings::where('category_tournament_id',$cat->id)->get();
+            if (is_null($settings) || sizeof($settings) == 0)
+                $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
+            //TODO HAy que poner un caso Auth::user()->settings()
+            else{
+                $fightingAreas = $settings->fightingAreas;
+            }
+
+
+            dd($fightingAreas);
+            echo "<h3>".$cat->category->name."</h3>";
+            $competitors = $tournament->competitors($cat->id);
+            echo $competitors;
+        }
+//        dd($competitors->where('cat_id','2'));
     }
 
 
