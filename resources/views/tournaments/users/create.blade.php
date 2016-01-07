@@ -9,7 +9,6 @@
             {!! Form::open(['url'=>"tournaments/$tournament->id/users/"]) !!}
 
 
-
             <div class="container-fluid">
 
 
@@ -25,9 +24,7 @@
 
 
                                         <fieldset title="add_competitor">
-                                            <a name="add_competitor">
-                                                <legend class="text-semibold">{{Lang::get('crud.add_competitor')}}</legend>
-                                            </a>
+                                            <legend class="text-semibold">{{Lang::get('crud.add_competitor')}}</legend>
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -108,7 +105,7 @@
 
                             </div>
 
-                            @include("layouts.users_menu")
+                            @include("help.users_create")
 
 
                         </div>
@@ -117,9 +114,11 @@
                     </div>
 
 
-                    {!! Form::close()!!}
                 </div>
             </div>
+
+
+            {!! Form::close()!!}
         </div>
     </div>
     <script>

@@ -36,6 +36,7 @@ return [
     'save' => 'Guardar',
     'edit' => 'Editar',
     'delete' => 'Borrar',
+    'help' => 'Ayuda',
 
     // Left menu
     'lastlogin' => 'Ultima conexión',

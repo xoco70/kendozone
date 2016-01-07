@@ -76,10 +76,12 @@
     <br/>
     <div class="row">
         <div class="col-md-12">
-            <p><a href="#" type="button" class="btn btn-warning btn-labeled btn-xlg"
+            <p><a href="{!!   URL::action('TournamentController@generateTrees',
+                                                    ['tournamentId'=>$tournament->id]) !!}" type="button" class="btn btn-warning btn-labeled btn-xlg"
                   style="width: 100%;"><b><i class="icon-tree7"></i></b>{{ trans('crud.generate_trees') }}</a></p>
 
         </div>
+
     </div>
     <br/>
 

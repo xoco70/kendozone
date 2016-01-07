@@ -41,6 +41,7 @@ Route::group(['middleware' => ['guest']],
         Route::get('auth/login', 'Auth\AuthController@getLogin');
 
         // Registration routes...
+
         Route::get('auth/register', 'Auth\AuthController@getRegister');
         Route::post('auth/register', 'Auth\AuthController@postRegister');
         Route::get('auth/register/confirm/{token}', 'Auth\AuthController@confirmEmail');
@@ -63,7 +64,7 @@ Route::group(['middleware' => ['guest']],
 
 //Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
 
-Route::group(['middleware' => ['auth', 'own']],
+Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
     function () {
 
         Route::resource('tournaments', 'TournamentController');

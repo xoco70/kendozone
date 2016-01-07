@@ -40,10 +40,10 @@
                         @foreach($users as $user)
                             <tr>
                                 <td class="text-center"><a
-                                            href="{!!   URL::action('UserController@show',  $user->tcu_id) !!}">{{ $user->ctuId }}</a>
+                                            href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id]) !!}">{{ $user->ctuId }}</a>
                                 </td>
                                 <td class="text-center"><a
-                                            href="{!!   URL::action('UserController@show',  $user->id) !!}">{{ $user->name }}</a>
+                                            href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id] ) !!}">{{ $user->name }}</a>
                                 </td>
                                 <td class="text-center">{{ $user->email }}</td>
                                 <td class="text-center">{{ trans($user->cat_name)}}</td>
