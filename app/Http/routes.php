@@ -29,13 +29,13 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 //Route::get('/', function () {
 //    return Redirect::to('/frontend');
 //});
-Route::get('/', 'DashboardController@index')->middleware(['auth','throttle']);
-Route::get('/admin', 'DashboardController@index')->middleware(['auth','throttle']);
+Route::get('/', 'DashboardController@index')->middleware(['auth']);
+Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
 Route::get('invite/register/{token}', 'InviteController@register');
 
-Route::group(['middleware' => ['guest','throttle']],
+Route::group(['middleware' => ['guest']],
     function () {
         Route::post('auth/login', 'Auth\AuthController@postLogin');
         Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['guest','throttle']],
 
 //Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
 
-Route::group(['middleware' => ['auth', 'own','throttle']],
+Route::group(['middleware' => ['auth', 'own']],
     function () {
 
         Route::resource('tournaments', 'TournamentController');
@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'own','throttle']],
         Route::resource('users', 'UserController');
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
-        Route::resource('tournaments/{tournamentId}/users', 'TournamentUserController');
+        Route::resource('tournaments/{tournament}/users', 'TournamentUserController');
 
 //        Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
         Route::get('tournaments/{tournamentId}/categories/{tournamentCategoryId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth', 'own','throttle']],
 //        Route::get('tournaments/{tournamentId}/users/create', 'TournamentController@createUser', ['as' => 'tournaments.users.create']);
 //        Route::post('tournaments/{tournamentId}/users/', 'TournamentController@postUser');
 
-        Route::resource('tournaments/{tournamentId}/categories', 'CategoryController');
+        Route::resource('tournaments/{tournament}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
         Route::resource('invites', 'InviteController');
 

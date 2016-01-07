@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\Own::class,
+//        'throttle:60,1',
     ];
 
     /**
@@ -32,5 +33,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'roles' => \App\Http\Middleware\CheckRole::class,
         'own' => \App\Http\Middleware\Own::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

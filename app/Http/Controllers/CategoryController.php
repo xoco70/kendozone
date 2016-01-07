@@ -28,9 +28,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($tournamentId)
+    public function index(Tournament $tournament)
     {
-        $tournament = Tournament::find($tournamentId)->first();
         $categories = $tournament->categories;
         $defaultSettings =  $this->defaultSettings;
         return view("categories.index", compact('categories','defaultSettings'));

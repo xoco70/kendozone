@@ -24,10 +24,11 @@
 
                         @include('categories.categorySettings')
 
-                        {!! Form::close()!!}
+
                     </div>
                 </div>
             </div>
+            {!! Form::close()!!}
         </div>
     </div>
 @stop

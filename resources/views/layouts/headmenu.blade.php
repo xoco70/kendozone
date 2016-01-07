@@ -23,8 +23,7 @@
                             class="icon-cog"></i> </a>
                 <ul class="dropdown-menu dropdown-menu-right icons-right">
 
-                    <li><a href="{!! URL::to('/settings')!!}"><i
-                                    class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>
+
 
 
                     @can('CanRegisterUser')
@@ -45,29 +44,6 @@
                 </ul>
             </li>
 
-            <li class="dropdown dropdown-user">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    @if(Auth::check())
-                        <img src="{!! Auth::getUser()->avatar !!}" alt="">
-                        <span>{!! Auth::getUser()->name !!}</span>
-                        <i class="caret"></i>
-                    @endif
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-right">
-                    @can('CanEditProfile')
-                    <li><a href="{!! URL::to('users/'.Auth::getUser()->id).'/edit' !!}"><i
-                                    class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>@endcan
-                    {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}
-                    {{--<li><a href="index.html#"><i class="icon-coins"></i> My balance</a></li>--}}
-                    {{--<li><a href="index.html#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>--}}
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
-                    <li><a href="{{ url('auth/logout') }}"><i class="icon-switch2"></i> {!! Lang::get('core.logout') !!}
-                        </a></li>
-
-                </ul>
-            </li>
         </ul>
     </div>
 </div>

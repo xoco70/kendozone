@@ -44,13 +44,12 @@ class TournamentUserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new competitor.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($tournamentId)
+    public function create(Tournament $tournament)
     {
-        $tournament = Tournament::findOrFail($tournamentId);
         $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/create_user", compact('tournament', 'currentModelName')); //, compact()
     }
