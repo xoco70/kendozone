@@ -6,20 +6,15 @@ use App\Category;
 use App\CategorySettings;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
-use App\Invite;
-use App\Mailers\AppMailer;
 use App\Tournament;
 use App\TournamentCategory;
-use App\TournamentCategoryUser;
 use App\TournamentLevel;
-use App\User;
+use GeoIP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
-use GeoIP;
-use Webpatser\Countries\Countries;
 
 //use App\Place;
 
@@ -160,24 +155,29 @@ class TournamentController extends Controller
     }
 
 
-    public function generateTrees($tournamentId){
+    public function generateTrees($tournamentId)
+    {
         $tournament = Tournament::findOrFail($tournamentId);
         $competitors = $tournament->competitors();
-        $tournamentCategories = TournamentCategory::where('tournament_id',$tournamentId)->get();
-        foreach ($tournamentCategories as $cat){
+        $tournamentCategories = TournamentCategory::where('tournament_id', $tournamentId)->get();
+        foreach ($tournamentCategories as $cat) {
             // Get number of area for this category
-            $fightingAreas  = null;
-            $settings = CategorySettings::where('category_tournament_id',$cat->id)->get();
-            if (is_null($settings) || sizeof($settings) == 0)
-                $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
-            //TODO HAy que poner un caso Auth::user()->settings()
-            else{
+            $fightingAreas = null;
+            $settings = CategorySettings::where('category_tournament_id', $cat->id)->get();
+            if (is_null($settings) || sizeof($settings) == 0) {
+
+                // Check general user settings
+                $generalSettings = Auth::user()->settings;
+
+                if (is_null($generalSettings) || sizeof($generalSettings) == 0)
+                    $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
+            } else {
                 $fightingAreas = $settings->fightingAreas;
             }
 
 
             dd($fightingAreas);
-            echo "<h3>".$cat->category->name."</h3>";
+            echo "<h3>" . $cat->category->name . "</h3>";
             $competitors = $tournament->competitors($cat->id);
             echo $competitors;
         }
