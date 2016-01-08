@@ -193,13 +193,43 @@ class TournamentUserController extends Controller
         }
 
         // Get all TournamentCategories Related to this tournament
+        // We can't just delete and create rows, because id is changing. We must delete and update existing
+        // Making diff between old and new
 
-        $categoriesToDelete = TournamentCategory::where('tournament_id', $tournamentId)->lists('id');
+        $categoriesTournement = TournamentCategory::where('tournament_id', $tournamentId)->lists('id');
 
         // Delete All Registered category
-        TournamentCategoryUser::whereIn('category_tournament_id', $categoriesToDelete)
+        $oldTcus = TournamentCategoryUser::whereIn('category_tournament_id', $categoriesTournement)
             ->where('user_id', $user->id)
-            ->delete();
+            ->select('id')
+            ->get();
+
+        $tcusToAdd = collect($tcat);
+//        dd($oldTcus);
+        // We need to make a list of tcus that were in the old list and aint anymore in the new list.
+        // This will be the delete list.
+
+        $deleteList = array();
+        $createList = array();
+        $updateList = array();
+        foreach($oldTcus as $oldTcu){
+            $oldTcuId = $oldTcu->id;
+            if (!$tcusToAdd->contains($oldTcuId)){
+//                dd("old:".$oldTcuId."-new:".$tcusToAdd);
+                array_push($deleteList,$oldTcuId);
+            }
+//            else{
+//                array_push($updateList,$oldTcuId);
+//            }
+        }
+
+        dd($deleteList);
+        // CreateList will be the difference between $tcat and updateList
+        $resultado = array_diff($tcat, $updateList);
+
+
+
+
 
         TournamentCategoryUser::insert($tcusToCreate);
         // We send him an email with detail ( and user /password if new)
