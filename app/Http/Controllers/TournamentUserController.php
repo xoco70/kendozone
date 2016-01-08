@@ -199,36 +199,9 @@ class TournamentUserController extends Controller
         $categoriesTournement = TournamentCategory::where('tournament_id', $tournamentId)->lists('id');
 
         // Delete All Registered category
-        $oldTcus = TournamentCategoryUser::whereIn('category_tournament_id', $categoriesTournement)
+        TournamentCategoryUser::whereIn('category_tournament_id', $categoriesTournement)
             ->where('user_id', $user->id)
-            ->select('id')
-            ->get();
-
-        $tcusToAdd = collect($tcat);
-//        dd($oldTcus);
-        // We need to make a list of tcus that were in the old list and aint anymore in the new list.
-        // This will be the delete list.
-
-        $deleteList = array();
-        $createList = array();
-        $updateList = array();
-        foreach($oldTcus as $oldTcu){
-            $oldTcuId = $oldTcu->id;
-            if (!$tcusToAdd->contains($oldTcuId)){
-//                dd("old:".$oldTcuId."-new:".$tcusToAdd);
-                array_push($deleteList,$oldTcuId);
-            }
-//            else{
-//                array_push($updateList,$oldTcuId);
-//            }
-        }
-
-        dd($deleteList);
-        // CreateList will be the difference between $tcat and updateList
-        $resultado = array_diff($tcat, $updateList);
-
-
-
+            ->delete();
 
 
         TournamentCategoryUser::insert($tcusToCreate);

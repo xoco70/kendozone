@@ -26,8 +26,7 @@
                     <table class="table datatable-responsive">
                         <thead>
                         <tr>
-                            <th class="text-center">ID</th>
-                            <th class="text-center">{{ trans('crud.username') }}</th>
+                            <th >{{ trans('crud.username') }}</th>
                             <th class="text-center">{{ trans('crud.email') }}</th>
                             <th class="text-center">{{ trans_choice('crud.category',1) }}</th>
                             <th class="text-center">{{ trans('crud.confirmed') }}</th>
@@ -39,10 +38,8 @@
 
                         @foreach($users as $user)
                             <tr>
-                                <td class="text-center"><a
-                                            href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id]) !!}">{{ $user->ctuId }}</a>
-                                </td>
-                                <td class="text-center"><a
+
+                                <td><a
                                             href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id] ) !!}">{{ $user->name }}</a>
                                 </td>
                                 <td class="text-center">{{ $user->email }}</td>

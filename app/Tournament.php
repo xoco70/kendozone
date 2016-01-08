@@ -64,7 +64,10 @@ class Tournament extends Model
             $users->where('ct.id', '=', $tournamentCategoryId);
 
         $users = $users->select('users.id','ct.tournament_id', 'users.name','email','avatar','country_id',
-                                'category.id as cat_id','category.name as cat_name', 'ct.tournament_id','ct.id as tcId','ctu.confirmed', 'ctu.id as ctuId')->get();
+                                'category.id as cat_id','category.name as cat_name', 'ct.tournament_id','ct.id as tcId','ctu.confirmed', 'ctu.id as ctuId')
+                        ->orderBy('users.email', 'ASC')
+                        ->orderBy('ct.id', 'ASC')
+                        ->get();
         $users = User::hydrate($users);
 //        $users->paginate(Config::get('constants.PAGINATION'));
         return $users;
