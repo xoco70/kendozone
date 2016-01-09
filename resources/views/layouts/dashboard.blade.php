@@ -31,22 +31,27 @@
     {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
+    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
 
+    @if (Request::is("tournaments") || Request::is("invites"))
+        {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
+    @endif
+    @if (Request::is("tournaments/create"))
+        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
+        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
+        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 
-
+    @endif
 
     @if (Request::is("users/*"))
         {!! Html::script('http://maps.google.com/maps/api/js') !!}
         {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
-    @if (Request::is("tournaments"))
-        {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
-    @endif
     {{--{!! Html::script('js/jquery.infinitescroll.min.js') !!}--}}
 
 
-    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
+
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit') && !strpos(Request::url(),'users')  )
@@ -64,13 +69,13 @@
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
 
     @endif
-
-    @if (Request::is("tournaments/create"))
-        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )
+        {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
+        {!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}
+        {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
 
     @endif
+
 
 
 

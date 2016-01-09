@@ -9,14 +9,14 @@
             <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
             {{--<div class="row col-md-10 custyle">--}}
-                <table class="table table-striped custab">
+                <table class="table table-togglable table-hover">
                     <thead>
                     <tr>
                         {{--<th><input type="checkbox" id="checkAll"/></th>--}}
-                        <th >#</th>
-                        <th class="text-center">{{ trans_choice('crud.tournament',1) }}</th>
+                        <th data-hide="phone">#</th>
+                        <th class="text-center" data-toggle="true">{{ trans_choice('crud.tournament',1) }}</th>
                         {{--<th>{{ trans_choice('crud.place',1) }}</th>--}}
-                        <th class="text-center">{{ trans('crud.organizer') }}</th>
+                        <th class="text-center" data-hide="phone">{{ trans('crud.organizer') }}</th>
                         <th class="text-center">{{ trans('crud.used') }}</th>
 
                         {{--<th>{{ trans('crud.limitDateRegistration') }}</th>--}}
@@ -39,7 +39,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
 
+            // Initialize responsive functionality
+            $('.table-togglable').footable();
+
+        });
+    </script>
     @include("errors.list")
 @stop
 

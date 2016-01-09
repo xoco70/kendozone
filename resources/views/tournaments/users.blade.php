@@ -27,8 +27,8 @@
                             <table class="table datatable-responsive">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">&nbsp;</th>
-                                    <th>{{ trans('crud.username') }}</th>
+                                    <th class="text-center " data-hide="phone">&nbsp;</th>
+                                    <th >{{ trans('crud.username') }}</th>
                                     <th class="text-center">{{ trans('crud.email') }}</th>
                                     <th class="text-center">{{ trans_choice('crud.category',1) }}</th>
                                     <th class="text-center">{{ trans('crud.confirmed') }}</th>
@@ -100,10 +100,6 @@
 <script>
     $(function () {
 
-
-        // Table setup
-        // ------------------------------
-
         // Setting datatable defaults
         $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
@@ -158,57 +154,7 @@
         });
 
 
-        // Control position
-        $('.datatable-responsive-control-right').DataTable({
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: -1
-                }
-            },
-            columnDefs: [
-                {
-                    className: 'control',
-                    orderable: false,
-                    targets: -1
-                },
-                {
-                    width: "100px",
-                    targets: [5]
-                },
-                {
-                    orderable: false,
-                    targets: [5]
-                }
-            ]
-        });
 
-
-        // Whole row as a control
-        $('.datatable-responsive-row-control').DataTable({
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-            columnDefs: [
-                {
-                    className: 'control',
-                    orderable: false,
-                    targets: 0
-                },
-                {
-                    width: "100px",
-                    targets: [6]
-                },
-                {
-                    orderable: false,
-                    targets: [6]
-                }
-            ],
-            order: [1, 'asc']
-        });
 
 
         // External table additions
