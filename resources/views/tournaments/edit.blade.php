@@ -144,8 +144,6 @@
                                 <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
-
-
                     </div>
                     <!-- /simple panel -->
                     <!-- Simple panel 2 : Venue -->
@@ -224,8 +222,6 @@
                                 <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
-
-
                     </div>
                     <!-- /simple panel -->
                     <div class="panel panel-flat">
@@ -260,7 +256,6 @@
 
 
                         </div>
-
                         <!-- /simple panel -->
                     </div>
 
@@ -290,15 +285,13 @@
                                 </fieldset>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <!-- /detached content -->
-
-                @include("layouts.tournament_menu")
             </div>
-            <!-- /content area -->
+            @include("layouts.tournament_menu")
+
+                    <!-- /content area -->
             <?php
             $now = Carbon\Carbon::now();
             $year = $now->year;

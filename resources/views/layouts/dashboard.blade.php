@@ -31,12 +31,12 @@
     {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
-    {!! Html::script('http://maps.google.com/maps/api/js') !!}
-    {!! Html::script('js/plugins/pickers/location/location.js') !!}
+
 
 
 
     @if (Request::is("users/*"))
+        {!! Html::script('http://maps.google.com/maps/api/js') !!}
         {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
@@ -49,7 +49,12 @@
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
     @if (Request::is("tournaments/*"))
-        {{--{!! Html::script('js/plugins/forms/wizards/stepy.min.js') !!}--}}
+        {!! Html::script('js/plugins/pickers/location/location.js') !!}
+        {!! Html::script('http://maps.google.com/maps/api/js') !!}
+
+        {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
+        {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
+
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 
@@ -57,7 +62,6 @@
     @endif
     {{--Dual Box select--}}
     {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
-    {!! Html::script('http://maps.google.com/maps/api/js') !!}
 
     @if (Request::is("invites/*"))
         {!! Html::script('js/plugins/multiple-emails.js') !!}
@@ -103,15 +107,15 @@
                 </div>
             </div>
             <!-- Content area -->
-            <div class="content">
 
-                @include('layouts.flash')
-                @yield('content')
 
-                @include('layouts.footer')
+            @include('layouts.flash')
+            @yield('content')
 
-            </div>
-            <!-- /content area -->
+            @include('layouts.footer')
+
+
+                    <!-- /content area -->
 
         </div>
         <!-- /main content -->

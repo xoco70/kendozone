@@ -26,11 +26,11 @@
                     <table class="table datatable-responsive">
                         <thead>
                         <tr>
+                            <th class="text-center">&nbsp;</th>
                             <th >{{ trans('crud.username') }}</th>
                             <th class="text-center">{{ trans('crud.email') }}</th>
                             <th class="text-center">{{ trans_choice('crud.category',1) }}</th>
                             <th class="text-center">{{ trans('crud.confirmed') }}</th>
-                            <th class="text-center">{{ trans('crud.avatar') }}</th>
                             <th class="text-center">{{ trans('crud.country') }}</th>
                             <th class="text-center">{{ trans('crud.action') }}</th>
                         </tr>
@@ -38,7 +38,10 @@
 
                         @foreach($users as $user)
                             <tr>
-
+                                <td class="text-center">
+                                    <a href="{!!   URL::action('UserController@show',  $user->id) !!}"><img
+                                                src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
+                                </td>
                                 <td><a
                                             href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id] ) !!}">{{ $user->name }}</a>
                                 </td>
@@ -55,10 +58,7 @@
                                     @endif
 
                                 </td>
-                                <td class="text-center">
-                                    <a href="{!!   URL::action('UserController@show',  $user->id) !!}"><img
-                                                src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
-                                </td>
+
 
                                 <td class="text-center"><img src="/images/flags/{{ $user->country->flag }}"
                                                              alt="{{ $user->country->name }}"/></td>

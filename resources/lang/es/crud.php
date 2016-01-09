@@ -58,7 +58,7 @@ return [
     'certificates' => 'Certificados',
     'acredit' => 'Acreditaciones',
     'broadcast' => 'Transmitir',
-    'publish' => 'Publicat',
+    'publish' => 'Publicar',
     'invite_competitors' => 'Invitar competidores',
     'generate_trees' => 'Generar Arboles',
 
