@@ -105,7 +105,7 @@
 
                             </div>
 
-                            @include("help.users_create")
+                            @include("right-panel.users_create")
 
 
                         </div>

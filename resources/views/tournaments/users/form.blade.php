@@ -94,7 +94,7 @@
 
                 </div>
 
-                @include("layouts.users_menu")
+                @include("right-panel.users_menu")
 
 
             </div>

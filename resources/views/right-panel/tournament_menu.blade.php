@@ -47,10 +47,10 @@
                                 @endif
 
                             </a>
-                        <li ><a href="#" class="text-slate-300"><i class="icon-certificate"></i>{{ trans('crud.certificates') }}</a>
-                        <li><a href="#" class="text-slate-300"><i class="icon-user-lock"></i>{{ trans('crud.acredit') }}</a>
-                        <li><a href="#" class="text-slate-300"><i class="icon-feed"></i>{{ trans('crud.broadcast') }}</a>
-                        <li><a href="#" class="text-slate-300"><i class="icon-share"></i>{{ trans('crud.publish') }}</a>
+                        <li class="disabled"><a href="#" ><i class="icon-certificate"></i>{{ trans('crud.certificates') }}</a>
+                        <li class="disabled"><a href="#" ><i class="icon-user-lock"></i>{{ trans('crud.acredit') }}</a>
+                        <li class="disabled"><a href="#" ><i class="icon-feed"></i>{{ trans('crud.broadcast') }}</a>
+                        <li class="disabled"><a href="#" ><i class="icon-share"></i>{{ trans('crud.publish') }}</a>
 
                         </li>
                         {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}

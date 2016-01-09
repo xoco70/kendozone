@@ -45,6 +45,9 @@ return [
     'country' => 'País',
     'statistics' => 'Estadisticas',
 
+    // Right Menu
+
+    'sumary' => 'Resumen',
     //Settings
 
     'isTeam' => 'Equipo',

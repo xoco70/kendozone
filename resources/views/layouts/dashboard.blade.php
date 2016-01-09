@@ -40,28 +40,48 @@
         {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
-
-
+    @if (Request::is("tournaments"))
+        {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
+    @endif
     {{--{!! Html::script('js/jquery.infinitescroll.min.js') !!}--}}
 
 
     {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    @if (Request::is("tournaments/*"))
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit') && !strpos(Request::url(),'users')  )
+        {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
+        {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
+        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
         {!! Html::script('js/plugins/pickers/location/location.js') !!}
         {!! Html::script('http://maps.google.com/maps/api/js') !!}
+        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
+        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+    @endif
 
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit'))
         {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
 
+    @endif
+
+    @if (Request::is("tournaments/create"))
+        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
 
-
     @endif
-    {{--Dual Box select--}}
-    {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
+
+
+
+
+
+        {{--Dual Box select--}}
+
+
+
+
+
 
     @if (Request::is("invites/*"))
         {!! Html::script('js/plugins/multiple-emails.js') !!}

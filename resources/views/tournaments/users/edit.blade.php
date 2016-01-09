@@ -91,8 +91,6 @@
 
                             </div>
 
-                            @include("layouts.users_menu")
-
 
                         </div>
 

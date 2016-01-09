@@ -63,7 +63,7 @@
                 </div>
                 <!-- /detached content -->
 
-            @include("layouts.tournament_menu")
+            @include("right-panel.tournament_menu")
 
             </div>
             <!-- /content area -->
