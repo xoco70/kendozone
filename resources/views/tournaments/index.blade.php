@@ -13,40 +13,40 @@
                         <div class="container-fluid">
 
                             {{--<div class="row col-md-10 custyle">--}}
-                            <table class="table table-striped custab">
+                            <table class="table table-togglable table-hover">
                                 <thead>
                                 {{--@can('CanDeleteTournament')--}}
                                 {{--<a id="delete" href="{!!   URL::action('TournamentController@create') !!}">@lang('crud.deleteAllElements')</a>--}}
                                 {{--@endcan--}}
 
-                                @can('CanCreateTournament')
+                                {{--@can('CanCreateTournament')--}}
                                 <a href="{!!   URL::action('TournamentController@create') !!}"
                                    class="btn btn-primary btn-xs pull-right"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
                                 </a>
-                                @endcan
+                                {{--@endcan--}}
 
                                 <tr>
                                     {{--<th><input type="checkbox" id="checkAll"/></th>--}}
-                                    <th>#</th>
-                                    <th>{{ trans('crud.name') }}</th>
+                                    <th  data-hide="phone">#</th>
+                                    <th data-toggle="true">{{ trans('crud.name') }}</th>
                                     {{--<th>{{ trans_choice('crud.place',1) }}</th>--}}
-                                    <th>{{ trans('crud.date') }}</th>
+                                    <th  data-hide="phone">{{ trans('crud.date') }}</th>
                                     {{--<th>{{ trans('crud.limitDateRegistration') }}</th>--}}
-                                    <th>{{ trans('crud.owner') }}</th>
-                                    @can('CanDeleteTournament')
+                                    <th  data-hide="phone">{{ trans('crud.owner') }}</th>
+                                    {{--@can('CanDeleteTournament')--}}
                                     <th class="text-center">{{ trans('crud.action') }}</th>
-                                    @endcan
+                                    {{--@endcan--}}
                                 </tr>
                                 </thead>
                                 @foreach($tournaments as $tournament)
                                     <tr>
                                         {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
-                                        <td>@can('CanEditTournament')<a
-                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->id }}@can('CanEditTournament')</a>@endCan
+                                        <td><a
+                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->id }}</a>
                                         </td>
-                                        <td>@can('CanEditTournament')<a
-                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">@endCan{{ $tournament->name }}@can('CanEditTournament')</a>@endCan
+                                        <td><a
+                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->name }}</a>
                                         </td>
                                         {{--<td>{{ $tournament->place }}</td>--}}
                                         <td>{{ $tournament->date }}</td>
@@ -54,12 +54,12 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
-                                            @can('CanDeleteTournament')
+
                                             <a class=" text-danger "
                                                href="{!! URL::action('TournamentController@destroyTournament',  ['tournamentId' => $tournament->id]) !!}"
                                                data-method="delete" data-token="{{csrf_token()}}">
                                                 <span class="glyphicon glyphicon-remove"></span></a>
-                                            @endcan
+
                                         </td>
                                     </tr>
 
@@ -72,6 +72,14 @@
             </div>
         </div>
     </div>
+    <script>
+    $(function() {
+
+    // Initialize responsive functionality
+    $('.table-togglable').footable();
+
+    });
+    </script>
     {{--<script type="text/javascript">--}}
     {{--$("#checkAll").change(function () {--}}
     {{--$("input:checkbox").prop('checked', $(this).prop("checked"));--}}
