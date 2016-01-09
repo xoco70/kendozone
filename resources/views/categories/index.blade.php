@@ -80,13 +80,13 @@
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@create',
                                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                                     'category_tournament_id' => $categoryTournament->id]) !!}">
+                                                     'category_tournament_id' =>$category->id]) !!}">
                                                     {{ $category->id }}</a>
                                             </td>
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@create',
                                                  ['tournamentId'=> $category->pivot->tournament_id,
-                                                  'category_tournament_id' => $categoryTournament->id]) !!}">
+                                                  'category_tournament_id' => $category->id]) !!}">
                                                     {{ $category->name }}</a>
                                             </td>
                                             <td class="text-center">{!!  $defaultSettings->isTeam == 1 ? $ok : $nok!!}</td>
@@ -99,7 +99,7 @@
                                                 <a class=" text-info "
                                                    href="{!! URL::action('CategorySettingsController@create',
                                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                                     'category_tournament_id' => $categoryTournament->id]) !!}"><span
+                                                     'category_tournament_id' => $category->id]) !!}"><span
                                                             class="text-slate glyphicon glyphicon-cog"></span></a>
                                             </td>
                                         </tr>
