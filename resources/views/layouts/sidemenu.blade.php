@@ -8,21 +8,21 @@
                 <div class="media">
                     @if(Auth::check())
                         <a href="{!!   URL::action('UserController@edit',  Auth::user()->id) !!}"
-                           class="media-left"><img src="{!! Auth::getUser()->avatar !!}"
+                           class="media-left"><img src="{!! Auth::user()->avatar !!}"
                                                    class="img-circle img-sm" alt=""></a>
 
 
-                    <div class="media-body">
+                        <div class="media-body">
 
-                        <span class="media-heading text-semibold">{!! Auth::getUser()->name !!}</span>
+                            <span class="media-heading text-semibold">{!! Auth::getUser()->name !!}</span>
 
-                        <div class="text-size-mini text-muted">
-                            <i class="icon-pin text-size-small"></i>
-                            @if (!is_null(Auth::getUser()->city ))
-                                {!!Auth::getUser()->city !!}, {!!Auth::getUser()->country->countryCode!!}
-                            @endif
+                            <div class="text-size-mini text-muted">
+                                <i class="icon-pin text-size-small"></i>
+                                @if (!is_null(Auth::user()->city ))
+                                    {!!Auth::user()->city !!}, {!!Auth::user()->country->countryCode!!}
+                                @endif
+                            </div>
                         </div>
-                    </div>
                     @endif
                     <div class="media-right media-middle">
                         <ul class="icons-list">
@@ -50,19 +50,19 @@
                                     class="icon-trophy2"></i> <span>Torneos</span></a></li>
                     {{--                    <li {{ (Request::is('places') ? 'class=active' : '') }}><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>--}}
                     <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
-                                    class="icon-envelop3"></i> <span>{{trans_choice('crud.invitation',2)}}</span></a></li>
+                                    class="icon-envelop3"></i> <span>{{trans_choice('crud.invitation',2)}}</span></a>
+                    </li>
                     <li class="navigation-divider"></li>
 
 
-                    <li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a href="{!! URL::to('users/'.Auth::getUser()->id).'/edit' !!}"><i
+                    <li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a
+                                href="{!! URL::to('users/'.Auth::getUser()->id).'/edit' !!}"><i
                                     class="icon-user"></i> <span>{{trans('core.profile')}}</span></a></li>
 
                     {{--<li {{ (Request::is('settings') ? 'class=active' : '') }}><a href="/settings"><i--}}
-                                    {{--class="icon-cog"></i> <span>{{trans('core.settings')}}</span></a></li>--}}
+                    {{--class="icon-cog"></i> <span>{{trans('core.settings')}}</span></a></li>--}}
                     <li><a href="{{ url('auth/logout') }}"><i
                                     class="icon-switch2"></i> <span>{{trans('core.logout')}}</span></a></li>
-
-
 
 
                 </ul>

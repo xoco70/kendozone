@@ -45,10 +45,16 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="form-group">
+
                 {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
+            <div class="input-group clockpicker">
                 {!!  Form::input('number','enchoDuration', old('enchoDuration'), ['class' => 'form-control', 'placeholder' => $defaultSettings->enchoDuration]) !!}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
+
+
+
+
         </div>
     </div>
     <div class="row">
@@ -78,20 +84,32 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-2">
+            <div class="checkbox-switch">
+                <label>
 
-    <div class="checkbox-switch">
-        <label>
+                    {!!  Form::label('hasHantei', trans('crud.hasHantei')) !!} <br/>
+                    {!!   Form::hidden('hasHantei', 0) !!}
+                    {!!   Form::checkbox('hasHantei', 1, old('hasHantei') !=null ? old('hasHantei') : $defaultSettings->hasHantei,
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
 
-            {!!  Form::label('hasHantei', trans('crud.hasHantei')) !!} <br/>
-            {!!   Form::hidden('hasHantei', 0) !!}
-            {!!   Form::checkbox('hasHantei', 1, old('hasHantei') !=null ? old('hasHantei') : $defaultSettings->hasHantei,
-                                 ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="">
+                {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
+                <br/>
+                {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
 
-        </label>
+            </div>
+
+        </div>
     </div>
-
     {{--{!!   Form::hidden('tournament_id', $tournamentId) !!}--}}
     {{--{!!   Form::hidden('category_id', $categoryId) !!}--}}
+
 
     <div align="right">
         <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
@@ -102,5 +120,8 @@
 
     $(function () {
         $(".switch").bootstrapSwitch();
+        $('.clockpicker').clockpicker();
+
+
     });
 </script>

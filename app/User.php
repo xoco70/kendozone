@@ -84,7 +84,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $data = $request->except($except);
 
         if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
+
             $destinationPath = Config::get('constants.RELATIVE_AVATAR_PATH');
+//            dd($destinationPath );
             $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();

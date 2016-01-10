@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
 
-        {!! Form::model($user, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["UserController@update", $user->id]]) !!}
+        {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
 
 
         <div class="content">
@@ -30,6 +30,15 @@
                                             <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            {!!  Form::label('name', trans('crud.username')) !!}
+                                                            {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+
+
+                                                        </div>
+                                                    </div>
+
                                                     <div class="row">
                                                         <div class="form-group">
                                                             {!!  Form::label('firstname', trans('crud.firstname')) !!}
@@ -145,7 +154,7 @@
 
                             </div>
                         </div>
-                        @include("right-panel.users_menu")
+                        {{--@include("right-panel.users_menu")--}}
                     </div>
 
                 </div>

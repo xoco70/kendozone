@@ -138,6 +138,9 @@ class UserController extends Controller
         }
         $data = User::uploadPic($request, $except);
 
+        //TODO: Should have an expection for pics
+
+
         if ($user->update($data)) {
             flash('success', Lang::get('core.success'));
         } else

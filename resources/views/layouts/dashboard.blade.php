@@ -54,7 +54,11 @@
 
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit') && !strpos(Request::url(),'users')  )
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit')
+            && !strpos(Request::url(),'users')
+            && !strpos(Request::url(),'categories')
+            && !strpos(Request::url(),'settings')
+            )
         {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
         {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
@@ -69,6 +73,11 @@
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
 
     @endif
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))
+        {!! Html::style('css/clockpicker.css')!!}
+        {!! Html::script('js/clockpicker.js') !!}
+    @endif
+
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )
         {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
         {!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}

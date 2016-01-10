@@ -96,24 +96,16 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}
                                             <br/>
                                             {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            {!!  Form::label('fightingAreas', trans('crud.fightingAreas'),['class' => 'text-bold' ]) !!}
-                                            <br/>
-                                            {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
 
-                                        </div>
 
-                                    </div>
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
 
                                         <div class="form-group">
                                             {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
