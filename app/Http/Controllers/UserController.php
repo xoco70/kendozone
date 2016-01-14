@@ -136,6 +136,9 @@ class UserController extends Controller
             array_push($except, 'password');
 
         }
+        if (trim(Input::get('avatar')) == '') {
+            array_push($except, 'avatar');
+        }
         $data = User::uploadPic($request, $except);
 
         //TODO: Should have an expection for pics
