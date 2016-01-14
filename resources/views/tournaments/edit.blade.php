@@ -307,6 +307,15 @@
                     format: 'yyyy-mm-dd'
                 });
 
+                $('#generate_tree').on('click', function() {
+                    swal({
+                        title: "{!! trans('core.information') !!}",
+                        text: "{!!   trans('crud.all_categories_not_configured') !!}",
+                        confirmButtonColor: "#2196F3",
+                        type: "info"
+                    });
+                });
+
             });
         </script>
     </div>

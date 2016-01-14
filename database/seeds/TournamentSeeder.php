@@ -25,7 +25,6 @@ class TournamentSeeder extends Seeder
             'registerDateLimit' => "2016-02-23",
             'cost' => 100,
             'sport' => 1,
-            'fightingAreas' => 4,
             'type' => 0,
             'mustPay' => 1,
             'venue' => "CDOM",

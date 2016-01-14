@@ -31,6 +31,7 @@ return [
     'warning' => 'Atención',
     'success' => 'Exito',
     'info' => 'Info',
+    'information' => 'Información',
     'operation_successful' => ' Operación exitosa',
     'operation_failed' => ' Hubo un problema',
     'save' => 'Guardar',

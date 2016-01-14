@@ -140,6 +140,9 @@ return [
 
 
 
+    // Messages
+    'all_categories_not_configured' => 'Todas las categorias deben de ser configuradas. Ve Torneo > Categorías para configurarlas.',
+
 
 
 

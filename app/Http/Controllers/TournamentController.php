@@ -111,8 +111,11 @@ class TournamentController extends Controller
 //        dd($tournament);
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
+        $settingSize = sizeof($tournament->settings());
+        $categorySize = sizeof($tournament->categories);
+
 //        dd($tournament);
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories','settingSize','categorySize'));
     }
 
     /**
