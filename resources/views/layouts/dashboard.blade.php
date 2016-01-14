@@ -66,11 +66,15 @@
         {!! Html::script('http://maps.google.com/maps/api/js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+        {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
+
     @endif
 
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit'))
         {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
+        {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
+
 
     @endif
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))

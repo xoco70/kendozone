@@ -101,9 +101,9 @@ class Tournament extends Model
             ->withTimestamps();
     }
 
-    public function settings($tournamentId)
+    public function settings()
     {
-        $arrTc = TournamentCategory::select('id')->where('tournament_id', $tournamentId)->get();
+        $arrTc = TournamentCategory::select('id')->where('tournament_id', $this->id)->get();
         $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
         return $settings;
     }

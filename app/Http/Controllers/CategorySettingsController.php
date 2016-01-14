@@ -75,6 +75,7 @@ class CategorySettingsController extends Controller
         $defaultSettings = $this->defaultSettings;
 
         $categorySetting = CategorySettings::findOrFail($settingId);
+        dd($categorySetting);
         return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting', 'defaultSettings'));
     }
 

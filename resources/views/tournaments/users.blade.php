@@ -10,8 +10,25 @@
 
                     <div class="panel-body">
                         <div class="mb-20">
-                            <a href="{!!   URL::action('TournamentController@generateTrees',
-                                                    ['tournamentId'=>$users[0]->tournament_id]) !!}"
+
+
+                            <?php
+                            $link = "";
+                            $id = "";
+                            if ($settingSize > 0 && $settingSize == $categorySize)
+                                $link = URL::action('TournamentController@generateTrees',['tournamentId'=>$users[0]->tournament_id]);
+                            else
+                                // For showing Modal
+                                $link = "#";
+                            $id = 'id="generate_tree"';
+
+                            ?>
+
+
+
+
+
+                            <a href="{!!   $link !!}"  {!! $id !!}
                                class="btn bg-teal btn-xs pull-right ml-20"><b><i
                                             class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
                             </a>
@@ -163,7 +180,15 @@
         // Add placeholder to the datatable filter option
         $('.dataTables_filter input[type=search]').attr('placeholder', 'Type to filter...');
 
-
+// Info alert
+        $('#generate_tree').on('click', function() {
+            swal({
+                title: "{!! trans('core.information') !!}",
+                text: "{!!   trans('crud.all_categories_not_configured') !!}",
+                confirmButtonColor: "#2196F3",
+                type: "info"
+            });
+        });
     });
 </script>
 @stop
