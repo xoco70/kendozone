@@ -1,8 +1,11 @@
 <?php
 
+use App\Grade;
 use App\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Webpatser\Countries\Countries;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -13,13 +16,14 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
+        $faker = Faker::create();
 
-
+        $grades = Grade::all()->pluck('id')->toArray();
         User::create([
             'name' => 'xoco',
             'email'    => 'xoco70@hotmail.com1',
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
-            'grade_id' => '9',
+            'grade_id' => $faker->randomElement($grades),
             'country_id' => '4',
             'city' => 'Mexico City',
             'latitude' => '19.4342',
@@ -31,18 +35,19 @@ class UserSeeder extends Seeder
             'provider_id' => '1'
         ]);
 
-        $faker = Faker::create();
 
-        foreach ( range(2,100) as $index){
+        $countries = Countries::all()->pluck('id')->toArray();
+
+        foreach ( range(2,30) as $index){
             User::create([
                 'name' => $faker->name,
                 'email'    => $faker->email,
                 'password' => bcrypt('secret'), // 111111
                 'grade_id' => $faker->numberBetween(1,5),
-                'country_id' => 4,
+                'country_id' => $faker->randomElement($countries),
                 'city' => $faker->city,
-                'latitude' => $faker->randomDigit,
-                'longitude' => $faker->randomDigit,
+                'latitude' => $faker->latitude,
+                'longitude' => $faker->longitude,
                 'role_id' => $faker->numberBetween(1,3),
                 'verified' => $faker->numberBetween(0,1),
                 'provider' => '',
