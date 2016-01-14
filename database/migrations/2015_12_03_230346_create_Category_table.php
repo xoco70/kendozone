@@ -23,6 +23,7 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->integer('tournament_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
+//            $table->unique(array('tournament_id', 'category_id'));
 
             $table->foreign('tournament_id')
                 ->references('id')

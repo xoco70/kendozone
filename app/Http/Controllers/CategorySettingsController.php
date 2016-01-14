@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\CategorySettings;
 use App\Tournament;
+use App\TournamentCategory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 
@@ -44,9 +46,11 @@ class CategorySettingsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $tournamentId,$categoryTournamentId)
+    public function store(Request $request, $tournamentId,$categoryId)
     {
-        $request->request->add(['category_tournament_id' => $categoryTournamentId]);
+        $categoryTournament = TournamentCategory::where('tournament_id',$tournamentId)
+                                                  ->where('category_id',$categoryId)->first();
+        $request->request->add(['category_tournament_id' => $categoryTournament->id]);
 //        dd($request);
         CategorySettings::create($request->all());
         flash("success", Lang::get('core.operation_successful'));
@@ -72,11 +76,11 @@ class CategorySettingsController extends Controller
      */
     public function edit($tournamentId, $categoryId, $settingId)
     {
-        $defaultSettings = $this->defaultSettings;
+//        $defaultSettings = $this->defaultSettings;
 
         $categorySetting = CategorySettings::findOrFail($settingId);
-        dd($categorySetting);
-        return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting', 'defaultSettings'));
+//        dd($categorySetting);
+        return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting')); //, 'defaultSettings'
     }
 
     /**
@@ -86,10 +90,10 @@ class CategorySettingsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tournamentId, $categoryId, $settingId)
+    public function update(Request $request, $tournamentId, $categoryId, CategorySettings $categorySettings)
     {
-        $categorySettings = CategorySettings::findOrFail($settingId);
-        $categorySettings->update($request->all());
+        $data = $request->except('_method', '_token');
+        $categorySettings->update($data);
 
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/categories");
