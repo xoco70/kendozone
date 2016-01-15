@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\CategorySettings;
-use App\Tournament;
+use App\Http\Requests;
 use App\TournamentCategory;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 
@@ -76,9 +71,15 @@ class CategorySettingsController extends Controller
      */
     public function edit($tournamentId, $categoryId, $settingId)
     {
+
 //        $defaultSettings = $this->defaultSettings;
+        $tc = TournamentCategory::where('tournament_id', $tournamentId)
+            ->where('category_id', $categoryId)->first();
+        dd($tc);
+
 
         $categorySetting = CategorySettings::findOrFail($settingId);
+
 //        dd($categorySetting);
         return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting')); //, 'defaultSettings'
     }

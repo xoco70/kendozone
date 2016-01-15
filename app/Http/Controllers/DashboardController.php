@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PlaceRequest;
-use App\Place;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
+use App\Place;
 use GeoIP;
-use Webpatser\Countries\Countries;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
 {
@@ -34,6 +26,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+//        dd(Auth::user()->tcs);
 //        $ip = $_SERVER["REMOTE_ADDR"];
 //        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
 //        dd($location['isoCode']);
