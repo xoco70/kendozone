@@ -123,6 +123,9 @@
     </div>
 
 </div>
+
+
+
 <script>
 
     $(function () {
@@ -147,7 +150,7 @@
 
         $(".teamSizeSlider").slider({
             max: 10,
-            value: 1  ,
+            value: {!!  $categorySetting->teamSize !!}  ,
             change: function(event, ui) {
                 $('#teamSize').attr('value', ui.value);
             }
@@ -158,7 +161,7 @@
 
         $(".enchoQtySlider").slider({
             max: 5,
-            value: 2,
+            value: {!!  $categorySetting->enchoQty !!},
             change: function(event, ui) {
                 $('#enchoQty').attr('value', ui.value);
             }
@@ -169,7 +172,7 @@
 
         $(".fightingAreasSlider").slider({
             max: 5,
-            value: 1,
+            value: {!!  $categorySetting->fightingAreas !!},
             change: function(event, ui) {
                 $('#fightingAreas').attr('value', ui.value);
             }
