@@ -44,9 +44,9 @@
                             <table class="table datatable-responsive">
                                 <thead>
                                 <tr>
-                                    <th class="text-center " data-hide="phone">&nbsp;</th>
-                                    <th >{{ trans('crud.username') }}</th>
-                                    <th class="text-center">{{ trans('crud.email') }}</th>
+                                    <th class="min-tablet text-center " data-hide="phone">{{ trans('crud.avatar') }}</th>
+                                    <th class="none">{{ trans('crud.username') }}</th>
+                                    <th class="min-phone-l">{{ trans('crud.email') }}</th>
                                     <th class="text-center">{{ trans_choice('crud.category',1) }}</th>
                                     <th class="text-center">{{ trans('crud.confirmed') }}</th>
                                     <th class="text-center">{{ trans('crud.country') }}</th>
@@ -63,7 +63,7 @@
                                         <td><a
                                                     href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id] ) !!}">{{ $user->name }}</a>
                                         </td>
-                                        <td class="text-center">{{ $user->email }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td class="text-center">{{ trans($user->cat_name)}}</td>
 
                                         <td class="text-center">
