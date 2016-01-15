@@ -125,12 +125,17 @@
 
                                         <div class="row">
                                             <div class="col-md-6">
-                                                @can('CanChangeRole')
+
                                                 <div class="form-group">
                                                     {!!  Form::label('role_id', trans('crud.role')) !!}
-                                                    {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                    @if (Auth::user()->role_id == 1)
+                                                        {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                    @else
+                                                        {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
+                                                    @endif
+
                                                 </div>
-                                                @endcan
+
                                             </div>
 
                                             <div class="col-md-6">

@@ -20,14 +20,17 @@ class UserRequest  extends Request
     {
 //        dd($request);
 //        $method= $request->method;
-//        dd($request->method);
-        $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
-        $country = Countries::where('name','=',$location['country'])->first();
-        $request->request->add(['country_id' => $country->id ]);
-        $request->request->add(['countryCode' => $location['isoCode'] ]);
-        $request->request->add(['city' => $location['city'] ]);
-        $request->request->add(['latitude' => $location['lat'] ]);
-        $request->request->add(['longitude' => $location['lon'] ]);
+
+        if ($request->method!= "PATCH"){
+            $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+            $country = Countries::where('name','=',$location['country'])->first();
+            $request->request->add(['country_id' => $country->id ]);
+            $request->request->add(['countryCode' => $location['isoCode'] ]);
+            $request->request->add(['city' => $location['city'] ]);
+            $request->request->add(['latitude' => $location['lat'] ]);
+            $request->request->add(['longitude' => $location['lon'] ]);
+
+        }
 
     }
 
