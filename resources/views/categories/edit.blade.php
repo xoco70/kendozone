@@ -8,6 +8,7 @@
             <?php
             $category = \App\Category::findOrFail($categoryId);
             ?>
+
             <h2 align="center">{{ $category->name }}</h2>
             {!! Form::model($categorySetting,
                 ['method'=>"PATCH",

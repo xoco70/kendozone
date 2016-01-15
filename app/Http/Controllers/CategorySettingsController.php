@@ -90,8 +90,15 @@ class CategorySettingsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tournamentId, $categoryId, CategorySettings $categorySettings)
+    public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
+        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
+
+//        dd($categorySettings);
+//        $ct = TournamentCategory::where('tournament_id',$tournamentId)
+//                                    ->where('category_id',$categoryId)->first();
+//        $request->request->add(['category_tournament_id' => $ct->id ]);
+//        dd($request);
         $data = $request->except('_method', '_token');
         $categorySettings->update($data);
 

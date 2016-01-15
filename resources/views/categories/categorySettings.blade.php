@@ -1,5 +1,5 @@
 
-
+{{ "teamSize:". old( 'teamSize') }}
 
 <div class="tab-pane" id="category">
     <div class="row">
@@ -17,8 +17,8 @@
         <div class="col-md-5">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
             {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
-            <div class="teamSize"></div>
-{{--            {!!  Form::input('number','teamSize', old('teamSize')) !!}--}}
+            <div class="teamSizeSlider"></div>
+            {!!  Form::hidden('teamSize') !!}
         </div>
         <div class="col-md-5">
 
@@ -46,8 +46,8 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-{{--                {!!  Form::input('number','enchoQty', old('enchoQty'), ['class' => 'form-control']) !!}--}}
-                <div class="enchoQty"></div>
+                {!!  Form::hidden('enchoQty', old('enchoQty')) !!}
+                <div class="enchoQtySlider"></div>
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
@@ -102,13 +102,13 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 <br/>
-                <div class="fightingAreas"></div>
+                <div class="fightingAreasSlider"></div>
 
-{{--                {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}--}}
+                {!!  Form::hidden('fightingAreas', old('fightingAreas')) !!}
 
             </div>
 
@@ -145,28 +145,37 @@
             'step': '15'
         }));
 
-        $(".teamSize").slider({
+        $(".teamSizeSlider").slider({
             max: 10,
-            value: 6
+            value: 1  ,
+            change: function(event, ui) {
+                $('#teamSize').attr('value', ui.value);
+            }
         });
-        $(".teamSize").slider("pips");
-        $(".teamSize").slider("float");
+        $(".teamSizeSlider").slider("pips");
+        $(".teamSizeSlider").slider("float");
         //--------------------------
 
-        $(".enchoQty").slider({
+        $(".enchoQtySlider").slider({
             max: 5,
-            value: 2
+            value: 2,
+            change: function(event, ui) {
+                $('#enchoQty').attr('value', ui.value);
+            }
         });
-        $(".enchoQty").slider("pips");
-        $(".enchoQty").slider("float");
+        $(".enchoQtySlider").slider("pips");
+        $(".enchoQtySlider").slider("float");
         //--------------------------
 
-        $(".fightingAreas").slider({
+        $(".fightingAreasSlider").slider({
             max: 5,
-            value: 1
+            value: 1,
+            change: function(event, ui) {
+                $('#fightingAreas').attr('value', ui.value);
+            }
         });
-        $(".fightingAreas").slider("pips");
-        $(".fightingAreas").slider("float");
+        $(".fightingAreasSlider").slider("pips");
+        $(".fightingAreasSlider").slider("float");
         //--------------------------
 
 
