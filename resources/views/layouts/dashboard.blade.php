@@ -78,8 +78,13 @@
 
     @endif
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))
-        {!! Html::style('css/clockpicker.css')!!}
-        {!! Html::script('js/clockpicker.js') !!}
+        {{--{!! Html::style('css/clockpicker.css')!!}--}}
+        {{--{!! Html::script('js/clockpicker.js') !!}--}}
+
+        {!! Html::style('js/jquery.infinitescroll.min.js')!!}
+        {!! Html::style('js/jquery.timepicker.css')!!}
+        {!! Html::script('js/jquery.timepicker.js') !!}
+
     @endif
 
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )
@@ -88,6 +93,7 @@
         {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
 
     @endif
+
 
 
 

@@ -17,9 +17,11 @@
             {!!  Form::input('number','teamSize', old('teamSize'), ['class' => 'form-control','size']) !!}
         </div>
         <div class="col-md-5">
-            <div class="form-group">
-                {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
-                {!!  Form::input('number','fightDuration', old('fightDuration'), ['class' => 'form-control']) !!}
+
+            {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
+            <div class="input-group">
+                {!!  Form::input('text','fightDuration', old('fightDuration'), ['class' => 'form-control','id' => 'fightDuration']) !!}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
     </div>
@@ -47,7 +49,7 @@
         <div class="col-md-5">
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
-            <div class="input-group clockpicker">
+            <div class="input-group ">
                 {!!  Form::input('number','enchoDuration', old('enchoDuration'), ['class' => 'form-control']) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
@@ -118,7 +120,7 @@
 
     $(function () {
         $(".switch").bootstrapSwitch();
-        $('.clockpicker').clockpicker();
+        $('#fightDuration').timepicker();
 
 
     });
