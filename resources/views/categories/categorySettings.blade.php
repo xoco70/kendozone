@@ -1,3 +1,6 @@
+
+
+
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">
@@ -12,9 +15,10 @@
             </div>
         </div>
         <div class="col-md-5">
-            {!!  Form::label('teamSize', trans('crud.teamSize')) !!}
+            {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
             {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
-            {!!  Form::input('number','teamSize', old('teamSize'), ['class' => 'form-control','size']) !!}
+            <div class="teamSize"></div>
+{{--            {!!  Form::input('number','teamSize', old('teamSize')) !!}--}}
         </div>
         <div class="col-md-5">
 
@@ -42,7 +46,8 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::input('number','enchoQty', old('enchoQty'), ['class' => 'form-control']) !!}
+{{--                {!!  Form::input('number','enchoQty', old('enchoQty'), ['class' => 'form-control']) !!}--}}
+                <div class="enchoQty"></div>
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
@@ -50,7 +55,7 @@
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('number','enchoDuration', old('enchoDuration'), ['class' => 'form-control']) !!}
+                {!!  Form::input('number','enchoDuration', old('enchoDuration'), ['class' => 'form-control','id' => 'enchoDuration']) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 
@@ -101,7 +106,9 @@
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 <br/>
-                {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
+                <div class="fightingAreas"></div>
+
+{{--                {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}--}}
 
             </div>
 
@@ -120,7 +127,51 @@
 
     $(function () {
         $(".switch").bootstrapSwitch();
-        $('#fightDuration').timepicker();
+        $('#fightDuration').timepicker(('option',
+
+        {
+            'minTime': '2:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $('#enchoDuration').timepicker(('option',
+
+        {
+            'minTime': '0:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $(".teamSize").slider({
+            max: 10,
+            value: 6
+        });
+        $(".teamSize").slider("pips");
+        $(".teamSize").slider("float");
+        //--------------------------
+
+        $(".enchoQty").slider({
+            max: 5,
+            value: 2
+        });
+        $(".enchoQty").slider("pips");
+        $(".enchoQty").slider("float");
+        //--------------------------
+
+        $(".fightingAreas").slider({
+            max: 5,
+            value: 1
+        });
+        $(".fightingAreas").slider("pips");
+        $(".fightingAreas").slider("float");
+        //--------------------------
+
+
+
+
 
 
     });

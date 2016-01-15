@@ -84,6 +84,11 @@
         {!! Html::style('js/jquery.infinitescroll.min.js')!!}
         {!! Html::style('js/jquery.timepicker.css')!!}
         {!! Html::script('js/jquery.timepicker.js') !!}
+        <script type="text/javascript" src="/js/core/libraries/jquery_ui/sliders.min.js"></script>
+        <script type="text/javascript" src="/js/core/libraries/jquery_ui/touch.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/sliders/slider_pips.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/sliders/nouislider.min.js"></script>
+
 
     @endif
 

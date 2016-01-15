@@ -11,6 +11,7 @@
             <h2 align="center">{{ $category->name }}</h2>
             {!! Form::model($categorySetting,
                 ['method'=>"PATCH",
+                'class' => 'form-pricing',
                  "action" => ["CategorySettingsController@update",
                  $tournamentId,
                  $categoryId,
