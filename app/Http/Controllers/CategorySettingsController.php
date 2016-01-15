@@ -36,8 +36,8 @@ class CategorySettingsController extends Controller
      */
     public function create($tournamentId, $categoryId)
     {
-        $defaultSettings = $this->defaultSettings;
-        return view("categories.create", compact('tournamentId', 'categoryId', 'defaultSettings'));
+//        $defaultSettings = $this->defaultSettings;
+        return view("categories.create", compact('tournamentId', 'categoryId')); //, 'defaultSettings'
     }
 
     /**

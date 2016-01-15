@@ -16,14 +16,14 @@ return [
     'ROLE_COMPETITOR' => '5',
 
     'CAT_FIGHTING_AREAS' => '1',
-    'CAT_FIGHT_DURATION' => '180',
+    'CAT_FIGHT_DURATION' => '03:00',
     'CAT_ISTEAM' => '0',
-    'CAT_TEAM' => '0',
+    'CAT_TEAM_SIZE' => '5',
     'CAT_HASROUNDROBIN' => '1',
     'CAT_ROUNDROBINWINNER' => '1',
     'CAT_HASENCHO' => '1',
-    'CAT_enchoQty' => '2',
-    'CAT_ENCHO_DURATION' => '90',
+    'CAT_ENCHO_QTY' => '2',
+    'CAT_ENCHO_DURATION' => '01:30',
     'CAT_HASHANTEI' => '0',
 
 
