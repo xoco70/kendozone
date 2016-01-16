@@ -105,7 +105,6 @@
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 <br/>
                 <div class="fightingAreasSlider"></div>
-
                 {!!  Form::hidden('fightingAreas', old('fightingAreas')) !!}
 
             </div>

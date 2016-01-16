@@ -114,8 +114,10 @@ class TournamentController extends Controller
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
-//        dd($tournament);
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories','settingSize','categorySize'));
+        // get categories with settings
+        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
+//        dd($categoriesWithSettings);
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories','settingSize','categorySize','categoriesWithSettings'));
     }
 
     /**
@@ -157,6 +159,12 @@ class TournamentController extends Controller
         return redirect("tournaments");
     }
 
+    public function register(Tournament $tournament){
+        if ($tournament->type == 1) // Tournament is open
+            return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
+        else
+            dd("You need an invitation to register in this tournament");
+    }
 
     public function generateTrees($tournamentId)
     {

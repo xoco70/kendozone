@@ -249,7 +249,10 @@
                     <!-- /simple panel -->
                 </div>
 
-                <!-- /simple panel -->
+                {{-- If open Tournament--}}
+                @if ($tournament->type==1)
+
+                        <!-- /simple panel -->
                 <div class="panel panel-flat">
                     {{--<div class="panel-heading " >--}}
                     {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
@@ -260,15 +263,14 @@
 
 
                             <fieldset title="1">
-                                <legend class="text-semibold">{{Lang::get('crud.share')}}</legend>
+                                <legend class="text-semibold">Invita competitodres con este link</legend>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group text-center">
-                                            {!!  Form::label('share', trans('crud.share'),['class' => 'text-bold' ]) !!}
+                                        <h2 class="form-group text-center">
                                             <br/>
-                                            <a href="#">Share tournament</a>
-                                        </div>
+                                            {{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/register/
+                                        </h2>
 
                                     </div>
                                 </div>
@@ -276,6 +278,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!-- /detached content -->
         </div>
@@ -307,7 +310,7 @@
                     format: 'yyyy-mm-dd'
                 });
 
-                $('#generate_tree').on('click', function() {
+                $('#generate_tree').on('click', function () {
                     swal({
                         title: "{!! trans('core.information') !!}",
                         text: "{!!   trans('crud.all_categories_not_configured') !!}",

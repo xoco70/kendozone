@@ -5,10 +5,6 @@
 
     <div class="container">
         <div class="row col-md-10 custyle">
-            <?php
-            $tournament = \App\Tournament::findOrFail($tournamentId);
-
-            ?>
             <h2 align="center">{{ $tournament->name }}</h2>
 
             <div class="panel panel-flat">

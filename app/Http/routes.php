@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
 
         Route::resource('tournaments', 'TournamentController');
         Route::get('tournaments/{tournamentId}/delete', 'TournamentController@destroyTournament');
+        Route::get('tournaments/{tournamentId}/register', 'TournamentController@register');
 
         Route::resource('users', 'UserController');
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
@@ -77,7 +78,7 @@ Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
 
 //        Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
         Route::get('tournaments/{tournamentId}/categories/{tournamentCategoryId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
-            Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
+        Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
 
 //        Route::get('tournaments/{tournamentId}/users/create', 'TournamentController@createUser', ['as' => 'tournaments.users.create']);
 //        Route::post('tournaments/{tournamentId}/users/', 'TournamentController@postUser');
