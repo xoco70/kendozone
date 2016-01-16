@@ -63,7 +63,6 @@
                 </div>
                 <!-- /detached content -->
 
-            @include("right-panel.tournament_menu")
 
             </div>
             <!-- /content area -->
