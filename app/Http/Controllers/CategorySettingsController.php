@@ -75,7 +75,7 @@ class CategorySettingsController extends Controller
 //        $defaultSettings = $this->defaultSettings;
         $tc = CategoryTournament::where('tournament_id', $tournamentId)
             ->where('category_id', $categoryId)->first();
-        dd($tc);
+//        dd($tc);
 
 
         $categorySetting = CategorySettings::findOrFail($settingId);

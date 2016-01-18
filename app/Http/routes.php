@@ -64,11 +64,12 @@ Route::group(['middleware' => ['guest']],
 
 //Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
 
-Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
+Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
     function () {
 
         Route::resource('tournaments', 'TournamentController');
         Route::get('tournaments/{tournamentId}/delete', 'TournamentController@destroyTournament');
+        Route::get('tournaments/{tournamentId}/register', 'TournamentController@register');
 
         Route::resource('users', 'UserController');
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
@@ -76,8 +77,8 @@ Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
         Route::resource('tournaments/{tournament}/users', 'TournamentUserController');
 
 //        Route::get('tournaments/{tournamentId}/users', 'TournamentController@getUsers');
-        Route::get('tournaments/{tournamentId}/categories/{CategoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
-            Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
+        Route::get('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
+        Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
 
 //        Route::get('tournaments/{tournamentId}/users/create', 'TournamentController@createUser', ['as' => 'tournaments.users.create']);
 //        Route::post('tournaments/{tournamentId}/users/', 'TournamentController@postUser');

@@ -51,6 +51,5 @@ return [
     'sumary' => 'Resumen',
     //Settings
 
-    'isTeam' => 'Equipo',
     'social_networks' => 'Redes Sociales',
 ];

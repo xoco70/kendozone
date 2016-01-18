@@ -76,11 +76,11 @@ class InviteController extends Controller
                 return view('auth/invite', compact('token'));
             } else {
                 // Redirect to register category Screen
-                $userId = $user->id;
-                $tournamentId = $invite->tournament_id;
-//                $tournament = Tournament::findOrFail($tournamentId);
 
-                return view("categories.register", compact('userId', 'tournamentId', 'invite', 'currentModelName'));
+                $tournamentId = $invite->tournament_id;
+                $tournament = Tournament::findOrFail($tournamentId);
+                Auth::loginUsingId($user->id);
+                return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
 
 
             }
@@ -163,9 +163,9 @@ class InviteController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tournamentId)
     {
-        $tournament = Tournament::where("id", "=", $id)->first();
+        $tournament = Tournament::find($tournamentId);
         return view('invitation.show', compact('tournament'));
     }
 

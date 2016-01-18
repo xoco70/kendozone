@@ -25,7 +25,7 @@
     {{--<!-- /core JS files -->--}}
     {{--<!-- Theme JS files -->--}}
     {!! Html::script('js/core/app.js') !!}
-
+    {!! Html::script('js/plugins/notifications/pnotify.min.js') !!}
 
     {{--Slider libs--}}
     {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
@@ -54,6 +54,7 @@
 
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
 
+    {{--EDIT TOURNAMENT PAGE--}}
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit')
             && !strpos(Request::url(),'users')
             && !strpos(Request::url(),'categories')
@@ -67,6 +68,8 @@
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
         {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
+{{--        {!! Html::script('bower/clipboard/dist/clipboard.min.js') !!}--}}
+
 
     @endif
 
@@ -84,10 +87,10 @@
         {!! Html::style('js/jquery.infinitescroll.min.js')!!}
         {!! Html::style('js/jquery.timepicker.css')!!}
         {!! Html::script('js/jquery.timepicker.js') !!}
-        <script type="text/javascript" src="/js/core/libraries/jquery_ui/sliders.min.js"></script>
-        <script type="text/javascript" src="/js/core/libraries/jquery_ui/touch.min.js"></script>
-        <script type="text/javascript" src="/js/plugins/sliders/slider_pips.min.js"></script>
-        <script type="text/javascript" src="/js/plugins/sliders/nouislider.min.js"></script>
+        {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
+        {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
+        {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
+        {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
 
 
     @endif
@@ -100,24 +103,11 @@
     @endif
 
 
-
-
-
-
-
-        {{--Dual Box select--}}
-
-
-
-
-
-
     @if (Request::is("invites/*"))
         {!! Html::script('js/plugins/multiple-emails.js') !!}
         {!! Html::style('css/multiple-emails.css') !!}
     @endif
-    {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
-    {!! Html::style('js/plugins/tables/datatables/extensions/responsive.min.js') !!}
+
 
 
 </head>
@@ -157,14 +147,14 @@
             </div>
             <!-- Content area -->
 
+            <div class="content">
+                @include('layouts.flash')
+                @yield('content')
 
-            @include('layouts.flash')
-            @yield('content')
+                @include('layouts.footer')
+            </div>
 
-            @include('layouts.footer')
-
-
-                    <!-- /content area -->
+            <!-- /content area -->
 
         </div>
         <!-- /main content -->

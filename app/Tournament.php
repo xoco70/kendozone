@@ -101,6 +101,11 @@ class Tournament extends Model
             ->withTimestamps();
     }
 
+    public function categoryTournaments()
+    {
+        return $this->hasMany(TournamentCategory::class);
+    }
+
     public function settings()
     {
         $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
@@ -158,6 +163,17 @@ class Tournament extends Model
     public function setLimitRegisterDateAttribute($date)
     {
         $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date);
+    }
+
+    public function getCategoriesWithSettings()
+    {
+        $categories = DB::table('category_tournament')
+            ->join('category as cat', 'cat.id', '=', 'category_tournament.category_id')
+            ->leftJoin('category_settings as cs', 'cs.category_tournament_id', '=', 'category_tournament.id')
+            ->where('category_tournament.tournament_id', '=', $this->id)
+            ->select('category_tournament.*','cat.name', 'cs.*')
+            ->get();
+        return $categories;
     }
 
 
