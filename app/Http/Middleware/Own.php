@@ -38,8 +38,10 @@ class Own
                     }
                 }
             }// Check if user own user
+
             else if ($request->users != null || $request->userId != null) {
                 $user = $request->users;
+
                 // User is superadmin, or is the user himself
                 if ($userLogged->role->name != "SuperAdmin" && $userLogged->id != $user->id) {
                     return view('errors.general',

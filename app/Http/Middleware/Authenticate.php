@@ -42,7 +42,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                return Redirect::intended('auth/login');
             }
         }
         else {
@@ -52,7 +52,7 @@ class Authenticate
 //                Session::flash('success', 'La cuenta no esta activa');
                 Session::flash('error', Lang::get('auth.account_not_activated'));
 
-                return redirect('/auth/login');
+                return Redirect::intended('auth/login');
             }
         }
 

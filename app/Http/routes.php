@@ -64,7 +64,7 @@ Route::group(['middleware' => ['guest']],
 
 //Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
 
-Route::group(['middleware' => ['auth', 'throttle:100,1']], // , 'own'
+Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
     function () {
 
         Route::resource('tournaments', 'TournamentController');
