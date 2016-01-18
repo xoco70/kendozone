@@ -24,12 +24,12 @@
                         @foreach($tournament->categories as $key => $category)
 
                             <?php
-                            $tournamentCategory = DB::table('category_tournament')
+                            $CategoryTournament = DB::table('category_tournament')
                                     ->where('tournament_id', $tournament->id)
                                     ->where('category_id', $category->id)
                                     ->first();
                             $old = DB::table('category_tournament_user')
-                                    ->where('category_tournament_id', $tournamentCategory->id)
+                                    ->where('category_tournament_id', $CategoryTournament->id)
                                     ->where('user_id', Auth::user()->id)
                                     ->count();
                             ?>
@@ -41,7 +41,7 @@
                                         <p>
 
                                             {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
-                                            {!!   Form::checkbox('cat['.$key.']', $tournamentCategory->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                            {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>
                                     @if ($key % 3 == 0 && $key != 0)

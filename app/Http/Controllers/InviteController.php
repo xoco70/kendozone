@@ -7,8 +7,8 @@ use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
-use App\TournamentCategory;
-use App\TournamentCategoryUser;
+use App\CategoryTournament;
+use App\CategoryTournamentUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -106,10 +106,10 @@ class InviteController extends Controller
 
         // Get all TournamentCategories Related to this tournament
 
-        $tcats = TournamentCategory::where('tournament_id', $tournament->id)->lists('id');
+        $tcats = CategoryTournament::where('tournament_id', $tournament->id)->lists('id');
 
         // Delete All Registered category that has not been paid
-        TournamentCategoryUser::whereIn('category_tournament_id', $tcats)
+        CategoryTournamentUser::whereIn('category_tournament_id', $tcats)
             ->where('user_id', Auth::user()->id)
             ->delete();
 
@@ -119,7 +119,7 @@ class InviteController extends Controller
             array_push($arrToSave, ['category_tournament_id' => $cat, 'user_id' => Auth::user()->id, 'confirmed' => 0]);
         }
 
-        TournamentCategoryUser::insert($arrToSave);
+        CategoryTournamentUser::insert($arrToSave);
 
         $invite->consume();
         flash("success", trans('core.operation_successful'));

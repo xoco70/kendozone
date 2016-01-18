@@ -2,8 +2,8 @@
 
 use App\Category;
 use App\Tournament;
-use App\TournamentCategory;
-use App\TournamentCategoryUser;
+use App\CategoryTournament;
+use App\CategoryTournamentUser;
 use App\TournamentLevel;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -59,9 +59,9 @@ class TournamentSeeder extends Seeder
         $tournaments = Tournament::all()->pluck('id')->toArray();
         $categories = Category::all()->pluck('id')->toArray();
         // Tournament categories creation
-        TournamentCategory::truncate();
+        CategoryTournament::truncate();
         foreach (range(1, 30) as $index) {
-            TournamentCategory::create([
+            CategoryTournament::create([
                 'tournament_id' => $faker->randomElement($tournaments),
                 'category_id' => $faker->randomElement($categories),
             ]);
@@ -70,10 +70,10 @@ class TournamentSeeder extends Seeder
 
         // Tournament categories users
 
-        TournamentCategoryUser::truncate();
-        $tcs = TournamentCategory::all()->pluck('id')->toArray();
+        CategoryTournamentUser::truncate();
+        $tcs = CategoryTournament::all()->pluck('id')->toArray();
         foreach (range(2, 50) as $index) {
-            TournamentCategoryUser::create([
+            CategoryTournamentUser::create([
                 'category_tournament_id' => $faker->randomElement($tcs),
                 'user_id' => $faker->randomElement($users),
                 'confirmed' => $faker->numberBetween(0, 1),

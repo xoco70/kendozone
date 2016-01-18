@@ -197,16 +197,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $count > 0 ;
     }
 
-    public function tcs(){
-        return $this->belongsToMany('App\TournamentCategory', 'category_tournament_user', 'user_id','category_tournament_id');
-    }
 
     public function categories()
     {
         return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id','category_tournament_id');
     }
 
-
+    public function categoryTournaments()
+    {
+        return $this->belongsToMany(CategoryTournament::class);
+    }
 //    public function hasAtLeastOneTournament(){
 //
 //        return $this->tournaments()->first(); // Where not finished

@@ -51,7 +51,7 @@ class Tournament extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function competitors($tournamentCategoryId = null)
+    public function competitors($CategoryTournamentId = null)
     {
 //        User::join('category_tournament_user', 'user.id','user_id' )
         $users = DB::table('users')
@@ -60,8 +60,8 @@ class Tournament extends Model
             ->join('category', 'ct.category_id', '=', 'category.id')
             ->where('ct.tournament_id', '=', $this->id);
 
-        if ($tournamentCategoryId != null)
-            $users->where('ct.id', '=', $tournamentCategoryId);
+        if ($CategoryTournamentId != null)
+            $users->where('ct.id', '=', $CategoryTournamentId);
 
         $users = $users->select('users.id','ct.tournament_id', 'users.name','email','avatar','country_id',
                                 'category.id as cat_id','category.name as cat_name', 'ct.tournament_id','ct.id as tcId','ctu.confirmed', 'ctu.id as ctuId')
@@ -103,19 +103,19 @@ class Tournament extends Model
 
     public function settings()
     {
-        $arrTc = TournamentCategory::select('id')->where('tournament_id', $this->id)->get();
+        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
         $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
         return $settings;
     }
 
 //    public function ct(){
-//        return $this->hasMany('App\TournamentCategory');
+//        return $this->hasMany('App\CategoryTournament');
 //    }
 
 
-//    public function tournamentCategory()
+//    public function CategoryTournament()
 //    {
-//        return $this->belongsToMany('App\TournamentCategory', 'category_tournament', 'tournament_id', 'category_id');
+//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament', 'tournament_id', 'category_id');
 //    }
 
     // We can use $tournament->category_user()->attach(id);
@@ -124,12 +124,12 @@ class Tournament extends Model
 
     public function tournament_categories()
     {
-        return $this->belongsToMany('App\TournamentCategory', 'category_tournament');
+        return $this->belongsToMany('App\CategoryTournament', 'category_tournament');
     }
 
     public function categories_user()
     {
-        return $this->belongsToMany('App\TournamentCategory', 'category_tournament_user', 'user_id', 'category_tournament_id')
+        return $this->belongsToMany('App\CategoryTournament', 'category_tournament_user', 'user_id', 'category_tournament_id')
             ->withTimestamps();
     }
 

@@ -7,8 +7,8 @@ use App\Http\Requests\TournamentRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
-use App\TournamentCategory;
-use App\TournamentCategoryUser;
+use App\CategoryTournament;
+use App\CategoryTournamentUser;
 use App\User;
 use GeoIP;
 use Illuminate\Http\Request;
@@ -115,10 +115,10 @@ class TournamentUserController extends Controller
             array_push($tcus, ['category_tournament_id' => $tCategoryId,
                 'user_id' => $user->id]);
 
-            array_push($categories, trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
+            array_push($categories, trans(CategoryTournament::findOrFail($tCategoryId)->category->name));
         }
 
-        TournamentCategoryUser::insert($tcus);
+        CategoryTournamentUser::insert($tcus);
         // We send him an email with detail ( and user /password if new)
         $invite = new Invite();
         $code = $invite->generate($user->email, $tournament);
@@ -133,7 +133,7 @@ class TournamentUserController extends Controller
     {
 
 
-        TournamentCategoryUser::where('category_tournament_id', $tcId)
+        CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $userId)
             ->delete();
         flash('success', trans('core.operation_successful'));
@@ -161,6 +161,8 @@ class TournamentUserController extends Controller
     public function edit(Tournament $tournament, User $user)
     {
 
+        $user = User::with('categorytournaments.tournament', 'categoryTournaments.category')->find($user->id);
+        dd($user->categoryTournaments);
         $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users/edit", compact('tournament', 'currentModelName', 'user')); //, compact()
 
@@ -192,22 +194,22 @@ class TournamentUserController extends Controller
             array_push($tcusToCreate, ['category_tournament_id' => $tCategoryId,
                 'user_id' => $user->id]);
 
-            array_push($categories, trans(TournamentCategory::findOrFail($tCategoryId)->category->name));
+            array_push($categories, trans(CategoryTournament::findOrFail($tCategoryId)->category->name));
         }
 
         // Get all TournamentCategories Related to this tournament
         // We can't just delete and create rows, because id is changing. We must delete and update existing
         // Making diff between old and new
 
-        $categoriesTournement = TournamentCategory::where('tournament_id', $tournamentId)->lists('id');
+        $categoriesTournement = CategoryTournament::where('tournament_id', $tournamentId)->lists('id');
 
         // Delete All Registered category
-        TournamentCategoryUser::whereIn('category_tournament_id', $categoriesTournement)
+        CategoryTournamentUser::whereIn('category_tournament_id', $categoriesTournement)
             ->where('user_id', $user->id)
             ->delete();
 
 
-        TournamentCategoryUser::insert($tcusToCreate);
+        CategoryTournamentUser::insert($tcusToCreate);
         // We send him an email with detail ( and user /password if new)
 //        $invite = new Invite();
 //        $code = $invite->generate($user->email, $tournament);

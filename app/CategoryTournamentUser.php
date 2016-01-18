@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
-class TournamentCategoryUser extends Model
+class CategoryTournamentUser extends Model
 {
     protected $table = 'category_tournament_user';
     public $timestamps = true;
@@ -19,9 +19,9 @@ class TournamentCategoryUser extends Model
 
     public function categoryTournament($ctId)
     {
-        $tcu = TournamentCategoryUser::where('category_tournament_id', $ctId)->first();
-        $tournamentCategoryId = $tcu->category_tournament_id;
-        $tc = TournamentCategory::find($tournamentCategoryId);
+        $tcu = CategoryTournamentUser::where('category_tournament_id', $ctId)->first();
+        $CategoryTournamentId = $tcu->category_tournament_id;
+        $tc = CategoryTournament::find($CategoryTournamentId);
 
         return $tc;
     }

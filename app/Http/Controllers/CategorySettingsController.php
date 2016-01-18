@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CategorySettings;
 use App\Http\Requests;
-use App\TournamentCategory;
+use App\CategoryTournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
@@ -43,7 +43,7 @@ class CategorySettingsController extends Controller
      */
     public function store(Request $request, $tournamentId,$categoryId)
     {
-        $categoryTournament = TournamentCategory::where('tournament_id',$tournamentId)
+        $categoryTournament = CategoryTournament::where('tournament_id',$tournamentId)
                                                   ->where('category_id',$categoryId)->first();
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
 //        dd($request);
@@ -73,7 +73,7 @@ class CategorySettingsController extends Controller
     {
 
 //        $defaultSettings = $this->defaultSettings;
-        $tc = TournamentCategory::where('tournament_id', $tournamentId)
+        $tc = CategoryTournament::where('tournament_id', $tournamentId)
             ->where('category_id', $categoryId)->first();
         dd($tc);
 
@@ -96,7 +96,7 @@ class CategorySettingsController extends Controller
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
 
 //        dd($categorySettings);
-//        $ct = TournamentCategory::where('tournament_id',$tournamentId)
+//        $ct = CategoryTournament::where('tournament_id',$tournamentId)
 //                                    ->where('category_id',$categoryId)->first();
 //        $request->request->add(['category_tournament_id' => $ct->id ]);
 //        dd($request);

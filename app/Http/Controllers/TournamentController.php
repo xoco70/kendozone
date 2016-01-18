@@ -7,7 +7,7 @@ use App\CategorySettings;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
-use App\TournamentCategory;
+use App\CategoryTournament;
 use App\TournamentLevel;
 use GeoIP;
 use Illuminate\Http\Request;
@@ -162,7 +162,7 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::findOrFail($tournamentId);
         $competitors = $tournament->competitors();
-        $tournamentCategories = TournamentCategory::where('tournament_id', $tournamentId)->get();
+        $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
         foreach ($tournamentCategories as $cat) {
             // Get number of area for this category
             $fightingAreas = null;

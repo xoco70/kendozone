@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
-class TournamentCategory extends Model
+class CategoryTournament extends Model
 {
     protected $table = 'category_tournament';
     public $timestamps = true;
@@ -18,7 +18,7 @@ class TournamentCategory extends Model
 
 
     public function ctu(){
-        return $this->hasMany('App\TournamentCategoryUser', 'category_tournament_id','id');
+        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id','id');
     }
 
     public function category(){

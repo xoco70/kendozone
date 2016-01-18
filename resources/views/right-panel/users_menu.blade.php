@@ -22,7 +22,7 @@ $groups = $users->groupBy('tcId');
 
                             <li><a href="#"></i>
                                     <?php
-                                    $tc = \App\TournamentCategory::findOrFail($group->get(0)->tcId);
+                                    $tc = \App\CategoryTournament::findOrFail($group->get(0)->tcId);
                                     $name = $tc->category->name;
                                     echo $name;
                                     ?>
