@@ -5,7 +5,7 @@
             <div class="checkbox-switch ">
                 <label>
 
-                    {!!  Form::label('isTeam', trans('core.isTeam')) !!} <br/>
+                    {!!  Form::label('isTeam', trans('crud.isTeam')) !!} <br/>
                     {!!   Form::hidden('isTeam', 0) !!}
                     {!!   Form::checkbox('isTeam', 1, old('isTeam')  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
 

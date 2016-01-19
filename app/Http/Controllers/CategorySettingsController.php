@@ -72,12 +72,6 @@ class CategorySettingsController extends Controller
     public function edit($tournamentId, $categoryId, $settingId)
     {
 
-//        $defaultSettings = $this->defaultSettings;
-        $tc = CategoryTournament::where('tournament_id', $tournamentId)
-            ->where('category_id', $categoryId)->first();
-//        dd($tc);
-
-
         $categorySetting = CategorySettings::findOrFail($settingId);
 
 //        dd($categorySetting);
@@ -95,11 +89,6 @@ class CategorySettingsController extends Controller
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
 
-//        dd($categorySettings);
-//        $ct = CategoryTournament::where('tournament_id',$tournamentId)
-//                                    ->where('category_id',$categoryId)->first();
-//        $request->request->add(['category_tournament_id' => $ct->id ]);
-//        dd($request);
         $data = $request->except('_method', '_token');
         $categorySettings->update($data);
 

@@ -1,8 +1,4 @@
 <!-- Detached sidebar -->
-<?php
-$groups = $users->groupBy('tcId');
-
-?>
 <div class="sidebar-detached">
     <div class="sidebar sidebar-default">
         <div class="sidebar-content">
@@ -18,16 +14,16 @@ $groups = $users->groupBy('tcId');
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        @foreach($groups as $group)
+                        @foreach($tournament->categoryTournaments as $categoryTournament)
 
                             <li><a href="#"></i>
                                     <?php
-                                    $tc = \App\CategoryTournament::findOrFail($group->get(0)->tcId);
-                                    $name = $tc->category->name;
+
+                                    $name = $categoryTournament->category->name;
                                     echo $name;
                                     ?>
 
-                                        <span class="label  label-striped">{{  sizeof($group) }}</span></a></li>
+                                        <span class="label  label-striped">{{  sizeof($categoryTournament->users) }}</span></a></li>
                         @endforeach
                     </ul>
                 </div>

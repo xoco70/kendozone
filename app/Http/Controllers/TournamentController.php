@@ -166,13 +166,13 @@ class TournamentController extends Controller
 
         if ($tournament->type == 1){
             // Tournament is open
-            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
-            $registeredCategories = $user->categoryTournaments;
+//            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
+//            $registeredCategories = $user->categoryTournaments;
 
 //            dd($registeredCategories);
 
 
-            return view("categories.register", compact('tournament', 'invite', 'currentModelName','categories','registeredCategories'));
+            return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         }
         else
             dd("You need an invitation to register in this tournament");

@@ -17,9 +17,9 @@ class CategoryTournament extends Model
     ];
 
 
-    public function ctu(){
-        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id','id');
-    }
+//    public function ctu(){
+//        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id','id');
+//    }
 
     public function category(){
         return $this->belongsTo('App\Category');
