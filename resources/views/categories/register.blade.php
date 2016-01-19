@@ -21,18 +21,7 @@
                             <h6 class="coutent-group"></h6>
 
 
-                            @foreach($tournament->categories as $key => $category)
-
-                                <?php
-                                $CategoryTournament = DB::table('category_tournament')
-                                        ->where('tournament_id', $tournament->id)
-                                        ->where('category_id', $category->id)
-                                        ->first();
-                                $old = DB::table('category_tournament_user')
-                                        ->where('category_tournament_id', $CategoryTournament->id)
-                                        ->where('user_id', Auth::user()->id)
-                                        ->count();
-                                ?>
+                            @foreach($tournament->categoryTournaments as $key => $categoryTournament)
 
                                 @if ($key % 4 == 0)
                                     <div class="row">
@@ -40,8 +29,8 @@
                                         <div class="col-md-3">
                                             <p>
 
-                                                {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
-                                                {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                                {!!  Form::label('cat['.$key.']', trans($categoryTournament->category->name)) !!} <br/>
+                                                {!!   Form::checkbox('cat['.$key.']', $categoryTournament->id,Auth::user()->categoryTournaments->get($key), ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                             </p>
                                         </div>
                                         @if ($key % 3 == 0 && $key != 0)

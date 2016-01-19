@@ -106,7 +106,7 @@ class InviteController extends Controller
         else
             $invite = null;
 
-        $tournament = Tournament::findOrFail($request->tournament);
+//        $tournament = Tournament::findOrFail($request->tournament);
         $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
         $user->categoryTournaments()->sync($categories);
 

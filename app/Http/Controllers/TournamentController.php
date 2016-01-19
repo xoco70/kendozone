@@ -9,6 +9,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\CategoryTournament;
 use App\TournamentLevel;
+use App\User;
 use GeoIP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -161,8 +162,18 @@ class TournamentController extends Controller
 
     public function register($tournamentId){
         $tournament = Tournament::findOrFail($tournamentId);
-        if ($tournament->type == 1) // Tournament is open
-            return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
+
+
+        if ($tournament->type == 1){
+            // Tournament is open
+            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
+            $registeredCategories = $user->categoryTournaments;
+
+//            dd($registeredCategories);
+
+
+            return view("categories.register", compact('tournament', 'invite', 'currentModelName','categories','registeredCategories'));
+        }
         else
             dd("You need an invitation to register in this tournament");
     }

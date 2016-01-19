@@ -97,10 +97,10 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
 //        invite/{userId}/register/
         Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
 
-//Event::listen('illuminate.query', function($query)
-//{
-//        var_dump($query);
-//});
+Event::listen('illuminate.query', function($query)
+{
+        var_dump($query);
+});
 
 //Route::resource('shinpan', 'ShinpanController');
 //Route::resource('clubs', 'ClubController');
