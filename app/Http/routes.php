@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
 //        Route::resource('places', 'PlaceController');
     });
 //        invite/{userId}/register/
-        Route::post('invite/{inviteId}/categories', 'InviteController@registerCategories');
+        Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
 
 //Event::listen('illuminate.query', function($query)
 //{

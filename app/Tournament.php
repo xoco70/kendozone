@@ -51,6 +51,7 @@ class Tournament extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+
     public function competitors($CategoryTournamentId = null)
     {
 //        User::join('category_tournament_user', 'user.id','user_id' )
@@ -103,7 +104,7 @@ class Tournament extends Model
 
     public function categoryTournaments()
     {
-        return $this->hasMany(TournamentCategory::class);
+        return $this->hasMany(CategoryTournament::class);
     }
 
     public function settings()

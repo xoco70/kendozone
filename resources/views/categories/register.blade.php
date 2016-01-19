@@ -13,39 +13,42 @@
                 <div class="panel-body">
                     <div class="container-fluid">
                         <legend class="text-semibold">{{Lang::get('crud.select_categories_to_register')}}</legend>
+                        @if (isset($invite))
+                            {!! Form::open(['url'=>'tournaments/'.$tournament->id.'/invite/'.$invite->id.'/categories']) !!}
+                        @else
+                            {!! Form::open(['url'=>'tournaments/'.$tournament->id.'/invite/0/categories']) !!}
+                        @endif
+                            <h6 class="coutent-group"></h6>
 
-                        {!! Form::open(['url'=>'invite/'.$invite->id.'/categories']) !!}
-                        <h6 class="coutent-group"></h6>
 
+                            @foreach($tournament->categories as $key => $category)
 
-                        @foreach($tournament->categories as $key => $category)
+                                <?php
+                                $CategoryTournament = DB::table('category_tournament')
+                                        ->where('tournament_id', $tournament->id)
+                                        ->where('category_id', $category->id)
+                                        ->first();
+                                $old = DB::table('category_tournament_user')
+                                        ->where('category_tournament_id', $CategoryTournament->id)
+                                        ->where('user_id', Auth::user()->id)
+                                        ->count();
+                                ?>
 
-                            <?php
-                            $CategoryTournament = DB::table('category_tournament')
-                                    ->where('tournament_id', $tournament->id)
-                                    ->where('category_id', $category->id)
-                                    ->first();
-                            $old = DB::table('category_tournament_user')
-                                    ->where('category_tournament_id', $CategoryTournament->id)
-                                    ->where('user_id', Auth::user()->id)
-                                    ->count();
-                            ?>
+                                @if ($key % 4 == 0)
+                                    <div class="row">
+                                        @endif
+                                        <div class="col-md-3">
+                                            <p>
 
-                            @if ($key % 4 == 0)
-                                <div class="row">
-                                    @endif
-                                    <div class="col-md-3">
-                                        <p>
-
-                                            {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
-                                            {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
-                                        </p>
+                                                {!!  Form::label('cat['.$key.']', trans($category->name)) !!} <br/>
+                                                {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                            </p>
+                                        </div>
+                                        @if ($key % 3 == 0 && $key != 0)
                                     </div>
-                                    @if ($key % 3 == 0 && $key != 0)
-                                </div>
-                            @endif
+                                @endif
 
-                        @endforeach
+                            @endforeach
 
                     </div>
                     <div align="right">

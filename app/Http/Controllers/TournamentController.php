@@ -159,7 +159,8 @@ class TournamentController extends Controller
         return redirect("tournaments");
     }
 
-    public function register(Tournament $tournament){
+    public function register($tournamentId){
+        $tournament = Tournament::findOrFail($tournamentId);
         if ($tournament->type == 1) // Tournament is open
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         else

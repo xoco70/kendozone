@@ -35,7 +35,7 @@ class CategoryTournament extends Model
 
     public function categoryTournaments()
     {
-        return $this->belongsToMany(TournamentCategory::class, 'category_tournament_user');
+        return $this->belongsToMany(CategoryTournament::class, 'category_tournament_user');
     }
 
 

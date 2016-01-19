@@ -101,27 +101,35 @@ class InviteController extends Controller
 
         $categories = $request->get('cat');
         $inviteId = $request->inviteId;
-        $invite = Invite::findOrFail($inviteId);
-        $tournament = $invite->tournament;
+        if ($inviteId!=0)
+            $invite = Invite::findOrFail($inviteId);
+        else
+            $invite = null;
+
+        $tournament = Tournament::findOrFail($request->tournament);
+        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
+        $user->categoryTournaments()->sync($categories);
+
 
         // Get all TournamentCategories Related to this tournament
 
-        $tcats = CategoryTournament::where('tournament_id', $tournament->id)->lists('id');
+//        $tcats = CategoryTournament::where('tournament_id', $tournament->id)->lists('id');
+//
+//        // Delete All Registered category that has not been paid
+//        CategoryTournamentUser::whereIn('category_tournament_id', $tcats)
+//            ->where('user_id', Auth::user()->id)
+//            ->delete();
+//
+//        //Create new ones
+//        $arrToSave = array();
+//        foreach ($categories as $cat) {
+//            array_push($arrToSave, ['category_tournament_id' => $cat, 'user_id' => Auth::user()->id, 'confirmed' => 0]);
+//        }
+//
+//        CategoryTournamentUser::insert($arrToSave);
 
-        // Delete All Registered category that has not been paid
-        CategoryTournamentUser::whereIn('category_tournament_id', $tcats)
-            ->where('user_id', Auth::user()->id)
-            ->delete();
+        if (isset($invite)) $invite->consume();
 
-        //Create new ones
-        $arrToSave = array();
-        foreach ($categories as $cat) {
-            array_push($arrToSave, ['category_tournament_id' => $cat, 'user_id' => Auth::user()->id, 'confirmed' => 0]);
-        }
-
-        CategoryTournamentUser::insert($arrToSave);
-
-        $invite->consume();
         flash("success", trans('core.operation_successful'));
         return redirect("/invites");
 

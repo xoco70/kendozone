@@ -41,6 +41,9 @@ class TournamentUserController extends Controller
         $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
         $users = $tournament->competitors();
 
+        $myTournament = Tournament::with('categoryTournaments.users')->find(1);
+//        dd($myTournament->users);
+
 
         return view("tournaments/users", compact('users', 'currentModelName','settingSize','categorySize'));
 
