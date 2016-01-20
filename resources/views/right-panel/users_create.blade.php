@@ -14,7 +14,7 @@
 
                 <div class="category-content">
 
-                        {{Lang::get('help.create_competitor') }}
+                        {{trans('help.create_competitor') }}
                 </div>
             </div>
             <!-- /sub navigation -->

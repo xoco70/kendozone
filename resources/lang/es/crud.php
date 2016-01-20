@@ -118,6 +118,7 @@ return [
     // Competitor
     'competitor' => 'Competidor|Competidores',
     'add_competitor' => 'Agregar Competidor',
+    'add_competitor_to_category' => 'Agregar Competidor a la categoria: :category',
     'select_competitor_categories' => 'Selecciona las categorias en la cual quieres registrar al competidor',
 
 

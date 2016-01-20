@@ -6,6 +6,10 @@
     <div class="container">
         <div class="row col-md-10 col-md-offset-2 custyle">
 
+            <?php
+//                dd($categoryTournamentId);
+                $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
+            ?>
             {!! Form::open(['url'=>"tournaments/$tournament->id/users/"]) !!}
 
 
@@ -24,7 +28,7 @@
 
 
                                         <fieldset title="add_competitor">
-                                            <legend class="text-semibold">{{Lang::get('crud.add_competitor')}}</legend>
+                                            <legend class="text-semibold">{{trans('crud.add_competitor_to_category',['category' => $categoryTournament->category->name])}}</legend>
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -40,59 +44,8 @@
                                             </div>
                                         </div>
                                         <br/>
-                                        {{--Tournament Categories --}}
-                                        <div class="row">
-                                            <legend class="text-semibold">{{Lang::get('crud.select_competitor_categories')}}</legend>
-                                            @foreach($tournament->categories as $key => $category)
+                                        {!!  Form::hidden('categoryTournamentId',$categoryTournamentId) !!}
 
-                                                <?php
-                                                $CategoryTournament = DB::table('category_tournament')
-                                                        ->where('tournament_id', $tournament->id)
-                                                        ->where('category_id', $category->id)
-                                                        ->first();
-                                                $old = DB::table('category_tournament_user')
-                                                        ->where('category_tournament_id', $CategoryTournament->id)
-                                                        ->where('user_id', Auth::user()->id)
-                                                        ->count();
-                                                ?>
-
-                                                @if ($key % 3 == 0)
-                                                    <div class="row">
-                                                        @endif
-                                                        <div class="col-md-4">
-                                                            <p>
-
-                                                                {!!  Form::label('cat['.$key.']', trans($category->name)) !!}
-                                                                <br/>
-                                                                {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
-                                                            </p>
-                                                        </div>
-                                                        @if ($key % 2 == 0 && $key != 0)
-                                                    </div>
-                                                @endif
-
-                                            @endforeach
-                                        </div>
-
-                                        {{--<div class="row">--}}
-                                        {{--<div class="col-md-6">--}}
-                                        {{--@can('CanChangeRole')--}}
-                                        {{--<div class="form-group">--}}
-                                        {{--{!!  Form::label('role_id', trans('crud.role')) !!}--}}
-                                        {{--{!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}--}}
-                                        {{--</div>--}}
-                                        {{--@endcan--}}
-                                        {{--</div>--}}
-
-                                        {{--<div class="col-md-6">--}}
-                                        {{--<div class="form-group">--}}
-                                        {{--{!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}--}}
-                                        {{--{!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}--}}
-                                        {{--<p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-
-                                        {{--</div>--}}
 
                                         <div align="right">
                                             <button type="submit"

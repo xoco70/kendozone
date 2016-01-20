@@ -2,53 +2,66 @@
 
 @section('content')
     <div class="container-fluid">
+        <?php
 
-        <!-- Detached content -->
+        $link = "";
+        $id = "";
+        if ($settingSize > 0 && $settingSize == $categorySize)
+            $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->id]);
+        else
+            // For showing Modal
+            $link = "#";
+        $id = 'id="generate_tree"';
+
+        ?>
+                <!-- Detached content -->
         <div class="container-detached">
             <div class="content-detached">
-                <div class="panel panel-flat">
+                @foreach($tournament->categoryTournaments as $categoryTournament)
+                    <div class="panel panel-flat">
 
-                    <div class="panel-body">
-                        <div class="mb-20">
+                        <div class="panel-body">
+                            <div class="mb-20">
 
 
-                            <?php
-                            $link = "";
-                            $id = "";
-                            if ($settingSize > 0 && $settingSize == $categorySize)
-                                $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $users[0]->tournament_id]);
-                            else
-                                // For showing Modal
-                                $link = "#";
-                            $id = 'id="generate_tree"';
+                                {{--<a href="{!!   $link !!}" {!! $id !!}--}}
+                                {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
+                                {{--class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>--}}
+                                {{--</a>--}}
+                                {{--<a href="{!!   URL::action('TournamentUserController@create',--}}
+                                {{--['tournamentId'=>$tournament->id]) !!}"--}}
+                                {{--class="btn btn-primary btn-xs pull-right"><b><i--}}
+                                {{--class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])--}}
+                                {{--</a>--}}
+                            </div>
+                            <div class="container-fluid">
 
-                            ?>
-                            <a href="{!!   $link !!}" {!! $id !!}
-                            class="btn bg-teal btn-xs pull-right ml-20"><b><i
-                                            class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
-                            </a>
-                            <a href="{!!   URL::action('TournamentUserController@create',
-                                                    ['tournamentId'=>$tournament->id]) !!}"
-                               class="btn btn-primary btn-xs pull-right"><b><i
-                                            class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
-                            </a>
-                        </div>
-                        <div class="container-fluid">
 
-                            @foreach($tournament->categoryTournaments as $categoryTournament)
-
+                                <div class="mb-20">
+                                    <a href="{!!   $link !!}" {!! $id !!}
+                                    class="btn bg-teal btn-xs pull-right ml-20"><b><i
+                                                    class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
+                                    </a>
+                                    <a href="{!!   URL::action('TournamentUserController@create',
+                                                    ['tournamentId'=>$tournament->id,
+                                                    'categoryId'=>$categoryTournament->id
+                                                    ]) !!}"
+                                       class="btn btn-primary btn-xs pull-right"><b><i
+                                                    class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
+                                    </a>
+                                </div>
                                 <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
                                 <table class="table datatable-responsive">
                                     <thead>
                                     <tr>
                                         <th class="min-tablet text-center "
                                             data-hide="phone">{{ trans('crud.avatar') }}</th>
-                                        <th class="min-phone-l">{{ trans('crud.username') }}</th>
-                                        <th class="min-phone-l">{{ trans('crud.email') }}</th>
-                                        <th class="min-phone-l">{{ trans_choice('crud.category',1) }}</th>
-                                        <th class="min-phone-l">{{ trans('crud.confirmed') }}</th>
-                                        <th class="min-phone-l">{{ trans('crud.country') }}</th>
-                                        <th class="min-phone-l">{{ trans('crud.action') }}</th>
+                                        <th class="phone">{{ trans('crud.username') }}</th>
+                                        <th class="phone">{{ trans('crud.email') }}</th>
+                                        <th class="phone">{{ trans_choice('crud.category',1) }}</th>
+                                        <th class="phone">{{ trans('crud.confirmed') }}</th>
+                                        <th class="phone">{{ trans('crud.country') }}</th>
+                                        <th class="all">{{ trans('crud.action') }}</th>
                                     </tr>
                                     </thead>
                                     @foreach($categoryTournament->users as $user)
@@ -58,7 +71,7 @@
                                                             src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                             </td>
                                             <td><a
-                                                        href="{!!   URL::action('TournamentUserController@edit',  ['users'=>$user->id, 'tournament'=> $user->tournament_id] ) !!}">{{ $user->name }}</a>
+                                                        href="{!!   URL::action('UserController@show',  ['users'=>$user->id] ) !!}">{{ $user->name }}</a>
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td class="text-center">{{ trans($categoryTournament->category->name)}}</td>
@@ -78,11 +91,12 @@
                                             <td class="text-center"><img src="/images/flags/{{ $user->country->flag }}"
                                                                          alt="{{ $user->country->name }}"/></td>
 
+
                                             <td class="text-center">
                                                 <a class=" text-danger "
                                                    href="{!! URL::action('TournamentUserController@deleteUser',
-                                                    ['tournamentId'=>$user->tournament_id,
-                                                    'tcId'=>$user->tcId,
+                                                    ['tournamentId'=>$tournament->id,
+                                                    'categoryId'=>$categoryTournament->id,
                                                     'userId'=>$user->id])  !!}">
                                                     <span class="glyphicon glyphicon-remove"></span></a>
                                             </td>
@@ -91,19 +105,21 @@
                                     @endforeach
 
                                 </table>
-                            <br/>
-                            @endforeach
+                                <br/>
+
+
+                            </div>
+                            <br/><br/>
+
+                            {{--                <div class="text-right mr-20">{{ $users->count() }} {{ Lang::get('crud.results')}}</div>--}}
+
+                            {{--                <div class="text-center">{!! $users->render() !!}</div>--}}
+
 
                         </div>
-                        <br/><br/>
-
-                        {{--                <div class="text-right mr-20">{{ $users->count() }} {{ Lang::get('crud.results')}}</div>--}}
-
-                        {{--                <div class="text-center">{!! $users->render() !!}</div>--}}
-
 
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

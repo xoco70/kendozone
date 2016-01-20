@@ -186,16 +186,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
-    public function isRegisteredInTournament($tournamentId)
-    {
-        $count = DB::table('category_tournament_user as ctu')
-            ->join('category_tournament as ct', 'ct.id', '=', 'ctu.category_tournament_id')
-            ->where('ctu.user_id',$this->id)
-            ->where('ct.tournament_id',$tournamentId)
-            ->count();
-//        dd($count);
-        return $count > 0 ;
-    }
+//    public function isRegisteredInTournament($tournamentId)
+//    {
+//        $count = DB::table('category_tournament_user as ctu')
+//            ->join('category_tournament as ct', 'ct.id', '=', 'ctu.category_tournament_id')
+//            ->where('ctu.user_id',$this->id)
+//            ->where('ct.tournament_id',$tournamentId)
+//            ->count();
+////        dd($count);
+//        return $count > 0 ;
+//    }
 
 
     public function categories()

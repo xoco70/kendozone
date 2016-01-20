@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Requests\TournamentRequest;
-use App\Invite;
-use App\Mailers\AppMailer;
-use App\Tournament;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
+use App\Http\Requests;
+use App\Mailers\AppMailer;
+use App\Tournament;
 use App\User;
 use GeoIP;
 use Illuminate\Http\Request;
@@ -34,7 +32,7 @@ class TournamentUserController extends Controller
      */
     public function index($tournamentId)
     {
-        $tournament = Tournament::with('categoryTournaments.users','categoryTournaments.category')->find(1);
+        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find(1);
 //        $tournament = Tournament::find($tournamentId)->first();
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
@@ -46,7 +44,7 @@ class TournamentUserController extends Controller
 //        dd($tournament->categoryTournaments);
 
 
-        return view("tournaments/users", compact('tournament', 'currentModelName','settingSize','categorySize'));
+        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize'));
 
     }
 
@@ -55,10 +53,11 @@ class TournamentUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Tournament $tournament)
+    public function create(Request $request, Tournament $tournament)
     {
+        $categoryTournamentId = $request->get('categoryId');
         $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/users/create", compact('tournament', 'currentModelName')); //, compact()
+        return view("tournaments/users/create", compact('tournament', 'currentModelName', 'categoryTournamentId')); //, compact()
     }
 
     /**
@@ -72,11 +71,12 @@ class TournamentUserController extends Controller
         $this->validate($request, [
             'username' => 'required|max:255',
             'email' => 'required',
-            'cat' => 'required|array'
+            'categoryTournamentId' => 'required',
 
         ]);
 
-        $tcat = $request->cat;
+        $categoryTournamentId = $request->categoryTournamentId;
+        $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
         $email = $request->email;
         $username = $request->username;
 
@@ -103,30 +103,23 @@ class TournamentUserController extends Controller
 
             // User already exists
             // We check that this user isn't registered in this tournament
+            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
+            $categoryTournaments = $user->categoryTournaments();
 
-            if ($user->isRegisteredInTournament($tournamentId)) {
-                // If so, send alert, must edit user instead of create
+            if ($categoryTournaments->get()->contains($categoryTournament)) {
                 flash('error', trans('flash.user_already_registered_in_tournament'));
-//                $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-                return redirect("tournaments/$tournamentId/users/create"); //, compact()
+                return redirect()->back();
 
+            } else {
+                $categoryTournaments->attach($categoryTournamentId);
             }
         }
-        // We add him to the different categor
-        $tcus = array();
-        $categories = array();
-        foreach ($tcat as $tCategoryId) {
-            array_push($tcus, ['category_tournament_id' => $tCategoryId,
-                'user_id' => $user->id]);
 
-            array_push($categories, trans(CategoryTournament::findOrFail($tCategoryId)->category->name));
-        }
 
-        CategoryTournamentUser::insert($tcus);
         // We send him an email with detail ( and user /password if new)
-        $invite = new Invite();
-        $code = $invite->generate($user->email, $tournament);
-        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
+//        $invite = new Invite();
+//        $code = $invite->generate($user->email, $tournament);
+//        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, null, $password);
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
 
@@ -179,7 +172,7 @@ class TournamentUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tournamentId,$user)
+    public function update(Request $request, $tournamentId, $user)
     {
 
         $this->validate($request, [
