@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container-fluid">
         <?php
 
         $link = "";
@@ -22,38 +21,38 @@
                     <div class="panel panel-flat">
 
                         <div class="panel-body">
-                            <div class="mb-20">
 
 
-                                {{--<a href="{!!   $link !!}" {!! $id !!}--}}
-                                {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
-                                {{--class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>--}}
-                                {{--</a>--}}
-                                {{--<a href="{!!   URL::action('TournamentUserController@create',--}}
-                                {{--['tournamentId'=>$tournament->id]) !!}"--}}
-                                {{--class="btn btn-primary btn-xs pull-right"><b><i--}}
-                                {{--class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])--}}
-                                {{--</a>--}}
-                            </div>
+                            {{--<a href="{!!   $link !!}" {!! $id !!}--}}
+                            {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
+                            {{--class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>--}}
+                            {{--</a>--}}
+                            {{--<a href="{!!   URL::action('TournamentUserController@create',--}}
+                            {{--['tournamentId'=>$tournament->id]) !!}"--}}
+                            {{--class="btn btn-primary btn-xs pull-right"><b><i--}}
+                            {{--class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])--}}
+                            {{--</a>--}}
+
                             <div class="container-fluid">
 
 
-                                <div class="mb-20">
-                                    <a href="{!!   $link !!}" {!! $id !!}
-                                    class="btn bg-teal btn-xs pull-right ml-20"><b><i
-                                                    class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
-                                    </a>
-                                    <a href="{!!   URL::action('TournamentUserController@create',
+                                <a href="{!!   $link !!}" {!! $id !!}
+                                class="btn bg-teal btn-xs pull-right ml-20"><b><i
+                                                class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
+                                </a>
+                                <a href="{!!   URL::action('TournamentUserController@create',
                                                     ['tournamentId'=>$tournament->id,
                                                     'categoryId'=>$categoryTournament->id
                                                     ]) !!}"
-                                       class="btn btn-primary btn-xs pull-right"><b><i
-                                                    class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
-                                    </a>
-                                </div>
-                                <a name="{{ $categoryTournament->category->name }}"><legend class="text-semibold">{{ $categoryTournament->category->name }}</legend></a>
+                                   class="btn btn-primary btn-xs pull-right"><b><i
+                                                class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
+                                </a>
 
-                                <table class="table datatable-responsive" >
+                                <a name="{{ $categoryTournament->category->name }}">
+                                    <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
+                                </a>
+
+                                <table class="table datatable-responsive">
                                     <thead>
                                     <tr>
                                         <th class="min-tablet text-center "
@@ -127,9 +126,6 @@
 
 
         @include("right-panel.users_menu")
-
-
-    </div>
 
     <script>
         $(function () {

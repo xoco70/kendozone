@@ -4,7 +4,6 @@
 
     @include("errors.list")
 
-    <div class="container-fluid">
 
         {!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
 
@@ -321,8 +320,6 @@
 
             });
         </script>
-    </div>
-
 
     {!! Form::close()!!}
 
