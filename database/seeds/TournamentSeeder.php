@@ -38,7 +38,7 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 2) as $index) {
             Tournament::create([
                 'user_id' => $faker->randomElement($users),
                 'name' => $faker->title,
@@ -60,7 +60,7 @@ class TournamentSeeder extends Seeder
         $categories = Category::all()->pluck('id')->toArray();
         // Tournament categories creation
         CategoryTournament::truncate();
-        foreach (range(1, 30) as $index) {
+        foreach (range(1, 5) as $index) {
             CategoryTournament::create([
                 'tournament_id' => $faker->randomElement($tournaments),
                 'category_id' => $faker->randomElement($categories),
@@ -72,7 +72,7 @@ class TournamentSeeder extends Seeder
 
         CategoryTournamentUser::truncate();
         $tcs = CategoryTournament::all()->pluck('id')->toArray();
-        foreach (range(2, 50) as $index) {
+        foreach (range(2, 200) as $index) {
             CategoryTournamentUser::create([
                 'category_tournament_id' => $faker->randomElement($tcs),
                 'user_id' => $faker->randomElement($users),

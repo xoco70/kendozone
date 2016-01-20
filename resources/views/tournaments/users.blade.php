@@ -138,6 +138,7 @@
             $.extend($.fn.dataTable.defaults, {
                 autoWidth: false,
                 responsive: true,
+                paging: false,
                 columnDefs: [{
                     orderable: false,
                     width: '100px',
@@ -151,9 +152,6 @@
                 },
                 drawCallback: function () {
                     $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
-                    $('.dataTables_paginate').css("display", "none");
-                    $('.dataTables_length').css("display", "none");
-                    $('.dataTables_filter').css("display", "none");
                 },
                 preDrawCallback: function () {
                     $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
@@ -169,7 +167,6 @@
 
             // Column controlled child rows
             $('.datatable-responsive-column-controlled').DataTable({
-
                 responsive: {
                     details: {
                         type: 'column'
