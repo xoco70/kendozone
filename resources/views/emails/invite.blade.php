@@ -19,13 +19,10 @@
     @if ($tournament->registerDateLimit != null)
         <strong>Fecha Limite de Registro:</strong> {{ $tournament->registerDateLimit }}<br/>
 @endif
-@if ($categories!=null)
-    <P>Has sido preregistrado en las categorias siguientes</P>
+@if (isset($category))
+    <P>Has sido preregistrado en las categoria</P>
     <ul>
-
-        @foreach($categories as $category)
             <li>{{$category}}</li>
-        @endforeach
     </ul>
 @else
     Por favor pica el link de pre-registro: <br/>

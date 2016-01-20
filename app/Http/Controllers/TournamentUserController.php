@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Http\Requests;
+use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
 use App\User;
@@ -33,17 +34,10 @@ class TournamentUserController extends Controller
     public function index($tournamentId)
     {
         $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find(1);
-//        $tournament = Tournament::find($tournamentId)->first();
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
         $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
-////        $users = $tournament->competitors();
-//
-
-//        dd($tournament->categoryTournaments);
-
-
         return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize'));
 
     }
@@ -107,8 +101,8 @@ class TournamentUserController extends Controller
             $categoryTournaments = $user->categoryTournaments();
 
             if ($categoryTournaments->get()->contains($categoryTournament)) {
-                flash('error', trans('flash.user_already_registered_in_tournament'));
-                return redirect()->back();
+                flash('error', trans('flash.user_already_registered_in_category'));
+                return redirect("tournaments/$tournamentId/users");
 
             } else {
                 $categoryTournaments->attach($categoryTournamentId);
@@ -117,9 +111,9 @@ class TournamentUserController extends Controller
 
 
         // We send him an email with detail ( and user /password if new)
-//        $invite = new Invite();
-//        $code = $invite->generate($user->email, $tournament);
-//        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, null, $password);
+        $invite = new Invite();
+        $code = $invite->generate($user->email, $tournament);
+        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
 

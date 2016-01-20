@@ -18,6 +18,7 @@
         <div class="container-detached">
             <div class="content-detached">
                 @foreach($tournament->categoryTournaments as $categoryTournament)
+
                     <div class="panel panel-flat">
 
                         <div class="panel-body">
@@ -50,13 +51,14 @@
                                                     class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
                                     </a>
                                 </div>
-                                <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
-                                <table class="table datatable-responsive">
+                                <a name="{{ $categoryTournament->category->name }}"><legend class="text-semibold">{{ $categoryTournament->category->name }}</legend></a>
+
+                                <table class="table datatable-responsive" >
                                     <thead>
                                     <tr>
                                         <th class="min-tablet text-center "
                                             data-hide="phone">{{ trans('crud.avatar') }}</th>
-                                        <th class="phone">{{ trans('crud.username') }}</th>
+                                        <th class="all">{{ trans('crud.username') }}</th>
                                         <th class="phone">{{ trans('crud.email') }}</th>
                                         <th class="phone">{{ trans_choice('crud.category',1) }}</th>
                                         <th class="phone">{{ trans('crud.confirmed') }}</th>
@@ -162,6 +164,7 @@
 
             // Column controlled child rows
             $('.datatable-responsive-column-controlled').DataTable({
+
                 responsive: {
                     details: {
                         type: 'column'
@@ -203,4 +206,3 @@
         });
     </script>
 @stop
-

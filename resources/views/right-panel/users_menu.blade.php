@@ -16,7 +16,7 @@
                     <ul class="navigation navigation-alt navigation-accordion">
                         @foreach($tournament->categoryTournaments as $categoryTournament)
 
-                            <li><a href="#"></i>
+                            <li><a href="#{{ $categoryTournament->category->name }}"></i>
                                     <?php
 
                                     $name = $categoryTournament->category->name;
