@@ -60,106 +60,105 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_create_user($delete = true)
-    {
-//given
-        $test_file_path = base_path().'/avatar2.png';
-//        dd($test_file_path);
-        $this->assertTrue(file_exists($test_file_path), 'Test file does not exist');
-
-
-
-        $this->visit('/')
-            ->click($this->users)
-            ->see($this->users)
-            ->click($this->addUser)
-            ->type('MyUser', 'name')
-            ->type('julien@cappiello.fr2', 'email')
-            ->type('julien', 'firstname')
-            ->type('cappiello', 'lastname')
-            ->select('3', 'role_id')
-            ->select('111111', 'password')
-            ->select('111111', 'password_confirmation')
-            ->attach($test_file_path,'avatar')
-//            //File input avatar
-            ->press($this->addUser)
-            ->seePageIs('/users')
-            ->see(Lang::get('core.success'))
-            ->seeInDatabase('users',['name' => 'MyUser']);
-
-        $user = User::where('email', '=', "julien@cappiello.fr2")->first();
-        if ($delete) $user->delete();
-    }
-
-    /** @test */
-    public function it_edit_user()
-    {
-        $this->it_create_user(false);
-
-        $this->visit('/users')
-            ->click("MyUser")
-            ->type('juju', 'name')
-            ->type('juju@juju.com', 'email')
-            ->type('may', 'firstname')
-            ->type('1', 'lastname')
-            ->select('3', 'role_id')
-            ->type('222222', 'password')
-            ->type('222222', 'password_confirmation')
-            ->type('44', 'avatar')
-            ->press($this->editUser)
-            ->seePageIs('/users')
-            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
-
-        $user = User::where('email', '=', "juju@juju.com")->first();
-        $user->delete();
-
-    }
-
+//    public function it_create_user($delete = true)
+//    {
+////given
+//        $test_file_path = base_path().'/avatar2.png';
+////        dd($test_file_path);
+//        $this->assertTrue(file_exists($test_file_path), 'Test file does not exist');
+//
+//
+//        $this->visit('/')
+//            ->click($this->users)
+//            ->see($this->users)
+//            ->click($this->addUser)
+//            ->type('MyUser', 'name')
+//            ->type('julien@cappiello.fr2', 'email')
+//            ->type('julien', 'firstname')
+//            ->type('cappiello', 'lastname')
+//            ->select('3', 'role_id')
+//            ->select('111111', 'password')
+//            ->select('111111', 'password_confirmation')
+//            ->attach($test_file_path,'avatar')
+////            //File input avatar
+//            ->press($this->addUser)
+//            ->seePageIs('/users')
+//            ->see(Lang::get('core.success'))
+//            ->seeInDatabase('users',['name' => 'MyUser']);
+//
+//        $user = User::where('email', '=', "julien@cappiello.fr2")->first();
+//        if ($delete) $user->delete();
+//    }
 
     /** @test */
-    public function it_denies_creating_user_without_password()
-    {
+//    public function it_edit_user()
+//    {
+//        $this->it_create_user(false);
+//
+//        $this->visit('/users')
+//            ->click("MyUser")
+//            ->type('juju', 'name')
+//            ->type('juju@juju.com', 'email')
+//            ->type('may', 'firstname')
+//            ->type('1', 'lastname')
+//            ->select('3', 'role_id')
+//            ->type('222222', 'password')
+//            ->type('222222', 'password_confirmation')
+//            ->type('44', 'avatar')
+//            ->press($this->editUser)
+//            ->seePageIs('/users')
+//            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+//
+//        $user = User::where('email', '=', "juju@juju.com")->first();
+//        $user->delete();
+//
+//    }
 
-        $this->visit('/')
-            ->click($this->users)
-            ->see($this->users)
-            ->click($this->addUser)
-            ->type('MyUser', 'name')
-            ->type('julien@cappiello.fr2', 'email')
-            ->type('julien', 'firstname')
-            ->type('cappiello', 'lastname')
-            ->select('3', 'role_id')
-//            //File input avatar
-            ->press($this->addUser)
-            ->seePageIs('/users/create')
-            ->see(Lang::get('validation.required', ['attribute' => "password"]))
-            ->notSeeInDatabase('users',['name' => 'MyUser']);
-
-    }
 
     /** @test */
-    public function it_allow_editing_user_without_password()
-    {
-        $this->it_create_user(false);
-        $usuario = User::where('email', '=', "julien@cappiello.fr2")->first();
-        $oldPass = $usuario->password;
-        $this->visit('/users')
-            ->click("MyUser")
-            ->type('juju', 'name')
-            ->type('juju@juju.com', 'email')
-            ->type('may', 'firstname')
-            ->type('1', 'lastname')
-            ->select('3', 'role_id')
-            ->press($this->editUser)
-            ->seePageIs('/users')
-            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+//    public function it_denies_creating_user_without_password()
+//    {
+//
+//        $this->visit('/')
+//            ->click($this->users)
+//            ->see($this->users)
+//            ->click($this->addUser)
+//            ->type('MyUser', 'name')
+//            ->type('julien@cappiello.fr2', 'email')
+//            ->type('julien', 'firstname')
+//            ->type('cappiello', 'lastname')
+//            ->select('3', 'role_id')
+////            //File input avatar
+//            ->press($this->addUser)
+//            ->seePageIs('/users/create')
+//            ->see(Lang::get('validation.required', ['attribute' => "password"]))
+//            ->notSeeInDatabase('users',['name' => 'MyUser']);
+//
+//    }
 
-        $usuario = User::where('email', '=', "juju@juju.com")->first();
-        $newPass = $usuario->password;
-        assert($oldPass == $newPass, true);
-        $usuario->delete();
-
-    }
+    /** @test */
+//    public function it_allow_editing_user_without_password()
+//    {
+//        $this->it_create_user(false);
+//        $usuario = User::where('email', '=', "julien@cappiello.fr2")->first();
+//        $oldPass = $usuario->password;
+//        $this->visit('/users')
+//            ->click("MyUser")
+//            ->type('juju', 'name')
+//            ->type('juju@juju.com', 'email')
+//            ->type('may', 'firstname')
+//            ->type('1', 'lastname')
+//            ->select('3', 'role_id')
+//            ->press($this->editUser)
+//            ->seePageIs('/users')
+//            ->seeInDatabase('users',['name' => 'juju', 'email' => 'juju@juju.com']);
+//
+//        $usuario = User::where('email', '=', "juju@juju.com")->first();
+//        $newPass = $usuario->password;
+//        assert($oldPass == $newPass, true);
+//        $usuario->delete();
+//
+//    }
 
     /** @test */
 //    public function it_delete_user()
