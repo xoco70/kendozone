@@ -53,11 +53,11 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
-
-                                            <a class=" text-danger "
-                                               href="{!! URL::action('TournamentController@destroyTournament',  ['tournamentId' => $tournament->id]) !!}"
-                                               data-method="delete" data-token="{{csrf_token()}}">
-                                                <span class="glyphicon glyphicon-remove"></span></a>
+                                            {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}
+                                            <button id="delete" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            {!! Form::close() !!}
 
                                         </td>
                                     </tr>

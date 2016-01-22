@@ -166,12 +166,13 @@ class UserTest extends TestCase
         factory(User::class)->create(['name'=>'MyUser']);
         $this->seeInDatabase('users',['name' => 'MyUser']);
 
-        $delete = Lang::get('crud.delete');
+//        $delete = Lang::get('crud.delete');
         $this->it_create_user();
 
         $this->visit('/users')
-            ->click($delete)
+            ->click('delete')
             ->seePageIs('/users')
+            ->see(Lang::get('core.success'))
             ->dontSee('My User')
             ->notSeeInDatabase('user', ['name' => 'My User']);
     }

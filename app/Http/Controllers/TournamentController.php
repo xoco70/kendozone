@@ -153,10 +153,13 @@ class TournamentController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyTournament($tournamentId)
+    public function destroy(Tournament $tournament)
     {
-        Tournament::destroy($tournamentId);
-        flash("success", Lang::get('core.operation_successful'));
+        if ($tournament->delete()) {
+            flash('success', Lang::get('core.success'));
+        } else
+            flash('error', Lang::get('core.fail'));
+
         return redirect("tournaments");
     }
 

@@ -97,8 +97,7 @@ class UserController extends Controller
      * @param User $user
      * @return Response
      */
-    public
-    function show($user)
+    public function show($user)
     {
 
         return view('users.show', compact('user'));
@@ -190,4 +189,15 @@ class UserController extends Controller
 
         })->export('xls');
     }
+
+    public function destroy(User $user)
+    {
+        if ($user->delete()) {
+            flash('success', Lang::get('core.success'));
+        } else
+            flash('error', Lang::get('core.fail'));
+        return redirect("/users");
+
+    }
+
 }

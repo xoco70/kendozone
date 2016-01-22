@@ -8,11 +8,13 @@
                 <thead>
                 <span class="pl-10 pull-right">
                                     <a href="{!!   URL::action('UserController@create') !!}"
-                                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                                       class="btn btn-primary btn-xs "><b><i
+                                                    class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
                                     </a>
 
 </span>
-                <a href="{!!   URL::action('UserController@exportUsersExcel') !!}" class="btn btn-success btn-xs pull-right"><i class="icon-file-excel position-left"></i>Export
+                <a href="{!!   URL::action('UserController@exportUsersExcel') !!}"
+                   class="btn btn-success btn-xs pull-right"><i class="icon-file-excel position-left"></i>Export
                     to Excel</a>
 
                 <tr>
@@ -40,10 +42,11 @@
                         <td><img src="/images/flags/{{ $user->country->flag }}" alt="{{ $user->country->name }}"/></td>
 
                         <td class="text-center">
-                            <a class=" text-danger "
-                               href="{!! URL::action('UserController@destroy',  $user->id) !!}" data-method="delete"
-                               data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span></a>
+                            {{ Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) }}
+                            <button id="delete" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            {!! Form::close() !!}
                         </td>
                     </tr>
 

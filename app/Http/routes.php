@@ -68,7 +68,6 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
     function () {
 
         Route::resource('tournaments', 'TournamentController');
-        Route::get('tournaments/{tournamentId}/delete', 'TournamentController@destroyTournament');
         Route::get('tournaments/{tournamentId}/register', 'TournamentController@register');
 
         Route::resource('users', 'UserController');
