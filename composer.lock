@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c03346be48ad022e1cf583c5519f772c",
-    "content-hash": "5e258362e53b40ab61da98e76873ff27",
+    "hash": "ba47724ac9708b3506c5bb86d6affe0c",
+    "content-hash": "95a26e1428a0e36b639f76f668a3b5b0",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -264,6 +264,49 @@
                 "maxmind"
             ],
             "time": "2015-09-24 17:29:28"
+        },
+        {
+            "name": "google/apiclient",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/google-api-php-client.git",
+                "reference": "a25dc9d5c109ebb02945ba1ff6336cc937c27628"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/a25dc9d5c109ebb02945ba1ff6336cc937c27628",
+                "reference": "a25dc9d5c109ebb02945ba1ff6336cc937c27628",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Client library for Google APIs",
+            "homepage": "http://developers.google.com/api-client-library/php",
+            "keywords": [
+                "google"
+            ],
+            "time": "2015-10-16 22:11:08"
         },
         {
             "name": "guzzle/guzzle",
@@ -1656,6 +1699,68 @@
                 "shell"
             ],
             "time": "2015-11-12 16:18:56"
+        },
+        {
+            "name": "spatie/laravel-analytics",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-analytics.git",
+                "reference": "ee19b695071a29c50bdf4a2eaa9dc7f3e3e39d31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-analytics/zipball/ee19b695071a29c50bdf4a2eaa9dc7f3e3e39d31",
+                "reference": "ee19b695071a29c50bdf4a2eaa9dc7f3e3e39d31",
+                "shasum": ""
+            },
+            "require": {
+                "google/apiclient": "1.1.*",
+                "illuminate/contracts": "~5.0",
+                "illuminate/support": "~5.0",
+                "nesbot/carbon": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelAnalytics\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://murze.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Matthias De Winter",
+                    "email": "dewinter.matthias@gmail.com",
+                    "homepage": "https://github.com/MatthiasDeWinter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An opinionated Laravel 5 package to retrieve Google Analytics data.",
+            "homepage": "https://github.com/spatie/laravel-analytics",
+            "keywords": [
+                "analytics",
+                "google",
+                "laravel",
+                "reports",
+                "retrieve",
+                "spatie"
+            ],
+            "time": "2016-01-06 12:24:55"
         },
         {
             "name": "swiftmailer/swiftmailer",
