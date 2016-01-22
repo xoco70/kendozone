@@ -38,26 +38,10 @@ class UserSeeder extends Seeder
             'remember_token' => '7rCCxMRjsqSgHCt1mbOSkz5TV0iKe9YYVNMrOwX2g5pLUsF3qBqVQ1zlYOuv'
         ]);
 
-
-
-        User::create([
-            'name' => 'xoco',
-            'email'    => 'xoco70@hotmail.com1',
-            'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
-            'grade_id' => $faker->randomElement($grades),
-            'country_id' => '4',
-            'city' => 'Mexico City',
-            'latitude' => '19.4342',
-            'longitude' => '-99.1386',
-            'role_id' => '3',
-            'avatar' => 'avatar.png',
-            'verified' => '1',
-            'provider' => '',
-            'provider_id' => '1'
-        ]);
-
-
-        factory(User::class,5)->create();
+        factory(User::class)->create(['role_id',2]);
+        factory(User::class)->create(['role_id',3]);
+        factory(User::class)->create(['role_id',4]);
+        factory(User::class)->create(['role_id',5]);
 
 
 

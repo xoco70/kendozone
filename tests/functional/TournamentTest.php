@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Lang;
  * mustBeAuthenticated()
  * it_create_tournament($delete = true)
  * it_edit_tournament()
- * you_must_own_tournament_to_edit_it_or_be_superuser
+ * you_must_own_tournament_to_edit_it_or_be_superuser()
  *
  * User: juliatzin
  * Date: 10/11/2015
@@ -46,6 +46,7 @@ class TournamentTest extends TestCase
 //        $nameMandatory = Lang::get('validation.filled', ['attribute' => "name"]);
 //        echo $nameMandatory;
 //        assertEquals($nameMandatory , "El campo name es obligatorio");
+        Auth::loginUsingId(1);
 
         $this->visit("/tournaments")
             ->see($this->tournaments)
@@ -122,8 +123,12 @@ class TournamentTest extends TestCase
     /** @test */
     public function it_edit_tournament($tournament = null)
     {
-        if ($tournament == null)
+        if ($tournament == null){
             $tournament = factory(Tournament::class)->create(['name' => 'MyTournament']);
+            factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
+
+        }
+
         $this->visit('/tournaments/' . $tournament->id . '/edit')
             ->see($this->tournaments)
             ->type('MyTournament', 'name')
@@ -137,6 +142,7 @@ class TournamentTest extends TestCase
             ->type('1.11111', 'latitude')
             ->type('2.22222', 'longitude')
             ->press(trans("core.save"))
+            ->dontSee("403")
             ->see("Operaci&oacute;n Exitosa")
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournament',
@@ -170,12 +176,7 @@ class TournamentTest extends TestCase
         Auth::loginUsingId(2);
         $this->visit('/tournaments/' . $hisTournament->id . '/edit')
             ->see("403");
-
-
-//        Auth::loginUsingId(3);
-//        $this->it_edit_tournament($hisTournament); //
-
-
+        Auth::loginUsingId(1);
 
     }
 }
