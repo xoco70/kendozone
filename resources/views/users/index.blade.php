@@ -43,7 +43,7 @@
 
                         <td class="text-center">
                             {{ Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) }}
-                            <button id="delete" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+                            <button id="delete_{{$user->id}}" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                             {!! Form::close() !!}

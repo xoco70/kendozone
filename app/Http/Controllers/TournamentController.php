@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\CategorySettings;
+use App\CategoryTournament;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
-use App\CategoryTournament;
 use App\TournamentLevel;
-use App\User;
 use GeoIP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,15 +39,13 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = Auth::user()->tournaments()->paginate(Config::get('constants.PAGINATION'));
-//        $tournaments = Tournament::paginate(Config::get('constants.PAGINATION'));
-//
-//        dd($tournaments);
-//        $tournaments = Tournament::where('user_id',Auth::user()->id)
-//            ->paginate(Config::get('constants.PAGINATION'));;
-//        $tournaments = Tournament::
+        if (Auth::user()->isSuperAdmin()) {
+            $tournaments = Tournament::orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
+        } else {
+            $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
+                ->paginate(Config::get('constants.PAGINATION'));
+        }
 
-//        dd($tournaments->first()->user->name);
         return view('tournaments.index', compact('tournaments'));
     }
 
@@ -118,7 +115,7 @@ class TournamentController extends Controller
         // get categories with settings
         $categoriesWithSettings = $tournament->getCategoriesWithSettings();
 //        dd($categoriesWithSettings);
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories','settingSize','categorySize','categoriesWithSettings'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'categoriesWithSettings'));
     }
 
     /**
@@ -163,11 +160,12 @@ class TournamentController extends Controller
         return redirect("tournaments");
     }
 
-    public function register($tournamentId){
+    public function register($tournamentId)
+    {
         $tournament = Tournament::findOrFail($tournamentId);
 
 
-        if ($tournament->type == 1){
+        if ($tournament->type == 1) {
             // Tournament is open
 //            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
 //            $registeredCategories = $user->categoryTournaments;
@@ -176,8 +174,7 @@ class TournamentController extends Controller
 
 
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
-        }
-        else
+        } else
             dd("You need an invitation to register in this tournament");
     }
 

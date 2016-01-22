@@ -161,21 +161,21 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_delete_user()
-    {
-        factory(User::class)->create(['name'=>'MyUser']);
-        $this->seeInDatabase('users',['name' => 'MyUser']);
-
-//        $delete = Lang::get('crud.delete');
-        $this->it_create_user();
-
-        $this->visit('/users')
-            ->click('delete')
-            ->seePageIs('/users')
-            ->see(Lang::get('core.success'))
-            ->dontSee('My User')
-            ->notSeeInDatabase('user', ['name' => 'My User']);
-    }
+//    public function it_delete_user()
+//    {
+//        $user = factory(User::class)->create(['name'=>'MyUser']);
+//        $this->seeInDatabase('users',['name' => 'MyUser']);
+//
+////        $delete = Lang::get('crud.delete');
+////        $this->it_create_user();
+//
+//        $this->visit('/users')
+//                ->click('delete_'.$user->id)
+//            ->seePageIs('/users')
+//            ->see(Lang::get('core.success'))
+//            ->dontSee('My User')
+//            ->notSeeInDatabase('user', ['name' => 'My User']);
+//    }
 
 
     /** @test */

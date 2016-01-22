@@ -26,7 +26,7 @@ class Own
                 $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournaments;
                 if ($tournament != null) {
-                    if (!$tournaments->contains($tournament)) {
+                    if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
                         return view('errors.general',
                             ['code' => '403',
                                 'message' => 'Forbidden!',
@@ -43,7 +43,7 @@ class Own
                 $user = $request->users;
 
                 // User is superadmin, or is the user himself
-                if ($userLogged->role->name != "SuperAdmin" && $userLogged->id != $user->id) {
+                if ( $userLogged->id != $user->id && !$userLogged->isSuperAdmin()) {
                     return view('errors.general',
                         ['code' => '403',
                             'message' => 'Forbidden!',
