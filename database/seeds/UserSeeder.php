@@ -19,6 +19,27 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
+
+        User::create([
+            'name' => 'Juliatzin Del torro',
+            'email'    => 'flordcactus@gmail.com',
+            'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
+            'grade_id' => $faker->randomElement($grades),
+            'country_id' => '484',
+            'city' => 'Mexico City',
+            'latitude' => '19.4342',
+            'longitude' => '-99.1386',
+            'role_id' => '1',
+            'avatar' => 'https://lh3.googleusercontent.com/-1IZ2nbY2o40/AAAAAAAAAAI/AAAAAAAAHEY/KrhjLc7m66g/photo.jpg?sz=50',
+            'token' => 'JgczvNP4eEn2LCHPj2MGg4obZooeIj',
+            'verified' => '1',
+            'provider' => 'google',
+            'provider_id' => '113769489654625617770',
+            'remember_token' => '7rCCxMRjsqSgHCt1mbOSkz5TV0iKe9YYVNMrOwX2g5pLUsF3qBqVQ1zlYOuv'
+        ]);
+
+
+
         User::create([
             'name' => 'xoco',
             'email'    => 'xoco70@hotmail.com1',
@@ -36,7 +57,7 @@ class UserSeeder extends Seeder
         ]);
 
 
-        factory(User::class,30)->create();
+        factory(User::class,5)->create();
 
 
 
