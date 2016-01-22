@@ -166,7 +166,7 @@ class TournamentTest extends TestCase
         $hisTournament = factory(Tournament::class)->create(['name' => 't2', 'user_id' => 3]);
         // 1 is SuperUser so it should be OK
         $this->visit('/tournaments/' . $hisTournament->id . '/edit')
-             ->see("403");
+            ->see($this->tournaments);
         Auth::loginUsingId(2);
         $this->visit('/tournaments/' . $hisTournament->id . '/edit')
             ->see("403");
