@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'mysql_test' => [
+            'driver'    => 'mysql',
+            'host'      => env('DBTEST_HOST', '127.0.0.1'),
+            'database'  => env('DBTEST_DATABASE', 'kendo_test'),
+            'username'  => env('DBTEST_USERNAME', 'homestead'),
+            'password'  => env('DBTEST_PASSWORD', 'secret'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => 'test_',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),

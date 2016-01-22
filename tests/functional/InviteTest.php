@@ -8,6 +8,7 @@ class InviteTest extends TestCase
 {
     /**
      * Tests inside:
+     * 0. Generate an invite with key
      * 1. Send mails and success
      * 2. Click mail and add to tournament
      * 3. Click mail, register and add to tournament
@@ -18,6 +19,19 @@ class InviteTest extends TestCase
 
     use DatabaseTransactions;
 
+    public function setUp()
+    {
 
+    }
+    /** @test */
+    public function it_generate_an_invite()
+    {
+
+    }
+
+    public function user_register_a_tournament()
+    {
+
+    }
 
 }
