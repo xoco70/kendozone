@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -222,5 +223,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             }
             return implode($pass); //turn the array into a string
     }
+    public function isSuperAdmin(){
+        return Auth::user()->role_id == 1;
+    }
 
+    public function isOwner(){
+        return Auth::user()->role_id == 2;
+    }
+    public function isAdmin(){
+        return Auth::user()->role_id == 3;
+    }
+    public function isModerator(){
+        return Auth::user()->role_id == 4;
+    }
+    public function isUser(){
+        return Auth::user()->role_id == 5;
+    }
 }

@@ -6,7 +6,11 @@
 
     <div class="container-fluid">
 
-        {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
+        @if (!is_null($user->id))
+            {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
+        @else
+            {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
+        @endif
 
 
         <div class="content">
@@ -18,10 +22,6 @@
                         <div class="col-md-12 ">
                             <!-- Simple panel 1 : General Data-->
                             <div class="panel panel-flat">
-                                {{--<div class="panel-heading " >--}}
-                                {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                                {{--</div>--}}
-
                                 <div class="panel-body">
                                     <div class="container-fluid">
 
@@ -73,10 +73,10 @@
                                             </div>
 
 
-                                            {{--<div class="form-group">--}}
-                                            {{--{!!  Form::label('countryId', trans('crud.country')) !!}--}}
-                                            {{--{!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->--}}
-                                            {{--</div>--}}
+                                            <div class="form-group">
+                                            {!!  Form::label('countryId', trans('crud.country')) !!}
+                                            {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                            </div>
 
 
                                         </fieldset>
@@ -129,9 +129,9 @@
                                                 <div class="form-group">
                                                     {!!  Form::label('role_id', trans('crud.role')) !!}
                                                     @if (Auth::user()->role_id == 1)
-                                                        {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                        {{--{!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}--}}
                                                     @else
-                                                        {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
+                                                        {{--{!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}--}}
                                                     @endif
 
                                                 </div>
@@ -165,13 +165,13 @@
                 </div>
 
 
-                {!! Form::close()!!}
+
 
             </div>
-            @stop
 
-            <div class="form-group">
-                {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
-            </div>
+
+
         </div>
+        {!! Form::close()!!}
     </div>
+@stop

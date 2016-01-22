@@ -1,19 +1,15 @@
-@extends('layouts.dashboard')
-@section('content')
+{{--@extends('layouts.dashboard')--}}
+{{--@section('content')--}}
 
-    @include("errors.list")
+    {{--@include("errors.list")--}}
 
-    <div class="container">
-        <div class="row col-md-8 custyle">
+    {{--<div class="container">--}}
+        {{--<div class="row col-md-8 custyle">--}}
 
-            {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
+            {{--@include("users.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])--}}
+            {{----}}
+        {{--</div>--}}
+    {{--</div>--}}
 
-            @include("users.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
-
-
-            {!! Form::close()!!}
-        </div>
-    </div>
-
-@stop
+{{--@stop--}}
 

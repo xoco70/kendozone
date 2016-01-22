@@ -26,7 +26,7 @@ class TournamentTest extends TestCase
     use DatabaseTransactions;
 //    use WithoutMiddleware;
 
-    protected $tournament, $tournaments, $addTournament, $editTournament;
+    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament;
 
 
     public function setUp()
@@ -35,6 +35,8 @@ class TournamentTest extends TestCase
         $this->tournament = trans_choice('crud.tournament', 1);
         $this->tournaments = trans_choice('crud.tournament', 2);
         $this->addTournament = Lang::get('crud.addModel', ['currentModelName' => $this->tournament]);
+        $this->addTournaments = Lang::get('crud.addModel', ['currentModelName' => $this->tournaments]);
+
         $this->editTournament = Lang::get('crud.updateModel', ['currentModelName' => $this->tournament]);
 
         Auth::loginUsingId(1); 
@@ -48,10 +50,10 @@ class TournamentTest extends TestCase
 
         $this->visit("/tournaments")
             ->see($this->tournaments)
-            ->click("+ ".$this->addTournament)
+            ->click($this->addTournaments)
 //            ->press("Next")
 //            ->press("Next")
-            ->press($this->addTournament)
+            ->press($this->addTournaments)
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")  //Lang::get('validation.filled', ['attribute' => "name"])
             ->see("El campo date es obligatorio")  //Lang::get('validation.filled', ['attribute' => "tournament"])
@@ -90,11 +92,11 @@ class TournamentTest extends TestCase
         $this->visit('/')
             ->click($this->tournaments)
             ->see($this->tournaments)
-            ->click($this->addTournament)
+            ->click($this->addTournaments)
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'date')
             ->storeInput('category', [1, 2], true)
-            ->press($this->addTournament)
+            ->press($this->addTournaments)
             ->see(Lang::get('core.operation_successful'))
             ->seeInDatabase('tournament',['name' => 'MyTournament']);
 
@@ -133,7 +135,6 @@ class TournamentTest extends TestCase
             ->type('1', 'mustPay')
             ->type('1', 'type')
             ->type('5000', 'cost')
-            ->type('2', 'fightingAreas')
             ->type('2', 'level_id')
             ->type('CDOM', 'venue')
             ->type('1.11111', 'latitude')
@@ -147,7 +148,6 @@ class TournamentTest extends TestCase
                     'mustPay' => '1',
                     'type' => '1',
                     'cost' => '5000',
-                    'fightingAreas' => '2',
                     'level_id' => '2',
                     'venue' => 'CDOM',
                     'latitude' => '1.11111',

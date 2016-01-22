@@ -34,7 +34,7 @@ class UserTest extends TestCase
         $this->addUser = Lang::get('crud.addModel', ['currentModelName' => $this->user]);
         $this->editUser = Lang::get('crud.updateModel', ['currentModelName' => $this->user]);
 
-        Auth::loginUsingId(1); 
+        Auth::loginUsingId(32);
     }
 
     /** @test */
@@ -42,8 +42,8 @@ class UserTest extends TestCase
     {
         $this->visit("/users")
             ->see($this->users)
-            ->click("+ ".$this->addUser)
-            ->press($this->user)
+            ->click($this->addUser)
+            ->press(Lang::get('core.save'))
             ->seePageIs('/users/create')
             ->see("El campo name es obligatorio") // Lang::get('validation.filled', ['attribute' => "name"])
             ->see("El campo email es obligatorio") // Lang::get('validation.filled', ['attribute' => "email"])

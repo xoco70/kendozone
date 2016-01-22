@@ -18,7 +18,7 @@
         {{--<p class="navbar-text"><span class="label bg-success-400">Online</span></p>--}}
 
         <ul class="nav navbar-nav navbar-right">
-
+            @if (Auth::user()->isSuperAdmin())
             <li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><i
                             class="icon-cog"></i> </a>
                 <ul class="dropdown-menu dropdown-menu-right icons-right">
@@ -26,15 +26,14 @@
 
 
 
-                    @can('CanRegisterUser')
                     <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}
-                        </a></li>@endcan
-                    @can('CanSeeGroups')
-                    <li><a href="{!! URL::to('groups')!!}"><i class="fa fa-users"></i> {!! Lang::get('core.groups') !!}
-                        </a></li>@endcan
-                    @can('CanInviteCompetitor')
-                    <li><a href="{!! URL::to('config/blast')!!}"><i
-                                    class="fa fa-envelope"></i> {!! Lang::get('core.blastmail') !!} </a></li>@endcan
+                        </a></li>
+                    {{--@can('CanSeeGroups')--}}
+                    {{--<li><a href="{!! URL::to('groups')!!}"><i class="fa fa-users"></i> {!! Lang::get('core.groups') !!}--}}
+                        {{--</a></li>@endcan--}}
+                    {{--@can('CanInviteCompetitor')--}}
+                    {{--<li><a href="{!! URL::to('config/blast')!!}"><i--}}
+                                    {{--class="fa fa-envelope"></i> {!! Lang::get('core.blastmail') !!} </a></li>@endcan--}}
 
                     @can('CanSeeLogs')
                     <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}
@@ -43,7 +42,7 @@
 
                 </ul>
             </li>
-
+            @endif
         </ul>
     </div>
 </div>

@@ -56,9 +56,9 @@ class UserController extends Controller
         $user = new User();
         $roles = Role::lists('name', 'id');
         $grades = Grade::lists('name', 'id');
-//        $countries = Countries::lists('name', 'id');
-
-        return view('users.create', compact('user', 'grades', 'roles')); // 'countries',
+        $countries = Countries::lists('name', 'id');
+        $submitButton = trans('crud.addModel',['currentModelName' =>  $this->currentModelName]);
+        return view('users.form', compact('user', 'grades', 'countries','roles','submitButton')); //
     }
 
     /**
@@ -114,9 +114,9 @@ class UserController extends Controller
 //        $user = User::findOrFail($id);
         $roles = Role::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
-//        $countries = Countries::lists('name', 'id');
+        $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user', 'grades', 'roles')); // 'countries',
+        return view('users.edit', compact('user', 'grades', 'countries','roles')); //
     }
 
     /**
