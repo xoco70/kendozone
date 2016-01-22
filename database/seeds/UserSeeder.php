@@ -36,37 +36,7 @@ class UserSeeder extends Seeder
         ]);
 
 
-        $countries = Countries::all()->pluck('id')->toArray();
-
-        foreach ( range(2,30) as $index){
-            User::create([
-                'name' => $faker->name,
-                'email'    => $faker->email,
-                'password' => bcrypt('secret'), // 111111
-                'grade_id' => $faker->numberBetween(1,5),
-                'country_id' => $faker->randomElement($countries),
-                'city' => $faker->city,
-                'latitude' => $faker->latitude,
-                'longitude' => $faker->longitude,
-                'role_id' => $faker->numberBetween(1,3),
-                'verified' => $faker->numberBetween(0,1),
-                'provider' => '',
-                'provider_id' => $index
-            ]);
-        }
-
-
-//        User::create([
-//            'email'    => 'user@user.com',
-//            'password' => '$2y$10$ZkpACe1Xq7OblA2Jvb5CiO2gFw7716X7HdnHexPMAEMKvHlj7fIWu', // 111111
-//            'name' => 'UserFirstName',
-//            'verified' => '1',
-//            'roleId' => '5',
-//            'provider' => 'seed',
-//            'provider_id' => '2'
-//
-//
-//        ]);
+        factory(User::class,30)->create();
 
 
 
