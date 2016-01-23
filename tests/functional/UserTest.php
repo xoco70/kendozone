@@ -185,18 +185,18 @@ class UserTest extends TestCase
         // User 2 can edit his info
         Auth::loginUsingId(2);
         $user = Auth::user();
-        $this->it_edit_user($user);
+        $this->visit('/users/'.$user->id.'/edit')
+        ->see($this->user);
 
         // Now superuser can also edit User 2 Info
         Auth::loginUsingId(1);
-        $this->it_edit_user($user);
+        $this->visit('/users/'.$user->id.'/edit')
+            ->see($this->user);
 
         //Now superuser cannot edit User 2 info
         Auth::loginUsingId(3);
         $this->visit('/users/' . $user->id . '/edit')
             ->see("403");
-        Auth::loginUsingId(1);
-
 
     }
 
