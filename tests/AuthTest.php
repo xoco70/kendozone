@@ -43,7 +43,7 @@
                 ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
 
             // Reset this user
-            $user->delete();
+//            $user->delete();
 
         }
 

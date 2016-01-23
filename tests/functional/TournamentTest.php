@@ -143,7 +143,7 @@ class TournamentTest extends TestCase
             ->type('2.22222', 'longitude')
             ->press(trans("core.save"))
             ->dontSee("403")
-            ->see("Operaci&oacute;n Exitosa")
+            ->see(htmlentities(Lang::get('core.operation_successful')))
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournament',
                     'date' => '2015-12-15',

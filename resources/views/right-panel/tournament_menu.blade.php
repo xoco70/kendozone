@@ -70,7 +70,7 @@
     <br/>
     <div class="row">
         <div class="col-md-12">
-            <p><a href="/invites/{{$tournament->id}}" type="button" class="btn btn-primary btn-labeled btn-xlg"
+            <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->id) !!}" type="button" class="btn btn-primary btn-labeled btn-xlg"
                   style="width: 100%;"><b><i class="icon-envelope"></i></b>{{ trans('crud.invite_competitors') }}</a>
             </p>
 

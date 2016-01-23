@@ -112,7 +112,7 @@
     @endif
 
 
-    @if (Request::is("invites/*"))
+    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'invite'))
         {!! Html::script('js/plugins/multiple-emails.js') !!}
         {!! Html::style('css/multiple-emails.css') !!}
     @endif

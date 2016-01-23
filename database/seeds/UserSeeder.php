@@ -39,11 +39,11 @@ class UserSeeder extends Seeder
         ]);
 
 
-        factory(User::class,5)->create();
+        factory(User::class,5)->create(['role_id' => 2]);
         $this->command->info('seeding users!');
-//        factory(User::class)->create(['role_id',3]);
-//        factory(User::class)->create(['role_id',4]);
-//        factory(User::class)->create(['role_id',5]);
+        factory(User::class)->create(['role_id' => 3]);
+        factory(User::class)->create(['role_id' => 4]);
+        factory(User::class)->create(['role_id' => 5]);
 
 
 

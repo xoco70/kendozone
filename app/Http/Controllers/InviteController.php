@@ -105,7 +105,8 @@ class InviteController extends Controller
             $invite = Invite::findOrFail($inviteId);
         else
             $invite = null;
-
+        $tournament = $request->tournament;
+        dd($request->tournament);
 //        $tournament = Tournament::findOrFail($request->tournament);
         $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
         $user->categoryTournaments()->sync($categories);
@@ -131,7 +132,7 @@ class InviteController extends Controller
         if (isset($invite)) $invite->consume();
 
         flash("success", trans('core.operation_successful'));
-        return redirect("/invites");
+        return redirect("/tournaments/$tournament->id/invites");
 
     }
 
@@ -171,9 +172,9 @@ class InviteController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($tournamentId)
+    public function inviteUsers(Tournament $tournament)
     {
-        $tournament = Tournament::find($tournamentId);
+
         return view('invitation.show', compact('tournament'));
     }
 

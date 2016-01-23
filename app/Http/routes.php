@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
         Route::resource('tournaments/{tournament}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
         Route::resource('invites', 'InviteController');
+        Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
 
         Route::resource('competitors', 'CompetitorController');
         Route::resource('grade', 'GradeController');
