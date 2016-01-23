@@ -46,7 +46,7 @@ class TournamentTest extends TestCase
 //        $nameMandatory = Lang::get('validation.filled', ['attribute' => "name"]);
 //        echo $nameMandatory;
 //        assertEquals($nameMandatory , "El campo name es obligatorio");
-        Auth::loginUsingId(1);
+//        Auth::loginUsingId(1);
 
         $this->visit("/tournaments")
             ->see($this->tournaments)

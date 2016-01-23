@@ -38,10 +38,12 @@ class UserSeeder extends Seeder
             'remember_token' => '7rCCxMRjsqSgHCt1mbOSkz5TV0iKe9YYVNMrOwX2g5pLUsF3qBqVQ1zlYOuv'
         ]);
 
-        factory(User::class)->create(['role_id',2]);
-        factory(User::class)->create(['role_id',3]);
-        factory(User::class)->create(['role_id',4]);
-        factory(User::class)->create(['role_id',5]);
+
+        factory(User::class,5)->create();
+        $this->command->info('seeding users!');
+//        factory(User::class)->create(['role_id',3]);
+//        factory(User::class)->create(['role_id',4]);
+//        factory(User::class)->create(['role_id',5]);
 
 
 

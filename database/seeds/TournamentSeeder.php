@@ -24,7 +24,7 @@ class TournamentSeeder extends Seeder
         // Tournament creation
         Tournament::truncate();
         Tournament::create([
-            'user_id' => 31,
+            'user_id' => 1,
             'name' => "Fake Tournoi",
             'date' => "2016-02-23",
             'registerDateLimit' => "2016-02-23",
