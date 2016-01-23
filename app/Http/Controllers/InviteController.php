@@ -38,7 +38,6 @@ class InviteController extends Controller
     public function index()
     {
         $invites = Auth::user()->invites()->paginate(Config::get('constants.PAGINATION'));
-
         return view('invitation.index', compact('invites'));
     }
 
@@ -145,6 +144,8 @@ class InviteController extends Controller
      */
     public function store(Request $request, AppMailer $mailer)
     {
+
+        //TODO check that recipient is list of emails
         $this->validate($request, [
             'recipients' => 'required'
         ]);
@@ -174,7 +175,6 @@ class InviteController extends Controller
      */
     public function inviteUsers(Tournament $tournament)
     {
-
         return view('invitation.show', compact('tournament'));
     }
 

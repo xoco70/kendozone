@@ -7,8 +7,6 @@
     <div class="container-fluid">
 
 
-
-
         <div class="content">
 
             <!-- Detached content -->
@@ -17,11 +15,8 @@
 
                     <!-- Simple panel 1 : General Data-->
                     <div class="panel panel-flat">
-                        {{--<div class="panel-heading " >--}}
-                        {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                        {{--</div>--}}
 
-<?php $message = trans('crud.invite_template', ['link' => '<a href="#">link</a>','tournament' => 'Nacional de Kendo' ]); ?>
+
 
                         <div class="panel-body">
                             <div class="container-fluid">
@@ -34,7 +29,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                                                {!! Form::open(['url'=>"/invites"]) !!}
+                                                {!! Form::open(['url'=>URL::action('InviteController@store')]) !!}
                                                 <div class=" form-group">
                                                     {!!  Form::label('recipients', trans('crud.recipients')) !!}
                                                     {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
@@ -69,8 +64,6 @@
 
 
         </div>
-
-
 
 
         <script>
