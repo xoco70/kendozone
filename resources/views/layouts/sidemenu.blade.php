@@ -54,11 +54,11 @@
                     </li>
                     <li class="navigation-divider"></li>
 
-
+                    @if(Auth::check())
                     <li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a
                                 href="{!! URL::to('users/'.Auth::getUser()->id).'/edit' !!}"><i
                                     class="icon-user"></i> <span>{{trans('core.profile')}}</span></a></li>
-
+                    @endif
                     {{--<li {{ (Request::is('settings') ? 'class=active' : '') }}><a href="/settings"><i--}}
                     {{--class="icon-cog"></i> <span>{{trans('core.settings')}}</span></a></li>--}}
                     <li><a href="{{ url('auth/logout') }}"><i

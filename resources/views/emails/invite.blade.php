@@ -26,7 +26,7 @@
     </ul>
 @else
     Por favor pica el link de pre-registro: <br/>
-    <a href='{{getenv('URL_BASE')}}invite/register/{{ $code }}'>{{getenv('URL_BASE')}}invite/register/{{ $code }}</a>
+    <a href='{{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/invite/{{ $code }}</a>
 @endif
 
 @if($password!=null)

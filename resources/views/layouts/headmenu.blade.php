@@ -18,7 +18,7 @@
         {{--<p class="navbar-text"><span class="label bg-success-400">Online</span></p>--}}
 
         <ul class="nav navbar-nav navbar-right">
-            @if (Auth::user()->isSuperAdmin())
+            @if (Auth::user()!=null && Auth::user()->isSuperAdmin())
             <li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><i
                             class="icon-cog"></i> </a>
                 <ul class="dropdown-menu dropdown-menu-right icons-right">

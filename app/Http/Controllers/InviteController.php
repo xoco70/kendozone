@@ -59,7 +59,7 @@ class InviteController extends Controller
      */
     public function register($token)
     {
-
+        dd("hola");
 
         // Get available invitation
         $invite = Invite::getActiveInvite($token);

@@ -1,8 +1,11 @@
 <?php
 
 use App\CategoryTournament;
+use App\Invite;
 use App\Tournament;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Auth;
 
 class InviteTest extends TestCase
 {
@@ -43,7 +46,13 @@ class InviteTest extends TestCase
                  'active' =>1,
                  'used' =>0,
                 ]);
-//        $user = User::whereName('JohnDoe')->first();
+
+        $invitation = Invite::where('tournament_id',$tournament->id)
+                                   ->where('email','john@example.com' )->get();
+        $user = User::where('email', 'john@example.com' )->first();
+        if (is_null($user)){
+            $this->visit("/invite/register/$invitation->code");
+        }
 //        // You can't login until you confirm your email address.
 //        $this->login($user)->see(Lang::get('auth.account_not_activated'));
 //        $this->visit("auth/register/confirm/{$user->token}")
