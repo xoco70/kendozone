@@ -151,6 +151,7 @@ return [
         Torann\GeoIP\GeoIPServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
@@ -206,6 +207,7 @@ return [
         'GeoIP' => Torann\GeoIP\GeoIPFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
 
     ],
 

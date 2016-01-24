@@ -17,3 +17,4 @@ Homestead.json
 /.idea/
 /.idea/workspace.xml
 public/images/avatar/
+.phpstorm.meta.php

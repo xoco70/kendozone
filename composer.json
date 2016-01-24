@@ -16,7 +16,8 @@
     "laravel/socialite": "~2.0",
     "torann/geoip": "0.2.*@dev",
     "maatwebsite/excel": "~2.0.0",
-    "barryvdh/laravel-debugbar": "^2.1"
+    "barryvdh/laravel-debugbar": "^2.1",
+    "barryvdh/laravel-ide-helper": "^2.1"
 
   },
   "require-dev": {
@@ -46,6 +47,7 @@
   "scripts": {
     "post-install-cmd": [
       "php artisan clear-compiled",
+      "php artisan ide-helper:generate",
       "php artisan optimize"
     ],
     "pre-update-cmd": [
