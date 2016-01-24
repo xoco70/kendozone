@@ -33,7 +33,7 @@ Route::get('/', 'DashboardController@index')->middleware(['auth']);
 Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
-Route::get('/tournaments/{{tournamentId}}/invite/{token}', 'InviteController@register');
+Route::get('/tournaments/{tournamentId}/invite/{token}', 'InviteController@register');
 
 Route::group(['middleware' => ['guest']],
     function () {

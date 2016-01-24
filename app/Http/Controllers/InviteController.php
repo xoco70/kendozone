@@ -54,16 +54,21 @@ class InviteController extends Controller
     /**
      * Triggered when User click Activation Link received in mail
      *
-     * @param  Request $request
-     * @param  AppMailer $mailer
+     * @param $tournamentId
+     * @param $token
+     * @return View
+     * @internal param Request $request
+     * @internal param AppMailer $mailer
      */
-    public function register($token)
+    public function register($tournamentId, $token)
     {
-        dd("hola");
 
         // Get available invitation
         $invite = Invite::getActiveInvite($token);
         // Check if invitation is expired
+        if (is_null($invite)) {
+            dd("No invitation");
+        }
         if ($invite->expiration < Carbon::now())
             dd ("Expired Invitation");
         $currentModelName = trans('crud.select_categories_to_register');
@@ -76,7 +81,6 @@ class InviteController extends Controller
             } else {
                 // Redirect to register category Screen
 
-                $tournamentId = $invite->tournament_id;
                 $tournament = Tournament::findOrFail($tournamentId);
                 Auth::loginUsingId($user->id);
                 return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
@@ -104,9 +108,7 @@ class InviteController extends Controller
             $invite = Invite::findOrFail($inviteId);
         else
             $invite = null;
-        $tournament = $request->tournament;
-        dd($request->tournament);
-//        $tournament = Tournament::findOrFail($request->tournament);
+        $tournamentId = $request->tournament;
         $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
         $user->categoryTournaments()->sync($categories);
 
@@ -131,7 +133,7 @@ class InviteController extends Controller
         if (isset($invite)) $invite->consume();
 
         flash("success", trans('core.operation_successful'));
-        return redirect("/tournaments/$tournament->id/invites");
+        return redirect("/invites");
 
     }
 

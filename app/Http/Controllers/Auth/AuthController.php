@@ -8,6 +8,7 @@ use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Role;
+use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
@@ -71,50 +72,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-//    public function postLogin(Request $request)
-//    {
-//        $this->validate($request, [
-//            $this->loginUsername() => 'required', 'password' => 'required',
-//        ]);
-//
-//
-//        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-//        // the login attempts for this application. We'll key this by the username and
-//        // the IP address of the client making these requests into this application.
-//        $throttles = $this->isUsingThrottlesLoginsTrait();
-//
-//        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-//            return $this->sendLockoutResponse($request);
-//        }
-//
-//        $credentials = $this->getCredentials($request);
-////        dd($credentials);
-////        dd(Auth::attempt($credentials, $request->has('remember')));
-//
-//        if (Auth::attempt($credentials)) {
-//            return $this->handleUserWasAuthenticated($request, $throttles);
-//        }
-//
-//        // If the login attempt was unsuccessful we will increment the number of attempts
-//        // to login and redirect the user back to the login form. Of course, when this
-//        // user surpasses their maximum number of attempts they will get locked out.
-//        if ($throttles) {
-//            $this->incrementLoginAttempts($request);
-//        }
-//
-//        return redirect($this->loginPath())
-//            ->withInput($request->only($this->loginUsername(), 'remember'))
-//            ->withErrors([
-//                $this->loginUsername() => $this->getFailedLoginMessage(),
-//            ]);
-//    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array $data
@@ -173,7 +130,7 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
-    public function getInvite(Request $request)
+    public function getInvite()
     {
         return view('auth.invite');
     }
@@ -181,9 +138,8 @@ class AuthController extends Controller
 
     public function postInvite(AuthRequest $request)
     {
-        $request->request->add(['role_id' => Config::get('constants.ROLE_COMPETITOR')]);
+        $request->request->add(['role_id' => Config::get('constants.ROLE_ADMIN')]);
         //Check token
-//        dd($request);
         $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveInvite($token);
@@ -192,12 +148,12 @@ class AuthController extends Controller
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }
-            $tournamentId = $invite->tournament_id;
+            $tournament = Tournament::find($invite->tournament_id);
             $userId = $user->id;
 //            $invite->consume();
 
             flash('success', Lang::get('auth.registration_completed'));
-            return view("categories.register", compact('userId','tournamentId','invite'));
+            return view("categories.register", compact('userId', 'tournament', 'invite'));
 
         } else {
             dd("yes is null");

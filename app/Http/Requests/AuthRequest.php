@@ -4,8 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use App\Invite;
+use Config;
 use GeoIP;
-use Illuminate\Support\Facades\Config;
 use Webpatser\Countries\Countries;
 
 class AuthRequest  extends Request
