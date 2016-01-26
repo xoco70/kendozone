@@ -265,7 +265,7 @@
                                         <div class="panel-heading bg-slate">
                                             <h6 class="panel-title">
                                                 <a data-toggle="collapse" data-parent="#accordion-styled"
-                                                   href="components_navs.html#accordion-styled-group{!! $key !!}">{{trans($category->name)}}</a>
+                                                   href="#accordion-styled-group{!! $key !!}">{{trans($category->name)}}</a>
                                             </h6>
                                         </div>
                                         <div id="accordion-styled-group{!! $key !!}"
@@ -380,55 +380,7 @@ $day = $now->day;
             }
         });
 
-        $('#fightDuration').timepicker(('option',
 
-        {
-            'minTime': '2:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
-
-        $('#enchoDuration').timepicker(('option',
-
-        {
-            'minTime': '0:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
-
-        $(".teamSizeSlider").slider({
-            max: 10,
-            value: {!! isset($teamSize) ? $teamSize : 0 !!} ,
-            change: function (event, ui) {
-                $('#teamSize').attr('value', ui.value);
-            }
-        });
-        $(".teamSizeSlider").slider("pips");
-        $(".teamSizeSlider").slider("float");
-        //--------------------------
-
-        $(".enchoQtySlider").slider({
-            max: 5,
-            value: {!! isset($enchoQty) ? $enchoQty : 0  !!} ,
-            change: function (event, ui) {
-                $('#enchoQty').attr('value', ui.value);
-            }
-        });
-        $(".enchoQtySlider").slider("pips");
-        $(".enchoQtySlider").slider("float");
-        //--------------------------
-
-        $(".fightingAreasSlider").slider({
-            max: 5,
-            value: {!! isset($fightingAreas) ? $fightingAreas : 0 !!} ,
-            change: function (event, ui) {
-                $('#fightingAreas').attr('value', ui.value);
-            }
-        });
-        $(".fightingAreasSlider").slider("pips");
-        $(".fightingAreasSlider").slider("float");
 
     });
 </script>

@@ -1,14 +1,19 @@
-{!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
+{!! Form::model($tournament, ['method'=>"PATCH", "action" => ["TournamentController@update", $tournament->id]]) !!}
+<?php
 
+$setting = $tournament->categoryTournaments->get($key)->settings;
+$teamSize = isset($setting->teamSize) ? $setting->teamSize :0;
+$enchoQty = isset($setting->enchoQty) ? $setting->enchoQty :0;
+$fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas :0;
+?>
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">
             <div class="checkbox-switch ">
                 <label>
-
                     {!!  Form::label('isTeam', trans('crud.isTeam')) !!} <br/>
                     {!!   Form::hidden('isTeam', 0) !!}
-                    {!!   Form::checkbox('isTeam', 1, old('isTeam')  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                    {!!   Form::checkbox('isTeam', 1, is_null($setting) ? 0 : $setting->isTeam  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
 
                 </label>
             </div>
@@ -16,14 +21,14 @@
         <div class="col-md-5">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
             {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
-            <div class="teamSizeSlider"></div>
+            <div class="teamSizeSlider{{$key}}"></div>
             {!!  Form::hidden('teamSize') !!}
         </div>
         <div class="col-md-5">
 
             {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
             <div class="input-group">
-                {!!  Form::input('text','fightDuration', old('fightDuration'), ['class' => 'form-control','id' => 'fightDuration']) !!}
+                {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration']) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
@@ -36,7 +41,7 @@
 
                     {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
                     {!!   Form::hidden('hasEncho', 0) !!}
-                    {!!   Form::checkbox('hasEncho', 1, old('hasEncho'),
+                    {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
 
                 </label>
@@ -45,8 +50,8 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::hidden('enchoQty', old('enchoQty')) !!}
-                <div class="enchoQtySlider"></div>
+                {!!  Form::hidden('enchoQty', is_null($setting) ? 0 : $setting->enchoQty) !!}
+                <div class="enchoQtySlider{{$key}}"></div>
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
@@ -54,7 +59,7 @@
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', old('enchoDuration'), ['class' => 'form-control','id' => 'enchoDuration']) !!}
+                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration']) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 
@@ -68,7 +73,7 @@
 
                     {!!  Form::label('hasRoundRobin', trans('crud.hasRoundRobin')) !!} <br/>
                     {!!   Form::hidden('hasRoundRobin', 0) !!}
-                    {!!   Form::checkbox('hasRoundRobin', 1, old('hasRoundRobin'),
+                    {!!   Form::checkbox('hasRoundRobin', 1, is_null($setting) ? 0 : $setting->hasRoundRobin,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
 
                 </label>
@@ -77,13 +82,13 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
-                {!!  Form::input('number','roundRobinWinner', old('roundRobinWinner'), ['class' => 'form-control']) !!}
+                {!!  Form::input('number','roundRobinWinner',is_null($setting) ? 0 : $setting->roundRobinWinner, ['class' => 'form-control']) !!}
             </div>
         </div>
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('cost', trans('crud.cost')) !!}
-                {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control']) !!}
+                {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>
@@ -95,7 +100,7 @@
 
                     {!!  Form::label('hasHantei', trans('crud.hasHantei')) !!} <br/>
                     {!!   Form::hidden('hasHantei', 0) !!}
-                    {!!   Form::checkbox('hasHantei', 1, old('hasHantei'),
+                    {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
 
                 </label>
@@ -105,8 +110,8 @@
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 <br/>
-                <div class="fightingAreasSlider"></div>
-                {!!  Form::hidden('fightingAreas', old('fightingAreas')) !!}
+                <div class="fightingAreasSlider{{$key}}"></div>
+                {!!  Form::hidden('fightingAreas',is_null($setting) ? 0 : $setting->fightingAreas) !!}
 
             </div>
 
@@ -119,31 +124,61 @@
     <div align="right">
         <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
     </div>
-
-</div>
-{!! Form::close()!!}
-<?php
-if (isset($categorySetting)) {
-    $teamSize = $categorySetting->teamSize;
-    $enchoQty = $categorySetting->enchoQty;
-    $fightingAreas = $categorySetting->fightingAreas;
-} else {
-    $teamSize = Config::get('constants.CAT_TEAM_SIZE');
-    $enchoQty = Config::get('constants.CAT_ENCHO_QTY');
-    $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
-
-}
-
-?>
-
 <script>
 
-
     $(function () {
-        $(".switch").bootstrapSwitch();
+        $('#fightDuration{{$key}}').timepicker(('option',
 
+        {
+            'minTime': '2:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $('#enchoDuration{{$key}}').timepicker(('option',
+
+        {
+            'minTime': '0:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $(".teamSizeSlider{{$key}}").slider({
+            max: 10,
+            value: {!! $teamSize !!} ,
+            change: function (event, ui) {
+                $('#teamSize{{$key}}').attr('value', ui.value);
+            }
+        });
+        $(".teamSizeSlider{{$key}}").slider("pips");
+        $(".teamSizeSlider{{$key}}").slider("float");
         //--------------------------
 
+        $(".enchoQtySlider{{$key}}").slider({
+            max: 5,
+            value: {!! $enchoQty  !!} ,
+            change: function (event, ui) {
+                $('#enchoQty{{$key}}').attr('value', ui.value);
+            }
+        });
+        $(".enchoQtySlider{{$key}}").slider("pips");
+        $(".enchoQtySlider{{$key}}").slider("float");
+        //--------------------------
+
+        $(".fightingAreasSlider{{$key}}").slider({
+            max: 5,
+            value: {!! $fightingAreas !!} ,
+            change: function (event, ui) {
+                $('#fightingAreas{{$key}}').attr('value', ui.value);
+            }
+        });
+        $(".fightingAreasSlider{{$key}}").slider("pips");
+        $(".fightingAreasSlider{{$key}}").slider("float");
 
     });
 </script>
+
+</div>
+{!! Form::close()!!}

@@ -64,11 +64,11 @@ class Tournament extends Model
         if ($CategoryTournamentId != null)
             $users->where('ct.id', '=', $CategoryTournamentId);
 
-        $users = $users->select('users.id','ct.tournament_id', 'users.name','email','avatar','country_id',
-                                'category.id as cat_id','category.name as cat_name', 'ct.tournament_id','ct.id as tcId','ctu.confirmed', 'ctu.id as ctuId')
-                        ->orderBy('ct.id', 'ASC')
-                        ->orderBy('users.email', 'ASC')
-                        ->get();
+        $users = $users->select('users.id', 'ct.tournament_id', 'users.name', 'email', 'avatar', 'country_id',
+            'category.id as cat_id', 'category.name as cat_name', 'ct.tournament_id', 'ct.id as tcId', 'ctu.confirmed', 'ctu.id as ctuId')
+            ->orderBy('ct.id', 'ASC')
+            ->orderBy('users.email', 'ASC')
+            ->get();
         $users = User::hydrate($users);
 //        $users->paginate(Config::get('constants.PAGINATION'));
         return $users;
@@ -76,7 +76,9 @@ class Tournament extends Model
 //            ->withPivot('confirmed')
 //            ->withTimestamps();
     }
-    public function deleteUser($categoryTournamentId, $userId){
+
+    public function deleteUser($categoryTournamentId, $userId)
+    {
 
 
     }
@@ -105,6 +107,12 @@ class Tournament extends Model
     public function categoryTournaments()
     {
         return $this->hasMany(CategoryTournament::class);
+    }
+
+    public function categorySettings()
+    {
+        return $this->hasMany(CategorySettings::class);
+
     }
 
     public function settings()
@@ -172,7 +180,7 @@ class Tournament extends Model
             ->join('category as cat', 'cat.id', '=', 'category_tournament.category_id')
             ->leftJoin('category_settings as cs', 'cs.category_tournament_id', '=', 'category_tournament.id')
             ->where('category_tournament.tournament_id', '=', $this->id)
-            ->select('category_tournament.*','cat.name', 'cs.*')
+            ->select('category_tournament.*', 'cat.name', 'cs.*')
             ->get();
         return $categories;
     }

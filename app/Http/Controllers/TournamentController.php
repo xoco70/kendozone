@@ -113,30 +113,8 @@ class TournamentController extends Controller
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
-
-        // This will list all tournament and category names a user belongs to.
-//        $user = User::with('categoryTournaments.tournament',
-//            'categoryTournaments.settings',
-//            'categoryTournaments.category')
-//            ->where('tournament.id', $tournament->id)
-//            ->where('id', Auth::user()->id)
-//            ->get();
-
-
-//        $users = User::with(['categoryTournaments.tournament' => function ($query) use ($tournament) {
-//            $query->where('id', '=', $tournament->id);
-//
-//        }, 'categoryTournaments.settings',
-//            'categoryTournaments.category'])->find(Auth::user()->id);
-//        foreach($user->categoryTournaments as $categoryTournament) {
-//            echo 'Category Name: '.$categoryTournament->category->name;
-//            echo 'Tournament Name: '.$categoryTournament->tournament->name;
-//            echo '<br>';
-//        }
-
-//        dd($users);
-        // get categories with settings
-
+        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
+//        dd($tournament->categoryTournaments->get(5)->settings);
         $categoriesWithSettings = $tournament->getCategoriesWithSettings();
 //        dd($categoriesWithSettings);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'categoriesWithSettings'));

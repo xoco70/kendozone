@@ -33,7 +33,7 @@ class CategoryTournament extends Model
         return $this->belongsToMany('App\User','category_tournament_user','category_tournament_id');
     }
     public function settings(){
-        return $this->hasOne('App\CategorySettings');
+        return $this->hasOne(CategorySettings::class);
     }
 
 

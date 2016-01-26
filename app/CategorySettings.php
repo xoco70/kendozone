@@ -25,6 +25,10 @@ class CategorySettings extends Model
         "cost",
     ];
 
+    public function categoryTournament(){
+        return $this->belongsTo(CategoryTournament::class);
+    }
+
     //option to seed competitors
 
     public static function getDefaultSettings()
