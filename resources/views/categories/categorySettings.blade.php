@@ -1,11 +1,5 @@
 {!! Form::model($tournament, ['method'=>"PATCH", "action" => ["TournamentController@update", $tournament->id]]) !!}
-<?php
 
-$setting = $tournament->categoryTournaments->get($key)->settings;
-$teamSize = isset($setting->teamSize) ? $setting->teamSize :0;
-$enchoQty = isset($setting->enchoQty) ? $setting->enchoQty :0;
-$fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas :0;
-?>
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">

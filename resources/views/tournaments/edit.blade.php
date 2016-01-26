@@ -261,11 +261,27 @@
                             <div class="panel-group" id="accordion-styled">
 
                                 @foreach($categoriesWithSettings as $key => $category)
+                                    <?php
+
+                                    $setting = $tournament->categoryTournaments->get($key)->settings;
+                                    $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
+                                    $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
+                                    $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+                                    ?>
+
                                     <div class="panel">
-                                        <div class="panel-heading bg-slate">
+
+
+                                    @if (is_null($setting))
+                                       <div class="panel-heading bg-danger-400">
+                                    @else
+                                       <div class="panel-heading bg-success-600">
+                                            @endif
                                             <h6 class="panel-title">
                                                 <a data-toggle="collapse" data-parent="#accordion-styled"
                                                    href="#accordion-styled-group{!! $key !!}">{{trans($category->name)}}</a>
+
+
                                             </h6>
                                         </div>
                                         <div id="accordion-styled-group{!! $key !!}"
@@ -379,7 +395,6 @@ $day = $now->day;
                 ui.placeholder.height(ui.item.outerHeight());
             }
         });
-
 
 
     });
