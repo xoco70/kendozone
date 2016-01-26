@@ -77,7 +77,19 @@
         {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
         {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
         {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
-{{--        {!! Html::script('bower/clipboard/dist/clipboard.min.js') !!}--}}
+
+        {!! Html::script('js/core/libraries/jquery_ui/interactions.min.js') !!}
+        {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
+        {!! Html::style('js/jquery.timepicker.css')!!}
+        {!! Html::script('js/jquery.timepicker.js') !!}
+        {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
+        {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
+        {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
+
+
+
+
+        {{--        {!! Html::script('bower/clipboard/dist/clipboard.min.js') !!}--}}
 
 
     @endif
@@ -93,7 +105,7 @@
         {{--{!! Html::style('css/clockpicker.css')!!}--}}
         {{--{!! Html::script('js/clockpicker.js') !!}--}}
 
-        {!! Html::style('js/jquery.infinitescroll.min.js')!!}
+        {{--{!! Html::style('js/jquery.infinitescroll.min.js')!!}--}}
         {!! Html::style('js/jquery.timepicker.css')!!}
         {!! Html::script('js/jquery.timepicker.js') !!}
         {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}

@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\TournamentLevel;
-use GeoIP;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -107,13 +107,18 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
 //        dd($tournament);
+//        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category', 'categoryTournaments.setting')
+//            ->where('id',Auth::user()->id)
+////            ->where('categoryTournaments.tournament.id',$tournament->id)
+//            ->get();
+//        dd($user);
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
         // get categories with settings
-        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
+        $categoriesWithSettings = collect($tournament->getCategoriesWithSettings());
 //        dd($categoriesWithSettings);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'categoriesWithSettings'));
     }
@@ -160,9 +165,8 @@ class TournamentController extends Controller
         return redirect("tournaments");
     }
 
-    public function register($tournamentId)
+    public function register(Tournament $tournament)
     {
-        $tournament = Tournament::findOrFail($tournamentId);
 
 
         if ($tournament->type == 1) {
