@@ -5,18 +5,13 @@
 @include("errors.list")
 
 
-{!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
-
-
         <!-- Detached content -->
 <div class="container-detached">
     <div class="content-detached">
+        {!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
 
-        <!-- Simple panel 1 : General Data-->
+                <!-- Simple panel 1 : General Data-->
         <div class="panel panel-flat">
-            {{--<div class="panel-heading " >--}}
-            {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-            {{--</div>--}}
 
             <div class="panel-body">
                 <div class="container-fluid">
@@ -52,7 +47,7 @@
 
 
                             <div class="col-md-3">
-                                {!!  Form::label('limitRegistrationDate', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                {!!  Form::label('registerDateLimit', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                 <br/>
 
                                 <div class="input-group">
@@ -247,15 +242,15 @@
             </div>
             <!-- /simple panel -->
         </div>
+        {!! Form::close()!!}
 
-
-        <!-- /simple panel acordion -->
+                <!-- /simple panel acordion -->
         <div class="panel panel-flat">
             <div class="panel-body">
                 <div class="container-fluid">
                     <fieldset title="{{trans_choice('crud.category',2)}}">
                         <a name="categories">
-                            <legend class="text-semibold">{{trans_choice('crud.category_settings',2)}}</legend>
+                            <legend class="text-semibold">{{trans_choice('crud.categorySettings',2)}}</legend>
                         </a>
                     </fieldset>
 
@@ -270,7 +265,7 @@
                                         <div class="panel-heading bg-slate">
                                             <h6 class="panel-title">
                                                 <a data-toggle="collapse" data-parent="#accordion-styled"
-                                                   href="components_navs.html#accordion-styled-group{!! $key !!}">{{$category->name}}</a>
+                                                   href="components_navs.html#accordion-styled-group{!! $key !!}">{{trans($category->name)}}</a>
                                             </h6>
                                         </div>
                                         <div id="accordion-styled-group{!! $key !!}"
@@ -385,10 +380,58 @@ $day = $now->day;
             }
         });
 
+        $('#fightDuration').timepicker(('option',
+
+        {
+            'minTime': '2:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $('#enchoDuration').timepicker(('option',
+
+        {
+            'minTime': '0:00',
+            'maxTime': '5:00',
+            'timeFormat': 'H:i',
+            'step': '15'
+        }));
+
+        $(".teamSizeSlider").slider({
+            max: 10,
+            value: {!! isset($teamSize) ? $teamSize : 0 !!} ,
+            change: function (event, ui) {
+                $('#teamSize').attr('value', ui.value);
+            }
+        });
+        $(".teamSizeSlider").slider("pips");
+        $(".teamSizeSlider").slider("float");
+        //--------------------------
+
+        $(".enchoQtySlider").slider({
+            max: 5,
+            value: {!! isset($enchoQty) ? $enchoQty : 0  !!} ,
+            change: function (event, ui) {
+                $('#enchoQty').attr('value', ui.value);
+            }
+        });
+        $(".enchoQtySlider").slider("pips");
+        $(".enchoQtySlider").slider("float");
+        //--------------------------
+
+        $(".fightingAreasSlider").slider({
+            max: 5,
+            value: {!! isset($fightingAreas) ? $fightingAreas : 0 !!} ,
+            change: function (event, ui) {
+                $('#fightingAreas').attr('value', ui.value);
+            }
+        });
+        $(".fightingAreasSlider").slider("pips");
+        $(".fightingAreasSlider").slider("float");
+
     });
 </script>
-
-{!! Form::close()!!}
 
 
 @stop

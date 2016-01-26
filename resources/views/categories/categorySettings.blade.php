@@ -1,3 +1,4 @@
+{!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
 
 <div class="tab-pane" id="category">
     <div class="row">
@@ -120,15 +121,13 @@
     </div>
 
 </div>
-
+{!! Form::close()!!}
 <?php
-if (isset($categorySetting)){
+if (isset($categorySetting)) {
     $teamSize = $categorySetting->teamSize;
     $enchoQty = $categorySetting->enchoQty;
     $fightingAreas = $categorySetting->fightingAreas;
-}
-
-else{
+} else {
     $teamSize = Config::get('constants.CAT_TEAM_SIZE');
     $enchoQty = Config::get('constants.CAT_ENCHO_QTY');
     $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
@@ -142,55 +141,7 @@ else{
 
     $(function () {
         $(".switch").bootstrapSwitch();
-        $('#fightDuration').timepicker(('option',
 
-        {
-            'minTime': '2:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
-
-        $('#enchoDuration').timepicker(('option',
-
-        {
-            'minTime': '0:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
-
-        $(".teamSizeSlider").slider({
-            max: 10,
-            value: {!! $teamSize !!} ,
-            change: function (event, ui) {
-                $('#teamSize').attr('value', ui.value);
-            }
-        });
-        $(".teamSizeSlider").slider("pips");
-        $(".teamSizeSlider").slider("float");
-        //--------------------------
-
-        $(".enchoQtySlider").slider({
-            max: 5,
-            value: {!! $enchoQty !!} ,
-            change: function (event, ui) {
-                $('#enchoQty').attr('value', ui.value);
-            }
-        });
-        $(".enchoQtySlider").slider("pips");
-        $(".enchoQtySlider").slider("float");
-        //--------------------------
-
-        $(".fightingAreasSlider").slider({
-            max: 5,
-            value: {!! $fightingAreas !!} ,
-            change: function (event, ui) {
-                $('#fightingAreas').attr('value', ui.value);
-            }
-        });
-        $(".fightingAreasSlider").slider("pips");
-        $(".fightingAreasSlider").slider("float");
         //--------------------------
 
 

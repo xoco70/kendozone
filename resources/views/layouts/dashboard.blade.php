@@ -58,11 +58,7 @@
         {!! Html::script('js/pages/uploader_bootstrap.js') !!}
     @endif
     {{--{!! Html::script('js/jquery.infinitescroll.min.js') !!}--}}
-
-
-
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
-
     {{--EDIT TOURNAMENT PAGE--}}
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit')
             && !strpos(Request::url(),'users')
@@ -85,26 +81,17 @@
         {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
         {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
         {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
-
-
-
-
         {{--        {!! Html::script('bower/clipboard/dist/clipboard.min.js') !!}--}}
-
-
     @endif
 
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit'))
         {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
         {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
         {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
-
-
     @endif
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))
         {{--{!! Html::style('css/clockpicker.css')!!}--}}
         {{--{!! Html::script('js/clockpicker.js') !!}--}}
-
         {{--{!! Html::style('js/jquery.infinitescroll.min.js')!!}--}}
         {!! Html::style('js/jquery.timepicker.css')!!}
         {!! Html::script('js/jquery.timepicker.js') !!}
@@ -112,25 +99,17 @@
         {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
         {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
         {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
-
-
     @endif
-
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )
         {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
         {!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}
         {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
 
     @endif
-
-
     @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'invite'))
         {!! Html::script('js/plugins/multiple-emails.js') !!}
         {!! Html::style('css/multiple-emails.css') !!}
     @endif
-
-
-
 </head>
 
 <body class="sidebar-xs has-detached-right">
