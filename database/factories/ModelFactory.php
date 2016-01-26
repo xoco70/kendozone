@@ -81,3 +81,21 @@ $factory->define(App\CategoryTournamentUser::class, function (Faker\Generator $f
     ];
 });
 
+
+$factory->define(App\CategorySettings::class, function (Faker\Generator $faker) use ($factory) {
+    return [
+        'category_tournament_id' => $factory->create(App\CategoryTournament::class)->id,
+        'isTeam' => $faker->boolean(),
+        'teamSize' => $faker->numberBetween(0, 6),
+        'fightingAreas' => $faker->numberBetween(0, 4),
+        'fightDuration' => "03:00",
+        'hasRoundRobin' => $faker->boolean(),
+        'roundRobinWinner' => $faker->numberBetween(1, 2),
+        'hasEncho' => $faker->boolean(),
+        'enchoQty' => $faker->numberBetween(0, 4),
+        'enchoDuration' => "01:00",
+        'hasHantei' => $faker->boolean(),
+        'cost' => $faker->numberBetween(0, 100),
+    ];
+});
+

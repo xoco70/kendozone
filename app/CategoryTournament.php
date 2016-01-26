@@ -32,6 +32,11 @@ class CategoryTournament extends Model
     public function users(){
         return $this->belongsToMany('App\User','category_tournament_user','category_tournament_id');
     }
+    public function settings(){
+        return $this->hasOne('App\CategorySettings');
+    }
+
+
 
     public function categoryTournaments()
     {

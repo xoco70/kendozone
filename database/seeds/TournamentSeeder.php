@@ -1,6 +1,7 @@
 <?php
 
 use App\Category;
+use App\CategorySettings;
 use App\Tournament;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
@@ -45,9 +46,10 @@ class TournamentSeeder extends Seeder
         // Tournament categories users
 
         CategoryTournamentUser::truncate();
-        factory(CategoryTournamentUser::class,200)->create();
+        factory(CategoryTournamentUser::class,50)->create();
 
-
+        CategorySettings::truncate();
+        factory(CategorySettings::class,10)->create();
 
     }
 }
