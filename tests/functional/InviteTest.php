@@ -31,10 +31,12 @@ class InviteTest extends TestCase
     /** @test */
     public function an_admin_may_invite_users_but_users_must_register_after()
     {
-        $numCategories = 5;
         // Given
         $tournament = factory(Tournament::class)->create();
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
+
+
+
 
         // Check that inviting one user by email
         $this->visit('/tournaments/' . $tournament->id . '/invite/')
@@ -103,6 +105,39 @@ class InviteTest extends TestCase
     /** @test */
     public function a_user_may_register_an_open_tournament()
     {
+        // Given
+        $tournament = factory(Tournament::class)->create();
+        $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
 
+
+
+        $this->visit("/tournaments/" . $tournament->id . "/register");
+        // If user didn't exit, check that it is created
+        if (is_null($user)) {
+            // System redirect to user creation
+            $this->type('Johnny', 'name')
+                ->type('11111111', 'password')
+                ->type('11111111', 'password_confirmation')
+                ->press(Lang::get('auth.create_account'))
+                ->seeInDatabase('users', ['email' => 'john@example.com', 'verified' => '1'])
+                ->see(trans('auth.registration_completed'));
+
+        }
+
+        // Get all categories for this tournament
+        // Now we are on category Selection page
+        foreach ($categoriesTournament as $key => $ct) {
+            $this->type($ct->id, 'cat[' . $key . ']');
+        }
+        $this->press(trans("core.save"));
+
+        foreach ($categoriesTournament as $key => $ct) {
+            $this->seeInDatabase('category_tournament_user',
+                ['category_tournament_id' => $ct->id,
+                    'user_id' => Auth::user()->id,
+                ]);
+        }
+        $this->seePageIs('/invites')
+            ->see(htmlentities(Lang::get('core.operation_successful')));
     }
 }
