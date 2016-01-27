@@ -7,14 +7,11 @@ use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class InviteController extends Controller
@@ -67,10 +64,17 @@ class InviteController extends Controller
         $invite = Invite::getActiveInvite($token);
         // Check if invitation is expired
         if (is_null($invite)) {
-            dd("No invitation");
+            return view('errors.general',
+                ['code' => '403',
+                    'message' => 'Forbidden!',
+                    'quote' => '“You need an invitation to this tournament.”',
+                    'author' => 'Admin',
+                    'source' => '',
+                ]
+            );
         }
         if ($invite->expiration < Carbon::now())
-            dd ("Expired Invitation");
+            dd("Expired Invitation");
         $currentModelName = trans('crud.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
@@ -90,10 +94,24 @@ class InviteController extends Controller
         } else {
             $invite = Invite::where('code', $token)->first();
             if (is_null($invite)) {
-                dd("No invitation");
+                return view('errors.general',
+                    ['code' => '403',
+                        'message' => 'Forbidden!',
+                        'quote' => '“You need an invitation to this tournament.”',
+                        'author' => 'Admin',
+                        'source' => '',
+                    ]
+                );
 
             } else {
-                dd("invitation used");
+                return view('errors.general',
+                    ['code' => '403',
+                        'message' => 'Forbidden!',
+                        'quote' => '“Invitation used.”',
+                        'author' => 'Admin',
+                        'source' => '',
+                    ]
+                );
             }
         }
     }
@@ -104,7 +122,7 @@ class InviteController extends Controller
 
         $categories = $request->get('cat');
         $inviteId = $request->inviteId;
-        if ($inviteId!=0)
+        if ($inviteId != 0)
             $invite = Invite::findOrFail($inviteId);
         else
             $invite = null;

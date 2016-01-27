@@ -32,10 +32,8 @@ class InviteTest extends TestCase
     public function an_admin_may_invite_users_but_users_must_register_after()
     {
         // Given
-        $tournament = factory(Tournament::class)->create();
+        $tournament = factory(Tournament::class)->create(['type' => 0]);
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
-
-
 
 
         // Check that inviting one user by email
@@ -66,10 +64,8 @@ class InviteTest extends TestCase
         $user = User::where('email', 'john@example.com')->first();
 
         //Bad Code or no code
-//        $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/123456s")
-//            ->see("No invitation");
-//        $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/")
-//            ->see("No invitation");
+        $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/123456s")
+            ->see("403");
 
         $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/" . $invitation->code);
         // If user didn't exit, check that it is created
@@ -105,24 +101,22 @@ class InviteTest extends TestCase
     /** @test */
     public function a_user_may_register_an_open_tournament()
     {
+        Auth::logout();
         // Given
-        $tournament = factory(Tournament::class)->create();
+        $tournament = factory(Tournament::class)->create(['type' => 1]);
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
-
-
+//        $user = factory(User::class)->create(['email' => 'aaa@bbb.ccc',
+//            'role_id' => 3,
+//            'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
+//            'verified' => 1,]);
 
         $this->visit("/tournaments/" . $tournament->id . "/register");
-        // If user didn't exit, check that it is created
-        if (is_null($user)) {
-            // System redirect to user creation
-            $this->type('Johnny', 'name')
-                ->type('11111111', 'password')
-                ->type('11111111', 'password_confirmation')
-                ->press(Lang::get('auth.create_account'))
-                ->seeInDatabase('users', ['email' => 'john@example.com', 'verified' => '1'])
-                ->see(trans('auth.registration_completed'));
 
-        }
+        // System redirect to user creation
+        $this->type('xoco@aaa.bbb', 'email')
+            ->type('111111', 'password')
+            ->press(Lang::get('auth.signin'))
+            ->seePageIs('/tournaments/' . $tournament->id . '/register');
 
         // Get all categories for this tournament
         // Now we are on category Selection page

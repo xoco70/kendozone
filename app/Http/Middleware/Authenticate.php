@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class Authenticate
@@ -42,17 +41,16 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return Redirect::intended('auth/login');
+                return redirect()->guest('auth/login');
             }
-        }
-        else {
+        } else {
             // If the user is not active any more, immidiately log out.
             if (Auth::check() && !Auth::user()->verified) {
                 Auth::logout();
 //                Session::flash('success', 'La cuenta no esta activa');
                 Session::flash('error', Lang::get('auth.account_not_activated'));
 
-                return Redirect::intended('auth/login');
+                return redirect()->guest('auth/login');
             }
         }
 

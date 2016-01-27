@@ -177,7 +177,14 @@ class TournamentController extends Controller
 
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         } else
-            dd("You need an invitation to register in this tournament");
+            return view('errors.general',
+                ['code' => '403',
+                    'message' => 'Forbidden!',
+                    'quote' => '“You need an invitation to register in this tournament.”',
+                    'author' => 'Admin',
+                    'source' => '',
+                ]
+            );
     }
 
     public function generateTrees($tournamentId)
