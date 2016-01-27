@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
 
-            {!! Form::open(['url'=>"tournaments", 'class'=>'stepy-validation']) !!}
+            {!! Form::open(['url'=>"tournaments"]) !!}
 
             @include("tournaments.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
 

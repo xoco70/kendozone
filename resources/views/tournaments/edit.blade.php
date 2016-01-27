@@ -271,19 +271,20 @@
 
                                     <div class="panel">
 
+                                        <a data-toggle="collapse" data-parent="#accordion-styled"
+                                           href="#accordion-styled-group{!! $key !!}">
+                                            @if (is_null($setting))
+                                                <div class="panel-heading bg-danger-400">
+                                                    @else
+                                                        <div class="panel-heading bg-success-600">
+                                                            @endif
+                                                            <h6 class="panel-title">
+                                                                {{trans($category->name)}}
 
-                                    @if (is_null($setting))
-                                       <div class="panel-heading bg-danger-400">
-                                    @else
-                                       <div class="panel-heading bg-success-600">
-                                            @endif
-                                            <h6 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion-styled"
-                                                   href="#accordion-styled-group{!! $key !!}">{{trans($category->name)}}</a>
 
-
-                                            </h6>
-                                        </div>
+                                                            </h6>
+                                                        </div>
+                                        </a>
                                         <div id="accordion-styled-group{!! $key !!}"
                                              class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
                                             <div class="panel-body">

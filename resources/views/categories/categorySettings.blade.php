@@ -1,5 +1,21 @@
-{!! Form::model($tournament, ['method'=>"PATCH", "action" => ["TournamentController@update", $tournament->id]]) !!}
+<?php
+$categoryId = $tournament->categoryTournaments->get($key)->category->id;
+?>
 
+@if (is_null($setting))
+    {!! Form::open(['url' => 'tournaments/'.$tournament->id.'/categories/'.$categoryId.'/settings']) !!}
+@else
+    {!! Form::model($setting,
+                ['method'=>"PATCH",
+                'class' => 'form-pricing',
+                 "action" => ["CategorySettingsController@update",
+                 $tournament->id,
+                 $categoryId,
+                 $setting->id]]) !!}
+
+    {!! Form::model($setting, ['method'=>"PATCH",
+        "action" => [ "CategorySettingsController@update", $tournament->id, $categoryId,$setting->id]]) !!}
+@endif
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">
@@ -118,61 +134,61 @@
     <div align="right">
         <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
     </div>
-<script>
+    <script>
 
-    $(function () {
-        $('#fightDuration{{$key}}').timepicker(('option',
+        $(function () {
+            $('#fightDuration{{$key}}').timepicker(('option',
 
-        {
-            'minTime': '2:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
+            {
+                'minTime': '2:00',
+                'maxTime': '5:00',
+                'timeFormat': 'H:i',
+                'step': '15'
+            }));
 
-        $('#enchoDuration{{$key}}').timepicker(('option',
+            $('#enchoDuration{{$key}}').timepicker(('option',
 
-        {
-            'minTime': '0:00',
-            'maxTime': '5:00',
-            'timeFormat': 'H:i',
-            'step': '15'
-        }));
+            {
+                'minTime': '0:00',
+                'maxTime': '5:00',
+                'timeFormat': 'H:i',
+                'step': '15'
+            }));
 
-        $(".teamSizeSlider{{$key}}").slider({
-            max: 10,
-            value: {!! $teamSize !!} ,
-            change: function (event, ui) {
-                $('#teamSize{{$key}}').attr('value', ui.value);
-            }
+            $(".teamSizeSlider{{$key}}").slider({
+                max: 10,
+                value: {!! $teamSize !!} ,
+                change: function (event, ui) {
+                    $('#teamSize{{$key}}').attr('value', ui.value);
+                }
+            });
+            $(".teamSizeSlider{{$key}}").slider("pips");
+            $(".teamSizeSlider{{$key}}").slider("float");
+            //--------------------------
+
+            $(".enchoQtySlider{{$key}}").slider({
+                max: 5,
+                value: {!! $enchoQty  !!} ,
+                change: function (event, ui) {
+                    $('#enchoQty{{$key}}').attr('value', ui.value);
+                }
+            });
+            $(".enchoQtySlider{{$key}}").slider("pips");
+            $(".enchoQtySlider{{$key}}").slider("float");
+            //--------------------------
+
+            $(".fightingAreasSlider{{$key}}").slider({
+                max: 5,
+                value: {!! $fightingAreas !!} ,
+                change: function (event, ui) {
+                    $('#fightingAreas{{$key}}').attr('value', ui.value);
+                }
+            });
+            $(".fightingAreasSlider{{$key}}").slider("pips");
+            $(".fightingAreasSlider{{$key}}").slider("float");
+
         });
-        $(".teamSizeSlider{{$key}}").slider("pips");
-        $(".teamSizeSlider{{$key}}").slider("float");
-        //--------------------------
-
-        $(".enchoQtySlider{{$key}}").slider({
-            max: 5,
-            value: {!! $enchoQty  !!} ,
-            change: function (event, ui) {
-                $('#enchoQty{{$key}}').attr('value', ui.value);
-            }
-        });
-        $(".enchoQtySlider{{$key}}").slider("pips");
-        $(".enchoQtySlider{{$key}}").slider("float");
-        //--------------------------
-
-        $(".fightingAreasSlider{{$key}}").slider({
-            max: 5,
-            value: {!! $fightingAreas !!} ,
-            change: function (event, ui) {
-                $('#fightingAreas{{$key}}').attr('value', ui.value);
-            }
-        });
-        $(".fightingAreasSlider{{$key}}").slider("pips");
-        $(".fightingAreasSlider{{$key}}").slider("float");
-
-    });
-</script>
+    </script>
 
 </div>
 {!! Form::close()!!}

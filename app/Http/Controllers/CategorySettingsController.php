@@ -29,11 +29,11 @@ class CategorySettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($tournamentId, $categoryId)
-    {
-//        $defaultSettings = $this->defaultSettings;
-        return view("categories.create", compact('tournamentId', 'categoryId')); //, 'defaultSettings'
-    }
+//    public function create($tournamentId, $categoryId)
+//    {
+////        $defaultSettings = $this->defaultSettings;
+//        return view("categories.create", compact('tournamentId', 'categoryId')); //, 'defaultSettings'
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,10 +46,10 @@ class CategorySettingsController extends Controller
         $categoryTournament = CategoryTournament::where('tournament_id',$tournamentId)
                                                   ->where('category_id',$categoryId)->first();
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
-//        dd($request);
         CategorySettings::create($request->all());
         flash("success", Lang::get('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/categories");
+        return redirect("tournaments/$tournamentId/edit");
+
     }
 
     /**
@@ -69,14 +69,14 @@ class CategorySettingsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($tournamentId, $categoryId, $settingId)
-    {
-
-        $categorySetting = CategorySettings::findOrFail($settingId);
-
-//        dd($categorySetting);
-        return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting')); //, 'defaultSettings'
-    }
+//    public function edit($tournamentId, $categoryId, $settingId)
+//    {
+//
+//        $categorySetting = CategorySettings::findOrFail($settingId);
+//
+////        dd($categorySetting);
+//        return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting')); //, 'defaultSettings'
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -91,9 +91,9 @@ class CategorySettingsController extends Controller
 
         $data = $request->except('_method', '_token');
         $categorySettings->update($data);
-
+//
         flash('success', trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/categories");
+        return redirect("tournaments/$tournamentId/edit");
     }
 
     /**
