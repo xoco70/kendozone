@@ -27,7 +27,7 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/categories"><i
+                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i
                                         class="icon-cog2"></i>{{trans_choice('crud.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)

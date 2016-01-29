@@ -38,7 +38,7 @@ return [
     'back_to_login_form' => 'Iniciar sesión',
     'we_will_send_instructions' => 'Te inviaremos instrucciones en un correo electrónico',
     'password_recovery' => 'Recupera tu contraseña',
-    'send_password' => 'Reinitializar la contraseña',
+    'reset_password' => 'Reinitializar la contraseña',
     'check_your_email' => 'Te hemos enviado un correo a tu cuenta de correo con un link de activación.',
     'account_already_exists' => 'El correo electrónico ya ha sido usado para otra cuenta',
     'account_not_activated' => 'La cuenta no ha sido activada. Por favor consulte su email',  // <a href="#">reenviar</a>
