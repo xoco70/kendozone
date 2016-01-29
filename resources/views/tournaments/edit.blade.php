@@ -267,6 +267,7 @@
                                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+
                                     ?>
 
                                     <div class="panel">

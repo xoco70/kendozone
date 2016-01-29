@@ -70,3 +70,9 @@ class Handler extends ExceptionHandler
         return parent::render($request, $e);
     }
 }
+
+
+//Life is growth. If we stop growing, technically and spiritually, we are as good as dead.
+//Those who are possessed by nothing possess everything.
+//Economy is the basis of society. When the economy is stable, society develops. The ideal economy combines the spiritual and the material, and the best commodities to trade in are sincerity and love.
+//“There are 3 reasons for why you can't beat me. First, I'm better looking than you are. Second, your blows are too light. And third, there's nothing in the world I can't tear up.”

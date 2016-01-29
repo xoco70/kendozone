@@ -159,7 +159,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 10,
                 value: {!! $teamSize !!} ,
                 change: function (event, ui) {
-                    $('#teamSize{{$key}}').attr('value', ui.value);
+                    $('#teamSize').attr('value', ui.value);
                 }
             });
             $(".teamSizeSlider{{$key}}").slider("pips");
@@ -170,7 +170,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 5,
                 value: {!! $enchoQty  !!} ,
                 change: function (event, ui) {
-                    $('#enchoQty{{$key}}').attr('value', ui.value);
+                    $('#enchoQty').attr('value', ui.value);
                 }
             });
             $(".enchoQtySlider{{$key}}").slider("pips");
@@ -181,7 +181,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 5,
                 value: {!! $fightingAreas !!} ,
                 change: function (event, ui) {
-                    $('#fightingAreas{{$key}}').attr('value', ui.value);
+                    $('#fightingAreas').attr('value', ui.value);
                 }
             });
             $(".fightingAreasSlider{{$key}}").slider("pips");

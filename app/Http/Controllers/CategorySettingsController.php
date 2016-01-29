@@ -87,11 +87,7 @@ class CategorySettingsController extends Controller
      */
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
-        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
-
-        $data = $request->except('_method', '_token');
-        $categorySettings->update($data);
-//
+        CategorySettings::findOrFail($categorySettingsId)->update($request->all());
         flash('success', trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/edit");
     }
