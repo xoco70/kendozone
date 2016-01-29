@@ -88,7 +88,7 @@ class AuthController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => bcrypt($data['password']),
             'country_id' => $country->id,
             'role_id' => $data['role_id'],
             'city' => $location['city'],
@@ -123,7 +123,9 @@ class AuthController extends Controller
     public function postRegister(AuthRequest $request, AppMailer $mailer)
     {
 
-
+//        'name' => $request->name,
+//            'email' => $request->email,
+//            'password' => bcrypt($request->password),
         $user = User::create($request->all());
         $mailer->sendEmailConfirmationTo($user);
         flash('success', Lang::get('auth.check_your_email'));

@@ -107,7 +107,7 @@ class InviteTest extends TestCase
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
         factory(User::class)->create(['email' => 'xoco@aaa.bbb',
             'role_id' => 3,
-            'password' => '111111', // 111111
+            'password' => bcrypt('111111'), // 111111
             ]);
 
         $this->visit("/tournaments/" . $tournament->id . "/register");
@@ -117,7 +117,7 @@ class InviteTest extends TestCase
 //        dd($user);
         // System redirect to user creation
 //        $this->type('xoco@aaa.bbb', 'email')
-//            ->type('111111', 'password')
+//            ->type(bcrypt('111111'), 'password')
 //            ->press(Lang::get('auth.signin'))
 //            ->dump();
 ////            ->seePageIs('/tournaments/' . $tournament->id . '/register');

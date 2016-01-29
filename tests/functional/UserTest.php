@@ -78,8 +78,8 @@ class UserTest extends TestCase
             ->type('julien@cappiello.fr2', 'email')
             ->type('julien', 'firstname')
             ->type('cappiello', 'lastname')
-            ->select('111111', 'password')
-            ->select('111111', 'password_confirmation')
+            ->select(bcrypt('111111'), 'password')
+            ->select(bcrypt('111111'), 'password_confirmation')
             ->attach($test_file_path, 'avatar')
 //            //File input avatar
             ->press(Lang::get('core.save'))

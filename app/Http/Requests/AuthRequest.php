@@ -25,8 +25,6 @@ class AuthRequest  extends Request
             }
         }
 
-// TODO RElation with countryId
-
         $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
         if (!is_null($location)){
             $country = Countries::where("name", $location['country'])->first();

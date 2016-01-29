@@ -37,7 +37,7 @@ class AuthTest extends TestCase
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
         $user = User::whereName('JohnDoe')->first();
         // You can't login until you confirm your email address.
-        $this->login($user)->see(Lang::get('auth.account_not_activated'));
+        $this-> login($user)->see(Lang::get('auth.account_not_activated'));
         $this->visit("auth/register/confirm/{$user->token}")
             ->see(Lang::get('auth.tx_for_confirm'))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
@@ -61,10 +61,10 @@ class AuthTest extends TestCase
             ->NotseeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
     }
 
-
-    protected function login($user = null)
+    /** @test */
+    public function login($user = null)
     {
-        $user = $user ?: $this->factory->create('App\User', ['password' => 'password']);
+        $user = $user ?: $this->factory->create('App\User', ['password' => bcrypt('password')]);
         return $this->visit('/auth/login')
             ->type($user->email, 'email')
             ->type('password', 'password')

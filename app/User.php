@@ -145,16 +145,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @param string $password
      */
-    public function setPasswordAttribute($password)
-    {
-        if (strlen($password) < 60) {
-//            dd($password);
-            $this->attributes['password'] = bcrypt($password);
-        }else{
-//            dd("Already Encrypted");
-        }
-
-    }
+//    public function setPasswordAttribute($password)
+//    {
+//        if (strlen($password) < 60) {
+////            dd($password);
+//            $this->attributes['password'] = bcrypt($password);
+//        }else{
+////            dd("Already Encrypted");
+//        }
+//
+//    }
 
 
 //    public function country()

@@ -85,7 +85,7 @@ class TournamentUserController extends Controller
 
             $user = User::create(['email' => $email,
                 'name' => $username,
-                'password' => $password,
+                'password' => bcrypt($password),
                 'country_id' => $country->id,
                 'countryCode' => $location['isoCode'],
                 'city' => $location['city'],

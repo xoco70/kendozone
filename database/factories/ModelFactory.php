@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'firstname' => $faker->firstName,
         'lastname' => $faker->lastName,
         'email' => $faker->email,
-        'password' => str_random(10),
+        'password' => bcrypt(str_random(10)),
         'grade_id' => $faker->numberBetween(1, 5),
         'country_id' => $faker->randomElement($countries),
         'city' => $faker->city,

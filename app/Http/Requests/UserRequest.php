@@ -20,8 +20,7 @@ class UserRequest  extends Request
     {
 //        dd($request);
 //        $method= $request->method;
-
-        if ($request->method!= "PATCH"){
+        if ($request->isMethod('post')) {
             $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
             $country = Countries::where('name','=',$location['country'])->first();
             $request->request->add(['country_id' => $country->id ]);

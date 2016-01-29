@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             [   'name' => 'Jujuju',
                 'email' => 'aaa@bbb.ccc',
                 'role_id' => 3,
-                'password' => '111111',
+                'password' => bcrypt('111111'),
                 'verified' => 1,]);
 
         factory(User::class, 5)->create(['role_id' => 2]);
