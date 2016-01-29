@@ -87,7 +87,7 @@
                     @include('layouts.flash')
                     <div class="text-center">
                         <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
-                        <h5 class="content-group">{{  Lang::get('auth.password_recovery') }} <small class="display-block">{{  Lang::get('auth.we_will_send_instructions') }}</small></h5>
+                        <h5 class="content-group">{{  Lang::get('auth.enter_new_passwords') }} <small class="display-block">{{  Lang::get('auth.enter_new_passwords_description') }}</small></h5>
                     </div>
                     <div class="form-group">
                         {!! Form::hidden('email', $email)!!}

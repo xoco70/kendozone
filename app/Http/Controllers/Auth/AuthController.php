@@ -4,24 +4,21 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
 use App\Grade;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Role;
 use App\Tournament;
 use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-
-use GeoIP;
 use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Webpatser\Countries\Countries;
 
 class AuthController extends Controller
@@ -71,34 +68,34 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-        $country = $location['country'];
-        // Get id from country
-        $country = Countries::where('name', '=', $country)->first();
-
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'country_id' => $country->id,
-            'role_id' => $data['role_id'],
-            'city' => $location['city'],
-            'latitude' => $location['lat'],
-            'longitude' => $location['lon'],
-            'provider' => 'manual',
-            'provider_id' => $data['email']
-
-        ]);
-    }
+//    /**
+//     * Create a new user instance after a valid registration.
+//     *
+//     * @param  array $data
+//     * @return User
+//     */
+//    protected function create(AuthRequest $request)
+//    {
+//        $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+//        $country = $location['country'];
+//        // Get id from country
+//        $country = Countries::where('name', '=', $country)->first();
+//
+//        dd($request->name);
+//        return User::create([
+//            'name' => $request->name,
+//            'email' => $data['email'],
+//            'password' => bcrypt($data['password']),
+//            'country_id' => $country->id,
+//            'role_id' => $data['role_id'],
+//            'city' => $location['city'],
+//            'latitude' => $location['lat'],
+//            'longitude' => $location['lon'],
+//            'provider' => 'manual',
+//            'provider_id' => $data['email']
+//
+//        ]);
+//    }
 
 
     public function getRegister()
@@ -123,10 +120,18 @@ class AuthController extends Controller
     public function postRegister(AuthRequest $request, AppMailer $mailer)
     {
 
-//        'name' => $request->name,
-//            'email' => $request->email,
-//            'password' => bcrypt($request->password),
-        $user = User::create($request->all());
+
+        $user = User::create([  'name' => $request->name,
+                                'email' => $request->email,
+                                'password' => bcrypt($request->password),
+                                'country_id' => $request->country_id,
+                                'city' => $request->city,
+                                'latitude' => $request->latitude,
+                                'longitude' => $request->longitude,
+                                'role_id' => Config::get('constants.ROLE_ADMIN'),
+                                'verified' => 0,
+
+        ]);
         $mailer->sendEmailConfirmationTo($user);
         flash('success', Lang::get('auth.check_your_email'));
         return redirect()->back();

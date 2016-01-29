@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use GeoIP;
-use Webpatser\Countries\Countries;
+use App\User;
 
-class UserRequest  extends Request
+class UserRequest extends Request
 {
 
     protected $method;
@@ -18,18 +17,7 @@ class UserRequest  extends Request
 
     public function __construct(\Illuminate\Http\Request $request)
     {
-//        dd($request);
-//        $method= $request->method;
-        if ($request->isMethod('post')) {
-            $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
-            $country = Countries::where('name','=',$location['country'])->first();
-            $request->request->add(['country_id' => $country->id ]);
-            $request->request->add(['countryCode' => $location['isoCode'] ]);
-            $request->request->add(['city' => $location['city'] ]);
-            $request->request->add(['latitude' => $location['lat'] ]);
-            $request->request->add(['longitude' => $location['lon'] ]);
-
-        }
+        User::insertCoordsInRequest($request);
 
     }
 
@@ -47,18 +35,17 @@ class UserRequest  extends Request
     {
         $uniqueUser = '';
         $passwordRules = '';
-        if ($this->method == 'POST'){
+        if ($this->method == 'POST') {
             $passwordRules = '|required|min:1';
             $uniqueUser = '|unique:users';
         }
 
 
-
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255'.$uniqueUser,
+            'email' => 'required|email|max:255' . $uniqueUser,
 //            'avatar' => 'mimes:png,jpg, jpeg, gif',
-            'password' => 'confirmed'.$passwordRules,
+            'password' => 'confirmed' . $passwordRules,
         ];
     }
 

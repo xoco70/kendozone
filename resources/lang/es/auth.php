@@ -50,8 +50,10 @@ return [
     'tx_for_confirm' => 'Gracias por verificar tu email',
     'registration_completed' => 'Gracias por registarte',
     'user_dont_exist' => 'No hay ningun usuario registrado con este correo',
-    'password_reset_successfull' => 'Contraseña reinicializada!'
-
+    'go_to_password_reset' => 'Dale click al link para resetear tu contraseña',
+    'password_reset_successfull' => 'Contraseña reinicializada!',
+     'enter_new_passwords' => 'Ingresa tu nueva contraseña',
+    'enter_new_passwords_description' => 'Escribe tu contraseña 2 veces'
 
 
 ];

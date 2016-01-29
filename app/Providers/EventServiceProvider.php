@@ -13,10 +13,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
-        ],
+        'App\Events\InsertCoordInUser' => ['App\Listeners\InsertCoordInUser'],
+        'App\Events\RespondedToSupportRequest' => ['App\Listeners\MailUserSupportResponse'],
     ];
+
 
     /**
      * Register any other events for your application.

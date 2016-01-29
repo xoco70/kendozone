@@ -78,8 +78,8 @@ class UserTest extends TestCase
             ->type('julien@cappiello.fr2', 'email')
             ->type('julien', 'firstname')
             ->type('cappiello', 'lastname')
-            ->select(bcrypt('111111'), 'password')
-            ->select(bcrypt('111111'), 'password_confirmation')
+            ->select('111111', 'password')
+            ->select('111111', 'password_confirmation')
             ->attach($test_file_path, 'avatar')
 //            //File input avatar
             ->press(Lang::get('core.save'))
@@ -87,8 +87,9 @@ class UserTest extends TestCase
             ->see(Lang::get('core.success'))
             ->seeInDatabase('users', ['name' => 'MyUser']);
 
-//        $user = User::where('email', '=', "julien@cappiello.fr2")->first();
-//        if ($delete) $user->delete();
+        $user = User::where('name', 'MyUser')->first();
+        File::delete(base_path() . '/'.$user->avatar);
+
     }
 
     /** @test */

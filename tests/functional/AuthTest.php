@@ -37,7 +37,7 @@ class AuthTest extends TestCase
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
         $user = User::whereName('JohnDoe')->first();
         // You can't login until you confirm your email address.
-        $this-> login($user)->see(Lang::get('auth.account_not_activated'));
+        $this->login($user)->see(Lang::get('auth.account_not_activated'));
         $this->visit("auth/register/confirm/{$user->token}")
             ->see(Lang::get('auth.tx_for_confirm'))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
@@ -64,7 +64,8 @@ class AuthTest extends TestCase
     /** @test */
     public function login($user = null)
     {
-        $user = $user ?: $this->factory->create('App\User', ['password' => bcrypt('password')]);
+        $user = $user ?: factory(User::class)->create(['password' => bcrypt('password')]);
+
         return $this->visit('/auth/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
@@ -76,19 +77,19 @@ class AuthTest extends TestCase
     {
         // It should verify email is in system
 
-        $user = factory(User::class)->create(['email' => 'julien@lost.password',
+        $user = factory(User::class)->create([
             'role_id' => 3,
             'verified' => 1,]);
 
         $this->visit('/auth/login')
             ->click(trans('auth.lost_password'))
             ->seePageIs('/password/email')
-            ->type('julien@lost.password', 'email')
+            ->type($user->email, 'email')
             ->press(Lang::get('auth.send_password'))
             ->seePageIs('/password/email')
             ->see(Lang::get('passwords.sent'));
 
-        $reset = DB::table('password_resets')->where('email', 'julien@lost.password')
+        $reset = DB::table('password_resets')->where('email', $user->email)
             ->orderBy('created_at', 'desc')
             ->first();
 
@@ -100,7 +101,12 @@ class AuthTest extends TestCase
             ->type('222222', 'password_confirmation')
             ->press(Lang::get('auth.reset_password'));
 
-
+        Auth::logout();
+        $this->visit('/auth/login')
+            ->type($user->email, 'email')
+            ->type('222222', 'password')
+            ->press(Lang::get('auth.signin'))
+            ->seePageIs('/admin');
 
 
     }

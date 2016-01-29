@@ -61,15 +61,6 @@ class PasswordController extends Controller
 
         $this->validate($request, ['email' => 'required|email']);
 
-        // Check User exists
-        $user = User::where('email', $request->email)->first();
-
-//        if (is_null($user)){
-//            flash("success","hola");
-//            return redirect()->back();
-////            redirect()->back()->withErrors(['email' => trans('auth.user_dont_exist')]);
-//        }
-
         $response = Password::sendResetLink($request->only('email'), function (Message $message) {
 
             $message->subject($this->getEmailSubject());
@@ -130,7 +121,7 @@ class PasswordController extends Controller
         );
 
         $response = Password::reset($credentials, function ($user, $password) {
-            $this->resetPassword($user, \Hash::make($password));
+            $this->resetPassword($user, $password);
         });
 
         switch ($response) {
