@@ -74,6 +74,8 @@ class AuthTest extends TestCase
     /** @test */
     public function lost_password()
     {
+        // It should verify email is in system
+
         $user = factory(User::class)->create(['email' => 'julien@lost.password',
             'role_id' => 3,
             'verified' => 1,]);

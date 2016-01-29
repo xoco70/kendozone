@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-     protected $fillable = ['name','firstname','lastname','email', 'password','grade_id','country_id','city','latitude','longitude', 'role_id','avatar','provider','provider_id','verified'];
+    protected $fillable = ['name', 'firstname', 'lastname', 'email', 'password', 'grade_id', 'country_id', 'city', 'latitude', 'longitude', 'role_id', 'avatar', 'provider', 'provider_id', 'verified'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -63,6 +63,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->token = str_random(30);
         });
     }
+
     /**
      * Confirm the user.
      *
@@ -79,7 +80,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param Request $request
      * @return array
      */
-    public static function uploadPic(UserRequest $request, $except=null)
+    public static function uploadPic(UserRequest $request, $except = null)
     {
 //        if (is_null($data))
         $data = $request->except($except);
@@ -91,8 +92,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
-            $fileName = trim($data['name']) . "_" . $timestamp ; // renameing image
-            $fileName = Str::slug($fileName, '-'). '.' . $extension;
+            $fileName = trim($data['name']) . "_" . $timestamp; // renameing image
+            $fileName = Str::slug($fileName, '-') . '.' . $extension;
 //            dd($destinationPath, $fileName);
             if (!Input::file('avatar')->move($destinationPath, $fileName)) {
                 flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
@@ -121,22 +122,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //        }
 //    }
 
-    public function getAvatarAttribute($avatar){
+    public function getAvatarAttribute($avatar)
+    {
 
-        if (is_null($avatar) ||strlen($avatar)==0){
+        if (is_null($avatar) || strlen($avatar) == 0) {
             $avatar = 'avatar.png';
         }
 
-        if (!str_contains($avatar, 'http')){
+        if (!str_contains($avatar, 'http')) {
 
-            $avatar = Config::get('constants.AVATAR_PATH').$avatar;
-        }else{
+            $avatar = Config::get('constants.AVATAR_PATH') . $avatar;
+        } else {
 
         }
 
 
         return $avatar;
     }
+
     /**
      * Set the password attribute.
      *
@@ -144,7 +147,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = bcrypt($password);
+        if (strlen($password) < 60) {
+//            dd($password);
+            $this->attributes['password'] = bcrypt($password);
+        }else{
+//            dd("Already Encrypted");
+        }
+
     }
 
 
@@ -169,7 +178,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function invites()
     {
-        return $this->hasMany('App\Invite', 'email','email');
+        return $this->hasMany('App\Invite', 'email', 'email');
     }
 
     public function country()
@@ -201,7 +210,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id','category_tournament_id');
+        return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id', 'category_tournament_id');
     }
 
     public function categoryTournaments()
@@ -213,30 +222,40 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //        return $this->tournaments()->first(); // Where not finished
 //    }
 
-    public static function generatePassword(){
-            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            $pass = array(); //remember to declare $pass as an array
-            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-            for ($i = 0; $i < 8; $i++) {
-                $n = rand(0, $alphaLength);
-                $pass[] = $alphabet[$n];
-            }
-            return implode($pass); //turn the array into a string
+    public static function generatePassword()
+    {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
-    public function isSuperAdmin(){
+
+    public function isSuperAdmin()
+    {
         return Auth::user()->role_id == 1;
     }
 
-    public function isOwner(){
+    public function isOwner()
+    {
         return Auth::user()->role_id == 2;
     }
-    public function isAdmin(){
+
+    public function isAdmin()
+    {
         return Auth::user()->role_id == 3;
     }
-    public function isModerator(){
+
+    public function isModerator()
+    {
         return Auth::user()->role_id == 4;
     }
-    public function isUser(){
+
+    public function isUser()
+    {
         return Auth::user()->role_id == 5;
     }
 }

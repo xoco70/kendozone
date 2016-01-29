@@ -90,7 +90,7 @@
                         <h5 class="content-group">{{  Lang::get('auth.password_recovery') }} <small class="display-block">{{  Lang::get('auth.we_will_send_instructions') }}</small></h5>
                     </div>
                     <div class="form-group">
-                        {!! Form::hidden('email', null)!!}
+                        {!! Form::hidden('email', $email)!!}
                     </div>
 
                     <!-- Password field -->

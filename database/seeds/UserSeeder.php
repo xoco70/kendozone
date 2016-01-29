@@ -36,11 +36,11 @@ class UserSeeder extends Seeder
             'provider_id' => '113769489654625617770',
             'remember_token' => '7rCCxMRjsqSgHCt1mbOSkz5TV0iKe9YYVNMrOwX2g5pLUsF3qBqVQ1zlYOuv'
         ]);
-        $user = factory(User::class)->create(
-            [   'name' => 'Juju ',
+        factory(User::class)->create(
+            [   'name' => 'Jujuju',
                 'email' => 'aaa@bbb.ccc',
                 'role_id' => 3,
-                'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau',
+                'password' => '111111',
                 'verified' => 1,]);
 
         factory(User::class, 5)->create(['role_id' => 2]);

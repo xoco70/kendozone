@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
@@ -26,7 +27,7 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     protected $redirectPath = "auth/login";
-    protected $subject = "Your Password Reset Link for kendoOnline.com";
+    protected $subject = "Your Password Reset Link for Kendozone.com";
 
     /**
      * Create a new password controller instance.
@@ -59,6 +60,16 @@ class PasswordController extends Controller
     {
 
         $this->validate($request, ['email' => 'required|email']);
+
+        // Check User exists
+        $user = User::where('email', $request->email)->first();
+
+//        if (is_null($user)){
+//            flash("success","hola");
+//            return redirect()->back();
+////            redirect()->back()->withErrors(['email' => trans('auth.user_dont_exist')]);
+//        }
+
         $response = Password::sendResetLink($request->only('email'), function (Message $message) {
 
             $message->subject($this->getEmailSubject());
@@ -66,10 +77,12 @@ class PasswordController extends Controller
 
         switch ($response) {
             case Password::RESET_LINK_SENT:
-                return redirect()->back()->with('flash_message', trans($response));
+                flash('success',trans($response));
+                return redirect()->back();
 
             case Password::INVALID_USER:
-                return redirect()->back()->withErrors(['email' => trans($response)]);
+                flash("error",trans($response));
+                return redirect()->back();
         }
     }
 
@@ -89,6 +102,10 @@ class PasswordController extends Controller
         $reset = DB::table('password_resets')->where('token', $token)
             ->orderBy('created_at', 'desc')
             ->first();
+
+        if (is_null($reset))
+            throw new NotFoundHttpException;
+
         $email = $reset->email;
         return view('auth.reset',compact('token', 'email'));
 
@@ -118,13 +135,13 @@ class PasswordController extends Controller
 
         switch ($response) {
             case Password::PASSWORD_RESET:
-                return redirect($this->redirectPath())
-                    ->withFlashMessage('Password Reset Successfully!');
+                flash('success', trans('auth.password_reset_successfull'));
+                return redirect($this->redirectPath());
 
             default:
+                flash('error', trans($response));
                 return redirect()->back()
-                    ->withInput($request->only('email'))
-                    ->withErrors(['email' => trans($response)]);
+                    ->withInput($request->only('email'));
         }
     }
 //
