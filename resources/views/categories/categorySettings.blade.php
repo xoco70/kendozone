@@ -22,8 +22,8 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
             <div class="checkbox-switch ">
                 <label>
                     {!!  Form::label('isTeam', trans('crud.isTeam')) !!} <br/>
-                    {!!   Form::hidden('isTeam', 0) !!}
-                    {!!   Form::checkbox('isTeam', 1, is_null($setting) ? 0 : $setting->isTeam  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                    {!!   Form::hidden('isTeam', 0,['id'=>'isTeam'.$key ]) !!}
+                    {!!   Form::checkbox('isTeam', 1, is_null($setting) ? 0 : $setting->isTeam  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'isTeam'.$key ]) !!}
 
                 </label>
             </div>
@@ -50,9 +50,9 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 <label>
 
                     {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
-                    {!!   Form::hidden('hasEncho', 0) !!}
+                    {!!   Form::hidden('hasEncho', 0,['id'=>'isTeam'.$key ]) !!}
                     {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
-                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
                 </label>
             </div>
@@ -82,9 +82,9 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 <label>
 
                     {!!  Form::label('hasRoundRobin', trans('crud.hasRoundRobin')) !!} <br/>
-                    {!!   Form::hidden('hasRoundRobin', 0) !!}
+                    {!!   Form::hidden('hasRoundRobin', 0,['id'=>'hasRoundRobin'.$key ]) !!}
                     {!!   Form::checkbox('hasRoundRobin', 1, is_null($setting) ? 0 : $setting->hasRoundRobin,
-                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasRoundRobin'.$key]) !!}
 
                 </label>
             </div>
@@ -109,9 +109,9 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 <label>
 
                     {!!  Form::label('hasHantei', trans('crud.hasHantei')) !!} <br/>
-                    {!!   Form::hidden('hasHantei', 0) !!}
+                    {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
                     {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
-                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}
 
                 </label>
             </div>
@@ -132,7 +132,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 
 
     <div align="right">
-        <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+        <button type="submit" class="btn btn-success" id="save{{$key}}">{{trans("core.save")}}</button>
     </div>
     <script>
 

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Lang;
  * it_create_tournament($delete = true)
  * it_edit_tournament()
  * you_must_own_tournament_to_edit_it_or_be_superuser()
+ * it_configure_a_tournament_category
  *
  * User: juliatzin
  * Date: 10/11/2015
@@ -158,6 +159,42 @@ class TournamentTest extends TestCase
                 ]);
     }
 
+
+
+    /** @test */
+    public function it_create_tournament_category_conf()
+    {
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
+
+        $this->visit('/tournaments/' . $tournament->id . '/edit')
+            ->type('1', 'isTeam0')
+            ->type('1', 'hasEncho0')
+            ->type('1', 'hasRoundRobin0')
+            ->type('1', 'hasHantei0')
+            ->type('100', 'cost')
+            ->type('1', 'roundRobinWinner')
+            ->type('1', 'fightDuration0')
+            ->type('1', 'enchoDuration0')
+            ->type('2', 'teamSize0')
+            ->type('2', 'enchoQty0')
+            ->type('2', 'fightingAreas0');
+//            ->press('save0')
+//
+//        ;
+
+
+    }
+    /** @test */
+    public function it_edit_tournament_category_conf()
+    {
+
+    }
     /** @test */
     public function you_must_own_tournament_to_edit_it_or_be_superuser()
     {
