@@ -32,13 +32,13 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
             {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
             <div class="teamSizeSlider{{$key}}"></div>
-            {!!  Form::hidden('teamSize') !!}
+            {!!  Form::hidden('teamSize', $teamSize, [ 'id' => 'teamSize'.$key ]) !!}
         </div>
         <div class="col-md-5">
 
             {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
             <div class="input-group">
-                {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration']) !!}
+                {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
@@ -60,7 +60,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::hidden('enchoQty', is_null($setting) ? 0 : $setting->enchoQty) !!}
+                {!!  Form::hidden('enchoQty', is_null($setting) ? 0 : $setting->enchoQty, [ 'id' => 'enchoQty'.$key ]) !!}
                 <div class="enchoQtySlider{{$key}}"></div>
                 <small class="display-block">0 para infinito</small>
             </div>
@@ -69,7 +69,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration']) !!}
+                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 
@@ -121,7 +121,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 <br/>
                 <div class="fightingAreasSlider{{$key}}"></div>
-                {!!  Form::hidden('fightingAreas',is_null($setting) ? 0 : $setting->fightingAreas) !!}
+                {!!  Form::hidden('fightingAreas',is_null($setting) ? 0 : $setting->fightingAreas, [ 'id' => 'fightingAreas'.$key ]) !!}
 
             </div>
 
@@ -159,7 +159,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 10,
                 value: {!! $teamSize !!} ,
                 change: function (event, ui) {
-                    $('#teamSize').attr('value', ui.value);
+                    $('#teamSize{{$key}}').attr('value', ui.value);
                 }
             });
             $(".teamSizeSlider{{$key}}").slider("pips");
@@ -170,7 +170,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 5,
                 value: {!! $enchoQty  !!} ,
                 change: function (event, ui) {
-                    $('#enchoQty').attr('value', ui.value);
+                    $('#enchoQty{{$key}}').attr('value', ui.value);
                 }
             });
             $(".enchoQtySlider{{$key}}").slider("pips");
@@ -181,7 +181,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 max: 5,
                 value: {!! $fightingAreas !!} ,
                 change: function (event, ui) {
-                    $('#fightingAreas').attr('value', ui.value);
+                    $('#fightingAreas{{$key}}').attr('value', ui.value);
                 }
             });
             $(".fightingAreasSlider{{$key}}").slider("pips");
