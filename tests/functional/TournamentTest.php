@@ -1,4 +1,5 @@
 <?php
+use App\CategorySettings;
 use App\CategoryTournament;
 use App\Tournament;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -166,25 +167,31 @@ class TournamentTest extends TestCase
     {
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
 
         $this->visit('/tournaments/' . $tournament->id . '/edit')
-            ->type('1', 'isTeam0')
-            ->type('1', 'hasEncho0')
-            ->type('1', 'hasRoundRobin0')
-            ->type('1', 'hasHantei0')
+//            ->type('1', 'isTeam0')
+//            ->type('1', 'hasEncho0')
+//            ->type('1', 'hasRoundRobin0')
+//            ->type('1', 'hasHantei0')
             ->type('100', 'cost')
             ->type('1', 'roundRobinWinner')
-            ->type('1', 'fightDuration0')
-            ->type('1', 'enchoDuration0')
-            ->type('2', 'teamSize0')
-            ->type('2', 'enchoQty0')
-            ->type('2', 'fightingAreas0');
-//            ->press('save0')
+//            ->type('1', 'fightDuration0')
+//            ->type('1', 'enchoDuration0')
+//            ->type('2', 'teamSize0')
+//            ->type('2', 'enchoQty0')
+//            ->type('2', 'fightingAreas0')
+            ->press('save0')
+            ->see(htmlentities(Lang::get('core.operation_successful')))
+            ->seeInDatabase('category_settings',
+                ['category_tournament_id' => $ct0->id,
+                    'cost' => '100',
+                    'roundRobinWinner' => '1',
+                ]);
 //
 //        ;
 
@@ -193,6 +200,42 @@ class TournamentTest extends TestCase
     /** @test */
     public function it_edit_tournament_category_conf()
     {
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+
+        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
+
+        $setting0 = factory(CategorySettings::class)->create([
+            'category_tournament_id' => $ct0->id,
+            'roundRobinWinner' => 2,
+            'cost' => 100,
+        ]);
+
+        $this->visit('/tournaments/' . $tournament->id . '/edit')
+//            ->type('1', 'isTeam0')
+//            ->type('1', 'hasEncho0')
+//            ->type('1', 'hasRoundRobin0')
+//            ->type('1', 'hasHantei0')
+            ->type('200', 'cost')
+            ->type('1', 'roundRobinWinner')
+//            ->type('1', 'fightDuration0')
+//            ->type('1', 'enchoDuration0')
+//            ->type('2', 'teamSize0')
+//            ->type('2', 'enchoQty0')
+//            ->type('2', 'fightingAreas0')
+            ->press('save0')
+            ->see(htmlentities(Lang::get('core.operation_successful')))
+            ->seeInDatabase('category_settings',
+                ['category_tournament_id' => $ct0->id,
+                    'cost' => '200',
+                    'roundRobinWinner' => '1',
+                ]);
+//
+//        ;
+
 
     }
     /** @test */
