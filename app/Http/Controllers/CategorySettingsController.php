@@ -47,7 +47,7 @@ class CategorySettingsController extends Controller
                                                   ->where('category_id',$categoryId)->first();
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
         CategorySettings::create($request->all());
-        flash("success", Lang::get('core.operation_successful'));
+        flash()->success(Lang::get('core.operation_successful'));
         return redirect("tournaments/$tournamentId/edit");
 
     }
@@ -88,7 +88,7 @@ class CategorySettingsController extends Controller
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
         CategorySettings::findOrFail($categorySettingsId)->update($request->all());
-        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/edit");
     }
 

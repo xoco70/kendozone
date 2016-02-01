@@ -48,7 +48,7 @@ class Authenticate
             if (Auth::check() && !Auth::user()->verified) {
                 Auth::logout();
 //                Session::flash('success', 'La cuenta no esta activa');
-                Session::flash('error', Lang::get('auth.account_not_activated'));
+                flash()->error(Lang::get('auth.account_not_activated'));
 
                 return redirect()->guest('auth/login');
             }

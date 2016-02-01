@@ -74,7 +74,14 @@ class InviteController extends Controller
             );
         }
         if ($invite->expiration < Carbon::now())
-            dd("Expired Invitation");
+            return view('errors.general',
+                ['code' => '403',
+                    'message' => 'Forbidden!',
+                    'quote' => '“Invitation expired.”',
+                    'author' => 'Admin',
+                    'source' => '',
+                ]
+            );
         $currentModelName = trans('crud.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
@@ -115,7 +122,6 @@ class InviteController extends Controller
             }
         }
     }
-
     public function registerCategories(Request $request)
     {
         //TODO Check if catgory has been paid. if so, can't change
@@ -150,7 +156,7 @@ class InviteController extends Controller
 
         if (isset($invite)) $invite->consume();
 
-        flash("success", trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("/invites");
 
     }
@@ -180,7 +186,7 @@ class InviteController extends Controller
             $mailer->sendEmailInvitationTo($recipient, $tournament, $code);
 
         }
-        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournament->id/edit");
 
 

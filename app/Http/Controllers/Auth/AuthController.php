@@ -106,8 +106,6 @@ class AuthController extends Controller
         $countries = Countries::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         return view('auth.register', compact('countries', 'grades', 'role_id'));
-
-
     }
 
     /**
@@ -133,7 +131,7 @@ class AuthController extends Controller
 
         ]);
         $mailer->sendEmailConfirmationTo($user);
-        flash('success', Lang::get('auth.check_your_email'));
+        flash()->success(Lang::get('auth.check_your_email'));
         return redirect()->back();
     }
 
@@ -159,12 +157,12 @@ class AuthController extends Controller
             $userId = $user->id;
 //            $invite->consume();
 
-            flash('success', Lang::get('auth.registration_completed'));
+            flash()->success(Lang::get('auth.registration_completed'));
             return view("categories.register", compact('userId', 'tournament', 'invite'));
 
         } else {
             dd("yes is null");
-            flash('error', Lang::get('auth.no_invite'));
+            flash()->error(Lang::get('auth.no_invite'));
             return redirect("/")->with('status', 'success');
         }
     }
@@ -184,7 +182,7 @@ class AuthController extends Controller
     public function confirmEmail($token)
     {
         User::whereToken($token)->firstOrFail()->confirmEmail();
-        flash('success', Lang::get('auth.tx_for_confirm'));
+        flash()->success(Lang::get('auth.tx_for_confirm'));
         return redirect('auth/login');
     }
 
@@ -213,7 +211,7 @@ class AuthController extends Controller
 
     public function userHasLoggedIn($user)
     {
-        flash('info', 'Welcome, ' . $user->username);
+        flash('Welcome, ' . $user->username);
         return redirect('/admin');
     }
 

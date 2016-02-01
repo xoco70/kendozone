@@ -17,7 +17,7 @@ class InviteTest extends TestCase
      * 3. Click mail, register and add to tournament
      * 4. Click mail and deny - used invitation
      * 5. Click mail and deny - invitation disabled
-     *
+     * 6. FALTA Invitation expired
      */
 
     use DatabaseTransactions;

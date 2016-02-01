@@ -68,11 +68,11 @@ class PasswordController extends Controller
 
         switch ($response) {
             case Password::RESET_LINK_SENT:
-                flash('success',trans($response));
+                flash()->success(trans($response));
                 return redirect()->back();
 
             case Password::INVALID_USER:
-                flash("error",trans($response));
+                flash()->error(trans($response));
                 return redirect()->back();
         }
     }
@@ -126,11 +126,11 @@ class PasswordController extends Controller
 
         switch ($response) {
             case Password::PASSWORD_RESET:
-                flash('success', trans('auth.password_reset_successfull'));
+                flash()->success(trans('auth.password_reset_successfull'));
                 return redirect($this->redirectPath());
 
             default:
-                flash('error', trans($response));
+                flash()->error(trans($response));
                 return redirect()->back()
                     ->withInput($request->only('email'));
         }

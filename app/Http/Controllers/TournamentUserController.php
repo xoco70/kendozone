@@ -101,7 +101,7 @@ class TournamentUserController extends Controller
             $categoryTournaments = $user->categoryTournaments();
 
             if ($categoryTournaments->get()->contains($categoryTournament)) {
-                flash('error', trans('flash.user_already_registered_in_category'));
+                flash()->error(trans('flash.user_already_registered_in_category'));
                 return redirect("tournaments/$tournamentId/users");
 
             } else {
@@ -114,7 +114,7 @@ class TournamentUserController extends Controller
         $invite = new Invite();
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
-        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
 
 
@@ -127,7 +127,7 @@ class TournamentUserController extends Controller
         CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $userId)
             ->delete();
-        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
 
@@ -205,7 +205,7 @@ class TournamentUserController extends Controller
 //        $invite = new Invite();
 //        $code = $invite->generate($user->email, $tournament);
 //        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
-        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
 

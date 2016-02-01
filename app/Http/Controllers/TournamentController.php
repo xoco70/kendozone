@@ -75,7 +75,7 @@ class TournamentController extends Controller
     {
         $tournament = Auth::user()->tournaments()->create($request->all());
         $tournament->categories()->sync($request->input('category'));
-//        flash('success', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
 //        else flash('error', 'operation_failed!');
         return redirect("tournaments/$tournament->id/edit");
     }
@@ -132,7 +132,7 @@ class TournamentController extends Controller
 
         $tournament->update($request->all());
         $tournament->categories()->sync($request->input('category'));
-        flash()->success('Success!', trans('core.operation_successful'));
+        flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournament->id/edit");
     }
 
@@ -141,7 +141,7 @@ class TournamentController extends Controller
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
         $categorySettings->update($request->all());
-        flash()->success("success", Lang::get('core.operation_successful'));
+        flash()->success(Lang::get('core.operation_successful'));
         return view("tournaments/categories", compact('categories'));
     }
 
@@ -155,9 +155,9 @@ class TournamentController extends Controller
     public function destroy(Tournament $tournament)
     {
         if ($tournament->delete()) {
-            flash('success', Lang::get('core.success'));
+            flash()->success(Lang::get('core.success'));
         } else
-            flash('error', Lang::get('core.fail'));
+            flash()->error(Lang::get('core.fail'));
 
         return redirect("tournaments");
     }

@@ -85,9 +85,9 @@ class UserController extends Controller
 //        $user->avatar = $fileName;
 
         if (User::create($data)) {
-            flash('success', Lang::get('core.success'));
+            flash()->success(Lang::get('core.success'));
         } else
-            flash('error', Lang::get('core.fail'));
+            flash()->error(Lang::get('core.fail'));
         return redirect('/users');
     }
 
@@ -144,9 +144,9 @@ class UserController extends Controller
 
 
         if ($user->update($data)) {
-            flash('success', Lang::get('core.success'));
+            flash()->success(Lang::get('core.success'));
         } else
-            flash('error', Lang::get('core.fail'));
+            flash()->success(Lang::get('core.fail'));
 
 
         return redirect("/users");

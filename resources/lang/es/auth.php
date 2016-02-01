@@ -42,14 +42,14 @@ return [
     'reset_password' => 'Reinitializar la contraseña',
     'check_your_email' => 'Te hemos enviado un correo a tu cuenta de correo con un link de activación.',
     'account_already_exists' => 'El correo electrónico ya ha sido usado para otra cuenta',
-    'account_not_activated' => 'La cuenta no ha sido activada. Por favor consulte su email',  // <a href="#">reenviar</a>
+    'account_not_activated' => '¡Hansoku Ikkai! La cuenta no ha sido activada. Por favor consulte su email',  // <a href="#">reenviar</a>
     'login_to_your_account' => 'Conectate a tu cuenta',
     'credentials' => 'Ingresa tus datos',
     'signin_with' => 'O conectate con',
     'no_account' => 'Aún no tienes cuenta?',
     'tx_for_confirm' => 'Gracias por verificar tu email',
     'registration_completed' => 'Gracias por registarte',
-    'user_dont_exist' => 'No hay ningun usuario registrado con este correo',
+    'user_dont_exist' => 'Hansoku nikkai! No hay ningun usuario registrado con este correo',
     'go_to_password_reset' => 'Dale click al link para resetear tu contraseña',
     'password_reset_successfull' => 'Contraseña reinicializada!',
      'enter_new_passwords' => 'Ingresa tu nueva contraseña',
