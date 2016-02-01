@@ -29,7 +29,6 @@ class TournamentSeeder extends Seeder
             'name' => "Fake Tournoi",
             'date' => "2016-02-23",
             'registerDateLimit' => "2016-02-23",
-            'cost' => 100,
             'sport' => 1,
             'type' => 0,
             'mustPay' => 1,

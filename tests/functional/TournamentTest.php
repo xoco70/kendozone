@@ -138,7 +138,7 @@ class TournamentTest extends TestCase
             ->type('2015-12-16', 'registerDateLimit')
             ->type('1', 'mustPay')
             ->type('1', 'type')
-            ->type('5000', 'cost')
+//            ->type('5000', 'cost')
             ->type('2', 'level_id')
             ->type('CDOM', 'venue')
             ->type('1.11111', 'latitude')
@@ -152,7 +152,7 @@ class TournamentTest extends TestCase
                     'registerDateLimit' => '2015-12-16',
                     'mustPay' => '1',
                     'type' => '1',
-                    'cost' => '5000',
+//                    'cost' => '5000',
                     'level_id' => '2',
                     'venue' => 'CDOM',
                     'latitude' => '1.11111',

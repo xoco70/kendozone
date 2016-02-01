@@ -51,7 +51,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
         'name' => $faker->title,
         'date' => "2016-02-23",
         'registerDateLimit' => "2016-02-23",
-        'cost' => $faker->numberBetween(10, 500),
+//        'cost' => $faker->numberBetween(10, 500),
         'sport' => 1,
         'type' => $faker->boolean(),
         'mustPay' => $faker->boolean(),
