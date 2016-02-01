@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('scripts')
+    {!! Html::script('js/tournamentUserCreate.js') !!}
+@stop
 @section('content')
 
     @include("errors.list")

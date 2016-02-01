@@ -1,3 +1,13 @@
+@section('scripts')
+    {!! Html::script('js/jquery.timepicker.js') !!}
+    {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
+    {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
+    {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
+    {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
+@stop
+@section('styles')
+    {!! Html::style('js/jquery.timepicker.css')!!}
+@stop
 <?php
 $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 ?>
@@ -30,9 +40,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         </div>
         <div class="col-md-5">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
-            {{--<div class="ui-slider-labels" name="teamSize"></div>--}}
-            <div class="teamSizeSlider{{$key}}"></div>
-            {!!  Form::hidden('teamSize', $teamSize, [ 'id' => 'teamSize'.$key ]) !!}
+            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
         </div>
         <div class="col-md-5">
 
@@ -60,8 +68,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::hidden('enchoQty', is_null($setting) ? 0 : $setting->enchoQty, [ 'id' => 'enchoQty'.$key ]) !!}
-                <div class="enchoQtySlider{{$key}}"></div>
+                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control']) !!}
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
@@ -92,7 +99,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
-                {!!  Form::input('number','roundRobinWinner',is_null($setting) ? 0 : $setting->roundRobinWinner, ['class' => 'form-control']) !!}
+                {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control']) !!}
             </div>
         </div>
         <div class="col-md-5">
@@ -119,9 +126,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
-                <br/>
-                <div class="fightingAreasSlider{{$key}}"></div>
-                {!!  Form::hidden('fightingAreas',is_null($setting) ? 0 : $setting->fightingAreas, [ 'id' => 'fightingAreas'.$key ]) !!}
+                {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
 
             </div>
 
@@ -155,37 +160,37 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
                 'step': '15'
             }));
 
-            $(".teamSizeSlider{{$key}}").slider({
-                max: 10,
-                value: {!! $teamSize !!} ,
-                change: function (event, ui) {
-                    $('#teamSize{{$key}}').attr('value', ui.value);
-                }
-            });
-            $(".teamSizeSlider{{$key}}").slider("pips");
-            $(".teamSizeSlider{{$key}}").slider("float");
-            //--------------------------
+            {{--$(".teamSizeSlider{{$key}}").slider({--}}
+                {{--max: 10,--}}
+                {{--value: {!! $teamSize !!} ,--}}
+                {{--change: function (event, ui) {--}}
+                    {{--$('#teamSize{{$key}}').attr('value', ui.value);--}}
+                {{--}--}}
+            {{--});--}}
+            {{--$(".teamSizeSlider{{$key}}").slider("pips");--}}
+            {{--$(".teamSizeSlider{{$key}}").slider("float");--}}
+            {{--//----------------------------}}
 
-            $(".enchoQtySlider{{$key}}").slider({
-                max: 5,
-                value: {!! $enchoQty  !!} ,
-                change: function (event, ui) {
-                    $('#enchoQty{{$key}}').attr('value', ui.value);
-                }
-            });
-            $(".enchoQtySlider{{$key}}").slider("pips");
-            $(".enchoQtySlider{{$key}}").slider("float");
-            //--------------------------
+            {{--$(".enchoQtySlider{{$key}}").slider({--}}
+                {{--max: 5,--}}
+                {{--value: {!! $enchoQty  !!} ,--}}
+                {{--change: function (event, ui) {--}}
+                    {{--$('#enchoQty{{$key}}').attr('value', ui.value);--}}
+                {{--}--}}
+            {{--});--}}
+            {{--$(".enchoQtySlider{{$key}}").slider("pips");--}}
+            {{--$(".enchoQtySlider{{$key}}").slider("float");--}}
+            {{--//----------------------------}}
 
-            $(".fightingAreasSlider{{$key}}").slider({
-                max: 5,
-                value: {!! $fightingAreas !!} ,
-                change: function (event, ui) {
-                    $('#fightingAreas{{$key}}').attr('value', ui.value);
-                }
-            });
-            $(".fightingAreasSlider{{$key}}").slider("pips");
-            $(".fightingAreasSlider{{$key}}").slider("float");
+            {{--$(".fightingAreasSlider{{$key}}").slider({--}}
+                {{--max: 5,--}}
+                {{--value: {!! $fightingAreas !!} ,--}}
+                {{--change: function (event, ui) {--}}
+                    {{--$('#fightingAreas{{$key}}').attr('value', ui.value);--}}
+                {{--}--}}
+            {{--});--}}
+            {{--$(".fightingAreasSlider{{$key}}").slider("pips");--}}
+            {{--$(".fightingAreasSlider{{$key}}").slider("float");--}}
 
         });
     </script>

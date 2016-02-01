@@ -1,5 +1,9 @@
 @extends('layouts.dashboard')
-
+@section('scripts')
+    {!! Html::script('js/tournamentCreate.js') !!}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
+    {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
+@stop
 @section('content')
 
     @include("errors.list")

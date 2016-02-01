@@ -1,4 +1,11 @@
 @extends('layouts.dashboard')
+@section('scripts')
+
+    {!! Html::script('js/tournamentUserEdit.js') !!}
+
+    {{--{!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}--}}
+    {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
+@stop
 @section('content')
 
     @include("errors.list")

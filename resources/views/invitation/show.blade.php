@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
-
+@section('scripts')
+    {!! Html::script('js/tournamentInvite.js') !!}
+@stop
+@section('styles')
+    {!! Html::style('css/tournamentInvite.css') !!}
+@stop
 @section('content')
 
     @include("errors.list")

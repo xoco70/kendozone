@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
-
+@section('scripts')
+    {!! Html::script('js/invitationIndex.js') !!}
+@stop
 @section('content')
 
 

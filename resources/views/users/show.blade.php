@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('scripts')
+    {!! Html::script('http://maps.google.com/maps/api/js') !!}
+@stop
 
 @section('content')
 

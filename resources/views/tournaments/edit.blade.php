@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
-
+@section('scripts')
+{!! Html::script('js/tournamentEdit.js') !!}
+{!! Html::script('http://maps.google.com/maps/api/js') !!}
+@stop
+@section('styles')
+{!! Html::style('js/jquery.timepicker.css')!!}
+@stop
 @section('content')
 
 @include("errors.list")
@@ -21,7 +27,7 @@
                         <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     {!!  Form::label('name', trans('crud.name'),['class' => 'text-bold' ]) !!}
                                     <br/>
@@ -29,6 +35,14 @@
 
                                 </div>
 
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
+                                    <br/>
+                                    {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -90,23 +104,16 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}
-                                    <br/>
-                                    {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}
-                                </div>
-                            </div>
+                            {{--<div class="col-md-6">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
+                                    {{--<br/>--}}
+                                    {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
 
-                            <div class="col-md-6">
 
-                                <div class="form-group">
-                                    {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
-                                    <br/>
-                                    {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -275,16 +282,15 @@
                                         <a data-toggle="collapse" data-parent="#accordion-styled"
                                            href="#accordion-styled-group{!! $key !!}">
                                             @if (is_null($setting))
-                                                <div class="panel-heading bg-danger-400">
-                                                    @else
-                                                        <div class="panel-heading bg-success-600">
-                                                            @endif
-                                                            <h6 class="panel-title">
-                                                                {{trans($category->name)}}
-
-
-                                                            </h6>
-                                                        </div>
+                                                <div class="panel-heading">
+                                            @else
+                                                <div class="panel-heading" >
+                                                    <span class="input-group-addon">
+                                            @endif
+                                                    <h6 class="panel-title">
+                                                        {{trans($category->name)}}
+                                                    </h6>
+                                                </div>
                                         </a>
                                         <div id="accordion-styled-group{!! $key !!}"
                                              class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">

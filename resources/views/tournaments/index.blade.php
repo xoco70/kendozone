@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('scripts')
+    {!! Html::script('js/tournamentIndex.js') !!}
+@stop
 @section('content')
 
 

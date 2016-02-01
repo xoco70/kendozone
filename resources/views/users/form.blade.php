@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
+@section('scripts')
+{!! Html::script('js/userCreate.js') !!}
+{!! Html::script('http://maps.google.com/maps/api/js') !!}
 
+{{--    {!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
+{{--    {!! Html::script('js/pages/uploader_bootstrap.js') !!}--}}
+@stop
 @section('content')
 
     @include("errors.list")

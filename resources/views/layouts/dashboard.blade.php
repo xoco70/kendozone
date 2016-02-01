@@ -19,97 +19,81 @@
     <!-- Global stylesheets -->
     {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
     {!! Html::style('css/icons/icomoon/styles.css')!!}
-    {!! Html::style('css/bootstrap.css')!!}
-    {!! Html::style('css/core.css')!!}
-    {!! Html::style('css/components.css')!!}
-    {!! Html::style('css/colors.css')!!}
-            <!-- /global stylesheets -->
 
+    {!! Html::script('js/app.js')!!}
+    {!! Html::style('css/app.css')!!}
 
-    <!-- Core JS files -->
-    {!! Html::script('js/plugins/loaders/pace.min.js') !!}
-    {!! Html::script('js/core/libraries/jquery.min.js') !!}
-    {!! Html::script('js/core/libraries/bootstrap.min.js') !!}
-    {!! Html::script('js/plugins/loaders/blockui.min.js') !!}
-    {{--<!-- /core JS files -->--}}
-    {{--<!-- Theme JS files -->--}}
-    {!! Html::script('js/core/app.js') !!}
-    {!! Html::script('js/plugins/notifications/pnotify.min.js') !!}
+    @yield('scripts')
+    @yield('styles')
 
-    {{--Slider libs--}}
-    {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
-    {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
-    {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
-    {!! Html::script('js/plugins/forms/styling/switch.min.js') !!}
+    {{--@if (Request::is("tournaments") || Request::is("invites"))--}}
+        {{--{!! Html::script('js/plugins/tables/footable/footable.min.js') !!}--}}
+    {{--@endif--}}
+    {{--@if (Request::is("tournaments/create"))--}}
+        {{--{!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
 
-    @if (Request::is("tournaments") || Request::is("invites"))
-        {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
-    @endif
-    @if (Request::is("tournaments/create"))
-        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
+    {{--@endif--}}
 
-    @endif
-
-    @if (Request::is("users/*"))
-        {!! Html::script('http://maps.google.com/maps/api/js') !!}
-        {!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}
-        {!! Html::script('js/pages/uploader_bootstrap.js') !!}
-    @endif
+    {{--@if (Request::is("users/*"))--}}
+        {{--{!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
+        {{--{!! Html::script('js/plugins/uploaders/fileinput.min.js') !!}--}}
+        {{--{!! Html::script('js/pages/uploader_bootstrap.js') !!}--}}
+    {{--@endif--}}
     {{--{!! Html::script('js/jquery.infinitescroll.min.js') !!}--}}
     {{--{!! Html::script('js/pages/form_checkboxes_radios.js') !!}--}}
     {{--EDIT TOURNAMENT PAGE--}}
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit')
-            && !strpos(Request::url(),'users')
-            && !strpos(Request::url(),'categories')
-            && !strpos(Request::url(),'settings')
-            )
-        {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
-        {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
-        {!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}
-        {!! Html::script('js/plugins/pickers/location/location.js') !!}
-        {!! Html::script('http://maps.google.com/maps/api/js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}
-        {!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}
-        {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
+    {{--@if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'edit')--}}
+            {{--&& !strpos(Request::url(),'users')--}}
+            {{--&& !strpos(Request::url(),'categories')--}}
+            {{--&& !strpos(Request::url(),'settings')--}}
+            {{--)--}}
+        {{--{!! Html::script('js/plugins/ui/nicescroll.min.js') !!}--}}
+        {{--{!! Html::script('js/sidebar_detached_sticky_custom.js') !!}--}}
+        {{--{!! Html::script('js/plugins/forms/inputs/duallistbox.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/location/location.js') !!}--}}
+        {{--{!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
+        {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
+        {{--{!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}--}}
 
-        {!! Html::script('js/core/libraries/jquery_ui/interactions.min.js') !!}
-        {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
-        {!! Html::style('js/jquery.timepicker.css')!!}
-        {!! Html::script('js/jquery.timepicker.js') !!}
-        {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
-        {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
-        {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
+        {{--{!! Html::script('js/core/libraries/jquery_ui/interactions.min.js') !!}--}}
+        {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
+        {{--{!! Html::style('js/jquery.timepicker.css')!!}--}}
+        {{--{!! Html::script('js/jquery.timepicker.js') !!}--}}
+        {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/sliders/nouislider.min.js') !!}--}}
         {{--        {!! Html::script('bower/clipboard/dist/clipboard.min.js') !!}--}}
-    @endif
+    {{--@endif--}}
 
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit'))
-        {!! Html::script('js/plugins/ui/nicescroll.min.js') !!}
-        {!! Html::script('js/sidebar_detached_sticky_custom.js') !!}
-        {!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}
-    @endif
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))
+    {{--@if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit'))--}}
+        {{--{!! Html::script('js/plugins/ui/nicescroll.min.js') !!}--}}
+        {{--{!! Html::script('js/sidebar_detached_sticky_custom.js') !!}--}}
+        {{--{!! Html::script('js/plugins/notifications/sweet_alert.min.js') !!}--}}
+    {{--@endif--}}
+    {{--@if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'categories') && strpos(Request::url(),'settings'))--}}
         {{--{!! Html::style('css/clockpicker.css')!!}--}}
         {{--{!! Html::script('js/clockpicker.js') !!}--}}
         {{--{!! Html::style('js/jquery.infinitescroll.min.js')!!}--}}
-        {!! Html::style('js/jquery.timepicker.css')!!}
-        {!! Html::script('js/jquery.timepicker.js') !!}
-        {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
-        {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
-        {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
-        {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
-    @endif
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )
-        {!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}
-        {!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}
-        {!! Html::script('js/plugins/forms/selects/select2.min.js') !!}
+        {{--{!! Html::style('js/jquery.timepicker.css')!!}--}}
+        {{--{!! Html::script('js/jquery.timepicker.js') !!}--}}
+        {{--{!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}--}}
+        {{--{!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/sliders/nouislider.min.js') !!}--}}
+    {{--@endif--}}
+    {{--@if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'users') && !strpos(Request::url(),'edit')  )--}}
+        {{--{!! Html::script('js/plugins/tables/datatables/datatables.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}--}}
+        {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}
 
-    @endif
-    @if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'invite'))
-        {!! Html::script('js/plugins/multiple-emails.js') !!}
-        {!! Html::style('css/multiple-emails.css') !!}
-    @endif
+    {{--@endif--}}
+    {{--@if (strpos(Request::url(),'tournaments') && strpos(Request::url(),'invite'))--}}
+        {{--{!! Html::script('js/plugins/multiple-emails.js') !!}--}}
+        {{--{!! Html::style('css/multiple-emails.css') !!}--}}
+    {{--@endif--}}
 </head>
 
 <body class="sidebar-xs has-detached-right">
