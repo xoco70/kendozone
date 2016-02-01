@@ -36,20 +36,19 @@ elixir(function (mix) {
         'core/libraries/bootstrap.min.js',
         'plugins/loaders/blockui.min.js',
         'core/app.js',
-        'plugins/notifications/pnotify.min.js',
+        'plugins/notifications/noty.min.js',
         'core/libraries/jquery_ui/sliders.min.js',
         'core/libraries/jquery_ui/touch.min.js',
         'plugins/sliders/slider_pips.min.js',
         'plugins/forms/styling/switch.min.js'
     ], 'public/js/app.js');
 
-
     mix.scripts([
-        'plugins/tables/footable/footable.min.js',
+        'plugins/tables/footable/footable.min.js'
     ], 'public/js/tournamentIndex.js');
 
     mix.scripts([
-        'plugins/tables/footable/footable.min.js',
+        'plugins/tables/footable/footable.min.js'
     ], 'public/js/invitationIndex.js');
 
     mix.scripts([
