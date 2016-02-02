@@ -30,9 +30,9 @@ Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
 });
 
 // Home > Tournaments > MyTournament > Add Competitors
-Breadcrumbs::register('tournament_users', function ($breadcrumbs, $tournament) {
-    $breadcrumbs->parent('tournaments');
-    $breadcrumbs->push(trans('crud.invite_competitors'), action('TournamentController@edit', [$tournament->id]));
+Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('tournaments.edit',$tournament);
+    $breadcrumbs->push(trans('crud.add_competitors'), route('tournaments.users.index', $tournament->id));
 });
 
 // Home > Tournaments > MyTournament > Add Competitors  //TODO A Completar
