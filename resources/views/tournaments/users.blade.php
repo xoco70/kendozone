@@ -9,20 +9,21 @@
         <?php
 
         $link = "";
-        $id = "";
         if ($settingSize > 0 && $settingSize == $categorySize)
             $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->id]);
         else
             // For showing Modal
             $link = "#";
-        $id = 'id="generate_tree"';
+
 
         ?>
                 <!-- Detached content -->
         <div class="container-detached">
             <div class="content-detached">
+                <?php
+//                dd($tournament->categoryTournaments);
+                ?>
                 @foreach($tournament->categoryTournaments as $categoryTournament)
-
                     <div class="panel panel-flat">
 
                         <div class="panel-body">
@@ -41,7 +42,7 @@
                             <div class="container-fluid">
 
 
-                                <a href="{!!   $link !!}" {!! $id !!}
+                                <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
                                 class="btn bg-teal btn-xs pull-right ml-20"><b><i
                                                 class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
                                 </a>
@@ -49,7 +50,7 @@
                                                     ['tournamentId'=>$tournament->id,
                                                     'categoryId'=>$categoryTournament->id
                                                     ]) !!}"
-                                   class="btn btn-primary btn-xs pull-right"><b><i
+                                   class="btn btn-primary btn-xs pull-right" id="addcompetitor{!! $categoryTournament->id !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
                                 </a>
 

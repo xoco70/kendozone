@@ -11,6 +11,7 @@ use App\Tournament;
 use App\User;
 use GeoIP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Webpatser\Countries\Countries;
 
@@ -62,6 +63,7 @@ class TournamentUserController extends Controller
      */
     public function store(Request $request, $tournamentId, AppMailer $mailer)
     {
+
         $this->validate($request, [
             'username' => 'required|max:255',
             'email' => 'required',
@@ -70,6 +72,10 @@ class TournamentUserController extends Controller
         ]);
 
         $categoryTournamentId = $request->categoryTournamentId;
+
+//        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($userId);
+
+
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
         $email = $request->email;
         $username = $request->username;
@@ -79,7 +85,7 @@ class TournamentUserController extends Controller
         $password = null;
         if (is_null($user)) {
             //Create user first
-            $location = GeoIP::getLocation("189.209.75.100"); // Simulating IP in Mexico DF
+            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
             $country = Countries::where('name', '=', $location['country'])->first();
             $password = User::generatePassword();
 
@@ -98,15 +104,16 @@ class TournamentUserController extends Controller
             // User already exists
             // We check that this user isn't registered in this tournament
             $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
-            $categoryTournaments = $user->categoryTournaments();
+        }
 
-            if ($categoryTournaments->get()->contains($categoryTournament)) {
-                flash()->error(trans('flash.user_already_registered_in_category'));
-                return redirect("tournaments/$tournamentId/users");
+        $categoryTournaments = $user->categoryTournaments();
 
-            } else {
-                $categoryTournaments->attach($categoryTournamentId);
-            }
+        if ($categoryTournaments->get()->contains($categoryTournament)) {
+            flash()->error(trans('flash.user_already_registered_in_category'));
+            return redirect("tournaments/$tournamentId/users");
+
+        } else {
+            $categoryTournaments->attach($categoryTournamentId);
         }
 
 
@@ -140,7 +147,7 @@ class TournamentUserController extends Controller
      */
     public function show(Tournament $tournament, User $user)
     {
-        return view('users.show', compact('tournament','user'));
+        return view('users.show', compact('tournament', 'user'));
     }
 
     /**

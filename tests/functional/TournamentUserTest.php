@@ -1,10 +1,7 @@
 <?php
-use App\CategoryTournament;
 use App\Tournament;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Lang;
 
 /**
  * List of User Test
@@ -19,7 +16,7 @@ use Illuminate\Support\Facades\Lang;
  */
 class TournamentUserTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
 //    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament;
 
@@ -31,17 +28,45 @@ class TournamentUserTest extends TestCase
     }
 
     /** @test */
-    public function it_add_a_user_to_tournament_category(){
+    public function it_add_a_user_to_tournament_category()
+    {
+        // Given
+
+        $tournament = Tournament::find(1);
+
+
+        $categoryTournaments = $tournament->categoryTournaments;
+        foreach ($categoryTournaments as $categoryTournament) {
+            echo $categoryTournament->category->name;
+            $this->visit('/tournaments/' . $tournament->id . '/edit')
+                ->click(trans_choice('crud.competitor', 2))
+                ->click('addcompetitor' . $categoryTournament->id)
+                ->type('usertest', 'username')
+                ->type('usertest@gmail.com', 'email')
+                ->press(trans("core.save"))
+                ->seePageIs('/tournaments/' . $tournament->id . '/users');
+
+
+            $user = User::where('email', 'usertest@gmail.com')->first();
+            // User must exists
+            $this->seeInDatabase('category_tournament_user',
+                ['category_tournament_id' => $categoryTournament->id,
+                    'user_id' => $user->id,
+                ]);
+        }
+
 
     }
 
     /** @test */
-    public function it_removes_a_user_from_tournament_category(){
+    public function it_removes_a_user_from_tournament_category()
+    {
 
     }
 
     /** @test */
-    public function you_must_own_tournament_to_add_or_remove_user_from_tournament(){
+    public function you_must_own_tournament_to_add_or_remove_user_from_tournament()
+    {
 
     }
 
