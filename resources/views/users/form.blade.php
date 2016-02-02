@@ -79,13 +79,17 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
+                                                    {!!  Form::label('preview', trans('crud.preview')) !!}
+
+
+                                                </div>
+                                                <div class="col-md-2">
                                                     {!!  Form::label('avatar', trans('crud.avatar')) !!}
 
-                                                    <input type="file" id="avatar" name="avatar"
-                                                           data-show-upload="false"
-                                                           class="file-input-custom" accept="image/*">
-
+                                                    <div id="dZUpload" class="dropzone">
+                                                        <div class="dz-default dz-message"></div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -188,4 +192,22 @@
         </div>
         {!! Form::close()!!}
     </div>
+    <script>
+        $(document).ready(function () {
+            Dropzone.autoDiscover = false;
+            $("#dZUpload").dropzone({
+                url: "hn_SimpeFileUploader.ashx",
+                uploadMultiple:false,
+                addRemoveLinks: true,
+                success: function (file, response) {
+                    var imgName = response;
+                    file.previewElement.classList.add("dz-success");
+                    console.log("Successfully uploaded :" + imgName);
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                }
+            });
+        });
+    </script>
 @stop
