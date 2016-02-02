@@ -182,10 +182,7 @@
                         </div>
                         {{--@include("right-panel.users_menu")--}}
                     </div>
-
                 </div>
-
-
             </div>
 
 
@@ -198,7 +195,10 @@
             $("#dZUpload").dropzone({
                 url: "hn_SimpeFileUploader.ashx",
                 uploadMultiple:false,
+                maxFiles:1,
                 addRemoveLinks: true,
+                thumbnailWidth:150,
+                thumbnailHeigth:150,
                 success: function (file, response) {
                     var imgName = response;
                     file.previewElement.classList.add("dz-success");
