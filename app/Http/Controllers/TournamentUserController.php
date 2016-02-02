@@ -138,9 +138,9 @@ class TournamentUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tournament $tournament)
+    public function show(Tournament $tournament, User $user)
     {
-        dd("show");
+        return view('users.show', compact('tournament','user'));
     }
 
     /**

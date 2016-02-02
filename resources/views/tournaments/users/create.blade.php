@@ -2,6 +2,9 @@
 @section('scripts')
     {!! Html::script('js/tournamentUserCreate.js') !!}
 @stop
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('tournaments.users.create',$tournament) !!}
+@stop
 @section('content')
 
     @include("errors.list")

@@ -53,7 +53,7 @@ class TournamentTest extends TestCase
         $this->visit("/tournaments")
             ->see($this->tournaments)
             ->click($this->addTournaments)
-            ->press($this->addTournaments)
+            ->press($this->addTournament)
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")//Lang::get('validation.filled', ['attribute' => "name"])
             ->see("El campo date es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
@@ -97,7 +97,7 @@ class TournamentTest extends TestCase
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'date')
             ->storeInput('category', [1, 2], true)
-            ->press($this->addTournaments)
+            ->press($this->addTournament)
             ->see(Lang::get('core.operation_successful'))
             ->seeInDatabase('tournament', ['name' => 'MyTournament']);
 
