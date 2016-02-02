@@ -17,7 +17,9 @@
     "torann/geoip": "0.2.*@dev",
     "maatwebsite/excel": "~2.0.0",
     "barryvdh/laravel-debugbar": "^2.1",
-    "barryvdh/laravel-ide-helper": "^2.1"
+    "barryvdh/laravel-ide-helper": "^2.1",
+    "intervention/image": "^2.3",
+    "davejamesmiller/laravel-breadcrumbs": "^3.0"
 
   },
   "require-dev": {

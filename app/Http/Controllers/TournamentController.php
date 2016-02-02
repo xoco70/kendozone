@@ -28,8 +28,8 @@ class TournamentController extends Controller
         // Fetch the Site Settings object
 //        $this->middleware('auth');
 //        $this->currentModelName = trans_choice('crud.tournament', 1);
-        $this->currentModelName = trans_choice('crud.tournament', 2);
-        View::share('currentModelName', $this->currentModelName);
+//        $this->currentModelName = trans_choice('crud.tournament', 2);
+//        View::share('currentModelName', $this->currentModelName);
 //        View::share('modelPlural', $this->modelPlural);
     }
 
@@ -40,6 +40,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
+        $currentModelName = trans_choice('crud.tournament', 2);
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
         } else {
@@ -47,7 +48,7 @@ class TournamentController extends Controller
                 ->paginate(Config::get('constants.PAGINATION'));
         }
 
-        return view('tournaments.index', compact('tournaments'));
+        return view('tournaments.index', compact('tournaments','currentModelName'));
     }
 
     /**
@@ -57,12 +58,13 @@ class TournamentController extends Controller
      */
     public function create()
     {
+        $currentModelName = trans_choice('crud.tournament', 1);
         $levels = TournamentLevel::lists('name', 'id');
         $categories = Category::lists('name', 'id');
         $tournament = new Tournament();
 //        dd($categories);
 //        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('levels', 'categories', 'tournament'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament','currentModelName'));
     }
 
     /**

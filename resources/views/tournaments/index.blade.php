@@ -2,6 +2,11 @@
 @section('scripts')
     {!! Html::script('js/tournamentIndex.js') !!}
 @stop
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('tournaments') !!}
+
+@stop
+
 @section('content')
 
 

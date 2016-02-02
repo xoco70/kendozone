@@ -6,8 +6,11 @@
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
-@section('content')
+@section('breadcrumbs')
+{!! Breadcrumbs::render('edit_tournament',$tournament) !!}
 
+@stop
+@section('content')
 @include("errors.list")
 
 

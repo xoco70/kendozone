@@ -5,6 +5,9 @@
 @section('styles')
     {!! Html::style('css/tournamentInvite.css') !!}
 @stop
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('invite_competitors',$tournament) !!}
+@stop
 @section('content')
 
     @include("errors.list")

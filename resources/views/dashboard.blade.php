@@ -1,10 +1,10 @@
 @extends('layouts.dashboard')
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('dashboard') !!}
 
+@stop
 @section('content')
     @include("errors.list")
-
-
-
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

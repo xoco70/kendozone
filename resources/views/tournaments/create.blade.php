@@ -4,6 +4,9 @@
     {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
 @stop
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('create_tournament',$currentModelName) !!}
+@stop
 @section('content')
 
     @include("errors.list")
