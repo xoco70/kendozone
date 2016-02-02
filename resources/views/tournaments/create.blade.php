@@ -5,7 +5,7 @@
     {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
 @stop
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('create_tournament',$currentModelName) !!}
+    {!! Breadcrumbs::render('tournaments.create',$currentModelName) !!}
 @stop
 @section('content')
 

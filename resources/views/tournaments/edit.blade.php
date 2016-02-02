@@ -7,7 +7,7 @@
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
 @section('breadcrumbs')
-{!! Breadcrumbs::render('edit_tournament',$tournament) !!}
+{!! Breadcrumbs::render('tournaments.edit',$tournament) !!}
 
 @stop
 @section('content')

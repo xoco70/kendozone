@@ -6,7 +6,7 @@
     {!! Html::style('css/tournamentInvite.css') !!}
 @stop
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('invite_competitors',$tournament) !!}
+    {!! Breadcrumbs::render('invites.show',$tournament) !!}
 @stop
 @section('content')
 

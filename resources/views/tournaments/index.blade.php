@@ -3,7 +3,7 @@
     {!! Html::script('js/tournamentIndex.js') !!}
 @stop
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('tournaments') !!}
+    {!! Breadcrumbs::render('tournaments.index') !!}
 
 @stop
 

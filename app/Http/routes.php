@@ -88,10 +88,10 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
         Route::resource('invites', 'InviteController');
         Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
 
-        Route::resource('competitors', 'CompetitorController');
-        Route::resource('grade', 'GradeController');
+//        Route::resource('competitors', 'CompetitorController');
+//        Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');
-        Route::resource('country', 'CountryController');
+//        Route::resource('country', 'CountryController');
 
 //        Route::resource('places', 'PlaceController');
     });
