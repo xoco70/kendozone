@@ -27,7 +27,7 @@ return [
 
 
     //Common
-
+    'preview' => ' Vista Previa',
 
 
     //Tournament

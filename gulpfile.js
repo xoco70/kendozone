@@ -61,11 +61,11 @@ elixir(function (mix) {
         //'http://maps.google.com/maps/api/js',
         'plugins/uploaders/fileinput.min.js',
         'pages/uploader_bootstrap.js',
-        'plugins/dropzone.js'
+        //'plugins/dropzone.js'
     ], 'public/js/userCreate.js');
 
     mix.styles([
-        'dropzone.css'
+        //'dropzone.css'
     ], 'public/css/userCreate.css');
     //mix.scripts([
     //    'http://maps.google.com/maps/api/js',

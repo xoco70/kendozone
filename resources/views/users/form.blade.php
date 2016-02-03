@@ -79,17 +79,21 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-4">
-                                                    {!!  Form::label('preview', trans('crud.preview')) !!}
-
-
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+<br/>
+                                                        @if ($user->avatar)
+                                                            <img src="{!! $user->avatar !!}" class="img-thumbnail center-block"/>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     {!!  Form::label('avatar', trans('crud.avatar')) !!}
 
-                                                    <div id="dZUpload" class="dropzone">
-                                                        <div class="dz-default dz-message"></div>
-                                                    </div>
+                                                    <input type="file" id="avatar" name="avatar"
+                                                           data-show-upload="false"
+                                                           class="file-input-custom" accept="image/*">
+
                                                 </div>
                                             </div>
 
@@ -182,32 +186,14 @@
                         </div>
                         {{--@include("right-panel.users_menu")--}}
                     </div>
+
                 </div>
+
+
             </div>
 
 
         </div>
         {!! Form::close()!!}
     </div>
-    <script>
-        $(document).ready(function () {
-            Dropzone.autoDiscover = false;
-            $("#dZUpload").dropzone({
-                url: "hn_SimpeFileUploader.ashx",
-                uploadMultiple:false,
-                maxFiles:1,
-                addRemoveLinks: true,
-                thumbnailWidth:150,
-                thumbnailHeigth:150,
-                success: function (file, response) {
-                    var imgName = response;
-                    file.previewElement.classList.add("dz-success");
-                    console.log("Successfully uploaded :" + imgName);
-                },
-                error: function (file, response) {
-                    file.previewElement.classList.add("dz-error");
-                }
-            });
-        });
-    </script>
 @stop
