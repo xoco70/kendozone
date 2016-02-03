@@ -1,13 +1,3 @@
-@section('scripts')
-    {!! Html::script('js/jquery.timepicker.js') !!}
-    {!! Html::script('js/core/libraries/jquery_ui/sliders.min.js') !!}
-    {!! Html::script('js/core/libraries/jquery_ui/touch.min.js') !!}
-    {!! Html::script('js/plugins/sliders/slider_pips.min.js') !!}
-    {!! Html::script('js/plugins/sliders/nouislider.min.js') !!}
-@stop
-@section('styles')
-    {!! Html::style('js/jquery.timepicker.css')!!}
-@stop
 <?php
 $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 ?>

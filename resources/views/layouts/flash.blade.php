@@ -5,7 +5,7 @@
             type: 'success',
             width: 200,
             dismissQueue: true,
-            timeout: 2000,
+            timeout: 3000,
             text: "{{session('flash_message.message')}}",
         });
 

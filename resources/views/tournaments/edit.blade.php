@@ -288,7 +288,6 @@
                                                 <div class="panel-heading">
                                             @else
                                                 <div class="panel-heading" >
-                                                    <span class="input-group-addon">
                                             @endif
                                                     <h6 class="panel-title">
                                                         {{trans($category->name)}}
