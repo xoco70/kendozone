@@ -34,7 +34,7 @@ class TournamentUserController extends Controller
      */
     public function index($tournamentId)
     {
-        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find(1);
+        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournamentId);
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 

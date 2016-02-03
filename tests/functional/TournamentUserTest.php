@@ -1,6 +1,8 @@
 <?php
+use App\CategoryTournament;
 use App\Tournament;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -9,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
  * it_add_a_user_to_tournament_category()
  * it_removes_a_user_from_tournament_category()
  * you_must_own_tournament_to_add_or_remove_user_from_tournament()
+ * you_can_confirm_a_user
  *
  * User: juliatzin
  * Date: 10/11/2015
@@ -16,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class TournamentUserTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
 //    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament;
 
@@ -31,15 +34,18 @@ class TournamentUserTest extends TestCase
     public function it_add_a_user_to_tournament_category()
     {
         // Given
-
-        $tournament = Tournament::find(1);
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
 
 
         $categoryTournaments = $tournament->categoryTournaments;
+//        dd($categoryTournaments);
         foreach ($categoryTournaments as $categoryTournament) {
-            echo $categoryTournament->category->name;
+//            echo $categoryTournament->category->name;
             $this->visit('/tournaments/' . $tournament->id . '/edit')
                 ->click(trans_choice('crud.competitor', 2))
+//                ->dump();
                 ->click('addcompetitor' . $categoryTournament->id)
                 ->type('usertest', 'username')
                 ->type('usertest@gmail.com', 'email')
@@ -61,6 +67,8 @@ class TournamentUserTest extends TestCase
     /** @test */
     public function it_removes_a_user_from_tournament_category()
     {
+//        $tournament = Tournament::find(1);
+//        $categoryTournaments = $tournament->categoryTournaments;
 
     }
 
