@@ -108,13 +108,12 @@
 
                         <div class="row">
                             {{--<div class="col-md-6">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
-                                    {{--<br/>--}}
-                                    {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
-                                {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
+                            {{--<br/>--}}
+                            {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
                             {{--</div>--}}
-
+                            {{--</div>--}}
 
 
                         </div>
@@ -280,20 +279,30 @@
 
                                     ?>
 
-                                    <div class="panel">
+                                    <div class="panel ">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <a data-toggle="collapse" data-parent="#accordion-styled"
+                                                   href="#accordion-styled-group{!! $key !!}">
 
-                                        <a data-toggle="collapse" data-parent="#accordion-styled"
-                                           href="#accordion-styled-group{!! $key !!}">
-                                            @if (is_null($setting))
+                                                    <div class="panel-heading">
+                                                        <h6 class="panel-title">
+                                                            {{trans($category->name)}}
+                                                        </h6>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-1">
                                                 <div class="panel-heading">
-                                            @else
-                                                <div class="panel-heading" >
-                                            @endif
-                                                    <h6 class="panel-title">
-                                                        {{trans($category->name)}}
-                                                    </h6>
-                                                </div>
-                                        </a>
+                                                    @if (is_null($setting))
+                                                        <i class="glyphicon  glyphicon-exclamation-sign text-orange-600"></i>
+                                                    @else
+                                                        <i class="glyphicon glyphicon-ok text-success"></i>
+                                                    @endif
+                                                    </div>
+                                            </div>
+
+                                        </div>
                                         <div id="accordion-styled-group{!! $key !!}"
                                              class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
                                             <div class="panel-body">
@@ -302,8 +311,6 @@
                                             </div>
 
                                         </div>
-
-
                                     </div>
                                 @endforeach
                             </div>
