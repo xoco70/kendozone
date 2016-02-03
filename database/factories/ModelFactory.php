@@ -48,7 +48,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
 
     return [
         'user_id' => $faker->randomElement($users),
-        'name' => $faker->title,
+        'name' => $faker->colorName,
         'date' => "2016-02-23",
         'registerDateLimit' => "2016-02-23",
 //        'cost' => $faker->numberBetween(10, 500),

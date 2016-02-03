@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Lang;
  * it_edit_tournament()
  * you_must_own_tournament_to_edit_it_or_be_superuser()
  * it_configure_a_tournament_category
+ * it_delete_tournament
  *
  * User: juliatzin
  * Date: 10/11/2015
@@ -257,6 +258,11 @@ class TournamentTest extends TestCase
         $this->visit('/tournaments/' . $hisTournament->id . '/edit')
             ->see("403");
         Auth::loginUsingId(1);
+
+    }
+
+    /** @test */
+    public function it_delete_tournament(){
 
     }
 }
