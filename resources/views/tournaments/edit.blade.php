@@ -146,7 +146,7 @@
                 <div class="container-fluid">
 
 
-                    <fieldset title="Venue">
+                    <fieldset title="{{Lang::get('crud.venue')}}">
                         <a name="place">
                             <legend class="text-semibold">{{Lang::get('crud.venue')}}</legend>
                         </a>
@@ -257,7 +257,7 @@
         <div class="panel panel-flat">
             <div class="panel-body">
                 <div class="container-fluid">
-                    <fieldset title="{{trans_choice('crud.category',2)}}">
+                    <fieldset title="{{trans_choice('crud.categorySettings',2)}}">
                         <a name="categories">
                             <legend class="text-semibold">{{trans_choice('crud.categorySettings',2)}}</legend>
                         </a>
@@ -269,7 +269,9 @@
 
                             <div class="panel-group" id="accordion-styled">
 
-                                @foreach($categoriesWithSettings as $key => $category)
+<!--                                --><?php //dd($tournament->categoryTournaments); ?>
+
+                                @foreach($tournament->categoryTournaments as $key => $categoryTournament)
                                     <?php
 
                                     $setting = $tournament->categoryTournaments->get($key)->settings;
@@ -287,7 +289,7 @@
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($category->name)}}
+                                                            {{trans($categoryTournament->category->name)}}
                                                         </h6>
                                                     </div>
                                                 </a>

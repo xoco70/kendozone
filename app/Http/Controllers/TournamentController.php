@@ -118,9 +118,9 @@ class TournamentController extends Controller
         //TODO Hay que usar tournament instead of cws
         $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
 //        dd($tournament->categoryTournaments->get(5)->settings);
-        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
+//        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
 //        dd($categoriesWithSettings);
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'categoriesWithSettings'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize')); // , 'categoriesWithSettings'
     }
 
     /**
