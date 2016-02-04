@@ -1,4 +1,8 @@
 <?php
+use App\CategorySettings;
+use App\CategoryTournament;
+use App\CategoryTournamentUser;
+use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
@@ -163,21 +167,30 @@ class UserTest extends TestCase
     }
 
     /** @test */
-//    public function it_delete_user()
-//    {
-//        $user = factory(User::class)->create(['name'=>'MyUser']);
-//        $this->seeInDatabase('users',['name' => 'MyUser']);
-//
-////        $delete = Lang::get('crud.delete');
-////        $this->it_create_user();
-//
-//        $this->visit('/users')
-//                ->click('delete_'.$user->id)
-//            ->seePageIs('/users')
-//            ->see(Lang::get('core.success'))
-//            ->dontSee('My User')
-//            ->notSeeInDatabase('user', ['name' => 'My User']);
-//    }
+    public function it_delete_user()
+    {
+        // Given
+        $user = factory(User::class)->create(['name'=>'MyKendoUser']);
+        $this->seeInDatabase('users',['name' => 'MyKendoUser']);
+
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $user->id]);
+        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(CategorySettings::class)->create(['category_tournament_id' => $ct1->id]);
+        factory(CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id]);
+
+
+        $this->visit('/users')
+            ->press('delete_'.$user->id)
+            ->seePageIs('/users')
+            ->seeIsSoftDeletedInDatabase('users',['name' => 'MyKendoUser'])
+            ->seeIsSoftDeletedInDatabase('tournament',['user_id' => $user->id])
+//            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
+//            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
+//            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
+
+        ;
+
+    }
 
 
     /** @test */

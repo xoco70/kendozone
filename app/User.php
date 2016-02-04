@@ -10,6 +10,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ use Webpatser\Countries\Countries;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -28,6 +29,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +65,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::creating(function ($user) {
             $user->token = str_random(30);
         });
+
+        // If a User is deleted, you must delete:
+        // His tournaments, his tcus
+
+        static::deleting(function ($user) {
+            $user->tournaments()->delete();
+            $user->categoryTournamentUsers()->delete();
+
+        });
+        static::restoring(function ($user) {
+            $user->tournaments()->restore();
+            $user->categoryTournamentUsers()->restore();
+
+        });
+
+
     }
 
     /**
@@ -83,19 +101,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function uploadPic(UserRequest $request, $except = null)
     {
-//        if (is_null($data))
         $data = $request->except($except);
 
         if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
 
             $destinationPath = Config::get('constants.RELATIVE_AVATAR_PATH');
-//            dd($destinationPath );
             $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
             $fileName = trim($data['name']) . "_" . $timestamp; // renameing image
             $fileName = Str::slug($fileName, '-') . '.' . $extension;
-//            dd($destinationPath, $fileName);
             if (!Input::file('avatar')->move($destinationPath, $fileName)) {
                 flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;
@@ -107,21 +122,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $data;
     }
-//    public function setAvatarAttribute($avatar){
-//
-//        if (!is_null($avatar) && is_file($avatar)){
-//            $extension = $avatar->getClientOriginalExtension(); // getting image extension
-//            $date = new DateTime();
-//            $timestamp =  $date->getTimestamp();
-//            $fileName = $timestamp.'.'.$extension; // renameing image
-//            $this->attributes['avatar'] = $fileName;
-//            dd($fileName);
-//
-//
-//        }else{
-//            dd("isNull");
-//        }
-//    }
+
 
     public function getAvatarAttribute($avatar)
     {
@@ -136,32 +137,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         } else {
 
         }
-
-
         return $avatar;
     }
 
-    /**
-     * Set the password attribute.
-     *
-     * @param string $password
-     */
-//    public function setPasswordAttribute($password)
-//    {
-//        if (strlen($password) < 60) {
-////            dd($password);
-//            $this->attributes['password'] = bcrypt($password);
-//        }else{
-////            dd("Already Encrypted");
-//        }
-//
-//    }
-
-
-//    public function country()
-//    {
-//        return $this->hasOne('App\Country');
-//    }
     public function grade()
     {
         return $this->belongsTo('App\Grade');
@@ -197,18 +175,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament');
     }
 
-//    public function isRegisteredInTournament($tournamentId)
-//    {
-//        $count = DB::table('category_tournament_user as ctu')
-//            ->join('category_tournament as ct', 'ct.id', '=', 'ctu.category_tournament_id')
-//            ->where('ctu.user_id',$this->id)
-//            ->where('ct.tournament_id',$tournamentId)
-//            ->count();
-////        dd($count);
-//        return $count > 0 ;
-//    }
-
-
     public function categories()
     {
         return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id', 'category_tournament_id');
@@ -218,11 +184,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany(CategoryTournament::class);
     }
-//    public function hasAtLeastOneTournament(){
-//
-//        return $this->tournaments()->first(); // Where not finished
-//    }
-
+    public function categoryTournamentUsers()
+    {
+        return $this->hasMany(CategoryTournamentUser::class);
+    }
 
     public static function insertCoordsInRequest(Request $request)
     {

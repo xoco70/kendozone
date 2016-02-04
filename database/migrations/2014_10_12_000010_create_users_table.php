@@ -50,6 +50,7 @@ class CreateUsersTable extends Migration
             $table->string('provider_id')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
 
         });

@@ -1,6 +1,7 @@
 <?php
 use App\CategorySettings;
 use App\CategoryTournament;
+use App\CategoryTournamentUser;
 use App\Tournament;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
@@ -269,22 +270,18 @@ class TournamentTest extends TestCase
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
         $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(CategorySettings::class)->create(['category_tournament_id' => $ct1->id]);
+        factory(CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id]);
 
         // Check that tournament is gone
         $this->visit("/tournaments")
             ->see($this->tournaments)
             ->press("delete_" . $tournament->id)
-            ->seeIsSoftDeletedInDatabase('tournament',
-                ['id' => $tournament->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament',
-                ['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament',
-                ['id' => $ct2->id]);
-//        ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
-//        ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct2->id])
-//        ->seeIsSoftDeletedInDatabase('category_tournament',
-//        ['id' => $ct2->id]);
-        // Check that categories are gone
+            ->seeIsSoftDeletedInDatabase('tournament',['id' => $tournament->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct2->id]);
+//            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
+//            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
 
     }
 }
