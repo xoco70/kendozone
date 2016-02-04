@@ -105,7 +105,7 @@ class InviteTest extends TestCase
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 1]);
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
-        factory(User::class)->create(['email' => 'xoco@aaa.bbb',
+        factory(User::class)->create(['email' => 'xoco@aaa.bbb2',
             'role_id' => 3,
             'password' => bcrypt('111111'), // 111111
             ]);

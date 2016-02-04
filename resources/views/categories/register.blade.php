@@ -18,9 +18,26 @@
                         @else
                             {!! Form::open(['url'=>'tournaments/'.$tournament->id.'/invite/0/categories']) !!}
                         @endif
-                            <h6 class="coutent-group"></h6>
+
+                        <?php
+//                        $tcus = App\CategoryTournamentUser::with();
+//                        $user = App\User::with('categoryTournaments','categoryTournamentUsers')
+//                                ->find(Auth::user()->id);
+//                            dd($user);
+//                        }])->get();
 
 
+                        //                        $user = App\User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
+//                        foreach($user->categoryTournaments as $categoryTournament) {
+//                            echo($categoryTournament->pivot->user_id);
+////                            echo 'Category Name: '.$categoryTournament->category->name;
+////                            echo 'Tournament Name: '.$categoryTournament->tournament->name;
+//                            echo '<br>';
+//                        }
+                        ?>
+
+
+                        {{--// BAD ELOQUENT RELATIONSHIP Auth::user()->categoryTournaments->get($key)--}}
                             @foreach($tournament->categoryTournaments as $key => $categoryTournament)
 
                                 @if ($key % 4 == 0)
@@ -30,7 +47,10 @@
                                             <p>
 
                                                 {!!  Form::label('cat['.$key.']', trans($categoryTournament->category->name)) !!} <br/>
-                                                {!!   Form::checkbox('cat['.$key.']', $categoryTournament->id,Auth::user()->categoryTournaments->get($key), ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                                {!!   Form::checkbox('cat['.$key.']',
+                                                    $categoryTournament->id,
+                                                    $categoryTournament->users()->where('users.id',Auth::user()->id)->count(),
+                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                             </p>
                                         </div>
                                         @if ($key % 3 == 0 && $key != 0)
