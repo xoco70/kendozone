@@ -36,6 +36,7 @@ class CreateCategoryTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
 
 
@@ -60,6 +61,7 @@ class CreateCategoryTable extends Migration
             $table->boolean('confirmed');
 
             $table->timestamps();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
 
 

@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
 class CategoryTournament extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $table = 'category_tournament';
+
     public $timestamps = true;
     protected $fillable = [
         "tournament_id",
@@ -16,6 +20,19 @@ class CategoryTournament extends Model
 //        "confirmed",
     ];
 
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($categoryTournament) {
+            $categoryTournament->settings()->delete();
+            $categoryTournament->users()->delete();
+        });
+        static::restoring(function($categoryTournament) {
+            $categoryTournament->settings()->restore();
+            $categoryTournament->users()->restore();
+
+        });
+    }
 
 //    public function ctu(){
 //        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id','id');

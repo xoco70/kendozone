@@ -126,7 +126,7 @@ class TournamentTest extends TestCase
     /** @test */
     public function it_edit_tournament($tournament = null)
     {
-        if ($tournament == null){
+        if ($tournament == null) {
             $tournament = factory(Tournament::class)->create(['name' => 'MyTournament']);
             factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
 
@@ -160,7 +160,6 @@ class TournamentTest extends TestCase
                     'longitude' => '2.22222',
                 ]);
     }
-
 
 
     /** @test */
@@ -198,6 +197,7 @@ class TournamentTest extends TestCase
 
 
     }
+
     /** @test */
     public function it_edit_tournament_category_conf()
     {
@@ -239,6 +239,7 @@ class TournamentTest extends TestCase
 
 
     }
+
     /** @test */
     public function you_must_own_tournament_to_edit_it_or_be_superuser()
     {
@@ -262,7 +263,28 @@ class TournamentTest extends TestCase
     }
 
     /** @test */
-    public function it_delete_tournament(){
+    public function it_delete_tournament()
+    {
+
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+
+        // Check that tournament is gone
+        $this->visit("/tournaments")
+            ->see($this->tournaments)
+            ->press("delete_" . $tournament->id)
+            ->seeIsSoftDeletedInDatabase('tournament',
+                ['id' => $tournament->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament',
+                ['id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament',
+                ['id' => $ct2->id]);
+//        ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
+//        ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct2->id])
+//        ->seeIsSoftDeletedInDatabase('category_tournament',
+//        ['id' => $ct2->id]);
+        // Check that categories are gone
 
     }
 }

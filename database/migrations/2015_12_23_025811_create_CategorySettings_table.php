@@ -35,6 +35,7 @@ class CreateCategorySettingsTable extends Migration
             $table->smallInteger('cost');
 
             $table->timestamps();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
         });
     }

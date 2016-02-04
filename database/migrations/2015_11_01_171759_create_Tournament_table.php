@@ -52,6 +52,7 @@ class CreateTournamentTable extends Migration {
 
 
 			$table->timestamps();
+			$table->softDeletes();
 			$table->engine = 'InnoDB';
 
 		});

@@ -33,10 +33,8 @@
         <div class="content">
 
             <!-- Detached content -->
-            <div class="container-detached">
-                <div class="content-detached">
                     <div class="row">
-                        <div class="col-md-12 ">
+                        <div class="col-md-12 col-sm-8">
                             <!-- Simple panel 1 : General Data-->
                             <div class="panel panel-flat">
                                 <div class="panel-body">
@@ -187,10 +185,9 @@
                         {{--@include("right-panel.users_menu")--}}
                     </div>
 
-                </div>
 
 
-            </div>
+
 
 
         </div>

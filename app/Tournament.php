@@ -4,11 +4,15 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
+
+
 class Tournament extends Model
 {
+    use SoftDeletes;
 
     protected $table = 'tournament';
     public $timestamps = true;
@@ -33,8 +37,21 @@ class Tournament extends Model
         'level_id',
 
     ];
+    protected $dates = ['date', 'registerDateLimit','created_at', 'updated_at','deleted_at'];
 
-    protected $dates = ['date', 'registerDateLimit'];
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($tournament) {
+            $tournament->categoryTournaments()->delete();
+        });
+        static::restoring(function($tournament) {
+            $tournament->categoryTournaments()->restore();
+
+
+        });
+
+    }
 
 //    public function place()
 //    {

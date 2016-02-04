@@ -62,7 +62,7 @@
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                             {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}
-                                            <button id="delete" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+                                            <button id="delete_{!! $tournament->id !!}" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                             {!! Form::close() !!}
