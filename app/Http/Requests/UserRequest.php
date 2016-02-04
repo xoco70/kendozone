@@ -17,7 +17,7 @@ class UserRequest extends Request
 
     public function __construct(\Illuminate\Http\Request $request)
     {
-        User::insertCoordsInRequest($request);
+//        User::insertCoordsInRequest($request);
 
     }
 

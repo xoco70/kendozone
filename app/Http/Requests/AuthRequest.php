@@ -23,7 +23,7 @@ class AuthRequest extends Request
             }
         }
 
-        User::insertCoordsInRequest($request);
+//        User::insertCoordsInRequest($request);
     }
 
     /**

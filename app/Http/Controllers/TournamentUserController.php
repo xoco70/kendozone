@@ -85,18 +85,18 @@ class TournamentUserController extends Controller
         $password = null;
         if (is_null($user)) {
             //Create user first
-            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-            $country = Countries::where('name', '=', $location['country'])->first();
+//            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+//            $country = Countries::where('name', '=', $location['country'])->first();
             $password = User::generatePassword();
 
             $user = User::create(['email' => $email,
                 'name' => $username,
                 'password' => bcrypt($password),
-                'country_id' => $country->id,
-                'countryCode' => $location['isoCode'],
-                'city' => $location['city'],
-                'latitude' => $location['lat'],
-                'longitude' => $location['lon']
+//                'country_id' => $country->id,
+//                'countryCode' => $location['isoCode'],
+//                'city' => $location['city'],
+//                'latitude' => $location['lat'],
+//                'longitude' => $location['lon']
 
             ]);
         } else {

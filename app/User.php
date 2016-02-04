@@ -64,6 +64,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         parent::boot();
         static::creating(function ($user) {
             $user->token = str_random(30);
+            $user->addGeoData();
+
+
         });
 
         // If a User is deleted, you must delete:
@@ -184,35 +187,60 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany(CategoryTournament::class);
     }
+
     public function categoryTournamentUsers()
     {
         return $this->hasMany(CategoryTournamentUser::class);
     }
 
-    public static function insertCoordsInRequest(Request $request)
+//    public static function insertCoordsInRequest(Request $request)
+//    {
+//
+//        if ($request->isMethod('post')) {
+//
+//            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+//            $country = Countries::where('name', '=', $location['country'])->first();
+//            if (is_null($country)) {
+//                $request->request->add(['country_id' => Config::get('constants.COUNTRY_ID_DEFAULT')]);
+//                $request->request->add(['city' => "Paris"]);
+//                $request->request->add(['latitude' => "48.858222"]);
+//                $request->request->add(['longitude' => "2.2945"]);
+//
+//            } else {
+//                $country_id = $country->id;
+//                $request->request->add(['country_id' => $country_id]);
+//                $request->request->add(['city' => $location['city']]);
+//                $request->request->add(['latitude' => $location['lat']]);
+//                $request->request->add(['longitude' => $location['lon']]);
+//            }
+//
+//        }
+//        return $request;
+//
+//    }
+
+
+    public function addGeoData()
     {
+        $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+        $country = Countries::where('name', '=', $location['country'])->first();
+        if (is_null($country)) {
+            $countryId = Config::get('constants.COUNTRY_ID_DEFAULT');
+            $city = "Paris";
+            $latitude = 48.858222;
+            $longitude = 2.2945;
 
-        if ($request->isMethod('post')) {
-
-            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-            $country = Countries::where('name', '=', $location['country'])->first();
-            if (is_null($country)) {
-                $request->request->add(['country_id' => Config::get('constants.COUNTRY_ID_DEFAULT')]);
-                $request->request->add(['city' => "Paris"]);
-                $request->request->add(['latitude' => "48.858222"]);
-                $request->request->add(['longitude' => "2.2945"]);
-
-            } else {
-                $country_id = $country->id;
-                $request->request->add(['country_id' => $country_id]);
-                $request->request->add(['city' => $location['city']]);
-                $request->request->add(['latitude' => $location['lat']]);
-                $request->request->add(['longitude' => $location['lon']]);
-            }
+        } else {
+            $countryId = $country->id;
+            $city = $location['city'];
+            $latitude = $location['lat'];
+            $longitude = $location['lon'];
 
         }
-        return $request;
-
+        $this->country_id = $countryId;
+        $this->city = $city;
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
     }
 
     public static function generatePassword()

@@ -19,12 +19,12 @@ class UserRepository
             if (!$user){
 
 //                dd("IP:".Config::get('constants.CLIENT_IP')); // 10.0.2.2
-                $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-
-                $country = $location['country'];
+//                $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+//
+//                $country = $location['country'];
                 // Get id from country
 
-                $country = Countries::where('name','=',$country)->first();
+//                $country = Countries::where('name','=',$country)->first();
 //                dd($country);
                 $user = User::create([
                     'provider' => $provider,
@@ -32,10 +32,10 @@ class UserRepository
                     'name' => $userData->name,
                     'username' => $userData->nickname,
                     'email' => $userData->email,
-                    'country_id' => $country->id,
-                    'city' => $location['city'],
-                    'latitude' => $location['lat'],
-                    'longitude' => $location['lon'],
+//                    'country_id' => $country->id,
+//                    'city' => $location['city'],
+//                    'latitude' => $location['lat'],
+//                    'longitude' => $location['lon'],
                     'avatar' => $userData->avatar,
                     'role_id' => Config::get('constants.ROLE_ADMIN'),
                     'verified' => 1,
