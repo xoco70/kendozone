@@ -47,7 +47,6 @@ class TournamentController extends Controller
             $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         }
-
         return view('tournaments.index', compact('tournaments','currentModelName'));
     }
 

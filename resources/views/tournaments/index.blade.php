@@ -61,11 +61,11 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
-{{--                                            {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}--}}
-                                            <button id="delete_{!! $tournament->id !!}" class="btn text-warning-600 btn-flat btn-icon btn-rounded"  v-on="click: deleteItem({{ $tournament->id }})">
+                                            {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}
+                                            <button id="delete_{!! $tournament->id !!}" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
-                                            {{--{!! Form::close() !!}--}}
+                                            {!! Form::close() !!}
 
                                         </td>
                                     </tr>
@@ -79,13 +79,44 @@
             </div>
         </div>
     </div>
+    <?php
+
+            ?>
+    <tournaments list="{{json_encode($tournaments)}}"> </tournaments>
+
+    <template id="tournaments-template">
+<ul>
+    <li v-for="tournament in list.data">
+        @{{ tournament.name }}
+    </li>
+</ul>
+    </template>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
     <script>
-    $(function() {
+        Vue.component('tournaments', {
+            template: '#tournaments-template',
+            props: ['list'],
 
-    // Initialize responsive functionality
-    $('.table-togglable').footable();
+            created(){
+//                this.list = JSON.parse(this.list);
+                $.getJSON('api/v1/tournaments', function(data){
+                    console.log(data);
+                    this.list = data;
+                }.bind(this))
+            }
+        });
+        new Vue({
+            el:'body'
+        });
 
-    });
+
+        $(function () {
+
+            // Initialize responsive functionality
+            $('.table-togglable').footable();
+
+        });
+
     </script>
     {{--<script type="text/javascript">--}}
     {{--$("#checkAll").change(function () {--}}

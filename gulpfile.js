@@ -1,5 +1,5 @@
-var elixir = require('laravel-elixir');
-
+//var elixir = require('laravel-elixir');
+//require('laravel-elixir-vueify');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -28,7 +28,7 @@ elixir(function (mix) {
         'colors.css',
         'core.css'
     ], 'public/css/app.css');
-
+    //mix.browserify('vue/pages/tournaments.js');
     mix.scripts([
         //'icons/icomoon/styles.css',
         'plugins/loaders/pace.min.js',

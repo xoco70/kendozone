@@ -1,6 +1,8 @@
 /**
  * Created by juliatzin on 04/02/2016.
  */
+
+
 Vue.component('delete_tournament', {
     el: '#content',
     data: {
@@ -10,9 +12,9 @@ Vue.component('delete_tournament', {
         getTournaments: function() {
             $.ajax({
                 context: this,
-                url: "/",
+                url: "/api/v1/tournaments",
                 success: function (result) {
-                    this.$set("tournament", result)
+                    this.$set("tournaments", result)
                 }
             })
         },
