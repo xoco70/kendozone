@@ -105,37 +105,33 @@ class InviteTest extends TestCase
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 1]);
         $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
-        factory(User::class)->create(['email' => 'xoco@aaa.bbb2',
+        $user = factory(User::class)->create(['email' => 'xoco@aaa.bbb2',
             'role_id' => 3,
             'password' => bcrypt('111111'), // 111111
             ]);
 
         $this->visit("/tournaments/" . $tournament->id . "/register");
 
-//        $user = User::where('email','xoco@aaa.bbb')
-//            ->first();
-//        dd($user);
         // System redirect to user creation
-//        $this->type('xoco@aaa.bbb', 'email')
-//            ->type(bcrypt('111111'), 'password')
-//            ->press(Lang::get('auth.signin'))
-//            ->dump();
-////            ->seePageIs('/tournaments/' . $tournament->id . '/register');
+        $this->type($user->email, 'email')
+            ->type('111111', 'password')
+            ->press(Lang::get('auth.signin'))
+            ->seePageIs('/tournaments/' . $tournament->id . '/register');
 //
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page
-//        foreach ($categoriesTournament as $key => $ct) {
-//            $this->type($ct->id, 'cat[' . $key . ']');
-//        }
-//        $this->press(trans("core.save"));
+        foreach ($categoriesTournament as $key => $ct) {
+            $this->type($ct->id, 'cat[' . $key . ']');
+        }
+        $this->press(trans("core.save"));
 //
-//        foreach ($categoriesTournament as $key => $ct) {
-//            $this->seeInDatabase('category_tournament_user',
-//                ['category_tournament_id' => $ct->id,
-//                    'user_id' => Auth::user()->id,
-//                ]);
-//        }
-//        $this->seePageIs('/invites')
-//            ->see(htmlentities(Lang::get('core.operation_successful')));
+        foreach ($categoriesTournament as $key => $ct) {
+            $this->seeInDatabase('category_tournament_user',
+                ['category_tournament_id' => $ct->id,
+                    'user_id' => $user->id,
+                ]);
+        }
+        $this->seePageIs('/invites')
+            ->see(htmlentities(Lang::get('core.operation_successful')));
     }
 }

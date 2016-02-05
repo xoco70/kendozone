@@ -172,12 +172,6 @@ class TournamentController extends Controller
 
         if ($tournament->type == 1) {
             // Tournament is open
-//            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
-//            $registeredCategories = $user->categoryTournaments;
-
-//            dd($registeredCategories);
-
-
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         } else
             return view('errors.general',
@@ -193,7 +187,7 @@ class TournamentController extends Controller
     public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
-        $competitors = $tournament->competitors();
+//        $competitors = $tournament->competitors();
         $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
         foreach ($tournamentCategories as $cat) {
             // Get number of area for this category
