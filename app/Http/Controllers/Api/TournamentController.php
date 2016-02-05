@@ -27,7 +27,7 @@ class TournamentController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
@@ -35,6 +35,7 @@ class TournamentController extends ApiController
             $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         }
+
 
         return $this->respondWithPagination($tournaments, [
             'data' => $this->tournamentTransformer->transformCollection($tournaments->all())

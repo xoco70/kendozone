@@ -37,8 +37,14 @@ class UserSeeder extends Seeder
             'remember_token' => '7rCCxMRjsqSgHCt1mbOSkz5TV0iKe9YYVNMrOwX2g5pLUsF3qBqVQ1zlYOuv'
         ]);
         factory(User::class)->create(
-            [   'name' => 'Jujuju',
-                'email' => 'aaa@bbb.ccc',
+            [   'name' => 'root',
+                'email' => 'superuser@kendozone.com',
+                'role_id' => 1,
+                'password' => bcrypt('111111'),
+                'verified' => 1,]);
+        factory(User::class)->create(
+            [   'name' => 'admin',
+                'email' => 'admin@kendozone.com',
                 'role_id' => 3,
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);

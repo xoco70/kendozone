@@ -15,6 +15,7 @@ class TournamentTransformer extends Transformer{
     public function transform($tournament)
     {
         return [
+            'id' =>$tournament['id'],
             'user_id' => $tournament['user_id'],
             'name' => $tournament['name'],
             'date' => $tournament['date'],

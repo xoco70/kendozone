@@ -35,12 +35,12 @@
 
                                 <tr>
                                     {{--<th><input type="checkbox" id="checkAll"/></th>--}}
-                                    <th  data-hide="phone">#</th>
+                                    <th data-hide="phone">#</th>
                                     <th data-toggle="true">{{ trans('crud.name') }}</th>
                                     {{--<th>{{ trans_choice('crud.place',1) }}</th>--}}
-                                    <th  data-hide="phone">{{ trans('crud.date') }}</th>
+                                    <th data-hide="phone">{{ trans('crud.date') }}</th>
                                     {{--<th>{{ trans('crud.limitDateRegistration') }}</th>--}}
-                                    <th  data-hide="phone">{{ trans('crud.owner') }}</th>
+                                    <th data-hide="phone">{{ trans('crud.owner') }}</th>
                                     {{--@can('CanDeleteTournament')--}}
                                     <th class="text-center">{{ trans('crud.action') }}</th>
                                     {{--@endcan--}}
@@ -49,8 +49,8 @@
                                 @foreach($tournaments as $tournament)
                                     <tr>
                                         {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
-                                        <td><a
-                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->id }}</a>
+                                        <td>
+                                            <a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->id }}</a>
                                         </td>
                                         <td><a
                                                     href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->name }}</a>
@@ -62,7 +62,8 @@
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                             {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}
-                                            <button id="delete_{!! $tournament->id !!}" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+                                            <button id="delete_{!! $tournament->id !!}" type="submit"
+                                                    class="btn text-warning-600 btn-flat btn-icon btn-rounded">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                             {!! Form::close() !!}
@@ -79,45 +80,46 @@
             </div>
         </div>
     </div>
-    <?php
 
-            ?>
-    <tournaments list="{{json_encode($tournaments)}}"> </tournaments>
+    {{--<tournaments></tournaments>--}}
 
-    <template id="tournaments-template">
-<ul>
-    <li v-for="tournament in list.data">
-        @{{ tournament.name }}
-    </li>
-</ul>
-    </template>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
+    {{--<template id="tournaments-template">--}}
+        {{--<ul>--}}
+            {{--<li v-for="tournament in list.data">--}}
+                {{--@{{ tournament.id }}--}}
+                {{--<a href="{!!   URL::action('TournamentController@edit',  @{ tournament.id }} ) !!}">@{{ tournament.id }}</a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+    {{--</template>--}}
+
+    {{--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>--}}
     <script>
-        Vue.component('tournaments', {
-            template: '#tournaments-template',
-            props: ['list'],
-
-            created(){
-//                this.list = JSON.parse(this.list);
-                $.getJSON('api/v1/tournaments', function(data){
-                    console.log(data);
-                    this.list = data;
-                }.bind(this))
-            }
-        });
-        new Vue({
-            el:'body'
-        });
+//        Vue.component('tournaments', {
+//            template: '#tournaments-template',
+//            props: ['list'],
+//
+//            created(){
+////                this.list = JSON.parse(this.list);
+//                $.getJSON('api/v1/tournaments', function (data) {
+//                    console.log(data);
+//                    this.list = data;
+//                }.bind(this))
+//            }
+//        });
+//        new Vue({
+//            el: 'body'
+//        });
 
 
         $(function () {
 
             // Initialize responsive functionality
             $('.table-togglable').footable();
-
         });
 
+
     </script>
+
     {{--<script type="text/javascript">--}}
     {{--$("#checkAll").change(function () {--}}
     {{--$("input:checkbox").prop('checked', $(this).prop("checked"));--}}

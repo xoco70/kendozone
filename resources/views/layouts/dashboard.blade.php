@@ -24,7 +24,7 @@
 
 
         <!-- Page container -->
-<div class="page-container">
+<div class="page-container" id="app">
 
     <!-- Page content -->
     <div class="page-content">
