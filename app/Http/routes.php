@@ -34,6 +34,7 @@ Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/dashboard', 'DashboardController@index')->middleware(['auth']);
 //Route::get('/users/{id}/edit', 'UserController@edit')->middleware(['auth']);
 Route::get('/tournaments/{tournamentId}/invite/{token}', 'InviteController@register');
+Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
 
 Route::group(['middleware' => ['guest']],
     function () {
@@ -61,10 +62,7 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-
-//Route::get('auth/register/users/{userId}/tournaments/{tournamentId}/categories', 'Auth\AuthController@getCategories');
-
-Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
+Route::group(['middleware' => ['auth', 'own', 'throttle:100,1']], // , 'own'
     function () {
 
         Route::resource('tournaments', 'TournamentController');
@@ -91,17 +89,22 @@ Route::group(['middleware' => ['auth','own', 'throttle:100,1']], // , 'own'
 //        Route::resource('competitors', 'CompetitorController');
 //        Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');
-//        Route::resource('country', 'CountryController');
 
-//        Route::resource('places', 'PlaceController');
+
+
+
     });
-//        invite/{userId}/register/
-        Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
-
-Event::listen('illuminate.query', function($query)
-{
-        var_dump($query);
+//APIS
+Route::group(['prefix' => 'api/v1', 'middleware' => 'simpleauth'], function () { // , 'middleware' => 'AuthApi'
+        Route::resource('tournaments', 'Api\TournamentController');
 });
+//        invite/{userId}/register/
+
+
+//Event::listen('illuminate.query', function($query)
+//{
+//        var_dump($query);
+//});
 
 //Route::resource('shinpan', 'ShinpanController');
 //Route::resource('clubs', 'ClubController');

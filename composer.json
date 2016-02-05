@@ -44,7 +44,10 @@
   "autoload-dev": {
     "classmap": [
       "tests/TestCase.php"
-    ]
+    ],
+    "psr-4": {
+      "Kendozone\\": "app/Kendozone"
+    }
   },
   "scripts": {
     "post-install-cmd": [

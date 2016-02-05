@@ -61,11 +61,11 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
-                                            {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}
-                                            <button id="delete_{!! $tournament->id !!}" type="submit" class="btn text-warning-600 btn-flat btn-icon btn-rounded">
+{{--                                            {{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete']) }}--}}
+                                            <button id="delete_{!! $tournament->id !!}" class="btn text-warning-600 btn-flat btn-icon btn-rounded"  v-on="click: deleteItem({{ $tournament->id }})">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
-                                            {!! Form::close() !!}
+                                            {{--{!! Form::close() !!}--}}
 
                                         </td>
                                     </tr>

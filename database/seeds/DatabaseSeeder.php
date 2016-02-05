@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TournamentLevelSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TournamentSeeder::class);
+        $this->call(ApiKeySeeder::class);
         $this->command->info('All tables seeded!');
 
 

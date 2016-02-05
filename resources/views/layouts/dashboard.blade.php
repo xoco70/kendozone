@@ -48,7 +48,7 @@
             </div>
             <!-- Content area -->
 
-            <div class="content">
+            <div class="content" id="content">
                 @include('layouts.flash')
                 @yield('content')
 
