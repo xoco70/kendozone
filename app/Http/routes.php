@@ -95,7 +95,9 @@ Route::group(['middleware' => ['auth', 'own', 'throttle:100,1']], // , 'own'
 
     });
 //APIS
-Route::group(['prefix' => 'api/v1', 'middleware' => 'simpleauth'], function () { // , 'middleware' => 'AuthApi'
+Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
+        Route::get('authenticate', 'Api\AuthenticateController@index');
+        Route::post('authenticate', 'Api\AuthenticateController@authenticate');
         Route::resource('tournaments', 'Api\TournamentController');
 });
 //        invite/{userId}/register/

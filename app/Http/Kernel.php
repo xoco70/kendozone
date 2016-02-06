@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        Middleware\VerifyCsrfToken::class,
+//        Middleware\VerifyCsrfToken::class,
         Middleware\Own::class,
 
 //        'throttle:60,1',
@@ -36,5 +36,7 @@ class Kernel extends HttpKernel
         'own' => Middleware\Own::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'simpleauth' => Middleware\SimpleAuthMiddleware::class,
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }

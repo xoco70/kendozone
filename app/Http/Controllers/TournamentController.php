@@ -11,6 +11,7 @@ use App\Tournament;
 use App\TournamentLevel;
 use App\User;
 use GeoIP;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -41,13 +42,23 @@ class TournamentController extends Controller
     public function index()
     {
         $currentModelName = trans_choice('crud.tournament', 2);
+
+//        $client = new Client(['base_uri' => getenv('URL_BASE') . 'api/v1']);
+//        $res = $client->request('GET', '/tournaments', [
+//            'auth' => ['user', 'pass']
+//        ]);
+//        $response = $client->request('GET', '/tournaments', [
+//            'auth' => [Auth::user()->email,
+//                       Auth::user()->password]
+//        ]);
+
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
         } else {
             $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         }
-        return view('tournaments.index', compact('tournaments','currentModelName'));
+        return view('tournaments.index', compact('tournaments', 'currentModelName'));
     }
 
     /**
@@ -63,7 +74,7 @@ class TournamentController extends Controller
         $tournament = new Tournament();
 //        dd($categories);
 //        $places = Place::lists('name', 'id');
-        return view('tournaments.create', compact('levels', 'categories', 'tournament','currentModelName'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName'));
     }
 
     /**
@@ -154,14 +165,21 @@ class TournamentController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tournament $tournament)
+    public function destroy(Tournament $tournament, Request $request)
     {
-        if ($tournament->delete()) {
-            flash()->success(Lang::get('core.success'));
-        } else
-            flash()->error(Lang::get('core.fail'));
+        if($request->wantsJson()) {
+            dd($request);
+            $tournament->delete( $request->all() );
 
-        return redirect("tournaments");
+            return response(['msg' => 'Product deleted', 'status' => 'success']);
+        }
+        return response(['msg' => 'Failed deleting the product', 'status' => 'failed']);
+//        if ($tournament->delete()) {
+//            flash()->success(Lang::get('core.success'));
+//        } else
+//            flash()->error(Lang::get('core.fail'));
+
+//        return redirect("tournaments");
     }
 
     public function register($tournamentId)
