@@ -61,14 +61,15 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->id]]) !!}
-                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn text-warning-600 btn-flat ','id' => 'btnDeleteTournament', 'data-id' => $tournament->id ] ) !!}
+                                            <input type="hidden" name="_Token" value="{!!  csrf_token()  !!}">
+                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['class' => 'btn text-warning-600 btn-flat ','id' => 'btnDeleteTournament', 'data-id' => $tournament->id ] ) !!}
                                             {!! Form::close() !!}
 
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
                                             {{--{{ Form::open(['route' => ['tournaments.destroy', $tournament->id], 'method' => 'delete', 'id' => 'formDeleteTourament']) }}--}}
                                             {{--<button id="delete" data-id="{{$tournament->id}}" type="submit"--}}
-                                                    {{--class=" ">--}}
-                                                {{--<span class=""></span>--}}
+                                            {{--class=" ">--}}
+                                            {{--<span class=""></span>--}}
                                             {{--</button>--}}
                                             {!! Form::close() !!}
 
@@ -119,28 +120,7 @@
             {{--var dataId = $('#btnDeleteTournament').attr('data-id');--}}
             {{--var $tr = $(this).closest('tr');--}}
             {{--console.log('hola');--}}
-            {{--$.ajax({--}}
 
-                {{--url: '{{ url('/tournaments/') }}' + dataId,--}}
-                {{--type: 'DELETE',--}}
-                {{--data: inputData,--}}
-                {{--success: function (msg) {--}}
-                    {{--$tr.find('td').fadeOut(1000,function(){--}}
-                        {{--$tr.remove();--}}
-                    {{--});--}}
-                    {{--if (msg.status === 'success') {--}}
-                        {{--toastr.success(msg.msg);--}}
-{{--//                        setInterval(function () {--}}
-{{--//                            window.location.reload();--}}
-{{--//                        }, 5900);--}}
-                    {{--}--}}
-                {{--},--}}
-                {{--error: function (data) {--}}
-                    {{--if (data.status === 422) {--}}
-                        {{--toastr.error('Cannot delete the category');--}}
-                    {{--}--}}
-                {{--}--}}
-            {{--});--}}
 
             {{--return false;--}}
         {{--});--}}
@@ -148,22 +128,68 @@
 
             // Initialize responsive functionality
             $('.table-togglable').footable();
+            $('#btnDeleteTournament').on('click', function () {
+                var inputData = $('#formDeleteTourament').serialize();
+                var dataId = $('#btnDeleteTournament').attr('data-id');
+                var $tr = $(this).closest('tr');
+
+                swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#EF5350",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "No, cancel pls!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $.ajax(
+                                        {
+                                            headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+                                            type: 'DELETE',
+                                            url: '{{ url('/tournaments/') }}' + dataId,
+                                            data: inputData,
+                                            success: function (data) {
+                                                console.log(data);
+                                                $tr.find('td').fadeOut(1000, function () {
+                                                    $tr.remove();
+                                                });
+                                                swal({
+                                                    title: "Deleted!",
+                                                    text: "Tournament has been deleted.",
+                                                    confirmButtonColor: "#66BB6A",
+                                                    type: "success"
+
+                                                });
+
+                                            },
+                                            error: function (data) {
+                                                swal("Oops", "We couldn't connect to the server!", "error");
+                                            }
+                                        }
+                                )
 
 
+                            }
+                            else {
+                                swal({
+                                    title: "Cancelled",
+                                    text: "Your Tournament is safe :)",
+                                    confirmButtonColor: "#2196F3",
+                                    type: "error"
+                                });
+                            }
+                        });
+            });
         });
 
 
     </script>
 
-    {{--<script type="text/javascript">--}}
-    {{--$("#checkAll").change(function () {--}}
-    {{--$("input:checkbox").prop('checked', $(this).prop("checked"));--}}
-    {{--});--}}
-    {{--var checkboxes = $("input[type='checkbox']");--}}
-    {{--checkboxes.click(function() {--}}
-    {{--$('#delete').attr("show", !checkboxes.is(":checked"));--}}
-    {{--});--}}
-    {{--</script>--}}
     @include("errors.list")
 @stop
 

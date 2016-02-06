@@ -50,7 +50,6 @@ class AuthenticateController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        dd(Auth::user());
         // if no errors are encountered we can return a JWT
         return response()->json(compact('token'));
     }

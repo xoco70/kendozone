@@ -45,7 +45,8 @@ elixir(function (mix) {
     ], 'public/js/app.js');
 
     mix.scripts([
-        'plugins/tables/footable/footable.min.js'
+        'plugins/tables/footable/footable.min.js',
+        'plugins/notifications/sweet_alert.min.js'
     ], 'public/js/tournamentIndex.js');
 
         mix.scripts([

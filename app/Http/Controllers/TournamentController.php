@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 //use App\Place;
 
@@ -42,7 +43,8 @@ class TournamentController extends Controller
     public function index()
     {
         $currentModelName = trans_choice('crud.tournament', 2);
-
+        $token=JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
 //        $client = new Client(['base_uri' => getenv('URL_BASE') . 'api/v1']);
 //        $res = $client->request('GET', '/tournaments', [
 //            'auth' => ['user', 'pass']
@@ -167,19 +169,24 @@ class TournamentController extends Controller
      */
     public function destroy(Tournament $tournament, Request $request)
     {
-        if($request->wantsJson()) {
-            dd($request);
-            $tournament->delete( $request->all() );
+        if ($request->ajax()) {
+            dd('AJAX');
+            if ($tournament->delete($request->all())) {
+                return response(['msg' => 'Product deleted', 'status' => 'success']);
+            }else{
+                return response(['msg' => 'Failed deleting the product', 'status' => 'failed']);
+            }
 
-            return response(['msg' => 'Product deleted', 'status' => 'success']);
+        } else {
+            dd('NO AJAX');
+            if ($tournament->delete()) {
+                flash()->success(Lang::get('core.success'));
+            } else
+                flash()->error(Lang::get('core.fail'));
+
+            return redirect("tournaments");
+
         }
-        return response(['msg' => 'Failed deleting the product', 'status' => 'failed']);
-//        if ($tournament->delete()) {
-//            flash()->success(Lang::get('core.success'));
-//        } else
-//            flash()->error(Lang::get('core.fail'));
-
-//        return redirect("tournaments");
     }
 
     public function register($tournamentId)
