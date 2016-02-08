@@ -177,7 +177,7 @@ class TournamentController extends Controller
 
 
 
-
+        flash()->success(Lang::get('core.operation_successful'));
         return response(['msg' => 'Product deleted', 'status' => 'success']);
 
 

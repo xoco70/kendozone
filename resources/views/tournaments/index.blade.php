@@ -105,12 +105,12 @@
             $('.table-togglable').footable();
             $('.btnDeleteTournament').on('click', function (e) {
                 var inputData = $('#formDeleteTourament').serialize();
-                var dataId = $(this).data('id');
+                var dataId      =   $(this).data('id');
 //                console.log(inputData);
                 console.log(dataId);
                 var $tr = $(this).closest('tr');
                 $(this).find('i').removeClass();
-                $(this).find('i').addClass('icon-spinner spinner position-left');
+                $(this).find('i').addClass('icon-spinner spinner');
 
                 $.ajax(
                         {
@@ -118,13 +118,27 @@
                             url: '{{ url("/tournaments") }}' + '/' + dataId,
                             data: inputData,
                             success: function (msg) {
-                                console.log('success');
-                                $tr.remove();
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'success',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: "{{ trans('core.operation_successful') }}",
+                                });
+                                    $tr.remove();
 
                             },
                             error: function (msg) {
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'success',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: "{{ trans('core.operation_failed') }}",
+                                });
                                 console.log(msg);
-                                swal("Oops", "We couldn't connect to the server!", "error");
                             }
                         }
                 )

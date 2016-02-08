@@ -32,23 +32,23 @@ class AuthApi
 
     public function handle($request, Closure $next)
     {
-        if ($key = AuthApi::getAPI()) {
-            $auth = ApiKey::where("apikey", $key)->first();
-
-            if (count($auth) <= 0) {
-                return response()->json([
-                    'error' => 401,
-                    'message' => 'Invalid authenticated params !',
-                    "API_KEY" => $key], 401
-                );
-            }
-            return $next($request);
-        } else {
-            return response()->json([
-                'error' => 401,
-                'message' => 'Invalid authenticated params !'
-            ], 401
-            );
-        }
+//        if ($key = AuthApi::getAPI()) {
+//            $auth = ApiKey::where("apikey", $key)->first();
+//
+//            if (count($auth) <= 0) {
+//                return response()->json([
+//                    'error' => 401,
+//                    'message' => 'Invalid authenticated params !',
+//                    "API_KEY" => $key], 401
+//                );
+//            }
+//            return $next($request);
+//        } else {
+//            return response()->json([
+//                'error' => 401,
+//                'message' => 'Invalid authenticated params !'
+//            ], 401
+//            );
+//        }
     }
 }
