@@ -47,7 +47,7 @@
                                 </tr>
                                 </thead>
                                 @foreach($tournaments as $tournament)
-                                    <tr id="line" data-id="{{$tournament->id}}">
+                                    <tr id="line">
                                         {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
                                         <td>
                                             <a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->id }}</a>
@@ -57,12 +57,11 @@
                                         </td>
                                         {{--<td>{{ $tournament->place }}</td>--}}
                                         <td>{{ $tournament->date }}</td>
-                                        {{--                            <td>{{ $tournament->registerDateLimit }}</td>--}}
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->id]]) !!}
-                                            <input type="hidden" name="_Token" value="{!!  csrf_token()  !!}">
-                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['class' => 'btn text-warning-600 btn-flat ','id' => 'btnDeleteTournament', 'data-id' => $tournament->id ] ) !!}
+                                            {{--<input type="hidden" name="_Token" value="{!!  csrf_token()  !!}">--}}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'data-id' => $tournament->id ] ) !!}
                                             {!! Form::close() !!}
 
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
@@ -71,7 +70,7 @@
                                             {{--class=" ">--}}
                                             {{--<span class=""></span>--}}
                                             {{--</button>--}}
-                                            {!! Form::close() !!}
+                                            {{--{!! Form::close() !!}--}}
 
                                         </td>
                                     </tr>
@@ -99,6 +98,76 @@
 
     {{--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>--}}
     <script>
+
+        $(function () {
+
+            // Initialize responsive functionality
+            $('.table-togglable').footable();
+            $('.btnDeleteTournament').on('click', function (e) {
+                var inputData = $('#formDeleteTourament').serialize();
+                var dataId      =   $(this).data('id');
+//                console.log(inputData);
+                console.log(dataId);
+                var $tr = $(this).closest('tr');
+
+                swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#EF5350",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "No, cancel pls!",
+                            closeOnConfirm: false,
+                            closeOnCancel: true
+                        },
+
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                e.preventDefault();
+
+                                $.ajax(
+                                        {
+                                            type: 'POST',
+                                            url: '{{ url("/tournaments") }}' + '/' + dataId,
+                                            data: inputData,
+                                            success: function (msg) {
+                                                console.log('success');
+
+                                                $tr.find('td').fadeOut(1000, function () {
+                                                    $tr.remove();
+                                                });
+                                                swal({
+                                                    title: "Deleted!",
+                                                    text: "Tournament has been deleted.",
+                                                    confirmButtonColor: "#66BB6A",
+                                                    timer: 2000,
+                                                    type: "success"
+
+                                                });
+
+                                            },
+                                            error: function (msg) {
+                                                console.log(msg);
+                                                swal("Oops", "We couldn't connect to the server!", "error");
+                                            }
+                                        }
+                                )
+
+
+                            }
+//                            else {
+//                                swal({
+//                                    title: "Cancelled",
+//                                    text: "Your Tournament is safe :)",
+//                                    confirmButtonColor: "#2196F3",
+//                                    type: "error"
+//                                });
+//                            }
+                        });
+            });
+        });
+
         //        Vue.component('tournaments', {
         //            template: '#tournaments-template',
         //            props: ['list'],
@@ -116,78 +185,14 @@
         //        });
 
         {{--$('#btnDeleteTournament').on('click', function (e) {--}}
-            {{--var inputData = $('#formDeleteTourament').serialize();--}}
-            {{--var dataId = $('#btnDeleteTournament').attr('data-id');--}}
-            {{--var $tr = $(this).closest('tr');--}}
-            {{--console.log('hola');--}}
+        {{--var inputData = $('#formDeleteTourament').serialize();--}}
+        {{--var dataId = $('#btnDeleteTournament').attr('data-id');--}}
+        {{--var $tr = $(this).closest('tr');--}}
+        {{--console.log('hola');--}}
 
 
-            {{--return false;--}}
+        {{--return false;--}}
         {{--});--}}
-        $(function () {
-
-            // Initialize responsive functionality
-            $('.table-togglable').footable();
-            $('#btnDeleteTournament').on('click', function () {
-                var inputData = $('#formDeleteTourament').serialize();
-                var dataId = $('#btnDeleteTournament').attr('data-id');
-                var $tr = $(this).closest('tr');
-
-                swal({
-                            title: "Are you sure?",
-                            text: "You will not be able to recover this imaginary file!",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#EF5350",
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "No, cancel pls!",
-                            closeOnConfirm: false,
-                            closeOnCancel: false
-                        },
-
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                $.ajax(
-                                        {
-                                            headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
-                                            type: 'DELETE',
-                                            url: '{{ url('/tournaments/') }}' + dataId,
-                                            data: inputData,
-                                            success: function (data) {
-                                                console.log(data);
-                                                $tr.find('td').fadeOut(1000, function () {
-                                                    $tr.remove();
-                                                });
-                                                swal({
-                                                    title: "Deleted!",
-                                                    text: "Tournament has been deleted.",
-                                                    confirmButtonColor: "#66BB6A",
-                                                    type: "success"
-
-                                                });
-
-                                            },
-                                            error: function (data) {
-                                                swal("Oops", "We couldn't connect to the server!", "error");
-                                            }
-                                        }
-                                )
-
-
-                            }
-                            else {
-                                swal({
-                                    title: "Cancelled",
-                                    text: "Your Tournament is safe :)",
-                                    confirmButtonColor: "#2196F3",
-                                    type: "error"
-                                });
-                            }
-                        });
-            });
-        });
-
-
     </script>
 
     @include("errors.list")
