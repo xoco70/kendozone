@@ -249,7 +249,7 @@ class AuthController extends Controller
 
     public function userHasLoggedIn($user)
     {
-        flash('Welcome, ' . $user->username);
+        flash('Welcome, ' . $user->name);
         return redirect('/admin');
     }
 

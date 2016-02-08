@@ -105,66 +105,30 @@
             $('.table-togglable').footable();
             $('.btnDeleteTournament').on('click', function (e) {
                 var inputData = $('#formDeleteTourament').serialize();
-                var dataId      =   $(this).data('id');
+                var dataId = $(this).data('id');
 //                console.log(inputData);
                 console.log(dataId);
                 var $tr = $(this).closest('tr');
+                $(this).find('i').removeClass();
+                $(this).find('i').addClass('icon-spinner spinner position-left');
 
-                swal({
-                            title: "Are you sure?",
-                            text: "You will not be able to recover this imaginary file!",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#EF5350",
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "No, cancel pls!",
-                            closeOnConfirm: false,
-                            closeOnCancel: true
-                        },
+                $.ajax(
+                        {
+                            type: 'POST',
+                            url: '{{ url("/tournaments") }}' + '/' + dataId,
+                            data: inputData,
+                            success: function (msg) {
+                                console.log('success');
+                                $tr.remove();
 
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                e.preventDefault();
-
-                                $.ajax(
-                                        {
-                                            type: 'POST',
-                                            url: '{{ url("/tournaments") }}' + '/' + dataId,
-                                            data: inputData,
-                                            success: function (msg) {
-                                                console.log('success');
-
-                                                $tr.find('td').fadeOut(1000, function () {
-                                                    $tr.remove();
-                                                });
-                                                swal({
-                                                    title: "Deleted!",
-                                                    text: "Tournament has been deleted.",
-                                                    confirmButtonColor: "#66BB6A",
-                                                    timer: 2000,
-                                                    type: "success"
-
-                                                });
-
-                                            },
-                                            error: function (msg) {
-                                                console.log(msg);
-                                                swal("Oops", "We couldn't connect to the server!", "error");
-                                            }
-                                        }
-                                )
-
-
+                            },
+                            error: function (msg) {
+                                console.log(msg);
+                                swal("Oops", "We couldn't connect to the server!", "error");
                             }
-//                            else {
-//                                swal({
-//                                    title: "Cancelled",
-//                                    text: "Your Tournament is safe :)",
-//                                    confirmButtonColor: "#2196F3",
-//                                    type: "error"
-//                                });
-//                            }
-                        });
+                        }
+                )
+
             });
         });
 
