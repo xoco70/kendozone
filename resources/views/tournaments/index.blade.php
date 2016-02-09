@@ -61,7 +61,7 @@
                                         <td class="text-center">
                                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->id]]) !!}
                                             {{--<input type="hidden" name="_Token" value="{!!  csrf_token()  !!}">--}}
-                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'data-id' => $tournament->id ] ) !!}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->id, 'data-id' => $tournament->id ] ) !!}
                                             {!! Form::close() !!}
 
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}
@@ -104,6 +104,7 @@
             // Initialize responsive functionality
             $('.table-togglable').footable();
             $('.btnDeleteTournament').on('click', function (e) {
+                e.preventDefault();
                 var inputData = $('#formDeleteTourament').serialize();
                 var dataId      =   $(this).data('id');
 //                console.log(inputData);

@@ -173,13 +173,13 @@ class TournamentController extends Controller
      */
     public function destroy(Tournament $tournament, Request $request)
     {
-        if ($request->ajax()) {
-            if ($tournament->delete()) {
-                return Response::json(['msg' => 'Tournament deleted', 'status' => 'success']);
-            } else {
-                return Response::json(['msg' => 'Error deleting tournament', 'status' => 'error']);
-            }
+//        if ($request->ajax()) {
+        if ($tournament->delete()) {
+            return Response::json(['msg' => 'Tournament deleted', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error deleting tournament', 'status' => 'error']);
         }
+//        }
 
 
     }
