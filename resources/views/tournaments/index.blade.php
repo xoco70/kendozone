@@ -117,28 +117,39 @@
                             type: 'POST',
                             url: '{{ url("/tournaments") }}' + '/' + dataId,
                             data: inputData,
-                            success: function (msg) {
-                                noty({
-                                    layout: 'topRight',
-                                    type: 'success',
-                                    width: 200,
-                                    dismissQueue: true,
-                                    timeout: 3000,
-                                    text: "{{ trans('core.operation_successful') }}",
-                                });
+                            success: function (data) {
+                                if (data != null && data.status == 'success') {
+                                    noty({
+                                        layout: 'topRight',
+                                        type: 'success',
+                                        width: 200,
+                                        dismissQueue: true,
+                                        timeout: 3000,
+                                        text: data.msg
+                                    });
                                     $tr.remove();
+                                } else {
+                                    noty({
+                                        layout: 'topRight',
+                                        type: 'error',
+                                        width: 200,
+                                        dismissQueue: true,
+                                        timeout: 3000,
+                                        text: data.msg
+                                    });
+                                }
+
 
                             },
-                            error: function (msg) {
+                            error: function (data) {
                                 noty({
                                     layout: 'topRight',
-                                    type: 'success',
+                                    type: 'error',
                                     width: 200,
                                     dismissQueue: true,
                                     timeout: 3000,
-                                    text: "{{ trans('core.operation_failed') }}",
+                                    text: data.msg
                                 });
-                                console.log(msg);
                             }
                         }
                 )

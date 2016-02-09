@@ -9,16 +9,11 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\TournamentLevel;
-use App\User;
-use GeoIP;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\View;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Response;
 
 //use App\Place;
 
@@ -145,11 +140,19 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, Tournament $tournament)
     {
+        if ($request->ajax()) {
+            if ($tournament->update($request->all())) {
+                $tournament->categories()->sync($request->input('category'));
+                return Response::json(['msg' => 'Tournament updated', 'status' => 'success']);
+            } else {
+                return Response::json(['msg' => 'Error updating tournament', 'status' => 'error']);
+            }
+        }
 
-        $tournament->update($request->all());
-        $tournament->categories()->sync($request->input('category'));
-        flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournament->id/edit");
+//        $tournament->update($request->all());
+//        $tournament->categories()->sync($request->input('category'));
+//        flash()->success(trans('core.operation_successful'));
+//        return redirect("tournaments/$tournament->id/edit");
     }
 
 
@@ -170,15 +173,13 @@ class TournamentController extends Controller
      */
     public function destroy(Tournament $tournament, Request $request)
     {
-        if($request->ajax()){
-//            print_r(Input::all());
-            $tournament->delete();
+        if ($request->ajax()) {
+            if ($tournament->delete()) {
+                return Response::json(['msg' => 'Tournament deleted', 'status' => 'success']);
+            } else {
+                return Response::json(['msg' => 'Error deleting tournament', 'status' => 'error']);
+            }
         }
-
-
-
-        flash()->success(Lang::get('core.operation_successful'));
-        return response(['msg' => 'Product deleted', 'status' => 'success']);
 
 
     }

@@ -17,7 +17,7 @@
         <!-- Detached content -->
 <div class="container-detached">
     <div class="content-detached">
-        {!! Form::model($tournament, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["TournamentController@update", $tournament->id]]) !!}
+        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->id]]) !!}
 
                 <!-- Simple panel 1 : General Data-->
         <div class="panel panel-flat">
@@ -134,7 +134,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                    <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -212,7 +212,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                    <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@
 
                     </div>
                     <div align="right">
-                        <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                        <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                     </div>
                 </div>
 
@@ -269,51 +269,51 @@
 
                             <div class="panel-group" id="accordion-styled">
 
-<!--                                --><?php //dd($tournament->categoryTournaments); ?>
+                                <!--                                --><?php //dd($tournament->categoryTournaments); ?>
 
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
-                                    <?php
+                                <?php
 
-                                    $setting = $tournament->categoryTournaments->get($key)->settings;
-                                    $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
-                                    $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
-                                    $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+                                $setting = $tournament->categoryTournaments->get($key)->settings;
+                                $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
+                                $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
+                                $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
 
-                                    ?>
+                                ?>
 
-                                    <div class="panel ">
-                                        <div class="row">
-                                            <div class="col-md-11">
-                                                <a data-toggle="collapse" data-parent="#accordion-styled"
-                                                   href="#accordion-styled-group{!! $key !!}">
+                                <div class="panel ">
+                                    <div class="row">
+                                        <div class="col-md-11">
+                                            <a data-toggle="collapse" data-parent="#accordion-styled"
+                                               href="#accordion-styled-group{!! $key !!}">
 
-                                                    <div class="panel-heading">
-                                                        <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->name)}}
-                                                        </h6>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-1">
                                                 <div class="panel-heading">
-                                                    @if (is_null($setting))
-                                                        <i class="glyphicon  glyphicon-exclamation-sign text-orange-600"></i>
-                                                    @else
-                                                        <i class="glyphicon glyphicon-ok text-success"></i>
-                                                    @endif
-                                                    </div>
-                                            </div>
-
+                                                    <h6 class="panel-title">
+                                                        {{trans($categoryTournament->category->name)}}
+                                                    </h6>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div id="accordion-styled-group{!! $key !!}"
-                                             class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
-                                            <div class="panel-body">
-                                                {{--FORM--}}
-                                                @include('categories.categorySettings')
+                                        <div class="col-md-1">
+                                            <div class="panel-heading">
+                                                @if (is_null($setting))
+                                                    <i class="glyphicon  glyphicon-exclamation-sign text-orange-600"></i>
+                                                @else
+                                                    <i class="glyphicon glyphicon-ok text-success"></i>
+                                                @endif
                                             </div>
-
                                         </div>
+
                                     </div>
+                                    <div id="accordion-styled-group{!! $key !!}"
+                                         class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
+                                        <div class="panel-body">
+                                            {{--FORM--}}
+                                            @include('categories.categorySettings')
+                                        </div>
+
+                                    </div>
+                                </div>
                                 @endforeach
                             </div>
 
@@ -335,7 +335,7 @@
                 <!-- /simple panel -->
         <div class="panel panel-flat">
             {{--<div class="panel-heading " >--}}
-            {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
+            {{--<button type="button" class="btn btn-warning">Borrar</button>--}}
             {{--</div>--}}
 
             <div class="panel-body">
@@ -343,11 +343,11 @@
 
 
                     <fieldset title="1">
-                        <legend class="text-semibold">Invita competitodres con este link</legend>
+                        <legend class="text-semibold ">Invita competitodres con este link</legend>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="form-group text-center">
+                                <h2 class="form-group text-center m">
                                     <br/>
                                     {{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/register/
                                 </h2>
@@ -375,6 +375,67 @@ $day = $now->day;
 <script>
 
     $(function () {
+        $('.btn-success').on('click', function (e) {
+            var inputData = $('#form').serialize();
+            var dataId = $(this).data('id');
+//            console.log(dataId);
+            $(this).find('i').addClass('icon-spinner spinner position-left');
+            $(this).prop( "disabled", true );
+
+            $.ajax(
+                    {
+                        type: 'PUT',
+                        url: '{{ url("/tournaments/$tournament->id") }}',
+                        data: inputData,
+                        success: function (data) {
+                            console.log(data);
+                            if (data != null && data.status == 'success') {
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'success',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: data.msg
+                                });
+//                                console.log()
+                                $('.btn-success').prop( "disabled", false );
+                                $('.btn-success').find('i').removeClass('icon-spinner spinner position-left');
+
+                            } else {
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'error',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: "1"
+                                });
+                                $(this).prop( "disabled", false );
+                                $(this).find('i').removeClass('icon-spinner spinner position-left');
+
+                            }
+
+                        },
+                        error: function (data) {
+                            noty({
+                                layout: 'topRight',
+                                type: 'error',
+                                width: 200,
+                                dismissQueue: true,
+                                timeout: 3000,
+                                text: data.msg,
+
+                            });
+                            $(this).prop( "disabled", false );
+                            $(this).find('i').removeClass('icon-spinner spinner position-left')
+
+                        }
+                    }
+            )
+
+        });
+
         $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false
         });
@@ -418,6 +479,5 @@ $day = $now->day;
 
     });
 </script>
-
 
 @stop
