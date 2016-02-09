@@ -3,15 +3,23 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 ?>
 
 @if (is_null($setting))
-    {!! Form::open(['url' => 'tournaments/'.$tournament->id.'/categories/'.$categoryId.'/settings']) !!}
+    {!! Form::open(['url' => 'tournaments/'.$tournament->id.'/categories/'.$categoryId.'/settings',
+                 'data-tournament' => $tournament->id,
+                 'data-category' => $categoryId,
+                 'class' => 'form-settings',
+
+]) !!}
 @else
     {!! Form::model($setting,
                 ['method'=>"PATCH",
-                'class' => 'form-pricing',
+                'class' => 'form-settings',
+                 'data-tournament' => $tournament->id,
+                 'data-category' => $categoryId,
+                 'data-setting' => $setting->id,
                  "action" => ["CategorySettingsController@update",
-                 $tournament->id,
-                 $categoryId,
-                 $setting->id]]) !!}
+                             $tournament->id,
+                             $categoryId,
+                             $setting->id]]) !!}
 
     {!! Form::model($setting, ['method'=>"PATCH",
         "action" => [ "CategorySettingsController@update", $tournament->id, $categoryId,$setting->id]]) !!}
@@ -127,7 +135,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 
 
     <div align="right">
-        <button type="submit" class="btn btn-success" id="save{{$key}}">{{trans("core.save")}}</button>
+        <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}</button>
     </div>
     <script>
 
@@ -151,33 +159,33 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
             }));
 
             {{--$(".teamSizeSlider{{$key}}").slider({--}}
-                {{--max: 10,--}}
-                {{--value: {!! $teamSize !!} ,--}}
-                {{--change: function (event, ui) {--}}
-                    {{--$('#teamSize{{$key}}').attr('value', ui.value);--}}
-                {{--}--}}
+            {{--max: 10,--}}
+            {{--value: {!! $teamSize !!} ,--}}
+            {{--change: function (event, ui) {--}}
+            {{--$('#teamSize{{$key}}').attr('value', ui.value);--}}
+            {{--}--}}
             {{--});--}}
             {{--$(".teamSizeSlider{{$key}}").slider("pips");--}}
             {{--$(".teamSizeSlider{{$key}}").slider("float");--}}
             {{--//----------------------------}}
 
             {{--$(".enchoQtySlider{{$key}}").slider({--}}
-                {{--max: 5,--}}
-                {{--value: {!! $enchoQty  !!} ,--}}
-                {{--change: function (event, ui) {--}}
-                    {{--$('#enchoQty{{$key}}').attr('value', ui.value);--}}
-                {{--}--}}
+            {{--max: 5,--}}
+            {{--value: {!! $enchoQty  !!} ,--}}
+            {{--change: function (event, ui) {--}}
+            {{--$('#enchoQty{{$key}}').attr('value', ui.value);--}}
+            {{--}--}}
             {{--});--}}
             {{--$(".enchoQtySlider{{$key}}").slider("pips");--}}
             {{--$(".enchoQtySlider{{$key}}").slider("float");--}}
             {{--//----------------------------}}
 
             {{--$(".fightingAreasSlider{{$key}}").slider({--}}
-                {{--max: 5,--}}
-                {{--value: {!! $fightingAreas !!} ,--}}
-                {{--change: function (event, ui) {--}}
-                    {{--$('#fightingAreas{{$key}}').attr('value', ui.value);--}}
-                {{--}--}}
+            {{--max: 5,--}}
+            {{--value: {!! $fightingAreas !!} ,--}}
+            {{--change: function (event, ui) {--}}
+            {{--$('#fightingAreas{{$key}}').attr('value', ui.value);--}}
+            {{--}--}}
             {{--});--}}
             {{--$(".fightingAreasSlider{{$key}}").slider("pips");--}}
             {{--$(".fightingAreasSlider{{$key}}").slider("float");--}}

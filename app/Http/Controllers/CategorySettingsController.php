@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\CategorySettings;
-use App\Http\Requests;
 use App\CategoryTournament;
+use App\Http\Requests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+use Response;
 
 class CategorySettingsController extends Controller
 {
@@ -41,14 +41,18 @@ class CategorySettingsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $tournamentId,$categoryId)
+    public function store(Request $request, $tournamentId, $categoryId)
     {
-        $categoryTournament = CategoryTournament::where('tournament_id',$tournamentId)
-                                                  ->where('category_id',$categoryId)->first();
+        $categoryTournament = CategoryTournament::where('tournament_id', $tournamentId)
+                                    ->where('category_id', $categoryId)->first();
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
-        CategorySettings::create($request->all());
-        flash()->success(Lang::get('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/edit");
+        if (CategorySettings::create($request->all())) {
+            return Response::json(['msg' => 'Category updated', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error updating category', 'status' => 'error']);
+        }
+//        flash()->success(Lang::get('core.operation_successful'));
+//        return redirect("tournaments/$tournamentId/edit");
 
     }
 

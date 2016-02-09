@@ -134,7 +134,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -198,7 +198,7 @@
 
 
                     <script>$('#locationpicker-default').locationpicker({
-                            location: {latitude:{{$latitude }}  , longitude:{{$longitude }} },
+                            location: {latitude:"{{$latitude }}"  , longitude:"{{$longitude }}" },
                             radius: 300,
                             inputBinding: {
                                 latitudeInput: $('#latitude'),
@@ -212,7 +212,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@
 
                     </div>
                     <div align="right">
-                        <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                        <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}</button>
                     </div>
                 </div>
 
@@ -375,7 +375,8 @@ $day = $now->day;
 <script>
 
     $(function () {
-        $('.btn-success').on('click', function (e) {
+        // EDIT TOURNAMENT
+        $('.btn-update-tour').on('click', function (e) {
             e.preventDefault();
             var inputData = $('#form').serialize();
             var dataId = $(this).data('id');
@@ -400,8 +401,8 @@ $day = $now->day;
                                     text: data.msg
                                 });
 //                                console.log()
-                                $('.btn-success').prop( "disabled", false );
-                                $('.btn-success').find('i').removeClass('icon-spinner spinner position-left');
+                                $('.btn-update-tour').prop( "disabled", false );
+                                $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
                             } else {
                                 noty({
@@ -432,6 +433,77 @@ $day = $now->day;
                             $(this).find('i').removeClass('icon-spinner spinner position-left')
 
                         }
+                    }
+            )
+
+        });
+
+        //EDIT CATEGORIES
+
+        $('.save_category').on('click', function (e) {
+            e.preventDefault();
+            var inputData = $('.save_category').serialize();
+            var tournamentId =   $('.form-settings').data('tournament');
+            var categoryId =   $('.form-settings').data('category');
+            var settingId =   $('.form-settings').data('setting');
+
+
+            console.log(tournamentId);
+            console.log(categoryId);
+            console.log(settingId);
+
+
+            $(this).find('i').removeClass();
+            $(this).find('i').addClass('icon-spinner spinner position-left');
+            $('.save_category').prop( "disabled", true );
+
+
+
+            $.ajax(
+                    {
+                        type: 'POST',
+                        url: '{{ url("/tournaments") }}' + '/' + tournamentId + '/' + categoryId + '/settings',
+                        data: inputData,
+                        success: function (data) {
+                            if (data != null && data.status == 'success') {
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'success',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: data.msg
+                                });
+
+                            } else {
+                                noty({
+                                    layout: 'topRight',
+                                    type: 'error',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 3000,
+                                    text: data.msg
+                                });
+                            }
+                            $('.save_category').prop( "disabled", false );
+                            $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
+
+
+
+                        },
+                        error: function (data) {
+                            noty({
+                                layout: 'topRight',
+                                type: 'error',
+                                width: 200,
+                                dismissQueue: true,
+                                timeout: 3000,
+                                text: data.msg
+                            });
+                            $('.save_category').prop( "disabled", false );
+                            $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
+                        }
+
                     }
             )
 
