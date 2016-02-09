@@ -134,7 +134,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -212,7 +212,7 @@
 
                 </div>
                 <div align="right">
-                    <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@
 
                     </div>
                     <div align="right">
-                        <button type="button" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                        <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
                     </div>
                 </div>
 
@@ -335,7 +335,7 @@
                 <!-- /simple panel -->
         <div class="panel panel-flat">
             {{--<div class="panel-heading " >--}}
-            {{--<button type="button" class="btn btn-warning">Borrar</button>--}}
+            {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
             {{--</div>--}}
 
             <div class="panel-body">
@@ -376,6 +376,7 @@ $day = $now->day;
 
     $(function () {
         $('.btn-success').on('click', function (e) {
+            e.preventDefault();
             var inputData = $('#form').serialize();
             var dataId = $(this).data('id');
 //            console.log(dataId);

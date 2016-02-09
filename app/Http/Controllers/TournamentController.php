@@ -140,14 +140,14 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, Tournament $tournament)
     {
-        if ($request->ajax()) {
-            if ($tournament->update($request->all())) {
-                $tournament->categories()->sync($request->input('category'));
-                return Response::json(['msg' => 'Tournament updated', 'status' => 'success']);
-            } else {
-                return Response::json(['msg' => 'Error updating tournament', 'status' => 'error']);
-            }
+//        if ($request->ajax()) {
+        if ($tournament->update($request->all())) {
+            $tournament->categories()->sync($request->input('category'));
+            return Response::json(['msg' => 'Tournament updated', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error updating tournament', 'status' => 'error']);
         }
+//        }
 
 //        $tournament->update($request->all());
 //        $tournament->categories()->sync($request->input('category'));
