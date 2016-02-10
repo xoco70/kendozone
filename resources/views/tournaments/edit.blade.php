@@ -333,7 +333,7 @@
         @if ($tournament->type==1)
 
                 <!-- /simple panel -->
-        <div class="panel panel-flat">
+        <div class="panel panel-flat" id="share_tournament">
             {{--<div class="panel-heading " >--}}
             {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
             {{--</div>--}}
@@ -403,6 +403,13 @@ $day = $now->day;
 //                                console.log()
                                 $('.btn-update-tour').prop( "disabled", false );
                                 $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
+
+                                // Show / Hide Share Tournament Link
+                                var tournamentType =  $('[name="type"]').is(':checked');
+                                if (tournamentType) $('#share_tournament').show();
+                                else $('#share_tournament').hide();
+
+                                
 
                             } else {
                                 noty({
