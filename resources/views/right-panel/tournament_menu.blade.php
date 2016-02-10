@@ -36,7 +36,7 @@
                                     $class = "badge-warning";
                                 ?>
                                 <span class="badge {!! $class !!}">
-                                {{ $settingSize  }} / {{$categorySize}}</span>
+                                <span class="category-size">{{ $settingSize  }}</span> / {{$categorySize}}</span>
                             </a></li>
 
                         <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>

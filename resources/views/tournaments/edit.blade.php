@@ -487,8 +487,8 @@ $day = $now->day;
                                 // Change warning icon to success
                                 panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok text-success status-icon');
                                 form.attr('data-setting', data.settingId);
-
-
+                                $('.category-size').html(parseInt($('.category-size').html(), 10)+1)
+                                
                             } else {
                                 noty({
                                     layout: 'topRight',
