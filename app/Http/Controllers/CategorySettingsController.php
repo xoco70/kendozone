@@ -44,12 +44,12 @@ class CategorySettingsController extends Controller
     public function store(Request $request, $tournamentId, $categoryId)
     {
         $categoryTournament = CategoryTournament::where('tournament_id', $tournamentId)
-                                    ->where('category_id', $categoryId)->first();
+            ->where('category_id', $categoryId)->first();
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
-        if (CategorySettings::create($request->all())) {
-            return Response::json(['msg' => 'Category updated', 'status' => 'success']);
+        if ($setting = CategorySettings::create($request->all())) {
+            return Response::json(['settingId' =>$setting->id, 'msg' => 'Configuration created', 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error updating category', 'status' => 'error']);
+            return Response::json(['msg' => 'Error configuring Category', 'status' => 'error']);
         }
 //        flash()->success(Lang::get('core.operation_successful'));
 //        return redirect("tournaments/$tournamentId/edit");
@@ -91,9 +91,13 @@ class CategorySettingsController extends Controller
      */
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
-        CategorySettings::findOrFail($categorySettingsId)->update($request->all());
-        flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/edit");
+        if (CategorySettings::findOrFail($categorySettingsId)->update($request->all())) {
+            return Response::json(['msg' => 'Category updated', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error updating category', 'status' => 'error']);
+        }
+//        flash()->success(trans('core.operation_successful'));
+//        return redirect("tournaments/$tournamentId/edit");
     }
 
     /**

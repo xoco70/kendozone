@@ -297,9 +297,9 @@
                                         <div class="col-md-1">
                                             <div class="panel-heading">
                                                 @if (is_null($setting))
-                                                    <i class="glyphicon  glyphicon-exclamation-sign text-orange-600"></i>
+                                                    <i class="glyphicon  glyphicon-exclamation-sign text-orange-600 status-icon"></i>
                                                 @else
-                                                    <i class="glyphicon glyphicon-ok text-success"></i>
+                                                    <i class="glyphicon glyphicon-ok text-success status-icon"></i>
                                                 @endif
                                             </div>
                                         </div>
@@ -443,10 +443,11 @@ $day = $now->day;
         $('.save_category').on('click', function (e) {
             e.preventDefault();
             var inputData = $('.save_category').serialize();
-            var tournamentId =   $('.form-settings').data('tournament');
-            var categoryId =   $('.form-settings').data('category');
-            var settingId =   $('.form-settings').data('setting');
+            var form = $(this).parents('form:first');
 
+            var tournamentId =   form.data('tournament');
+            var categoryId =   form.data('category');
+            var settingId =  form.data('setting');
 
             console.log(tournamentId);
             console.log(categoryId);
@@ -455,14 +456,23 @@ $day = $now->day;
 
             $(this).find('i').removeClass();
             $(this).find('i').addClass('icon-spinner spinner position-left');
-            $('.save_category').prop( "disabled", true );
+            $(this).prop( "disabled", true );
+            var panel = $(this).closest('.panel');
+//            console.log(icon);
+            var method = null;
+            var url = null;
 
-
-
+            if ((typeof settingId === "undefined")){
+                method = 'POST';
+                url = '{{ url("/tournaments") }}' + '/' + tournamentId + '/categories/' + categoryId + '/settings';
+            }else{
+                method = 'PUT';
+                url = '{{ url("/tournaments") }}' + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId ;
+            }
             $.ajax(
                     {
-                        type: 'POST',
-                        url: '{{ url("/tournaments") }}' + '/' + tournamentId + '/' + categoryId + '/settings',
+                        type: method,
+                        url: url,
                         data: inputData,
                         success: function (data) {
                             if (data != null && data.status == 'success') {
@@ -474,6 +484,10 @@ $day = $now->day;
                                     timeout: 3000,
                                     text: data.msg
                                 });
+                                // Change warning icon to success
+                                panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok text-success status-icon');
+                                form.attr('data-setting', data.settingId);
+
 
                             } else {
                                 noty({
@@ -487,6 +501,7 @@ $day = $now->day;
                             }
                             $('.save_category').prop( "disabled", false );
                             $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
+
 
 
 
