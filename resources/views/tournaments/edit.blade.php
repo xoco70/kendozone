@@ -409,7 +409,7 @@ $day = $now->day;
                                 if (tournamentType) $('#share_tournament').show();
                                 else $('#share_tournament').hide();
 
-                                
+
 
                             } else {
                                 noty({
