@@ -409,6 +409,18 @@ $day = $now->day;
                                 if (tournamentType) $('#share_tournament').show();
                                 else $('#share_tournament').hide();
 
+                                // Set Venue Badge
+                                var venueSize = $('[name="venue"]').val().length;
+                                var latSize = $('[name="latitude"]').val().length;
+                                var longSize = $('[name="longitude"]').val().length;
+                                console.log(venueSize);
+                                console.log(latSize);
+                                console.log(longSize);
+                                if (venueSize>0 && latSize>0  && longSize>0){
+                                    $('#venue-status').show();
+                                }else{
+                                    $('#venue-status').hide();
+                                }
 
 
                             } else {

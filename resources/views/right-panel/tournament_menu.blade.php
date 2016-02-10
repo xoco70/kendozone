@@ -23,9 +23,9 @@
                                 @endif
                             </a></li>
                         <li><a href="/tournaments/{{$tournament->id}}/edit#place"><i class="icon-location4"></i> Lugar
-                                @if(!isNullOrEmptyString($tournament->venue) && $tournament->latitude!=0 && $tournament->longitude!=0)
-                                    <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
-                                @endif
+                                {{--@if(!isNullOrEmptyString($tournament->venue) && $tournament->latitude!=0 && $tournament->longitude!=0)--}}
+                                    <span class="badge badge-success" id="venue-status"><i class=" icon icon-checkmark2"></i></span>
+                                {{--@endif--}}
                             </a></li>
                         <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i
                                         class="icon-cog2"></i>{{trans_choice('crud.category',2)}}
