@@ -439,19 +439,19 @@ $day = $now->day;
         });
 
         //EDIT CATEGORIES
+        var categoriesSize = null;
+        var allCategoriesSize = '{!! $categorySize !!}';
 
         $('.save_category').on('click', function (e) {
             e.preventDefault();
             var inputData = $('.save_category').serialize();
             var form = $(this).parents('form:first');
-
             var tournamentId =   form.data('tournament');
             var categoryId =   form.data('category');
             var settingId =  form.data('setting');
-
-            console.log(tournamentId);
-            console.log(categoryId);
-            console.log(settingId);
+//            console.log(tournamentId);
+//            console.log(categoryId);
+//            console.log(settingId);
 
 
             $(this).find('i').removeClass();
@@ -487,8 +487,15 @@ $day = $now->day;
                                 // Change warning icon to success
                                 panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok text-success status-icon');
                                 form.attr('data-setting', data.settingId);
-                                $('.category-size').html(parseInt($('.category-size').html(), 10)+1)
-                                
+                                if (method == 'POST'){
+                                    categoriesSize = parseInt($(".category-size").text(), 10) + 1;
+                                    $('.category-size').html(categoriesSize)
+                                }
+                                if (categoriesSize == allCategoriesSize){
+                                    $('#categories-status').removeClass().addClass('badge badge-success');
+                                }
+
+
                             } else {
                                 noty({
                                     layout: 'topRight',

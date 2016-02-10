@@ -35,7 +35,7 @@
                                 else
                                     $class = "badge-warning";
                                 ?>
-                                <span class="badge {!! $class !!}">
+                                <span class="badge {!! $class !!}" id="categories-status">
                                 <span class="category-size">{{ $settingSize  }}</span> / {{$categorySize}}</span>
                             </a></li>
 
