@@ -377,8 +377,8 @@ $day = $now->day;
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ url('/tournaments') }}";
-        var url_edit = url_base + '/' + "{{$tournament->id}}";
+        var url_base = "{{ url('/tournaments/') }}";
+        var url_edit = url_base + "{{$tournament->id}}";
 
     </script>
 

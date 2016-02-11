@@ -38,6 +38,9 @@ $(function () {
                             timeout: 3000,
                             text: data.msg
                         });
+                        $('.btnDeleteTournament').prop("disabled", false);
+                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+
                     }
 
 
