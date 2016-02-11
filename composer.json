@@ -20,7 +20,8 @@
     "barryvdh/laravel-ide-helper": "^2.1",
     "intervention/image": "^2.3",
     "tymon/jwt-auth": "0.5.*",
-    "davejamesmiller/laravel-breadcrumbs": "^3.0"
+    "davejamesmiller/laravel-breadcrumbs": "^3.0",
+    "cviebrock/eloquent-sluggable": "^3.1"
 
   },
   "require-dev": {

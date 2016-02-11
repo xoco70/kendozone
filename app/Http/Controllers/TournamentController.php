@@ -134,9 +134,10 @@ class TournamentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param TournamentRequest|Request $request
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function update(TournamentRequest $request, Tournament $tournament)
     {

@@ -17,7 +17,9 @@ class CreateTournamentTable extends Migration {
 					->onDelete('cascade');
 
 			$table->string('name');
-            $table->date('date');
+			$table->string('slug')->nullable();
+
+			$table->date('date');
             $table->date('registerDateLimit');
 //            $table->smallInteger('cost')->unsigned()->nullable();
             $table->Integer('sport')->unsigned()->default(1); // Default is Kendo for now
@@ -49,7 +51,6 @@ class CreateTournamentTable extends Migration {
 //			$table->integer('ScoreType');
 //			$table->string('Diploma');
 //			$table->string('Accreditation');
-
 
 			$table->timestamps();
 			$table->softDeletes();

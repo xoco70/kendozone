@@ -17,7 +17,7 @@
         <!-- Detached content -->
 <div class="container-detached">
     <div class="content-detached">
-        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->id]]) !!}
+        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
 
                 <!-- Simple panel 1 : General Data-->
         <div class="panel panel-flat">
@@ -197,17 +197,7 @@
                     ?>
 
 
-                    <script>$('#locationpicker-default').locationpicker({
-                            location: {latitude: "{{$latitude }}", longitude: "{{$longitude }}"},
-                            radius: 300,
-                            inputBinding: {
-                                latitudeInput: $('#latitude'),
-                                longitudeInput: $('#longitude'),
-                                radiusInput: $('#us2-radius'),
-                                locationNameInput: $('#city')
-                            }
-                        });
-                    </script>
+
 
 
                 </div>
@@ -350,7 +340,7 @@
                             <div class="col-md-12">
                                 <h2 class="form-group text-center m">
                                     <br/>
-                                    {{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/register/
+                                    {{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/register/
                                 </h2>
 
                             </div>
@@ -378,7 +368,10 @@ $day = $now->day;
 @section('scripts_footer')
     <script>
         var url_base = "{{ url('/tournaments/') }}";
-        var url_edit = url_base + "{{$tournament->id}}";
+        var url_edit = url_base + '/' + "{{$tournament->slug}}";
+        var longitude = "{{$longitude }}";
+        var latitude = "{{$latitude }}";
+
 
     </script>
 

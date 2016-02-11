@@ -153,7 +153,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class
     ],
 
     /*

@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 
-
-class Tournament extends Model
+class Tournament extends Model implements SluggableInterface
 {
     use SoftDeletes;
+    use SluggableTrait;
 
+    protected $sluggable = [
+        'build_from' => 'name',
+        'save_to'    => 'slug',
+    ];
     protected $table = 'tournament';
     public $timestamps = true;
 
@@ -201,7 +207,10 @@ class Tournament extends Model
             ->get();
         return $categories;
     }
-
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
 //    public function setMustPayAttribute($mustPay)
 //    {

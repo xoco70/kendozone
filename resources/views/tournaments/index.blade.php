@@ -35,7 +35,6 @@
 
                                 <tr>
                                     {{--<th><input type="checkbox" id="checkAll"/></th>--}}
-                                    <th data-hide="phone">#</th>
                                     <th data-toggle="true">{{ trans('crud.name') }}</th>
                                     {{--<th>{{ trans_choice('crud.place',1) }}</th>--}}
                                     <th data-hide="phone">{{ trans('crud.date') }}</th>
@@ -49,19 +48,16 @@
                                 @foreach($tournaments as $tournament)
                                     <tr id="line">
                                         {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
-                                        <td>
-                                            <a href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->id }}</a>
-                                        </td>
                                         <td><a
-                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->id) !!}">{{ $tournament->name }}</a>
+                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
                                         </td>
                                         {{--<td>{{ $tournament->place }}</td>--}}
                                         <td>{{ $tournament->date }}</td>
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
-                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->id]]) !!}
+                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->slug]]) !!}
                                             {{--<input type="hidden" name="_Token" value="{!!  csrf_token()  !!}">--}}
-                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->id, 'data-id' => $tournament->id ] ) !!}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->slug, 'data-id' => $tournament->slug ] ) !!}
                                             {!! Form::close() !!}
 
                                             {{--<a class="btn btn-danger btn-xs" href="/tournaments/{{ $tournament->id }}" data-method="delete" data-token="{{csrf_token()}}">--}}

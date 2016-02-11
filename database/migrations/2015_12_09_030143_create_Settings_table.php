@@ -32,7 +32,7 @@ class CreateSettingsTable extends Migration
             $table->tinyInteger('enchoDuration');
             $table->tinyInteger('hasHantei');
             $table->smallInteger('cost');
-
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
