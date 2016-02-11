@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/pages/tournamentCreate.js') !!}
+    {!! Html::script('js/pages/header/tournamentCreate.js') !!}
     {{--{!! Html::script('js/plugins/pickers/pickadate/picker.js') !!}--}}
     {{--{!! Html::script('js/plugins/pickers/pickadate/picker.date.js') !!}--}}
 @stop

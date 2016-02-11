@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/pages/tournamentUserCreate.js') !!}
+    {!! Html::script('js/pages/header/tournamentUserCreate.js') !!}
 @stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.users.create',$tournament) !!}

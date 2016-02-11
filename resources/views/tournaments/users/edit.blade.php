@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('scripts')
 
-    {!! Html::script('js/pages/tournamentUserEdit.js') !!}
+    {!! Html::script('js/pages/header/tournamentUserEdit.js') !!}
 
     {{--{!! Html::script('js/plugins/tables/datatables/extensions/responsive.min.js') !!}--}}
     {{--{!! Html::script('js/plugins/forms/selects/select2.min.js') !!}--}}

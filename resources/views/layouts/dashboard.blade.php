@@ -66,10 +66,9 @@
 </div>
 <!-- /page container -->
 
-<script>
+    {!! Html::script('js/analytics.js') !!}
+
     @yield('scripts_footer')
 
-
-</script>
 </body>
 </html>
