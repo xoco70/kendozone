@@ -198,7 +198,7 @@
 
 
                     <script>$('#locationpicker-default').locationpicker({
-                            location: {latitude:"{{$latitude }}"  , longitude:"{{$longitude }}" },
+                            location: {latitude: "{{$latitude }}", longitude: "{{$longitude }}"},
                             radius: 300,
                             inputBinding: {
                                 latitudeInput: $('#latitude'),
@@ -243,7 +243,8 @@
 
                     </div>
                     <div align="right">
-                        <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}</button>
+                        <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}
+                        </button>
                     </div>
                 </div>
 
@@ -254,7 +255,7 @@
         {!! Form::close()!!}
 
                 <!-- /simple panel acordion -->
-        <div class="panel panel-flat">
+        <div class="panel panel-flat category-settings">
             <div class="panel-body">
                 <div class="container-fluid">
                     <fieldset title="{{trans_choice('crud.categorySettings',2)}}">
@@ -375,6 +376,27 @@ $day = $now->day;
 <script>
 
     $(function () {
+
+//        var panel = $('.category-settings');
+//        panel.removeClass();
+//        panel.find(':checkbox').removeClass();
+
+
+        $('input[name="isTeam"]').on('switchChange.bootstrapSwitch', function (event, state) {
+            var isChecked = $(this).is(':checked');
+            $(this).closest('form').find('[name="teamSize"]').prop('disabled', !isChecked);
+//            $('#teamSize').prop('disabled', !isChecked);
+        });
+        $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
+            var isChecked = $(this).is(':checked');
+            $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
+            $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
+        });
+        $('input[name="hasRoundRobin"]').on('switchChange.bootstrapSwitch', function (event, state) {
+            var isChecked = $(this).is(':checked');
+            $(this).closest('form').find('[name="roundRobinWinner"]').prop('disabled', !isChecked);
+        });
+
         // EDIT TOURNAMENT
         $('.btn-update-tour').on('click', function (e) {
             e.preventDefault();
@@ -382,7 +404,7 @@ $day = $now->day;
             var dataId = $(this).data('id');
 //            console.log(dataId);
             $(this).find('i').addClass('icon-spinner spinner position-left');
-            $(this).prop( "disabled", true );
+            $(this).prop("disabled", true);
 
             $.ajax(
                     {
@@ -401,11 +423,11 @@ $day = $now->day;
                                     text: data.msg
                                 });
 //                                console.log()
-                                $('.btn-update-tour').prop( "disabled", false );
+                                $('.btn-update-tour').prop("disabled", false);
                                 $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
                                 // Show / Hide Share Tournament Link
-                                var tournamentType =  $('[name="type"]').is(':checked');
+                                var tournamentType = $('[name="type"]').is(':checked');
                                 if (tournamentType) $('#share_tournament').show();
                                 else $('#share_tournament').hide();
 
@@ -416,9 +438,9 @@ $day = $now->day;
                                 console.log(venueSize);
                                 console.log(latSize);
                                 console.log(longSize);
-                                if (venueSize>0 && latSize>0  && longSize>0){
+                                if (venueSize > 0 && latSize > 0 && longSize > 0) {
                                     $('#venue-status').show();
-                                }else{
+                                } else {
                                     $('#venue-status').hide();
                                 }
 
@@ -432,7 +454,7 @@ $day = $now->day;
                                     timeout: 3000,
                                     text: "1"
                                 });
-                                $(this).prop( "disabled", false );
+                                $(this).prop("disabled", false);
                                 $(this).find('i').removeClass('icon-spinner spinner position-left');
 
                             }
@@ -448,7 +470,7 @@ $day = $now->day;
                                 text: data.msg,
 
                             });
-                            $(this).prop( "disabled", false );
+                            $(this).prop("disabled", false);
                             $(this).find('i').removeClass('icon-spinner spinner position-left')
 
                         }
@@ -465,9 +487,9 @@ $day = $now->day;
             e.preventDefault();
             var inputData = $('.save_category').serialize();
             var form = $(this).parents('form:first');
-            var tournamentId =   form.data('tournament');
-            var categoryId =   form.data('category');
-            var settingId =  form.data('setting');
+            var tournamentId = form.data('tournament');
+            var categoryId = form.data('category');
+            var settingId = form.data('setting');
 //            console.log(tournamentId);
 //            console.log(categoryId);
 //            console.log(settingId);
@@ -475,18 +497,18 @@ $day = $now->day;
 
             $(this).find('i').removeClass();
             $(this).find('i').addClass('icon-spinner spinner position-left');
-            $(this).prop( "disabled", true );
+            $(this).prop("disabled", true);
             var panel = $(this).closest('.panel');
 //            console.log(icon);
             var method = null;
             var url = null;
 
-            if ((typeof settingId === "undefined")){
+            if ((typeof settingId === "undefined")) {
                 method = 'POST';
                 url = '{{ url("/tournaments") }}' + '/' + tournamentId + '/categories/' + categoryId + '/settings';
-            }else{
+            } else {
                 method = 'PUT';
-                url = '{{ url("/tournaments") }}' + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId ;
+                url = '{{ url("/tournaments") }}' + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId;
             }
             $.ajax(
                     {
@@ -506,11 +528,11 @@ $day = $now->day;
                                 // Change warning icon to success
                                 panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok text-success status-icon');
                                 form.attr('data-setting', data.settingId);
-                                if (method == 'POST'){
+                                if (method == 'POST') {
                                     categoriesSize = parseInt($(".category-size").text(), 10) + 1;
                                     $('.category-size').html(categoriesSize)
                                 }
-                                if (categoriesSize == allCategoriesSize){
+                                if (categoriesSize == allCategoriesSize) {
                                     $('#categories-status').removeClass().addClass('badge badge-success');
                                 }
 
@@ -525,10 +547,8 @@ $day = $now->day;
                                     text: data.msg
                                 });
                             }
-                            $('.save_category').prop( "disabled", false );
+                            $('.save_category').prop("disabled", false);
                             $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
-
-
 
 
                         },
@@ -541,7 +561,7 @@ $day = $now->day;
                                 timeout: 3000,
                                 text: data.msg
                             });
-                            $('.save_category').prop( "disabled", false );
+                            $('.save_category').prop("disabled", false);
                             $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
                         }
 

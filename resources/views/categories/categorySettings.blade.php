@@ -1,5 +1,14 @@
 <?php
 $categoryId = $tournament->categoryTournaments->get($key)->category->id;
+if (is_null($setting)) {
+    $disableTeam = $disableEncho = $disableRoundRobin = "disabled";
+} else {
+    $disableTeam = $setting->isTeam ? "" : "disabled";
+    $disableEncho = $setting->hasEncho ? "" : "disabled";
+    $disableRoundRobin = $setting->hasRoundRobin ? "" : "disabled";
+}
+
+
 ?>
 
 @if (is_null($setting))
@@ -38,7 +47,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         </div>
         <div class="col-md-5">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
-            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
+            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control', $disableTeam]) !!}
         </div>
         <div class="col-md-5">
 
@@ -66,7 +75,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control']) !!}
+                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
@@ -74,7 +83,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key]) !!}
+                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 
@@ -97,7 +106,7 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
-                {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control']) !!}
+                {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
         <div class="col-md-5">
@@ -135,7 +144,8 @@ $categoryId = $tournament->categoryTournaments->get($key)->category->id;
 
 
     <div align="right">
-        <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}</button>
+        <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}
+        </button>
     </div>
     <script>
 
