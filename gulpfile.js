@@ -47,28 +47,28 @@ elixir(function (mix) {
     mix.scripts([
         'plugins/tables/footable/footable.min.js',
         'plugins/notifications/sweet_alert.min.js'
-    ], 'public/js/tournamentIndex.js');
+    ], 'public/js/pages/tournamentIndex.js');
 
         mix.scripts([
             'plugins/tables/footable/footable.min.js'
-        ], 'public/js/invitationIndex.js');
+        ], 'public/js/pages/invitationIndex.js');
 
         mix.scripts([
             'plugins/forms/inputs/duallistbox.min.js',
             'plugins/pickers/pickadate/picker.js',
             'plugins/pickers/pickadate/picker.date.js'
-        ], 'public/js/tournamentCreate.js');
+        ], 'public/js/pages/tournamentCreate.js');
 
         mix.scripts([
             //'http://maps.google.com/maps/api/js',
             'plugins/uploaders/fileinput.min.js',
             'pages/uploader_bootstrap.js',
             //'plugins/dropzone.js'
-        ], 'public/js/userCreate.js');
+        ], 'public/js/pages/userCreate.js');
 
         mix.styles([
             //'dropzone.css'
-        ], 'public/css/userCreate.css');
+        ], 'public/css/pages/userCreate.css');
         //mix.scripts([
         //    'http://maps.google.com/maps/api/js',
         //    'plugins/uploaders/fileinput.min.js',
@@ -87,27 +87,27 @@ elixir(function (mix) {
             'core/libraries/jquery_ui/interactions.min.js',
             'core/libraries/jquery_ui/touch.min.js',
             'jquery.timepicker.js'
-        ], 'public/js/tournamentEdit.js');
+        ], 'public/js/pages/tournamentEdit.js');
 
 
         mix.scripts([
             'plugins/ui/nicescroll.min.js',
             'sidebar_detached_sticky_custom.js',
             'plugins/notifications/sweet_alert.min.js'
-        ], 'public/js/tournamentUserCreate.js');
+        ], 'public/js/pages/tournamentUserCreate.js');
 
         mix.scripts([
             'plugins/tables/datatables/datatables.min.js',
             'plugins/tables/datatables/extensions/responsive.min.js',
             'plugins/forms/selects/select2.min.js'
-        ], 'public/js/tournamentUserIndex.js');
+        ], 'public/js/pages/tournamentUserIndex.js');
 
         mix.scripts([
             'plugins/multiple-emails.js'
-        ], 'public/js/tournamentInvite.js');
+        ], 'public/js/pages/tournamentInvite.js');
 
         mix.styles([
             'multiple-emails.css'
-        ], 'public/css/tournamentInvite.css');
+        ], 'public/css/pages/tournamentInvite.css');
 
 });

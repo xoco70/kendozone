@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-{!! Html::script('js/tournamentEdit.js') !!}
+{!! Html::script('js/pages/tournamentEdit.js') !!}
 {!! Html::script('http://maps.google.com/maps/api/js') !!}
 @stop
 @section('styles')

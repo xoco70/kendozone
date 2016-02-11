@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/userCreate.js') !!}
+    {!! Html::script('js/pages/userCreate.js') !!}
     {!! Html::script('http://maps.google.com/maps/api/js') !!}
 
     {{--    {!! Html::script('http://maps.google.com/maps/api/js') !!}--}}

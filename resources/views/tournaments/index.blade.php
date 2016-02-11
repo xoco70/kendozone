@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/tournamentIndex.js') !!}
+    {!! Html::script('js/pages/pagestournamentIndex.js') !!}
 @stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.index') !!}
