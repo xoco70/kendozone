@@ -16,9 +16,9 @@
     @endif
     <strong>Fecha:</strong> {{ $tournament->date }}<br/>
     @if ($tournament->cost != null) <strong>Costo:</strong> {{ $tournament->cost }}<br/>@endif
-    @if ($tournament->registerDateLimit != null)
+    @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
         <strong>Fecha Limite de Registro:</strong> {{ $tournament->registerDateLimit }}<br/>
-@endif
+    @endif
 @if (isset($category))
     <P>Has sido preregistrado en las categoria</P>
     <ul>
@@ -26,7 +26,7 @@
     </ul>
 @else
     Por favor pica el link de pre-registro: <br/>
-    <a href='{{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}tournaments/{{$tournament->id}}/invite/{{ $code }}</a>
+    <a href='{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
 @endif
 
 @if($password!=null)
@@ -35,7 +35,10 @@
     Contraseña: {{ $password }}
 @endif
 
-<p>No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo antes del dia {{ $tournament->registerDateLimit }}.</p>
+<p>No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo
+    @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
+        antes del dia {{ $tournament->registerDateLimit }}.</p>
+    @endif
 
 <p>Gracias</p>
 

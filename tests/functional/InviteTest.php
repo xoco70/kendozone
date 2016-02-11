@@ -37,7 +37,7 @@ class InviteTest extends TestCase
 
 
         // Check that inviting one user by email
-        $this->visit('/tournaments/' . $tournament->id . '/invite/')
+        $this->visit('/tournaments/' . $tournament->slug . '/invite/')
             ->type('["john@example.com","john2@example.com"]', 'recipients')// Must simulate js plugin
             ->press(trans('crud.send_invites'))
             ->seePageIs('/tournaments/' . $tournament->id . '/edit')
@@ -110,13 +110,13 @@ class InviteTest extends TestCase
             'password' => bcrypt('111111'), // 111111
             ]);
 
-        $this->visit("/tournaments/" . $tournament->id . "/register");
+        $this->visit("/tournaments/" . $tournament->slug . "/register");
 
         // System redirect to user creation
         $this->type($user->email, 'email')
             ->type('111111', 'password')
             ->press(Lang::get('auth.signin'))
-            ->seePageIs('/tournaments/' . $tournament->id . '/register');
+            ->seePageIs('/tournaments/' . $tournament->slug . '/register');
 //
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page

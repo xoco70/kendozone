@@ -71,7 +71,7 @@ class TournamentTest extends TestCase
 
         $tournament = factory(Tournament::class)->create();
 
-        $this->visit('/tournaments/' . $tournament->id . '/edit')
+        $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->see($this->tournaments)
             ->type('1111', 'name')
             ->press(Lang::get('core.save'))
@@ -133,7 +133,7 @@ class TournamentTest extends TestCase
 
         }
 
-        $this->visit('/tournaments/' . $tournament->id . '/edit')
+        $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->see($this->tournaments)
             ->type('MyTournament', 'name')
             ->type('2015-12-15', 'date')
@@ -174,7 +174,7 @@ class TournamentTest extends TestCase
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
 
-        $this->visit('/tournaments/' . $tournament->id . '/edit')
+        $this->visit('/tournaments/' . $tournament->slug . '/edit')
 //            ->type('1', 'isTeam0')
 //            ->type('1', 'hasEncho0')
 //            ->type('1', 'hasRoundRobin0')
@@ -255,10 +255,10 @@ class TournamentTest extends TestCase
         $this->it_edit_tournament($myTournament); // it must be OK because tournament is mine
         $hisTournament = factory(Tournament::class)->create(['name' => 't2', 'user_id' => 3]);
         // 1 is SuperUser so it should be OK
-        $this->visit('/tournaments/' . $hisTournament->id . '/edit')
+        $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see($this->tournaments);
         Auth::loginUsingId(4);
-        $this->visit('/tournaments/' . $hisTournament->id . '/edit')
+        $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see("403");
         Auth::loginUsingId(1);
 
@@ -277,7 +277,7 @@ class TournamentTest extends TestCase
         // Check that tournament is gone
         $this->visit("/tournaments")
             ->see($this->tournaments)
-            ->press("delete_" . $tournament->id)
+            ->press("delete_" . $tournament->slug)
             ->seeIsSoftDeletedInDatabase('tournament',['id' => $tournament->id])
             ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
             ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct2->id]);

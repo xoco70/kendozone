@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/tournamentInvite.js') !!}
+    {!! Html::script('js/pages/header/tournamentInvite.js') !!}
 @stop
 @section('styles')
     {!! Html::style('css/tournamentInvite.css') !!}
@@ -42,7 +42,7 @@
                                                     {!!  Form::label('recipients', trans('crud.recipients')) !!}
                                                     {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
                                                 </div>
-                                                {!!  Form::hidden('tournamentId', $tournament->id) !!}
+                                                {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
 
                                                 <div class="form-group">
                                                     {!!  Form::submit(trans('crud.send_invites'), ['class' => 'btn btn-primary form-control']) !!}

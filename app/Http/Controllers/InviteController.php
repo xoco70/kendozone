@@ -51,33 +51,35 @@ class InviteController extends Controller
     /**
      * Triggered when User click Activation Link received in mail
      *
-     * @param $tournamentId
+     * @param $tournamentSlug
      * @param $token
      * @return View
+     * @internal param $tournamentId
      * @internal param Request $request
      * @internal param AppMailer $mailer
      */
-    public function register($tournamentId, $token)
+    public function register($tournamentSlug, $token)
     {
 
         // Get available invitation
         $invite = Invite::getActiveInvite($token);
+
         // Check if invitation is expired
         if (is_null($invite)) {
             return view('errors.general',
                 ['code' => '403',
                     'message' => 'Forbidden!',
-                    'quote' => '“You need an invitation to this tournament.”',
+                    'quote' => 'You need an invitation to this tournament.',
                     'author' => 'Admin',
                     'source' => '',
                 ]
             );
         }
-        if ($invite->expiration < Carbon::now())
+        if ($invite->expiration < Carbon::now() && $invite->expiration!= '0000-00-00')
             return view('errors.general',
                 ['code' => '403',
                     'message' => 'Forbidden!',
-                    'quote' => '“Invitation expired.”',
+                    'quote' => 'Invitation expired.',
                     'author' => 'Admin',
                     'source' => '',
                 ]
@@ -92,7 +94,7 @@ class InviteController extends Controller
             } else {
                 // Redirect to register category Screen
 
-                $tournament = Tournament::findOrFail($tournamentId);
+                $tournament = Tournament::findBySlug($tournamentSlug);
                 Auth::loginUsingId($user->id);
                 return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
 
@@ -177,7 +179,7 @@ class InviteController extends Controller
         ]);
 
 
-        $tournament = Tournament::findOrFail($request->get("tournamentId"));
+        $tournament = Tournament::findBySlug($request->tournamentSlug);
         $recipients = json_decode($request->get("recipients"));
         foreach ($recipients as $recipient) {
             // Mail to Recipients
@@ -187,7 +189,7 @@ class InviteController extends Controller
 
         }
         flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournament->id/edit");
+        return redirect("tournaments/$tournament->slug/edit");
 
 
 //        dd($recipients);
@@ -199,8 +201,9 @@ class InviteController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function inviteUsers(Tournament $tournament)
+    public function inviteUsers($tournamentSlug)
     {
+        $tournament = Tournament::findBySlug($tournamentSlug);
         return view('invitation.show', compact('tournament'));
     }
 
