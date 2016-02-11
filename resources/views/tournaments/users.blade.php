@@ -102,7 +102,7 @@
                                             <td class="text-center">
                                                 <a class=" text-danger "
                                                    href="{!! URL::action('TournamentUserController@deleteUser',
-                                                    ['tournamentId'=>$tournament->id,
+                                                    ['tournamentId'=>$tournament->slug,
                                                     'categoryId'=>$categoryTournament->id,
                                                     'userId'=>$user->id])  !!}">
                                                     <span class="glyphicon glyphicon-remove"></span></a>

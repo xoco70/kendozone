@@ -12,8 +12,8 @@ if (is_null($setting)) {
 ?>
 
 @if (is_null($setting))
-    {!! Form::open(['url' => 'tournaments/'.$tournament->id.'/categories/'.$categoryId.'/settings',
-                 'data-tournament' => $tournament->id,
+    {!! Form::open(['url' => 'tournaments/'.$tournament->slug.'/categories/'.$categoryId.'/settings',
+                 'data-tournament' => $tournament->slug,
                  'data-category' => $categoryId,
                  'class' => 'form-settings',
 
@@ -22,16 +22,16 @@ if (is_null($setting)) {
     {!! Form::model($setting,
                 ['method'=>"PATCH",
                 'class' => 'form-settings',
-                 'data-tournament' => $tournament->id,
+                 'data-tournament' => $tournament->slug,
                  'data-category' => $categoryId,
                  'data-setting' => $setting->id,
                  "action" => ["CategorySettingsController@update",
-                             $tournament->id,
+                             $tournament->slug,
                              $categoryId,
                              $setting->id]]) !!}
 
     {!! Form::model($setting, ['method'=>"PATCH",
-        "action" => [ "CategorySettingsController@update", $tournament->id, $categoryId,$setting->id]]) !!}
+        "action" => [ "CategorySettingsController@update", $tournament->slug, $categoryId,$setting->id]]) !!}
 @endif
 <div class="tab-pane" id="category">
     <div class="row">

@@ -87,7 +87,7 @@ class TournamentController extends Controller
         $tournament->categories()->sync($request->input('category'));
         flash()->success(trans('core.operation_successful'));
 //        else flash('error', 'operation_failed!');
-        return redirect("tournaments/$tournament->id/edit");
+        return redirect("tournaments/$tournament->slug/edit");
     }
 
     /**

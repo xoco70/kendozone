@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CategorySettings;
 use App\CategoryTournament;
 use App\Http\Requests;
+use App\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Response;
@@ -41,10 +42,13 @@ class CategorySettingsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $tournamentId, $categoryId)
+    public function store(Request $request, $tournamentSlug, $categoryId)
     {
-        $categoryTournament = CategoryTournament::where('tournament_id', $tournamentId)
+        $tournament = Tournament::findBySlug($tournamentSlug);
+
+        $categoryTournament = CategoryTournament::where('tournament_id', $tournament->id)
             ->where('category_id', $categoryId)->first();
+
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
         if ($setting = CategorySettings::create($request->all())) {
             return Response::json(['settingId' =>$setting->id, 'msg' => 'Configuration created', 'status' => 'success']);

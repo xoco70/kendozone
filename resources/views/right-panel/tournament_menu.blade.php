@@ -22,12 +22,12 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#place"><i class="icon-location4"></i> Lugar
+                        <li><a href="/tournaments/{{$tournament->slug}}/edit#place"><i class="icon-location4"></i> Lugar
                                 {{--@if(!isNullOrEmptyString($tournament->venue) && $tournament->latitude!=0 && $tournament->longitude!=0)--}}
                                     <span class="badge badge-success" id="venue-status"><i class=" icon icon-checkmark2"></i></span>
                                 {{--@endif--}}
                             </a></li>
-                        <li><a href="/tournaments/{{$tournament->id}}/edit#categories"><i
+                        <li><a href="/tournaments/{{$tournament->slug}}/edit#categories"><i
                                         class="icon-cog2"></i>{{trans_choice('crud.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)
@@ -39,7 +39,7 @@
                                 <span class="category-size">{{ $settingSize  }}</span> / {{$categorySize}}</span>
                             </a></li>
 
-                        <li><a href="/tournaments/{{$tournament->id}}/users"><i class="icon-users"></i>
+                        <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
                                 @if((sizeof($tournament->competitors()))>8)
                                     <span class="badge badge-success">{{sizeof($tournament->competitors())}}</span>
@@ -70,7 +70,7 @@
     <br/>
     <div class="row">
         <div class="col-md-12">
-            <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->id) !!}" type="button" class="btn btn-primary btn-labeled btn-xlg"
+            <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button" class="btn btn-primary btn-labeled btn-xlg"
                   style="width: 100%;"><b><i class="icon-envelope"></i></b>{{ trans('crud.invite_competitors') }}</a>
             </p>
 
@@ -81,7 +81,7 @@
     $link = "";
     $id = "";
     if ($settingSize > 0 && $settingSize == $categorySize) {
-        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->id]);
+        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
         $id = "";
     } else {
         // For showing Modal

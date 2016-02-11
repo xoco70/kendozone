@@ -32,9 +32,9 @@ class TournamentUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($tournamentId)
+    public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournamentId);
+        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
@@ -127,7 +127,7 @@ class TournamentUserController extends Controller
 
     }
 
-    public function deleteUser($tournamentId, $tcId, $userId)
+    public function deleteUser($tournamentSlug, $tcId, $userId)
     {
 
 
@@ -135,7 +135,7 @@ class TournamentUserController extends Controller
             ->where('user_id', $userId)
             ->delete();
         flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/users");
+        return redirect("tournaments/$tournamentSlug/users");
     }
 
 
