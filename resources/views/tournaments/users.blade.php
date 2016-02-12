@@ -10,7 +10,7 @@
 
         $link = "";
         if ($settingSize > 0 && $settingSize == $categorySize)
-            $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->id]);
+            $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
         else
             // For showing Modal
             $link = "#";
@@ -47,7 +47,7 @@
                                                 class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
                                 </a>
                                 <a href="{!!   URL::action('TournamentUserController@create',
-                                                    ['tournamentId'=>$tournament->id,
+                                                    ['tournamentId'=>$tournament->slug,
                                                     'categoryId'=>$categoryTournament->id
                                                     ]) !!}"
                                    class="btn btn-primary btn-xs pull-right" id="addcompetitor{!! $categoryTournament->id !!}"><b><i
@@ -71,14 +71,17 @@
                                         <th class="all">{{ trans('crud.action') }}</th>
                                     </tr>
                                     </thead>
+                                    <?php
+                                    dd($categoryTournament->users);
+                                    ?>
                                     @foreach($categoryTournament->users as $user)
                                         <tr>
                                             <td class="text-center">
-                                                <a href="{!!   URL::action('UserController@show',  $user->id) !!}"><img
+                                                <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
                                                             src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                             </td>
                                             <td><a
-                                                        href="{!!   URL::action('UserController@show',  ['users'=>$user->id] ) !!}">{{ $user->name }}</a>
+                                                        href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td class="text-center">{{ trans($categoryTournament->category->name)}}</td>
@@ -102,9 +105,9 @@
                                             <td class="text-center">
                                                 <a class=" text-danger "
                                                    href="{!! URL::action('TournamentUserController@deleteUser',
-                                                    ['tournamentId'=>$tournament->slug,
+                                                    ['tournamentSlug'=>$tournament->slug,
                                                     'categoryId'=>$categoryTournament->id,
-                                                    'userId'=>$user->id])  !!}">
+                                                    'userSlug'=>$user->slug])  !!}">
                                                     <span class="glyphicon glyphicon-remove"></span></a>
                                             </td>
                                         </tr>

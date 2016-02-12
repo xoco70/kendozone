@@ -10,6 +10,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
@@ -40,10 +41,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->isSuperAdmin()){
+            $users = User::paginate(Config::get('constants.PAGINATION'));
 
-        $users = User::paginate(Config::get('constants.PAGINATION'));
-
-        return view('users.index', compact('users'));
+            return view('users.index', compact('users'));
+        }else{
+            return view('errors.general',
+                ['code' => '403',
+                    'message' => 'Forbidden!',
+                    'quote' => trans(''),
+                    'author' => 'Admin',
+                    'source' => '',
+                ]
+            );
+        }
     }
 
     /**
@@ -149,7 +160,7 @@ class UserController extends Controller
             flash()->success(Lang::get('core.fail'));
 
 
-        return redirect("/users");
+        return redirect("/users/".Auth::user()->slug."/edit");
     }
 
 

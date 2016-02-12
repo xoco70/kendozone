@@ -59,9 +59,11 @@ class TournamentUserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Tournament $tournament
+     * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $tournamentId, AppMailer $mailer)
+    public function store(Request $request, Tournament $tournament, AppMailer $mailer)
     {
 
         $this->validate($request, [
@@ -80,7 +82,7 @@ class TournamentUserController extends Controller
         $email = $request->email;
         $username = $request->username;
 
-        $tournament = Tournament::findOrFail($tournamentId);
+//        $tournament = Tournament::findOrFail($tournament);
         $user = User::where('email', $email)->first();
         $password = null;
         if (is_null($user)) {
@@ -92,6 +94,7 @@ class TournamentUserController extends Controller
             $user = User::create(['email' => $email,
                 'name' => $username,
                 'password' => bcrypt($password),
+                'confirmed' => '1'
 //                'country_id' => $country->id,
 //                'countryCode' => $location['isoCode'],
 //                'city' => $location['city'],
@@ -104,16 +107,17 @@ class TournamentUserController extends Controller
             // User already exists
             // We check that this user isn't registered in this tournament
             $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
+
         }
 
         $categoryTournaments = $user->categoryTournaments();
 
         if ($categoryTournaments->get()->contains($categoryTournament)) {
             flash()->error(trans('flash.user_already_registered_in_category'));
-            return redirect("tournaments/$tournamentId/users");
+            return redirect("tournaments/$tournament->slug/users");
 
         } else {
-            $categoryTournaments->attach($categoryTournamentId);
+            $categoryTournaments->attach($categoryTournamentId, ['confirmed' => 1]);
         }
 
 
@@ -122,17 +126,17 @@ class TournamentUserController extends Controller
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
         flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentId/users");
+        return redirect("tournaments/$tournament->slug/users");
 
 
     }
 
-    public function deleteUser($tournamentSlug, $tcId, $userId)
+    public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
-
+        $user = User::findBySlug($userSlug);
         CategoryTournamentUser::where('category_tournament_id', $tcId)
-            ->where('user_id', $userId)
+            ->where('user_id', $user->id)
             ->delete();
         flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentSlug/users");

@@ -24,7 +24,7 @@
     <div class="container-fluid">
 
         @if (!is_null($user->id))
-            {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->id), 'enctype' => 'multipart/form-data')) !!}
+            {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->slug), 'enctype' => 'multipart/form-data')) !!}
         @else
             {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
         @endif

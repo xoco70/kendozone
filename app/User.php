@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Http\Requests\UserRequest;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use DateTime;
 use GeoIP;
 use Illuminate\Auth\Authenticatable;
@@ -19,9 +21,9 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Webpatser\Countries\Countries;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract,SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes,SluggableTrait;
 
     /**
      * The database table used by the model.
@@ -30,6 +32,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
     protected $dates = ['deleted_at'];
+
+    protected $sluggable = [
+        'build_from' => 'name',
+        'save_to'    => 'slug',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -185,7 +192,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function categoryTournaments()
     {
-        return $this->belongsToMany(CategoryTournament::class);
+        return $this->belongsToMany(CategoryTournament::class)
+            ->withTimestamps();
     }
 
     public function categoryTournamentUsers()
@@ -279,4 +287,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return Auth::user()->role_id == 5;
     }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

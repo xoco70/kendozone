@@ -56,7 +56,7 @@
 
                     @if(Auth::check())
                     <li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a
-                                href="{!! URL::to('users/'.Auth::getUser()->id).'/edit' !!}"><i
+                                href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> <span>{{trans('core.profile')}}</span></a></li>
                     @endif
                     {{--<li {{ (Request::is('settings') ? 'class=active' : '') }}><a href="/settings"><i--}}

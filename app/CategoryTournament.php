@@ -47,7 +47,8 @@ class CategoryTournament extends Model
     }
 
     public function users(){
-        return $this->belongsToMany('App\User','category_tournament_user','category_tournament_id');
+        return $this->belongsToMany('App\User','category_tournament_user','category_tournament_id')
+            ->withTimestamps();
     }
     public function settings(){
         return $this->hasOne(CategorySettings::class);
