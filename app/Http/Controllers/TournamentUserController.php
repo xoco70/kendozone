@@ -79,6 +79,7 @@ class TournamentUserController extends Controller
 
 
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
+
         $email = $request->email;
         $username = $request->username;
 
@@ -106,9 +107,10 @@ class TournamentUserController extends Controller
 
             // User already exists
             // We check that this user isn't registered in this tournament
-//            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
-            $ctu = CategoryTournamentUser::with('categoryTournaments', 'users')->where('user_id',$user->id)->get();
+            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
+//            $ctu = CategoryTournamentUser::with('categoryTournaments', 'users')->where('user_id',$user->id)->get();
         }
+
 
         $categoryTournaments = $user->categoryTournaments();
 

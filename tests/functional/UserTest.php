@@ -99,7 +99,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_edit_user()
     {
-        factory(User::class)->create(['name' => 'MyUser']);
+        $user = factory(User::class)->create(['name' => 'MyUser']);
 
         $this->visit('/users')
             ->click("MyUser")
@@ -112,7 +112,7 @@ class UserTest extends TestCase
             ->type('222222', 'password_confirmation')
             ->type('44', 'avatar')
             ->press(Lang::get('core.save'))
-            ->seePageIs('/users')
+            ->seePageIs('/users/')
             ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
 
 //        $user = User::where('email', '=', "juju@juju.com")->first();
@@ -145,9 +145,16 @@ class UserTest extends TestCase
     /** @test */
     public function it_allow_editing_user_without_password()
     {
-        $this->it_create_user(false);
-        $usuario = User::where('email', '=', "julien@cappiello.fr2")->first();
-        $oldPass = $usuario->password;
+//        $this->it_create_user(false);
+        $user = factory(User::class)->create(
+            [   'name' => 'MyUser',
+                'email' => 'MyUser@kendozone.com',
+                'role_id' => 3,
+                'password' => bcrypt('111111'),
+                'verified' => 1,]);
+
+//        $user = User::where('email', '=', )->first();
+        $oldPass = $user->password;
         $this->visit('/users')
             ->click("MyUser")
             ->type('juju', 'name')
@@ -156,12 +163,12 @@ class UserTest extends TestCase
             ->type('1', 'lastname')
 //            ->select('3', 'role_id')
             ->press(Lang::get('core.save'))
-            ->seePageIs('/users')
+            ->seePageIs('/users/')
             ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
 
         // Check that password remains unchanged
-        $usuario = User::where('email', '=', "juju@juju.com")->first();
-        $newPass = $usuario->password;
+        $user = User::where('email', '=', "juju@juju.com")->first();
+        $newPass = $user->password;
         assert($oldPass == $newPass, true);
 
     }

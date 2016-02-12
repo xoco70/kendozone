@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -41,11 +40,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->isSuperAdmin()){
+        if (Auth::user()->isSuperAdmin()) {
             $users = User::paginate(Config::get('constants.PAGINATION'));
 
             return view('users.index', compact('users'));
-        }else{
+        } else {
             return view('errors.general',
                 ['code' => '403',
                     'message' => 'Forbidden!',
@@ -68,8 +67,8 @@ class UserController extends Controller
         $roles = Role::lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
-        $submitButton = trans('crud.addModel',['currentModelName' =>  $this->currentModelName]);
-        return view('users.form', compact('user', 'grades', 'countries','roles','submitButton')); //
+        $submitButton = trans('crud.addModel', ['currentModelName' => $this->currentModelName]);
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton')); //
     }
 
     /**
@@ -127,7 +126,7 @@ class UserController extends Controller
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user', 'grades', 'countries','roles')); //
+        return view('users.edit', compact('user', 'grades', 'countries', 'roles')); //
     }
 
     /**
@@ -150,7 +149,9 @@ class UserController extends Controller
         if (trim(Input::get('avatar')) == '') {
             array_push($except, 'avatar');
         }
-        $req = $request->except('_token');
+        array_push($except, '_token');
+
+        $req = $request->except($except);
         $data = User::uploadPic($req);
 
 
@@ -163,7 +164,12 @@ class UserController extends Controller
             flash()->success(Lang::get('core.fail'));
 
 
-        return redirect("/users/".Auth::user()->slug."/edit");
+        if ($user == Auth::user()) {
+            return redirect("/users/" . Auth::user()->slug . "/edit");
+        } else {
+            return redirect("/users/");
+        }
+
     }
 
 

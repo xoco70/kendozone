@@ -1,6 +1,7 @@
 <?php
 
 
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase

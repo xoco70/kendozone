@@ -185,9 +185,8 @@ class TournamentController extends Controller
 
     }
 
-    public function register($tournamentId)
+    public function register(Tournament $tournament)
     {
-        $tournament = Tournament::findOrFail($tournamentId);
 
 
         if ($tournament->type == 1) {

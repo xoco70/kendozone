@@ -31,21 +31,21 @@
             </thead>
             @foreach($users as $user)
                 <tr>
-                    <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->id }}</a></td>
-                    <td><a href="{!!   URL::action('UserController@edit',  $user->id) !!}">{{ $user->name }}</a>
+                    <td><a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">{{ $user->id }}</a></td>
+                    <td><a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">{{ $user->name }}</a>
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td>
-                        <a href="{!!   URL::action('UserController@edit',  $user->id) !!}"><img
+                        <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}"><img
                                     src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                     </td>
 
                     <td><img src="/images/flags/{{ $user->country->flag }}" alt="{{ $user->country->name }}"/></td>
 
                     <td class="text-center">
-                        {{ Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) }}
-                        <button id="delete_{{$user->id}}" type="submit"
+                        {{ Form::open(['route' => ['users.destroy', $user->slug], 'method' => 'delete']) }}
+                        <button id="delete_{{$user->slug}}" type="submit"
                                 class="btn text-warning-600 btn-flat btn-icon btn-rounded">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>

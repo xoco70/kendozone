@@ -197,16 +197,16 @@ class Tournament extends Model implements SluggableInterface
         $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date);
     }
 
-    public function getCategoriesWithSettings()
-    {
-        $categories = DB::table('category_tournament')
-            ->join('category as cat', 'cat.id', '=', 'category_tournament.category_id')
-            ->leftJoin('category_settings as cs', 'cs.category_tournament_id', '=', 'category_tournament.id')
-            ->where('category_tournament.tournament_id', '=', $this->id)
-            ->select('category_tournament.*', 'cat.name', 'cs.*')
-            ->get();
-        return $categories;
-    }
+//    public function getCategoriesWithSettings()
+//    {
+//        $categories = DB::table('category_tournament')
+//            ->join('category as cat', 'cat.id', '=', 'category_tournament.category_id')
+//            ->leftJoin('category_settings as cs', 'cs.category_tournament_id', '=', 'category_tournament.id')
+//            ->where('category_tournament.tournament_id', '=', $this->id)
+//            ->select('category_tournament.*', 'cat.name', 'cs.*')
+//            ->get();
+//        return $categories;
+//    }
     public function getRouteKeyName()
     {
         return 'slug';
