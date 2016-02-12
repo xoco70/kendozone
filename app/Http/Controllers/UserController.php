@@ -80,8 +80,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $data = $request->except('_token');
 
-        $data = User::uploadPic($request, null);
+        $data = User::uploadPic($data);
 //        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
         if ($request->is("users")) {
             $data['provider'] = "created";
@@ -149,7 +150,9 @@ class UserController extends Controller
         if (trim(Input::get('avatar')) == '') {
             array_push($except, 'avatar');
         }
-        $data = User::uploadPic($request, $except);
+        $req = $request->except('_token');
+        $data = User::uploadPic($req);
+
 
         //TODO: Should have an expection for pics
 

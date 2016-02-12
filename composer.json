@@ -18,17 +18,17 @@
     "maatwebsite/excel": "~2.0.0",
     "barryvdh/laravel-debugbar": "^2.1",
     "barryvdh/laravel-ide-helper": "^2.1",
-    "intervention/image": "^2.3",
-    "tymon/jwt-auth": "0.5.*",
     "davejamesmiller/laravel-breadcrumbs": "^3.0",
     "cviebrock/eloquent-sluggable": "^3.1"
-
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
-    "phpspec/phpspec": "~2.1"
+    "phpspec/phpspec": "~2.1",
+    "symfony/dom-crawler": "^3.0",
+    "symfony/css-selector": "~3.0"
+
   },
   "autoload": {
     "files": [

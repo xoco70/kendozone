@@ -43,14 +43,14 @@ class TournamentUserTest extends TestCase
 //        dd($categoryTournaments);
         foreach ($categoryTournaments as $categoryTournament) {
 //            echo $categoryTournament->category->name;
-            $this->visit('/tournaments/' . $tournament->id . '/edit')
+            $this->visit('/tournaments/' . $tournament->slug . '/edit')
                 ->click(trans_choice('crud.competitor', 2))
 //                ->dump();
                 ->click('addcompetitor' . $categoryTournament->id)
                 ->type('usertest', 'username')
                 ->type('usertest@gmail.com', 'email')
                 ->press(trans("core.save"))
-                ->seePageIs('/tournaments/' . $tournament->id . '/users');
+                ->seePageIs('/tournaments/' . $tournament->slug . '/users');
 
 
             $user = User::where('email', 'usertest@gmail.com')->first();

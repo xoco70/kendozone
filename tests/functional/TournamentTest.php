@@ -216,7 +216,7 @@ class TournamentTest extends TestCase
             'cost' => 100,
         ]);
 
-        $this->visit('/tournaments/' . $tournament->id . '/edit')
+        $this->visit('/tournaments/' . $tournament->slug . '/edit')
 //            ->type('1', 'isTeam0')
 //            ->type('1', 'hasEncho0')
 //            ->type('1', 'hasRoundRobin0')

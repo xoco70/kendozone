@@ -14,9 +14,9 @@
                     <div class="container-fluid">
                         <legend class="text-semibold">{{Lang::get('crud.select_categories_to_register')}}</legend>
                         @if (isset($invite))
-                            {!! Form::open(['url'=>'tournaments/'.$tournament->id.'/invite/'.$invite->id.'/categories']) !!}
+                            {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/'.$invite->id.'/categories']) !!}
                         @else
-                            {!! Form::open(['url'=>'tournaments/'.$tournament->id.'/invite/0/categories']) !!}
+                            {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/0/categories']) !!}
                         @endif
 
                         <?php

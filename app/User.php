@@ -72,6 +72,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::creating(function ($user) {
             $user->token = str_random(30);
             $user->addGeoData();
+//            dd($user);
 
 
         });
@@ -109,9 +110,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param Request $request
      * @return array
      */
-    public static function uploadPic(UserRequest $request, $except = null)
+    public static function uploadPic($data)
     {
-        $data = $request->except($except);
 
         if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
 

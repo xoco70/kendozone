@@ -19,38 +19,38 @@ Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentMode
 // Home > Tournaments > Edit Tournament
 Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
-    $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->id));
+    $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
 });
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
 
     $breadcrumbs->parent('tournaments.edit', $tournament);
-    $breadcrumbs->push(trans('crud.invite_competitors'), route('invites.show', $tournament->id));
+    $breadcrumbs->push(trans('crud.invite_competitors'), route('invites.show', $tournament->slug));
 });
 
 // Home > Tournaments > MyTournament > List Competitors
 Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.edit',$tournament);
-    $breadcrumbs->push(trans_choice('crud.competitor',2), action('TournamentUserController@index', [$tournament->id]));
+    $breadcrumbs->push(trans_choice('crud.competitor',2), action('TournamentUserController@index', [$tournament->slug]));
 });
 
 // Home > Tournaments > MyTournament > Add Competitors  //TODO A Completar
 Breadcrumbs::register('tournaments.users.create', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.edit',$tournament);
-    $breadcrumbs->push(trans('crud.add_competitor'), action('TournamentController@create', [$tournament->id]));
+    $breadcrumbs->push(trans('crud.add_competitor'), action('TournamentController@create', [$tournament->slug]));
 });
 
 // Home > Tournaments > MyTournament > show Competitor
 Breadcrumbs::register('tournaments.users.show', function ($breadcrumbs, $tournament, $user) {
     $breadcrumbs->parent('tournaments.users.index', $tournament);
-    $breadcrumbs->push($user->name, action('TournamentUserController@index', [$tournament->id, $user->id]));
+    $breadcrumbs->push($user->name, action('TournamentUserController@index', [$tournament->slug, $user->slug]));
 });
 
 // Home > Edit Profile
 Breadcrumbs::register('users.edit', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push($user->name, route('users.edit', $user->id));
+    $breadcrumbs->push($user->name, route('users.edit', $user->slug));
 });
 
 Breadcrumbs::register('users.index', function ($breadcrumbs) {
@@ -65,7 +65,7 @@ Breadcrumbs::register('users.create', function ($breadcrumbs) {
 
 Breadcrumbs::register('users.show', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments');
-    $breadcrumbs->push(trans('crud.invite_competitors'), route('users.show', $tournament->id));
+    $breadcrumbs->push(trans('crud.invite_competitors'), route('users.show', $tournament->slug));
 });
 
 //// Home > Blog > [Category]

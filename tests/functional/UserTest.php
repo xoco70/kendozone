@@ -180,7 +180,7 @@ class UserTest extends TestCase
 
 
         $this->visit('/users')
-            ->press('delete_'.$user->id)
+            ->press('delete_'.$user->slug)
             ->seePageIs('/users')
             ->seeIsSoftDeletedInDatabase('users',['name' => 'MyKendoUser'])
             ->seeIsSoftDeletedInDatabase('tournament',['user_id' => $user->id])
@@ -199,17 +199,17 @@ class UserTest extends TestCase
         // User 2 can edit his info
         Auth::loginUsingId(2);
         $user = Auth::user();
-        $this->visit('/users/'.$user->id.'/edit')
+        $this->visit('/users/'.$user->slug.'/edit')
         ->see($this->user);
 
         // Now superuser can also edit User 2 Info
         Auth::loginUsingId(1);
-        $this->visit('/users/'.$user->id.'/edit')
+        $this->visit('/users/'.$user->slug.'/edit')
             ->see($this->user);
 
         //Now superuser cannot edit User 2 info
         Auth::loginUsingId(3);
-        $this->visit('/users/' . $user->id . '/edit')
+        $this->visit('/users/' . $user->slug . '/edit')
             ->see("403");
 
     }
