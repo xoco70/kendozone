@@ -96,7 +96,9 @@ else
                                             <button type="submit"
                                                     class="btn text-warning-600 btn-flat btnDeleteTCU"
                                                     id="delete_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
-                                                    data-id="{!! $user->slug !!}">
+                                                    data-tournament ="{!! $tournament->slug !!}"
+                                                    data-category ="{!! $categoryTournament->id !!}"
+                                                    data-user = "{!! $user->slug !!}">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </button>
                                         {!! Form::close() !!}
@@ -133,80 +135,11 @@ else
 
 @include("right-panel.users_menu")
 
-<script>
-    $(function () {
-
-        // Setting datatable defaults
-        $.extend($.fn.dataTable.defaults, {
-            autoWidth: false,
-            responsive: true,
-            paging: false,
-            columnDefs: [{
-                orderable: false,
-                width: '100px',
-                targets: [5]
-            }],
-            dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
-            language: {
-                search: '<span>Filter:</span> _INPUT_',
-                lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
-            },
-            drawCallback: function () {
-                $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
-            },
-            preDrawCallback: function () {
-                $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
-            },
-
-
-        });
-
-
-        // Basic responsive configuration
-        $('.datatable-responsive').DataTable();
-
-
-        // Column controlled child rows
-        $('.datatable-responsive-column-controlled').DataTable({
-            responsive: {
-                details: {
-                    type: 'column'
-                }
-            },
-            columnDefs: [
-                {
-                    className: 'control',
-                    orderable: false,
-                    targets: 0
-                },
-                {
-                    width: "100px",
-                    targets: [6]
-                },
-                {
-                    orderable: false,
-                    targets: [6]
-                }
-            ],
-        });
-
-
-        // External table additions
-        // ------------------------------
-
-        // Add placeholder to the datatable filter option
-        $('.dataTables_filter input[type=search]').attr('placeholder', 'Type to filter...');
-
-// Info alert
-        $('#generate_tree').on('click', function () {
-            swal({
-                title: "{!! trans('core.information') !!}",
-                text: "{!!   trans('crud.all_categories_not_configured') !!}",
-                confirmButtonColor: "#2196F3",
-                type: "info"
-            });
-        });
-    });
-</script>
+@stop
+@section("scripts_footer")
+    <script>
+        var url = "{{ url("/tournaments/".$tournament->slug) }}";
+        var tournamentSlug = "{{ $tournament->slug }}";
+    </script>
+    {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
 @stop

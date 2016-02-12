@@ -13,6 +13,7 @@ use GeoIP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
+use Response;
 use Webpatser\Countries\Countries;
 
 //use App\Place;
@@ -137,11 +138,17 @@ class TournamentUserController extends Controller
     {
 
         $user = User::findBySlug($userSlug);
-        CategoryTournamentUser::where('category_tournament_id', $tcId)
-            ->where('user_id', $user->id)
-            ->delete();
-        flash()->success(trans('core.operation_successful'));
-        return redirect("tournaments/$tournamentSlug/users");
+        $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
+            ->where('user_id', $user->id);
+
+        if ($ctu->delete()) {
+            return Response::json(['msg' => 'User deleted', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error deleting User', 'status' => 'error']);
+        }
+//        flash()->success(trans('core.operation_successful'));
+//        return redirect("tournaments/$tournamentSlug/users");
+
     }
 
 
