@@ -72,7 +72,7 @@
                                     </tr>
                                     </thead>
                                     <?php
-                                    dd($categoryTournament->users);
+//                                    dd($categoryTournament->users);
                                     ?>
                                     @foreach($categoryTournament->users as $user)
                                         <tr>
