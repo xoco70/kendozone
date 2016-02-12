@@ -67,9 +67,27 @@ class TournamentUserTest extends TestCase
     /** @test */
     public function it_removes_a_user_from_tournament_category()
     {
-//        $tournament = Tournament::find(1);
-//        $categoryTournaments = $tournament->categoryTournaments;
+        // Given
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
 
+        $users = factory(User::class, 3)->create(['role_id' => 3]);
+
+        foreach ($users as $user){
+            factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
+            factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
+
+            $this->visit("/tournaments/$tournament->slug/users")
+                // delete_t1111_73_prof-jaquelin-bruen
+                ->press("delete_" . $tournament->slug."_".$ct1->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
+                ->dontSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
+
+            $this->visit("/tournaments/$tournament->slug/users")
+                // delete_t1111_73_prof-jaquelin-bruen
+                ->press("delete_" . $tournament->slug."_".$ct2->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
+                ->dontSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
+        }
     }
 
     /** @test */
@@ -77,5 +95,13 @@ class TournamentUserTest extends TestCase
     {
 
     }
+
+    /** @test */
+    public function you_can_confirm_a_user()
+    {
+
+    }
+
+
 
 }
