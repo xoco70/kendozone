@@ -142,7 +142,7 @@ class TournamentUserController extends Controller
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
         if ($ctu->save()){
-            return Response::json(['msg' => 'User status updated', 'status' => 'success']);
+            return Response::json(['msg' => $user->name.': User status updated', 'status' => 'success']);
         }else{
             return Response::json(['msg' => 'Error updating User Status', 'status' => 'error']);
         }
@@ -158,9 +158,9 @@ class TournamentUserController extends Controller
             ->where('user_id', $user->id);
 
         if ($ctu->delete()) {
-            return Response::json(['msg' => 'User deleted', 'status' => 'success']);
+            return Response::json(['msg' => $user->name.': User deleted', 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting User', 'status' => 'error']);
+            return Response::json(['msg' => 'Error deleting '.$user->name, 'status' => 'error']);
         }
 //        flash()->success(trans('core.operation_successful'));
 //        return redirect("tournaments/$tournamentSlug/users");

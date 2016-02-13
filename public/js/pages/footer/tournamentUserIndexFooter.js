@@ -30,7 +30,7 @@ $(function () {
                             width: 200,
                             dismissQueue: true,
                             timeout: 10000,
-                            text: "<div class='row'><div class='col-lg-6'>" + data.msg + "</div><div class='col-lg-6' align='right'><a href=#>UNDO</a></div></div>",
+                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a href=#>UNDO</a></div></div>",
                             closeWith: ['click'],
 
                         });
