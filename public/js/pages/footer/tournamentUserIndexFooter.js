@@ -73,14 +73,14 @@ $(function () {
         e.preventDefault();
         $(this).prop("disabled", true);
 
-        var inputData = $('#formDeleteTCU').serialize();
+        var inputData = $('#formConfirmTCU').serialize();
         //var tournamentSlug      =   $(this).data('tournament');
         var categoryId          =   $(this).data('category');
         var userSlug            =   $(this).data('user');
 
 //                console.log(inputData);
 //        console.log(tournamentSlug);
-//        console.log(myclass);
+        console.log(inputData);
         console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm');
 
 
@@ -90,7 +90,7 @@ $(function () {
         console.log(myclass);
         icon.removeClass();
         icon.addClass('icon-spinner spinner');
-
+        var confirmId = 'confirm_'+tournamentSlug+'_'+categoryId+'_'+userSlug;
 
         $.ajax(
             {
@@ -100,16 +100,19 @@ $(function () {
                 success: function (data) {
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
                             type: 'information',
                             width: 200,
                             dismissQueue: true,
                             timeout: 10000,
                             text: data.msg
                         });
-                        //$('.btnConfirmTCU').find('i').toggleClass("text-warning-600 text-success");
+                        $('#'+confirmId).prop("disabled", false);
+                        $('#'+confirmId).find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
+                        $('#'+confirmId).find('i').toggleClass("text-danger text-success");
+                        $('#'+confirmId).find('i').toggleClass("glyphicon-ok-sign glyphicon-remove-sign");
                     } else {
-                        //console.log(data);
+                        console.log(data);
                         noty({
                             layout: 'topRight',
                             type: 'error',
@@ -118,9 +121,9 @@ $(function () {
                             timeout: 3000,
                             text: data.msg
                         });
-                        //$('.btnConfirmTCU').prop("disabled", false);
-                        //$('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
-                        //$('.btnConfirmTCU').find('i').toggleClass("text-warning-600 text-success");
+                        $('.btnConfirmTCU').prop("disabled", false);
+                        $('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
+                        $('.btnConfirmTCU').find('i').toggleClass("text-warning-600 text-success");
                     }
 
 

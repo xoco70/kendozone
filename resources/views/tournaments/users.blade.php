@@ -78,19 +78,17 @@ else
 
                                     <td class="text-center">
                                         @if ($user->pivot->confirmed)
-                                            <?php $class="glyphicon glyphicon-ok-sign";
-                                                  $color ="text-success"  ?>
+                                            <?php $class="glyphicon glyphicon-ok-sign text-success";?>
                                         @else
-                                            <?php $class="text-danger glyphicon glyphicon-remove-sign";
-                                                  $color ="text-warning-600"?>
+                                            <?php $class="glyphicon glyphicon-remove-sign text-danger ";?>
                                         @endif
 
-                                            {!! Form::open(['method' => 'PUT', 'id' => 'confirmTCU',
+                                            {!! Form::open(['method' => 'PUT', 'id' => 'formConfirmTCU',
                                         'action' => ['TournamentUserController@confirmUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
 
 
                                         <button type="submit"
-                                                class="btn btn-flat {!! $color  !!} btnConfirmTCU"
+                                                class="btn btn-flat btnConfirmTCU"
                                                 id="confirm_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
                                                 data-tournament ="{!! $tournament->slug !!}"
                                                 data-category ="{!! $categoryTournament->id !!}"

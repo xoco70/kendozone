@@ -141,8 +141,12 @@ class TournamentUserController extends Controller
             ->where('user_id', $user->id)->first();
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
-        $ctu->save();
-        return redirect("tournaments/$tournamentSlug/users");
+        if ($ctu->save()){
+            return Response::json(['msg' => 'User status updated', 'status' => 'success']);
+        }else{
+            return Response::json(['msg' => 'Error updating User Status', 'status' => 'error']);
+        }
+//        return redirect("tournaments/$tournamentSlug/users");
 
     }
 
