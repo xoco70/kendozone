@@ -134,6 +134,18 @@ class TournamentUserController extends Controller
 
     }
 
+    public function confirmUser($tournamentSlug, $tcId, $userSlug)
+    {
+        $user = User::findBySlug($userSlug);
+        $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
+            ->where('user_id', $user->id)->first();
+
+        $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
+        $ctu->save();
+        return redirect("tournaments/$tournamentSlug/users");
+
+    }
+
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 

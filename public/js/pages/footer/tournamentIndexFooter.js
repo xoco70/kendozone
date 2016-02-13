@@ -20,7 +20,7 @@ $(function () {
                 success: function (data) {
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'topRight',
+                            layout: 'leftBottom',
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
@@ -31,7 +31,7 @@ $(function () {
                     } else {
                         console.log();
                         noty({
-                            layout: 'topRight',
+                            layout: 'leftBottom',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
@@ -53,7 +53,7 @@ $(function () {
                         width: 200,
                         dismissQueue: true,
                         timeout: 3000,
-                        text: data.msg
+                        text: data.statusText
                     });
                 }
             }

@@ -42,11 +42,11 @@ $(function () {
                     console.log(data);
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'topRight',
-                            type: 'success',
+                            layout: 'leftBottom',
+                            type: 'information',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
+                            timeout: 10000,
                             text: data.msg
                         });
 //                                console.log()
@@ -74,7 +74,7 @@ $(function () {
 
                     } else {
                         noty({
-                            layout: 'topRight',
+                            layout: 'leftBottom',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
@@ -93,12 +93,12 @@ $(function () {
                 },
                 error: function (data) {
                     noty({
-                        layout: 'topRight',
+                        layout: 'leftBottom',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
                         timeout: 3000,
-                        text: data.msg,
+                        text: data.statusText
 
                     });
                     $(this).prop("disabled", false);
@@ -145,7 +145,7 @@ $(function () {
                 success: function (data) {
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'topRight',
+                            layout: 'leftBottom',
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
@@ -186,7 +186,7 @@ $(function () {
                         width: 200,
                         dismissQueue: true,
                         timeout: 3000,
-                        text: data.msg
+                        text: data.statusText
                     });
                     $('.save_category').prop("disabled", false);
                     $('.save_category').find('i').removeClass('icon-spinner spinner position-left');

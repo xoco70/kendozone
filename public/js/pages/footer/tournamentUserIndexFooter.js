@@ -25,12 +25,14 @@ $(function () {
                 success: function (data) {
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'topRight',
-                            type: 'success',
+                            layout: 'bottomLeft',
+                            type: 'information',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
+                            timeout: 10000,
+                            text: "<div class='row'><div class='col-lg-6'>" + data.msg + "</div><div class='col-lg-6' align='right'><a href=#>UNDO</a></div></div>",
+                            closeWith: ['click'],
+
                         });
                         $tr.remove();
                     } else {
@@ -58,13 +60,90 @@ $(function () {
                         width: 200,
                         dismissQueue: true,
                         timeout: 3000,
-                        text: data.msg
+                        text: data.statusText
                     });
                 }
             }
         )
 
     });
+
+
+    $('.btnConfirmTCU').on('click', function (e) {
+        e.preventDefault();
+        $(this).prop("disabled", true);
+
+        var inputData = $('#formDeleteTCU').serialize();
+        //var tournamentSlug      =   $(this).data('tournament');
+        var categoryId          =   $(this).data('category');
+        var userSlug            =   $(this).data('user');
+
+//                console.log(inputData);
+//        console.log(tournamentSlug);
+//        console.log(myclass);
+        console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm');
+
+
+        var icon = $(this).find('i');
+        //console.log(icon);
+        var myclass = icon.attr('class')
+        console.log(myclass);
+        icon.removeClass();
+        icon.addClass('icon-spinner spinner');
+
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm',
+                data: inputData,
+                success: function (data) {
+                    if (data != null && data.status == 'success') {
+                        noty({
+                            layout: 'topRight',
+                            type: 'information',
+                            width: 200,
+                            dismissQueue: true,
+                            timeout: 10000,
+                            text: data.msg
+                        });
+                        //$('.btnConfirmTCU').find('i').toggleClass("text-warning-600 text-success");
+                    } else {
+                        //console.log(data);
+                        noty({
+                            layout: 'topRight',
+                            type: 'error',
+                            width: 200,
+                            dismissQueue: true,
+                            timeout: 3000,
+                            text: data.msg
+                        });
+                        //$('.btnConfirmTCU').prop("disabled", false);
+                        //$('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
+                        //$('.btnConfirmTCU').find('i').toggleClass("text-warning-600 text-success");
+                    }
+
+
+                },
+                error: function (data) {
+                    //console.log(data);
+                    noty({
+                        layout: 'topRight',
+                        type: 'error',
+                        width: 200,
+                        dismissQueue: true,
+                        timeout: 3000,
+                        text: data.statusText
+                    });
+                    $('.btnConfirmTCU').prop("disabled", false);
+                    $('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
+                }
+            }
+        )
+
+    });
+
+
 });
 
 

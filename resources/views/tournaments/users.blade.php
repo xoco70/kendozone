@@ -52,16 +52,19 @@ else
                                     data-hide="phone">{{ trans('crud.avatar') }}</th>
                                 <th class="all">{{ trans('crud.username') }}</th>
                                 <th class="phone">{{ trans('crud.email') }}</th>
-                                <th class="phone">{{ trans_choice('crud.category',1) }}</th>
-                                <th class="phone">{{ trans('crud.confirmed') }}</th>
+                                <th align="center" class="phone">{{ trans_choice('crud.category',1) }}</th>
+                                <th align="center"  class="phone">{{ trans('crud.confirmed') }}</th>
                                 <th class="phone">{{ trans('crud.country') }}</th>
                                 <th class="all">{{ trans('crud.action') }}</th>
                             </tr>
                             </thead>
-                            <?php
-                            //                                    dd($categoryTournament->users);
-                            ?>
+
+
                             @foreach($categoryTournament->users as $user)
+                            <?php
+//                                if (sizeof($categoryTournament->users)>0)
+//                                dd($user->pivot);
+                                ?>
                                 <tr>
                                     <td class="text-center">
                                         <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
@@ -74,14 +77,37 @@ else
                                     <td class="text-center">{{ trans($categoryTournament->category->name)}}</td>
 
                                     <td class="text-center">
-                                        @if ($user->confirmed)
-                                            <a class=" text-success" href="#"><span
-                                                        class="glyphicon glyphicon-ok-sign"></span></a>
+                                        @if ($user->pivot->confirmed)
+                                            <?php $class="glyphicon glyphicon-ok-sign";
+                                                  $color ="text-success"  ?>
                                         @else
-                                            <a class=" text-danger text-center" href="#"><span
-                                                        class="glyphicon glyphicon-remove-sign"></span></a>
+                                            <?php $class="text-danger glyphicon glyphicon-remove-sign";
+                                                  $color ="text-warning-600"?>
                                         @endif
 
+                                            {!! Form::open(['method' => 'PUT', 'id' => 'confirmTCU',
+                                        'action' => ['TournamentUserController@confirmUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
+
+
+                                        <button type="submit"
+                                                class="btn btn-flat {!! $color  !!} btnConfirmTCU"
+                                                id="confirm_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
+                                                data-tournament ="{!! $tournament->slug !!}"
+                                                data-category ="{!! $categoryTournament->id !!}"
+                                                data-user = "{!! $user->slug !!}">
+                                            <i class="{!! $class  !!} "></i>
+                                        </button>
+                                        {!! Form::close() !!}
+
+                                        {{--<button type="submit"--}}
+                                                {{--class="glyphicon glyphicon-ok-sign btnDeleteTCU"--}}
+                                                {{--id="delete_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"--}}
+                                                {{--data-tournament ="{!! $tournament->slug !!}"--}}
+                                                {{--data-category ="{!! $categoryTournament->id !!}"--}}
+                                                {{--data-user = "{!! $user->slug !!}">--}}
+                                            {{--<i class="glyphicon glyphicon-remove"></i>--}}
+                                        {{--</button>--}}
+                                        {{--{!! Form::close() !!}--}}
                                     </td>
 
 
@@ -90,7 +116,7 @@ else
 
 
                                     <td class="text-center">
-                                        {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTCU',
+                                        {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
                                          'action' => ['TournamentUserController@deleteUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
 
                                             <button type="submit"
@@ -102,12 +128,6 @@ else
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </button>
                                         {!! Form::close() !!}
-                                         {{--<a class=" text-danger " id =--}}
-                                            {{--href="{!! URL::action('TournamentUserController@deleteUser',--}}
-                                                     {{--['tournamentSlug'=>$tournament->slug,--}}
-                                                     {{--'categoryId'=>$categoryTournament->id,--}}
-                                                     {{--'userSlug'=>$user->slug])  !!}">--}}
-                                            {{--<span class="glyphicon glyphicon-remove"></span></a>--}}
                                     </td>
                                 </tr>
 
@@ -119,11 +139,6 @@ else
 
                     </div>
                     <br/><br/>
-
-                    {{--                <div class="text-right mr-20">{{ $users->count() }} {{ Lang::get('crud.results')}}</div>--}}
-
-                    {{--                <div class="text-center">{!! $users->render() !!}</div>--}}
-
 
                 </div>
 
