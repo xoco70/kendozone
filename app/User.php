@@ -71,7 +71,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::creating(function ($user) {
             $user->token = str_random(30);
             $user->addGeoData();
-            dd($user);
+//            dd($user);
 
 
         });
