@@ -51,7 +51,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+    function addGeoData()
+    {
+        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
+        $country = Countries::where('name', '=', $location['country'])->first();
+        if (is_null($country)) {
+            $countryId = Config::get('constants.COUNTRY_ID_DEFAULT');
+            $city = "Paris";
+            $latitude = 48.858222;
+            $longitude = 2.2945;
 
+        } else {
+            $countryId = $country->id;
+            $city = $location['city'];
+            $latitude = $location['lat'];
+            $longitude = $location['lon'];
+
+        }
+        $this->country_id = $countryId;
+        $this->city = $city;
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
+
+
+    }
 //    public function rules()
 //    {
 //        return [
@@ -226,45 +249,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //
 //    }
 
-
-    public function addGeoData()
-    {
-
-        $location = GeoIP::getLocation(self::getIP()); // Simulating IP in Mexico DF
-        $country = Countries::where('name', '=', $location['country'])->first();
-        if (is_null($country)) {
-            $countryId = Config::get('constants.COUNTRY_ID_DEFAULT');
-            $city = "Paris";
-            $latitude = 48.858222;
-            $longitude = 2.2945;
-
-        } else {
-            $countryId = $country->id;
-            $city = $location['city'];
-            $latitude = $location['lat'];
-            $longitude = $location['lon'];
-
-        }
-        $this->country_id = $countryId;
-        $this->city = $city;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-
-
-    }
-
-
-    public static function getIP()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        return $ip;
-    }
 
     public static function generatePassword()
     {
