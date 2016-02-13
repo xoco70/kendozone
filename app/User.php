@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Http\Requests\UserRequest;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use DateTime;
@@ -21,9 +20,9 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Webpatser\Countries\Countries;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract,SluggableInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes,SluggableTrait;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait;
 
     /**
      * The database table used by the model.
@@ -35,7 +34,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $sluggable = [
         'build_from' => 'name',
-        'save_to'    => 'slug',
+        'save_to' => 'slug',
     ];
 
     /**
@@ -72,7 +71,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::creating(function ($user) {
             $user->token = str_random(30);
             $user->addGeoData();
-//            dd($user);
+            dd($user);
 
 
         });
@@ -230,7 +229,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function addGeoData()
     {
-        $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
+
+        $location = GeoIP::getLocation(self::getIP()); // Simulating IP in Mexico DF
         $country = Countries::where('name', '=', $location['country'])->first();
         if (is_null($country)) {
             $countryId = Config::get('constants.COUNTRY_ID_DEFAULT');
@@ -249,6 +249,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->city = $city;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+
+
+    }
+
+
+    public static function getIP()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
     public static function generatePassword()
@@ -287,6 +302,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return Auth::user()->role_id == 5;
     }
+
     public function getRouteKeyName()
     {
         return 'slug';
