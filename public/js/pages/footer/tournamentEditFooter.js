@@ -42,7 +42,7 @@ $(function () {
                     console.log(data);
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'leftBottom',
+                            layout: 'bottomLeft',
                             type: 'information',
                             width: 200,
                             dismissQueue: true,
@@ -74,7 +74,7 @@ $(function () {
 
                     } else {
                         noty({
-                            layout: 'leftBottom',
+                            layout: 'bottomLeft',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
@@ -88,7 +88,7 @@ $(function () {
                 },
                 error: function (data) {
                     noty({
-                        layout: 'leftBottom',
+                        layout: 'bottomLeft',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,

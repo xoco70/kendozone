@@ -172,17 +172,24 @@ class TournamentController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tournament $tournament, Request $request)
+    public function destroy(Tournament $tournament)
     {
-//        if ($request->ajax()) {
         if ($tournament->delete()) {
-            return Response::json(['msg' => 'Tournament deleted', 'status' => 'success']);
+            return Response::json(['msg' => $tournament->name.' deleted', 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting tournament', 'status' => 'error']);
+            return Response::json(['msg' => 'Error deleting '.$tournament->name, 'status' => 'error']);
         }
-//        }
+    }
 
+    public function restore($tournamentSlug)
 
+    {
+        $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
+        if ($tournament->restore()) {
+            return Response::json(['msg' => $tournament->name.' restored', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error restoring '.$tournament->name, 'status' => 'error']);
+        }
     }
 
     public function register(Tournament $tournament)

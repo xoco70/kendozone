@@ -46,7 +46,7 @@
                                 </tr>
                                 </thead>
                                 @foreach($tournaments as $tournament)
-                                    <tr id="line">
+                                    <tr id="{!! $tournament->slug !!}">
                                         {{--                            <td>{!! Form::checkbox('ids_to_delete[]', $tournament->id, null) !!}                            </td>--}}
                                         <td><a
                                                     href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
@@ -87,6 +87,7 @@
 @section("scripts_footer")
     <script>
         var url = "{{ url("/tournaments") }}";
+
     </script>
 {!! Html::script('js/pages/footer/tournamentIndexFooter.js') !!}
 @stop

@@ -15,7 +15,7 @@ var elixir = require('laravel-elixir');
 elixir(function (mix) {
     //mix.stylesIn("public/css");
     //mix.stylesIn("public/js");
-    //mix.stylesIn("public/js/plugins");
+    //mix.stylesIn("public/js/plugins");u
     //
     //mix.scriptsIn("public/js/plugins");
     //mix.scriptsIn("public/js");
@@ -27,7 +27,8 @@ elixir(function (mix) {
         'bootstrap.css',
         'components.css',
         'colors.css',
-        'core.css'
+        'core.css',
+        'custom.css'
     ], 'public/css/app.css');
     //mix.browserify('vue/pages/tournaments.js');
     mix.scripts([
