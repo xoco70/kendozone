@@ -2,11 +2,11 @@
     <script>
         var n = noty({
             layout: 'topRight',
-            type: 'success',
+            type: "{{session('flash_message.level')}}",
             width: 200,
             dismissQueue: true,
             timeout: 3000,
-            text: "{{session('flash_message.message')}}",
+            text: "{{session('flash_message.message')}}"
         });
 
     </script>

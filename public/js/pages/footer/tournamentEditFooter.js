@@ -83,11 +83,6 @@ $(function () {
                         });
                         $('.btn-update-tour').prop("disabled", false);
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
-                        //form.attr('data-setting', data.settingId);
-
-
-                        //$(this).find('i').removeClass('');
-
                     }
 
                 },
@@ -145,7 +140,7 @@ $(function () {
                 success: function (data) {
                     if (data != null && data.status == 'success') {
                         noty({
-                            layout: 'leftBottom',
+                            layout: 'bottomLeft',
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
