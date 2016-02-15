@@ -168,8 +168,11 @@ class AuthController extends Controller
 
         ]);
         $mailer->sendEmailConfirmationTo($user);
+        flash()->success(trans('core.operation_successful'));
+//        else flash('error', 'operation_failed!');
+//        return redirect("tournaments/$tournament->slug/edit")
         flash()->success(Lang::get('auth.check_your_email'));
-        return redirect()->back();
+        return redirect('auth/login');
     }
 
     public function getInvite()
