@@ -1,49 +1,52 @@
 $(function () {
+    var disabled = false;
 
     // Initialize responsive functionality
     $('.table-togglable').footable();
-    $('.undo_link').on('click', function (e) {
-        var dataSlug      =   $(this).data('id');
+    $('.undo_link').click(function (e) {
+        e.preventDefault();
+        var dataRestore      =   $(this).data('restore');
         var tr = $("#"+dataSlug);
+        disabled = true;
 
-        $.ajax(
-            {
-                type: 'GET',
-                url: url+ '/' + dataId + '/restore',
-                data: dataSlug,
-                success: function (data) {
-                    if (data != null && data.status == 'success') {
-                        $tr.remove();
-                    } else {
-                        console.log(data);
-                        noty({
-                            layout: 'topRight',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
-                        });
-                        $('.btnDeleteTournament').prop("disabled", false);
-                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
-
-                    }
-
-
-                },
-                error: function (data) {
-                    console.log("error");
-                    noty({
-                        layout: 'topRight',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
-                    });
-                }
-            }
-        )
+        //$.ajax(
+        //    {
+        //        type: 'GET',
+        //        url: url+ '/' + dataId + '/restore',
+        //        data: dataSlug,
+        //        success: function (data) {
+        //            if (data != null && data.status == 'success') {
+        //                $tr.remove();
+        //            } else {
+        //                console.log(data);
+        //                noty({
+        //                    layout: 'topRight',
+        //                    type: 'error',
+        //                    width: 200,
+        //                    dismissQueue: true,
+        //                    timeout: 3000,
+        //                    text: data.msg
+        //                });
+        //                $('.btnDeleteTournament').prop("disabled", false);
+        //                $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+        //
+        //            }
+        //
+        //
+        //        },
+        //        error: function (data) {
+        //            console.log("error");
+        //            noty({
+        //                layout: 'topRight',
+        //                type: 'error',
+        //                width: 200,
+        //                dismissQueue: true,
+        //                timeout: 3000,
+        //                text: data.statusText
+        //            });
+        //        }
+        //    }
+        //)
 
     });
     $('.btnDeleteTournament').on('click', function (e) {
@@ -68,7 +71,8 @@ $(function () {
                             width: 200,
                             dismissQueue: true,
                             timeout: 10000,
-                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a href='"+ url+ '/' + dataId + "/restore' 'data-slug' =" + dataId +" ><span class='undo_link'>UNDO</span> </a></a></div></div>",
+                            closeWith: ['button'],
+                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a href='"+ url+ '/' + dataId + "/restore' 'data-restore' =" + dataId +" ><span class='undo_link'>UNDO</span> </a></div></div>",
 
 
                     });
