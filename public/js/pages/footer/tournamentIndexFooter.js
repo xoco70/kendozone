@@ -4,91 +4,22 @@ $(function () {
 
     // Initialize responsive functionality
     $('.table-togglable').footable();
-    $('.undo').click(function (e) {
-        console.log("hola");
+    $(document).on('click', '.undo', function (e) {
         e.preventDefault();
-        e.stopPropagation();
+        //e.stopPropagation();
         var dataRestore      =   $(this).data('restore');
-        tr.show();
-        //disabled = true;
-
-        //$.ajax(
-        //    {
-        //        type: 'GET',
-        //        url: url+ '/' + dataId + '/restore',
-        //        data: dataSlug,
-        //        success: function (data) {
-        //            if (data != null && data.status == 'success') {
-        //                //tr.remove();
-        //                noty({
-        //                    layout: 'topRight',
-        //                    type: 'error',
-        //                    width: 200,
-        //                    dismissQueue: true,
-        //                    timeout: 3000,
-        //                    text: data.msg
-        //                });
-        //            } else {
-        //                console.log(data);
-        //                noty({
-        //                    layout: 'topRight',
-        //                    type: 'error',
-        //                    width: 200,
-        //                    dismissQueue: true,
-        //                    timeout: 3000,
-        //                    text: data.msg
-        //                });
-        //                $('.btnDeleteTournament').prop("disabled", false);
-        //                $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
-        //
-        //            }
-        //
-        //
-        //        },
-        //        error: function (data) {
-        //            console.log("error");
-        //            noty({
-        //                layout: 'topRight',
-        //                type: 'error',
-        //                width: 200,
-        //                dismissQueue: true,
-        //                timeout: 3000,
-        //                text: data.statusText
-        //            });
-        //        }
-        //    }
-        //)
-
-    });
-    $('.btnDeleteTournament').on('click', function (e) {
-        e.preventDefault();
-        var inputData = $('#formDeleteTourament').serialize();
-        var dataId      =   $(this).data('id');
-//                console.log(inputData);
-        console.log(dataId);
-        tr = $(this).closest('tr');
-        $(this).find('i').removeClass();
-        $(this).find('i').addClass('icon-spinner spinner');
 
         $.ajax(
             {
-                type: 'POST',
-                url: url + '/' + dataId,
-                data: inputData,
+                type: 'GET',
+                url: url+ '/' + dataRestore + '/restore',
+                data: dataRestore,
                 success: function (data) {
+                    console.log(data);
                     if (data != null && data.status == 'success') {
-                        noty({
-                            layout: 'bottomLeft',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 10000,
-                            closeWith: ['button'],
-                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a class='undo' href='"+ url+ "/" + dataId + "/restore'><span class='undo_link'>UNDO</span> </a></div></div>"
+                        tr.show();
+                        $.noty.closeAll()
 
-
-
-                    });
-                        //tr.hide();
                     } else {
                         console.log(data);
                         noty({
@@ -116,6 +47,78 @@ $(function () {
                         timeout: 3000,
                         text: data.statusText
                     });
+                }
+            }
+        )
+
+    });
+    $('.btnDeleteTournament').on('click', function (e) {
+        e.preventDefault();
+        var inputData = $('#formDeleteTourament').serialize();
+        var dataId      =   $(this).data('id');
+//                console.log(inputData);
+        console.log(dataId);
+        tr = $(this).closest('tr');
+        $(this).find('i').removeClass();
+        $(this).find('i').addClass('icon-spinner spinner');
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: url + '/' + dataId,
+                data: inputData,
+                success: function (data) {
+                    if (data != null && data.status == 'success') {
+                        noty({
+                            layout: 'bottomLeft',
+                            width: 200,
+                            type: 'information',
+                            dismissQueue: true,
+                            timeout: 10000,
+                            force: true,
+                            killer: true,
+                            closeWith: ['button'],
+                            //text: "ok<i class='icon  icon-cross2 noty_close' ></i>"
+                            text: "<a href='#' class='undo_link'><i class='icon  icon-cross3 noty_close' ></i></a>"+
+                            "<div class='row'><div class='col-lg-8'>" + data.msg + "</div>" +
+                                  "<div class='col-lg-3' align='right'><a class='undo' href='"+ url+ "/" + dataId + "/restore' data-restore='"+dataId+"'><span class='undo_link'>UNDO</span> </a></div>" +
+                            "</div>"
+
+
+
+                    });
+                        $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-remove');
+                        tr.hide();
+                    } else {
+                        console.log(data);
+                        noty({
+                            layout: 'topRight',
+                            type: 'error',
+                            width: 200,
+                            dismissQueue: true,
+                            timeout: 3000,
+                            text: data.msg
+                        });
+                        $('.btnDeleteTournament').prop("disabled", false);
+                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+
+                    }
+
+
+                },
+                error: function (data) {
+                    console.log("error");
+                    noty({
+                        layout: 'topRight',
+                        type: 'error',
+                        width: 200,
+                        dismissQueue: true,
+                        timeout: 3000,
+                        text: data.statusText
+                    });
+                    $('.btnDeleteTournament').prop("disabled", false);
+                    $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+
                 }
             }
         )
