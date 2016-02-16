@@ -64,7 +64,7 @@ class CreateCategoryTable extends Migration
             $table->boolean('confirmed');
 
             $table->timestamps();
-//            $table->softDeletes();
+            $table->softDeletes();
             $table->engine = 'InnoDB';
 
 

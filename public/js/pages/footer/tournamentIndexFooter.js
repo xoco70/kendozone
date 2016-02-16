@@ -72,16 +72,14 @@ $(function () {
                         noty({
                             layout: 'bottomLeft',
                             width: 200,
-                            type: 'information',
                             dismissQueue: true,
                             timeout: 10000,
                             force: true,
                             killer: true,
                             closeWith: ['button'],
-                            //text: "ok<i class='icon  icon-cross2 noty_close' ></i>"
                             text: "<a href='#' class='undo_link'><i class='icon  icon-cross3 noty_close' ></i></a>"+
-                            "<div class='row'><div class='col-lg-8'>" + data.msg + "</div>" +
-                                  "<div class='col-lg-3' align='right'><a class='undo' href='"+ url+ "/" + dataId + "/restore' data-restore='"+dataId+"'><span class='undo_link'>UNDO</span> </a></div>" +
+                            "<div class='row'><div class='col-xs-8'>" + data.msg + "</div>" +
+                                  "<div class='col-xs-3' align='right'><a class='undo' href='"+ url+ "/" + dataId + "/restore' data-restore='"+dataId+"'><span class='undo_link'>UNDO</span> </a></div>" +
                             "</div>"
 
 
@@ -107,7 +105,6 @@ $(function () {
 
                 },
                 error: function (data) {
-                    console.log("error");
                     noty({
                         layout: 'topRight',
                         type: 'error',

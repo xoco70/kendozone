@@ -24,11 +24,16 @@ class CategoryTournament extends Model
         parent::boot();
 
         static::deleting(function($categoryTournament) {
-//            $categoryTournament->settings()->delete();
-            $categoryTournament->users()->delete();
+            foreach ($categoryTournament->users()->get() as $user) {
+                $user->delete();
+            }
+            foreach ($categoryTournament->settings()->get() as $setting) {
+                $setting->delete();
+            }
+
         });
         static::restoring(function($categoryTournament) {
-//            $categoryTournament->settings()->restore();
+            $categoryTournament->settings()->withTrashed()->restore();
             $categoryTournament->users()->withTrashed()->restore();
 
         });

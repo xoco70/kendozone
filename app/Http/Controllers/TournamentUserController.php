@@ -113,14 +113,14 @@ class TournamentUserController extends Controller
         }
 
 
-        $categoryTournaments = $user->categoryTournaments();
+        $ctu = $user->categoryTournaments();
 
-        if ($categoryTournaments->get()->contains($categoryTournament)) {
+        if ($ctu->get()->contains($categoryTournament)) {
             flash()->error(trans('flash.user_already_registered_in_category'));
             return redirect("tournaments/$tournament->slug/users");
 
         } else {
-            $categoryTournaments->attach($categoryTournamentId, ['confirmed' => 1]);
+            $ctu->attach($categoryTournamentId, ['confirmed' => 1]);
         }
 
 
@@ -158,7 +158,7 @@ class TournamentUserController extends Controller
             ->where('user_id', $user->id);
 
         if ($ctu->delete()) {
-            return Response::json(['msg' => $user->name.': User deleted', 'status' => 'success']);
+            return Response::json(['msg' => $user->name.' deleted', 'status' => 'success']);
         } else {
             return Response::json(['msg' => 'Error deleting '.$user->name, 'status' => 'error']);
         }

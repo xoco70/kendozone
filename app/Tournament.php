@@ -49,7 +49,10 @@ class Tournament extends Model implements SluggableInterface
         parent::boot();
 
         static::deleting(function($tournament) {
-            $tournament->categoryTournaments()->delete();
+            foreach ($tournament->categoryTournaments()->get() as $ct) {
+                $ct->delete();
+            }
+//            $tournament->categoryTournaments()->delete();
         });
         static::restoring(function($tournament) {
             $tournament->categoryTournaments()->restore();

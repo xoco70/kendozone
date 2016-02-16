@@ -26,12 +26,11 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
-                            type: 'information',
                             width: 200,
                             dismissQueue: true,
                             timeout: 10000,
-                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a href=#>UNDO</a></div></div>",
-                            closeWith: ['click'],
+                            text: data.msg,
+                            closeWith: ['click']
 
                         });
                         $tr.remove();

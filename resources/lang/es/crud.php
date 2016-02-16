@@ -61,6 +61,7 @@ return [
     'publish' => 'Publicar',
     'invite_competitors' => 'Invitar competidores',
     'generate_trees' => 'Generar Arboles',
+    'admin_tournaments' => 'Administrar torneos',
 
 
 
