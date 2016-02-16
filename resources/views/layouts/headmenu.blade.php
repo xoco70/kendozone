@@ -3,17 +3,10 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="/"><img src="/images/logo_light.png" alt=""></a>
 
-        {{--<ul class="nav navbar-nav no-border visible-xs-block">--}}
-            {{--<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>--}}
-        {{--</ul>--}}
-
         <ul class="nav navbar-nav visible-xs-block">
-            <li><a class="sidebar-mobile-main-toggle" data-target="#navbar-mobile"><i class="icon-paragraph-justify3"></i></a></li>
-            {{--<ul>--}}
-            {{--<li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><span>Home</span></a></li>--}}
-            {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><span>Torneos</span></a></li>--}}
-            {{--</ul>--}}
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
         </ul>
+
     </div>
 
 
@@ -78,3 +71,29 @@
         </ul>
     </div>
 </div>
+
+<!-- Second navbar -->
+<div class="navbar navbar-default" id="navbar-second">
+    <ul class="nav navbar-nav no-border visible-xs-block">
+        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+    </ul>
+
+    <div class="navbar-collapse collapse" id="navbar-second-toggle">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html"><i class="icon-display4 position-left"></i> Dashboard</a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="changelog.html">
+                    <i class="icon-history position-left"></i>
+                    Changelog
+                    <span class="label label-inline position-right bg-success-400">1.2.1</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!-- /second navbar -->

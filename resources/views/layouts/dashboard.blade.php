@@ -18,7 +18,7 @@
     @yield('styles')
 
 </head>
-
+{{--sidebar-xs should be out--}}
 <body class="sidebar-xs has-detached-right">
 @include('layouts.headmenu')
 
