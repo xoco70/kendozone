@@ -81,12 +81,12 @@ class TournamentUserTest extends TestCase
             $this->visit("/tournaments/$tournament->slug/users")
                 // delete_t1111_73_prof-jaquelin-bruen
                 ->press("delete_" . $tournament->slug."_".$ct1->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
-                ->dontSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
+                ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
 
             $this->visit("/tournaments/$tournament->slug/users")
                 // delete_t1111_73_prof-jaquelin-bruen
                 ->press("delete_" . $tournament->slug."_".$ct2->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
-                ->dontSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
+                ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
         }
     }
 

@@ -4,8 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 
 class CategoryTournament extends Model
 {
@@ -20,56 +18,70 @@ class CategoryTournament extends Model
 //        "confirmed",
     ];
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($categoryTournament) {
-            foreach ($categoryTournament->users()->get() as $user) {
-                $user->delete();
+        static::deleting(function ($categoryTournament) {
+            foreach ($categoryTournament->ctus as $ctus) {
+                $ctus->delete();
             }
-            foreach ($categoryTournament->settings()->get() as $setting) {
-                $setting->delete();
-            }
+//            foreach ($categoryTournament->settings as $setting) {
+//                $setting->delete();
+//            }
 
         });
-        static::restoring(function($categoryTournament) {
-            $categoryTournament->settings()->withTrashed()->restore();
-            $categoryTournament->users()->withTrashed()->restore();
+        static::restoring(function ($categoryTournament) {
+//            $categoryTournament->settings()->withTrashed()->restore();
 
+//            foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
+//                $ct->restore();
+//            }
+            $categoryTournament->ctus()->withTrashed()->restore();
+//            foreach ($categoryTournament->ctus()->withTrashed()->get() as $ctu) {
+//
+//                $ctu->restore();
+//            }
         });
     }
 
-//    public function ctu(){
-//        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id','id');
-//    }
+    public function ctus()
+    {
+        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id', 'id');
+    }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo('App\Category');
     }
 
-    public function tournament(){
+    public function tournament()
+    {
         return $this->belongsTo('App\Tournament');
     }
 
-    public function users(){
-        return $this->belongsToMany('App\User','category_tournament_user','category_tournament_id')
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id')
             ->withPivot('confirmed')
             ->withTimestamps();
     }
-    public function settings(){
+
+    public function settings()
+    {
         return $this->hasOne(CategorySettings::class);
     }
-
 
 
     public function categoryTournaments()
     {
         return $this->belongsToMany(CategoryTournament::class, 'category_tournament_user');
     }
-    public function setting(){
+
+    public function setting()
+    {
         return $this->belongsTo(CategorySettings::class);
     }
-
 
 
 }

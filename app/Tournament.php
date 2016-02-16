@@ -3,12 +3,11 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 
 class Tournament extends Model implements SluggableInterface
@@ -18,7 +17,7 @@ class Tournament extends Model implements SluggableInterface
 
     protected $sluggable = [
         'build_from' => 'name',
-        'save_to'    => 'slug',
+        'save_to' => 'slug',
     ];
     protected $table = 'tournament';
     public $timestamps = true;
@@ -43,19 +42,22 @@ class Tournament extends Model implements SluggableInterface
         'level_id',
 
     ];
-    protected $dates = ['date', 'registerDateLimit','created_at', 'updated_at','deleted_at'];
+    protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($tournament) {
-            foreach ($tournament->categoryTournaments()->get() as $ct) {
+        static::deleting(function ($tournament) {
+            foreach ($tournament->categoryTournaments as $ct) {
                 $ct->delete();
             }
-//            $tournament->categoryTournaments()->delete();
         });
-        static::restoring(function($tournament) {
-            $tournament->categoryTournaments()->restore();
+        static::restoring(function ($tournament) {
+
+            foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
+                $ct->restore();
+            }
 
 
         });
