@@ -46,23 +46,23 @@
                     <li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Menu"></i></li>
                     <li {{ ((Request::is('admin') || Request::is('/')) ? 'class=active' : '') }}><a href="/admin"><i
                                     class="icon-home4"></i> <span>Dashboard</span></a></li>
-                    <li {{ (Request::is('tournaments') ? 'class=active' : '') }}><a href="/tournaments"><i
+                    <li {{ (Request::is('tournaments') ? 'class=active' : '') }}><a href="/invites"><i
                                     class="icon-trophy2"></i> <span>Torneos</span></a></li>
                     {{--                    <li {{ (Request::is('places') ? 'class=active' : '') }}><a href="/places"><i class="icon-location4"></i> <span>Lugares</span></a></li>--}}
-                    <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
-                                    class="icon-envelop3"></i> <span>{{trans_choice('crud.invitation',2)}}</span></a>
-                    </li>
+                    {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i--}}
+                                    {{--class="icon-envelop3"></i> <span>{{trans_choice('crud.invitation',2)}}</span></a>--}}
+                    {{--</li>--}}
                     <li class="navigation-divider"></li>
 
-                    @if(Auth::check())
-                    <li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a
-                                href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
-                                    class="icon-user"></i> <span>{{trans('core.profile')}}</span></a></li>
-                    @endif
+                    {{--@if(Auth::check())--}}
+                    {{--<li {{ (Request::is('users/'.Auth::getUser()->id.'/edit') ? 'class=active' : '') }}><a--}}
+                                {{--href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i--}}
+                                    {{--class="icon-user"></i> <span>{{trans('core.profile')}}</span></a></li>--}}
+                    {{--@endif--}}
                     {{--<li {{ (Request::is('settings') ? 'class=active' : '') }}><a href="/settings"><i--}}
                     {{--class="icon-cog"></i> <span>{{trans('core.settings')}}</span></a></li>--}}
-                    <li><a href="{{ url('auth/logout') }}"><i
-                                    class="icon-switch2"></i> <span>{{trans('core.logout')}}</span></a></li>
+                    {{--<li><a href="{{ url('auth/logout') }}"><i--}}
+                                    {{--class="icon-switch2"></i> <span>{{trans('core.logout')}}</span></a></li>--}}
 
 
                 </ul>

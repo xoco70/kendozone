@@ -3,15 +3,28 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="/"><img src="/images/logo_light.png" alt=""></a>
 
+        {{--<ul class="nav navbar-nav no-border visible-xs-block">--}}
+            {{--<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>--}}
+        {{--</ul>--}}
+
         <ul class="nav navbar-nav visible-xs-block">
-            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            <li><a class="sidebar-mobile-main-toggle" data-target="#navbar-mobile"><i class="icon-paragraph-justify3"></i></a></li>
+            {{--<ul>--}}
+            {{--<li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><span>Home</span></a></li>--}}
+            {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><span>Torneos</span></a></li>--}}
+            {{--</ul>--}}
         </ul>
     </div>
 
+
     <div class="navbar-collapse collapse" id="navbar-mobile">
         <ul class="nav navbar-nav">
-            <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>
-            </li>
+            <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><span>Home</span></a></li>
+            <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><span>Torneos</span></a></li>
+            {{--<i class="icon-trophy2"></i>--}}
+
+            {{--<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>--}}
+            {{--</li>--}}
 
         </ul>
 
@@ -28,8 +41,8 @@
 
 
 
-                    <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}
-                        </a></li>
+                    <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}</a></li>
+                    <li><a href="{!! URL::to('tournaments')!!}"><i class="fa fa-user"></i> {!! Lang::get('crud.admin_tournaments') !!}</a></li>
 
 
                     @can('CanSeeLogs')
