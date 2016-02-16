@@ -9,8 +9,6 @@
 
 @section('content')
 
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
@@ -74,13 +72,19 @@
                                 @endforeach
 
                             </table>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-lg-8">DarkSlateBlue deleted</div>
+        <div class="col-lg-4" align="right">
+            <a class="undo" href="#"><span class="undo_link">UNDO</span> </a>
+        </div>
+    </div>
 
     @include("errors.list")
 @stop

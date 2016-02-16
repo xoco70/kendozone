@@ -36,16 +36,16 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-        factory(Tournament::class,5)->create();
+//        factory(Tournament::class,5)->create();
 
 
         CategoryTournament::truncate();
-        factory(CategoryTournament::class,30)->create();
+        factory(CategoryTournament::class,5)->create();
 
         // Tournament categories users
 
         CategoryTournamentUser::truncate();
-        factory(CategoryTournamentUser::class,50)->create();
+        factory(CategoryTournamentUser::class,10)->create();
 
         CategorySettings::truncate();
         factory(CategorySettings::class,10)->create();

@@ -23,7 +23,7 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->integer('tournament_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
-//            $table->unique(array('tournament_id', 'category_id'));
+            $table->unique(array('tournament_id', 'category_id'));
 
             $table->foreign('tournament_id')
                 ->references('id')
@@ -34,6 +34,7 @@ class CreateCategoryTable extends Migration
                 ->references('id')
                 ->on('category')
                 ->onDelete('cascade');
+
 
             $table->timestamps();
             $table->softDeletes();
@@ -57,6 +58,8 @@ class CreateCategoryTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->unique(array('category_tournament_id', 'user_id'));
 
             $table->boolean('confirmed');
 

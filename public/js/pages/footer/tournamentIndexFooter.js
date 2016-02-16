@@ -1,13 +1,16 @@
 $(function () {
     var disabled = false;
+    var tr = null;
 
     // Initialize responsive functionality
     $('.table-togglable').footable();
-    $('.undo_link').click(function (e) {
+    $('.undo').click(function (e) {
+        console.log("hola");
         e.preventDefault();
+        e.stopPropagation();
         var dataRestore      =   $(this).data('restore');
-        var tr = $("#"+dataSlug);
-        disabled = true;
+        tr.show();
+        //disabled = true;
 
         //$.ajax(
         //    {
@@ -16,7 +19,15 @@ $(function () {
         //        data: dataSlug,
         //        success: function (data) {
         //            if (data != null && data.status == 'success') {
-        //                $tr.remove();
+        //                //tr.remove();
+        //                noty({
+        //                    layout: 'topRight',
+        //                    type: 'error',
+        //                    width: 200,
+        //                    dismissQueue: true,
+        //                    timeout: 3000,
+        //                    text: data.msg
+        //                });
         //            } else {
         //                console.log(data);
         //                noty({
@@ -55,7 +66,7 @@ $(function () {
         var dataId      =   $(this).data('id');
 //                console.log(inputData);
         console.log(dataId);
-        var $tr = $(this).closest('tr');
+        tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');
 
@@ -72,11 +83,12 @@ $(function () {
                             dismissQueue: true,
                             timeout: 10000,
                             closeWith: ['button'],
-                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a href='"+ url+ '/' + dataId + "/restore' 'data-restore' =" + dataId +" ><span class='undo_link'>UNDO</span> </a></div></div>",
+                            text: "<div class='row'><div class='col-lg-8'>" + data.msg + "</div><div class='col-lg-4' align='right'><a class='undo' href='"+ url+ "/" + dataId + "/restore'><span class='undo_link'>UNDO</span> </a></div></div>"
+
 
 
                     });
-                        $tr.remove();
+                        //tr.hide();
                     } else {
                         console.log(data);
                         noty({
