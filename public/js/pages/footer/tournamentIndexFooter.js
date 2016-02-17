@@ -31,7 +31,7 @@ $(function () {
                             text: data.msg
                         });
                         $('.btnDeleteTournament').prop("disabled", false);
-                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
                     }
 
@@ -85,7 +85,7 @@ $(function () {
 
 
                     });
-                        $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-remove');
+                        $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-trash');
                         tr.hide();
                     } else {
                         console.log(data);
@@ -98,7 +98,7 @@ $(function () {
                             text: data.msg
                         });
                         $('.btnDeleteTournament').prop("disabled", false);
-                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+                        $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
                     }
 
@@ -114,7 +114,7 @@ $(function () {
                         text: data.statusText
                     });
                     $('.btnDeleteTournament').prop("disabled", false);
-                    $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
+                    $('.btnDeleteTournament').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
                 }
             }
