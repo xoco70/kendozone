@@ -199,6 +199,15 @@ class Tournament extends Model implements SluggableInterface
         $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date);
     }
 
+    public function isOpen()
+    {
+        return $this->type == 1;
+    }
+
+    public function needsInvitation()
+    {
+        return $this->type == 0;
+    }
 //    public function getCategoriesWithSettings()
 //    {
 //        $categories = DB::table('category_tournament')

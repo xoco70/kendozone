@@ -75,7 +75,7 @@ class InviteController extends Controller
                 ]
             );
         }
-        if ($invite->expiration < Carbon::now() && $invite->expiration!= '0000-00-00')
+        if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00')
             return view('errors.general',
                 ['code' => '403',
                     'message' => 'Forbidden!',
@@ -124,6 +124,7 @@ class InviteController extends Controller
             }
         }
     }
+
     public function registerCategories(Request $request)
     {
         //TODO Check if catgory has been paid. if so, can't change
@@ -134,27 +135,24 @@ class InviteController extends Controller
             $invite = Invite::findOrFail($inviteId);
         else
             $invite = null;
-        $tournamentId = $request->tournament;
-        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
-        $user->categoryTournaments()->sync($categories);
 
+        $tournamentSlug = $request->tournament;
+        $tournament = Tournament::findBySlug($tournamentSlug);
 
-        // Get all TournamentCategories Related to this tournament
+        if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
+            $user = User::find(Auth::user()->id);
+            $user->categoryTournaments()->sync($categories);
+            if (is_null($invite)){
+                $invite = new Invite();
+                $invite->code = 'open';
+                $invite->email = Auth::user()->email;
+                $invite->tournament_id = $tournament->id;
+                $invite->active = 1;
+                $invite->used = 1;
+                $invite->save();
+            }
+        }
 
-//        $tcats = CategoryTournament::where('tournament_id', $tournament->id)->lists('id');
-//
-//        // Delete All Registered category that has not been paid
-//        CategoryTournamentUser::whereIn('category_tournament_id', $tcats)
-//            ->where('user_id', Auth::user()->id)
-//            ->delete();
-//
-//        //Create new ones
-//        $arrToSave = array();
-//        foreach ($categories as $cat) {
-//            array_push($arrToSave, ['category_tournament_id' => $cat, 'user_id' => Auth::user()->id, 'confirmed' => 0]);
-//        }
-//
-//        CategoryTournamentUser::insert($arrToSave);
 
         if (isset($invite)) $invite->consume();
 
