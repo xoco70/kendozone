@@ -41,7 +41,7 @@
                                         <td>{{ $tournament->owner->name}}</td>
                                         <td class="text-center">
                                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTourament', 'action' => ['TournamentController@destroy', $tournament->slug]]) !!}
-                                            {!! Form::button( '<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->slug, 'data-id' => $tournament->slug ] ) !!}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->slug, 'data-id' => $tournament->slug ] ) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
@@ -49,7 +49,7 @@
                                 @endforeach
 
                             </table>
-
+                            <div class="text-center">{!! $tournaments->render() !!}</div>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    @include("errors.list")
+    {{--@include("errors.list")--}}
 @stop
 @section("scripts_footer")
     <script>

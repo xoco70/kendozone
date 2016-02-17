@@ -45,10 +45,8 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}</a>
-                    </li>
-                    <li><a href="{!! URL::to('tournaments')!!}"><i
-                                    class="fa fa-user"></i> {!! Lang::get('crud.admin_tournaments') !!}</a></li>
+                    <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}</a></li>
+                    <li><a href="{!! URL::to('tournaments')!!}"> <i class="icon-trophy3"></i>  {!! Lang::get('crud.admin_tournaments') !!}</a></li>
                     <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
                     {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}
