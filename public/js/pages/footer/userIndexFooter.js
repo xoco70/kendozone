@@ -4,54 +4,54 @@ $(function () {
 
     // Initialize responsive functionality
     $('.table-togglable').footable();
-//    $(document).on('click', '.undo', function (e) {
-//        e.preventDefault();
-//        //e.stopPropagation();
-//        var dataRestore      =   $(this).data('restore');
-//
-//        $.ajax(
-//            {
-//                type: 'GET',
-//                url: url+ '/' + dataRestore + '/restore',
-//                data: dataRestore,
-//                success: function (data) {
-//                    console.log(data);
-//                    if (data != null && data.status == 'success') {
-//                        tr.show();
-//                        $.noty.closeAll()
-//
-//                    } else {
-//                        console.log(data);
-//                        noty({
-//                            layout: 'topRight',
-//                            type: 'error',
-//                            width: 200,
-//                            dismissQueue: true,
-//                            timeout: 3000,
-//                            text: data.msg
-//                        });
-//                        $('.btnDeleteUser').prop("disabled", false);
-//                        $('.btnDeleteUser').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
-//
-//                    }
-//
-//
-//                },
-//                error: function (data) {
-//                    console.log("error");
-//                    noty({
-//                        layout: 'topRight',
-//                        type: 'error',
-//                        width: 200,
-//                        dismissQueue: true,
-//                        timeout: 3000,
-//                        text: data.statusText
-//                    });
-//                }
-//            }
-//        )
-//
-//    });
+    $(document).on('click', '.undo', function (e) {
+        e.preventDefault();
+        //e.stopPropagation();
+        var dataRestore      =   $(this).data('restore');
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: url+ '/' + dataRestore + '/restore',
+                data: dataRestore,
+                success: function (data) {
+                    console.log(data);
+                    if (data != null && data.status == 'success') {
+                        tr.show();
+                        $.noty.closeAll()
+
+                    } else {
+                        console.log(data);
+                        noty({
+                            layout: 'topRight',
+                            type: 'error',
+                            width: 200,
+                            dismissQueue: true,
+                            timeout: 3000,
+                            text: data.msg
+                        });
+                        $('.btnDeleteUser').prop("disabled", false);
+                        $('.btnDeleteUser').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
+
+                    }
+
+
+                },
+                error: function (data) {
+                    console.log("error");
+                    noty({
+                        layout: 'topRight',
+                        type: 'error',
+                        width: 200,
+                        dismissQueue: true,
+                        timeout: 3000,
+                        text: data.statusText
+                    });
+                }
+            }
+        )
+
+    });
     $('.btnDeleteUser').on('click', function (e) {
         e.preventDefault();
         var inputData = $('#formDeleteUser').serialize();

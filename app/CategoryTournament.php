@@ -27,8 +27,8 @@ class CategoryTournament extends Model
             $categoryTournament->settings()->delete();
         });
         static::restoring(function ($categoryTournament) {
-            $categoryTournament->ctus()->withTrashed()->restore();
-            $categoryTournament->settings()->withTrashed()->restore();
+            $categoryTournament->ctus()->restore();
+            $categoryTournament->settings()->restore();
 
         });
     }

@@ -102,16 +102,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // If a User is deleted, you must delete:
         // His tournaments, his tcus
 
-//        static::deleting(function ($user) {
+        static::deleting(function ($user) {
+//            foreach
 //            $user->tournaments()->delete();
-//            $user->categoryTournamentUsers()->delete();
-//
-//        });
-//        static::restoring(function ($user) {
-//            $user->tournaments()->restore();
-//            $user->categoryTournamentUsers()->restore();
-//
-//        });
+            foreach ( $user->tournaments as $tournament){
+                $tournament->delete();
+            }
+            $user->categoryTournamentUsers()->delete();
+
+        });
+        static::restoring(function ($user) {
+            $user->categoryTournamentUsers()->withTrashed()->restore();
+            foreach ( $user->tournaments()->withTrashed()->get() as $tournament) {
+                $tournament->restore();
+            }
+
+        });
 
 
     }
