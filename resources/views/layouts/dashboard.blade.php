@@ -19,12 +19,12 @@
 
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs has-detached-right">
+<body class="sidebar-xs has-detached-right navbar-top">
 @include('layouts.headmenu')
 
 
         <!-- Page container -->
-<div class="page-container" id="app">
+<div class="page-container">
 
     <!-- Page content -->
     <div class="page-content">
@@ -36,14 +36,9 @@
 
 
             <!-- Page header -->
-            <div class="page-header">
-                <div class="page-header-content">
-                    <div class="page-title">
-                        <h1><span class="text-semibold">
-                                @yield('breadcrumbs')
-                            </span>
-                        </h1>
-                    </div>
+            <div class="page-header" >
+                <div class="breadcrumb-line">
+                    @yield('breadcrumbs')
                 </div>
             </div>
             <!-- Content area -->

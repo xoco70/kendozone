@@ -1,49 +1,38 @@
-<!-- Main navbar -->
-<div class="navbar navbar-inverse">
+<!-- Second navbar  -->
+<div class="navbar navbar-default navbar-fixed-top" id="navbar-second">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/"><img src="/images/logo_light.png" alt=""></a>
-
-        <ul class="nav navbar-nav visible-xs-block">
-            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+        <a class="navbar-brand" href="/"><img src="/images/logo_dark.png" alt=""></a>
+        <ul class="nav navbar-nav no-border visible-xs-block">
+            <li><a class="text-right collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i
+                            class="icon-paragraph-justify3"></i></a></li>
         </ul>
 
     </div>
 
 
-    <div class="navbar-collapse collapse" id="navbar-mobile">
+    <div class="navbar-collapse collapse" id="navbar-second-toggle">
         <ul class="nav navbar-nav">
-            <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><span>Home</span></a></li>
-            <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><span>Torneos</span></a></li>
-            {{--<i class="icon-trophy2"></i>--}}
-
-            {{--<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>--}}
-            {{--</li>--}}
+            <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><i class="icon-display4 position-left"></i>
+                    Dashboard</a></li>
+            <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
+                            class="icon-trophy2 position-left"></i>Torneos</a></li>
 
         </ul>
 
-        {{--<p class="navbar-text"><span class="label bg-success-400">Online</span></p>--}}
-
         <ul class="nav navbar-nav navbar-right">
 
-            <li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><i
-                            class="icon-cog"></i> </a>
-                <ul class="dropdown-menu dropdown-menu-right icons-right">
 
-                    {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
-                                    {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
+            <ul class="dropdown-menu dropdown-menu-right icons-right">
 
+                {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
+                {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
 
+                @can('CanSeeLogs')
+                <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}
+                    </a></li>@endcan
+                        <!--<li class="divider"></li>-->
 
-                    <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}</a></li>
-                    <li><a href="{!! URL::to('tournaments')!!}"><i class="fa fa-user"></i> {!! Lang::get('crud.admin_tournaments') !!}</a></li>
-
-
-                    @can('CanSeeLogs')
-                    <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}
-                        </a></li>@endcan
-                            <!--<li class="divider"></li>-->
-
-                </ul>
+            </ul>
             </li>
 
             <li class="dropdown dropdown-user">
@@ -56,6 +45,10 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{!! URL::to('users')!!}"><i class="fa fa-user"></i> {!! Lang::get('core.users') !!}</a>
+                    </li>
+                    <li><a href="{!! URL::to('tournaments')!!}"><i
+                                    class="fa fa-user"></i> {!! Lang::get('crud.admin_tournaments') !!}</a></li>
                     <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
                     {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}
@@ -68,31 +61,6 @@
 
                 </ul>
             </li>
-        </ul>
-    </div>
-</div>
-
-<!-- Second navbar -->
-<div class="navbar navbar-default" id="navbar-second">
-    <ul class="nav navbar-nav no-border visible-xs-block">
-        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
-    </ul>
-
-    <div class="navbar-collapse collapse" id="navbar-second-toggle">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html"><i class="icon-display4 position-left"></i> Dashboard</a></li>
-
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="changelog.html">
-                    <i class="icon-history position-left"></i>
-                    Changelog
-                    <span class="label label-inline position-right bg-success-400">1.2.1</span>
-                </a>
-            </li>
-
         </ul>
     </div>
 </div>
