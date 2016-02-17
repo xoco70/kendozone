@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 class CategoryTournamentUser extends Model
 {
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    protected $dates = ['created_at', 'updated_at','deleted_at'];
 
     protected $table = 'category_tournament_user';
     public $timestamps = true;

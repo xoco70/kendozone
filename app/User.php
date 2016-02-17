@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['created_at', 'updated_at','deleted_at'];
 
     protected $sluggable = [
         'build_from' => 'name',
@@ -102,16 +102,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // If a User is deleted, you must delete:
         // His tournaments, his tcus
 
-        static::deleting(function ($user) {
-            $user->tournaments()->delete();
-            $user->categoryTournamentUsers()->delete();
-
-        });
-        static::restoring(function ($user) {
-            $user->tournaments()->restore();
-            $user->categoryTournamentUsers()->restore();
-
-        });
+//        static::deleting(function ($user) {
+//            $user->tournaments()->delete();
+//            $user->categoryTournamentUsers()->delete();
+//
+//        });
+//        static::restoring(function ($user) {
+//            $user->tournaments()->restore();
+//            $user->categoryTournamentUsers()->restore();
+//
+//        });
 
 
     }

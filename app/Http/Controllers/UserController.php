@@ -8,13 +8,13 @@ use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Response;
 use Webpatser\Countries\Countries;
 
 class UserController extends Controller
@@ -210,14 +210,33 @@ class UserController extends Controller
         })->export('xls');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param User $user
+     * @return Response
+     * @throws \Exception
+     * @internal param int $id
+     */
     public function destroy(User $user)
     {
-        if ($user->delete()) {
-            flash('success', Lang::get('core.success'));
-        } else
-            flash('error', Lang::get('core.fail'));
-        return redirect("/users");
 
+        if ($user->delete()) {
+            return Response::json(['msg' => $user->name.' deleted', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error deleting '.$user->name, 'status' => 'error']);
+        }
+    }
+
+    public function restore($userSlug)
+
+    {
+        $user = User::withTrashed()->whereSlug($userSlug)->first();
+        if ($user->restore()) {
+            return Response::json(['msg' => $user->name.' restored', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error restoring '.$user->name, 'status' => 'error']);
+        }
     }
 
 }

@@ -10,7 +10,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <div class="col-lg-10 col-lg-offset-1">
                 <div class="panel panel-flat">
 
                     <div class="panel-body">
@@ -33,17 +33,22 @@
                                         to Excel</a>
 
                                     <tr>
+                                        <th data-hide="phone">{{ trans('crud.avatar') }}</th>
                                         <th data-hide="phone">ID</th>
                                         <th data-toggle="true">{{ trans('crud.username') }}</th>
                                         <th data-hide="phone">{{ trans('crud.email') }}</th>
                                         <th data-hide="phone">{{ trans('crud.role') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.avatar') }}</th>
                                         <th data-hide="phone">{{ trans('crud.country') }}</th>
                                         <th class="text-center">{{ trans('crud.action') }}</th>
                                     </tr>
                                 </thead>
                                 @foreach($users as $user)
                                     <tr>
+                                        <td>
+                                            <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}"><img
+                                                        src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
+                                        </td>
+
                                         <td>
                                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">{{ $user->id }}</a>
                                         </td>
@@ -52,23 +57,15 @@
                                         </td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role->name }}</td>
-                                        <td>
-                                            <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}"><img
-                                                        src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
-                                        </td>
 
                                         <td><img src="/images/flags/{{ $user->country->flag }}"
                                                  alt="{{ $user->country->name }}"/></td>
 
                                         <td class="text-center">
-                                            {{ Form::open(['route' => ['users.destroy', $user->slug], 'method' => 'delete']) }}
-                                            <button id="delete_{{$user->slug}}" type="submit"
-                                                    class="btn text-warning-600 btn-flat btn-icon btn-rounded">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </button>
+                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteUser', 'action' => ['UserController@destroy', $user->slug]]) !!}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteUser', 'id'=>'delete_'.$user->slug, 'data-id' => $user->slug ] ) !!}
                                             {!! Form::close() !!}
-                                        </td>
-                                    </tr>
+                                        </td>                                    </tr>
 
                                 @endforeach
 
@@ -89,7 +86,7 @@
 @stop
 @section("scripts_footer")
     <script>
-        var url = "{{ url("/tournaments") }}";
+        var url = "{{ url("/users") }}";
 
     </script>
     {!! Html::script('js/pages/footer/userIndexFooter.js') !!}

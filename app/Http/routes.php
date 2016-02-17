@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth', 'own', 'throttle:100,1']], // , 'own'
 
         //Restoring
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
+        Route::get('users/{user}/restore', 'UserController@restore');
 
 
 

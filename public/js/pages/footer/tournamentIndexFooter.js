@@ -54,7 +54,7 @@ $(function () {
     });
     $('.btnDeleteTournament').on('click', function (e) {
         e.preventDefault();
-        var inputData = $('#formDeleteTourament').serialize();
+        var inputData = $('#formDeleteTournament').serialize();
         var dataId      =   $(this).data('id');
 //                console.log(inputData);
         console.log(dataId);
