@@ -85,8 +85,10 @@ $factory->define(App\CategoryTournamentUser::class, function (Faker\Generator $f
 
 
 $factory->define(App\CategorySettings::class, function (Faker\Generator $faker) use ($factory) {
+    $tcs = CategoryTournament::all()->pluck('id')->toArray();
+
     return [
-        'category_tournament_id' => $factory->create(App\CategoryTournament::class)->id,
+        'category_tournament_id' => $faker->randomElement($tcs),
         'isTeam' => $faker->boolean(),
         'teamSize' => $faker->numberBetween(0, 6),
         'fightingAreas' => $faker->numberBetween(0, 4),

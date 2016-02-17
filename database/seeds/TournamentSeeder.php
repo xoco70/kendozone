@@ -1,14 +1,11 @@
 <?php
 
-use App\Category;
 use App\CategorySettings;
-use App\Tournament;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
-use App\TournamentLevel;
-use App\User;
+use App\Tournament;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 class TournamentSeeder extends Seeder
 {
@@ -19,8 +16,8 @@ class TournamentSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        $users = User::all()->pluck('id')->toArray();
+//        $faker = Faker::create();
+//        $users = User::all()->pluck('id')->toArray();
 
         // Tournament creation
         Tournament::truncate();
@@ -36,19 +33,44 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-//        factory(Tournament::class,5)->create();
+        factory(Tournament::class, 5)->create();
 
 
         CategoryTournament::truncate();
-        factory(CategoryTournament::class,5)->create();
+        for ($i = 0; $i < 10; $i++) {
+            try {
+                factory(CategoryTournament::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
 
         // Tournament categories users
 
         CategoryTournamentUser::truncate();
-        factory(CategoryTournamentUser::class,10)->create();
+        for ($i = 0; $i < 50; $i++) {
+            try {
+                factory(CategoryTournamentUser::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
+
 
         CategorySettings::truncate();
-        factory(CategorySettings::class,10)->create();
+        for ($i = 0; $i < 50; $i++) {
+            try {
+                factory(CategorySettings::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
 
     }
 }
