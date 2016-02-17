@@ -110,8 +110,13 @@ class CategorySettingsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CategorySettings $cs)
     {
-        //
+        if ($cs->delete) {
+            return Response::json(['msg' => 'Category deleted', 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => 'Error deleting category', 'status' => 'error']);
+        }
     }
+
 }

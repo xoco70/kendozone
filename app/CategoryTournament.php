@@ -23,25 +23,13 @@ class CategoryTournament extends Model
         parent::boot();
 
         static::deleting(function ($categoryTournament) {
-            foreach ($categoryTournament->ctus as $ctus) {
-                $ctus->delete();
-            }
-//            foreach ($categoryTournament->settings as $setting) {
-//                $setting->delete();
-//            }
-
+            $categoryTournament->ctus()->delete();
+            $categoryTournament->settings()->delete();
         });
         static::restoring(function ($categoryTournament) {
-//            $categoryTournament->settings()->withTrashed()->restore();
-
-//            foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
-//                $ct->restore();
-//            }
             $categoryTournament->ctus()->withTrashed()->restore();
-//            foreach ($categoryTournament->ctus()->withTrashed()->get() as $ctu) {
-//
-//                $ctu->restore();
-//            }
+            $categoryTournament->settings()->withTrashed()->restore();
+
         });
     }
 

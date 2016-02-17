@@ -52,13 +52,13 @@ class Tournament extends Model implements SluggableInterface
             foreach ($tournament->categoryTournaments as $ct) {
                 $ct->delete();
             }
+
         });
         static::restoring(function ($tournament) {
 
             foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
                 $ct->restore();
             }
-
 
         });
 
@@ -80,6 +80,7 @@ class Tournament extends Model implements SluggableInterface
     }
 
 
+    //TODO Change this method por tcu() relation
     public function competitors($CategoryTournamentId = null)
     {
 //        User::join('category_tournament_user', 'user.id','user_id' )
@@ -98,18 +99,14 @@ class Tournament extends Model implements SluggableInterface
             ->orderBy('users.email', 'ASC')
             ->get();
         $users = User::hydrate($users);
-//        $users->paginate(Config::get('constants.PAGINATION'));
         return $users;
-//        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id', 'user_id' )
-//            ->withPivot('confirmed')
-//            ->withTimestamps();
     }
 
-    public function deleteUser($categoryTournamentId, $userId)
-    {
-
-
-    }
+//    public function deleteUser($categoryTournamentId, $userId)
+//    {
+//
+//
+//    }
 
 
     public function level()
