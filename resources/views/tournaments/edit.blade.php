@@ -89,7 +89,7 @@
                                         <div class="checkbox-switch">
                                             <label>
                                                 {!!     Form::hidden('mustPay', 0) !!}
-                                                {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
+                                                {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>trans('core.yes'), 'data-off-text'=>trans('core.no')]) !!}
                                             </label>
                                         </div>
 
@@ -102,7 +102,7 @@
                                                 {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 {!!   Form::hidden('type', 0) !!}
-                                                {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Abierto", 'data-off-text'=>"Invitación"]) !!}
+                                                {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>trans('core.open'), 'data-off-text'=>trans_choice('crud.invitation', 1)]) !!}
 
                                             </label>
                                         </div>
@@ -223,8 +223,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="panel-body">
-                                        <p class="coutent-group">Seleccione las categorias abiertas para su
-                                            torneo</p>
+                                        <p class="coutent-group">{{trans('crud.select_tournament_categories')}}</p>
 
 
                                         {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
@@ -338,7 +337,7 @@
 
 
                             <fieldset title="1">
-                                <legend class="text-semibold ">Invita competitodres con este link</legend>
+                                <legend class="text-semibold ">{{ trans('crud.invite_with_link') }}</legend>
 
                                 <div class="row">
                                     <div class="col-md-12">

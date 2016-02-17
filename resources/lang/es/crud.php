@@ -121,6 +121,8 @@ return [
     'add_competitor' => 'Agregar Competidor',
     'add_competitor_to_category' => 'Agregar Competidor a la categoria: :category',
     'select_competitor_categories' => 'Selecciona las categorias en la cual quieres registrar al competidor',
+    'select_tournament_categories' => 'Seleccione las categorias abiertas para su torneo',
+
 
 
     // Invitation
@@ -133,6 +135,8 @@ return [
     'invite_message' => 'Mensaje de invitación',
     'invite_template' => "Pica el link que sigue para registrarse al torneo :tournament \n :link ",
     'send_invites' => 'Mandar Invitaciones',
+    'invite_with_link' => 'Invita competitodres con este link',
+
 
     'confirmed' => 'Confirmado',
     'used' => 'Usada',

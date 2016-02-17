@@ -38,6 +38,12 @@ return [
     'edit' => 'Editar',
     'delete' => 'Borrar',
     'help' => 'Ayuda',
+    'type' => 'Tipo',
+    'open' => 'Abierto',
+    'yes' => 'Si',
+    'no' => 'No',
+
+
 
     // Left menu
     'lastlogin' => 'Ultima conexión',
