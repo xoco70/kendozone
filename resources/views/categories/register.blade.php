@@ -19,26 +19,8 @@
                             {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/0/categories']) !!}
                         @endif
 
-                        <?php
-//                        $tcus = App\CategoryTournamentUser::with();
-//                        $user = App\User::with('categoryTournaments','categoryTournamentUsers')
-//                                ->find(Auth::user()->id);
-//                            dd($user);
-//                        }])->get();
 
-
-                        //                        $user = App\User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find(Auth::user()->id);
-//                        foreach($user->categoryTournaments as $categoryTournament) {
-//                            echo($categoryTournament->pivot->user_id);
-////                            echo 'Category Name: '.$categoryTournament->category->name;
-////                            echo 'Tournament Name: '.$categoryTournament->tournament->name;
-//                            echo '<br>';
-//                        }
-                        ?>
-
-
-                        {{--// BAD ELOQUENT RELATIONSHIP Auth::user()->categoryTournaments->get($key)--}}
-                            @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                         @foreach($tournament->categoryTournaments as $key => $categoryTournament)
 
                                 @if ($key % 4 == 0)
                                     <div class="row">

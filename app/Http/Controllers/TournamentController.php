@@ -223,8 +223,5 @@ class TournamentController extends Controller
             $competitors = $tournament->competitors($cat->id);
             echo $competitors;
         }
-//        dd($competitors->where('cat_id','2'));
     }
-
-
 }

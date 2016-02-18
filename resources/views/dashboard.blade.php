@@ -5,6 +5,7 @@
 @stop
 @section('content')
     @include("errors.list")
+    {{--TODO Falta traducir--}}
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

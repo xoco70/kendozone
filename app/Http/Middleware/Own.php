@@ -29,10 +29,10 @@ class Own
                     if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
                         return view('errors.general',
                             ['code' => '403',
-                                'message' => 'Forbidden!',
+                                'message' => trans('core.forbidden'),
                                 'quote' => '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”',
                                 'author' => 'Tabitha Suzuma',
-                                'source' => 'Forbidden',
+                                'source' => trans('core.forbidden'),
                             ]
                         );
                     }
@@ -46,10 +46,10 @@ class Own
                 if ( $userLogged->id != $user->id && !$userLogged->isSuperAdmin()) {
                     return view('errors.general',
                         ['code' => '403',
-                            'message' => 'Forbidden!',
+                            'message' => trans('core.forbidden'),
                             'quote' => '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”',
                             'author' => 'Tabitha Suzuma',
-                            'source' => 'Forbidden',
+                            'source' => trans('core.forbidden'),
                         ]
                     );
                 }

@@ -51,9 +51,9 @@ class CategorySettingsController extends Controller
 
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
         if ($setting = CategorySettings::create($request->all())) {
-            return Response::json(['settingId' =>$setting->id, 'msg' => 'Configuration created', 'status' => 'success']);
+            return Response::json(['settingId' =>$setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error configuring Category', 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
         }
 //        flash()->success(Lang::get('core.operation_successful'));
 //        return redirect("tournaments/$tournamentId/edit");
@@ -96,9 +96,9 @@ class CategorySettingsController extends Controller
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
         if (CategorySettings::findOrFail($categorySettingsId)->update($request->all())) {
-            return Response::json(['msg' => 'Category updated', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error updating category', 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);
         }
 //        flash()->success(trans('core.operation_successful'));
 //        return redirect("tournaments/$tournamentId/edit");
@@ -113,9 +113,9 @@ class CategorySettingsController extends Controller
     public function destroy(CategorySettings $cs)
     {
         if ($cs->delete) {
-            return Response::json(['msg' => 'Category deleted', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.category_delete_succesful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting category', 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.category_delete_error'), 'status' => 'error']);
         }
     }
 

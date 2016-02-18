@@ -63,25 +63,6 @@
                                 @endforeach
                             </div>
 
-                            {{--<div class="row">--}}
-                            {{--<div class="col-md-6">--}}
-                            {{--@can('CanChangeRole')--}}
-                            {{--<div class="form-group">--}}
-                            {{--{!!  Form::label('role_id', trans('crud.role')) !!}--}}
-                            {{--{!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}--}}
-                            {{--</div>--}}
-                            {{--@endcan--}}
-                            {{--</div>--}}
-
-                            {{--<div class="col-md-6">--}}
-                            {{--<div class="form-group">--}}
-                            {{--{!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}--}}
-                            {{--{!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}--}}
-                            {{--<p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-
-                            {{--</div>--}}
 
                             <div align="right">
                                 <button type="submit"

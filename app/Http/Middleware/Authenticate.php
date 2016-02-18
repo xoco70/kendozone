@@ -39,7 +39,7 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return response(trans('msg.access_denied'), 401);
             } else {
                 return redirect()->guest('auth/login');
             }

@@ -96,7 +96,7 @@
                                                 {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
 
                                                 <br/>
-                                                {{ $tournament->type == 0 ? trans('core.open') : trans_choice('crud.invitation', 1) }}
+                                                {{ $tournament->type == 1 ? trans('core.open') : trans_choice('crud.invitation', 1) }}
 
                                             </label>
                                         </div>
@@ -157,38 +157,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /simple panel -->
-                <div class="panel panel-flat">
-                    <div class="panel-body">
-                        <div class="container-fluid">
-                            <fieldset title="{{trans_choice('crud.category',2)}}">
-                                <a name="categories">
-                                    <legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend>
-                                </a>
-                            </fieldset>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel-body">
-                                        <ul>
-                                            @foreach($tournament->categories as $category)
-                                                <li>{{ $category->name  }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- /simple panel -->
-                </div>
-
 
                 <!-- /simple panel acordion -->
                 <div class="panel panel-flat category-settings">
@@ -211,9 +179,9 @@
                                             <?php
 
                                             $setting = $tournament->categoryTournaments->get($key)->settings;
-                                            $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
-                                            $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
-                                            $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+//                                            $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
+//                                            $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
+//                                            $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
 
                                             ?>
 

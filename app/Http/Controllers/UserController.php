@@ -47,8 +47,8 @@ class UserController extends Controller
         } else {
             return view('errors.general',
                 ['code' => '403',
-                    'message' => 'Forbidden!',
-                    'quote' => trans(''),
+                    'message' => trans('core.forbidden'),
+                    'quote' => trans('msg.access_denied'),
                     'author' => 'Admin',
                     'source' => '',
                 ]
@@ -222,9 +222,9 @@ class UserController extends Controller
     {
 
         if ($user->delete()) {
-            return Response::json(['msg' => $user->name.' deleted', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting '.$user->name, 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
         }
     }
 
@@ -233,9 +233,9 @@ class UserController extends Controller
     {
         $user = User::withTrashed()->whereSlug($userSlug)->first();
         if ($user->restore()) {
-            return Response::json(['msg' => $user->name.' restored', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error restoring '.$user->name, 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'error']);
         }
     }
 

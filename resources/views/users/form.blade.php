@@ -3,15 +3,13 @@
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('http://maps.google.com/maps/api/js') !!}
 
-    {{--    {!! Html::script('http://maps.google.com/maps/api/js') !!}--}}
-    {{--    {!! Html::script('js/pages/uploader_bootstrap.js') !!}--}}
 @stop
 @section('styles')
     {!! Html::script('css/userCreate.css') !!}
 @stop
 @section('breadcrumbs')
     @if (!is_null($user->id))
-        {!! Breadcrumbs::render('users.edit', $useTorneo	Organizador	Tipo	Usadar) !!}
+        {!! Breadcrumbs::render('users.edit', $user) !!}
     @else
         {!! Breadcrumbs::render('users.create') !!}
 

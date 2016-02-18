@@ -29,7 +29,7 @@
 
             <div class="row">
                 <div class="panel-body">
-                    <p class="coutent-group">Seleccione las categorias abiertas para su torneo</p>
+                    <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
 
 
                     {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->

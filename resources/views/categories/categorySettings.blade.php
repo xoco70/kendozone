@@ -168,38 +168,6 @@ if (is_null($setting)) {
                 'step': '15'
             }));
 
-            {{--$(".teamSizeSlider{{$key}}").slider({--}}
-            {{--max: 10,--}}
-            {{--value: {!! $teamSize !!} ,--}}
-            {{--change: function (event, ui) {--}}
-            {{--$('#teamSize{{$key}}').attr('value', ui.value);--}}
-            {{--}--}}
-            {{--});--}}
-            {{--$(".teamSizeSlider{{$key}}").slider("pips");--}}
-            {{--$(".teamSizeSlider{{$key}}").slider("float");--}}
-            {{--//----------------------------}}
-
-            {{--$(".enchoQtySlider{{$key}}").slider({--}}
-            {{--max: 5,--}}
-            {{--value: {!! $enchoQty  !!} ,--}}
-            {{--change: function (event, ui) {--}}
-            {{--$('#enchoQty{{$key}}').attr('value', ui.value);--}}
-            {{--}--}}
-            {{--});--}}
-            {{--$(".enchoQtySlider{{$key}}").slider("pips");--}}
-            {{--$(".enchoQtySlider{{$key}}").slider("float");--}}
-            {{--//----------------------------}}
-
-            {{--$(".fightingAreasSlider{{$key}}").slider({--}}
-            {{--max: 5,--}}
-            {{--value: {!! $fightingAreas !!} ,--}}
-            {{--change: function (event, ui) {--}}
-            {{--$('#fightingAreas{{$key}}').attr('value', ui.value);--}}
-            {{--}--}}
-            {{--});--}}
-            {{--$(".fightingAreasSlider{{$key}}").slider("pips");--}}
-            {{--$(".fightingAreasSlider{{$key}}").slider("float");--}}
-
         });
     </script>
 

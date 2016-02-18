@@ -24,11 +24,8 @@
                     <!-- Simple panel 1 : General Data-->
                     <div class="panel panel-flat">
 
-
-
                         <div class="panel-body">
                             <div class="container-fluid">
-
 
                                 <fieldset title="{{Lang::get('crud.invite_send',['tournament' => $tournament->name])}}">
                                     <legend class="text-semibold">{{Lang::get('crud.invite_send',['tournament' => $tournament->name])}}</legend>

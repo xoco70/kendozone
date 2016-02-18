@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Invitación</title>
+    <title>{{ trans('mail.invite') }}</title>
 </head>
 <body>
-<h2>Invitación al torneo: {{ $tournament->name }} </h2>
+<h2>{{ trans('mail.invite_to_tournament') }}: {{ $tournament->name }} </h2>
 
-<p>Estimado Kenshi,<br/>
+<p>{{ trans('mail.dear_kenshi') }}<br/>
 
-    Estas invitado al torneo: {{ $tournament->name }} <BR/>
+    {{ trans('mail.you_are_invited_to_tournament') }}: {{ $tournament->name }} <BR/>
 
     @if ($tournament->venue != null)
-        <strong>Lugar:</strong> {{ $tournament->venue }}<br/>
+        <strong>{{trans('crud.venue')}}:</strong> {{ $tournament->venue }}<br/>
     @endif
-    <strong>Fecha:</strong> {{ $tournament->date }}<br/>
-    @if ($tournament->cost != null) <strong>Costo:</strong> {{ $tournament->cost }}<br/>@endif
+    <strong>{{trans('crud.date')}}:</strong> {{ $tournament->date }}<br/>
+    @if ($tournament->cost != null) <strong>{{trans('crud.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
-        <strong>Fecha Limite de Registro:</strong> {{ $tournament->registerDateLimit }}<br/>
+        <strong>{{trans('crud.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
     @endif
 @if (isset($category))
-    <P>Has sido preregistrado en las categoria</P>
+    <P>{{ trans('mail.you_have_been_preregistered') }}</P>
     <ul>
             <li>{{$category}}</li>
     </ul>
 @else
-    Por favor pica el link de pre-registro: <br/>
+    {{trans('mail.please_clic_confirmation_link')}}: <br/>
     <a href='{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
 @endif
-
+{{--TODO Falta traducir--}}
 @if($password!=null)
     <p>Tus datos de conexión son:</p>
     Usuario : {{ $email  }}

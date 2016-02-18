@@ -97,15 +97,7 @@ else
                                         </button>
                                         {!! Form::close() !!}
 
-                                        {{--<button type="submit"--}}
-                                                {{--class="glyphicon glyphicon-ok-sign btnDeleteTCU"--}}
-                                                {{--id="delete_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"--}}
-                                                {{--data-tournament ="{!! $tournament->slug !!}"--}}
-                                                {{--data-category ="{!! $categoryTournament->id !!}"--}}
-                                                {{--data-user = "{!! $user->slug !!}">--}}
-                                            {{--<i class="glyphicon glyphicon-remove"></i>--}}
-                                        {{--</button>--}}
-                                        {{--{!! Form::close() !!}--}}
+
                                     </td>
 
 

@@ -53,16 +53,6 @@
             @include("errors.list")
         </div>
     </div>
-    {{--<script>--}}
-    {{--// Label with pips--}}
-    {{--$(".ui-slider-labels").slider({--}}
-    {{--max: 8,--}}
-    {{--value: 4--}}
-    {{--});--}}
-    {{--$(".ui-slider-labels").slider("pips", {--}}
-    {{--rest: "label"--}}
-    {{--});--}}
 
-    {{--</script>--}}
 @stop
 
