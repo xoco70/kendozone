@@ -2,23 +2,24 @@
  $tournament = \App\Tournament::with('categoryTournaments.users')->find($tournament->id);
 ?>
 <div class="col-lg-6">
-    <div class="panel panel-flat">
+    <div class="panel panel-info panel-bordered">
         <div class="panel-heading">
             <h6 class="panel-title"><a href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">{{ $tournament->name }}</a></h6>
             <div class="heading-elements">
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid pt-20">
             <div class="row">
                 <div class="col-lg-4">
+                    <div id="campaigns-donut"></div>
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="#"
+                            <a href="{{URL::action('TournamentController@edit', $tournament->slug)}}#categories"
                                class="btn border-teal text-teal  btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i class="icon-plus3"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold"> {{ trans_choice('crud.category',2) }}</div>
+                            <div class="text-semibold"><a class="text-default" href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}"> {{ trans_choice('crud.category',2) }}</a></div>
                             <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->categoryTournaments) }} </div>
                         </li>
                     </ul>
@@ -31,11 +32,11 @@
                     <ul class="list-inline text-center">
                         <li>
                             <a href="index.html#"
-                               class="btn border-warning-400 text-warning-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
+                               class="btn border-grey-400 text-grey-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
                                         class="icon-people"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold"> {{trans_choice('crud.competitor',2)}}</div>
+                            <div class="text-semibold"> <a class="text-default" href="{!! URL::action('TournamentUserController@index', $tournament->slug) !!}"> {{trans_choice('crud.competitor',2)}}</a></div>
                             <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->competitors()) }}
 
                             </div>
@@ -53,7 +54,7 @@
                         <li>
                             <a href="index.html#"
                                class="btn border-indigo-400 text-indigo-400  btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
-                                        class="icon-watch2"></i></a>
+                                        class="icon-lock2"></i></a>
                         </li>
                         <li class="text-left">
                             <div class="text-semibold">{{ trans('core.type') }}</div>
@@ -108,8 +109,8 @@
                     <ul class="list-inline text-center">
                         <li>
                             <a href="index.html#"
-                               class="btn border-indigo-400 text-indigo-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
-                                        class="icon-people"></i></a>
+                               class="btn border-brown-400 text-brown-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
+                                        class="icon-target"></i></a>
                         </li>
                         <li class="text-left">
                             <div class="text-semibold">{{trans('crud.level')}}</div>
