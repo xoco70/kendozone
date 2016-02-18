@@ -59,4 +59,13 @@ return [
     //Settings
 
     'social_networks' => 'Redes Sociales',
+
+
+    // Dashboard
+    'welcome' => 'Bienvenido',
+    'welcome_text' => 'Aún te falta unos pasos para disfrutar del sistema',
+    'create_new_tournament' => 'Crear un nuevo torneo',
+    'congigure_categories' => 'Configurar las diferentes categorias',
+
+
 ];

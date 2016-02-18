@@ -52,6 +52,7 @@ class Tournament extends Model implements SluggableInterface
             foreach ($tournament->categoryTournaments as $ct) {
                 $ct->delete();
             }
+            $tournament->invites()->delete();
 
         });
         static::restoring(function ($tournament) {
@@ -137,6 +138,12 @@ class Tournament extends Model implements SluggableInterface
     public function categorySettings()
     {
         return $this->hasMany(CategorySettings::class);
+
+    }
+
+    public function invites()
+    {
+        return $this->hasMany(Invite::class);
 
     }
 
