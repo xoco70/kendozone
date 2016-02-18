@@ -81,7 +81,8 @@ class Tournament extends Model implements SluggableInterface
     }
 
 
-    //TODO Change this method por tcu() relation
+
+    //TODO Change this method por ctus() relation
     public function competitors($CategoryTournamentId = null)
     {
 //        User::join('category_tournament_user', 'user.id','user_id' )

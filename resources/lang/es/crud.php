@@ -37,6 +37,7 @@ return [
     'eventDate' => 'Fecha del evento',
     'account' => 'Cuenta',
     'limitDateRegistration' => 'Fecha limite de registro',
+    'limitDate' => 'Fecha limite',
     'teamSize' => 'Tamaño de equipos',
     'fightingAreas' => 'Areas',
     'fightDuration' =>'Duración',

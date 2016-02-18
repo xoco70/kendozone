@@ -68,6 +68,7 @@ return [
     'congigure_categories' => 'Configurar las diferentes categorias',
     'join_tournament' => 'Inscribete a un torneo abierto',
     'soon' => 'Proximamente',
+    'configured' => 'conf.',
 
 
 
