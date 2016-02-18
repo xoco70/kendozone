@@ -4,7 +4,9 @@ use App\CategoryTournament;
 use App\Invite;
 use App\Tournament;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class InviteTest extends TestCase
@@ -33,7 +35,14 @@ class InviteTest extends TestCase
     {
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 0]);
-        $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
+        $categoriesTournament = new Collection;
+        for ($i = 0; $i < 5; $i++) {
+            try {
+                $categoriesTournament->push(factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]));
+            } catch (QueryException $e) {
+            } catch (PDOException $e) {
+            }
+        }
 
 
         // Check that inviting one user by email
@@ -82,9 +91,12 @@ class InviteTest extends TestCase
 
         // Get all categories for this tournament
         // Now we are on category Selection page
+//        dd($categoriesTournament);
         foreach ($categoriesTournament as $key => $ct) {
             $this->type($ct->id, 'cat[' . $key . ']');
         }
+        // Can't resolve: LogicException: The selected node does not have a form ancestor.
+
         $this->press(trans("core.save"));
 
         foreach ($categoriesTournament as $key => $ct) {
@@ -104,11 +116,19 @@ class InviteTest extends TestCase
         Auth::logout();
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 1]);
-        $categoriesTournament = factory(CategoryTournament::class, 5)->create(['tournament_id' => $tournament->id]);
+        $categoriesTournament = new Collection;
+
+        for ($i = 0; $i < 5; $i++) {
+            try {
+                $categoriesTournament->push(factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]));
+            } catch (QueryException $e) {
+            } catch (PDOException $e) {
+            }
+        }
         $user = factory(User::class)->create(['email' => 'xoco@aaa.bbb2',
             'role_id' => 3,
             'password' => bcrypt('111111'), // 111111
-            ]);
+        ]);
 
         $this->visit("/tournaments/" . $tournament->slug . "/register");
 

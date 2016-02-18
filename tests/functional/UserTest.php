@@ -188,12 +188,12 @@ class UserTest extends TestCase
 
         $this->visit('/users')
             ->press('delete_'.$user->slug)
-            ->seePageIs('/users')
+//            ->seePageIs('/users')
             ->seeIsSoftDeletedInDatabase('users',['name' => 'MyKendoUser'])
             ->seeIsSoftDeletedInDatabase('tournament',['user_id' => $user->id])
-//            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
-//            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
-//            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
+            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
 
         ;
 
