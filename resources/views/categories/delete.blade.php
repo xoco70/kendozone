@@ -1,9 +1,9 @@
-    {!! Form::model($tournament, ['method'=>"DELETE", "action" => ["TournamentController@update", $tournament->id]]) !!}
+{!! Form::model($tournament, ['method'=>"DELETE", "action" => ["TournamentController@update", $tournament->id]]) !!}
 
-    @include("tournaments.form", ["submitButton" => "Actualizar Torneo"])
+@include("tournaments.form", ["submitButton" => trans('crud.updateModel', ['currentModelName' => trans_choice('crud.tournament',1)])])
 
 
-    {!! Form::close()!!}
+{!! Form::close()!!}
 
-    @include("errors.list")
+@include("errors.list")
 @stop

@@ -18,9 +18,6 @@
                         <div class="col-md-12 ">
                             <!-- Simple panel 1 : General Data-->
                             <div class="panel panel-flat">
-                                {{--<div class="panel-heading " >--}}
-                                {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                                {{--</div>--}}
 
                                 <div class="panel-body">
                                     <div class="container-fluid">
@@ -53,7 +50,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6" >
+                                                <div class="col-md-6">
                                                     {!!  Form::label('avatar', trans('crud.avatar')) !!}
 
                                                     <input type="file" id="avatar" name="avatar"
@@ -62,15 +59,6 @@
 
                                                 </div>
                                             </div>
-
-
-
-
-                                            {{--<div class="form-group">--}}
-                                            {{--{!!  Form::label('countryId', trans('crud.country')) !!}--}}
-                                            {{--{!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->--}}
-                                            {{--</div>--}}
-
 
                                         </fieldset>
 
@@ -137,7 +125,8 @@
                                         </div>
 
                                         <div align="right">
-                                            <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                                            <button type="submit"
+                                                    class="btn btn-success">{{trans("core.save")}}</button>
                                         </div>
                                     </div>
 
@@ -159,10 +148,4 @@
             @stop
 
 
-            --------
-
-
-            <div class="form-group">
-                {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
-            </div>
 

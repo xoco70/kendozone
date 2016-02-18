@@ -68,8 +68,8 @@ class InviteController extends Controller
         if (is_null($invite)) {
             return view('errors.general',
                 ['code' => '403',
-                    'message' => 'Forbidden!',
-                    'quote' => 'You need an invitation to this tournament.',
+                    'message' => trans('core.forbidden'),
+                    'quote' => trans('msg.invitation_needed'),
                     'author' => 'Admin',
                     'source' => '',
                 ]
@@ -78,8 +78,8 @@ class InviteController extends Controller
         if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00')
             return view('errors.general',
                 ['code' => '403',
-                    'message' => 'Forbidden!',
-                    'quote' => 'Invitation expired.',
+                    'message' => trans('core.forbidden'),
+                    'quote' => trans('msg.invitation_expired'),
                     'author' => 'Admin',
                     'source' => '',
                 ]
@@ -105,8 +105,8 @@ class InviteController extends Controller
             if (is_null($invite)) {
                 return view('errors.general',
                     ['code' => '403',
-                        'message' => 'Forbidden!',
-                        'quote' => '“You need an invitation to this tournament.”',
+                        'message' => trans('core.forbidden'),
+                        'quote' => trans('msg.invitation_needed'),
                         'author' => 'Admin',
                         'source' => '',
                     ]
@@ -115,8 +115,8 @@ class InviteController extends Controller
             } else {
                 return view('errors.general',
                     ['code' => '403',
-                        'message' => 'Forbidden!',
-                        'quote' => '“Invitation used.”',
+                        'message' => trans('core.forbidden'),
+                        'quote' => '',
                         'author' => 'Admin',
                         'source' => '',
                     ]
@@ -155,6 +155,7 @@ class InviteController extends Controller
 
 
         if (isset($invite)) $invite->consume();
+        //TODO core.operation_successful
 
         flash()->success(trans('core.operation_successful'));
         return redirect("/invites");
@@ -186,6 +187,7 @@ class InviteController extends Controller
             $mailer->sendEmailInvitationTo($recipient, $tournament, $code);
 
         }
+        //TODO core.operation_successful
         flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournament->slug/edit");
 

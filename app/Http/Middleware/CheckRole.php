@@ -28,7 +28,7 @@ class CheckRole
         return response([
             'error' => [
                 'code' => 'INSUFFICIENT_ROLE',
-                'description' => 'You are not authorized to access this resource.'
+                'description' => trans('msg.access_denied')
             ]
         ], 401);
     }

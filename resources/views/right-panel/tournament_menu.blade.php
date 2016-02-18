@@ -38,7 +38,7 @@
                                 <span class="badge {!! $class !!}" id="categories-status">
                                 <span class="category-size">{{ $settingSize  }}</span> / {{$categorySize}}</span>
                             </a></li>
-
+{{--TODO Using competitors()--}}
                         <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
                                 @if((sizeof($tournament->competitors()))>8)
@@ -55,9 +55,7 @@
                         <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('crud.publish') }}</a>
 
                         </li>
-                        {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
-                        {{--class="label bg-success-400">Online</span></a></li>--}}
-                        {{--<li class="navigation-divider"></li>--}}
+
 
                     </ul>
                 </div>

@@ -17,7 +17,7 @@
         <div class="col-md-5">
 
             {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
-
+            <br/>
             {{ $setting->fightDuration }}
 
         </div>
@@ -37,6 +37,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
+                <br/>
                 {{ $setting->enchoQty }}
             </div>
         </div>
@@ -65,6 +66,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
+                <br/>
                 {{ $setting->roundRobinWinner }}
 
             </div>
@@ -72,6 +74,8 @@
         <div class="col-md-5">
             <div class="form-group">
                 {!!  Form::label('cost', trans('crud.cost')) !!}
+                <br/>
+
                 {{ $setting->cost }}
 
             </div>
@@ -92,6 +96,7 @@
         <div class="col-md-5">
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
+                <br/>
                 {{ $setting->fightingAreas }}
 
             </div>

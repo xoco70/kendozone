@@ -5,9 +5,6 @@
     <div class="container">
         <div class="row col-md-10 custyle">
             <div class="panel panel-flat">
-                {{--<div class="panel-heading " >--}}
-                {{--<button type="submit" class="btn btn-warning">Borrar</button>--}}
-                {{--</div>--}}
 
                 <div class="panel-body">
                     <div class="container-fluid">

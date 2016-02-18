@@ -61,7 +61,7 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-Route::group(['middleware' => ['auth', 'own', 'throttle:100,1']], // , 'own'
+Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
     function () {
 
         Route::resource('tournaments', 'TournamentController');

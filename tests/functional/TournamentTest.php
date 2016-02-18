@@ -93,14 +93,14 @@ class TournamentTest extends TestCase
     public function it_create_tournament()
     {
         $this->visit('/')
-            ->click($this->tournaments)
+            ->click(trans('crud.admin_tournaments'))
             ->see($this->tournaments)
             ->click($this->addTournaments)
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'date')
             ->storeInput('category', [1, 2], true)
             ->press($this->addTournament)
-            ->see(Lang::get('core.operation_successful'))
+            ->see(trans('msg.tournament_create_successful', ['name' => 'MyTournament']))
             ->seeInDatabase('tournament', ['name' => 'MyTournament']);
 
         $categoriesAdded = [1, 2];

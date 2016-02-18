@@ -89,8 +89,6 @@ class TournamentUserController extends Controller
         $password = null;
         if (is_null($user)) {
             //Create user first
-//            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-//            $country = Countries::where('name', '=', $location['country'])->first();
             $password = User::generatePassword();
 
             $user = User::create(['email' => $email,
@@ -116,7 +114,7 @@ class TournamentUserController extends Controller
         $ctu = $user->categoryTournaments();
 
         if ($ctu->get()->contains($categoryTournament)) {
-            flash()->error(trans('flash.user_already_registered_in_category'));
+            flash()->error(trans('msg.user_already_registered_in_category'));
             return redirect("tournaments/$tournament->slug/users");
 
         } else {
@@ -128,6 +126,7 @@ class TournamentUserController extends Controller
         $invite = new Invite();
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
+        //TODO core.operation_successful
         flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournament->slug/users");
 
@@ -142,11 +141,10 @@ class TournamentUserController extends Controller
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
         if ($ctu->save()){
-            return Response::json(['msg' => $user->name.': User status updated', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_status_successful', ['name' => $user->name]), 'status' => 'success']);
         }else{
-            return Response::json(['msg' => 'Error updating User Status', 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_status_error', ['name' => $user->name]), 'status' => 'error']);
         }
-//        return redirect("tournaments/$tournamentSlug/users");
 
     }
 
@@ -158,9 +156,9 @@ class TournamentUserController extends Controller
             ->where('user_id', $user->id);
 
         if ($ctu->delete()) {
-            return Response::json(['msg' => $user->name.' deleted', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting '.$user->name, 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
         }
 //        flash()->success(trans('core.operation_successful'));
 //        return redirect("tournaments/$tournamentSlug/users");
@@ -241,6 +239,8 @@ class TournamentUserController extends Controller
 //        $invite = new Invite();
 //        $code = $invite->generate($user->email, $tournament);
 //        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
+        //TODO core.operation_successful
+
         flash()->success(trans('core.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
