@@ -18,10 +18,11 @@
         <div class="content">
 
             <!-- Detached content -->
-            <div class="container-detached">
-                <div class="content-detached">
 
-                    <!-- Simple panel 1 : General Data-->
+            <!-- Simple panel 1 : General Data-->
+            <div class="row">
+                <div class="col-md-12 col-lg-6 col-lg-offset-3">
+
                     <div class="panel panel-flat">
 
                         <div class="panel-body">
@@ -31,24 +32,20 @@
                                     <legend class="text-semibold">{{Lang::get('crud.invite_send',['tournament' => $tournament->name])}}</legend>
 
                                     <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                                                {!! Form::open(['url'=>URL::action('InviteController@store')]) !!}
-                                                <div class=" form-group">
-                                                    {!!  Form::label('recipients', trans('crud.recipients')) !!}
-                                                    {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
-                                                </div>
-                                                {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
-
-                                                <div class="form-group">
-                                                    {!!  Form::submit(trans('crud.send_invites'), ['class' => 'btn btn-primary form-control']) !!}
-                                                </div>
-
-                                                {!! Form::close()!!}
-
-                                            </div>
+                                        {!! Form::open(['url'=>URL::action('InviteController@store')]) !!}
+                                        <div class=" form-group">
+                                            {!!  Form::label('recipients', trans('crud.recipients')) !!}
+                                            {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
                                         </div>
+                                        {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
+
+                                        <div class="form-group">
+                                            {!!  Form::submit(trans('crud.send_invites'), ['class' => 'btn btn-primary form-control']) !!}
+                                        </div>
+
+                                        {!! Form::close()!!}
+
                                     </div>
 
 
@@ -56,13 +53,11 @@
 
 
                             </div>
-
                         </div>
+                        <!-- /detached content -->
 
                     </div>
                 </div>
-                <!-- /detached content -->
-
 
             </div>
             <!-- /content area -->
