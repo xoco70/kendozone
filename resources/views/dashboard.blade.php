@@ -6,8 +6,8 @@
 @section('content')
 
 
-    @if (sizeof(Auth::user()->tournaments == 0))
-
+    @if (sizeof(Auth::user()->tournaments) == 0)
+    @include('layouts.dashboard.createFirstTournament')
 
     @else
 

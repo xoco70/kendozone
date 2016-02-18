@@ -66,6 +66,9 @@ return [
     'welcome_text' => 'Aún te falta unos pasos para disfrutar del sistema',
     'create_new_tournament' => 'Crear un nuevo torneo',
     'congigure_categories' => 'Configurar las diferentes categorias',
+    'join_tournament' => 'Inscribete a un torneo abierto',
+    'soon' => 'Proximamente',
+
 
 
 ];
