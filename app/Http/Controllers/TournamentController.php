@@ -21,15 +21,6 @@ class TournamentController extends Controller
 {
     protected $currentModelName;
 
-    public function __construct()
-    {
-        // Fetch the Site Settings object
-//        $this->middleware('auth');
-//        $this->currentModelName = trans_choice('crud.tournament', 1);
-//        $this->currentModelName = trans_choice('crud.tournament', 2);
-//        View::share('currentModelName', $this->currentModelName);
-//        View::share('modelPlural', $this->modelPlural);
-    }
 
     /**
      * Display a listing of the resource.
@@ -70,8 +61,7 @@ class TournamentController extends Controller
         $levels = TournamentLevel::lists('name', 'id');
         $categories = Category::lists('name', 'id');
         $tournament = new Tournament();
-//        dd($categories);
-//        $places = Place::lists('name', 'id');
+
         return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName'));
     }
 
@@ -85,7 +75,7 @@ class TournamentController extends Controller
     {
         $tournament = Auth::user()->tournaments()->create($request->all());
         $tournament->categories()->sync($request->input('category'));
-        flash()->success(trans('core.operation_successful'));
+        flash()->success(trans('msg.tournament_create_successful', ['name' => $tournament->name]));
 //        else flash('error', 'operation_failed!');
         return redirect("tournaments/$tournament->slug/edit");
     }
@@ -98,15 +88,11 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        echo("show");
-//        dd($tournament);
-        $levels = TournamentLevel::lists('name', 'id');
-
-        $categories = Category::lists('name', 'id');
-//        $level = TournamentLevel::where("id","=",$tournament->level_id)->first();
-//        $tournament->delete();
-//        return redirect("tournaments");
-        return view('tournaments.show', compact('tournament', 'categories', 'levels'));
+//
+//        $levels = TournamentLevel::lists('name', 'id');
+//
+//        $categories = Category::lists('name', 'id');
+        return view('tournaments.show', compact('tournament'));
     }
 
     /**
@@ -123,11 +109,7 @@ class TournamentController extends Controller
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
-        //TODO Hay que usar tournament instead of cws
-        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
-//        dd($tournament->categoryTournaments->get(5)->settings);
-//        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
-//        dd($categoriesWithSettings);
+//        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize')); // , 'categoriesWithSettings'
     }
 
@@ -144,9 +126,9 @@ class TournamentController extends Controller
 //        if ($request->ajax()) {
         if ($tournament->update($request->all())) {
             $tournament->categories()->sync($request->input('category'));
-            return Response::json(['msg' => 'Tournament updated', 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error updating tournament', 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error']);
         }
 //        }
 
@@ -157,11 +139,16 @@ class TournamentController extends Controller
     }
 
 
+    //TODO is it used???
     public function updateCategory(Request $request, $categorySettingsId)
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
-        $categorySettings->update($request->all());
-        flash()->success(Lang::get('core.operation_successful'));
+        if ($categorySettings->update($request->all())) {
+            flash()->success(trans('msg.category_update_successful'));
+        } else {
+            flash()->error(trans('msg.category_update_error'));
+        }
+
         return view("tournaments/categories", compact('categories'));
     }
 
@@ -175,9 +162,9 @@ class TournamentController extends Controller
     public function destroy(Tournament $tournament)
     {
         if ($tournament->delete()) {
-            return Response::json(['msg' => $tournament->name.' deleted', 'status' => 'success']);
+            return Response::json(['msg' => Lang::get('msg.tournament_delete_successful', ['name' => $tournament->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error deleting '.$tournament->name, 'status' => 'error']);
+            return Response::json(['msg' => Lang::get('msg.tournament_delete_error', ['name' => $tournament->name]), 'status' => 'error']);
         }
     }
 
@@ -186,9 +173,9 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
         if ($tournament->restore()) {
-            return Response::json(['msg' => $tournament->name.' restored', 'status' => 'success']);
+            return Response::json(['msg' => Lang::get('msg.tournament_restored_successful', ['name' => $tournament->name]), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => 'Error restoring '.$tournament->name, 'status' => 'error']);
+            return Response::json(['msg' => Lang::get('msg.tournament_restored_error', ['name' => $tournament->name]), 'status' => 'error']);
         }
     }
 
@@ -202,8 +189,8 @@ class TournamentController extends Controller
         } else
             return view('errors.general',
                 ['code' => '403',
-                    'message' => 'Forbidden!',
-                    'quote' => '“You need an invitation to register in this tournament.”',
+                    'message' => trans('core.forbidden'),
+                    'quote' => trans('msg.invitation_needed'),
                     'author' => 'Admin',
                     'source' => '',
                 ]

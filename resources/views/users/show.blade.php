@@ -149,7 +149,7 @@
             function initialize() {
 
                 // Set coordinates
-                var myLatlng = new google.maps.LatLng({{$user->latitude}}, {{$user->longitude}});
+                var myLatlng = new google.maps.LatLng("{{$user->latitude}}, {{$user->longitude}}");
 
                 // Options
                 var mapOptions = {

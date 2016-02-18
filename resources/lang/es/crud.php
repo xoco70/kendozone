@@ -70,6 +70,8 @@ return [
     'enchoQty' => '¿Cuantos encho habrá?',
     'encho_infinite' => '0 para infinito',
     'enchoDuration' => '¿Cuanto dura cada encho?',
+    'category_not_configured' => 'La categoría aún no esta configurada',
+
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',
@@ -144,6 +146,7 @@ return [
     'latest_competitors' => 'Ultimos registros',
     'organizer' => 'Organizador',
     'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
+//    'tournament_categories_available' => 'Categorias del torneo',
 
 
 

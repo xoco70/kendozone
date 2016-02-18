@@ -42,6 +42,7 @@ return [
     'open' => 'Abierto',
     'yes' => 'Si',
     'no' => 'No',
+    'forbidden' => 'Prohibido',
 
 
 
