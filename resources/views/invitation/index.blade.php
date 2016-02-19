@@ -7,46 +7,59 @@
 
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                <table class="table table-togglable table-hover">
-                    <thead>
-                    <tr>
+        @if (sizeof($invites)==0)
+            @include('layouts.joinFirstTournament')
+        @else
+            <div class="row">
 
-                        <th class="text-center" data-toggle="true">{{ trans_choice('crud.tournament',1) }}</th>
-                        <th class="text-center" data-hide="phone">{{ trans('crud.organizer') }}</th>
-                        <th class="text-center" data-hide="phone">{{ trans('core.type') }}</th>
+                <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
-                        <th class="text-center">{{ trans('crud.used') }}</th>
 
-                    </tr>
-                    </thead>
-                    @foreach($invites as $invite)
+
+                    <table class="table table-togglable table-hover">
+                        <thead>
                         <tr>
-                            <td align="center"><a href="{!!   URL::action('TournamentController@edit',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>
-                            <td align="center">{{ $invite->tournament->owner->name }}</td>
-                            <td align="center">{{ $invite->tournament->type == 0 ? trans('core.open') : trans_choice('crud.invitation',1) }}</td>
-                            <td align="center">{!!  $invite->used ?
+
+                            <th class="text-center" data-toggle="true">{{ trans_choice('crud.tournament',1) }}</th>
+                            <th class="text-center" data-hide="phone">{{ trans('crud.organizer') }}</th>
+                            <th class="text-center" data-hide="phone">{{ trans('core.type') }}</th>
+
+                            <th class="text-center">{{ trans('crud.used') }}</th>
+
+                        </tr>
+                        </thead>
+                        @foreach($invites as $invite)
+                            <tr>
+                                <td align="center"><a href="{!!   URL::action('TournamentController@edit',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>
+                                <td align="center">{{ $invite->tournament->owner->name }}</td>
+                                <td align="center">{{ $invite->tournament->type == 0 ? trans('core.open') : trans_choice('crud.invitation',1) }}</td>
+                                <td align="center">{!!  $invite->used ?
                                         '<span class=" text-success glyphicon glyphicon-ok"></span>' :
                                         '<span class=" text-warning glyphicon glyphicon-remove"></span>'!!}</td>
 
-                        </tr>
+                            </tr>
 
-                    @endforeach
+                        @endforeach
 
-                </table>
+
+
+                    </table>
+                </div>
             </div>
-        </div>
+            <script>
+                $(function() {
+
+                    // Initialize responsive functionality
+                    $('.table-togglable').footable();
+
+                });
+            </script>
+        @endif
+
+
     </div>
-    <script>
-        $(function() {
 
-            // Initialize responsive functionality
-            $('.table-togglable').footable();
-
-        });
-    </script>
     @include("errors.list")
 @stop
 

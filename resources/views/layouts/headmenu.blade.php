@@ -45,7 +45,9 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+                    @if (Auth::user()->isSuperAdmin())
                     <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}</a></li>
+                    @endif
                     <li><a href="{!! URL::to('tournaments')!!}"> <i class="icon-trophy3"></i>  {!! trans('crud.admin_tournaments') !!}</a></li>
                     <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>

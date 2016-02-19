@@ -64,6 +64,7 @@ return [
     // Dashboard
     'welcome' => 'Bienvenido',
     'welcome_text' => 'Aún te falta unos pasos para disfrutar del sistema',
+    'still_no_tournament' => 'Aún no estas registrado en ningun torneo',
     'create_new_tournament' => 'Crear un nuevo torneo',
     'congigure_categories' => 'Configurar las diferentes categorias',
     'join_tournament' => 'Inscribete a un torneo abierto',
