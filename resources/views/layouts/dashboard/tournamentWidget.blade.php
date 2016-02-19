@@ -58,7 +58,7 @@
                         </li>
                         <li class="text-left">
                             <div class="text-semibold">{{ trans('core.type') }}</div>
-                            <div class="text-muted">{{ $tournament->type ? trans('crud.invitation') :  trans('core.open')}}</div>
+                            <div class="text-muted">{{ $tournament->type ? trans_choice('crud.invitation',1) :  trans('core.open')}}</div>
                         </li>
                     </ul>
 
