@@ -9,7 +9,7 @@
 
     <!-- Global stylesheets -->
     {!! Html::style('/css/icons/icomoon/styles.css')!!}
-    {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
+    {!! Html::style('https://fonts.googleapis.com/css?family=Nunito:400,300,100,500,700,900')!!}
 
     {!! Html::script('js/app.js')!!}
     {!! Html::style('css/app.css')!!}
@@ -19,7 +19,7 @@
 
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs has-detached-right navbar-top">
+<body class="sidebar-xs  has-detached-right navbar-top">
 @include('layouts.headmenu')
 
 
@@ -35,12 +35,6 @@
         <div class="content-wrapper">
 
 
-            <!-- Page header -->
-            <div class="page-header" >
-                <div class="breadcrumb-line">
-                    @yield('breadcrumbs')
-                </div>
-            </div>
             <!-- Content area -->
 
             <div class="content" id="content">
@@ -61,9 +55,9 @@
 </div>
 <!-- /page container -->
 
-    {!! Html::script('js/analytics.js') !!}
+{!! Html::script('js/analytics.js') !!}
 
-    @yield('scripts_footer')
+@yield('scripts_footer')
 
 </body>
 </html>

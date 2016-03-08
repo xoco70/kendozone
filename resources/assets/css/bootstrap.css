@@ -1377,7 +1377,7 @@ html {
 }
 
 body {
-    font-family: "Roboto", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;
     line-height: 1.5384616;
     color: #333;
@@ -5166,7 +5166,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .navbar-brand {
     float: left;
-    padding: 12px 20px;
+    /*padding: 12px 20px;*/
     font-size: 14px;
     line-height: 20px;
     height: 44px
@@ -5654,7 +5654,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 .breadcrumb>li {
-    display: inline-block
+    display: inline-block;
+    color: #999
 }
 
 .breadcrumb>li+li:before {
@@ -5664,7 +5665,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 .breadcrumb>.active {
-    color: #999
+    color: #000
 }
 
 .pagination {

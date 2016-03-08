@@ -11,11 +11,20 @@
 
 
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
+
+
+
         <ul class="nav navbar-nav">
-            <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><i class="icon-display4 position-left"></i>
-                    Dashboard</a></li>
-            <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
-                            class="icon-trophy2 position-left"></i>{{trans_choice('crud.tournament',2)}}</a></li>
+
+
+                    @yield('breadcrumbs')
+
+
+            {{--@yield('breadcrumbs')--}}
+            {{--<li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><i class="icon-display4 position-left"></i>--}}
+                    {{--Dashboard</a></li>--}}
+            {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i--}}
+                            {{--class="icon-trophy2 position-left"></i>{{trans_choice('crud.tournament',2)}}</a></li>--}}
 
         </ul>
 
