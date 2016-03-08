@@ -1,3 +1,27 @@
+.bg-create {
+    background-color: #7CD69C;
+    border-color: #7CD69C;
+    color: #fff
+}
+
+.bg-delete {
+    background-color: #ff5663;
+    border-color: #ff5663;
+    color: #fff
+}
+
+.bg-nav {
+    background-color: #273c4a;
+    border-color: #273c4a;
+    color: #fff
+}
+
+.bg-nav {
+    background-color: #B59B7F;
+    border-color: #B59B7F;
+    color: #fff
+}
+
 .bg-primary {
     background-color: #2196f3;
     border-color: #2196f3;

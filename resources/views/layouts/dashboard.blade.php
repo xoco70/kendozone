@@ -28,7 +28,7 @@
 
     <!-- Page content -->
     <div class="page-content">
-        {{--@include('layouts.sidemenu')--}}
+        @include('layouts.sidemenu')
 
 
                 <!-- Main content -->
