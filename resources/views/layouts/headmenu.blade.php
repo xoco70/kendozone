@@ -2,7 +2,7 @@
 <div class="navbar navbar-default navbar-fixed-top" id="navbar-second">
     <div class="navbar-header">
         <a class="navbar-brand" href="/"><img src="/images/logored.png" alt=""></a>
-        <ul class="nav navbar-nav no-border visible-xs-block">
+        <ul class="nav navbar-nav  visible-xs-block">
             <li><a class="text-right collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i
                             class="icon-paragraph-justify3"></i></a></li>
         </ul>

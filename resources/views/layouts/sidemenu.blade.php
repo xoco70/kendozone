@@ -1,5 +1,5 @@
 <!-- Main sidebar -->
-<div class="sidebar sidebar-main">
+<div class="sidebar sidebar-main sidebar-fixed">
     <div class="sidebar-content">
 
         <!-- User menu -->
