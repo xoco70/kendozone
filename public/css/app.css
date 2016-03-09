@@ -25662,7 +25662,7 @@ label.display-block {
 }
 
 .border-primary {
-  border-color: #7CD69C;
+  border-color: #ff5663;
 }
 
 .border-primary-300 {
@@ -35293,6 +35293,11 @@ ul > ol.breadcrumb > li {
 
 ul > ol.breadcrumb > li.active {
   color: #333;
+}
+
+ul.nav > li > a.btn {
+  text-transform: uppercase;
+  border-width: 3px;
 }
 
 @media (max-width: 860px) {

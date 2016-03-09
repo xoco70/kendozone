@@ -33,6 +33,7 @@ return [
     //Tournament
     'tournament' => 'Torneo|Torneos',
     'newTournament' => 'Nuevo Torneo',
+    'createTournament' => 'Crear Torneo',
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'account' => 'Cuenta',

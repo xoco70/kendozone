@@ -29,9 +29,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="{!! URL::to('tournaments/create') !!}" class="navbar-right btn border-primary text-primary btn-flat">{{ trans('crud.createTournament') }}</a></li>
 
-
-            <ul class="dropdown-menu dropdown-menu-right icons-right">
+            {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
 
                 {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
                 {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
@@ -41,8 +41,8 @@
                     </a></li>@endcan
                         <!--<li class="divider"></li>-->
 
-            </ul>
-            </li>
+            {{--</ul>--}}
+            {{--</li>--}}
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">

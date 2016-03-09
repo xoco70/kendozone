@@ -16,6 +16,10 @@ ul > ol.breadcrumb > li.active{
 
 }
 
+ul.nav > li > a.btn{
+    text-transform: uppercase;
+    border-width: 3px;
+}
 
 @media (max-width: 860px) {
     .container-fluid {
