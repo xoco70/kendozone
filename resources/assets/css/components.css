@@ -232,7 +232,7 @@
 .navigation>li.active>a,
 .navigation>li.active>a:hover,
 .navigation>li.active>a:focus {
-    background-color: #26a69a;
+    background-color: #364d5c;
     color: #fff
 }
 
@@ -367,7 +367,7 @@
 .sidebar-default .navigation>li.active>a,
 .sidebar-default .navigation>li.active>a:hover,
 .sidebar-default .navigation>li.active>a:focus {
-    background-color: #26a69a;
+    background-color: #364d5c;
     color: #fff
 }
 

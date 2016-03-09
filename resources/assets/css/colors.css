@@ -1,6 +1,6 @@
 .bg-primary {
-    background-color: #2196f3;
-    border-color: #2196f3;
+    background-color: #ff5663;
+    border-color: #ff5663;
     color: #fff
 }
 
@@ -69,10 +69,10 @@
     border-color: #c62828;
     color: #fff
 }
-
+/* New value */
 .bg-success {
-    background-color: #4caf50;
-    border-color: #4caf50;
+    background-color: #7CD69C;
+    border-color: #7CD69C;
     color: #fff
 }
 
@@ -660,7 +660,7 @@
 }
 
 .border-primary {
-    border-color: #2196f3
+    border-color: #7CD69C
 }
 
 .border-primary-300 {
@@ -2606,7 +2606,7 @@
 .text-primary,
 .text-primary:hover,
 .text-primary:focus {
-    color: #2196f3 !important
+    color: #ff5663 !important
 }
 
 .text-primary-300,
@@ -2678,7 +2678,7 @@
 .text-success,
 .text-success:hover,
 .text-success:focus {
-    color: #4caf50 !important
+    color: #7CD69C !important
 }
 
 .text-success-300,

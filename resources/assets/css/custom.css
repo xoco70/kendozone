@@ -3,6 +3,20 @@
     font-weight: 700;
 }
 
+ul > ol.breadcrumb > li{
+    font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.5384616;
+    color: #333;
+
+}
+
+ul > ol.breadcrumb > li.active{
+    color: #333;
+
+}
+
+
 @media (max-width: 860px) {
     .container-fluid {
         margin-right: 0;
