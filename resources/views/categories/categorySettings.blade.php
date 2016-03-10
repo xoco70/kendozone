@@ -42,10 +42,10 @@ if (is_null($setting)) {
             </div>
         </div>
         @if ($tournament->categoryTournaments->get($key)->category->isTeam())
-        <div class="col-md-3">
-            {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
-            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
-        </div>
+            <div class="col-md-3">
+                {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
+                {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
+            </div>
         @endif
         <div class="col-md-3">
 
@@ -119,7 +119,7 @@ if (is_null($setting)) {
 
 
     </div>
-
+    <hr/>
     <div class="row">
 
         <div class="col-md-2">

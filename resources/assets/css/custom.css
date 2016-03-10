@@ -45,10 +45,15 @@ fieldset > a > legend {
 
 }
 
-.sidebar-category > .category-content > ul.navigation > li {
+.sidebar-main > .sidebar-content > .sidebar-category > .category-content > ul.navigation > li {
     padding-bottom: 20px;
 }
 
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6{
+    padding-top: 8px;
+
+}
 @media (max-width: 860px) {
     .container-fluid {
         margin-right: 0;

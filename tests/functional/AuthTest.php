@@ -24,7 +24,7 @@ class AuthTest extends TestCase
     /** @test */
     public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
     {
-        $faker = Faker::create();
+//        $faker = Faker::create();
         // When we register...
         $this->visit('/auth/register')
             ->type('JohnDoe', 'name')

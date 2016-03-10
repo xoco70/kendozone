@@ -97,7 +97,8 @@ class TournamentTest extends TestCase
             ->see($this->tournaments)
             ->click($this->addTournaments)
             ->type('MyTournament', 'name')
-            ->type('2015-12-12', 'date')
+            ->type('2015-12-12', 'dateIni')
+            ->type('2015-12-12', 'dateFin')
             ->storeInput('category', [1, 2], true)
             ->press($this->addTournament)
             ->see(trans('msg.tournament_create_successful', ['name' => 'MyTournament']))
@@ -136,7 +137,8 @@ class TournamentTest extends TestCase
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->see($this->tournaments)
             ->type('MyTournament', 'name')
-            ->type('2015-12-15', 'date')
+            ->type('2015-12-15', 'dateIni')
+            ->type('2015-12-15', 'dateFin')
             ->type('2015-12-16', 'registerDateLimit')
             ->type('1', 'mustPay')
             ->type('1', 'type')
@@ -150,7 +152,8 @@ class TournamentTest extends TestCase
 //            ->see(htmlentities(Lang::get('core.operation_successful')))
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournament',
-                    'date' => '2015-12-15',
+                    'dateIni' => '2015-12-15',
+                    'dateFin' => '2015-12-15',
                     'registerDateLimit' => '2015-12-16',
                     'mustPay' => '1',
                     'type' => '1',
