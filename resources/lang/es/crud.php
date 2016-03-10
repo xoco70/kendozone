@@ -64,6 +64,11 @@ return [
     'invite_competitors' => 'Invitar competidores',
     'generate_trees' => 'Generar Arboles',
     'admin_tournaments' => 'Administrar torneos',
+    'eventDateIni' => 'Fecha Inicial',
+    'eventDateFin' => 'Fecha Final',
+    'from' => 'Del',
+    'to' => 'Al',
+    'competitors_register' => 'Registro de competidores',
 
 
 

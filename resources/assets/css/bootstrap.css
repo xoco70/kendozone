@@ -148,7 +148,8 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button;
-    cursor: pointer
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 button[disabled],
@@ -3849,29 +3850,29 @@ fieldset[disabled] .btn-primary.active {
 
 .btn-success {
     color: #fff;
-    background-color: #4caf50;
-    border-color: #4caf50
+    background-color: #7CD69C;
+    border-color: #7CD69C
 }
 
 .btn-success:focus,
 .btn-success.focus {
     color: #fff;
-    background-color: #3d8b40;
-    border-color: #255627
+    background-color: #6cc188;
+    border-color: #6cc188
 }
 
 .btn-success:hover {
     color: #fff;
-    background-color: #3d8b40;
-    border-color: #39843c
+    background-color: #6cc188;
+    border-color: #6cc188
 }
 
 .btn-success:active,
 .btn-success.active,
 .open>.dropdown-toggle.btn-success {
     color: #fff;
-    background-color: #3d8b40;
-    border-color: #39843c
+    background-color: #5cb379;
+    border-color: #5cb379
 }
 
 .btn-success:active:hover,
@@ -3884,8 +3885,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active.focus,
 .open>.dropdown-toggle.btn-success.focus {
     color: #fff;
-    background-color: #327334;
-    border-color: #255627
+    background-color: #6cc188;
+    border-color: #6cc188
 }
 
 .btn-success:active,
@@ -5042,7 +5043,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .navbar {
     position: relative;
-    min-height: 44px;
+    /*min-height: 44px;*/
+    min-height: 60px;
     margin-bottom: 20px;
     border: 1px solid transparent
 }
@@ -5167,7 +5169,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
     /*padding: 12px 20px;*/
     font-size: 14px;
     line-height: 20px;
-    height: 44px
+    height: 60px
 }
 
 .navbar-brand:hover,
@@ -5662,9 +5664,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     color: #333
 }
 
-.breadcrumb>.active {
-    color: #000
-}
+/*.breadcrumb>.active {*/
+    /*color: #000*/
+/*}*/
 
 .pagination {
     display: inline-block;

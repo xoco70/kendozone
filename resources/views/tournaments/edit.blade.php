@@ -34,7 +34,7 @@
                                 <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             {!!  Form::label('name', trans('crud.name'),['class' => 'text-bold' ]) !!}
                                             <br/>
@@ -43,43 +43,72 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                            {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
+                                            {{--<br/>--}}
 
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">{{trans('crud.from') }}</span>
+                                                {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
+                                                <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+
+                                            </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold' ]) !!}
+                                        {{--<br/>--}}
+
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{trans('crud.to') }}</span>
+                                            {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
                                             <br/>
                                             {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
-                                        {{--<br/>--}}
 
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
-                                            {!!  Form::input('text', 'date', old('date'), ['class' => 'form-control datetournament']) !!}
-                                        </div>
-
-
-                                    </div>
-
-
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         {!!  Form::label('registerDateLimit', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                         <br/>
 
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
-                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
 
+                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
                                         </div>
                                         <br/>
 
 
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    {{--<div class="col-md-6">--}}
+                                    {{--<div class="form-group">--}}
+                                    {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
+                                    {{--<br/>--}}
+                                    {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
+
+
+                                </div>
+                                <legend class="text-semibold">{{Lang::get('crud.competitors_register')}}</legend>
+
+                                <div class="row">
                                     <div class="col-md-3">
 
 
@@ -108,27 +137,7 @@
                                         </div>
 
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    {{--<div class="col-md-6">--}}
-                                    {{--<div class="form-group">--}}
-                                    {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
-                                    {{--<br/>--}}
-                                    {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-
-
-                                    </div>
-                                    <div class="col-md-6">
-
-                                    </div>
 
                                 </div>
 

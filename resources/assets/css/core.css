@@ -3424,7 +3424,7 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 .navbar-brand>img {
     /*margin-top: 2px;*/
     width: 56px;
-    height: 46px
+    height: 60px
 }
 
 .navbar-nav {
@@ -4576,11 +4576,23 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
     }
 }
 
+a.navbar-right.btn.border-primary.text-primary.btn-flat {
+    margin-right: 20px;
+    margin-top:4px;
+}
+
+a.dropdown-toggle {
+    margin-top: 10px;
+}
+
+.sidebar-category > .category-content > ul > li > a > i.sidemenu{
+    font-size: 30px;
+}
 .breadcrumb {
     border-radius: 0;
     margin-bottom: 0;
     text-transform: uppercase;
-    padding-top: 13px;
+    padding-top: 19px;
 
 }
 
