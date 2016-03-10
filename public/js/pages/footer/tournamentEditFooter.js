@@ -148,7 +148,11 @@ $(function () {
                             text: data.msg
                         });
                         // Change warning icon to success
-                        panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok text-success status-icon');
+                        //$('#one span').text('Hi I am replace');
+                        panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok  status-icon');
+                        panel.find('.text-orange-600').removeClass().addClass('text-success'); //.text(configured);
+                        //panel.find('span').text(configured);
+
                         form.attr('data-setting', data.settingId);
                         if (method == 'POST') {
                             categoriesSize = parseInt($(".category-size").text(), 10) + 1;
@@ -193,7 +197,8 @@ $(function () {
     });
 
     $('.listbox-filter-disabled').bootstrapDualListbox({
-        showFilterInputs: false
+        showFilterInputs: false,
+        setMoveSelectedLabel: 'go'
     });
 
     $(".switch").bootstrapSwitch();

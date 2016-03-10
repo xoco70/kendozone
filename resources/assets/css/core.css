@@ -70,6 +70,7 @@ h6,
 .h4,
 .h5,
 .h6 {
+    font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
     letter-spacing: -0.015em
 }
 
@@ -3433,8 +3434,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-nav>li>a {
-    padding-top: 12px;
-    padding-bottom: 12px
+    /*padding-top: 12px;*/
+    /*padding-bottom: 12px*/
 }
 
 .navbar-nav>li>a>.label,
@@ -3948,8 +3949,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-lg .navbar-nav>li>a {
-    padding-top: 14px;
-    padding-bottom: 14px
+    /*padding-top: 14px;*/
+    /*padding-bottom: 14px*/
 }
 
 .navbar-lg .navbar-nav>.dropdown-user>a,
@@ -3969,8 +3970,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-sm .navbar-nav>li>a {
-    padding-top: 11px;
-    padding-bottom: 11px
+    /*padding-top: 11px;*/
+    /*padding-bottom: 11px*/
 }
 
 .navbar-sm .navbar-nav>.dropdown-user>a,
@@ -3990,8 +3991,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-xs .navbar-nav>li>a {
-    padding-top: 10px;
-    padding-bottom: 10px
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px*/
 }
 
 .navbar-xs .navbar-nav>.dropdown-user>a,
@@ -4578,7 +4579,8 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
 
 a.navbar-right.btn.border-primary.text-primary.btn-flat {
     margin-right: 20px;
-    margin-top:4px;
+    margin-top:9px;
+    border-radius: 4px;
 }
 
 a.dropdown-toggle {

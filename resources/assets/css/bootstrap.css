@@ -4823,7 +4823,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .nav>li>a {
     position: relative;
     display: block;
-    padding: 9px 15px
+    /*padding: 9px 15px*/
 }
 
 .nav>li>a:hover,
@@ -5227,8 +5227,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 }
 
 .navbar-nav>li>a {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
     line-height: 20px
 }
 
@@ -5264,8 +5264,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
         float: left
     }
     .navbar-nav>li>a {
-        padding-top: 12px;
-        padding-bottom: 12px
+        /*padding-top: 12px;*/
+        /*padding-bottom: 12px*/
     }
 }
 
@@ -6563,7 +6563,7 @@ button.list-group-item-danger.active:focus {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 15px;
-    color: inherit
+    color: black;
 }
 
 .panel-title>a,

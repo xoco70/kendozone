@@ -24,7 +24,8 @@ class Tournament extends Model implements SluggableInterface
 
     protected $fillable = [
         'name',
-        'date',
+        'dateIni',
+        'dateFin',
         'registerDateLimit',
         'sport',
         'cost',

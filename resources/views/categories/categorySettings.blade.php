@@ -45,11 +45,11 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
             {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control', $disableTeam]) !!}
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
 
             {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
             <div class="input-group">
@@ -72,14 +72,14 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
                 {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
 
             {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
             <div class="input-group ">
@@ -103,13 +103,13 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
                 {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group">
                 {!!  Form::label('cost', trans('crud.cost')) !!}
                 {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
@@ -130,7 +130,7 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="">
                 {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
                 {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}

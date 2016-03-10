@@ -44,16 +44,16 @@
 
                                     </div>
                                     <div class="col-md-4">
-                                            {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
-                                            {{--<br/>--}}
+                                        {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
+                                        {{--<br/>--}}
 
 
-                                            <div class="input-group">
-                                                <span class="input-group-addon">{{trans('crud.from') }}</span>
-                                                {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
-                                                <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{trans('crud.from') }}</span>
+                                            {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
 
-                                            </div>
+                                        </div>
 
                                     </div>
                                     <div class="col-md-4">
@@ -267,60 +267,60 @@
                             </fieldset>
 
 
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div class="panel-group" id="accordion-styled">
 
-                                    <div class="panel-group" id="accordion-styled">
+                                <!--                                --><?php //dd($tournament->categoryTournaments); ?>
 
-                                        <!--                                --><?php //dd($tournament->categoryTournaments); ?>
+                                @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                                <?php
 
-                                        @foreach($tournament->categoryTournaments as $key => $categoryTournament)
-                                        <?php
+                                $setting = $tournament->categoryTournaments->get($key)->settings;
+                                $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
+                                $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
+                                $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
 
-                                        $setting = $tournament->categoryTournaments->get($key)->settings;
-                                        $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
-                                        $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
-                                        $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+                                ?>
 
-                                        ?>
+                                <div class="panel">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <a data-toggle="collapse" data-parent="#accordion-styled"
+                                               href="#accordion-styled-group{!! $key !!}">
 
-                                        <div class="panel ">
-                                            <div class="row">
-                                                <div class="col-md-11">
-                                                    <a data-toggle="collapse" data-parent="#accordion-styled"
-                                                       href="#accordion-styled-group{!! $key !!}">
-
-                                                        <div class="panel-heading">
-                                                            <h6 class="panel-title">
-                                                                {{trans($categoryTournament->category->name)}}
-                                                            </h6>
-                                                        </div>
-                                                    </a>
+                                                <div class="panel-heading">
+                                                    <h6 class="panel-title">
+                                                        {{trans($categoryTournament->category->name)}}
+                                                    </h6>
                                                 </div>
-                                                <div class="col-md-1">
-                                                    <div class="panel-heading">
-                                                        @if (is_null($setting))
-                                                            <i class="glyphicon  glyphicon-exclamation-sign text-orange-600 status-icon"></i>
-                                                        @else
-                                                            <i class="glyphicon glyphicon-ok text-success status-icon"></i>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div id="accordion-styled-group{!! $key !!}"
-                                                 class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
-                                                <div class="panel-body">
-                                                    {{--FORM--}}
-                                                    @include('categories.categorySettings')
-                                                </div>
-
-                                            </div>
+                                            </a>
                                         </div>
-                                        @endforeach
-                                    </div>
+                                        <div class="col-md-3">
+                                            <a data-toggle="collapse" data-parent="#accordion-styled"
+                                               href="#accordion-styled-group{!! $key !!}">
+                                                <div class="panel-heading">
+                                                    @if (is_null($setting))
+                                                        <span class="text-orange-600">{{ trans('crud.configure') }}
+                                                            <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i></span>
 
+                                                    @else
+                                                        <span class="text-success">{{ trans('crud.configured') }}
+                                                            <i class="glyphicon glyphicon-ok  status-icon"></i></span>
+                                                    @endif
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    <div id="accordion-styled-group{!! $key !!}"
+                                         class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
+                                        <div class="panel-body">
+                                            {{--FORM--}}
+                                            @include('categories.categorySettings')
+                                        </div>
+
+                                    </div>
                                 </div>
+                                @endforeach
 
 
                             </div>
@@ -381,6 +381,7 @@ $day = $now->day;
         var url_edit = url_base + '/' + "{{$tournament->slug}}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";
+        var configured = "{{ trans('crud.configured') }}";
 
 
     </script>

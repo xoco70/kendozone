@@ -18,7 +18,35 @@ ul > ol.breadcrumb > li.active{
 
 ul.nav > li > a.btn{
     text-transform: uppercase;
-    border-width: 3px;
+    border-width: 4px;
+}
+
+
+fieldset > a > legend {
+    font-size:14px;
+    font-weight: 400;
+}
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-9 > a >.panel-heading {
+    vertical-align: middle;
+}
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a >.panel-heading{
+    text-align: right;
+    letter-spacing: 2px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a > .panel-heading > span {
+     font-size: 18px;
+ }
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a > .panel-heading > span > i {
+    font-size: 40px;
+    margin-left: 10px;
+
+}
+
+.sidebar-category > .category-content > ul.navigation > li {
+    padding-bottom: 20px;
 }
 
 @media (max-width: 860px) {

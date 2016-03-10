@@ -69,6 +69,8 @@ return [
     'from' => 'Del',
     'to' => 'Al',
     'competitors_register' => 'Registro de competidores',
+    'configure' => 'Configurar',
+    'configured' => 'Configurada',
 
 
 

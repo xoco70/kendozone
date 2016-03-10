@@ -5011,7 +5011,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .nav>li>a {
   position: relative;
   display: block;
-  padding: 9px 15px;
+  /*padding: 9px 15px*/
 }
 
 .nav>li>a:hover,
@@ -5422,8 +5422,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 }
 
 .navbar-nav>li>a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px;*/
   line-height: 20px;
 }
 
@@ -5464,8 +5464,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
   }
 
   .navbar-nav>li>a {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    /*padding-top: 12px;*/
+    /*padding-bottom: 12px*/
   }
 }
 
@@ -6790,7 +6790,7 @@ button.list-group-item-danger.active:focus {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 15px;
-  color: inherit;
+  color: black;
 }
 
 .panel-title>a,
@@ -9367,6 +9367,7 @@ button.close {
 
 .page-container {
   position: relative;
+  margin-top: 14px;
 }
 
 @media (min-width:769px) {
@@ -28270,6 +28271,7 @@ h6,
 .h4,
 .h5,
 .h6 {
+  font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
   letter-spacing: -0.015em;
 }
 
@@ -31732,8 +31734,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-nav>li>a {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  /*padding-top: 12px;*/
+  /*padding-bottom: 12px*/
 }
 
 .navbar-nav>li>a>.label,
@@ -32293,8 +32295,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-lg .navbar-nav>li>a {
-  padding-top: 14px;
-  padding-bottom: 14px;
+  /*padding-top: 14px;*/
+  /*padding-bottom: 14px*/
 }
 
 .navbar-lg .navbar-nav>.dropdown-user>a,
@@ -32314,8 +32316,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-sm .navbar-nav>li>a {
-  padding-top: 11px;
-  padding-bottom: 11px;
+  /*padding-top: 11px;*/
+  /*padding-bottom: 11px*/
 }
 
 .navbar-sm .navbar-nav>.dropdown-user>a,
@@ -32335,8 +32337,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-xs .navbar-nav>li>a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px*/
 }
 
 .navbar-xs .navbar-nav>.dropdown-user>a,
@@ -32959,7 +32961,8 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
 
 a.navbar-right.btn.border-primary.text-primary.btn-flat {
   margin-right: 20px;
-  margin-top: 4px;
+  margin-top: 9px;
+  border-radius: 4px;
 }
 
 a.dropdown-toggle {
@@ -35316,7 +35319,36 @@ ul > ol.breadcrumb > li.active {
 
 ul.nav > li > a.btn {
   text-transform: uppercase;
-  border-width: 3px;
+  border-width: 4px;
+}
+
+fieldset > a > legend {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-9 > a >.panel-heading {
+  vertical-align: middle;
+}
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a >.panel-heading {
+  text-align: right;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a > .panel-heading > span {
+  font-size: 18px;
+}
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-3 > a > .panel-heading > span > i {
+  font-size: 40px;
+  margin-left: 10px;
+}
+
+.sidebar-category > .category-content > ul.navigation > li {
+  padding-bottom: 20px;
 }
 
 @media (max-width: 860px) {
