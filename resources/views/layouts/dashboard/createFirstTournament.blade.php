@@ -1,20 +1,29 @@
-<br/><br/><br/>
-<div class="row">
+<br/><br/><br/><br/><br/><br/>
+<div class="row text-center">
     <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-body border-top-primary">
-            <div class="text-center">
-                <h6 class="no-margin text-semibold">{{ trans('core.welcome') }}</h6>
-                <p class="content-group-sm text-muted">{{ trans('core.welcome_text') }}</p>
+        {{--<div class="panel panel-body border-top-primary">--}}
+
+            <h1 class="no-margin text-semibold">{{ trans('core.welcome') }}</h1>
+            <p class="text-muted text-size-large">{{ trans('core.welcome_text') }}</p>
+
+        <br/>
+        <div class="row pt-20">
+            <div class="col-md-6 text-right">
+                <a href="{!! URL::action('TournamentController@create') !!}" type="button"
+                   class="btn border-primary btn-flat text-primary disabled text-uppercase p-10 ">{{ trans('core.see_open_tournaments') }}
+                    {{--( {{trans('core.soon')}} )--}}
+                </a>
+            </div>
+            <div class="col-md-6 text-left">
+                <a href="{!! URL::action('TournamentController@create') !!}" type="button"
+                   class="btn btn-primary text-uppercase p-10">{{ trans('core.create_new_tournament') }}
+                </a>
+
             </div>
 
-            <div class="well well-lg mb-15 ">
-                <div class="text-center">
-                    <a href="{!! URL::action('TournamentController@create') !!}" type="button" class="btn btn-primary p-20 m-20 width-400">{{ trans('core.create_new_tournament') }}</a>
-                    <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.signin_with') }}</span></div>
-                    <a href="{!! URL::action('TournamentController@create') !!}" type="button" class="btn btn-primary p-20  width-400 disabled" >{{ trans('core.join_tournament') }} ( {{trans('core.soon')}} )</a>
-                </div>
-            </div>
 
         </div>
+
+
     </div>
 </div>

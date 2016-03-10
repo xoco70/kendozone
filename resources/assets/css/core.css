@@ -1790,15 +1790,15 @@ input[class*=bg-]+.form-control-feedback {
 .btn-primary:focus,
 .btn-primary.focus,
 .btn-primary:hover {
-    background-color: #2196f3;
-    border-color: #2196f3
+    background-color: #dd4545;
+    border-color: #dd4545
 }
 
 .btn-primary:active,
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
-    background-color: #2196f3;
-    border-color: #2196f3
+    background-color: #dd4545;
+    border-color: #dd4545
 }
 
 .btn-primary:active:hover,
@@ -1810,8 +1810,8 @@ input[class*=bg-]+.form-control-feedback {
 .btn-primary:active.focus,
 .btn-primary.active.focus,
 .open>.dropdown-toggle.btn-primary.focus {
-    background-color: #2196f3;
-    border-color: #2196f3
+    background-color: #dd4545;
+    border-color: #dd4545
 }
 
 .btn-primary.disabled {
@@ -1822,15 +1822,15 @@ input[class*=bg-]+.form-control-feedback {
 .btn-success:focus,
 .btn-success.focus,
 .btn-success:hover {
-    background-color: #4caf50;
-    border-color: #4caf50
+    background-color: #6cc188;
+    border-color: #6cc188
 }
 
 .btn-success:active,
 .btn-success.active,
 .open>.dropdown-toggle.btn-success {
-    background-color: #4caf50;
-    border-color: #4caf50
+    background-color: #5cb379;
+    border-color: #5cb379
 }
 
 .btn-success:active:hover,

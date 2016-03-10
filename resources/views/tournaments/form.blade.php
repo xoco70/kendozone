@@ -1,13 +1,17 @@
 {{--TODO PREFENCIAS CURRENCY--}}
-<div class="col-md-12 col-lg-6 col-lg-offset-3">
+<div class="col-md-12 col-lg-8 col-lg-offset-2">
     <div class="panel panel-flat">
 
         <div class="panel-body">
-            <div class="row">
-                <div class="container-fluid">
 
-                    <h2 align="center">{{Lang::get('crud.newTournament')}}</h2>
+            <div class="container-fluid">
+                <fieldset title="{{Lang::get('crud.newTournament')}}">
 
+                    <legend class="text-semibold">{{Lang::get('crud.newTournament')}}</legend>
+
+                </fieldset>
+
+                <div class="row">
                     <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('name', trans('crud.name')) !!}
@@ -20,7 +24,7 @@
                         <div class="input-group">
                             <span class="input-group-addon">{{trans('crud.from') }}</span>
                             {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
-                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
                         </div>
 
@@ -32,34 +36,35 @@
                         <div class="input-group">
                             <span class="input-group-addon">{{trans('crud.to') }}</span>
                             {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
-                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                         </div>
+                    </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pl">
+                        <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
+
+
+                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                     </div>
                 </div>
+                <div class="row form-group text-right">
+                    {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
                 </div>
-
-
             </div>
-
-
-            <div class="row">
-                <div class="panel-body">
-                    <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
-
-
-                    {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
-                </div>
-
-                <div class="form-group">
-                    {!!  Form::submit($submitButton, ['class' => 'btn btn-primary form-control']) !!}
-                </div>
-
-
-            </div>
-
         </div>
+
+
+
+
+
+
+
     </div>
+
+</div>
+</div>
 </div>
 
 
