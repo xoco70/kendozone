@@ -269,8 +269,6 @@
 
                             <div class="panel-group" id="accordion-styled">
 
-                                <!--                                --><?php //dd($tournament->categoryTournaments); ?>
-
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
                                 <?php
 
@@ -283,7 +281,7 @@
 
                                 <div class="panel">
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-7">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
 
@@ -294,17 +292,22 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
                                                 <div class="panel-heading">
                                                     @if (is_null($setting))
-                                                        <span class="text-orange-600">{{ trans('crud.configure') }}
-                                                            <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i></span>
-
+                                                        <span class="text-orange-600">
+                                                            <span class="cat-state">{{ trans('crud.configure') }}</span>
+                                                            <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i>
+                                                        </span>
                                                     @else
-                                                        <span class="text-success">{{ trans('crud.configured') }}
-                                                            <i class="glyphicon glyphicon-ok  status-icon"></i></span>
+
+                                                        <span class="text-success">
+
+                                                            <span class="cat-state">{{ trans('crud.configured') }}</span>
+                                                            <i class="glyphicon text-success glyphicon-ok  status-icon"></i>
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </a>

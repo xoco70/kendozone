@@ -8,19 +8,35 @@
 
                     <h2 align="center">{{Lang::get('crud.newTournament')}}</h2>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('name', trans('crud.name')) !!}
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        {!!  Form::label('date', trans('crud.eventDate')) !!}
+                    <div class="col-md-4">
+                        {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
+
                         <div class="input-group">
+                            <span class="input-group-addon">{{trans('crud.from') }}</span>
+                            {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
                             <span class="input-group-addon"><i class="icon-calendar5"></i></span>
-                            {!!  Form::input('text', 'date', old('date'), ['class' => 'form-control datetournament']) !!}
+
                         </div>
+
                     </div>
+                    <div class="col-md-4">
+
+                        {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold' ]) !!}
+
+                        <div class="input-group">
+                            <span class="input-group-addon">{{trans('crud.to') }}</span>
+                            {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
+                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                        </div>
+
+                    </div>
+                </div>
                 </div>
 
 

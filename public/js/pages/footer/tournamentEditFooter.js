@@ -49,7 +49,6 @@ $(function () {
                             timeout: 10000,
                             text: data.msg
                         });
-//                                console.log()
                         $('.btn-update-tour').prop("disabled", false);
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
@@ -150,8 +149,8 @@ $(function () {
                         // Change warning icon to success
                         //$('#one span').text('Hi I am replace');
                         panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok  status-icon');
-                        panel.find('.text-orange-600').removeClass().addClass('text-success'); //.text(configured);
-                        //panel.find('span').text(configured);
+                        panel.find('.text-orange-600').removeClass().addClass('text-success');
+                        panel.find('.cat-state').text(configured);
 
                         form.attr('data-setting', data.settingId);
                         if (method == 'POST') {

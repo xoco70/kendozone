@@ -1,9 +1,8 @@
 <?php
-$categoryId = $tournament->categoryTournaments->get($key)->category->id;
+$categoryId = $categoryTournament->category->id;
 if (is_null($setting)) {
-    $disableTeam = $disableEncho = $disableRoundRobin = "disabled";
+    $disableEncho = $disableRoundRobin = "disabled";
 } else {
-    $disableTeam = $setting->isTeam ? "" : "disabled";
     $disableEncho = $setting->hasEncho ? "" : "disabled";
     $disableRoundRobin = $setting->hasRoundRobin ? "" : "disabled";
 }
@@ -35,21 +34,20 @@ if (is_null($setting)) {
 @endif
 <div class="tab-pane" id="category">
     <div class="row">
-        <div class="col-md-2">
-            <div class="checkbox-switch ">
-                <label>
-                    {!!  Form::label('isTeam', trans('crud.isTeam')) !!} <br/>
-                    {!!   Form::hidden('isTeam', 0,['id'=>'isTeam'.$key ]) !!}
-                    {!!   Form::checkbox('isTeam', 1, is_null($setting) ? 0 : $setting->isTeam  , ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'isTeam'.$key ]) !!}
+        <div class="col-md-3">
+            <div class="">
+                {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
+                {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
 
-                </label>
             </div>
         </div>
-        <div class="col-md-4">
+        @if ($tournament->categoryTournaments->get($key)->category->isTeam())
+        <div class="col-md-3">
             {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
-            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control', $disableTeam]) !!}
+            {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
         </div>
-        <div class="col-md-4">
+        @endif
+        <div class="col-md-3">
 
             {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
             <div class="input-group">
@@ -57,39 +55,14 @@ if (is_null($setting)) {
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <div class="checkbox-switch">
-                <label>
-
-                    {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
-                    {!!   Form::hidden('hasEncho', 0,['id'=>'isTeam'.$key ]) !!}
-                    {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
-                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
-
-                </label>
-            </div>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
-                {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
-                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
-                <small class="display-block">0 para infinito</small>
+                {!!  Form::label('cost', trans('crud.cost')) !!}
+                {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
             </div>
-        </div>
-        <div class="col-md-4">
-
-            {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
-            <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
-                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-            </div>
-
-
         </div>
     </div>
+    <hr/>
     <div class="row">
         <div class="col-md-2">
             <div class="checkbox-switch ">
@@ -103,21 +76,52 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3 col-md-offset-1">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
                 {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {!!  Form::label('cost', trans('crud.cost')) !!}
-                {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
+
+
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="checkbox-switch">
+                <label>
+
+                    {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
+                    {!!   Form::hidden('hasEncho', 0,['id'=>'isTeam'.$key ]) !!}
+                    {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
+
+                </label>
             </div>
         </div>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="form-group">
+                {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
+                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
+                <small class="display-block">0 para infinito</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+            {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
+            <div class="input-group ">
+                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+
+
+        </div>
+
+
     </div>
 
     <div class="row">
+
         <div class="col-md-2">
             <div class="checkbox-switch">
                 <label>
@@ -130,14 +134,7 @@ if (is_null($setting)) {
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="">
-                {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
-                {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
 
-            </div>
-
-        </div>
     </div>
     {{--{!!   Form::hidden('tournament_id', $tournamentId) !!}--}}
     {{--{!!   Form::hidden('category_id', $categoryId) !!}--}}
