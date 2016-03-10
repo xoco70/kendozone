@@ -39,6 +39,10 @@ class Category extends Model
         return $this->hasMany(CategoryTournament::class);
     }
 
+    public function isTeam()
+    {
+        return $this->team;
+    }
 //    public function shinpans()
 //    {
 //        return $this->hasMany('App\Shinpan');
