@@ -16311,6 +16311,18 @@ label.display-block {
     border-width: 3px
 }
 
+.border-4 {
+    border-width: 4px
+}
+
+.border-5 {
+    border-width: 5px
+}
+
+.border-6 {
+    border-width: 6px
+}
+
 .border-top-xlg {
     border-top: 3px solid
 }

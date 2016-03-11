@@ -54,6 +54,40 @@ fieldset > a > legend {
     padding-top: 8px;
 
 }
+.square {
+    /* float: left; */
+    text-align: center;
+    padding-top: 25px;
+    height: 160px;
+    /* padding-bottom: 100%; */
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 5em;
+}
+
+.dashboard-table{
+    height: 80px;
+    vertical-align: middle;
+
+}
+
+.dashboard-table:not(:last-child){
+    border-bottom: 1px solid;
+    border-color: #EEE;
+
+}
+/*.dashboard-table:last-child{*/
+    /*padding-bottom: 30px;*/
+
+/*}*/
+
+.btn.text-success.border-success.border-xlg:hover{
+    background-color: transparent;
+    border-color: #6cc188;
+    color: #6cc188;
+    /*box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.00) inset;*/
+}
+
 @media (max-width: 860px) {
     .container-fluid {
         margin-right: 0;
@@ -75,4 +109,5 @@ fieldset > a > legend {
         padding-left: 15px;
         padding-right: 15px;
     }
+
 }

@@ -70,6 +70,7 @@ return [
     'see_open_tournaments' => 'Ver torneos abiertos',
     'soon' => 'Proximamente',
     'configured' => 'conf.',
+    'see_all' => 'Ver Todos',
 
 
 

@@ -21,32 +21,32 @@ class TournamentSeeder extends Seeder
 
         // Tournament creation
         Tournament::truncate();
-//        Tournament::create([
-//            'user_id' => 1,
-//            'name' => "Fake Tournoi",
-//            'dateIni' => "2016-02-23",
-//            'dateFin' => "2016-02-23",
-//            'registerDateLimit' => "2016-02-23",
-//            'sport' => 1,
-//            'type' => 0,
-//            'mustPay' => 1,
-//            'venue' => "CDOM",
-//
-//
-//        ]);
-//        factory(Tournament::class, 5)->create();
+        Tournament::create([
+            'user_id' => 1,
+            'name' => "Fake Tournoi",
+            'dateIni' => "2016-02-23",
+            'dateFin' => "2016-02-23",
+            'registerDateLimit' => "2016-02-23",
+            'sport' => 1,
+            'type' => 0,
+            'mustPay' => 1,
+            'venue' => "CDOM",
 
 
-//        CategoryTournament::truncate();
-//        for ($i = 0; $i < 10; $i++) {
-//            try {
-//                factory(CategoryTournament::class)->create();
-//            } catch (QueryException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            } catch (PDOException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            }
-//        }
+        ]);
+        factory(Tournament::class, 5)->create();
+
+
+        CategoryTournament::truncate();
+        for ($i = 0; $i < 10; $i++) {
+            try {
+                factory(CategoryTournament::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
 
         // Tournament categories users
 

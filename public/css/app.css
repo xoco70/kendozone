@@ -24910,6 +24910,18 @@ label.display-block {
   border-width: 3px;
 }
 
+.border-4 {
+  border-width: 4px;
+}
+
+.border-5 {
+  border-width: 5px;
+}
+
+.border-6 {
+  border-width: 6px;
+}
+
 .border-top-xlg {
   border-top: 3px solid;
 }
@@ -25008,6 +25020,18 @@ label.display-block {
 .bg-primary {
   background-color: #ff5663;
   border-color: #ff5663;
+  color: #fff;
+}
+
+.bg-nav {
+  background-color: #273c4a;
+  border-color: #273c4a;
+  color: #fff;
+}
+
+.bg-secondary {
+  background-color: #B59B7F;
+  border-color: #B59B7F;
   color: #fff;
 }
 
@@ -25717,7 +25741,7 @@ label.display-block {
 }
 
 .border-success {
-  border-color: #4caf50;
+  border-color: #7CD69C;
 }
 
 .border-success-300 {
@@ -28504,7 +28528,7 @@ svg {
 
 .bg-success {
   color: #fff;
-  background-color: #4caf50;
+  background-color: #7CD69C;
 }
 
 a.bg-success:hover,
@@ -35354,6 +35378,40 @@ fieldset > a > legend {
 
 .category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6 {
   padding-top: 8px;
+}
+
+.square {
+  /* float: left; */
+  text-align: center;
+  padding-top: 25px;
+  height: 160px;
+  /* padding-bottom: 100%; */
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 5em;
+}
+
+.dashboard-table {
+  height: 80px;
+  vertical-align: middle;
+}
+
+.dashboard-table:not(:last-child) {
+  border-bottom: 1px solid;
+  border-color: #EEE;
+}
+
+/*.dashboard-table:last-child{*/
+
+/*padding-bottom: 30px;*/
+
+/*}*/
+
+.btn.text-success.border-success.border-xlg:hover {
+  background-color: transparent;
+  border-color: #6cc188;
+  color: #6cc188;
+  /*box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.00) inset;*/
 }
 
 @media (max-width: 860px) {

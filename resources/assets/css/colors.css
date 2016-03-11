@@ -4,6 +4,20 @@
     color: #fff
 }
 
+.bg-nav {
+    background-color: #273c4a;
+    border-color: #273c4a;
+    color: #fff
+}
+
+.bg-secondary {
+    background-color: #B59B7F;
+    border-color: #B59B7F;
+    color: #fff
+}
+
+
+
 .bg-primary-300 {
     background-color: #64b5f6;
     border-color: #64b5f6;
@@ -708,7 +722,7 @@
 }
 
 .border-success {
-    border-color: #4caf50
+    border-color: #7CD69C;
 }
 
 .border-success-300 {

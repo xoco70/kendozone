@@ -13,9 +13,9 @@
         @include('layouts.dashboard.configureTournament')
     @else
         {{-- Display widget for the latest 5 tournaments --}}
-        @foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(5) as $tournament)
+        {{--@foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(5) as $tournament)--}}
 
-            @include('layouts.dashboard.tournamentWidget')
-        @endforeach
+            @include('layouts.dashboard.dashboard')
+        {{--@endforeach--}}
     @endif
 @stop

@@ -229,6 +229,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(CategoryTournamentUser::class);
     }
 
+    public function getMyTournaments(){
+
+    }
+
 //    public static function insertCoordsInRequest(Request $request)
 //    {
 //
