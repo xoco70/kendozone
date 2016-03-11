@@ -42,29 +42,27 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-12 pl">
+                    <div class="col-md-12">
                         <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
 
 
                         {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                     </div>
                 </div>
-                <div class="row form-group text-right">
+                <div class="row text-uppercase">
+                    <div class="col-md-6 col-md-offset-6 ">
+                        <a href="#" class="text-black">+ Agregar otra categoria</a>
+                    </div>
+                </div>
+                <div class=" text-right mt-15">
                     {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
                 </div>
             </div>
+
+
         </div>
 
-
-
-
-
-
-
     </div>
-
-</div>
-</div>
 </div>
 
 
@@ -89,7 +87,11 @@ $day = $now->day;
         // Basic Dual select example
         // Disable filtering
         $('.listbox-filter-disabled').bootstrapDualListbox({
-            showFilterInputs: false
+            showFilterInputs: false,
+            infoTextEmpty: '',
+            infoText: ''
+
+
         });
 
 
