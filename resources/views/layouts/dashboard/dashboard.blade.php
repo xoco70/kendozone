@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <div class="square bg-nav">1
+                        <div class="square bg-nav">{{ Auth::user()->tournaments()->count() }}
                             <div class="text-size-large text-uppercase">creados</div>
                         </div>
                     </div>
@@ -77,12 +77,12 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="square bg-primary">3
+                        <div class="square bg-primary">{{ Auth::user()->tournaments()->where('dateFin','<', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Pasados</div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="square bg-success">4
+                        <div class="square bg-success">{{ Auth::user()->tournaments()->where('dateFin','>=', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Próximos</div>
                         </div>
                     </div>

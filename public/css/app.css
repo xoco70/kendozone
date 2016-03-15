@@ -8441,7 +8441,7 @@ button.close {
 
 .category-content {
   position: relative;
-  padding: 20px;
+  padding: 7px;
 }
 
 .navigation {
@@ -32995,7 +32995,7 @@ a.dropdown-toggle {
 }
 
 .sidebar-category > .category-content > ul > li > a > i.sidemenu {
-  font-size: 30px;
+  font-size: 24px;
 }
 
 .breadcrumb {
@@ -35373,7 +35373,7 @@ fieldset > a > legend {
 }
 
 .sidebar-main > .sidebar-content > .sidebar-category > .category-content > ul.navigation > li {
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
 }
 
 .category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6 {

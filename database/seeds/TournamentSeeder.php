@@ -50,28 +50,28 @@ class TournamentSeeder extends Seeder
 
         // Tournament categories users
 
-//        CategoryTournamentUser::truncate();
-//        for ($i = 0; $i < 50; $i++) {
-//            try {
-//                factory(CategoryTournamentUser::class)->create();
-//            } catch (QueryException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            } catch (PDOException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            }
-//        }
+        CategoryTournamentUser::truncate();
+        for ($i = 0; $i < 50; $i++) {
+            try {
+                factory(CategoryTournamentUser::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
 
 
-//        CategorySettings::truncate();
-//        for ($i = 0; $i < 50; $i++) {
-//            try {
-//                factory(CategorySettings::class)->create();
-//            } catch (QueryException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            } catch (PDOException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            }
-//        }
+        CategorySettings::truncate();
+        for ($i = 0; $i < 50; $i++) {
+            try {
+                factory(CategorySettings::class)->create();
+            } catch (QueryException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            } catch (PDOException $e) {
+//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+            }
+        }
 
     }
 }
