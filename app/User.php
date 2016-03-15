@@ -230,6 +230,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function getMyTournaments(){
+//        return User::with('')->find($this->id);
+        return Tournament::leftJoin('category_tournament', 'category_tournament.tournament_id', '=', 'tournament.id')
+            ->leftJoin('category_tournament_user', 'category_tournament_user.category_tournament_id', '=', 'category_tournament.id' )
+            ->where('category_tournament_user.user_id', '=',$this->id )
+            ->select('tournament.*')
+            ->distinct()
+            ->get();
+
 
     }
 
@@ -300,6 +308,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function owns(Tournament $tournament){
+        return $this->id == $tournament->user_id;
     }
 
 }

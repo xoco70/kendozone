@@ -26,10 +26,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+//        $myTournaments = Auth::user()->getMyTournaments();
+
 //        $past_tournaments = Auth::user()->tournaments()
 //                                    ->where('dateFin','<', new \DateTime('today'))
 //                                    ->get();
-//        dd($past_tournaments);
+//        dd($myTournaments);
         return view('/dashboard');
 
     }

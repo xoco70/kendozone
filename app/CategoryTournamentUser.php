@@ -37,6 +37,12 @@ class CategoryTournamentUser extends Model
         return $cat;
     }
 
+
+    public function categoryTournament2(){
+        return $this->hasOne('App\CategoryTournament');
+
+
+    }
     public function tournament($ctuId){
         $tc = $this->categoryTournament($ctuId);
         $tourmanentId = $tc->tournament_id;

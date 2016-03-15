@@ -37,11 +37,18 @@
                 <table width="100%">
 
 
-                    @foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(3) as $tournament)
+                    @foreach(Auth::user()->getMyTournaments() as $tournament)
+
+
                         <tr class="dashboard-table" height="100px" valign="middle">
                             <td width="80%">{{$tournament->name}}</td>
                             <td width="20%" align="right"><a class="btn text-success border-success border-4 pl-20 pr-20 "
-                                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">VER</a>
+                                 @if(Auth::user()->isSuperAdmin() || Auth::user()->owns($tournament))
+                                    href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
+                                 @else
+                                     {{--TODO Permission problems--}}
+                                    href="{!! URL::action('TournamentController@show', $tournament->slug) !!}">VER</a>
+                                @endif
                             </td>
                         </tr>
 
@@ -49,7 +56,7 @@
                 </table>
                 <div align="right" class="mt-20 pt-20">
                     <a class="btn text-primary border-primary border-4 text-uppercase "
-                       href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">{{trans('core.see_all')}}</a>
+                       href="#">{{trans('core.see_all')}}</a>
                 </div>
 
             </div>
@@ -69,8 +76,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="square bg-secondary">2
-                            <div class="text-size-large text-uppercase">Invitaciones</div>
+                        <div class="square bg-secondary">{{ Auth::user()->getMyTournaments()->count()  }}
+                            <div class="text-size-large text-uppercase">Participaciones</div>
                         </div>
                     </div>
 
@@ -136,7 +143,7 @@
 
                 <div align="right" class="pt-20">
                     <a class="btn text-primary border-primary border-4 text-uppercase "
-                       href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">{{trans('core.see_all')}}</a>
+                       href="#">{{trans('core.see_all')}}</a>
                 </div>
 
             </div>
