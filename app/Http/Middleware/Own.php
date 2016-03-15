@@ -23,10 +23,14 @@ class Own
 
             // Check if user own tournament
             if ($request->tournaments != null || $request->tournamentId != null) {
+//                dd($request);
                 $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournaments;
                 if ($tournament != null) {
-                    if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
+                    if (!$tournaments->contains($tournament)
+                            && !$userLogged->isSuperAdmin()
+                            && !$request->isMethod('show')
+                            && !$request->isMethod('get')) {
                         return view('errors.general',
                             ['code' => '403',
                                 'message' => trans('core.forbidden'),
@@ -43,7 +47,7 @@ class Own
                 $user = $request->users;
 
                 // User is superadmin, or is the user himself
-                if ( $userLogged->id != $user->id && !$userLogged->isSuperAdmin()) {
+                if ( $userLogged->id != $user->id && !$userLogged->isSuperAdmin() && !$request->isMethod('show')) {
                     return view('errors.general',
                         ['code' => '403',
                             'message' => trans('core.forbidden'),

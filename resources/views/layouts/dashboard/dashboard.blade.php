@@ -1,3 +1,7 @@
+<?php
+$tournamentsCreated = Auth::user()->tournaments;
+$tournamentsParticipated = Auth::user()->getMyTournaments();
+?>
 <div class="row">
     <div class="col-md-6">
         <div class="row ml-5 mr-10">
@@ -10,7 +14,7 @@
                 <table width="100%">
 
 
-                    @foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(3) as $tournament)
+                    @foreach($tournamentsCreated->sortByDesc('created_at')->take(3) as $tournament)
                         <tr class="dashboard-table">
                             <td width="80%">{{$tournament->name}}</td>
                             <td width="20%" align="right"><a class="btn text-success border-success border-4 pl-20 pr-20 "
@@ -37,7 +41,7 @@
                 <table width="100%">
 
 
-                    @foreach(Auth::user()->getMyTournaments() as $tournament)
+                    @foreach($tournamentsParticipated as $tournament)
 
 
                         <tr class="dashboard-table" height="100px" valign="middle">
@@ -71,12 +75,12 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <div class="square bg-nav">{{ Auth::user()->tournaments()->count() }}
+                        <div class="square bg-nav">{{ $tournamentsCreated->count() }}
                             <div class="text-size-large text-uppercase">creados</div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="square bg-secondary">{{ Auth::user()->getMyTournaments()->count()  }}
+                        <div class="square bg-secondary">{{ $tournamentsParticipated->count()  }}
                             <div class="text-size-large text-uppercase">Participaciones</div>
                         </div>
                     </div>
@@ -84,12 +88,12 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="square bg-primary">{{ Auth::user()->tournaments()->where('dateFin','<', new \DateTime('today'))->count() }}
+                        <div class="square bg-primary">{{ $tournamentsCreated->where('dateFin','<', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Pasados</div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="square bg-success">{{ Auth::user()->tournaments()->where('dateFin','>=', new \DateTime('today'))->count() }}
+                        <div class="square bg-success">{{ $tournamentsCreated->where('dateFin','>=', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Próximos</div>
                         </div>
                     </div>
