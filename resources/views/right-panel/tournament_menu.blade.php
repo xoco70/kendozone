@@ -1,3 +1,6 @@
+<?php
+$competitors = $tournament->competitors();
+        ?>
 <!-- Detached sidebar -->
 <div class="sidebar-detached">
 
@@ -42,9 +45,9 @@
                         <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
                                 @if((sizeof($tournament->competitors()))>8)
-                                    <span class="badge badge-success">{{sizeof($tournament->competitors())}}</span>
+                                    <span class="badge badge-success">{{sizeof($competitors)}}</span>
                                 @else
-                                    <span class="badge badge-warning">{{sizeof($tournament->competitors())}}</span>
+                                    <span class="badge badge-warning">{{sizeof($competitors)}}</span>
                                 @endif
 
                             </a>
