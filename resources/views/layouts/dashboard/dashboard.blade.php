@@ -10,58 +10,71 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                     <legend class="text-semibold">TORNEOS CREADOS</legend>
                 </fieldset>
 
+                    <table width="100%">
+                        @foreach($tournamentsCreated->sortByDesc('created_at')->take(3) as $tournament)
+                            <tr class="dashboard-table">
+                                <td width="80%">{{$tournament->name}}</td>
+                                <td width="20%" align="right"><a
+                                            class="btn text-success border-success border-4 pl-20 pr-20 "
+                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">VER</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
-                <table width="100%">
+                    </table>
+                    <div align="right" class="mt-20 pt-20">
+                        <a class="btn text-primary border-primary border-4 text-uppercase "
+                           href="{!! URL::to('tournaments')!!}">{{trans('core.see_all')}}</a>
+                    </div>
 
 
-                    @foreach($tournamentsCreated->sortByDesc('created_at')->take(3) as $tournament)
-                        <tr class="dashboard-table">
-                            <td width="80%">{{$tournament->name}}</td>
-                            <td width="20%" align="right"><a class="btn text-success border-success border-4 pl-20 pr-20 "
-                                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">VER</a>
-                            </td>
-                        </tr>
-
-                    @endforeach
-                </table>
-                <div align="right" class="mt-20 pt-20">
-                    <a class="btn text-primary border-primary border-4 text-uppercase "
-                       href="{!! URL::to('tournaments')!!}">{{trans('core.see_all')}}</a>
-                </div>
 
             </div>
         </div>
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
                 <fieldset title="MIS TORNEOS">
-                    <legend class="text-semibold">MIS TORNEOS</legend>
+                    <legend class="text-semibold">REGISTROS EN TORNEOS</legend>
                 </fieldset>
+                @if (sizeof($tournamentsParticipated) == 0)
+                    <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('crud.no_tournament_registered_yet') }}</div>
+                    <div class="text-center pb-20">
+                        <a href="{!! URL::action('TournamentController@create') !!}" type="button"
+                           class="btn border-primary btn-flat text-primary disabled text-uppercase p-10 ">{{ trans('core.see_open_tournaments') }}
+                            {{--( {{trans('core.soon')}} )--}}
+                        </a>
+                    </div>
+
+                @else
+                    <table width="100%">
 
 
-                <table width="100%">
+                        @foreach($tournamentsParticipated as $tournament)
 
 
-                    @foreach($tournamentsParticipated as $tournament)
+                            <tr class="dashboard-table" height="100px" valign="middle">
+                                <td width="80%">{{$tournament->name}}</td>
+                                <td width="20%" align="right"><a
+                                            class="btn text-success border-success border-4 pl-20 pr-20 "
+                                            @if(Auth::user()->isSuperAdmin() || Auth::user()->owns($tournament))
+                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
+                                    @else
+                                        {{--TODO Permission problems--}}
+                                        href="{!! URL::action('TournamentController@show', $tournament->slug) !!}
+                                        ">VER</a>
+                                    @endif
+                                </td>
+                            </tr>
 
+                        @endforeach
+                    </table>
 
-                        <tr class="dashboard-table" height="100px" valign="middle">
-                            <td width="80%">{{$tournament->name}}</td>
-                            <td width="20%" align="right"><a class="btn text-success border-success border-4 pl-20 pr-20 "
-                                 @if(Auth::user()->isSuperAdmin() || Auth::user()->owns($tournament))
-                                    href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
-                                 @else
-                                     {{--TODO Permission problems--}}
-                                    href="{!! URL::action('TournamentController@show', $tournament->slug) !!}">VER</a>
-                                @endif
-                            </td>
-                        </tr>
+                    <div align="right" class="mt-20 pt-20">
+                        <a class="btn text-primary border-primary border-4 text-uppercase "
+                           href="#">{{trans('core.see_all')}}</a>
+                    </div>
+                @endif
 
-                    @endforeach
-                </table>
-                <div align="right" class="mt-20 pt-20">
-                    <a class="btn text-primary border-primary border-4 text-uppercase "
-                       href="#">{{trans('core.see_all')}}</a>
-                </div>
 
             </div>
         </div>
@@ -142,7 +155,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                         </div>
                     </li>
 
-                    
+
                 </ul>
 
                 <div align="right" class="pt-20">

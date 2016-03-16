@@ -147,6 +147,7 @@ return [
     'invite_template' => "Pica el link que sigue para registrarse al torneo :tournament \n :link ",
     'send_invites' => 'Mandar Invitaciones',
     'invite_with_link' => 'Invita competitodres con este link',
+    'no_tournament_registered_yet' => 'Aún no se ha registrado en ningun torneo',
 
 
     'confirmed' => 'Confirmado',
