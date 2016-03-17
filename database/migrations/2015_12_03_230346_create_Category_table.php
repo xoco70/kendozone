@@ -16,7 +16,8 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('gender');
-            $table->string('team');
+            $table->string('isTeam');
+            $table->string('ageCategory'); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

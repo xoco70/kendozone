@@ -51,7 +51,7 @@
                 </div>
                 <div class="row text-uppercase">
                     <div class="col-md-6 col-md-offset-6 ">
-                        <a href="#" class="text-black">+ Agregar otra categoria</a>
+                        <a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>
                     </div>
                 </div>
                 <div class=" text-right mt-15">

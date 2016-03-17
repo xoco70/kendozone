@@ -4949,6 +4949,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .input-group-addon:first-child {
   border-right: 0;
+  color: #cccccc;
 }
 
 .input-group .form-control:last-child,
@@ -4964,6 +4965,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .input-group-addon:last-child {
   border-left: 0;
+  color: #cccccc;
 }
 
 .input-group-btn {

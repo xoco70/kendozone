@@ -80,7 +80,17 @@ return [
     'encho_infinite' => '0 para infinito',
     'enchoDuration' => '¿Cuanto dura cada encho?',
     'category_not_configured' => 'La categoría aún no esta configurada',
-
+    'add_category' => 'Agregar Categoria',
+    'gender' => 'Genero',
+    'male' => 'Varonil',
+    'female' => 'Femenil',
+    'mixt' => 'Mixto',
+    'ageCategory' => 'Categoría de edad',
+    'no_age' => 'Sin restricción de edad',
+    'children' => 'Niños',
+    'teenagers' => 'Adolescentes',
+    'adults' => 'Adultos',
+    'masters' => 'Masters',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',

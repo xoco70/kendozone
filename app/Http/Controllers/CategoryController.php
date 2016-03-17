@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CategorySettings;
+use App\Http\Requests\CategoryRequest;
 use App\Tournament;
 use App\CategoryTournament;
 use Illuminate\Http\Request;
@@ -13,15 +14,15 @@ use Illuminate\Support\Facades\View;
 
 class CategoryController extends Controller
 {
-    protected $currentModelName,$defaultSettings;
+//    protected $currentModelName,$defaultSettings;
 
     public function __construct()
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-        $this->currentModelName = trans_choice('crud.category', 2);
-        View::share('currentModelName', $this->currentModelName);
-        $this->defaultSettings = CategorySettings::getDefaultSettings();
+//        $this->currentModelName = trans_choice('crud.category', 2);
+//        View::share('currentModelName', $this->currentModelName);
+//        $this->defaultSettings = CategorySettings::getDefaultSettings();
 
     }
     /**
@@ -29,11 +30,34 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Tournament $tournament)
+//    public function index(Tournament $tournament)
+//    {
+//        $categories = $tournament->categories;
+//        $defaultSettings =  $this->defaultSettings;
+//        return view("categories.index", compact('categories','defaultSettings'));
+//    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $categories = $tournament->categories;
-        $defaultSettings =  $this->defaultSettings;
-        return view("categories.index", compact('categories','defaultSettings'));
+        $currentModelName = trans_choice('crud.category', 1);
+        return view('categories.create', compact('currentModelName'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param CategoryRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CategoryRequest $request)
+    {
+        $currentModelName = trans_choice('crud.category', 1);
+        return view('categories.create', compact('currentModelName'));
     }
 
     /**

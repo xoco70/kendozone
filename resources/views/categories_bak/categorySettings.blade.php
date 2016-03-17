@@ -92,7 +92,7 @@ if (is_null($setting)) {
                 <label>
 
                     {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
-                    {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
+                    {!!   Form::hidden('hasEncho', 0,['id'=>'isTeam'.$key ]) !!}
                     {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
