@@ -1,13 +1,6 @@
 @media (max-width: 767px) {
-
-    .head_create_tournament {
-        visibility: hidden;
-    }
-    .breadcrumb{
-        visibility: hidden;
-    }
-    ul.nav.navbar-nav.breadcrumbs{
-        visibility: hidden;
+    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament {
+        display: none;
     }
 }
 
@@ -16,6 +9,9 @@
     font-weight: 700;
 }
 
+.btn, legend{
+    font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
+}
 ul > ol.breadcrumb > li {
     font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;

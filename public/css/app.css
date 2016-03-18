@@ -35339,22 +35339,21 @@ h6.panel-title,
   border-left-color: inherit;
 }
 @media (max-width: 767px) {
+  .breadcrumb,
+  ul.nav.navbar-nav.breadcrumbs,
   .head_create_tournament {
-    visibility: hidden;
-  }
-
-  .breadcrumb {
-    visibility: hidden;
-  }
-
-  ul.nav.navbar-nav.breadcrumbs {
-    visibility: hidden;
+    display: none;
   }
 }
 
 .undo_link {
   color: #FFF;
   font-weight: 700;
+}
+
+.btn,
+legend {
+  font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 ul > ol.breadcrumb > li {
