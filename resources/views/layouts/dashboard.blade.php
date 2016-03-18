@@ -20,7 +20,9 @@
 </head>
 {{--sidebar-xs should be out--}}
 <body class="sidebar-xs  has-detached-right navbar-top">
-@include('layouts.headmenu')
+@if (Auth::check())
+    @include('layouts.headmenu')
+@endif
 
 
         <!-- Page container -->
@@ -28,8 +30,9 @@
 
     <!-- Page content -->
     <div class="page-content">
-        @include('layouts.sidemenu')
-
+        @if (Auth::check())
+            @include('layouts.sidemenu')
+        @endif
 
                 <!-- Main content -->
         <div class="content-wrapper">

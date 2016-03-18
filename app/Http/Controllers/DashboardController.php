@@ -26,6 +26,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
 //        $myTournaments = Auth::user()->getMyTournaments();
 
 //        $past_tournaments = Auth::user()->tournaments()

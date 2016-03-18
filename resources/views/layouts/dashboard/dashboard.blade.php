@@ -16,7 +16,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                                 <td width="80%">{{$tournament->name}}</td>
                                 <td width="20%" align="right"><a
                                             class="btn text-success border-success border-4 pl-20 pr-20 "
-                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">VER</a>
+                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,7 +50,6 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
 
 
                         @foreach($tournamentsParticipated as $tournament)
-
 
                             <tr class="dashboard-table" height="100px" valign="middle">
                                 <td width="80%">{{$tournament->name}}</td>

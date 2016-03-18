@@ -49,11 +49,11 @@
                         {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                     </div>
                 </div>
-                <div class="row text-uppercase">
-                    <div class="col-md-6 col-md-offset-6 ">
-                        <a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>
-                    </div>
-                </div>
+                {{--<div class="row text-uppercase">--}}
+                    {{--<div class="col-md-6 col-md-offset-6 ">--}}
+                        {{--<a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class=" text-right mt-15">
                     {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
                 </div>

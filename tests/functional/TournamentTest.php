@@ -58,7 +58,8 @@ class TournamentTest extends TestCase
             ->press($this->addTournament)
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")//Lang::get('validation.filled', ['attribute' => "name"])
-            ->see("El campo date es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
+            ->see("El campo date ini es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
+            ->see("El campo date fin es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
             ->see("El campo category es obligatorio")//Lang::get('validation.filled', ['attribute' => "category"])
 
             ->notSeeInDatabase('tournament', ['name' => '']);

@@ -45,14 +45,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
     $users = User::all()->pluck('id')->toArray();
     $levels = TournamentLevel::all()->pluck('id')->toArray();
-
+    $dateIni = $faker->dateTimeBetween('now', '+2 weeks')->format('Y-m-d');
     return [
         'user_id' => $faker->randomElement($users),
         'name' => $faker->colorName,
-        'dateIni' => "2016-02-23",
-        'dateFin' => "2016-02-23",
-        'registerDateLimit' => "2016-02-23",
-//        'cost' => $faker->numberBetween(10, 500),
+        'dateIni' => $dateIni,
+        'dateFin' => $dateIni,
+        'registerDateLimit' => $dateIni,
         'sport' => 1,
         'type' => $faker->boolean(),
         'mustPay' => $faker->boolean(),

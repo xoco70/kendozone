@@ -65,21 +65,19 @@ class InviteController extends Controller
         $invite = Invite::getActiveInvite($token);
 
         // Check if invitation is expired
-        if (is_null($invite)) {
-            return view('errors.general',
-                ['code' => '403',
-                    'message' => trans('core.forbidden'),
-                    'quote' => trans('msg.invitation_needed'),
-                    'author' => 'Admin',
-                    'source' => '',
-                ]
-            );
+        $quote = null;
+        if (is_null($invite)) $quote = trans('msg.invitation_needed');
+        else {
+            if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00') $quote = trans('msg.invitation_expired');
+            if ($invite->active != 1) $quote = trans('msg.invitation_not_active');
         }
-        if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00')
+
+
+        if (!is_null($quote))
             return view('errors.general',
                 ['code' => '403',
                     'message' => trans('core.forbidden'),
-                    'quote' => trans('msg.invitation_expired'),
+                    'quote' => $quote,
                     'author' => 'Admin',
                     'source' => '',
                 ]
@@ -142,7 +140,7 @@ class InviteController extends Controller
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
             $user->categoryTournaments()->sync($categories);
-            if (is_null($invite)){
+            if (is_null($invite)) {
                 $invite = new Invite();
                 $invite->code = 'open';
                 $invite->email = Auth::user()->email;

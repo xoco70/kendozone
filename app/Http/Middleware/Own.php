@@ -27,10 +27,11 @@ class Own
                 $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournaments;
                 if ($tournament != null) {
+
                     if (!$tournaments->contains($tournament)
                             && !$userLogged->isSuperAdmin()
-                            && !$request->isMethod('show')
-                            && !$request->isMethod('get')) {
+                            && !strpos($request->route()->getName(), 'show')
+                            ) {
                         return view('errors.general',
                             ['code' => '403',
                                 'message' => trans('core.forbidden'),
@@ -47,7 +48,9 @@ class Own
                 $user = $request->users;
 
                 // User is superadmin, or is the user himself
-                if ( $userLogged->id != $user->id && !$userLogged->isSuperAdmin() && !$request->isMethod('show')) {
+                if ( $userLogged->id != $user->id
+                        && !$userLogged->isSuperAdmin()
+                        && !strpos($request->route()->getName(), 'show')) {
                     return view('errors.general',
                         ['code' => '403',
                             'message' => trans('core.forbidden'),

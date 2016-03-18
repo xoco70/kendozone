@@ -4,6 +4,7 @@ use App\CategoryTournament;
 use App\Invite;
 use App\Tournament;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Collection;
@@ -19,7 +20,7 @@ class InviteTest extends TestCase
      * 3. Click mail, register and add to tournament
      * 4. Click mail and deny - used invitation
      * 5. Click mail and deny - invitation disabled
-     * 6. FALTA Invitation expired
+     *
      */
 
     use DatabaseTransactions;
@@ -39,11 +40,9 @@ class InviteTest extends TestCase
         for ($i = 0; $i < 5; $i++) {
             try {
                 $categoriesTournament->push(factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]));
-            } catch (QueryException $e) {
-            } catch (PDOException $e) {
+            } catch (Exception $e) {
             }
         }
-
 
         // Check that inviting one user by email
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
@@ -73,10 +72,20 @@ class InviteTest extends TestCase
         $user = User::where('email', 'john@example.com')->first();
 
         //Bad Code or no code
-        $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/123456s")
+        $this->visit("/tournaments/" . $invitation->tournament->slug . "/invite/123456s")
             ->see("403");
 
-        $this->visit("/tournaments/" . $invitation->tournament_id . "/invite/" . $invitation->code);
+        // Invitation expired
+        if ($invitation->expiration < Carbon::now() && $invitation->expiration != '0000-00-00'){
+            $this->see("403");
+        }
+
+        if ($invitation->active == 0){
+            $this->see("403");
+        }
+
+
+        $this->visit("/tournaments/" . $invitation->tournament->slug. "/invite/" . $invitation->code);
         // If user didn't exit, check that it is created
         if (is_null($user)) {
             // System redirect to user creation
