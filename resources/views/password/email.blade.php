@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn bg-blue btn-block">{{  Lang::get('auth.send_password') }} <i
+        <button type="submit" class="btn bg-success btn-block">{{  Lang::get('auth.send_password') }} <i
                     class="icon-arrow-right14 position-right"></i></button>
     </div>
     {!! Form::close() !!}

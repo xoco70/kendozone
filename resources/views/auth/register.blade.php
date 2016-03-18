@@ -85,7 +85,7 @@
                                     class="icon-arrow-left13 position-left"></i> {{  Lang::get('auth.back_to_login_form') }}
                         </a>
                         <button type="submit"
-                                class="btn bg-teal-400 btn-labeled btn-labeled-right ml-10">
+                                class="btn bg-success btn-labeled btn-labeled-right ml-10">
                             <b><i class="icon-plus3"></i></b>{{  Lang::get('auth.create_account') }}
                         </button>
                     </div>

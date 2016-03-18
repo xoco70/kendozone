@@ -6,9 +6,10 @@
     {!! csrf_field() !!}
     <div class="panel panel-body login-form">
         <div class="text-center">
-            <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+            <div><img src="/images/logoLogin.png" width=200" /></div>
+            {{--<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>--}}
+
             <h5 class="content-group">{{  Lang::get('auth.login_to_your_account') }}
-                <small class="display-block">{{  Lang::get('auth.credentials') }}</small>
             </h5>
         </div>
 
@@ -46,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn bg-blue btn-block">{{  Lang::get('auth.signin') }} <i
+            <button type="submit" class="btn bg-success btn-block p-10">{{  Lang::get('auth.signin') }} <i
                         class="icon-arrow-right14 position-right"></i></button>
         </div>
 
@@ -61,8 +62,12 @@
         </ul>
 
         <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.no_account') }}</span></div>
-        <a href="{!! URL::to('auth/register') !!}"
-           class="btn btn-default btn-block content-group">{{  Lang::get('auth.signup') }}</a>
+
+        <div class="mt-20">
+            <a class="btn full-width text-primary border-primary border-4 text-uppercase "
+               href="{!! URL::to('auth/register') !!}">{{  Lang::get('auth.signup') }}</a>
+        </div>
+
         {{--<span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a--}}
         {{--href="login_advanced.html#">Terms &amp; Conditions</a> and <a--}}
         {{--href="login_advanced.html#">Cookie Policy</a></span>--}}
