@@ -9026,10 +9026,10 @@ button.close {
   .sidebar-xs .sidebar-main .navigation-main>li>a>span {
     display: none;
     position: absolute;
-    top: 0;
+    top: 4px;
     right: -260px;
-    background-color: #26a69a;
-    border-color: #26a69a;
+    background-color: #FFF;
+    border-color: #FFF;
     padding: inherit;
     padding-left: 20px;
     padding-right: 20px;
@@ -35328,6 +35328,20 @@ h6.panel-title,
 .popover[class*=border-].left>.arrow:after {
   border-left-color: inherit;
 }
+@media (max-width: 767px) {
+  .head_create_tournament {
+    visibility: hidden;
+  }
+
+  .breadcrumb {
+    visibility: hidden;
+  }
+
+  ul.navbar-nav:not(.navbar-right) {
+    visibility: hidden;
+  }
+}
+
 .undo_link {
   color: #FFF;
   font-weight: 700;
@@ -35354,11 +35368,11 @@ fieldset > a > legend {
   font-weight: 400;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a >.panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading {
   vertical-align: middle;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a >.panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading {
   text-align: right;
   letter-spacing: 2px;
   vertical-align: middle;

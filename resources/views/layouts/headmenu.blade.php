@@ -2,10 +2,17 @@
 <div class="navbar navbar-default navbar-fixed-top" id="navbar-second">
     <div class="navbar-header">
         <a class="navbar-brand" href="/"><img src="/images/logored.png" alt=""></a>
-        <ul class="nav navbar-nav  visible-xs-block">
-            <li><a class="text-right collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i
-                            class="icon-paragraph-justify3"></i></a></li>
+        <ul class="nav navbar-nav visible-xs-block mt-15">
+            <li><a data-toggle="collapse" data-target="#navbar-second-toggle"><img src="{!! Auth::getUser()->avatar !!}" width="28" alt="kendozone_avatar"></a></li>
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
         </ul>
+
+        {{--<ul class="nav navbar-nav  visible-xs-block">--}}
+            {{--<li><a class="text-right collapsed mt-15" data-toggle="collapse" data-target="#navbar-second-toggle">--}}
+                    {{--<i class="icon-paragraph-justify3"></i>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
 
     </div>
 
@@ -13,33 +20,34 @@
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
 
 
-
         <ul class="nav navbar-nav">
 
 
-                    @yield('breadcrumbs')
+            @yield('breadcrumbs')
 
 
             {{--@yield('breadcrumbs')--}}
             {{--<li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><i class="icon-display4 position-left"></i>--}}
-                    {{--Dashboard</a></li>--}}
+            {{--Dashboard</a></li>--}}
             {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i--}}
-                            {{--class="icon-trophy2 position-left"></i>{{trans_choice('crud.tournament',2)}}</a></li>--}}
+            {{--class="icon-trophy2 position-left"></i>{{trans_choice('crud.tournament',2)}}</a></li>--}}
 
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{!! URL::to('tournaments/create') !!}" class="navbar-right btn border-primary text-primary btn-flat">{{ trans('crud.createTournament') }}</a></li>
+            <li class="head_create_tournament"><a href="{!! URL::to('tournaments/create') !!}"
+                   class="navbar-right btn border-primary text-primary btn-flat">{{ trans('crud.createTournament') }}</a>
+            </li>
 
             {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
 
-                {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
-                {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
+            {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
+            {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
 
-                @can('CanSeeLogs')
-                <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}
-                    </a></li>@endcan
-                        <!--<li class="divider"></li>-->
+            @can('CanSeeLogs')
+            <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}
+                </a></li>@endcan
+                    <!--<li class="divider"></li>-->
 
             {{--</ul>--}}
             {{--</li>--}}
@@ -47,7 +55,7 @@
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     @if(Auth::check())
-                        <img src="{!! Auth::getUser()->avatar !!}" alt="">
+                        <img src="{!! Auth::getUser()->avatar !!}" alt="kendozone_avatar">
                         <span>{!! Auth::getUser()->name !!}</span>
                         <i class="caret"></i>
                     @endif
@@ -55,9 +63,11 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     @if (Auth::user()->isSuperAdmin())
-                    <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}</a></li>
+                        <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}
+                            </a></li>
                     @endif
-                    <li><a href="{!! URL::to('tournaments')!!}"> <i class="icon-trophy3"></i>  {!! trans('crud.admin_tournaments') !!}</a></li>
+                    <li><a href="{!! URL::to('tournaments')!!}"> <i
+                                    class="icon-trophy3"></i> {!! trans('crud.admin_tournaments') !!}</a></li>
                     <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
                     {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}

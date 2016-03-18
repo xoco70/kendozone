@@ -78,20 +78,20 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
         <div class="row">
             <div class="panel panel-body">
                 <fieldset title="NUMEROS">
                     <legend class="text-semibold">NUMEROS</legend>
                 </fieldset>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
 
                         <div class="square bg-nav">{{ $tournamentsCreated->count() }}
                             <div class="text-size-large text-uppercase">creados</div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="square bg-secondary">{{ $tournamentsParticipated->count()  }}
                             <div class="text-size-large text-uppercase">Participaciones</div>
                         </div>
@@ -99,12 +99,12 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
 
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="square bg-primary">{{ $tournamentsCreated->where('dateFin','<', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Pasados</div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="square bg-success">{{ $tournamentsCreated->where('dateFin','>=', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">Próximos</div>
                         </div>

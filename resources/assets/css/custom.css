@@ -1,9 +1,22 @@
+@media (max-width: 767px) {
+
+    .head_create_tournament {
+        visibility: hidden;
+    }
+    .breadcrumb{
+        visibility: hidden;
+    }
+    ul.navbar-nav:not(.navbar-right){
+        visibility: hidden;
+    }
+}
+
 .undo_link {
     color: #FFF;
     font-weight: 700;
 }
 
-ul > ol.breadcrumb > li{
+ul > ol.breadcrumb > li {
     font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;
     line-height: 1.5384616;
@@ -11,33 +24,35 @@ ul > ol.breadcrumb > li{
 
 }
 
-ul > ol.breadcrumb > li.active{
+ul > ol.breadcrumb > li.active {
     color: #333;
 
 }
 
-ul.nav > li > a.btn{
+ul.nav > li > a.btn {
     text-transform: uppercase;
     border-width: 4px;
 }
 
-
 fieldset > a > legend {
-    font-size:14px;
+    font-size: 14px;
     font-weight: 400;
 }
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a >.panel-heading {
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading {
     vertical-align: middle;
 }
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a >.panel-heading{
+
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading {
     text-align: right;
     letter-spacing: 2px;
     vertical-align: middle;
     text-transform: uppercase;
 }
+
 .category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading > span {
-     font-size: 18px;
- }
+    font-size: 18px;
+}
 
 .category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading > span > i {
     font-size: 40px;
@@ -49,11 +64,11 @@ fieldset > a > legend {
     /*padding-bottom: 20px;*/
 }
 
-
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6{
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6 {
     padding-top: 8px;
 
 }
+
 .square {
     /* float: left; */
     text-align: center;
@@ -65,23 +80,24 @@ fieldset > a > legend {
     font-size: 5em;
 }
 
-.dashboard-table{
+.dashboard-table {
     height: 80px;
     vertical-align: middle;
 
 }
 
-.dashboard-table:not(:last-child){
+.dashboard-table:not(:last-child) {
     border-bottom: 1px solid;
     border-color: #EEE;
 
 }
+
 /*.dashboard-table:last-child{*/
-    /*padding-bottom: 30px;*/
+/*padding-bottom: 30px;*/
 
 /*}*/
 
-.btn.text-success.border-success.border-xlg:hover{
+.btn.text-success.border-success.border-xlg:hover {
     background-color: transparent;
     border-color: #6cc188;
     color: #6cc188;

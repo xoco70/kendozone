@@ -665,10 +665,10 @@
     .sidebar-xs .sidebar-main .navigation-main>li>a>span {
         display: none;
         position: absolute;
-        top: 0;
+        top: 4px;
         right: -260px;
-        background-color: #26a69a;
-        border-color: #26a69a;
+        background-color: #FFF;
+        border-color: #FFF;
         padding: inherit;
         padding-left: 20px;
         padding-right: 20px;

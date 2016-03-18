@@ -3,7 +3,7 @@
     <div class="sidebar-content">
 
         <!-- User menu -->
-        <div class="sidebar-user">
+        <div class="sidebar-user" id="sidemenu">
             <div class="category-content">
                 <div class="media">
                     {{--@if(Auth::check())--}}
@@ -39,12 +39,12 @@
 
         <!-- Main navigation -->
         <div class="sidebar-category sidebar-category-visible">
-            <div class="category-content no-padding">
+                <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
                     <li {{ (Request::is('/') ? 'class=active' : '') }}><a href="/"><i class="icon-display4 position-left sidemenu"></i>
-                            </a></li>
+                            <span>Dashboard</span></a></li>
                     <li {{ (Request::is('invites') ? 'class=active' : '') }}><a href="/invites"><i
-                                    class="icon-trophy2 position-left sidemenu"></i></a></li>
+                                    class="icon-trophy2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span></a></li>
                     <!-- Main -->
                     {{--<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Menu"></i></li>--}}
                     {{--<li {{ ((Request::is('admin') || Request::is('/')) ? 'class=active' : '') }}><a href="/admin"><i--}}
