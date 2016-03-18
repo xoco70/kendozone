@@ -3,9 +3,9 @@
     <div class="sidebar-content">
 
         <!-- User menu -->
-        <div class="sidebar-user" id="sidemenu">
-            <div class="category-content">
-                <div class="media">
+        {{--<div class="sidebar-user" id="sidemenu">--}}
+            {{--<div class="category-content">--}}
+                {{--<div class="media">--}}
                     {{--@if(Auth::check())--}}
                         {{--<a href="{!!   URL::action('UserController@edit',  Auth::user()->id) !!}"--}}
                            {{--class="media-left"><img src="{!! Auth::user()->avatar !!}"--}}
@@ -31,9 +31,9 @@
                             {{--</li>--}}
                         {{--</ul>--}}
                     {{--</div>--}}
-                </div>
-            </div>
-        </div>
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <!-- /user menu -->
 
 

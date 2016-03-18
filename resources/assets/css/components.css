@@ -978,9 +978,19 @@
     .page-container {
         width: 100%;
         display: table;
-        table-layout: fixed
+        table-layout: fixed;
     }
 }
+
+@media (max-width:768px) {
+    .page-container {
+        margin-top: 0;
+    }
+    .sidebar-user{
+        visibility: hidden;
+    }
+}
+
 
 @-moz-document url-prefix() {
     .page-container {

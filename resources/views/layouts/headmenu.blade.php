@@ -20,7 +20,7 @@
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
 
 
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav breadcrumbs">
 
 
             @yield('breadcrumbs')

@@ -9380,6 +9380,16 @@ button.close {
   }
 }
 
+@media (max-width:768px) {
+  .page-container {
+    margin-top: 0;
+  }
+
+  .sidebar-user {
+    visibility: hidden;
+  }
+}
+
 @-moz-document url-prefix()  {
   .page-container {
     height: 1px;
@@ -35337,7 +35347,7 @@ h6.panel-title,
     visibility: hidden;
   }
 
-  ul.navbar-nav:not(.navbar-right) {
+  ul.nav.navbar-nav.breadcrumbs {
     visibility: hidden;
   }
 }
