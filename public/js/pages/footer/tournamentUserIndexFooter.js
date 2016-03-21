@@ -26,23 +26,26 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
+                            theme: 'kz',
+                            type: 'success',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 10000,
+                            timeout: 5000,
                             text: data.msg,
-                            closeWith: ['click']
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                         });
                         $tr.remove();
                     } else {
-                        console.log(data);
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
+                            timeout: 5000,
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                         $('.btnDeleteTCU').prop("disabled", false);
                         $('.btnDeleteTCU').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-remove');
@@ -52,14 +55,15 @@ $(function () {
 
                 },
                 error: function (data) {
-                    console.log("error");
                     noty({
-                        layout: 'topRight',
+                        layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
+                        timeout: 5000,
+                        text: data.statusText,
+                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                     });
                 }
             }
@@ -100,11 +104,14 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
-                            type: 'information',
+                            theme: 'kz',
+                            type: 'success',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 10000,
-                            text: data.msg
+                            timeout: 3000,
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+
                         });
                         $('#'+confirmId).prop("disabled", false);
                         $('#'+confirmId).find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
@@ -113,12 +120,14 @@ $(function () {
                     } else {
                         console.log(data);
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
+                            timeout: 5000,
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                         $('.btnConfirmTCU').prop("disabled", false);
                         $('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
@@ -130,12 +139,14 @@ $(function () {
                 error: function (data) {
                     //console.log(data);
                     noty({
-                        layout: 'topRight',
+                        layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
+                        timeout: 5000,
+                        text: data.statusText,
+                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                     });
                     $('.btnConfirmTCU').prop("disabled", false);
                     $('.btnConfirmTCU').find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);

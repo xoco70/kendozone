@@ -90,6 +90,13 @@ class InviteController extends Controller
                 // Redirect to user creation
                 return view('auth/invite', compact('token'));
             } else {
+                // If user is not confirmed, auto confirm him
+                if ($user->verified == 0){
+                    $user->verified = 1;
+                    $user->save();
+                }
+
+
                 // Redirect to register category Screen
 
                 $tournament = Tournament::findBySlug($tournamentSlug);

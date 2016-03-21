@@ -13,10 +13,10 @@ return [
     'user_already_registered_in_category' => 'El usuario ya esta registrado en esta categoria.',
 
     // Torneo
-    'tournament_create_successful' => 'El torneo :name se creó de forma exitosa',
+    'tournament_create_successful' => 'El torneo <b>:name</b><br/> se creó',
     'tournament_update_successful' => 'Torneo <b>:name</b><br/> se actualizó',
-    'tournament_delete_successful' => 'El torneo :name se borró de forma exitosa',
-    'tournament_restored_successful' => ':name se restauró de forma exitosa',
+    'tournament_delete_successful' => 'El torneo <b>:name</b><br/> se borró',
+    'tournament_restored_successful' => 'El torneo <b>:name</b><br/> se restauró',
 
     'tournament_create_error' => '¡Oooops! Hubo un problema al crear el torneo',
     'tournament_update_error' => '¡Oooops! Hubo un problema al editar el torneo',
@@ -25,10 +25,10 @@ return [
 
 
     // Usuario
-    'user_create_successful' => 'El usuario se agregó de forma exitosa',
-    'user_update_successful' => 'El usuario se actualizó de forma exitosa',
-    'user_delete_successful' => 'El usuario :name se borró de forma exitosa',
-    'user_restore_successful' => 'El usuario :name se restauró de forma exitosa',
+    'user_create_successful' => 'El usuario <b>:name</b><br/> se agregó',
+    'user_update_successful' => 'El usuario <b>:name</b><br/> se actualizó',
+    'user_delete_successful' => 'El usuario <b>:name</b><br/> se borró',
+    'user_restore_successful' => 'El usuario <b>:name</b><br/> se restauró',
 
     'user_create_error' => 'Hubo un problema al crear el usuario',
     'user_update_error' => 'Hubo un problema al editar el usuario',

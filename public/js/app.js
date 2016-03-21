@@ -650,8 +650,8 @@ $.noty.layouts.bottomLeft = {
         selector: 'ul#noty_bottomLeft_layout_container',
         style   : function() {
             $(this).css({
-                bottom       : 20,
-                left         : 20,
+                bottom       : 0,
+                left         : 0,
                 position     : 'fixed',
                 width        : '310px',
                 height       : 'auto',

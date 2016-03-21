@@ -47,7 +47,7 @@ $(function () {
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 200000,
+                            timeout: 3000,
                             text: data.msg,
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
@@ -77,11 +77,13 @@ $(function () {
                     } else {
                         noty({
                             layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
-                            text: url_edit
+                            timeout: 5000,
+                            text: url_edit,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                         $('.btn-update-tour').prop("disabled", false);
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
@@ -91,11 +93,13 @@ $(function () {
                 error: function (data) {
                     noty({
                         layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
+                        timeout: 5000,
+                        text: data.statusText,
+                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
                     $(this).prop("disabled", false);
@@ -143,11 +147,13 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
                             timeout: 3000,
-                            text: data.msg
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                         // Change warning icon to success
                         //$('#one span').text('Hi I am replace');
@@ -167,12 +173,14 @@ $(function () {
 
                     } else {
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
+                            timeout: 5000,
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                     }
                     $('.save_category').prop("disabled", false);
@@ -182,12 +190,14 @@ $(function () {
                 },
                 error: function (data) {
                     noty({
-                        layout: 'topRight',
+                        layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
+                        timeout: 5000,
+                        text: data.statusText,
+                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                     });
                     $('.save_category').prop("disabled", false);
                     $('.save_category').find('i').removeClass('icon-spinner spinner position-left');

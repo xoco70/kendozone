@@ -35538,4 +35538,12 @@ fieldset > a > legend {
 
 .noty_message > .row > .noty_icon > .icon-trophy2 {
   font-size: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.noty_message > .row > .noty_icon > .icon-warning {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 40px;
 }
