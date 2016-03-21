@@ -96,6 +96,9 @@ class InviteTest extends TestCase
                 ->seeInDatabase('users', ['email' => 'john@example.com', 'verified' => '1'])
                 ->see(trans('auth.registration_completed'));
 
+        } // Unconfirmed User
+        elseif ($user->verified == 0){
+
         }
 
         // Get all categories for this tournament

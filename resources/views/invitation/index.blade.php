@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('js/invitationIndex.js') !!}
+    {!! Html::script('js/pages/header/invitationIndex.js') !!}
 @stop
 @section('content')
 

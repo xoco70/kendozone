@@ -43,11 +43,14 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 10000,
-                            text: data.msg
+                            timeout: 200000,
+                            text: data.msg,
+                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+
                         });
                         $('.btn-update-tour').prop("disabled", false);
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
@@ -202,11 +205,47 @@ $(function () {
 
     $(".switch").bootstrapSwitch();
 
-    $('.datetournament').pickadate({
+
+
+    $('#dateIni').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
-    format: 'yyyy-mm-dd'
-});
-    $('.datelimit').pickadate({
+        format: 'yyyy-mm-dd',
+        onSet: function(context) {
+
+             var dateIni = new Date(context.select);
+             var year = $.format.date(dateIni, "yy");
+             var year4digits = $.format.date(dateIni, "yyyy");
+             var month = $.format.date(dateIni, "MM");
+             var day = $.format.date(dateIni, "dd");
+             var $dateFin = $('#dateFin');
+
+            $dateFin.val(year4digits + '-' + month + '-' + day); // This works well
+            $dateFin.pickadate({
+                    min: [year, month,day]
+            });
+        }
+
+    });
+    $('#dateFin').pickadate({
+        min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
+        format: 'yyyy-mm-dd'
+    });
+    // $('#dateIni').on('change', function (e) {
+        // alert($.format.date(this.value, "yy"));
+    // $('#registerDateLimit').val(this.value);
+
+
+        // $dateFin.val(this.value);
+        // $dateFin.pickadate({
+        //         min: [, , ,]
+        //
+        // });
+
+
+
+    // });
+
+        $('.datelimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
     format: 'yyyy-mm-dd'
 });

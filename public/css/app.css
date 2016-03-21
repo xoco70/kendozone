@@ -35535,3 +35535,7 @@ fieldset > a > legend {
     padding-right: 15px;
   }
 }
+
+.noty_message > .row > .noty_icon > .icon-trophy2 {
+  font-size: 40px;
+}

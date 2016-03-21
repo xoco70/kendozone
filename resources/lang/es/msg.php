@@ -14,7 +14,7 @@ return [
 
     // Torneo
     'tournament_create_successful' => 'El torneo :name se creó de forma exitosa',
-    'tournament_update_successful' => 'El torneo se actualizó de forma exitosa',
+    'tournament_update_successful' => 'Torneo <b>:name</b><br/> se actualizó',
     'tournament_delete_successful' => 'El torneo :name se borró de forma exitosa',
     'tournament_restored_successful' => ':name se restauró de forma exitosa',
 

@@ -1,7 +1,7 @@
 @if(Session::has('flash_message'))
     <script>
         var n = noty({
-            layout: 'topRight',
+            layout: 'leftBottom',
             type: "{{session('flash_message.level')}}",
             width: 200,
             dismissQueue: true,
