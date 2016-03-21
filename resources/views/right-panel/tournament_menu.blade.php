@@ -44,7 +44,7 @@ $competitors = $tournament->competitors();
 {{--TODO Using competitors()--}}
                         <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
-                                @if((sizeof($tournament->competitors()))>8)
+                                @if((sizeof($competitors))>8)
                                     <span class="badge badge-success">{{sizeof($competitors)}}</span>
                                 @else
                                     <span class="badge badge-warning">{{sizeof($competitors)}}</span>

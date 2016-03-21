@@ -79,20 +79,21 @@
                                             {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
 
-                                    <div class="col-md-4">
-                                        {!!  Form::label('registerDateLimit', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
-                                        <br/>
+                                        <div class="checkbox-switch">
+                                            <label>
 
-                                        <div class="input-group">
+                                                {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
+                                                <br/>
+                                                {!!   Form::hidden('type', 0) !!}
+                                                {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>trans('core.open'), 'data-off-text'=>trans_choice('crud.invitation', 1)]) !!}
 
-                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
-                                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                                            </label>
                                         </div>
-                                        <br/>
-
 
                                     </div>
+
                                 </div>
 
                                 <div class="row">
@@ -109,7 +110,7 @@
                                 <legend class="text-semibold">{{Lang::get('crud.competitors_register')}}</legend>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
 
 
                                         {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
@@ -123,18 +124,17 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
+                                        {!!  Form::label('registerDateLimit', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                        <br/>
 
-                                        <div class="checkbox-switch">
-                                            <label>
+                                        <div class="input-group">
 
-                                                {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
-                                                <br/>
-                                                {!!   Form::hidden('type', 0) !!}
-                                                {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>trans('core.open'), 'data-off-text'=>trans_choice('crud.invitation', 1)]) !!}
-
-                                            </label>
+                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
+                                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
+                                        <br/>
+
 
                                     </div>
 
@@ -165,25 +165,18 @@
                                     <legend class="text-semibold">{{Lang::get('crud.venue')}}</legend>
                                 </a>
                             </fieldset>
-                            <div class="col-md-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     {!!  Form::label('venue', trans('crud.name'),['class' => 'text-bold' ]) !!}
                                     {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
                                 </div>
-                                <div class="form-group">
-                                    {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
-                                    {!!  Form::text('latitude', old('latitude'), ['class' => 'form-control']) !!}
 
-                                </div>
-                                <div class="form-group">
-                                    {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
-                                    {!!  Form::text('longitude', old('longitude'), ['class' => 'form-control']) !!}
-
-                                </div>
+                                {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control']) !!}
+                                {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control']) !!}
 
 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     {!!  Form::label('name', trans('crud.coords')) !!}
                                     <div class="map-wrapper locationpicker-default"
@@ -270,59 +263,59 @@
                             <div class="panel-group" id="accordion-styled">
 
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
-                                <?php
+                                    <?php
 
-                                $setting = $tournament->categoryTournaments->get($key)->settings;
-                                $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
-                                $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
-                                $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+                                    $setting = $tournament->categoryTournaments->get($key)->settings;
+                                    $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
+                                    $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
+                                    $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
 
-                                ?>
+                                    ?>
 
-                                <div class="panel">
-                                    <div class="row">
-                                        <div class="col-lg-7 col-xs-5 cat-title">
-                                            <a data-toggle="collapse" data-parent="#accordion-styled"
-                                               href="#accordion-styled-group{!! $key !!}">
+                                    <div class="panel">
+                                        <div class="row">
+                                            <div class="col-lg-7 col-xs-5 cat-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-styled"
+                                                   href="#accordion-styled-group{!! $key !!}">
 
-                                                <div class="panel-heading">
-                                                    <h6 class="panel-title">
-                                                        {{trans($categoryTournament->category->name)}}
-                                                    </h6>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-5 col-xs-7 cat-status">
-                                            <a data-toggle="collapse" data-parent="#accordion-styled"
-                                               href="#accordion-styled-group{!! $key !!}">
-                                                <div class="panel-heading">
-                                                    @if (is_null($setting))
-                                                        <span class="text-orange-600">
+                                                    <div class="panel-heading">
+                                                        <h6 class="panel-title">
+                                                            {{trans($categoryTournament->category->name)}}
+                                                        </h6>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-5 col-xs-7 cat-status">
+                                                <a data-toggle="collapse" data-parent="#accordion-styled"
+                                                   href="#accordion-styled-group{!! $key !!}">
+                                                    <div class="panel-heading">
+                                                        @if (is_null($setting))
+                                                            <span class="text-orange-600">
                                                             <span class="cat-state">{{ trans('crud.configure') }}</span>
                                                             <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i>
                                                         </span>
-                                                    @else
+                                                        @else
 
-                                                        <span class="text-success">
+                                                            <span class="text-success">
 
                                                             <span class="cat-state">{{ trans('crud.configured') }}</span>
                                                             <i class="glyphicon text-success glyphicon-ok  status-icon"></i>
                                                         </span>
-                                                    @endif
-                                                </div>
-                                            </a>
-                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                            </div>
 
-                                    </div>
-                                    <div id="accordion-styled-group{!! $key !!}"
-                                         class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
-                                        <div class="panel-body">
-                                            {{--FORM--}}
-                                            @include('categories.categorySettings')
                                         </div>
+                                        <div id="accordion-styled-group{!! $key !!}"
+                                             class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
+                                            <div class="panel-body">
+                                                {{--FORM--}}
+                                                @include('categories.categorySettings')
+                                            </div>
 
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
 
 

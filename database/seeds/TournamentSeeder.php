@@ -24,9 +24,6 @@ class TournamentSeeder extends Seeder
         Tournament::create([
             'user_id' => 1,
             'name' => "Fake Tournoi",
-            'dateIni' => "2016-02-23",
-            'dateFin' => "2016-02-23",
-            'registerDateLimit' => "2016-02-23",
             'sport' => 1,
             'type' => 0,
             'mustPay' => 1,

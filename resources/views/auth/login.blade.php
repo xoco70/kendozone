@@ -31,14 +31,14 @@
 
         <div class="form-group login-options">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-xs-6">
                     <label class="checkbox-inline">
                         <input type="checkbox" value="remember-me" class="styled" checked="checked">
                         {{  Lang::get('auth.remember') }}
                     </label>
                 </div>
 
-                <div class="col-sm-6 text-right">
+                <div class="col-xs-6 text-right">
                     <a href="{!! URL::to('password/email') !!}">{{  Lang::get('auth.lost_password') }}</a>
                 </div>
             </div>

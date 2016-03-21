@@ -15,7 +15,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                             <tr class="dashboard-table">
                                 <td width="80%">{{$tournament->name}}</td>
                                 <td width="20%" align="right"><a
-                                            class="btn text-success border-success border-4 seeall pl-20 pr-20 "
+                                            class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                 </td>
                             </tr>

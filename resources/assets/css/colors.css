@@ -2698,9 +2698,12 @@
 }
 
 .text-success:hover
- {
-    color: #FFF!important;
+{
+    color: #7CD69C!important;
 
+}
+.btn.border-primary.btn-flat.border-4:hover{
+    color: #FFF!important;
 }
 
 .text-success-300,
