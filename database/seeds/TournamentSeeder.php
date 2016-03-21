@@ -21,9 +21,14 @@ class TournamentSeeder extends Seeder
 
         // Tournament creation
         Tournament::truncate();
+        $faker = Faker\Factory::create();
+        $dateIni = $faker->dateTimeBetween('now', '+2 weeks')->format('Y-m-d');
         Tournament::create([
             'user_id' => 1,
             'name' => "Fake Tournoi",
+            'dateIni' =>  $dateIni,
+            'dateFin' =>  $dateIni,
+            'registerDateLimit' =>  $dateIni,
             'sport' => 1,
             'type' => 0,
             'mustPay' => 1,

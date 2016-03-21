@@ -7,7 +7,7 @@
 @stop
 @section('content')
 <?php
-
+$countries = Countries::all();
 $link = "";
 if ($settingSize > 0 && $settingSize == $categorySize)
     $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
@@ -62,8 +62,10 @@ else
 
                             @foreach($categoryTournament->users as $user)
                             <?php
-//                                if (sizeof($categoryTournament->users)>0)
-//                                dd($user->pivot);
+                                   $arr_country = $countries->where('id', $user->country_id)->all();
+                                    $country = array_first ($arr_country );
+
+
                                 ?>
                                 <tr>
                                     <td class="text-center">
@@ -101,8 +103,8 @@ else
                                     </td>
 
 
-                                    <td class="text-center"><img src="/images/flags/{{ $user->country->flag }}"
-                                                                 alt="{{ $user->country->name }}"/></td>
+                                    <td class="text-center"><img src="/images/flags/{{ $country->flag }}"
+                                                                 alt="{{ $country->name }}"/></td>
 
 
                                     <td class="text-center">
