@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Lang;
  * it_denies_creating_user_without_password()
  * it_allow_editing_user_without_password()
  * you_must_be_the_user_to_edit_your_info_or_be_superuser()
- *
+ * check_you_can_see_user_info ( TODO )
  * User: juliatzin
  * Date: 10/11/2015
  * Time: 23:14
@@ -221,4 +221,9 @@ class UserTest extends TestCase
 
     }
 
+    /** @test */
+    public function check_you_can_see_user_info()
+    {
+
+    }
 }
