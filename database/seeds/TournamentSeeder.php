@@ -36,7 +36,7 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-        factory(Tournament::class, 5)->create();
+//        factory(Tournament::class, 5)->create();
 
 
         CategoryTournament::truncate();
@@ -53,7 +53,7 @@ class TournamentSeeder extends Seeder
         // Tournament categories users
 
         CategoryTournamentUser::truncate();
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             try {
                 factory(CategoryTournamentUser::class)->create();
             } catch (QueryException $e) {
