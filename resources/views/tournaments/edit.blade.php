@@ -281,7 +281,7 @@
 
                                 <div class="panel">
                                     <div class="row">
-                                        <div class="col-lg-7 col-md-5 col-sm-5 col-xs-5 cat-title">
+                                        <div class="col-lg-7 col-xs-5 cat-title">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
 
@@ -292,7 +292,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-5 col-md-7 col-sm-7 col-xs-7 cat-status">
+                                        <div class="col-lg-5 col-xs-7 cat-status">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
                                                 <div class="panel-heading">
