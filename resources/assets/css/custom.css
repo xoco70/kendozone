@@ -4,6 +4,7 @@
     }
 }
 
+
 .undo_link {
     color: #FFF;
     font-weight: 700;
@@ -35,22 +36,22 @@ fieldset > a > legend {
     font-weight: 400;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-title > a > .panel-heading {
     vertical-align: middle;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-status > a > .panel-heading {
     text-align: right;
     letter-spacing: 2px;
     vertical-align: middle;
     text-transform: uppercase;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading > span {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-title > a > .panel-heading > span {
     font-size: 18px;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-5 > a > .panel-heading > span > i {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-status > a > .panel-heading > span > i {
     font-size: 40px;
     margin-left: 10px;
 
@@ -60,9 +61,29 @@ fieldset > a > legend {
     /*padding-bottom: 20px;*/
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .col-md-7 > a > .panel-heading > h6 {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-title > a > .panel-heading > h6 {
     padding-top: 8px;
 
+}
+
+.btn.text-primary.border-primary.border-4.seeall{
+    width:107px;
+
+}
+.btn.text-success.border-success.border-4.seeall{
+    width:107px;
+
+}
+.btn.text-success.border-success.border-4:hover {
+    color: #FFF!important;
+    background-color: #7CD69C;
+    border-color: #7CD69C!important;
+
+}
+.btn.text-primary.border-4:hover{
+    color: #FFF!important;
+    background-color: #ff5663;
+    border-color: #ff5663;
 }
 
 .square {

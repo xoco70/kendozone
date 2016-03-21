@@ -5,12 +5,10 @@
 
     {!! csrf_field() !!}
     <div class="panel panel-body login-form">
-        <div class="text-center">
-            <div><img src="/images/logoLogin.png" width=200" /></div>
+        <div class="text-center pt-10 pb-20" >
+            <div class="pb-10"><img src="/images/logoLogin.png" width=200" /></div>
             {{--<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>--}}
 
-            <h5 class="content-group">{{  Lang::get('auth.login_to_your_account') }}
-            </h5>
         </div>
 
         <div class="form-group has-feedback has-feedback-left">

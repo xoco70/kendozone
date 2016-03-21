@@ -16322,7 +16322,7 @@ label.display-block {
 }
 
 .border-4 {
-    border-width: 4px
+    border-width: 4px!important;
 }
 
 .border-5 {

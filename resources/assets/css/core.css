@@ -4579,6 +4579,7 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
 }
 
 a.navbar-right.btn.border-primary.text-primary.btn-flat {
+    margin-left: 20px;
     margin-right: 20px;
     margin-top:9px;
     border-radius: 4px;

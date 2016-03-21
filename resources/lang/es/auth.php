@@ -43,7 +43,6 @@ return [
     'check_your_email' => 'Te hemos enviado un correo a tu cuenta de correo con un link de activación.',
     'account_already_exists' => 'El correo electrónico ya ha sido usado para otra cuenta',
     'account_not_activated' => '¡Hansoku Ikkai! La cuenta no ha sido activada. Por favor consulte su email',  // <a href="#">reenviar</a>
-    'login_to_your_account' => 'Conectate a tu cuenta',
     'credentials' => 'Ingresa tus datos',
     'signin_with' => 'O conectate con',
     'no_account' => 'Aún no tienes cuenta?',

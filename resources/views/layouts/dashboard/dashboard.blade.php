@@ -15,7 +15,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                             <tr class="dashboard-table">
                                 <td width="80%">{{$tournament->name}}</td>
                                 <td width="20%" align="right"><a
-                                            class="btn text-success border-success border-4 pl-20 pr-20 "
+                                            class="btn text-success border-success border-4 seeall pl-20 pr-20 "
                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                 </td>
                             </tr>
@@ -23,7 +23,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
 
                     </table>
                     <div align="right" class="mt-20 pt-20">
-                        <a class="btn text-primary border-primary border-4 text-uppercase "
+                        <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "
                            href="{!! URL::to('tournaments')!!}">{{trans('core.see_all')}}</a>
                     </div>
 
@@ -54,7 +54,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                             <tr class="dashboard-table" height="100px" valign="middle">
                                 <td width="80%">{{$tournament->name}}</td>
                                 <td width="20%" align="right"><a
-                                            class="btn text-success border-success border-4 pl-20 pr-20 "
+                                            class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
                                             @if(Auth::user()->isSuperAdmin() || Auth::user()->owns($tournament))
                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                     @else
@@ -69,7 +69,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                     </table>
 
                     <div align="right" class="mt-20 pt-20">
-                        <a class="btn text-primary border-primary border-4 text-uppercase "
+                        <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall"
                            href="#">{{trans('core.see_all')}}</a>
                     </div>
                 @endif
@@ -158,7 +158,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                 </ul>
 
                 <div align="right" class="pt-20">
-                    <a class="btn text-primary border-primary border-4 text-uppercase "
+                    <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "
                        href="#">{{trans('core.see_all')}}</a>
                 </div>
 

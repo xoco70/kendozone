@@ -51,7 +51,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">{{trans('crud.from') }}</span>
                                             {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
-                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
                                         </div>
 
@@ -65,7 +65,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">{{trans('crud.to') }}</span>
                                             {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
-                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
 
                                     </div>
@@ -87,7 +87,7 @@
                                         <div class="input-group">
 
                                             {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
-                                            <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
                                         <br/>
 
@@ -281,7 +281,7 @@
 
                                 <div class="panel">
                                     <div class="row">
-                                        <div class="col-md-7">
+                                        <div class="col-lg-7 col-md-5 cat-title">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
 
@@ -292,7 +292,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-lg-5 col-md-7 cat-status">
                                             <a data-toggle="collapse" data-parent="#accordion-styled"
                                                href="#accordion-styled-group{!! $key !!}">
                                                 <div class="panel-heading">

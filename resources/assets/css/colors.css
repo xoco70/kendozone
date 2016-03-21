@@ -2618,9 +2618,12 @@
 }
 
 .text-primary,
-.text-primary:hover,
-.text-primary:focus {
+.text-primary
+{
     color: #ff5663 !important
+}
+.text-primary:hover:focus{
+    color: #FFF !important;
 }
 
 .text-primary-300,
@@ -2690,9 +2693,14 @@
 }
 
 .text-success,
-.text-success:hover,
-.text-success:focus {
+.text-success:focus{
     color: #7CD69C !important
+}
+
+.text-success:hover
+ {
+    color: #FFF!important;
+
 }
 
 .text-success-300,
