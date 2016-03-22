@@ -1,13 +1,13 @@
 <?php
 $tournamentsCreated = Auth::user()->tournaments;
-$tournamentsParticipated = Auth::user()->getMyTournaments();
+$tournamentsParticipated = Auth::user()->myTournaments()->get();
 ?>
 <div class="row">
     <div class="col-md-6">
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
                 <fieldset title="{{Lang::get('crud.venue')}}">
-                    <legend class="text-semibold">TORNEOS CREADOS</legend>
+                    <legend class="text-semibold">{{ trans('crud.tournaments_created') }}</legend>
                 </fieldset>
 
                     <table width="100%">
@@ -34,7 +34,7 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
                 <fieldset title="MIS TORNEOS">
-                    <legend class="text-semibold">REGISTROS EN TORNEOS</legend>
+                    <legend class="text-semibold">{{ trans('crud.tournaments_registered') }}</legend>
                 </fieldset>
                 @if (sizeof($tournamentsParticipated) == 0)
                     <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('crud.no_tournament_registered_yet') }}</div>
@@ -70,7 +70,8 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
 
                     <div align="right" class="mt-20 pt-20">
                         <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall"
-                           href="#">{{trans('core.see_all')}}</a>
+                           href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug) !!}"
+                                   >{{trans('core.see_all')}}</a>
                     </div>
                 @endif
 
@@ -82,18 +83,18 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
         <div class="row">
             <div class="panel panel-body">
                 <fieldset title="NUMEROS">
-                    <legend class="text-semibold">NUMEROS</legend>
+                    <legend class="text-semibold">{{ trans('crud.numbers') }}</legend>
                 </fieldset>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
 
                         <div class="square bg-nav">{{ $tournamentsCreated->count() }}
-                            <div class="text-size-large text-uppercase">creados</div>
+                            <div class="text-size-large text-uppercase">{{ trans('crud.created') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-secondary">{{ $tournamentsParticipated->count()  }}
-                            <div class="text-size-large text-uppercase">Participaciones</div>
+                            <div class="text-size-large text-uppercase">{{ trans('crud.participations') }}</div>
                         </div>
                     </div>
 
@@ -101,12 +102,12 @@ $tournamentsParticipated = Auth::user()->getMyTournaments();
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-primary">{{ $tournamentsCreated->where('dateFin','<', new \DateTime('today'))->count() }}
-                            <div class="text-size-large text-uppercase">Pasados</div>
+                            <div class="text-size-large text-uppercase">{{ trans('crud.past') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-success">{{ $tournamentsCreated->where('dateFin','>=', new \DateTime('today'))->count() }}
-                            <div class="text-size-large text-uppercase">Próximos</div>
+                            <div class="text-size-large text-uppercase">{{ trans('crud.next') }}</div>
                         </div>
                     </div>
 

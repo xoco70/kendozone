@@ -3,7 +3,7 @@
     {!! Html::script('js/pages/header/tournamentIndex.js') !!}
 @stop
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('tournaments.index') !!}
+    {!! Breadcrumbs::render('users.tournaments',Auth::user()) !!}
 
 @stop
 
@@ -20,25 +20,27 @@
                             {{--<div class="row col-md-10 custyle">--}}
                             <table class="table table-togglable table-hover">
                                 <thead>
+
+
                                 <tr>
                                     <th data-toggle="true">{{ trans('crud.name') }}</th>
                                     <th data-hide="phone">{{ trans('crud.date') }}</th>
                                     <th data-hide="phone">{{ trans('crud.owner') }}</th>
-                                    <th class="text-center">{{ trans('crud.action') }}</th>
+
                                 </tr>
                                 </thead>
                                 @foreach($tournaments as $tournament)
                                     <tr id="{!! $tournament->slug !!}">
-                                        <td><a
-                                                    href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                        <td>
+                                            @if (Auth::user()->canEditTournament($tournament) )
+                                                <a href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                            @else
+                                                <a href="{!!   URL::action('TournamentController@show',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                            @endif
                                         </td>
                                         <td>{{ $tournament->dateIni }}</td>
                                         <td>{{ $tournament->owner->name}}</td>
-                                        <td class="text-center">
-                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTournament', 'action' => ['TournamentController@destroy', $tournament->slug]]) !!}
-                                            {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTournament', 'id'=>'delete_'.$tournament->slug, 'data-id' => $tournament->slug ] ) !!}
-                                            {!! Form::close() !!}
-                                        </td>
+
                                     </tr>
 
                                 @endforeach
@@ -59,5 +61,5 @@
         var url = "{{ url("/tournaments") }}";
 
     </script>
-{!! Html::script('js/pages/footer/tournamentIndexFooter.js') !!}
+    {!! Html::script('js/pages/footer/tournamentIndexFooter.js') !!}
 @stop

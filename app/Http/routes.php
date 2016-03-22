@@ -64,6 +64,12 @@ Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
         Route::resource('users', 'UserController');
+        Route::get('users/{user}/tournaments', [
+            'uses' => 'UserController@getMyTournaments',
+            'as' => 'users.tournaments'
+        ]);
+
+
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
 
         Route::resource('tournaments/{tournament}/users', 'TournamentUserController');

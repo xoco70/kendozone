@@ -68,6 +68,14 @@ Breadcrumbs::register('users.show', function ($breadcrumbs, $tournament) {
     $breadcrumbs->push(trans('crud.invite_competitors'), route('users.show', $tournament->slug));
 });
 
+Breadcrumbs::register('users.tournaments', function ($breadcrumbs, $user) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('crud.tournaments_registered'), route('users.tournaments', $user->slug));
+
+
+});
+
+
 Breadcrumbs::register('categories.create', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans('crud.add_category'), route('categories.create'));

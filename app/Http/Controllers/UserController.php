@@ -209,6 +209,14 @@ class UserController extends Controller
 
         })->export('xls');
     }
+    public function getMyTournaments()
+    {
+        $tournaments = Auth::user()->myTournaments()
+            ->orderBy('created_at', 'desc')
+            ->paginate(Config::get('constants.PAGINATION'));;
+        
+        return view('users.tournaments', compact('tournaments'));
+    }
 
     /**
      * Remove the specified resource from storage.

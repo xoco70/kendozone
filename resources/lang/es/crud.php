@@ -72,6 +72,15 @@ return [
     'configure' => 'Configurar',
     'configured' => 'Configurada',
 
+    // Dashboard
+    'tournaments_registered' => 'Registros en torneos',
+    'tournaments_created' => 'Torneos creados',
+    'numbers' => 'Números',
+    'created' => 'Creados',
+    'participations' => 'Participaciones',
+    'past' => 'Pasados',
+    'next' => 'Próximos',
+
 
 
     // Categories

@@ -16,8 +16,18 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('gender');
-            $table->string('isTeam');
-            $table->string('ageCategory'); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
+            $table->integer('isTeam')->unsigned()->default(0);
+            $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
+            $table->integer('ageIni')->unsigned()->default(0);
+            $table->integer('ageFin')->unsigned()->default(0);
+            $table->integer('gradeIni')->unsigned()->default(1);
+            $table->integer('gradeFin')->unsigned()->default(1);
+            $table->foreign('gradeIni')
+                ->references('id')
+                ->on('grade');
+            $table->foreign('gradeFin')
+                ->references('id')
+                ->on('grade');
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
@@ -67,7 +77,7 @@ class CreateCategoryTable extends Migration
             $table->boolean('confirmed');
 
             $table->timestamps();
-            $table->softDeletes();
+//            $table->softDeletes();
             $table->engine = 'InnoDB';
 
 

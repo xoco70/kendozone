@@ -35,12 +35,7 @@ class TournamentUserController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with((['categoryTournaments.users' => function ($query) {
-            $query->whereNull('category_tournament_user.deleted_at');
-
-        }, 'categoryTournaments.category']))->find($tournament->id);
-
-
+        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
         $settingSize = sizeof($tournament->settings());
         $categorySize = sizeof($tournament->categories);
 
@@ -143,7 +138,6 @@ class TournamentUserController extends Controller
         $user = User::findBySlug($userSlug);
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id)->first();
-//        dd($tcId ."-".$user->id);
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
         if ($ctu->save()){

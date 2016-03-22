@@ -198,6 +198,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Invite', 'email', 'email');
     }
 
+    public function tournamentsInvited()
+    {
+        return $this->hasManyThrough('App\Invite','App\Tournament');
+    }
+
     public function country()
     {
         return $this->belongsTo('Webpatser\Countries\Countries');
@@ -229,14 +234,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(CategoryTournamentUser::class);
     }
 
-    public function getMyTournaments(){
+    public function myTournaments(){
 //        return User::with('')->find($this->id);
         return Tournament::leftJoin('category_tournament', 'category_tournament.tournament_id', '=', 'tournament.id')
             ->leftJoin('category_tournament_user', 'category_tournament_user.category_tournament_id', '=', 'category_tournament.id' )
             ->where('category_tournament_user.user_id', '=',$this->id )
             ->select('tournament.*')
-            ->distinct()
-            ->get();
+            ->distinct();
 
 
     }
@@ -312,6 +316,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function owns(Tournament $tournament){
         return $this->id == $tournament->user_id;
+    }
+
+
+    public function canEditTournament($tournament){
+        return ($this->id == $tournament->user_id || $this->isSuperAdmin());
     }
 
 }
