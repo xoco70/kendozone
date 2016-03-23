@@ -39,7 +39,7 @@ return [
     'user_status_error' => 'Hubo un error al actualizar :name',
 
     // Categoria
-    'category_create_successful' => 'La categoría se creó de forma exitosa',
+    'category_create_successful' => 'La categoría se configuró de forma exitosa',
     'category_update_successful' => 'La categoría se actualizó de forma exitosa',
     'category_delete_successful' => 'La categoría se borró de forma exitosa',
 

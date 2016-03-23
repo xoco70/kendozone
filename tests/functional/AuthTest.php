@@ -57,8 +57,8 @@ class AuthTest extends TestCase
             ->type('password', 'password')
             ->type('password2', 'password_confirmation')
             ->press(Lang::get('auth.create_account'));
-        $this->see(htmlentities(Lang::get('validation.confirmed', ['attribute' => 'password'])))
-            ->NotseeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
+        $this->see(Lang::get('validation.confirmed', ['attribute' => 'password']))
+            ->notSeeInDatabase('users', ['name' => 'JohnDoe', 'email' => 'john2@example.com', 'verified' => 0]);
     }
 
     /** @test */

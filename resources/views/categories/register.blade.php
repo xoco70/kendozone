@@ -1,3 +1,8 @@
+<?php
+$categoryTournaments = $tournament->categoryTournaments;
+dd($categoryTournaments);
+?>
+
 @extends('layouts.dashboard')
 @section('content')
 
@@ -19,9 +24,8 @@
                             {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/0/categories']) !!}
                         @endif
 
-
-                         @foreach($tournament->categoryTournaments as $key => $categoryTournament)
-
+                             @foreach($categoryTournaments as $key => $categoryTournament)
+                                {{--{{ $key }}--}}
                                 @if ($key % 4 == 0)
                                     <div class="row">
                                         @endif

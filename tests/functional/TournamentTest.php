@@ -47,14 +47,8 @@ class TournamentTest extends TestCase
     /** @test */
     public function it_denies_creating_an_empty_tournament()
     {
-//        $nameMandatory = Lang::get('validation.filled', ['attribute' => "name"]);
-//        echo $nameMandatory;
-//        assertEquals($nameMandatory , "El campo name es obligatorio");
-//        Auth::loginUsingId(1);
-
         $this->visit("/tournaments")
-            ->see($this->tournaments)
-            ->click($this->addTournaments)
+            ->click('Crear Torneo')
             ->press($this->addTournament)
             ->seePageIs('/tournaments/create')
             ->see("El campo name es obligatorio")//Lang::get('validation.filled', ['attribute' => "name"])
@@ -94,9 +88,7 @@ class TournamentTest extends TestCase
     public function it_create_tournament()
     {
         $this->visit('/')
-            ->click(trans('crud.admin_tournaments'))
-            ->see($this->tournaments)
-            ->click($this->addTournaments)
+            ->click('Crear Torneo')
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'dateIni')
             ->type('2015-12-12', 'dateFin')
@@ -184,7 +176,7 @@ class TournamentTest extends TestCase
 //            ->type('1', 'hasRoundRobin0')
 //            ->type('1', 'hasHantei0')
             ->type('100', 'cost')
-            ->type('1', 'roundRobinWinner')
+//            ->type('1', 'roundRobinWinner')
 //            ->type('1', 'fightDuration0')
 //            ->type('1', 'enchoDuration0')
 //            ->type('2', 'teamSize0')
@@ -195,7 +187,7 @@ class TournamentTest extends TestCase
             ->seeInDatabase('category_settings',
                 ['category_tournament_id' => $ct0->id,
                     'cost' => '100',
-                    'roundRobinWinner' => '1',
+//                    'roundRobinWinner' => '1',
                 ]);
 //
 //        ;

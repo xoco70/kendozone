@@ -36,7 +36,7 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-        factory(Tournament::class, 5)->create();
+//        factory(Tournament::class, 5)->create();
 
 
         CategoryTournament::truncate();
@@ -64,16 +64,16 @@ class TournamentSeeder extends Seeder
         }
 
 
-        CategorySettings::truncate();
-        for ($i = 0; $i < 50; $i++) {
-            try {
-                factory(CategorySettings::class)->create();
-            } catch (QueryException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-            } catch (PDOException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-            }
-        }
+//        CategorySettings::truncate();
+//        for ($i = 0; $i < 50; $i++) {
+//            try {
+//                factory(CategorySettings::class)->create();
+//            } catch (QueryException $e) {
+////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+//            } catch (PDOException $e) {
+////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+//            }
+//        }
 
     }
 }

@@ -15,7 +15,7 @@ class InviteTest extends TestCase
     /**
      * Tests inside:
      * an_admin_may_invite_users_but_users_must_register_after
-     * a_user_may_register_an_open_tournament
+     * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
      * 1. Send mails and success
      * 3. Click mail, register and add to tournament
      * 4. Click mail and deny - used invitation
@@ -23,7 +23,7 @@ class InviteTest extends TestCase
      *
      */
 
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     public function setUp()
     {
@@ -43,6 +43,7 @@ class InviteTest extends TestCase
             } catch (Exception $e) {
             }
         }
+
 
         // Check that inviting one user by email
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
@@ -132,19 +133,22 @@ class InviteTest extends TestCase
 
         for ($i = 0; $i < 5; $i++) {
             try {
-                $categoriesTournament->push(factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]));
-            } catch (QueryException $e) {
-            } catch (PDOException $e) {
+                $ct = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
+                $categoriesTournament->push($ct);
+            } catch (Exception $e) {
             }
         }
-        $user = factory(User::class)->create(['email' => 'xoco@aaa.bbb2',
-            'role_id' => 3,
-            'password' => bcrypt('111111'), // 111111
+//        dump($)
+        $categoriesTournament = $categoriesTournament->sortBy('id');
+
+        $user = factory(User::class)->create(['role_id' => 3,
+            'password' => bcrypt('111111') // 111111
         ]);
 
         $this->visit("/tournaments/" . $tournament->slug . "/register");
 
         // System redirect to user creation
+
         $this->type($user->email, 'email')
             ->type('111111', 'password')
             ->press(Lang::get('auth.signin'))
@@ -153,9 +157,12 @@ class InviteTest extends TestCase
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page
         foreach ($categoriesTournament as $key => $ct) {
+//            dump($ct->id . " - ".$key);
             $this->type($ct->id, 'cat[' . $key . ']');
+//
         }
         $this->press(trans("core.save"));
+//        $this->dump();
 //
         foreach ($categoriesTournament as $key => $ct) {
             $this->seeInDatabase('category_tournament_user',
