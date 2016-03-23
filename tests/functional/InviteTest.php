@@ -23,7 +23,7 @@ class InviteTest extends TestCase
      *
      */
 
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function setUp()
     {
@@ -91,8 +91,8 @@ class InviteTest extends TestCase
         if (is_null($user)) {
             // System redirect to user creation
             $this->type('Johnny', 'name')
-                ->type('11111111', 'password')
-                ->type('11111111', 'password_confirmation')
+                ->type('222222', 'password')
+                ->type('222222', 'password_confirmation')
                 ->press(Lang::get('auth.create_account'))
                 ->seeInDatabase('users', ['email' => 'john@example.com', 'verified' => '1'])
                 ->see(trans('auth.registration_completed'));

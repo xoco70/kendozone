@@ -206,8 +206,9 @@ class TournamentTest extends TestCase
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
 
-        $setting0 = factory(CategorySettings::class)->create([
+        factory(CategorySettings::class)->create([
             'category_tournament_id' => $ct0->id,
+            'hasRoundRobin' => 1,
             'roundRobinWinner' => 2,
             'cost' => 100,
         ]);

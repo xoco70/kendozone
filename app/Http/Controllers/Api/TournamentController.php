@@ -132,7 +132,7 @@ class TournamentController extends ApiController
 //        $settingSize = sizeof($tournament->settings());
 //        $categorySize = sizeof($tournament->categories);
 //
-//        //TODO Hay que usar tournament instead of cws
+//        
 //        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
 ////        dd($tournament->categoryTournaments->get(5)->settings);
 ////        $categoriesWithSettings = $tournament->getCategoriesWithSettings();
