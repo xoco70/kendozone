@@ -106,7 +106,7 @@ class InviteTest extends TestCase
         // Now we are on category Selection page
 //        dd($categoriesTournament);
         foreach ($categoriesTournament as $key => $ct) {
-            $this->type($ct->id, 'cat[' . $key . ']');
+            $this->type($ct->id, 'cat[' . $ct->id . ']');
         }
         // Can't resolve: LogicException: The selected node does not have a form ancestor.
 
@@ -139,7 +139,7 @@ class InviteTest extends TestCase
             }
         }
 //        dump($)
-        $categoriesTournament = $categoriesTournament->sortBy('id');
+//        $categoriesTournament = $categoriesTournament;
 
         $user = factory(User::class)->create(['role_id' => 3,
             'password' => bcrypt('111111') // 111111
@@ -156,9 +156,9 @@ class InviteTest extends TestCase
 //
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page
-        foreach ($categoriesTournament as $key => $ct) {
+        foreach ($categoriesTournament as $ct) {
 //            dump($ct->id . " - ".$key);
-            $this->type($ct->id, 'cat[' . $key . ']');
+            $this->type($ct->id, 'cat[' . $ct->id . ']');
 //
         }
         $this->press(trans("core.save"));
