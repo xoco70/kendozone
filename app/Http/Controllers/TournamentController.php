@@ -106,8 +106,8 @@ class TournamentController extends Controller
 //        dd($tournament);
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
-        $settingSize = sizeof($tournament->settings());
-        $categorySize = sizeof($tournament->categories);
+        $settingSize = $tournament->settings()->count();
+        $categorySize = $tournament->categories()->count();
 
 //        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize')); // , 'categoriesWithSettings'
@@ -202,10 +202,10 @@ class TournamentController extends Controller
         $tournament = Tournament::findOrFail($tournamentId);
 //        $competitors = $tournament->competitors();
         $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
-        foreach ($tournamentCategories as $cat) {
+        foreach ($tournamentCategories as $tcat) {
             // Get number of area for this category
             $fightingAreas = null;
-            $settings = CategorySettings::where('category_tournament_id', $cat->id)->get();
+            $settings = CategorySettings::where('category_tournament_id', $tcat->id)->get();
             if (is_null($settings) || sizeof($settings) == 0) {
 
                 // Check general user settings
@@ -217,10 +217,8 @@ class TournamentController extends Controller
                 $fightingAreas = $settings->fightingAreas;
             }
 
-
-            dd($fightingAreas);
-            echo "<h3>" . $cat->category->name . "</h3>";
-            $competitors = $tournament->competitors($cat->id);
+            echo "<h3>" . $tcat->category->name . "</h3>";
+            $competitors = $tournament->competitors()->where('category_tournament_id', $tcat->id);
             echo $competitors;
         }
     }

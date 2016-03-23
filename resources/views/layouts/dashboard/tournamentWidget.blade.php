@@ -37,7 +37,7 @@
                         </li>
                         <li class="text-left">
                             <div class="text-semibold"> <a class="text-default" href="{!! URL::action('TournamentUserController@index', $tournament->slug) !!}"> {{trans_choice('crud.competitor',2)}}</a></div>
-                            <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->competitors()) }}
+                            <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ $tournament->competitors()->count() }}
 
                             </div>
 

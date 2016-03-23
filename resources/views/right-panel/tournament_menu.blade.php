@@ -1,5 +1,5 @@
 <?php
-$competitors = $tournament->competitors();
+$numCompetitors = $tournament->competitors()->count();
         ?>
 <!-- Detached sidebar -->
 <div class="sidebar-detached">
@@ -44,10 +44,10 @@ $competitors = $tournament->competitors();
 {{--TODO Using competitors()--}}
                         <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
-                                @if((sizeof($competitors))>8)
-                                    <span class="badge badge-success">{{sizeof($competitors)}}</span>
+                                @if($numCompetitors>8)
+                                    <span class="badge badge-success">{{$numCompetitors }}</span>
                                 @else
-                                    <span class="badge badge-warning">{{sizeof($competitors)}}</span>
+                                    <span class="badge badge-warning">{{$numCompetitors}}</span>
                                 @endif
 
                             </a>

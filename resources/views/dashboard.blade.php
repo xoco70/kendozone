@@ -20,7 +20,7 @@
             $tournament = $tournaments->first();
             $settingSize = $tournament->categorySettings()->count();
             $categorySize = $tournament->categoryTournaments()->count();
-            $ctuSize = count($tournament->ctus);
+            $ctuSize = $tournament->competitors()->count();
 
             if ($settingSize != $categorySize || $ctuSize == 0)
                 $configurationNotFinished = true;
@@ -37,5 +37,7 @@
             @include('layouts.dashboard.dashboard')
             {{--@endforeach--}}
         @endif
+    @else
+        @include('layouts.dashboard.dashboard')
     @endif
 @stop

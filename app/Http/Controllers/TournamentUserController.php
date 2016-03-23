@@ -36,8 +36,8 @@ class TournamentUserController extends Controller
     public function index(Tournament $tournament)
     {
         $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
-        $settingSize = sizeof($tournament->settings());
-        $categorySize = sizeof($tournament->categories);
+        $settingSize = $tournament->settings()->count();
+        $categorySize = $tournament->categories->count();
 
         $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize'));

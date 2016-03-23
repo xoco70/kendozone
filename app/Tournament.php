@@ -84,26 +84,26 @@ class Tournament extends Model implements SluggableInterface
 
 
     //TODO Change this method por ctus() relation
-    public function competitors($CategoryTournamentId = null)
-    {
-//        User::join('category_tournament_user', 'user.id','user_id' )
-        $users = DB::table('users')
-            ->join('category_tournament_user as ctu', 'ctu.user_id', '=', 'users.id')
-            ->join('category_tournament as ct', 'ctu.category_tournament_id', '=', 'ct.id')
-            ->join('category', 'ct.category_id', '=', 'category.id')
-            ->where('ct.tournament_id', '=', $this->id);
-
-        if ($CategoryTournamentId != null)
-            $users->where('ct.id', '=', $CategoryTournamentId);
-
-        $users = $users->select('users.id', 'ct.tournament_id', 'users.name', 'email', 'avatar', 'country_id',
-            'category.id as cat_id', 'category.name as cat_name', 'ct.tournament_id', 'ct.id as tcId', 'ctu.confirmed', 'ctu.id as ctuId')
-            ->orderBy('ct.id', 'ASC')
-            ->orderBy('users.email', 'ASC')
-            ->get();
-        $users = User::hydrate($users);
-        return $users;
-    }
+//    public function competitors($CategoryTournamentId = null)
+//    {
+////        User::join('category_tournament_user', 'user.id','user_id' )
+//        $users = DB::table('users')
+//            ->join('category_tournament_user as ctu', 'ctu.user_id', '=', 'users.id')
+//            ->join('category_tournament as ct', 'ctu.category_tournament_id', '=', 'ct.id')
+//            ->join('category', 'ct.category_id', '=', 'category.id')
+//            ->where('ct.tournament_id', '=', $this->id);
+//
+//        if ($CategoryTournamentId != null)
+//            $users->where('ct.id', '=', $CategoryTournamentId);
+//
+//        $users = $users->select('users.id', 'ct.tournament_id', 'users.name', 'email', 'avatar', 'country_id',
+//            'category.id as cat_id', 'category.name as cat_name', 'ct.tournament_id', 'ct.id as tcId', 'ctu.confirmed', 'ctu.id as ctuId')
+//            ->orderBy('ct.id', 'ASC')
+//            ->orderBy('users.email', 'ASC')
+//            ->get();
+//        $users = User::hydrate($users);
+//        return $users;
+//    }
 
 //    public function deleteUser($categoryTournamentId, $userId)
 //    {
@@ -143,7 +143,7 @@ class Tournament extends Model implements SluggableInterface
         return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
     }
 
-    public function ctus()
+    public function competitors($CategoryTournamentId = null)
     {
         return $this->hasManyThrough('App\CategoryTournamentUser', 'App\CategoryTournament');
     }
