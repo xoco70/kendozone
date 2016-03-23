@@ -8,15 +8,15 @@
 
         <br/>
         <div class="row pt-20">
-            <div class="col-xs-12 col-sm-6  text-right pr-20">
-                <a href="{!! URL::action('TournamentController@create') !!}" type="button"
+            <div class="col-xs-12 col-sm-6 p-20">
+                <a href="#" type="button"
                    class="btn border-primary btn-flat text-primary disabled text-uppercase p-10 ">{{ trans('core.see_open_tournaments') }}
                     {{--( {{trans('core.soon')}} )--}}
                 </a>
             </div>
-            <div class="col-xs-12 col-sm-6 text-left pl-20">
+            <div class="col-xs-12 col-sm-6 p-20">
                 <a href="{!! URL::action('TournamentController@create') !!}" type="button"
-                   class="btn btn-primary text-uppercase p-10">{{ trans('core.create_new_tournament') }}
+                   class="btn btn-primary text-uppercase p-10 ">{{ trans('core.create_new_tournament') }}
                 </a>
 
             </div>

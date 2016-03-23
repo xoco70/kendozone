@@ -137,11 +137,17 @@ class Tournament extends Model implements SluggableInterface
         return $this->hasMany(CategoryTournament::class);
     }
 
+
     public function categorySettings()
     {
-        return $this->hasMany(CategorySettings::class);
-
+        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
     }
+
+    public function ctus()
+    {
+        return $this->hasManyThrough('App\CategoryTournamentUser', 'App\CategoryTournament');
+    }
+
 
     public function invites()
     {

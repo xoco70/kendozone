@@ -4,18 +4,38 @@
 
 @stop
 @section('content')
-    <?php $configurationNotFinished = false; ?>
+    <?php
+    //    Configuration has not finished:
+    //            - category Settings size == 0
+    //            - 0 users added
+    $configurationNotFinished = false;
+    $tournaments = Auth::user()->tournaments;
+    ?>
 
-    @if (sizeof(Auth::user()->tournaments) == 0)
+    @if (sizeof($tournaments) == 0)
         @include('layouts.dashboard.createFirstTournament')
 
-    @elseif (sizeof(Auth::user()->tournaments) == 1 && $configurationNotFinished)
-        @include('layouts.dashboard.configureTournament')
-    @else
-        {{-- Display widget for the latest 5 tournaments --}}
-        {{--@foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(5) as $tournament)--}}
+    @elseif (sizeof($tournaments) == 1)
+        <?php
+            $tournament = $tournaments->first();
+            $settingSize = $tournament->categorySettings()->count();
+            $categorySize = $tournament->categoryTournaments()->count();
+            $ctuSize = count($tournament->ctus);
+
+            if ($settingSize != $categorySize || $ctuSize == 0)
+                $configurationNotFinished = true;
+
+
+
+        ?>
+        @if ($configurationNotFinished)
+            @include('layouts.dashboard.configureTournament')
+        @else
+            {{-- Display widget for the latest 5 tournaments --}}
+            {{--@foreach(Auth::user()->tournaments->sortByDesc('created_at')->take(5) as $tournament)--}}
 
             @include('layouts.dashboard.dashboard')
-        {{--@endforeach--}}
+            {{--@endforeach--}}
+        @endif
     @endif
 @stop

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
@@ -209,7 +210,7 @@ class UserController extends Controller
 
         })->export('xls');
     }
-    public function getMyTournaments()
+    public function getMyTournaments(Request $request)
     {
         $tournaments = Auth::user()->myTournaments()
             ->orderBy('created_at', 'desc')

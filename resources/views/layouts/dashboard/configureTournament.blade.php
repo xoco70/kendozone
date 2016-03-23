@@ -1,7 +1,7 @@
 <?php
-$tournament = Auth::user()->tournaments->first();
-$settingSize = sizeof($tournament->settings());
-$categorySize = sizeof($tournament->categories);
+//$tournament = Auth::user()->tournaments->first();
+//$settingSize = sizeof($tournament->settings());
+//$categorySize = sizeof($tournament->categories);
 
 ?>
 <div class="row">
@@ -17,6 +17,7 @@ $categorySize = sizeof($tournament->categories);
             </div>
 
             <div class="well well-lg mb-15">
+
                 @if ($settingSize > 0 && $settingSize == $categorySize)
                     <del class="text-muted">
                         {{ trans('core.congigure_categories') }}

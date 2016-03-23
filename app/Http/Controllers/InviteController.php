@@ -35,9 +35,7 @@ class InviteController extends Controller
     public function index()
     {
         $tournaments =
-        $invites = Auth::user()->tournamentsInvited()->get();
-        dd($invites);
-        $invites->paginate(Config::get('constants.PAGINATION'));
+        $invites = Auth::user()->invites()->paginate(Config::get('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
 //user has a lot of tournament through invites
