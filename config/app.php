@@ -156,6 +156,11 @@ return [
 //        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Spatie\LinkChecker\LinkCheckerServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
+
     ],
 
     /*
@@ -212,8 +217,14 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
+//        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+//        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
+        'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
+        'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
+        // or
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
 
 
     ],

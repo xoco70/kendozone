@@ -4,9 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "997c3cdcdd7beadc9095cb6031d6a9e0",
-    "content-hash": "2fcbd66c8e013dfff480e998da5dfeb0",
+    "hash": "c597fdca13e9cb6834d32ea43f329bd1",
+    "content-hash": "fd55aa433c1b6f858f61538182cff617",
     "packages": [
+        {
+            "name": "artesaos/seotools",
+            "version": "v0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/seotools.git",
+                "reference": "f173a3f8f16353594e57819f79ccfb0e675ba063"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/seotools/zipball/f173a3f8f16353594e57819f79ccfb0e675ba063",
+                "reference": "f173a3f8f16353594e57819f79ccfb0e675ba063",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5",
+                "illuminate/support": "~5",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.1.x",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Artesaos\\SEOTools\\": "src/SEOTools/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vinicius",
+                    "email": "luiz.vinicius73@gmail.com"
+                }
+            ],
+            "description": "SEO Tools for Laravel and Lumen",
+            "keywords": [
+                "laravel5",
+                "lumen",
+                "metatags",
+                "opengraph",
+                "seo",
+                "seotools",
+                "webmaster"
+            ],
+            "time": "2016-01-24 21:43:40"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v2.2.0",
@@ -1874,6 +1925,65 @@
             "time": "2015-05-01 07:00:55"
         },
         {
+            "name": "proengsoft/laravel-jsvalidation",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/proengsoft/laravel-jsvalidation.git",
+                "reference": "d659e05837a705b55c8bfe1e54eee0b93c7ccf11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/d659e05837a705b55c8bfe1e54eee0b93c7ccf11",
+                "reference": "d659e05837a705b55c8bfe1e54eee0b93c7ccf11",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0",
+                "illuminate/contracts": "~5.0",
+                "illuminate/http": "~5.0",
+                "illuminate/support": "~5.0",
+                "illuminate/validation": "~5.0",
+                "illuminate/view": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Proengsoft\\JsValidation\\": "src",
+                    "Proengsoft\\JsValidation\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Moreno",
+                    "email": "albert@memorylimit.net",
+                    "homepage": "http://memorylimit.net",
+                    "role": "DevOps"
+                }
+            ],
+            "description": "Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest",
+            "homepage": "https://github.com/proengsoft/laravel-jsvalidation",
+            "keywords": [
+                "form",
+                "javascript",
+                "jquery",
+                "laravel",
+                "proengsoft",
+                "validation",
+                "validator"
+            ],
+            "time": "2016-01-04 00:23:38"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0",
             "source": {
@@ -2033,6 +2143,106 @@
             "time": "2016-03-09 05:03:14"
         },
         {
+            "name": "rap2hpoutre/laravel-log-viewer",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
+                "reference": "111628d33a138553a1494a6fd9f6572afe01beea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/111628d33a138553a1494a6fd9f6572afe01beea",
+                "reference": "111628d33a138553a1494a6fd9f6572afe01beea",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "rap2hpoutre",
+                    "email": "raphael@ornikar.com"
+                }
+            ],
+            "description": "A Laravel log reader",
+            "keywords": [
+                "log",
+                "log-reader",
+                "log-viewer",
+                "logging"
+            ],
+            "time": "2016-03-10 09:38:19"
+        },
+        {
+            "name": "spatie/crawler",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/crawler.git",
+                "reference": "489d94e0cf72c9f85d45351810dff9a0507026f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/crawler/zipball/489d94e0cf72c9f85d45351810dff9a0507026f9",
+                "reference": "489d94e0cf72c9f85d45351810dff9a0507026f9",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.1",
+                "illuminate/support": "^5.1",
+                "php": ">=5.5.0",
+                "symfony/dom-crawler": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Crawler\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be"
+                }
+            ],
+            "description": "Crawl all internal links found on a website",
+            "homepage": "https://github.com/spatie/crawler",
+            "keywords": [
+                "crawler",
+                "link",
+                "spatie",
+                "website"
+            ],
+            "time": "2016-03-08 08:55:36"
+        },
+        {
             "name": "spatie/db-dumper",
             "version": "1.2.3",
             "source": {
@@ -2143,6 +2353,59 @@
                 "spatie"
             ],
             "time": "2016-03-16 21:48:53"
+        },
+        {
+            "name": "spatie/laravel-link-checker",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-link-checker.git",
+                "reference": "2a21a72ca68a7997f8b03250425174d9dc346966"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-link-checker/zipball/2a21a72ca68a7997f8b03250425174d9dc346966",
+                "reference": "2a21a72ca68a7997f8b03250425174d9dc346966",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "spatie/crawler": "^1.1.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.1",
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LinkChecker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Check all links in a Laravel app",
+            "homepage": "https://github.com/spatie/laravel-link-checker",
+            "keywords": [
+                "checker",
+                "crawler",
+                "health",
+                "laravel-link-checker",
+                "link",
+                "spatie"
+            ],
+            "time": "2015-12-03 16:41:38"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2422,6 +2685,62 @@
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
             "time": "2016-01-27 05:14:46"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "981c8edb4538f88ba976ed44bdcaa683fce3d6c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/981c8edb4538f88ba976ed44bdcaa683fce3d6c6",
+                "reference": "981c8edb4538f88ba976ed44bdcaa683fce3d6c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "symfony/css-selector": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DomCrawler Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-02-28 16:24:34"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4422,62 +4741,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
-        },
-        {
-            "name": "symfony/dom-crawler",
-            "version": "v3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "981c8edb4538f88ba976ed44bdcaa683fce3d6c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/981c8edb4538f88ba976ed44bdcaa683fce3d6c6",
-                "reference": "981c8edb4538f88ba976ed44bdcaa683fce3d6c6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "symfony/polyfill-mbstring": "~1.0"
-            },
-            "require-dev": {
-                "symfony/css-selector": "~2.8|~3.0"
-            },
-            "suggest": {
-                "symfony/css-selector": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\DomCrawler\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony DomCrawler Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-02-28 16:24:34"
         },
         {
             "name": "symfony/yaml",

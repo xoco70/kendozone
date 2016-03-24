@@ -97,6 +97,7 @@
 
     {!! Form::close()!!}
             <!-- /registration form -->
-
+    {!! JsValidator::formRequest('App\Http\Requests\AuthRequest') !!}
 </div>
 @stop
+

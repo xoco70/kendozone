@@ -12,6 +12,8 @@
 
     {!! Html::style('css/icons/icomoon/styles.css')!!}
     {!! Html::script('js/app.js') !!}
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
 
 
 

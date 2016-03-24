@@ -10,6 +10,7 @@
     <!-- Global stylesheets -->
     {!! Html::style('/css/icons/icomoon/styles.css')!!}
     {!! Html::style('https://fonts.googleapis.com/css?family=Nunito:400,300,100,500,700,900')!!}
+    {!! Html::script('http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js')!!}
 
     {!! Html::script('js/app.js')!!}
     {!! Html::style('css/app.css')!!}

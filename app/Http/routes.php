@@ -108,6 +108,7 @@ Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi
         Route::resource('tournaments', 'Api\TournamentController');
 });
 //        invite/{userId}/register/
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
 //Event::listen('illuminate.query', function($query)
