@@ -41,6 +41,7 @@ class CreateCategoryTable extends Migration
             $table->foreign('tournament_id')
                 ->references('id')
                 ->on('tournament')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreign('category_id')
@@ -63,6 +64,7 @@ class CreateCategoryTable extends Migration
             $table->foreign('category_tournament_id')
                 ->references('id')
                 ->on('category_tournament')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
 
 
@@ -70,6 +72,7 @@ class CreateCategoryTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->unique(array('category_tournament_id', 'user_id'));

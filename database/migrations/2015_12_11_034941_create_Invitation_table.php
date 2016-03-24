@@ -21,6 +21,7 @@ class CreateInvitationTable extends Migration
             $table->foreign('tournament_id')
                 ->references('id')
                 ->on('tournament')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->date('expiration');

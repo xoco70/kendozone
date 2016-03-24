@@ -17,6 +17,7 @@ class CreateCategorySettingsTable extends Migration
             $table->integer('category_tournament_id')->unsigned()->unique();
             $table->foreign('category_tournament_id')
                 ->references('id')
+                ->onUpdate('cascade')
                 ->on('category_tournament')
                 ->onDelete('cascade');
 
