@@ -66,9 +66,7 @@ else
                             @foreach($categoryTournament->users as $user)
                                 <?php
                                 $arr_country = $countries->where('id', $user->country_id)->all();
-                                $country = array_first($arr_country);
-
-
+                                $country = array_first($arr_country, null);
                                 ?>
                                 <tr>
                                     <td class="text-center">
