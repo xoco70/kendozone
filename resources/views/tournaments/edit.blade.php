@@ -378,7 +378,7 @@ $day = $now->day;
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";
         var configured = "{{ trans('crud.configured') }}";
-
+        var allCategoriesSize = '{!! $categorySize !!}';
 
     </script>
 

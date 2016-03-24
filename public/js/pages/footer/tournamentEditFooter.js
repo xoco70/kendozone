@@ -113,7 +113,7 @@ $(function () {
 
     //EDIT CATEGORIES
     var categoriesSize = null;
-    var allCategoriesSize = '{!! $categorySize !!}';
+    
 
     $('.save_category').on('click', function (e) {
         e.preventDefault();
