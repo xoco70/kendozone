@@ -162,10 +162,10 @@ $(function () {
                         panel.find('.cat-state').text(configured);
 
                         form.attr('data-setting', data.settingId);
-
+                        var catsize = $(".category-size");
                         if (method == 'POST') {
-                            categoriesSize = parseInt($(".category-size").text(), 10) + 1;
-                            $('.category-size').html(categoriesSize)
+                            categoriesSize = parseInt(catsize.text(), 10) + 1;
+                            catsize.html(categoriesSize)
                         }
                         // console.log(categoriesSize);
                         console.log(allCategoriesSize);
