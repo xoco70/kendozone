@@ -36,7 +36,7 @@ class TournamentSeeder extends Seeder
 
 
         ]);
-//        factory(Tournament::class, 5)->create();
+        factory(Tournament::class, 5)->create();
 
 
         CategoryTournament::truncate();

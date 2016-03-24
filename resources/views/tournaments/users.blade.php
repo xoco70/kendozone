@@ -27,19 +27,20 @@ else
 
                     <div class="container-fluid">
 
-
-                        <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
-                           class="btn bg-teal btn-xs pull-right ml-20"><b><i
-                                        class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
-                        </a>
-                        <a href="{!!   URL::action('TournamentUserController@create',
-                                                    ['tournamentId'=>$tournament->slug,
-                                                    'categoryId'=>$categoryTournament->id
-                                                    ]) !!}"
-                           class="btn btn-primary btn-xs pull-right"
-                           id="addcompetitor{!! $categoryTournament->id !!}"><b><i
-                                        class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
-                        </a>
+                        @if (Auth::user()->canEditTournament($tournament))
+                            <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
+                               class="btn bg-teal btn-xs pull-right ml-20"><b><i
+                                            class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
+                            </a>
+                            <a href="{!!   URL::action('TournamentUserController@create',
+                                                        ['tournamentId'=>$tournament->slug,
+                                                        'categoryId'=>$categoryTournament->id
+                                                        ]) !!}"
+                               class="btn btn-primary btn-xs pull-right"
+                               id="addcompetitor{!! $categoryTournament->id !!}"><b><i
+                                            class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
+                            </a>
+                        @endif
 
                         <a name="{{ $categoryTournament->category->name }}">
                             <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
@@ -53,17 +54,19 @@ else
                                 <th class="all">{{ trans('crud.username') }}</th>
                                 <th class="phone">{{ trans('crud.email') }}</th>
                                 <th align="center" class="phone">{{ trans_choice('crud.category',1) }}</th>
-                                <th align="center"  class="phone">{{ trans('crud.confirmed') }}</th>
+                                <th align="center" class="phone">{{ trans('crud.confirmed') }}</th>
                                 <th class="phone">{{ trans('crud.country') }}</th>
-                                <th class="all">{{ trans('crud.action') }}</th>
+                                @if (Auth::user()->canEditTournament($tournament))
+                                    <th class="all">{{ trans('crud.action') }}</th>
+                                @endif
                             </tr>
                             </thead>
 
 
                             @foreach($categoryTournament->users as $user)
-                            <?php
-                                   $arr_country = $countries->where('id', $user->country_id)->all();
-                                    $country = array_first ($arr_country );
+                                <?php
+                                $arr_country = $countries->where('id', $user->country_id)->all();
+                                $country = array_first($arr_country);
 
 
                                 ?>
@@ -72,55 +75,68 @@ else
                                         <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
                                                     src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                     </td>
-                                    <td><a
-                                                href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
+                                    <td>
+                                        @if (Auth::user()->canEditTournament($tournament))
+                                            <a href="{!!   URL::action('UserController@edit',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
+                                        @else
+                                            <a href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
+                                        @endif
+
+
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td class="text-center">{{ trans($categoryTournament->category->name)}}</td>
 
                                     <td class="text-center">
                                         @if ($user->pivot->confirmed)
-                                            <?php $class="glyphicon glyphicon-ok-sign text-success";?>
+                                            <?php $class = "glyphicon glyphicon-ok-sign text-success";?>
                                         @else
-                                            <?php $class="glyphicon glyphicon-remove-sign text-danger ";?>
+                                            <?php $class = "glyphicon glyphicon-remove-sign text-danger ";?>
                                         @endif
 
+                                        @if (Auth::user()->canEditTournament($tournament))
                                             {!! Form::open(['method' => 'PUT', 'id' => 'formConfirmTCU',
                                         'action' => ['TournamentUserController@confirmUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
 
 
-                                        <button type="submit"
-                                                class="btn btn-flat btnConfirmTCU"
-                                                id="confirm_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
-                                                data-tournament ="{!! $tournament->slug !!}"
-                                                data-category ="{!! $categoryTournament->id !!}"
-                                                data-user = "{!! $user->slug !!}">
+                                            <button type="submit"
+                                                    class="btn btn-flat btnConfirmTCU"
+                                                    id="confirm_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
+                                                    data-tournament="{!! $tournament->slug !!}"
+                                                    data-category="{!! $categoryTournament->id !!}"
+                                                    data-user="{!! $user->slug !!}">
+                                                <i class="{!! $class  !!} "></i>
+                                            </button>
+                                            {!! Form::close() !!}
+                                        @else
                                             <i class="{!! $class  !!} "></i>
-                                        </button>
-                                        {!! Form::close() !!}
+
+
+                                        @endif
 
 
                                     </td>
 
 
-                                    <td class="text-center"><img src="/images/flags/{{ $country->flag }}"
-                                                                 alt="{{ $country->name }}"/></td>
+                                    <td class="text-center"><img src="/images/flags/{{ $country->flag }}" alt="{{ $country->name }}"/></td>
 
-
+                                    @if (Auth::user()->canEditTournament($tournament))
                                     <td class="text-center">
-                                        {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
+
+                                            {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
                                          'action' => ['TournamentUserController@deleteUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
 
                                             <button type="submit"
                                                     class="btn text-warning-600 btn-flat btnDeleteTCU"
                                                     id="delete_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
-                                                    data-tournament ="{!! $tournament->slug !!}"
-                                                    data-category ="{!! $categoryTournament->id !!}"
-                                                    data-user = "{!! $user->slug !!}">
+                                                    data-tournament="{!! $tournament->slug !!}"
+                                                    data-category="{!! $categoryTournament->id !!}"
+                                                    data-user="{!! $user->slug !!}">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </button>
-                                        {!! Form::close() !!}
+                                            {!! Form::close() !!}
                                     </td>
+                                    @endif
                                 </tr>
 
                             @endforeach

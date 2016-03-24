@@ -162,10 +162,13 @@ $(function () {
                         panel.find('.cat-state').text(configured);
 
                         form.attr('data-setting', data.settingId);
+
                         if (method == 'POST') {
                             categoriesSize = parseInt($(".category-size").text(), 10) + 1;
                             $('.category-size').html(categoriesSize)
                         }
+                        // console.log(categoriesSize);
+                        console.log(allCategoriesSize);
                         if (categoriesSize == allCategoriesSize) {
                             $('#categories-status').removeClass().addClass('badge badge-success');
                         }

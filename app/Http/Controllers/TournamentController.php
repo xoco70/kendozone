@@ -110,7 +110,7 @@ class TournamentController extends Controller
         $categorySize = $tournament->categories()->count();
 
 //        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize')); // , 'categoriesWithSettings'
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize'));
     }
 
     /**

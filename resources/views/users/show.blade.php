@@ -3,10 +3,12 @@
     {!! Html::script('http://maps.google.com/maps/api/js') !!}
 @stop
 @section('breadcrumbs')
-    @if (!is_null($tournament))
+    @if (isset($tournament) && !is_null($tournament))
+        {{ "ok" }}
         {!! Breadcrumbs::render('tournaments.users.show',$tournament, $user) !!}
     @else
-        {!! Breadcrumbs::render('users.show',$user) !!}
+        {{--{!! Breadcrumbs::render('users.show',$user) !!}--}}
+        {{--TODO Put Breadcrumbs here--}}
     @endif
 @stop
 @section('content')
@@ -164,7 +166,7 @@
                     infowindow.open(map, marker);
                 });
 
-            };
+            }
 
             // Initialize map on window load
             google.maps.event.addDomListener(window, 'load', initialize);

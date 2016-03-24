@@ -52,10 +52,10 @@
         <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.signin_with') }}</span></div>
         <ul class="list-inline form-group list-inline-condensed text-center">
             <li><a href="{!! URL::to('/auth/login/facebook') !!}"
-                   class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded"><i
+                   class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded" id="fb"><i
                             class="icon-facebook"></i></a></li>
             <li><a href="{!! URL::to('/auth/login/google') !!}"
-                   class="btn border-danger text-danger btn-flat btn-icon btn-rounded"><i
+                   class="btn border-danger text-danger btn-flat btn-icon btn-rounded" id="google"><i
                             class="icon-google"></i></a></li>
         </ul>
 

@@ -126,6 +126,15 @@ class AuthTest extends TestCase
     /** @test */
     public function loginWithGoogle()
     {
+        Auth::logout();
+        $this->visit('/auth/login')
+             ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
+//        dump(Request::url());
+//        $this->dump();
+//             ->press('choose-account-0');
+//        dd(Request::url());
+//             ->dump();
+
     }
 
 

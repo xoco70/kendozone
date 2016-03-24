@@ -38,10 +38,10 @@ $numCompetitors = $tournament->competitors()->count();
                                 else
                                     $class = "badge-warning";
                                 ?>
-                                <span class="badge {!! $class !!}" id="categories-status">
-                                <span class="category-size">{{ $settingSize  }}</span> / {{$categorySize}}</span>
+                                <div class="badge {!! $class !!}" id="categories-status">
+                                    <span class="category-size">{{ $settingSize  }}</span> / {{ $categorySize }}
+                                </div>
                             </a></li>
-{{--TODO Using competitors()--}}
                         <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
                                 {{trans_choice("crud.competitor",2)}}
                                 @if($numCompetitors>8)
@@ -69,6 +69,7 @@ $numCompetitors = $tournament->competitors()->count();
         </div>
     </div>
     <br/>
+    @if (Auth::user()->canEditTournament($tournament))
     <div class="row">
         <div class="col-md-12">
             <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button" class="btn btn-primary btn-labeled btn-xlg"
@@ -77,6 +78,7 @@ $numCompetitors = $tournament->competitors()->count();
 
         </div>
     </div>
+    @endif
     <br/>
     <?php
     $link = "";
@@ -93,7 +95,7 @@ $numCompetitors = $tournament->competitors()->count();
 
     ?>
 
-
+    @if (Auth::user()->canEditTournament($tournament))
     <div class="row">
         <div class="col-md-12">
             <p><a href="{!!  $link  !!}" {!! $id !!} type="button" class="btn bg-teal btn-labeled btn-xlg"
@@ -103,6 +105,7 @@ $numCompetitors = $tournament->competitors()->count();
 
     </div>
     <br/>
+    @endif
 
     <?php
     //    $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();

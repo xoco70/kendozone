@@ -221,9 +221,39 @@ class UserTest extends TestCase
 
     }
 
-    /** @test */
+    /** @test
+     * TODO Map seems not to work in user.show
+     */
     public function check_you_can_see_user_info()
     {
+        $user1 = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>'3']);
+        $user2 = factory(User::class)->create(['name'=>'AnotherUser' ]);
 
+        Auth::loginUsingId($user1->id);
+        $this->visit('/users/'.$user2->slug)
+            ->dontSee("403")
+            ->visit('/users/'.$user2->slug.'/edit')
+            ->see("403");
+//            $this->visit('/users/'.$user->slug.'/edit')
+    }
+
+    /** @test
+     * TODO Map seems not to work in user.show
+     */
+    public function user_can_see_tournament_info_but_cannot_edit_it()
+    {
+        $user = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>'3']);
+        $owner = factory(User::class)->create(['name'=>'AnotherUser' ]);
+
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
+
+
+
+        Auth::loginUsingId($user->id);
+        $this->visit('/tournaments/'.$tournament->slug)
+            ->dontSee("403")
+            ->visit('/tournaments/'.$tournament->slug.'/edit')
+            ->see("403");
+//            $this->visit('/users/'.$user->slug.'/edit')
     }
 }
