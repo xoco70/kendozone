@@ -40,8 +40,8 @@ class CreateTournamentTable extends Migration {
 			$table->integer("level_id")->unsigned()->default(1);
 			$table->foreign('level_id')
 					->references('id')
-					->on('tournamentLevel')
-					->onDelete('cascade');
+					->on('tournamentLevel');
+
 
 //			$table->string('banner');
 //			$table->string('PassingTeams');
