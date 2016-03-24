@@ -154,7 +154,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 //        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
