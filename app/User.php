@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
+use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
@@ -166,7 +167,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
 
         if (is_null($avatar) || strlen($avatar) == 0) {
-            $avatar = 'avatar.png';
+            // Check if it has gravatar
+            if (Gravatar::exists($this->email)){
+                $avatar = Gravatar::src($this->email);
+            }else{
+                $avatar = 'avatar.png';
+            }
+
         }
 
         if (!str_contains($avatar, 'http')) {
