@@ -160,7 +160,7 @@ return [
 //        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+//        Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class
 
 
