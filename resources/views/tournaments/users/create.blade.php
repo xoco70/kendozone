@@ -13,8 +13,8 @@
         <div class="row col-md-10 col-md-offset-2 custyle">
 
             <?php
-//                dd($categoryTournamentId);
-                $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
+            //                dd($categoryTournamentId);
+            $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
             ?>
             {!! Form::open(['url'=>"tournaments/$tournament->slug/users/"]) !!}
 
@@ -28,6 +28,7 @@
                     <div class="container-detached">
                         <div class="content-detached">
 
+
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
@@ -38,15 +39,20 @@
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                {!!  Form::label('username', trans('crud.username')) !!}
-                                                {!!  Form::text('username',null, ['class' => 'form-control']) !!}
+                                                <div class="form-group">
+                                                    {!!  Form::label('username', trans('crud.username')) !!}
+                                                    {!!  Form::text('username',null, ['class' => 'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
                                         <br/>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                {!!  Form::label('email', trans('crud.email')) !!}
-                                                {!!  Form::email('email',null, ['class' => 'form-control']) !!}
+                                            <div class="form-group">
+
+                                                <div class="col-md-6">
+                                                    {!!  Form::label('email', trans('crud.email')) !!}
+                                                    {!!  Form::email('email',null, ['class' => 'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
                                         <br/>
@@ -78,6 +84,7 @@
 
 
             {!! Form::close()!!}
+            {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
         </div>
     </div>
     <script>

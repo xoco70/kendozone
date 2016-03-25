@@ -75,7 +75,8 @@ class TournamentController extends Controller
     {
         $tournament = Auth::user()->tournaments()->create($request->all());
         $tournament->categories()->sync($request->input('category'));
-        flash()->success(trans('msg.tournament_create_successful', ['name' => $tournament->name]));
+        $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
+        flash()->success($msg);
 //        else flash('error', 'operation_failed!');
         return redirect("tournaments/$tournament->slug/edit");
     }

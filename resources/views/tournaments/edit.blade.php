@@ -2,6 +2,8 @@
 @section('scripts')
 {!! Html::script('js/pages/header/tournamentEdit.js') !!}
 {!! Html::script('https://maps.google.com/maps/api/js') !!}
+{{--{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}--}}
+
 @stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
@@ -381,6 +383,5 @@ $day = $now->day;
         var allCategoriesSize = '{!! $categorySize !!}';
 
     </script>
-
     {!! Html::script('js/pages/footer/tournamentEditFooter.js') !!}
 @stop

@@ -20,39 +20,45 @@
                     </div>
                     <div class="col-md-4">
                         {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">{{trans('crud.from') }}</span>
+                                {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
+                                <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
-                        <div class="input-group">
-                            <span class="input-group-addon">{{trans('crud.from') }}</span>
-                            {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
-                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
-
+                            </div>
                         </div>
-
                     </div>
                     <div class="col-md-4">
 
                         {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold' ]) !!}
+                        <div class="form-group">
 
-                        <div class="input-group">
-                            <span class="input-group-addon">{{trans('crud.to') }}</span>
-                            {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
-                            <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                            <div class="input-group">
+                                <span class="input-group-addon">{{trans('crud.to') }}</span>
+                                {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
+                                <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
 
+                            <p>{{trans('crud.select_categories_to_register')}}</p>
 
-                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                        <div class="form-group">
+
+                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                        </div>
                     </div>
                 </div>
                 {{--<div class="row text-uppercase">--}}
-                    {{--<div class="col-md-6 col-md-offset-6 ">--}}
-                        {{--<a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>--}}
-                    {{--</div>--}}
+                {{--<div class="col-md-6 col-md-offset-6 ">--}}
+                {{--<a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>--}}
+                {{--</div>--}}
                 {{--</div>--}}
                 <div class=" text-right mt-15">
                     {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
@@ -116,3 +122,4 @@ $day = $now->day;
 
     });
 </script>
+{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}

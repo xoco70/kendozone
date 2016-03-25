@@ -131,9 +131,11 @@
                                     </a>
                                 </fieldset>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        {!!  Form::label('email', trans('crud.email')) !!}
-                                        {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            {!!  Form::label('email', trans('crud.email')) !!}
+                                            {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -187,5 +189,7 @@
 
         </div>
         {!! Form::close()!!}
+        {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+
     </div>
 @stop

@@ -32,7 +32,9 @@ $(function () {
 
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        console.log(url_edit);
+        var btnUpdateTour = $('.btn-update-tour');
+
+        // console.log(url_edit);
         $.ajax(
             {
                 type: 'PUT',
@@ -85,8 +87,8 @@ $(function () {
                             text: url_edit,
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
-                        $('.btn-update-tour').prop("disabled", false);
-                        $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
+                        btnUpdateTour.prop("disabled", false);
+                        btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                     }
 
                 },
@@ -102,8 +104,8 @@ $(function () {
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
-                    $(this).prop("disabled", false);
-                    $(this).find('i').removeClass('icon-spinner spinner position-left')
+                    btnUpdateTour.prop("disabled", false);
+                    btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
 
                 }
             }
@@ -168,7 +170,7 @@ $(function () {
                             catsize.html(categoriesSize)
                         }
                         // console.log(categoriesSize);
-                        console.log(allCategoriesSize);
+                        // console.log(allCategoriesSize);
                         if (categoriesSize == allCategoriesSize) {
                             $('#categories-status').removeClass().addClass('badge badge-success');
                         }

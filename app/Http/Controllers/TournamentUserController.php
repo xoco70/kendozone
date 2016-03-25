@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Http\Requests;
+use App\Http\Requests\TournamentUserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
@@ -64,27 +65,17 @@ class TournamentUserController extends Controller
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tournament $tournament, AppMailer $mailer)
+    public function store(TournamentUserRequest $request, Tournament $tournament, AppMailer $mailer)
     {
-
-        $this->validate($request, [
-            'username' => 'required|max:255',
-            'email' => 'required',
-            'categoryTournamentId' => 'required',
-
-        ]);
-
         $categoryTournamentId = $request->categoryTournamentId;
 
 //        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($userId);
-
 
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
 
         $email = $request->email;
         $username = $request->username;
 
-//        $tournament = Tournament::findOrFail($tournament);
         $user = User::where('email', $email)->first();
         $password = null;
         if (is_null($user)) {
