@@ -96,7 +96,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log' => 'daily',
 
     /*
     |--------------------------------------------------------------------------
@@ -157,9 +157,11 @@ return [
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Spatie\LinkChecker\LinkCheckerServiceProvider::class,
-        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+//        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+
 
     ],
 
@@ -222,7 +224,6 @@ return [
         'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
-        // or
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
 

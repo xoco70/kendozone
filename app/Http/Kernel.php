@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
 //        Middleware\VerifyCsrfToken::class,
         Middleware\Own::class,
 
+
 //        'throttle:60,1',
     ];
 
@@ -34,9 +35,10 @@ class Kernel extends HttpKernel
         'guest' => Middleware\RedirectIfAuthenticated::class,
         'roles' => Middleware\CheckRole::class,
         'own' => Middleware\Own::class,
+        'root' => Middleware\SuperAdmin::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'simpleauth' => Middleware\SimpleAuthMiddleware::class,
-        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
-        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
+//        'simpleauth' => Middleware\SimpleAuthMiddleware::class,
+//        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+//        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }
