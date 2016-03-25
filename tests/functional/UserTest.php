@@ -149,7 +149,7 @@ class UserTest extends TestCase
         $user = factory(User::class)->create(
             [   'name' => 'MyUser',
                 'email' => 'MyUser@kendozone.com',
-                'role_id' => 3,
+                'role_id' => Config::get('constants.ROLE_USER'),
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);
 
@@ -226,7 +226,7 @@ class UserTest extends TestCase
      */
     public function check_you_can_see_user_info()
     {
-        $user1 = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>'3']);
+        $user1 = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>Config::get('constants.ROLE_USER')]);
         $user2 = factory(User::class)->create(['name'=>'AnotherUser' ]);
 
         Auth::loginUsingId($user1->id);
@@ -242,7 +242,7 @@ class UserTest extends TestCase
      */
     public function user_can_see_tournament_info_but_cannot_edit_it()
     {
-        $user = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>'3']);
+        $user = factory(User::class)->create(['name'=>'MyUser', 'role_id'=>Config::get('constants.ROLE_USER')]);
         $owner = factory(User::class)->create(['name'=>'AnotherUser' ]);
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);

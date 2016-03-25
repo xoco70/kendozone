@@ -286,27 +286,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isSuperAdmin()
     {
-        return Auth::user()->role_id == 1;
+        return Auth::user()->role_id == Config::get('constants.ROLE_SUPERADMIN');
     }
 
     public function isOwner()
     {
-        return Auth::user()->role_id == 2;
+        return Auth::user()->role_id == Config::get('constants.ROLE_OWNER');
     }
 
     public function isAdmin()
     {
-        return Auth::user()->role_id == 3;
+        return Auth::user()->role_id == Config::get('constants.ROLE_ADMIN');
     }
 
     public function isModerator()
     {
-        return Auth::user()->role_id == 4;
+        return Auth::user()->role_id == Config::get('constants.ROLE_PRESIDENT');
     }
 
     public function isUser()
     {
-        return Auth::user()->role_id == 5;
+        return Auth::user()->role_id == Config::get('constants.ROLE_USER');
     }
 
     public function getRouteKeyName()

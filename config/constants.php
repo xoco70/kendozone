@@ -13,7 +13,7 @@ return [
     'ROLE_OWNER' => '2',
     'ROLE_ADMIN' => '3',
     'ROLE_PRESIDENT' => '4',
-    'ROLE_COMPETITOR' => '5',
+    'ROLE_USER' => '5',
 
     'CAT_FIGHTING_AREAS' => '1',
     'CAT_FIGHT_DURATION' => '03:00',

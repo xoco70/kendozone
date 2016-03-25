@@ -32,7 +32,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'city' => $faker->city,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
-        'role_id' => $faker->numberBetween(1, 3),
+        'role_id' => $faker->numberBetween(1, 5),
         'verified' => true,
         'remember_token' => str_random(10),
         'provider' => '',

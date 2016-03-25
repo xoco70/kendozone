@@ -163,7 +163,7 @@ class AuthController extends Controller
                                 'city' => $request->city,
                                 'latitude' => $request->latitude,
                                 'longitude' => $request->longitude,
-                                'role_id' => Config::get('constants.ROLE_ADMIN'),
+                                'role_id' => Config::get('constants.ROLE_USER'),
                                 'verified' => 0,
 
         ]);
@@ -183,7 +183,7 @@ class AuthController extends Controller
 
     public function postInvite(AuthRequest $request)
     {
-        $request->request->add(['role_id' => Config::get('constants.ROLE_ADMIN')]);
+        $request->request->add(['role_id' => Config::get('constants.ROLE_USER')]);
         //Check token
         $user = null;
         $token = $request->get("token");

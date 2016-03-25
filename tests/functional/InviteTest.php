@@ -141,7 +141,7 @@ class InviteTest extends TestCase
 //        dump($)
 //        $categoriesTournament = $categoriesTournament;
 
-        $user = factory(User::class)->create(['role_id' => 3,
+        $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'),
             'password' => bcrypt('111111') // 111111
         ]);
 

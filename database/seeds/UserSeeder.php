@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'city' => 'Mexico City',
             'latitude' => '19.4342',
             'longitude' => '-99.1386',
-            'role_id' => '1',
+            'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
             'avatar' => 'https://lh3.googleusercontent.com/-1IZ2nbY2o40/AAAAAAAAAAI/AAAAAAAAHEY/KrhjLc7m66g/photo.jpg?sz=50',
             'token' => 'JgczvNP4eEn2LCHPj2MGg4obZooeIj',
             'verified' => '1',
@@ -39,21 +39,21 @@ class UserSeeder extends Seeder
         factory(User::class)->create(
             [   'name' => 'root',
                 'email' => 'superuser@kendozone.com',
-                'role_id' => 1,
+                'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);
         factory(User::class)->create(
             [   'name' => 'admin',
                 'email' => 'admin@kendozone.com',
-                'role_id' => 3,
+                'role_id' => Config::get('constants.ROLE_ADMIN'),
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);
 
-        factory(User::class, 5)->create(['role_id' => 2]);
+        factory(User::class, 5)->create(['role_id' => Config::get('constants.ROLE_OWNER')]);
         $this->command->info('seeding users!');
-        factory(User::class)->create(['role_id' => 3]);
-        factory(User::class)->create(['role_id' => 4]);
-        factory(User::class)->create(['role_id' => 5]);
+        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ADMIN')]);
+        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_PRESIDENT')]);
+        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
 
         $this->command->info('Users seeded!');

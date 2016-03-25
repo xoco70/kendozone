@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
 
-            $table->integer('role_id')->unsigned()->default(3);
+            $table->integer('role_id')->unsigned()->default(Config::get('constants.ROLE_USER'));
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles')

@@ -150,7 +150,7 @@
 
                                         <div class="form-group">
                                             {!!  Form::label('role_id', trans('crud.role')) !!}
-                                            @if (Auth::user()->role_id == 1)
+                                            @if (Auth::user()->isSuperAdmin())
                                                 {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
                                             @else
                                                 {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}

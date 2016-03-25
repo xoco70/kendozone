@@ -72,7 +72,7 @@ class TournamentUserTest extends TestCase
         $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
 
-        $users = factory(User::class, 3)->create(['role_id' => 3]);
+        $users = factory(User::class, 3)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         foreach ($users as $user){
             factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);

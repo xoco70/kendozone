@@ -78,7 +78,7 @@ class AuthTest extends TestCase
         // It should verify email is in system
 
         $user = factory(User::class)->create([
-            'role_id' => 3,
+            'role_id' => Config::get('constants.ROLE_USER'),
             'verified' => 1,]);
 
         $this->visit('/auth/login')
