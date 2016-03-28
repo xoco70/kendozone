@@ -23,15 +23,15 @@ class CreateSettingsTable extends Migration
                 ->onDelete('cascade');
 
             // Category Section
-            $table->tinyInteger('isTeam');
+            $table->boolean('isTeam');
             $table->tinyInteger('teamSize');
             $table->tinyInteger('fightDuration');
-            $table->tinyInteger('hasRoundRobin');
+            $table->boolean('hasRoundRobin');
             $table->tinyInteger('roundRobinWinner');
-            $table->tinyInteger('hasEncho');
+            $table->boolean('hasEncho');
             $table->tinyInteger('enchoQty');
             $table->tinyInteger('enchoDuration');
-            $table->tinyInteger('hasHantei');
+            $table->boolean('hasHantei');
             $table->smallInteger('cost');
             $table->string('slug')->nullable();
             $table->timestamps();

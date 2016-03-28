@@ -18,7 +18,7 @@ class CreateTournamentTable extends Migration {
 					->onDelete('cascade');
 
 			$table->string('name');
-			$table->string('slug')->nullable();
+			$table->string('slug')->unique();
 
 			$table->date('dateIni');
 			$table->date('dateFin');
