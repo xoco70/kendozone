@@ -29,7 +29,7 @@ class TournamentTest extends TestCase
     use DatabaseTransactions;
 //    use WithoutMiddleware;
 
-    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament;
+    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament, $root;
 
 
     public function setUp()
@@ -41,8 +41,9 @@ class TournamentTest extends TestCase
         $this->addTournaments = Lang::get('crud.addModel', ['currentModelName' => $this->tournaments]);
 
         $this->editTournament = Lang::get('crud.updateModel', ['currentModelName' => $this->tournament]);
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
-        Auth::loginUsingId(1);
+        Auth::loginUsingId($this->root->id);
     }
 
     /** @test */
