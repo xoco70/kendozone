@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
  *
  * it_add_a_user_to_tournament_category()
  * it_removes_a_user_from_tournament_category()
- * you_must_own_tournament_to_add_or_remove_user_from_tournament() (TODO)
+ * you_must_own_tournament_or_be_superuser_to_add_or_remove_user_from_tournament
  * you_can_confirm_a_user (TODO)
  *
  * User: juliatzin
@@ -74,25 +74,66 @@ class TournamentUserTest extends TestCase
 
         $users = factory(User::class, 3)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
-        foreach ($users as $user){
+        foreach ($users as $user) {
             factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
             factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
 
             $this->visit("/tournaments/$tournament->slug/users")
                 // delete_t1111_73_prof-jaquelin-bruen
-                ->press("delete_" . $tournament->slug."_".$ct1->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
+                ->press("delete_" . $tournament->slug . "_" . $ct1->id . "_" . $user->slug)// delete_olive_21_xoco70athotmail
                 ->notSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
 
             $this->visit("/tournaments/$tournament->slug/users")
                 // delete_t1111_73_prof-jaquelin-bruen
-                ->press("delete_" . $tournament->slug."_".$ct2->id."_".$user->slug)   // delete_olive_21_xoco70athotmail
+                ->press("delete_" . $tournament->slug . "_" . $ct2->id . "_" . $user->slug)// delete_olive_21_xoco70athotmail
                 ->notSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
         }
     }
 
     /** @test */
-    public function you_must_own_tournament_to_add_or_remove_user_from_tournament()
+    public function you_must_own_tournament_or_be_superuser_to_add_or_remove_user_from_tournament()
     {
+        $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+
+        $users = factory(User::class, 3)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
+        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        $ct3 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
+
+        foreach ($users as $user) {
+
+            // Attach user to 2 categories
+            factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
+            factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
+            factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct3->id, 'user_id' => $user->id]);
+
+
+            Auth::loginUsingId($root->id);
+            // delete first user as root
+            $this->visit("/tournaments/$tournament->slug/users")
+                ->press("delete_" . $tournament->slug . "_" . $ct1->id . "_" . $user->slug) // delete_olive_21_xoco70athotmail
+                ->notSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
+
+
+            Auth::loginUsingId($owner->id);
+//            // delete first user as owner
+            $this->visit("/tournaments/$tournament->slug/users")
+                ->press("delete_" . $tournament->slug . "_" . $ct2->id . "_" . $user->slug)
+                ->notSeeInDatabase('category_tournament_user', ['category_tournament_id' => $ct2->id, 'user_id' => $user->id]);
+
+
+            Auth::loginUsingId($simpleUser->id);
+//            // delete first user as owner
+            $this->visit("/tournaments/$tournament->slug/users")
+                ->dontSee("delete_" . $tournament->slug . "_" . $ct3->id . "_" . $user->slug)
+                ->seeInDatabase('category_tournament_user', ['category_tournament_id' => $ct3->id, 'user_id' => $user->id]);
+
+        }
+
 
     }
 
@@ -101,7 +142,6 @@ class TournamentUserTest extends TestCase
     {
 
     }
-
 
 
 }
