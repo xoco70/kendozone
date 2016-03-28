@@ -3,6 +3,7 @@ use App\CategorySettings;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Tournament;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -241,9 +242,12 @@ class TournamentTest extends TestCase
     /** @test */
     public function you_must_own_tournament_to_edit_it_or_be_superuser()
     {
-        Auth::loginUsingId(1);
+        $root =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $user =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
-        $myTournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        Auth::loginUsingId($root->id);
+
+        $myTournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $root->id ]);
 
         //add categories
 
@@ -254,11 +258,9 @@ class TournamentTest extends TestCase
         // 1 is SuperUser so it should be OK
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see($this->tournaments);
-        Auth::loginUsingId(4);
+        Auth::loginUsingId($user->id);
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see("403");
-        Auth::loginUsingId(1);
-
     }
 
     /** @test */
