@@ -16,11 +16,6 @@ class InviteTest extends TestCase
      * Tests inside:
      * an_admin_may_invite_users_but_users_must_register_after
      * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
-     * 1. Send mails and success
-     * 3. Click mail, register and add to tournament
-     * 4. Click mail and deny - used invitation
-     * 5. Click mail and deny - invitation disabled
-     *
      */
 
     use DatabaseTransactions;

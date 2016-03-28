@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  * it_add_a_user_to_tournament_category()
  * it_removes_a_user_from_tournament_category()
  * you_must_own_tournament_or_be_superuser_to_add_or_remove_user_from_tournament
- * you_can_confirm_a_user (TODO)
+ * you_can_confirm_a_user
  *
  * User: juliatzin
  * Date: 10/11/2015
