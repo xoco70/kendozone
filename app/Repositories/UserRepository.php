@@ -11,32 +11,26 @@ class UserRepository
 {
     public function findByUserNameOrCreate($userData, $provider)
     {
+
         $user = User::where('provider_id', '=', $userData->id)->first();
         if (!$user) {
             // Check if there is no other user with same email
             $user = User::where('email', '=', $userData->email)->first();
-//            dd($user);
             if (!$user){
 
-//                dd("IP:".Config::get('constants.CLIENT_IP')); // 10.0.2.2
-//                $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-//
-//                $country = $location['country'];
-                // Get id from country
-
-//                $country = Countries::where('name','=',$country)->first();
-//                dd($country);
+                // get Large avatar
+                $avatar = str_replace('sz=50', 'sz=120 ', $userData->avatar);
+//                $avatar = str_replace('type=normal', 'type=large ', $avatar);
+//dd (str_slug($userData->email));
                 $user = User::create([
                     'provider' => $provider,
                     'provider_id' => $userData->id,
                     'name' => $userData->name,
+                    'firstname' => $userData->name,
                     'username' => $userData->nickname,
+                    'slug' => str_slug($userData->email),
                     'email' => $userData->email,
-//                    'country_id' => $country->id,
-//                    'city' => $location['city'],
-//                    'latitude' => $location['lat'],
-//                    'longitude' => $location['lon'],
-                    'avatar' => $userData->avatar,
+                    'avatar' => $avatar,
                     'role_id' => Config::get('constants.ROLE_USER'),
                     'verified' => 1,
                 ]);
@@ -45,8 +39,6 @@ class UserRepository
             else{
                 return null;
             }
-
-//                dd("ya hay otro we");
         }
 
         $this->checkIfUserNeedsUpdating($userData, $user);
@@ -70,10 +62,20 @@ class UserRepository
         ];
 
         if (!empty(array_diff($socialData, $dbData))) {
-            $user->avatar = $userData->avatar;
+
+            $avatar = str_replace('sz=50', 'sz=120', $userData->avatar);
+//            $avatar = str_replace('type=normal', 'type=medium', $avatar);
+
+            $user->avatar = $avatar;
+            $user->slug = str_slug($userData->email);
             $user->email = $userData->email;
             $user->firstname = $userData->name;
-            $user->name = $userData->nickname;
+            if (strlen($userData->nickname) != 0)
+                $user->name = $userData->nickname;
+            else
+                $user->name = $userData->email;
+
+//            dd($user);
             $user->save();
         }
     }
