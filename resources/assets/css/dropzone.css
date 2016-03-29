@@ -174,10 +174,11 @@
   box-sizing: border-box; }
 
 .dropzone {
-  min-height: 150px;
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  min-height: 230px;
+  border: 2px dashed rgba(0, 0, 0, 0.3);
   background: white;
-  padding: 20px 20px; }
+  /*padding: 20px 20px;*/
+}
   .dropzone.dz-clickable {
     cursor: pointer; }
     .dropzone.dz-clickable * {
@@ -198,7 +199,7 @@
     display: inline-block;
     vertical-align: top;
     margin: 16px;
-    min-height: 100px; }
+    min-height: 230px; }
     .dropzone .dz-preview:hover {
       z-index: 1000; }
       .dropzone .dz-preview:hover .dz-details {
@@ -210,7 +211,9 @@
     .dropzone .dz-preview.dz-file-preview .dz-details {
       opacity: 1; }
     .dropzone .dz-preview.dz-image-preview {
-      background: white; }
+      background: white;
+      margin-left: 33%;
+    }
       .dropzone .dz-preview.dz-image-preview .dz-details {
         -webkit-transition: opacity 0.2s linear;
         -moz-transition: opacity 0.2s linear;
@@ -268,8 +271,8 @@
     .dropzone .dz-preview .dz-image {
       border-radius: 20px;
       overflow: hidden;
-      width: 120px;
-      height: 120px;
+      width: 230px;
+      height: 230px;
       position: relative;
       display: block;
       z-index: 10; }

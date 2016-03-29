@@ -5,7 +5,7 @@
 
 @stop
 @section('styles')
-    {!! Html::script('css/userCreate.css') !!}
+    {!! Html::style('css/pages/userCreate.css') !!}
 @stop
 @section('breadcrumbs')
     @if (!is_null($user->id))
@@ -22,9 +22,13 @@
     <div class="container-fluid">
 
         @if (!is_null($user->id))
-            {!! Form::model($user, array('method'=>"PATCH",'route' => array('users.update', $user->slug), 'enctype' => 'multipart/form-data')) !!}
+            {!! Form::model($user, ['method'=>"PATCH",
+                                    'route' => array('users.update', $user->slug),
+                                    'enctype' => 'multipart/form-data',
+                                    'id' => 'MyTest']) !!}
         @else
-            {!! Form::open(['url'=>"users",'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url'=>"users",
+                            'enctype' => 'multipart/form-data']) !!}
         @endif
 
 
@@ -41,69 +45,75 @@
 
                                 <fieldset title="{{Lang::get('crud.general_data')}}">
                                     <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    {!!  Form::label('name', trans('crud.username')) !!}
-                                                    {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
-
-
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    {!!  Form::label('firstname', trans('crud.firstname')) !!}
-                                                    {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
-
-
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    {!!  Form::label('lastname', trans('crud.lastname')) !!}
-                                                    {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    {!!  Form::label('grade_id', trans('crud.grade')) !!}
-                                                    {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        {{--<div class="col-md-3">--}}
-                                            {{--<div class="form-group">--}}
-                                                {{--<br/>--}}
-                                                {{--@if ($user->avatar)--}}
-                                                    {{--<img src="{!! $user->avatar !!}"--}}
-                                                         {{--class="img-thumbnail center-block"/>--}}
-                                                {{--@endif--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        <div class="col-md-6">
-                                            {!!  Form::label('avatar', trans('crud.avatar')) !!}
-                                            <div id="dropzone"></div>
-
-
-                                            {{--<input type="file" id="avatar" name="avatar"--}}
-                                                   {{--data-show-upload="false"--}}
-                                                   {{--class="file-input-custom" accept="image/*">--}}
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        {!!  Form::label('countryId', trans('crud.country')) !!}
-                                        {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
-                                    </div>
-
-
                                 </fieldset>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                {!!  Form::label('name', trans('crud.username')) !!}
+                                                {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                {!!  Form::label('firstname', trans('crud.firstname')) !!}
+                                                {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                {!!  Form::label('lastname', trans('crud.lastname')) !!}
+                                                {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                {!!  Form::label('grade_id', trans('crud.grade')) !!}
+                                                {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    {{--<div class="col-md-3">--}}
+                                    {{--<div class="form-group">--}}
+                                    {{--<br/>--}}
+                                    {{--@if ($user->avatar)--}}
+                                    {{--<img src="{!! $user->avatar !!}"--}}
+                                    {{--class="img-thumbnail center-block"/>--}}
+                                    {{--@endif--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {!!  Form::label('avatar', trans('crud.avatar')) !!}
+                                            <div id="fileInput" class="dropzone">
+                                                <div class="fallback">
+                                                    <input name="file" type="file"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        {{--<input type="file" id="avatar" name="avatar"--}}
+                                        {{--data-show-upload="false"--}}
+                                        {{--class="file-input-custom" accept="image/*">--}}
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    {!!  Form::label('countryId', trans('crud.country')) !!}
+                                    {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                </div>
 
 
                             </div>
@@ -134,8 +144,8 @@
                                 </fieldset>
                                 <div class="row">
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             {!!  Form::label('email', trans('crud.email')) !!}
                                             {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
                                         </div>
@@ -192,18 +202,116 @@
 
         </div>
         {!! Form::close()!!}
+        {{--<script>--}}
+        {{--Dropzone.options.fileInput = { // The camelized version of the ID of the form element--}}
 
-            <script>
-                jQuery(document).ready(function(){
-                    $("div#dropzone").dropzone({
-                        url: "/file/post"
-                    });
-                });
+        {{--// The configuration we've talked about above--}}
+        {{--autoProcessQueue: false,--}}
+        {{--uploadMultiple: true,--}}
+        {{--parallelUploads: 100,--}}
+        {{--maxFiles: 100,--}}
 
-            </script>
+        {{--// The setting up of the dropzone--}}
+        {{--init: function () {--}}
+        {{--var myDropzone = this;--}}
 
+        {{--// First change the button to actually tell Dropzone to process the queue.--}}
+        {{--this.element.querySelector("button[type=submit]").addEventListener("click", function (e) {--}}
+        {{--// Make sure that the form isn't actually being sent.--}}
+        {{--e.preventDefault();--}}
+        {{--e.stopPropagation();--}}
+        {{--myDropzone.processQueue();--}}
+        {{--});--}}
 
-            {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+        {{--// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead--}}
+        {{--// of the sending event because uploadMultiple is set to true.--}}
+        {{--this.on("sendingmultiple", function () {--}}
+        {{--// Gets triggered when the form is actually being sent.--}}
+        {{--// Hide the success button or the complete form.--}}
+        {{--});--}}
+        {{--this.on("successmultiple", function (files, response) {--}}
+        {{--// Gets triggered when the files have successfully been sent.--}}
+        {{--// Redirect user or notify of success.--}}
+        {{--});--}}
+        {{--this.on("errormultiple", function (files, response) {--}}
+        {{--// Gets triggered when there was an error sending the files.--}}
+        {{--// Maybe show form again, and notify user of error--}}
+        {{--});--}}
+        {{--}--}}
+
+        {{--}--}}
+        {{--        </script>--}}
+        <script>
+            Dropzone.options.MyTest = {
+                thumbnailWidth:"250",
+                thumbnailHeight:"250"
+            };
+            Dropzone.autoDiscover = false;
+            $(document).ready(function () {
+
+                new Dropzone('#fileInput', {
+                    autoProcessQueue: false,
+                    uploadMultiple: true,
+                    parallelUploads: 100,
+                    thumbnailWidth: "300",
+                    thumbnailHeight: "300",
+//                    dictRemoveFile:'Remove',
+//                    dictDefaultMessage:'Upload file',
+                    createImageThumbnails: true,
+                    addRemoveLinks:'dictRemoveFile',
+                    url: "#",
+                    maxFiles: 1,
+
+                    init: function () {
+                        var myDropzone = this;
+                        var mockFile = {name: "avatar.png", size: 2000};
+                        myDropzone.emit("addedfile", mockFile);
+
+                        // And optionally show the thumbnail of the file:
+                        myDropzone.emit("thumbnail", mockFile, "{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}");
+                        // Or if the file on your server is not yet in the right
+                        // size, you can let Dropzone download and resize it
+                        // callback and crossOrigin are optional.
+                        {{--myDropzone.createThumbnailFromUrl(--}}
+                                {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}",--}}
+                                {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}", null, null);--}}
+
+                        // Make sure that there is no progress bar, etc...
+                        myDropzone.emit("complete", mockFile);
+
+                        // If you use the maxFiles option, make sure you adjust it to the
+                        // correct amount:
+                        var existingFileCount = 0; // The number of files already uploaded
+                        myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
+                        {{--myDropzone.options.addedfile.call(myDropzone, mockFile);--}}
+                        {{--myDropzone.options.thumbnail.call(myDropzone, mockFile, "{{ url(Config::get('constants.AVATAR_PATH')."avatar.png")}}");--}}
+                        myDropzone.on("addedfile", function () {
+                            if (this.files[1] != null) {
+                                this.removeFile(this.files[0]);
+                            }
+                        });
+
+                        $(".btn-success").click(function (e) {
+                            e.preventDefault();
+                            myDropzone.processQueue();
+                        });
+                        myDropzone.on('success', function () {
+                            myDropzone.removeAllFiles();
+
+                        });
+                    },
+                    maxfilesexceeded: function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                    },
+                    sending: function (file, xhr, formData) {
+                        formData.append("name", 'Julien');
+                    },
+
+                })
+            })
+        </script>
+        {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 
     </div>
 @stop
