@@ -35349,6 +35349,8 @@ h6.panel-title,
 .popover[class*=border-].left>.arrow:after {
   border-left-color: inherit;
 }
+/* col-xs */
+
 @media (max-width: 767px) {
   .breadcrumb,
   ul.nav.navbar-nav.breadcrumbs,

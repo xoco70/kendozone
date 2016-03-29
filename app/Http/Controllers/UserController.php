@@ -153,13 +153,13 @@ class UserController extends Controller
         array_push($except, '_token');
 
         $req = $request->except($except);
-        $data = User::uploadPic($req);
+//        $data = User::uploadPic($req);
 
 
         //TODO: Should have an expection for pics
 
 
-        if ($user->update($data)) {
+        if ($user->update($req)) {
             flash()->success(Lang::get('core.success'));
         } else
             flash()->success(Lang::get('core.fail'));
@@ -246,6 +246,13 @@ class UserController extends Controller
         } else {
             return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'error']);
         }
+    }
+
+
+    public function uploadAvatar(Request $request){
+        $data = $request->except('_token');
+        $data = User::uploadPic($data);
+
     }
 
 }

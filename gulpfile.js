@@ -13,13 +13,6 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function (mix) {
-    //mix.stylesIn("public/css");
-    //mix.stylesIn("public/js");
-    //mix.stylesIn("public/js/plugins");u
-    //
-    //mix.scriptsIn("public/js/plugins");
-    //mix.scriptsIn("public/js");
-    //mix.phpUnit();
 
     // General Styles for app
     mix.styles([
@@ -74,11 +67,12 @@ elixir(function (mix) {
     mix.styles([
        //'dropzone.css'
     ], 'public/css/pages/userCreate.css');
-    //mix.scripts([
-    //    'http://maps.google.com/maps/api/js',
-    //    'plugins/uploaders/fileinput.min.js',
-    //    'plugins/pages/uploader_bootstrap.js',
-    //], 'public/js/userEdit.js');
+    mix.scripts([
+       'http://maps.google.com/maps/api/js',
+       'plugins/uploaders/fileinput.min.js',
+       'plugins/uploaders/dropzone.js',
+       'plugins/pages/uploader_bootstrap.js'
+    ], 'public/js/userEdit.js');
 
     mix.scripts([
        'plugins/ui/nicescroll.min.js',

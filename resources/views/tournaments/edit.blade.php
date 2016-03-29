@@ -335,7 +335,7 @@
                                     <div class="col-md-12">
                                         <h2 class="form-group text-center">
                                             <br/>
-                                            {{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/register/
+                                            {{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/register/
                                         </h2>
 
                                     </div>

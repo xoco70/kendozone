@@ -26,7 +26,7 @@
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
+    <a href='{{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
 @endif
 {{--TODO Falta traducir--}}
 @if($password!=null)

@@ -75,21 +75,23 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <br/>
-                                                @if ($user->avatar)
-                                                    <img src="{!! $user->avatar !!}"
-                                                         class="img-thumbnail center-block"/>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        {{--<div class="col-md-3">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<br/>--}}
+                                                {{--@if ($user->avatar)--}}
+                                                    {{--<img src="{!! $user->avatar !!}"--}}
+                                                         {{--class="img-thumbnail center-block"/>--}}
+                                                {{--@endif--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        <div class="col-md-6">
                                             {!!  Form::label('avatar', trans('crud.avatar')) !!}
+                                            <div id="dropzone"></div>
 
-                                            <input type="file" id="avatar" name="avatar"
-                                                   data-show-upload="false"
-                                                   class="file-input-custom" accept="image/*">
+
+                                            {{--<input type="file" id="avatar" name="avatar"--}}
+                                                   {{--data-show-upload="false"--}}
+                                                   {{--class="file-input-custom" accept="image/*">--}}
 
                                         </div>
                                     </div>
@@ -131,8 +133,9 @@
                                     </a>
                                 </fieldset>
                                 <div class="row">
-                                    <div class="form-group">
+
                                         <div class="col-md-6">
+                                            <div class="form-group">
                                             {!!  Form::label('email', trans('crud.email')) !!}
                                             {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
                                         </div>
@@ -189,7 +192,18 @@
 
         </div>
         {!! Form::close()!!}
-        {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+
+            <script>
+                jQuery(document).ready(function(){
+                    $("div#dropzone").dropzone({
+                        url: "/file/post"
+                    });
+                });
+
+            </script>
+
+
+            {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 
     </div>
 @stop

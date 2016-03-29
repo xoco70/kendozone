@@ -661,11 +661,11 @@ $.noty.layouts.bottomLeft = {
                 zIndex       : 10000000
             });
 
-            if(window.innerWidth < 600) {
-                $(this).css({
-                    left: 5
-                });
-            }
+            // if(window.innerWidth < 600) {
+            //     $(this).css({
+            //         left: 5
+            //     });
+            // }
         }
     },
     parent   : {

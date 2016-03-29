@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+ç@extends('layouts.dashboard')
 @section('content')
 
     @include("errors.list")
