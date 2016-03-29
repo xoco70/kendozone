@@ -234,7 +234,7 @@
 }
 
 .dropzone {
-  min-height: 230px;
+  /*min-height: 230px;*/
   border: 2px dashed rgba(0, 0, 0, 0.3);
   background: white;
   /*padding: 20px 20px;*/
@@ -275,7 +275,7 @@
   display: inline-block;
   vertical-align: top;
   margin: 16px;
-  min-height: 230px;
+  /*min-height: 230px;*/
 }
 
 .dropzone .dz-preview:hover {
@@ -298,7 +298,7 @@
 
 .dropzone .dz-preview.dz-image-preview {
   background: white;
-  /*margin-left: 25%;*/
+  margin-left: 33%;
 }
 
 .dropzone .dz-preview.dz-image-preview .dz-details {
@@ -383,8 +383,8 @@
 .dropzone .dz-preview .dz-image {
   border-radius: 20px;
   overflow: hidden;
-  width: 230px;
-  height: 230px;
+  /*width: 230px;*/
+  /*height: 230px;*/
   position: relative;
   display: block;
   z-index: 10;

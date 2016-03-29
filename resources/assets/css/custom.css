@@ -157,14 +157,14 @@ fieldset > a > legend {
     font-size: 40px;
 }
 /*.dropzone .dz-preview .dz-image { width: 300px !important; height: 300px !important; }*/
-.dropzone-previews .dz-preview .dz-details {
-    width: 250px;
-    height: 250px;
-    position: relative;
-    background: #ebebeb;
-    padding: 5px;
-    margin-bottom: 22px;
-}
+/*.dropzone-previews .dz-preview .dz-details {*/
+    /*width: 250px;*/
+    /*height: 250px;*/
+    /*position: relative;*/
+    /*background: #ebebeb;*/
+    /*padding: 5px;*/
+    /*margin-bottom: 22px;*/
+/*}*/
 /*.dropzone .dz-preview .dz-image{*/
     /*width: 250px!important;*/
     /*height: 250px!important;*/

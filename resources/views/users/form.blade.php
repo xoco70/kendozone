@@ -50,33 +50,40 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="form-group">
-                                                {!!  Form::label('name', trans('crud.username')) !!}
-                                                {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
-
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group">
-                                                {!!  Form::label('firstname', trans('crud.firstname')) !!}
-                                                {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
-
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    {!!  Form::label('name', trans('crud.username')) !!}
+                                                    {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                                                </div>
 
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="form-group">
-                                                {!!  Form::label('lastname', trans('crud.lastname')) !!}
-                                                {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    {!!  Form::label('firstname', trans('crud.firstname')) !!}
+                                                    {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    {!!  Form::label('lastname', trans('crud.lastname')) !!}
+                                                    {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group">
-                                                {!!  Form::label('grade_id', trans('crud.grade')) !!}
-                                                {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    {!!  Form::label('grade_id', trans('crud.grade')) !!}
+                                                    {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -108,11 +115,13 @@
 
                                     </div>
                                 </div>
-
-
-                                <div class="form-group">
-                                    {!!  Form::label('countryId', trans('crud.country')) !!}
-                                    {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            {!!  Form::label('countryId', trans('crud.country')) !!}
+                                            {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -245,42 +254,44 @@
 
         <script>
 
-            Dropzone.options.MyTest = {
-                thumbnailWidth:"250",
-                thumbnailHeight:"250"
-            };
+//            Dropzone.options.MyTest = {
+//                thumbnailWidth: "250",
+//                thumbnailHeight: "250"
+//            };
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
                 var initialPic = "{{ Auth::user()->avatar }}";
-                console.log(initialPic);
+                var onlyPic = initialPic.substring(initialPic.lastIndexOf('/')+1);
+
+//                console.log(onlyPic);
                 new Dropzone('#fileInput', {
                     autoProcessQueue: false,
                     uploadMultiple: false,
                     parallelUploads: 100,
-                    thumbnailWidth: 200,
-                    thumbnailHeight: 200,
+//                    thumbnailWidth: 200,
+//                    thumbnailHeight: 200,
 //                    dictRemoveFile:'Remove',
 //                    dictDefaultMessage:'Upload file',
                     createImageThumbnails: true,
-                    addRemoveLinks:'dictRemoveFile',
+                    addRemoveLinks: 'dictRemoveFile',
                     url: "#",
                     maxFiles: 1,
 
                     init: function () {
                         var myDropzone = this;
-                        var mockFile = {name: "avatar.png", size: 2000};
+                        var mockFile = {name: onlyPic, size: 2000};
                         myDropzone.emit("addedfile", mockFile);
 
                         // And optionally show the thumbnail of the file:
-                        if (initialPic.indexOf('http') >= 0)
-                            myDropzone.emit("thumbnail", mockFile, initialPic);
-                        else
+//                        if (initialPic.indexOf('http') >= 0)
+                        myDropzone.emit("thumbnail", mockFile, initialPic);
+//                        else
                         // Or if the file on your server is not yet in the right
                         // size, you can let Dropzone download and resize it
                         // callback and crossOrigin are optional.
-                            myDropzone.createThumbnailFromUrl(mockFile, initialPic);
-                                {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}",--}}
-                                {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}", null, null);--}}
+//                        myDropzone.createThumbnailFromUrl(mockFile, initialPic);
+                        {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}",--}}
+                        {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}", null, null);--}}
 
                         // Make sure that there is no progress bar, etc...
                         myDropzone.emit("complete", mockFile);
@@ -300,19 +311,20 @@
                         $(".btn-success").click(function (e) {
                             e.preventDefault();
                             myDropzone.processQueue();
+                            e.submit();
                         });
                         myDropzone.on('success', function () {
                             myDropzone.removeAllFiles();
 
                         });
                     },
-                    maxfilesexceeded: function(file) {
+                    maxfilesexceeded: function (file) {
                         this.removeAllFiles();
                         this.addFile(file);
                     },
-                    sending: function (file, xhr, formData) {
-                        formData.append("name", 'Julien');
-                    },
+//                    sending: function (file, xhr, formData) {
+//                        formData.append("name", 'Julien');
+//                    },
 
                 })
             })

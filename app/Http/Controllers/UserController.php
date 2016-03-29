@@ -153,7 +153,7 @@ class UserController extends Controller
         array_push($except, '_token');
 
         $req = $request->except($except);
-//        $data = User::uploadPic($req);
+        $data = User::uploadPic($req);
 
 
         //TODO: Should have an expection for pics

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
@@ -150,14 +151,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $timestamp = $date->getTimestamp();
             $fileName = trim($data['name']) . "_" . $timestamp; // renameing image
             $fileName = Str::slug($fileName, '-') . '.' . $extension;
+
             if (!Input::file('avatar')->move($destinationPath, $fileName)) {
                 flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;
             } else {
                 $data['avatar'] = $fileName;
-                return $data;
 
+                // Redimension and pic
+                $img = Image::make($destinationPath.$fileName);
+                if ($img->width()> $img->height()){
+                    $img->resize(200, null);
+                }else{
+                    $img->resize(null, 200);
+                }
+                $img->crop(200, 200, 0, 0);
+                $img->save($destinationPath.$fileName);
+
+
+                return $data;
             }
+
+
+
         }
         return $data;
     }

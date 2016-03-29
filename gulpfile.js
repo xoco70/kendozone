@@ -59,8 +59,8 @@ elixir(function (mix) {
 
     mix.scripts([
        //'http://maps.google.com/maps/api/js',
-       'plugins/uploaders/fileinput.min.js',
-       'pages/uploader_bootstrap.js',
+       // 'plugins/uploaders/fileinput.min.js',
+       // 'pages/uploader_bootstrap.js',
        'plugins/dropzone.js'
     ], 'public/js/pages/header/userCreate.js');
 
@@ -70,7 +70,7 @@ elixir(function (mix) {
     ], 'public/css/pages/userCreate.css');
     mix.scripts([
        'http://maps.google.com/maps/api/js',
-       'plugins/uploaders/fileinput.min.js',
+       // 'plugins/uploaders/fileinput.min.js',
        'plugins/uploaders/dropzone.js',
        // 'plugins/pages/uploader_bootstrap.js'
     ], 'public/js/userEdit.js');
