@@ -15,7 +15,7 @@ class InviteTest extends TestCase
     /**
      * Tests inside:
      * an_admin_may_invite_users_but_users_must_register_after
-     * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
+     * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB 
      */
 
     use DatabaseTransactions;
