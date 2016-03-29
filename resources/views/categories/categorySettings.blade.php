@@ -6,8 +6,7 @@ if (is_null($setting)) {
     $disableEncho = $setting->hasEncho ? "" : "disabled";
     $disableRoundRobin = $setting->hasRoundRobin ? "" : "disabled";
 }
-
-
+$currency = Auth::user()->country->currency_code;
 ?>
 
 @if (is_null($setting))
@@ -57,7 +56,7 @@ if (is_null($setting)) {
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!!  Form::label('cost', trans('crud.cost')) !!}
+                {!!  Form::label('cost', trans('crud.cost'). '('. $currency  .')' ) !!}
                 {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
             </div>
         </div>

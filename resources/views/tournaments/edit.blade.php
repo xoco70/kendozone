@@ -98,21 +98,10 @@
 
                                 </div>
 
-                                <div class="row">
-                                    {{--<div class="col-md-6">--}}
-                                    {{--<div class="form-group">--}}
-                                    {{--{!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}--}}
-                                    {{--<br/>--}}
-                                    {{--{!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-
-                                </div>
                                 <legend class="text-semibold">{{Lang::get('crud.competitors_register')}}</legend>
 
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
 
 
                                         {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
