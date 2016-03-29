@@ -69,7 +69,7 @@ elixir(function (mix) {
         // 'dz-basic.css'
     ], 'public/css/pages/userCreate.css');
     mix.scripts([
-       'http://maps.google.com/maps/api/js',
+       'https://maps.google.com/maps/api/js',
        // 'plugins/uploaders/fileinput.min.js',
        'plugins/uploaders/dropzone.js',
        // 'plugins/pages/uploader_bootstrap.js'

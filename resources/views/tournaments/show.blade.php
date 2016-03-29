@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('scripts')
 {!! Html::script('js/pages/header/tournamentEdit.js') !!}
-{!! Html::script('http://maps.google.com/maps/api/js') !!}
+{!! Html::script('https://maps.google.com/maps/api/js') !!}
 @stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
