@@ -133,7 +133,7 @@ return [
     'username' => 'Nombre de usuario',
     'profile' => 'Perfil',
     'grade' => 'Grado',
-    'avatar' => 'Foto',
+    'avatar' => 'Avatar',
     'email' => 'Email',
     'role' => 'Role',
     'firstname' => 'Nombre',

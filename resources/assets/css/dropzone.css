@@ -212,7 +212,7 @@
       opacity: 1; }
     .dropzone .dz-preview.dz-image-preview {
       background: white;
-      margin-left: 33%;
+      /*margin-left: 25%;*/
     }
       .dropzone .dz-preview.dz-image-preview .dz-details {
         -webkit-transition: opacity 0.2s linear;

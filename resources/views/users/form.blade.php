@@ -241,20 +241,24 @@
 
         {{--}--}}
         {{--        </script>--}}
+
+
         <script>
+
             Dropzone.options.MyTest = {
                 thumbnailWidth:"250",
                 thumbnailHeight:"250"
             };
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
-
+                var initialPic = "{{ Auth::user()->avatar }}";
+                console.log(initialPic);
                 new Dropzone('#fileInput', {
                     autoProcessQueue: false,
-                    uploadMultiple: true,
+                    uploadMultiple: false,
                     parallelUploads: 100,
-                    thumbnailWidth: "300",
-                    thumbnailHeight: "300",
+                    thumbnailWidth: 200,
+                    thumbnailHeight: 200,
 //                    dictRemoveFile:'Remove',
 //                    dictDefaultMessage:'Upload file',
                     createImageThumbnails: true,
@@ -268,11 +272,13 @@
                         myDropzone.emit("addedfile", mockFile);
 
                         // And optionally show the thumbnail of the file:
-                        myDropzone.emit("thumbnail", mockFile, "{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}");
+                        if (initialPic.indexOf('http') >= 0)
+                            myDropzone.emit("thumbnail", mockFile, initialPic);
+                        else
                         // Or if the file on your server is not yet in the right
                         // size, you can let Dropzone download and resize it
                         // callback and crossOrigin are optional.
-                        {{--myDropzone.createThumbnailFromUrl(--}}
+                            myDropzone.createThumbnailFromUrl(mockFile, initialPic);
                                 {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}",--}}
                                 {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}", null, null);--}}
 
