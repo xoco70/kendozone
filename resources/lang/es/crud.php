@@ -187,6 +187,9 @@ return [
     // Share
     'share' => 'Compartir',
 
+    // Dashboard
+    'no_tournament_created_yet' => 'Aún no has creado ningún torneo'
+
 
 
 ];
