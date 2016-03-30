@@ -26,9 +26,11 @@
                                     'route' => array('users.update', $user->slug),
                                     'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
+            <?php $disabled = "disabled"; ?>
         @else
             {!! Form::open(['url'=>"users",
                             'enctype' => 'multipart/form-data']) !!}
+            <?php $disabled = ""; ?>
         @endif
 
 
@@ -53,8 +55,13 @@
                                             <div class="col-xs-12">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('crud.username')) !!}
-                                                    {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled"]) !!}
-                                                    {!!  Form::hidden('name', $user->name) !!}
+                                                    @if (!is_null($user->id))
+                                                        {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}
+                                                        {!!  Form::hidden('name', $user->name) !!}
+                                                    @else
+                                                        {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
+                                                    @endif
+
                                                     {!!  Form::hidden('avatar','') !!}
                                                 </div>
 
@@ -154,7 +161,11 @@
                                                 <div class="form-group">
                                                     {!!  Form::label('role_id', trans('crud.role')) !!}
                                                     @if (Auth::user()->isSuperAdmin())
-                                                        {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                        @if (!is_null($user->id))
+                                                            {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                        @else
+                                                            {!!  Form::select('role_id', $roles,Config::get('constants.ROLE_USER'), ['class' => 'form-control']) !!}
+                                                        @endif
                                                     @else
                                                         {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
                                                     @endif
@@ -262,9 +273,11 @@
 
 
                     },
-                    accept: function(file, done) {
+                    accept: function (file, done) {
                         file.acceptDimensions = done;
-                        file.rejectDimensions = function() { done("Invalid dimension."); };
+                        file.rejectDimensions = function () {
+                            done("Invalid dimension.");
+                        };
                         // Of course you could also just put the `done` function in the file
                         // and call it either with or without error in the `thumbnail` event
                         // callback, but I think that this is cleaner.
