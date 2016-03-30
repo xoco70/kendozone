@@ -161,8 +161,8 @@ return [
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
 //        Arcanedev\LogViewer\LogViewerServiceProvider::class,
-        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class
-
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -227,7 +227,8 @@ return [
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
-        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
 
     ],

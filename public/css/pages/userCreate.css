@@ -315,6 +315,7 @@
   display: block;
   cursor: pointer;
   border: none;
+  margin-top: 50px;
 }
 
 .dropzone .dz-preview .dz-remove:hover {
@@ -388,7 +389,7 @@
   position: relative;
   display: block;
   z-index: 10;
-  margin-bottom: 50px;
+  /*margin-bottom: 50px;*/
 }
 
 .dropzone .dz-preview .dz-image img {

@@ -39,6 +39,7 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
+                dd('pas glop');
                 return response(trans('msg.access_denied'), 401);
             } else {
                 return redirect()->guest('auth/login');

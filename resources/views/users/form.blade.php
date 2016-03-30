@@ -249,27 +249,10 @@
                         var myDropzone = this;
                         var mockFile = {name: onlyPic, size: 2000};
                         myDropzone.emit("addedfile", mockFile);
-
-                        // And optionally show the thumbnail of the file:
-//                        if (initialPic.indexOf('http') >= 0)
                         myDropzone.emit("thumbnail", mockFile, initialPic);
-//                        else
-                        // Or if the file on your server is not yet in the right
-                        // size, you can let Dropzone download and resize it
-                        // callback and crossOrigin are optional.
-//                        myDropzone.createThumbnailFromUrl(mockFile, initialPic);
-                        {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}",--}}
-                        {{--"{{url(Config::get('constants.AVATAR_PATH')."avatar.png")}}", null, null);--}}
-
-                        // Make sure that there is no progress bar, etc...
                         myDropzone.emit("complete", mockFile);
-
-                        // If you use the maxFiles option, make sure you adjust it to the
-                        // correct amount:
                         var existingFileCount = 0; // The number of files already uploaded
                         myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
-                        {{--myDropzone.options.addedfile.call(myDropzone, mockFile);--}}
-                        {{--myDropzone.options.thumbnail.call(myDropzone, mockFile, "{{ url(Config::get('constants.AVATAR_PATH')."avatar.png")}}");--}}
                         myDropzone.on("addedfile", function () {
                             if (this.files[1] != null) {
                                 this.removeFile(this.files[0]);
@@ -277,11 +260,9 @@
                         });
 
                         $(".btn-success").click(function (e) {
-                            e.preventDefault();
                             myDropzone.processQueue();
                         });
 //                        myDropzone.on('success', function () {
-//                            myDropzone.removeAllFiles();
 //
 //                        });
                     },

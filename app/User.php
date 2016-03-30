@@ -13,12 +13,11 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
@@ -32,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
-    protected $dates = ['created_at', 'updated_at','deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $sluggable = [
         'build_from' => 'name',
@@ -107,7 +106,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::deleting(function ($user) {
 //            foreach
 //            $user->tournaments()->delete();
-            foreach ( $user->tournaments as $tournament){
+            foreach ($user->tournaments as $tournament) {
                 $tournament->delete();
             }
             $user->categoryTournamentUsers()->delete();
@@ -115,7 +114,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
         static::restoring(function ($user) {
             $user->categoryTournamentUsers()->withTrashed()->restore();
-            foreach ( $user->tournaments()->withTrashed()->get() as $tournament) {
+            foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
                 $tournament->restore();
             }
 
@@ -137,43 +136,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param Request $request
+     * @param $data
      * @return array
      */
     public static function uploadPic($data)
     {
+        $file = array_first(Input::file(), null);
 
-        if (Input::hasFile('avatar') != null && Input::file('avatar')->isValid()) {
+        if ($file != null && $file->isValid()) {
 
             $destinationPath = Config::get('constants.RELATIVE_AVATAR_PATH');
-            $extension = Input::file('avatar')->getClientOriginalExtension(); // getting image extension
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
-            $fileName = trim($data['name']) . "_" . $timestamp; // renameing image
-            $fileName = Str::slug($fileName, '-') . '.' . $extension;
+            $ext = $file->getClientOriginalExtension();
+            $fileName = $timestamp . "_" . $file->getClientOriginalName();
+            $fileName = Str::slug($fileName, '-') . "." . $ext;
 
-            if (!Input::file('avatar')->move($destinationPath, $fileName)) {
+            if (!$file->move($destinationPath, $fileName)) {
                 flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;
             } else {
                 $data['avatar'] = $fileName;
-
                 // Redimension and pic
-                $img = Image::make($destinationPath.$fileName);
-                if ($img->width()> $img->height()){
-                    $img->resize(200, null);
-                }else{
-                    $img->resize(null, 200);
+                $img = Image::make($destinationPath . $fileName);
+                if ($img->width() > $img->height()) {
+                    $img->resize(200, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+
+                } else {
+                    $img->resize(null, 200, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
                 }
-                $img->crop(200, 200, 0, 0);
-                $img->save($destinationPath.$fileName);
+//                $img->crop(200, 200, 0, 0);
+                $img->save($destinationPath . $fileName);
+//                flash("success", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
 
 
                 return $data;
             }
-
-
-
         }
         return $data;
     }
@@ -184,9 +186,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if (is_null($avatar) || strlen($avatar) == 0) {
             // Check if it has gravatar
-            if (Gravatar::exists($this->email)){
+            if (Gravatar::exists($this->email)) {
                 $avatar = Gravatar::src($this->email);
-            }else{
+            } else {
                 $avatar = 'avatar.png';
             }
 
@@ -223,7 +225,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function tournamentsInvited()
     {
-        return $this->hasManyThrough('App\Invite','App\Tournament');
+        return $this->hasManyThrough('App\Invite', 'App\Tournament');
     }
 
     public function country()
@@ -257,11 +259,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(CategoryTournamentUser::class);
     }
 
-    public function myTournaments(){
+    public function myTournaments()
+    {
 //        return User::with('')->find($this->id);
         return Tournament::leftJoin('category_tournament', 'category_tournament.tournament_id', '=', 'tournament.id')
-            ->leftJoin('category_tournament_user', 'category_tournament_user.category_tournament_id', '=', 'category_tournament.id' )
-            ->where('category_tournament_user.user_id', '=',$this->id )
+            ->leftJoin('category_tournament_user', 'category_tournament_user.category_tournament_id', '=', 'category_tournament.id')
+            ->where('category_tournament_user.user_id', '=', $this->id)
             ->select('tournament.*')
             ->distinct();
 
@@ -337,12 +340,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-    public function owns(Tournament $tournament){
+    public function owns(Tournament $tournament)
+    {
         return $this->id == $tournament->user_id;
     }
 
 
-    public function canEditTournament($tournament){
+    public function canEditTournament($tournament)
+    {
         return ($this->id == $tournament->user_id || $this->isSuperAdmin());
     }
 

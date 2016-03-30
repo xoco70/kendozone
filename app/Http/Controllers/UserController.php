@@ -147,6 +147,7 @@ class UserController extends Controller
             array_push($except, 'password');
 
         }
+
         if (trim(Input::get('avatar')) == '') {
             array_push($except, 'avatar');
         }
@@ -250,9 +251,9 @@ class UserController extends Controller
 
 
     public function uploadAvatar(Request $request){
-        dd($request);
         $data = $request->except('_token');
         $data = User::uploadPic($data);
+        return $data;
 
     }
 
