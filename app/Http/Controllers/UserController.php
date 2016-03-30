@@ -139,6 +139,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+//        dd($request);
         $except = [];
         if (trim(Input::get('role_id')) == '') {
             array_push($except, 'role_id');
@@ -148,9 +149,9 @@ class UserController extends Controller
 
         }
 
-        if (trim(Input::get('avatar')) == '') {
-            array_push($except, 'avatar');
-        }
+//        if (trim(Input::get('avatar')) == '') {
+//            array_push($except, 'avatar');
+//        }
         array_push($except, '_token');
 
         $req = $request->except($except);

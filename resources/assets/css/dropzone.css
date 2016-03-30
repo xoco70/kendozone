@@ -297,7 +297,7 @@
     display: block;
     cursor: pointer;
     border: none;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 
 .dropzone .dz-preview .dz-remove:hover {

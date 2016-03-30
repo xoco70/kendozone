@@ -25,7 +25,7 @@
             {!! Form::model($user, ['method'=>"PATCH",
                                     'route' => array('users.update', $user->slug),
                                     'enctype' => 'multipart/form-data',
-                                    'id' => 'MyTest']) !!}
+                                    'id' => 'form']) !!}
         @else
             {!! Form::open(['url'=>"users",
                             'enctype' => 'multipart/form-data']) !!}
@@ -55,6 +55,7 @@
                                                     {!!  Form::label('name', trans('crud.username')) !!}
                                                     {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled"]) !!}
                                                     {!!  Form::hidden('name', $user->name) !!}
+                                                    {!!  Form::hidden('avatar','') !!}
                                                 </div>
 
                                             </div>
@@ -89,31 +90,17 @@
                                         </div>
 
                                     </div>
-                                    {{--<div class="col-xs-3">--}}
-                                    {{--<div class="form-group">--}}
-                                    {{--<br/>--}}
-                                    {{--@if ($user->avatar)--}}
-                                    {{--<img src="{!! $user->avatar !!}"--}}
-                                    {{--class="img-thumbnail center-block"/>--}}
-                                    {{--@endif--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
                                     <div class="col-xs-12 col-md-6  ">
                                         <div class="form-group">
                                             {!!  Form::label('avatar', trans('crud.avatar')) !!}
                                             <div id="fileInput" class="dropzone text-center">
                                                 <div class="fallback">
-                                                    <input name="avatar" type="file"/>
+                                                    <input name="file" type="file"/>
+
+
                                                 </div>
                                             </div>
-
                                         </div>
-
-
-                                        {{--<input type="file" id="avatar" name="avatar"--}}
-                                        {{--data-show-upload="false"--}}
-                                        {{--class="file-input-custom" accept="image/*">--}}
-
                                     </div>
                                 </div>
                                 <div class="row">
@@ -214,7 +201,6 @@
 
                     </div>
                 </div>
-                {{--@include("right-panel.users_menu")--}}
             </div>
 
 
@@ -222,25 +208,24 @@
         {!! Form::close()!!}
 
         <script>
+            var maxImageWidth = 100, maxImageHeight = 100;
 
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
+
                 var initialPic = "{{ Auth::user()->avatar }}";
                 var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
                 var uploadUrl = "{{ url('users/'.Auth::user()->slug.'/uploadAvatar') }}";
+                var avatarHiddenField = $('input[name=avatar]');
 
-//                console.log(uploadUrl);
                 new Dropzone('#fileInput', {
-                    autoProcessQueue: false,
+                    autoProcessQueue: true,
                     uploadMultiple: false,
                     parallelUploads: 100,
                     acceptedFiles: "image/jpeg,image/png,image/gif",
 
-//                    thumbnailWidth: 200,
-//                    thumbnailHeight: 200,
 //                    dictRemoveFile:'Remove',
 //                    dictDefaultMessage:'Upload file',
-//                    createImageThumbnails: true,
                     addRemoveLinks: 'dictRemoveFile',
                     url: uploadUrl,
                     maxFiles: 1,
@@ -251,28 +236,43 @@
                         myDropzone.emit("addedfile", mockFile);
                         myDropzone.emit("thumbnail", mockFile, initialPic);
                         myDropzone.emit("complete", mockFile);
+                        myDropzone.files.push(mockFile);
                         var existingFileCount = 0; // The number of files already uploaded
                         myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
+
+                        myDropzone.on("thumbnail", function (file) {
+                            if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                                file.rejectDimensions();
+                            }
+                            else {
+                                file.acceptDimensions();
+                            }
+                        });
+
+
                         myDropzone.on("addedfile", function () {
                             if (this.files[1] != null) {
                                 this.removeFile(this.files[0]);
                             }
                         });
 
-                        $(".btn-success").click(function (e) {
-                            myDropzone.processQueue();
+                        myDropzone.on('success', function (file, response) {
+                            avatarHiddenField.val(response['avatar']);
                         });
-//                        myDropzone.on('success', function () {
-//
-//                        });
+
+
+                    },
+                    accept: function(file, done) {
+                        file.acceptDimensions = done;
+                        file.rejectDimensions = function() { done("Invalid dimension."); };
+                        // Of course you could also just put the `done` function in the file
+                        // and call it either with or without error in the `thumbnail` event
+                        // callback, but I think that this is cleaner.
                     },
                     maxfilesexceeded: function (file) {
                         this.removeAllFiles();
                         this.addFile(file);
                     },
-//                    sending: function (file, xhr, formData) {
-//                        formData.append("name", 'Julien');
-//                    },
 
                 })
             })

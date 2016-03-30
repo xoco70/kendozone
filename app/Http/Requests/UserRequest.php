@@ -15,12 +15,6 @@ class UserRequest extends Request
      * @param \Illuminate\Http\Request $request
      */
 
-    public function __construct(\Illuminate\Http\Request $request)
-    {
-//        User::insertCoordsInRequest($request);
-
-    }
-
     public function authorize()
     {
         return true;
