@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
         Route::get('users/{user}/restore', 'UserController@restore');
 
-        Route::put('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
+        Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
     });
 //APIS

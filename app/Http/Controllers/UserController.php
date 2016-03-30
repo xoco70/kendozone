@@ -82,7 +82,7 @@ class UserController extends Controller
     {
         $data = $request->except('_token');
 
-        $data = User::uploadPic($data);
+//        $data = User::uploadPic($data);
 //        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
         if ($request->is("users")) {
             $data['provider'] = "created";
@@ -153,21 +153,21 @@ class UserController extends Controller
         array_push($except, '_token');
 
         $req = $request->except($except);
-        $data = User::uploadPic($req);
+//        $data = User::uploadPic($req);
 
 
         //TODO: Should have an expection for pics
 
 
         if ($user->update($req)) {
-            flash()->success(Lang::get('core.success'));
+            flash()->success(trans('msg.user_update_successful', ['name' => $user->name]));
         } else
-            flash()->success(Lang::get('core.fail'));
+            flash()->success(Lang::get('msg.user_update_error'));
 
 
-        if ($user == Auth::user()) {
+        if ($user->id == Auth::user()->id) {
             return redirect("/users/" . Auth::user()->slug . "/edit");
-        } else {
+        } else  {
             return redirect("/users/");
         }
 
@@ -250,6 +250,7 @@ class UserController extends Controller
 
 
     public function uploadAvatar(Request $request){
+        dd($request);
         $data = $request->except('_token');
         $data = User::uploadPic($data);
 

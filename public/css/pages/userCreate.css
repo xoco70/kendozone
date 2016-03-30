@@ -298,7 +298,7 @@
 
 .dropzone .dz-preview.dz-image-preview {
   background: white;
-  margin-left: 33%;
+  /*margin-left: 33%;*/
 }
 
 .dropzone .dz-preview.dz-image-preview .dz-details {
@@ -388,6 +388,7 @@
   position: relative;
   display: block;
   z-index: 10;
+  margin-bottom: 50px;
 }
 
 .dropzone .dz-preview .dz-image img {

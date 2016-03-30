@@ -135,6 +135,7 @@ return [
     'grade' => 'Grado',
     'avatar' => 'Avatar',
     'email' => 'Email',
+    'email_desc' => 'El email asociado a su cuenta',
     'role' => 'Role',
     'firstname' => 'Nombre',
     'lastname' => 'Appellido',

@@ -28,7 +28,7 @@ class UserRepository
                     'name' => $userData->name,
                     'firstname' => $userData->name,
                     'username' => $userData->nickname,
-                    'slug' => str_slug($userData->email),
+                    'slug' => str_slug($userData->name),
                     'email' => $userData->email,
                     'avatar' => $avatar,
                     'role_id' => Config::get('constants.ROLE_USER'),
@@ -67,15 +67,13 @@ class UserRepository
 //            $avatar = str_replace('type=normal', 'type=medium', $avatar);
 
             $user->avatar = $avatar;
-            $user->slug = str_slug($userData->email);
+            $user->slug = str_slug($userData->name);
             $user->email = $userData->email;
             $user->firstname = $userData->name;
             if (strlen($userData->nickname) != 0)
                 $user->name = $userData->nickname;
             else
                 $user->name = $userData->email;
-
-//            dd($user);
             $user->save();
         }
     }
