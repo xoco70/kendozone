@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('scripts')
 {!! Html::script('js/pages/header/tournamentEdit.js') !!}
-{!! Html::script('https://maps.google.com/maps/api/js') !!}
+{!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
 {{--{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}--}}
 
 @stop

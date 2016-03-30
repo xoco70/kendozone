@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-    {!! Html::script('https://maps.google.com/maps/api/js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
 @stop
 @section('breadcrumbs')
     @if (isset($tournament) && !is_null($tournament))

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('scripts')
     {!! Html::script('js/pages/header/userCreate.js') !!}
-    {!! Html::script('https://maps.google.com/maps/api/js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
 
 @stop
 @section('styles')
@@ -36,7 +36,7 @@
 
             <!-- Detached content -->
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12">
+                <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
                     <!-- Simple panel 1 : General Data-->
                     <div class="panel panel-flat">
                         <div class="panel-body">
@@ -48,19 +48,20 @@
                                 </fieldset>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-xs-12">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('crud.username')) !!}
-                                                    {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                                                    {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled"]) !!}
+                                                    {!!  Form::hidden('name', $user->name) !!}
                                                 </div>
 
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-xs-12">
                                                 <div class="form-group">
                                                     {!!  Form::label('firstname', trans('crud.firstname')) !!}
                                                     {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
@@ -71,7 +72,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-xs-12">
                                                 <div class="form-group">
                                                     {!!  Form::label('lastname', trans('crud.lastname')) !!}
                                                     {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
@@ -79,7 +80,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-xs-12">
                                                 <div class="form-group">
                                                     {!!  Form::label('grade_id', trans('crud.grade')) !!}
                                                     {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
@@ -88,7 +89,7 @@
                                         </div>
 
                                     </div>
-                                    {{--<div class="col-md-3">--}}
+                                    {{--<div class="col-xs-3">--}}
                                     {{--<div class="form-group">--}}
                                     {{--<br/>--}}
                                     {{--@if ($user->avatar)--}}
@@ -97,12 +98,12 @@
                                     {{--@endif--}}
                                     {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-md-6">
+                                    <div class="col-xs-12 col-md-6  ">
                                         <div class="form-group">
                                             {!!  Form::label('avatar', trans('crud.avatar')) !!}
-                                            <div id="fileInput" class="dropzone">
+                                            <div id="fileInput" class="dropzone text-center">
                                                 <div class="fallback">
-                                                    <input name="file" type="file"/>
+                                                    <input name="avatar" type="file"/>
                                                 </div>
                                             </div>
 
@@ -116,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <div class="form-group">
                                             {!!  Form::label('countryId', trans('crud.country')) !!}
                                             {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
@@ -139,7 +140,7 @@
 
                     <!-- /detached content -->
                 </div>
-                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12">
+                <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
 
                     <div class="panel panel-flat">
                         <div class="panel-body">
@@ -152,43 +153,51 @@
                                     </a>
                                 </fieldset>
                                 <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    {!!  Form::label('email', trans('crud.email')) !!}
+                                                    {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('crud.email_desc') }}</p>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('email', trans('crud.email')) !!}
-                                            {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col">
+                                                <div class="form-group">
+                                                    {!!  Form::label('role_id', trans('crud.role')) !!}
+                                                    @if (Auth::user()->isSuperAdmin())
+                                                        {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                    @else
+                                                        {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
+                                                    @endif
+
+                                                </div>
+
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('password', trans('crud.password')) !!}
-                                            {!!  Form::password('password', ['class' => 'form-control']) !!}
-                                            <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                        <div class="row">
+                                            <div class="col-xs-12 ">
+                                                <div class="form-group">
+                                                    {!!  Form::label('password', trans('crud.password')) !!}
+                                                    {!!  Form::password('password', ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
 
-                                    </div>
-                                </div>
+                                                <div class="form-group">
+                                                    {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
+                                                    {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                </div>
+                                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-
-                                        <div class="form-group">
-                                            {!!  Form::label('role_id', trans('crud.role')) !!}
-                                            @if (Auth::user()->isSuperAdmin())
-                                                {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
-                                            @else
-                                                {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
-                                            @endif
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
-                                            {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                                            <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
                                         </div>
                                     </div>
 
@@ -211,70 +220,29 @@
 
         </div>
         {!! Form::close()!!}
-        {{--<script>--}}
-        {{--Dropzone.options.fileInput = { // The camelized version of the ID of the form element--}}
-
-        {{--// The configuration we've talked about above--}}
-        {{--autoProcessQueue: false,--}}
-        {{--uploadMultiple: true,--}}
-        {{--parallelUploads: 100,--}}
-        {{--maxFiles: 100,--}}
-
-        {{--// The setting up of the dropzone--}}
-        {{--init: function () {--}}
-        {{--var myDropzone = this;--}}
-
-        {{--// First change the button to actually tell Dropzone to process the queue.--}}
-        {{--this.element.querySelector("button[type=submit]").addEventListener("click", function (e) {--}}
-        {{--// Make sure that the form isn't actually being sent.--}}
-        {{--e.preventDefault();--}}
-        {{--e.stopPropagation();--}}
-        {{--myDropzone.processQueue();--}}
-        {{--});--}}
-
-        {{--// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead--}}
-        {{--// of the sending event because uploadMultiple is set to true.--}}
-        {{--this.on("sendingmultiple", function () {--}}
-        {{--// Gets triggered when the form is actually being sent.--}}
-        {{--// Hide the success button or the complete form.--}}
-        {{--});--}}
-        {{--this.on("successmultiple", function (files, response) {--}}
-        {{--// Gets triggered when the files have successfully been sent.--}}
-        {{--// Redirect user or notify of success.--}}
-        {{--});--}}
-        {{--this.on("errormultiple", function (files, response) {--}}
-        {{--// Gets triggered when there was an error sending the files.--}}
-        {{--// Maybe show form again, and notify user of error--}}
-        {{--});--}}
-        {{--}--}}
-
-        {{--}--}}
-        {{--        </script>--}}
-
 
         <script>
 
-//            Dropzone.options.MyTest = {
-//                thumbnailWidth: "250",
-//                thumbnailHeight: "250"
-//            };
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
                 var initialPic = "{{ Auth::user()->avatar }}";
-                var onlyPic = initialPic.substring(initialPic.lastIndexOf('/')+1);
+                var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
+                var uploadUrl = "{{ url('users/'.Auth::user()->slug.'/uploadAvatar') }}";
 
-//                console.log(onlyPic);
+//                console.log(uploadUrl);
                 new Dropzone('#fileInput', {
                     autoProcessQueue: false,
                     uploadMultiple: false,
                     parallelUploads: 100,
+                    acceptedFiles: "image/jpeg,image/png,image/gif",
+
 //                    thumbnailWidth: 200,
 //                    thumbnailHeight: 200,
 //                    dictRemoveFile:'Remove',
 //                    dictDefaultMessage:'Upload file',
-                    createImageThumbnails: true,
+//                    createImageThumbnails: true,
                     addRemoveLinks: 'dictRemoveFile',
-                    url: "#",
+                    url: uploadUrl,
                     maxFiles: 1,
 
                     init: function () {
@@ -311,12 +279,11 @@
                         $(".btn-success").click(function (e) {
                             e.preventDefault();
                             myDropzone.processQueue();
-                            e.submit();
                         });
-                        myDropzone.on('success', function () {
-                            myDropzone.removeAllFiles();
-
-                        });
+//                        myDropzone.on('success', function () {
+//                            myDropzone.removeAllFiles();
+//
+//                        });
                     },
                     maxfilesexceeded: function (file) {
                         this.removeAllFiles();
