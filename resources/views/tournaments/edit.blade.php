@@ -121,7 +121,7 @@
 
                                         <div class="input-group">
 
-                                            {!!  Form::input('text', 'registerDateLimit', old('registerDateLimit'), ['class' => 'form-control datelimit']) !!}
+                                            {!!  Form::input('text', 'registerDateLimit', ($tournament->registerDateLimit == '0000-00-00') ? '' : old('registerDateLimit') , ['class' => 'form-control datelimit']) !!}
                                             <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
                                         <br/>
