@@ -72,14 +72,6 @@ return [
     'configure' => 'Configurar',
     'configured' => 'Configurada',
 
-    // Dashboard
-    'tournaments_registered' => 'Registros en torneos',
-    'tournaments_created' => 'Torneos creados',
-    'numbers' => 'Números',
-    'created' => 'Creados',
-    'participations' => 'Participaciones',
-    'past' => 'Pasados',
-    'next' => 'Próximos',
 
 
 
@@ -188,7 +180,7 @@ return [
     'share' => 'Compartir',
 
     // Dashboard
-    'no_tournament_created_yet' => 'Aún no has creado ningún torneo'
+
 
 
 

@@ -21,10 +21,10 @@
 
 
                                 <fieldset title="MIS TORNEOS">
-                                    <legend class="text-semibold">{{ trans('crud.tournaments_created') }}</legend>
+                                    <legend class="text-semibold">{{ trans('core.tournaments_created') }}</legend>
                                 </fieldset>
 
-                                <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('crud.no_tournament_created_yet') }}</div>
+                                <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('core.no_tournament_created_yet') }}</div>
                                 <div class="text-center pb-20">
                                     <a href="{!! URL::action('TournamentController@create') !!}" type="button"
                                        class="btn border-primary btn-flat text-primary text-uppercase p-10 ">{{ trans('crud.createTournament') }}

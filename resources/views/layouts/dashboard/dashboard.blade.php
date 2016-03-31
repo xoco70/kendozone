@@ -7,7 +7,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
                 <fieldset title="{{Lang::get('crud.venue')}}">
-                    <legend class="text-semibold">{{ trans('crud.tournaments_created') }}</legend>
+                    <legend class="text-semibold">{{ trans('core.tournaments_created') }}</legend>
                 </fieldset>
 
                     <table width="100%">
@@ -34,7 +34,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
                 <fieldset title="MIS TORNEOS">
-                    <legend class="text-semibold">{{ trans('crud.tournaments_registered') }}</legend>
+                    <legend class="text-semibold">{{ trans('core.tournaments_registered') }}</legend>
                 </fieldset>
                 @if (sizeof($tournamentsParticipated) == 0)
                     <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('crud.no_tournament_registered_yet') }}</div>

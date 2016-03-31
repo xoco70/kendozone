@@ -71,6 +71,18 @@ return [
     'soon' => 'Proximamente',
     'configured' => 'conf.',
     'see_all' => 'Ver Todos',
+    'no_tournament_created_yet' => 'Aún no has creado ningún torneo',
+    'join_tournament' => 'Unirse a un torneo existente',
+    'tournaments_registered' => 'Registros en torneos',
+    'tournaments_created' => 'Torneos creados',
+    'numbers' => 'Números',
+    'created' => 'Creados',
+    'participations' => 'Participaciones',
+    'past' => 'Pasados',
+    'next' => 'Próximos',
+
+
+
 
 
 

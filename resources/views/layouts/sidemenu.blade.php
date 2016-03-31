@@ -42,18 +42,24 @@
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
                     <li {{ (Route::getCurrentRoute()->getActionName() == null ? 'class=active' : '') }}>
-                        <a href="/"><i class="icon-display4 position-left sidemenu"></i>
+                        <a href="/"><i class="icon-display4 position-left sidemenu" title data-original-title="Main pages"></i>
                             <span>Dashboard</span>
+
                         </a>
                     </li>
-                    <li {{ (Route::getCurrentRoute()->getActionName() == 'invites.index' ? 'class=active' : '') }}>
-                        <a href="{!! URL::action('InviteController@index') !!}"><i
+                    <li {{ (Route::getCurrentRoute()->getActionName() == 'tournaments.index' ? 'class=active' : '') }}>
+                        <a href="{!! URL::action('TournamentController@index') !!}"><i
                                     class="icon-trophy2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
                         </a>
                     </li>
                     <li {{ (Route::getCurrentRoute()->getActionName() == 'users.tournaments' ? 'class=active' : '') }}>
                         <a href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug ) !!}">
                             <i class="icon-medal2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
+                        </a>
+                    </li>
+                    <li {{ (Route::getCurrentRoute()->getActionName() == 'tournaments.invites' ? 'class=active' : '') }}>
+                        <a href="{!! URL::action('InviteController@index') !!}"><i
+                                    class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('crud.invitation',2) }}</span>
                         </a>
                     </li>
                 </ul>

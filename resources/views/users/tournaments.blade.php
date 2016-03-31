@@ -16,6 +16,23 @@
 
                     <div class="panel-body">
                         <div class="container-fluid">
+                            @if (sizeof($tournaments) == 0)
+
+
+                                <fieldset title="MIS TORNEOS">
+                                    <legend class="text-semibold">{{ trans('core.tournaments_registered') }}</legend>
+                                </fieldset>
+
+                                <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('core.no_tournament_created_yet') }}</div>
+                                <div class="text-center pb-20">
+                                    <a href="{!! URL::action('TournamentController@create') !!}" type="button"
+                                       class="btn border-primary btn-flat text-primary text-uppercase p-10 ">{{ trans('crud.createTournament') }}
+                                        {{--( {{trans('core.soon')}} )--}}
+                                    </a>
+                                </div>
+
+
+                            @else
 
                             {{--<div class="row col-md-10 custyle">--}}
                             <table class="table table-togglable table-hover">
@@ -47,6 +64,8 @@
 
                             </table>
                             <div class="text-center">{!! $tournaments->render() !!}</div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
