@@ -106,10 +106,14 @@ elixir(function (mix) {
     ], 'public/js/pages/header/tournamentUserIndex.js');
 
     mix.scripts([
+        // 'bootstrap-tagsinput.js',
+        // 'bootstrap-multiEmail.js'
        'plugins/multiple-emails.js'
     ], 'public/js/pages/header/tournamentInvite.js');
 
     mix.styles([
+        // 'bootstrap-tagsinput.css',
+        // 'bootstrap-multiEmail.css'
        'multiple-emails.css'
     ], 'public/css/pages/tournamentInvite.css');
 
