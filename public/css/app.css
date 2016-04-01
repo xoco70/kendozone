@@ -34996,7 +34996,8 @@ h6.panel-title,
 @media (max-width: 767px) {
   .breadcrumb,
   ul.nav.navbar-nav.breadcrumbs,
-  .head_create_tournament {
+  .head_create_tournament,
+  .protip-container {
     display: none;
   }
 }

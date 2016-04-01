@@ -1,6 +1,6 @@
 /* col-xs */
 @media (max-width: 767px) {
-    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament, . {
+    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament, .protip-container {
         display: none;
     }
 
