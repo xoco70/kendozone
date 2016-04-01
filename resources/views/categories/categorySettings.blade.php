@@ -56,7 +56,7 @@ $currency = Auth::user()->country->currency_code;
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!!  Form::label('cost', trans('crud.cost'). '('. $currency  .')' ) !!}
+                {!!  Form::label('cost', trans('crud.cost'). ' ('. $currency  .')' ) !!}
                 {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
             </div>
         </div>

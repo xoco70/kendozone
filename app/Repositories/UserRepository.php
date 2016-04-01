@@ -3,9 +3,6 @@ namespace App\Repositories;
 
 use App\User;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
-use GeoIP;
-use Webpatser\Countries\Countries;
 
 class UserRepository
 {

@@ -3,11 +3,12 @@
 namespace App;
 
 use Carbon\Carbon;
+use Countries;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 
 class Tournament extends Model implements SluggableInterface
@@ -48,7 +49,11 @@ class Tournament extends Model implements SluggableInterface
     protected static function boot()
     {
         parent::boot();
+        static::creating(function ($tournament) {
 
+            $tournament->addGeoData();
+
+        });
         static::deleting(function ($tournament) {
             foreach ($tournament->categoryTournaments as $ct) {
                 $ct->delete();
@@ -65,7 +70,22 @@ class Tournament extends Model implements SluggableInterface
         });
 
     }
+    function addGeoData()
+    {
+        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
+        $country = Countries::where('name', '=', $location['country'])->first();
+        if (is_null($country)) {
+            $latitude = 48.858222;
+            $longitude = 2.2945;
+        } else {
+            $latitude = $location['lat'];
+            $longitude = $location['lon'];
+        }
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
 
+
+    }
     /**
      * A tournament is owned by a user
      *
@@ -143,13 +163,19 @@ class Tournament extends Model implements SluggableInterface
     /**
      * @return mixed
      */
-//    public function settings()
-//    {
-//        //TODO Should use hasManyThrough
-//        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
-//        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
-//        return $settings;
-//    }
+    public function settings()
+    {
+        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
+        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
+        return $settings;
+    }
+
+    public function settings2()
+    {
+        //TODO Should use hasManyThrough
+        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
+    }
+
 
 
     /**

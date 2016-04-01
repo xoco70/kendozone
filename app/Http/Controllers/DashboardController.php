@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Place;
-use GeoIP;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller

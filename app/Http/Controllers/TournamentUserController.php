@@ -10,14 +10,9 @@ use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
 use App\User;
-use GeoIP;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Response;
-use Webpatser\Countries\Countries;
-
-//use App\Place;
 
 class TournamentUserController extends Controller
 {
@@ -200,7 +195,7 @@ class TournamentUserController extends Controller
         ]);
 
         $tcat = $request->cat;
-        
+
         // We add him to the different categor
         $tcusToCreate = array();
         $categories = array();
