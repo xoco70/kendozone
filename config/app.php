@@ -2,6 +2,8 @@
 
 return [
 
+
+    'name' => env('APP_NAME', 'Kendozone'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

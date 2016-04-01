@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('crud.username')) !!}
                                                     @if (!is_null($user->id))
@@ -69,7 +69,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('firstname', trans('crud.firstname')) !!}
                                                     {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
@@ -80,7 +80,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('lastname', trans('crud.lastname')) !!}
                                                     {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
@@ -88,7 +88,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('grade_id', trans('crud.grade')) !!}
                                                     {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
                                             {!!  Form::label('countryId', trans('crud.country')) !!}
                                             {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
@@ -149,7 +149,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('email', trans('crud.email')) !!}
                                                     {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
@@ -157,7 +157,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('role_id', trans('crud.role')) !!}
                                                     @if (Auth::user()->isSuperAdmin())
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-xs-12 ">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 ">
                                                 <div class="form-group">
                                                     {!!  Form::label('password', trans('crud.password')) !!}
                                                     {!!  Form::password('password', ['class' => 'form-control']) !!}
@@ -187,7 +187,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
 
                                                 <div class="form-group">
                                                     {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
