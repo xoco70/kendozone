@@ -66,11 +66,6 @@ class Tournament extends Model implements SluggableInterface
 
     }
 
-//    public function place()
-//    {
-//        return $this->hasOne('Place');
-//    }
-
     /**
      * A tournament is owned by a user
      *
@@ -81,50 +76,23 @@ class Tournament extends Model implements SluggableInterface
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-
-
-    //TODO Change this method por ctus() relation
-//    public function competitors($CategoryTournamentId = null)
-//    {
-////        User::join('category_tournament_user', 'user.id','user_id' )
-//        $users = DB::table('users')
-//            ->join('category_tournament_user as ctu', 'ctu.user_id', '=', 'users.id')
-//            ->join('category_tournament as ct', 'ctu.category_tournament_id', '=', 'ct.id')
-//            ->join('category', 'ct.category_id', '=', 'category.id')
-//            ->where('ct.tournament_id', '=', $this->id);
-//
-//        if ($CategoryTournamentId != null)
-//            $users->where('ct.id', '=', $CategoryTournamentId);
-//
-//        $users = $users->select('users.id', 'ct.tournament_id', 'users.name', 'email', 'avatar', 'country_id',
-//            'category.id as cat_id', 'category.name as cat_name', 'ct.tournament_id', 'ct.id as tcId', 'ctu.confirmed', 'ctu.id as ctuId')
-//            ->orderBy('ct.id', 'ASC')
-//            ->orderBy('users.email', 'ASC')
-//            ->get();
-//        $users = User::hydrate($users);
-//        return $users;
-//    }
-
-//    public function deleteUser($categoryTournamentId, $userId)
-//    {
-//
-//
-//    }
-
-
+    /**
+     * Get All Tournaments levels
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function level()
     {
         return $this->belongsTo('App\TournamentLevel', 'level_id', 'id');
     }
 
     /**
+     * Get All categories available
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
 
     // We can use $tournament->categories()->attach(id);
     // Or         $tournament->categories()->sync([1, 2, 3]);
-    // I'm not sure about the name
     public function categories()
     {
         return $this->belongsToMany('App\Category')
@@ -132,60 +100,73 @@ class Tournament extends Model implements SluggableInterface
             ->withTimestamps();
     }
 
+    /**
+     * Get All categoriesTournament that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function categoryTournaments()
     {
         return $this->hasMany(CategoryTournament::class);
     }
 
 
+    /**
+     * Get All categoriesSettings that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function categorySettings()
     {
         return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
     }
 
+    /**
+     * Get All competitors that belongs to a tournament
+     * @param null $CategoryTournamentId
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function competitors($CategoryTournamentId = null)
     {
         return $this->hasManyThrough('App\CategoryTournamentUser', 'App\CategoryTournament');
     }
 
 
+    /**
+     * Get all Invitations that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function invites()
     {
         return $this->hasMany(Invite::class);
 
     }
 
-    public function settings()
-    {
-        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
-        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
-        return $settings;
-    }
-
-//    public function ct(){
-//        return $this->hasMany('App\CategoryTournament');
-//    }
-
-
-//    public function CategoryTournament()
+    /**
+     * @return mixed
+     */
+//    public function settings()
 //    {
-//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament', 'tournament_id', 'category_id');
+//        //TODO Should use hasManyThrough
+//        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
+//        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
+//        return $settings;
 //    }
 
-    // We can use $tournament->category_user()->attach(id);
-    // Or         $tournament->category_user()->sync([1, 2, 3]);
-    // I'm not sure about the name
 
-    public function tournament_categories()
-    {
-        return $this->belongsToMany('App\CategoryTournament', 'category_tournament');
-    }
+    /**
+     * Get All categoriesTournament that belongs to a tournament
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+//    public function tournament_categories()
+//    {
+//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament');
+//    }
 
-    public function categories_user()
-    {
-        return $this->belongsToMany('App\CategoryTournament', 'category_tournament_user', 'user_id', 'category_tournament_id')
-            ->withTimestamps();
-    }
+//    public function categories_user()
+//    {
+//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament_user', 'user_id', 'category_tournament_id')
+//            ->withTimestamps();
+//    }
 
 
     public function getCategoryList()

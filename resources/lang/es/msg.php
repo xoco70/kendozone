@@ -25,18 +25,24 @@ return [
 
 
     // Usuario
-    'user_create_successful' => 'El usuario <b>:name</b><br/> se agregó',
+    'user_create_successful' => 'El usuario <b>:name</b><br/> se creó',
     'user_update_successful' => 'El usuario <b>:name</b><br/> se actualizó',
     'user_delete_successful' => 'El usuario <b>:name</b><br/> se borró',
     'user_restore_successful' => 'El usuario <b>:name</b><br/> se restauró',
+    'user_registered_successful' => 'El usuario <b>:name</b><br/> se agregó al torneo :tournament',
 
     'user_create_error' => 'Hubo un problema al crear el usuario',
     'user_update_error' => 'Hubo un problema al editar el usuario',
     'user_delete_error' => 'Hubo un problema al borrar el usuario :name',
     'user_restore_error' => 'Hubo un problema al restaurar el usuario :name',
+    'user_registered_error' => 'Hubo un problema al restaurar el usuario :name',
 
     'user_status_successful' => ':name : Estatus actualizado',
     'user_status_error' => 'Hubo un error al actualizar :name',
+
+
+
+
 
     // Categoria
     'category_create_successful' => 'La categoría se configuró de forma exitosa',
@@ -53,6 +59,7 @@ return [
     'invitation_needed' => '"Necesitas una invitación para registarte en este torneo."',
     'invitation_expired' => '"La invitación ha expirado."',
     'invitation_used' => '"La invitación ya ha sido usada"',
+    'invitation_sent' => '"La invitación ha sido enviada"',
 
     // Permisos
     'access_denied' => 'No tiene acceso a esta sección',

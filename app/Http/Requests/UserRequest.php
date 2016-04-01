@@ -34,7 +34,7 @@ class UserRequest extends Request
             $uniqueUser = '|unique:users';
         }
 
-
+    
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,

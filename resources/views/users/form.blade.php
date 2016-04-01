@@ -26,11 +26,15 @@
                                     'route' => array('users.update', $user->slug),
                                     'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
-            <?php $disabled = "disabled"; ?>
+            <?php $disabled = "disabled";
+                  $userPic = Auth::user()->avatar;
+            ?>
         @else
             {!! Form::open(['url'=>"users",
                             'enctype' => 'multipart/form-data']) !!}
-            <?php $disabled = ""; ?>
+            <?php $disabled = "";
+                  $userPic='';
+            ?>
         @endif
 
 
@@ -224,7 +228,7 @@
             Dropzone.autoDiscover = false;
             $(document).ready(function () {
 
-                var initialPic = "{{ Auth::user()->avatar }}";
+                var initialPic = "{{ $user->avatar }}";
                 var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
                 var uploadUrl = "{{ url('users/'.Auth::user()->slug.'/uploadAvatar') }}";
                 var avatarHiddenField = $('input[name=avatar]');

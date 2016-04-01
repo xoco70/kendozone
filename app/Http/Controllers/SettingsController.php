@@ -55,7 +55,7 @@ class SettingsController extends Controller
         Auth::user()->settings()->create($request->all());
         //TODO core.operation_successful
 
-        flash()->success(trans('core.operation_successful'));
+//        flash()->success(trans('core.operation_successful'));
 //        else flash('error', 'operation_failed!');
         return redirect('settings');
     }

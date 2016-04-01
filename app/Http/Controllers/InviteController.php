@@ -161,9 +161,7 @@ class InviteController extends Controller
 
 
         if (isset($invite)) $invite->consume();
-        //TODO core.operation_successful
-
-        flash()->success(trans('core.operation_successful'));
+        flash()->success(trans('msg.invitation_sent'));
         return redirect("/invites");
 
     }
@@ -193,8 +191,7 @@ class InviteController extends Controller
             $mailer->sendEmailInvitationTo($recipient, $tournament, $code);
 
         }
-        //TODO core.operation_successful
-        flash()->success(trans('core.operation_successful'));
+        flash()->success(trans('msg.invitation_sent'));
         return redirect("tournaments/$tournament->slug/edit");
 
 

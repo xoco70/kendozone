@@ -113,12 +113,12 @@ class TournamentUserController extends Controller
         }
 
 
-        // We send him an email with detail ( and user /password if new)
+        // We send him an email with detail (and user /password if new)
         $invite = new Invite();
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
-        //TODO core.operation_successful
-        flash()->success(trans('core.operation_successful'));
+
+        flash()->success(trans('msg.user_registered_successful',['name' => $user->name, 'tournament' => $tournament->name]));
         return redirect("tournaments/$tournament->slug/users");
 
 
@@ -193,16 +193,14 @@ class TournamentUserController extends Controller
      */
     public function update(Request $request, $tournamentId, $user)
     {
-
+//TODO Se podria usar eloquent mas facil - ya no me acuerdo donde se usa
         $this->validate($request, [
             'cat' => 'required|array'
 
         ]);
 
         $tcat = $request->cat;
-
-//        dd($user);
-
+        
         // We add him to the different categor
         $tcusToCreate = array();
         $categories = array();
@@ -230,9 +228,8 @@ class TournamentUserController extends Controller
 //        $invite = new Invite();
 //        $code = $invite->generate($user->email, $tournament);
 //        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
-        //TODO core.operation_successful
 
-        flash()->success(trans('core.operation_successful'));
+        flash()->success(trans('msg.operation_successful'));
         return redirect("tournaments/$tournamentId/users");
     }
 

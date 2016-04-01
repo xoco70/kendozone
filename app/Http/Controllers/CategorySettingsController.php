@@ -55,9 +55,6 @@ class CategorySettingsController extends Controller
         } else {
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
         }
-//        flash()->success(Lang::get('core.operation_successful'));
-//        return redirect("tournaments/$tournamentId/edit");
-
     }
 
     /**
