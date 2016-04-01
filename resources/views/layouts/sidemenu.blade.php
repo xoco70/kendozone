@@ -49,17 +49,22 @@
                     </li>
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
                         <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}" href="{!! URL::action('TournamentController@index') !!}"><i
-                                    class="icon-trophy2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
+                                    class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.tournaments_created') }}</span>
                         </a>
                     </li>
                     <li {{ (Request::is('users/'.Auth::user()->slug.'/tournaments') ? 'class=active' : '') }}>
                         <a class="protip" data-pt-title="{{ trans('core.participations') }}" href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug ) !!}">
-                            <i class="icon-medal2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
+                            <i class="icon-medal2 position-left sidemenu"></i><span>{{ trans('core.participations') }}</span>
                         </a>
                     </li>
                     <li {{ (Request::is('invites') ? 'class=active' : '') }}>
                         <a class="protip" data-pt-title="{{ trans_choice('crud.invitation',2) }}" href="{!! URL::action('InviteController@index') !!}"><i
                                     class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('crud.invitation',2) }}</span>
+                        </a>
+                    </li>
+                    <li {{ (Request::is('invites') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans('core.tournaments_deleted') }}" href="{!! URL::action('TournamentController@index') !!}"><i
+                                    class="icon-trash-alt position-left sidemenu"></i><span>{{ trans('core.tournaments_deleted') }}</span>
                         </a>
                     </li>
                 </ul>

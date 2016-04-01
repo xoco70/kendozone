@@ -75,6 +75,7 @@ return [
     'join_tournament' => 'Unirse a un torneo existente',
     'tournaments_registered' => 'Registros en torneos',
     'tournaments_created' => 'Torneos creados',
+    'tournaments_deleted' => 'Torneos borrados',
     'numbers' => 'Números',
     'created' => 'Creados',
     'participations' => 'Participaciones',
