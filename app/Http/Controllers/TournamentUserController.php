@@ -81,19 +81,11 @@ class TournamentUserController extends Controller
                 'name' => $username,
                 'password' => bcrypt($password),
                 'confirmed' => '1'
-//                'country_id' => $country->id,
-//                'countryCode' => $location['isoCode'],
-//                'city' => $location['city'],
-//                'latitude' => $location['lat'],
-//                'longitude' => $location['lon']
-
             ]);
         } else {
-
             // User already exists
             // We check that this user isn't registered in this tournament
             $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
-//            $ctu = CategoryTournamentUser::with('categoryTournaments', 'users')->where('user_id',$user->id)->get();
         }
 
 
@@ -141,7 +133,7 @@ class TournamentUserController extends Controller
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id);
 
-        if ($ctu->delete()) {
+        if ($ctu->forceDelete()) {
             return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
         } else {
             return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
