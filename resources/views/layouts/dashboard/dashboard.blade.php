@@ -83,18 +83,18 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
         <div class="row">
             <div class="panel panel-body">
                 <fieldset title="NUMEROS">
-                    <legend class="text-semibold">{{ trans('crud.numbers') }}</legend>
+                    <legend class="text-semibold">{{ trans('core.numbers') }}</legend>
                 </fieldset>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
 
                         <div class="square bg-nav">{{ $tournamentsCreated->count() }}
-                            <div class="text-size-large text-uppercase">{{ trans('crud.created') }}</div>
+                            <div class="text-size-large text-uppercase">{{ trans('core.created') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-secondary">{{ $tournamentsParticipated->count()  }}
-                            <div class="text-size-large text-uppercase">{{ trans('crud.participations') }}</div>
+                            <div class="text-size-large text-uppercase">{{ trans('core.participations') }}</div>
                         </div>
                     </div>
 
@@ -102,12 +102,12 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-primary">{{ $tournamentsCreated->where('dateFin','<', new \DateTime('today'))->count() }}
-                            <div class="text-size-large text-uppercase">{{ trans('crud.past') }}</div>
+                            <div class="text-size-large text-uppercase">{{ trans('core.past') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="square bg-success">{{ $tournamentsCreated->where('dateFin','>=', new \DateTime('today'))->count() }}
-                            <div class="text-size-large text-uppercase">{{ trans('crud.next') }}</div>
+                            <div class="text-size-large text-uppercase">{{ trans('core.next') }}</div>
                         </div>
                     </div>
 

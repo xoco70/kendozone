@@ -19,8 +19,8 @@
 
     @include("errors.list")
 
-    <div class="container-fluid">
-
+    <div class="container">
+        <div class="content">
         @if (!is_null($user->id))
             {!! Form::model($user, ['method'=>"PATCH",
                                     'route' => array('users.update', $user->slug),
@@ -34,7 +34,7 @@
         @endif
 
 
-        <div class="content">
+
 
             <!-- Detached content -->
             <div class="row">
@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('crud.username')) !!}
                                                     @if (!is_null($user->id))
@@ -69,7 +69,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
                                                     {!!  Form::label('firstname', trans('crud.firstname')) !!}
                                                     {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
@@ -214,9 +214,9 @@
                 </div>
             </div>
 
+            {!! Form::close()!!}
 
         </div>
-        {!! Form::close()!!}
 
         <script>
             var maxImageWidth = 100, maxImageHeight = 100;

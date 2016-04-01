@@ -42,10 +42,9 @@
 
             <!-- Content area -->
 
-            <div class="content" id="content">
+            <div class="content">
                 @include('layouts.flash')
                 @yield('content')
-
                 @include('layouts.footer')
             </div>
 
