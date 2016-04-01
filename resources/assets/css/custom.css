@@ -1,8 +1,9 @@
 /* col-xs */
 @media (max-width: 767px) {
-    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament {
+    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament, . {
         display: none;
     }
+
 }
 
 
@@ -156,29 +157,27 @@ fieldset > a > legend {
     padding-bottom: 10px;
     font-size: 40px;
 }
-/*.dropzone .dz-preview .dz-image { width: 300px !important; height: 300px !important; }*/
-/*.dropzone-previews .dz-preview .dz-details {*/
-    /*width: 250px;*/
-    /*height: 250px;*/
-    /*position: relative;*/
-    /*background: #ebebeb;*/
-    /*padding: 5px;*/
-    /*margin-bottom: 22px;*/
-/*}*/
-/*.dropzone .dz-preview .dz-image{*/
-    /*width: 250px!important;*/
-    /*height: 250px!important;*/
-/*}*/
-/*.dropzone-previews .dz-preview .dz-details img {*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*width: 250px;*/
-    /*height: 250px;*/
-/*}*/
-/*.dropzone {*/
-    /*min-height: 250px;*/
-    /*border: 2px dashed rgba(0, 0, 0, 0.3);*/
-    /*background: white;*/
-    /*padding: 0px 0px;*/
-/*}*/
+.ui-tooltip {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 0;
+    opacity: 1;
+}
+.ui-tooltip-content {
+    position: relative;
+    padding: 1em;
+}
+.ui-tooltip-content::after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    display: block;
+    width: 0;
+}
+.right .ui-tooltip-content::after {
+    top: 18px;
+    left: -10px;
+    border-color: transparent #666;
+    border-width: 10px 10px 10px 0;
+}

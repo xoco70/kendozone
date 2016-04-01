@@ -41,24 +41,24 @@
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
-                    <li {{ (Route::getCurrentRoute()->getActionName() == null ? 'class=active' : '') }}>
-                        <a href="/"><i class="icon-display4 position-left sidemenu" title data-original-title="Main pages"></i>
+                    <li {{ (Request::is('/') ? 'class=active' : '') }}>
+                        <a href="/" class="protip" data-pt-title="Dashboard"><i class="icon-display4 position-left sidemenu" title data-original-title="Main pages"></i>
                             <span>Dashboard</span>
 
                         </a>
                     </li>
-                    <li {{ (Route::getCurrentRoute()->getActionName() == 'tournaments.index' ? 'class=active' : '') }}>
-                        <a href="{!! URL::action('TournamentController@index') !!}"><i
+                    <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}" href="{!! URL::action('TournamentController@index') !!}"><i
                                     class="icon-trophy2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
                         </a>
                     </li>
-                    <li {{ (Route::getCurrentRoute()->getActionName() == 'users.tournaments' ? 'class=active' : '') }}>
-                        <a href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug ) !!}">
+                    <li {{ (Request::is('users/'.Auth::user()->slug.'/tournaments') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans('core.participations') }}" href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug ) !!}">
                             <i class="icon-medal2 position-left sidemenu"></i><span>{{ trans_choice('crud.tournament',2) }}</span>
                         </a>
                     </li>
-                    <li {{ (Route::getCurrentRoute()->getActionName() == 'tournaments.invites' ? 'class=active' : '') }}>
-                        <a href="{!! URL::action('InviteController@index') !!}"><i
+                    <li {{ (Request::is('invites') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans_choice('crud.invitation',2) }}" href="{!! URL::action('InviteController@index') !!}"><i
                                     class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('crud.invitation',2) }}</span>
                         </a>
                     </li>

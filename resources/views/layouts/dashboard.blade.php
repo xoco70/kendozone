@@ -60,6 +60,15 @@
 <!-- /page container -->
 
 {!! Html::script('js/analytics.js') !!}
+<script>
+    $(document).ready(function(){
+        $.protip(
+
+        );
+    });
+</script>
+
+
 
 @yield('scripts_footer')
 

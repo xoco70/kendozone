@@ -21,7 +21,8 @@ elixir(function (mix) {
         'components.css',
         'colors.css',
         'core.css',
-        'custom.css'
+        'custom.css',
+        'protip.css'
     ], 'public/css/app.css');
    // mix.browserify('vue/pages/tournaments.js');
     mix.scripts([
@@ -35,7 +36,8 @@ elixir(function (mix) {
        'core/libraries/jquery_ui/sliders.min.js',
        'core/libraries/jquery_ui/touch.min.js',
        'plugins/sliders/slider_pips.min.js',
-       'plugins/forms/styling/switch.min.js'
+       'plugins/forms/styling/switch.min.js',
+        'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
     mix.scripts([
