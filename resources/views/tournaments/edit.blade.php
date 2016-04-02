@@ -52,7 +52,7 @@
 
                                         <div class="input-group">
                                             <span class="input-group-addon">{{trans('crud.from') }}</span>
-                                            {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
+                                            {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control dateIni']) !!}
                                             <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
                                         </div>
@@ -66,7 +66,7 @@
 
                                         <div class="input-group">
                                             <span class="input-group-addon">{{trans('crud.to') }}</span>
-                                            {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
+                                            {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control dateFin']) !!}
                                             <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
 
@@ -121,7 +121,7 @@
 
                                         <div class="input-group">
 
-                                            {!!  Form::input('text', 'registerDateLimit', ($tournament->registerDateLimit == '0000-00-00') ? '' : old('registerDateLimit') , ['class' => 'form-control datelimit']) !!}
+                                            {!!  Form::input('text', 'registerDateLimit', ($tournament->registerDateLimit == '0000-00-00') ? '' : old('registerDateLimit') , ['class' => 'form-control dateLimit']) !!}
                                             <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                                         </div>
                                         <br/>

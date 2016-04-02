@@ -19,11 +19,11 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold ']) !!}
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">{{trans('crud.from') }}</span>
-                                {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control datetournament']) !!}
+                                {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control dateIni']) !!}
                                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
                             </div>
@@ -31,12 +31,12 @@
                     </div>
                     <div class="col-md-4">
 
-                        {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold ' ]) !!}
                         <div class="form-group">
 
                             <div class="input-group">
                                 <span class="input-group-addon">{{trans('crud.to') }}</span>
-                                {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control datetournament']) !!}
+                                {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control dateFin']) !!}
                                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                             </div>
                         </div>
@@ -77,6 +77,7 @@ $now = Carbon\Carbon::now();
 $year = $now->year;
 $month = $now->month;
 $day = $now->day;
+
 ?>
 
 
@@ -84,10 +85,20 @@ $day = $now->day;
 <script>
 
     $(function () {
-        $('.datetournament').pickadate({
+        var $input = $('.dateFin').pickadate({
             min: [{{$year}}, {{$month}}, {{$day}}],
             format: 'yyyy-mm-dd'
         });
+        var pickerFin = $input.pickadate('picker')
+
+        $('.dateIni').pickadate({
+            min: [{{$year}}, {{$month}}, {{$day}}],
+            format: 'yyyy-mm-dd',
+            onSet: function() {
+                pickerFin.set('min',this.get('select'));
+            }
+        });
+
 
 
         // Basic Dual select example
@@ -99,6 +110,11 @@ $day = $now->day;
 
 
         });
+
+//        var calendarFin = input[name="dateFin"];
+//        var calendarLimit = input[name="registerDateLimit"];
+//
+//        calendarIni.on()
 
 
         $('#block-panel').on('click', function () {

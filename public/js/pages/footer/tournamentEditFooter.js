@@ -221,26 +221,39 @@ $(function () {
     $(".switch").bootstrapSwitch();
 
 
+    var $input = $('.dateFin').pickadate({
+        min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
+        format: 'yyyy-mm-dd'
+});
+    var $input2 = $('.dateLimit').pickadate({
+        min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
+        format: 'yyyy-mm-dd'
+    });
 
-    $('#dateIni').pickadate({
+    var pickerFin = $input.pickadate('picker');
+    var pickerLimit = $input2.pickadate('picker');
+
+    $('.dateIni').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
-        onSet: function(context) {
+        onSet: function() {
+            pickerFin.set('min',this.get('select'));
+            pickerLimit.set('min',this.get('select'));
 
-             var dateIni = new Date(context.select);
-             var year = $.format.date(dateIni, "yy");
-             var year4digits = $.format.date(dateIni, "yyyy");
-             var month = $.format.date(dateIni, "MM");
-             var day = $.format.date(dateIni, "dd");
-             var $dateFin = $('#dateFin');
-
-            $dateFin.val(year4digits + '-' + month + '-' + day); // This works well
-            $dateFin.pickadate({
-                    min: [year, month,day]
-            });
         }
 
     });
+
+
+//
+//     $('.dateIni').pickadate({
+//         min: [{{$year}}, {{$month}}, {{$day}}],
+//     format: 'yyyy-mm-dd',
+
+// });
+
+
+
     $('#dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd'
