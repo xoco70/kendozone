@@ -31,7 +31,7 @@
                         </thead>
                         @foreach($invites as $invite)
                             <tr>
-                                <td align="center"><a href="{!!   URL::action('TournamentController@edit',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>
+                                <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>sh
                                 <td align="center">{{ $invite->tournament->owner->name }}</td>
                                 <td align="center">{{ $invite->tournament->type == 0 ? trans('core.open') : trans_choice('crud.invitation',1) }}</td>
                                 <td align="center">{!!  $invite->used ?
