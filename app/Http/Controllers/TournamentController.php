@@ -47,7 +47,8 @@ class TournamentController extends Controller
             $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         }
-        return view('tournaments.index', compact('tournaments', 'currentModelName'));
+        $title = trans('core.tournaments_created');
+        return view('tournaments.index', compact('tournaments', 'currentModelName', 'title'));
     }
 
     /**
@@ -197,8 +198,23 @@ class TournamentController extends Controller
                 ]
             );
     }
-
-    public function generateTrees($tournamentId)
+    public function getDeleted()
+    {
+        $currentModelName = trans_choice('crud.tournament', 2);
+        if (Auth::user()->isSuperAdmin()) {
+            $tournaments = Tournament::onlyTrashed()
+                ->orderBy('created_at', 'desc')
+                ->paginate(Config::get('constants.PAGINATION'));
+        } else {
+            $tournaments = Auth::user()->tournaments()
+                ->onlyTrashed()
+                ->orderBy('created_at', 'desc')
+                ->paginate(Config::get('constants.PAGINATION'));
+        }
+        $title = trans('core.tournaments_deleted');
+        return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
+    }
+    public function generateTrees($tournamentId)    
     {
         $tournament = Tournament::findOrFail($tournamentId);
 //        $competitors = $tournament->competitors();

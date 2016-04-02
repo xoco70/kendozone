@@ -36,7 +36,7 @@ $numCompetitors = $tournament->competitors()->count();
                                 if ($settingSize > 0 && $settingSize == $categorySize)
                                     $class = "badge-success";
                                 else
-                                    $class = "badge-warning";
+                                    $class = "badge-primary";
                                 ?>
                                 <div class="badge {!! $class !!}" id="categories-status">
                                     <span class="category-size">{{ $settingSize  }}</span> / {{ $categorySize }}
@@ -47,7 +47,7 @@ $numCompetitors = $tournament->competitors()->count();
                                 @if($numCompetitors>8)
                                     <span class="badge badge-success">{{$numCompetitors }}</span>
                                 @else
-                                    <span class="badge badge-warning">{{$numCompetitors}}</span>
+                                    <span class="badge badge-primary">{{$numCompetitors}}</span>
                                 @endif
 
                             </a>

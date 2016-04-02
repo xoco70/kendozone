@@ -5406,13 +5406,13 @@ a.dropdown-toggle {
 }
 
 .badge-primary {
-    background-color: #2196f3;
-    border-color: #2196f3
+    background-color: #ff5663;
+    border-color: #ff5663
 }
 
 .badge-success {
-    background-color: #4caf50;
-    border-color: #4caf50
+    background-color: #7CD69C;
+    border-color: #7CD69C
 }
 
 .badge-info {
@@ -5426,8 +5426,8 @@ a.dropdown-toggle {
 }
 
 .badge-danger {
-    background-color: #f44336;
-    border-color: #f44336
+    background-color: #ff5663;
+    border-color: #ff5663
 }
 
 .badge-flat {

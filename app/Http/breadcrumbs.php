@@ -8,8 +8,13 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
 // Home > Tournaments
 Breadcrumbs::register('tournaments.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('crud.tournament', 2), route('tournaments.index'));
+    $breadcrumbs->push(trans_choice('crud.tournament', 2));
 });
+Breadcrumbs::register('tournaments.deleted', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('core.tournaments_deleted'));
+});
+
 // Home > Create Tournament
 Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentModelName) {
     $breadcrumbs->parent('dashboard');

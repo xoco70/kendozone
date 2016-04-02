@@ -56,7 +56,9 @@ Route::group(['middleware' => ['guest']],
 Route::get('/', 'DashboardController@index')->middleware(['auth']);
 Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 
-Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
+Route::get('tournaments/deleted', 'TournamentController@getDeleted');
+
+Route::group(['middleware' => ['auth', 'own', ]], // 'throttle:100,1'
     function () {
 
         Route::resource('tournaments', 'TournamentController');
@@ -71,26 +73,14 @@ Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
 
 
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
-
         Route::resource('tournaments/{tournament}/users', 'TournamentUserController');
-
-
         Route::delete('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
         Route::put('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/confirm', 'TournamentUserController@confirmUser');
-
         Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
-
-//        Route::resource('tournaments/{tournament}/categories', 'CategoryController');
         Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
         Route::resource('invites', 'InviteController');
         Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
-
-//        Route::resource('competitors', 'CompetitorController');
-//        Route::resource('grade', 'GradeController');
         Route::resource('settings', 'SettingsController');
-
-
-
 
         //Restoring
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
@@ -99,6 +89,8 @@ Route::group(['middleware' => ['auth', 'own', ]], // , 'own' // 'throttle:100,1'
         Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
     });
+
+
 //APIS
 Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
         Route::get('authenticate', 'Api\AuthenticateController@index');
@@ -108,16 +100,3 @@ Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi
 //        invite/{userId}/register/
 //Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['root']);;
 
-
-//Event::listen('illuminate.query', function($query)
-//{
-//        var_dump($query);
-//});
-
-//Route::resource('shinpan', 'ShinpanController');
-//Route::resource('clubs', 'ClubController');
-//Route::resource('fight', 'FightController');
-//Route::resource('team', 'TeamController');
-//Route::resource('shiaicategory', 'ShiaiCategoryController');
-//Route::resource('associations', 'AssociationController');
-//Route::resource('federations', 'FederationController');

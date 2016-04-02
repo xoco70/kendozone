@@ -2,41 +2,6 @@
 <div class="sidebar sidebar-main sidebar-fixed">
     <div class="sidebar-content">
 
-        <!-- User menu -->
-        {{--<div class="sidebar-user" id="sidemenu">--}}
-        {{--<div class="category-content">--}}
-        {{--<div class="media">--}}
-        {{--@if(Auth::check())--}}
-        {{--<a href="{!!   URL::action('UserController@edit',  Auth::user()->id) !!}"--}}
-        {{--class="media-left"><img src="{!! Auth::user()->avatar !!}"--}}
-        {{--class="img-circle img-sm" alt=""></a>--}}
-
-
-        {{--<div class="media-body">--}}
-
-        {{--<span class="media-heading text-semibold">{!! Auth::getUser()->name !!}</span>--}}
-
-        {{--<div class="text-size-mini text-muted">--}}
-        {{--<i class="icon-pin text-size-small"></i>--}}
-        {{--@if (!is_null(Auth::user()->city ))--}}
-        {{--{!!Auth::user()->city !!}, {!!Auth::user()->country->countryCode!!}--}}
-        {{--@endif--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endif--}}
-        {{--<div class="media-right media-middle">--}}
-        {{--<ul class="icons-list">--}}
-        {{--<li>--}}
-        {{--<a href="{!! URL::to('/settings')!!}"><i class="icon-cog3"></i></a>--}}
-        {{--</li>--}}
-        {{--</ul>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-                <!-- /user menu -->
-
-
         <!-- Main navigation -->
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
@@ -62,8 +27,8 @@
                                     class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('crud.invitation',2) }}</span>
                         </a>
                     </li>
-                    <li {{ (Request::is('invites') ? 'class=active' : '') }}>
-                        <a class="protip" data-pt-title="{{ trans('core.tournaments_deleted') }}" href="{!! URL::action('TournamentController@index') !!}"><i
+                    <li {{ (Request::is('tournaments/deleted') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans('core.tournaments_deleted') }}" href="{!! URL::action('TournamentController@getDeleted') !!}"><i
                                     class="icon-trash-alt position-left sidemenu"></i><span>{{ trans('core.tournaments_deleted') }}</span>
                         </a>
                     </li>
