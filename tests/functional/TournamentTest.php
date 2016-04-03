@@ -35,12 +35,12 @@ class TournamentTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->tournament = trans_choice('crud.tournament', 1);
-        $this->tournaments = trans_choice('crud.tournament', 2);
-        $this->addTournament = Lang::get('crud.addModel', ['currentModelName' => $this->tournament]);
-        $this->addTournaments = Lang::get('crud.addModel', ['currentModelName' => $this->tournaments]);
+        $this->tournament = trans_choice('core.tournament', 1);
+        $this->tournaments = trans_choice('core.tournament', 2);
+        $this->addTournament = Lang::get('core.addModel', ['currentModelName' => $this->tournament]);
+        $this->addTournaments = Lang::get('core.addModel', ['currentModelName' => $this->tournaments]);
 
-        $this->editTournament = Lang::get('crud.updateModel', ['currentModelName' => $this->tournament]);
+        $this->editTournament = Lang::get('core.updateModel', ['currentModelName' => $this->tournament]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
         Auth::loginUsingId($this->root->id);

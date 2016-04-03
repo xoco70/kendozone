@@ -21,7 +21,7 @@ class InviteController extends Controller
 
     public function __construct()
     {
-        $this->currentModelName = trans_choice('crud.tournament_invitations', 1);
+        $this->currentModelName = trans_choice('core.tournament_invitations', 1);
         View::share('currentModelName', $this->currentModelName);
 
     }
@@ -83,7 +83,7 @@ class InviteController extends Controller
                     'source' => '',
                 ]
             );
-        $currentModelName = trans('crud.select_categories_to_register');
+        $currentModelName = trans('core.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
             $user = User::where('email', $invite->email)->first();

@@ -28,20 +28,20 @@
                         <div class="panel-body">
                             <div class="container-fluid">
 
-                                <fieldset title="{{Lang::get('crud.invite_send',['tournament' => $tournament->name])}}">
-                                    <legend class="text-semibold">{{Lang::get('crud.invite_send',['tournament' => $tournament->name])}}</legend>
+                                <fieldset title="{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}">
+                                    <legend class="text-semibold">{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}</legend>
 
                                     <div class="container-fluid">
 
                                         {!! Form::open(['url'=>URL::action('InviteController@store')]) !!}
                                         <div class=" form-group">
-                                            {!!  Form::label('recipients', trans('crud.recipients')) !!}
-                                            {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('crud.invite_recipients')]) !!}
+                                            {!!  Form::label('recipients', trans('core.recipients')) !!}
+                                            {!!  Form::text('recipients', null, ['class' => 'form-control', 'placeholder'=>trans('core.invite_recipients')]) !!}
                                         </div>
                                         {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
 
                                         <div class="form-group">
-                                            {!!  Form::submit(trans('crud.send_invites'), ['class' => 'btn btn-primary form-control']) !!}
+                                            {!!  Form::submit(trans('core.send_invites'), ['class' => 'btn btn-primary form-control']) !!}
                                         </div>
 
                                         {!! Form::close()!!}

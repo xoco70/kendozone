@@ -19,7 +19,7 @@ class CategorySettingsController extends Controller
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-        $this->currentModelName = trans_choice('crud.categorySettings', 2);
+        $this->currentModelName = trans_choice('core.categorySettings', 2);
         View::share('currentModelName', $this->currentModelName);
         $this->defaultSettings = CategorySettings::getDefaultSettings();
 

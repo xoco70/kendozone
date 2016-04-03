@@ -49,8 +49,8 @@
                             <div class="container-fluid">
 
 
-                                <fieldset title="{{Lang::get('crud.general_data')}}">
-                                    <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                                <fieldset title="{{Lang::get('core.general_data')}}">
+                                    <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
                                 </fieldset>
 
                                 <div class="row">
@@ -58,7 +58,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('name', trans('crud.username')) !!}
+                                                    {!!  Form::label('name', trans('core.username')) !!}
                                                     @if (!is_null($user->id))
                                                         {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}
                                                         {!!  Form::hidden('name', $user->name) !!}
@@ -75,7 +75,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('firstname', trans('crud.firstname')) !!}
+                                                    {!!  Form::label('firstname', trans('core.firstname')) !!}
                                                     {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
 
 
@@ -86,7 +86,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('lastname', trans('crud.lastname')) !!}
+                                                    {!!  Form::label('lastname', trans('core.lastname')) !!}
                                                     {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('grade_id', trans('crud.grade')) !!}
+                                                    {!!  Form::label('grade_id', trans('core.grade')) !!}
                                                     {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-6  ">
                                         <div class="form-group">
-                                            {!!  Form::label('avatar', trans('crud.avatar')) !!}
+                                            {!!  Form::label('avatar', trans('core.avatar')) !!}
                                             <div id="fileInput" class="dropzone text-center">
                                                 <div class="fallback">
                                                     <input name="file" type="file"/>
@@ -117,7 +117,7 @@
                                 <div class="row">
                                     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
-                                            {!!  Form::label('countryId', trans('crud.country')) !!}
+                                            {!!  Form::label('countryId', trans('core.country')) !!}
                                             {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@
 
                                 <fieldset title="Venue">
                                     <a name="place">
-                                        <legend class="text-semibold">{{Lang::get('crud.account')}}</legend>
+                                        <legend class="text-semibold">{{Lang::get('core.account')}}</legend>
                                     </a>
                                 </fieldset>
                                 <div class="row">
@@ -155,15 +155,15 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('email', trans('crud.email')) !!}
+                                                    {!!  Form::label('email', trans('core.email')) !!}
                                                     {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
-                                                    <p class="help-block">{{  Lang::get('crud.email_desc') }}</p>
+                                                    <p class="help-block">{{  Lang::get('core.email_desc') }}</p>
 
                                                 </div>
                                             </div>
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('role_id', trans('crud.role')) !!}
+                                                    {!!  Form::label('role_id', trans('core.role')) !!}
                                                     @if (Auth::user()->isSuperAdmin())
                                                         @if (!is_null($user->id))
                                                             {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
@@ -184,9 +184,9 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 ">
                                                 <div class="form-group">
-                                                    {!!  Form::label('password', trans('crud.password')) !!}
+                                                    {!!  Form::label('password', trans('core.password')) !!}
                                                     {!!  Form::password('password', ['class' => 'form-control']) !!}
-                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +196,7 @@
                                                 <div class="form-group">
                                                     {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
                                                     {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
                                                 </div>
                                             </div>
 

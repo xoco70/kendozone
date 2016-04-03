@@ -75,7 +75,7 @@ class TournamentController extends ApiController
      */
 //    public function create()
 //    {
-//        $currentModelName = trans_choice('crud.tournament', 1);
+//        $currentModelName = trans_choice('core.tournament', 1);
 //        $levels = TournamentLevel::lists('name', 'id');
 //        $categories = Category::lists('name', 'id');
 //        $tournament = new Tournament();

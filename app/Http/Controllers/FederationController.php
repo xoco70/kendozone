@@ -22,7 +22,7 @@ class FederationController extends Controller
     {
 //        $this->middleware('auth');
         // Fetch the Site Settings object
-        $this->currentModelName = Lang::get('crud.federation');
+        $this->currentModelName = Lang::get('core.federation');
         View::share('currentModelName', $this->currentModelName);
 
     }

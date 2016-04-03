@@ -35,12 +35,12 @@
 
 
                                         <fieldset title="add_competitor">
-                                            <legend class="text-semibold">{{trans('crud.add_competitor_to_category',['category' => $categoryTournament->category->name])}}</legend>
+                                            <legend class="text-semibold">{{trans('core.add_competitor_to_category',['category' => $categoryTournament->category->name])}}</legend>
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {!!  Form::label('username', trans('crud.username')) !!}
+                                                    {!!  Form::label('username', trans('core.username')) !!}
                                                     {!!  Form::text('username',null, ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
@@ -50,7 +50,7 @@
                                             <div class="form-group">
 
                                                 <div class="col-md-6">
-                                                    {!!  Form::label('email', trans('crud.email')) !!}
+                                                    {!!  Form::label('email', trans('core.email')) !!}
                                                     {!!  Form::email('email',null, ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>

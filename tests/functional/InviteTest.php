@@ -43,7 +43,7 @@ class InviteTest extends TestCase
         // Check that inviting one user by email
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
             ->type('["john@example.com","john2@example.com"]', 'recipients')// Must simulate js plugin
-            ->press(trans('crud.send_invites'))
+            ->press(trans('core.send_invites'))
             ->seePageIs('/tournaments/' . $tournament->slug . '/edit')
             ->seeInDatabase('invitation',
                 ['email' => 'john@example.com',

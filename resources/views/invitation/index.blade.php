@@ -21,11 +21,11 @@
                         <thead>
                         <tr>
 
-                            <th class="text-center" data-toggle="true">{{ trans_choice('crud.tournament',1) }}</th>
-                            <th class="text-center" data-hide="phone">{{ trans('crud.organizer') }}</th>
+                            <th class="text-center" data-toggle="true">{{ trans_choice('core.tournament',1) }}</th>
+                            <th class="text-center" data-hide="phone">{{ trans('core.organizer') }}</th>
                             <th class="text-center" data-hide="phone">{{ trans('core.type') }}</th>
 
-                            <th class="text-center">{{ trans('crud.used') }}</th>
+                            <th class="text-center">{{ trans('core.used') }}</th>
 
                         </tr>
                         </thead>
@@ -33,7 +33,7 @@
                             <tr>
                                 <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>sh
                                 <td align="center">{{ $invite->tournament->owner->name }}</td>
-                                <td align="center">{{ $invite->tournament->type == 1 ? trans('core.open') : trans_choice('crud.invitation',1) }}</td>
+                                <td align="center">{{ $invite->tournament->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
                                 <td align="center">{!!  $invite->used ?
                                         '<span class=" text-success glyphicon glyphicon-ok"></span>' :
                                         '<span class=" text-warning glyphicon glyphicon-remove"></span>'!!}</td>

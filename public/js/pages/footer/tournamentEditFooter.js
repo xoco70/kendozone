@@ -245,14 +245,6 @@ $(function () {
     });
 
 
-//
-//     $('.dateIni').pickadate({
-//         min: [{{$year}}, {{$month}}, {{$day}}],
-//     format: 'yyyy-mm-dd',
-
-// });
-
-
 
     $('#dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
@@ -281,7 +273,7 @@ $(function () {
     $('#generate_tree').on('click', function () {
         swal({
             title: "{!! trans('core.information') !!}",
-            text: "{!!   trans('crud.all_categories_not_configured') !!}",
+            text: "{!!   trans('core.all_categories_not_configured') !!}",
             confirmButtonColor: "#2196F3",
             type: "info"
         });

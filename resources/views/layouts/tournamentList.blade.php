@@ -10,17 +10,17 @@
 
                             @if ($title == trans('core.tournaments_registered'))
                                 <?php
-                                $noItemYet = trans('core.no_tournament_created_yet');
+                                $noItemYet = trans('core.no_tournament_registered_yet');
                                 $link = URL::action('TournamentController@create');
-                                $linkLabel = trans('crud.createTournament');
+                                $linkLabel = trans('core.createTournament');
                                 $printLink = true;
                                 ?>
 
                             @elseif ($title == trans('core.tournaments_created'))
                                 <?php
-                                $noItemYet = trans('core.no_tournament_registered_yet');
+                                $noItemYet = trans('core.no_tournament_created_yet');
                                 $link = '#'; //URL::action('TournamentController@joinOpenTournament') ;
-                                $linkLabel = trans('crud.join_tournament');
+                                $linkLabel = trans('core.join_tournament');
                                 $printLink = false;
                                 ?>
 
@@ -28,7 +28,7 @@
                                 <?php
                                 $noItemYet = trans('core.no_tournament_deleted_yet');
                                 $link = '#'; //URL::action('TournamentController@joinOpenTournament') ;
-                                $linkLabel = trans('crud.join_tournament');
+                                $linkLabel = trans('core.join_tournament');
                                 $printLink = false;
                                 ?>
                             @endif
@@ -54,11 +54,11 @@
                             <table class="table table-togglable table-hover">
                                 <thead>
                                 <tr>
-                                    <th data-toggle="true">{{ trans('crud.name') }}</th>
-                                    <th data-hide="phone">{{ trans('crud.date') }}</th>
-                                    <th data-hide="phone">{{ trans('crud.owner') }}</th>
+                                    <th data-toggle="true">{{ trans('core.name') }}</th>
+                                    <th data-hide="phone">{{ trans('core.date') }}</th>
+                                    <th data-hide="phone">{{ trans('core.owner') }}</th>
                                     @if ($title == trans('core.tournaments_created') || $title == trans('core.tournaments_deleted') )
-                                        <th class="text-center">{{ trans('crud.action') }}</th>
+                                        <th class="text-center">{{ trans('core.action') }}</th>
                                     @endif
                                 </tr>
                                 </thead>

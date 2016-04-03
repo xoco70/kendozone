@@ -37,10 +37,10 @@
                                 <table class="table table-togglable table-hover">
                                     <thead>
                                     <tr>
-                                        <th data-toggle="true">{{ trans('crud.name') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.date') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.owner') }}</th>
-                                        <th class="text-center">{{ trans('crud.action') }}</th>
+                                        <th data-toggle="true">{{ trans('core.name') }}</th>
+                                        <th data-hide="phone">{{ trans('core.date') }}</th>
+                                        <th data-hide="phone">{{ trans('core.owner') }}</th>
+                                        <th class="text-center">{{ trans('core.action') }}</th>
 
                                     </tr>
                                     </thead>

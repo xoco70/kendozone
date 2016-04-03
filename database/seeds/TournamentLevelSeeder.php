@@ -18,13 +18,13 @@ class TournamentLevelSeeder extends Seeder {
 //        DB::table('Grade')->delete();
         TournamentLevel::truncate();
         TournamentLevel::create(['id'=> '0','name' => "ND"]);
-        TournamentLevel::create(['name' => "crud.local"]);
-        TournamentLevel::create(['name' => "crud.district"]);
-        TournamentLevel::create(['name' => "crud.level_city"]);
-        TournamentLevel::create(['name' => "crud.level_state"]);
-        TournamentLevel::create(['name' => "crud.regional"]);
-        TournamentLevel::create(['name' => "crud.national"]);
-        TournamentLevel::create(['name' => "crud.international"]);
+        TournamentLevel::create(['name' => "core.local"]);
+        TournamentLevel::create(['name' => "core.district"]);
+        TournamentLevel::create(['name' => "core.level_city"]);
+        TournamentLevel::create(['name' => "core.level_state"]);
+        TournamentLevel::create(['name' => "core.regional"]);
+        TournamentLevel::create(['name' => "core.national"]);
+        TournamentLevel::create(['name' => "core.international"]);
 
     }
 }

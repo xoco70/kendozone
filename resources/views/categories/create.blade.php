@@ -14,7 +14,7 @@
 
         {!! Form::open(['url'=>"categories"]) !!}
 
-        @include("categories.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
+        @include("categories.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 
 
         {!! Form::close()!!}

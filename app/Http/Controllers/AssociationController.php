@@ -22,7 +22,7 @@ class AssociationController extends Controller
     {
         $this->middleware('auth');
         // Fetch the Site Settings object
-        $this->currentModelName = Lang::get('crud.association');
+        $this->currentModelName = Lang::get('core.association');
         View::share('currentModelName', $this->currentModelName);
 
     }

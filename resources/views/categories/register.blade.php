@@ -21,7 +21,7 @@ $i=0;
 
                 <div class="panel-body">
                     <div class="container-fluid">
-                        <legend class="text-semibold">{{Lang::get('crud.select_categories_to_register')}}</legend>
+                        <legend class="text-semibold">{{Lang::get('core.select_categories_to_register')}}</legend>
 
 
                              @foreach($categoryTournaments as $categoryTournament)

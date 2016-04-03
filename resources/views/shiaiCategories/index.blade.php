@@ -13,13 +13,13 @@
         <div class="row col-md-12 custyle">
             <table class="table table-striped custab">
                 <thead>
-                <a href="{!!   URL::action('ShiaiCategoryController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
+                <a href="{!!   URL::action('ShiaiCategoryController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('core.addModel', ['currentModelName' => $currentModelName])</a>
                 <tr>
                     <th>ID</th>
-                    <th>{{ trans('crud.tournament') }}</th>
-                    <th>{{ trans('crud.category') }}</th>
+                    <th>{{ trans('core.tournament') }}</th>
+                    <th>{{ trans('core.category') }}</th>
 
-                    <th class="text-center">{{ trans('crud.action') }}</th>
+                    <th class="text-center">{{ trans('core.action') }}</th>
                 </tr>
                 </thead>
                 @foreach($shiaiCategories as $shiaiCategory)
@@ -29,10 +29,10 @@
 
                         <td class="text-center">
                             <a class='btn btn-info btn-xs' href="{!!   URL::action('PlaceController@edit',  $shiaiCategory->id) !!}">
-                                <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
+                                <span class="glyphicon glyphicon-edit"></span> {{ trans('core.edit') }}</a>
                             <a class="btn btn-danger btn-xs"
                                href="{!! URL::action('PlaceController@destroy',  $shiaiCategory->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
+                                <span class="glyphicon glyphicon-remove"></span> {{ trans('core.delete') }}</a>
                         </td>
                     </tr>
                             <a href="{{url('shiaiCategory', $shiaiCategory->id)}}"> </a></h2>

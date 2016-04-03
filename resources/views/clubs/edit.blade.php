@@ -7,7 +7,7 @@
     @include("errors.list")
     {!! Form::model($club, ['method'=>"PATCH", "action" => ["ClubController@update", $club->id]]) !!}
 
-    @include("clubs.form", ["submitButton" => trans('crud.editModel',['currentModelName' => $currentModelName])])
+    @include("clubs.form", ["submitButton" => trans('core.editModel',['currentModelName' => $currentModelName])])
 
     {!! Form::close()!!}
 

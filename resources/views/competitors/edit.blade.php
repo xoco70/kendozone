@@ -5,7 +5,7 @@
     @include("errors.list")
     {!! Form::model($competitor, ['method'=>"PATCH", "action" => ["CompetitorController@update", $competitor->id]]) !!}
 
-    @include("competitors.form", ["submitButton" => trans('crud.editModel',['currentModelName' => $currentModelName])])
+    @include("competitors.form", ["submitButton" => trans('core.editModel',['currentModelName' => $currentModelName])])
 
 
     {!! Form::close()!!}

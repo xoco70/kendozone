@@ -23,8 +23,8 @@
                         </a>
                     </li>
                     <li {{ (Request::is('invites') ? 'class=active' : '') }}>
-                        <a class="protip" data-pt-title="{{ trans_choice('crud.invitation',2) }}" href="{!! URL::action('InviteController@index') !!}"><i
-                                    class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('crud.invitation',2) }}</span>
+                        <a class="protip" data-pt-title="{{ trans_choice('core.invitation',2) }}" href="{!! URL::action('InviteController@index') !!}"><i
+                                    class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('core.invitation',2) }}</span>
                         </a>
                     </li>
                     <li {{ (Request::is('tournaments/deleted') ? 'class=active' : '') }}>

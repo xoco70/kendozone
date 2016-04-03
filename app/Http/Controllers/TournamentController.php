@@ -29,7 +29,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $currentModelName = trans_choice('crud.tournament', 2);
+        $currentModelName = trans_choice('core.tournament', 2);
 //        $token=JWTAuth::getToken();
 //        $user = JWTAuth::toUser($token);
 //        $client = new Client(['base_uri' => getenv('URL_BASE') . 'api/v1']);
@@ -58,7 +58,7 @@ class TournamentController extends Controller
      */
     public function create()
     {
-        $currentModelName = trans_choice('crud.tournament', 1);
+        $currentModelName = trans_choice('core.tournament', 1);
         $levels = TournamentLevel::lists('name', 'id');
         $categories = Category::lists('name', 'id');
         $tournament = new Tournament();
@@ -200,10 +200,11 @@ class TournamentController extends Controller
     }
     public function getDeleted()
     {
-        $currentModelName = trans_choice('crud.tournament', 2);
+        $currentModelName = trans_choice('core.tournament', 2);
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::onlyTrashed()
-                ->orderBy('created_at', 'desc')
+                ->has('owner')
+                ->orderBy('tournament.created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         } else {
             $tournaments = Auth::user()->tournaments()

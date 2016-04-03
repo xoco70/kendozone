@@ -227,7 +227,7 @@ $('.dataTables_filter input[type=search]').attr('placeholder', 'Type to filter..
 $('#generate_tree').on('click', function () {
     swal({
         title: "{!! trans('core.information') !!}",
-        text: "{!!   trans('crud.all_categories_not_configured') !!}",
+        text: "{!!   trans('core.all_categories_not_configured') !!}",
         confirmButtonColor: "#2196F3",
         type: "info"
     });

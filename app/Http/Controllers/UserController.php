@@ -26,8 +26,8 @@ class UserController extends Controller
     {
 //        $this->middleware('auth');
         // Fetch the Site Settings object
-        $this->currentModelName = trans_choice('crud.user', 1);
-        $this->modelPlural = trans_choice('crud.user', 1);
+        $this->currentModelName = trans_choice('core.user', 1);
+        $this->modelPlural = trans_choice('core.user', 1);
         View::share('currentModelName', $this->currentModelName);
         View::share('modelPlural', $this->modelPlural);
 
@@ -68,7 +68,7 @@ class UserController extends Controller
         $roles = Role::lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
-        $submitButton = trans('crud.addModel', ['currentModelName' => $this->currentModelName]);
+        $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton')); //
     }
 
@@ -194,11 +194,11 @@ class UserController extends Controller
     public function exportUsersExcel()
     {
 
-        Excel::create(trans_choice('crud.user', 2), function ($excel) {
+        Excel::create(trans_choice('core.user', 2), function ($excel) {
             $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
 
             // Set the title
-            $excel->setTitle(trans_choice('crud.user', 2));
+            $excel->setTitle(trans_choice('core.user', 2));
 
             // Chain the setters
             $excel->setCreator($appName)
@@ -206,7 +206,7 @@ class UserController extends Controller
 
             // Call them separately
             $excel->setDescription('A list of users');
-            $excel->sheet(trans_choice('crud.user', 2), function ($sheet) {
+            $excel->sheet(trans_choice('core.user', 2), function ($sheet) {
                 $users = User::all();
                 $sheet->fromArray($users);
             });

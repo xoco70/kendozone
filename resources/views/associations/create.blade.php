@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <h1>@lang('crud.addModel', ['currentModelName' => $currentModelName])</h1>
+    <h1>@lang('core.addModel', ['currentModelName' => $currentModelName])</h1>
     <hr/>
     @include("errors.list")
     {!! Form::open(['url'=>"associations"]) !!}
-    @include("associations.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName])])
+    @include("associations.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName])])
 
     {!! Form::close()!!}
 

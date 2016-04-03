@@ -8,7 +8,7 @@
 
         <ul class="nav nav-tabs nav-tabs-bottom bottom-divided nav-justified">
             <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-            <li><a href="#category" data-toggle="tab">{{trans_choice('crud.category',2)}}</a></li>
+            <li><a href="#category" data-toggle="tab">{{trans_choice('core.category',2)}}</a></li>
             <li><a href="#bottom-justified-divided-tab3" data-toggle="tab">{{Lang::get('core.social_networks')}}</a>
             </li>
         </ul>

@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         // Fetch the Site Settings object
 //        $this->middleware('auth');
-//        $this->currentModelName = trans_choice('crud.category', 2);
+//        $this->currentModelName = trans_choice('core.category', 2);
 //        View::share('currentModelName', $this->currentModelName);
 //        $this->defaultSettings = CategorySettings::getDefaultSettings();
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $currentModelName = trans_choice('crud.category', 1);
+        $currentModelName = trans_choice('core.category', 1);
         return view('categories.create', compact('currentModelName'));
     }
 
@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $currentModelName = trans_choice('crud.category', 1);
+        $currentModelName = trans_choice('core.category', 1);
         return view('categories.create', compact('currentModelName'));
     }
 

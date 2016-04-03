@@ -15,12 +15,12 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     {{ trans('mail.you_are_invited_to_tournament') }}: {{ $tournament->name }} <BR/>
 
     @if ($tournament->venue != null)
-        <strong>{{trans('crud.venue')}}:</strong> {{ $tournament->venue }}<br/>
+        <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue }}<br/>
     @endif
-    <strong>{{trans('crud.date')}}:</strong> {{ $tournament->date }}<br/>
-    @if ($tournament->cost != null) <strong>{{trans('crud.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
+    <strong>{{trans('core.date')}}:</strong> {{ $tournament->date }}<br/>
+    @if ($tournament->cost != null) <strong>{{trans('core.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
-        <strong>{{trans('crud.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
+        <strong>{{trans('core.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
     @endif
 @if (isset($category))
     <P>{{ trans('mail.you_have_been_preregistered') }}</P>

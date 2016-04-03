@@ -12,7 +12,7 @@
 
                 <div class="panel-body">
                     <div class="container-fluid">
-                        <legend class="text-semibold">{{Lang::get('crud.select_categories_to_register')}}</legend>
+                        <legend class="text-semibold">{{Lang::get('core.select_categories_to_register')}}</legend>
                         @if (isset($invite))
                             {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/'.$invite->id.'/categories']) !!}
                         @else

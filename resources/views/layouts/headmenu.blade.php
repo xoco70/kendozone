@@ -15,7 +15,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li class="head_create_tournament"><a href="{!! URL::to('tournaments/create') !!}"
-                   class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('crud.createTournament') }}</a></li>
+                   class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}</a></li>
             {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
             {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
             {{--class="fa  fa-wrench"></i> {!! Lang::get('core.settings') !!}</a></li>--}}
@@ -38,7 +38,7 @@
                             </a></li>
                     @endif
                     {{--<li><a href="{!! URL::to('tournaments')!!}"> <i--}}
-                                    {{--class="icon-trophy3"></i> {!! trans('crud.admin_tournaments') !!}</a></li>--}}
+                                    {{--class="icon-trophy3"></i> {!! trans('core.admin_tournaments') !!}</a></li>--}}
                     <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
                     {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}

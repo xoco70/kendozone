@@ -19,7 +19,7 @@
                                class="btn border-teal text-teal  btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i class="icon-plus3"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold"><a class="text-default" href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}"> {{ trans_choice('crud.category',2) }}</a></div>
+                            <div class="text-semibold"><a class="text-default" href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}"> {{ trans_choice('core.category',2) }}</a></div>
                             <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->categoryTournaments) }} </div>
                         </li>
                     </ul>
@@ -36,7 +36,7 @@
                                         class="icon-people"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold"> <a class="text-default" href="{!! URL::action('TournamentUserController@index', $tournament->slug) !!}"> {{trans_choice('crud.competitor',2)}}</a></div>
+                            <div class="text-semibold"> <a class="text-default" href="{!! URL::action('TournamentUserController@index', $tournament->slug) !!}"> {{trans_choice('core.competitor',2)}}</a></div>
                             <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ $tournament->competitors()->count() }}
 
                             </div>
@@ -58,7 +58,7 @@
                         </li>
                         <li class="text-left">
                             <div class="text-semibold">{{ trans('core.type') }}</div>
-                            <div class="text-muted">{{ $tournament->type ? trans_choice('crud.invitation',1) :  trans('core.open')}}</div>
+                            <div class="text-muted">{{ $tournament->type ? trans_choice('core.invitation',1) :  trans('core.open')}}</div>
                         </li>
                     </ul>
 
@@ -77,7 +77,7 @@
                                         class="icon-calendar22"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold">{{ trans('crud.date') }}</div>
+                            <div class="text-semibold">{{ trans('core.date') }}</div>
                             <div class="text-muted">{{ $tournament->date }}</div>
                         </li>
                     </ul>
@@ -95,7 +95,7 @@
                                         class="icon-alert"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold">{{ trans('crud.limitDate')}}</div>
+                            <div class="text-semibold">{{ trans('core.limitDate')}}</div>
                             <div class="text-muted">{{ $tournament->registerDateLimit == '0000-00-00' ? '--' : $tournament->registerDateLimit  }}</div>
                         </li>
                     </ul>
@@ -113,7 +113,7 @@
                                         class="icon-target"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold">{{trans('crud.level')}}</div>
+                            <div class="text-semibold">{{trans('core.level')}}</div>
                             <div class="text-muted"></span> {{ $tournament->level->name }}
                             </div>
                         </li>

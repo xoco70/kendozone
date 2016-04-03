@@ -31,13 +31,13 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                         <div class="container-fluid">
 
 
-                            <fieldset title="{{Lang::get('crud.general_data')}}">
-                                <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                            <fieldset title="{{Lang::get('core.general_data')}}">
+                                <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!!  Form::label('name', trans('crud.name'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
                                             <br/>
                                             {{ $tournament->name }}
 
@@ -48,7 +48,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="col-md-6">
 
                                         <div class="form-group">
-                                            {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
                                             <br/>
                                             {{ $tournament->level->name }}
                                         </div>
@@ -56,7 +56,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('date', trans('core.eventDate'),['class' => 'text-bold' ]) !!}
                                         {{--<br/>--}}
 
 
@@ -69,7 +69,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
 
                                     <div class="col-md-3">
-                                        {!!  Form::label('registerDateLimit', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                         <br/>
 
                                         <div class="input-group">
@@ -84,7 +84,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="col-md-3">
 
 
-                                        {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
+                                        {!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}
                                         <br/>
 
                                         {{ $tournament->mustPay == 1 ? trans('core.yes') : trans('core.no') }}
@@ -96,10 +96,10 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                         <div class="checkbox-switch">
                                             <label>
 
-                                                {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('type', trans('core.tournamentType'),['class' => 'text-bold' ]) !!}
 
                                                 <br/>
-                                                {{ $tournament->type == 1 ? trans('core.open') : trans_choice('crud.invitation', 1) }}
+                                                {{ $tournament->type == 1 ? trans('core.open') : trans_choice('core.invitation', 1) }}
 
                                             </label>
                                         </div>
@@ -110,7 +110,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!!  Form::label('rules', trans('crud.rules'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}
                                             <br/>
                                             rules
                                         </div>
@@ -144,9 +144,9 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                         <div class="container-fluid">
 
 
-                            <fieldset title="{{Lang::get('crud.venue')}}">
+                            <fieldset title="{{Lang::get('core.venue')}}">
                                 <a name="place">
-                                    <legend class="text-semibold">{{Lang::get('crud.venue')}}
+                                    <legend class="text-semibold">{{Lang::get('core.venue')}}
                                         : {{ $tournament->venue }}</legend>
                                 </a>
                             </fieldset>
@@ -165,9 +165,9 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                 <div class="panel panel-flat category-settings">
                     <div class="panel-body">
                         <div class="container-fluid">
-                            <fieldset title="{{trans_choice('crud.categorySettings',2)}}">
+                            <fieldset title="{{trans_choice('core.categorySettings',2)}}">
                                 <a name="categories">
-                                    <legend class="text-semibold">{{trans_choice('crud.categorySettings',2)}}</legend>
+                                    <legend class="text-semibold">{{trans_choice('core.categorySettings',2)}}</legend>
                                 </a>
                             </fieldset>
 
@@ -204,7 +204,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                                         @if ($setting !=null)
                                                             @include('categories.categorySettingsShow')
                                                         @else
-                                                            {{ trans('crud.category_not_configured') }}
+                                                            {{ trans('core.category_not_configured') }}
                                                         @endif
                                                     </div>
 
@@ -233,7 +233,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                     <div class="panel-body">
 
-                    <legend class="text-semibold ">{{ trans('crud.invite_with_link') }}</legend>
+                    <legend class="text-semibold ">{{ trans('core.invite_with_link') }}</legend>
 
                             <h2 class="form-group text-center m">
                                 <br/>

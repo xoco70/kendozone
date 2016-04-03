@@ -23,13 +23,13 @@
                                     <div class="container-fluid">
 
 
-                                        <fieldset title="{{Lang::get('crud.general_data')}}">
-                                            <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                                        <fieldset title="{{Lang::get('core.general_data')}}">
+                                            <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="form-group">
-                                                            {!!  Form::label('firstname', trans('crud.firstname')) !!}
+                                                            {!!  Form::label('firstname', trans('core.firstname')) !!}
                                                             {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
 
 
@@ -38,20 +38,20 @@
 
                                                     <div class="row">
                                                         <div class="form-group">
-                                                            {!!  Form::label('lastname', trans('crud.lastname')) !!}
+                                                            {!!  Form::label('lastname', trans('core.lastname')) !!}
                                                             {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
-                                                            {!!  Form::label('grade_id', trans('crud.grade')) !!}
+                                                            {!!  Form::label('grade_id', trans('core.grade')) !!}
                                                             {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
                                                         </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-md-6">
-                                                    {!!  Form::label('avatar', trans('crud.avatar')) !!}
+                                                    {!!  Form::label('avatar', trans('core.avatar')) !!}
 
                                                     <input type="file" id="avatar" name="avatar"
                                                            data-show-upload="false"
@@ -86,19 +86,19 @@
 
                                         <fieldset title="Venue">
                                             <a name="place">
-                                                <legend class="text-semibold">{{Lang::get('crud.account')}}</legend>
+                                                <legend class="text-semibold">{{Lang::get('core.account')}}</legend>
                                             </a>
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                {!!  Form::label('email', trans('crud.email')) !!}
+                                                {!!  Form::label('email', trans('core.email')) !!}
                                                 {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {!!  Form::label('password', trans('crud.password')) !!}
+                                                    {!!  Form::label('password', trans('core.password')) !!}
                                                     {!!  Form::password('password', ['class' => 'form-control']) !!}
-                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
                                                 </div>
 
                                             </div>
@@ -108,7 +108,7 @@
                                             <div class="col-md-6">
                                                 @can('CanChangeRole')
                                                 <div class="form-group">
-                                                    {!!  Form::label('role_id', trans('crud.role')) !!}
+                                                    {!!  Form::label('role_id', trans('core.role')) !!}
                                                     {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
                                                 </div>
                                                 @endcan
@@ -118,7 +118,7 @@
                                                 <div class="form-group">
                                                     {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
                                                     {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                                                    <p class="help-block">{{  Lang::get('crud.left_password_blank') }}</p>
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
                                                 </div>
                                             </div>
 

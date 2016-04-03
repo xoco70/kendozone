@@ -18,13 +18,13 @@
 
                                 <tr>
                                     <th>ID</th>
-                                    <th class="text-center">{{ trans('crud.name') }}</th>
+                                    <th class="text-center">{{ trans('core.name') }}</th>
                                     <th class="text-center">{{ trans('core.isTeam') }}</th>
-                                    <th class="text-center">{{ trans('crud.fightDuration') }}</th>
-                                    <th class="text-center">{{ trans('crud.hasRoundRobin') }}</th>
-                                    <th class="text-center">{{ trans('crud.hasEncho') }}</th>
-                                    <th class="text-center">{{ trans('crud.hasHantei') }}</th>
-                                    <th class="text-center">{{ trans('crud.action') }}</th>
+                                    <th class="text-center">{{ trans('core.fightDuration') }}</th>
+                                    <th class="text-center">{{ trans('core.hasRoundRobin') }}</th>
+                                    <th class="text-center">{{ trans('core.hasEncho') }}</th>
+                                    <th class="text-center">{{ trans('core.hasHantei') }}</th>
+                                    <th class="text-center">{{ trans('core.action') }}</th>
                                 </tr>
                                 </thead>
                                 @foreach($categories as $category)

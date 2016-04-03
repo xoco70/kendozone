@@ -30,7 +30,7 @@ else
                         @if (Auth::user()->canEditTournament($tournament))
                             <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
                                class="btn bg-teal btn-xs pull-right ml-20"><b><i
-                                            class="icon-tree7 mr-5"></i>{{ trans('crud.generate_trees') }}</b>
+                                            class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>
                             </a>
                             <a href="{!!   URL::action('TournamentUserController@create',
                                                         ['tournamentId'=>$tournament->slug,
@@ -38,7 +38,7 @@ else
                                                         ]) !!}"
                                class="btn btn-primary btn-xs pull-right"
                                id="addcompetitor{!! $categoryTournament->id !!}"><b><i
-                                            class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => trans_choice('crud.competitor',2)])
+                                            class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                             </a>
                         @endif
 
@@ -50,14 +50,14 @@ else
                             <thead>
                             <tr>
                                 <th class="min-tablet text-center "
-                                    data-hide="phone">{{ trans('crud.avatar') }}</th>
-                                <th class="all">{{ trans('crud.username') }}</th>
-                                <th class="phone">{{ trans('crud.email') }}</th>
-                                <th align="center" class="phone">{{ trans_choice('crud.category',1) }}</th>
-                                <th align="center" class="phone">{{ trans('crud.confirmed') }}</th>
-                                <th class="phone">{{ trans('crud.country') }}</th>
+                                    data-hide="phone">{{ trans('core.avatar') }}</th>
+                                <th class="all">{{ trans('core.username') }}</th>
+                                <th class="phone">{{ trans('core.email') }}</th>
+                                <th align="center" class="phone">{{ trans_choice('core.category',1) }}</th>
+                                <th align="center" class="phone">{{ trans('core.confirmed') }}</th>
+                                <th class="phone">{{ trans('core.country') }}</th>
                                 @if (Auth::user()->canEditTournament($tournament))
-                                    <th class="all">{{ trans('crud.action') }}</th>
+                                    <th class="all">{{ trans('core.action') }}</th>
                                 @endif
                             </tr>
                             </thead>

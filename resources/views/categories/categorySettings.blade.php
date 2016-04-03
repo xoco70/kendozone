@@ -35,20 +35,20 @@ $currency = Auth::user()->country->currency_code;
     <div class="row">
         <div class="col-md-3">
             <div class="">
-                {!!  Form::label('fightingAreas', trans('crud.fightingAreas')) !!}
+                {!!  Form::label('fightingAreas', trans('core.fightingAreas')) !!}
                 {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
 
             </div>
         </div>
         @if ($tournament->categoryTournaments->get($key)->category->isTeam())
             <div class="col-md-3">
-                {!!  Form::label('teamSize', trans('crud.teamSize')) !!}<br/>
+                {!!  Form::label('teamSize', trans('core.teamSize')) !!}<br/>
                 {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
             </div>
         @endif
         <div class="col-md-3">
 
-            {!!  Form::label('fightDuration', trans('crud.fightDuration')) !!}
+            {!!  Form::label('fightDuration', trans('core.fightDuration')) !!}
             <div class="input-group">
                 {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
@@ -56,7 +56,7 @@ $currency = Auth::user()->country->currency_code;
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!!  Form::label('cost', trans('crud.cost'). ' ('. $currency  .')' ) !!}
+                {!!  Form::label('cost', trans('core.cost'). ' ('. $currency  .')' ) !!}
                 {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
             </div>
         </div>
@@ -67,7 +67,7 @@ $currency = Auth::user()->country->currency_code;
             <div class="checkbox-switch ">
                 <label>
 
-                    {!!  Form::label('hasRoundRobin', trans('crud.hasRoundRobin')) !!} <br/>
+                    {!!  Form::label('hasRoundRobin', trans('core.hasRoundRobin')) !!} <br/>
                     {!!   Form::hidden('hasRoundRobin', 0,['id'=>'hasRoundRobin'.$key ]) !!}
                     {!!   Form::checkbox('hasRoundRobin', 1, is_null($setting) ? 0 : $setting->hasRoundRobin,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasRoundRobin'.$key]) !!}
@@ -77,7 +77,7 @@ $currency = Auth::user()->country->currency_code;
         </div>
         <div class="col-md-3 col-md-offset-1">
             <div class="form-group">
-                {!!  Form::label('roundRobinWinner', trans('crud.roundRobinWinner')) !!}
+                {!!  Form::label('roundRobinWinner', trans('core.roundRobinWinner')) !!}
                 {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
@@ -90,7 +90,7 @@ $currency = Auth::user()->country->currency_code;
             <div class="checkbox-switch">
                 <label>
 
-                    {!!  Form::label('hasEncho', trans('crud.hasEncho')) !!} <br/>
+                    {!!  Form::label('hasEncho', trans('core.hasEncho')) !!} <br/>
                     {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
                     {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
@@ -100,14 +100,14 @@ $currency = Auth::user()->country->currency_code;
         </div>
         <div class="col-md-3 col-md-offset-1">
             <div class="form-group">
-                {!!  Form::label('enchoQty', trans('crud.enchoQty')) !!}
+                {!!  Form::label('enchoQty', trans('core.enchoQty')) !!}
                 {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
                 <small class="display-block">0 para infinito</small>
             </div>
         </div>
         <div class="col-md-3">
 
-            {!!  Form::label('enchoDuration', trans('crud.enchoDuration')) !!}
+            {!!  Form::label('enchoDuration', trans('core.enchoDuration')) !!}
             <div class="input-group ">
                 {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
@@ -125,7 +125,7 @@ $currency = Auth::user()->country->currency_code;
             <div class="checkbox-switch">
                 <label>
 
-                    {!!  Form::label('hasHantei', trans('crud.hasHantei')) !!} <br/>
+                    {!!  Form::label('hasHantei', trans('core.hasHantei')) !!} <br/>
                     {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
                     {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}

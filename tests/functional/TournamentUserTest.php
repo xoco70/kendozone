@@ -44,7 +44,7 @@ class TournamentUserTest extends TestCase
         foreach ($categoryTournaments as $categoryTournament) {
 //            echo $categoryTournament->category->name;
             $this->visit('/tournaments/' . $tournament->slug . '/edit')
-                ->click(trans_choice('crud.competitor', 2))
+                ->click(trans_choice('core.competitor', 2))
 //                ->dump();
                 ->click('addcompetitor' . $categoryTournament->id)
                 ->type('usertest', 'username')

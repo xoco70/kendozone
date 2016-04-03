@@ -9,7 +9,7 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-    {!! Html::style('css/crud.css') !!}
+    {!! Html::style('css/core.css') !!}
     {!! Html::script('js/delete.js') !!}
 
 
@@ -23,12 +23,12 @@
         <div class="row col-md-12 custyle">
             <table class="table table-striped custab">
                 <thead>
-                <a href="{!!   URL::action('AssociationController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
+                <a href="{!!   URL::action('AssociationController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('core.addModel', ['currentModelName' => $currentModelName])</a>
                 <tr>
                     <th>ID</th>
-                    <th>{{ trans('crud.name') }}</th>
+                    <th>{{ trans('core.name') }}</th>
 
-                    <th class="text-center">{{ trans('crud.action') }}</th>
+                    <th class="text-center">{{ trans('core.action') }}</th>
                 </tr>
                 </thead>
                 @foreach($associations as $association)
@@ -38,10 +38,10 @@
 
                         <td class="text-center">
                             <a class='btn btn-info btn-xs' href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">
-                                <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
+                                <span class="glyphicon glyphicon-edit"></span> {{ trans('core.edit') }}</a>
                             <a class="btn btn-danger btn-xs"
                                href="{!! URL::action('AssociationController@destroy',  $association->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
+                                <span class="glyphicon glyphicon-remove"></span> {{ trans('core.delete') }}</a>
                         </td>
                     </tr>
                             <a href="{{url('associations', $association->id)}}"> </a></h2>

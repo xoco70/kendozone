@@ -25,13 +25,13 @@
                             <div class="container-fluid">
 
 
-                                <fieldset title="{{Lang::get('crud.general_data')}}">
-                                    <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                                <fieldset title="{{Lang::get('core.general_data')}}">
+                                    <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                {!!  Form::label('name', trans('crud.name'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
 
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            {!!  Form::label('date', trans('crud.eventDate'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('date', trans('core.eventDate'),['class' => 'text-bold' ]) !!}
                                             {{--<br/>--}}
 
 
@@ -55,7 +55,7 @@
 
 
                                         <div class="col-md-3">
-                                            {!!  Form::label('limitRegistrationDate', trans('crud.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('limitRegistrationDate', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                             <br/>
 
                                             <div class="input-group">
@@ -70,7 +70,7 @@
                                         <div class="col-md-3">
 
 
-                                            {!!     Form::label('mustPay', trans('crud.pay4register'),['class' => 'text-bold' ])  !!}
+                                            {!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}
                                             <br/>
 
                                             <div class="checkbox-switch">
@@ -86,7 +86,7 @@
                                             <div class="checkbox-switch">
                                                 <label>
 
-                                                    {!!  Form::label('type', trans('crud.tournamentType'),['class' => 'text-bold' ]) !!}
+                                                    {!!  Form::label('type', trans('core.tournamentType'),['class' => 'text-bold' ]) !!}
                                                     <br/>
                                                     {!!   Form::hidden('type', 0) !!}
                                                     {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>"Abierto", 'data-off-text'=>"Invitación"]) !!}
@@ -100,14 +100,14 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                {!!  Form::label('cost', trans('crud.cost'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('cost', trans('core.cost'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 {!!  Form::input('number','cost', old('cost'), ['class' => 'form-control', 'size'=>'3','maxsize'=>'4']) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                {!!  Form::label('fightingAreas', trans('crud.fightingAreas'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('fightingAreas', trans('core.fightingAreas'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 {!!  Form::input('number','fightingAreas', old('fightingAreas'), ['class' => 'form-control']) !!}
 
@@ -118,7 +118,7 @@
                                         <div class="col-md-4">
 
                                             <div class="form-group">
-                                                {!!  Form::label('level_id', trans('crud.level'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                             </div>
@@ -157,20 +157,20 @@
 
 
                                 <fieldset title="Venue">
-                                    <a name="place"><legend class="text-semibold">{{Lang::get('crud.venue')}}</legend></a>
+                                    <a name="place"><legend class="text-semibold">{{Lang::get('core.venue')}}</legend></a>
                                 </fieldset>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!!  Form::label('venue', trans('crud.name'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('venue', trans('core.name'),['class' => 'text-bold' ]) !!}
                                             {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
                                         </div>
                                         <div class="form-group">
-                                            {!!  Form::label('latitude', trans('crud.latitude'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('latitude', trans('core.latitude'),['class' => 'text-bold' ]) !!}
                                             {!!  Form::text('latitude', old('latitude'), ['class' => 'form-control']) !!}
 
                                         </div>
                                         <div class="form-group">
-                                            {!!  Form::label('longitude', trans('crud.longitude'),['class' => 'text-bold' ]) !!}
+                                            {!!  Form::label('longitude', trans('core.longitude'),['class' => 'text-bold' ]) !!}
                                             {!!  Form::text('longitude', old('longitude'), ['class' => 'form-control']) !!}
 
                                         </div>
@@ -179,7 +179,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!!  Form::label('name', trans('crud.coords')) !!}
+                                            {!!  Form::label('name', trans('core.coords')) !!}
                                             <div class="map-wrapper locationpicker-default"
                                                  id="locationpicker-default"></div>
                                         </div>
@@ -216,8 +216,8 @@
 
                         <div class="panel-body">
                             <div class="container-fluid">
-                                <fieldset title="{{trans_choice('crud.category',2)}}">
-                                    <a name="categories"><legend class="text-semibold">{{trans_choice('crud.category',2)}}</legend></a>
+                                <fieldset title="{{trans_choice('core.category',2)}}">
+                                    <a name="categories"><legend class="text-semibold">{{trans_choice('core.category',2)}}</legend></a>
                                 </fieldset>
 
 
@@ -258,12 +258,12 @@
 
 
                                 <fieldset title="1">
-                                    <legend class="text-semibold">{{Lang::get('crud.share')}}</legend>
+                                    <legend class="text-semibold">{{Lang::get('core.share')}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group text-center">
-                                                {!!  Form::label('share', trans('crud.share'),['class' => 'text-bold' ]) !!}
+                                                {!!  Form::label('share', trans('core.share'),['class' => 'text-bold' ]) !!}
                                                 <br/>
                                                 <a href="#">Share tournament</a>
                                             </div>

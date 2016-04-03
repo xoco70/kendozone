@@ -33,7 +33,7 @@
 
                                         {{--Tournament Categories --}}
                                         <div class="row">
-                                            <legend class="text-semibold">{{Lang::get('crud.select_competitor_categories')}}</legend>
+                                            <legend class="text-semibold">{{Lang::get('core.select_competitor_categories')}}</legend>
                                             @foreach($tournament->categories as $key => $category)
 
                                                 <?php

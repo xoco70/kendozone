@@ -13,25 +13,25 @@
 
 
                             <fieldset title="add_competitor">
-                                <legend class="text-semibold">{{Lang::get('crud.add_competitor')}}</legend>
+                                <legend class="text-semibold">{{Lang::get('core.add_competitor')}}</legend>
                             </fieldset>
                             <div class="row">
                                 <div class="col-md-6">
-                                    {!!  Form::label('username', trans('crud.username')) !!}
+                                    {!!  Form::label('username', trans('core.username')) !!}
                                     {!!  Form::text('username',null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <br/>
                             <div class="row">
                                 <div class="col-md-6">
-                                    {!!  Form::label('email', trans('crud.email')) !!}
+                                    {!!  Form::label('email', trans('core.email')) !!}
                                     {!!  Form::email('email',null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <br/>
                             {{--Tournament Categories --}}
                             <div class="row">
-                                <legend class="text-semibold">{{Lang::get('crud.select_competitor_categories')}}</legend>
+                                <legend class="text-semibold">{{Lang::get('core.select_competitor_categories')}}</legend>
                                 @foreach($tournament->categories as $key => $category)
 
                                     <?php

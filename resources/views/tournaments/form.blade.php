@@ -5,24 +5,24 @@
         <div class="panel-body">
 
             <div class="container-fluid">
-                <fieldset title="{{Lang::get('crud.newTournament')}}">
+                <fieldset title="{{Lang::get('core.newTournament')}}">
 
-                    <legend class="text-semibold">{{Lang::get('crud.newTournament')}}</legend>
+                    <legend class="text-semibold">{{Lang::get('core.newTournament')}}</legend>
 
                 </fieldset>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class=" form-group">
-                            {!!  Form::label('name', trans('crud.name')) !!}
+                            {!!  Form::label('name', trans('core.name')) !!}
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
-                        {!!  Form::label('dateIni', trans('crud.eventDateIni'),['class' => 'text-bold ']) !!}
+                        {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold ']) !!}
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">{{trans('crud.from') }}</span>
+                                <span class="input-group-addon">{{trans('core.from') }}</span>
                                 {!!  Form::input('text', 'dateIni', old('dateIni'), ['class' => 'form-control dateIni']) !!}
                                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
 
@@ -31,11 +31,11 @@
                     </div>
                     <div class="col-md-4">
 
-                        {!!  Form::label('dateFin', trans('crud.eventDateFin'),['class' => 'text-bold ' ]) !!}
+                        {!!  Form::label('dateFin', trans('core.eventDateFin'),['class' => 'text-bold ' ]) !!}
                         <div class="form-group">
 
                             <div class="input-group">
-                                <span class="input-group-addon">{{trans('crud.to') }}</span>
+                                <span class="input-group-addon">{{trans('core.to') }}</span>
                                 {!!  Form::input('text', 'dateFin', old('dateFin'), ['class' => 'form-control dateFin']) !!}
                                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
                             </div>
@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                            <p>{{trans('crud.select_categories_to_register')}}</p>
+                            <p>{{trans('core.select_categories_to_register')}}</p>
 
                         <div class="form-group">
 

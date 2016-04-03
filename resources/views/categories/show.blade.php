@@ -10,15 +10,15 @@
                     <div class="container-fluid">
 
 
-                        <fieldset title="{{Lang::get('crud.general_data')}}">
-                            <legend class="text-semibold">{{Lang::get('crud.general_data')}}</legend>
+                        <fieldset title="{{Lang::get('core.general_data')}}">
+                            <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
 
                                             <div class="form-group">
-                                                {!!  Form::label('name', trans('crud.username'), ['class' => 'text-bold']) !!}
+                                                {!!  Form::label('name', trans('core.username'), ['class' => 'text-bold']) !!}
                                                 <BR/>
                                                 {!!  $user->name !!}
 
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                {!!  Form::label('grade_id', trans('crud.grade'), ['class' => 'text-bold']) !!}
+                                                {!!  Form::label('grade_id', trans('core.grade'), ['class' => 'text-bold']) !!}
                                                 <BR/>
                                                 {!!  trans($user->grade->name)!!}
                                             </div>
@@ -38,7 +38,7 @@
                                         <div class="col-md-6">
 
                                             <div class="form-group">
-                                                {!!  Form::label('name', trans('crud.firstname'), ['class' => 'text-bold']) !!}
+                                                {!!  Form::label('name', trans('core.firstname'), ['class' => 'text-bold']) !!}
                                                 <BR/>
                                                 {!!  $user->firstName !!}
 
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                {!!  Form::label('grade_id', trans('crud.lastname'), ['class' => 'text-bold']) !!}
+                                                {!!  Form::label('grade_id', trans('core.lastname'), ['class' => 'text-bold']) !!}
                                                 <BR/>
                                                 {!!  $user->lastName!!}
                                             </div>
@@ -56,12 +56,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!!  Form::label('email', trans('crud.email'), ['class' => 'text-bold']) !!}
+                                            {!!  Form::label('email', trans('core.email'), ['class' => 'text-bold']) !!}
                                             <BR/>
                                             {!!  $user->email !!}
                                         </div>
                                         <div class="col-md-6">
-                                            {!!  Form::label('role', trans('crud.role'), ['class' => 'text-bold']) !!}
+                                            {!!  Form::label('role', trans('core.role'), ['class' => 'text-bold']) !!}
                                             <BR/>
                                             {!!  $user->role->name !!}
                                         </div>
@@ -89,13 +89,13 @@
                     <div class="container-fluid">
 
 
-                        <fieldset title="{{Lang::get('crud.location')}}">
-                            <legend class="text-semibold">{{Lang::get('crud.location')}}</legend>
+                        <fieldset title="{{Lang::get('core.location')}}">
+                            <legend class="text-semibold">{{Lang::get('core.location')}}</legend>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
 
-                                        {!!  Form::label('name', trans('crud.city'), ['class' => 'text-bold']) !!}
+                                        {!!  Form::label('name', trans('core.city'), ['class' => 'text-bold']) !!}
                                         <BR/>
                                         {!!  $user->city !!}
 
@@ -103,7 +103,7 @@
                                     </div><br/>
                                     <div class="row">
 
-                                            {!!  Form::label('country', trans('crud.country'), ['class' => 'text-bold']) !!}
+                                            {!!  Form::label('country', trans('core.country'), ['class' => 'text-bold']) !!}
                                             <BR/>
                                             {!!  trans($user->country->name)!!} <img
                                                     src="/images/flags/{{$user->country->flag}}"/></div>

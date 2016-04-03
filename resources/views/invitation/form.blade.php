@@ -1,17 +1,17 @@
 
 
-<h2 align="center">{{Lang::get('crud.newTournament')}}</h2>
+<h2 align="center">{{Lang::get('core.newTournament')}}</h2>
 
 <div class="row">
     <div class="col-md-12 col-lg-6 col-lg-offset-3">
         <div class="col-md-6">
             <div class=" form-group">
-                {!!  Form::label('name', trans('crud.name')) !!}
+                {!!  Form::label('name', trans('core.name')) !!}
                 {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
             </div>
         </div>
         <div class="col-md-6">
-            {!!  Form::label('date', trans('crud.eventDate')) !!}
+            {!!  Form::label('date', trans('core.eventDate')) !!}
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon-calendar5"></i></span>
                 {!!  Form::input('text', 'date', old('date'), ['class' => 'form-control datetournament']) !!}
@@ -23,7 +23,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-6 col-lg-offset-3">
         <div class="panel-body">
-            <p class="coutent-group">{{trans('crud.select_categories_to_register')}}</p>
+            <p class="coutent-group">{{trans('core.select_categories_to_register')}}</p>
 
 
             {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->

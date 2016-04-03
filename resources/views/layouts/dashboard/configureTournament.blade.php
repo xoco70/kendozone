@@ -28,7 +28,7 @@
             </div>
 
             <div class="well well-lg">
-                <a href="{!! URL::action('InviteController@inviteUsers', $tournament->slug) !!}">{{ trans('crud.invite_competitors') }}</a>
+                <a href="{!! URL::action('InviteController@inviteUsers', $tournament->slug) !!}">{{ trans('core.invite_competitors') }}</a>
             </div>
         </div>
     </div>

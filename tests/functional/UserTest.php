@@ -38,10 +38,10 @@ class UserTest extends TestCase
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
-        $this->user = trans_choice('crud.user', 1);
-        $this->users = trans_choice('crud.user', 2);
-        $this->addUser = Lang::get('crud.addModel', ['currentModelName' => $this->user]);
-        $this->editUser = Lang::get('crud.updateModel', ['currentModelName' => $this->user]);
+        $this->user = trans_choice('core.user', 1);
+        $this->users = trans_choice('core.user', 2);
+        $this->addUser = Lang::get('core.addModel', ['currentModelName' => $this->user]);
+        $this->editUser = Lang::get('core.updateModel', ['currentModelName' => $this->user]);
     }
 
     /** @test */

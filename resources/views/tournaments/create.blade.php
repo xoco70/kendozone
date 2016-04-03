@@ -14,7 +14,7 @@
 
             {!! Form::open(['url'=>"tournaments"]) !!}
 
-            @include("tournaments.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName]) ])
+            @include("tournaments.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 
 
             {!! Form::close()!!}

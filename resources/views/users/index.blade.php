@@ -23,7 +23,7 @@
                                     <span class="pl-10 pull-right">
                                     <a href="{!!   URL::action('UserController@create') !!}"
                                        class="btn btn-primary btn-xs "><b><i
-                                                    class="icon-plus22 mr-5"></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])
+                                                    class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => $currentModelName])
                                     </a>
 
                                     </span>
@@ -33,13 +33,13 @@
                                         to Excel</a>
 
                                     <tr>
-                                        <th data-hide="phone">{{ trans('crud.avatar') }}</th>
+                                        <th data-hide="phone">{{ trans('core.avatar') }}</th>
                                         <th data-hide="phone">ID</th>
-                                        <th data-toggle="true">{{ trans('crud.username') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.email') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.role') }}</th>
-                                        <th data-hide="phone">{{ trans('crud.country') }}</th>
-                                        <th class="text-center">{{ trans('crud.action') }}</th>
+                                        <th data-toggle="true">{{ trans('core.username') }}</th>
+                                        <th data-hide="phone">{{ trans('core.email') }}</th>
+                                        <th data-hide="phone">{{ trans('core.role') }}</th>
+                                        <th data-hide="phone">{{ trans('core.country') }}</th>
+                                        <th class="text-center">{{ trans('core.action') }}</th>
                                     </tr>
                                 </thead>
                                 @foreach($users as $user)

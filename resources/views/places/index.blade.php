@@ -9,17 +9,17 @@
             <table class="table table-striped custab">
                 <thead>
                 @can('CanCreatePlace')
-                <a href="{!!   URL::action('PlaceController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('crud.addModel', ['currentModelName' => $currentModelName])</a>
+                <a href="{!!   URL::action('PlaceController@create') !!}" class="btn btn-primary btn-xs pull-right"><b><i class="icon-plus22 mr-5" ></i></b> @lang('core.addModel', ['currentModelName' => $currentModelName])</a>
                 @endcan
                 <tr>
                     <th>ID</th>
-                    <th>{{ trans('crud.name') }}</th>
-                    <th>{{ trans('crud.coords') }}</th>
-                    <th>{{ trans('crud.city') }}</th>
-                    <th>{{ trans('crud.state') }}</th>
-                    <th>{{ trans('crud.country') }}</th>
+                    <th>{{ trans('core.name') }}</th>
+                    <th>{{ trans('core.coords') }}</th>
+                    <th>{{ trans('core.city') }}</th>
+                    <th>{{ trans('core.state') }}</th>
+                    <th>{{ trans('core.country') }}</th>
 
-                    <th class="text-center">{{ trans('crud.action') }}</th>
+                    <th class="text-center">{{ trans('core.action') }}</th>
                 </tr>
                 </thead>
                 @foreach($places as $place)
@@ -34,12 +34,12 @@
                         <td class="text-center">
                             @can('CanEditPlace')
                             <a class='btn btn-info btn-xs' href="{!!   URL::action('PlaceController@edit',  $place->id) !!}">
-                                <span class="glyphicon glyphicon-edit"></span> {{ trans('crud.edit') }}</a>
+                                <span class="glyphicon glyphicon-edit"></span> {{ trans('core.edit') }}</a>
                             @endcan
                             @can('CanDeletePlace')
                             <a class="btn btn-danger btn-xs"
                                href="{!! URL::action('PlaceController@destroy',  $place->id) !!}" data-method="delete" data-token="{{csrf_token()}}">
-                                <span class="glyphicon glyphicon-remove"></span> {{ trans('crud.delete') }}</a>
+                                <span class="glyphicon glyphicon-remove"></span> {{ trans('core.delete') }}</a>
                             @endcan
                         </td>
                     </tr>

@@ -20,7 +20,7 @@ class TournamentUserController extends Controller
 
     public function __construct()
     {
-        $this->currentModelName = trans_choice('crud.tournament', 2);
+        $this->currentModelName = trans_choice('core.tournament', 2);
         View::share('currentModelName', $this->currentModelName);
     }
 
@@ -35,7 +35,7 @@ class TournamentUserController extends Controller
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories->count();
 
-        $currentModelName = trans_choice('crud.competitor', 2) . " - " . trans_choice('crud.tournament', 1) . " : " . $tournament->name;
+        $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize'));
 
     }
@@ -48,7 +48,7 @@ class TournamentUserController extends Controller
     public function create(Request $request, Tournament $tournament)
     {
         $categoryTournamentId = $request->get('categoryId');
-        $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
+        $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users/create", compact('tournament', 'currentModelName', 'categoryTournamentId')); //, compact()
     }
 
@@ -166,7 +166,7 @@ class TournamentUserController extends Controller
 
         $user = User::with('categorytournaments.tournament', 'categoryTournaments.category')->find($user->id);
         dd($user->categoryTournaments);
-        $currentModelName = trans_choice('crud.tournament', 1) . " : " . $tournament->name;
+        $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users/edit", compact('tournament', 'currentModelName', 'user')); //, compact()
 
     }

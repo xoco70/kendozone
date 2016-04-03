@@ -4,7 +4,7 @@
 
     @include("errors.list")
     {!! Form::open(['url'=>"competitors"]) !!}
-    @include("competitors.form", ["submitButton" => trans('crud.addModel',['currentModelName' => $currentModelName])])
+    @include("competitors.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName])])
 
     {!! Form::close()!!}
 
