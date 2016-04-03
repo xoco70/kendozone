@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>{{ trans('mail.invite') }}</title>
 </head>
+<?php
+$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
+?>
 <body>
 <h2>{{ trans('mail.invite_to_tournament') }}: {{ $tournament->name }} </h2>
 
@@ -26,7 +29,7 @@
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
+    <a href='{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
 @endif
 {{--TODO Falta traducir--}}
 @if($password!=null)

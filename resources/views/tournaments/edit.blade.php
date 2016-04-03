@@ -14,6 +14,9 @@
 @stop
 @section('content')
 @include("errors.list")
+<?php
+$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
+?>
 
 
         <!-- Detached content -->
@@ -335,7 +338,7 @@
                                     <div class="col-md-12">
                                         <h2 class="form-group text-center">
                                             <br/>
-                                            {{getenv('URL_BASE')}}/tournaments/{{$tournament->slug}}/register/
+                                            {{$appURL}}/tournaments/{{$tournament->slug}}/register/
                                         </h2>
 
                                     </div>

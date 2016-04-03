@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b6a3e5342231e578122ead3a153e381",
-    "content-hash": "64424108f38740bb7f09dd07fc00950e",
+    "hash": "ef95c27a06a9b43fade0a580453c7e2d",
+    "content-hash": "b00564a3c41ddde637dc87e36ef0ee5e",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -3633,6 +3633,67 @@
                 "location"
             ],
             "time": "2015-06-30 16:13:35"
+        },
+        {
+            "name": "tshafer/laravel-service-provider",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tshafer/laravel-service-provider.git",
+                "reference": "f3cc541e862566f6c1a6f478316bf355ceebf6f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tshafer/laravel-service-provider/zipball/f3cc541e862566f6c1a6f478316bf355ceebf6f6",
+                "reference": "f3cc541e862566f6c1a6f478316bf355ceebf6f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0|~5.1|~5.2",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tshafer\\ServiceProvider\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DRY Service Provider for Laravel 5 Packages",
+            "time": "2015-12-29 02:43:53"
+        },
+        {
+            "name": "tshafer/laravel-social-share",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tshafer/laravel-social-share.git",
+                "reference": "35210585f05d42e58c809b8d6298b640c344f011"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tshafer/laravel-social-share/zipball/35210585f05d42e58c809b8d6298b640c344f011",
+                "reference": "35210585f05d42e58c809b8d6298b640c344f011",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "tshafer/laravel-service-provider": "1.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tshafer\\SocialShare\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2015-12-29 04:06:53"
         },
         {
             "name": "vlucas/phpdotenv",

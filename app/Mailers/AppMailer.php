@@ -53,8 +53,10 @@ class AppMailer
      */
     public function sendEmailConfirmationTo(User $user)
     {
+        $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+
         $this->to = $user->email;
-        $this->subject = 'Activación de tu cuenta '.getenv('APP_NAME');
+        $this->subject = 'Activación de tu cuenta '.$appName;
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
@@ -76,8 +78,10 @@ class AppMailer
      */
     public function deliver()
     {
+        $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+
         $this->mailer->send($this->view, $this->data, function ($message) {
-            $message->from($this->from, getenv('APP_NAME'))
+            $message->from($this->from, $appName)
                 ->to($this->to)
                 ->subject($this->subject);
         });

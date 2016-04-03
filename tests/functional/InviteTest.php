@@ -166,6 +166,6 @@ class InviteTest extends TestCase
                 ]);
         }
         $this->seePageIs('/invites')
-            ->see(htmlentities(Lang::get('core.operation_successful')));
+            ->see(htmlentities(Lang::get('sent.invitation_sent')));
     }
 }

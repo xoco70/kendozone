@@ -11,7 +11,7 @@
     "php": ">=5.5.9",
     "laravel/framework": "5.2.*",
     "laravelcollective/html": "5.2.*",
-    "guzzlehttp/guzzle": "~5.0|~6.0",
+    "guzzlehttp/guzzle": "~6.0",
     "webpatser/laravel-countries": "dev-master",
     "laravel/socialite": "~2.0",
     "torann/geoip": "0.2.*@dev",

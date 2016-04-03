@@ -193,14 +193,16 @@ class UserController extends Controller
 
     public function exportUsersExcel()
     {
+
         Excel::create(trans_choice('crud.user', 2), function ($excel) {
+            $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
 
             // Set the title
             $excel->setTitle(trans_choice('crud.user', 2));
 
             // Chain the setters
-            $excel->setCreator(getenv('APP_NAME'))
-                ->setCompany(getenv('APP_NAME'));
+            $excel->setCreator($appName)
+                ->setCompany($appName);
 
             // Call them separately
             $excel->setDescription('A list of users');
