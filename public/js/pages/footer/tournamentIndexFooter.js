@@ -86,7 +86,7 @@ $(function () {
                             force: true,
                             killer: true,
                             closeWith: ['button'],
-                            text: "<a href='#' class='undo_link'><i class='icon  icon-cross3 noty_close' ></i></a>" +
+                            text: "<a href='#' class='undo_link'></a>" +
                             "<div class='row'><div class='col-xs-8'>" + data.msg + "</div>" +
                             "<div class='col-xs-3' align='right'><a class='undo' href='" + url + "/" + dataId + "/restore' data-restore='" + dataId + "'><span class='undo_link'>UNDO</span> </a></div>" +
                             "</div>"

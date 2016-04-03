@@ -78,9 +78,10 @@ class AppMailer
      */
     public function deliver()
     {
-        $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
 
         $this->mailer->send($this->view, $this->data, function ($message) {
+            $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+
             $message->from($this->from, $appName)
                 ->to($this->to)
                 ->subject($this->subject);

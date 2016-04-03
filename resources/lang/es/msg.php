@@ -41,9 +41,6 @@ return [
     'user_status_error' => 'Hubo un error al actualizar :name',
 
 
-
-
-
     // Categoria
     'category_create_successful' => 'La categoría se configuró de forma exitosa',
     'category_update_successful' => 'La categoría se actualizó de forma exitosa',
@@ -56,11 +53,11 @@ return [
 
     //Invitation
 
-    'invitation_needed' => '"Necesitas una invitación para registarte en este torneo."',
-    'invitation_expired' => '"La invitación ha expirado."',
-    'invitation_used' => '"La invitación ya ha sido usada"',
-    'invitation_sent' => '"La invitación ha sido enviada"',
-
+    'invitation_needed' => 'Necesitas una invitación para registarte en este torneo.',
+    'invitation_expired' => 'La invitación ha expirado.',
+    'invitation_used' => 'La invitación ya ha sido usada',
+    'invitation_sent' => 'La invitación ha sido enviada',
+    'tx_for_register_tournament' => 'Gracias por registrarte al torneo :tournament',
     // Permisos
     'access_denied' => 'No tiene acceso a esta sección',
 

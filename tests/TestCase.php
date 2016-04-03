@@ -16,6 +16,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
+        //TODO Should be an IF env== 
         $this->baseUrl = env('APP_BASE', $this->baseUrl);
 
         $app = require __DIR__ . '/../bootstrap/app.php';

@@ -20,16 +20,26 @@ class DashboardTest extends TestCase
 
     use DatabaseTransactions;
 
-//    public function setUp()
-//    {
-//        parent::setUp();
-//        Auth::loginUsingId(1);
-//    }
+    protected $user, $users, $addUser, $editUser, $root, $simpleUser;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+
+        $this->user = trans_choice('crud.user', 1);
+        $this->users = trans_choice('crud.user', 2);
+        $this->addUser = Lang::get('crud.addModel', ['currentModelName' => $this->user]);
+        $this->editUser = Lang::get('crud.updateModel', ['currentModelName' => $this->user]);
+    }
 
     /** @test */
     public function dashboard_check_initial_state()
     {
         // Given
+
 
     }
     /** @test */

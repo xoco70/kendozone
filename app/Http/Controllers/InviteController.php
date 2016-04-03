@@ -161,7 +161,7 @@ class InviteController extends Controller
 
 
         if (isset($invite)) $invite->consume();
-        flash()->success(trans('msg.invitation_sent'));
+        flash()->success(trans('msg.tx_for_register_tournament', ['tournament' =>$tournament->name]));
         return redirect("/invites");
 
     }

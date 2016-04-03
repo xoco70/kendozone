@@ -32,8 +32,8 @@ class Invite extends Model
     {
 
         $code = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
-        //TODO Aqui esta mal
-        $invite = Invite::firstOrNew(['email' => $email,'used' => 0, 'tournament_id' => $tournament->id]);
+
+        $invite = Invite::firstOrNew(['email' => $email, 'tournament_id' => $tournament->id]);
         $invite->code = $code;
         $invite->email = $email;
         $invite->tournament_id = $tournament->id;
