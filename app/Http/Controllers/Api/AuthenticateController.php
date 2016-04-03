@@ -7,12 +7,10 @@ namespace App\Http\Controllers\Api;
  * Date: 10-Feb-2015
  * Time: 21:20
  */
-use App\User;
-use Auth;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\User;
+use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;

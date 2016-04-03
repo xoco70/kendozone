@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
 
 class Authenticate
 {

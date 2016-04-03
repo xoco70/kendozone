@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\CategorySettings;
-use App\Http\Requests\CategoryRequest;
-use App\Tournament;
 use App\CategoryTournament;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {

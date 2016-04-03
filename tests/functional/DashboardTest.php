@@ -2,13 +2,9 @@
 
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
-use App\Invite;
 use App\Tournament;
 use App\User;
-use Carbon\Carbon;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardTest extends TestCase

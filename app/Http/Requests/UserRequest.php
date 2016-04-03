@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\User;
-
 class UserRequest extends Request
 {
 

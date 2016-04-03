@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests;
 use App\Tournament;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use App\Http\Controllers\Controller;
 use Kendozone\Transformers\TournamentTransformer;
 
 

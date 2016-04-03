@@ -1,10 +1,10 @@
 <?php namespace App;
 // AuthenticateUser.php
+use App\Repositories\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Contracts\Factory as Socialite;
-use App\Repositories\UserRepository; use Request;
 
 class AuthenticateUser {
 

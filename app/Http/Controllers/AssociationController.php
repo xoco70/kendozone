@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AssociationRequest;
 use App\Association;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AssociationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
-use Webpatser\Countries\Countries;
 
 class AssociationController extends Controller
 {
