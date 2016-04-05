@@ -1,4 +1,32 @@
 $(function () {
+
+    var validate = false;
+
+    $('#name').blur(function () {
+        if (!$(this).val() || $(this).length <6) {
+            $(this).closest('div').addClass('has-error');
+        } else {
+            $(this).closest('div').removeClass('has-error').addClass('has-success');
+        }
+    });
+
+    $('#dateIni').blur(function () {
+        if (!$(this).val()) {
+            $(this).closest('div').addClass('has-error');
+        } else {
+            $(this).closest('div').removeClass('has-error').addClass('has-success');
+        }
+    });
+
+    $('#dateFin').blur(function () {
+        if (!$(this).val()) {
+            $(this).closest('div').addClass('has-error');
+        } else {
+            $(this).closest('div').removeClass('has-error').addClass('has-success');
+        }
+    });
+
+
     $('#locationpicker-default').locationpicker({
         location: {latitude: latitude, longitude: longitude},
         radius: 300,
@@ -29,12 +57,18 @@ $(function () {
         e.preventDefault();
         var inputData = $('#form').serialize();
         var dataId = $(this).data('id');
+        var name = $('#name');
 
+
+        if (!name.val() || name.length <6) {
+            name.closest('div').addClass('has-error');
+        } else {
+            name.closest('div').removeClass('has-error').addClass('has-success');
+        }
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
         var btnUpdateTour = $('.btn-update-tour');
 
-        // console.log(url_edit);
         $.ajax(
             {
                 type: 'PUT',
@@ -93,14 +127,18 @@ $(function () {
 
                 },
                 error: function (data) {
+                    var json = data.responseText;
+                    var obj = jQuery.parseJSON(json);
+                    console.log(obj);
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
                         type: 'error',
                         width: 200,
+                        dataType: 'json',
                         dismissQueue: true,
                         timeout: 5000,
-                        text: data.statusText,
+                        text:  data.responseText ,
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
@@ -109,13 +147,16 @@ $(function () {
 
                 }
             }
-        )
+        );
+
+
+        // console.log(url_edit);
 
     });
 
     //EDIT CATEGORIES
     var categoriesSize = null;
-    
+
 
     $('.save_category').on('click', function (e) {
         e.preventDefault();
@@ -223,11 +264,17 @@ $(function () {
 
     var $input = $('.dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
-        format: 'yyyy-mm-dd'
-});
+        format: 'yyyy-mm-dd',
+        today: '',
+        clear: '',
+        close: ''
+    });
     var $input2 = $('.dateLimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        today: '',
+        clear: '',
+        close: ''
     });
 
     var pickerFin = $input.pickadate('picker');
@@ -236,9 +283,20 @@ $(function () {
     $('.dateIni').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
-        onSet: function() {
-            pickerFin.set('min',this.get('select'));
-            pickerLimit.set('min',this.get('select'));
+        today: '',
+        clear: '',
+        close: '',
+
+        onSet: function () {
+            pickerFin.set('min', this.get('select'));
+            pickerLimit.set('min', this.get('select'));
+
+            if (pickerFin.get() < this.get()){
+                pickerFin.clear();
+            }
+            if (pickerLimit.get() < this.get()){
+                pickerLimit.clear();
+            }
 
         }
 
@@ -246,29 +304,27 @@ $(function () {
 
 
 
-    $('#dateFin').pickadate({
-        min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
-        format: 'yyyy-mm-dd'
-    });
     // $('#dateIni').on('change', function (e) {
-        // alert($.format.date(this.value, "yy"));
+    // alert($.format.date(this.value, "yy"));
     // $('#registerDateLimit').val(this.value);
 
 
-        // $dateFin.val(this.value);
-        // $dateFin.pickadate({
-        //         min: [, , ,]
-        //
-        // });
-
+    // $dateFin.val(this.value);
+    // $dateFin.pickadate({
+    //         min: [, , ,]
+    //
+    // });
 
 
     // });
 
-        $('.datelimit').pickadate({
+    $('.datelimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
-    format: 'yyyy-mm-dd'
-});
+        format: 'yyyy-mm-dd',
+        today: '',
+        clear: '',
+        close: ''
+    });
 
     $('#generate_tree').on('click', function () {
         swal({
