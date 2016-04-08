@@ -95,7 +95,7 @@
                                         class="icon-alert"></i></a>
                         </li>
                         <li class="text-left">
-                            <div class="text-semibold">{{ trans('core.limitDate')}}</div>
+                            <div class="text-semibold">{{ trans('core.limitDateRegistration')}}</div>
                             <div class="text-muted">{{ $tournament->registerDateLimit == '0000-00-00' ? '--' : $tournament->registerDateLimit  }}</div>
                         </li>
                     </ul>
