@@ -8,7 +8,7 @@ class CreateTournamentTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('tournaments', function(Blueprint $table) {
+		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
             $table->Integer('user_id')->unsigned();
 			$table->foreign('user_id')

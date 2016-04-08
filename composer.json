@@ -25,7 +25,8 @@
     "artesaos/seotools": "^0.8.2",
     "proengsoft/laravel-jsvalidation": "^1.3",
     "thomaswelton/laravel-gravatar": "^1.1",
-    "intervention/image": "^2.3"
+    "intervention/image": "^2.3",
+    "mcamara/laravel-localization": "^1.1"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

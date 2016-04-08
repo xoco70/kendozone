@@ -14,17 +14,6 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown language-switch">
-                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/flags/mx.png" class="position-left" alt="">
-                    Español
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="mexico" href="#"><img src="/images/flags/mx.png" alt=""> Español</a></li>
-                    <li><a class="english" href="#"><img src="/images/flags/gb.png" alt=""> English</a></li>
-                </ul>
-            </li>
             <li class="head_create_tournament"><a href="{!! URL::to('tournaments/create') !!}"
                    class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}</a></li>
             {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
@@ -33,6 +22,24 @@
             {{--<li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}</a></li>--}}
             {{--</ul>--}}
             {{--</li>--}}
+            <li class="dropdown language-switch">
+                <a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
+                    @if (LaravelLocalization::getCurrentLocale() =='en')
+                        <img src="/images/flags/gb.png" class="position-left" alt="">
+                    @elseif (LaravelLocalization::getCurrentLocale() =='es')
+                        <img src="/images/flags/mx.png" class="position-left" alt="">
+                    @else
+                        <img src="/images/flags/{{LaravelLocalization::getCurrentLocale()}}.png" class="position-left" alt="">
+                    @endif
+
+
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL('es', LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/mx.png" alt=""> Español</a></li>
+                    <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL('en', LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/gb.png" alt=""> English</a></li>
+                </ul>
+            </li>
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
