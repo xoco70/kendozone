@@ -75,7 +75,7 @@ $(function () {
                 url: url_edit,
                 data: inputData,
                 success: function (data) {
-                    // console.log(data);
+                    console.log(data.msg);
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
@@ -83,7 +83,7 @@ $(function () {
                             type: 'success',
                             width: 200,
                             dismissQueue: true,
-                            timeout: 3000,
+                            timeout: 13000,
                             text: data.msg,
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 

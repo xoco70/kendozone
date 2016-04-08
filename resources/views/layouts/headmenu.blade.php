@@ -14,6 +14,17 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown language-switch">
+                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="/images/flags/mx.png" class="position-left" alt="">
+                    Español
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="mexico" href="#"><img src="/images/flags/mx.png" alt=""> Español</a></li>
+                    <li><a class="english" href="#"><img src="/images/flags/gb.png" alt=""> English</a></li>
+                </ul>
+            </li>
             <li class="head_create_tournament"><a href="{!! URL::to('tournaments/create') !!}"
                    class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}</a></li>
             {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
@@ -33,6 +44,7 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+
                     @if (Auth::user()->isSuperAdmin())
                         <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}
                             </a></li>

@@ -181,3 +181,7 @@ fieldset > a > legend {
     border-color: transparent #666;
     border-width: 10px 10px 10px 0;
 }
+
+.language-switch {
+    margin-top: 10px;
+}
