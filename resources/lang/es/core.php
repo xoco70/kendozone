@@ -12,10 +12,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    // Models
-
-
-
     // Accion
     'action' => 'Acción',
     'edit' => 'Editar',
@@ -28,8 +24,14 @@ return [
 
     //Common
     'preview' => ' Vista Previa',
+    'thanks' => ' Gracias',
+    'from' => 'Del',
+    'to' => 'Al',
+    'share' => 'Compartir',
+    'sumary' => 'Resumen',
+    'social_networks' => 'Redes Sociales',
 
-
+    
     //Tournament
     'tournament' => 'Torneo|Torneos',
     'newTournament' => 'Nuevo Torneo',
@@ -66,8 +68,6 @@ return [
     'admin_tournaments' => 'Administrar torneos',
     'eventDateIni' => 'Fecha Inicial',
     'eventDateFin' => 'Fecha Final',
-    'from' => 'Del',
-    'to' => 'Al',
     'competitors_register' => 'Registro de competidores',
     'configure' => 'Configurar',
     'configured' => 'Configurada',
@@ -99,7 +99,7 @@ return [
 
 
 
-    // Places
+    // Venue
     'venue' => 'Lugar del encuentro',
     'place' => 'Lugar|Lugares',
     'coords' => 'Coords',
@@ -108,7 +108,7 @@ return [
     'country' => 'País',
     'location' => 'Ubicación',
 
-    // Nivel
+    // Level
     'local' => 'Local',
     'district' => 'Distrital',
     'level_city' => 'Municipal',
@@ -116,8 +116,6 @@ return [
     'level_state' => 'Estatal',
     'national' => 'Nacional',
     'international' => 'Internacional',
-
-
 
     // User
     'user' => 'Usuario|Usuarios',
@@ -137,16 +135,18 @@ return [
     'without_grade' => 'Sin grado',
     'left_password_blank' => 'Deja la contraseña vacia si no desea cambiarla',
 
-
-
     // Competitor
     'competitor' => 'Competidor|Competidores',
     'add_competitor' => 'Agregar Competidor',
     'add_competitor_to_category' => 'Agregar Competidor a la categoria: :category',
     'select_competitor_categories' => 'Selecciona las categorias en la cual quieres registrar al competidor',
     'select_tournament_categories' => 'Seleccione las categorias abiertas para su torneo',
-
-
+    'confirmed' => 'Confirmado',
+    'used' => 'Usada',
+    'results' => 'resultados',
+    'latest_competitors' => 'Ultimos registros',
+    'organizer' => 'Organizador',
+    'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
 
     // Invitation
 
@@ -162,38 +162,18 @@ return [
     'no_tournament_registered_yet' => 'Aún no se ha registrado en ningun torneo',
 
 
-    'confirmed' => 'Confirmado',
-    'used' => 'Usada',
-    'results' => 'resultados',
-    'latest_competitors' => 'Ultimos registros',
-    'organizer' => 'Organizador',
-    'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
-//    'tournament_categories_available' => 'Categorias del torneo',
-
-
-
-    // Messages
-    'all_categories_not_configured' => 'Todas las categorias deben de ser configuradas. Ve Torneo > Categorías para configurarlas.',
-
-
-    // Share
-    'share' => 'Compartir',
-
     // Dashboard
 
     'controlpanel' => 'Configuración',
     'myaccount' => 'Mi Cuenta',
-    'settings' => 'Parametros   ',
     'groups' => 'Grupos de usuarios',
     'blastmail' => 'Correo Másivo',
     'logs' => 'Logs',
     'dashboard' => 'Panel de control',
-    'profile' => 'Perfil',
     'logout' => 'Desconectar',
     'home' => 'Inicio',
     'personalinfo' => 'Información personal',
     'changepassword' => 'Cambiar mi contraseña  ',
-    'email' => 'Correo electrónico',
     'savechanges' => 'Guardar cambios',
     'all_fields_required' => 'Todos los campos son obligatorios',
     'error' => 'Error ',
@@ -204,8 +184,6 @@ return [
     'operation_successful' => ' Operación exitosa',
     'operation_failed' => ' Hubo un problema',
     'save' => 'Guardar',
-    'edit' => 'Editar',
-    'delete' => 'Borrar',
     'help' => 'Ayuda',
     'type' => 'Tipo',
     'open' => 'Abierto',
@@ -213,21 +191,10 @@ return [
     'no' => 'No',
     'forbidden' => 'Prohibido!',
 
-
-
     // Left menu
     'lastlogin' => 'Ultima conexión',
     'users' => 'Usuarios',
-    'state' => 'Estado',
-    'country' => 'País',
     'statistics' => 'Estadisticas',
-
-    // Right Menu
-
-    'sumary' => 'Resumen',
-    //Settings
-
-    'social_networks' => 'Redes Sociales',
 
 
     // Dashboard
@@ -238,12 +205,10 @@ return [
     'congigure_categories' => 'Configurar las diferentes categorias',
     'see_open_tournaments' => 'Ver torneos abiertos',
     'soon' => 'Proximamente',
-    'configured' => 'conf.',
     'configured_full' => 'configurada',
     'see_all' => 'Ver Todos',
     'no_tournament_created_yet' => 'Aún no has creado ningún torneo',
     'no_tournament_deleted_yet' => 'Aún no has borrado ningún torneo',
-
     'join_tournament' => 'Unirse a un torneo existente',
     'tournaments_registered' => 'Registros en torneos',
     'tournaments_created' => 'Torneos creados',
@@ -253,9 +218,7 @@ return [
     'participations' => 'Participaciones',
     'past' => 'Pasados',
     'next' => 'Próximos',
-
-
-
+    
 
 
 

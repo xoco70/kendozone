@@ -329,7 +329,7 @@ $(function () {
     $('#generate_tree').on('click', function () {
         swal({
             title: "{!! trans('core.information') !!}",
-            text: "{!!   trans('core.all_categories_not_configured') !!}",
+            text: "{!!   trans('msg.all_categories_not_configured') !!}",
             confirmButtonColor: "#2196F3",
             type: "info"
         });

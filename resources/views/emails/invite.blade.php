@@ -5,7 +5,7 @@
     <title>{{ trans('mail.invite') }}</title>
 </head>
 <?php
-$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
+$appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
 ?>
 <body>
 <h2>{{ trans('mail.invite_to_tournament') }}: {{ $tournament->name }} </h2>
@@ -17,33 +17,35 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     @if ($tournament->venue != null)
         <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue }}<br/>
     @endif
-    <strong>{{trans('core.date')}}:</strong> {{ $tournament->date }}<br/>
+    <strong>{{trans('core.dateIni')}}:</strong> {{ $tournament->dateIni }}<br/>
+    <strong>{{trans('core.dateFin')}}:</strong> {{ $tournament->dateFin }}<br/>
     @if ($tournament->cost != null) <strong>{{trans('core.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
         <strong>{{trans('core.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
-    @endif
+@endif
 @if (isset($category))
     <P>{{ trans('mail.you_have_been_preregistered') }}</P>
     <ul>
-            <li>{{$category}}</li>
+        <li>{{$category}}</li>
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
+    <a href='{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{$appURL}}
+        /tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
 @endif
-{{--TODO Falta traducir--}}
+
 @if($password!=null)
-    <p>Tus datos de conexión son:</p>
-    Usuario : {{ $email  }}
-    Contraseña: {{ $password }}
+    <p>{{trans('mail.your_connection_data')}}:</p>
+    {{ trans('core.username') }}: {{ $email  }}
+    {{ trans('core.password') }}: {{ $password }}
 @endif
 
-<p>No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo
+<p>{{ trans('mail.dont_forget_to_pay') }}
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
-        antes del dia {{ $tournament->registerDateLimit }}.</p>
-    @endif
+        {{ trans('before_day') }} {{ $tournament->registerDateLimit }}.</p>
+@endif
 
-<p>Gracias</p>
+<p>{{ trans('core.thanks') }}</p>
 
 <p align="right">{{ $tournament->owner->name  }}</p>
 </body>

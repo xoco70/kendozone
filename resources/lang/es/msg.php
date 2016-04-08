@@ -60,7 +60,7 @@ return [
     'tx_for_register_tournament' => 'Gracias por registrarte al torneo :tournament',
     // Permisos
     'access_denied' => 'No tiene acceso a esta sección',
-
+    'all_categories_not_configured' => 'Todas las categorias deben de ser configuradas. Ve Torneo > Categorías para configurarlas.',
 
 
 ];
