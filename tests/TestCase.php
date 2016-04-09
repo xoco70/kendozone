@@ -1,5 +1,7 @@
 <?php
 
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -7,7 +9,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://laravel.dev';
+    protected $baseUrl = 'http://laravel.dev/';
 
     /**
      * Creates the application.
@@ -16,12 +18,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        //TODO Should be an IF env== 
-        $this->baseUrl = env('APP_BASE', $this->baseUrl);
 
         $app = require __DIR__ . '/../bootstrap/app.php';
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+
+        $this->baseUrl = env('APP_BASE', $this->baseUrl);
+        $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
+//        $this->baseUrl .= LaravelLocalization::getCurrentLocale().'/';
+
 
         return $app;
     }

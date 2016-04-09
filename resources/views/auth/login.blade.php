@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-<form id="login-form" class="login-form" method="POST" action="{!!   URL::to('/auth/login') !!}">
+<form id="login-form" class="login-form" method="POST" action="{!!   URL::action('Auth\AuthController@postLogin') !!}">
 
     {!! csrf_field() !!}
     <div class="panel panel-body login-form">
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="col-xs-6 text-right">
-                    <a href="{!! URL::to('password/email') !!}">{{  Lang::get('auth.lost_password') }}</a>
+                    <a href="{!! URL::action('Auth\PasswordController@getEmail') !!}">{{  Lang::get('auth.lost_password') }}</a>
                 </div>
             </div>
         </div>
@@ -51,10 +51,10 @@
 
         <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.signin_with') }}</span></div>
         <ul class="list-inline form-group list-inline-condensed text-center">
-            <li><a href="{!! URL::to('/auth/login/facebook') !!}"
+            <li><a href="{!! URL::action('Auth\AuthController@getSocialAuth','facebook') !!}"
                    class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded" id="fb"><i
                             class="icon-facebook"></i></a></li>
-            <li><a href="{!! URL::to('/auth/login/google') !!}"
+            <li><a href="{!! URL::action('Auth\AuthController@getSocialAuth', 'google') !!}"
                    class="btn border-danger text-danger btn-flat btn-icon btn-rounded" id="google"><i
                             class="icon-google"></i></a></li>
         </ul>
@@ -63,7 +63,7 @@
 
         <div class="mt-20">
             <a class="btn full-width text-primary border-primary border-4 text-uppercase "
-               href="{!! URL::to('auth/register') !!}">{{  Lang::get('auth.signup') }}</a>
+               href="{!! URL::action('Auth\AuthController@getRegister') !!}">{{  Lang::get('auth.signup') }}</a>
         </div>
 
         {{--<span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a--}}

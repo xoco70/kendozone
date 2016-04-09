@@ -2,7 +2,6 @@
 @section('scripts')
 {!! Html::script('js/pages/header/tournamentEdit.js') !!}
 {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-{{--{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}--}}
 
 @stop
 @section('styles')
@@ -338,7 +337,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="col-md-12">
                                         <h2 class="form-group text-center">
                                             <br/>
-                                            {{$appURL}}/tournaments/{{$tournament->slug}}/register/
+                                            {{ URL::action('URL::action(‘TournamentController@edit') }}
                                         </h2>
 
                                     </div>
@@ -367,7 +366,7 @@ $day = $now->day;
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/tournaments/') }}";
+        var url_base = "{{ URL::action('TournamentController@index') }}";
         var url_edit = url_base + '/' + "{{$tournament->slug}}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";

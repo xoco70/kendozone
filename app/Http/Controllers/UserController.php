@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
+use URL;
 use Webpatser\Countries\Countries;
 
 class UserController extends Controller
@@ -80,6 +81,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+
         $data = $request->except('_token');
 
 //        $data = User::uploadPic($data);
@@ -97,10 +99,10 @@ class UserController extends Controller
 //        $user->avatar = $fileName;
 
         if (User::create($data)) {
-            flash()->success(Lang::get('core.success'));
+            flash()->success(trans('msg.user_create_successful', ['name' => $data['name']]));
         } else
-            flash()->error(Lang::get('core.fail'));
-        return redirect('/users');
+            flash()->error(trans('msg.user_create_successful', ['name' => $data['name']]));
+        return redirect(URL::action('UserController@index'));
     }
 
     /**
@@ -139,7 +141,6 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-//        dd($request);
         $except = [];
         if (trim(Input::get('role_id')) == '') {
             array_push($except, 'role_id');
@@ -168,9 +169,9 @@ class UserController extends Controller
 
 
         if ($user->id == Auth::user()->id) {
-            return redirect("/users/" . Auth::user()->slug . "/edit");
+            return redirect(URL::action('UserController@edit',Auth::user()->slug));
         } else  {
-            return redirect("/users/");
+            return redirect(URL::action('UserController@index'));
         }
 
     }
@@ -207,7 +208,9 @@ class UserController extends Controller
             // Call them separately
             $excel->setDescription('A list of users');
             $excel->sheet(trans_choice('core.user', 2), function ($sheet) {
+                //TODO Here we should join grade, role, country to print name not FK
                 $users = User::all();
+//                $users = User::with(['grade', 'role'])->get();
                 $sheet->fromArray($users);
             });
 

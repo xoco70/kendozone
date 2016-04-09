@@ -12,7 +12,7 @@
                                 <?php
                                 $noItemYet = trans('core.no_tournament_registered_yet');
                                 $link = '#';
-                                $linkLabel = trans('core.createTournament');
+                                $linkLabel = trans('core.create_new_tournament');
                                 $printLink = false;
                                 ?>
 
@@ -20,7 +20,7 @@
                                 <?php
                                 $noItemYet = trans('core.no_tournament_created_yet');
                                 $link = URL::action('TournamentController@create');
-                                $linkLabel = trans('core.createTournament');
+                                $linkLabel = trans('core.create_new_tournament');
                                 $printLink = true;
                                 ?>
 

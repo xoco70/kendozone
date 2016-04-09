@@ -2,7 +2,7 @@
 
 @section('content')
         <!-- Registration form -->
-{!! Form::open(['url'=>URL::to('/auth/invite') , 'class'=> "form-signin"]) !!}
+{!! Form::open(['url'=>URL::action('Auth\AuthController@postInvite') , 'class'=> "form-signin"]) !!}
 <div class="row">
     <div class="col-lg-4 col-lg-offset-4">
 

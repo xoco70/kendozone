@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Session;
 
 class DashboardController extends Controller
 {
@@ -11,6 +13,7 @@ class DashboardController extends Controller
 
     public function __construct()
     {
+//        dd( Session::get('locale'));
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.dashboard', 1);
         View::share('currentModelName', $this->currentModelName);

@@ -36,7 +36,6 @@ class UserRequest extends Request
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
-//            'avatar' => 'mimes:png,jpg, jpeg, gif',
             'password' => 'confirmed' . $passwordRules,
         ];
     }

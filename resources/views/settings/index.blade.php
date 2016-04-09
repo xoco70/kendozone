@@ -23,7 +23,7 @@
                     <div  class="tab-pane" id="category">
                         <!-- TAB CATEGORIES DEFAULT SETTING -->
                         @if (is_null($settings))
-                            {!! Form::open(['url'=>"settings"]) !!}
+                            {!! Form::open(['action'=>"SettingsController@store"]) !!}
                             <?php $settings = new App\Settings; ?>
                         @else
                             {!! Form::model($settings, ['method'=>"PATCH", 'class'=>'stepy-validation', "action" => ["SettingsController@update", $settings->id]]) !!}

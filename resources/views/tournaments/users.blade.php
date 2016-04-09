@@ -28,10 +28,10 @@ else
                     <div class="container-fluid">
 
                         @if (Auth::user()->canEditTournament($tournament))
-                            <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
-                               class="btn bg-teal btn-xs pull-right ml-20"><b><i
-                                            class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>
-                            </a>
+                            {{--<a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"--}}
+                               {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
+                                            {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
+                            {{--</a>--}}
                             <a href="{!!   URL::action('TournamentUserController@create',
                                                         ['tournamentId'=>$tournament->slug,
                                                         'categoryId'=>$categoryTournament->id
@@ -159,7 +159,7 @@ else
 @stop
 @section("scripts_footer")
     <script>
-        var url = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),"/tournaments/".$tournament->slug) }}";
+        var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
 
         var tournamentSlug = "{{ $tournament->slug }}";
     </script>

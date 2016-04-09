@@ -31,7 +31,7 @@
                 <div class="col-lg-4">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="index.html#"
+                            <a href="#"
                                class="btn border-grey-400 text-grey-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
                                         class="icon-people"></i></a>
                         </li>
@@ -52,7 +52,7 @@
                 <div class="col-lg-4">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="index.html#"
+                            <a href="#"
                                class="btn border-indigo-400 text-indigo-400  btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
                                         class="icon-lock2"></i></a>
                         </li>
@@ -90,7 +90,7 @@
                 <div class="col-lg-4">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="index.html#"
+                            <a href="#"
                                class="btn border-warning-400 text-warning-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
                                         class="icon-alert"></i></a>
                         </li>
@@ -108,7 +108,7 @@
                 <div class="col-lg-4">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="index.html#"
+                            <a href="#"
                                class="btn border-brown-400 text-brown-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
                                         class="icon-target"></i></a>
                         </li>

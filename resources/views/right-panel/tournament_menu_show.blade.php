@@ -26,9 +26,8 @@ $numCompetitors = $competitors->count();
 
 
 
-                        <li><a href="/tournaments/{{$tournament->slug}}/users"><i class="icon-users"></i>
+                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
-                                {{--TODO Using competitors()--}}
 
                             @if(($numCompetitors)>8)
                                     <span class="badge badge-success">{{$numCompetitors}}</span>
@@ -67,71 +66,6 @@ $numCompetitors = $competitors->count();
 
         </div>
     </div>
-    <br/>
 
-    <br/>
-
-    <?php
-    //    $competitors = $tournament->competitors()->orderby('pivot_created_at')->take(5)->get();
-    //    ?>
-    {{--@if (sizeof($competitors)>0)--}}
-
-    {{--
-    <div class="sidebar sidebar-default">--}}
-
-        {{--
-        <div class="sidebar-content">--}}
-
-
-            {{--<!-- Sub navigation -->--}}
-            {{--
-            <div class="sidebar-category">--}}
-                {{--
-                <div class="category-title">--}}
-                    {{--<span>{{ Lang::get("core.latest_competitors") }}</span>--}}
-                    {{--
-                    <ul class="icons-list">--}}
-                        {{--
-                        <li><a href="#" data-action="collapse"></a></li>
-                        --}}
-                        {{--
-                    </ul>
-                    --}}
-                    {{--
-                </div>
-                --}}
-
-
-                {{--
-                <div class="category-content no-padding">--}}
-                    {{--
-                    <ul class="navigation navigation-alt navigation-accordion">--}}
-                        {{--@foreach($competitors as $competitor)--}}
-                        {{--
-                        <li><a href="/users/{{$competitor->id}}"><i class="icon-user"></i>{{$competitor->name}}--}}
-                                {{--</a>--}}
-                            {{--@endforeach--}}
-
-                            {{--
-                    </ul>
-                    --}}
-                    {{--
-                </div>
-                --}}
-
-                {{--
-            </div>
-            --}}
-
-            {{--<!-- /sub navigation -->--}}
-
-
-            {{--
-        </div>
-        --}}
-        {{--
-    </div>
-    --}}
-    {{--@endif--}}
 </div>
 <!-- /detached sidebar -->

@@ -131,7 +131,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                         </div>
 
                         <div class="media-body">
-                            <a href="index.html#">
+                            <a href="#">
                                 Jesus Maya
                                 <span class="media-annotation pull-right">14:58</span>
                             </a>
@@ -146,7 +146,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                         </div>
 
                         <div class="media-body">
-                            <a href="index.html#">
+                            <a href="#">
                                 FMK
                                 <span class="media-annotation pull-right">12:16</span>
                             </a>

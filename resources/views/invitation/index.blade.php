@@ -9,7 +9,7 @@
     <div class="container-fluid">
 
         @if (sizeof($invites)==0)
-            @include('layouts.joinFirstTournament')
+            @include('layouts.noInvites')
         @else
             <div class="row">
 

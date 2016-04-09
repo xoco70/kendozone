@@ -28,7 +28,7 @@ return [
 
     //Common
     'preview' => ' Vista Previa',
-
+    'thanks' => ' ¡Gracias!',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -136,6 +136,7 @@ return [
     'conewpassword' => 'Confirma la nueva contraseña',
     'without_grade' => 'Sin grado',
     'left_password_blank' => 'Deja la contraseña vacia si no desea cambiarla',
+    'remove' => 'Borrar',
 
 
 
@@ -160,7 +161,7 @@ return [
     'send_invites' => 'Mandar Invitaciones',
     'invite_with_link' => 'Invita competitodres con este link',
     'no_tournament_registered_yet' => 'Aún no se ha registrado en ningun torneo',
-
+    'no_invitation_yet' => 'Aún no has sido invitado a ningun torneo',
 
     'confirmed' => 'Confirmado',
     'used' => 'Usada',
@@ -238,7 +239,6 @@ return [
     'congigure_categories' => 'Configurar las diferentes categorias',
     'see_open_tournaments' => 'Ver torneos abiertos',
     'soon' => 'Proximamente',
-    'configured' => 'conf.',
     'configured_full' => 'configurada',
     'see_all' => 'Ver Todos',
     'no_tournament_created_yet' => 'Aún no has creado ningún torneo',

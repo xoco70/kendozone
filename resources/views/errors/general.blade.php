@@ -29,7 +29,7 @@
                         @if (Auth::check())
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <a href="/" class="btn btn-primary btn-block content-group"><i
+                                    <a href="URL::action('Auth\DashboardController@index')" class="btn btn-primary btn-block content-group"><i
                                                 class="icon-circle-left2 position-left"></i> Go to dashboard</a>
                                 </div>
 

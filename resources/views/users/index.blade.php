@@ -86,9 +86,7 @@
 @stop
 @section("scripts_footer")
     <script>
-
-        var url = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/users') }}";
-
+        var url = "{{ URL::action('UserController@index') }}";
     </script>
     {!! Html::script('js/pages/footer/userIndexFooter.js') !!}
 @stop

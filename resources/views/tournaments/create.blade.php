@@ -12,7 +12,7 @@
 
     <div class="container-fluid">
 
-            {!! Form::open(['url'=> LaravelLocalization::getLocalizedURL (LaravelLocalization::getCurrentLocale(),"tournaments")]) !!}
+            {!! Form::open(['url'=> URL::action('TournamentController@index') ]) !!}
 
             @include("tournaments.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 

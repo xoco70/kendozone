@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Laravel\Socialite\Facades\Socialite;
+use URL;
 use Validator;
 use Webpatser\Countries\Countries;
 
@@ -172,7 +173,7 @@ class AuthController extends Controller
 //        else flash('error', 'operation_failed!');
 //        return redirect("tournaments/$tournament->slug/edit")
         flash()->success(Lang::get('auth.check_your_email'));
-        return redirect('auth/login');
+        return redirect (URL::action('Auth\AuthController@getLogin'));
     }
 
     public function getInvite()
@@ -201,9 +202,8 @@ class AuthController extends Controller
             return view("categories.register", compact('userId', 'tournament', 'invite'));
 
         } else {
-            dd("yes is null");
             flash()->error(Lang::get('auth.no_invite'));
-            return redirect("/")->with('status', 'success');
+            return redirect(URL::action('Auth\AuthController@postLogin'))->with('status', 'error');
         }
     }
 
@@ -223,7 +223,7 @@ class AuthController extends Controller
     {
         User::whereToken($token)->firstOrFail()->confirmEmail();
         flash()->success(Lang::get('auth.tx_for_confirm'));
-        return redirect('auth/login');
+        return redirect(URL::action('Auth\AuthController@getLogin'));
     }
 
     /**
@@ -253,7 +253,8 @@ class AuthController extends Controller
     public function userHasLoggedIn($user)
     {
 //        flash('Welcome, ' . $user->name);
-        return redirect('/');
+        return redirect(URL::action('DashboardController@index'));
+
     }
 
     /**

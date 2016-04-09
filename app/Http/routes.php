@@ -27,8 +27,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
     Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-    Route::get('/tournaments/{tournamentId}/invite/{token}', 'InviteController@register');
-    Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
+    Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@register');
+    Route::post('tournaments/{tournament}/invite/{invite}/categories', 'InviteController@registerCategories');
 
     Route::group(['middleware' => ['guest']],
         function () {
@@ -75,12 +75,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
 
             Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
-            Route::resource('tournaments/{tournament}/users', 'TournamentUserController');
+            Route::resource('tournaments/{tournament}/users', 'TournamentUserController',['names' => ['index' => 'tournament.users.index', 'create' => 'users.create','edit' => 'tournament.users.edit', 'store' => 'tournament.users.store', 'update' => 'tournament.users.update']]);
             Route::delete('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
             Route::put('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/confirm', 'TournamentUserController@confirmUser');
             Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
             Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
-            Route::resource('invites', 'InviteController');
+            Route::resource('invites', 'InviteController',['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
             Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
             Route::resource('settings', 'SettingsController');
 

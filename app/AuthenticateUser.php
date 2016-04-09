@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Contracts\Factory as Socialite;
+use URL;
 
 class AuthenticateUser {
 
@@ -30,7 +31,8 @@ class AuthenticateUser {
             $this->auth->login($user, true);
         }else{
             Session::flash('error', Lang::get('auth.account_already_exists'));
-            return redirect('auth/login');
+
+            return redirect(URL::action('Auth\AuthController@getLogin'));
         }
 
 

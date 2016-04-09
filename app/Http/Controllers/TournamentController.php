@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\URL;
 use Response;
 
 //use App\Place;
@@ -29,6 +30,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
+        
         $currentModelName = trans_choice('core.tournament', 2);
 //        $token=JWTAuth::getToken();
 //        $user = JWTAuth::toUser($token);
@@ -79,7 +81,7 @@ class TournamentController extends Controller
         $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
         flash()->success($msg);
 //        else flash('error', 'operation_failed!');
-        return redirect("tournaments/$tournament->slug/edit");
+        return redirect(URL::action('TournamentController@edit', $tournament->slug));
     }
 
     /**

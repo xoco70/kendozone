@@ -14,7 +14,7 @@
 @section("scripts_footer")
     <script>
 
-        var url = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/tournaments/') }}";
+        var url ="{{ URL::action('TournamentController@index') }}";
 
     </script>
     {!! Html::script('js/pages/footer/tournamentIndexFooter.js') !!}

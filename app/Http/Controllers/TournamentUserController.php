@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Response;
+use URL;
 
 class TournamentUserController extends Controller
 {
@@ -93,8 +94,7 @@ class TournamentUserController extends Controller
 
         if ($ctu->get()->contains($categoryTournament)) {
             flash()->error(trans('msg.user_already_registered_in_category'));
-            return redirect("tournaments/$tournament->slug/users");
-
+            return redirect(URL::action('TournamentUserController@index', $tournament->slug));
         } else {
             $ctu->attach($categoryTournamentId, ['confirmed' => 1]);
         }
@@ -106,7 +106,7 @@ class TournamentUserController extends Controller
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
 
         flash()->success(trans('msg.user_registered_successful',['name' => $user->name, 'tournament' => $tournament->name]));
-        return redirect("tournaments/$tournament->slug/users");
+        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 
 
     }
@@ -217,7 +217,7 @@ class TournamentUserController extends Controller
 //        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
 
         flash()->success(trans('msg.operation_successful'));
-        return redirect("tournaments/$tournamentId/users");
+        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
     }
 
 

@@ -22,4 +22,9 @@ return [
     'you_have_been_preregistered' => 'Has sido preregistrado en las categoria',
     'please_clic_confirmation_link' => 'Por favor pica el link de confirmación',
 
+    // Registration
+    'dont_forget_to_pay' => '  No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo',
+    'before_day' => 'antes del dia',
+    'your_connection_data' => 'Tus datos de conexión son',
+    
 ];

@@ -1,7 +1,7 @@
 <!-- Second navbar  -->
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/"><img src="/images/logored.png" alt=""></a>
+        <a class="navbar-brand" href="{{ URL::action('DashboardController@index') }}"><img src="/images/logored.png" alt=""></a>
         <ul class="nav navbar-nav visible-xs-block mt-15">
             <li><a data-toggle="collapse" data-target="#navbar-second-toggle"><img src="{!! Auth::getUser()->avatar !!}" width="28" alt="kendozone_avatar"></a></li>
             <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
@@ -14,7 +14,7 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="head_create_tournament"><a href="{!! URL::to('tournaments/create') !!}"
+            <li class="head_create_tournament"><a href="{{ URL::action('TournamentController@create') }}"
                    class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}</a></li>
             {{--<ul class="dropdown-menu dropdown-menu-right icons-right">--}}
             {{--<li><a href="{!! URL::to('/settings')!!}"><i--}}
@@ -54,19 +54,12 @@
 
                     @if (Auth::user()->isSuperAdmin())
 
-                        <li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/users') }}"><i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
+                        <li><a href="{{ URL::action('UserController@index') }} "><i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
                             </a></li>
                     @endif
-                    {{--<li><a href="{!! URL::to('tournaments')!!}"> <i--}}
-                                    {{--class="icon-trophy3"></i> {!! trans('core.admin_tournaments') !!}</a></li>--}}
-                    <li><a href="{!! URL::to('users/'.Auth::getUser()->slug).'/edit' !!}"><i
-                                    class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
-                    {{--<li><a href="index.html#"><i ></i> My profile</a></li>--}}
-                    {{--<li><a href="index.html#"><i class="icon-coins"></i> My balance</a></li>--}}
-                    {{--<li><a href="index.html#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>--}}
+                    <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
                     <li class="divider"></li>
-                    {{--<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>--}}
-                    <li><a href="{{ url('auth/logout') }}"><i class="icon-switch2"></i> {!! Lang::get('core.logout') !!}
+                    <li><a href="{{  URL::action('Auth\AuthController@getLogout') }}"><i class="icon-switch2"></i> {!! Lang::get('core.logout') !!}
                         </a></li>
 
                 </ul>

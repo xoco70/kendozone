@@ -29,7 +29,7 @@
                         ?>
                         <!-- TAB CATEGORIES DEFAULT SETTING -->
                         @if (is_null($categorySettings))
-                            {!! Form::open(["url" => "tournaments/categorySettings"]) !!}
+                            {!! Form::open(["route" => "tournaments.{tournamentId}.categorySettings.store"]) !!}
                         @else
                         {!! Form::model($categorySettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $categorySettings->id), 'method' => 'PATCH')) !!}
                         @endif

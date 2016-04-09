@@ -17,7 +17,8 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     @if ($tournament->venue != null)
         <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue }}<br/>
     @endif
-    <strong>{{trans('core.date')}}:</strong> {{ $tournament->date }}<br/>
+    <strong>{{trans('core.eventDateIni')}}:</strong> {{ $tournament->dateIni }}<br/>
+    <strong>{{trans('core.eventDateFin')}}:</strong> {{ $tournament->dateFin }}<br/>
     @if ($tournament->cost != null) <strong>{{trans('core.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
         <strong>{{trans('core.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
@@ -29,22 +30,22 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
-@endif
-{{--TODO Falta traducir--}}
-@if($password!=null)
-    <p>Tus datos de conexión son:</p>
-    Usuario : {{ $email  }}
-    Contraseña: {{ $password }}
+    <a href='{{ URL::action('InviteController@register', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}'>{{ URL::action('InviteController@register', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}</a>
 @endif
 
-<p>No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo
+@if($password!=null)
+    <p>{{trans('mail.your_connection_data')}}:</p>
+    {{ trans('core.username') }}: {{ $email  }}
+    {{ trans('core.password') }}: {{ $password }}
+@endif
+
+<p>{{trans('mail.dont_forget_to_pay')}}
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
-        antes del dia {{ $tournament->registerDateLimit }}.</p>
+        {{trans('mail.before_day')}} {{ $tournament->registerDateLimit }}.</p>
     @endif
 
-<p>Gracias</p>
+<p>{{trans('core.thanks')}}</p>
 
-<p align="right">{{ $tournament->owner->name  }}</p>
+<p>{{ $tournament->owner->name  }}</p>
 </body>
 </html>

@@ -3,6 +3,7 @@
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AuthTest extends TestCase
 {

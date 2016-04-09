@@ -28,6 +28,7 @@ return [
 
     //Common
     'preview' => ' Preview',
+    'thanks' => ' Thanks',
 
 
     //Tournament
@@ -132,6 +133,7 @@ return [
     'conewpassword' => 'Confirm new password',
     'without_grade' => 'No grade',
     'left_password_blank' => 'If you don\'t want to change password... please leave them empty',
+    'remove' => 'Remove',
 
 
 
@@ -157,7 +159,7 @@ return [
     'send_invites' => 'Send Invites',
     'invite_with_link' => 'Invite competitors with that link',
     'no_tournament_registered_yet' => 'Not registered in any tournament yet',
-
+    'no_invitation_yet' => 'You have not been invited to any tournament yet',
 
     'confirmed' => 'Confirmed',
     'used' => 'Used',
@@ -165,6 +167,7 @@ return [
     'latest_competitors' => 'Latest Competitors',
     'organizer' => 'Organizer',
     'select_categories_to_register' => 'Select categories to register',
+
 //    'tournament_categories_available' => 'Categorias del torneo',
 
 

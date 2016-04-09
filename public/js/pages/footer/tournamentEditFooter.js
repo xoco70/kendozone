@@ -59,8 +59,8 @@ $(function () {
         var dataId = $(this).data('id');
         var name = $('#name');
 
-
-        if (!name.val() || name.length <6) {
+        
+        if (name.val() =='' || name.val().length <6) {
             name.closest('div').addClass('has-error');
         } else {
             name.closest('div').removeClass('has-error').addClass('has-success');

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
+use URL;
 
 class InviteController extends Controller
 {
@@ -162,7 +163,7 @@ class InviteController extends Controller
 
         if (isset($invite)) $invite->consume();
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' =>$tournament->name]));
-        return redirect("/invites");
+        return redirect(URL::action('InviteController@index'));
 
     }
 
@@ -192,7 +193,8 @@ class InviteController extends Controller
 
         }
         flash()->success(trans('msg.invitation_sent'));
-        return redirect("tournaments/$tournament->slug/edit");
+
+        return redirect(URL::action('TournamentController@edit', $tournament->slug));
 
 
 //        dd($recipients);
