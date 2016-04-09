@@ -102,7 +102,7 @@ $currency = Auth::user()->country->currency_code;
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('core.enchoQty')) !!}
                 {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
-                <small class="display-block">0 para infinito</small>
+                <small class="display-block">{{ trans('core.encho_infinite') }}</small>
             </div>
         </div>
         <div class="col-md-3">

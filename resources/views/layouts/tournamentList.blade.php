@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 col-lg-8 col-lg-offset-2">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
             <div class="panel panel-flat">
 
                 <div class="panel-body">
@@ -11,17 +11,17 @@
                             @if ($title == trans('core.tournaments_registered'))
                                 <?php
                                 $noItemYet = trans('core.no_tournament_registered_yet');
-                                $link = URL::action('TournamentController@create');
+                                $link = '#';
                                 $linkLabel = trans('core.createTournament');
-                                $printLink = true;
+                                $printLink = false;
                                 ?>
 
                             @elseif ($title == trans('core.tournaments_created'))
                                 <?php
                                 $noItemYet = trans('core.no_tournament_created_yet');
-                                $link = '#'; //URL::action('TournamentController@joinOpenTournament') ;
-                                $linkLabel = trans('core.join_tournament');
-                                $printLink = false;
+                                $link = URL::action('TournamentController@create');
+                                $linkLabel = trans('core.createTournament');
+                                $printLink = true;
                                 ?>
 
                             @elseif ($title == trans('core.tournaments_deleted'))
@@ -40,11 +40,13 @@
 
                             <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ $noItemYet }}</div>
                             @if ($printLink == true)
-                                <div class="text-center pb-20">
+
+                                <div align="center">
                                     <a href="{!! $link !!}" type="button"
-                                       class="btn border-primary btn-flat text-primary text-uppercase p-10 ">{{ $linkLabel }}
+                                       class="btn btn-primary text-uppercase p-10  ">{{ $linkLabel }}
                                     </a>
                                 </div>
+
                             @endif
 
 

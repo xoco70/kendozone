@@ -36,8 +36,8 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL('es', LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/mx.png" alt=""> Español</a></li>
-                    <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL('en', LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/gb.png" alt=""> English</a></li>
+                    <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('es'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/mx.png" alt=""> Español</a></li>
+                    <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('en'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/gb.png" alt=""> English</a></li>
                 </ul>
             </li>
 
@@ -53,7 +53,8 @@
                 <ul class="dropdown-menu dropdown-menu-right">
 
                     @if (Auth::user()->isSuperAdmin())
-                        <li><a href="{!! URL::to('users')!!}"><i class="icon-users"></i> {!! Lang::get('core.users') !!}
+
+                        <li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/users') }}"><i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
                             </a></li>
                     @endif
                     {{--<li><a href="{!! URL::to('tournaments')!!}"> <i--}}

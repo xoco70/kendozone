@@ -367,7 +367,7 @@ $day = $now->day;
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ url('/tournaments/') }}";
+        var url_base = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),'/tournaments/') }}";
         var url_edit = url_base + '/' + "{{$tournament->slug}}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";

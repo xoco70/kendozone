@@ -16,7 +16,7 @@
             //                dd($categoryTournamentId);
             $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
             ?>
-            {!! Form::open(['url'=>"tournaments/$tournament->slug/users/"]) !!}
+            {!! Form::open(['url'=>LaravelLocalization::getLocalizedURL (LaravelLocalization::getCurrentLocale(),"tournaments/$tournament->slug/users/")]) !!}
 
 
             <div class="container-fluid">

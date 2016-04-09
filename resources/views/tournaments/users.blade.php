@@ -159,7 +159,8 @@ else
 @stop
 @section("scripts_footer")
     <script>
-        var url = "{{ url("/tournaments/".$tournament->slug) }}";
+        var url = "{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),"/tournaments/".$tournament->slug) }}";
+
         var tournamentSlug = "{{ $tournament->slug }}";
     </script>
     {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}

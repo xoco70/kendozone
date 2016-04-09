@@ -30,8 +30,10 @@
                   $userPic = Auth::user()->avatar;
             ?>
         @else
-            {!! Form::open(['url'=>"users",
-                            'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['url'=> LaravelLocalization::getLocalizedURL (LaravelLocalization::getCurrentLocale(),"tournaments")]) !!}
+
+        {!! Form::open(['url'=>LaravelLocalization::getLocalizedURL (LaravelLocalization::getCurrentLocale(),"users"),
+                        'enctype' => 'multipart/form-data']) !!}
             <?php $disabled = "";
                   $userPic='';
             ?>
@@ -230,7 +232,8 @@
 
                 var initialPic = "{{ $user->avatar }}";
                 var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
-                var uploadUrl = "{{ url('users/'.Auth::user()->slug.'/uploadAvatar') }}";
+
+                var uploadUrl = "{{ LaravelLocalization::getLocalizedURL (LaravelLocalization::getCurrentLocale(),'users/'.Auth::user()->slug.'/uploadAvatar') }}";
                 var avatarHiddenField = $('input[name=avatar]');
 
                 new Dropzone('#fileInput', {
