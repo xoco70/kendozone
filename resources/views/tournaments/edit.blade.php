@@ -337,7 +337,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="col-md-12">
                                         <h2 class="form-group text-center">
                                             <br/>
-                                            {{ URL::action('URL::action(‘TournamentController@edit') }}
+                                            {{ URL::action('TournamentController@edit',$tournament->slug) }}
                                         </h2>
 
                                     </div>
