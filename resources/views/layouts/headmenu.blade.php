@@ -25,9 +25,9 @@
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
                     @if (LaravelLocalization::getCurrentLocale() =='en')
-                        <img src="/images/flags/gb.png" class="position-left" alt="">
+                        <img src="/images/flags/GB.png" class="position-left" alt="">
                     @elseif (LaravelLocalization::getCurrentLocale() =='es')
-                        <img src="/images/flags/mx.png" class="position-left" alt="">
+                        <img src="/images/flags/MX.png" class="position-left" alt="">
                     @else
                         <img src="/images/flags/{{LaravelLocalization::getCurrentLocale()}}.png" class="position-left" alt="">
                     @endif
@@ -37,7 +37,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('es'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/MX.png" alt=""> Español</a></li>
-                    <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('en'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/gb.png" alt=""> English</a></li>
+                    <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('en'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/GB.png" alt=""> English</a></li>
                 </ul>
             </li>
 
