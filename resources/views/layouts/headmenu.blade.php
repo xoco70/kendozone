@@ -36,7 +36,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('es'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/mx.png" alt=""> Español</a></li>
+                    <li><a class="mexico" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('es'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/MX.png" alt=""> Español</a></li>
                     <li><a class="english" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::setLocale('en'), LaravelLocalization::getNonLocalizedURL(Request::url())) }}"><img src="/images/flags/gb.png" alt=""> English</a></li>
                 </ul>
             </li>
