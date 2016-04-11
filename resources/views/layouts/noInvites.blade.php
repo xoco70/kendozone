@@ -1,21 +1,12 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row text-center">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-            <div class="panel panel-flat">
+            <br/><br/><br/><br/><br/><br/>
 
-                <div class="panel-body">
-                    <div class="container-fluid">
+            <h1 class="no-margin text-semibold">{{ trans_choice('core.invitation',2) }}</h1>
 
+            <p class="text-muted text-size-large mt-20">{{ trans('core.no_invitation_yet') }}</p>
 
-                        <fieldset title="{{ trans_choice('core.invitation',2) }}">
-                            <legend class="text-semibold">{{ trans_choice('core.invitation',2) }}</legend>
-                        </fieldset>
-
-                        <div class="mt-20 mb-20 pt-20 pb-20 text-center">{{ trans('core.no_invitation_yet') }}</div>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
