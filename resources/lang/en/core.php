@@ -75,7 +75,7 @@ return [
     // Categories
     'category' => 'Category|Categories',
     'enchoQty' => 'How much Enchos?',
-    'encho_infinite' => '0 for infi nite',
+    'encho_infinite' => '0 for infinite',
     'enchoDuration' => '¿How long lasts each Encho?',
     'category_not_configured' => 'Category isn\'t configured yet',
     'add_category' => 'Add Category',

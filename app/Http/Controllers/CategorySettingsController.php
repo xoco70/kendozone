@@ -50,6 +50,7 @@ class CategorySettingsController extends Controller
             ->where('category_id', $categoryId)->first();
 
         $request->request->add(['category_tournament_id' => $categoryTournament->id]);
+
         if ($setting = CategorySettings::create($request->all())) {
             return Response::json(['settingId' =>$setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
         } else {

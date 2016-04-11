@@ -79,7 +79,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::delete('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
             Route::put('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/confirm', 'TournamentUserController@confirmUser');
             Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
-            Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
+            Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController',['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create','edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
             Route::resource('invites', 'InviteController',['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
             Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
             Route::resource('settings', 'SettingsController');

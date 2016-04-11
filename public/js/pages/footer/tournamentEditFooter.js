@@ -59,7 +59,7 @@ $(function () {
         var dataId = $(this).data('id');
         var name = $('#name');
 
-        
+
         if (name.val() =='' || name.val().length <6) {
             name.closest('div').addClass('has-error');
         } else {
@@ -157,11 +157,13 @@ $(function () {
     //EDIT CATEGORIES
     var categoriesSize = null;
 
-
+    // 'form_'.$tournament->slug.'_'.$categoryId.'_'.$setting->id
     $('.save_category').on('click', function (e) {
         e.preventDefault();
         var inputData = $('.save_category').serialize();
         var form = $(this).parents('form:first');
+        inputData = form.serialize();
+        console.log(inputData);
         var tournamentId = form.data('tournament');
         var categoryId = form.data('category');
         var settingId = form.data('setting');
@@ -180,7 +182,9 @@ $(function () {
         } else {
             method = 'PUT';
             url = url_base + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId;
+
         }
+        console.log(url);
         $.ajax(
             {
                 type: method,
