@@ -257,11 +257,15 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
                                     <?php
-
+                                    // Set defaults
                                     $setting = $tournament->categoryTournaments->get($key)->settings;
                                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+                                    $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration!="")
+                                            ? $setting->fightDuration
+                                            : Config::get('constants.CAT_FIGHT_DURATION');
+
 
                                     ?>
 

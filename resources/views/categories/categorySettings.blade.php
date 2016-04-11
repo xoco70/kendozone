@@ -53,7 +53,7 @@ $currency = Auth::user()->country->currency_code;
 
             {!!  Form::label('fightDuration', trans('core.fightDuration')) !!}
             <div class="input-group">
-                {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
+                {!!  Form::input('text','fightDuration',$fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
