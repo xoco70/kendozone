@@ -153,7 +153,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $fileName = Str::slug($fileName, '-') . "." . $ext;
 
             if (!$file->move($destinationPath, $fileName)) {
-                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
+                flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;
             } else {
                 $data['avatar'] = $fileName;

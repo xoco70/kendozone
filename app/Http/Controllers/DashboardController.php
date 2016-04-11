@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Session;
 
 class DashboardController extends Controller
 {

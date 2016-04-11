@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div class="row text-center">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-            <br/><br/><br/><br/><br/><br/>
-            @if (sizeof($tournaments) == 0)
 
+            @if (sizeof($tournaments) == 0)
+                <br/><br/><br/><br/><br/><br/>
                 @if ($title == trans('core.tournaments_registered'))
                     <?php
                     $noItemYet = trans('core.no_tournament_registered_yet');
