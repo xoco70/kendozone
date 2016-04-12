@@ -69,13 +69,13 @@ Breadcrumbs::register('users.create', function ($breadcrumbs) {
 });
 
 Breadcrumbs::register('users.show', function ($breadcrumbs, $user) {
-    $breadcrumbs->parent('tournaments');
-    $breadcrumbs->push(trans('core.invite_competitors'), route('users.show', $user->slug));
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push($user->email, route('users.show', $user->slug));
 });
 
 Breadcrumbs::register('users.tournaments', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans('core.tournaments_registered'), route('users.tournaments', $user->slug));
+    $breadcrumbs->push(trans('core.tournaments_registered'), route('users.show', $user->slug));
 
 
 });

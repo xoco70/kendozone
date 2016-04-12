@@ -67,7 +67,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('categories', 'CategoryController');
             Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
-            Route::resource('users', 'UserController',['names' => ['index' => 'users.index', 'create' => 'users.create','edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);
+            Route::resource('users', 'UserController',['names' => ['index' => 'users.index', 'create' => 'users.create','show' => 'users.show','edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);
             Route::get('users/{user}/tournaments', [
                 'uses' => 'UserController@getMyTournaments',
                 'as' => 'users.tournaments'

@@ -7,8 +7,7 @@
         {{ "ok" }}
         {!! Breadcrumbs::render('tournaments.users.show',$tournament, $user) !!}
     @else
-        {{--{!! Breadcrumbs::render('users.show',$user) !!}--}}
-        {{--TODO Put Breadcrumbs here--}}
+        {!! Breadcrumbs::render('users.show',$user) !!}
     @endif
 @stop
 @section('content')
