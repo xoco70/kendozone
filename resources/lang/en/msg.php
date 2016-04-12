@@ -25,19 +25,19 @@ return [
 
 
     // Usuario
-    'user_create_successful' => 'User <b>:name</b><br/> created',
-    'user_update_successful' => 'User <b>:name</b><br/> updated',
-    'user_delete_successful' => 'User <b>:name</b><br/> deleted',
-    'user_restore_successful' => 'User <b>:name</b><br/> restored',
-    'user_registered_successful' => 'User <b>:name</b><br/> were added to tournament :tournament',
+    'user_create_successful' => 'User <br/> created',
+    'user_update_successful' => 'User <br/> updated',
+    'user_delete_successful' => 'User <br/> deleted',
+    'user_restore_successful' => 'User <br/> restored',
+    'user_registered_successful' => 'User <br/> were added to tournament :tournament',
 
     'user_create_error' => 'Oooops! Error creating User',
     'user_update_error' => 'Oooops! Error updating User',
-    'user_delete_error' => 'Error deleting User  :name',
-    'user_restore_error' => 'Error restoring User :name',
-    'user_registered_error' => 'Error registering User :name',
+    'user_delete_error' => 'Error deleting User',
+    'user_restore_error' => 'Error restoring User',
+    'user_registered_error' => 'Error registering User',
 
-    'user_status_successful' => ':name : Status updated',
+    'user_status_successful' => 'Status updated',
     'user_status_error' => 'Error updating :name',
 
 

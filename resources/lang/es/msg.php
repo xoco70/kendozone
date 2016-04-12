@@ -25,19 +25,19 @@ return [
 
 
     // Usuario
-    'user_create_successful' => 'El usuario <b>:name</b><br/> se creó',
-    'user_update_successful' => 'El usuario <b>:name</b><br/> se actualizó',
-    'user_delete_successful' => 'El usuario <b>:name</b><br/> se borró',
-    'user_restore_successful' => 'El usuario <b>:name</b><br/> se restauró',
-    'user_registered_successful' => 'El usuario <b>:name</b><br/> se agregó al torneo :tournament',
+    'user_create_successful' => 'El usuario <br/> se creó',
+    'user_update_successful' => 'El usuario <br/> se actualizó',
+    'user_delete_successful' => 'El usuario <br/> se borró',
+    'user_restore_successful' => 'El usuario <br/> se restauró',
+    'user_registered_successful' => 'El usuario <br/> se agregó al torneo :tournament',
 
     'user_create_error' => 'Hubo un problema al crear el usuario',
     'user_update_error' => 'Hubo un problema al editar el usuario',
-    'user_delete_error' => 'Hubo un problema al borrar el usuario :name',
-    'user_restore_error' => 'Hubo un problema al restaurar el usuario :name',
-    'user_registered_error' => 'Hubo un problema al restaurar el usuario :name',
+    'user_delete_error' => 'Hubo un problema al borrar el usuario',
+    'user_restore_error' => 'Hubo un problema al restaurar el usuario',
+    'user_registered_error' => 'Hubo un problema al restaurar el usuario',
 
-    'user_status_successful' => ':name : Estatus actualizado',
+    'user_status_successful' => 'Estatus actualizado',
     'user_status_error' => 'Hubo un error al actualizar :name',
 
 

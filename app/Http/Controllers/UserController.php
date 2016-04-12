@@ -99,9 +99,9 @@ class UserController extends Controller
 //        $user->avatar = $fileName;
 
         if (User::create($data)) {
-            flash()->success(trans('msg.user_create_successful', ['name' => $data['name']]));
+            flash()->success(trans('msg.user_create_successful'));
         } else
-            flash()->error(trans('msg.user_create_successful', ['name' => $data['name']]));
+            flash()->error(trans('msg.user_create_successful'));
         return redirect(URL::action('UserController@index'));
     }
 
@@ -163,7 +163,7 @@ class UserController extends Controller
 
 
         if ($user->update($req)) {
-            flash()->success(trans('msg.user_update_successful', ['name' => $user->name]));
+            flash()->success(trans('msg.user_update_successful'));
         } else
             flash()->success(Lang::get('msg.user_update_error'));
 
@@ -240,9 +240,9 @@ class UserController extends Controller
     {
 
         if ($user->delete()) {
-            return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_delete_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_delete_error'), 'status' => 'error']);
         }
     }
 
@@ -251,9 +251,9 @@ class UserController extends Controller
     {
         $user = User::withTrashed()->whereSlug($userSlug)->first();
         if ($user->restore()) {
-            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'error']);
         }
     }
 

@@ -105,7 +105,7 @@ class TournamentUserController extends Controller
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
 
-        flash()->success(trans('msg.user_registered_successful',['name' => $user->name, 'tournament' => $tournament->name]));
+        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
         return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 
 
@@ -119,9 +119,9 @@ class TournamentUserController extends Controller
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
         if ($ctu->save()){
-            return Response::json(['msg' => trans('msg.user_status_successful', ['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_status_successful'), 'status' => 'success']);
         }else{
-            return Response::json(['msg' => trans('msg.user_status_error', ['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_status_error'), 'status' => 'error']);
         }
 
     }
@@ -134,9 +134,9 @@ class TournamentUserController extends Controller
             ->where('user_id', $user->id);
 
         if ($ctu->forceDelete()) {
-            return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_delete_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_delete_error'), 'status' => 'error']);
         }
 //        flash()->success(trans('core.operation_successful'));
 //        return redirect("tournaments/$tournamentSlug/users");
