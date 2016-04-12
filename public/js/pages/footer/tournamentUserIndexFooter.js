@@ -16,6 +16,10 @@ $(function () {
         var $tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');
+        // var menuId = $('#menu'+categoryId).text();
+        // console.log(menuId);
+        // var categoriesSize = parseInt(menuId.text(), 10) + 1;
+        // console.log(categoriesSize);
 
         $.ajax(
             {
@@ -36,6 +40,8 @@ $(function () {
 
                         });
                         $tr.remove();
+                        // catsize.html(categoriesSize)
+
                     } else {
                         noty({
                             layout: 'bottomLeft',
