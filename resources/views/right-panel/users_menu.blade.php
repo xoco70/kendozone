@@ -24,7 +24,7 @@
                                         echo $name;
                                         ?>
 
-                                        <span  id="menu{{ $categoryTournament->category->id}}" class="label  label-striped">{{  sizeof($categoryTournament->users) }}</span>
+                                        <span  id="menu" data-id="{{ $categoryTournament->id}}" class="label  label-striped">{{  sizeof($categoryTournament->users) }}</span>
                                     </div>
                                 </a>
 

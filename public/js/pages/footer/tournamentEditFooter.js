@@ -75,7 +75,7 @@ $(function () {
                 url: url_edit,
                 data: inputData,
                 success: function (data) {
-                    console.log(data.msg);
+                    // console.log(data.msg);
                     if (data != null && data.status == 'success') {
                         noty({
                             layout: 'bottomLeft',
@@ -129,7 +129,7 @@ $(function () {
                 error: function (data) {
                     var json = data.responseText;
                     var obj = jQuery.parseJSON(json);
-                    console.log(obj);
+                    // console.log(obj);
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -163,7 +163,7 @@ $(function () {
         var inputData = $('.save_category').serialize();
         var form = $(this).parents('form:first');
         inputData = form.serialize();
-        console.log(inputData);
+        // console.log(inputData);
         var tournamentId = form.data('tournament');
         var categoryId = form.data('category');
         var settingId = form.data('setting');
@@ -184,7 +184,7 @@ $(function () {
             url = url_base + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId;
 
         }
-        console.log(url);
+        // console.log(url);
         $.ajax(
             {
                 type: method,

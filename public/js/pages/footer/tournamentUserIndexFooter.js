@@ -4,22 +4,23 @@ $(function () {
         e.preventDefault();
         var inputData = $('#formDeleteTCU').serialize();
         //var tournamentSlug      =   $(this).data('tournament');
-        var categoryId          =   $(this).data('category');
-        var userSlug            =   $(this).data('user');
+        var categoryId = $(this).data('category');
+        var userSlug = $(this).data('user');
 
 //                console.log(inputData);
 //        console.log(tournamentSlug);
 //        console.log(categoryId);
-        console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/delete');
+//         console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/delete');
 
 
         var $tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');
         // var menuId = $('#menu'+categoryId).text();
-        // console.log(menuId);
-        // var categoriesSize = parseInt(menuId.text(), 10) + 1;
-        // console.log(categoriesSize);
+        var menuId = $('#menu[data-id=' + categoryId + ']');
+        console.log(menuId);
+        var categoriesSize = parseInt(menuId.text(), 10) - 1;
+        menuId.html(categoriesSize);
 
         $.ajax(
             {
@@ -84,22 +85,22 @@ $(function () {
 
         var inputData = $('#formConfirmTCU').serialize();
         //var tournamentSlug      =   $(this).data('tournament');
-        var categoryId          =   $(this).data('category');
-        var userSlug            =   $(this).data('user');
+        var categoryId = $(this).data('category');
+        var userSlug = $(this).data('user');
 
 //                console.log(inputData);
 //        console.log(tournamentSlug);
-        console.log(inputData);
+//         console.log(inputData);
         console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm');
 
 
         var icon = $(this).find('i');
         //console.log(icon);
         var myclass = icon.attr('class')
-        console.log(myclass);
+        // console.log(myclass);
         icon.removeClass();
         icon.addClass('icon-spinner spinner');
-        var confirmId = 'confirm_'+tournamentSlug+'_'+categoryId+'_'+userSlug;
+        var confirmId = 'confirm_' + tournamentSlug + '_' + categoryId + '_' + userSlug;
 
         $.ajax(
             {
@@ -119,12 +120,12 @@ $(function () {
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                         });
-                        $('#'+confirmId).prop("disabled", false);
-                        $('#'+confirmId).find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
-                        $('#'+confirmId).find('i').toggleClass("text-danger text-success");
-                        $('#'+confirmId).find('i').toggleClass("glyphicon-ok-sign glyphicon-remove-sign");
+                        $('#' + confirmId).prop("disabled", false);
+                        $('#' + confirmId).find('i').removeClass('icon-spinner spinner position-left').addClass(myclass);
+                        $('#' + confirmId).find('i').toggleClass("text-danger text-success");
+                        $('#' + confirmId).find('i').toggleClass("glyphicon-ok-sign glyphicon-remove-sign");
                     } else {
-                        console.log(data);
+                        // console.log(data);
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -164,7 +165,6 @@ $(function () {
 
 
 });
-
 
 
 // Setting datatable defaults
