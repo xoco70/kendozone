@@ -16,8 +16,8 @@ $(function () {
         var $tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');
-        // var menuId = $('#menu'+categoryId).text();
-        var menuId = $('#menu[data-id=' + categoryId + ']');
+
+        var menuId = $('.menu[data-id=' + categoryId + ']');
         console.log(menuId);
         var categoriesSize = parseInt(menuId.text(), 10) - 1;
         menuId.html(categoriesSize);
