@@ -70,7 +70,7 @@ Breadcrumbs::register('users.create', function ($breadcrumbs) {
 
 Breadcrumbs::register('users.show', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push($user->email, route('users.show', $user->slug));
+    $breadcrumbs->push(trans_choice('core.user',1), route('users.show', $user->slug));
 });
 
 Breadcrumbs::register('users.tournaments', function ($breadcrumbs, $user) {
