@@ -23,7 +23,8 @@ $(function () {
                     } else {
                         console.log(data);
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
@@ -40,7 +41,8 @@ $(function () {
                 error: function (data) {
                     console.log("error");
                     noty({
-                        layout: 'topRight',
+                        layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
@@ -91,7 +93,8 @@ $(function () {
                     } else {
                         console.log(data);
                         noty({
-                            layout: 'topRight',
+                            layout: 'bottomLeft',
+                            theme: 'kz',
                             type: 'error',
                             width: 200,
                             dismissQueue: true,
@@ -107,7 +110,8 @@ $(function () {
                 },
                 error: function (data) {
                     noty({
-                        layout: 'topRight',
+                        layout: 'bottomLeft',
+                        theme: 'kz',
                         type: 'error',
                         width: 200,
                         dismissQueue: true,
