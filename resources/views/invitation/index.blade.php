@@ -2,6 +2,11 @@
 @section('scripts')
     {!! Html::script('js/pages/header/invitationIndex.js') !!}
 @stop
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('invites.index') !!}
+
+@stop
+
 @section('content')
 
 
@@ -31,7 +36,7 @@
                         </thead>
                         @foreach($invites as $invite)
                             <tr>
-                                <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>sh
+                                <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->tournament->slug) !!}">{{ $invite->tournament->name }}</a></td>
                                 <td align="center">{{ $invite->tournament->owner->name }}</td>
                                 <td align="center">{{ $invite->tournament->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
                                 <td align="center">{!!  $invite->used ?

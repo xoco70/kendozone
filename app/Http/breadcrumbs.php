@@ -26,6 +26,12 @@ Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
     $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
 });
+// Home > Invites
+Breadcrumbs::register('invites.index', function ($breadcrumbs) {
+
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans_choice('core.invitation',2), route('invites.index'));
+});
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
