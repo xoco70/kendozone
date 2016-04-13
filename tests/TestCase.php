@@ -1,7 +1,5 @@
 <?php
 
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -26,7 +24,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         $this->baseUrl = env('APP_BASE', $this->baseUrl);
         $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
-//        $this->baseUrl .= LaravelLocalization::getCurrentLocale().'/';
+        $this->baseUrl .= App::getLocale()."/";
 
 
         return $app;

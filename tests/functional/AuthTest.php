@@ -3,11 +3,13 @@
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AuthTest extends TestCase
 {
     use DatabaseTransactions;
+//    use WithoutMiddleware;
 
 
     public function setUp()
@@ -25,9 +27,13 @@ class AuthTest extends TestCase
     /** @test */
     public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
     {
+
+
 //        $faker = Faker::create();
         // When we register...
-        $this->visit('/auth/register')
+        $this->visit('/');
+        dd(Request::url());
+        $this->click(trans('auth.signup'))
             ->type('JohnDoe', 'name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
