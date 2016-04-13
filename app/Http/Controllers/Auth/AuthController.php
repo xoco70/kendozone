@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App;
 use App\AuthenticateUser;
 use App\Grade;
 use App\Http\Controllers\Controller;
@@ -43,8 +44,7 @@ class AuthController extends Controller
      *
      * @return void
      */
-    private $redirectTo = '/admin';
-    private $redirectAfterLogout = '/auth/login';
+
 
 
     public function __construct(Socialite $socialite)
