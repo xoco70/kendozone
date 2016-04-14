@@ -1,7 +1,6 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRolesTables extends Migration
 {

@@ -1,10 +1,6 @@
 <?php
 
-use App\Permission;
-use App\Role;
-use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class PermissionRoleSeeder extends Seeder
 {

@@ -12,7 +12,7 @@
 
     <div class="container-fluid">
 
-            {!! Form::open(['url'=> URL::action('TournamentController@index') ]) !!}
+            {!! Form::open(['url'=> URL::action('TournamentController@store') ]) !!}
 
             @include("tournaments.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 

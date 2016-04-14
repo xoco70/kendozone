@@ -93,11 +93,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         parent::boot();
         static::creating(function ($user) {
-            $user->token = str_random(30);
-            $user->addGeoData();
-//            dd($user);
+            $softDeletedUser = User::onlyTrashed()->where('email', '=', $user->email)->first();
+            if ($softDeletedUser != null) {
+                $softDeletedUser->restore();
+                return false;
+            } else {
+                $user->token = str_random(30);
+                $user->addGeoData();
 
-
+            }
+            return true;
         });
 
         // If a User is deleted, you must delete:

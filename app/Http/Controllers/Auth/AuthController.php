@@ -25,6 +25,9 @@ use Webpatser\Countries\Countries;
 
 class AuthController extends Controller
 {
+    private $redirectTo = '/';
+    private $redirectAfterLogout = '/auth/login';
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller

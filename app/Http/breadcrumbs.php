@@ -46,10 +46,10 @@ Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tourna
     $breadcrumbs->push(trans_choice('core.competitor', 2), action('TournamentUserController@index', [$tournament->slug]));
 });
 
-// Home > Tournaments > MyTournament > Add Competitors  //TODO A Completar
+// Home > Tournaments > MyTournament > Add Competitors
 Breadcrumbs::register('tournaments.users.create', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.edit', $tournament);
-    $breadcrumbs->push(trans('core.add_competitor'), action('TournamentController@create', [$tournament->slug]));
+    $breadcrumbs->push(trans('core.add_competitor'), action('TournamentUserController@create', [$tournament->slug]));
 });
 
 // Home > Tournaments > MyTournament > show Competitor

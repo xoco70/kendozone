@@ -3,8 +3,8 @@
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+//use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AuthTest extends TestCase
 {
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
 //        $faker = Faker::create();
         // When we register...
         $this->visit('/');
-        dd(Request::url());
+//        dd(Request::url());
         $this->click(trans('auth.signup'))
             ->type('JohnDoe', 'name')
             ->type('john@example.com', 'email')
@@ -113,7 +113,7 @@ class AuthTest extends TestCase
             ->type($user->email, 'email')
             ->type('222222', 'password')
             ->press(Lang::get('auth.signin'))
-            ->seePageIs('/admin');
+            ->seePageIs('/');
 
 
     }

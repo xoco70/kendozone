@@ -7,7 +7,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://laravel.dev/';
+    protected $baseUrl = 'http://laravel.dev';
 
     /**
      * Creates the application.
@@ -23,8 +23,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 
         $this->baseUrl = env('APP_BASE', $this->baseUrl);
-        $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
-        $this->baseUrl .= App::getLocale()."/";
+//        $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
+//        $this->baseUrl .= App::getLocale()."/";
 
 
         return $app;

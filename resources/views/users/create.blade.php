@@ -1,15 +1,15 @@
-{{--@extends('layouts.dashboard')--}}
-{{--@section('content')--}}
+@extends('layouts.dashboard')
+@section('content')
 
-    {{--@include("errors.list")--}}
+    @include("errors.list")
 
-    {{--<div class="container">--}}
-        {{--<div class="row col-md-8 custyle">--}}
+    <div class="container">
+        <div class="row col-md-8 custyle">
 
-            {{--@include("users.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])--}}
-            {{----}}
-        {{--</div>--}}
-    {{--</div>--}}
+            @include("users.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 
-{{--@stop--}}
+        </div>
+    </div>
+
+@stop
 

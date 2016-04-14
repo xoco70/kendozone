@@ -1,6 +1,5 @@
 <?php
 
-use App\Grade;
 use App\TournamentLevel;
 use Illuminate\Database\Seeder;
 

@@ -245,21 +245,21 @@ class TournamentTest extends TestCase
     {
         $root =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $user =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-
+        $otherUser =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         Auth::loginUsingId($root->id);
 
-        $myTournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $root->id ]);
+        $myTournament = factory(Tournament::class)->create(['user_id' => $root->id ]);
 
         //add categories
 
         factory(CategoryTournament::class)->create(['tournament_id' => $myTournament->id]);
 
         $this->it_edit_tournament($myTournament); // it must be OK because tournament is mine
-        $hisTournament = factory(Tournament::class)->create(['name' => 't2', 'user_id' => 3]);
+        $hisTournament = factory(Tournament::class)->create(['user_id' => $user->id]);
         // 1 is SuperUser so it should be OK
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see($this->tournaments);
-        Auth::loginUsingId($user->id);
+        Auth::loginUsingId($otherUser->id);
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see("403");
     }
