@@ -16,7 +16,7 @@
             //                dd($categoryTournamentId);
             $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
             ?>
-            {!! Form::open(['action'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
+            {!! Form::open(['url'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
 
 
             <div class="container-fluid">

@@ -100,9 +100,9 @@ class UserTest extends TestCase
             ->select('111111', 'password_confirmation')
             ->attach($test_file_path, 'avatar')
 //            //File input avatar
-            ->press(Lang::get('core.save'))
+            ->press(trans('core.save'))
             ->seePageIs('/users')
-            ->see(Lang::get('core.success'))
+            ->see(trans('msg.user_create_successful'))
             ->seeInDatabase('users', ['name' => 'MyUser']);
 
         $user = User::where('name', 'MyUser')->first();

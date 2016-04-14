@@ -21,31 +21,30 @@ class TournamentUserTest extends TestCase
 {
     use DatabaseTransactions;
 
-//    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament;
+    protected $user, $users, $addUser, $editUser, $root, $simpleUser;
 
 
     public function setUp()
     {
         parent::setUp();
-        Auth::loginUsingId(1);
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        Auth::loginUsingId($this->root->id);
     }
 
     /** @test */
     public function it_add_a_user_to_tournament_category()
     {
         // Given
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
 
 
         $categoryTournaments = $tournament->categoryTournaments;
-//        dd($categoryTournaments);
         foreach ($categoryTournaments as $categoryTournament) {
-//            echo $categoryTournament->category->name;
+
             $this->visit('/tournaments/' . $tournament->slug . '/edit')
                 ->click(trans_choice('core.competitor', 2))
-//                ->dump();
                 ->click('addcompetitor' . $categoryTournament->id)
                 ->type('usertest', 'username')
                 ->type('usertest@gmail.com', 'email')
