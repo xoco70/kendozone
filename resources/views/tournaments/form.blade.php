@@ -49,17 +49,17 @@
 
                             <p>{{trans('core.select_categories_to_register')}}</p>
 
-                        <div class="form-group">
+                        <div class="form-group multiselect">
 
                             {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
                     </div>
                 </div>
-                {{--<div class="row text-uppercase">--}}
-                {{--<div class="col-md-6 col-md-offset-6 ">--}}
-                {{--<a href="{{URL::action('CategoryController@create')}}" class="text-black">+ Agregar otra categoria</a>--}}
-                {{--</div>--}}
-                {{--</div>--}}
+                <div class="row text-uppercase">
+                    <div class="col-md-6 col-md-offset-6 mb-20">
+                        <a href="{{URL::action('CategoryController@create')}}" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
+                    </div>
+                </div>
                 <div class=" text-right mt-15">
                     {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
                 </div>

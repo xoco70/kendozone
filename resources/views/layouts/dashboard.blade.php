@@ -22,7 +22,7 @@
 
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs  has-detached-right navbar-top">
+<body class="sidebar-xs  has-detached-right navbar-top" >
 @if (Auth::check())
 @include('layouts.headmenu')
 @endif

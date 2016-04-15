@@ -185,3 +185,7 @@ fieldset > a > legend {
 .language-switch {
     margin-top: 10px;
 }
+
+.form-group.multiselect {
+    margin-bottom: -20px;
+}

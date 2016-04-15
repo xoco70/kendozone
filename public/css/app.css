@@ -35224,6 +35224,10 @@ fieldset > a > legend {
 .language-switch {
   margin-top: 10px;
 }
+
+.form-group.multiselect {
+  margin-bottom: -20px;
+}
 body .protip-container.protip-mixin--css-no-transition {
   transition: all 0s;
 }

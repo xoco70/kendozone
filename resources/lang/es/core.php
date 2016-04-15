@@ -71,8 +71,7 @@ return [
     'competitors_register' => 'Registro de competidores',
     'configure' => 'Configurar',
     'configured' => 'Configurada',
-
-
+    'add_custom_category' => 'Agregar una categoría',
 
 
     // Categories

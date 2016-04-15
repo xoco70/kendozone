@@ -12,7 +12,7 @@
 
                 <div class="row">
                     <div class="col-md-10">
-                        <div class=" form-group">
+                        <div class=" form-gro2up">
                             {!!  Form::label('name', trans('core.name')) !!}
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                         </div>
@@ -65,6 +65,3 @@
 
     </div>
 </div>
-@section('scripts_footer')
-    {!! Html::script('js/pages/footer/categoryCreateFooter.js') !!}
-@stop
