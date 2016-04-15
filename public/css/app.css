@@ -35228,6 +35228,10 @@ fieldset > a > legend {
 .form-group.multiselect {
   margin-bottom: -20px;
 }
+
+.border-solid {
+  border-style: solid;
+}
 body .protip-container.protip-mixin--css-no-transition {
   transition: all 0s;
 }

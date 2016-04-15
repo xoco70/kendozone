@@ -189,3 +189,6 @@ fieldset > a > legend {
 .form-group.multiselect {
     margin-bottom: -20px;
 }
+.border-solid{
+    border-style: solid;
+}

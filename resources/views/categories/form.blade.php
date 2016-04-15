@@ -12,9 +12,10 @@
 
                 <div class="row">
                     <div class="col-md-10">
-                        <div class=" form-gro2up">
-                            {!!  Form::label('name', trans('core.name')) !!}
-                            {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                        <div class=" form-group border-grey-700">
+                            {!!  Form::label('name') !!}
+                            <p class="full-width border-lg p-20 border-grey-300 border-solid text-size-large">@{{ categoryName }} </p>
+
                         </div>
                     </div>
                 </div>
@@ -35,10 +36,10 @@
                     </div>
                     <div class="col-md-4">
                         {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('teamSize', ['M'=> trans('core.male') ,
+                        {!!  Form::select('genger', ['M'=> trans('core.male') ,
                                                        'F'=> trans('core.female') ,
                                                        'X'=> trans('core.mixt') , ],
-                                           old('teamsize'), ['class' => 'form-control']) !!}
+                                           old('gender'), ['class' => 'form-control','v-on:change'=> "getCategoryName","v-model"=>"gender"]) !!}
 
                     </div>
                     <div class="col-md-4">
@@ -48,7 +49,7 @@
                                                        '2'=> trans('core.teenagers') ,
                                                        '3'=> trans('core.adults') ,
                                                        '4'=> trans('core.masters')],
-                                           old('ageCategory'), ['class' => 'form-control']) !!}
+                                           old('ageCategory'), ['class' => 'form-control','v-on:change'=> "getCategoryName","v-model"=>"ageCategory"]) !!}
 
                     </div>
 
