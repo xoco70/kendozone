@@ -90,6 +90,7 @@ return [
     'teenagers' => 'Teenagers',
     'adults' => 'Adults',
     'masters' => 'Masters',
+    'custom' => 'Custom',
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',

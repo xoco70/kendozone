@@ -91,6 +91,7 @@ return [
     'teenagers' => 'Adolescentes',
     'adults' => 'Adultos',
     'masters' => 'Masters',
+    'custom' => 'Personalizado',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',
