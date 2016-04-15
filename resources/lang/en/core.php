@@ -70,6 +70,7 @@ return [
     'to' => 'To',
     'competitors_register' => 'Competitors registration',
     'configure' => 'Configure',
+    'add_custom_category' => 'Add custom category',
 
 
     // Categories
