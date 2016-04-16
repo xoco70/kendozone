@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CategoryTournament;
+use App\Grade;
 use App\Http\Requests;
 use App\Http\Requests\CategoryRequest;
 
@@ -39,7 +40,13 @@ class CategoryController extends Controller
     public function create()
     {
         $currentModelName = trans_choice('core.category', 1);
-        return view('categories.create', compact('currentModelName'));
+
+
+        $grades = Grade::orderBy('order', 'asc')->lists('name', 'id');
+
+
+
+        return view('categories.create', compact('currentModelName', 'grades'));
     }
 
     /**

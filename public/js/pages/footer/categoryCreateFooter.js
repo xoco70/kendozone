@@ -1,5 +1,5 @@
 $(function () {
 
-    $(".switch").bootstrapSwitch();
-
+    // $(".switch").bootstrapSwitch();
+    $('input').iCheck();
 });

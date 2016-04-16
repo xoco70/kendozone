@@ -9,8 +9,24 @@ new Vue({
     data: {
         isTeam: 1,
         categoryName: 'Individual Varonil init',
-        gender: 'M',
+        gender: 'X',
         ageCategory: 0,
+        genderValues: [
+            'core.no_age',
+            'core.children',
+            'core.teenagers',
+            'core.adults',
+            'core.masters',
+            'core.custom'
+        ],
+        ageValues: [
+            'core.no_age',
+            'core.children',
+            'core.teenagers',
+            'core.adults',
+            'core.masters',
+            'core.custom'
+        ],
         ageIni: '0',
         ageFin: '0'
     },
@@ -21,40 +37,49 @@ new Vue({
             var isTeam = this.isTeam;
             var gender = this.gender;
 
-            var ageCategory = this.ageCategory;
             var ageIni = this.ageIni;
             var ageFin = this.ageFin;
+            var $ageCategorySelect = this.$els.ageCategory;
+            var ageCategoryOption = $ageCategorySelect.options[$ageCategorySelect.selectedIndex];
+            var ageCategoryName = ageCategoryOption.text;
 
-            return this.categoryName;
+            console.log(isTeam);
+            console.log(gender);
+            console.log(isTeam);
+
+            return this.categoryName; // this.categoryName
         }
     },
     methods: {
-        getCategoryName: function () {
+        getCategoryName: function getCategoryName() {
             // Get fields value
             var isTeam = this.isTeam;
             var gender = this.gender;
             var ageCategory = this.ageCategory;
             var categoryBaseName = '';
 
-
             // Get Data and Display it
             if (ageCategory >= 4) {
-                $.getJSON('/api/v1/category/' + isTeam + '/' + gender + '/' + ageCategory, function (data) {
+                $.getJSON('/api/v1/category/' + isTeam + '/' + gender + '/' + ageCategory, (function (data) {
                     // console.log( data.name);
-                    categoryName = data.name;
-                }.bind(this));
+                    this.categoryName = data.name;
+                }).bind(this));
             }
-
-
         },
-        calculateCategoryName: function () {
+        calculateCategoryName: function calculateCategoryName() {
             var isTeam = this.isTeam;
             var gender = this.gender;
 
             var ageCategory = this.ageCategory;
             var ageIni = this.ageIni;
             var ageFin = this.ageFin;
-            // console.log(ageCategory);
+
+            var $ageCategorySelect = this.$els.ageCategory;
+            var ageCategoryOption = $ageCategorySelect.options[$ageCategorySelect.selectedIndex];
+            var ageCategoryName = ageCategoryOption.text;
+
+            console.log(ageCategoryName);
+
             // if (ageCategory < 4) {
             //     this.categoryName = ageCategory.value + this.categoryName;
             // }
