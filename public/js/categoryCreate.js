@@ -10018,11 +10018,11 @@ setTimeout(function () {
 module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],3:[function(require,module,exports){
+'use strict';
+
 /**
  * Created by julien on 14/04/16.
  */
-'use strict';
-
 var Vue = require('vue');
 
 new Vue({
@@ -10039,6 +10039,13 @@ new Vue({
     computed: {
         categoryFullName: function categoryFullName() {
 
+            var isTeam = this.isTeam;
+            var gender = this.gender;
+
+            var ageCategory = this.ageCategory;
+            var ageIni = this.ageIni;
+            var ageFin = this.ageFin;
+
             return this.categoryName;
         }
     },
@@ -10052,10 +10059,10 @@ new Vue({
 
             // Get Data and Display it
             if (ageCategory >= 4) {
-                $.getJSON('/api/v1/category/' + isTeam + '/' + gender + '/' + ageCategory, (function (data) {
+                $.getJSON('/api/v1/category/' + isTeam + '/' + gender + '/' + ageCategory, function (data) {
                     // console.log( data.name);
                     categoryName = data.name;
-                }).bind(this));
+                }.bind(this));
             }
         },
         calculateCategoryName: function calculateCategoryName() {
@@ -10065,11 +10072,16 @@ new Vue({
             var ageCategory = this.ageCategory;
             var ageIni = this.ageIni;
             var ageFin = this.ageFin;
-            console.log(ageCategory);
-            if (ageCategory < 4) {
-                this.categoryName = ageCategory.value + this.categoryName;
-            }
-            if (ageIni == 0) this.categoryName += ' - Max Age:' + ageFin;else if (ageFin == 0) this.categoryName += ' - Min Age:' + ageIni;else if (ageIni != 0 && ageFin != 0) this.categoryName += ' - Age:' + ageIni + ' - ' + ageFin;
+            // console.log(ageCategory);
+            // if (ageCategory < 4) {
+            //     this.categoryName = ageCategory.value + this.categoryName;
+            // }
+            // if (ageIni == 0)
+            //     this.categoryName += ' - Max Age:' + ageFin;
+            // else if (ageFin == 0)
+            //     this.categoryName += ' - Min Age:' + ageIni;
+            // else if (ageIni != 0 && ageFin != 0)
+            //     this.categoryName += ' - Age:' + ageIni + ' - ' + ageFin;
         }
     }
 });
