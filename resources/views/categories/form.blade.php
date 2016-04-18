@@ -29,12 +29,7 @@
                             {!!     Form::label('isTeam', trans('core.isTeam'),['class' => 'text-bold' ])  !!}
                             <br/>
 
-                            <div class="checkbox-switch">
-                                <label>
-                                    {!!     Form::hidden('isTeam', 0) !!}
-                                    {!!       Form::checkbox('isTeam', 1, null, ["v-model"=>"isTeam",'v-on:change'=> "getCategoryName", 'class' => 'switch', 'data-on-text'=>trans('core.yes'), 'data-off-text'=>trans('core.no')]) !!}
-                                </label>
-                            </div>
+
                         </div>
 
                     </div>
@@ -55,7 +50,8 @@
                     <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('ageCategory', trans('core.ageCategory'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageCategory" class="form-control" @change="calculateCategoryName" v-el:age-category>
+                            <select v-model="ageCategory" class="form-control" @change="calculateCategoryName"
+                            v-el:age-category>
                             <option value="0">{{trans('core.no_age')}}</option>
                             <option value="1">{{trans('core.children')}}</option>
                             <option value="2">{{trans('core.teenagers')}}</option>
@@ -81,7 +77,8 @@
                     <div class="col-md-2">
                         <div class=" form-group">
                             {!!  Form::label('ageFin', trans('core.to'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageFin" class="form-control" @change="calculateCategoryName" :disabled="ageCategory!=5">
+                            <select v-model="ageFin" class="form-control" @change="calculateCategoryName" :disabled="
+                            ageCategory!=5">
                             <option value="0">No age limit</option>
                             <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
 
@@ -90,39 +87,43 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('grade', trans('core.grade'),['class' => 'text-bold' ]) !!}
-                            <select v-model="grade" class="form-control" @change="calculateCategoryName" v-el:grade>
-                            <option v-for="gradeValue in gra                                            es" :gradeValues="{{ $grades }}">@{{ gradeValue }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class=" form-group">
-                            {!!  Form::label('ageIni', trans('core.from'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageIni" class="form-control" @change="calculateCategoryName"
-                            :disabled="ageCategory!=5">
-                            <option value="0">No age limit</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-
-                            </select>
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class=" form-group">
-                            {!!  Form::label('ageFin', trans('core.to'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageFin" class="form-control" @change="calculateCategoryName" :disabled="ageCategory!=5">
-                            <option value="0">No age limit</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-
-                            </select>
+                            <select v-model="grade" class="form-control">
+                            @foreach ($grades as $grade)
+                                <option :grade="{{ $grade }}">{{ $grade }}</option>
+                            @endforeach
+                            {{--<option v-for="gradeValue in gradeValues"--}}
+                                    {{--:gradeValues="{{ $grades }}">@{{ gradeValue }}</option>--}}
+                            {{--</select>--}}
                         </div>
                     </div>
                 </div>
+                {{--<div class="col-md-2">--}}
+                {{--<div class=" form-group">--}}
+                {{--{!!  Form::label('ageIni', trans('core.from'),['class' => 'text-bold' ]) !!}--}}
+                {{--<select v-model="ageIni" class="form-control" @change="calculateCategoryName"--}}
+                {{--:disabled="ageCategory!=5">--}}
+                {{--<option value="0">No age limit</option>--}}
+                {{--<option :value="n+6" v-for="n in 85">@{{n+6}}</option>--}}
+
+                {{--</select>--}}
+
+
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-2">--}}
+                {{--<div class=" form-group">--}}
+                {{--{!!  Form::label('ageFin', trans('core.to'),['class' => 'text-bold' ]) !!}--}}
+                {{--<select v-model="ageFin" class="form-control" @change="calculateCategoryName" :disabled="ageCategory!=5">--}}
+                {{--<option value="0">No age limit</option>--}}
+                {{--<option :value="n+6" v-for="n in 85">@{{n+6}}</option>--}}
+
+                {{--</select>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
 
                 <div class=" text-right mt-20 pt-20">
