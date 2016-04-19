@@ -1,5 +1,8 @@
 $(function () {
 
     // $(".switch").bootstrapSwitch();
-    $('input').iCheck();
+    // $('input').iCheck({
+    //     labelHover: false,
+    //     cursor: true
+    // });
 });

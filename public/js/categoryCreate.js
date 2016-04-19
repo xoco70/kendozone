@@ -10018,25 +10018,34 @@ setTimeout(function () {
 module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],3:[function(require,module,exports){
-/**
- * Created by julien on 14/04/16.
- */
 'use strict';
 
-    var Vue = require('vue');
+var Vue = require('vue');
 
-    new Vue({
-        el: '#create_category',
-        data: {
-            grades:grades,
-            gradeSelect:0,
-            categoryFullName:'',
-            gender:'X',
-            ageCategory:0
+new Vue({
+    el: 'body',
+    data: {
+        isTeam : 0,
+        gender: 'M',
+        ageCategorySelect : 0,
+        ageMin:0,
+        ageMax:0,
+        grades: grades,
+        gradeSelect: 0,
+        gradeMin:0,
+        gradeMax:0,
+
+        categoryFullName: 'Individual Men',
+
+
+    },
+    methods: {
+        setVars: function () {
+            
+
         }
-
-    });
-
+    }
+});
 
 },{"vue":2}]},{},[3]);
 

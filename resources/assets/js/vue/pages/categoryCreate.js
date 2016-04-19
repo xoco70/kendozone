@@ -1,10 +1,26 @@
 var Vue = require('vue');
 
 new Vue({
-    el: '#create_category',
+    el: 'body',
     data: {
-        grades:grades,
-        gradeDefault:0
-    }
+        isTeam : 0,
+        gender: 'M',
+        ageCategorySelect : 0,
+        ageMin:0,
+        ageMax:0,
+        grades: grades,
+        gradeSelect: 0,
+        gradeMin:0,
+        gradeMax:0,
 
+        categoryFullName: 'Individual Men',
+
+
+    },
+    methods: {
+        setVars: function () {
+
+
+        }
+    }
 });
