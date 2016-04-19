@@ -10039,6 +10039,14 @@ new Vue({
 
 
     },
+    computed: {
+        categoryFullName: function () {
+
+
+            return this.isTeam + ' ' + this.gender
+        }
+    },
+
     methods: {
         setVars: function () {
             

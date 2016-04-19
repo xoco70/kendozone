@@ -33,7 +33,6 @@
                             <div>
                                 <input type="radio" name="isTeam" id='yes' value ="1" v-model="isTeam" />
                                 <label for="yes">{{ trans('core.yes') }}</label>
-                                <label>Yes </label>
                                 &nbsp;&nbsp;&nbsp;
                                 <input type="radio" name="isTeam" id='no' value ="0" v-model="isTeam" />
                                 <label for="no">{{ trans('core.no') }}</label>
