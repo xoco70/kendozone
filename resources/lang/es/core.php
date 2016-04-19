@@ -92,6 +92,11 @@ return [
     'adults' => 'Adultos',
     'masters' => 'Masters',
     'custom' => 'Personalizado',
+    'min_age' => 'Edad minima',
+    'max_age' => 'Edad máxima',
+    'min_grade' => 'Grado minimo',
+    'max_grade' => 'Grado máximo',
+    'no_grade_restriction' => 'Sin restricción de grado',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',

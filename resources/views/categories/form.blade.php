@@ -1,10 +1,10 @@
 <div class="col-xs-12 col-lg-8 col-lg-offset-2" xmlns:v-on="http://www.w3.org/1999/xhtml"
      xmlns:v-bind="http://www.w3.org/1999/xhtml">
-    <person-data :grades="{{ $grades }}"></person-data>
+
 
     <div class="panel panel-flat">
 
-        <div class="panel-body">
+        <div class="panel-body" id="create_category">
 
             <div class="container-fluid">
                 <fieldset title="{{Lang::get('core.addCategory')}}">
@@ -22,65 +22,65 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
+                {{--<div class="row">--}}
+                {{--<div class="col-md-2">--}}
 
-                        <div class=" form-group">
+                {{--<div class=" form-group">--}}
 
-                            {!!     Form::label('isTeam', trans('core.isTeam'),['class' => 'text-bold' ])  !!}
-                            <br/>
+                {{--{!!     Form::label('isTeam', trans('core.isTeam'),['class' => 'text-bold' ])  !!}--}}
+                {{--<br/>--}}
 
-                            <div class="checkbox-switch">
-                                <label>
-                                    {!!     Form::hidden('isTeam', 0) !!}
-                                    {!!       Form::checkbox('isTeam', 1, null, ["v-model"=>"isTeam", 'class' => 'switch', 'data-on-text'=>trans('core.yes'), 'data-off-text'=>trans('core.no')]) !!}
-                                </label>
-                            </div>
-                        </div>
+                {{--<div class="checkbox-switch">--}}
+                {{--<label>--}}
+                {{--{!!     Form::hidden('isTeam', 0) !!}--}}
+                {{--{!!       Form::checkbox('isTeam', 1, null, ["v-model"=>"isTeam", 'class' => 'switch', 'data-on-text'=>trans('core.yes'), 'data-off-text'=>trans('core.no')]) !!}--}}
+                {{--</label>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
-                    </div>
-                    <div class="col-md-4">
-                        {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('genger', ['M'=> trans('core.male') ,
-                                                       'F'=> trans('core.female') ,
-                                                       'X'=> trans('core.mixt') , ],
-                                           old('gender'), ['class' => 'form-control',"v-model"=>"gender"]) !!}
+                {{--</div>--}}
+                {{--<div class="col-md-4">--}}
+                {{--{!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}--}}
+                {{--{!!  Form::select('gender', ['M'=> trans('core.male') ,--}}
+                {{--'F'=> trans('core.female') ,--}}
+                {{--'X'=> trans('core.mixt') , ],--}}
+                {{--null, ['class' => 'form-control',"v-model"=>"gender"]) !!}--}}
 
-                    </div>
-                </div>
+                {{--</div>--}}
+                {{--</div>--}}
                 <div class="row">
 
                     <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('ageCategory', trans('core.ageCategory'),['class' => 'text-bold' ]) !!}
                             <select v-model="ageCategory" class="form-control">
-                            <option value="0">{{trans('core.no_age')}}</option>
-                            <option value="1">{{trans('core.children')}}</option>
-                            <option value="2">{{trans('core.teenagers')}}</option>
-                            <option value="3">{{trans('core.adults')}}</option>
-                            <option value="4">{{trans('core.masters')}}</option>
-                            <option value="5">{{trans('core.custom')}}</option>
+                                <option value="0">{{trans('core.no_age')}}</option>
+                                <option value="1">{{trans('core.children')}}</option>
+                                <option value="2">{{trans('core.teenagers')}}</option>
+                                <option value="3">{{trans('core.adults')}}</option>
+                                <option value="4">{{trans('core.masters')}}</option>
+                                <option value="5">{{trans('core.custom')}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" v-if='ageCategory==5'>
                         <div class=" form-group">
-                            {!!  Form::label('ageIni', trans('core.from'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageIni" class="form-control"  v-if="ageCategory!=5">
-                            <option value="0">No age limit</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
+                            {!!  Form::label('ageIni', trans('core.min_age'),['class' => 'text-bold' ]) !!}
+                            <select v-model="ageIni" class="form-control">
+                                <option value="0">No age limit</option>
+                                <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
 
                             </select>
 
 
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" v-if='ageCategory==5'>
                         <div class=" form-group">
-                            {!!  Form::label('ageFin', trans('core.to'),['class' => 'text-bold' ]) !!}
-                            <select v-model="ageFin" class="form-control" :disabled="ageCategory!=5">
-                            <option value="0">No age limit</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
+                            {!!  Form::label('ageFin', trans('core.max_age'),['class' => 'text-bold' ]) !!}
+                            <select v-model="ageFin" class="form-control">
+                                <option value="0">No age limit</option>
+                                <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
 
                             </select>
                         </div>
@@ -95,34 +95,33 @@
                     <div class="col-md-4">
                         <div class=" form-group">
                             {!!  Form::label('gradesSelect', trans('core.grade'),['class' => 'text-bold' ]) !!}
-                            <select v-model="gradesSelect" class="form-control">
+
+                            <select v-model="gradeSelect" class="form-control">
+                                <option value="0">{{trans('core.no_grade_restriction')}}</option>
+                                <option value="1">{{trans('core.custom')}}</option>
+
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" v-if='gradeSelect==1'>
                         <div class=" form-group">
-                            {!!  Form::label('gradeIni', trans('core.from'),['class' => 'text-bold' ]) !!}
-                            <select v-model="gradeIni" class="form-control"
-                            v-show="gradesSelect!=0">
-                            <option value="0">No grade restriction</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
+                            {!!  Form::label('gradeIniSelect', trans('core.min_grade'),['class' => 'text-bold' ]) !!}
+                            <select v-model="gradeIniSelect" class="form-control" v-show="gradesSelect!=0">
+                                <option v-for="(grade, val) in grades" :value="grade">@{{ val }}</option>
 
                             </select>
 
 
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2"  v-if='gradeSelect==1'>
                         <div class=" form-group">
-                            {!!  Form::label('gradeFin', trans('core.to'),['class' => 'text-bold' ]) !!}
-                            <select v-model="gradeFin" class="form-control" v-show="gradesSelect!=0">
-                            <option value="0">No grade restriction</option>
-                            <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-
+                            {!!  Form::label('gradeFinSelect', trans('core.max_grade'),['class' => 'text-bold' ]) !!}
+                            <select v-model="gradeFinSelect" class="form-control" v-show="gradesSelect!=0">
+                                <option v-for="(grade, val) in grades" :value="grade">@{{ val }}</option>
                             </select>
                         </div>
                     </div>
-
 
                 </div>
 
@@ -137,3 +136,7 @@
 
     </div>
 </div>
+<script>
+    var grades ={!!  $grades !!};
+
+</script>
