@@ -17,7 +17,7 @@
                     <div class="col-md-12">
                         <div class=" form-group border-grey-700">
                             {!!  Form::label('name') !!}
-                            <p class="full-width border-lg p-20 border-grey-300 border-solid text-size-large text-center text-uppercase">@{{ categoryFullName }} </p>
+                            <p class="full-width border-lg p-20 border-grey-300 border-solid text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
 
                         </div>
                     </div>
@@ -31,21 +31,24 @@
                             <br/>
 
                             <div>
-                                <input type="radio" name="isTeam" id='yes' value ="1" v-model="isTeam" />
-                                <label for="yes">{{ trans('core.yes') }}</label>
+                                <input type="radio" name="isTeam" id='yes' value="1" v-model="isTeam"/>
+                                <label for="yes"> {{ trans('core.yes')  }}</label>
+
                                 &nbsp;&nbsp;&nbsp;
-                                <input type="radio" name="isTeam" id='no' value ="0" v-model="isTeam" />
-                                <label for="no">{{ trans('core.no') }}</label>
+                                <input type="radio" name="isTeam" id='no' value="0" v-model="isTeam"/>
+                                <label for="no">{{ trans('core.no')  }}</label>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('gender', ['M'=> trans('core.male') ,
-                        'F'=> trans('core.female') ,
-                        'X'=> trans('core.mixt') , ],
-                        null, ['class' => 'form-control',"v-model"=>"gender"]) !!}
+
+                        <select v-model="genderSelect" class="form-control">
+                            <option v-for="gender in genders" v-bind:value="gender.value">
+                                @{{ gender.text }}
+                            </option>
+                        </select>
 
                     </div>
                 </div>
@@ -55,12 +58,9 @@
                         <div class=" form-group">
                             {!!  Form::label('ageCategory', trans('core.ageCategory'),['class' => 'text-bold' ]) !!}
                             <select v-model="ageCategorySelect" class="form-control">
-                                <option value="0">{{trans('core.no_age')}}</option>
-                                <option value="1">{{trans('core.children')}}</option>
-                                <option value="2">{{trans('core.teenagers')}}</option>
-                                <option value="3">{{trans('core.adults')}}</option>
-                                <option value="4">{{trans('core.masters')}}</option>
-                                <option value="5">{{trans('core.custom')}}</option>
+                                <option v-for="ageCategory in ageCategories" v-bind:value="ageCategory.value">
+                                    @{{ decodeHtml(ageCategory.text) }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class=" form-group">
                             {!!  Form::label('gradesSelect', trans('core.grade'),['class' => 'text-bold' ]) !!}
 
-                            <select v-model="gradeSelect" class="form-control">
+                            <select v-model="gradeSelect" class="form-control" >
                                 <option value="0">{{trans('core.no_grade_restriction')}}</option>
                                 <option value="1">{{trans('core.custom')}}</option>
 
@@ -133,15 +133,15 @@
             </div>
 
             {{--Grades : @{{ grades }}<br/>--}}
-            isTeam @{{ isTeam }}<br/>
-            Gender @{{ gender }}<br/>
-            ageCategorySelect @{{ ageCategorySelect }}<br/>
+            {{--isTeam @{{ isTeam }}<br/> - @{{ isTeam  }} <br/>--}}
+            {{--Gender @{{ genderSelect }} - @{{ genderSelect | selectText genders}} <br/>--}}
+            {{--ageCategorySelect @{{ ageCategorySelect }}<br/>--}}
 
-            GradeSelect : @{{ gradeSelect }}<br/>
-            GradeMin : @{{ gradeMin}} GradeMax : @{{ gradeMax }}<br/>
-            AgeMin : @{{ ageMin }} AgeMax : @{{ ageMax }}<br/>
+            {{--GradeSelect : @{{ gradeSelect }}<br/>--}}
+            {{--GradeMin : @{{ gradeMin}} GradeMax : @{{ gradeMax }}<br/>--}}
+            {{--AgeMin : @{{ ageMin }} AgeMax : @{{ ageMax }}<br/>--}}
 
-            FullName : @{{ categoryFullName }}<br/>
+            {{--FullName : @{{ categoryFullName }}<br/>--}}
 
         </div>
 
@@ -150,6 +150,22 @@
 
 <script>
 
-    var grades ={!!  $grades !!};
+    var grades = {!!  $grades !!};
+
+    var team = "{{trans('core.isTeam')}}";
+    var single = "{{trans('core.single')}}";
+
+    var no_age = "{{trans('core.no_age')}}";
+    var childs = "{{trans('core.children')}}";
+    var students = "{{trans('core.students')}}";
+    var adults = "{{trans('core.adults')}}";
+    var masters = "{{trans('core.masters')}}";
+    var custom = "{{trans('core.custom')}}";
+
+    var male = "{{trans('core.male')}}";
+    var female = "{{trans('core.female')}}";
+    var mixt = "{{trans('core.mixt')}}";
+
+    var years = "{{trans('core.years')}}";
 
 </script>

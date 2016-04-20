@@ -87,15 +87,16 @@ return [
     'ageCategory' => 'Age Category',
     'no_age' => 'No age restriction',
     'children' => 'Children',
-    'teenagers' => 'Teenagers',
+    'students' => 'Students',
     'adults' => 'Adults',
     'masters' => 'Masters',
     'custom' => 'Custom',
+    'years' => 'years',
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',
     'isTeam' => 'Team',
-
+    'single' => 'Single',
 
 
     // Places

@@ -88,7 +88,7 @@ return [
     'ageCategory' => 'Categoría de edad',
     'no_age' => 'Sin restricción de edad',
     'children' => 'Niños',
-    'teenagers' => 'Adolescentes',
+    'students' => 'Estudiantes',
     'adults' => 'Adultos',
     'masters' => 'Masters',
     'custom' => 'Personalizado',
@@ -97,6 +97,8 @@ return [
     'min_grade' => 'Grado minimo',
     'max_grade' => 'Grado máximo',
     'no_grade_restriction' => 'Sin restricción de grado',
+    'single' => 'Individual',
+    'years' => 'años',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',
