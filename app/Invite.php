@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use OwenIt\Auditing\AuditingTrait;
 
 class Invite extends Model
 {
+    use AuditingTrait;
     protected $table = 'invitation';
     public $timestamps = true;
 

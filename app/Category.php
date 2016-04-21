@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
+use OwenIt\Auditing\AuditingTrait;
 
 class Category extends Model
 {
+    use AuditingTrait;
     protected $table = 'category';
     public $timestamps = true;
 

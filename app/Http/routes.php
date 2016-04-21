@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
 
         Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
+        Route::get('logs', 'LogsController@index');
     });
 
 

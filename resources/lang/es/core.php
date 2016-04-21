@@ -262,8 +262,12 @@ return [
     'next' => 'Próximos',
 
 
+    // Logs
 
-
-
+    'object_type' => 'Objeto',
+    'operation_type' => 'Operación',
+    'object_id' => 'Id del objeto',
+    'created_at' => 'Creado',
+    'updated_at' => 'Actualizado',
 
 ];

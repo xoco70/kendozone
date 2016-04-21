@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\AuditingTrait;
 
 class CategoryTournamentUser extends Model
 {
     use SoftDeletes;
+    use AuditingTrait;
     protected $DATES = ['created_at', 'updated_at','deleted_at'];
 
 

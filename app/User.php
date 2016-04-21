@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait;
+
 
     /**
      * The database table used by the model.

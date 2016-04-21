@@ -7,7 +7,7 @@
         <div class="panel-body">
 
             <div class="container-fluid">
-                <fieldset title="{{Lang::get('core.addCategory')}}">
+                <fieldset title="{{Lang::get('core.add_category')}}">
 
                     <legend class="text-semibold">{{Lang::get('core.add_category')}}</legend>
 

@@ -6,12 +6,12 @@ new Vue({
         isTeam: 0,
         genderSelect: 'M',
         ageCategorySelect: 0,
-        ageMin: 0,
-        ageMax: 0,
+        ageMin: 6,
+        ageMax: 10,
         grades: grades,
         gradeSelect: 0,
-        gradeMin: 0,
-        gradeMax: 0,
+        gradeMin: 9,
+        gradeMax: 11,
 
         ageCategories: [
             {value: 0, text: no_age},
@@ -37,10 +37,16 @@ new Vue({
             var ageCategoryText = '';
             if (this.ageCategorySelect != 0) {
                 if (this.ageCategorySelect == 5) {
-                    ageCategoryText = this.ageMin + ' - ' + this.ageMax + years;
+                    if (this.ageMin!=0 && this.ageMax!=0){
+                        ageCategoryText = this.ageMin + ' - ' + this.ageMax +' '+ years;
+                    }
+                        
                 } else {
                     ageCategoryText = this.getSelectText(this.ageCategories, this.ageCategorySelect);
                 }
+            }
+            if (this.gradeSelect != 0) {
+
             }
 
             this.getSelectText(this.ageCategories, this.ageCategorySelect);

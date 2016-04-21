@@ -166,7 +166,7 @@ return [
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 //        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
-
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
     ],
 

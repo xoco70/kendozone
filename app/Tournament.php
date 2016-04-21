@@ -9,12 +9,14 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\AuditingTrait;
 
 
 class Tournament extends Model implements SluggableInterface
 {
     use SoftDeletes;
     use SluggableTrait;
+    use AuditingTrait;
 
     protected $sluggable = [
         'build_from' => 'name',
