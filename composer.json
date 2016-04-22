@@ -27,13 +27,12 @@
     "thomaswelton/laravel-gravatar": "^1.1",
     "intervention/image": "^2.3",
     "owen-it/laravel-auditing": "^2.2",
-    "barryvdh/laravel-translation-manager": "0.2.x-dev"
+    "barryvdh/laravel-translation-manager": "0.2.x-dev",
+    "fzaninotto/faker": "~1.4"
   },
   "require-dev": {
-    "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
-    "phpspec/phpspec": "~2.1",
     "symfony/dom-crawler": "^3.0",
     "symfony/css-selector": "~3.0"
 
