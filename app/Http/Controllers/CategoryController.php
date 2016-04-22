@@ -42,11 +42,11 @@ class CategoryController extends Controller
         $currentModelName = trans_choice('core.category', 1);
 
 
-        $grades = Grade::orderBy('order', 'asc')->lists('name', 'id');
+//        $grades = Grade::orderBy('order', 'asc')->lists('name', 'id');
 
 
 
-        return view('categories.create', compact('currentModelName', 'grades'));
+        return view('categories.create', compact('currentModelName'));
     }
 
     /**

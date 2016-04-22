@@ -86,7 +86,7 @@ return [
     'female' => 'Femenil',
     'mixt' => 'Mixto',
     'ageCategory' => 'Categoría de edad',
-    'no_age' => 'Sin restricción de edad',
+    'no_age_restriction' => 'Sin restricción de edad',
     'children' => 'Niños',
     'students' => 'Estudiantes',
     'adults' => 'Adultos',
@@ -97,8 +97,10 @@ return [
     'min_grade' => 'Grado minimo',
     'max_grade' => 'Grado máximo',
     'no_grade_restriction' => 'Sin restricción de grado',
-    'single' => 'Individual',
+
     'years' => 'años',
+    'age' => 'Edad',
+    'single' => 'Individual',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',

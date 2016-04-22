@@ -85,13 +85,14 @@ return [
     'female' => 'Ladies',
     'mixt' => 'Mixed',
     'ageCategory' => 'Age Category',
-    'no_age' => 'No age restriction',
+    'no_age_restriction' => 'No age restriction',
     'children' => 'Children',
     'students' => 'Students',
     'adults' => 'Adults',
     'masters' => 'Masters',
     'custom' => 'Custom',
     'years' => 'years',
+    'age' => 'Age',
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',

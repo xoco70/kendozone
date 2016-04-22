@@ -108,7 +108,7 @@
                         <div class=" form-group">
                             {!!  Form::label('gradeMin', trans('core.min_grade'),['class' => 'text-bold' ]) !!}
                             <select v-model="gradeMin" class="form-control" v-show="gradesSelect!=0">
-                                <option v-for="(grade, val) in grades" :value="grade">@{{ val }}</option>
+                                <option v-for="(grade, val) in grades" :value="val.value">@{{ val.text | html }}</option>
 
                             </select>
 
@@ -119,7 +119,7 @@
                         <div class=" form-group">
                             {!!  Form::label('gradeMax', trans('core.max_grade'),['class' => 'text-bold' ]) !!}
                             <select v-model="gradeMax" class="form-control" v-show="gradesSelect!=0">
-                                <option v-for="(grade, val) in grades" :value="grade">@{{ val }}</option>
+                                <option v-for="(grade, val) in grades" v-bind:value="val.value">@{{ val.text | html }}</option>
                             </select>
                         </div>
                     </div>
@@ -150,12 +150,11 @@
 
 <script>
 
-    var grades = {!!  $grades !!};
-
     var team = "{{trans('core.isTeam')}}";
     var single = "{{trans('core.single')}}";
 
-    var no_age = "{{trans('core.no_age')}}";
+    var no_age = "{{trans('core.no_age_restriction')}}";
+    var no_grade = "{{trans('core.no_grade_restriction')}}";
     var childs = "{{trans('core.children')}}";
     var students = "{{trans('core.students')}}";
     var adults = "{{trans('core.adults')}}";
@@ -166,6 +165,8 @@
     var female = "{{trans('core.female')}}";
     var mixt = "{{trans('core.mixt')}}";
 
+    var grade = "{{trans('core.grade')}}";
+    var age = "{{trans('core.age')}}";
     var years = "{{trans('core.years')}}";
 
 </script>
