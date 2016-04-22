@@ -28,7 +28,7 @@ class CreateCategoryTable extends Migration
             $table->foreign('gradeMax')
                 ->references('id')
                 ->on('grade');
-            $table->unique(['name','gender','isTeam','ageCategory','ageMin','ageMax','gradeMin','gradeMax']);
+            $table->unique(['name','gender','isTeam','ageCategory','ageMin','ageMax','gradeMin','gradeMax'], 'category_fields_unique');
             $table->timestamps();
             $table->engine = 'InnoDB';
 
@@ -96,9 +96,11 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('category_tournament_user');
         Schema::dropIfExists('category_tournament');
         Schema::dropIfExists('category');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
 
     }

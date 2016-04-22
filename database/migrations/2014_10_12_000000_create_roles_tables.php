@@ -44,7 +44,8 @@ class CreateRolesTables extends Migration
      */
     public function down()
     {
-//        Schema::drop('role_user');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('roles');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

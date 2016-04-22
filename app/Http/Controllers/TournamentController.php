@@ -62,7 +62,7 @@ class TournamentController extends Controller
     {
         $currentModelName = trans_choice('core.tournament', 1);
         $levels = TournamentLevel::lists('name', 'id');
-        $categories = Category::lists('name', 'id');
+        $categories = Category::take(10)->lists('name', 'id');
         $tournament = new Tournament();
 
         return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName'));
@@ -107,13 +107,11 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
-//        dd($tournament);
-        $categories = Category::lists('name', 'id');
+        $categories = Category::take(10)->lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories()->count();
 
-//        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize'));
     }
 
