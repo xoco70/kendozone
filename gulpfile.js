@@ -15,30 +15,30 @@ require('laravel-elixir-vueify');
 elixir(function (mix) {
 
     // General Styles for app
-    // mix.styles([
-    //     //'icons/icomoon/styles.css',
-    //     'bootstrap.css',
-    //     'components.css',
-    //     'colors.css',
-    //     'core.css',
-    //     'custom.css',
-    //     'protip.css'
-    // ], 'public/css/app.css');
+    mix.styles([
+        //'icons/icomoon/styles.css',
+        'bootstrap.css',
+        'components.css',
+        'colors.css',
+        'core.css',
+        'custom.css',
+        'protip.css'
+    ], 'public/css/app.css');
     mix.browserify('vue/pages/categoryCreate.js');
-    // mix.scripts([
-    //     //'icons/icomoon/styles.css',
-    //     'plugins/loaders/pace.min.js',
-    //     'core/libraries/jquery.min.js', // 2.1.4
-    //     'core/libraries/bootstrap.min.js', // v3.3.6
-    //     'plugins/loaders/blockui.min.js',
-    //     'core/app.js',
-    //     'components/noty/js/noty/packaged/jquery.noty.packaged.js',
-    //     'core/libraries/jquery_ui/sliders.min.js',
-    //     'core/libraries/jquery_ui/touch.min.js',
-    //     'plugins/sliders/slider_pips.min.js',
-    //     'plugins/forms/styling/switch.min.js',
-    //     'components/protip/protip.min.js'
-    // ], 'public/js/app.js');
+    mix.scripts([
+        //'icons/icomoon/styles.css',
+        'plugins/loaders/pace.min.js',
+        'core/libraries/jquery.min.js', // 2.1.4
+        'core/libraries/bootstrap.min.js', // v3.3.6
+        // 'plugins/loaders/blockui.min.js',
+        'core/app.js',
+        'components/noty/js/noty/packaged/jquery.noty.packaged.js',
+        // 'core/libraries/jquery_ui/sliders.min.js',
+        // 'core/libraries/jquery_ui/touch.min.js',
+        // 'plugins/sliders/slider_pips.min.js',
+        'plugins/forms/styling/switch.min.js',
+        'components/protip/protip.min.js'
+    ], 'public/js/app.js');
     //
     // mix.scripts([
     //     'plugins/tables/footable/footable.min.js',
