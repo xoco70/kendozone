@@ -11,8 +11,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">{{ trans('core.add_and_new') }}</button>
-                <button type="button" data-dismiss="modal" class="btn btn-success">{{ trans('core.add_and_close') }}</button>
+                <button type="button" class="btn btn-primary" @click="addCategory">{{ trans('core.add_and_new') }}</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success" @click="addCategory">{{ trans('core.add_and_close') }}</button>
 
             </div>
         </div>

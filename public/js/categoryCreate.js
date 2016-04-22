@@ -10084,13 +10084,17 @@ new Vue({
 
     methods: {
         addCategory: function addCategory() {
+
             // Get Get Category Name and Id
-            console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
-            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' + +this.gradeSelect + '/' + this.gradeMin + '/' + +this.gradeMax;
+            // console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
+            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/'  + this.gradeMin + '/' + +this.gradeMax;
             console.log(url);
             $.getJSON(url, function (data) {
-                // console.log( data.name);
-                this.categoryName = data.name;
+                // console.log(data);
+                var option = '<option value='+data.id+' selected>'+data.name+'</option>';
+                // console.log(option);
+                dualList.append(option);
+                dualList.bootstrapDualListbox('refresh');
             }.bind(this));
         },
         decodeHtml: function decodeHtml(html) {
@@ -10100,7 +10104,7 @@ new Vue({
         },
         getSelectText: function getSelectText(myArray, val) {
             var newVal = '';
-            console.log(myArray);
+            // console.log(myArray);
             myArray.map(function (el) {
                 if (val == el.value) {
                     newVal = el.text;

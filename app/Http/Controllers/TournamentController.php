@@ -62,7 +62,7 @@ class TournamentController extends Controller
     {
         $currentModelName = trans_choice('core.tournament', 1);
         $levels = TournamentLevel::lists('name', 'id');
-        $categories = Category::take(10)->orderBy('id', 'asc')->lists('name', 'id');
+        $categories = Category::take(2)->orderBy('id', 'asc')->lists('name', 'id');
         $tournament = new Tournament();
 
         return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName'));

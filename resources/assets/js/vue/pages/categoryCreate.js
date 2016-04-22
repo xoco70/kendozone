@@ -50,7 +50,7 @@ new Vue({
 
     },
     computed: {
-        categoryFullName: function () {
+        categoryFullName: function categoryFullName() {
             var teamText = this.isTeam == 1 ? team : single;
             var ageCategoryText = '';
             var gradeText = '';
@@ -76,8 +76,7 @@ new Vue({
                 gradeText = ' - ' + grade + ' : ';
                 if (this.gradeMin != 0 && this.gradeMax != 0) {
                     gradeText += this.getSelectText(this.grades, this.gradeMin) + ' - ' + this.getSelectText(this.grades, this.gradeMax);
-                }
-                else if (this.gradeMin == 0 && this.gradeMax != 0) {
+                } else if (this.gradeMin == 0 && this.gradeMax != 0) {
                     gradeText += ' < ' + this.getSelectText(this.grades, this.gradeMax);
                 } else if (this.gradeMin != 0 && this.gradeMax == 0) {
                     gradeText += ' > ' + this.getSelectText(this.grades, this.gradeMin);
@@ -92,30 +91,28 @@ new Vue({
     },
 
     methods: {
-        addCategory: function () {
-            // Get Get Category Name and Id
-            console.log(this.isTeam + " - " + this.genderSelect + " - " +this.ageCategorySelect + " - " +
-                        this.ageMin + " - " +this.ageMax + " - " +this.gradeMin+ " - " +this.gradeMax);
-            var url = '/api/v1/category/'
-                + this.isTeam  + '/'
-                + this.genderSelect + '/'
-                + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' +
-                + this.gradeSelect + '/' + this.gradeMin + '/' + +this.gradeMax;
-            console.log(url);
-            $.getJSON(url, (function (data) {
-                // console.log( data.name);
-                this.categoryName = data.name;
-            }).bind(this));
+        addCategory: function addCategory() {
 
+            // Get Get Category Name and Id
+            // console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
+            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/'  + this.gradeMin + '/' + +this.gradeMax;
+            console.log(url);
+            $.getJSON(url, function (data) {
+                // console.log(data);
+                var option = '<option value='+data.id+' selected>'+data.name+'</option>';
+                // console.log(option);
+                dualList.append(option);
+                dualList.bootstrapDualListbox('refresh');
+            }.bind(this));
         },
-        decodeHtml: function (html) {
+        decodeHtml: function decodeHtml(html) {
             var txt = document.createElement("textarea");
             txt.innerHTML = html;
             return txt.value;
         },
-        getSelectText: function (myArray, val) {
+        getSelectText: function getSelectText(myArray, val) {
             var newVal = '';
-            console.log(myArray);
+            // console.log(myArray);
             myArray.map(function (el) {
                 if (val == el.value) {
                     newVal = el.text;
@@ -125,11 +122,11 @@ new Vue({
         }
     },
     filters: {
-        selectText: function (val, myArray) {
+        selectText: function selectText(val, myArray) {
             return this.getSelectText(myArray, val);
         },
-        html: function (html) {
-            return this.decodeHtml(html);
+        html: function html(_html) {
+            return this.decodeHtml(_html);
         }
     }
 });

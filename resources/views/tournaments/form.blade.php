@@ -47,17 +47,17 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                            <p>{{trans('core.select_categories_to_register')}}</p>
+                        <p>{{trans('core.select_categories_to_register')}}</p>
+
 
                         <div class="form-group multiselect">
-
-                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'demo2 form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
                     </div>
                 </div>
                 <div class="row text-uppercase">
-                    <div class="col-md-6 col-md-offset-6 mb-20">
-                        <button type="button" class="btn btn-primary" @click="addCategory">{{ trans('core.add_and_new') }}</button>
+                    <div class="col-md-6 col-md-offset-6 mb-20 mt-20 pt-20">
+                        {{--<button type="button" class="btn btn-primary" id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
                         <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
@@ -81,9 +81,12 @@ $day = $now->day;
 
 ?>
 
-
-        <!-- Theme JS files -->
 <script>
+    var dualList = $('.demo2').bootstrapDualListbox({
+        showFilterInputs: false,
+        infoTextEmpty: '',
+        infoText: ''
+    });
 
     $(function () {
         var $input = $('.dateFin').pickadate({
@@ -101,42 +104,33 @@ $day = $now->day;
         });
 
 
-
-        // Basic Dual select example
-        // Disable filtering
-        $('.listbox-filter-disabled').bootstrapDualListbox({
-            showFilterInputs: false,
-            infoTextEmpty: '',
-            infoText: ''
-
-
-        });
-
-//        var calendarFin = input[name="dateFin"];
-//        var calendarLimit = input[name="registerDateLimit"];
-//
-//        calendarIni.on()
-
-
-//        $('#block-panel').on('click', function () {
-//            var block = $(this).parent().parent();
-//            $(block).block({
-//                message: '<i class="icon-spinner4 spinner"></i>',
-//                timeout: 2000, //unblock after 2 seconds
-//                overlayCSS: {
-//                    backgroundColor: '#fff',
-//                    opacity: 0.8,
-//                    cursor: 'wait'
-//                },
-//                css: {
-//                    border: 0,
-//                    padding: 0,
-//                    backgroundColor: 'transparent'
-//                }
-//            });
+//        $("#demo2-add").click(function() {
+//            dualList.append('<option value="apples">Apples</option>' +
+//                    '       <option value="oranges" selected>Oranges</option>');
+//            dualList.bootstrapDualListbox('refresh');
 //        });
+//        dualList.append($('<option>', {
+//            value: 10,
+//            text: 'My option'
+//        }));
+//        dualList.trigger('bootstrapduallistbox.refresh', true);
+//        function getCategoriesSelected() {
+//            var select1 = document.getElementById("categorySelection");
+//            var selected1 = [];
+//            for (var i = 0; i < select1.length; i++) {
+//                if (select1.options[i].selected) selected1.push(select1.options[i].value);
+//            }
+//            console.log(selected1);
+//        }​
 
 
     });
+
+
+
+
+
+
+
 </script>
 {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}

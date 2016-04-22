@@ -20,8 +20,8 @@ class CreateCategoryTable extends Migration
             $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
             $table->integer('ageMin')->unsigned()->default(0);
             $table->integer('ageMax')->unsigned()->default(0);
-            $table->integer('gradeMin')->unsigned()->default(1);
-            $table->integer('gradeMax')->unsigned()->default(1);
+            $table->integer('gradeMin')->unsigned()->default(0);
+            $table->integer('gradeMax')->unsigned()->default(0);
             $table->foreign('gradeMin')
                 ->references('id')
                 ->on('grade');

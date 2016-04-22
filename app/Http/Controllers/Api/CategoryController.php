@@ -21,14 +21,21 @@ class CategoryController extends ApiController
             ->where('gradeMax', '=', 0)
             ->firstOrFail();
 
-        return $newCategoryName = Category::where('isTeam', '=', $isTeam)
-            ->where('gender', '=', $gender)
-            ->where('ageCategory', '=', $ageCategory)
-            ->where('ageMin', '=', $ageMin)
-            ->where('ageMax', '=', $ageMax)
-            ->where('gradeMin', '=', $gradeMin)
-            ->where('gradeMax', '=', $gradeMax)
-            ->firstOrNew();
+         $newCategoryName = Category::firstOrNew(
+             ['isTeam'=> $isTeam,
+              'gender'=> $gender,
+              'ageCategory' => $ageCategory,
+              'ageMin' => $ageMin,
+              'ageMax' => $ageMax,
+              'gradeMin' => $gradeMin,
+              'gradeMax' => $gradeMax
+             ]);
+
+        return $newCategoryName;
     }
+    public function getBaseCategories(){
+        return Category::take(2)->orderBy('id', 'asc')->lists('name', 'id');
+
+}
 
 }
