@@ -492,16 +492,16 @@
         },
         {
             "name": "geoip2/geoip2",
-            "version": "v2.3.3",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maxmind/GeoIP2-php.git",
-                "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86"
+                "reference": "2edce6957126399039124459174d5dce24edfdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
-                "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
+                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/2edce6957126399039124459174d5dce24edfdae",
+                "reference": "2edce6957126399039124459174d5dce24edfdae",
                 "shasum": ""
             },
             "require": {
@@ -510,7 +510,8 @@
                 "php": ">=5.3.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.2.*"
+                "phpunit/phpunit": "4.2.*",
+                "squizlabs/php_codesniffer": "2.*"
             },
             "type": "library",
             "autoload": {
@@ -538,7 +539,7 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2015-09-24 17:29:28"
+            "time": "2016-04-15 19:49:51"
         },
         {
             "name": "guzzle/guzzle",
@@ -1012,16 +1013,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.29",
+            "version": "v5.2.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e3d644eb131f18c5f3d28ff7bc678bc797091f20"
+                "reference": "ecfbbfbf96105439cc9a40bc78277bdb0268e34d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e3d644eb131f18c5f3d28ff7bc678bc797091f20",
-                "reference": "e3d644eb131f18c5f3d28ff7bc678bc797091f20",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ecfbbfbf96105439cc9a40bc78277bdb0268e34d",
+                "reference": "ecfbbfbf96105439cc9a40bc78277bdb0268e34d",
                 "shasum": ""
             },
             "require": {
@@ -1082,7 +1083,7 @@
             },
             "require-dev": {
                 "aws/aws-sdk-php": "~3.0",
-                "mockery/mockery": "~0.9.2",
+                "mockery/mockery": "~0.9.4",
                 "pda/pheanstalk": "~3.0",
                 "phpunit/phpunit": "~4.1",
                 "predis/predis": "~1.0",
@@ -1100,7 +1101,8 @@
                 "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
                 "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (2.8.*|3.0.*).",
-                "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (2.8.*|3.0.*)."
+                "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (2.8.*|3.0.*).",
+                "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
             },
             "type": "library",
             "extra": {
@@ -1136,7 +1138,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-04-03 01:43:55"
+            "time": "2016-04-19 19:12:18"
         },
         {
             "name": "laravel/socialite",
@@ -1783,16 +1785,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206"
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ce5be709d59b32dd8a88c80259028759991a4206",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
                 "shasum": ""
             },
             "require": {
@@ -1808,7 +1810,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -1830,7 +1832,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-02-28 19:48:28"
+            "time": "2016-04-19 13:41:41"
         },
         {
             "name": "owen-it/laravel-auditing",
@@ -2358,16 +2360,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "3.4.2",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "aa300d50873fcec64527773d0baba1279a68a780"
+                "reference": "a083a0be211767c6dbae38f272b05d8ced7513d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/aa300d50873fcec64527773d0baba1279a68a780",
-                "reference": "aa300d50873fcec64527773d0baba1279a68a780",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/a083a0be211767c6dbae38f272b05d8ced7513d3",
+                "reference": "a083a0be211767c6dbae38f272b05d8ced7513d3",
                 "shasum": ""
             },
             "require": {
@@ -2416,7 +2418,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2016-04-13 08:49:01"
+            "time": "2016-04-18 07:05:28"
         },
         {
             "name": "spatie/laravel-link-checker",
