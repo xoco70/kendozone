@@ -192,3 +192,17 @@ fieldset > a > legend {
 .border-solid{
     border-style: solid;
 }
+
+.bootstrap-duallistbox-container .btn.moveall,
+.bootstrap-duallistbox-container .btn.removeall {
+    display: none;
+}
+
+.bootstrap-duallistbox-container .btn.move,
+.bootstrap-duallistbox-container .btn.remove {
+    width: 100%;
+}
+
+[v-cloak] {
+    display: none;
+}

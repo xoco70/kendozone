@@ -49,15 +49,22 @@
 
                         <p>{{trans('core.select_categories_to_register')}}</p>
 
-
                         <div class="form-group multiselect">
                             {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'demo2 form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
+
                     </div>
                 </div>
                 <div class="row text-uppercase">
-                    <div class="col-md-6 col-md-offset-6 mb-20 mt-20 pt-20">
-                        {{--<button type="button" class="btn btn-primary" id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
+                    <div class="col-md-6 mb-20 mt-20 pt-20">
+                        <span class="text-danger" v-cloak>
+                            @{{ error }}
+                        </span>
+
+                    </div>
+                    <div class="col-md-6 mb-20 mt-20 pt-20">
+                        {{--<button type="button" class="btn btn-primary"--}}
+                        {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
                         <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
@@ -87,6 +94,7 @@ $day = $now->day;
         infoTextEmpty: '',
         infoText: ''
     });
+    var dualListIds = [];
 
     $(function () {
         var $input = $('.dateFin').pickadate({
@@ -98,17 +106,16 @@ $day = $now->day;
         $('.dateIni').pickadate({
             min: [{{$year}}, {{$month}}, {{$day}}],
             format: 'yyyy-mm-dd',
-            onSet: function() {
-                pickerFin.set('min',this.get('select'));
+            onSet: function () {
+                pickerFin.set('min', this.get('select'));
             }
         });
 
+        $(".demo2 > option").each(function () {
+            dualListIds.push(this.value);
+        });
+        console.log(dualListIds);
 
-//        $("#demo2-add").click(function() {
-//            dualList.append('<option value="apples">Apples</option>' +
-//                    '       <option value="oranges" selected>Oranges</option>');
-//            dualList.bootstrapDualListbox('refresh');
-//        });
 //        dualList.append($('<option>', {
 //            value: 10,
 //            text: 'My option'
@@ -125,11 +132,6 @@ $day = $now->day;
 
 
     });
-
-
-
-
-
 
 
 </script>

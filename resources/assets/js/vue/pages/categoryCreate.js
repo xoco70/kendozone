@@ -11,7 +11,7 @@ new Vue({
         gradeSelect: 0,
         gradeMin: 0,
         gradeMax: 0,
-
+        error:'',
         grades: [
             {value: 0, text: no_grade},
             {value: 2, text: '7 Kyu'},
@@ -92,17 +92,29 @@ new Vue({
 
     methods: {
         addCategory: function addCategory() {
-
+            this.error = '';
             // Get Get Category Name and Id
             // console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
-            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/'  + this.gradeMin + '/' + +this.gradeMax;
-            console.log(url);
+            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' + this.gradeMin + '/' + +this.gradeMax;
+            // console.log(url);
+            dualListIds = [];
+            $(".demo2 > option").each(function () {
+                dualListIds.push(this.value);
+            });
             $.getJSON(url, function (data) {
                 // console.log(data);
-                var option = '<option value='+data.id+' selected>'+data.name+'</option>';
-                // console.log(option);
-                dualList.append(option);
-                dualList.bootstrapDualListbox('refresh');
+                console.log(dualListIds);
+                console.log(data.id);
+                console.log(dualListIds.indexOf('' +data.id));
+                if (dualListIds.indexOf('' + data.id) == -1){
+                    var option = '<option value=' + data.id + ' selected>' + data.name + '</option>';
+                    // console.log(option);
+                    dualList.append(option);
+                    dualList.bootstrapDualListbox('refresh');
+                }else{
+                    // Print message
+                    this.error =" Ya existe el elemento";
+                }
             }.bind(this));
         },
         decodeHtml: function decodeHtml(html) {

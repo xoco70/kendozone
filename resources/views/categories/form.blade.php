@@ -115,10 +115,6 @@
 
     </div>
 
-
-    {{--<div class=" text-right mt-20 pt-20">--}}
-    {{--{!!  Form::submit(trans('core, ['class' => 'btn btn-success ']) !!}--}}
-    {{--</div>--}}
 </div>
 
 {{--Grades : @{{ grades }}<br/>--}}
