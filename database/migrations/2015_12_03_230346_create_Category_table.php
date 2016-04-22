@@ -18,18 +18,20 @@ class CreateCategoryTable extends Migration
             $table->string('gender');
             $table->integer('isTeam')->unsigned()->default(0);
             $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
-            $table->integer('ageIni')->unsigned()->default(0);
-            $table->integer('ageFin')->unsigned()->default(0);
-            $table->integer('gradeIni')->unsigned()->default(1);
-            $table->integer('gradeFin')->unsigned()->default(1);
-            $table->foreign('gradeIni')
+            $table->integer('ageMin')->unsigned()->default(0);
+            $table->integer('ageMax')->unsigned()->default(0);
+            $table->integer('gradeMin')->unsigned()->default(1);
+            $table->integer('gradeMax')->unsigned()->default(1);
+            $table->foreign('gradeMin')
                 ->references('id')
                 ->on('grade');
-            $table->foreign('gradeFin')
+            $table->foreign('gradeMax')
                 ->references('id')
                 ->on('grade');
+            $table->unique(['name','gender','isTeam','ageCategory','ageMin','ageMax','gradeMin','gradeMax']);
             $table->timestamps();
             $table->engine = 'InnoDB';
+
         });
 
         Schema::create('category_tournament', function (Blueprint $table) {

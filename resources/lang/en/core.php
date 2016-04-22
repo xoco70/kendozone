@@ -98,6 +98,8 @@ return [
     'min_grade' => 'Min Grade',
     'max_grade' => 'Max Grade',
     'no_grade_restriction' => 'No grade limit',
+    'add_and_close' => 'Add',
+    'add_and_new' => 'Add and New',
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',

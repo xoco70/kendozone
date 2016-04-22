@@ -5,14 +5,23 @@
     <div class="row">
         <div class="col-xs-12">
             <div class=" form-group border-grey-700">
-                {!!  Form::label('name') !!}
-                <p class="full-width border-lg p-20 border-grey-300 border-solid text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
-
+                <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
+                <hr/>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
+            {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
+
+            <select v-model="genderSelect" class="form-control">
+                <option v-for="gender in genders" v-bind:value="gender.value">
+                    @{{ gender.text }}
+                </option>
+            </select>
+
+        </div>
+        <div class="col-md-4 col-md-offset-2">
 
             <div class=" form-group">
 
@@ -30,16 +39,7 @@
             </div>
 
         </div>
-        <div class="col-md-4">
-            {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
 
-            <select v-model="genderSelect" class="form-control">
-                <option v-for="gender in genders" v-bind:value="gender.value">
-                    @{{ gender.text }}
-                </option>
-            </select>
-
-        </div>
     </div>
     <div class="row">
 

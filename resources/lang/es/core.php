@@ -94,13 +94,13 @@ return [
     'custom' => 'Personalizado',
     'years' => 'años',
     'age' => 'Edad',
-    
     'min_age' => 'Edad minima',
     'max_age' => 'Edad máxima',
     'min_grade' => 'Grado minimo',
     'max_grade' => 'Grado máximo',
     'no_grade_restriction' => 'Sin limite de grado',
-
+    'add_and_close' => 'Guardar',
+    'add_and_new' => 'Guardar y Nuevo ',
     
     'single' => 'Individual',
 

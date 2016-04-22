@@ -57,6 +57,7 @@
                 </div>
                 <div class="row text-uppercase">
                     <div class="col-md-6 col-md-offset-6 mb-20">
+                        <button type="button" class="btn btn-primary" @click="addCategory">{{ trans('core.add_and_new') }}</button>
                         <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>

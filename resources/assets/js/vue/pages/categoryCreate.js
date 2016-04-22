@@ -6,13 +6,13 @@ new Vue({
         isTeam: 0,
         genderSelect: 'M',
         ageCategorySelect: 0,
-        ageMin: 6,
-        ageMax: 10,
+        ageMin: 0,
+        ageMax: 0,
         gradeSelect: 0,
-        gradeMin: 10,
-        gradeMax: 12,
+        gradeMin: 0,
+        gradeMax: 0,
 
-        grades:[
+        grades: [
             {value: 0, text: no_grade},
             {value: 2, text: '7 Kyu'},
             {value: 3, text: '6 Kyu'},
@@ -56,7 +56,7 @@ new Vue({
             var gradeText = '';
 
             if (this.ageCategorySelect != 0) {
-                if (this.ageCategorySelect == 5 ) {
+                if (this.ageCategorySelect == 5) {
                     ageCategoryText = ' - ' + age + ' : ';
                     if (this.ageMin != 0 && this.ageMax != 0) {
                         ageCategoryText += this.ageMin + ' - ' + this.ageMax + ' ' + years;
@@ -64,8 +64,8 @@ new Vue({
                         ageCategoryText += ' < ' + this.ageMax + ' ' + years;
                     } else if (this.ageMin != 0 && this.ageMax == 0) {
                         ageCategoryText += ' > ' + this.ageMin + ' ' + years;
-                    }else{
-                        ageCategoryText='';
+                    } else {
+                        ageCategoryText = '';
                     }
                 } else {
                     ageCategoryText = this.getSelectText(this.ageCategories, this.ageCategorySelect);
@@ -85,13 +85,29 @@ new Vue({
                     gradeText = '';
                 }
             }
-            
+
             this.getSelectText(this.ageCategories, this.ageCategorySelect);
             return teamText + ' ' + this.getSelectText(this.genders, this.genderSelect) + ' ' + ageCategoryText + ' ' + gradeText;
         }
     },
 
     methods: {
+        addCategory: function () {
+            // Get Get Category Name and Id
+            console.log(this.isTeam + " - " + this.genderSelect + " - " +this.ageCategorySelect + " - " +
+                        this.ageMin + " - " +this.ageMax + " - " +this.gradeMin+ " - " +this.gradeMax);
+            var url = '/api/v1/category/'
+                + this.isTeam  + '/'
+                + this.genderSelect + '/'
+                + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' +
+                + this.gradeSelect + '/' + this.gradeMin + '/' + +this.gradeMax;
+            console.log(url);
+            $.getJSON(url, (function (data) {
+                // console.log( data.name);
+                this.categoryName = data.name;
+            }).bind(this));
+
+        },
         decodeHtml: function (html) {
             var txt = document.createElement("textarea");
             txt.innerHTML = html;

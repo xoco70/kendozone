@@ -10028,11 +10028,11 @@ new Vue({
         isTeam: 0,
         genderSelect: 'M',
         ageCategorySelect: 0,
-        ageMin: 6,
-        ageMax: 10,
+        ageMin: 0,
+        ageMax: 0,
         gradeSelect: 0,
-        gradeMin: 10,
-        gradeMax: 12,
+        gradeMin: 0,
+        gradeMax: 0,
 
         grades: [{ value: 0, text: no_grade }, { value: 2, text: '7 Kyu' }, { value: 3, text: '6 Kyu' }, { value: 4, text: '5 Kyu' }, { value: 5, text: '4 Kyu' }, { value: 6, text: '3 Kyu' }, { value: 7, text: '2 Kyu' }, { value: 8, text: '1 Kyu' }, { value: 9, text: '7 Kyu' }, { value: 10, text: '1 Dan' }, { value: 11, text: '2 Dan' }, { value: 12, text: '3 Dan' }, { value: 13, text: '4 Dan' }, { value: 14, text: '5 Dan' }, { value: 15, text: '6 Dan' }, { value: 16, text: '7 Dan' }, { value: 17, text: '8 Dan' }],
         ageCategories: [{ value: 0, text: no_age }, { value: 1, text: childs }, { value: 2, text: students }, { value: 3, text: adults }, { value: 4, text: masters }, { value: 5, text: custom }],
@@ -10083,6 +10083,16 @@ new Vue({
     },
 
     methods: {
+        addCategory: function addCategory() {
+            // Get Get Category Name and Id
+            console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
+            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' + +this.gradeSelect + '/' + this.gradeMin + '/' + +this.gradeMax;
+            console.log(url);
+            $.getJSON(url, function (data) {
+                // console.log( data.name);
+                this.categoryName = data.name;
+            }.bind(this));
+        },
         decodeHtml: function decodeHtml(html) {
             var txt = document.createElement("textarea");
             txt.innerHTML = html;

@@ -99,7 +99,7 @@ Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi
 //    Route::get('authenticate', 'Api\AuthenticateController@index');
 //    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
 //    Route::resource('tournaments', 'Api\TournamentController');
-    Route::get("/category/{isTeam}/{gender}/{age}", 'Api\CategoryController@getName');
+    Route::get("/category/{isTeam}/{gender}/{age}/{ageMin}/{ageMax}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
 
 });
