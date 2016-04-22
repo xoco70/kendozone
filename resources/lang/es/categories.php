@@ -13,9 +13,9 @@ return [
     'woman_first_force' => 'Femenil Primera Fuerza',
     'woman_second_force' => 'Femenil Segunda Fuerza',
 
-    'mixed_single' => 'Individual Mixto',
-    'men_single' => 'Individual Varonil',
-    'ladies_single' => 'Individual Feminil',
+    'mixed_single' => 'Mixto Individual',
+    'men_single' => 'Varonil Individual',
+    'ladies_single' => 'Feminil Individual ',
     'mixed_team' => 'Mixto por Equipo',
     'men_team' => 'Varonil por Equipo',
     'ladies_team' => 'Feminil por Equipo',
