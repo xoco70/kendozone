@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\CategoryTournament;
-use App\Grade;
 use App\Http\Requests;
 use App\Http\Requests\CategoryRequest;
 
