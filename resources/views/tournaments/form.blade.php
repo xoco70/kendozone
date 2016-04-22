@@ -57,7 +57,7 @@
                 </div>
                 <div class="row text-uppercase">
                     <div class="col-md-6 col-md-offset-6 mb-20">
-                        <a href="{{URL::action('CategoryController@create')}}" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
+                        <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
                 <div class=" text-right mt-15">
@@ -117,23 +117,23 @@ $day = $now->day;
 //        calendarIni.on()
 
 
-        $('#block-panel').on('click', function () {
-            var block = $(this).parent().parent();
-            $(block).block({
-                message: '<i class="icon-spinner4 spinner"></i>',
-                timeout: 2000, //unblock after 2 seconds
-                overlayCSS: {
-                    backgroundColor: '#fff',
-                    opacity: 0.8,
-                    cursor: 'wait'
-                },
-                css: {
-                    border: 0,
-                    padding: 0,
-                    backgroundColor: 'transparent'
-                }
-            });
-        });
+//        $('#block-panel').on('click', function () {
+//            var block = $(this).parent().parent();
+//            $(block).block({
+//                message: '<i class="icon-spinner4 spinner"></i>',
+//                timeout: 2000, //unblock after 2 seconds
+//                overlayCSS: {
+//                    backgroundColor: '#fff',
+//                    opacity: 0.8,
+//                    cursor: 'wait'
+//                },
+//                css: {
+//                    border: 0,
+//                    padding: 0,
+//                    backgroundColor: 'transparent'
+//                }
+//            });
+//        });
 
 
     });

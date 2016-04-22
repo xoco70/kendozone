@@ -56,7 +56,8 @@ elixir(function (mix) {
     mix.scripts([
         'plugins/forms/inputs/duallistbox.min.js',
         'plugins/pickers/pickadate/picker.js',
-        'plugins/pickers/pickadate/picker.date.js'
+        'plugins/pickers/pickadate/picker.date.js',
+        'plugins/notifications/bootbox.min.js'
     ], 'public/js/pages/header/tournamentCreate.js');
 
     mix.scripts([

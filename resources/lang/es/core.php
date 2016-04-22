@@ -86,20 +86,22 @@ return [
     'female' => 'Femenil',
     'mixt' => 'Mixto',
     'ageCategory' => 'Categoría de edad',
-    'no_age_restriction' => 'Sin restricción de edad',
+    'no_age_restriction' => 'Sin limite de edad',
     'children' => 'Niños',
     'students' => 'Estudiantes',
     'adults' => 'Adultos',
     'masters' => 'Masters',
     'custom' => 'Personalizado',
+    'years' => 'años',
+    'age' => 'Edad',
+    
     'min_age' => 'Edad minima',
     'max_age' => 'Edad máxima',
     'min_grade' => 'Grado minimo',
     'max_grade' => 'Grado máximo',
-    'no_grade_restriction' => 'Sin restricción de grado',
+    'no_grade_restriction' => 'Sin limite de grado',
 
-    'years' => 'años',
-    'age' => 'Edad',
+    
     'single' => 'Individual',
 
     // CategorySetting

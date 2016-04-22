@@ -85,7 +85,7 @@ return [
     'female' => 'Ladies',
     'mixt' => 'Mixed',
     'ageCategory' => 'Age Category',
-    'no_age_restriction' => 'No age restriction',
+    'no_age_restriction' => 'No age limit',
     'children' => 'Children',
     'students' => 'Students',
     'adults' => 'Adults',
@@ -93,6 +93,11 @@ return [
     'custom' => 'Custom',
     'years' => 'years',
     'age' => 'Age',
+    'min_age' => 'Min Age',
+    'max_age' => 'Max Age',
+    'min_grade' => 'Min Grade',
+    'max_grade' => 'Max Grade',
+    'no_grade_restriction' => 'No grade limit',
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',
