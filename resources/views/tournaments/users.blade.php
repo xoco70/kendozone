@@ -32,10 +32,11 @@ else
                                {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
                                             {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
                             {{--</a>--}}
-                            <a href="{!!   URL::action('TournamentUserController@create',
-                                                        ['tournamentId'=>$tournament->slug,
-                                                        'categoryId'=>$categoryTournament->id
-                                                        ]) !!}"
+                            <a href="#?categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal" data-target="#create_tournament_user"
+                            {{--{!!   URL::action('TournamentUserController@create',--}}
+                                                        {{--['tournamentId'=>$tournament->slug,--}}
+                                                        {{--'categoryId'=>$categoryTournament->id--}}
+                                                        {{--]) !!}"--}}
                                class="btn btn-primary btn-xs pull-right"
                                id="addcompetitor{!! $categoryTournament->id !!}"><b><i
                                             class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
@@ -155,7 +156,7 @@ else
 
 
 @include("right-panel.users_menu")
-
+@include("modals.add_tournament_user")
 @stop
 @section("scripts_footer")
     <script>

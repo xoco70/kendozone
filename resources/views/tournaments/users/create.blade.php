@@ -89,9 +89,9 @@
     </div>
     <script>
 
-        $(function () {
-            $(" .switch").bootstrapSwitch();
-        });
+//        $(function () {
+//            $(" .switch").bootstrapSwitch();
+//        });
     </script>
 @stop
 
