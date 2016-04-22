@@ -167,6 +167,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 //        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
         OwenIt\Auditing\AuditingServiceProvider::class,
+        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+
 
     ],
 
