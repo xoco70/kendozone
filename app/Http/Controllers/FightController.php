@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Response;
+
 class FightController extends Controller {
 
   /**

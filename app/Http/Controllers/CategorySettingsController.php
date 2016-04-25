@@ -57,31 +57,6 @@ class CategorySettingsController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-//    public function edit($tournamentId, $categoryId, $settingId)
-//    {
-//
-//        $categorySetting = CategorySettings::findOrFail($settingId);
-//
-////        dd($categorySetting);
-//        return view("categories.edit", compact('tournamentId', 'categoryId', 'categorySetting')); //, 'defaultSettings'
-//    }
 
     /**
      * Update the specified resource in storage.
@@ -104,7 +79,7 @@ class CategorySettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param CategorySettings $cs
      * @return \Illuminate\Http\Response
      */
     public function destroy(CategorySettings $cs)

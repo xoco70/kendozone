@@ -48,7 +48,7 @@ class AssociationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param AssociationRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(AssociationRequest $request)

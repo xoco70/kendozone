@@ -201,7 +201,7 @@ class InviteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param $tournamentSlug
      * @return \Illuminate\Http\Response
      */
     public function inviteUsers($tournamentSlug)

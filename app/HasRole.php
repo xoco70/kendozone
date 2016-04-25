@@ -12,21 +12,6 @@ trait HasRole
         return $this->belongsTo(Role::class,'role_id', 'id');
     }
     /**
-     * Assign the given role to the user.
-     *
-     * @param  string $role
-     * @return mixed
-     */
-//	public function assignRole($role)
-//	{
-//        $this->roleId = $role->id;
-//        return $this->save();
-//
-////		return $this->roles()->save(
-////				Role::whereName($role)->firstOrFail()
-////		);
-//	}
-    /**
      * Determine if the user has the given role.
      *
      * @param  mixed $role
@@ -38,18 +23,7 @@ trait HasRole
         if (is_string($role)) {
             return $this->role->equals('name', $role);
         }
-
-//        dd($role->contains($this->role->name));
-
-//        var_dump($role->contains($this->role->name));
-//        echo "<br/>hasRole<br/>";
-//        var_dump($role);
-//        echo"<br>";
-//        var_dump($this->role->name);
-//        echo"<br>";
-        // Convert array to collection
-//        $role = collect($role);
-
+        
         return  $role->contains($this->role);
 
     }

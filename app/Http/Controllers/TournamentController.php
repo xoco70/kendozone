@@ -69,7 +69,7 @@ class TournamentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TournamentRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(TournamentRequest $request)
@@ -85,8 +85,9 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show(Tournament $tournament)
     {
@@ -105,13 +106,11 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
-//        dd($tournament);
         $categories = Category::lists('name', 'id');
         $levels = TournamentLevel::lists('name', 'id');
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories()->count();
 
-//        $tournament = Tournament::with('categoryTournaments.settings')->find($tournament->id);
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize'));
     }
 
@@ -158,8 +157,9 @@ class TournamentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Tournament $tournament)
     {

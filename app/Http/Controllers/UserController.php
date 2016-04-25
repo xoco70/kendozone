@@ -75,15 +75,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param UserRequest $request
      * @return Response
      */
     public function store(UserRequest $request)
     {
         $data = $request->except('_token');
 
-//        $data = User::uploadPic($data);
-//        dd(Input::file('avatar'), $destinationPath, $fileName,Input::file('avatar')->move($destinationPath, $fileName));
         if ($request->is("users")) {
             $data['provider'] = "created";
         } else {
@@ -92,9 +90,6 @@ class UserController extends Controller
 
         $data['provider_id'] = $data['email'];
         $data['verified'] = 1;
-//        dd($data);
-//        $user =
-//        $user->avatar = $fileName;
 
         if (User::create($data)) {
             flash()->success(Lang::get('core.success'));
@@ -122,7 +117,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-//        $user = User::findOrFail($id);
         $roles = Role::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
@@ -133,8 +127,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param User $profile
+     * @param  UserRequest $request
+     * @param User $user
      * @return Response
      */
     public function update(UserRequest $request, User $user)
@@ -175,21 +169,6 @@ class UserController extends Controller
 
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-//    public function showProfile($id)
-//    {
-//        $user = User::findOrFail($id);
-//        $grades = Grade::lists('name', 'id');
-//        $countries = Countries::lists('name', 'id');
-//        return view('users.show', compact('user', 'countries', 'grades'));
-//    }
 
     public function exportUsersExcel()
     {

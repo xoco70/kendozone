@@ -34,7 +34,7 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param GeneralRequest|\Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(GeneralRequest $request)
@@ -77,8 +77,8 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ClubRequest|\Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(ClubRequest $request, $id)

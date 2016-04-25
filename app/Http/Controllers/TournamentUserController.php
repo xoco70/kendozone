@@ -55,7 +55,7 @@ class TournamentUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TournamentUserRequest $request
      * @param Tournament $tournament
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
@@ -147,7 +147,8 @@ class TournamentUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Tournament $tournament
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function show(Tournament $tournament, User $user)
@@ -175,7 +176,8 @@ class TournamentUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param $tournamentId
+     * @param $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $tournamentId, $user)
