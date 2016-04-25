@@ -22,108 +22,67 @@
     <div class="container">
         <div class="content">
             <!-- Detached content -->
+
+            <!-- Simple panel 1 : General Data-->
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
-                    <!-- Simple panel 1 : General Data-->
+                <div class="col-md-6">
+
                     <div class="panel panel-flat">
                         <div class="panel-body">
                             <div class="container-fluid">
-
 
                                 <fieldset title="{{Lang::get('core.general_data')}}">
                                     <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
                                 </fieldset>
+                                <div class="text-center">
+                                    <img src="{{ $user->avatar }}" class="img-circle" width="200" height="200"/>
 
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.username') }}
-                                                    :</span> {!!  $user->name !!}
-                                            </div>
-                                        </div>
+                                    <div class="text-semibold text-uppercase pt-10"> {!!  $user->name !!}</div>
+                                    <div class="text-grey">{{ $user->email }}</div>
 
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.firstname') }}:</span>
-                                                {!!  $user->firstName !!}
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.lastname') }}:</span>
-                                                {!!  $user->lastName !!}
+                                    @if ($user->firstName !=null)
+                                        <div><span class="text-semibold"> {{ trans('core.firstname') }}:</span></div>
+                                        {!!  $user->firstName !!}
+                                    @endif
+                                    @if ($user->lastName !=null)
+                                        <div><span class="text-semibold"> {{ trans('core.lastname') }}:</span></div>
+                                        <div>{!!  $user->lastName !!}</div>
+                                    @endif
 
 
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.grade') }}:</span>
-                                                {!!  trans($user->grade->name)!!}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.email') }}:</span>
-                                                {!!  trans($user->email)!!}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.role') }}:</span>
-                                                {!!  trans($user->role->name)!!}
-                                            </div>
-                                        </div>
-
-
+                                    <hr/>
+                                    <div><i class="icon-medal2 text-primary pr-5"  ></i>
+                                        <span class="text-semibold"> {{ trans('core.grade') }}:</span>
+                                    {!!  trans($user->grade->name)!!}
                                     </div>
-                                    <div class="col-xs-12 col-md-6  text-center">
-                                        <img src="{{ $user->avatar }}" width="200" height="200"/>
-                                    </div>
+                                    {{--<div><span class="text-bold"> {{ trans('core.role') }}:</span></div>--}}
+                                    {{--{!!  trans($user->role->name)!!}--}}
+
                                 </div>
 
                             </div>
                         </div>
+
                     </div>
-
+                </div>
+                <div class="col-md-6">
                     <div class="panel panel-flat">
-
-
                         <div class="panel-body">
                             <div class="container-fluid">
-
-
                                 <fieldset title="{{Lang::get('core.location')}}">
                                     <legend class="text-semibold">{{Lang::get('core.location')}}</legend>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="row">
-                                                <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.city') }}
-                                                    :</span> {!!  $user->city !!}
-                                                </div>
-
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                                <span class="text-bold"> {{ trans('core.country') }}
-                                                    :</span> {!!  trans($user->country->name)!!} <img
-                                                            src="/images/flags/{{$user->country->flag}}"/>
-                                                </div>
-                                                <br/>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6  ">
-                                            <div class="map-container map-basic"></div>
-                                        </div>
-                                    </div>
-
                                 </fieldset>
+                                <div>
+                                    <span class="text-semibold"> {{ trans('core.country') }}:</span>
+                                    <span class="text-grey">{!!  trans($user->country->name)!!}</span>
+                                    <img src="/images/flags/{{$user->country->flag}}" class="ml-10"/>
+                                </div>
+
+                                <div class="mb-10"><span class="text-semibold"> {{ trans('core.city') }}:</span>
+                                    <span class="text-grey">{!!  $user->city !!}</span>
+                                </div>
+
+                                <div class="map-container map-basic"></div>
                             </div>
                         </div>
                     </div>
