@@ -107,15 +107,47 @@ elixir(function (mix) {
     ], 'public/js/pages/header/tournamentUserIndex.js');
 
     mix.scripts([
-        // 'bootstrap-tagsinput.js',
-        // 'bootstrap-multiEmail.js'
         'plugins/multiple-emails.js'
     ], 'public/js/pages/header/tournamentInvite.js');
 
     mix.styles([
-        // 'bootstrap-tagsinput.css',
-        // 'bootstrap-multiEmail.css'
         'multiple-emails.css'
     ], 'public/css/pages/tournamentInvite.css');
+
+    
+    
+    
+    // FOOTER
+
+    mix.scripts([
+        'pages/footer/categoryCreateFooter.js'
+    ], 'public/js/pages/footer/categoryCreateFooter.js');
+
+
+    mix.scripts([
+        'pages/footer/tournamentEditFooter.js'
+    ], 'public/js/pages/footer/tournamentEditFooter.js');
+
+
+    mix.scripts([
+        'pages/footer/tournamentDeletedFooter.js'
+    ], 'public/js/pages/footer/tournamentDeletedFooter.js');
+
+    mix.scripts([
+        'pages/footer/tournamentIndexFooter.js'
+    ], 'public/js/pages/footer/tournamentIndexFooter.js');
+
+    mix.scripts([
+        'pages/footer/tournamentShowFooter.js'
+    ], 'public/js/pages/footer/tournamentShowFooter.js');
+
+    mix.scripts([
+        'pages/footer/userIndexFooter.js'
+    ], 'public/js/pages/footer/userIndexFooter.js');
+
+    mix.scripts([
+        'pages/footer/userShowFooter.js'
+    ], 'public/js/pages/footer/userShowFooter.js');
+
 
 });
