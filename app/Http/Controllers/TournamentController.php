@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\TournamentLevel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -30,7 +31,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        
+
         $currentModelName = trans_choice('core.tournament', 2);
 //        $token=JWTAuth::getToken();
 //        $user = JWTAuth::toUser($token);
@@ -107,7 +108,29 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
-        $categories = Category::take(10)->orderBy('id', 'asc')->lists('name', 'id');
+        $selectedCategories = $tournament->categories;
+        $baseCategories = Category::take(10)->get();
+
+        // Gives me a list of category containing
+        $categories1 = $selectedCategories->merge($baseCategories)->unique();
+//                    ->sortBy(function ($key) {
+//                        return $key;
+//                    });
+//                    ->lists('name', 'id');
+
+        $categories = new Collection();
+        foreach ($categories1 as $category) {
+//            echo $category->buildName() . '<br/>';
+//                $categories = array_prepend($categories, [trim($category->buildName(), $category->id]);
+//            echo trim($category->buildName()).'<br/>';
+            $category->name = trim($category->buildName());
+            $categories->push($category);
+        }
+        $categories = $categories->sortBy(function ($key) {
+            return $key;
+        })->lists('name', 'id');
+
+
         $levels = TournamentLevel::lists('name', 'id');
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories()->count();
@@ -198,6 +221,7 @@ class TournamentController extends Controller
                 ]
             );
     }
+
     public function getDeleted()
     {
         $currentModelName = trans_choice('core.tournament', 2);
@@ -215,7 +239,8 @@ class TournamentController extends Controller
         $title = trans('core.tournaments_deleted');
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }
-    public function generateTrees($tournamentId)    
+
+    public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
 //        $competitors = $tournament->competitors();

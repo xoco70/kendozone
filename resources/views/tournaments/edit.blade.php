@@ -357,6 +357,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     <!-- /detached content -->
 </div>
 @include("right-panel.tournament_menu")
+@include("modals.create_category");
 
         <!-- /content area -->
 <?php
@@ -379,4 +380,5 @@ $day = $now->day;
 
     </script>
     {!! Html::script('js/pages/footer/tournamentEditFooter.js') !!}
+    {!! Html::script('js/categoryCreate.js') !!}
 @stop

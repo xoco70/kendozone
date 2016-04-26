@@ -35,7 +35,9 @@ $(function() {
 
     // Disable filtering
     $('.listbox-filter-disabled').bootstrapDualListbox({
-        showFilterInputs: false
+        showFilterInputs: false,
+        infoTextEmpty: '',
+        infoText: ''
     });
 
 

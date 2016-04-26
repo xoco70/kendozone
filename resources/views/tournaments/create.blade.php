@@ -24,6 +24,6 @@
 @stop
 @section('scripts_footer')
     {!! Html::script('js/icheck.min.js') !!}
-    {!! Html::script('js/pages/footer/categoryCreateFooter.js') !!}
+{{--    {!! Html::script('js/pages/footer/categoryCreateFooter.js') !!}--}}
     {!! Html::script('js/categoryCreate.js') !!}
 @stop

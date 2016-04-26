@@ -71,7 +71,7 @@ new Vue({
                 }
             }
 
-            if (this.gradeSelect == 1) {
+            if (this.gradeSelect == 3) {
                 gradeText = ' - ' + grade + ' : ';
                 if (this.gradeMin != 0 && this.gradeMax != 0) {
                     gradeText += this.getSelectText(this.grades, this.gradeMin) + ' - ' + this.getSelectText(this.grades, this.gradeMax);
@@ -84,7 +84,6 @@ new Vue({
                 }
             }
 
-            this.getSelectText(this.ageCategories, this.ageCategorySelect);
             return teamText + ' ' + this.getSelectText(this.genders, this.genderSelect) + ' ' + ageCategoryText + ' ' + gradeText;
         }
     },

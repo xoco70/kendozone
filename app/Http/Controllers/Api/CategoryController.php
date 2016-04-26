@@ -10,32 +10,36 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends ApiController
 {
 
-    public function getNameAndInsertIfNotExists($isTeam, $gender, $ageCategory, $ageMin, $ageMax, $gradeMin, $gradeMax)
+    public function getNameAndInsertIfNotExists($isTeam, $gender, $ageCategory, $ageMin, $ageMax,$gradeCategory, $gradeMin, $gradeMax)
     {
-        $category =DB::table('category')
+        $category = DB::table('category')
             ->select('name')
             ->where('isTeam', '=', $isTeam)
             ->where('gender', '=', $gender)
-            ->where('gradeCategory', '=',0)
+            ->where('gradeCategory', '=', 0)
             ->first();
-        
-         $newCategoryName = Category::firstOrCreate(
-             [
-              'name' => $category->name,
-              'isTeam'=> $isTeam,
-              'gender'=> $gender,
-              'ageCategory' => $ageCategory,
-              'ageMin' => $ageMin,
-              'ageMax' => $ageMax,
-              'gradeMin' => $gradeMin,
-              'gradeMax' => $gradeMax
-             ]);
+//        dd($gradeCategory);
+
+        $newCategoryName = Category::firstOrCreate(
+            [
+                'name' => $category->name,
+                'isTeam' => $isTeam,
+                'gender' => $gender,
+                'ageCategory' => $ageCategory,
+                'ageMin' => $ageMin,
+                'ageMax' => $ageMax,
+                'gradeCategory' => $gradeCategory,
+                'gradeMin' => $gradeMin,
+                'gradeMax' => $gradeMax
+            ]);
 //        $newCategoryName = Category::all();
         return $newCategoryName;
     }
-    public function getBaseCategories(){
+
+    public function getBaseCategories()
+    {
         return Category::take(2)->orderBy('id', 'asc')->lists('name', 'id');
 
-}
+    }
 
 }

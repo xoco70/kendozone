@@ -1,6 +1,6 @@
 $(function () {
 
-    var validate = false;
+    // var validate = false;
 
     $('#name').blur(function () {
         if (!$(this).val() || $(this).length <6) {
@@ -260,7 +260,9 @@ $(function () {
 
     $('.listbox-filter-disabled').bootstrapDualListbox({
         showFilterInputs: false,
-        setMoveSelectedLabel: 'go'
+        infoTextEmpty: '',
+        infoText: ''
+
     });
 
     $(".switch").bootstrapSwitch();
@@ -338,22 +340,22 @@ $(function () {
             type: "info"
         });
     });
-    $(".accordion-sortable").sortable({
-        connectWith: '.accordion-sortable',
-        items: '.panel',
-        helper: 'original',
-        cursor: 'move',
-        handle: '[data-action=move]',
-        revert: 100,
-        containment: '.content',
-        forceHelperSize: true,
-        placeholder: 'sortable-placeholder',
-        forcePlaceholderSize: true,
-        tolerance: 'pointer',
-        start: function (e, ui) {
-            ui.placeholder.height(ui.item.outerHeight());
-        }
-    });
+    // $(".accordion-sortable").sortable({
+    //     connectWith: '.accordion-sortable',
+    //     items: '.panel',
+    //     helper: 'original',
+    //     cursor: 'move',
+    //     handle: '[data-action=move]',
+    //     revert: 100,
+    //     containment: '.content',
+    //     forceHelperSize: true,
+    //     placeholder: 'sortable-placeholder',
+    //     forcePlaceholderSize: true,
+    //     tolerance: 'pointer',
+    //     start: function (e, ui) {
+    //         ui.placeholder.height(ui.item.outerHeight());
+    //     }
+    // });
 
 
 });

@@ -20,6 +20,7 @@ class Category extends Model
         'ageCategory',
         'ageMin',
         'ageMax',
+        'gradeCategory',
         'gradeMin',
         'gradeMax',
     ];
@@ -77,6 +78,72 @@ class Category extends Model
     {
         return $this->gender == "X";
     }
+
+    public function buildName()
+    {
+//        dd($this);
+        $ageCategories = [
+            0 => trans('core.no_age'),
+            1 => trans('core.childs'),
+            2 => trans('core.students'),
+            3 => trans('core.adults'),
+            4 => trans('core.masters'),
+            5 => trans('core.custom')
+        ];
+
+        $genders = [
+            'M' => trans('core.male'),
+            'F' => trans('core.female'),
+            'X' => trans('core.mixt')
+        ];
+
+        $grades = Grade::lists('name','id');
+        $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
+
+        $ageCategoryText = '';
+        $gradeText = '';
+//
+        if ($this->ageCategory != 0) {
+            if ($this->ageCategory == 5) {
+                $ageCategoryText = ' - ' . trans('core.age') . ' : ';
+                if ($this->ageMin != 0 && $this->ageMax != 0) {
+                    $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('core.years');
+                } else if ($this->ageMin == 0 && $this->ageMax != 0) {
+                    $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('core.years');
+                } else if ($this->ageMin != 0 && $this->ageMax == 0) {
+                    $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('core.years');
+                } else {
+                    $ageCategoryText = '';
+                }
+            } else {
+                $ageCategoryText = $ageCategories[$this->ageCategory];
+            }
+        }
+//        echo ($this->gradeCategory) ;
+
+        if ($this->gradeCategory == 1) {
+            $gradeText = trans('core.first_force');
+        } else if ($this->gradeCategory == 2) {
+            $gradeText = trans('core.second_force');
+        } else if ($this->gradeCategory == 3) {
+
+            $gradeText = ' - ' . trans('core.grade') . ' : ';
+//            dd($grades);
+            if ($this->gradeMin != 0 && $this->gradeMax != 0) {
+                $gradeText .= $grades[$this->gradeMin] . ' - ' . $grades[$this->gradeMax];
+            } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
+                $gradeText .= ' < ' . $grades[$this->gradeMax];
+            } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
+                $gradeText .= ' > ' . $grades[$this->gradeMin];
+            } else {
+                $gradeText = '';
+            }
+        }
+//        dd($teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText);
+        return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
+
+    }
+
 //    public function shinpans()
 //    {
 //        return $this->hasMany('App\Shinpan');

@@ -88,12 +88,12 @@
 
                 <select v-model="gradeSelect" class="form-control">
                     <option value="0">{{trans('core.no_grade_restriction')}}</option>
-                    <option value="1">{{trans('core.custom')}}</option>
+                    <option value="3">{{trans('core.custom')}}</option>
 
                 </select>
             </div>
         </div>
-        <div class="col-md-4" v-if='gradeSelect==1'>
+        <div class="col-md-4" v-if='gradeSelect==3'>
             <div class=" form-group">
                 {!!  Form::label('gradeMin', trans('core.min_grade'),['class' => 'text-bold' ]) !!}
                 <select v-model="gradeMin" class="form-control" v-show="gradesSelect!=0">
@@ -104,7 +104,7 @@
 
             </div>
         </div>
-        <div class="col-md-4" v-if='gradeSelect==1'>
+        <div class="col-md-4" v-if='gradeSelect==3'>
             <div class=" form-group">
                 {!!  Form::label('gradeMax', trans('core.max_grade'),['class' => 'text-bold' ]) !!}
                 <select v-model="gradeMax" class="form-control" v-show="gradesSelect!=0">
@@ -122,7 +122,7 @@
 {{--Gender @{{ genderSelect }} - @{{ genderSelect | selectText genders}} <br/>--}}
 {{--ageCategorySelect @{{ ageCategorySelect }}<br/>--}}
 
-{{--GradeSelect : @{{ gradeSelect }}<br/>--}}
+GradeSelect : @{{ gradeSelect }}<br/>
 {{--GradeMin : @{{ gradeMin}} GradeMax : @{{ gradeMax }}<br/>--}}
 {{--AgeMin : @{{ ageMin }} AgeMax : @{{ ageMax }}<br/>--}}
 
