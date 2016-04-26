@@ -101,8 +101,11 @@ return [
     'no_grade_restriction' => 'Sin limite de grado',
     'add_and_close' => 'Guardar',
     'add_and_new' => 'Guardar y Nuevo ',
-    
     'single' => 'Individual',
+    'first_force' => 'Primera Fuerza',
+    'second_force' => 'Segunda Fuerza',
+//    'single' => 'Individual',
+//    'single' => 'Individual',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorias',

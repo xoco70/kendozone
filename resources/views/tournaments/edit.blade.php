@@ -14,7 +14,7 @@
 @section('content')
 @include("errors.list")
 <?php
-$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
+$appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
 ?>
 
 
@@ -214,29 +214,32 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                 </a>
                             </fieldset>
 
+                            <div class="panel-body">
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <p class="coutent-group">{{trans('core.select_tournament_categories')}}</p>
-
-
                                         {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                                     </div>
-
-
                                 </div>
-
-
-                            </div>
-                            <div align="right">
-                                <button type="submit" class="btn btn-success btn-update-tour">
-                                    <i></i>{{trans("core.save")}}
-                                </button>
+                                <div class="row text-uppercase">
+                                    <div class="col-md-6">
+                                    <span class="text-danger" v-cloak>
+                                        @{{ error }}
+                                    </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="#" data-toggle="modal" data-target="#create_category"
+                                           class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
+                                    </div>
+                                </div>
+                                <div align="right">
+                                    <button type="submit" class="btn btn-success btn-update-tour">
+                                        <i></i>{{trans("core.save")}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
                     <!-- /simple panel -->
                 </div>
@@ -262,7 +265,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
-                                    $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration!="")
+                                    $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
                                             ? $setting->fightDuration
                                             : Config::get('constants.CAT_FIGHT_DURATION');
 
@@ -359,7 +362,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 @include("right-panel.tournament_menu")
 @include("modals.create_category");
 
-        <!-- /content area -->
+<!-- /content area -->
 <?php
 $now = Carbon\Carbon::now();
 $year = $now->year;
@@ -377,7 +380,8 @@ $day = $now->day;
         var latitude = "{{$latitude }}";
         var configured = "{{ trans('core.configured_full') }}";
         var allCategoriesSize = '{!! $categorySize !!}';
-
+        var dualListIds = [];
+        var dualList;
     </script>
     {!! Html::script('js/pages/footer/tournamentEditFooter.js') !!}
     {!! Html::script('js/categoryCreate.js') !!}

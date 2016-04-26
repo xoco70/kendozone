@@ -100,6 +100,9 @@ return [
     'no_grade_restriction' => 'No grade limit',
     'add_and_close' => 'Add',
     'add_and_new' => 'Add and New',
+    'first_force' => 'First Force ( >1Dan )',
+    'second_force' => 'Second Force ( <1Dan)',
+
 
     // CategorySetting
     'categorySettings' => 'Categories Settings',

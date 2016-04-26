@@ -258,7 +258,7 @@ $(function () {
 
     });
 
-    $('.listbox-filter-disabled').bootstrapDualListbox({
+    dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
         showFilterInputs: false,
         infoTextEmpty: '',
         infoText: ''

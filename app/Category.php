@@ -84,7 +84,7 @@ class Category extends Model
 //        dd($this);
         $ageCategories = [
             0 => trans('core.no_age'),
-            1 => trans('core.childs'),
+            1 => trans('core.children'),
             2 => trans('core.students'),
             3 => trans('core.adults'),
             4 => trans('core.masters'),
