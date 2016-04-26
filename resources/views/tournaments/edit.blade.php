@@ -228,7 +228,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                                         @{{ error }}
                                     </span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 add_category">
                                         <a href="#" data-toggle="modal" data-target="#create_category"
                                            class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
                                     </div>

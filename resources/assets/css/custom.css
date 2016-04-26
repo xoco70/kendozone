@@ -206,3 +206,6 @@ fieldset > a > legend {
 [v-cloak] {
     display: none;
 }
+.add_category{
+    margin-top: -20px;
+}
