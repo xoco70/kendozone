@@ -107,27 +107,17 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}
-                                            <br/>
-                                            rules
-                                        </div>
-                                    </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-6">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--{!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}--}}
+                                            {{--<br/>--}}
+                                            {{--rules--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-
-
-                                    </div>
-                                    <div class="col-md-6">
-
-                                    </div>
-
-                                </div>
+                                {{--</div>--}}
 
 
                             </fieldset>
@@ -194,7 +184,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->name)}}
+                                                            {{trans($categoryTournament->category->buildName())}}
                                                         </h6>
                                                     </div>
                                                 </a>
