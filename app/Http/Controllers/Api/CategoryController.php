@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 
 class CategoryController extends ApiController
@@ -11,18 +12,17 @@ class CategoryController extends ApiController
 
     public function getNameAndInsertIfNotExists($isTeam, $gender, $ageCategory, $ageMin, $ageMax, $gradeMin, $gradeMax)
     {
-        Category::
-            where('isTeam', '=', $isTeam)
+        $category =DB::table('category')
+            ->select('name')
+            ->where('isTeam', '=', $isTeam)
             ->where('gender', '=', $gender)
-            ->where('ageCategory', '=', $ageCategory)
-            ->where('ageMin', '=', 0)
-            ->where('ageMax', '=', 0)
-            ->where('gradeMin', '=', 0)
-            ->where('gradeMax', '=', 0)
-            ->firstOrFail();
-
-         $newCategoryName = Category::firstOrNew(
-             ['isTeam'=> $isTeam,
+            ->where('gradeCategory', '=',0)
+            ->first();
+        
+         $newCategoryName = Category::firstOrCreate(
+             [
+              'name' => $category->name,
+              'isTeam'=> $isTeam,
               'gender'=> $gender,
               'ageCategory' => $ageCategory,
               'ageMin' => $ageMin,
@@ -30,7 +30,7 @@ class CategoryController extends ApiController
               'gradeMin' => $gradeMin,
               'gradeMax' => $gradeMax
              ]);
-
+//        $newCategoryName = Category::all();
         return $newCategoryName;
     }
     public function getBaseCategories(){

@@ -21,15 +21,14 @@ new Vue({
             {value: 6, text: '3 Kyu'},
             {value: 7, text: '2 Kyu'},
             {value: 8, text: '1 Kyu'},
-            {value: 9, text: '7 Kyu'},
-            {value: 10, text: '1 Dan'},
-            {value: 11, text: '2 Dan'},
-            {value: 12, text: '3 Dan'},
-            {value: 13, text: '4 Dan'},
-            {value: 14, text: '5 Dan'},
-            {value: 15, text: '6 Dan'},
-            {value: 16, text: '7 Dan'},
-            {value: 17, text: '8 Dan'}
+            {value: 9, text: '1 Dan'},
+            {value: 10, text: '2 Dan'},
+            {value: 11, text: '3 Dan'},
+            {value: 12, text: '4 Dan'},
+            {value: 13, text: '5 Dan'},
+            {value: 14, text: '6 Dan'},
+            {value: 15, text: '7 Dan'},
+            {value: 16, text: '8 Dan'}
         ],
         ageCategories: [
             {value: 0, text: no_age},
@@ -95,8 +94,10 @@ new Vue({
             this.error = '';
             // Get Get Category Name and Id
             // console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
-            var url = '/api/v1/category/' + this.isTeam + '/' + this.genderSelect + '/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax + '/' + this.gradeMin + '/' + +this.gradeMax;
-            // console.log(url);
+            var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
+                    + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
+                    + '/grade/' +this.gradeSelect+ '/'+ this.gradeMin + '/' + +this.gradeMax;
+            console.log(url);
             dualListIds = [];
             $(".demo2 > option").each(function () {
                 dualListIds.push(this.value);
@@ -107,7 +108,7 @@ new Vue({
                 console.log(data.id);
                 console.log(dualListIds.indexOf('' +data.id));
                 if (dualListIds.indexOf('' + data.id) == -1){
-                    var option = '<option value=' + data.id + ' selected>' + data.name + '</option>';
+                    var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
                     // console.log(option);
                     dualList.append(option);
                     dualList.bootstrapDualListbox('refresh');

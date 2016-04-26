@@ -18,7 +18,10 @@ class Category extends Model
         'gender',
         'isTeam',
         'ageCategory',
-        'grade'
+        'ageMin',
+        'ageMax',
+        'gradeMin',
+        'gradeMax',
     ];
 
     public function getNameAttribute($name)

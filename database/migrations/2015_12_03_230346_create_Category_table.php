@@ -20,14 +20,15 @@ class CreateCategoryTable extends Migration
             $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
             $table->integer('ageMin')->unsigned()->default(0);
             $table->integer('ageMax')->unsigned()->default(0);
+            $table->integer('gradeCategory')->unsigned()->default(0);
             $table->integer('gradeMin')->unsigned()->default(0);
             $table->integer('gradeMax')->unsigned()->default(0);
-            $table->foreign('gradeMin')
-                ->references('id')
-                ->on('grade');
-            $table->foreign('gradeMax')
-                ->references('id')
-                ->on('grade');
+//            $table->foreign('gradeMin')
+//                ->references('id')
+//                ->on('grade');
+//            $table->foreign('gradeMax')
+//                ->references('id')
+//                ->on('grade');
             $table->unique(['name','gender','isTeam','ageCategory','ageMin','ageMax','gradeMin','gradeMax'], 'category_fields_unique');
             $table->timestamps();
             $table->engine = 'InnoDB';
