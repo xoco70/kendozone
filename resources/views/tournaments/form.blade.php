@@ -50,7 +50,7 @@
                         <p>{{trans('core.select_categories_to_register')}}</p>
 
                         <div class="form-group multiselect">
-                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'demo2 form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
 
                     </div>
@@ -89,7 +89,7 @@ $day = $now->day;
 ?>
 
 <script>
-    var dualList = $('.demo2').bootstrapDualListbox({
+    var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
         showFilterInputs: false,
         infoTextEmpty: '',
         infoText: ''
@@ -111,7 +111,7 @@ $day = $now->day;
             }
         });
 
-        $(".demo2 > option").each(function () {
+        $(".listbox-filter-disabled > option").each(function () {
             dualListIds.push(this.value);
         });
         console.log(dualListIds);
