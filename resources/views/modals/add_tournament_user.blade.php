@@ -1,3 +1,4 @@
+{!! Form::open(['url'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
 <div id="create_tournament_user" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,15 +27,16 @@
                     </div>
                 </div>
                 <br/>
-{{--                {!!  Form::hidden('categoryTournamentId',$categoryTournamentId) !!}--}}
+                {!!  Form::hidden('categoryTournamentId',null, ["id" => 'categoryTournamentId']) !!}
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary" @click="addTournamentUser">{{ trans('core.add_and_close') }}</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary" id="addTournamentUser">{{ trans('core.add_and_close') }}</button>
                 {{--<button type="button"  class="btn btn-success" @click="addCategory">{{ trans('core.add_and_close') }}</button>--}}
 
             </div>
         </div>
     </div>
 </div>
+{!! Form::close() !!}
 {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}

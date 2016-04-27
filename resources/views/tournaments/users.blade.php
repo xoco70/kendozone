@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('scripts')
-{!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
+
 @stop
 @section('breadcrumbs')
 {!! Breadcrumbs::render('tournaments.users.index',$tournament) !!}
@@ -14,8 +14,6 @@ if ($settingSize > 0 && $settingSize == $categorySize)
 else
     // For showing Modal
     $link = "#";
-
-
 ?>
         <!-- Detached content -->
 <div class="container-detached">
@@ -29,16 +27,13 @@ else
 
                         @if (Auth::user()->canEditTournament($tournament))
                             {{--<a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"--}}
-                               {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
-                                            {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
+                            {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
+                            {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
                             {{--</a>--}}
-                            <a href="#?categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal" data-target="#create_tournament_user"
-                            {{--{!!   URL::action('TournamentUserController@create',--}}
-                                                        {{--['tournamentId'=>$tournament->slug,--}}
-                                                        {{--'categoryId'=>$categoryTournament->id--}}
-                                                        {{--]) !!}"--}}
-                               class="btn btn-primary btn-xs pull-right"
-                               id="addcompetitor{!! $categoryTournament->id !!}"><b><i
+                            <a href="#?categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal"
+                               data-target="#create_tournament_user"
+                               class="btn btn-primary btn-xs pull-right open-modal"
+                               data-id="{!! $categoryTournament->id !!}"><b><i
                                             class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                             </a>
                         @endif
@@ -47,7 +42,7 @@ else
                             <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
                         </a>
 
-                        <table class="table datatable-responsive">
+                        <table class="table datatable-responsive" id="table{{ $categoryTournament->id }}">
                             <thead>
                             <tr>
                                 <th class="min-tablet text-center "
@@ -117,10 +112,11 @@ else
                                     </td>
 
 
-                                    <td class="text-center"><img src="/images/flags/{{ $country->flag }}" alt="{{ $country->name }}"/></td>
+                                    <td class="text-center"><img src="/images/flags/{{ $country->flag }}"
+                                                                 alt="{{ $country->name }}"/></td>
 
                                     @if (Auth::user()->canEditTournament($tournament))
-                                    <td class="text-center">
+                                        <td class="text-center">
 
                                             {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
                                          'action' => ['TournamentUserController@deleteUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
@@ -134,7 +130,7 @@ else
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </button>
                                             {!! Form::close() !!}
-                                    </td>
+                                        </td>
                                     @endif
                                 </tr>
 
@@ -159,10 +155,42 @@ else
 @include("modals.add_tournament_user")
 @stop
 @section("scripts_footer")
+    {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
+    {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
+    {{--https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js--}}
     <script>
         var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
-
+        var categoryTournamentId;
         var tournamentSlug = "{{ $tournament->slug }}";
+        $(document).on("click", ".open-modal", function () {
+            categoryTournamentId = $(this).data('id');
+            $("#categoryTournamentId").val(categoryTournamentId);
+        });
+        $(document).on("click", "#addTournamentUser", function () {
+            // AJAX Request to save user
+
+            // Get Table reference
+
+
+            var t = $('#table' + categoryTournamentId).DataTable();
+            console.log(t);
+            t.row.add([
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+            ]).draw( false );
+
+            // Add User to footable
+
+
+        });
+
+
+        //
+
     </script>
-    {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
 @stop

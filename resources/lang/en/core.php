@@ -154,7 +154,7 @@ return [
     // Competitor
     'competitor' => 'Competitor|Competitors',
     'add_competitor' => 'Add Competitor',
-    'add_competitor_to_category' => 'Add competitor to category: :category',
+    'add_competitor_to_category' => 'Add competitor to category :category',
     'select_competitor_categories' => 'Select the categories in which you want to register the competitor',
     'select_tournament_categories' => 'Select the open categories for the tournament
 ',
