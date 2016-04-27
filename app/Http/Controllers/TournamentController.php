@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\CategorySettings;
 use App\CategoryTournament;
+use App\Grade;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
@@ -97,7 +98,8 @@ class TournamentController extends Controller
 //        $levels = TournamentLevel::lists('name', 'id');
 //
 //        $categories = Category::lists('name', 'id');
-        return view('tournaments.show', compact('tournament'));
+        $grades = Grade::lists('name','id');
+        return view('tournaments.show', compact('tournament','grades'));
     }
 
     /**
@@ -108,22 +110,18 @@ class TournamentController extends Controller
      */
     public function edit(Tournament $tournament)
     {
+        $numCompetitors = $tournament->competitors()->select('user_id')->groupBy('user_id')->get()->count();
+
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
 
         // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
-//                    ->sortBy(function ($key) {
-//                        return $key;
-//                    });
-//                    ->lists('name', 'id');
-
+        $grades = Grade::lists('name','id');
         $categories = new Collection();
         foreach ($categories1 as $category) {
-//            echo $category->buildName() . '<br/>';
-//                $categories = array_prepend($categories, [trim($category->buildName(), $category->id]);
-//            echo trim($category->buildName()).'<br/>';
-            $category->name = trim($category->buildName());
+
+            $category->name = trim($category->buildName($grades));
             $categories->push($category);
         }
         $categories = $categories->sortBy(function ($key) {
@@ -135,7 +133,7 @@ class TournamentController extends Controller
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories()->count();
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize','grades','numCompetitors'));
     }
 
     /**

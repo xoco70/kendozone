@@ -1,7 +1,4 @@
-<?php
-$numCompetitors = $tournament->competitors()->count();
-?>
-        <!-- Detached sidebar -->
+<!-- Detached sidebar -->
 <div class="sidebar-detached">
 
     <div class="sidebar sidebar-default">

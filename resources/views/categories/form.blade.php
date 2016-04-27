@@ -122,7 +122,7 @@
 {{--Gender @{{ genderSelect }} - @{{ genderSelect | selectText genders}} <br/>--}}
 {{--ageCategorySelect @{{ ageCategorySelect }}<br/>--}}
 
-GradeSelect : @{{ gradeSelect }}<br/>
+{{--GradeSelect : @{{ gradeSelect }}<br/>--}}
 {{--GradeMin : @{{ gradeMin}} GradeMax : @{{ gradeMax }}<br/>--}}
 {{--AgeMin : @{{ ageMin }} AgeMax : @{{ ageMax }}<br/>--}}
 

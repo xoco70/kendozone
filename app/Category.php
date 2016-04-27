@@ -79,7 +79,7 @@ class Category extends Model
         return $this->gender == "X";
     }
 
-    public function buildName()
+    public function buildName($grades)
     {
 //        dd($this);
         $ageCategories = [
@@ -97,7 +97,7 @@ class Category extends Model
             'X' => trans('core.mixt')
         ];
 
-        $grades = Grade::lists('name','id');
+        
         $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
 
         $ageCategoryText = '';

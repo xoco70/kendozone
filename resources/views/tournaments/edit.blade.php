@@ -259,6 +259,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             <div class="panel-group" id="accordion-styled">
 
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                                    {{--TODO This is making X query, have to cache it--}}
                                     <?php
                                     // Set defaults
                                     $setting = $tournament->categoryTournaments->get($key)->settings;
@@ -280,7 +281,8 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->buildName())}}
+
+                                                            {{trans($categoryTournament->category->buildName($grades))}}
                                                         </h6>
                                                     </div>
                                                 </a>
