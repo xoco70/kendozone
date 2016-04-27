@@ -168,6 +168,7 @@ return [
 //        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
         OwenIt\Auditing\AuditingServiceProvider::class,
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class
 
 
     ],
@@ -236,6 +237,7 @@ return [
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Image' => Intervention\Image\Facades\Image::class,
 //        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
+        'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class
 
 
 
