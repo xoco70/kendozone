@@ -10,12 +10,10 @@
 
     <!-- Global stylesheets -->
     {!! Html::style('/css/icons/icomoon/styles.css')!!}
-    {!! Html::style('https://fonts.googleapis.com/css?family=Nunito:400,300,100,500,700,900')!!}
 
     {!! Html::script('js/app.js')!!}
     {!! Html::style('css/app.css')!!}
 
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
     @yield('scripts')
     @yield('styles')

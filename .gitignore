@@ -19,4 +19,4 @@ public/images/avatar/
 .phpstorm.meta.php
 public/js
 public/css
-public/vendor
+resources/assets/js/vendor

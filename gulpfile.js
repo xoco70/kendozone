@@ -23,7 +23,8 @@ elixir(function (mix) {
         'colors.css',
         'core.css',
         'custom.css',
-        'protip.css'
+        'protip.css',
+        'nunito.css'
     ], 'public/css/app.css');
     mix.scripts([
         //'icons/icomoon/styles.css',
@@ -37,6 +38,7 @@ elixir(function (mix) {
         // 'core/libraries/jquery_ui/touch.min.js',
         // 'plugins/sliders/slider_pips.min.js',
         'plugins/forms/styling/switch.min.js',
+        'vendor/jsvalidation/js/jsvalidation.js',
         'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
@@ -72,7 +74,7 @@ elixir(function (mix) {
         // 'dz-basic.css'
     ], 'public/css/pages/userCreate.css');
     mix.scripts([
-        'https://maps.google.com/maps/api/js',
+        // 'https://maps.google.com/maps/api/js',
         // 'plugins/uploaders/fileinput.min.js',
         'plugins/uploaders/dropzone.js',
         // 'plugins/pages/uploader_bootstrap.js'
