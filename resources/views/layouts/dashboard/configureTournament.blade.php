@@ -5,7 +5,7 @@
             <h1 class="no-margin text-semibold">{{ trans('core.welcome') }}</h1>
             <h6 class="content-group-sm text-muted">{{ trans('core.welcome_text') }}</h6>
         </div>
-
+        <div class="pt-20"></div>
         <div class="well dash well-lg mb-15 success">
             <div class="btn success btn-rounded btn-flat dash mr-20">
                 <span class="letter-icon">1</span>
