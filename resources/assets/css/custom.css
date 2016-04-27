@@ -209,3 +209,15 @@ fieldset > a > legend {
 .add_category{
     margin-top: -20px;
 }
+.well.dash{
+    border: 0;
+    border-bottom: 4px solid;
+    border-radius:0
+}
+.well.error>a{
+    color:black;
+}
+
+.well.error>a:hover{
+    color:grey;
+}
