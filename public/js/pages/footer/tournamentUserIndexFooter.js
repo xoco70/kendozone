@@ -169,11 +169,11 @@ $(function () {
 
 // Setting datatable defaults
 $.extend($.fn.dataTable.defaults, {
-    autoWidth: false,
+    autoWidth: true,
     responsive: true,
     paging: false,
     columnDefs: [{
-        orderable: false,
+        orderable: true,
         width: '100px',
         targets: [5]
     }],
@@ -216,7 +216,7 @@ $('.datatable-responsive-column-controlled').DataTable({
             targets: [6]
         },
         {
-            orderable: false,
+            orderable: true,
             targets: [6]
         }
     ],

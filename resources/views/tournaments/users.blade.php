@@ -33,7 +33,8 @@ else
                             <a href="#?categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal"
                                data-target="#create_tournament_user"
                                class="btn btn-primary btn-xs pull-right open-modal"
-                               data-id="{!! $categoryTournament->id !!}"><b><i
+                               data-id="{!! $categoryTournament->id !!}"
+                               data-name="{!! $categoryTournament->category->name !!}"><b><i
                                             class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                             </a>
                         @endif
@@ -45,8 +46,7 @@ else
                         <table class="table datatable-responsive" id="table{{ $categoryTournament->id }}">
                             <thead>
                             <tr>
-                                <th class="min-tablet text-center "
-                                    data-hide="phone">{{ trans('core.avatar') }}</th>
+                                <th class="min-tablet text-center " data-hide="phone">{{ trans('core.avatar') }}</th>
                                 <th class="all">{{ trans('core.username') }}</th>
                                 <th class="phone">{{ trans('core.email') }}</th>
                                 <th align="center" class="phone">{{ trans_choice('core.category',1) }}</th>
@@ -157,35 +157,106 @@ else
 @section("scripts_footer")
     {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
     {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
-    {{--https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js--}}
     <script>
         var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
+        var url_add_user = "{{ URL::action('TournamentUserController@store',$tournament->slug) }}";
         var categoryTournamentId;
+        var newUserName;
+        var newUserEmail;
         var tournamentSlug = "{{ $tournament->slug }}";
+        var form = null;
         $(document).on("click", ".open-modal", function () {
             categoryTournamentId = $(this).data('id');
+            categoryTournamentName = $(this).data('name');
+
+            newUserName = $('#newUsername');
+            newUserEmail = $('#newUserEmail');
             $("#categoryTournamentId").val(categoryTournamentId);
         });
-        $(document).on("click", "#addTournamentUser", function () {
+        $(document).on("click", "#addTournamentUser", function (e) {
+            e.preventDefault();
+            form =  $(this).parents('form:first');
+            var inputData = form.serialize();
+
             // AJAX Request to save user
+            $.ajax(
+                    {
+                        type: 'POST',
+                        url: url_add_user,
+                        data: inputData,
+                        success: function (data) {
+                            // console.log(data.msg);
+                            if (data != null && data.status == 'success') {
+                                noty({
+                                    layout: 'bottomLeft',
+                                    theme: 'kz',
+                                    type: 'success',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 13000,
+                                    text: data.msg,
+                                    template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
-            // Get Table reference
+                                });
+
+                                // Get Table reference
+
+                                // Add User to footable
+                                var t = $('#table' + categoryTournamentId).DataTable();
+//            console.log(t);
+                                var row = t.row.add([
+                                    '<img src="/images/avatar/avatar.png" class="img-circle img-sm">',
+                                    newUserName.val(),
+                                    newUserEmail.val(),
+                                    categoryTournamentName,
+                                    '<i class="glyphicon text-danger glyphicon-remove-sign"></i>',
+                                    '&nbsp;',
+                                    '<button type="submit" class="btn text-warning-600 btn-flat btnDeleteTCU" id="delete_{{$tournament->slug}}_"+categoryTournamentId+"_root" data-tournament="fake-tournoi" data-category="2" data-user="root"><i class="glyphicon glyphicon-remove"></i> </button>',
+                                ]).draw(false);
 
 
-            var t = $('#table' + categoryTournamentId).DataTable();
-            console.log(t);
-            t.row.add([
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-                '7',
-            ]).draw( false );
+                                $('#addTournamentUser').prop("disabled", false);
+                                $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
 
-            // Add User to footable
 
+                            } else {
+                                noty({
+                                    layout: 'bottomLeft',
+                                    theme: 'kz',
+                                    type: 'error',
+                                    width: 200,
+                                    dismissQueue: true,
+                                    timeout: 5000,
+                                    text: url_add_user,
+                                    template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+                                });
+                                $('#addTournamentUser').prop("disabled", false);
+                                $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
+                            }
+
+                        },
+                        error: function (data) {
+                            var json = data.responseText;
+                            var obj = jQuery.parseJSON(json);
+                            // console.log(obj);
+                            noty({
+                                layout: 'bottomLeft',
+                                theme: 'kz',
+                                type: 'error',
+                                width: 200,
+                                dataType: 'json',
+                                dismissQueue: true,
+                                timeout: 5000,
+                                text:  data.responseText ,
+                                template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+
+                            });
+                            $('#addTournamentUser').prop("disabled", false);
+                            $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
+
+                        }
+                    }
+            );
 
         });
 

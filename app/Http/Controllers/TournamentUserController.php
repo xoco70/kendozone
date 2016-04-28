@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Http\Requests;
-use App\Http\Requests\TournamentUserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
@@ -28,6 +27,7 @@ class TournamentUserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
     public function index(Tournament $tournament)
@@ -61,7 +61,7 @@ class TournamentUserController extends Controller
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(TournamentUserRequest $request, Tournament $tournament, AppMailer $mailer)
+    public function store(Request $request, Tournament $tournament, AppMailer $mailer)
     {
         $categoryTournamentId = $request->categoryTournamentId;
 
@@ -105,12 +105,19 @@ class TournamentUserController extends Controller
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
 
-        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
-        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
+//        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
+//        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 
 
     }
 
+    /**
+     * @param $tournamentSlug
+     * @param $tcId
+     * @param $userSlug
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
         $user = User::findBySlug($userSlug);
@@ -126,6 +133,12 @@ class TournamentUserController extends Controller
 
     }
 
+    /**
+     * @param $tournamentSlug
+     * @param $tcId
+     * @param $userSlug
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
@@ -147,7 +160,8 @@ class TournamentUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Tournament $tournament
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function show(Tournament $tournament, User $user)
@@ -159,6 +173,7 @@ class TournamentUserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Tournament $tournament
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(Tournament $tournament, User $user)
@@ -178,47 +193,47 @@ class TournamentUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tournamentId, $user)
-    {
-//TODO Se podria usar eloquent mas facil - ya no me acuerdo donde se usa
-        $this->validate($request, [
-            'cat' => 'required|array'
-
-        ]);
-
-        $tcat = $request->cat;
-
-        // We add him to the different categor
-        $tcusToCreate = array();
-        $categories = array();
-        foreach ($tcat as $tCategoryId) {
-            array_push($tcusToCreate, ['category_tournament_id' => $tCategoryId,
-                'user_id' => $user->id]);
-
-            array_push($categories, trans(CategoryTournament::findOrFail($tCategoryId)->category->name));
-        }
-
-        // Get all TournamentCategories Related to this tournament
-        // We can't just delete and create rows, because id is changing. We must delete and update existing
-        // Making diff between old and new
-
-        $categoriesTournement = CategoryTournament::where('tournament_id', $tournamentId)->lists('id');
-
-        // Delete All Registered category
-        CategoryTournamentUser::whereIn('category_tournament_id', $categoriesTournement)
-            ->where('user_id', $user->id)
-            ->delete();
-
-
-        CategoryTournamentUser::insert($tcusToCreate);
-        // We send him an email with detail ( and user /password if new)
-//        $invite = new Invite();
-//        $code = $invite->generate($user->email, $tournament);
-//        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
-
-        flash()->success(trans('msg.operation_successful'));
-        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
-    }
+//    public function update(Request $request, $tournamentId, $user)
+//    {
+////TODO Se podria usar eloquent mas facil - ya no me acuerdo donde se usa
+//        $this->validate($request, [
+//            'cat' => 'required|array'
+//
+//        ]);
+//
+//        $tcat = $request->cat;
+//
+//        // We add him to the different categor
+//        $tcusToCreate = array();
+//        $categories = array();
+//        foreach ($tcat as $tCategoryId) {
+//            array_push($tcusToCreate, ['category_tournament_id' => $tCategoryId,
+//                'user_id' => $user->id]);
+//
+//            array_push($categories, trans(CategoryTournament::findOrFail($tCategoryId)->category->name));
+//        }
+//
+//        // Get all TournamentCategories Related to this tournament
+//        // We can't just delete and create rows, because id is changing. We must delete and update existing
+//        // Making diff between old and new
+//
+//        $categoriesTournement = CategoryTournament::where('tournament_id', $tournamentId)->lists('id');
+//
+//        // Delete All Registered category
+//        CategoryTournamentUser::whereIn('category_tournament_id', $categoriesTournement)
+//            ->where('user_id', $user->id)
+//            ->delete();
+//
+//
+//        CategoryTournamentUser::insert($tcusToCreate);
+//        // We send him an email with detail ( and user /password if new)
+////        $invite = new Invite();
+////        $code = $invite->generate($user->email, $tournament);
+////        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categories, $password);
+//
+//        flash()->success(trans('msg.operation_successful'));
+//        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+//    }
 
 
 }
