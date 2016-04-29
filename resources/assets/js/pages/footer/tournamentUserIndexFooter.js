@@ -3,7 +3,7 @@ $(function () {
     $('.btnDeleteTCU').on('click', function (e) {
         e.preventDefault();
         var inputData = $('#formDeleteTCU').serialize();
-        //var tournamentSlug      =   $(this).data('tournament');
+        var tournamentSlug = $(this).data('tournament');
         var categoryId = $(this).data('category');
         var userSlug = $(this).data('user');
 
@@ -84,14 +84,14 @@ $(function () {
         $(this).prop("disabled", true);
 
         var inputData = $('#formConfirmTCU').serialize();
-        //var tournamentSlug      =   $(this).data('tournament');
+        var tournamentSlug = $(this).data('tournament');
         var categoryId = $(this).data('category');
         var userSlug = $(this).data('user');
 
-//                console.log(inputData);
-//        console.log(tournamentSlug);
+        // console.log(categoryId);
+        // console.log(tournamentSlug);
 //         console.log(inputData);
-        console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm');
+//         console.log(url + '/categories/' + categoryId + '/users/' + userSlug + '/confirm');
 
 
         var icon = $(this).find('i');

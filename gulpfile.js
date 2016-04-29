@@ -90,7 +90,8 @@ elixir(function (mix) {
     mix.scripts([
         'plugins/tables/datatables/datatables.min.js',
         'plugins/tables/datatables/extensions/responsive.min.js',
-        'plugins/forms/selects/select2.min.js'
+        'plugins/forms/selects/select2.min.js',
+        'pages/footer/tournamentUserIndexFooter.js'
     ], 'public/js/pages/header/tournamentUserIndex.js');
 
     mix.scripts([

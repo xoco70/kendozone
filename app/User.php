@@ -34,6 +34,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+//    protected $appends = [''];
 
     protected $sluggable = [
         'build_from' => 'name',
@@ -61,21 +62,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function registerUserToTournament($attributes)
     {
-        $user = User::where('email', $attributes['email'])->first();
+        $user = User::firstOrNew(['email' => $attributes['email']]);
         $password = null;
-        if (is_null($user)) {
-            //Create user first
+        if (!$user->exists){
+            $user->name = $attributes['name'];
             $password = User::generatePassword();
-
-            $user = User::create(['email' => $attributes['email'],
-                'name' => $attributes['name'],
-                'password' => bcrypt($password),
-                'verified' => '1'
-            ]);
-        } else {
-            $user = User::find($user->id);
+            $user->password = bcrypt($password);
+            $user->verified = 1;
+            $user->save();
+            $user->clearPassword = $password;
         }
-        $user->clearPassword = $password;
 
         // Fire Events
         
