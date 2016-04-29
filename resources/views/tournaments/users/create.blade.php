@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/tournamentUserCreate.js') !!}
-@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.users.create',$tournament) !!}
 @stop
@@ -13,7 +10,6 @@
         <div class="row col-md-10 col-md-offset-2 custyle">
 
             <?php
-            //                dd($categoryTournamentId);
             $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
             ?>
             {!! Form::open(['url'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
@@ -84,14 +80,12 @@
 
 
             {!! Form::close()!!}
-            {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
+
         </div>
     </div>
-    <script>
-
-//        $(function () {
-//            $(" .switch").bootstrapSwitch();
-//        });
-    </script>
 @stop
 
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/tournamentUserCreate.js') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
+@stop

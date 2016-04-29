@@ -1,8 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-{!! Html::script('js/pages/header/tournamentEdit.js') !!}
-{!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-@stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
@@ -251,5 +247,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
         var latitude = "{{ $tournament->latitude }}";
         var longitude = "{{ $tournament->longitude }}";
     </script>
+    {!! Html::script('js/pages/header/tournamentEdit.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! Html::script('js/pages/footer/tournamentShowFooter.js') !!}
 @stop

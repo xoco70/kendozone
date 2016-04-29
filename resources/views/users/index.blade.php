@@ -1,8 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/userIndex.js') !!}
-@stop
-
 @section('breadcrumbs')
     {!! Breadcrumbs::render('users.index') !!}
 @stop
@@ -88,5 +84,6 @@
     <script>
         var url = "{{ URL::action('UserController@index') }}";
     </script>
+    {!! Html::script('js/pages/header/userIndex.js') !!}
     {!! Html::script('js/pages/footer/userIndexFooter.js') !!}
 @stop

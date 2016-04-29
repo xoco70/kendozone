@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/tournamentInvite.js') !!}
-@stop
 @section('styles')
     {!! Html::style('css/tournamentInvite.css') !!}
 @stop
@@ -65,15 +62,17 @@
 
         </div>
 
-
-        <script>
-            $('#recipients').multiple_emails({
-                position: 'top', // Display the added emails above the input
-                theme: 'bootstrap', // Bootstrap is the default theme
-                checkDupEmail: true // Should check for duplicate emails added
-            });
-        </script>
     </div>
 @stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/tournamentInvite.js') !!}
+    <script>
+        $('#recipients').multiple_emails({
+            position: 'top', // Display the added emails above the input
+            theme: 'bootstrap', // Bootstrap is the default theme
+            checkDupEmail: true // Should check for duplicate emails added
+        });
+    </script>
 
+@stop
 

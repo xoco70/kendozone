@@ -1,9 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/userCreate.js') !!}
-    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-
-@stop
 @section('styles')
     {!! Html::style('css/pages/userCreate.css') !!}
 @stop
@@ -303,7 +298,12 @@
                 })
             })
         </script>
-        {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+
 
     </div>
+@stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/userCreate.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 @stop

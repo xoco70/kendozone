@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/invitationIndex.js') !!}
-@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('invites.index') !!}
 
@@ -52,6 +49,7 @@
                     </table>
                 </div>
             </div>
+            {!! Html::script('js/pages/header/invitationIndex.js') !!}
             <script>
                 $(function() {
 

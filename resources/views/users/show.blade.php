@@ -1,9 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/userCreate.js') !!}
-    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-
-@stop
 @section('styles')
     {!! Html::style('css/pages/userCreate.css') !!}
 @stop
@@ -99,5 +94,7 @@
         var latitude = "{{ $user->latitude }}";
         var longitude = "{{ $user->longitude }}";
     </script>
+    {!! Html::script('js/pages/header/userCreate.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! Html::script('js/pages/footer/userShowFooter.js') !!}
 @stop

@@ -1,4 +1,3 @@
-{{--TODO PREFENCIAS CURRENCY--}}
 <div class="col-md-12 col-lg-8 col-lg-offset-2">
     <div class="panel panel-flat">
 
@@ -78,61 +77,3 @@
 
     </div>
 </div>
-
-
-<?php
-$now = Carbon\Carbon::now();
-$year = $now->year;
-$month = $now->month;
-$day = $now->day;
-
-?>
-
-<script>
-    var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
-        showFilterInputs: false,
-        infoTextEmpty: '',
-        infoText: ''
-    });
-    var dualListIds = [];
-
-    $(function () {
-        var $input = $('.dateFin').pickadate({
-            min: [{{$year}}, {{$month}}, {{$day}}],
-            format: 'yyyy-mm-dd'
-        });
-        var pickerFin = $input.pickadate('picker')
-
-        $('.dateIni').pickadate({
-            min: [{{$year}}, {{$month}}, {{$day}}],
-            format: 'yyyy-mm-dd',
-            onSet: function () {
-                pickerFin.set('min', this.get('select'));
-            }
-        });
-
-        $(".listbox-filter-disabled > option").each(function () {
-            dualListIds.push(this.value);
-        });
-        console.log(dualListIds);
-
-//        dualList.append($('<option>', {
-//            value: 10,
-//            text: 'My option'
-//        }));
-//        dualList.trigger('bootstrapduallistbox.refresh', true);
-//        function getCategoriesSelected() {
-//            var select1 = document.getElementById("categorySelection");
-//            var selected1 = [];
-//            for (var i = 0; i < select1.length; i++) {
-//                if (select1.options[i].selected) selected1.push(select1.options[i].value);
-//            }
-//            console.log(selected1);
-//        }​
-
-
-    });
-
-
-</script>
-{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}

@@ -1,9 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-
-    {!! Html::script('js/pages/header/tournamentUserEdit.js') !!}
-
-@stop
 @section('content')
 
     @include("errors.list")
@@ -92,11 +87,16 @@
             {!! Form::close()!!}
         </div>
     </div>
+@stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/tournamentUserEdit.js') !!}
     <script>
 
         $(function () {
             $(" .switch").bootstrapSwitch();
         });
     </script>
+
 @stop
+
 

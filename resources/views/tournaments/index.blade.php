@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/tournamentIndex.js') !!}
-@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.index') !!}
 
@@ -17,5 +14,6 @@
         var url ="{{ URL::action('TournamentController@index') }}";
 
     </script>
+    {!! Html::script('js/pages/header/tournamentIndex.js') !!}
     {!! Html::script('js/pages/footer/tournamentIndexFooter.js') !!}
 @stop

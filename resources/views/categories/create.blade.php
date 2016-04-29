@@ -1,6 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('categories.create',$currentModelName) !!}
 @stop

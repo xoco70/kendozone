@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-
-@stop
 @section('breadcrumbs')
 {!! Breadcrumbs::render('tournaments.users.index',$tournament) !!}
 @stop

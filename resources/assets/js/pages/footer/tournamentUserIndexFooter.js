@@ -18,7 +18,7 @@ $(function () {
         $(this).find('i').addClass('icon-spinner spinner');
 
         var menuId = $('.menu[data-id=' + categoryId + ']');
-        console.log(menuId);
+        // console.log(menuId);
         var categoriesSize = parseInt(menuId.text(), 10) - 1;
         menuId.html(categoriesSize);
 
