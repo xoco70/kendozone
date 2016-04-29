@@ -152,11 +152,13 @@ else
 @stop
 @section("scripts_footer")
     {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
     {{--{!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}--}}
     <script>
 //        var link_avatar = null;
 
         var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
+
         {{--var url_add_user = "{{ URL::action('TournamentUserController@store',$tournament->slug) }}";--}}
 //        var categoryTournamentId;
 //

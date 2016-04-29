@@ -13,7 +13,6 @@
     <!-- Global stylesheets -->
     {!! Html::style('/css/icons/icomoon/styles.css')!!}
 
-    {!! Html::script('js/app.js')!!}
     {!! Html::style('css/app.css')!!}
 
 
@@ -44,7 +43,6 @@
             <!-- Content area -->
 
             <div class="content">
-                @include('layouts.flash')
                 @yield('content')
                 @include('layouts.footer')
             </div>
@@ -60,6 +58,10 @@
 </div>
 <!-- /page container -->
 
+
+
+
+{!! Html::script('js/app.js')!!}
 {!! Html::script('js/analytics.js') !!}
 <script>
     $(document).ready(function(){
@@ -68,9 +70,7 @@
         );
     });
 </script>
-
-
-
+@include('layouts.flash')
 @yield('scripts_footer')
 
 </body>

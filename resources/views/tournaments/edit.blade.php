@@ -362,7 +362,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
     <!-- /detached content -->
 </div>
 @include("right-panel.tournament_menu")
-@include("modals.create_category");
+@include("modals.create_category")
 
 <!-- /content area -->
 <?php

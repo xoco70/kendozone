@@ -213,91 +213,7 @@
 
         </div>
 
-        <script>
-            var maxImageWidth = 100, maxImageHeight = 100;
 
-            Dropzone.autoDiscover = false;
-            $(document).ready(function () {
-
-                var initialPic = "{{ $user->avatar }}";
-                var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
-
-                var uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
-                var avatarHiddenField = $('input[name=avatar]');
-
-                new Dropzone('#fileInput', {
-                    autoProcessQueue: true,
-                    uploadMultiple: false,
-                    parallelUploads: 100,
-                    acceptedFiles: "image/jpeg,image/png,image/gif",
-
-                    dictRemoveFile:'{{ trans('core.remove') }}',
-                    dictDefaultMessage:'Upload file',
-                    addRemoveLinks: 'dictRemoveFile',
-                    url: uploadUrl,
-                    maxFiles: 1,
-
-                    init: function () {
-                        var myDropzone = this;
-                        var mockFile = {name: onlyPic, size: 2000};
-                        myDropzone.emit("addedfile", mockFile);
-                        myDropzone.emit("thumbnail", mockFile, initialPic);
-                        myDropzone.emit("complete", mockFile);
-                        myDropzone.files.push(mockFile);
-                        var existingFileCount = 0; // The number of files already uploaded
-                        myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
-
-                        myDropzone.on("thumbnail", function (file) {
-                            if (file.width < maxImageWidth || file.height < maxImageHeight) {
-                                file.rejectDimensions();
-                            }
-                            else {
-                                file.acceptDimensions();
-                            }
-                        });
-
-
-                        myDropzone.on("addedfile", function () {
-                            if (this.files[1] != null) {
-                                this.removeFile(this.files[0]);
-                            }
-                        });
-
-                        myDropzone.on('success', function (file, response) {
-                            avatarHiddenField.val(response['avatar']);
-                        });
-
-
-                    },
-                    accept: function (file, done) {
-                        file.acceptDimensions = done;
-                        file.rejectDimensions = function () {
-                            done("Invalid dimension.");
-                        };
-                        // Of course you could also just put the `done` function in the file
-                        // and call it either with or without error in the `thumbnail` event
-                        // callback, but I think that this is cleaner.
-                    },
-                    removedfile: function(file) {
-//                        var name = file.name;
-//                        $.ajax({
-//                            type: 'POST',
-//                            url: 'delete.php',
-//                            data: "id="+name,
-//                            dataType: 'html'
-//                        });
-                        avatarHiddenField.val('');
-                        var _ref;
-                        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                    },
-                    maxfilesexceeded: function (file) {
-                        this.removeAllFiles();
-                        this.addFile(file);
-                    },
-
-                })
-            })
-        </script>
 
 
     </div>
@@ -306,4 +222,89 @@
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+    <script>
+        var maxImageWidth = 100, maxImageHeight = 100;
+
+        Dropzone.autoDiscover = false;
+        $(document).ready(function () {
+
+            var initialPic = "{{ $user->avatar }}";
+            var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
+
+            var uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
+            var avatarHiddenField = $('input[name=avatar]');
+
+            new Dropzone('#fileInput', {
+                autoProcessQueue: true,
+                uploadMultiple: false,
+                parallelUploads: 100,
+                acceptedFiles: "image/jpeg,image/png,image/gif",
+
+                dictRemoveFile:'{{ trans('core.remove') }}',
+                dictDefaultMessage:'Upload file',
+                addRemoveLinks: 'dictRemoveFile',
+                url: uploadUrl,
+                maxFiles: 1,
+
+                init: function () {
+                    var myDropzone = this;
+                    var mockFile = {name: onlyPic, size: 2000};
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.emit("thumbnail", mockFile, initialPic);
+                    myDropzone.emit("complete", mockFile);
+                    myDropzone.files.push(mockFile);
+                    var existingFileCount = 0; // The number of files already uploaded
+                    myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
+
+                    myDropzone.on("thumbnail", function (file) {
+                        if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                            file.rejectDimensions();
+                        }
+                        else {
+                            file.acceptDimensions();
+                        }
+                    });
+
+
+                    myDropzone.on("addedfile", function () {
+                        if (this.files[1] != null) {
+                            this.removeFile(this.files[0]);
+                        }
+                    });
+
+                    myDropzone.on('success', function (file, response) {
+                        avatarHiddenField.val(response['avatar']);
+                    });
+
+
+                },
+                accept: function (file, done) {
+                    file.acceptDimensions = done;
+                    file.rejectDimensions = function () {
+                        done("Invalid dimension.");
+                    };
+                    // Of course you could also just put the `done` function in the file
+                    // and call it either with or without error in the `thumbnail` event
+                    // callback, but I think that this is cleaner.
+                },
+                removedfile: function(file) {
+//                        var name = file.name;
+//                        $.ajax({
+//                            type: 'POST',
+//                            url: 'delete.php',
+//                            data: "id="+name,
+//                            dataType: 'html'
+//                        });
+                    avatarHiddenField.val('');
+                    var _ref;
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                },
+                maxfilesexceeded: function (file) {
+                    this.removeAllFiles();
+                    this.addFile(file);
+                },
+
+            })
+        })
+    </script>
 @stop
