@@ -24,19 +24,29 @@ Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentMode
 // Home > Tournaments > Edit Tournament
 Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
-    $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
+    if (Auth::user()->canEditTournament($tournament)) {
+        $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
+    } else {
+        $breadcrumbs->push($tournament->name, route('tournaments.show', $tournament->slug));
+    }
+
 });
 // Home > Invites
 Breadcrumbs::register('invites.index', function ($breadcrumbs) {
 
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('core.invitation',2), route('invites.index'));
+    $breadcrumbs->push(trans_choice('core.invitation', 2), route('invites.index'));
 });
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
 
-    $breadcrumbs->parent('tournaments.edit', $tournament);
+    if (Auth::user()->canEditTournament($tournament)) {
+        $breadcrumbs->parent('tournaments.edit', $tournament);
+    } else {
+        $breadcrumbs->parent('tournaments.show', $tournament);
+    }
+
     $breadcrumbs->push(trans('core.invite_competitors'), route('invites.show', $tournament->slug));
 });
 
@@ -48,7 +58,11 @@ Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tourna
 
 // Home > Tournaments > MyTournament > Add Competitors
 Breadcrumbs::register('tournaments.users.create', function ($breadcrumbs, $tournament) {
-    $breadcrumbs->parent('tournaments.edit', $tournament);
+    if (Auth::user()->canEditTournament($tournament)) {
+        $breadcrumbs->parent('tournaments.edit', $tournament);
+    } else {
+        $breadcrumbs->parent('tournaments.show', $tournament);
+    }
     $breadcrumbs->push(trans('core.add_competitor'), action('TournamentUserController@create', [$tournament->slug]));
 });
 
@@ -61,7 +75,12 @@ Breadcrumbs::register('tournaments.users.show', function ($breadcrumbs, $tournam
 // Home > Edit Profile
 Breadcrumbs::register('users.edit', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push($user->name, route('users.edit', $user->slug));
+    if (Auth::user()->canEditUser($user)) {
+        $breadcrumbs->push($user->name, route('users.edit', $user->slug));
+    } else {
+        $breadcrumbs->push($user->name, route('users.show', $user->slug));
+    }
+
 });
 
 Breadcrumbs::register('users.index', function ($breadcrumbs) {
@@ -76,7 +95,7 @@ Breadcrumbs::register('users.create', function ($breadcrumbs) {
 
 Breadcrumbs::register('users.show', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('core.user',1), route('users.show', $user->slug));
+    $breadcrumbs->push(trans_choice('core.user', 1), route('users.show', $user->slug));
 });
 
 Breadcrumbs::register('users.tournaments', function ($breadcrumbs, $user) {
