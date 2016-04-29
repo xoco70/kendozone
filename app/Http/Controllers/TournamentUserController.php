@@ -6,6 +6,7 @@ use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Grade;
 use App\Http\Requests;
+use App\Http\Requests\TournamentUserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
@@ -64,7 +65,7 @@ class TournamentUserController extends Controller
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tournament $tournament, AppMailer $mailer)
+    public function store(TournamentUserRequest $request, Tournament $tournament, AppMailer $mailer)
     {
         $categoryTournamentId = $request->categoryTournamentId;
         
@@ -94,7 +95,7 @@ class TournamentUserController extends Controller
 
 //        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
-        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+        return view(URL::action('TournamentUserController@index', $tournament->slug));
 
 
     }

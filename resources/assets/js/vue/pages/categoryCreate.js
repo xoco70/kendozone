@@ -140,6 +140,16 @@ new Vue({
                 }
             });
             return newVal;
+        },
+        resetModalValues: function resetModalValues() {
+                this.isTeam = 0;
+                this.genderSelect = 'M';
+                this.ageCategorySelect= 0;
+                this.ageMin= 0;
+                this.ageMax= 0;
+                this.gradeSelect= 0;
+                this.gradeMin= 0;
+                this.gradeMax= 0;
         }
     },
     filters: {

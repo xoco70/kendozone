@@ -182,6 +182,7 @@ else
 
             newUserName = $('#newUsername');
             newUserEmail = $('#newUserEmail');
+
             $("#categoryTournamentId").val(categoryTournamentId);
         });
         {{--$(document).on("click", "#addTournamentUser", function (e) {--}}

@@ -64,7 +64,7 @@
                     <div class="col-md-6 mb-20 mt-20 pt-20">
                         {{--<button type="button" class="btn btn-primary"--}}
                         {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
-                        <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
+                        <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black" @click="resetModalValues()">+ {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
                 <div class=" text-right mt-15">

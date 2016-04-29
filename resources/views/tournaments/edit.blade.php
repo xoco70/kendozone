@@ -196,7 +196,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
                         <div align="right">
-                            <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}
+                            <button type="submit" class="btn btn-success btn-update-tour">{{trans("core.save")}}
                             </button>
                         </div>
                     </div>
@@ -227,7 +227,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                                     </div>
                                     <div class="col-md-6 add_category">
                                         <a href="#" data-toggle="modal" data-target="#create_category"
-                                           class="text-semibold text-black">+ {{ trans('core.add_custom_category') }}</a>
+                                           class="text-semibold text-black" @click="resetModalValues()">+ {{ trans('core.add_custom_category') }}</a>
                                     </div>
                                 </div>
                                 <div align="right">

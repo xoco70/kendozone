@@ -67,7 +67,5 @@ $day = $now->day;
                 dualListIds.push(this.value);
             });
         });
-
-
     </script>
 @stop
