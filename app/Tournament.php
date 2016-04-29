@@ -251,6 +251,9 @@ class Tournament extends Model implements SluggableInterface
     {
         return 'slug';
     }
+    public function isDeleted(){
+        return $this->deleted_at !=null;
+    }
 
 //    public function setMustPayAttribute($mustPay)
 //    {

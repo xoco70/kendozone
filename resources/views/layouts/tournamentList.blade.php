@@ -29,9 +29,9 @@
                     ?>
                 @endif
 
-                    <h1 class="no-margin text-semibold">{{ $title }}</h1>
+                <h1 class="no-margin text-semibold">{{ $title }}</h1>
 
-                    <p class="text-muted text-size-large mt-20">{{ $noItemYet }}</p>
+                <p class="text-muted text-size-large mt-20">{{ $noItemYet }}</p>
 
                 @if ($printLink == true)
 
@@ -61,10 +61,14 @@
                     @foreach($tournaments as $tournament)
                         <tr id="{!! $tournament->slug !!}">
                             <td>
-                                @if (Auth::user()->canEditTournament($tournament))
-                                    <a href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                @if (!$tournament->isDeleted())
+                                    @if (Auth::user()->canEditTournament($tournament))
+                                        <a href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                    @else
+                                        <a href="{!!   URL::action('TournamentController@show',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                    @endif
                                 @else
-                                    <a href="{!!   URL::action('TournamentController@show',  $tournament->slug) !!}">{{ $tournament->name }}</a>
+                                    {{ $tournament->name }}
                                 @endif
                             </td>
                             <td>{{ $tournament->dateIni }}</td>
