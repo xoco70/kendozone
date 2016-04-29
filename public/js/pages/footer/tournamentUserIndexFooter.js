@@ -219,7 +219,7 @@ $('.datatable-responsive-column-controlled').DataTable({
             orderable: true,
             targets: [6]
         }
-    ],
+    ]
 });
 
 

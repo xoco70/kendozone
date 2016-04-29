@@ -18,7 +18,7 @@
 
 
             {!! Form::close()!!}
-            @include("modals.create_category");
+            @include("modals.create_category")
 
     </div>
 @stop

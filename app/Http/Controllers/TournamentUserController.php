@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
+use App\Grade;
 use App\Http\Requests;
 use App\Invite;
 use App\Mailers\AppMailer;
@@ -35,9 +36,10 @@ class TournamentUserController extends Controller
         $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
         $settingSize = $tournament->settings()->count();
         $categorySize = $tournament->categories->count();
+        $grades = Grade::lists('name','id');
 
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize'));
+        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize','grades'));
 
     }
 
@@ -50,6 +52,7 @@ class TournamentUserController extends Controller
     {
         $categoryTournamentId = $request->get('categoryId');
         $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
+
         return view("tournaments/users/create", compact('tournament', 'currentModelName', 'categoryTournamentId')); //, compact()
     }
 
@@ -105,9 +108,9 @@ class TournamentUserController extends Controller
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
 
-        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
-//        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
-//        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+//        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
+        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
+        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 
 
     }

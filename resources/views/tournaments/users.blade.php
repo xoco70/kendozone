@@ -34,13 +34,13 @@ else
                                data-target="#create_tournament_user"
                                class="btn btn-primary btn-xs pull-right open-modal"
                                data-id="{!! $categoryTournament->id !!}"
-                               data-name="{!! $categoryTournament->category->name !!}"><b><i
+                               data-name="{!! $categoryTournament->category->buildName($grades) !!}"><b><i
                                             class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                             </a>
                         @endif
 
-                        <a name="{{ $categoryTournament->category->name }}">
-                            <legend class="text-semibold">{{ $categoryTournament->category->name }}</legend>
+                        <a name="{{ $categoryTournament->category->buildName($grades) }}">
+                            <legend class="text-semibold">{{ $categoryTournament->category->buildName($grades) }}</legend>
                         </a>
 
                         <table class="table datatable-responsive" id="table{{ $categoryTournament->id }}">
@@ -150,7 +150,6 @@ else
     </div>
 </div>
 
-
 @include("right-panel.users_menu")
 @include("modals.add_tournament_user")
 @stop
@@ -158,13 +157,26 @@ else
     {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
     {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
     <script>
+//        var link_avatar = null;
+
         var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
-        var url_add_user = "{{ URL::action('TournamentUserController@store',$tournament->slug) }}";
-        var categoryTournamentId;
-        var newUserName;
-        var newUserEmail;
-        var tournamentSlug = "{{ $tournament->slug }}";
-        var form = null;
+        {{--var url_add_user = "{{ URL::action('TournamentUserController@store',$tournament->slug) }}";--}}
+//        var categoryTournamentId;
+//
+//        var newUserName;
+//        var newUserEmail;
+        {{--var tournamentSlug = "{{ $tournament->slug }}";--}}
+//        var form = null;
+//
+//
+        {{--@if (Auth::user()->canEditTournament($tournament))--}}
+                {{--link_avatar = '<a href="{!!   URL::action('UserController@edit',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>';--}}
+        {{--@else--}}
+                {{--link_avatar = '<a href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>';--}}
+        {{--@endif--}}
+{{----}}
+{{----}}
+
         $(document).on("click", ".open-modal", function () {
             categoryTournamentId = $(this).data('id');
             categoryTournamentName = $(this).data('name');
@@ -173,92 +185,92 @@ else
             newUserEmail = $('#newUserEmail');
             $("#categoryTournamentId").val(categoryTournamentId);
         });
-        $(document).on("click", "#addTournamentUser", function (e) {
-            e.preventDefault();
-            form =  $(this).parents('form:first');
-            var inputData = form.serialize();
+        {{--$(document).on("click", "#addTournamentUser", function (e) {--}}
+            {{--e.preventDefault();--}}
+            {{--form = $(this).parents('form:first');--}}
+            {{--var inputData = form.serialize();--}}
 
-            // AJAX Request to save user
-            $.ajax(
-                    {
-                        type: 'POST',
-                        url: url_add_user,
-                        data: inputData,
-                        success: function (data) {
-                            // console.log(data.msg);
-                            if (data != null && data.status == 'success') {
-                                noty({
-                                    layout: 'bottomLeft',
-                                    theme: 'kz',
-                                    type: 'success',
-                                    width: 200,
-                                    dismissQueue: true,
-                                    timeout: 13000,
-                                    text: data.msg,
-                                    template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+            {{--// AJAX Request to save user--}}
+            {{--$.ajax(--}}
+                    {{--{--}}
+                        {{--type: 'POST',--}}
+                        {{--url: url_add_user,--}}
+                        {{--data: inputData,--}}
+                        {{--success: function (data) {--}}
+                            {{--// console.log(data.msg);--}}
+                            {{--if (data != null && data.status == 'success') {--}}
+                                {{--noty({--}}
+                                    {{--layout: 'bottomLeft',--}}
+                                    {{--theme: 'kz',--}}
+                                    {{--type: 'success',--}}
+                                    {{--width: 200,--}}
+                                    {{--dismissQueue: true,--}}
+                                    {{--timeout: 13000,--}}
+                                    {{--text: data.msg,--}}
+                                    {{--template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'--}}
 
-                                });
+                                {{--});--}}
 
-                                // Get Table reference
+                                {{--// Get Table reference--}}
 
-                                // Add User to footable
-                                var t = $('#table' + categoryTournamentId).DataTable();
-//            console.log(t);
-                                var row = t.row.add([
-                                    '<img src="/images/avatar/avatar.png" class="img-circle img-sm">',
-                                    newUserName.val(),
-                                    newUserEmail.val(),
-                                    categoryTournamentName,
-                                    '<i class="glyphicon text-danger glyphicon-remove-sign"></i>',
-                                    '&nbsp;',
-                                    '<button type="submit" class="btn text-warning-600 btn-flat btnDeleteTCU" id="delete_{{$tournament->slug}}_"+categoryTournamentId+"_root" data-tournament="fake-tournoi" data-category="2" data-user="root"><i class="glyphicon glyphicon-remove"></i> </button>',
-                                ]).draw(false);
-
-
-                                $('#addTournamentUser').prop("disabled", false);
-                                $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
+                                {{--// Add User to footable--}}
+                                {{--var t = $('#table' + categoryTournamentId).DataTable();--}}
+{{--//            console.log(t);--}}
+                                {{--var row = t.row.add([--}}
+                                    {{--'<img src="/images/avatar/avatar.png" class="img-circle img-sm">',--}}
+                                    {{--newUserName.val(),--}}
+                                    {{--newUserEmail.val(),--}}
+                                    {{--categoryTournamentName,--}}
+                                    {{--'<i class="glyphicon text-danger glyphicon-remove-sign"></i>',--}}
+                                    {{--'&nbsp;',--}}
+                                    {{--'<button type="submit" class="btn text-warning-600 btn-flat btnDeleteTCU" id="delete_{{$tournament->slug}}_"+categoryTournamentId+"_root" data-tournament="fake-tournoi" data-category="2" data-user="root"><i class="glyphicon glyphicon-remove"></i> </button>',--}}
+                                {{--]).draw(false);--}}
 
 
-                            } else {
-                                noty({
-                                    layout: 'bottomLeft',
-                                    theme: 'kz',
-                                    type: 'error',
-                                    width: 200,
-                                    dismissQueue: true,
-                                    timeout: 5000,
-                                    text: url_add_user,
-                                    template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                                });
-                                $('#addTournamentUser').prop("disabled", false);
-                                $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
-                            }
+                                {{--$('#addTournamentUser').prop("disabled", false);--}}
+                                {{--$('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');--}}
 
-                        },
-                        error: function (data) {
-                            var json = data.responseText;
-                            var obj = jQuery.parseJSON(json);
-                            // console.log(obj);
-                            noty({
-                                layout: 'bottomLeft',
-                                theme: 'kz',
-                                type: 'error',
-                                width: 200,
-                                dataType: 'json',
-                                dismissQueue: true,
-                                timeout: 5000,
-                                text:  data.responseText ,
-                                template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
-                            });
-                            $('#addTournamentUser').prop("disabled", false);
-                            $('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');
+                            {{--} else {--}}
+                                {{--noty({--}}
+                                    {{--layout: 'bottomLeft',--}}
+                                    {{--theme: 'kz',--}}
+                                    {{--type: 'error',--}}
+                                    {{--width: 200,--}}
+                                    {{--dismissQueue: true,--}}
+                                    {{--timeout: 5000,--}}
+                                    {{--text: url_add_user,--}}
+                                    {{--template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'--}}
+                                {{--});--}}
+                                {{--$('#addTournamentUser').prop("disabled", false);--}}
+                                {{--$('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');--}}
+                            {{--}--}}
 
-                        }
-                    }
-            );
+                        {{--},--}}
+                        {{--error: function (data) {--}}
+                            {{--var json = data.responseText;--}}
+                            {{--var obj = jQuery.parseJSON(json);--}}
+                            {{--// console.log(obj);--}}
+                            {{--noty({--}}
+                                {{--layout: 'bottomLeft',--}}
+                                {{--theme: 'kz',--}}
+                                {{--type: 'error',--}}
+                                {{--width: 200,--}}
+                                {{--dataType: 'json',--}}
+                                {{--dismissQueue: true,--}}
+                                {{--timeout: 5000,--}}
+                                {{--text: data.responseText,--}}
+                                {{--template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'--}}
 
-        });
+                            {{--});--}}
+                            {{--$('#addTournamentUser').prop("disabled", false);--}}
+                            {{--$('#addTournamentUser').find('i').removeClass('icon-spinner spinner position-left');--}}
+
+                        {{--}--}}
+                    {{--}--}}
+            {{--);--}}
+
+        {{--});--}}
 
 
         //

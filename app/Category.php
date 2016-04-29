@@ -27,17 +27,17 @@ class Category extends Model
 
     public function getNameAttribute($name)
     {
-        return Lang::get($name);
+        return trans($name);
     }
 
     public function getGradeAttribute($grade)
     {
-        return Lang::get($grade);
+        return trans($grade);
     }
 
     public function getAgeCategoryAttribute($ageCategory)
     {
-        return Lang::get($ageCategory);
+        return trans($ageCategory);
     }
 
     public function tournaments()
@@ -79,9 +79,9 @@ class Category extends Model
         return $this->gender == "X";
     }
 
-    public function buildName($grades)
+    public function getAgeString()
     {
-//        dd($this);
+        $ageCategoryText = '';
         $ageCategories = [
             0 => trans('core.no_age'),
             1 => trans('core.children'),
@@ -91,23 +91,16 @@ class Category extends Model
             5 => trans('core.custom')
         ];
 
-        $genders = [
-            'M' => trans('core.male'),
-            'F' => trans('core.female'),
-            'X' => trans('core.mixt')
-        ];
-
-        
-        $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
-
-        $ageCategoryText = '';
-        $gradeText = '';
-//
         if ($this->ageCategory != 0) {
             if ($this->ageCategory == 5) {
                 $ageCategoryText = ' - ' . trans('core.age') . ' : ';
                 if ($this->ageMin != 0 && $this->ageMax != 0) {
-                    $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('core.years');
+                    if ($this->ageMin == $this->ageMax) {
+                        $ageCategoryText .= $this->ageMax . ' ' . trans('core.years');
+                    } else {
+                        $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('core.years');
+                    }
+
                 } else if ($this->ageMin == 0 && $this->ageMax != 0) {
                     $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('core.years');
                 } else if ($this->ageMin != 0 && $this->ageMax == 0) {
@@ -119,8 +112,12 @@ class Category extends Model
                 $ageCategoryText = $ageCategories[$this->ageCategory];
             }
         }
-//        echo ($this->gradeCategory) ;
+        return $ageCategoryText;
+    }
 
+    public function getGradeString($grades)
+    {
+        $gradeText = '';
         if ($this->gradeCategory == 1) {
             $gradeText = trans('core.first_force');
         } else if ($this->gradeCategory == 2) {
@@ -130,7 +127,11 @@ class Category extends Model
             $gradeText = ' - ' . trans('core.grade') . ' : ';
 //            dd($grades);
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
-                $gradeText .= $grades[$this->gradeMin] . ' - ' . $grades[$this->gradeMax];
+                if ($this->gradeMin == $this->gradeMax) {
+                    $gradeText .= $grades[$this->gradeMin];
+                } else {
+                    $gradeText .= $grades[$this->gradeMin] . ' - ' . $grades[$this->gradeMax];
+                }
             } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
                 $gradeText .= ' < ' . $grades[$this->gradeMax];
             } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
@@ -139,6 +140,30 @@ class Category extends Model
                 $gradeText = '';
             }
         }
+
+        return $gradeText;
+    }
+
+
+    public function buildName($grades)
+    {
+//        dd($this);
+
+        $genders = [
+            'M' => trans('core.male'),
+            'F' => trans('core.female'),
+            'X' => trans('core.mixt')
+        ];
+
+
+        $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
+
+
+        $ageCategoryText = $this->getAgeString();
+
+
+        $gradeText = $this->getGradeString($grades);
+
 //        dd($teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText);
         return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
 

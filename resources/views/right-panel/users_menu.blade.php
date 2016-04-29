@@ -16,12 +16,14 @@
                     <ul class="navigation navigation-alt navigation-accordion">
                         @foreach($tournament->categoryTournaments as $categoryTournament)
 
-                            <li><a href="#{{ $categoryTournament->category->name }}"></i>
+                            <li><a href="#{{ $categoryTournament->category->buildName($grades) }}"></i>
                                     <div >
                                         <?php
 
-                                        $name = $categoryTournament->category->name;
-                                        echo $name;
+                                        $name = $categoryTournament->category->buildName($grades);
+                                        echo str_limit($name,25);
+
+
                                         ?>
 
                                         <span  data-id="{{ $categoryTournament->id}}" class="menu label  label-striped">{{  sizeof($categoryTournament->users) }}</span>

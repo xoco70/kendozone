@@ -31,7 +31,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" data-dismiss="modal" class="btn btn-primary" id="addTournamentUser">{{ trans('core.add_and_close') }}</button>
+                <button type="submit" class="btn btn-primary">{{ trans('core.add_and_close') }}</button>
             </div>
             {!! Form::close() !!}
 
