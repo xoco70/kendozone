@@ -28,7 +28,7 @@ $day = $now->day;
 
 @section('scripts_footer')
     {!! Html::script('js/pages/header/tournamentCreate.js') !!}
-    {!! Html::script('js/icheck.min.js') !!}
+    {{--{!! Html::script('js/icheck.min.js') !!}--}}
     {{--    {!! Html::script('js/pages/footer/categoryCreateFooter.js') !!}--}}
     {!! Html::script('js/categoryCreate.js') !!}
     {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}

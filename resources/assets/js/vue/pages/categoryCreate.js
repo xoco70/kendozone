@@ -58,7 +58,11 @@ new Vue({
                 if (this.ageCategorySelect == 5) {
                     ageCategoryText = ' - ' + age + ' : ';
                     if (this.ageMin != 0 && this.ageMax != 0) {
-                        ageCategoryText += this.ageMin + ' - ' + this.ageMax + ' ' + years;
+                        if (this.ageMin == this.ageMax) {
+                            ageCategoryText += this.ageMax + ' ' + years;
+                        }else{
+                            ageCategoryText += this.ageMin + ' - ' + this.ageMax + ' ' + years;
+                        }
                     } else if (this.ageMin == 0 && this.ageMax != 0) {
                         ageCategoryText += ' < ' + this.ageMax + ' ' + years;
                     } else if (this.ageMin != 0 && this.ageMax == 0) {
@@ -74,7 +78,12 @@ new Vue({
             if (this.gradeSelect == 3) {
                 gradeText = ' - ' + grade + ' : ';
                 if (this.gradeMin != 0 && this.gradeMax != 0) {
-                    gradeText += this.getSelectText(this.grades, this.gradeMin) + ' - ' + this.getSelectText(this.grades, this.gradeMax);
+                    if (this.gradeMin == this.gradeMax) {
+                        gradeText += this.getSelectText(this.grades, this.gradeMin);
+                    }else {
+                        gradeText += this.getSelectText(this.grades, this.gradeMin) + ' - ' + this.getSelectText(this.grades, this.gradeMax);
+                    }
+
                 } else if (this.gradeMin == 0 && this.gradeMax != 0) {
                     gradeText += ' < ' + this.getSelectText(this.grades, this.gradeMax);
                 } else if (this.gradeMin != 0 && this.gradeMax == 0) {
