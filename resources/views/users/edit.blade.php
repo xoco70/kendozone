@@ -62,7 +62,7 @@
                                                         {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
                                                     @endif
 
-                                                    {!!  Form::hidden('avatar',$user->avatar) !!}
+                                                    {!!  Form::hidden('avatar',basename($user->avatar)) !!}
                                                 </div>
 
                                             </div>
