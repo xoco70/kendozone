@@ -30,7 +30,7 @@ else
                             {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
                             {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
                             {{--</a>--}}
-                            <a href="#?categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal"
+                            <a href="#categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal"
                                data-target="#create_tournament_user"
                                class="btn btn-primary btn-xs pull-right open-modal"
                                data-id="{!! $categoryTournament->id !!}"
@@ -39,7 +39,7 @@ else
                             </a>
                         @endif
 
-                        <a name="{{ $categoryTournament->category->buildName($grades) }}">
+                        <a name="{{ str_slug($categoryTournament->category->buildName($grades), "-") }}">
                             <legend class="text-semibold">{{ $categoryTournament->category->buildName($grades) }}</legend>
                         </a>
 

@@ -16,7 +16,7 @@
                     <ul class="navigation navigation-alt navigation-accordion">
                         @foreach($tournament->categoryTournaments as $categoryTournament)
 
-                            <li><a href="#{{ $categoryTournament->category->buildName($grades) }}"></i>
+                            <li><a href="#{{ str_slug($categoryTournament->category->buildName($grades), "-") }}"></i>
                                     <div >
                                         <?php
 
