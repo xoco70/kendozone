@@ -1,6 +1,22 @@
 $(function () {
 
-    // var validate = false;
+    $('.fightDuration').timepicker(('option',
+
+    {
+        'minTime': '2:00',
+        'maxTime': '5:00',
+        'timeFormat': 'H:i',
+        'step': '15'
+    }));
+
+    $('.enchoDuration').timepicker(('option',
+
+    {
+        'minTime': '1:00',
+        'maxTime': '5:00',
+        'timeFormat': 'H:i',
+        'step': '15'
+    }));
 
     $('#name').blur(function () {
         if (!$(this).val() || $(this).length <6) {

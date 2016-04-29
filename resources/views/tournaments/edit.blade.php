@@ -1,4 +1,6 @@
 @extends('layouts.dashboard')
+@section('scripts')
+@stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
@@ -264,6 +266,9 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                                     $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
                                             ? $setting->fightDuration
                                             : Config::get('constants.CAT_FIGHT_DURATION');
+                                    $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
+                                            ? $setting->enchoDuration
+                                            : Config::get('constants.CAT_ENCHO_DURATION');
 
 
                                     ?>
@@ -384,4 +389,5 @@ $day = $now->day;
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! Html::script('js/pages/footer/tournamentEditFooter.js') !!}
     {!! Html::script('js/categoryCreate.js') !!}
+
 @stop

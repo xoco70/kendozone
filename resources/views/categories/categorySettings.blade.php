@@ -53,7 +53,7 @@ $currency = Auth::user()->country->currency_code;
 
             {!!  Form::label('fightDuration', trans('core.fightDuration')) !!}
             <div class="input-group">
-                {!!  Form::input('text','fightDuration',$fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
+                {!!  Form::input('text','fightDuration',$fightDuration, ['class' => 'form-control fightDuration','id' => 'fightDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
@@ -109,7 +109,7 @@ $currency = Auth::user()->country->currency_code;
         <div class="col-md-3">
             {!!  Form::label('enchoDuration', trans('core.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
+                {!!  Form::input('text','enchoDuration', $enchoDuration, ['class' => 'form-control enchoDuration','id' => 'enchoDuration'.$key, $disableEncho]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
@@ -133,29 +133,5 @@ $currency = Auth::user()->country->currency_code;
         <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}
         </button>
     </div>
-    <script>
-
-        $(function () {
-            $('#fightDuration{{$key}}').timepicker(('option',
-
-            {
-                'minTime': '2:00',
-                'maxTime': '5:00',
-                'timeFormat': 'H:i',
-                'step': '15'
-            }));
-
-            $('#enchoDuration{{$key}}').timepicker(('option',
-
-            {
-                'minTime': '1:00',
-                'maxTime': '5:00',
-                'timeFormat': 'H:i',
-                'step': '15'
-            }));
-
-        });
-    </script>
-
 </div>
 {!! Form::close()!!}
