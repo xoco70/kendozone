@@ -30,8 +30,8 @@
                 @endif
 
                 <h1 class="no-margin text-semibold">{{ $title }}</h1>
-
-                <p class="text-muted text-size-large mt-20">{{ $noItemYet }}</p>
+                <p class="text-muted text-size-large">{{ $noItemYet }}</p>
+                <br/>
 
                 @if ($printLink == true)
 
