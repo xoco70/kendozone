@@ -67,33 +67,15 @@ class TournamentUserController extends Controller
     public function store(Request $request, Tournament $tournament, AppMailer $mailer)
     {
         $categoryTournamentId = $request->categoryTournamentId;
-
-//        $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($userId);
-
+        
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
 
-        $email = $request->email;
-        $username = $request->username;
+        
+        $user = User::registerUserToTournament([
+            'name' => $request->username,
+            'email' => $request->email
 
-        $user = User::where('email', $email)->first();
-        $password = null;
-        if (is_null($user)) {
-            //Create user first
-            $password = User::generatePassword();
-
-            $user = User::create(['email' => $email,
-                'name' => $username,
-                'password' => bcrypt($password),
-                'confirmed' => '1'
-            ]);
-            dd($user);
-        } else {
-            // User already exists
-            // We check that this user isn't registered in this tournament
-            $user = User::find($user->id);
-//            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
-        }
-
+        ]);
 
         $ctu = $user->categoryTournaments();
 
@@ -101,14 +83,14 @@ class TournamentUserController extends Controller
             flash()->error(trans('msg.user_already_registered_in_category'));
             return redirect(URL::action('TournamentUserController@index', $tournament->slug));
         } else {
-            $ctu->attach($categoryTournamentId, ['confirmed' => 1]);
+            $ctu->attach($categoryTournamentId, ['confirmed' => 0]);
         }
 
 
         // We send him an email with detail (and user /password if new)
         $invite = new Invite();
         $code = $invite->generate($user->email, $tournament);
-        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $password);
+        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $user->clearPassword);
 
 //        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));

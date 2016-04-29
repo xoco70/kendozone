@@ -54,6 +54,34 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+
+    /**
+     * @param $attributes 
+     * @return static $user
+     */
+    public static function registerUserToTournament($attributes)
+    {
+        $user = User::where('email', $attributes['email'])->first();
+        $password = null;
+        if (is_null($user)) {
+            //Create user first
+            $password = User::generatePassword();
+
+            $user = User::create(['email' => $attributes['email'],
+                'name' => $attributes['name'],
+                'password' => bcrypt($password),
+                'verified' => '1'
+            ]);
+        } else {
+            $user = User::find($user->id);
+        }
+        $user->clearPassword = $password;
+
+        // Fire Events
+        
+        return $user;
+    }
+
     function addGeoData()
     {
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
