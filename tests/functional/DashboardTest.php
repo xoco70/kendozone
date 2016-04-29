@@ -56,7 +56,7 @@ class DashboardTest extends TestCase
         $tournament0 = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
 
         $this->visit('/')
-            ->seeInElement("del.text-muted", trans('core.create_new_tournament'));
+            ->seeInElement("text-muted", trans('core.create_new_tournament'));
 
         Auth::loginUsingId($this->simpleUser->id);
 
@@ -68,7 +68,7 @@ class DashboardTest extends TestCase
             });;
 
         $this->visit('/')
-             ->seeInElement("del.text-muted", trans('core.congigure_categories'));
+             ->seeInElement("text-muted", trans('core.congigure_categories'));
 
         // Now add ctu
 

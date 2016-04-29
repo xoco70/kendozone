@@ -86,10 +86,12 @@ class TournamentUserController extends Controller
                 'password' => bcrypt($password),
                 'confirmed' => '1'
             ]);
+            dd($user);
         } else {
             // User already exists
             // We check that this user isn't registered in this tournament
-            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
+            $user = User::find($user->id);
+//            $user = User::with('categoryTournaments.tournament', 'categoryTournaments.category')->find($user->id);
         }
 
 
