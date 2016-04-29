@@ -57,7 +57,7 @@
                                                         {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
                                                     @endif
 
-                                                    {!!  Form::hidden('avatar',basename($user->avatar)) !!}
+                                                    {!!  Form::hidden('avatar',filter_var($user->avatar, FILTER_VALIDATE_URL) ? $user->avatar : basename($user->avatar)) !!}
                                                 </div>
 
                                             </div>
