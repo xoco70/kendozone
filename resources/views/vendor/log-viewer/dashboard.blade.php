@@ -35,7 +35,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('scripts_footer')
     <script>
         $(function() {
             var data = {!! $reports !!};

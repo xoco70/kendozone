@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
-@stop
 @section('breadcrumbs')
 
 
@@ -44,6 +41,7 @@
 
 @stop
 @section("scripts_footer")
+    {!! Html::script('js/plugins/tables/footable/footable.min.js') !!}
     <script>
         $('.table-togglable').footable()
     </script>
