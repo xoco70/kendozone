@@ -44,13 +44,20 @@ $day = $now->day;
         $(function () {
             var $input = $('.dateFin').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
-                format: 'yyyy-mm-dd'
+                format: 'yyyy-mm-dd',
+                today: '',
+                clear: '',
+                close: ''
             });
             var pickerFin = $input.pickadate('picker')
 
             $('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
                 format: 'yyyy-mm-dd',
+                today: '',
+                clear: '',
+                close: '',
+
                 onSet: function () {
                     pickerFin.set('min', this.get('select'));
                 }
