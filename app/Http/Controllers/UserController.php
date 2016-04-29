@@ -145,32 +145,29 @@ class UserController extends Controller
         if (trim(Input::get('role_id')) == '') {
             array_push($except, 'role_id');
         }
+
         if (trim(Input::get('password')) == '' && trim(Input::get('password_confirmation')) == '') {
             array_push($except, 'password');
-
         }
-
-//        if (trim(Input::get('avatar')) == '') {
-//            array_push($except, 'avatar');
-//        }
         array_push($except, '_token');
 
         $req = $request->except($except);
-//        $data = User::uploadPic($req);
 
+        $user->fill($req);
 
-        //TODO: Should have an expection for pics
+        if (!in_array('password', $except)) {
+            $user->password = bcrypt(Input::get('password'));
+        }
 
-
-        if ($user->update($req)) {
+        if ($user->save()) {
             flash()->success(trans('msg.user_update_successful'));
         } else
             flash()->success(Lang::get('msg.user_update_error'));
 
 
         if ($user->id == Auth::user()->id) {
-            return redirect(URL::action('UserController@edit',Auth::user()->slug));
-        } else  {
+            return redirect(URL::action('UserController@edit', Auth::user()->slug));
+        } else {
             return redirect(URL::action('UserController@index'));
         }
 
@@ -196,7 +193,7 @@ class UserController extends Controller
     {
 
         Excel::create(trans_choice('core.user', 2), function ($excel) {
-            $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+            $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
 
             // Set the title
             $excel->setTitle(trans_choice('core.user', 2));
@@ -217,6 +214,7 @@ class UserController extends Controller
 
         })->export('xls');
     }
+
     public function getMyTournaments(Request $request)
     {
         $tournaments = Auth::user()->myTournaments()
@@ -224,8 +222,8 @@ class UserController extends Controller
             ->paginate(Config::get('constants.PAGINATION'));;
 
         $title = trans('core.tournaments_registered');
-        
-        return view('users.tournaments', compact('tournaments','title'));
+
+        return view('users.tournaments', compact('tournaments', 'title'));
     }
 
     /**
@@ -258,7 +256,8 @@ class UserController extends Controller
     }
 
 
-    public function uploadAvatar(Request $request){
+    public function uploadAvatar(Request $request)
+    {
         $data = $request->except('_token');
         $data = User::uploadPic($data);
         return $data;

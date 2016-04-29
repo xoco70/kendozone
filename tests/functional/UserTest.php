@@ -96,8 +96,8 @@ class UserTest extends TestCase
             ->type('julien@cappiello.fr2', 'email')
             ->type('julien', 'firstname')
             ->type('cappiello', 'lastname')
-            ->select('111111', 'password')
-            ->select('111111', 'password_confirmation')
+            ->type('111111', 'password')
+            ->type('111111', 'password_confirmation')
             ->attach($test_file_path, 'avatar')
 //            //File input avatar
             ->press(trans('core.save'))
@@ -244,7 +244,6 @@ class UserTest extends TestCase
     }
 
     /** @test
-     * TODO Map seems not to work in user.show
      */
     public function check_you_can_see_user_info()
     {
@@ -259,7 +258,6 @@ class UserTest extends TestCase
     }
 
     /** @test
-     * TODO Map seems not to work in user.show
      */
     public function user_can_see_tournament_info_but_cannot_edit_it()
     {
@@ -274,5 +272,31 @@ class UserTest extends TestCase
             ->visit('/tournaments/'.$tournament->slug.'/edit')
             ->see("403");
 //            $this->visit('/users/'.$user->slug.'/edit')
+    }
+
+    /** @test
+     */
+    public function you_can_change_your_password_and_login_with_new_data()
+    {
+        Auth::loginUsingId($this->simpleUser->id);
+        $this->visit("/users/".$this->simpleUser->slug."/edit/")
+            ->type('222222', 'password')
+            ->type('222222', 'password_confirmation')
+            ->press(trans('core.save'))
+            ->see(trans('msg.user_update_successful'));
+
+        //Logout
+        $this->click(trans('core.logout'))
+            ->seePageIs('auth/login');
+
+        // Login Again with new Data
+        $this->type($this->simpleUser->email, 'email')
+             ->type('222222', 'password')
+            ->press(trans('auth.signin'))
+            ->seePageIs('/');
+
+
+
+
     }
 }

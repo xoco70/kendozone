@@ -10,7 +10,7 @@ class UserRequest extends Request
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @return bool
      */
 
     public function authorize()
@@ -32,7 +32,7 @@ class UserRequest extends Request
             $uniqueUser = '|unique:users';
         }
 
-    
+
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
