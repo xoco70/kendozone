@@ -54,7 +54,8 @@ elixir(function (mix) {
         'components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
         'plugins/pickers/pickadate/picker.js',
         'plugins/pickers/pickadate/picker.date.js',
-        'plugins/notifications/bootbox.min.js'
+        'plugins/notifications/bootbox.min.js',
+        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentCreate.js');
 
     mix.scripts([
@@ -78,7 +79,19 @@ elixir(function (mix) {
         'plugins/notifications/sweet_alert.min.js',
         'jquery.timepicker.js',
         'plugins/jquery-dateFormat.min.js',
+        'pages/footer/tournamentEditFooter.js',
+        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentEdit.js');
+
+    mix.scripts([
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
+        'plugins/forms/inputs/duallistbox.min.js',
+        'plugins/pickers/location/location.js',
+        'plugins/notifications/sweet_alert.min.js',
+        'pages/footer/tournamentEditFooter.js',
+        'pages/footer/tournamentShowFooter.js'
+    ], 'public/js/pages/header/tournamentShow.js');
 
 
     mix.scripts([
