@@ -298,35 +298,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->where('category_tournament_user.user_id', '=', $this->id)
             ->select('tournament.*')
             ->distinct();
-
-
     }
-
-//    public static function insertCoordsInRequest(Request $request)
-//    {
-//
-//        if ($request->isMethod('post')) {
-//
-//            $location = GeoIP::getLocation(Config::get('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-//            $country = Countries::where('name', '=', $location['country'])->first();
-//            if (is_null($country)) {
-//                $request->request->add(['country_id' => Config::get('constants.COUNTRY_ID_DEFAULT')]);
-//                $request->request->add(['city' => "Paris"]);
-//                $request->request->add(['latitude' => "48.858222"]);
-//                $request->request->add(['longitude' => "2.2945"]);
-//
-//            } else {
-//                $country_id = $country->id;
-//                $request->request->add(['country_id' => $country_id]);
-//                $request->request->add(['city' => $location['city']]);
-//                $request->request->add(['latitude' => $location['lat']]);
-//                $request->request->add(['longitude' => $location['lon']]);
-//            }
-//
-//        }
-//        return $request;
-//
-//    }
 
 
     public static function generatePassword()
@@ -343,27 +315,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isSuperAdmin()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_SUPERADMIN');
+        return $this->role_id == Config::get('constants.ROLE_SUPERADMIN');
     }
 
     public function isOwner()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_OWNER');
+        return $this->role_id == Config::get('constants.ROLE_OWNER');
     }
 
     public function isAdmin()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_ADMIN');
+        return $this->role_id == Config::get('constants.ROLE_ADMIN');
     }
 
     public function isModerator()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_PRESIDENT');
+        return $this->role_id == Config::get('constants.ROLE_PRESIDENT');
     }
 
     public function isUser()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_USER');
+        return $this->role_id == Config::get('constants.ROLE_USER');
+    }
+
+    public function isDeleted()
+    {
+        return $this->deleted_at != null;
     }
 
     public function getRouteKeyName()
