@@ -16,8 +16,8 @@ class UserRepository
             if (!$user){
 
                 // get Large avatar
-                $avatar = str_replace('sz=50', 'sz=120', $userData->avatar);
-//                $avatar = str_replace('type=normal', 'type=large ', $avatar);
+                $avatar = str_replace('sz=50', 'sz=200', $userData->avatar);
+                $avatar = str_replace('type=normal', 'type=large ', $avatar);
 //dd (str_slug($userData->email));
                 $user = User::create([
                     'provider' => $provider,
@@ -60,7 +60,7 @@ class UserRepository
 
         if (!empty(array_diff($socialData, $dbData))) {
 
-            $avatar = str_replace('sz=50', 'sz=120', $userData->avatar);
+            $avatar = str_replace('sz=50', 'sz=200', $userData->avatar);
 //            $avatar = str_replace('type=normal', 'type=medium', $avatar);
 
             $user->avatar = $avatar;
