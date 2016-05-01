@@ -152,7 +152,6 @@ else
 @stop
 @section("scripts_footer")
     {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
-    {!! Html::script('js/pages/footer/tournamentUserIndexFooter.js') !!}
 
     {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
     <script>

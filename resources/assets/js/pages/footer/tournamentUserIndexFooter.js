@@ -28,7 +28,9 @@ $(function () {
                 url: url + '/categories/' + categoryId + '/users/' + userSlug + '/delete',
                 data: inputData,
                 success: function (data) {
+                    // console.log(data);
                     if (data != null && data.status == 'success') {
+
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -44,6 +46,7 @@ $(function () {
                         // catsize.html(categoriesSize)
 
                     } else {
+                        console.log("Not Success");
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -62,6 +65,7 @@ $(function () {
 
                 },
                 error: function (data) {
+                    console.log("Error");
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',

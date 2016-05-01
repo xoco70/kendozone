@@ -95,7 +95,7 @@ class TournamentUserController extends Controller
 
 //        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
-        return view(URL::action('TournamentUserController@index', $tournament->slug));
+        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 
 
     }
