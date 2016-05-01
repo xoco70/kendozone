@@ -61,7 +61,7 @@ class UserRepository
         if (!empty(array_diff($socialData, $dbData))) {
 
             $avatar = str_replace('sz=50', 'sz=200', $userData->avatar);
-//            $avatar = str_replace('type=normal', 'type=medium', $avatar);
+            $avatar = str_replace('type=normal', 'type=large', $avatar);
 
             $user->avatar = $avatar;
             $user->slug = str_slug($userData->name);
