@@ -147,7 +147,6 @@ class Category extends Model
 
     public function buildName($grades)
     {
-//        dd($this);
 
         $genders = [
             'M' => trans('core.male'),
@@ -155,33 +154,10 @@ class Category extends Model
             'X' => trans('core.mixt')
         ];
 
-
         $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
-
-
         $ageCategoryText = $this->getAgeString();
-
-
         $gradeText = $this->getGradeString($grades);
 
-//        dd($teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText);
         return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
-
     }
-
-//    public function shinpans()
-//    {
-//        return $this->hasMany('App\Shinpan');
-//    }
-
-//    public function competitors()
-//    {
-//        return $this->hasMany('App\Competitor');
-//    }
-
-//    public function teams()
-//    {
-//        return $this->hasMany('App\Team');
-//    }
-
 }

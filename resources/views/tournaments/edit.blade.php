@@ -261,12 +261,12 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+
                                     $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
-                                            ? $setting->fightDuration
-                                            : Config::get('constants.CAT_FIGHT_DURATION');
+                                            ? $setting->fightDuration : Config::get('constants.CAT_FIGHT_DURATION');
+
                                     $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
-                                            ? $setting->enchoDuration
-                                            : Config::get('constants.CAT_ENCHO_DURATION');
+                                            ? $setting->enchoDuration  : Config::get('constants.CAT_ENCHO_DURATION');
 
 
                                     ?>

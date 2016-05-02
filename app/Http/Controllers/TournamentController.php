@@ -107,9 +107,15 @@ class TournamentController extends Controller
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tournament $tournament)
+    public function edit($tournament)
     {
-        $numCompetitors = $tournament->competitors()->select('user_id')->groupBy('user_id')->get()->count();
+
+        $tournament = Tournament::with('competitors','categorySettings','categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
+//        dd($tournament->competitors->groupBy('user_id'));
+        // Statistics for Right Panel
+        $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
+        $settingSize = $tournament->categorySettings->count();
+        $categorySize = $tournament->categoryTournaments->count();
 
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
@@ -129,8 +135,6 @@ class TournamentController extends Controller
 
 
         $levels = TournamentLevel::lists('name', 'id');
-        $settingSize = $tournament->settings()->count();
-        $categorySize = $tournament->categories()->count();
 
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize','grades','numCompetitors'));
     }
