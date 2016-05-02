@@ -43,7 +43,7 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::user()->isSuperAdmin()) {
-            $users = User::paginate(Config::get('constants.PAGINATION'));
+            $users = User::with('country','role')->paginate(Config::get('constants.PAGINATION'));
 
             return view('users.index', compact('users'));
         } else {
