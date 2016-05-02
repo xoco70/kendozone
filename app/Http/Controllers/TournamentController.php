@@ -46,10 +46,9 @@ class TournamentController extends Controller
 //        ]);
 
         if (Auth::user()->isSuperAdmin()) {
-            $tournaments = Tournament::orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
+            $tournaments = Tournament::with('owner')->orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
         } else {
-            $tournaments = Auth::user()->tournaments()->orderBy('created_at', 'desc')
-                ->paginate(Config::get('constants.PAGINATION'));
+            $tournaments = Auth::user()->tournaments()->with('owner')->orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
         }
         $title = trans('core.tournaments_created');
         return view('tournaments.index', compact('tournaments', 'currentModelName', 'title'));
@@ -224,12 +223,12 @@ class TournamentController extends Controller
     {
         $currentModelName = trans_choice('core.tournament', 2);
         if (Auth::user()->isSuperAdmin()) {
-            $tournaments = Tournament::onlyTrashed()
+            $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
                 ->orderBy('tournament.created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));
         } else {
-            $tournaments = Auth::user()->tournaments()
+            $tournaments = Auth::user()->tournaments()->with('owner')
                 ->onlyTrashed()
                 ->orderBy('created_at', 'desc')
                 ->paginate(Config::get('constants.PAGINATION'));

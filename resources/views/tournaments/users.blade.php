@@ -76,7 +76,7 @@ else
 
                                     </td>
                                     <td>{{ $user->email }}</td>
-                                    <td class="text-center">{{ trans($categoryTournament->category->name)}}</td>
+                                    <td class="text-center">{{ $categoryTournament->category->buildName($grades)}}</td>
 
                                     <td class="text-center">
                                         @if ($user->pivot->confirmed)

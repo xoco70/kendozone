@@ -217,7 +217,7 @@ class UserController extends Controller
 
     public function getMyTournaments(Request $request)
     {
-        $tournaments = Auth::user()->myTournaments()
+        $tournaments = Auth::user()->myTournaments()->with('owner')
             ->orderBy('created_at', 'desc')
             ->paginate(Config::get('constants.PAGINATION'));;
 
