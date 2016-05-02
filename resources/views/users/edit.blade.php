@@ -29,8 +29,6 @@
             @endif
 
 
-
-
                     <!-- Detached content -->
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
@@ -50,12 +48,9 @@
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('core.username')) !!}
-                                                    @if (!is_null($user->id))
-                                                        {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}
-                                                        {!!  Form::hidden('name', $user->name) !!}
-                                                    @else
-                                                        {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
-                                                    @endif
+
+                                                    {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
+
 
                                                     {!!  Form::hidden('avatar',filter_var($user->avatar, FILTER_VALIDATE_URL) ? $user->avatar : basename($user->avatar)) !!}
                                                 </div>
@@ -147,7 +142,13 @@
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('email', trans('core.email')) !!}
-                                                    {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                                    @if (!is_null($user->id))
+                                                        {!!  Form::label('email', $user->email, ['class' => 'form-control', "disabled" ]) !!}
+                                                        {!!  Form::hidden('email', $user->email) !!}
+                                                    @else
+                                                        {!!  Form::text('name', $user->email, ['class' => 'form-control' ]) !!}
+                                                    @endif
+
                                                     <p class="help-block">{{  Lang::get('core.email_desc') }}</p>
 
                                                 </div>
@@ -214,8 +215,6 @@
         </div>
 
 
-
-
     </div>
 @stop
 @section('scripts_footer')
@@ -240,8 +239,8 @@
                 parallelUploads: 100,
                 acceptedFiles: "image/jpeg,image/png,image/gif",
 
-                dictRemoveFile:'{{ trans('core.remove') }}',
-                dictDefaultMessage:'Upload file',
+                dictRemoveFile: '{{ trans('core.remove') }}',
+                dictDefaultMessage: 'Upload file',
                 addRemoveLinks: 'dictRemoveFile',
                 url: uploadUrl,
                 maxFiles: 1,
@@ -287,7 +286,7 @@
                     // and call it either with or without error in the `thumbnail` event
                     // callback, but I think that this is cleaner.
                 },
-                removedfile: function(file) {
+                removedfile: function (file) {
 //                        var name = file.name;
 //                        $.ajax({
 //                            type: 'POST',
