@@ -55,7 +55,7 @@ class AppMailer
     public function sendEmailConfirmationTo(User $user)
     {
         $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
-
+        //TODO Not translated
         $this->to = $user->email;
         $this->subject = 'Activación de tu cuenta '.$appName;
         $this->view = 'emails.confirm';

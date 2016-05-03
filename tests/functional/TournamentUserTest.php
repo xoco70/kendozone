@@ -27,41 +27,66 @@ class TournamentUserTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+//        $this->user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+
         Auth::loginUsingId($this->root->id);
     }
 
     /** @test */
-//    public function it_add_a_user_to_tournament_category()
-//    {
-//        // Given
-//        $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
-//        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-//        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-//
-//
-//        $categoryTournaments = $tournament->categoryTournaments;
-//        foreach ($categoryTournaments as $categoryTournament) {
-//
-//            $this->visit('/tournaments/' . $tournament->slug . '/users/')
-//                ->click(trans_choice('core.competitor', 2))
-//                ->click('addcompetitor' . $categoryTournament->id)
-//                ->type('usertest', 'username')
-//                ->type('usertest@gmail.com', 'email')
-//                ->press(trans("core.save"))
-//                ->seePageIs('/tournaments/' . $tournament->slug . '/users');
-//
-//
-//            $user = User::where('email', 'usertest@gmail.com')->first();
-//            // User must exists
-//            $this->seeInDatabase('category_tournament_user',
-//                ['category_tournament_id' => $categoryTournament->id,
-//                    'user_id' => $user->id,
-//                ]);
-//        }
-//
-//
-//    }
+    public function it_add_a_user_to_tournament_category()
+    {
+        $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+
+
+        $existingUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $deletedUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'), 'deleted_at' => "2015-01-01"]);
+
+        $newUser = clone $existingUser;
+        $newUser->email = "new@email.com";
+
+
+        $usersToAdd = [$newUser, $existingUser,$deletedUser]; //
+
+
+        foreach ($usersToAdd as $user) {
+                $this->add_tcu($tournament, $user);
+        }
+
+
+    }
+
+    public function add_tcu($tournament, $user){
+
+        $categoryTournaments = $tournament->categoryTournaments;
+        foreach ($categoryTournaments as $categoryTournament) {
+
+
+            $this->post('/tournaments/' . $tournament->slug . '/users/',
+                ['categoryTournamentId' => $categoryTournament->id,
+                    'username' => $user->name,
+                    'email' => $user->email]);
+
+            $myUser = User::where('email', $user->email)->withTrashed()->first();
+
+            if ($myUser->deleted_at == null) {
+                $this->seeInDatabase('category_tournament_user',
+                    ['category_tournament_id' => $categoryTournament->id,
+                        'user_id' => $myUser->id,
+                    ]);
+
+            }
+            else {
+                $this->dontSeeInDatabase('category_tournament_user',
+                    ['category_tournament_id' => $categoryTournament->id,
+                        'user_id' => $myUser->id,
+                    ]);
+
+            }
+        }
+    }
 
     /** @test */
     public function it_removes_a_user_from_tournament_category()

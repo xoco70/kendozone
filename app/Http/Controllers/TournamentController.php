@@ -107,7 +107,7 @@ class TournamentController extends Controller
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
-    public function edit($tournament)
+    public function edit(Tournament $tournament)
     {
 
         $tournament = Tournament::with('competitors','categorySettings','categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
