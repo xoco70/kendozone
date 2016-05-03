@@ -12,13 +12,12 @@ class LanguageController extends Controller
 {
 
     public function change($locale){
+        Session::put('locale',$locale);
         if(Auth::check()){
             Auth::user()->locale = $locale;
             Auth::user()->save();
             Lang::setLocale($locale);
 
-        }else{
-            Session::put('locale',$locale);
         }
 
         return redirect()->back();

@@ -24,10 +24,10 @@
 
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
-                    @if ( App::getLocale() =='en' || App::getLocale() == null)
-                        <img src="/images/flags/GB.png" class="position-left" alt="">
-                    @elseif (App::getLocale() =='es')
+                    @if (App::getLocale() =='es')
                         <img src="/images/flags/MX.png" class="position-left" alt="">
+                    @else
+                        <img src="/images/flags/GB.png" class="position-left" alt="">
                     @endif
 
 
