@@ -11,7 +11,6 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-//        dd( Session::get('locale'));
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.dashboard', 1);
         View::share('currentModelName', $this->currentModelName);

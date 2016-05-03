@@ -61,7 +61,7 @@ Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
 Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
     function () {
-
+        Route::get('lang/change/{lang}', 'LanguageController@change');
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');

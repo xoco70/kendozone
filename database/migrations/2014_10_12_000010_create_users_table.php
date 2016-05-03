@@ -49,6 +49,8 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable();
             $table->string('provider');
             $table->string('provider_id')->unique()->nullable();
+            $table->string('locale', 5)->default('en');
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

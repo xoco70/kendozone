@@ -45,7 +45,7 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
+     * @param Socialite $socialite
      */
 
 
@@ -208,11 +208,6 @@ class AuthController extends Controller
             flash()->error(Lang::get('auth.no_invite'));
             return redirect(URL::action('Auth\AuthController@postLogin'))->with('status', 'error');
         }
-    }
-
-    public function getCategories($userId, $tournamentId)
-    {
-        dd("hola");
     }
 
 
