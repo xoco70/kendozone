@@ -2,7 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure, Session, Auth;
+use Auth;
+use Closure;
 
 class LocaleMiddleware
 {

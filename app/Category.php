@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Lang;
 use OwenIt\Auditing\AuditingTrait;
 
 class Category extends Model

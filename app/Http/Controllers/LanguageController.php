@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
+
 
 class LanguageController extends Controller
 {
@@ -22,8 +21,7 @@ class LanguageController extends Controller
             Session::put('locale',$locale);
         }
 
-        //TODO Aqui esta mal
-        return redirect('');
+        return redirect()->back();
 
     }
 }

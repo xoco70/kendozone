@@ -1,4 +1,3 @@
-<!-- Second navbar  -->
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="{{ URL::action('DashboardController@index') }}"><img src="/images/logored.png" alt=""></a>
@@ -22,9 +21,10 @@
             <li><a href="{!! URL::to('logs')!!}"><i class="fa fa-clock-o"></i> {!! Lang::get('core.logs') !!}</a></li>
             </ul>
             </li>
+
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
-                    @if ( App::getLocale() =='en')
+                    @if ( App::getLocale() =='en' || App::getLocale() == null)
                         <img src="/images/flags/GB.png" class="position-left" alt="">
                     @elseif (App::getLocale() =='es')
                         <img src="/images/flags/MX.png" class="position-left" alt="">
