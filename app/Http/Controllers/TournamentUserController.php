@@ -71,8 +71,7 @@ class TournamentUserController extends Controller
         
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
 
-        
-        $user = User::registerUserToTournament([
+        $user = User::registerUserToCategory([
             'name' => $request->username,
             'email' => $request->email
 
@@ -93,7 +92,6 @@ class TournamentUserController extends Controller
         $code = $invite->generate($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $user->clearPassword);
 
-//        return Response::json(['msg' => trans('msg.user_registered_successful', ['name' => $tournament->name]), 'status' => 'success']);
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
         return redirect(URL::action('TournamentUserController@index', $tournament->slug));
 

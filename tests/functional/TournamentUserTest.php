@@ -48,17 +48,18 @@ class TournamentUserTest extends TestCase
         $newUser->email = "new@email.com";
 
 
-        $usersToAdd = [$newUser, $existingUser,$deletedUser]; //
+        $usersToAdd = [$newUser, $existingUser, $deletedUser]; //
 
 
         foreach ($usersToAdd as $user) {
-                $this->add_tcu($tournament, $user);
+            $this->add_tcu($tournament, $user);
         }
 
 
     }
 
-    public function add_tcu($tournament, $user){
+    public function add_tcu($tournament, $user)
+    {
 
         $categoryTournaments = $tournament->categoryTournaments;
         foreach ($categoryTournaments as $categoryTournament) {
@@ -69,22 +70,13 @@ class TournamentUserTest extends TestCase
                     'username' => $user->name,
                     'email' => $user->email]);
 
-            $myUser = User::where('email', $user->email)->withTrashed()->first();
+            $myUser = User::where('email', $user->email)->first();
 
-            if ($myUser->deleted_at == null) {
-                $this->seeInDatabase('category_tournament_user',
-                    ['category_tournament_id' => $categoryTournament->id,
-                        'user_id' => $myUser->id,
-                    ]);
+            $this->seeInDatabase('category_tournament_user',
+                ['category_tournament_id' => $categoryTournament->id,
+                    'user_id' => $myUser->id,
+                ]);
 
-            }
-            else {
-                $this->dontSeeInDatabase('category_tournament_user',
-                    ['category_tournament_id' => $categoryTournament->id,
-                        'user_id' => $myUser->id,
-                    ]);
-
-            }
         }
     }
 
@@ -96,7 +88,7 @@ class TournamentUserTest extends TestCase
         $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
 
-        $users = factory(User::class, 3)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $users = factory(User::class, 2)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         foreach ($users as $user) {
             factory(\App\CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id, 'user_id' => $user->id]);
