@@ -113,7 +113,7 @@ return [
     // Places
     'venue' => 'Venue',
     'place' => 'Place|Places',
-    'coords' => 'Coords',
+    'coords' => 'Coordinates',
     'city' => 'City',
     'state' => 'State',
     'country' => 'Country',

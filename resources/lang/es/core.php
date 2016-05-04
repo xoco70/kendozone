@@ -116,7 +116,7 @@ return [
     // Places
     'venue' => 'Lugar del encuentro',
     'place' => 'Lugar|Lugares',
-    'coords' => 'Coords',
+    'coords' => 'Coordenadas',
     'city' => 'Ciudad',
     'state' => 'Estado',
     'country' => 'País',

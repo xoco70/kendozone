@@ -166,7 +166,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    {!!  Form::label('name', trans('core.coords')) !!}
+                                    {!!  Form::label('name', trans('core.coords'),['class' => 'text-bold' ]) !!}
                                     <div class="map-wrapper locationpicker-default"
                                          id="locationpicker-default"></div>
                                 </div>
