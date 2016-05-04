@@ -29,40 +29,42 @@ class UserTest extends TestCase
 //    use WithoutMiddleware;
 
 
-    protected $user, $users, $addUser, $editUser, $root, $simpleUser;
+    protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
 
     public function setUp()
     {
         parent::setUp();
-
-        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
-        $this->user = trans_choice('core.user', 1);
-        $this->users = trans_choice('core.user', 2);
-        $this->addUser = Lang::get('core.addModel', ['currentModelName' => $this->user]);
-        $this->editUser = Lang::get('core.updateModel', ['currentModelName' => $this->user]);
+
+
+
+//        trans_choice('core.user', 1) = trans_choice('core.user', 1);
+//        trans_choice('core.user', 2) = trans_choice('core.user', 2);
+//        $this->addUser = trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]);
+//        $this->editUser = trans('core.updateModel', ['currentModelName' => trans_choice('core.user', 1)]);
     }
 
     /** @test */
     public function it_denies_creating_an_empty_user()
     {
 
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
 
         $this->visit("/users")
              ->see('403');
 
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
 
         $this->visit("/users")
-            ->see($this->users)
-            ->click($this->addUser)
-            ->press(Lang::get('core.save'))
+//            ->see(trans_choice('core.user', 2))
+            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
+            ->press(trans('core.save'))
             ->seePageIs('/users/create')
-            ->see("El campo name es obligatorio")// Lang::get('validation.filled', ['attribute' => "name"])
-            ->see("El campo email es obligatorio")// Lang::get('validation.filled', ['attribute' => "email"])
-            ->see("El campo password es obligatorio")//Lang::get('validation.filled', ['attribute' => "password"])
+            ->see(trans('validation.filled', ['attribute' => "name"]))
+            ->see(trans('validation.filled', ['attribute' => "email"]))
+            ->see(trans('validation.filled', ['attribute' => "password"]))
             ->notSeeInDatabase('users', ['name' => '']);
 
     }
@@ -77,11 +79,10 @@ class UserTest extends TestCase
     /** @test */
     public function it_create_user($delete = true)
     {
-        Auth::loginUsingId($this->simpleUser->id);
-        $this->visit('/')->dontSee($this->users);
+        $this->logWithUser($this->simpleUser);
+        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
 
-
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
 
         $test_file_path = base_path() . '/avatar2.png';
 //        dd($test_file_path);
@@ -89,9 +90,9 @@ class UserTest extends TestCase
 
 
         $this->visit('/')
-            ->click($this->users)
-            ->see($this->users)
-            ->click($this->addUser)
+            ->click(trans_choice('core.user', 2))
+//            ->see(trans_choice('core.user', 2))
+            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
             ->type('MyUser', 'name')
             ->type('julien@cappiello.fr2', 'email')
             ->type('julien', 'firstname')
@@ -115,11 +116,10 @@ class UserTest extends TestCase
     {
 
 
-        Auth::loginUsingId($this->simpleUser->id);
-        $this->visit('/')->dontSee($this->users);
+        $this->logWithUser($this->simpleUser);
+        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
 
-
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
 
 
         $this->visit('/users')
@@ -141,16 +141,16 @@ class UserTest extends TestCase
     /** @test */
     public function it_denies_creating_user_without_password()
     {
-        Auth::loginUsingId($this->simpleUser->id);
-        $this->visit('/')->dontSee($this->users);
+        $this->logWithUser($this->simpleUser);
+        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
 
 
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
 
         $this->visit('/')
-            ->click($this->users)
-            ->see($this->users)
-            ->click($this->addUser)
+            ->click(trans_choice('core.user', 2))
+            ->see(trans_choice('core.user', 2))
+            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
             ->type('MyUser', 'name')
             ->type('julien@cappiello.fr3', 'email')
             ->type('julien', 'firstname')
@@ -167,7 +167,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_allow_editing_user_without_password()
     {
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
 
         $user = factory(User::class)->create(
             [   'name' => 'MyUser',
@@ -198,7 +198,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_delete_user()
     {
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
         // Given
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
@@ -227,17 +227,17 @@ class UserTest extends TestCase
         $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         // User 2 can edit his info
-        Auth::loginUsingId($owner->id);
+        $this->logWithUser($owner);
         $this->visit('/users/'.$owner->slug.'/edit')
-        ->see($this->user);
+        ->see(trans_choice('core.user', 1));
 
         // Now superuser can also edit User 2 Info
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
         $this->visit('/users/'.$this->simpleUser->slug.'/edit')
-            ->see($this->user);
+            ->see(trans_choice('core.user', 1));
 
         //Now superuser cannot edit User 2 info
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
         $this->visit('/users/' . $owner->slug . '/edit')
             ->see("403");
 
@@ -249,7 +249,7 @@ class UserTest extends TestCase
     {
         $user2 = factory(User::class)->create(['name'=>'AnotherUser' ]);
 
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
         $this->visit('/users/'.$user2->slug)
             ->dontSee("403")
             ->visit('/users/'.$user2->slug.'/edit')
@@ -265,7 +265,7 @@ class UserTest extends TestCase
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
 
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
 
         $this->visit('/tournaments/'.$tournament->slug)
             ->dontSee("403")
@@ -278,7 +278,8 @@ class UserTest extends TestCase
      */
     public function you_can_change_your_password_and_login_with_new_data()
     {
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $this->logWithUser($this->simpleUser);
         $this->visit("/users/".$this->simpleUser->slug."/edit/")
             ->type('222222', 'password')
             ->type('222222', 'password_confirmation')

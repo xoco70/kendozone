@@ -25,7 +25,7 @@ class InviteTest extends TestCase
     {
         parent::setUp();
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
     }
 
     /** @test */

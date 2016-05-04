@@ -19,7 +19,7 @@ return [
 
     
     'signin' => 'Sign in',
-    'signup' => 'Sign up ',
+    'signup' => 'Sign up',
     'remember' => 'Remember',
     'lost_password' => 'Lost passowrd?',
     'create_account' => 'Create account',
