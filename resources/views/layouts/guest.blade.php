@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="description" content="Kendozone is a online tournament Kendo Software. With Kendozone, you will be able to register tournaments, generate documentation, and score live with the future mobile app">
     <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }}</title>
     <!-- Global stylesheets -->
     {!! Html::style('css/app.css')!!}

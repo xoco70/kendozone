@@ -1,8 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-{{--    {!! Html::script('js/pages/header/categoryCreate.js') !!}--}}
-
-@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('categories.create',$currentModelName) !!}
 @stop
@@ -12,7 +8,7 @@
 
     <div class="container-fluid">
 
-        {!! Form::open(['url'=>"categories"]) !!}
+        {!! Form::open(['url'=>URL::action('CategoryController@index')]) !!}
 
         @include("categories.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
 
@@ -20,4 +16,9 @@
         {!! Form::close()!!}
 
     </div>
+@stop
+@section('scripts_footer')
+{{--    {!! Html::script('js/icheck.min.js') !!}--}}
+{{--    {!! Html::script('js/pages/footer/categoryCreateFooter.js') !!}--}}
+    {!! Html::script('/js/categoryCreate.js') !!}
 @stop

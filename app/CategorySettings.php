@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use OwenIt\Auditing\AuditingTrait;
 
 class CategorySettings extends Model
 {
     use SoftDeletes;
+    use AuditingTrait;
     protected $dates = ['created_at', 'updated_at','deleted_at'];
 
     protected $table = 'category_settings';

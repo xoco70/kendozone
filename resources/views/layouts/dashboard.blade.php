@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
+    <meta name="description"
+          content="Kendozone is a online tournament Kendo Software. With Kendozone, you will be able to register tournaments, generate documentation, and score live with the future mobile app">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }}</title>
-
-
+    {{--TODO Put acion + model here--}}
+    <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }} </title>
     <!-- Global stylesheets -->
     {!! Html::style('/css/icons/icomoon/styles.css')!!}
-    {!! Html::style('https://fonts.googleapis.com/css?family=Nunito:400,300,100,500,700,900')!!}
-
-    {!! Html::script('js/app.js')!!}
     {!! Html::style('css/app.css')!!}
-
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-
     @yield('scripts')
     @yield('styles')
-
 </head>
 {{--sidebar-xs should be out--}}
 <body class="sidebar-xs  has-detached-right navbar-top">
 @if (Auth::check())
 @include('layouts.headmenu')
 @endif
-
-
-        <!-- Page container -->
+<!-- Page container -->
 <div class="page-container">
 
     <!-- Page content -->
@@ -44,7 +35,6 @@
             <!-- Content area -->
 
             <div class="content">
-                @include('layouts.flash')
                 @yield('content')
                 @include('layouts.footer')
             </div>
@@ -60,17 +50,17 @@
 </div>
 <!-- /page container -->
 
+
+{!! Html::script('js/app.js')!!}
 {!! Html::script('js/analytics.js') !!}
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $.protip(
 
         );
     });
 </script>
-
-
-
+@include('layouts.flash')
 @yield('scripts_footer')
 
 </body>

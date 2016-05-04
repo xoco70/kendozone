@@ -83,7 +83,7 @@
     </div>
 @stop
 
-@section('scripts')
+@section('scripts_footer')
     <script>
         $(function () {
             var deleteLogModal = $('div#delete-log-modal'),

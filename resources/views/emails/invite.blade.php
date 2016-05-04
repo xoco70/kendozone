@@ -5,7 +5,7 @@
     <title>{{ trans('mail.invite') }}</title>
 </head>
 <?php
-$appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
+$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
 ?>
 <body>
 <h2>{{ trans('mail.invite_to_tournament') }}: {{ $tournament->name }} </h2>
@@ -17,21 +17,20 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
     @if ($tournament->venue != null)
         <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue }}<br/>
     @endif
-    <strong>{{trans('core.dateIni')}}:</strong> {{ $tournament->dateIni }}<br/>
-    <strong>{{trans('core.dateFin')}}:</strong> {{ $tournament->dateFin }}<br/>
+    <strong>{{trans('core.eventDateIni')}}:</strong> {{ $tournament->dateIni }}<br/>
+    <strong>{{trans('core.eventDateFin')}}:</strong> {{ $tournament->dateFin }}<br/>
     @if ($tournament->cost != null) <strong>{{trans('core.cost')}}:</strong> {{ $tournament->cost }}<br/>@endif
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
         <strong>{{trans('core.limitDateRegistration')}}:</strong> {{ $tournament->registerDateLimit }}<br/>
-@endif
+    @endif
 @if (isset($category))
     <P>{{ trans('mail.you_have_been_preregistered') }}</P>
     <ul>
-        <li>{{$category}}</li>
+            <li>{{$category}}</li>
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{$appURL}}/tournaments/{{$tournament->slug}}/invite/{{ $code }}'>{{$appURL}}
-        /tournaments/{{$tournament->slug}}/invite/{{ $code }}</a>
+    <a href='{{ URL::action('InviteController@register', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}'>{{ URL::action('InviteController@register', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}</a>
 @endif
 
 @if($password!=null)
@@ -40,13 +39,13 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
     {{ trans('core.password') }}: {{ $password }}
 @endif
 
-<p>{{ trans('mail.dont_forget_to_pay') }}
+<p>{{trans('mail.dont_forget_to_pay')}}
     @if ($tournament->registerDateLimit != null && $tournament->registerDateLimit!= '0000-00-00')
-        {{ trans('before_day') }} {{ $tournament->registerDateLimit }}.</p>
-@endif
+        {{trans('mail.before_day')}} {{ $tournament->registerDateLimit }}.</p>
+    @endif
 
-<p>{{ trans('core.thanks') }}</p>
+<p>{{trans('core.thanks')}}</p>
 
-<p align="right">{{ $tournament->owner->name  }}</p>
+<p>{{ $tournament->owner->name  }}</p>
 </body>
 </html>

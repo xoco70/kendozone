@@ -1,6 +1,6 @@
 var elixir = require('laravel-elixir');
 
-//require('laravel-elixir-vueify');
+require('laravel-elixir-vueify');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,6 +13,7 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function (mix) {
+    mix.browserify('vue/pages/categoryCreate.js');
 
     // General Styles for app
     mix.styles([
@@ -22,99 +23,132 @@ elixir(function (mix) {
         'colors.css',
         'core.css',
         'custom.css',
-        'protip.css'
+        'protip.css',
+        'nunito.css'
     ], 'public/css/app.css');
-   // mix.browserify('vue/pages/tournaments.js');
     mix.scripts([
-       //'icons/icomoon/styles.css',
-       'plugins/loaders/pace.min.js',
-       'core/libraries/jquery.min.js',
-       'core/libraries/bootstrap.min.js',
-       'plugins/loaders/blockui.min.js',
-       'core/app.js',
-       'components/noty/js/noty/packaged/jquery.noty.packaged.js',
-       'core/libraries/jquery_ui/sliders.min.js',
-       'core/libraries/jquery_ui/touch.min.js',
-       'plugins/sliders/slider_pips.min.js',
-       'plugins/forms/styling/switch.min.js',
+        'plugins/loaders/pace.min.js',
+        'core/libraries/jquery.min.js', // 2.1.4
+        'core/libraries/bootstrap.min.js', // v3.3.6
+        'core/app.js',
+        'components/noty/js/noty/packaged/jquery.noty.packaged.js',
+        'plugins/forms/styling/switch.min.js',
+        'vendor/jsvalidation/js/jsvalidation.js',
         'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
     mix.scripts([
-       'plugins/tables/footable/footable.min.js',
+        'plugins/tables/footable/footable.min.js',
     ], 'public/js/pages/header/tournamentIndex.js');
 
     mix.scripts([
-       'plugins/tables/footable/footable.min.js',
+        'plugins/tables/footable/footable.min.js',
     ], 'public/js/pages/header/userIndex.js');
 
 
     mix.scripts([
-       'plugins/tables/footable/footable.min.js'
+        'plugins/tables/footable/footable.min.js'
     ], 'public/js/pages/header/invitationIndex.js');
 
     mix.scripts([
-       'plugins/forms/inputs/duallistbox.min.js',
-       'plugins/pickers/pickadate/picker.js',
-       'plugins/pickers/pickadate/picker.date.js'
+        'components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
+        'plugins/pickers/pickadate/picker.js',
+        'plugins/pickers/pickadate/picker.date.js',
+        'plugins/notifications/bootbox.min.js',
+        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentCreate.js');
 
     mix.scripts([
-       //'http://maps.google.com/maps/api/js',
-       // 'plugins/uploaders/fileinput.min.js',
-       // 'pages/uploader_bootstrap.js',
-       'plugins/dropzone.js'
+        'plugins/dropzone.js'
     ], 'public/js/pages/header/userCreate.js');
 
     mix.styles([
         'dropzone.css',
-        // 'dz-basic.css'
     ], 'public/css/pages/userCreate.css');
     mix.scripts([
-       'https://maps.google.com/maps/api/js',
-       // 'plugins/uploaders/fileinput.min.js',
-       'plugins/uploaders/dropzone.js',
-       // 'plugins/pages/uploader_bootstrap.js'
+        'plugins/uploaders/dropzone.js',
     ], 'public/js/userEdit.js');
 
     mix.scripts([
-       'plugins/ui/nicescroll.min.js',
-       'sidebar_detached_sticky_custom.js',
-       'plugins/forms/inputs/duallistbox.min.js',
-       'plugins/pickers/location/location.js',
-       //'http://maps.google.com/maps/api/js',
-       'plugins/pickers/pickadate/picker.js',
-       'plugins/pickers/pickadate/picker.date.js',
-       'plugins/notifications/sweet_alert.min.js',
-       'core/libraries/jquery_ui/interactions.min.js',
-       'core/libraries/jquery_ui/touch.min.js',
-       'jquery.timepicker.js',
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
+        'plugins/forms/inputs/duallistbox.min.js',
+        'plugins/pickers/location/location.js',
+        'plugins/pickers/pickadate/picker.js',
+        'plugins/pickers/pickadate/picker.date.js',
+        'plugins/notifications/sweet_alert.min.js',
+        'jquery.timepicker.js',
         'plugins/jquery-dateFormat.min.js',
+        'pages/footer/tournamentEditFooter.js',
+        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentEdit.js');
+
+    mix.scripts([
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
+        'plugins/forms/inputs/duallistbox.min.js',
+        'plugins/pickers/location/location.js',
+        'plugins/notifications/sweet_alert.min.js',
+        'pages/footer/tournamentEditFooter.js',
+        'pages/footer/tournamentShowFooter.js'
+    ], 'public/js/pages/header/tournamentShow.js');
 
 
     mix.scripts([
-       'plugins/ui/nicescroll.min.js',
-       'sidebar_detached_sticky_custom.js',
-       'plugins/notifications/sweet_alert.min.js'
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
+        'plugins/notifications/sweet_alert.min.js'
     ], 'public/js/pages/header/tournamentUserCreate.js');
 
     mix.scripts([
-       'plugins/tables/datatables/datatables.min.js',
-       'plugins/tables/datatables/extensions/responsive.min.js',
-       'plugins/forms/selects/select2.min.js'
+        'plugins/tables/datatables/datatables.min.js',
+        'plugins/tables/datatables/extensions/responsive.min.js',
+        'plugins/forms/selects/select2.min.js',
+        'pages/footer/tournamentUserIndexFooter.js'
     ], 'public/js/pages/header/tournamentUserIndex.js');
 
     mix.scripts([
-        // 'bootstrap-tagsinput.js',
-        // 'bootstrap-multiEmail.js'
-       'plugins/multiple-emails.js'
+        'plugins/multiple-emails.js'
     ], 'public/js/pages/header/tournamentInvite.js');
 
     mix.styles([
-        // 'bootstrap-tagsinput.css',
-        // 'bootstrap-multiEmail.css'
-       'multiple-emails.css'
+        'multiple-emails.css'
     ], 'public/css/pages/tournamentInvite.css');
+
+    
+    
+    
+    // FOOTER
+
+    mix.scripts([
+        'pages/footer/categoryCreateFooter.js'
+    ], 'public/js/pages/footer/categoryCreateFooter.js');
+
+
+    mix.scripts([
+        'pages/footer/tournamentEditFooter.js'
+    ], 'public/js/pages/footer/tournamentEditFooter.js');
+
+
+    mix.scripts([
+        'pages/footer/tournamentDeletedFooter.js'
+    ], 'public/js/pages/footer/tournamentDeletedFooter.js');
+
+    mix.scripts([
+        'pages/footer/tournamentIndexFooter.js'
+    ], 'public/js/pages/footer/tournamentIndexFooter.js');
+
+    mix.scripts([
+        'pages/footer/tournamentShowFooter.js'
+    ], 'public/js/pages/footer/tournamentShowFooter.js');
+
+    mix.scripts([
+        'pages/footer/userIndexFooter.js'
+    ], 'public/js/pages/footer/userIndexFooter.js');
+
+    mix.scripts([
+        'pages/footer/userShowFooter.js'
+    ], 'public/js/pages/footer/userShowFooter.js');
+
 
 });

@@ -9,12 +9,14 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\AuditingTrait;
 
 
 class Tournament extends Model implements SluggableInterface
 {
     use SoftDeletes;
     use SluggableTrait;
+    use AuditingTrait;
 
     protected $sluggable = [
         'build_from' => 'name',
@@ -235,62 +237,12 @@ class Tournament extends Model implements SluggableInterface
     {
         return $this->type == 0;
     }
-//    public function getCategoriesWithSettings()
-//    {
-//        $categories = DB::table('category_tournament')
-//            ->join('category as cat', 'cat.id', '=', 'category_tournament.category_id')
-//            ->leftJoin('category_settings as cs', 'cs.category_tournament_id', '=', 'category_tournament.id')
-//            ->where('category_tournament.tournament_id', '=', $this->id)
-//            ->select('category_tournament.*', 'cat.name', 'cs.*')
-//            ->get();
-//        return $categories;
-//    }
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
-//    public function setMustPayAttribute($mustPay)
-//    {
-//
-//        if ($mustPay == "on") {
-//            dd($mustPay);
-//            $this->attributes['mustPay'] = 1;
-//        }
-//    }
-//    public function setTypeAttribute($type)
-//    {
-//        if ($type == "on")
-//            $this->attributes['type'] = 1;
-//    }
-
-
-//	public function setplaceId($id){
-//		$this->attributes['placeId'] = $id;
-//	}
-
-//    public function scopeIsFuture($query)
-//    {
-//        $query->where('tournamentDate', '>=', Carbon::now());
-//
-//    }
-//
-//    public function scopeIsPast($query)
-//    {
-//        $query->where('tournamentDate', '<=', Carbon::now());
-//
-//    }
-//
-//    public function scopeIsTooLate($query)
-//    {
-//        $query->where('registerDateLimit', '<=', Carbon::now());
-//
-//    }
-//
-//    public function scopeIsOnTime($query)
-//    {
-//        $query->where('registerDateLimit', '>=', Carbon::now());
-//
-//    }
+    public function isDeleted(){
+        return $this->deleted_at !=null;
+    }
 
 }

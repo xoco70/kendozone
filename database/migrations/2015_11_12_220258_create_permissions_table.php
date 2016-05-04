@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePermissionsTable extends Migration
 {
@@ -46,7 +46,9 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

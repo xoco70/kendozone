@@ -1,35 +1,43 @@
-<?php
-//$tournament = Auth::user()->tournaments->first();
-//$settingSize = sizeof($tournament->settings());
-//$categorySize = sizeof($tournament->categories);
+<div class="row mt-20 pt-20">
+    <div class="col-md-4 col-md-offset-4 mt-20 pt-10">
 
-?>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-body border-top-primary">
-            <div class="text-center">
-                <h6 class="no-margin text-semibold">{{ trans('core.welcome') }}</h6>
-                <p class="content-group-sm text-muted">{{ trans('core.welcome_text') }}</p>
+        <div class="text-center">
+            <h1 class="no-margin text-semibold">{{ trans('core.welcome') }}</h1>
+            <h6 class="content-group-sm text-muted">{{ trans('core.welcome_text') }}</h6>
+        </div>
+        <div class="pt-20"></div>
+        <div class="well dash well-lg mb-15 success">
+            <div class="btn success btn-rounded btn-flat dash mr-20">
+                <span class="letter-icon">1</span>
             </div>
+            <span class="text-muted">{{ trans('core.create_new_tournament') }}</span>
+        </div>
 
-            <div class="well well-lg mb-15">
-                <del class="text-muted">{{ trans('core.create_new_tournament') }}</del>
+
+        @if ($settingSize > 0 && $settingSize == $categorySize)
+            <div class="well dash well-lg mb-15 success">
+                <div class="btn success btn-rounded btn-flat dash mr-20">
+                    <span class="letter-icon">2</span>
+                </div>
+                <span class="text-muted">
+                    {{ trans('core.congigure_categories') }}
+                </span>
             </div>
-
-            <div class="well well-lg mb-15">
-
-                @if ($settingSize > 0 && $settingSize == $categorySize)
-                    <del class="text-muted">
-                        {{ trans('core.congigure_categories') }}
-                    </del>
-                @else
-                    <a href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}#categories">{{ trans('core.congigure_categories') }}</a>
-                @endif
+        @else
+            <div class="well dash well-lg mb-15 error">
+                <div class="btn error btn-rounded btn-flat dash mr-20">
+                    <span class="letter-icon">2</span>
+                </div>
+                <a href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}#categories">{{ trans('core.congigure_categories') }}</a>
             </div>
+        @endif
 
-            <div class="well well-lg">
-                <a href="{!! URL::action('InviteController@inviteUsers', $tournament->slug) !!}">{{ trans('core.invite_competitors') }}</a>
+
+        <div class="well dash well-lg error">
+            <div class="btn error btn-rounded btn-flat dash mr-20">
+                <span class="letter-icon">3</span>
             </div>
+            <a href="{!! URL::action('InviteController@inviteUsers', $tournament->slug) !!}">{{ trans('core.invite_competitors') }}</a>
         </div>
     </div>
 

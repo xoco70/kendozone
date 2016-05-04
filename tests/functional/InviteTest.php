@@ -5,7 +5,6 @@ use App\Invite;
 use App\Tournament;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +19,13 @@ class InviteTest extends TestCase
 
     use DatabaseTransactions;
 
+    protected $root;
+
     public function setUp()
     {
         parent::setUp();
-        Auth::loginUsingId(1);
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $this->logWithUser($this->root);
     }
 
     /** @test */

@@ -1,6 +1,6 @@
 <?php
 $categoryTournaments = $tournament->categoryTournaments;
-$i=0;
+$i = 0;
 ?>
 
 @extends('layouts.dashboard')
@@ -13,9 +13,12 @@ $i=0;
 
             <h2 align="center">{{ $tournament->name }}</h2>
             @if (isset($invite))
-                {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/'.$invite->id.'/categories']) !!}
+                {!! Form::open(['url'=> URL::action('InviteController@registerCategories',
+                    ['tournament' => $tournament->slug,'invite' => $invite->id] )]) !!}
             @else
-                {!! Form::open(['url'=>'tournaments/'.$tournament->slug.'/invite/0/categories']) !!}
+                {!! Form::open(['url'=> URL::action('InviteController@registerCategories',
+                    ['tournament' => $tournament->slug,'invite' => 0] )]) !!}
+
             @endif
             <div class="panel panel-flat">
 
@@ -24,27 +27,28 @@ $i=0;
                         <legend class="text-semibold">{{Lang::get('core.select_categories_to_register')}}</legend>
 
 
-                             @foreach($categoryTournaments as $categoryTournament)
-                                {{--{{ $key }}--}}
-                                @if ($i % 4 == 0)
-                                    <div class="row">
-                                        @endif
-                                        <div class="col-md-3">
-                                            <p>
+                        @foreach($categoryTournaments as $categoryTournament)
+                            {{--{{ $key }}--}}
+                            @if ($i % 4 == 0)
+                                <div class="row">
+                                    @endif
+                                    <div class="col-md-3">
+                                        <p>
 
-                                                {!!  Form::label('cat['.$categoryTournament->id.']', trans($categoryTournament->category->name)) !!} <br/>
-                                                {!!   Form::checkbox('cat['.$categoryTournament->id.']',
-                                                    $categoryTournament->id,
-                                                    $categoryTournament->users()->where('users.id',Auth::user()->id)->count(),
-                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
-                                            </p>
-                                        </div>
-                                        @if ($i % 3 == 0 && $i != 0)
+                                            {!!  Form::label('cat['.$categoryTournament->id.']', trans($categoryTournament->category->name)) !!}
+                                            <br/>
+                                            {!!   Form::checkbox('cat['.$categoryTournament->id.']',
+                                                $categoryTournament->id,
+                                                $categoryTournament->users()->where('users.id',Auth::user()->id)->count(),
+                                                 ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                        </p>
                                     </div>
+                                    @if ($i % 3 == 0 && $i != 0)
+                                </div>
 
-                                @endif
+                            @endif
                             <?php $i++; ?>
-                            @endforeach
+                        @endforeach
 
                     </div>
                     <div align="right">

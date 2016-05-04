@@ -1,8 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-{!! Html::script('js/pages/header/tournamentEdit.js') !!}
-{!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-@stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
@@ -107,27 +103,17 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}
-                                            <br/>
-                                            rules
-                                        </div>
-                                    </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-6">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--{!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}--}}
+                                            {{--<br/>--}}
+                                            {{--rules--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-
-
-                                    </div>
-                                    <div class="col-md-6">
-
-                                    </div>
-
-                                </div>
+                                {{--</div>--}}
 
 
                             </fieldset>
@@ -194,7 +180,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->name)}}
+                                                            {{trans($categoryTournament->category->buildName($grades))}}
                                                         </h6>
                                                     </div>
                                                 </a>
@@ -261,5 +247,6 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
         var latitude = "{{ $tournament->latitude }}";
         var longitude = "{{ $tournament->longitude }}";
     </script>
-    {!! Html::script('js/pages/footer/tournamentShowFooter.js') !!}
+    {!! Html::script('js/pages/header/tournamentShow.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
 @stop

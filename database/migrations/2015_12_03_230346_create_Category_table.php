@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCategoryTable extends Migration
 {
@@ -18,18 +18,21 @@ class CreateCategoryTable extends Migration
             $table->string('gender');
             $table->integer('isTeam')->unsigned()->default(0);
             $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
-            $table->integer('ageIni')->unsigned()->default(0);
-            $table->integer('ageFin')->unsigned()->default(0);
-            $table->integer('gradeIni')->unsigned()->default(1);
-            $table->integer('gradeFin')->unsigned()->default(1);
-            $table->foreign('gradeIni')
-                ->references('id')
-                ->on('grade');
-            $table->foreign('gradeFin')
-                ->references('id')
-                ->on('grade');
+            $table->integer('ageMin')->unsigned()->default(0);
+            $table->integer('ageMax')->unsigned()->default(0);
+            $table->integer('gradeCategory')->unsigned()->default(0);
+            $table->integer('gradeMin')->unsigned()->default(0);
+            $table->integer('gradeMax')->unsigned()->default(0);
+//            $table->foreign('gradeMin')
+//                ->references('id')
+//                ->on('grade');
+//            $table->foreign('gradeMax')
+//                ->references('id')
+//                ->on('grade');
+            $table->unique(['name','gender','isTeam','ageCategory','ageMin','ageMax','gradeCategory','gradeMin','gradeMax'], 'category_fields_unique');
             $table->timestamps();
             $table->engine = 'InnoDB';
+
         });
 
         Schema::create('category_tournament', function (Blueprint $table) {
@@ -94,9 +97,11 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('category_tournament_user');
         Schema::dropIfExists('category_tournament');
         Schema::dropIfExists('category');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
 
     }

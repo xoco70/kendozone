@@ -1,7 +1,6 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRolesTables extends Migration
 {
@@ -45,7 +44,8 @@ class CreateRolesTables extends Migration
      */
     public function down()
     {
-//        Schema::drop('role_user');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('roles');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -181,3 +181,43 @@ fieldset > a > legend {
     border-color: transparent #666;
     border-width: 10px 10px 10px 0;
 }
+
+.language-switch {
+    margin-top: 10px;
+}
+
+.form-group.multiselect {
+    margin-bottom: -20px;
+}
+.border-solid{
+    border-style: solid;
+}
+
+.bootstrap-duallistbox-container .btn.moveall,
+.bootstrap-duallistbox-container .btn.removeall {
+    display: none;
+}
+
+.bootstrap-duallistbox-container .btn.move,
+.bootstrap-duallistbox-container .btn.remove {
+    width: 100%;
+}
+
+[v-cloak] {
+    display: none;
+}
+.add_category{
+    margin-top: -20px;
+}
+.well.dash{
+    border: 0;
+    border-bottom: 4px solid;
+    border-radius:0
+}
+.well.error>a{
+    color:black;
+}
+
+.well.error>a:hover{
+    color:grey;
+}

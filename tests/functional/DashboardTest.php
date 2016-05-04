@@ -41,7 +41,7 @@ class DashboardTest extends TestCase
 //        $randUser = $users[0];
 
         // Given
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
 
         // Nothing has been created, default dash
         $this->visit('/')
@@ -51,14 +51,14 @@ class DashboardTest extends TestCase
 
 
         // Create 1 tournament
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
 
         $tournament0 = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
 
         $this->visit('/')
-            ->seeInElement("del.text-muted", trans('core.create_new_tournament'));
+            ->seeInElement("span.text-muted", trans('core.create_new_tournament'));
 
-        Auth::loginUsingId($this->simpleUser->id);
+        $this->logWithUser($this->simpleUser);
 
         // Now configure 2/2 categories
 
@@ -68,7 +68,7 @@ class DashboardTest extends TestCase
             });;
 
         $this->visit('/')
-             ->seeInElement("del.text-muted", trans('core.congigure_categories'));
+             ->seeInElement("span.text-muted", trans('core.congigure_categories'));
 
         // Now add ctu
 

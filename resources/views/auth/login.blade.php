@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-<form id="login-form" class="login-form" method="POST" action="{!!   URL::to('/auth/login') !!}">
+<form id="login-form" class="login-form" method="POST" action="{!!   URL::action('Auth\AuthController@postLogin') !!}">
 
     {!! csrf_field() !!}
     <div class="panel panel-body login-form">
@@ -22,7 +22,7 @@
 
         <div class="form-group has-feedback has-feedback-left">
             <input type="password" name="password" id="password" class="form-control"
-                   placeholder="{{  Lang::get('auth.password') }}" required>
+                   placeholder="{{  trans('auth.password') }}" required>
 
             <div class="form-control-feedback">
                 <i class="icon-lock2 text-muted"></i>
@@ -34,41 +34,37 @@
                 <div class="col-xs-6">
                     <label class="checkbox-inline">
                         <input type="checkbox" value="remember-me" class="styled" checked="checked">
-                        {{  Lang::get('auth.remember') }}
+                        {{  trans('auth.remember') }}
                     </label>
                 </div>
 
                 <div class="col-xs-6 text-right">
-                    <a href="{!! URL::to('password/email') !!}">{{  Lang::get('auth.lost_password') }}</a>
+                    <a href="{!! URL::action('Auth\PasswordController@getEmail') !!}">{{  trans('auth.lost_password') }}</a>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn bg-success btn-block p-10">{{  Lang::get('auth.signin') }} <i
+            <button type="submit" class="btn bg-success btn-block p-10">{{  trans('auth.signin') }} <i
                         class="icon-arrow-right14 position-right"></i></button>
         </div>
 
-        <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.signin_with') }}</span></div>
+        <div class="content-divider text-muted form-group"><span>{{  trans('auth.signin_with') }}</span></div>
         <ul class="list-inline form-group list-inline-condensed text-center">
-            <li><a href="{!! URL::to('/auth/login/facebook') !!}"
+            <li><a href="{!! URL::action('Auth\AuthController@getSocialAuth','facebook') !!}"
                    class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded" id="fb"><i
                             class="icon-facebook"></i></a></li>
-            <li><a href="{!! URL::to('/auth/login/google') !!}"
+            <li><a href="{!! URL::action('Auth\AuthController@getSocialAuth', 'google') !!}"
                    class="btn border-danger text-danger btn-flat btn-icon btn-rounded" id="google"><i
                             class="icon-google"></i></a></li>
         </ul>
 
-        <div class="content-divider text-muted form-group"><span>{{  Lang::get('auth.no_account') }}</span></div>
+        <div class="content-divider text-muted form-group"><span>{{  trans('auth.no_account') }}</span></div>
 
         <div class="mt-20">
             <a class="btn full-width text-primary border-primary border-4 text-uppercase "
-               href="{!! URL::to('auth/register') !!}">{{  Lang::get('auth.signup') }}</a>
+               href="{!! URL::action('Auth\AuthController@getRegister') !!}">{{  trans('auth.signup') }}</a>
         </div>
-
-        {{--<span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a--}}
-        {{--href="login_advanced.html#">Terms &amp; Conditions</a> and <a--}}
-        {{--href="login_advanced.html#">Cookie Policy</a></span>--}}
     </div>
 
 

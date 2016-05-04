@@ -33,7 +33,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
         </div>
         <div class="row ml-5 mr-10">
             <div class="panel panel-body">
-                <fieldset title="MIS TORNEOS">
+                <fieldset title="{{ trans('core.tournaments_registered') }}">
                     <legend class="text-semibold">{{ trans('core.tournaments_registered') }}</legend>
                 </fieldset>
                 @if (sizeof($tournamentsParticipated) == 0)
@@ -115,56 +115,56 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
 
             </div>
         </div>
-        <div class="row">
-            <div class="panel panel-body">
+        {{--<div class="row">--}}
+            {{--<div class="panel panel-body">--}}
 
-                <fieldset title="ULTIMOS MENSAJES">
-                    <legend class="text-semibold">ULTIMAS NOTIFICACIONES</legend>
-                </fieldset>
+                {{--<fieldset title="ULTIMOS MENSAJES">--}}
+                    {{--<legend class="text-semibold">ULTIMAS NOTIFICACIONES</legend>--}}
+                {{--</fieldset>--}}
 
 
-                <ul class="media-list">
-                    <li class="media">
-                        <div class="media-left">
-                            <img src="/images/demo/users/face10.jpg" class="img-circle img-xs" alt="">
+                {{--<ul class="media-list">--}}
+                    {{--<li class="media">--}}
+                        {{--<div class="media-left">--}}
+                            {{--<img src="/images/demo/users/face10.jpg" class="img-circle img-xs" alt="">--}}
                             {{--<span class="badge bg-danger-400 media-badge">8</span>--}}
-                        </div>
+                        {{--</div>--}}
 
-                        <div class="media-body">
-                            <a href="index.html#">
-                                Jesus Maya
-                                <span class="media-annotation pull-right">14:58</span>
-                            </a>
+                        {{--<div class="media-body">--}}
+                            {{--<a href="#">--}}
+                                {{--Jesus Maya--}}
+                                {{--<span class="media-annotation pull-right">14:58</span>--}}
+                            {{--</a>--}}
 
-                            <span class="display-block text-muted">Practica en Amecameca mañana... 4 horas de geiko para que se les quite lo p...</span>
-                        </div>
-                    </li>
+                            {{--<span class="display-block text-muted">Practica en Amecameca mañana... 4 horas de geiko para que se les quite lo p...</span>--}}
+                        {{--</div>--}}
+                    {{--</li>--}}
 
-                    <li class="media">
-                        <div class="media-left">
-                            <img src="/images/demo/users/face3.jpg" class="img-circle img-xs" alt="">
-                        </div>
+                    {{--<li class="media">--}}
+                        {{--<div class="media-left">--}}
+                            {{--<img src="/images/demo/users/face3.jpg" class="img-circle img-xs" alt="">--}}
+                        {{--</div>--}}
 
-                        <div class="media-body">
-                            <a href="index.html#">
-                                FMK
-                                <span class="media-annotation pull-right">12:16</span>
-                            </a>
+                        {{--<div class="media-body">--}}
+                            {{--<a href="#">--}}
+                                {{--FMK--}}
+                                {{--<span class="media-annotation pull-right">12:16</span>--}}
+                            {{--</a>--}}
 
-                            <span class="display-block text-muted">¡Examen de Iaido! No se apendejen!!!</span>
-                        </div>
-                    </li>
+                            {{--<span class="display-block text-muted">¡Examen de Iaido! No se apendejen!!!</span>--}}
+                        {{--</div>--}}
+                    {{--</li>--}}
 
 
-                </ul>
+                {{--</ul>--}}
 
-                <div align="right" class="pt-20">
-                    <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "
-                       href="#">{{trans('core.see_all')}}</a>
-                </div>
+                {{--<div align="right" class="pt-20">--}}
+                    {{--<a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "--}}
+                       {{--href="#">{{trans('core.see_all')}}</a>--}}
+                {{--</div>--}}
 
-            </div>
-        </div>
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 
 </div>

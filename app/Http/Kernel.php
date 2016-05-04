@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //        Middleware\VerifyCsrfToken::class,
         Middleware\Own::class,
+        Middleware\LocaleMiddleware::class,
 
 
 //        'throttle:60,1',
@@ -37,6 +38,9 @@ class Kernel extends HttpKernel
         'own' => Middleware\Own::class,
         'root' => Middleware\SuperAdmin::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+//        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+//        'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+//        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class
 //        'simpleauth' => Middleware\SimpleAuthMiddleware::class,
 //        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
 //        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App;
 use App\AuthenticateUser;
 use App\Grade;
 use App\Http\Controllers\Controller;
@@ -18,11 +19,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Laravel\Socialite\Facades\Socialite;
+use URL;
 use Validator;
 use Webpatser\Countries\Countries;
 
 class AuthController extends Controller
 {
+    private $redirectTo = '/';
+    private $redirectAfterLogout = '/auth/login';
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -40,9 +45,9 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
+     * @param Socialite $socialite
      */
-    private $redirectTo = '/admin';
-    private $redirectAfterLogout = '/auth/login';
+
 
 
     public function __construct(Socialite $socialite)
@@ -167,11 +172,11 @@ class AuthController extends Controller
 
         ]);
         $mailer->sendEmailConfirmationTo($user);
-        flash()->success(trans('msg.user_create_successful', ['name' => $user->name]));
+        flash()->success(trans('msg.user_create_successful'));
 //        else flash('error', 'operation_failed!');
 //        return redirect("tournaments/$tournament->slug/edit")
         flash()->success(Lang::get('auth.check_your_email'));
-        return redirect('auth/login');
+        return redirect (URL::action('Auth\AuthController@getLogin'));
     }
 
     public function getInvite()
@@ -200,15 +205,9 @@ class AuthController extends Controller
             return view("categories.register", compact('userId', 'tournament', 'invite'));
 
         } else {
-            dd("yes is null");
             flash()->error(Lang::get('auth.no_invite'));
-            return redirect("/")->with('status', 'success');
+            return redirect(URL::action('Auth\AuthController@postLogin'))->with('status', 'error');
         }
-    }
-
-    public function getCategories($userId, $tournamentId)
-    {
-        dd("hola");
     }
 
 
@@ -222,7 +221,7 @@ class AuthController extends Controller
     {
         User::whereToken($token)->firstOrFail()->confirmEmail();
         flash()->success(Lang::get('auth.tx_for_confirm'));
-        return redirect('auth/login');
+        return redirect(URL::action('Auth\AuthController@getLogin'));
     }
 
     /**
@@ -252,7 +251,8 @@ class AuthController extends Controller
     public function userHasLoggedIn($user)
     {
 //        flash('Welcome, ' . $user->name);
-        return redirect('/');
+        return redirect(URL::action('DashboardController@index'));
+
     }
 
     /**

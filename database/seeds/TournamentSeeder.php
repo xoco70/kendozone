@@ -1,6 +1,5 @@
 <?php
 
-use App\CategorySettings;
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Tournament;

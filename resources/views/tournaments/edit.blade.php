@@ -1,10 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-{!! Html::script('js/pages/header/tournamentEdit.js') !!}
-{!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-{{--{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}--}}
-
-@stop
 @section('styles')
 {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
@@ -15,7 +9,7 @@
 @section('content')
 @include("errors.list")
 <?php
-$appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'));
+$appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
 ?>
 
 
@@ -172,7 +166,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    {!!  Form::label('name', trans('core.coords')) !!}
+                                    {!!  Form::label('name', trans('core.coords'),['class' => 'text-bold' ]) !!}
                                     <div class="map-wrapper locationpicker-default"
                                          id="locationpicker-default"></div>
                                 </div>
@@ -200,7 +194,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                         </div>
                         <div align="right">
-                            <button type="submit" class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}
+                            <button type="submit" class="btn btn-success btn-update-tour">{{trans("core.save")}}
                             </button>
                         </div>
                     </div>
@@ -215,29 +209,32 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                 </a>
                             </fieldset>
 
+                            <div class="panel-body">
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <p class="coutent-group">{{trans('core.select_tournament_categories')}}</p>
-
-
                                         {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                                     </div>
-
-
                                 </div>
-
-
-                            </div>
-                            <div align="right">
-                                <button type="submit" class="btn btn-success btn-update-tour">
-                                    <i></i>{{trans("core.save")}}
-                                </button>
+                                <div class="row text-uppercase">
+                                    <div class="col-md-6">
+                                    <span class="text-danger" v-cloak>
+                                        @{{ error }}
+                                    </span>
+                                    </div>
+                                    <div class="col-md-6 add_category">
+                                        <a href="#" data-toggle="modal" data-target="#create_category"
+                                           class="text-semibold text-black" @click="resetModalValues()">+ {{ trans('core.add_custom_category') }}</a>
+                                    </div>
+                                </div>
+                                <div align="right">
+                                    <button type="submit" class="btn btn-success btn-update-tour">
+                                        <i></i>{{trans("core.save")}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
                     <!-- /simple panel -->
                 </div>
@@ -257,12 +254,20 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                             <div class="panel-group" id="accordion-styled">
 
                                 @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                                    {{--TODO This is making X query, have to cache it--}}
                                     <?php
-
+                                    // Set defaults
                                     $setting = $tournament->categoryTournaments->get($key)->settings;
                                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+
+                                    $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
+                                            ? $setting->fightDuration : Config::get('constants.CAT_FIGHT_DURATION');
+
+                                    $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
+                                            ? $setting->enchoDuration  : Config::get('constants.CAT_ENCHO_DURATION');
+
 
                                     ?>
 
@@ -274,7 +279,8 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->name)}}
+
+                                                            {{trans($categoryTournament->category->buildName($grades))}}
                                                         </h6>
                                                     </div>
                                                 </a>
@@ -338,7 +344,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="col-md-12">
                                         <h2 class="form-group text-center">
                                             <br/>
-                                            {{$appURL}}/tournaments/{{$tournament->slug}}/register/
+                                            {{ URL::action('TournamentController@register',$tournament->slug) }}
                                         </h2>
 
                                     </div>
@@ -354,8 +360,9 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     <!-- /detached content -->
 </div>
 @include("right-panel.tournament_menu")
+@include("modals.create_category")
 
-        <!-- /content area -->
+<!-- /content area -->
 <?php
 $now = Carbon\Carbon::now();
 $year = $now->year;
@@ -367,13 +374,18 @@ $day = $now->day;
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ url('/tournaments/') }}";
+        var url_base = "{{ URL::action('TournamentController@index') }}";
         var url_edit = url_base + '/' + "{{$tournament->slug}}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";
         var configured = "{{ trans('core.configured_full') }}";
         var allCategoriesSize = '{!! $categorySize !!}';
-
+        var dualListIds = [];
+        var dualList;
     </script>
-    {!! Html::script('js/pages/footer/tournamentEditFooter.js') !!}
+    {!! Html::script('js/pages/header/tournamentEdit.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
+{{--    {!! Html::script('') !!}--}}
+    {!! Html::script('js/categoryCreate.js') !!}
+
 @stop

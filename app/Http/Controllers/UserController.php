@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
+use URL;
 use Webpatser\Countries\Countries;
 
 class UserController extends Controller
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::user()->isSuperAdmin()) {
-            $users = User::paginate(Config::get('constants.PAGINATION'));
+            $users = User::with('country','role')->paginate(Config::get('constants.PAGINATION'));
 
             return view('users.index', compact('users'));
         } else {
@@ -80,6 +81,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+
         $data = $request->except('_token');
 
         if ($request->is("users")) {
@@ -92,10 +94,10 @@ class UserController extends Controller
         $data['verified'] = 1;
 
         if (User::create($data)) {
-            flash()->success(Lang::get('core.success'));
+            flash()->success(trans('msg.user_create_successful'));
         } else
-            flash()->error(Lang::get('core.fail'));
-        return redirect('/users');
+            flash()->error(trans('msg.user_create_successful'));
+        return redirect(URL::action('UserController@index'));
     }
 
     /**
@@ -133,38 +135,34 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-//        dd($request);
         $except = [];
         if (trim(Input::get('role_id')) == '') {
             array_push($except, 'role_id');
         }
+
         if (trim(Input::get('password')) == '' && trim(Input::get('password_confirmation')) == '') {
             array_push($except, 'password');
-
         }
-
-//        if (trim(Input::get('avatar')) == '') {
-//            array_push($except, 'avatar');
-//        }
         array_push($except, '_token');
 
         $req = $request->except($except);
-//        $data = User::uploadPic($req);
 
+        $user->fill($req);
 
-        //TODO: Should have an expection for pics
+        if (!in_array('password', $except)) {
+            $user->password = bcrypt(Input::get('password'));
+        }
 
-
-        if ($user->update($req)) {
-            flash()->success(trans('msg.user_update_successful', ['name' => $user->name]));
+        if ($user->save()) {
+            flash()->success(trans('msg.user_update_successful'));
         } else
             flash()->success(Lang::get('msg.user_update_error'));
 
 
         if ($user->id == Auth::user()->id) {
-            return redirect("/users/" . Auth::user()->slug . "/edit");
-        } else  {
-            return redirect("/users/");
+            return redirect(URL::action('UserController@edit', Auth::user()->slug));
+        } else {
+            return redirect(URL::action('UserController@index'));
         }
 
     }
@@ -174,7 +172,7 @@ class UserController extends Controller
     {
 
         Excel::create(trans_choice('core.user', 2), function ($excel) {
-            $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+            $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
 
             // Set the title
             $excel->setTitle(trans_choice('core.user', 2));
@@ -186,22 +184,25 @@ class UserController extends Controller
             // Call them separately
             $excel->setDescription('A list of users');
             $excel->sheet(trans_choice('core.user', 2), function ($sheet) {
+                //TODO Here we should join grade, role, country to print name not FK
                 $users = User::all();
+//                $users = User::with(['grade', 'role'])->get();
                 $sheet->fromArray($users);
             });
 
 
         })->export('xls');
     }
+
     public function getMyTournaments(Request $request)
     {
-        $tournaments = Auth::user()->myTournaments()
+        $tournaments = Auth::user()->myTournaments()->with('owner')
             ->orderBy('created_at', 'desc')
             ->paginate(Config::get('constants.PAGINATION'));;
 
         $title = trans('core.tournaments_registered');
-        
-        return view('users.tournaments', compact('tournaments','title'));
+
+        return view('users.tournaments', compact('tournaments', 'title'));
     }
 
     /**
@@ -216,9 +217,9 @@ class UserController extends Controller
     {
 
         if ($user->delete()) {
-            return Response::json(['msg' => trans('msg.user_delete_successful',['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_delete_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => trans('msg.user_delete_error',['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_delete_error'), 'status' => 'error']);
         }
     }
 
@@ -227,14 +228,15 @@ class UserController extends Controller
     {
         $user = User::withTrashed()->whereSlug($userSlug)->first();
         if ($user->restore()) {
-            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'success']);
+            return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'success']);
         } else {
-            return Response::json(['msg' => trans('msg.user_restore_successful',['name' => $user->name]), 'status' => 'error']);
+            return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'error']);
         }
     }
 
 
-    public function uploadAvatar(Request $request){
+    public function uploadAvatar(Request $request)
+    {
         $data = $request->except('_token');
         $data = User::uploadPic($data);
         return $data;

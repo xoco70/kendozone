@@ -26,4 +26,10 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="DB_CONNECTION" value="mysql"/>
     </php>
+    <!--<logging>-->
+    <!--<log type="coverage-html" target="./ci/codeCoverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>-->
+    <!--<log type="coverage-clover" target="./ci/codeCoverage/codeCoverage.xml"/>-->
+    <!--<log type="metrics-xml" target="./ci/codeCoverage/metrics.xml"/>-->
+    <!--<log type="test-xml" target="./ci/codeCoverage/logfile.xml" logIncompleteSkipped="false"/>-->
+    <!--</logging>-->
 </phpunit>

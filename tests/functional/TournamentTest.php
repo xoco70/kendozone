@@ -29,34 +29,27 @@ class TournamentTest extends TestCase
     use DatabaseTransactions;
 //    use WithoutMiddleware;
 
-    protected $tournament, $tournaments, $addTournament, $addTournaments, $editTournament, $root;
+    protected $root;
 
 
     public function setUp()
     {
         parent::setUp();
-        $this->tournament = trans_choice('core.tournament', 1);
-        $this->tournaments = trans_choice('core.tournament', 2);
-        $this->addTournament = Lang::get('core.addModel', ['currentModelName' => $this->tournament]);
-        $this->addTournaments = Lang::get('core.addModel', ['currentModelName' => $this->tournaments]);
-
-        $this->editTournament = Lang::get('core.updateModel', ['currentModelName' => $this->tournament]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-
-        Auth::loginUsingId($this->root->id);
+        $this->logWithUser($this->root);
     }
 
     /** @test */
     public function it_denies_creating_an_empty_tournament()
     {
         $this->visit("/tournaments")
-            ->click('Crear Torneo')
-            ->press($this->addTournament)
+            ->click(trans('core.createTournament'))
+            ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
             ->seePageIs('/tournaments/create')
-            ->see("El campo name es obligatorio")//Lang::get('validation.filled', ['attribute' => "name"])
-            ->see("El campo date ini es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
-            ->see("El campo date fin es obligatorio")//Lang::get('validation.filled', ['attribute' => "tournament"])
-            ->see("El campo category es obligatorio")//Lang::get('validation.filled', ['attribute' => "category"])
+            ->see(trans('validation.filled', ['attribute' => "name"]))
+//            ->see(trans('validation.filled', ['attribute' => "dateIni"])) // It's inserting spaces
+//            ->see(trans('validation.filled', ['attribute' => "dateFin"]))
+            ->see(trans('validation.filled', ['attribute' => "category"]))
 
             ->notSeeInDatabase('tournament', ['name' => '']);
 
@@ -69,10 +62,10 @@ class TournamentTest extends TestCase
         $tournament = factory(Tournament::class)->create();
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
-            ->see($this->tournaments)
+            ->see(trans_choice('core.tournament', 2))
             ->type('1111', 'name')
-            ->press(Lang::get('core.save'))
-            ->see("El campo name debe contener al menos 6 caracteres.")//Lang::get('validation.filled', ['attribute' => "category"])
+            ->press(trans('core.save'))
+            ->see(trans('validation.filled', ['attribute' => "category"]))//
             ->notSeeInDatabase('tournament',
                 ['name' => '1111',
                 ]);
@@ -90,12 +83,12 @@ class TournamentTest extends TestCase
     public function it_create_tournament()
     {
         $this->visit('/')
-            ->click('Crear Torneo')
+            ->click(trans('core.createTournament'))
             ->type('MyTournament', 'name')
             ->type('2015-12-12', 'dateIni')
             ->type('2015-12-12', 'dateFin')
             ->storeInput('category', [1, 2], true)
-            ->press($this->addTournament)
+            ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
 //            ->see(trans('msg.tournament_create_successful', ['name' => 'MyTournament']))
             ->seeInDatabase('tournament', ['name' => 'MyTournament']);
 
@@ -130,7 +123,7 @@ class TournamentTest extends TestCase
         }
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
-            ->see($this->tournaments)
+            ->see(trans_choice('core.tournament', 2))
             ->type('MyTournament', 'name')
             ->type('2015-12-15', 'dateIni')
             ->type('2015-12-15', 'dateFin')
@@ -144,7 +137,7 @@ class TournamentTest extends TestCase
             ->type('2.22222', 'longitude')
             ->press(trans("core.save"))
             ->dontSee("403")
-//            ->see(htmlentities(Lang::get('core.operation_successful')))
+//            ->see(htmlentities(trans('core.operation_successful')))
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournament',
                     'dateIni' => '2015-12-15',
@@ -185,7 +178,7 @@ class TournamentTest extends TestCase
 //            ->type('2', 'enchoQty0')
 //            ->type('2', 'fightingAreas0')
             ->press('save0')
-//            ->see(htmlentities(Lang::get('core.operation_successful')))
+//            ->see(htmlentities(trans('core.operation_successful')))
             ->seeInDatabase('category_settings',
                 ['category_tournament_id' => $ct0->id,
                     'cost' => '100',
@@ -228,7 +221,7 @@ class TournamentTest extends TestCase
 //            ->type('2', 'enchoQty0')
 //            ->type('2', 'fightingAreas0')
             ->press('save0')
-//            ->see(htmlentities(Lang::get('core.operation_successful')))
+//            ->see(htmlentities(trans('core.operation_successful')))
             ->seeInDatabase('category_settings',
                 ['category_tournament_id' => $ct0->id,
                     'cost' => '200',
@@ -245,21 +238,21 @@ class TournamentTest extends TestCase
     {
         $root =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $user =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $otherUser =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $this->logWithUser($root);
 
-        Auth::loginUsingId($root->id);
-
-        $myTournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $root->id ]);
+        $myTournament = factory(Tournament::class)->create(['user_id' => $root->id ]);
 
         //add categories
 
         factory(CategoryTournament::class)->create(['tournament_id' => $myTournament->id]);
 
         $this->it_edit_tournament($myTournament); // it must be OK because tournament is mine
-        $hisTournament = factory(Tournament::class)->create(['name' => 't2', 'user_id' => 3]);
+        $hisTournament = factory(Tournament::class)->create(['user_id' => $user->id]);
         // 1 is SuperUser so it should be OK
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
-            ->see($this->tournaments);
-        Auth::loginUsingId($user->id);
+            ->see(trans_choice('core.tournament', 2));
+        $this->logWithUser($otherUser);
         $this->visit('/tournaments/' . $hisTournament->slug . '/edit')
             ->see("403");
     }
@@ -276,7 +269,7 @@ class TournamentTest extends TestCase
 
         // Check that tournament is gone
         $this->visit("/tournaments")
-            ->see($this->tournaments)
+            ->see(trans_choice('core.tournament', 2))
             ->press("delete_" . $tournament->slug)
             ->seeIsSoftDeletedInDatabase('tournament',['id' => $tournament->id])
             ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])

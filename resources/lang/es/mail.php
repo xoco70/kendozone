@@ -26,4 +26,9 @@ return [
     'before_day' => 'antes del dia ',
 
 
+    // Registration
+    'dont_forget_to_pay' => '  No olvides que se tienen que cubrir las cuotas respectivas a cada categoria para aplicar al sorteo',
+    'before_day' => 'antes del dia',
+    'your_connection_data' => 'Tus datos de conexión son',
+    
 ];

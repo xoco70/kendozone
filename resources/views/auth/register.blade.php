@@ -5,7 +5,8 @@
 <div class="content">
     <!-- Registration form -->
     {{--@include("errors.list")--}}
-    {!! Form::open(['url'=>URL::to('/auth/register') , 'class'=> "form-signin"]) !!}
+
+    {!! Form::open(['url'=>URL::action('Auth\AuthController@postRegister') , 'class'=> "form-signin"]) !!}
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             @include('layouts.flash')
@@ -81,7 +82,7 @@
                     </div>
 
                     <div class="text-right">
-                        <a href="{!! URL::to('auth/login') !!}" class="btn btn-link"><i
+                        <a href="{!! URL::action('Auth\AuthController@getLogin') !!}" class="btn btn-link"><i
                                     class="icon-arrow-left13 position-left"></i> {{  Lang::get('auth.back_to_login_form') }}
                         </a>
                         <button type="submit"

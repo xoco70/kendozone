@@ -8,7 +8,6 @@ class AuthTest extends TestCase
 {
     use DatabaseTransactions;
 
-
     public function setUp()
     {
         parent::setUp();
@@ -24,26 +23,25 @@ class AuthTest extends TestCase
     /** @test */
     public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
     {
-//        $faker = Faker::create();
+
+        App::setLocale('en');
         // When we register...
-        $this->visit('/auth/register')
+        $this->visit('/')
+            ->click(trans('auth.signup'))
             ->type('JohnDoe', 'name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
-            ->press(Lang::get('auth.create_account'));
+            ->press(trans('auth.create_account'));
         // We should have an account - but one that is not yet confirmed/verified.
-        $this->see(htmlentities(Lang::get('auth.check_your_email')))
+        $this->see(htmlentities(trans('auth.check_your_email')))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
         $user = User::whereName('JohnDoe')->first();
         // You can't login until you confirm your email address.
-        $this->login($user)->see(Lang::get('auth.account_not_activated'));
+        $this->login($user)->see(trans('auth.account_not_activated'));
         $this->visit("auth/register/confirm/{$user->token}")
-            ->see(Lang::get('auth.tx_for_confirm'))
+            ->see(trans('auth.tx_for_confirm'))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
-
-        // Reset this user
-//            $user->delete();
 
     }
 
@@ -56,8 +54,8 @@ class AuthTest extends TestCase
             ->type('john2@example.com', 'email')
             ->type('password', 'password')
             ->type('password2', 'password_confirmation')
-            ->press(Lang::get('auth.create_account'));
-        $this->see(Lang::get('validation.confirmed', ['attribute' => 'password']))
+            ->press(trans('auth.create_account'));
+        $this->see(trans('validation.confirmed', ['attribute' => 'password']))
             ->notSeeInDatabase('users', ['name' => 'JohnDoe', 'email' => 'john2@example.com', 'verified' => 0]);
     }
 
@@ -69,7 +67,7 @@ class AuthTest extends TestCase
         return $this->visit('/auth/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
-            ->press(Lang::get('auth.signin'));
+            ->press(trans('auth.signin'));
     }
 
     /** @test */
@@ -85,9 +83,9 @@ class AuthTest extends TestCase
             ->click(trans('auth.lost_password'))
             ->seePageIs('/password/email')
             ->type($user->email, 'email')
-            ->press(Lang::get('auth.send_password'))
+            ->press(trans('auth.send_password'))
             ->seePageIs('/password/email')
-            ->see(Lang::get('passwords.sent'));
+            ->see(trans('passwords.sent'));
 
         $reset = DB::table('password_resets')->where('email', $user->email)
             ->orderBy('created_at', 'desc')
@@ -99,14 +97,14 @@ class AuthTest extends TestCase
         $this->visit('/password/reset/' . $reset->token)
             ->type('222222', 'password')
             ->type('222222', 'password_confirmation')
-            ->press(Lang::get('auth.reset_password'));
+            ->press(trans('auth.reset_password'));
 
         Auth::logout();
         $this->visit('/auth/login')
             ->type($user->email, 'email')
             ->type('222222', 'password')
-            ->press(Lang::get('auth.signin'))
-            ->seePageIs('/admin');
+            ->press(trans('auth.signin'))
+            ->seePageIs('/');
 
 
     }
@@ -128,7 +126,7 @@ class AuthTest extends TestCase
     {
         Auth::logout();
         $this->visit('/auth/login')
-             ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
+            ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
 //        dump(Request::url());
 //        $this->dump();
 //             ->press('choose-account-0');

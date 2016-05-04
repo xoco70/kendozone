@@ -1,9 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/header/userCreate.js') !!}
-    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-
-@stop
 @section('styles')
     {!! Html::style('css/pages/userCreate.css') !!}
 @stop
@@ -21,26 +16,22 @@
 
     <div class="container">
         <div class="content">
-        @if (!is_null($user->id))
+            @if (!is_null($user->id))
             {!! Form::model($user, ['method'=>"PATCH",
                                     'route' => array('users.update', $user->slug),
                                     'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
-            <?php $disabled = "disabled";
-                  $userPic = Auth::user()->avatar;
-            ?>
-        @else
-            {!! Form::open(['url'=>"users",
-                            'enctype' => 'multipart/form-data']) !!}
-            <?php $disabled = "";
-                  $userPic='';
-            ?>
-        @endif
+
+            @else
+
+            {!! Form::open(['url'=>URL::action('UserController@store'),'enctype' => 'multipart/form-data']) !!}
+
+            @endif
 
 
 
 
-            <!-- Detached content -->
+                    <!-- Detached content -->
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
                     <!-- Simple panel 1 : General Data-->
@@ -66,7 +57,7 @@
                                                         {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
                                                     @endif
 
-                                                    {!!  Form::hidden('avatar','') !!}
+                                                    {!!  Form::hidden('avatar',basename($user->avatar)) !!}
                                                 </div>
 
                                             </div>
@@ -230,7 +221,8 @@
 
                 var initialPic = "{{ $user->avatar }}";
                 var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
-                var uploadUrl = "{{ url('users/'.Auth::user()->slug.'/uploadAvatar') }}";
+
+                var uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
                 var avatarHiddenField = $('input[name=avatar]');
 
                 new Dropzone('#fileInput', {
@@ -239,8 +231,8 @@
                     parallelUploads: 100,
                     acceptedFiles: "image/jpeg,image/png,image/gif",
 
-//                    dictRemoveFile:'Remove',
-//                    dictDefaultMessage:'Upload file',
+                    dictRemoveFile:'{{ trans('core.remove') }}',
+                    dictDefaultMessage:'Upload file',
                     addRemoveLinks: 'dictRemoveFile',
                     url: uploadUrl,
                     maxFiles: 1,
@@ -286,6 +278,18 @@
                         // and call it either with or without error in the `thumbnail` event
                         // callback, but I think that this is cleaner.
                     },
+                    removedfile: function(file) {
+//                        var name = file.name;
+//                        $.ajax({
+//                            type: 'POST',
+//                            url: 'delete.php',
+//                            data: "id="+name,
+//                            dataType: 'html'
+//                        });
+                        avatarHiddenField.val('');
+                        var _ref;
+                        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                    },
                     maxfilesexceeded: function (file) {
                         this.removeAllFiles();
                         this.addFile(file);
@@ -294,7 +298,12 @@
                 })
             })
         </script>
-        {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+
 
     </div>
+@stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/userCreate.js') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 @stop

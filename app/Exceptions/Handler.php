@@ -56,16 +56,16 @@ class Handler extends ExceptionHandler
                 ]
             );
         }
-//        else if ($e instanceof HttpException){
-//            return response()->view('errors   .general',
-//                ['code' => '500',
-//                    'message' => 'Server Error',
-//                    'quote' => 'Failure is the key to success; each mistake teaches us something',
-//                    'author' => 'Morihei Ueshiba',
-//                    'source' => '',
-//                ]
-//            );
-//        }
+        else if ($e instanceof HttpException){
+            return response()->view('errors.general',
+                ['code' => '500',
+                    'message' => 'Server Error',
+                    'quote' => 'Failure is the key to success; each mistake teaches us something',
+                    'author' => 'Morihei Ueshiba',
+                    'source' => '',
+                ]
+            );
+        }
 
         return parent::render($request, $e);
     }

@@ -16,12 +16,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        //TODO Should be an IF env== 
-        $this->baseUrl = env('APP_BASE', $this->baseUrl);
 
         $app = require __DIR__ . '/../bootstrap/app.php';
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+
+        $this->baseUrl = env('APP_BASE', $this->baseUrl);
+//        $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
+//        $this->baseUrl .= App::getLocale()."/";
+
 
         return $app;
     }
@@ -75,5 +79,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         ));
 
         return $this;
+    }
+    public function logWithUser($newUser){
+        Auth::loginUsingId($newUser->id);
+        Lang::setLocale($newUser->locale);
     }
 }

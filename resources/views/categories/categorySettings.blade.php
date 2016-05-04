@@ -10,7 +10,11 @@ $currency = Auth::user()->country->currency_code;
 ?>
 
 @if (is_null($setting))
-    {!! Form::open(['url' => 'tournaments/'.$tournament->slug.'/categories/'.$categoryId.'/settings',
+    {!! Form::open([
+                 'action' => ['CategorySettingsController@store',
+                                $tournament->slug,
+                                $categoryId
+                             ],
                  'data-tournament' => $tournament->slug,
                  'data-category' => $categoryId,
                  'class' => 'form-settings',
@@ -20,6 +24,7 @@ $currency = Auth::user()->country->currency_code;
     {!! Form::model($setting,
                 ['method'=>"PATCH",
                 'class' => 'form-settings',
+                 'id' => 'form_'.$key,
                  'data-tournament' => $tournament->slug,
                  'data-category' => $categoryId,
                  'data-setting' => $setting->id,
@@ -28,15 +33,13 @@ $currency = Auth::user()->country->currency_code;
                              $categoryId,
                              $setting->id]]) !!}
 
-    {!! Form::model($setting, ['method'=>"PATCH",
-        "action" => [ "CategorySettingsController@update", $tournament->slug, $categoryId,$setting->id]]) !!}
 @endif
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-3">
             <div class="">
                 {!!  Form::label('fightingAreas', trans('core.fightingAreas')) !!}
-                {!!  Form::select('fightingAreas', [0,1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
+                {!!  Form::select('fightingAreas', [1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
 
             </div>
         </div>
@@ -50,7 +53,7 @@ $currency = Auth::user()->country->currency_code;
 
             {!!  Form::label('fightDuration', trans('core.fightDuration')) !!}
             <div class="input-group">
-                {!!  Form::input('text','fightDuration',is_null($setting) ? 0 : $setting->fightDuration, ['class' => 'form-control','id' => 'fightDuration'.$key]) !!}
+                {!!  Form::input('text','fightDuration',$fightDuration, ['class' => 'form-control fightDuration','id' => 'fightDuration'.$key]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
@@ -78,11 +81,9 @@ $currency = Auth::user()->country->currency_code;
         <div class="col-md-3 col-md-offset-1">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('core.roundRobinWinner')) !!}
-                {!!  Form::select('roundRobinWinner', [0,1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
+                {!!  Form::select('roundRobinWinner', [1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
-
-
     </div>
     <hr/>
     <div class="row">
@@ -102,25 +103,19 @@ $currency = Auth::user()->country->currency_code;
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('core.enchoQty')) !!}
                 {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
-                <small class="display-block">0 para infinito</small>
+                <small class="display-block">{{ trans('core.encho_infinite') }}</small>
             </div>
         </div>
         <div class="col-md-3">
-
             {!!  Form::label('enchoDuration', trans('core.enchoDuration')) !!}
             <div class="input-group ">
-                {!!  Form::input('text','enchoDuration', is_null($setting) ? 0 : $setting->enchoDuration, ['class' => 'form-control','id' => 'enchoDuration'.$key, $disableEncho]) !!}
+                {!!  Form::input('text','enchoDuration', $enchoDuration, ['class' => 'form-control enchoDuration','id' => 'enchoDuration'.$key, $disableEncho]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
-
-
         </div>
-
-
     </div>
     <hr/>
     <div class="row">
-
         <div class="col-md-2">
             <div class="checkbox-switch">
                 <label>
@@ -129,43 +124,14 @@ $currency = Auth::user()->country->currency_code;
                     {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
                     {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}
-
                 </label>
             </div>
         </div>
 
     </div>
-    {{--{!!   Form::hidden('tournament_id', $tournamentId) !!}--}}
-    {{--{!!   Form::hidden('category_id', $categoryId) !!}--}}
-
-
     <div align="right">
         <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}
         </button>
     </div>
-    <script>
-
-        $(function () {
-            $('#fightDuration{{$key}}').timepicker(('option',
-
-            {
-                'minTime': '2:00',
-                'maxTime': '5:00',
-                'timeFormat': 'H:i',
-                'step': '15'
-            }));
-
-            $('#enchoDuration{{$key}}').timepicker(('option',
-
-            {
-                'minTime': '0:00',
-                'maxTime': '5:00',
-                'timeFormat': 'H:i',
-                'step': '15'
-            }));
-
-        });
-    </script>
-
 </div>
 {!! Form::close()!!}

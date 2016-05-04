@@ -1,3 +1,22 @@
+.well.dash.success {
+    color: #7CD69C;
+    border-color: #7CD69C;
+}
+.btn-flat.dash.success {
+    color: #7CD69C;
+    border-color: #7CD69C;
+}
+
+.btn-flat.dash.error {
+    color: #ff5663;
+    border-color: #ff5663;
+}
+
+.well.dash.error {
+    color: #ff5663;
+    border-color: #ff5663;
+}
+
 .bg-primary {
     background-color: #ff5663;
     border-color: #ff5663;
@@ -15,8 +34,6 @@
     border-color: #B59B7F;
     color: #fff
 }
-
-
 
 .bg-primary-300 {
     background-color: #64b5f6;
@@ -83,6 +100,7 @@
     border-color: #c62828;
     color: #fff
 }
+
 /* New value */
 .bg-success {
     background-color: #7CD69C;
@@ -2618,11 +2636,11 @@
 }
 
 .text-primary,
-.text-primary
-{
+.text-primary {
     color: #ff5663 !important
 }
-.text-primary:hover:focus{
+
+.text-primary:hover:focus {
     color: #FFF !important;
 }
 
@@ -2693,17 +2711,17 @@
 }
 
 .text-success,
-.text-success:focus{
+.text-success:focus {
     color: #7CD69C !important
 }
 
-.text-success:hover
-{
-    color: #7CD69C!important;
+.text-success:hover {
+    color: #7CD69C !important;
 
 }
-.btn.border-primary.btn-flat.border-4:hover{
-    color: #FFF!important;
+
+.btn.border-primary.btn-flat.border-4:hover {
+    color: #FFF !important;
 }
 
 .text-success-300,

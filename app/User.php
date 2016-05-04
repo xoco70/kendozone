@@ -13,17 +13,18 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait;
+
 
     /**
      * The database table used by the model.
@@ -32,9 +33,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+//    protected $appends = [''];
 
     protected $sluggable = [
-        'build_from' => 'name',
+        'build_from' => 'email',
         'save_to' => 'slug',
     ];
 
@@ -51,6 +53,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * @param $attributes
+     * @return static $user
+     */
+    public static function registerUserToCategory($attributes)
+    {
+        $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
+
+        $password = null;
+        if ($user == null) {
+            $user = new User;
+            $user->name = $attributes['name'];
+            $user->email = $attributes['email'];
+            $password = User::generatePassword();
+            $user->password = bcrypt($password);
+            $user->verified = 1;
+            $user->save();
+            $user->clearPassword = $password;
+        }
+        // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
+        else if ($user->isDeleted()) {
+            $user->deleted_at = null;
+            $user->save();
+        }
+
+        // Fire Events
+
+        return $user;
+    }
 
     function addGeoData()
     {
@@ -76,6 +109,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     }
+//    public function rules()
+//    {
+//        return [
+//            'name' => 'required|max:255|unique:users',
+//            'email' => 'required|max:255|unique:users',
+//            'avatar' => 'mimes:png,jpg, jpeg, gif'
+//        ];
+//    }
     /**
      * Boot the model.
      *
@@ -85,11 +126,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         parent::boot();
         static::creating(function ($user) {
-            $user->token = str_random(30);
-            $user->addGeoData();
-//            dd($user);
+            $softDeletedUser = User::onlyTrashed()->where('email', '=', $user->email)->first();
+            if ($softDeletedUser != null) {
+                $softDeletedUser->restore();
+                return false;
+            } else {
+                $user->token = str_random(30);
+                $user->addGeoData();
 
-
+            }
+            return true;
         });
 
         // If a User is deleted, you must delete:
@@ -145,7 +191,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $fileName = Str::slug($fileName, '-') . "." . $ext;
 
             if (!$file->move($destinationPath, $fileName)) {
-                flash("error", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
+                flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
                 return $data;
             } else {
                 $data['avatar'] = $fileName;
@@ -161,7 +207,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                         $constraint->aspectRatio();
                     });
                 }
+//                $img->crop(200, 200, 0, 0);
                 $img->save($destinationPath . $fileName);
+//                flash("success", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
 
 
                 return $data;
@@ -257,9 +305,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->where('category_tournament_user.user_id', '=', $this->id)
             ->select('tournament.*')
             ->distinct();
-
-
     }
+
 
     public static function generatePassword()
     {
@@ -275,27 +322,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isSuperAdmin()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_SUPERADMIN');
+        return $this->role_id == Config::get('constants.ROLE_SUPERADMIN');
     }
 
     public function isOwner()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_OWNER');
+        return $this->role_id == Config::get('constants.ROLE_OWNER');
     }
 
     public function isAdmin()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_ADMIN');
+        return $this->role_id == Config::get('constants.ROLE_ADMIN');
     }
 
     public function isModerator()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_PRESIDENT');
+        return $this->role_id == Config::get('constants.ROLE_PRESIDENT');
     }
 
     public function isUser()
     {
-        return Auth::user()->role_id == Config::get('constants.ROLE_USER');
+        return $this->role_id == Config::get('constants.ROLE_USER');
+    }
+
+    public function isDeleted()
+    {
+        return $this->deleted_at != null;
     }
 
     public function getRouteKeyName()
@@ -312,6 +364,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function canEditTournament($tournament)
     {
         return ($this->id == $tournament->user_id || $this->isSuperAdmin());
+    }
+
+    public function canEditUser($user)
+    {
+        return ($this->id == $user->user_id || $this->isSuperAdmin());
     }
 
 }

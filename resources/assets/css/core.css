@@ -211,8 +211,9 @@ svg {
 }
 
 .letter-icon {
-    width: 16px;
-    display: block
+    width: 11px;
+    height: 20px;
+    display: block;
 }
 
 .content-divider {

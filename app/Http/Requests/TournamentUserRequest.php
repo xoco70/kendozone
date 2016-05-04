@@ -25,7 +25,7 @@ class TournamentUserRequest extends Request
     {
         return [
             'username' => 'required|max:255',
-            'email' => 'required',
+            'email' => 'email|required',
             'categoryTournamentId' => 'required',
 
         ];

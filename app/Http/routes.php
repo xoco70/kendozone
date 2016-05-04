@@ -13,6 +13,7 @@
 
 //Auth::loginUsingId(6); // 6 Admin, 5 User
 
+
 // Authentication routes...
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::post('auth/invite', 'Auth\AuthController@postInvite');
@@ -25,8 +26,8 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::get('/tournaments/{tournamentId}/invite/{token}', 'InviteController@register');
-Route::post('tournaments/{tournament}/invite/{inviteId}/categories', 'InviteController@registerCategories');
+Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@register');
+Route::post('tournaments/{tournament}/invite/{invite}/categories', 'InviteController@registerCategories');
 
 Route::group(['middleware' => ['guest']],
     function () {
@@ -54,18 +55,19 @@ Route::group(['middleware' => ['guest']],
     });
 
 Route::get('/', 'DashboardController@index')->middleware(['auth']);
-Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
+//Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 
 Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
-Route::group(['middleware' => ['auth', 'own', ]], // 'throttle:100,1'
+Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
     function () {
-
-        Route::resource('tournaments', 'TournamentController');
+        Route::get('lang/change/{lang}', 'LanguageController@change');
+        Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
-        Route::resource('users', 'UserController');
+        Route::resource('users', 'UserController', ['names' => ['index' => 'users.index', 'create' => 'users.create', 'edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);
+
         Route::get('users/{user}/tournaments', [
             'uses' => 'UserController@getMyTournaments',
             'as' => 'users.tournaments'
@@ -73,12 +75,12 @@ Route::group(['middleware' => ['auth', 'own', ]], // 'throttle:100,1'
 
 
         Route::get('exportUsersExcel', 'UserController@exportUsersExcel');
-        Route::resource('tournaments/{tournament}/users', 'TournamentUserController');
+        Route::resource('tournaments/{tournament}/users', 'TournamentUserController', ['names' => ['index' => 'tournament.users.index', 'create' => 'tournament.users.create', 'edit' => 'tournament.users.edit', 'store' => 'tournament.users.store', 'update' => 'tournament.users.update']]);
         Route::delete('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/delete', 'TournamentUserController@deleteUser');
         Route::put('tournaments/{tournamentId}/categories/{categoryTournamentId}/users/{userId}/confirm', 'TournamentUserController@confirmUser');
         Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
-        Route::resource('tournaments/{tournamentId}/categories/{categoryId}/settings', 'CategorySettingsController');
-        Route::resource('invites', 'InviteController');
+        Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController', ['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
+        Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
         Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
         Route::resource('settings', 'SettingsController');
 
@@ -88,15 +90,16 @@ Route::group(['middleware' => ['auth', 'own', ]], // 'throttle:100,1'
 
         Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
+        Route::get('logs', 'LogsController@index');
     });
 
 
 //APIS
 Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
-        Route::get('authenticate', 'Api\AuthenticateController@index');
-        Route::post('authenticate', 'Api\AuthenticateController@authenticate');
-        Route::resource('tournaments', 'Api\TournamentController');
-});
-//        invite/{userId}/register/
-//Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['root']);;
+//    Route::get('authenticate', 'Api\AuthenticateController@index');
+//    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
+//    Route::resource('tournaments', 'Api\TournamentController');
+    Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
+
+});

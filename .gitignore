@@ -15,6 +15,7 @@ Homestead.json
 .env.php
 .env
 /.idea/
-/.idea/workspace.xml
 public/images/avatar/
 .phpstorm.meta.php
+public/js
+public/css

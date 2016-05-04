@@ -164,7 +164,12 @@ return [
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
 //        Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+//        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
+        OwenIt\Auditing\AuditingServiceProvider::class,
+        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class
+
 
     ],
 
@@ -231,6 +236,9 @@ return [
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Image' => Intervention\Image\Facades\Image::class,
+//        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
+        'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class
+
 
 
     ],
