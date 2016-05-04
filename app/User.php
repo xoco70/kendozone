@@ -54,7 +54,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Boot the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            $softDeletedUser = User::onlyTrashed()->where('email', '=', $user->email)->first();
+            if ($softDeletedUser != null) {
+                $softDeletedUser->restore();
+                return false;
+            } else {
+                $user->token = str_random(30);
+                $user->addGeoData();
 
+            }
+            return true;
+        });
+
+        // If a User is deleted, you must delete:
+        // His tournaments, his tcus
+
+        static::deleting(function ($user) {
+//            foreach
+//            $user->tournaments()->delete();
+            foreach ($user->tournaments as $tournament) {
+                $tournament->delete();
+            }
+            $user->categoryTournamentUsers()->delete();
+
+        });
+        static::restoring(function ($user) {
+            $user->categoryTournamentUsers()->withTrashed()->restore();
+            foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
+                $tournament->restore();
+            }
+
+        });
+    }
     /**
      * @param $attributes
      * @return static $user
@@ -109,57 +149,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     }
-//    public function rules()
-//    {
-//        return [
-//            'name' => 'required|max:255|unique:users',
-//            'email' => 'required|max:255|unique:users',
-//            'avatar' => 'mimes:png,jpg, jpeg, gif'
-//        ];
-//    }
-    /**
-     * Boot the model.
-     *
-     * @return void
-     */
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($user) {
-            $softDeletedUser = User::onlyTrashed()->where('email', '=', $user->email)->first();
-            if ($softDeletedUser != null) {
-                $softDeletedUser->restore();
-                return false;
-            } else {
-                $user->token = str_random(30);
-                $user->addGeoData();
 
-            }
-            return true;
-        });
-
-        // If a User is deleted, you must delete:
-        // His tournaments, his tcus
-
-        static::deleting(function ($user) {
-//            foreach
-//            $user->tournaments()->delete();
-            foreach ($user->tournaments as $tournament) {
-                $tournament->delete();
-            }
-            $user->categoryTournamentUsers()->delete();
-
-        });
-        static::restoring(function ($user) {
-            $user->categoryTournamentUsers()->withTrashed()->restore();
-            foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
-                $tournament->restore();
-            }
-
-        });
-
-
-    }
 
     /**
      * Confirm the user.

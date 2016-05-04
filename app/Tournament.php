@@ -158,7 +158,8 @@ class Tournament extends Model implements SluggableInterface
      */
     public function invites()
     {
-        return $this->hasMany(Invite::class);
+        return $this->morphMany(Invite::class, 'object');
+
 
     }
 

@@ -43,29 +43,12 @@ $numCompetitors = $competitors->count();
                         <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a>
 
                         </li>
-                        {{--<li><a href="#"><i class="icon-portfolio"></i> Link with label <span--}}
-                        {{--class="label bg-success-400">Online</span></a></li>--}}
-                        {{--<li class="navigation-divider"></li>--}}
 
                     </ul>
                 </div>
             </div>
             <!-- /sub navigation -->
-
-
         </div>
     </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            @if ( $tournament->isOpen() || Auth::user()->isSuperAdmin())
-                <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button" class="btn btn-primary btn-labeled btn-xlg"
-                      style="width: 100%;"><b><i class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}</a>
-                </p>
-            @endif
-
-        </div>
-    </div>
-
 </div>
 <!-- /detached sidebar -->

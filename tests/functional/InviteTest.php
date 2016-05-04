@@ -49,20 +49,21 @@ class InviteTest extends TestCase
             ->seePageIs('/tournaments/' . $tournament->slug . '/edit')
             ->seeInDatabase('invitation',
                 ['email' => 'john@example.com',
-                    'tournament_id' => $tournament->id,
+                    'object_id' => $tournament->id,
                     'expiration' => $tournament->registerDateLimit,
                     'active' => 1,
                     'used' => 0,
                 ])
             ->seeInDatabase('invitation',
                 ['email' => 'john2@example.com',
-                    'tournament_id' => $tournament->id,
+                    'object_id' => $tournament->id,
                     'expiration' => $tournament->registerDateLimit,
                     'active' => 1,
                     'used' => 0,
                 ]);
 
-        $invitation = Invite::where('tournament_id', $tournament->id)
+        $invitation = Invite::where('object_id', $tournament->id)
+            ->where('object_type', 'App\Tournament')
             ->where('email', 'john@example.com')
             ->first();
 
@@ -70,7 +71,7 @@ class InviteTest extends TestCase
         $user = User::where('email', 'john@example.com')->first();
 
         //Bad Code or no code
-        $this->visit("/tournaments/" . $invitation->tournament->slug . "/invite/123456s")
+        $this->visit("/tournaments/" . $invitation->object->slug . "/invite/123456s")
             ->see("403");
 
         // Invitation expired
@@ -83,7 +84,7 @@ class InviteTest extends TestCase
         }
 
 
-        $this->visit("/tournaments/" . $invitation->tournament->slug. "/invite/" . $invitation->code);
+        $this->visit("/tournaments/" . $invitation->object->slug. "/invite/" . $invitation->code);
         // If user didn't exit, check that it is created
         if (is_null($user)) {
             // System redirect to user creation
@@ -101,11 +102,9 @@ class InviteTest extends TestCase
 
         // Get all categories for this tournament
         // Now we are on category Selection page
-//        dd($categoriesTournament);
         foreach ($categoriesTournament as $key => $ct) {
             $this->type($ct->id, 'cat[' . $ct->id . ']');
         }
-        // Can't resolve: LogicException: The selected node does not have a form ancestor.
 
         $this->press(trans("core.save"));
 
@@ -116,7 +115,6 @@ class InviteTest extends TestCase
                 ]);
         }
         $this->seePageIs('/invites');
-//            ->see(htmlentities(Lang::get('core.operation_successful')));
 
     }
 
@@ -135,8 +133,6 @@ class InviteTest extends TestCase
             } catch (Exception $e) {
             }
         }
-//        dump($)
-//        $categoriesTournament = $categoriesTournament;
 
         $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'),
             'password' => bcrypt('111111') // 111111
@@ -154,12 +150,10 @@ class InviteTest extends TestCase
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page
         foreach ($categoriesTournament as $ct) {
-//            dump($ct->id . " - ".$key);
             $this->type($ct->id, 'cat[' . $ct->id . ']');
 //
         }
         $this->press(trans("core.save"));
-//        $this->dump();
 //
         foreach ($categoriesTournament as $key => $ct) {
             $this->seeInDatabase('category_tournament_user',
@@ -168,6 +162,5 @@ class InviteTest extends TestCase
                 ]);
         }
         $this->seePageIs('/invites');
-//            ->see(htmlentities(Lang::get('sent.invitation_sent')));
     }
 }

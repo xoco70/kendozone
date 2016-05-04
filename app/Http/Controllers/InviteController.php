@@ -35,7 +35,6 @@ class InviteController extends Controller
      */
     public function index()
     {
-
         $invites = Auth::user()->invites()->with('tournament.owner')->paginate(Config::get('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
@@ -60,11 +59,12 @@ class InviteController extends Controller
      * @internal param Request $request
      * @internal param AppMailer $mailer
      */
-    public function register($tournamentSlug, $token)
+    public function registerTournamentInvite($tournamentSlug, $token)
     {
+        $tournament = Tournament::findBySlug($tournamentSlug);
 
         // Get available invitation
-        $invite = Invite::getActiveInvite($token);
+        $invite = Invite::getActiveTournamentInvite($token);
 
         // Check if invitation is expired
         $quote = null;
@@ -101,7 +101,6 @@ class InviteController extends Controller
 
                 // Redirect to register category Screen
 
-                $tournament = Tournament::findBySlug($tournamentSlug);
                 Auth::loginUsingId($user->id);
                 return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
 
@@ -134,8 +133,6 @@ class InviteController extends Controller
 
     public function registerCategories(Request $request)
     {
-        //TODO Check if catgory has been paid. if so, can't change
-
         $categories = $request->get('cat');
         $inviteId = $request->inviteId;
         if ($inviteId != 0)
@@ -153,7 +150,8 @@ class InviteController extends Controller
                 $invite = new Invite();
                 $invite->code = 'open';
                 $invite->email = Auth::user()->email;
-                $invite->tournament_id = $tournament->id;
+                $invite->object_type = 'App\Tournament';
+                $invite->object_id = $tournament->id;
                 $invite->active = 1;
                 $invite->used = 1;
                 $invite->save();
@@ -188,7 +186,7 @@ class InviteController extends Controller
         foreach ($recipients as $recipient) {
             // Mail to Recipients
             $invite = new Invite();
-            $code = $invite->generate($recipient, $tournament);
+            $code = $invite->generateTournamentInvite($recipient, $tournament);
             $mailer->sendEmailInvitationTo($recipient, $tournament, $code);
 
         }

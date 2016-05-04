@@ -34,7 +34,7 @@ $i = 0;
                                     @endif
                                     <div class="col-md-3">
                                         <p>
-
+                                            {{--TODO 1 query x row--}}
                                             {!!  Form::label('cat['.$categoryTournament->id.']', trans($categoryTournament->category->name)) !!}
                                             <br/>
                                             {!!   Form::checkbox('cat['.$categoryTournament->id.']',
@@ -60,12 +60,13 @@ $i = 0;
 
         </div>
     </div>
+@stop
+@section('scripts_footer')
     <script>
 
         $(function () {
             $(" .switch").bootstrapSwitch();
         });
     </script>
-
 @stop
 

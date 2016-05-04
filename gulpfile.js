@@ -89,7 +89,6 @@ elixir(function (mix) {
         'plugins/forms/inputs/duallistbox.min.js',
         'plugins/pickers/location/location.js',
         'plugins/notifications/sweet_alert.min.js',
-        'pages/footer/tournamentEditFooter.js',
         'pages/footer/tournamentShowFooter.js'
     ], 'public/js/pages/header/tournamentShow.js');
 

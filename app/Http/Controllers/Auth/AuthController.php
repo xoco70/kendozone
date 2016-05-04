@@ -191,13 +191,13 @@ class AuthController extends Controller
         //Check token
         $user = null;
         $token = $request->get("token");
-        $invite = Invite::getActiveInvite($token);
+        $invite = Invite::getActiveTournamentInvite($token);
         if (!is_null($invite)) {
             $user = User::create($request->all());
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }
-            $tournament = Tournament::find($invite->tournament_id);
+            $tournament = Tournament::find($invite->object_id);
             $userId = $user->id;
 //            $invite->consume();
 

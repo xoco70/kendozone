@@ -89,7 +89,7 @@ class TournamentUserController extends Controller
 
         // We send him an email with detail (and user /password if new)
         $invite = new Invite();
-        $code = $invite->generate($user->email, $tournament);
+        $code = $invite->generateTournamentInvite($user->email, $tournament);
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $user->clearPassword);
 
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));

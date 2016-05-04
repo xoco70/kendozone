@@ -16,7 +16,7 @@ class AuthRequest extends Request
 
         $token = $request->get("token");
         if (!isNullOrEmptyString($token)) {
-            $invite = Invite::getActiveInvite($token);
+            $invite = Invite::getActiveTournamentInvite($token);
             if (!$request->has('email')) {
                 $request->request->add(['email' => $invite->email]);
                 $request->request->add(['verified' => 1]);

@@ -26,7 +26,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@register');
+Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@registerTournamentInvite');
 Route::post('tournaments/{tournament}/invite/{invite}/categories', 'InviteController@registerCategories');
 
 Route::group(['middleware' => ['guest']],
