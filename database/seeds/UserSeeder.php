@@ -49,13 +49,13 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);
 
-        factory(User::class, 5)->create(['role_id' => Config::get('constants.ROLE_OWNER')]);
-        $this->command->info('seeding users!');
-        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ADMIN')]);
-        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_PRESIDENT')]);
-        factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-
-
+        factory(User::class)->create(
+            [   'name' => 'julien',
+                'email' => 'julien@cappiello.fr',
+                'role_id' => Config::get('constants.ROLE_USER'),
+                'password' => bcrypt('111111'),
+                'verified' => 1,]);
+        
         $this->command->info('Users seeded!');
 
     }
