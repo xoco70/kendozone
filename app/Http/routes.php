@@ -55,7 +55,7 @@ Route::group(['middleware' => ['guest']],
     });
 
 Route::get('/', 'DashboardController@index')->middleware(['auth']);
-Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
+//Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 
 Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
