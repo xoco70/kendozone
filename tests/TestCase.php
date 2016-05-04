@@ -80,4 +80,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $this;
     }
+    public function logWithUser($newUser){
+        Auth::loginUsingId($newUser->id);
+        Lang::setLocale($newUser->locale);
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Closure, Session, Auth;
+use Auth;
+use Closure;
+use Illuminate\Support\Facades\Session;
 
 class LocaleMiddleware
 {
@@ -19,8 +21,11 @@ class LocaleMiddleware
     {
         if (Auth::check()) {
             app()->setLocale(Auth::user()->locale);
-        } else { //TODO Aqui esta mal
-            app()->setLocale('en');
+        }
+        else { //TODO Aqui esta mal
+            $locale = Session::get('locale');
+//            dd($locale);
+            app()->setLocale($locale);
         }
         return $next($request);
     }

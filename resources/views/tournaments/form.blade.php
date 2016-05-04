@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class=" form-group">
-                            {!!  Form::label('name', trans('core.name')) !!}
+                            {!!  Form::label('name', trans('core.name'),['class' => 'text-bold ']) !!}
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                         </div>
                     </div>

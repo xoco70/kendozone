@@ -4,13 +4,9 @@
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-//use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
 class AuthTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
-
 
     public function setUp()
     {
@@ -28,12 +24,10 @@ class AuthTest extends TestCase
     public function a_user_may_register_for_an_account_but_must_confirm_their_email_address()
     {
 
-
-//        $faker = Faker::create();
+        App::setLocale('en');
         // When we register...
-        $this->visit('/');
-//        dd(Request::url());
-        $this->click(trans('auth.signup'))
+        $this->visit('/')
+            ->click(trans('auth.signup'))
             ->type('JohnDoe', 'name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
@@ -48,9 +42,6 @@ class AuthTest extends TestCase
         $this->visit("auth/register/confirm/{$user->token}")
             ->see(trans('auth.tx_for_confirm'))
             ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
-
-        // Reset this user
-//            $user->delete();
 
     }
 
@@ -135,7 +126,7 @@ class AuthTest extends TestCase
     {
         Auth::logout();
         $this->visit('/auth/login')
-             ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
+            ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
 //        dump(Request::url());
 //        $this->dump();
 //             ->press('choose-account-0');
