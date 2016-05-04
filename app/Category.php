@@ -5,6 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\AuditingTrait;
 
+/**
+ * @property mixed team
+ * @property mixed gender
+ * @property mixed ageCategory
+ * @property mixed ageMin
+ * @property mixed ageMax
+ * @property mixed gradeMin
+ * @property mixed gradeMax
+ * @property mixed isTeam
+ */
 class Category extends Model
 {
     use AuditingTrait;

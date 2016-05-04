@@ -21,6 +21,13 @@ use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
 
+/**
+ * @property  mixed name
+ * @property  mixed email
+ * @property  mixed password
+ * @property bool verified
+ * @property mixed token
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
     use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait;

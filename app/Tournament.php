@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
 
 
+/**
+ * @property mixed type
+ * @property float latitude
+ * @property float longitude
+ * @property mixed created_at
+ * @property mixed updated_at
+ * @property mixed deleted_at
+ */
 class Tournament extends Model implements SluggableInterface
 {
     use SoftDeletes;
@@ -178,25 +186,6 @@ class Tournament extends Model implements SluggableInterface
         //TODO Should use hasManyThrough
         return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
     }
-
-
-
-    /**
-     * Get All categoriesTournament that belongs to a tournament
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-//    public function tournament_categories()
-//    {
-//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament');
-//    }
-
-//    public function categories_user()
-//    {
-//        return $this->belongsToMany('App\CategoryTournament', 'category_tournament_user', 'user_id', 'category_tournament_id')
-//            ->withTimestamps();
-//    }
-
 
     public function getCategoryList()
     {

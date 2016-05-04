@@ -18,23 +18,10 @@ class CategorySettingsController extends Controller
     public function __construct()
     {
         // Fetch the Site Settings object
-//        $this->middleware('auth');
         $this->currentModelName = trans_choice('core.categorySettings', 2);
         View::share('currentModelName', $this->currentModelName);
-        $this->defaultSettings = CategorySettings::getDefaultSettings();
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function create($tournamentId, $categoryId)
-//    {
-////        $defaultSettings = $this->defaultSettings;
-//        return view("categories.create", compact('tournamentId', 'categoryId')); //, 'defaultSettings'
-//    }
 
     /**
      * Store a newly created resource in storage.
@@ -63,7 +50,9 @@ class CategorySettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param $tournamentId
+     * @param $categoryId
+     * @param $categorySettingsId
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
@@ -73,8 +62,6 @@ class CategorySettingsController extends Controller
         } else {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);
         }
-//        flash()->success(trans('core.operation_successful'));
-//        return redirect("tournaments/$tournamentId/edit");
     }
 
     /**
