@@ -84,6 +84,6 @@
     <script>
         var url = "{{ URL::action('UserController@index') }}";
     </script>
-    {!! Html::script('js/pages/header/userIndex.js') !!}
+    {!! Html::script('js/pages/header/footable.js') !!}
     {!! Html::script('js/pages/footer/userIndexFooter.js') !!}
 @stop

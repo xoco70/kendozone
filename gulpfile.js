@@ -37,18 +37,18 @@ elixir(function (mix) {
         'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
-    mix.scripts([
-        'plugins/tables/footable/footable.min.js',
-    ], 'public/js/pages/header/tournamentIndex.js');
-
-    mix.scripts([
-        'plugins/tables/footable/footable.min.js',
-    ], 'public/js/pages/header/userIndex.js');
+    // mix.scripts([
+    //     'plugins/tables/footable/footable.min.js',
+    // ], 'public/js/pages/header/tournamentIndex.js');
+    //
+    // mix.scripts([
+    //     'plugins/tables/footable/footable.min.js',
+    // ], 'public/js/pages/header/userIndex.js');
 
 
     mix.scripts([
         'plugins/tables/footable/footable.min.js'
-    ], 'public/js/pages/header/invitationIndex.js');
+    ], 'public/js/pages/header/footable.js');
 
     mix.scripts([
         'components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',

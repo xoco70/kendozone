@@ -49,15 +49,6 @@
                     </table>
                 </div>
             </div>
-            {!! Html::script('js/pages/header/invitationIndex.js') !!}
-            <script>
-                $(function() {
-
-                    // Initialize responsive functionality
-                    $('.table-togglable').footable();
-
-                });
-            </script>
         @endif
 
 
@@ -65,4 +56,15 @@
 
     @include("errors.list")
 @stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/footable.js') !!}
+    <script>
+        $(function() {
 
+            // Initialize responsive functionality
+            $('.table-togglable').footable();
+
+        });
+    </script>
+
+@stop
