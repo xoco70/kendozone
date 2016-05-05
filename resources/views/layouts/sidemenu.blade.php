@@ -12,6 +12,22 @@
 
                         </a>
                     </li>
+                    <li {{ (Request::is('federations') ? 'class=active' : '') }}>
+                        <a class="protip" data-pt-title="{{ trans('core.federations') }}" href="{!! URL::action('FederationController@index') !!}"><i
+                                    class="icon-starburst position-left sidemenu"></i><span>{{ trans('core.federations') }}</span>
+                        </a>
+                    </li>
+                    {{--<li {{ (Request::is('asociations') ? 'class=active' : '') }}>--}}
+                        {{--<a class="protip" data-pt-title="{{ trans('core.asociations') }}" href="{!! URL::action('AsociationController@index') !!}"><i--}}
+                                    {{--class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.asociations') }}</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li {{ (Request::is('clubs') ? 'class=active' : '') }}>--}}
+                        {{--<a class="protip" data-pt-title="{{ trans('core.clubs') }}" href="{!! URL::action('ClubController@index') !!}"><i--}}
+                                    {{--class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.clubs') }}</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
                         <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}" href="{!! URL::action('TournamentController@index') !!}"><i
                                     class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.tournaments_created') }}</span>

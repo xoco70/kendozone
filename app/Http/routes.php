@@ -61,6 +61,10 @@ Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
 Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
     function () {
+        Route::resource('federations', 'FederationController');
+//        Route::resource('associations', 'AssociationController');
+//        Route::resource('clubs', 'ClubController');
+
         Route::get('lang/change/{lang}', 'LanguageController@change');
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');

@@ -24,27 +24,27 @@ class CreateTeamTable extends Migration
 
         });
 
-        Schema::create('team_member', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('team_id')->unsigned(); // A checar
-            $table->integer('user_id')->unsigned();
-            $table->timestamps();
-
-            $table->foreign('team_id')
-                ->references('id')
-                ->on('team')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('user')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->unique(['team_id', 'user_id']);
-
-        });
+//        Schema::create('team_member', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('team_id')->unsigned(); // A checar
+//            $table->integer('user_id')->unsigned();
+//            $table->timestamps();
+//
+//            $table->foreign('team_id')
+//                ->references('id')
+//                ->on('team')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
+//
+//            $table->foreign('user_id')
+//                ->references('id')
+//                ->on('user')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
+//
+//            $table->unique(['team_id', 'user_id']);
+//
+//        });
     }
 
     public function down()

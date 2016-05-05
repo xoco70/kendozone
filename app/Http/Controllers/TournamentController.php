@@ -34,16 +34,6 @@ class TournamentController extends Controller
     {
 
         $currentModelName = trans_choice('core.tournament', 2);
-//        $token=JWTAuth::getToken();
-//        $user = JWTAuth::toUser($token);
-//        $client = new Client(['base_uri' => getenv('URL_BASE') . 'api/v1']);
-//        $res = $client->request('GET', '/tournaments', [
-//            'auth' => ['user', 'pass']
-//        ]);
-//        $response = $client->request('GET', '/tournaments', [
-//            'auth' => [Auth::user()->email,
-//                       Auth::user()->password]
-//        ]);
 
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::with('owner')->orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));

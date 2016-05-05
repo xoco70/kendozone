@@ -5,6 +5,27 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
     $breadcrumbs->push('Dashboard', action('DashboardController@index'));
 });
 
+// Home > Federations
+Breadcrumbs::register('federations.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans_choice('core.federation', 2), route('federations.index'));
+});
+
+//// Home > Associations
+//Breadcrumbs::register('associations.index', function ($breadcrumbs) {
+//    $breadcrumbs->parent('dashboard');
+//    $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
+//});
+//
+//// Home > Clubs
+//Breadcrumbs::register('clubs.index', function ($breadcrumbs) {
+//    $breadcrumbs->parent('dashboard');
+//    $breadcrumbs->push(trans_choice('core.club', 2), route('clubs.index'));
+//});
+
+
+
+
 // Home > Tournaments
 Breadcrumbs::register('tournaments.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');

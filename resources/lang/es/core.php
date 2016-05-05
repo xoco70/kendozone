@@ -282,4 +282,13 @@ return [
 
     'team' => 'Equipo|Equipos',
 
+    // Federations
+    'federation' => 'Federación|Federaciones',
+    'federation.president' => 'Presidente',
+    'federation.vicepresident' => 'Vice Presidente',
+    'federation.secretary' => 'Secretario',
+    'federation.treasurer' => 'Tesorero',
+    'federation.admin' => 'Administrador',
+    'federation.address' => 'Dirección',
+    'federation.phone' => 'Telefono',
 ];

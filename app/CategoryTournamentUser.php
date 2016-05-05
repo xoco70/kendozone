@@ -51,4 +51,9 @@ class CategoryTournamentUser extends Model
         return $tour;
     }
 
+    public function user(){
+        return self::find($this->user_id);
+    }
+    
+
 }
