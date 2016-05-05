@@ -27,6 +27,7 @@ use Webpatser\Countries\Countries;
  * @property  mixed password
  * @property bool verified
  * @property mixed token
+ * @property  mixed clearPassword
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
@@ -110,8 +111,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
 
-        $password = null;
+
         if ($user == null) {
+            $password = null;
             $user = new User;
             $user->name = $attributes['name'];
             $user->email = $attributes['email'];

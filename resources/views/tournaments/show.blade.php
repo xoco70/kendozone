@@ -210,7 +210,33 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                     <!-- /simple panel -->
                 </div>
 
+                <!-- Simple panel 2 : Venue -->
 
+                <div class="panel panel-flat">
+                    <div class="panel-body">
+                        <div class="container-fluid">
+
+
+                            <fieldset title="{{trans_choice('core.team',2)}}">
+                                <a name="teams">
+                                    <legend class="text-semibold">{{trans_choice('core.team',2)}}</legend>
+                                </a>
+                            </fieldset>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    Team you've registered:
+                                    {{ $teams }}
+
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
                 {{-- If open Tournament--}}
                 @if ($tournament->type==1)
 

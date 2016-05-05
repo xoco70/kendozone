@@ -93,12 +93,24 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
+        // get categoryTournament Team Registered
+//        $teams = CategoryTournament::with(
+//            ['ctus' => function ($query) {
+//                $query->where('user_id', '=', Auth::user()->id);
 //
-//        $levels = TournamentLevel::lists('name', 'id');
-//
-//        $categories = Category::lists('name', 'id');
-        $grades = Grade::lists('name','id');
-        return view('tournaments.show', compact('tournament','grades'));
+//            }]
+////            ,
+////            ['category' => function ($query) {
+////                $query->where('isTeam', '=', 1);
+////
+////            }]
+//        )->get();
+        $teams ="";
+        // CTU where UserId -> categoryTournament -> category where isTeam = 1 --> return Collection (categoryTournaments)
+
+//        dd($ctTeams);
+        $grades = Grade::lists('name', 'id');
+        return view('tournaments.show', compact('tournament', 'grades', 'teams'));
     }
 
     /**
@@ -110,7 +122,7 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
 
-        $tournament = Tournament::with('competitors','categorySettings','categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
+        $tournament = Tournament::with('competitors', 'categorySettings', 'categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
 //        dd($tournament->competitors->groupBy('user_id'));
         // Statistics for Right Panel
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
@@ -122,7 +134,7 @@ class TournamentController extends Controller
 
         // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
-        $grades = Grade::lists('name','id');
+        $grades = Grade::lists('name', 'id');
         $categories = new Collection();
         foreach ($categories1 as $category) {
 
@@ -136,7 +148,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::lists('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize','grades','numCompetitors'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors'));
     }
 
     /**

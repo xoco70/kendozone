@@ -260,4 +260,11 @@ return [
     'participations' => 'Participacions',
     'past' => 'Past',
     'next' => 'Next',
+
+    // Teams
+
+    'team' => 'Team|Teams',
+
+
+
 ];

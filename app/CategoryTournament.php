@@ -48,12 +48,12 @@ class CategoryTournament extends Model
         return $this->belongsTo('App\Tournament');
     }
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id')
-            ->withPivot('confirmed')
-            ->withTimestamps();
-    }
+//    public function users()
+//    {
+//        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id')
+//            ->withPivot('confirmed')
+//            ->withTimestamps();
+//    }
 
     public function settings()
     {
