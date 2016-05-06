@@ -55,7 +55,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                                 <td width="80%">{{$tournament->name}}</td>
                                 <td width="20%" align="right"><a
                                             class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
-                                            @if(Auth::user()->isSuperAdmin() || Auth::user()->owns($tournament))
+                                            @if(Auth::user()->isSuperAdmin() || Auth::user()->ownsTournament($tournament))
                                             href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                     @else
                                         {{--TODO Permission problems--}}

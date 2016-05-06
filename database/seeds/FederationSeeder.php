@@ -1,9 +1,11 @@
 <?php
 
 use App\Federation;
+use App\User;
 use Illuminate\Database\Seeder;
 
-class FederationSeeder extends Seeder {
+class FederationSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
@@ -15,8 +17,14 @@ class FederationSeeder extends Seeder {
     {
 
         Federation::truncate();
+        for ($i = 0; $i < 5; $i++) {
 
-        factory(Federation::class,5)->create();
+            $president = factory(User::class)->create(
+                ['role_id' => Config::get('constants.ROLE_ADMIN'),
+                    'password' => bcrypt('111111'),
+                    'verified' => 1,]);
+            factory(Federation::class)->create(['president_id' => $president->id]);
+        }
 
 
     }

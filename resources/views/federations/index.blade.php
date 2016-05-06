@@ -20,7 +20,7 @@
                 <thead>
                 <tr>
 
-                    <th class="text-center" data-toggle="true">{{ trans_choice('core.name',1) }}</th>
+                    <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.federation.president') }}</th>
                     <th class="text-center" data-hide="all">{{ trans('core.federation.address') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
@@ -36,9 +36,7 @@
                 </thead>
                 @foreach($federations as $federation)
                     <tr>
-                        <td align="center"><a
-                                    href="{!!   URL::action('FederationController@edit',  $federation->id) !!}">{{ $federation->name }}</a>
-                        </td>
+                        <td><a href="{!!   URL::action('FederationController@edit',  $federation->id) !!}">{{ $federation->name }}</a></td>
                         <td align="center">{{ $federation->president->name }}</td>
                         <td align="center">{{ $federation->address }}</td>
                         <td align="center">{{ $federation->president->email}}</td>

@@ -20,6 +20,10 @@ class UserSeeder extends Seeder
         $grades = Grade::all()->pluck('id')->toArray();
 
         User::create([
+            'name' => 'No User',
+            'email' => 'nouser@nouser.com',
+        ]);
+        User::create([
             'name' => 'Juliatzin Del torro',
             'email' => 'flordcactus@gmail.com',
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111

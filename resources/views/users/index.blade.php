@@ -13,30 +13,30 @@
                         <div class="container-fluid">
 
                             {{--<div class="row col-md-10 custyle">--}}
+                            <span class="pl-10 pull-right">
+                                        <a href="{!!   URL::action('UserController@create') !!}"
+                                           class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
+                                            @lang('core.addModel', ['currentModelName' => $currentModelName])
+                                        </a>
+
+                            </span>
+                            <a href="{!!   URL::action('UserController@exportUsersExcel') !!}" class="btn btn-success btn-xs pull-right">
+                                <i class="icon-file-excel position-left"></i>Export to Excel
+                            </a>
                             <table class="table table-togglable table-hover">
 
                                 <thead>
-                                    <span class="pl-10 pull-right">
-                                    <a href="{!!   URL::action('UserController@create') !!}"
-                                       class="btn btn-primary btn-xs "><b><i
-                                                    class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => $currentModelName])
-                                    </a>
 
-                                    </span>
-                                    <a href="{!!   URL::action('UserController@exportUsersExcel') !!}"
-                                       class="btn btn-success btn-xs pull-right"><i
-                                                class="icon-file-excel position-left"></i>Export
-                                        to Excel</a>
 
-                                    <tr>
-                                        <th data-hide="phone">{{ trans('core.avatar') }}</th>
-                                        <th data-hide="phone">ID</th>
-                                        <th data-toggle="true">{{ trans('core.username') }}</th>
-                                        <th data-hide="phone">{{ trans('core.email') }}</th>
-                                        <th data-hide="phone">{{ trans('core.role') }}</th>
-                                        <th data-hide="phone">{{ trans('core.country') }}</th>
-                                        <th class="text-center">{{ trans('core.action') }}</th>
-                                    </tr>
+                                <tr>
+                                    <th data-hide="phone">{{ trans('core.avatar') }}</th>
+                                    <th data-hide="phone">ID</th>
+                                    <th data-toggle="true">{{ trans('core.username') }}</th>
+                                    <th data-hide="phone">{{ trans('core.email') }}</th>
+                                    <th data-hide="phone">{{ trans('core.role') }}</th>
+                                    <th data-hide="phone">{{ trans('core.country') }}</th>
+                                    <th class="text-center">{{ trans('core.action') }}</th>
+                                </tr>
                                 </thead>
                                 @foreach($users as $user)
                                     <tr>
@@ -61,7 +61,8 @@
                                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteUser', 'action' => ['UserController@destroy', $user->slug]]) !!}
                                             {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteUser', 'id'=>'delete_'.$user->slug, 'data-id' => $user->slug ] ) !!}
                                             {!! Form::close() !!}
-                                        </td>                                    </tr>
+                                        </td>
+                                    </tr>
 
                                 @endforeach
 

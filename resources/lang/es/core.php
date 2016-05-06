@@ -300,4 +300,5 @@ return [
     'association.address' => 'Dirección',
     'association.phone' => 'Telefono',
     'association.no_user_in_this_country' => 'No hay usuario registrados en este país',
+    'association.add' => 'Agregar Associación',
 ];

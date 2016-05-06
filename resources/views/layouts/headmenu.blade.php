@@ -41,10 +41,10 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="mexico" href="{{ URL::action('LanguageController@change', 'es') }}"><img
-                                    src="/images/flags/MX.png" alt="Español"> Español</a></li>
-                    <li><a class="english" href="{{ URL::action('LanguageController@change', 'en') }}"><img
-                                    src="/images/flags/GB.png" alt="English"> English</a></li>
+                    <li><a class="mexico" href="{{ URL::action('LanguageController@change', 'es') }}">
+                            <img src="/images/flags/MX.png" alt="Español"> Español</a></li>
+                    <li><a class="english" href="{{ URL::action('LanguageController@change', 'en') }}">
+                            <img src="/images/flags/GB.png" alt="English"> English</a></li>
                 </ul>
             </li>
 

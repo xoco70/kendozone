@@ -14,13 +14,19 @@
             {{--            @include('layouts.noFederations')--}}
         @else
 
-
-
+            @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
+                <span class="pl-10 pull-right">
+                <a href="{!!   URL::action('AssociationController@create') !!}"
+                   class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
+                    @lang('core.addModel', ['currentModelName' => $currentModelName])
+                </a>
+            </span>
+            @endif
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>
 
-                    <th class="text-center" data-toggle="true">{{ trans_choice('core.name',1) }}</th>
+                    <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans_choice('core.federation',1) }}</th>
                     <th class="text-center" data-hide="all">{{ trans('core.association.president') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
@@ -33,16 +39,17 @@
                 </thead>
                 @foreach($associations as $association)
                     <tr>
-                        <td align="center"><a
+                        <td><a
                                     href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">{{ $association->name }}</a>
                         </td>
-                        <td align="center">{{ $association->federation->name }}</td>
+                        <td>{{ $association->federation->name }}</td>
                         <td align="center">{{ $association->president->name }}</td>
                         <td align="center">{{ $association->president->email }}</td>
                         <td align="center">{{ $association->address }}</td>
                         <td align="center">{{ $association->phone }}</td>
-                        <td align="center"><img src="images/flags/{{ $association->federation->country->flag }}" /></td>
-                        <td align="center"><a href="{{URL::action('AssociationController@edit', $association->id)}}"><i class="icon icon-pencil7"></i></a></td>
+                        <td align="center"><img src="images/flags/{{ $association->federation->country->flag }}"/></td>
+                        <td align="center"><a href="{{URL::action('AssociationController@edit', $association->id)}}"><i
+                                        class="icon icon-pencil7"></i></a></td>
 
                     </tr>
 

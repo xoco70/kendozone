@@ -103,6 +103,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         });
     }
+
     /**
      * @param $attributes
      * @return static $user
@@ -122,8 +123,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->verified = 1;
             $user->save();
             $user->clearPassword = $password;
-        }
-        // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
+        } // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
         else if ($user->isDeleted()) {
             $user->deleted_at = null;
             $user->save();
@@ -354,7 +354,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-    public function owns(Tournament $tournament)
+    public function ownsTournament(Tournament $tournament)
     {
         return $this->id == $tournament->user_id;
     }
@@ -370,9 +370,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return ($this->id == $user->user_id || $this->isSuperAdmin());
     }
 
-    public function isFederationPresident($federation)
+    public function isFederationPresident($federation = null)
     {
-        return ($this->id == $federation->president_id || $this->isSuperAdmin());
+        if ($federation == null)
+            return ($this->isOwner() || $this->isSuperAdmin());
+        else
+            return ($this->id == $federation->president_id || $this->isSuperAdmin());
     }
+
 
 }
