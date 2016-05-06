@@ -44,20 +44,34 @@ class UserSeeder extends Seeder
             [   'name' => 'root',
                 'email' => 'superuser@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
-                'password' => bcrypt('111111'),
+                'password' => bcrypt('superuser'),
                 'verified' => 1,]);
         factory(User::class)->create(
-            [   'name' => 'admin',
-                'email' => 'admin@kendozone.com',
+            [   'name' => 'federation',
+                'email' => 'federation@kendozone.com',
+                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+                'password' => bcrypt('federation'),
+                'verified' => 1,]);
+        factory(User::class)->create(
+            [   'name' => 'association',
+                'email' => 'association@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
-                'password' => bcrypt('111111'),
+                'password' => bcrypt('association'),
                 'verified' => 1,]);
 
         factory(User::class)->create(
-            [   'name' => 'julien',
-                'email' => 'julien@cappiello.fr',
+            [   'name' => 'club',
+                'email' => 'club@kendozone.com',
+                'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+                'password' => bcrypt('club'),
+                'verified' => 1,]);
+
+
+        factory(User::class)->create(
+            [   'name' => 'user',
+                'email' => 'user@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_USER'),
-                'password' => bcrypt('111111'),
+                'password' => bcrypt('user'),
                 'verified' => 1,]);
         
         $this->command->info('Users seeded!');

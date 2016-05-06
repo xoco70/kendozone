@@ -22,9 +22,8 @@ class LocaleMiddleware
         if (Auth::check()) {
             app()->setLocale(Auth::user()->locale);
         }
-        else { //TODO Aqui esta mal
+        else {
             $locale = Session::get('locale');
-//            dd($locale);
             app()->setLocale($locale);
         }
         return $next($request);
