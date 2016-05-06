@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Federation;
 use App\Http\Requests;
+use App\Http\Requests\FederationRequest;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class FederationController extends Controller
 {
     protected $currentModelName;
+    // Only Super Admin can manage Federations
 
     /**
      * Display a listing of the resource.
@@ -18,7 +20,7 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = Federation::with('president','vicepresident','secretary','treasurer','admin')->get();
+        $federations = Federation::with('president')->get(); // ,'vicepresident','secretary','treasurer','admin'
         return view('federations.index', compact('federations'));
     }
 
@@ -44,8 +46,9 @@ class FederationController extends Controller
     public function edit($id)
     {
         $federation = Federation::findOrFail($id);
+        $users = User::where('country_id','=', $federation->country_id)->get();
 
-        return view('federations.edit', compact('federation'));
+        return view('federations.edit', compact('federation','users'));
     }
 
     /**
@@ -55,10 +58,13 @@ class FederationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FederationRequest $request, $id)
     {
-        $association = Federation::findOrFail($id);
-        $association->update($request->all());
+
+        $federation = Federation::findOrFail($id);
+        $federation->update($request->all());
+        $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
+        flash()->success($msg);
         return redirect("federations");
     }
 

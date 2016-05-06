@@ -25,10 +25,10 @@
                     <th class="text-center" data-hide="all">{{ trans('core.federation.address') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
                     <th class="text-center" data-hide="tablet">{{ trans('core.federation.phone') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.federation.vicepresident') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.federation.secretary') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.federation.treasurer') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.federation.admin') }}</th>
+                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.vicepresident') }}</th>--}}
+                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.secretary') }}</th>--}}
+                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.treasurer') }}</th>--}}
+                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.admin') }}</th>--}}
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
 
@@ -40,13 +40,13 @@
                                     href="{!!   URL::action('FederationController@edit',  $federation->id) !!}">{{ $federation->name }}</a>
                         </td>
                         <td align="center">{{ $federation->president->name }}</td>
-                        <td align="center">{{ $federation->adress }}</td>
+                        <td align="center">{{ $federation->address }}</td>
                         <td align="center">{{ $federation->president->email}}</td>
                         <td align="center">{{ $federation->phone }}</td>
-                        <td align="center">{{ $federation->vicepresident->name }}</td>
-                        <td align="center">{{ $federation->secretary->name }}</td>
-                        <td align="center">{{ $federation->treasurer->name }}</td>
-                        <td align="center">{{ $federation->admin->name }}</td>
+                        {{--<td align="center">{{ $federation->vicepresident->name }}</td>--}}
+                        {{--<td align="center">{{ $federation->secretary->name }}</td>--}}
+                        {{--<td align="center">{{ $federation->treasurer->name }}</td>--}}
+                        {{--<td align="center">{{ $federation->admin->name }}</td>--}}
                         <td align="center"><img src="images/flags/{{ $federation->country->flag }}" /></td>
                         <td align="center"><a href="{{URL::action('FederationController@edit', $federation->id)}}"><i class="icon icon-pencil7"></i></a></td>
 

@@ -11,6 +11,16 @@ Breadcrumbs::register('federations.index', function ($breadcrumbs) {
     $breadcrumbs->push(trans_choice('core.federation', 2), route('federations.index'));
 });
 
+Breadcrumbs::register('federations.edit', function ($breadcrumbs, $federation) {
+    $breadcrumbs->parent('federations.index');
+    if (Auth::user()->isFederationPresident($federation)) {
+        $breadcrumbs->push($federation->name, route('federations.edit', $federation->id));
+    } else {
+        $breadcrumbs->push($federation->name, route('federations.show', $federation->id));
+    }
+
+});
+
 //// Home > Associations
 //Breadcrumbs::register('associations.index', function ($breadcrumbs) {
 //    $breadcrumbs->parent('dashboard');

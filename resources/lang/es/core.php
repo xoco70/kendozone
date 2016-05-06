@@ -291,4 +291,6 @@ return [
     'federation.admin' => 'Administrador',
     'federation.address' => 'Dirección',
     'federation.phone' => 'Telefono',
+    'federation.no_user_in_this_country' => 'No hay usuario registrados en este país',
+
 ];

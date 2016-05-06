@@ -62,5 +62,9 @@ return [
     'access_denied' => 'No tiene acceso a esta secci&oacute;n',
 
 
+    // Federation
+    'federation_edit_successful' => 'Federación <b>:name</b><br/> actualizada exitosamente',
+
+
 
 ];

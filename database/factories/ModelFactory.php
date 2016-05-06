@@ -18,6 +18,22 @@ use App\TournamentLevel;
 use App\User;
 use Webpatser\Countries\Countries;
 
+$factory->define(App\Federation::class, function (Faker\Generator $faker) {
+    $countries = Countries::all()->pluck('id')->toArray();
+    $users = User::all()->pluck('id')->toArray();
+
+    return [
+        'name' => $faker->name,
+        'president_id' => $faker->randomElement($users),
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+        'country_id' => $faker->randomElement($countries),
+    ];
+});
+
+
+
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     $countries = Countries::all()->pluck('id')->toArray();
 
