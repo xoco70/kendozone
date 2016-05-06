@@ -22,9 +22,9 @@
 
                     <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.federation.president') }}</th>
-                    <th class="text-center" data-hide="tablet">{{ trans('core.federation.address') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('core.federation.address') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
-                    <th class="text-center" data-hide="tablet">{{ trans('core.federation.phone') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('core.federation.phone') }}</th>
                     {{--<th class="text-center" data-hide="all">{{ trans('core.federation.vicepresident') }}</th>--}}
                     {{--<th class="text-center" data-hide="all">{{ trans('core.federation.secretary') }}</th>--}}
                     {{--<th class="text-center" data-hide="all">{{ trans('core.federation.treasurer') }}</th>--}}
