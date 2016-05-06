@@ -21,11 +21,11 @@ Breadcrumbs::register('federations.edit', function ($breadcrumbs, $federation) {
 
 });
 
-//// Home > Associations
-//Breadcrumbs::register('associations.index', function ($breadcrumbs) {
-//    $breadcrumbs->parent('dashboard');
-//    $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
-//});
+// Home > Associations
+Breadcrumbs::register('associations.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
+});
 //
 //// Home > Clubs
 //Breadcrumbs::register('clubs.index', function ($breadcrumbs) {

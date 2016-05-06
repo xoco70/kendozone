@@ -64,7 +64,7 @@
     @include("errors.list")
 @stop
 @section('scripts_footer')
-    {!! Html::script('js/pages/header/invitationIndex.js') !!}
+    {!! Html::script('js/pages/header/footable.js') !!}
     <script>
         $(function () {
 

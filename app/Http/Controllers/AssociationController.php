@@ -3,25 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Association;
+use App\Federation;
 use App\Http\Requests;
-use App\Http\Requests\AssociationRequest;
+use App\Http\Requests\FederationRequest;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class AssociationController extends Controller
 {
     protected $currentModelName;
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-        // Fetch the Site Settings object
-        $this->currentModelName = Lang::get('core.association');
-        View::share('currentModelName', $this->currentModelName);
-
-    }
+    // Only Super Admin and Federation President can manage Federations
 
     /**
      * Display a listing of the resource.
@@ -30,36 +21,10 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::all();
+        $associations = Association::with('president')->get(); // ,'vicepresident','secretary','treasurer','admin'
         return view('associations.index', compact('associations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $association = new Association();
-        return view('associations.create', compact('association'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param AssociationRequest|Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(AssociationRequest $request)
-    {
-        $association = $request->all();
-        if (Association::create($association))
-            Session::flash('success', 'Operación Exitosa!');
-        else
-            Session::flash('error', 'Operación No realizada!');
-        return redirect('associations');
-    }
 
     /**
      * Display the specified resource.
@@ -69,7 +34,7 @@ class AssociationController extends Controller
      */
     public function show($id)
     {
-        $association = Association::findOrFail($id);
+        $association = Federation::findOrFail($id);
         return view('associations.show', compact('association'));
     }
 
@@ -81,9 +46,10 @@ class AssociationController extends Controller
      */
     public function edit($id)
     {
-        $association = Association::findOrFail($id);
+        $association = Federation::findOrFail($id);
+        $users = User::where('country_id','=', $association->country_id)->get();
 
-        return view('associations.edit', compact('association'));
+        return view('associations.edit', compact('association','users'));
     }
 
     /**
@@ -93,10 +59,13 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FederationRequest $request, $id)
     {
-        $association = Association::findOrFail($id);
+
+        $association = Federation::findOrFail($id);
         $association->update($request->all());
+        $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
+        flash()->success($msg);
         return redirect("associations");
     }
 
@@ -108,7 +77,7 @@ class AssociationController extends Controller
      */
     public function destroy($id)
     {
-        $association = Association::findOrFail($id);
+        $association = Federation::findOrFail($id);
         $association->delete();
         return redirect("associations");
     }

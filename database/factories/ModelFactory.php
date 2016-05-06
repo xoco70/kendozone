@@ -13,6 +13,7 @@
 
 use App\Category;
 use App\CategoryTournament;
+use App\Federation;
 use App\Tournament;
 use App\TournamentLevel;
 use App\User;
@@ -31,6 +32,19 @@ $factory->define(App\Federation::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Association::class, function (Faker\Generator $faker) {
+    $countries = Countries::all()->pluck('id')->toArray();
+    $users = User::all()->pluck('id')->toArray();
+    $federations = Federation::all()->pluck('id')->toArray();
+
+    return [
+        'name' => $faker->name,
+        'federation_id' => $faker->randomElement($federations),
+        'president_id' => $faker->randomElement($users),
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+    ];
+});
 
 
 

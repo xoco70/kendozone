@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Federation extends Model
+class Association extends Model
 {
 
-    protected $table = 'federation';
+    protected $table = 'association';
     public $timestamps = true;
 
     protected $guarded = ['id'];
@@ -40,14 +40,14 @@ class Federation extends Model
 //    }
 
 
-    public function associations()
+    public function clubs()
     {
-        return $this->hasMany('Association');
+        return $this->hasMany('Club');
     }
 
-    public function country()
+    public function federation()
     {
-        return $this->belongsTo('Webpatser\Countries\Countries');
+        return $this->belongsTo(Federation::class);
     }
 
 }
