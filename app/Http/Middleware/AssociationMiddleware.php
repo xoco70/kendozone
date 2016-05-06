@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Association;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,13 +26,17 @@ class AssociationMiddleware
             ]));
 
         if (Auth::check()) {
+
             $userLogged = Auth::user();
-            if (!$userLogged->isSuperAdmin()) {
-                if (!$userLogged->isFederationPresident()) {
+            if (!$userLogged->isSuperAdmin() && !$userLogged->isFederationPresident()) {
+                if (!$userLogged->isAssociationPresident()) {
                     return $errorResponse;
-                } elseif ($request->federation != null) {
-                    if ($request->federation->president_id != $userLogged->id) {
-                        return $errorResponse;
+                } else{
+                    if ($request->associations != null) {
+                            $association = Association::findOrFail($request->associations);
+                        if ($association->president_id != $userLogged->id) {
+                            return $errorResponse;
+                        }
                     }
                 }
 
