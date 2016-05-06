@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+
 class ClubRequest extends Request
 {
     /**

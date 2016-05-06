@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
     function () {
         Route::resource('federations', 'FederationController');
         Route::resource('associations', 'AssociationController');
-//        Route::resource('clubs', 'ClubController');
+        Route::resource('clubs', 'ClubController');
 
         Route::get('lang/change/{lang}', 'LanguageController@change');
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
         Route::get('users/{user}/restore', 'UserController@restore');
         Route::get('associations/{association}/restore', 'AssociationController@restore');
-        //Route::get('clubs/{club}/restore', 'ClubController@restore');
+        Route::get('clubs/{club}/restore', 'ClubController@restore');
         Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
         Route::get('logs', 'LogsController@index');

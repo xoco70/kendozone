@@ -61,27 +61,27 @@
 
                     @if (Auth::user()->isSuperAdmin())
 
-                        <li {{ (Request::is('federations') ? 'class=active' : '') }}>
+                        <li>
                             <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}" href="{!! URL::action('FederationController@index') !!}"><i
                                         class="icon-starburst position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
                             </a>
                         </li>
-                        <li {{ (Request::is('asociations') ? 'class=active' : '') }}>
+                        <li>
                             <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}" href="{!! URL::action('AssociationController@index') !!}"><i
                                         class="icon-cube position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
                             </a>
+                        </li>
+
+                        <li>
+                        <a class="protip" data-pt-title="{{ trans('core.clubs') }}" href="{!! URL::action('ClubController@index') !!}"><i
+                        class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
+                        </a>
                         </li>
                         <li>
                             <a href="{{ URL::action('UserController@index') }} ">
                                 <i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
                             </a>
                         </li>
-
-                        {{--<li {{ (Request::is('clubs') ? 'class=active' : '') }}>--}}
-                        {{--<a class="protip" data-pt-title="{{ trans('core.clubs') }}" href="{!! URL::action('ClubController@index') !!}"><i--}}
-                        {{--class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.clubs') }}</span>--}}
-                        {{--</a>--}}
-                        {{--</li>--}}
 
                     @endif
                     <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i

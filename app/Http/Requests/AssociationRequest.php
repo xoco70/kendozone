@@ -23,8 +23,7 @@ class AssociationRequest extends Request
     public function rules()
     {
         return [
-//            'name' => 'required|min:6',
-//            'adminId' => 'required',
+            'name' => 'required|min:6',
         ];
     }
 }

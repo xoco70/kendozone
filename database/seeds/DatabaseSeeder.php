@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FederationSeeder::class);
         $this->call(AssociationSeeder::class);
-//        $this->call(ClubsSeeder::class);
+        $this->call(ClubSeeder::class);
         $this->command->info('All tables seeded!');
 
 

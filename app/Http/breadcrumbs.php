@@ -26,13 +26,33 @@ Breadcrumbs::register('associations.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
 });
-//
-//// Home > Clubs
-//Breadcrumbs::register('clubs.index', function ($breadcrumbs) {
-//    $breadcrumbs->parent('dashboard');
-//    $breadcrumbs->push(trans_choice('core.club', 2), route('clubs.index'));
-//});
 
+Breadcrumbs::register('associations.edit', function ($breadcrumbs, $association) {
+    $breadcrumbs->parent('associations.index');
+    if (Auth::user()->isFederationPresident($association->federation) || Auth::user()->isAssociationPresident($association)) {
+        $breadcrumbs->push($association->name, route('associations.edit', $association->id));
+    } else {
+        $breadcrumbs->push($association->name, route('associations.show', $association->id));
+    }
+
+});
+
+//
+// Home > Clubs
+Breadcrumbs::register('clubs.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans_choice('core.club', 2), route('clubs.index'));
+});
+
+Breadcrumbs::register('clubs.edit', function ($breadcrumbs, $club) {
+    $breadcrumbs->parent('clubs.index');
+    if (Auth::user()->isFederationPresident($club->federation) || Auth::user()->isAssociationPresident($club) || Auth::user()->isClubPresident($club)) {
+        $breadcrumbs->push($club->name, route('clubs.edit', $club->id));
+    } else {
+        $breadcrumbs->push($club->name, route('clubs.show', $club->id));
+    }
+
+});
 
 
 

@@ -153,8 +153,8 @@ elixir(function (mix) {
         'pages/footer/associationIndexFooter.js'
     ], 'public/js/pages/footer/associationIndexFooter.js');
 
-    // mix.scripts([
-    //     'pages/footer/clubIndexFooter.js'
-    // ], 'public/js/pages/footer/clubIndexFooter.js');
+    mix.scripts([
+        'pages/footer/clubIndexFooter.js'
+    ], 'public/js/pages/footer/clubIndexFooter.js');
 
 });

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-{!! Breadcrumbs::render('associations.edit',$association) !!}
+{!! Breadcrumbs::render('clubs.edit',$club) !!}
 
 @stop
 @section('content')
@@ -14,15 +14,15 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        @if (!is_null($association->id))
-        {!! Form::model($association, ['method'=>"PATCH",
-                                "action" => ["AssociationController@update", $association->id],
+        @if (!is_null($club->id))
+        {!! Form::model($club, ['method'=>"PATCH",
+                                "action" => ["ClubController@update", $club->id],
                                 'enctype' => 'multipart/form-data',
                                 'id' => 'form']) !!}
 
         @else
 
-        {!! Form::open(['url'=>URL::action('AssociationController@store'),'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['url'=>URL::action('ClubController@store'),'enctype' => 'multipart/form-data']) !!}
 
         @endif
                 <!-- Simple panel 1 : General Data-->
@@ -44,36 +44,36 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
 
-                        {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('federation_id', $federations,$association->federation_id, ['class' => 'form-control']) !!}
+                        {!!  Form::label('association', trans_choice('core.association',1),['class' => 'text-bold' ]) !!}
+                        {!!  Form::select('association_id', $associations,$club->association_id, ['class' => 'form-control']) !!}
 
 
                         <br/>
-                        {!!  Form::label('president', trans('core.association.president'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('president', trans('core.club.president'),['class' => 'text-bold' ]) !!}
                         @if(sizeof($users)==0)
-                            {!!  Form::text('president_id', trans('core.association.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+                            {!!  Form::text('president_id', trans('core.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
                             {!!  Form::hidden('president_id', 1) !!}
 
                         @else
-                            {!!  Form::select('president_id', $users,$association->president_id, ['class' => 'form-control']) !!}
+                            {!!  Form::select('president_id', $users,$club->president_id, ['class' => 'form-control']) !!}
                         @endif
 
 
                         <br/>
-                        {!!  Form::label('address', trans('core.association.address'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.association.address') }}</span>
+                            <span class="input-group-addon">{{trans('core.club.address') }}</span>
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                             <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
                         </div>
 
                         <br/>
-                        {!!  Form::label('phone', trans('core.association.phone'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('phone', trans('core.club.phone'),['class' => 'text-bold' ]) !!}
 
 
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.association.phone') }}</span>
+                            <span class="input-group-addon">{{trans('core.club.phone') }}</span>
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>
@@ -93,5 +93,5 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 </div>
 @stop
 @section('scripts_footer')
-    {!! JsValidator::formRequest('App\Http\Requests\AssociationRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ClubRequest') !!}
 @stop

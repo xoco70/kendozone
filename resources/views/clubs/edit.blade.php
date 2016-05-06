@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-{!! Breadcrumbs::render('associations.edit',$association) !!}
+{!! Breadcrumbs::render('federations.edit',$association) !!}
 
 @stop
 @section('content')
@@ -14,17 +14,8 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        @if (!is_null($association->id))
-        {!! Form::model($association, ['method'=>"PATCH",
-                                "action" => ["AssociationController@update", $association->id],
-                                'enctype' => 'multipart/form-data',
-                                'id' => 'form']) !!}
+        {!! Form::model($association, ['method'=>"PATCH", 'id'=>'form', "action" => ["AssociationController@update", $association->id]]) !!}
 
-        @else
-
-        {!! Form::open(['url'=>URL::action('AssociationController@store'),'enctype' => 'multipart/form-data']) !!}
-
-        @endif
                 <!-- Simple panel 1 : General Data-->
 
 
@@ -52,7 +43,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         {!!  Form::label('president', trans('core.association.president'),['class' => 'text-bold' ]) !!}
                         @if(sizeof($users)==0)
                             {!!  Form::text('president_id', trans('core.association.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
-                            {!!  Form::hidden('president_id', 1) !!}
 
                         @else
                             {!!  Form::select('president_id', $users,$association->president_id, ['class' => 'form-control']) !!}
@@ -93,5 +83,5 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 </div>
 @stop
 @section('scripts_footer')
-    {!! JsValidator::formRequest('App\Http\Requests\AssociationRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\FederationRequest') !!}
 @stop

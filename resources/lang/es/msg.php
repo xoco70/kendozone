@@ -74,7 +74,13 @@ return [
     'association_restored_successful' => 'Associación <br/><b>:name</b><br/> restaurada exitosamente',
     'association_restored_error' => 'Hubo un problema al restaurar la associación',
 
-
+    //Club
+    'club_create_successful' => 'Club <br/><b>:name</b><br/> creado exitosamente',
+    'club_edit_successful' => 'Club <br/><b>:name</b><br/> actualizado exitosamente',
+    'club_delete_successful' => 'Club <br/><b>:name</b><br/> borrado exitosamente',
+    'club_delete_error' => 'Hubo un problema al borrar el club',
+    'club_restored_successful' => 'Club <br/><b>:name</b><br/> restaurado exitosamente',
+    'club_restored_error' => 'Hubo un problema al restaurar el club',
 
 
 

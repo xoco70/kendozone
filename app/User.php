@@ -260,6 +260,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Invite', 'email', 'email');
     }
 
+
     public function tournamentsInvited()
     {
         return $this->hasManyThrough('App\Invite', 'App\Tournament');
@@ -289,6 +290,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany(CategoryTournament::class)
             ->withTimestamps();
+    }
+
+    public function association()
+    {
+        return $this->belongsTo(Association::class);
+    }
+
+    public function federation()
+    {
+        return $this->belongsTo(Federation::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 
     public function categoryTournamentUsers()
@@ -373,10 +389,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isFederationPresident($federation = null)
     {
         if ($federation == null)
-            return ($this->isOwner() || $this->isSuperAdmin());
+            return ($this->isOwner());
         else
-            return ($this->id == $federation->president_id || $this->isSuperAdmin());
+            return ($this->id == $federation->president_id);
     }
 
+    public function isAssociationPresident($association = null)
+    {
+        if ($association == null)
+            return ($this->isAdmin());
+        else
+            return ($this->id == $association->president_id);
+    }
 
+    public function isClubPresident($club = null)
+    {
+        if ($club == null)
+            return ($this->isModerator());
+        else
+            return ($this->id == $club->president_id);
+    }
 }
