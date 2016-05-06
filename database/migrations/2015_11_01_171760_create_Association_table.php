@@ -17,6 +17,7 @@ class CreateAssociationTable extends Migration {
 
 //			$table->integer('stateId')->unsigned();
 			$table->timestamps();
+			$table->softDeletes();
 			$table->engine = 'InnoDB';
 
 			$table->foreign('president_id')

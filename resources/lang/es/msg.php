@@ -67,7 +67,15 @@ return [
 
 
     //Association
+    'association_create_successful' => 'Associación <br/><b>:name</b><br/> creada exitosamente',
     'association_edit_successful' => 'Associación <br/><b>:name</b><br/> actualizada exitosamente',
+    'association_delete_successful' => 'Associación <br/><b>:name</b><br/> borrada exitosamente',
+    'association_delete_error' => 'Hubo un problema al borrar la associación',
+    'association_restored_successful' => 'Associación <br/><b>:name</b><br/> restaurada exitosamente',
+    'association_restored_error' => 'Hubo un problema al restaurar la associación',
+
+
+
 
 
 ];

@@ -91,7 +91,8 @@ Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
         //Restoring
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
         Route::get('users/{user}/restore', 'UserController@restore');
-
+        Route::get('associations/{association}/restore', 'AssociationController@restore');
+        //Route::get('clubs/{club}/restore', 'ClubController@restore');
         Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
         Route::get('logs', 'LogsController@index');

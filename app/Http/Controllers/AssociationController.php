@@ -13,12 +13,12 @@ use View;
 
 class AssociationController extends Controller
 {
+    // Only Super Admin and Association President can manage Associations
+
     protected $currentModelName;
 
     public function __construct()
     {
-//        $this->middleware('auth');
-        // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -28,7 +28,7 @@ class AssociationController extends Controller
 
 
 
-    // Only Super Admin and Association President can manage Associations
+
 
     /**
      * Display a listing of the resource.
@@ -119,13 +119,34 @@ class AssociationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Association $association
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy($associationId)
     {
-        $association = Association::findOrFail($id);
-        $association->delete();
-        return redirect("associations");
+        $association = Association::find($associationId);
+//        dd($association);
+        if ($association->delete()) {
+            return Response::json(['msg' => trans('msg.association_delete_successful', ['name' => $association->name]), 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => trans('msg.association_delete_error', ['name' => $association->name]), 'status' => 'error']);
+        }
     }
+
+    /**
+     * @param $tournamentSlug
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function restore($id)
+
+    {
+        $association = Association::withTrashed()->find($id);
+        if ($association->restore()) {
+            return Response::json(['msg' => trans('msg.association_restored_successful', ['name' => $association->name]), 'status' => 'success']);
+        } else {
+            return Response::json(['msg' => trans('msg.association_restored_error', ['name' => $association->name]), 'status' => 'error']);
+        }
+    }
+
 }

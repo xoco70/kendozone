@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Response;
 
-//use App\Place;
 
 class TournamentController extends Controller
 {
@@ -78,7 +77,7 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
     public function show(Tournament $tournament)
@@ -168,6 +167,11 @@ class TournamentController extends Controller
 
 
     //TODO is it used???
+    /**
+     * @param Request $request
+     * @param $categorySettingsId
+     * @return mixed
+     */
     public function updateCategory(Request $request, $categorySettingsId)
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
@@ -184,8 +188,9 @@ class TournamentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Tournament $tournament)
     {
@@ -196,6 +201,10 @@ class TournamentController extends Controller
         }
     }
 
+    /**
+     * @param $tournamentSlug
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function restore($tournamentSlug)
 
     {
@@ -207,6 +216,10 @@ class TournamentController extends Controller
         }
     }
 
+    /**
+     * @param Tournament $tournament
+     * @return mixed
+     */
     public function register(Tournament $tournament)
     {
 
@@ -225,6 +238,9 @@ class TournamentController extends Controller
             );
     }
 
+    /**
+     * @return mixed
+     */
     public function getDeleted()
     {
         $currentModelName = trans_choice('core.tournament', 2);
@@ -243,6 +259,9 @@ class TournamentController extends Controller
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }
 
+    /**
+     * @param $tournamentId
+     */
     public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
