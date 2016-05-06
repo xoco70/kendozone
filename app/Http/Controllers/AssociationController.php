@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Association;
 use App\Federation;
 use App\Http\Requests;
-use App\Http\Requests\FederationRequest;
+use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Http\Request;
 
 class AssociationController extends Controller
 {
     protected $currentModelName;
-    // Only Super Admin and Federation President can manage Federations
+    // Only Super Admin and Association President can manage Associations
 
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::with('president')->get(); // ,'vicepresident','secretary','treasurer','admin'
+        $associations = Association::with('president','federation.country')->get(); // ,'vicepresident','secretary','treasurer','admin'
         return view('associations.index', compact('associations'));
     }
 
@@ -34,7 +34,7 @@ class AssociationController extends Controller
      */
     public function show($id)
     {
-        $association = Federation::findOrFail($id);
+        $association = Association::findOrFail($id);
         return view('associations.show', compact('association'));
     }
 
@@ -46,10 +46,10 @@ class AssociationController extends Controller
      */
     public function edit($id)
     {
-        $association = Federation::findOrFail($id);
+        $association = Association::findOrFail($id);
         $users = User::where('country_id','=', $association->country_id)->get();
-
-        return view('associations.edit', compact('association','users'));
+        $federations = Federation::lists('name','id');;
+        return view('associations.edit', compact('association','users','federations'));
     }
 
     /**
@@ -59,10 +59,10 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FederationRequest $request, $id)
+    public function update(AssociationRequest $request, $id)
     {
 
-        $association = Federation::findOrFail($id);
+        $association = Association::findOrFail($id);
         $association->update($request->all());
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);
@@ -77,7 +77,7 @@ class AssociationController extends Controller
      */
     public function destroy($id)
     {
-        $association = Federation::findOrFail($id);
+        $association = Association::findOrFail($id);
         $association->delete();
         return redirect("associations");
     }

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-{!! Breadcrumbs::render('federations.edit',$federation) !!}
+{!! Breadcrumbs::render('federations.edit',$association) !!}
 
 @stop
 @section('content')
@@ -14,7 +14,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        {!! Form::model($federation, ['method'=>"PATCH", 'id'=>'form', "action" => ["FederationController@update", $federation->id]]) !!}
+        {!! Form::model($association, ['method'=>"PATCH", 'id'=>'form', "action" => ["AssociationController@update", $association->id]]) !!}
 
                 <!-- Simple panel 1 : General Data-->
 
@@ -35,32 +35,35 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
 
-                        {!!  Form::label('president', trans('core.federation.president'),['class' => 'text-bold' ]) !!}
-                        @if(sizeof($users)==0)
-                            {!!  Form::text('president_id', trans('core.federation.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
-
-                        @else
-                            {!!  Form::select('president_id', $users,$federation->president_id, ['class' => 'form-control']) !!}
-                        @endif
-
+                        {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                        {!!  Form::select('federation_id', $federations,$association->federation_id, ['class' => 'form-control']) !!}
 
 
                         <br/>
-                        {!!  Form::label('address', trans('core.federation.address'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('president', trans('core.association.president'),['class' => 'text-bold' ]) !!}
+                        @if(sizeof($users)==0)
+                            {!!  Form::text('president_id', trans('core.association.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+
+                        @else
+                            {!!  Form::select('president_id', $users,$association->president_id, ['class' => 'form-control']) !!}
+                        @endif
+
+
+                        <br/>
+                        {!!  Form::label('address', trans('core.association.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.federation.address') }}</span>
+                            <span class="input-group-addon">{{trans('core.association.address') }}</span>
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                             <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
                         </div>
 
                         <br/>
-                        {!!  Form::label('phone', trans('core.federation.phone'),['class' => 'text-bold' ]) !!}
-
+                        {!!  Form::label('phone', trans('core.association.phone'),['class' => 'text-bold' ]) !!}
 
 
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.federation.phone') }}</span>
+                            <span class="input-group-addon">{{trans('core.association.phone') }}</span>
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>
@@ -80,5 +83,5 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 </div>
 @stop
 @section('scripts_footer')
-{!! JsValidator::formRequest('App\Http\Requests\FederationRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\FederationRequest') !!}
 @stop

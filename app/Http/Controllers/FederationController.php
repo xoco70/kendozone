@@ -20,7 +20,7 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = Federation::with('president')->get(); // ,'vicepresident','secretary','treasurer','admin'
+        $federations = Federation::with('president','country')->get(); // ,'vicepresident','secretary','treasurer','admin'
         return view('federations.index', compact('federations'));
     }
 
@@ -46,7 +46,7 @@ class FederationController extends Controller
     public function edit($id)
     {
         $federation = Federation::findOrFail($id);
-        $users = User::where('country_id','=', $federation->country_id)->get();
+        $users = User::where('country_id','=', $federation->country_id)->lists('name','id');
 
         return view('federations.edit', compact('federation','users'));
     }

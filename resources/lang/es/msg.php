@@ -63,8 +63,11 @@ return [
 
 
     // Federation
-    'federation_edit_successful' => 'Federación <b>:name</b><br/> actualizada exitosamente',
+    'federation_edit_successful' => 'Federación <br/><b>:name</b><br/> actualizada exitosamente',
 
+
+    //Association
+    'association_edit_successful' => 'Associación <br/><b>:name</b><br/> actualizada exitosamente',
 
 
 ];
