@@ -19,9 +19,9 @@ class AssociationController extends Controller
 
     public function __construct()
     {
+        $this->middleware('association'); // , ['except' => ['index','show']]
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
-
 
     }
 

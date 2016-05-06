@@ -10,9 +10,9 @@ return [
     'RELATIVE_AVATAR_PATH' => 'images/avatar/',
 
     'ROLE_SUPERADMIN' => '1',
-    'ROLE_OWNER' => '2',
-    'ROLE_ADMIN' => '3',
-    'ROLE_PRESIDENT' => '4',
+    'ROLE_FEDERATION_PRESIDENT' => '2',
+    'ROLE_ASSOCIATION_PRESIDENT' => '3',
+    'ROLE_CLUB_PRESIDENT' => '4',
     'ROLE_USER' => '5',
 
     'CAT_FIGHTING_AREAS' => '1',

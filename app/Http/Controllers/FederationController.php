@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class FederationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('federation'); // , ['except' => ['index','show']]
+    }
+
+
+
     protected $currentModelName;
     // Only Super Admin can manage Federations
 

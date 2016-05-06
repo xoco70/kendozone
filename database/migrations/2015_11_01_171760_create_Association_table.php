@@ -14,7 +14,8 @@ class CreateAssociationTable extends Migration {
 			$table->integer('president_id')->unsigned();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();
-
+            $table->string('website')->nullable();
+            
 //			$table->integer('stateId')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();

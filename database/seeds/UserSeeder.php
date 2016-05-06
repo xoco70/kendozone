@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
         factory(User::class)->create(
             [   'name' => 'admin',
                 'email' => 'admin@kendozone.com',
-                'role_id' => Config::get('constants.ROLE_ADMIN'),
+                'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
                 'password' => bcrypt('111111'),
                 'verified' => 1,]);
 

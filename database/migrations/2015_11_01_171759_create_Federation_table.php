@@ -18,6 +18,8 @@ class CreateFederationTable extends Migration {
 //			$table->integer('treasurer_id')->unsigned()->nullable();
 //			$table->integer('admin_id')->unsigned()->nullable();
 			$table->integer('country_id')->unsigned();
+            $table->string('website')->nullable();
+
             // Direction, phone, contact
 
 			$table->timestamps();

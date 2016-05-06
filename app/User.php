@@ -342,17 +342,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isOwner()
     {
-        return $this->role_id == Config::get('constants.ROLE_OWNER');
+        return $this->role_id == Config::get('constants.ROLE_FEDERATION_PRESIDENT');
     }
 
     public function isAdmin()
     {
-        return $this->role_id == Config::get('constants.ROLE_ADMIN');
+        return $this->role_id == Config::get('constants.ROLE_ASSOCIATION_PRESIDENT');
     }
 
     public function isModerator()
     {
-        return $this->role_id == Config::get('constants.ROLE_PRESIDENT');
+        return $this->role_id == Config::get('constants.ROLE_CLUB_PRESIDENT');
     }
 
     public function isUser()
@@ -391,7 +391,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($federation == null)
             return ($this->isOwner());
         else
-            return ($this->id == $federation->president_id);
+            return ($this->isOwner() && $this->id == $federation->president_id);
     }
 
     public function isAssociationPresident($association = null)
@@ -399,7 +399,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($association == null)
             return ($this->isAdmin());
         else
-            return ($this->id == $association->president_id);
+            return ($this->isAdmin() && $this->id == $association->president_id);
     }
 
     public function isClubPresident($club = null)
@@ -407,6 +407,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($club == null)
             return ($this->isModerator());
         else
-            return ($this->id == $club->president_id);
+            return ($this->isModerator() && $this->id == $club->president_id);
     }
 }

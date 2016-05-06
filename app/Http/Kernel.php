@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //        Middleware\VerifyCsrfToken::class,
         Middleware\Own::class,
-        Middleware\LocaleMiddleware::class,
+//        Middleware\FederationMiddleware::class,
 
 
 //        'throttle:60,1',
@@ -36,6 +36,8 @@ class Kernel extends HttpKernel
         'guest' => Middleware\RedirectIfAuthenticated::class,
         'roles' => Middleware\CheckRole::class,
         'own' => Middleware\Own::class,
+        'federation' => Middleware\FederationMiddleware::class,
+        'association' => Middleware\AssociationMiddleware::class,
         'root' => Middleware\SuperAdmin::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 //        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
