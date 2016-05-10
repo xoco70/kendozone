@@ -1,7 +1,6 @@
 <?php
 
 use App\Federation;
-use App\User;
 use Illuminate\Database\Seeder;
 
 class FederationSeeder extends Seeder
@@ -68,7 +67,7 @@ class FederationSeeder extends Seeder
         Federation::create(['name' => 'South African Kendo Federation', 'president_id' => '1', 'address' => 'P.O. BOX 785577, Sandton, Johanesburg, South Africa, 2146', 'phone' => '27-82-389-9098', 'country_id' => '710','website' => 'www.sakf.co.za']); //
 
         //Oceania
-        Federation::create(['name' => 'Australian Kendo Renmei Incorporated', 'president_id' => '1', 'address' => ' PO Box 353, North Carlton, VIC 3054, Australia', 'phone' => '', 'country_id' => '36','website' => 'www.kendoaustralia.asn.au']); //
+        Federation::create(['name' => 'Australian Kendo Renmei Incorporated', 'president_id' => '1', 'address' => ' PO Box 353, North Carlton, VIC 3054, Australia', 'phone' => '-', 'country_id' => '36','website' => 'www.kendoaustralia.asn.au']); //
         Federation::create(['name' => 'New Zealand Kendo Federation', 'president_id' => '1', 'address' => '82a Bay Rd., St. Heliers, Aukland, New Zealand', 'phone' => '64-21-274-2415', 'country_id' => '554','website' => 'www.kendo.org.nz']); //
 
     }
