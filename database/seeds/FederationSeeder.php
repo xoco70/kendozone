@@ -51,6 +51,25 @@ class FederationSeeder extends Seeder
         Federation::create(['name' => 'Croatian Kendo Assosiation', 'president_id' => '1', 'address' => 'Sestinski dol 8 b, 10000 Zagreb, Croatia', 'phone' => '385-1-33 67 219', 'country_id' => '191','website' => 'http://www.kendo.hr']); //
         Federation::create(['name' => 'Kendo zveza Slovenije/Kendo Federation of Slovenia', 'president_id' => '1', 'address' => 'Topolsica 27, SI-3326 Topolsica Slovenia', 'phone' => '386-40-629-622', 'country_id' => '705','website' => 'http://www.kendo-zveza.si']); //
         Federation::create(['name' => 'Turkish Kendo Association', 'president_id' => '1', 'address' => 'Uzuncair Sok. Detay Apt. No:14 D:6, Uskudar-Acibadem Istanbul-Turkey 34660', 'phone' => '90-5322139862', 'country_id' => '792','website' => '']); //
-        // America 
+        // America
+        Federation::create(['name' => 'All United States Kendo Federation', 'president_id' => '1', 'address' => 'C/O Mr. Yoshiteru TAGAWA, AUSKF president, 41444 Fawn Trail, Novi, Michigan, 48375-4813 USA', 'phone' => '1-248-349-5377', 'country_id' => '840','website' => 'www.AUSKF.INFO']); //
+        Federation::create(['name' => 'Hawaii Kendo Federation', 'president_id' => '1', 'address' => 'c/o Ms. Kathleen Nekomoto 775 Kinalau place #2006 Honolulu, Hawaii 96813', 'phone' => '1-808-551-9892', 'country_id' => '840','website' => 'www.hawaiikendo.com']); //
+        Federation::create(['name' => 'Canadian Kendo Federation', 'president_id' => '1', 'address' => '65,Saint-Paul Street west, Apt 610 Montreal, QC, Canada H2Y 3S5', 'phone' => '1-514-844-469', 'country_id' => '124','website' => 'http://kendo-canada.com/']); //
+        Federation::create(['name' => 'Mexican Kendo Federation', 'president_id' => '1', 'address' => 'C/O Mr. Ing. Jesus Maya Martinez, President, Mexican Kendo Federation Av. Rio Churrubusco puerta 9 , entre Anily Viaducto Rio de la Piedad, col. Magdalena Mixihuca, Iztacalco, 08010, Mexico D.F, Mexico', 'phone' => '52-4455-4339-0414', 'country_id' => '484','website' => 'www.kendo.mx']); //
+        Federation::create(['name' => 'Brazilian Kendo Confederation', 'president_id' => '1', 'address' => 'c/o Mr. C.Kogima, Rua Monsenhor Basillo Pereira, 271 Parque Jabaquara- Sao Paulo- Brazil, 04343-090', 'phone' => '55-11-9-5584-6291', 'country_id' => '76','website' => 'www.cbkendo.esp.br']); //
+        Federation::create(['name' => 'Federacion Argentina de Kendo', 'president_id' => '1', 'address' => 'Mr. Francisco SCARAMELLINI, Quintana 1740 CP 3400 Corrientes Argentina', 'phone' => '54-379-4427362', 'country_id' => '32','website' => 'www.kendoargentina.org']); //
+        Federation::create(['name' => 'Federacion Venezolana de Kendo', 'president_id' => '1', 'address' => 'Mr. Ariel Pintos, Calle Cuyuni, Quinta Maral, Colinas de Bello Monte, Caracas 1051, Venezuela, Sur America', 'phone' => '58-212-7533226', 'country_id' => '862','website' => 'www.fvkendo.com']); //
+        Federation::create(['name' => 'Kendo Aruba/Bun Bu Itchi ', 'president_id' => '1', 'address' => 'c/o Mr. S. A. Velasquez, Mazurka 13, Cunucu Abao, Aruba (Dutch Caribbean)', 'phone' => '297-5-873974', 'country_id' => '533','website' => 'www.kendoaruba.com']); //
+        Federation::create(['name' => 'Chilean Kendo Federation', 'president_id' => '1', 'address' => 'Avenida Providencia 2528, local 210. Providencia, Santiago, Chile, 7510007', 'phone' => '56-09-8755-3369', 'country_id' => '152','website' => 'www.kendo.cl']); //
+        Federation::create(['name' => 'Federation Dominicana de Kendo', 'president_id' => '1', 'address' => 'Calle Caonabo 66 Edificio Raycarlos 102 Gazcue, Santo Domingo, Dominican Republic', 'phone' => '809-224-0457', 'country_id' => '214','website' => 'www.cbnintl.com']); //
+        Federation::create(['name' => 'Asociacion Ecuatoriana de Kendo', 'president_id' => '1', 'address' => 'P.O.Box 17-07-9024, Quito,Ecuador', 'phone' => '593-2-2431-285', 'country_id' => '218','website' => 'http://kendoecuador.org']); //
+        // Africa
+
+        Federation::create(['name' => 'South African Kendo Federation', 'president_id' => '1', 'address' => 'P.O. BOX 785577, Sandton, Johanesburg, South Africa, 2146', 'phone' => '27-82-389-9098', 'country_id' => '710','website' => 'www.sakf.co.za']); //
+
+        //Oceania
+        Federation::create(['name' => 'Australian Kendo Renmei Incorporated', 'president_id' => '1', 'address' => ' PO Box 353, North Carlton, VIC 3054, Australia', 'phone' => '', 'country_id' => '36','website' => 'www.kendoaustralia.asn.au']); //
+        Federation::create(['name' => 'New Zealand Kendo Federation', 'president_id' => '1', 'address' => '82a Bay Rd., St. Heliers, Aukland, New Zealand', 'phone' => '64-21-274-2415', 'country_id' => '554','website' => 'www.kendo.org.nz']); //
+
     }
 }
