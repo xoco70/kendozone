@@ -49,7 +49,7 @@
             </li>
 
             <li class="dropdown dropdown-user">
-                <a class="dropdown-toggle" data-toggle="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                     @if(Auth::check())
                         <img src="{!! Auth::getUser()->avatar !!}" alt="kendozone_avatar">
                         <span>{!! Auth::getUser()->name !!}</span>
@@ -63,14 +63,14 @@
 
                         <li>
                             <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"
-                               href="{!! URL::action('FederationController@index') !!}"><i
+                               href="{!! URL::action('FederationController@index') !!}" id="federations"><i
                                         class="icon-starburst position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
                             </a>
                         </li>
                     @endif
                     @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
                         <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"
+                            <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}" id="associations"
                                href="{!! URL::action('AssociationController@index') !!}"><i
                                         class="icon-cube position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
                             </a>

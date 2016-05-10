@@ -21,6 +21,7 @@
                     @lang('core.addModel', ['currentModelName' => $currentModelName])
                 </a>
             </span>
+
             @endif
             <table class="table table-togglable table-hover">
                 <thead>
@@ -49,7 +50,8 @@
                         <td align="center">{{ $association->phone }}</td>
                         <td align="center"><img src="images/flags/{{ $association->federation->country->flag }}"/></td>
                         <td align="center">
-                            <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i class="icon icon-pencil7"></i></a>
+                            <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i
+                                        class="icon icon-pencil7"></i></a>
                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteAssociation', 'action' => ['AssociationController@destroy', $association->id], 'style'=>"display: inline-block"]) !!}
                             {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteAssociation', 'id'=>'delete_'.$association->id, 'data-id' => $association->id ] ) !!}
                             {!! Form::close() !!}
@@ -72,7 +74,7 @@
     {!! Html::script('js/pages/header/footable.js') !!}
 
     <script>
-        var url ="{{ URL::action('AssociationController@index') }}";
+        var url = "{{ URL::action('AssociationController@index') }}";
     </script>
     {!! Html::script('js/pages/footer/associationIndexFooter.js') !!}
 @stop

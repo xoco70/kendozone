@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use View;
 
@@ -37,7 +38,11 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::with('president','federation.country')->get(); // ,'vicepresident','secretary','treasurer','admin'
+        $associations = Association::with('president', 'federation.country')
+        ->whereHas('federation', function($query) {
+            $query->where('president_id', Auth::user()->id);
+        })->get();
+
         return view('associations.index', compact('associations'));
     }
 

@@ -1,13 +1,8 @@
 <?php
-use App\CategorySettings;
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
+use App\Association;
 use App\Federation;
-use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
 
 /**
  * List of Federation Test
@@ -19,7 +14,7 @@ use Illuminate\Support\Facades\Lang;
  * Date: 10/11/2015
  * Time: 23:14
  */
-class FederationTest extends TestCase
+class AssociationTest extends TestCase
 {
     use DatabaseTransactions;
 //    use WithoutMiddleware;
@@ -47,19 +42,30 @@ class FederationTest extends TestCase
      *
      * a user must be superAdmin to access federation
      */
-    public function only_superAdmin_can_access_federations()
+    public function superAdmin_can_see_create_update_delete_association()
     {
-        foreach ($this->stateUsers as $user) {
-            $this->logWithUser($user);
-            $this->visit("/")
-                ->dontSee('federations');
-            $this->visit("/federations")
-                ->see('403');
-        }
+        // Create
+
+
+        // Update
+        $association = factory(Association::class)->create();
+
         $this->logWithUser($this->root);
         $this->visit("/")
-            ->click("federations")
-            ->dontSee('403');
+            ->click('associations')
+            ->type('MyAssociation', 'name')
+            ->type('MyAdress', 'address')
+            ->type('5555555555', 'phone')
+            ->press(trans('core.save'))
+            ->seePageIs('/associations')
+            ->seeInDatabase('association',
+                ['id' => $association->id,
+                    'name' => 'MyAssociation',
+                    'address' => 'MyAdress',
+                    'phone' => '5555555555',
+
+                ]);
+
 
     }
 
@@ -91,4 +97,5 @@ class FederationTest extends TestCase
 
                 ]);
     }
+
 }

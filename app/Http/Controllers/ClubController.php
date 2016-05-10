@@ -28,10 +28,6 @@ class ClubController extends Controller
     }
 
 
-
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +35,29 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $clubs = Club::with('president')->get(); // ,'vicepresident','secretary','treasurer','admin'
+        $clubs = Club::with('president');
+
+        if (!Auth::user()->isSuperAdmin()) {
+            $clubs->whereHas('association.federation', function ($query) {
+                $query->where('president_id', Auth::user()->id);
+            });
+        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
+            $clubs->whereHas('association.federation', function ($query) {
+                $query->where('president_id', Auth::user()->id);
+            });
+        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident() && !Auth::user()->isAssociationPresident()) {
+            $clubs->whereHas('association', function ($query) {
+                if (Auth::user()->isAssociationPresident()) {
+                    $query->where('president_id', Auth::user()->id);
+                }
+            });
+        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident() && !Auth::user()->isAssociationPresident() && !Auth::user()->isClubPresident()) {
+            $clubs->where('president_id', '=', Auth::user()->id);
+        }
+
+        $clubs = $clubs->get();
+//            ->get();
+
         return view('clubs.index', compact('clubs'));
     }
 
@@ -55,7 +73,7 @@ class ClubController extends Controller
         $users = User::lists('name', 'id');; // TODO BADDDDD
         $associations = Association::lists('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('clubs.form', compact('club','users', 'associations', 'submitButton')); //
+        return view('clubs.form', compact('club', 'users', 'associations', 'submitButton')); //
     }
 
     /**
@@ -98,7 +116,7 @@ class ClubController extends Controller
         $club = Club::findOrFail($id);
         $users = User::lists('name', 'id');; // TODO BADDDDD
         $associations = Association::lists('name', 'id');
-        return view('clubs.form', compact('club','users','associations')); //
+        return view('clubs.form', compact('club', 'users', 'associations')); //
     }
 
     /**
