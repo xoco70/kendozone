@@ -62,27 +62,32 @@
                     @if (Auth::user()->isSuperAdmin())
 
                         <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}" href="{!! URL::action('FederationController@index') !!}"><i
+                            <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"
+                               href="{!! URL::action('FederationController@index') !!}"><i
                                         class="icon-starburst position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
                             </a>
                         </li>
+                    @endif
+                    @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
                         <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}" href="{!! URL::action('AssociationController@index') !!}"><i
+                            <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"
+                               href="{!! URL::action('AssociationController@index') !!}"><i
                                         class="icon-cube position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
                             </a>
                         </li>
-
-                        <li>
-                        <a class="protip" data-pt-title="{{ trans('core.clubs') }}" href="{!! URL::action('ClubController@index') !!}"><i
-                        class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
-                        </a>
-                        </li>
+                        @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident() || Auth::user()->isAssociationPresident())
+                            <li>
+                                <a class="protip" data-pt-title="{{ trans('core.clubs') }}"
+                                   href="{!! URL::action('ClubController@index') !!}"><i
+                                            class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{ URL::action('UserController@index') }} ">
                                 <i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
                             </a>
                         </li>
-
                     @endif
                     <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
