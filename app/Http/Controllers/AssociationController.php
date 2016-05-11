@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use View;
@@ -27,10 +28,6 @@ class AssociationController extends Controller
     }
 
 
-
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -39,11 +36,11 @@ class AssociationController extends Controller
     public function index()
     {
         $associations = Association::with('president', 'federation.country')
-        ->whereHas('federation', function($query) {
-            if (!Auth::user()->isSuperAdmin()){
-                $query->where('president_id', Auth::user()->id);
-            }
-        })->get();
+            ->whereHas('federation', function ($query) {
+                if (!Auth::user()->isSuperAdmin()) {
+                    $query->where('president_id', Auth::user()->id);
+                }
+            })->get();
 
         return view('associations.index', compact('associations'));
     }
@@ -57,13 +54,24 @@ class AssociationController extends Controller
     public function create()
     {
         $association = new Association;
-        if(Auth::user()->isFederationPresident()){
-            $association->federation_id =  Auth::user()->federation->id;
+        $federations = new Collection;
+        $federation = new Federation;
+
+        if (Auth::user()->isFederationPresident()) {
+            $federation = Auth::user()->federationOwned;
+            if ($federation == null) {
+                return "You don't have an associated Federation";
+            }
+            $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
+        } else {
+            // User is SuperAdmin
+            $users = User::lists('name', 'id'); //TODO Should be list of user which belongs to association
+            $federations = Federation::lists('name', 'id');
         }
-        $users = User::where('country_id','=', $association->country_id)->get();
-        $federations = Federation::lists('name', 'id');
+
+
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('associations.form', compact('association','users', 'federations', 'submitButton')); //
+        return view('associations.form', compact('association', 'users', 'federation','federations', 'submitButton')); //
     }
 
     /**
@@ -91,6 +99,7 @@ class AssociationController extends Controller
      */
     public function show($id)
     {
+
         $association = Association::findOrFail($id);
         return view('associations.show', compact('association'));
     }
@@ -104,9 +113,10 @@ class AssociationController extends Controller
     public function edit($id)
     {
         $association = Association::findOrFail($id);
-        $users = User::where('country_id','=', $association->federation->country_id)->lists('name','id');
-        $federations = Federation::lists('name','id');;
-        return view('associations.form', compact('association','users','federations'));
+        $users = User::where('country_id', '=', $association->federation->country_id)->lists('name', 'id');
+        $federations = Federation::lists('name', 'id');
+        $federation = $association->federation;
+        return view('associations.form', compact('association', 'users', 'federations','federation'));
     }
 
     /**
@@ -160,7 +170,8 @@ class AssociationController extends Controller
     }
 
 
-    public function changePresident(){
+    public function changePresident()
+    {
         // Open Transaction
         // Get the current president
         // Set the new president

@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-{!! Breadcrumbs::render('associations.edit',$association) !!}
+@if (isset($association->id))
+    {!! Breadcrumbs::render('associations.edit',$association) !!}
+@else
+    {!! Breadcrumbs::render('associations.create') !!}
+@endif
+
 
 @stop
 @section('content')
@@ -45,12 +50,13 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         </div>
 
                         @if (Auth::user()->isSuperAdmin())
+
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::select('federation_id', $federations,$association->federation_id, ['class' => 'form-control']) !!}
+                            {!!  Form::select('federation_id', $federations,$federation->id, ['class' => 'form-control']) !!}
                         @elseif (Auth::user()->isFederationPresident())
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::select('federation', $federations,$association->federation_id, ['class' => 'form-control disabled', 'disabled']) !!}
-                            {!!  Form::hidden('federation_id', $association->federation->id) !!}
+                            {!!  Form::text('federation',$federation->name, ['class' => 'form-control disabled', 'disabled']) !!}
+                            {!!  Form::hidden('federation_id', $federation->id) !!}
                         @endif
 
 
@@ -61,7 +67,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             {!!  Form::hidden('president_id', 1) !!}
 
                         @else
-                            {!!  Form::select('president_id', $users,$association->president_id, ['class' => 'form-control']) !!}
+                            {!!  Form::select('president_id', $users,old('president_id'), ['class' => 'form-control']) !!}
                         @endif
 
 

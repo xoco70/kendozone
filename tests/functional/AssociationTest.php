@@ -52,14 +52,27 @@ class AssociationTest extends TestCase
      *
      * a user must be superAdmin to access federation
      */
+    //TODO HABRIA QUE FACTORISAR FUNCTION ROOT AND FP
     public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
     {
         $this->logWithUser($this->federationPresident);
 
-        $federation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
-        factory(Association::class)->create(['federation_id' => $federation->id]); // We create one so that there is
-        $association = factory(Association::class)->make(['federation_id' => $federation->id]);
+        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
+        $hisFederation = factory(Federation::class)->create(['president_id' => 3]);
 
+
+        // SEE FP Can see only his assoc
+        $myAssoc = factory(Association::class)->create(['federation_id' => $myFederation->id]); // We create one so that there is
+        $notMyAssoc = factory(Association::class)->create(['federation_id' => $hisFederation->id]); // We create one so that there is
+
+        $this->visit("/")
+            ->click('associations')
+            ->see($myAssoc->name)
+            ->dontSee($notMyAssoc->name);
+
+        $association = factory(Association::class)->make(['federation_id' => $myFederation->id]);
+
+        // CREATE
         // When creating an association, Federation must be disabled
         $this->visit("/")
             ->click('associations')
@@ -68,28 +81,41 @@ class AssociationTest extends TestCase
         $this->type($association->name, 'name')
             ->type($association->address, 'address')
             ->type($association->phone, 'phone')
-            ->seeElement('select',['name' => 'federation', 'disabled'])
-            ->seeElement('input',['name' => 'federation_id', 'type' => 'hidden' ]);
-//            ->press(trans('core.save'));
-//            ->seePageIs('/associations')
-//            ->seeInDatabase('association',
-//                ['name' => $association->name,
-//                    'address' => $association->address,
-//                    'phone' => $association->phone,
-//                ]);
+            ->seeElement('input',['name' => 'federation', 'disabled'=>'disabled'])
+            ->seeElement('input',['name' => 'federation_id', 'type' => 'hidden' ])
+            ->press(trans('core.save'))
+            ->seePageIs('/associations')
+            ->seeInDatabase('association',
+                ['name' => $association->name,
+                    'address' => $association->address,
+                    'phone' => $association->phone,
+                ]);
 
+        $association = Association::where('name', $association->name)
+            ->where('address', $association->address)
+            ->where('phone', $association->phone)
+            ->first();
+
+
+        //EDIT
+        $this->click($association->name);
+        $association->name = "MyAssociation2";
+        $association->address = "MyAdress2";
+        $association->phone = "6666666666";
+        $this->fillAssociationData($association);
+
+        $this->press("delete_" . $association->id)
+            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
 
     }
 
-    public function crud(User $user,Association $association)
+    public function crud(User $user, Association $association)
     {
-
-
         $this->visit("/")
             ->click('associations')
             ->click('addAssociation');
 
-        $this->fillAssociationData($association);
+        $this->fillAssociationData($user,$association);
         $association = Association::where('name', 'MyAssociation')
             ->where('address', 'MyAdress')
             ->where('phone', '55555')

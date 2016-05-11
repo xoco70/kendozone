@@ -305,15 +305,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(Association::class,'president_id');
     }
 
-//    public function federation()
-//    {
-//        return $this->belongsTo(Federation::class);
-//    }
 
     // A president of federation owns a federation
-    public function federation()
+    public function federationOwned()
     {
-        return $this->belongsTo(Federation::class,'president_id');
+        return $this->belongsTo(Federation::class,'id','president_id');
     }
 
     public function club()

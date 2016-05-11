@@ -27,6 +27,13 @@ Breadcrumbs::register('associations.index', function ($breadcrumbs) {
     $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
 });
 
+Breadcrumbs::register('associations.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('associations.index');
+    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => trans_choice('core.association',1)]), route('associations.create'));
+
+});
+
+
 Breadcrumbs::register('associations.edit', function ($breadcrumbs, $association) {
     $breadcrumbs->parent('associations.index');
     if (Auth::user()->isFederationPresident($association->federation) || Auth::user()->isAssociationPresident($association)) {
@@ -53,7 +60,6 @@ Breadcrumbs::register('clubs.edit', function ($breadcrumbs, $club) {
     }
 
 });
-
 
 
 // Home > Tournaments
