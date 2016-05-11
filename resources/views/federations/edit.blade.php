@@ -27,6 +27,8 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                     <fieldset title="{{Lang::get('core.general_data')}}">
                         <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
+                        <h2><img src = "/images/flags/{{ $federation->country->flag}}">{{ $federation->country->name }}</h2>
+                        <br/>
 
                         <div class="form-group">
                             {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
@@ -64,6 +66,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>
+
 
                     </fieldset>
 

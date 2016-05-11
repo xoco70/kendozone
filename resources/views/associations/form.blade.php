@@ -44,8 +44,14 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
 
-                        {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('federation_id', $federations,$association->federation_id, ['class' => 'form-control']) !!}
+                        @if (Auth::user()->isSuperAdmin())
+                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::select('federation_id', $federations,$association->federation_id, ['class' => 'form-control']) !!}
+                        @elseif (Auth::user()->isFederationPresident())
+                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::select('federation', $federations,$association->federation_id, ['class' => 'form-control disabled', 'disabled']) !!}
+                            {!!  Form::hidden('federation_id', $association->federation->id) !!}
+                        @endif
 
 
                         <br/>

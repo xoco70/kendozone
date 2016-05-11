@@ -16,7 +16,7 @@
 
             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
                 <span class="pl-10 pull-right">
-                <a href="{!!   URL::action('AssociationController@create') !!}"
+                <a href="{!!   URL::action('AssociationController@create') !!}" id="addAssociation"
                    class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
                     @lang('core.addModel', ['currentModelName' => $currentModelName])
                 </a>

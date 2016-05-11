@@ -78,7 +78,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'verified' => true,
         'remember_token' => str_random(10),
         'provider' => '',
-        'provider_id' => str_random(5)
+        'provider_id' => str_random(5),
+        'locale' => $faker->randomElement(['es','en'])
 
     ];
 });

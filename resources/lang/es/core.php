@@ -219,8 +219,6 @@ return [
     'operation_successful' => ' Operación exitosa',
     'operation_failed' => ' Hubo un problema',
     'save' => 'Guardar',
-    'edit' => 'Editar',
-    'delete' => 'Borrar',
     'help' => 'Ayuda',
     'type' => 'Tipo',
     'open' => 'Abierto',
@@ -233,8 +231,6 @@ return [
     // Left menu
     'lastlogin' => 'Ultima conexión',
     'users' => 'Usuarios',
-    'state' => 'Estado',
-    'country' => 'País',
     'statistics' => 'Estadisticas',
 
     // Right Menu

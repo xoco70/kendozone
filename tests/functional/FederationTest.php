@@ -75,20 +75,28 @@ class FederationTest extends TestCase
 
         $this->logWithUser($this->root);
 
+
+
         $this->visit("/federations")
             ->click($federation->name)
             ->seePageIs('/federations/' . $federation->id . '/edit')
-            ->type('MyFederation', 'name')
-            ->type('MyAdress', 'address')
-            ->type('5555555555', 'phone')
+            ->fillFederationData($federation);
+
+    }
+
+
+
+    private function fillFederationData(Federation $federation) //TODO Country??? President???
+    {
+        $this->type($federation->name, 'name')
+            ->type($federation->address, 'address')
+            ->type($federation->phone, 'phone')
             ->press(trans('core.save'))
             ->seePageIs('/federations')
             ->seeInDatabase('federation',
-                ['id' => $federation->id,
-                    'name' => 'MyFederation',
-                    'address' => 'MyAdress',
-                    'phone' => '5555555555',
-
+                ['name' => $federation->name,
+                    'address' => $federation->address,
+                    'phone' => $federation->phone,
                 ]);
     }
 }

@@ -17,8 +17,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class AssociationTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
-
 
     protected $user, $users, $root, $simpleUser, $clubPresident, $associationPresident, $federationPresident; // $addUser,  $editUser,
     protected $mortalUsers, $stateUsers, $clubUsers;
@@ -38,64 +36,99 @@ class AssociationTest extends TestCase
 
     }
 
+
     /** @test
      *
-     * a user must be superAdmin to access federation
+     * superAdmin can do everything
      */
     public function superAdmin_can_see_create_update_delete_association()
     {
-        // Create
-
-
-        // Update
-        $association = factory(Association::class)->create();
-
         $this->logWithUser($this->root);
-        $this->visit("/")
-            ->click('associations')
-            ->type('MyAssociation', 'name')
-            ->type('MyAdress', 'address')
-            ->type('5555555555', 'phone')
-            ->press(trans('core.save'))
-            ->seePageIs('/associations')
-            ->seeInDatabase('association',
-                ['id' => $association->id,
-                    'name' => 'MyAssociation',
-                    'address' => 'MyAdress',
-                    'phone' => '5555555555',
-
-                ]);
-
-
+        $association = factory(Association::class)->make();
+        $this->crud($this->root, $association);
     }
 
     /** @test
      *
      * a user must be superAdmin to access federation
      */
-    public function it_can_edit_federation()
+    public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
+    {
+        $this->logWithUser($this->federationPresident);
+
+        $federation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
+        factory(Association::class)->create(['federation_id' => $federation->id]); // We create one so that there is
+        $association = factory(Association::class)->make(['federation_id' => $federation->id]);
+
+        // When creating an association, Federation must be disabled
+        $this->visit("/")
+            ->click('associations')
+            ->click('addAssociation');
+
+        $this->type($association->name, 'name')
+            ->type($association->address, 'address')
+            ->type($association->phone, 'phone')
+            ->seeElement('select',['name' => 'federation', 'disabled'])
+            ->seeElement('input',['name' => 'federation_id', 'type' => 'hidden' ]);
+//            ->press(trans('core.save'));
+//            ->seePageIs('/associations')
+//            ->seeInDatabase('association',
+//                ['name' => $association->name,
+//                    'address' => $association->address,
+//                    'phone' => $association->phone,
+//                ]);
+
+
+    }
+
+    public function crud(User $user,Association $association)
     {
 
-        $federation = factory(Federation::class)->create();
 
+        $this->visit("/")
+            ->click('associations')
+            ->click('addAssociation');
 
-        $this->logWithUser($this->root);
+        $this->fillAssociationData($association);
+        $association = Association::where('name', 'MyAssociation')
+            ->where('address', 'MyAdress')
+            ->where('phone', '55555')
+            ->first();
+        // Update
 
-        $this->visit("/federations")
-            ->click($federation->name)
-            ->seePageIs('/federations/' . $federation->id . '/edit')
-            ->type('MyFederation', 'name')
-            ->type('MyAdress', 'address')
-            ->type('5555555555', 'phone')
+        $this->click($association->name);
+        $association->name = "MyAssociation2";
+        $association->address = "MyAdress2";
+        $association->phone = "6666666666";
+        $this->fillAssociationData($association);
+
+        // Delete
+
+        $this->press("delete_" . $association->id)
+            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
+    }
+
+    private function fillAssociationData(Association $association) //TODO I don't have here to change president
+    {
+        $this->type($association->name, 'name')
+            ->type($association->address, 'address')
+            ->type($association->phone, 'phone')
             ->press(trans('core.save'))
-            ->seePageIs('/federations')
-            ->seeInDatabase('federation',
-                ['id' => $federation->id,
-                    'name' => 'MyFederation',
-                    'address' => 'MyAdress',
-                    'phone' => '5555555555',
-
+            ->seePageIs('/associations')
+            ->seeInDatabase('association',
+                ['name' => $association->name,
+                    'address' => $association->address,
+                    'phone' => $association->phone,
                 ]);
     }
 
+
+    /** @test
+     *
+     * a user must be superAdmin to access federation
+     */
+    private function changePresident(User $old, User $new)
+    {
+
+    }
 }

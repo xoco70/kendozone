@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
-
+        $countries = Countries::all()->pluck('id')->toArray();
         User::create([
             'name' => 'No User',
             'email' => 'nouser@nouser.com',
@@ -73,7 +73,15 @@ class UserSeeder extends Seeder
                 'role_id' => Config::get('constants.ROLE_USER'),
                 'password' => bcrypt('user'),
                 'verified' => 1,]);
-        
+
+        foreach ($countries as $country){
+            factory(User::class)->create(
+                [   'country_id' => $country,
+                    'verified' => 1]);
+        }
+
+
+
         $this->command->info('Users seeded!');
 
     }

@@ -77,7 +77,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return false;
             } else {
                 $user->token = str_random(30);
-                $user->addGeoData();
+                if ($user->country_id==0){
+                    $user->addGeoData();
+                }
+
 
             }
             return true;
