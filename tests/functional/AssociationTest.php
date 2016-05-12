@@ -45,14 +45,34 @@ class AssociationTest extends TestCase
     {
         $this->logWithUser($this->root);
         $association = factory(Association::class)->make();
-        $this->crud($association);
+
+        $this->visit("/")
+            ->click('associations')
+            ->click('addAssociation');
+
+        $this->fillAssociationData($association);
+        $association = Association::where('name', $association->name)
+            ->where('address', $association->address)
+            ->where('phone', $association->phone)
+            ->first();
+        // Update
+
+        $this->click($association->name);
+        $association->name = "MyAssociation2";
+        $association->address = "MyAdress2";
+        $association->phone = "6666666666";
+        $this->fillAssociationData($association);
+
+        // Delete
+
+        $this->press("delete_" . $association->id)
+            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
     }
 
     /** @test
      *
      * a user must be superAdmin to access federation
      */
-    //TODO HABRIA QUE FACTORISAR FUNCTION ROOT AND FP
     public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
     {
         $this->logWithUser($this->federationPresident);

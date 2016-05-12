@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\CategorySettings;
 use App\CategoryTournament;
+use App\Exceptions\InvitationNeededException;
 use App\Grade;
 use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
@@ -23,7 +24,11 @@ class TournamentController extends Controller
 {
     protected $currentModelName;
 
-
+    public function __construct()
+    {
+        $this->middleware('ownTournament', ['except' => ['index','show']]);
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -228,14 +233,7 @@ class TournamentController extends Controller
             // Tournament is open
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         } else
-            return view('errors.general',
-                ['code' => '403',
-                    'message' => trans('core.forbidden'),
-                    'quote' => trans('msg.invitation_needed'),
-                    'author' => 'Admin',
-                    'source' => '',
-                ]
-            );
+            throw new InvitationNeededException();
     }
 
     /**

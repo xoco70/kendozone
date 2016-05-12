@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\InvitationExpiredException;
+use App\Exceptions\InvitationNeededException;
+use App\Exceptions\InvitationNotActiveException;
 use App\Http\Requests;
 use App\Http\Requests\InviteRequest;
 use App\Invite;
@@ -9,10 +12,12 @@ use App\Mailers\AppMailer;
 use App\Tournament;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use URL;
 
 class InviteController extends Controller
@@ -68,22 +73,13 @@ class InviteController extends Controller
 
         // Check if invitation is expired
         $quote = null;
-        if (is_null($invite)) $quote = trans('msg.invitation_needed');
+        if (is_null($invite)) throw new InvitationNeededException();
         else {
-            if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00') $quote = trans('msg.invitation_expired');
-            if ($invite->active != 1) $quote = trans('msg.invitation_not_active');
+            if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00') throw new InvitationExpiredException();
+            if ($invite->active != 1) throw new InvitationNotActiveException();
         }
 
-
-        if (!is_null($quote))
-            return view('errors.general',
-                ['code' => '403',
-                    'message' => trans('core.forbidden'),
-                    'quote' => $quote,
-                    'author' => 'Admin',
-                    'source' => '',
-                ]
-            );
+        
         $currentModelName = trans('core.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
@@ -109,24 +105,10 @@ class InviteController extends Controller
         } else {
             $invite = Invite::where('code', $token)->first();
             if (is_null($invite)) {
-                return view('errors.general',
-                    ['code' => '403',
-                        'message' => trans('core.forbidden'),
-                        'quote' => trans('msg.invitation_needed'),
-                        'author' => 'Admin',
-                        'source' => '',
-                    ]
-                );
+                throw new InvitationNeededException();
 
             } else {
-                return view('errors.general',
-                    ['code' => '403',
-                        'message' => trans('core.forbidden'),
-                        'quote' => '',
-                        'author' => 'Admin',
-                        'source' => '',
-                    ]
-                );
+                throw new UnauthorizedException;
             }
         }
     }

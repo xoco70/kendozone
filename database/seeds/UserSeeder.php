@@ -74,11 +74,11 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('user'),
                 'verified' => 1,]);
 
-        foreach ($countries as $country){
-            factory(User::class)->create(
-                [   'country_id' => $country,
-                    'verified' => 1]);
-        }
+//        foreach ($countries as $country){
+//            factory(User::class)->create(
+//                [   'country_id' => $country,
+//                    'verified' => 1]);
+//        }
 
 
 

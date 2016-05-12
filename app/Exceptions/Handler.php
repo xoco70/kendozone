@@ -4,11 +4,13 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,28 +48,53 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof NotFoundHttpException) {
-            return response()->view('errors.general',
-                ['code' => '404',
-                    'message' => 'Not Found',
-                    'quote' => 'I will search for you through 1000 worlds and 10000 lifetimes!',
-                    'author' => 'Kai',
-                    'source' => '47 Ronin',
-                ]
-            );
-        }
-        else if ($e instanceof HttpException){
-            return response()->view('errors.general',
-                ['code' => '500',
-                    'message' => 'Server Error',
-                    'quote' => 'Failure is the key to success; each mistake teaches us something',
-                    'author' => 'Morihei Ueshiba',
-                    'source' => '',
-                ]
-            );
-        }
+        $code = "";
+        $message = "";
+        $quote = "";
+        $author = "";
+        $source = "";
 
-        return parent::render($request, $e);
+        switch ($e) {
+            case $e instanceof NotFoundHttpException:
+                $code = "404";
+                $message = "Not Found";
+                $quote = "I will search for you through 1000 worlds and 10000 lifetimes!";
+                $author = "Kai";
+                $source = "47 Ronin";
+                break;
+            case $e instanceof HttpException:
+                $code = "500";
+                $message = "Server Error";
+                $quote = "Failure is the key to success; each mistake teaches us something";
+                $author = "Morihei Ueshiba";
+                $source = "";
+                break;
+            case $e instanceof UnauthorizedException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”';
+                $author = 'Tabitha Suzuma';
+                $source = trans('core.forbidden');
+                break;
+            case $e instanceof InvitationNeededException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = trans('msg.invitation_needed');
+                $author = "Admin";
+                $source = "";
+                break;
+            default:
+                return parent::render($request, $e);
+        }
+        return response()->view('errors.general',
+            ['code' => $code,
+                'message' => $message,
+                'quote' => $quote,
+                'author' => $author,
+                'source' => $source,
+            ]
+        );
+
     }
 }
 

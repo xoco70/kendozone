@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
+use Guzzle\Common\Collection;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -25,7 +27,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('ownUser', ['except' => ['index','show']]); 
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         $this->modelPlural = trans_choice('core.user', 1);
@@ -42,20 +44,13 @@ class UserController extends Controller
      */
     public function index()
     {
+//        $users = new Collection(User::class)  ;
         if (Auth::user()->isSuperAdmin()) {
             $users = User::with('country','role')->paginate(Config::get('constants.PAGINATION'));
-
-            return view('users.index', compact('users'));
-        } else {
-            return view('errors.general',
-                ['code' => '403',
-                    'message' => trans('core.forbidden'),
-                    'quote' => trans('msg.access_denied'),
-                    'author' => 'Admin',
-                    'source' => '',
-                ]
-            );
+        }else{
+            throw new UnauthorizedException();
         }
+        return view('users.index', compact('users'));
     }
 
     /**

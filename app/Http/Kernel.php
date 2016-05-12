@@ -2,7 +2,11 @@
 
 namespace App\Http;
 
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel
 {
@@ -12,17 +16,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        CheckForMaintenanceMode::class,
         Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        ShareErrorsFromSession::class,
 //        Middleware\VerifyCsrfToken::class,
-        Middleware\Own::class,
+        Middleware\OwnTournament::class,
         Middleware\LocaleMiddleware::class,
 //        Middleware\FederationMiddleware::class,
-
-
 //        'throttle:60,1',
     ];
 
@@ -33,13 +35,14 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+//        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => Middleware\RedirectIfAuthenticated::class,
         'roles' => Middleware\CheckRole::class,
-        'own' => Middleware\Own::class,
+        'ownTournament' => Middleware\OwnTournament::class,
+        'ownUser' => Middleware\OwnUser::class,
         'federation' => Middleware\FederationMiddleware::class,
         'association' => Middleware\AssociationMiddleware::class,
-        'root' => Middleware\SuperAdmin::class,
+//        'root' => Middleware\SuperAdmin::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 //        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
 //        'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

@@ -59,7 +59,7 @@ Route::get('/', 'DashboardController@index')->middleware(['auth']);
 
 Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
-Route::group(['middleware' => ['auth', 'own',]], // 'throttle:100,1'
+Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
         Route::resource('federations', 'FederationController');
         Route::resource('associations', 'AssociationController');

@@ -219,7 +219,7 @@ class TournamentTest extends TestCase
     }
 
     /** @test */
-    public function you_must_own_tournament_to_edit_it_or_be_superuser()
+    public function you_must_own_tournament_or_be_superuser_to_edit_it()
     {
         $root =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $user =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
