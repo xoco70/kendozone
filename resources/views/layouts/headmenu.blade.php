@@ -75,26 +75,61 @@
                                         class="icon-cube position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
                             </a>
                         </li>
-                        @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident() || Auth::user()->isAssociationPresident())
-                            <li>
-                                <a class="protip" data-pt-title="{{ trans('core.clubs') }}"
-                                   href="{!! URL::action('ClubController@index') !!}"><i
-                                            class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
-                                </a>
-                            </li>
-                        @endif
+                    @endif
+                    @if (!Auth::user()->isUser() && !Auth::user()->isClubPresident())
+                        <li>
+                            <a class="protip" data-pt-title="{{ trans('core.clubs') }}"
+                               href="{!! URL::action('ClubController@index') !!}"><i
+                                        class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (!Auth::user()->isUser())
                         <li>
                             <a href="{{ URL::action('UserController@index') }} ">
                                 <i class="icon-users"></i> {!! trans_choice('core.user',2) !!}
                             </a>
                         </li>
                     @endif
+
                     <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
+
+
+                    {{--Link to directly edit your structure information--}}
+                    @if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned!=null)
+                        <li>
+                            <a href="{{  URL::action('FederationController@edit', Auth::user()->federationOwned->id ) }}">
+                                <i
+                                        class="icon-starburst"></i>{{  Auth::user()->federationOwned->name }}
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned!=null)
+                        <li>
+                            <a href="{{  URL::action('AssociationController@edit', Auth::user()->associationOwned->id ) }}">
+                                <i
+                                        class="icon-starburst"></i>{{  Auth::user()->associationOwned->name }}
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->isClubPresident() && Auth::user()->clubOwned!=null)
+                        <li>
+                            <a href="{{  URL::action('ClubController@edit', Auth::user()->clubOwned->id ) }}">
+                                <i
+                                        class="icon-starburst"></i>{{  Auth::user()->clubOwned->name }}
+                            </a>
+                        </li>
+                    @endif
+
+
+                    {{--====================================== Logout ======================================--}}
                     <li class="divider"></li>
                     <li><a href="{{  URL::action('Auth\AuthController@getLogout') }}"><i
                                     class="icon-switch2"></i> {!! Lang::get('core.logout') !!}
-                        </a></li>
+                        </a>
+                    </li>
+
 
                 </ul>
             </li>
