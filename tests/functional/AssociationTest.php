@@ -45,7 +45,7 @@ class AssociationTest extends TestCase
     {
         $this->logWithUser($this->root);
         $association = factory(Association::class)->make();
-        $this->crud($this->root, $association);
+        $this->crud($association);
     }
 
     /** @test
@@ -109,16 +109,16 @@ class AssociationTest extends TestCase
 
     }
 
-    public function crud(User $user, Association $association)
+    public function crud(Association $association)
     {
         $this->visit("/")
             ->click('associations')
             ->click('addAssociation');
 
-        $this->fillAssociationData($user,$association);
-        $association = Association::where('name', 'MyAssociation')
-            ->where('address', 'MyAdress')
-            ->where('phone', '55555')
+        $this->fillAssociationData($association);
+        $association = Association::where('name', $association->name)
+            ->where('address', $association->address)
+            ->where('phone', $association->phone)
             ->first();
         // Update
 
@@ -149,12 +149,12 @@ class AssociationTest extends TestCase
     }
 
 
-    /** @test
-     *
-     * a user must be superAdmin to access federation
-     */
-    private function changePresident(User $old, User $new)
-    {
-
-    }
+//    /** @test
+//     *
+//     * a user must be superAdmin to access federation
+//     */
+//    public function changePresident(User $old, User $new)
+//    {
+//
+//    }
 }

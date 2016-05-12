@@ -66,10 +66,10 @@ return [
 
         'mysql_test' => [
             'driver'    => 'mysql',
-            'host'      => env('DBTEST_HOST', '127.0.0.1'),
-            'database'  => env('DBTEST_DATABASE', 'kendo_test'),
-            'username'  => env('DBTEST_USERNAME', 'homestead'),
-            'password'  => env('DBTEST_PASSWORD', 'secret'),
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'database'  => env('DB_DATABASE_TESTING', 'kendo_test'),
+            'username'  => env('DB_USERNAME', 'homestead'),
+            'password'  => env('DB_PASSWORD', 'secret'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => 'test_',

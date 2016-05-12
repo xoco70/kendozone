@@ -55,21 +55,6 @@ class TournamentTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_denies_editing_an_invalid_tournament()
-    {
-
-        $tournament = factory(Tournament::class)->create();
-
-        $this->visit('/tournaments/' . $tournament->slug . '/edit')
-            ->see(trans_choice('core.tournament', 2))
-            ->type('1111', 'name')
-            ->press(trans('core.save'))
-            ->see(trans('validation.filled', ['attribute' => "category"]))//
-            ->notSeeInDatabase('tournament',
-                ['name' => '1111',
-                ]);
-    }
 
     /** @test */
     public function mustBeAuthenticated()
