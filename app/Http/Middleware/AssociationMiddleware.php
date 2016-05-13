@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Association;
 use Closure;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Support\Facades\Auth;
 
 class AssociationMiddleware
@@ -17,25 +18,17 @@ class AssociationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $errorResponse = response(view('errors.general',
-            ['code' => '403',
-                'message' => trans('core.forbidden'),
-                'quote' => '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”',
-                'author' => 'Tabitha Suzuma',
-                'source' => trans('core.forbidden'),
-            ]));
 
         if (Auth::check()) {
-
             $userLogged = Auth::user();
             if (!$userLogged->isSuperAdmin() && !$userLogged->isFederationPresident()) {
                 if (!$userLogged->isAssociationPresident()) {
-                    return $errorResponse;
+                    throw new UnauthorizedException;
                 } else{
                     if ($request->associations != null) {
                             $association = Association::findOrFail($request->associations);
                         if ($association->president_id != $userLogged->id) {
-                            return $errorResponse;
+                            throw new UnauthorizedException;
                         }
                     }
                 }

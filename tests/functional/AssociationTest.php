@@ -46,27 +46,7 @@ class AssociationTest extends TestCase
         $this->logWithUser($this->root);
         $association = factory(Association::class)->make();
 
-        $this->visit("/")
-            ->click('associations')
-            ->click('addAssociation');
-
-        $this->fillAssociationData($association);
-        $association = Association::where('name', $association->name)
-            ->where('address', $association->address)
-            ->where('phone', $association->phone)
-            ->first();
-        // Update
-
-        $this->click($association->name);
-        $association->name = "MyAssociation2";
-        $association->address = "MyAdress2";
-        $association->phone = "6666666666";
-        $this->fillAssociationData($association);
-
-        // Delete
-
-        $this->press("delete_" . $association->id)
-            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
+        $this->crud($this->root);
     }
 
     /** @test
@@ -90,63 +70,27 @@ class AssociationTest extends TestCase
             ->see($myAssoc->name)
             ->dontSee($notMyAssoc->name);
 
-        $association = factory(Association::class)->make(['federation_id' => $myFederation->id]);
-
-        // CREATE
-        // When creating an association, Federation must be disabled
-        $this->visit("/")
-            ->click('associations')
-            ->click('addAssociation');
-
-        $this->type($association->name, 'name')
-            ->type($association->address, 'address')
-            ->type($association->phone, 'phone')
-            ->seeElement('input',['name' => 'federation', 'disabled'=>'disabled'])
-            ->seeElement('input',['name' => 'federation_id', 'type' => 'hidden' ])
-            ->press(trans('core.save'))
-            ->seePageIs('/associations')
-            ->seeInDatabase('association',
-                ['name' => $association->name,
-                    'address' => $association->address,
-                    'phone' => $association->phone,
-                ]);
-
-        $association = Association::where('name', $association->name)
-            ->where('address', $association->address)
-            ->where('phone', $association->phone)
-            ->first();
-
-
-        //EDIT
-        $this->click($association->name);
-        $association->name = "MyAssociation2";
-        $association->address = "MyAdress2";
-        $association->phone = "6666666666";
-        $this->fillAssociationData($association);
-
-        $this->press("delete_" . $association->id)
-            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
-
+        $this->crud($this->federationPresident);
     }
 
-    public function crud(Association $association)
-    {
-        $this->visit("/")
-            ->click('associations')
-            ->click('addAssociation');
 
-        $this->fillAssociationData($association);
-        $association = Association::where('name', $association->name)
-            ->where('address', $association->address)
-            ->where('phone', $association->phone)
-            ->first();
+    /**
+     * @param User $user
+     */
+    public function crud(User $user)
+    {
+        $this->visit_addAssociation();
+        $association = factory(Association::class)->make();
+
+        $this->fillAssociationData($user, $association);
+        $association = $this->getFullAssociationObject($association);
         // Update
 
         $this->click($association->name);
         $association->name = "MyAssociation2";
         $association->address = "MyAdress2";
         $association->phone = "6666666666";
-        $this->fillAssociationData($association);
+        $this->fillAssociationData($user, $association);
 
         // Delete
 
@@ -154,18 +98,48 @@ class AssociationTest extends TestCase
             ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
     }
 
-    private function fillAssociationData(Association $association) //TODO I don't have here to change president
+    /**
+     * @param User $user
+     * @param Association $association
+     */
+    private function fillAssociationData(User $user, Association $association) //TODO I don't have here to change president
     {
         $this->type($association->name, 'name')
             ->type($association->address, 'address')
-            ->type($association->phone, 'phone')
-            ->press(trans('core.save'))
+            ->type($association->phone, 'phone');
+
+        if ($user->isFederationPresident()) {
+            $this->seeElement('input', ['name' => 'federation', 'disabled' => 'disabled'])
+                ->seeElement('input', ['name' => 'federation_id', 'type' => 'hidden']);
+        }
+
+        $this->press(trans('core.save'))
             ->seePageIs('/associations')
             ->seeInDatabase('association',
                 ['name' => $association->name,
                     'address' => $association->address,
                     'phone' => $association->phone,
                 ]);
+    }
+
+    private function visit_addAssociation()
+    {
+        $this->visit("/")
+            ->click('associations')
+            ->click('addAssociation');
+    }
+
+    /**
+     * @param $association
+     * @return mixed
+     */
+    private function getFullAssociationObject($association)
+    {
+        $association = Association::where('name', $association->name)
+            ->where('address', $association->address)
+            ->where('phone', $association->phone)
+            ->first();
+        return $association;
     }
 
 
