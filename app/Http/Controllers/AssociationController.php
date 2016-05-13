@@ -7,6 +7,7 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
+use Exceptions\NotOwningFederationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ class AssociationController extends Controller
         if (Auth::user()->isFederationPresident()) {
             $federation = Auth::user()->federationOwned;
             if ($federation == null) {
-                return "You don't have an associated Federation";
+                throw new NotOwningFederationException();
             }
             $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
         } else {

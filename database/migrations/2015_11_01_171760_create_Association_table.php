@@ -12,6 +12,7 @@ class CreateAssociationTable extends Migration {
 			$table->string('name')->unique();
 			$table->integer('federation_id')->unsigned();
 			$table->integer('president_id')->unsigned();
+			$table->string('state')->nullable();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();
             $table->string('website')->nullable();

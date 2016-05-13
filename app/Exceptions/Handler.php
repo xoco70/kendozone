@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use Exceptions\NotOwningAssociationException;
+use Exceptions\NotOwningFederationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -83,6 +85,14 @@ class Handler extends ExceptionHandler
                 $author = "Admin";
                 $source = "";
                 break;
+            case $e instanceof NotOwningFederationException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = trans('msg.invitation_needed');
+                $author = "Admin";
+                $source = "";
+                break;
+
             default:
                 return parent::render($request, $e);
         }

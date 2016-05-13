@@ -99,4 +99,25 @@ class FederationTest extends TestCase
                     'phone' => $federation->phone,
                 ]);
     }
+
+    /** @test
+     *
+     * a user must be superAdmin to access federation
+     */
+    public function a_federation_president_can_change_his_federation_data()
+    {
+        $this->logWithUser($this->federationPresident);
+
+        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
+
+
+        $this->visit("/")
+            ->click($myFederation->name)
+            ->seePageIs("/federations/" . $myFederation->id . "/edit")
+            ->dontSee(403);
+
+        $federation = factory(Federation::class)->make();
+        $this->fillFederationData($federation);
+    }
+
 }

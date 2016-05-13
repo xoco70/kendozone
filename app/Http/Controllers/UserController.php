@@ -118,7 +118,7 @@ class UserController extends Controller
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 
-        return view('users.edit', compact('user', 'grades', 'countries', 'roles')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
     }
 
     /**

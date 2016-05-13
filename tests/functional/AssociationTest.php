@@ -44,7 +44,6 @@ class AssociationTest extends TestCase
     public function superAdmin_can_see_create_update_delete_association()
     {
         $this->logWithUser($this->root);
-        $association = factory(Association::class)->make();
 
         $this->crud($this->root);
     }
@@ -71,6 +70,26 @@ class AssociationTest extends TestCase
             ->dontSee($notMyAssoc->name);
 
         $this->crud($this->federationPresident);
+    }
+
+    /** @test
+     *
+     * a user must be superAdmin to access federation
+     */
+    public function a_association_president_can_change_his_association_data()
+    {
+        $this->logWithUser($this->associationPresident);
+
+        $myAssociation = factory(Association::class)->create(['president_id' => $this->associationPresident->id]);
+
+
+        $this->visit("/")
+            ->click($myAssociation->name)
+            ->seePageIs("/associations/" . $myAssociation->id . "/edit")
+            ->dontSee(403);
+
+        $association = factory(Association::class)->make();
+        $this->fillAssociationData($this->associationPresident, $association);
     }
 
 
