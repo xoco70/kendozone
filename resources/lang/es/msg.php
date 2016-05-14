@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'user_already_registered_in_category' => 'El usuario ya esta registrado en esta categoria.',
+    'user_already_registered_in_category' => 'El usuario ya esta registrado en esta categoría.',
 
     // Torneo
     'tournament_create_successful' => 'Torneo <b>:name</b><br/> creado exitosamente',
@@ -70,9 +70,9 @@ return [
     'association_create_successful' => 'Associación <br/><b>:name</b><br/> creada exitosamente',
     'association_edit_successful' => 'Associación <br/><b>:name</b><br/> actualizada exitosamente',
     'association_delete_successful' => 'Associación <br/><b>:name</b><br/> borrada exitosamente',
-    'association_delete_error' => 'Hubo un problema al borrar la associación',
+    'association_delete_error' => 'Hubo un problema al borrar la asociación',
     'association_restored_successful' => 'Associación <br/><b>:name</b><br/> restaurada exitosamente',
-    'association_restored_error' => 'Hubo un problema al restaurar la associación',
+    'association_restored_error' => 'Hubo un problema al restaurar la asociación',
 
     //Club
     'club_create_successful' => 'Club <br/><b>:name</b><br/> creado exitosamente',

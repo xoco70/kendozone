@@ -37,19 +37,19 @@ return [
     'date' => 'Fecha',
     'eventDate' => 'Fecha del evento',
     'account' => 'Cuenta',
-    'limitDateRegistration' => 'Fecha limite de registro',
-    'limitDate' => 'Fecha limite',
+    'limitDateRegistration' => 'Fecha límite de registro',
+    'limitDate' => 'Fecha límite',
     'teamSize' => 'Tamaño de equipos',
-    'fightingAreas' => 'Areas',
+    'fightingAreas' => 'Áreas',
     'fightDuration' =>'Duración',
     'hasRoundRobin' => 'Round Robin',
     'roundRobinWinner' => 'Ganadores x Round Robin',
-    'hasEncho' => 'Encho?',
-    'hasHantei' => 'Hantei?',
+    'hasEncho' => '¿Encho?',
+    'hasHantei' => '¿Hantei?',
     'general_data' => 'Datos generales',
     'level' => 'Nivel',
     'cost' => 'Costo',
-    'settings' => 'Parametros',
+    'settings' => 'Parámetros',
     'pay4register' => '¿Pago para registrarse?',
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
@@ -62,7 +62,7 @@ return [
     'broadcast' => 'Transmitir',
     'publish' => 'Publicar',
     'invite_competitors' => 'Invitar competidores',
-    'generate_trees' => 'Generar Arboles',
+    'generate_trees' => 'Generar Árboles',
     'admin_tournaments' => 'Administrar torneos',
     'eventDateIni' => 'Fecha Inicial',
     'eventDateFin' => 'Fecha Final',
@@ -75,18 +75,18 @@ return [
 
 
     // Categories
-    'category' => 'Categoria|Categorias',
-    'enchoQty' => '¿Cuantos encho habrá?',
+    'category' => 'Categoría|Categorías',
+    'enchoQty' => '¿Cuántos encho habrá?',
     'encho_infinite' => '0 para infinito',
-    'enchoDuration' => '¿Cuanto dura cada encho?',
+    'enchoDuration' => '¿Cuánto dura cada encho?',
     'category_not_configured' => 'La categoría aún no esta configurada',
     'add_category' => 'Agregar Categoria',
-    'gender' => 'Genero',
+    'gender' => 'Género',
     'male' => 'Varonil',
     'female' => 'Femenil',
     'mixt' => 'Mixto',
     'ageCategory' => 'Categoría de edad',
-    'no_age_restriction' => 'Sin limite de edad',
+    'no_age_restriction' => 'Sin límite de edad',
     'children' => 'Niños',
     'students' => 'Estudiantes',
     'adults' => 'Adultos',
@@ -94,9 +94,9 @@ return [
     'custom' => 'Personalizado',
     'years' => 'años',
     'age' => 'Edad',
-    'min_age' => 'Edad minima',
+    'min_age' => 'Edad mínima',
     'max_age' => 'Edad máxima',
-    'min_grade' => 'Grado minimo',
+    'min_grade' => 'Grado mínimo',
     'max_grade' => 'Grado máximo',
     'no_grade_restriction' => 'Sin limite de grado',
     'add_and_close' => 'Guardar',
@@ -108,7 +108,7 @@ return [
 //    'single' => 'Individual',
 
     // CategorySetting
-    'categorySettings' => 'Configuración de categorias',
+    'categorySettings' => 'Configuración de categorías',
     'isTeam' => 'Equipo',
 
 
@@ -144,12 +144,12 @@ return [
     'email_desc' => 'El email asociado a su cuenta',
     'role' => 'Role',
     'firstname' => 'Nombre',
-    'lastname' => 'Appellido',
+    'lastname' => 'Apellido',
     'password' => 'Contraseña',
     'newpassword' => 'Nueva contraseña',
     'conewpassword' => 'Confirma la nueva contraseña',
     'without_grade' => 'Sin grado',
-    'left_password_blank' => 'Deja la contraseña vacia si no desea cambiarla',
+    'left_password_blank' => 'Deja la contraseña vacía si no deseas cambiarla',
     'remove' => 'Borrar',
 
 
@@ -157,38 +157,35 @@ return [
     // Competitor
     'competitor' => 'Competidor|Competidores',
     'add_competitor' => 'Agregar Competidor',
-    'add_competitor_to_category' => 'Agregar Competidor a la categoria :category',
-    'select_competitor_categories' => 'Selecciona las categorias en la cual quieres registrar al competidor',
-    'select_tournament_categories' => 'Seleccione las categorias abiertas para su torneo',
+    'add_competitor_to_category' => 'Agregar Competidor a la categoría :category',
+    'select_competitor_categories' => 'Selecciona las categorías en las cuales deseas registrarte',
+    'select_tournament_categories' => 'Selecciona las categorías abiertas para tu torneo',
 
 
 
     // Invitation
 
-    'invitation' => 'Invitación|Invitaciones',
-    'tournament_invitations' => 'Invita competidores ',
+    'invitaion' => 'Invitación|Invitaciones',
+    'tournament_invitations' => 'Invita competidores',
     'invite_send' => 'Invita competidores al torneo: :tournament',
     'recipients' => 'Destinatarios',
-    'invite_recipients' => 'Escriba los destinatarios separados por comas',
+    'invite_recipients' => 'Escribe los destinatarios separados por comas',
     'invite_message' => 'Mensaje de invitación',
-    'invite_template' => "Pica el link que sigue para registrarse al torneo :tournament \n :link ",
+    'invite_template' => "Da clic en el link para registrarte al torneo :tournament \n :link ",
     'send_invites' => 'Mandar Invitaciones',
     'invite_with_link' => 'Invita competitodres con este link',
-    'no_tournament_registered_yet' => 'Aún no se ha registrado en ningun torneo',
-    'no_invitation_yet' => 'Aún no has sido invitado a ningun torneo',
+    'no_tournament_registered_yet' => 'Aún no te has registrado en ningún torneo',
+    'no_invitation_yet' => 'Aún no has sido invitado a ningún torneo',
 
     'confirmed' => 'Confirmado',
     'used' => 'Usada',
     'results' => 'resultados',
-    'latest_competitors' => 'Ultimos registros',
+    'latest_competitors' => 'Últimos registros',
     'organizer' => 'Organizador',
-    'select_categories_to_register' => 'Selecciona las categorias del torneo en las cuales deseas participar',
-//    'tournament_categories_available' => 'Categorias del torneo',
-
-
+    'select_categories_to_register' => 'Selecciona las categorías del torneo en las cuales deseas participar',
 
     // Messages
-    'all_categories_not_configured' => 'Todas las categorias deben de ser configuradas. Ve Torneo > Categorías para configurarlas.',
+    'all_categories_not_configured' => 'Todas las categorías deben de ser configuradas. Ve a <strong>Torneo > Categorías</strong> para configurarlas.',
 
 
     // Share
@@ -198,40 +195,37 @@ return [
 
     'controlpanel' => 'Configuración',
     'myaccount' => 'Mi Cuenta',
-    'settings' => 'Parametros   ',
     'groups' => 'Grupos de usuarios',
-    'blastmail' => 'Correo Másivo',
+    'blastmail' => 'Correo Masivo',
     'logs' => 'Logs',
     'dashboard' => 'Panel de control',
-    'profile' => 'Perfil',
     'logout' => 'Desconectar',
     'home' => 'Inicio',
     'personalinfo' => 'Información personal',
     'changepassword' => 'Cambiar mi contraseña  ',
-    'email' => 'Correo electrónico',
     'savechanges' => 'Guardar cambios',
     'all_fields_required' => 'Todos los campos son obligatorios',
-    'error' => 'Error ',
+    'error' => 'Error',
     'warning' => 'Atención',
-    'success' => 'Exito',
+    'success' => 'Éxito',
     'info' => 'Info',
     'information' => 'Información',
-    'operation_successful' => ' Operación exitosa',
-    'operation_failed' => ' Hubo un problema',
+    'operation_successful' => 'Operación exitosa',
+    'operation_failed' => 'Hubo un problema',
     'save' => 'Guardar',
     'help' => 'Ayuda',
     'type' => 'Tipo',
     'open' => 'Abierto',
     'yes' => 'Si',
     'no' => 'No',
-    'forbidden' => 'Prohibido!',
+    'forbidden' => '¡Prohibido!',
 
 
 
     // Left menu
-    'lastlogin' => 'Ultima conexión',
+    'lastlogin' => 'Última conexión',
     'users' => 'Usuarios',
-    'statistics' => 'Estadisticas',
+    'statistics' => 'Estadísticas',
 
     // Right Menu
 
@@ -243,12 +237,12 @@ return [
 
     // Dashboard
     'welcome' => '¡Bienvenido!',
-    'welcome_text' => 'Aún te falta unos pasos para disfrutar del sistema',
-    'still_no_tournament' => 'Aún no estas registrado en ningun torneo',
+    'welcome_text' => 'Aún te faltan unos pasos para disfrutar del sistema',
+    'still_no_tournament' => 'Aún no estas registrado en ningún torneo',
     'create_new_tournament' => 'Crear un nuevo torneo',
-    'congigure_categories' => 'Configurar las diferentes categorias',
+    'congigure_categories' => 'Configurar las diferentes categorías',
     'see_open_tournaments' => 'Ver torneos abiertos',
-    'soon' => 'Proximamente',
+    'soon' => 'Próximamente',
     'configured_full' => 'configurada',
     'see_all' => 'Ver Todos',
     'no_tournament_created_yet' => 'Aún no has creado ningún torneo',
@@ -286,22 +280,22 @@ return [
     'federation.treasurer' => 'Tesorero',
     'federation.admin' => 'Administrador',
     'federation.address' => 'Dirección',
-    'federation.phone' => 'Telefono',
-    'federation.no_user_in_this_country' => 'No hay usuario registrados en este país',
+    'federation.phone' => 'Teléfono',
+    'federation.no_user_in_this_country' => 'No hay usuarios registrados en este país',
 
 
     // Associations
     'association' => 'Associación|Associaciones',
     'association.president' => 'Presidente',
     'association.address' => 'Dirección',
-    'association.phone' => 'Telefono',
-    'association.no_user_in_this_country' => 'No hay usuario registrados en este país',
+    'association.phone' => 'Teléfono',
+    'association.no_user_in_this_country' => 'No hay usuarios registrados en este país',
     'association.add' => 'Agregar Associación',
 
     // Clubs
     'club' => 'Club|Clubs',
     'club.president' => 'Presidente',
     'club.address' => 'Dirección',
-    'club.phone' => 'Telefono',
-    'club.no_user_in_this_country' => 'No hay usuario registrados en este país',
+    'club.phone' => 'Teléfono',
+    'club.no_user_in_this_country' => 'No hay usuarios registrados en este país',
 ];

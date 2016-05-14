@@ -15,10 +15,10 @@ return [
 
     'mixed_single' => 'Mixto Individual',
     'men_single' => 'Varonil Individual',
-    'ladies_single' => 'Feminil Individual ',
+    'ladies_single' => 'Femenil Individual',
     'mixed_team' => 'Mixto por Equipo',
     'men_team' => 'Varonil por Equipo',
-    'ladies_team' => 'Feminil por Equipo',
+    'ladies_team' => 'Femenil por Equipo',
 
 
 ];
