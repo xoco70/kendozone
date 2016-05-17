@@ -17,15 +17,15 @@ class AdministrativeStructureController extends ApiController
     }
 
 
-    public function getAssociations(Federation $federation)
+    public function getAssociations($federationId)
     {
-        return Association::where('federation_id', $federation->id)->get()->lists('name', 'id');
+        return Association::where('federation_id', $federationId)->get(['id as value', 'name as text'])->toArray();
 
     }
 
-    public function getClubs(Association $association)
+    public function getClubs($associationId)
     {
-        return Club::where('association_id', $association->id)->get()->lists('name', 'id');
+        return Club::where('association_id', $associationId)->get(['id as value', 'name as text'])->toArray();
     }
 
 }

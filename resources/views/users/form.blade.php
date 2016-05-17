@@ -144,16 +144,23 @@
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
-                                    <select class="form-control">
-                                        <option v-for="federation in federations" v-bind:value="federation.value">
-                                            @{{ federation.text }}
-                                        </option>
+                                    <select v-model="federationSelected" class="form-control" @change="
+                                    getAssociations(federationSelected)">
+                                    <option v-for="federation in federations" v-bind:value="federation.value">
+                                        @{{ federation.text }}
+                                    </option>
                                     </select>
 
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    {!!  Form::select('association_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}
+                                    <select v-model="associationSelected"
+                                            class="form-control"> {{--@change="getClub(clubSelected)"--}}
+                                        <option value="0">Select a field</option>
+                                        <option v-for="association in associations" v-bind:value="association.value">
+                                            @{{ association.text }}
+                                        </option>
+                                    </select>
 
                                 </div>
                                 <div class="form-group">

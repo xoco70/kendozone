@@ -298,4 +298,7 @@ return [
     'club.address' => 'Dirección',
     'club.phone' => 'Teléfono',
     'club.no_user_in_this_country' => 'No hay usuarios registrados en este país',
+
+
+    'where_do_you_practice' => '¿Donde prácticas?'
 ];

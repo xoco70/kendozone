@@ -54,13 +54,14 @@ Route::group(['middleware' => ['guest']],
         ]);
     });
 
-Route::get('/', 'DashboardController@index')->middleware(['auth']);
+
 //Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 
 Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
+        Route::get('/', 'DashboardController@index');
         Route::resource('federations', 'FederationController');
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
@@ -107,7 +108,7 @@ Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi
     Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
     Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
-    Route::get("federation/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
-    Route::get("federation/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
+    Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
+    Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
 
 });

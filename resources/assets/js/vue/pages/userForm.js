@@ -1,38 +1,33 @@
 let Vue = require('vue');
 
-Vue.component('federations', {
-    props: ['federations', 'selected'],
-    template: '#federations-list'
-})
-
 let vm = new Vue({
     el: 'body',
     data: {
-        federations : [{
-            text: 'One',
-            value: 1
-        },{
-            text: 'Two',
-            value: 2
-        },{
-            text: 'Three',
-            value: 3
-        }],
+        federations: [],
+        federationSelected: 33,
+        associations: [],
+        associationSelected: 0
+
     },
     computed: {},
 
     methods: {
-        getFederations: function()  {
+        getFederations: function () {
             var url = '/api/v1/federations';
+
             $.getJSON(url, function (data) {
-                console.log(data);
-                this.federations = data;
+                vm.federations = data;
             });
-        }
-        // ,ready() {
-        //     this.getFederations();
-        // }
+        },
+        getAssociations: function (federationSelected) {
+            var url = '/api/v1/federations/' + federationSelected + '/associations';
+            $.getJSON(url, function (data) {
+                vm.associations = data;
+            });
+        },
+    }, ready: function () {
+        this.getFederations();
     },
+
     filters: {}
 });
-vm.getFederations();
