@@ -14,7 +14,7 @@
 
     @include("errors.list")
 
-    <div class="container">
+    <div class="container" xmlns:v-bind="http://symfony.com/schema/routing">
         <div class="content">
         @if (!is_null($user->id))
             {!! Form::model($user, ['method'=>"PATCH",
@@ -143,7 +143,12 @@
                                 </fieldset>
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1)) !!}
-                                    {!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}
+                                    {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
+                                    <select v-model="federationSelect" class="form-control">
+                                        <option v-for="federation in federations" v-bind:value="federation.value">
+                                            @{{ federation.text }}
+                                        </option>
+                                    </select>
 
                                 </div>
                                 <div class="form-group">

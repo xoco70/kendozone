@@ -1,9 +1,9 @@
-var Vue = require('vue');
+let Vue = require('vue');
 
-new Vue({
+let vm = new Vue({
     el: 'body',
     data: {
-
+        listFederation : null
     },
     computed: {},
 
@@ -11,10 +11,12 @@ new Vue({
         getFederations: function getFederations() {
             let url = '/api/v1/federations';
             $.getJSON(url, function (data) {
-
+                $this.listFederation = data;
             });
         },
 
     },
     filters: {}
 });
+// vm.getFederations();
+

@@ -106,8 +106,8 @@ Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi
 //    Route::resource('tournaments', 'Api\TournamentController');
     Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
-    Route::get("federations", 'Api\AdministrativeStructure@getFederations');
-    Route::get("federation/{federation}/associations/", 'Api\AdministrativeStructure@getAssociations');
-    Route::get("federation/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructure@getClubs');
+    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
+    Route::get("federation/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
+    Route::get("federation/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
 
 });
