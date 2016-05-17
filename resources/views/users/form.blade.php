@@ -146,6 +146,7 @@
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
                                     <select v-model="federationSelected" class="form-control" @change="
                                     getAssociations(federationSelected)">
+                                    <option value="0">{{ trans('core.select_field') }}</option>
                                     <option v-for="federation in federations" v-bind:value="federation.value">
                                         @{{ federation.text }}
                                     </option>
@@ -154,9 +155,10 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    <select v-model="associationSelected"
-                                            class="form-control"> {{--@change="getClub(clubSelected)"--}}
-                                        <option value="0">Select a field</option>
+                                    <select v-model="associationSelected" :disabled="federationSelected==0" class="form-control">
+                                             {{--@change="getClub(clubSelected)"--}}
+                                        <option value="0" v-if="associations.length!=0">{{ trans('core.select_field') }}</option>
+                                        <option value="0" v-if="associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
                                         <option v-for="association in associations" v-bind:value="association.value">
                                             @{{ association.text }}
                                         </option>

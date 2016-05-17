@@ -300,5 +300,9 @@ return [
     'club.no_user_in_this_country' => 'No hay usuarios registrados en este país',
 
 
-    'where_do_you_practice' => '¿Donde prácticas?'
+    'where_do_you_practice' => '¿Donde prácticas?',
+    'select_field' => 'Selecciona un campo',
+    'no_association_available' => 'No existen asociaciones en esta federación',
+    'no_club_available' => 'No existen clubes en esta asociación',
+
 ];
