@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Federation;
 use App\Grade;
+use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
@@ -65,7 +67,9 @@ class UserController extends Controller
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton')); //
+        $federations = AdministrativeStructureController::getFederations();
+
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton','federations')); //
     }
 
     /**
@@ -117,8 +121,8 @@ class UserController extends Controller
         $roles = Role::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
-
-        return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
+        $federations = AdministrativeStructureController::getFederations();
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations')); //
     }
 
     /**

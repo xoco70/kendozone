@@ -14,6 +14,8 @@ require('laravel-elixir-vueify');
 
 elixir(function (mix) {
     mix.browserify('vue/pages/categoryCreate.js');
+    mix.browserify('vue/pages/userForm.js');
+
 
     // General Styles for app
     mix.styles([
@@ -114,9 +116,9 @@ elixir(function (mix) {
         'multiple-emails.css'
     ], 'public/css/pages/tournamentInvite.css');
 
-    
-    
-    
+
+
+
     // FOOTER
 
     mix.scripts([

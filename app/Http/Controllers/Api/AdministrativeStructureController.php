@@ -11,10 +11,9 @@ use App\Http\Requests;
 class AdministrativeStructureController extends ApiController
 {
 
-    public function getFederations()
+    public static function getFederations()
     {
-        $federations = Federation::all(['id as value', 'name as text'])->toArray();
-        dd($federations);
+        return Federation::all(['id as value', 'name as text'])->toArray();
     }
 
 

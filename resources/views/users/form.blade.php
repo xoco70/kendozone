@@ -49,7 +49,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('name', trans('core.username')) !!}
+                                                    {!!  Form::label('name', trans('core.username'),['class' => 'text-bold']) !!}
                                                     @if (!is_null($user->id))
                                                         {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}
                                                         {!!  Form::hidden('name', $user->name) !!}
@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('firstname', trans('core.firstname')) !!}
+                                                    {!!  Form::label('firstname', trans('core.firstname'),['class' => 'text-bold']) !!}
                                                     {!!  Form::text('firstname', old('firstname'), ['class' => 'form-control']) !!}
 
 
@@ -77,7 +77,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('lastname', trans('core.lastname')) !!}
+                                                    {!!  Form::label('lastname', trans('core.lastname'),['class' => 'text-bold']) !!}
                                                     {!!  Form::text('lastname', old('lastname'), ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
@@ -85,7 +85,7 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('grade_id', trans('core.grade')) !!}
+                                                    {!!  Form::label('grade_id', trans('core.grade'),['class' => 'text-bold']) !!}
                                                     {!!  Form::select('grade_id', $grades ,null, ['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
@@ -108,7 +108,7 @@
                                 <div class="row">
                                     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
-                                        {!!  Form::label('countryId', trans('core.country')) !!}
+                                        {!!  Form::label('countryId', trans('core.country'),['class' => 'text-bold']) !!}
                                         {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                         </div>
                                     </div>
@@ -142,9 +142,9 @@
                                     </a>
                                 </fieldset>
                                 <div class="form-group">
-                                    {!!  Form::label('federation_id', trans_choice('core.federation',1)) !!}
+                                    {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
-                                    <select v-model="federationSelect" class="form-control">
+                                    <select class="form-control">
                                         <option v-for="federation in federations" v-bind:value="federation.value">
                                             @{{ federation.text }}
                                         </option>
@@ -152,12 +152,12 @@
 
                                 </div>
                                 <div class="form-group">
-                                    {!!  Form::label('association_id', trans_choice('core.association',1)) !!}
+                                    {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
                                     {!!  Form::select('association_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}
 
                                 </div>
                                 <div class="form-group">
-                                    {!!  Form::label('club_id', trans_choice('core.club',1)) !!}
+                                    {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
                                     {!!  Form::select('club_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}
 
                                 </div>
@@ -175,98 +175,94 @@
                     </div>
 
                 </div>
-            </div>
-            <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
+                <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
 
-                <div class="panel panel-flat">
-                    <div class="panel-body">
-                        <div class="container-fluid">
+                    <div class="panel panel-flat">
+                        <div class="panel-body">
+                            <div class="container-fluid">
 
 
-                            <fieldset title="Venue">
-                                <a name="place">
-                                    <legend class="text-semibold">{{Lang::get('core.account')}}</legend>
-                                </a>
-                            </fieldset>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="row">
-                                        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                            <div class="form-group">
-                                                {!!  Form::label('email', trans('core.email')) !!}
-                                                {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
-                                                <p class="help-block">{{  Lang::get('core.email_desc') }}</p>
+                                <fieldset title="Venue">
+                                    <a name="place">
+                                        <legend class="text-semibold">{{Lang::get('core.account')}}</legend>
+                                    </a>
+                                </fieldset>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+                                                <div class="form-group">
+                                                    {!!  Form::label('email', trans('core.email'),['class' => 'text-bold']) !!}
+                                                    {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('core.email_desc') }}</p>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                            <div class="form-group">
-                                                {!!  Form::label('role_id', trans('core.role')) !!}
-                                                @if (Auth::user()->isSuperAdmin())
-                                                    @if (!is_null($user->id))
-                                                        {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+                                                <div class="form-group">
+                                                    {!!  Form::label('role_id', trans('core.role'),['class' => 'text-bold']) !!}
+                                                    @if (Auth::user()->isSuperAdmin())
+                                                        @if (!is_null($user->id))
+                                                            {!!  Form::select('role_id', $roles,old('role_id'), ['class' => 'form-control']) !!}
+                                                        @else
+                                                            {!!  Form::select('role_id', $roles,Config::get('constants.ROLE_USER'), ['class' => 'form-control']) !!}
+                                                        @endif
                                                     @else
-                                                        {!!  Form::select('role_id', $roles,Config::get('constants.ROLE_USER'), ['class' => 'form-control']) !!}
+                                                        {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
                                                     @endif
-                                                @else
-                                                    {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
-                                                @endif
+
+                                                </div>
+
 
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 ">
+                                                <div class="form-group">
+                                                    {!!  Form::label('password', trans('core.password'),['class' => 'text-bold']) !!}
+                                                    {!!  Form::password('password', ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
 
+                                                <div class="form-group">
+                                                    {!!  Form::label('password_confirmation', trans('auth.password_confirmation'),['class' => 'text-bold']) !!}
+                                                    {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                                                    <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 ">
-                                            <div class="form-group">
-                                                {!!  Form::label('password', trans('core.password')) !!}
-                                                {!!  Form::password('password', ['class' => 'form-control']) !!}
-                                                <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
 
-                                            <div class="form-group">
-                                                {!!  Form::label('password_confirmation', trans('auth.password_confirmation')) !!}
-                                                {!!  Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                                                <p class="help-block">{{  Lang::get('core.left_password_blank') }}</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                <div align="right">
+                                    <button type="submit"
+                                            class="btn btn-success">{{trans("core.save")}}</button>
                                 </div>
-
                             </div>
 
-                            <div align="right">
-                                <button type="submit"
-                                        class="btn btn-success">{{trans("core.save")}}</button>
-                            </div>
+
                         </div>
 
-
                     </div>
-
                 </div>
             </div>
+
         </div>
-
         {!! Form::close()!!}
-
-    </div>
-
-
-
-
     </div>
 @stop
 @section('scripts_footer')
     {!! Html::script('js/pages/header/userCreate.js') !!}
+    {!! Html::script('js/userForm.js') !!}
+
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
     {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 
