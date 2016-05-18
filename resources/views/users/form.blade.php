@@ -108,8 +108,8 @@
                                 <div class="row">
                                     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
-                                        {!!  Form::label('countryId', trans('core.country'),['class' => 'text-bold']) !!}
-                                        {!!  Form::select('countryId', $countries,484, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                        {!!  Form::label('country_id', trans('core.country'),['class' => 'text-bold']) !!}
+                                        {!!  Form::select('country_id', $countries,Auth::user()->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
-                                    <select v-model="federationSelected" class="form-control" @change="
+                                    <select name="federation_id" v-model="federationSelected" class="form-control" @change="
                                     getAssociations(federationSelected)">
                                     <option value="0">{{ trans('core.select_field') }}</option>
                                     <option v-for="federation in federations" v-bind:value="federation.value">
@@ -155,8 +155,7 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    <select v-model="associationSelected" :disabled="federationSelected==0" class="form-control">
-                                             {{--@change="getClub(clubSelected)"--}}
+                                    <select name="association_id" v-model="associationSelected" :disabled="federationSelected==0" class="form-control" @change="getClubs(associationSelected)">
                                         <option value="0" v-if="associations.length!=0">{{ trans('core.select_field') }}</option>
                                         <option value="0" v-if="associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
                                         <option v-for="association in associations" v-bind:value="association.value">
@@ -167,7 +166,14 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
-                                    {!!  Form::select('club_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}
+                                    <select name="club_id" v-model="clubSelected" :disabled="associationSelected==0" class="form-control">
+                                        {{--@change="getClub(clubSelected)"--}}
+                                        <option value="0" v-if="clubs.length!=0">{{ trans('core.select_field') }}</option>
+                                        <option value="0" v-if="clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                        <option v-for="club in clubs" v-bind:value="club.value">
+                                            @{{ club.text }}
+                                        </option>
+                                    </select>
 
                                 </div>
 
@@ -269,6 +275,7 @@
     </div>
 @stop
 @section('scripts_footer')
+    <script>var user = "{{ Auth::user()}}"</script>
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('js/userForm.js') !!}
 

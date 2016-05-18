@@ -20,6 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('lastname')->nullable();
             $table->string('email')->unique();
             $table->string('password', 60);
+
+            // FK is definded in create_FK migration
+            $table->integer('federation_id')->unsigned()->default(1);
+            $table->integer('association_id')->unsigned()->default(1);
+            $table->integer('club_id')->unsigned()->default(1);
+
             $table->integer('grade_id')->unsigned()->default(1);
             $table->foreign('grade_id')
                 ->references('id')

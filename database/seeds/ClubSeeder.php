@@ -17,7 +17,7 @@ class ClubSeeder extends Seeder {
     {
 
         Club::truncate();
-
+        Club::create(['name' => 'core.no_club', 'president_id' => '1']);
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
                 'email' => 'naucali@aikem.com',
@@ -30,7 +30,7 @@ class ClubSeeder extends Seeder {
 
 
         factory(Club::class)->create(
-            ['association_id' => 6,
+            ['association_id' => 7,
                 'president_id' => $naucali_presidente->id,
                 'name' => 'Naucali'
             ]);

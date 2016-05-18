@@ -23,9 +23,10 @@ class AdministrativeStructureController extends ApiController
 
     }
 
-    public function getClubs($associationId)
+    public function getClubs($federationId, $associationId)
     {
-        return Club::where('association_id', $associationId)->get(['id as value', 'name as text'])->toArray();
+        return Club::where('association_id', $associationId)
+            ->get(['id as value', 'name as text'])->toArray();
     }
 
 }
