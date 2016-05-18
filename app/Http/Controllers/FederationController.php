@@ -6,7 +6,6 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
-use Illuminate\Http\Request;
 
 class FederationController extends Controller
 {

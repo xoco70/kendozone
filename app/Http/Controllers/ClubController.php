@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Association;
 use App\Club;
-use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;

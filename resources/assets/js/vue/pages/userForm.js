@@ -3,13 +3,12 @@ let Vue = require('vue');
 let vm = new Vue({
     el: 'body',
     data: {
-        user: user,
         federations: [],
-        federationSelected: user.id,
+        federationSelected: federationId,
         associations: [],
-        associationSelected: user.federation_id,
+        associationSelected: associationId,
         clubs: [],
-        clubSelected: user.club_id,
+        clubSelected: clubId,
 
 
     },
@@ -22,12 +21,14 @@ let vm = new Vue({
             $.getJSON(url, function (data) {
                 vm.federations = data;
             });
+            this.associationSelected = 1;
         },
         getAssociations: function (federationSelected) {
             var url = '/api/v1/federations/' + federationSelected + '/associations';
             $.getJSON(url, function (data) {
                 vm.associations = data;
             });
+            this.clubSelected = 1;
         },
         getClubs: function (associationSelected) {
             var url = '/api/v1/federations/' + this.federationSelected + '/associations/' + associationSelected + "/clubs/";
@@ -36,8 +37,13 @@ let vm = new Vue({
             });
         },
     }, ready: function () {
-        console.log(user.federation_id);
         this.getFederations();
+        if (this.federationSelected != 1) {
+            this.getAssociations(this.federationSelected);
+            if (this.associationSelected != 1) {
+                this.getClubs(this.associationSelected);
+            }
+        }
     },
 
     filters: {}

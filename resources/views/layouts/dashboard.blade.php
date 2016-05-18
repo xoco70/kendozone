@@ -17,7 +17,7 @@
 {{--sidebar-xs should be out--}}
 <body class="sidebar-xs  has-detached-right navbar-top">
 @if (Auth::check())
-@include('layouts.headmenu')
+{{--@include('layouts.headmenu')--}}
 @endif
 <!-- Page container -->
 <div class="page-container">
@@ -25,7 +25,7 @@
     <!-- Page content -->
     <div class="page-content">
         @if (Auth::check())
-        @include('layouts.sidemenu')
+        {{--@include('layouts.sidemenu')--}}
         @endif
 
                 <!-- Main content -->

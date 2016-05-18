@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 
-use App\Federation;
 use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
-use Guzzle\Common\Collection;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +27,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('ownUser', ['except' => ['index','show']]); 
+        $this->middleware('ownUser', ['except' => ['index', 'show']]);
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         $this->modelPlural = trans_choice('core.user', 1);
@@ -48,8 +46,8 @@ class UserController extends Controller
     {
 //        $users = new Collection(User::class)  ;
         if (Auth::user()->isSuperAdmin()) {
-            $users = User::with('country','role')->paginate(Config::get('constants.PAGINATION'));
-        }else{
+            $users = User::with('country', 'role')->paginate(Config::get('constants.PAGINATION'));
+        } else {
             throw new UnauthorizedException();
         }
         return view('users.index', compact('users'));
@@ -69,7 +67,7 @@ class UserController extends Controller
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = AdministrativeStructureController::getFederations();
 
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton','federations')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations')); //
     }
 
     /**
@@ -114,6 +112,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param User $user
      * @return Response
      */
     public function edit(User $user)
@@ -122,7 +121,7 @@ class UserController extends Controller
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
         $federations = AdministrativeStructureController::getFederations();
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
     }
 
     /**

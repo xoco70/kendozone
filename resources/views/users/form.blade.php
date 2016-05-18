@@ -144,10 +144,9 @@
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
-                                    <select name="federation_id" v-model="federationSelected" class="form-control" @change="
-                                    getAssociations(federationSelected)">
-                                    <option value="0">{{ trans('core.select_field') }}</option>
-                                    <option v-for="federation in federations" v-bind:value="federation.value">
+                                    <select name="federation_id" v-model="federationSelected"
+                                            class="form-control" @change="getAssociations(federationSelected)">
+                                    <option v-for="federation in federations" v-bind:value="federation.value" selected="@{{ federationId==federation.value }}">
                                         @{{ federation.text }}
                                     </option>
                                     </select>
@@ -155,21 +154,22 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    <select name="association_id" v-model="associationSelected" :disabled="federationSelected==0" class="form-control" @change="getClubs(associationSelected)">
-                                        <option value="0" v-if="associations.length!=0">{{ trans('core.select_field') }}</option>
-                                        <option value="0" v-if="associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
-                                        <option v-for="association in associations" v-bind:value="association.value">
-                                            @{{ association.text }}
-                                        </option>
+                                    <select name="association_id" v-model="associationSelected" class="form-control" @change="getClubs(associationSelected)">
+                                    <option value="1"
+                                            v-if="associations!=null && associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
+                                    <option value="1"
+                                            v-if="associations!=null && associations.length!=0 && federationSelected!=0"> - </option>
+                                    <option v-for="association in associations" v-bind:value="association.value" selected="@{{ associationId==association.value }}">
+                                        @{{ association.text }}
+                                    </option>
                                     </select>
 
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
-                                    <select name="club_id" v-model="clubSelected" :disabled="associationSelected==0" class="form-control">
-                                        {{--@change="getClub(clubSelected)"--}}
-                                        <option value="0" v-if="clubs.length!=0">{{ trans('core.select_field') }}</option>
-                                        <option value="0" v-if="clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                    <select name="club_id" v-model="clubSelected" class="form-control">
+                                        <option value="1" v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                        <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0"> - </option>
                                         <option v-for="club in clubs" v-bind:value="club.value">
                                             @{{ club.text }}
                                         </option>
@@ -275,7 +275,13 @@
     </div>
 @stop
 @section('scripts_footer')
-    <script>var user = "{{ Auth::user()}}"</script>
+    <script>
+        var federationId = "{{ (Auth::user()->federation_id != 0)? Auth::user()->federation_id : 1}}";
+        var associationId = "{{ (Auth::user()->association_id != 0)? Auth::user()->association_id : 1}}";
+        var clubId = "{{ (Auth::user()->club_id != 0)? Auth::user()->club_id : 1}}";
+
+
+    </script>
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('js/userForm.js') !!}
 

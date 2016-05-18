@@ -24,7 +24,6 @@ class UserRepository
                     'provider_id' => $userData->id,
                     'name' => $userData->name,
                     'firstname' => $userData->name,
-                    'username' => $userData->nickname,
                     'slug' => str_slug($userData->name),
                     'email' => $userData->email,
                     'avatar' => $avatar,

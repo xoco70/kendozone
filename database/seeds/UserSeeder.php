@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
-        $countries = Countries::all()->pluck('id')->toArray();
+//        $countries = Countries::all()->pluck('id')->toArray();
         User::create([
             'name' => 'No User',
             'email' => 'nouser@nouser.com',

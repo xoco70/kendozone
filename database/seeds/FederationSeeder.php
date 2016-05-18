@@ -17,7 +17,7 @@ class FederationSeeder extends Seeder
     {
 
         Federation::truncate();
-        Federation::create(['name' => 'core.no_federation', 'president_id' => '1']);
+        Federation::create(['name' => '-', 'president_id' => '1']);
         // Create Maya
         $fmk_president = factory(User::class)->create(
             [   'name' => 'FMK',

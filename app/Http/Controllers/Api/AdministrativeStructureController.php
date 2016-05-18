@@ -13,17 +13,17 @@ class AdministrativeStructureController extends ApiController
 
     public static function getFederations()
     {
-        return Federation::all(['id as value', 'name as text'])->toArray();
+        return Federation::orderBy('id', 'asc')->get(['id as value', 'name as text'])->toArray();
     }
 
 
-    public function getAssociations($federationId)
+    public static function getAssociations($federationId)
     {
-        return Association::where('federation_id', $federationId)->get(['id as value', 'name as text'])->toArray();
+        return Association::where('federation_id', $federationId)->orderBy('id', 'asc')->get(['id as value', 'name as text'])->toArray();
 
     }
 
-    public function getClubs($federationId, $associationId)
+    public static function getClubs($federationId, $associationId)
     {
         return Club::where('association_id', $associationId)
             ->get(['id as value', 'name as text'])->toArray();
