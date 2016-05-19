@@ -72,7 +72,7 @@ return [
             'password'  => env('DB_PASSWORD', 'secret'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'prefix'    => 'ken_',
             'strict'    => false,
         ],
 
