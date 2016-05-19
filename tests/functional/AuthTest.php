@@ -25,38 +25,40 @@ class AuthTest extends TestCase
     {
 
         App::setLocale('en');
+        $user = factory(User::class)->make();
         // When we register...
         $this->visit('/')
             ->click(trans('auth.signup'))
-            ->type('JohnDoe', 'name')
-            ->type('john@example.com', 'email')
+            ->type($user->name, 'name')
+            ->type($user->email, 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
             ->press(trans('auth.create_account'));
         // We should have an account - but one that is not yet confirmed/verified.
         $this->see(htmlentities(trans('auth.check_your_email')))
-            ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 0]);
-        $user = User::whereName('JohnDoe')->first();
+            ->seeInDatabase('users', ['name' => $user->name, 'verified' => 0]);
+        $user = User::whereName($user->name)->first();
         // You can't login until you confirm your email address.
         $this->login($user)->see(trans('auth.account_not_activated'));
-        $this->visit("auth/register/confirm/{$user->token}")
+        $this->visit("auth/register/confirm/".$user->token)
             ->see(trans('auth.tx_for_confirm'))
-            ->seeInDatabase('users', ['name' => 'JohnDoe', 'verified' => 1]);
+            ->seeInDatabase('users', ['name' => $user->name, 'verified' => 1]);
 
     }
 
     /** @test */
     public function register_but_error_in_confirmations()
     {
+        $user = factory(User::class)->make();
         // When we register...
         $this->visit('/auth/register')
-            ->type('JohnDoe', 'name')
-            ->type('john2@example.com', 'email')
+            ->type($user->name, 'name')
+            ->type($user->email, 'email')
             ->type('password', 'password')
             ->type('password2', 'password_confirmation')
             ->press(trans('auth.create_account'));
         $this->see(trans('validation.confirmed', ['attribute' => 'password']))
-            ->notSeeInDatabase('users', ['name' => 'JohnDoe', 'email' => 'john2@example.com', 'verified' => 0]);
+            ->notSeeInDatabase('users', ['name' => 'JohnDoe', 'email' => $user->email, 'verified' => 0]);
     }
 
     /** @test */
@@ -114,26 +116,11 @@ class AuthTest extends TestCase
     {
     }
 
-// I'm not sure how to Test Conexion Facebook
+// FB Connection don't work in local :( 
     /** @test */
     public function loginWithFB()
     {
 
     }
-
-    /** @test */
-    public function loginWithGoogle()
-    {
-        Auth::logout();
-        $this->visit('/auth/login')
-            ->click('google'); // go to "https://accounts.google.com/o/oauth2/auth"
-//        dump(Request::url());
-//        $this->dump();
-//             ->press('choose-account-0');
-//        dd(Request::url());
-//             ->dump();
-
-    }
-
 
 }

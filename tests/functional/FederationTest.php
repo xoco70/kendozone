@@ -37,9 +37,7 @@ class FederationTest extends TestCase
         $this->federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
-//        $this->mortalUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident, $this->federationPresident];
         $this->stateUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
-//        $this->clubUsers = [$this->simpleUser, $this->clubPresident];
 
     }
 

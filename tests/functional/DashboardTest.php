@@ -35,10 +35,6 @@ class DashboardTest extends TestCase
     /** @test */
     public function dashboard_check_initial_state()
     {
-//        $users = [$this->root, $this->simpleUser];
-//        shuffle($users);
-//
-//        $randUser = $users[0];
 
         // Given
         $this->logWithUser($this->simpleUser);
@@ -80,17 +76,17 @@ class DashboardTest extends TestCase
             ->see(trans('core.tournaments_registered'));
     }
 
-    /** @test */
-    public function dashboard_check_tournament_created_widget()
-    {
-        // Given
-
-    }
-
-    /** @test */
-    public function dashboard_check_tournament_registered_widget()
-    {
-        // Given
-
-    }
+//    /** @test */
+//    public function dashboard_check_tournament_created_widget()
+//    {
+//        // Given
+//
+//    }
+//
+//    /** @test */
+//    public function dashboard_check_tournament_registered_widget()
+//    {
+//        // Given
+//
+//    }
 }
