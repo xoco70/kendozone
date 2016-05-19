@@ -6,7 +6,16 @@
 
 class_name: AcceptanceTester
 modules:
-    enabled:
-        - PhpBrowser:
-            url: http://localhost/myapp
-        - \Helper\Acceptance
+  enabled:
+      - Laravel5
+      - \Helper\Acceptance
+      - Db
+
+  config:
+      WebDriver:
+          url: 'http://laravel.dev'
+          browser: 'phantomjs'
+      Db:
+          dsn: 'mysql:host=laravel.dev;dbname=kendo_test'
+          user: 'homestead'
+          password: 'secret'
