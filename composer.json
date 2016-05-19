@@ -52,7 +52,7 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/TestCase.php"
+      "tests/functional/TestCase.php"
     ],
     "psr-4": {
       "Kendozone\\": "app/Kendozone"
