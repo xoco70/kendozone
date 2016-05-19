@@ -7,7 +7,7 @@
 class_name: AcceptanceTester
 modules:
   enabled:
-      - Laravel5
+      - WebDriver
       - \Helper\Acceptance
       - Db
 
