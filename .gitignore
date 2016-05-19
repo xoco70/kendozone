@@ -19,3 +19,4 @@ public/images/avatar/
 .phpstorm.meta.php
 public/js
 public/css
+tests/_output/*

@@ -29,7 +29,8 @@
     "owen-it/laravel-auditing": "^2.2",
     "barryvdh/laravel-translation-manager": "0.2.x-dev",
     "fzaninotto/faker": "~1.4",
-    "graham-campbell/htmlmin": "^4.3"
+    "graham-campbell/htmlmin": "^4.3",
+    "codeception/codeception": "*"
   },
   "require-dev": {
     "mockery/mockery": "0.9.*",
