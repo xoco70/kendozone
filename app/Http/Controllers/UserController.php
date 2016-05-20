@@ -90,7 +90,11 @@ class UserController extends Controller
         $data['provider_id'] = $data['email'];
         $data['verified'] = 1;
 
-        if (User::create($data)) {
+        $user = new User;
+        $user->fill($data);
+        $user->password = bcrypt(Input::get('password'));
+
+        if ($user->save()) {
             flash()->success(trans('msg.user_create_successful'));
         } else
             flash()->error(trans('msg.user_create_successful'));
@@ -120,7 +124,7 @@ class UserController extends Controller
         $roles = Role::lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
-        $federations = AdministrativeStructureController::getFederations();
+//        $federations = AdministrativeStructureController::getFederations();
         return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
     }
 
