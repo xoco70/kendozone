@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -81,7 +83,11 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $this;
     }
-    public function logWithUser($newUser){
+
+    /**
+     * @param User $newUser
+     */
+    public function logWithUser(User $newUser){
         Auth::loginUsingId($newUser->id);
         Lang::setLocale($newUser->locale);
     }

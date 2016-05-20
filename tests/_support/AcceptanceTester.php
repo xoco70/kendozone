@@ -1,4 +1,5 @@
 <?php
+use App\User;
 
 
 /**
@@ -23,4 +24,14 @@ class AcceptanceTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+
+    /**
+     * @param User $newUser
+     * @return $this
+     */
+    public function logWithUser(User $newUser){
+        Auth::loginUsingId($newUser->id);
+        Lang::setLocale($newUser->locale);
+        return $this;
+    }
 }

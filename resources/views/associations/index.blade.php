@@ -44,11 +44,11 @@
                                     href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">{{ $association->name }}</a>
                         </td>
                         <td>{{ $association->federation->name }}</td>
-                        <td align="center">{{ $association->president->name }}</td>
-                        <td align="center">{{ $association->president->email }}</td>
+                        <td align="center">{{ $association->president != null ? $association->president->name : " - "}}</td>
+                        <td align="center">{{ $association->president != null ? $association->president->email : " - " }}</td>
                         <td align="center">{{ $association->address }}</td>
                         <td align="center">{{ $association->phone }}</td>
-                        <td align="center"><img src="images/flags/{{ $association->federation->country->flag }}"/></td>
+                        <td align="center">{!!   $association->federation !=null ? "<img src=images/flags/".$association->federation->country->flag. "/>" : '&nbsp;' !!}</td>
                         <td align="center">
                             <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i
                                         class="icon icon-pencil7"></i></a>

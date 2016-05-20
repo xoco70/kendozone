@@ -42,8 +42,8 @@
                                     href="{!!   URL::action('ClubController@edit',  $club->id) !!}">{{ $club->name }}</a>
                         </td>
                         <td>{{ $club->association->name }}</td>
-                        <td align="center">{{ $club->president->name }}</td>
-                        <td align="center">{{ $club->president->email }}</td>
+                        <td align="center">{{ $club->president !=null ? $club->president->name : " - " }}</td>
+                        <td align="center">{{ $club->president != null ? $club->president->email : " - "}}</td>
                         <td align="center">{{ $club->address }}</td>
                         <td align="center">{{ $club->phone }}</td>
                         <td align="center">

@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 class AuthCest
 {
     // test
@@ -18,6 +20,10 @@ class AuthCest
         $I->see(env('APP_NAME')); // Footer is the only common screen
 
     }
+
+    
+
 }
+
 
 ?>
