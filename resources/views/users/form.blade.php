@@ -117,7 +117,7 @@
 
                             </div>
                             <div align="right">
-                                <button type="submit" class="btn btn-success">{{trans("core.save")}}</button>
+                                <button type="submit" id="save1" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
-                                    <select name="federation_id" v-model="federationSelected"
+                                    <select name="federation_id" v-model="federationSelected" id="federation_id"
                                             class="form-control" @change="getAssociations(federationSelected)">
                                     <option v-for="federation in federations" v-bind:value="federation.value" selected="@{{ federationId==federation.value }}">
                                         @{{ federation.text }}
@@ -181,8 +181,7 @@
                             </div>
 
                             <div align="right">
-                                <button type="submit"
-                                        class="btn btn-success">{{trans("core.save")}}</button>
+                                <button type="submit" id="save2" class="btn btn-success">{{trans("core.save")}}</button>
                             </div>
                         </div>
 
@@ -258,8 +257,7 @@
                                 </div>
 
                                 <div align="right">
-                                    <button type="submit"
-                                            class="btn btn-success">{{trans("core.save")}}</button>
+                                    <button type="submit" id="save2" class="btn btn-success">{{trans("core.save")}}</button>
                                 </div>
                             </div>
 

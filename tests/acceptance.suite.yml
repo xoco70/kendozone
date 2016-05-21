@@ -18,6 +18,6 @@ modules:
           browser: 'phantomjs'
           window_size: 1024x768
       Db:
-          dsn: 'mysql:host=laravel.dev;dbname=kendo_test'
+          dsn: 'mysql:host=laravel.dev;dbname=kendo'
           user: 'homestead'
           password: 'secret'
