@@ -52,18 +52,27 @@ class UserSeeder extends Seeder
         factory(User::class)->create(
             [   'name' => 'root',
                 'email' => 'superuser@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+                'federation_id' => $faker->randomElement($federations),
+                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
                 'password' => bcrypt('superuser'),
                 'verified' => 1,]);
         factory(User::class)->create(
             [   'name' => 'federation',
                 'email' => 'federation@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+                'federation_id' => $faker->randomElement($federations),
+                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('federation'),
                 'verified' => 1,]);
         factory(User::class)->create(
             [   'name' => 'association',
                 'email' => 'association@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+                'federation_id' => $faker->randomElement($federations),
+                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
                 'password' => bcrypt('association'),
                 'verified' => 1,]);
@@ -79,6 +88,9 @@ class UserSeeder extends Seeder
         factory(User::class)->create(
             [   'name' => 'user',
                 'email' => 'user@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+                'federation_id' => $faker->randomElement($federations),
+                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_USER'),
                 'password' => bcrypt('user'),
                 'verified' => 1,]);

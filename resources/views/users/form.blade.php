@@ -57,7 +57,11 @@
                                                     {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
                                                     {{--@endif--}}
 
-                                                    {!!  Form::hidden('avatar',basename($user->avatar)) !!}
+                                                    @if (strpos($user->avatar, 'http') !== false)
+                                                        {!!  Form::hidden('avatar',$user->avatar) !!}
+                                                    @else
+                                                        {!!  Form::hidden('avatar',basename($user->avatar)) !!}
+                                                    @endif
                                                 </div>
 
                                             </div>
@@ -308,6 +312,7 @@
         $(document).ready(function () {
 
             var initialPic = "{{ $user->avatar }}";
+
             var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
             var uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";

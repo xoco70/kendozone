@@ -24,7 +24,7 @@ class FederationSeeder extends Seeder
                 'email' => 'fmk@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('fmk'),
-                'verified' => 1,]);
+                'verified' => 1]);
 
         // Europa
         Federation::create(['name' => 'The British Kendo Association', 'president_id' => '1', 'address' => '113 Vibart Road, Yardley, Birmingham, B26 2AB, UK', 'phone' => '32-2-672-8342', 'country_id' => 826,'website' => 'www.kendo.org.uk']); //  BKAchair@britishkendoassociation.com
@@ -80,6 +80,7 @@ class FederationSeeder extends Seeder
         Federation::create(['name' => 'New Zealand Kendo Federation', 'president_id' => '1', 'address' => '82a Bay Rd., St. Heliers, Aukland, New Zealand', 'phone' => '64-21-274-2415', 'country_id' => '554','website' => 'www.kendo.org.nz']); //
 
 
+        $this->command->info('Federations Seeded!');
 
 
     }

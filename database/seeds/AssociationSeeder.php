@@ -40,6 +40,6 @@ class AssociationSeeder extends Seeder
         Association::create(['federation_id'=> 37,'name' => 'ASOCIACIÓN ESTATAL DE KENDO E IAIDO DE AGUASCALIENTES, A.C.', 'president_id' => '1', 'address' => '', 'phone' => '4492094939', 'state' => 'Aguascalientes']);
 
         factory(Association::class, 5)->create();
-
+        $this->command->info('Associations Seeded!');
     }
 }

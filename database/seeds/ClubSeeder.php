@@ -34,5 +34,6 @@ class ClubSeeder extends Seeder {
                 'president_id' => $naucali_presidente->id,
                 'name' => 'Naucali'
             ]);
+        $this->command->info('Clubs Seeded!');
     }
 }

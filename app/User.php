@@ -53,7 +53,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $guarded = ['id','password_confirmation'];
+    protected $guarded = ['id', 'password_confirmation'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -77,7 +77,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return false;
             } else {
                 $user->token = str_random(30);
-                if ($user->country_id==0){
+                if ($user->country_id == 0) {
                     $user->addGeoData();
                 }
 
@@ -209,9 +209,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                         $constraint->aspectRatio();
                     });
                 }
-//                $img->crop(200, 200, 0, 0);
                 $img->save($destinationPath . $fileName);
-//                flash("success", "La subida del archivo ha fallado, vuelve a subir su foto por favor");
 
 
                 return $data;
@@ -302,24 +300,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function associations()
     {
-        return $this->hasMany(Association::class,'president_id');
+        return $this->hasMany(Association::class, 'president_id');
     }
 
 
     // A president of federation owns a federation
     public function federationOwned()
     {
-        return $this->belongsTo(Federation::class,'id','president_id');
+        return $this->belongsTo(Federation::class, 'id', 'president_id');
     }
 
     public function associationOwned()
     {
-        return $this->belongsTo(Association::class,'id','president_id');
+        return $this->belongsTo(Association::class, 'id', 'president_id');
     }
 
     public function clubOwned()
     {
-        return $this->belongsTo(Club::class,'id','president_id');
+        return $this->belongsTo(Club::class, 'id', 'president_id');
     }
 
     public function club()
