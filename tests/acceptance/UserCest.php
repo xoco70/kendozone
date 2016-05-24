@@ -127,25 +127,29 @@ class UserCest
     }
 
     // test
-    public function you_can_change_your_password_and_login_with_new_data(\AcceptanceTester $I)
+    public function you_can_change_your_password_and_login_with_new_data(\AcceptanceTester $I, $scenario)
     {
-//        $I->simpleUser = factory(User::class)->create(    ['role_id' => Config::get('constants.ROLE_USER')]);
-//        $I->logWithUser($I->simpleUser);
-//        $I->visit("/users/".$I->simpleUser->slug."/edit/")
-//            $I->fillField('222222', 'password')
-//            $I->fillField('222222', 'password_confirmation')
-//            ->press(trans('core.save'))
-//            ->see(trans('msg.user_update_successful'));
+        App::setLocale('en');
+        $this->user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $I = new SuperAdmin($scenario);
+        $I->logAsSuperAdmin();
+        $I->amOnPage("/users/".$this->user->slug."/edit/");
+            $I->fillField('password','333333');
+            $I->fillField('password_confirmation','333333');
+            $I->click("#save1");
+            $I->seeInSource(trans('msg.user_update_successful'));
 //
 //        //Logout
-//        $I->click(trans('core.logout'))
-//            ->seePageIs('auth/login');
-//
+        $I->logout();
 //        // Login Again with new Data
-//        $I$I->fillField($I->simpleUser->email, 'email')
-//            $I->fillField('222222', 'password')
-//            ->press(trans('auth.signin'))
-//            ->seePageIs('/');
+
+        $I->amOnPage('/');
+        $I->fillField('email', $this->user->email);
+        $I->fillField('password', '333333');
+        $I->click(trans('auth.signin'));
+        $I->seeCurrentUrlEquals('/');
+
+
 
     }
 
