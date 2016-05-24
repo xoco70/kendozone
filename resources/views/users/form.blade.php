@@ -50,12 +50,12 @@
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('core.username'),['class' => 'text-bold']) !!}
-                                                    @if (!is_null($user->id))
-                                                        {!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}
-                                                        {!!  Form::hidden('name', $user->name) !!}
-                                                    @else
-                                                        {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
-                                                    @endif
+                                                    {{--@if (!is_null($user->id))--}}
+                                                    {{--{!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}--}}
+                                                    {{--{!!  Form::hidden('name', $user->name) !!}--}}
+                                                    {{--@else--}}
+                                                    {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
+                                                    {{--@endif--}}
 
                                                     {!!  Form::hidden('avatar',basename($user->avatar)) !!}
                                                 </div>
@@ -146,7 +146,8 @@
                                     {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
                                     <select name="federation_id" v-model="federationSelected" id="federation_id"
                                             class="form-control" @change="getAssociations(federationSelected)">
-                                    <option v-for="federation in federations" v-bind:value="federation.value" selected="@{{ federationId==federation.value }}">
+                                    <option v-for="federation in federations" v-bind:value="federation.value"
+                                            selected="@{{ federationId==federation.value }}">
                                         @{{ federation.text }}
                                     </option>
                                     </select>
@@ -154,12 +155,16 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    <select name="association_id" v-model="associationSelected" class="form-control" @change="getClubs(associationSelected)">
+                                    <select name="association_id" v-model="associationSelected"
+                                            class="form-control" @change="getClubs(associationSelected)">
                                     <option value="1"
                                             v-if="associations!=null && associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
                                     <option value="1"
-                                            v-if="associations!=null && associations.length!=0 && federationSelected!=0"> - </option>
-                                    <option v-for="association in associations" v-bind:value="association.value" selected="@{{ associationId==association.value }}">
+                                            v-if="associations!=null && associations.length!=0 && federationSelected!=0">
+                                        -
+                                    </option>
+                                    <option v-for="association in associations" v-bind:value="association.value"
+                                            selected="@{{ associationId==association.value }}">
                                         @{{ association.text }}
                                     </option>
                                     </select>
@@ -168,8 +173,10 @@
                                 <div class="form-group">
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
                                     <select name="club_id" v-model="clubSelected" class="form-control">
-                                        <option value="1" v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
-                                        <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0"> - </option>
+                                        <option value="1"
+                                                v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                        <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0"> -
+                                        </option>
                                         <option v-for="club in clubs" v-bind:value="club.value">
                                             @{{ club.text }}
                                         </option>
@@ -206,8 +213,15 @@
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    {!!  Form::label('email', trans('core.email'),['class' => 'text-bold']) !!}
-                                                    {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+                                                    @if (!is_null($user->id))
+                                                        {!!  Form::label('email', $user->email, ['class' => 'form-control', "disabled" ]) !!}
+                                                        {!!  Form::hidden('email', $user->email) !!}
+                                                    @else
+                                                        {!!  Form::label('email', trans('core.email'),['class' => 'text-bold']) !!}
+                                                        {!!  Form::email('email',old('email'), ['class' => 'form-control']) !!}
+
+                                                    @endif
+
                                                     <p class="help-block">{{  Lang::get('core.email_desc') }}</p>
 
                                                 </div>
@@ -257,7 +271,8 @@
                                 </div>
 
                                 <div align="right">
-                                    <button type="submit" id="save2" class="btn btn-success">{{trans("core.save")}}</button>
+                                    <button type="submit" id="save2"
+                                            class="btn btn-success">{{trans("core.save")}}</button>
                                 </div>
                             </div>
 

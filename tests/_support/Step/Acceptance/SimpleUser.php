@@ -1,6 +1,8 @@
 <?php
 namespace Step\Acceptance;
 
+use Illuminate\Support\Facades\App;
+
 class SimpleUser extends \AcceptanceTester
 {
 

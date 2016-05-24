@@ -1,5 +1,8 @@
 <?php
 
+use App\Association;
+use App\Club;
+use App\Federation;
 use App\Grade;
 use App\User;
 use Faker\Factory as Faker;
@@ -18,7 +21,10 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
-//        $countries = Countries::all()->pluck('id')->toArray();
+        $federations = Federation::all()->pluck('id')->toArray();
+        $associations = Association::all()->pluck('id')->toArray();
+        $clubs = Club::all()->pluck('id')->toArray();
+        $countries = Countries::all()->pluck('id')->toArray();
         User::create([
             'name' => 'No User',
             'email' => 'nouser@nouser.com',
@@ -28,7 +34,10 @@ class UserSeeder extends Seeder
             'email' => 'flordcactus@gmail.com',
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
             'grade_id' => $faker->randomElement($grades),
-            'country_id' => '484',
+            'country_id' => $faker->randomElement($countries),
+            'federation_id' => $faker->randomElement($federations),
+            'association_id' => $faker->randomElement($associations),
+            'club_id' => $faker->randomElement($clubs),
             'city' => 'Mexico City',
             'latitude' => '19.4342',
             'longitude' => '-99.1386',

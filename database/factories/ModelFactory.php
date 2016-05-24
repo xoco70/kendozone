@@ -14,6 +14,7 @@
 use App\Association;
 use App\Category;
 use App\CategoryTournament;
+use App\Club;
 use App\Federation;
 use App\Tournament;
 use App\TournamentLevel;
@@ -22,6 +23,7 @@ use Webpatser\Countries\Countries;
 
 $factory->define(App\Federation::class, function (Faker\Generator $faker) {
     $countries = Countries::all()->pluck('id')->toArray();
+
     $users = User::all()->pluck('id')->toArray();
 
     return [
@@ -62,15 +64,23 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     $countries = Countries::all()->pluck('id')->toArray();
+    $federations = Federation::all()->pluck('id')->toArray();
+    $associations = Association::all()->pluck('id')->toArray();
+    $clubs = Club::all()->pluck('id')->toArray();
 
+    $email = $faker->email;
     return [
         'name' => $faker->name,
+        'slug' => str_slug($email),
         'firstname' => $faker->firstName,
         'lastname' => $faker->lastName,
-        'email' => $faker->email,
+        'email' => $email,
         'password' => bcrypt(str_random(10)),
         'grade_id' => $faker->numberBetween(1, 5),
         'country_id' => $faker->randomElement($countries),
+        'federation_id' => $faker->randomElement($federations),
+        'association_id' => $faker->randomElement($associations),
+        'club_id' => $faker->randomElement($clubs),
         'city' => $faker->city,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
