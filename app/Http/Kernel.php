@@ -35,7 +35,6 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => Middleware\Authenticate::class,
-//        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => Middleware\RedirectIfAuthenticated::class,
         'roles' => Middleware\CheckRole::class,
         'ownTournament' => Middleware\OwnTournament::class,

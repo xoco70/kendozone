@@ -17,15 +17,12 @@ class DatabaseSeeder extends Seeder
         //Seed the countries
         $this->command->info('Seeded the countries!');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('users')->truncate();
+
 
         $this->call(CountriesSeeder::class);
         $this->call(GradeSeeder::class);
         $this->call(RoleSeeder::class);
-
-        $this->call(FederationSeeder::class);
-        $this->call(AssociationSeeder::class);
-        $this->call(ClubSeeder::class);
-
 
         $this->call(UserSeeder::class);
         $this->call(PermissionSeeder::class);
@@ -34,6 +31,10 @@ class DatabaseSeeder extends Seeder
         $this->call(TournamentLevelSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TournamentSeeder::class);
+
+        $this->call(FederationSeeder::class);
+        $this->call(AssociationSeeder::class);
+        $this->call(ClubSeeder::class);
 
         $this->command->info('All tables seeded!');
 

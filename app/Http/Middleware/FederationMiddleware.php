@@ -19,12 +19,11 @@ class FederationMiddleware
     {
         if (Auth::check()) {
             $userLogged = Auth::user();
-            if (!$userLogged->isSuperAdmin()) {
+            if (!$userLogged->isSuperAdmin() || Auth::user()->id) {
                 throw new UnauthorizedException;
             }
         }
-
-
+        
         return $next($request);
     }
 }

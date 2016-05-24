@@ -45,7 +45,7 @@
                         {{--<td align="center">{{ $federation->secretary->name }}</td>--}}
                         {{--<td align="center">{{ $federation->treasurer->name }}</td>--}}
                         {{--<td align="center">{{ $federation->admin->name }}</td>--}}
-                        <td align="center"><img src="images/flags/{{ $federation->country->flag }}" /></td>
+                        <td align="center">@if ($federation->country!= null) <img src="images/flags/{{ $federation->country->flag }}" />@else &nbsp; @endif</td>
                         <td align="center"><a href="{{URL::action('FederationController@edit', $federation->id)}}"><i class="icon icon-pencil7"></i></a></td>
 
                     </tr>

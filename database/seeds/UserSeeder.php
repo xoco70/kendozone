@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
@@ -35,9 +34,9 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
             'grade_id' => $faker->randomElement($grades),
             'country_id' => $faker->randomElement($countries),
-            'federation_id' => $faker->randomElement($federations),
-            'association_id' => $faker->randomElement($associations),
-            'club_id' => $faker->randomElement($clubs),
+//            'federation_id' => $faker->randomElement($federations),
+//            'association_id' => $faker->randomElement($associations),
+//            'club_id' => $faker->randomElement($clubs),
             'city' => 'Mexico City',
             'latitude' => '19.4342',
             'longitude' => '-99.1386',
@@ -53,8 +52,8 @@ class UserSeeder extends Seeder
             [   'name' => 'root',
                 'email' => 'superuser@kendozone.com',
                 'country_id' => $faker->randomElement($countries),
-                'federation_id' => $faker->randomElement($federations),
-                'association_id' => $faker->randomElement($associations),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
                 'password' => bcrypt('superuser'),
                 'verified' => 1,]);
@@ -62,8 +61,8 @@ class UserSeeder extends Seeder
             [   'name' => 'federation',
                 'email' => 'federation@kendozone.com',
                 'country_id' => $faker->randomElement($countries),
-                'federation_id' => $faker->randomElement($federations),
-                'association_id' => $faker->randomElement($associations),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('federation'),
                 'verified' => 1,]);
@@ -71,8 +70,8 @@ class UserSeeder extends Seeder
             [   'name' => 'association',
                 'email' => 'association@kendozone.com',
                 'country_id' => $faker->randomElement($countries),
-                'federation_id' => $faker->randomElement($federations),
-                'association_id' => $faker->randomElement($associations),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
                 'password' => bcrypt('association'),
                 'verified' => 1,]);
@@ -89,8 +88,8 @@ class UserSeeder extends Seeder
             [   'name' => 'user',
                 'email' => 'user@kendozone.com',
                 'country_id' => $faker->randomElement($countries),
-                'federation_id' => $faker->randomElement($federations),
-                'association_id' => $faker->randomElement($associations),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_USER'),
                 'password' => bcrypt('user'),
                 'verified' => 1,]);

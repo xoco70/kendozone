@@ -1,13 +1,7 @@
 <?php
-use App\CategorySettings;
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
 use App\Federation;
-use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
 
 /**
  * List of Federation Test
@@ -37,7 +31,7 @@ class FederationTest extends TestCase
         $this->federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
-        $this->stateUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
+        $this->mortalUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident, $this->federationPresident];
 
     }
 
@@ -47,18 +41,21 @@ class FederationTest extends TestCase
      */
     public function only_superAdmin_can_access_federations()
     {
-        foreach ($this->stateUsers as $user) {
+        foreach ($this->mortalUsers as $user) {
             $this->logWithUser($user);
+
             $this->visit("/")
                 ->dontSee('federations');
+
             $this->visit("/federations")
                 ->see('403');
         }
-        $this->logWithUser($this->root);
-        $this->visit("/")
-            ->click("federations")
-            ->dontSee('403');
 
+        $this->logWithUser($this->root);
+
+        $this->visit("/");
+        $this->click("federations");
+//        $this->dontSee('403');
     }
 
     /** @test
@@ -74,14 +71,12 @@ class FederationTest extends TestCase
         $this->logWithUser($this->root);
 
 
-
         $this->visit("/federations")
             ->click($federation->name)
             ->seePageIs('/federations/' . $federation->id . '/edit')
             ->fillFederationData($federation);
 
     }
-
 
 
     private function fillFederationData(Federation $federation) //TODO Country??? President???

@@ -60,7 +60,7 @@ class FederationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param FederationRequest|\Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
@@ -74,16 +74,4 @@ class FederationController extends Controller
         return redirect("federations");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $association = Federation::findOrFail($id);
-        $association->delete();
-        return redirect("federations");
-    }
 }

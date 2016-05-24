@@ -63,18 +63,7 @@ return [
             'prefix'    => 'ken_',
             'strict'    => false,
         ],
-
-        'mysql_test' => [
-            'driver'    => 'mysql',
-            'host'      => env('DB_HOST', '127.0.0.1'),
-            'database'  => env('DB_DATABASE_TESTING', 'kendo_test'),
-            'username'  => env('DB_USERNAME', 'homestead'),
-            'password'  => env('DB_PASSWORD', 'secret'),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => 'ken_',
-            'strict'    => false,
-        ],
+        
 
         'pgsql' => [
             'driver'   => 'pgsql',

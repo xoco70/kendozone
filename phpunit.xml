@@ -24,7 +24,7 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="DB_CONNECTION" value="mysql_test"/>
+        <env name="DB_CONNECTION" value="mysql"/>
     </php>
     <!--<logging>-->
     <!--<log type="coverage-html" target="./ci/codeCoverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>-->
