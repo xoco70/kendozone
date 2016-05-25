@@ -19,11 +19,16 @@ class FederationMiddleware
     {
         if (Auth::check()) {
             $userLogged = Auth::user();
-            if (!$userLogged->isSuperAdmin() || Auth::user()->id) {
-                throw new UnauthorizedException;
+            if (!$userLogged->isSuperAdmin()) {
+                $url = $request->url();
+                if (preg_match('@/federations/(\d+)/edit@', $url, $match)) {
+                    $federationId = $match[1];
+                    if (Auth::user()->federationOwned->id != $federationId) {
+                        throw new UnauthorizedException;
+                    }
+                }
             }
         }
-        
         return $next($request);
     }
 }
