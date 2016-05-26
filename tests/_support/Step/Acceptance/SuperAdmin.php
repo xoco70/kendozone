@@ -10,7 +10,7 @@ class SuperAdmin extends \AcceptanceTester
         $I->amOnPage('/');
         $I->fillField('email', 'superuser@kendozone.com');
         $I->fillField('password', 'superuser');
-        $I->click(trans('auth.signin'));
+        $I->click("#login");
         $I->seeCurrentUrlEquals('/');
     }
     public function logout(){

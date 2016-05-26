@@ -86,7 +86,7 @@
                     @endif
                     @if (!Auth::user()->isUser())
                         <li>
-                            <a href="{{ URL::action('UserController@index') }} ">
+                            <a href="{{ URL::action('UserController@index') }}" id="users">
                                 <i class="icon-users"></i>{!!trans_choice('core.user',2) !!}
                             </a>
                         </li>

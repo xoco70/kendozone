@@ -21,7 +21,7 @@ class UserCest
     // test
     public function it_create_user(\AcceptanceTester $I, $scenario)
     {
-        App::setLocale('en');
+        App::setLocale('es');
 
         $I = new SimpleUser($scenario);
         $I->logAsUser();
@@ -31,8 +31,8 @@ class UserCest
         $I->logAsSuperAdmin();
 
         $I->click('#dropdown-user');
-        $I->click(trans_choice('core.user', 2));
-        $I->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]));
+        $I->click('#users');
+        $I->click('#adduser');
         $I->fillField('name', $this->user->name);
         $I->fillField('email', $this->user->email);
         $I->fillField('firstname', $this->user->firstname);
@@ -55,8 +55,8 @@ class UserCest
         $I->selectOption('form select[name=club_id]', "Naucali");
 //
 //        $I->attachFile('input[type="file"]',  'avatar2.png'); // TODO Aqui podria simular Dropzone de verdad
-
         $I->click("#save1");
+
         $I->seeInCurrentUrl('/users');
         $I->seeInSource(trans('msg.user_create_successful'));
         $I->seeInDatabase('ken_users',
@@ -79,7 +79,7 @@ class UserCest
     // test
     public function it_edit_user(\AcceptanceTester $I, $scenario)
     {
-        App::setLocale('en');
+        App::setLocale('es');
         $this->user = factory(User::class)->create();
         $I = new SimpleUser($scenario);
         $I->logAsUser();
@@ -118,7 +118,7 @@ class UserCest
                 'country_id' => $countryId,
                 'federation_id' => 37,
                 'association_id' => 6,
-                'club_id' => 2,
+                'club_id' => 6,
             ]);
 
 
@@ -129,15 +129,14 @@ class UserCest
     // test
     public function you_can_change_your_password_and_login_with_new_data(\AcceptanceTester $I, $scenario)
     {
-        App::setLocale('en');
         $this->user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $I = new SuperAdmin($scenario);
         $I->logAsSuperAdmin();
         $I->amOnPage("/users/".$this->user->slug."/edit/");
-            $I->fillField('password','333333');
-            $I->fillField('password_confirmation','333333');
-            $I->click("#save1");
-            $I->seeInSource(trans('msg.user_update_successful'));
+        $I->fillField('password','333333');
+        $I->fillField('password_confirmation','333333');
+        $I->click("#save1");
+        $I->seeInSource(trans('msg.user_update_successful'));
 //
 //        //Logout
         $I->logout();
@@ -146,7 +145,7 @@ class UserCest
         $I->amOnPage('/');
         $I->fillField('email', $this->user->email);
         $I->fillField('password', '333333');
-        $I->click(trans('auth.signin'));
+        $I->click("#login");
         $I->seeCurrentUrlEquals('/');
 
 

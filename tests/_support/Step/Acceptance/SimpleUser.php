@@ -12,7 +12,7 @@ class SimpleUser extends \AcceptanceTester
         $I->amOnPage('/');
         $I->fillField('email', 'user@kendozone.com');
         $I->fillField('password', 'user');
-        $I->click(trans('auth.signin'));
+        $I->click("#login");
         $I->seeCurrentUrlEquals('/');
 
     }

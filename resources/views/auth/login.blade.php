@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn bg-success btn-block p-10">{{  trans('auth.signin') }} <i
+            <button type="submit" id="login" class="btn bg-success btn-block p-10">{{  trans('auth.signin') }} <i
                         class="icon-arrow-right14 position-right"></i></button>
         </div>
 

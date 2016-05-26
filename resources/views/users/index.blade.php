@@ -14,13 +14,14 @@
 
                             {{--<div class="row col-md-10 custyle">--}}
                             <span class="pl-10 pull-right">
-                                        <a href="{!!   URL::action('UserController@create') !!}"
+                                        <a href="{!!   URL::action('UserController@create') !!}" id="adduser"
                                            class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
                                             @lang('core.addModel', ['currentModelName' => $currentModelName])
                                         </a>
 
                             </span>
-                            <a href="{!!   URL::action('UserController@exportUsersExcel') !!}" class="btn btn-success btn-xs pull-right">
+                            <a href="{!!   URL::action('UserController@exportUsersExcel') !!}"
+                               class="btn btn-success btn-xs pull-right">
                                 <i class="icon-file-excel position-left"></i>Export to Excel
                             </a>
                             <table class="table table-togglable table-hover">
