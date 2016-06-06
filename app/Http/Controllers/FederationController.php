@@ -6,6 +6,7 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
+use URL;
 
 class FederationController extends Controller
 {
@@ -13,7 +14,6 @@ class FederationController extends Controller
     {
         $this->middleware('federation'); // , ['except' => ['index','show']]
     }
-
 
 
     protected $currentModelName;
@@ -26,7 +26,7 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = Federation::with('president','country')->get(); // ,'vicepresident','secretary','treasurer','admin'
+        $federations = Federation::with('president', 'country')->get(); // ,'vicepresident','secretary','treasurer','admin'
         return view('federations.index', compact('federations'));
     }
 
@@ -52,9 +52,9 @@ class FederationController extends Controller
     public function edit($id)
     {
         $federation = Federation::findOrFail($id);
-        $users = User::where('country_id','=', $federation->country_id)->lists('name','id');
+        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
 
-        return view('federations.edit', compact('federation','users'));
+        return view('federations.edit', compact('federation', 'users'));
     }
 
     /**
@@ -66,12 +66,13 @@ class FederationController extends Controller
      */
     public function update(FederationRequest $request, $id)
     {
-
         $federation = Federation::findOrFail($id);
         $federation->update($request->all());
+        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
         $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
         flash()->success($msg);
-        return redirect("federations");
+
+        return redirect(URL::action('FederationController@edit', $federation->id))->with('users');
     }
 
 }

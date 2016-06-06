@@ -5,7 +5,6 @@ use App\CategoryTournamentUser;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
 /**
@@ -38,8 +37,6 @@ class UserTest extends TestCase
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
 
-
-
 //        trans_choice('core.user', 1) = trans_choice('core.user', 1);
 //        trans_choice('core.user', 2) = trans_choice('core.user', 2);
 //        $this->addUser = trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]);
@@ -53,7 +50,7 @@ class UserTest extends TestCase
         $this->logWithUser($this->simpleUser);
 
         $this->visit("/users")
-             ->see('403');
+            ->see('403');
 
         $this->logWithUser($this->root);
 
@@ -142,7 +139,7 @@ class UserTest extends TestCase
     public function it_denies_creating_user_without_password()
     {
         $this->logWithUser($this->simpleUser);
-        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
+        $this->visit('/')->dontSee(trans_choice('core.user', 2) . ' </a></li>');
 
 
         $this->logWithUser($this->root);
@@ -206,17 +203,15 @@ class UserTest extends TestCase
         factory(CategorySettings::class)->create(['category_tournament_id' => $ct1->id]);
         factory(CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id]);
 
+        $response = $this->call('DELETE', '/users/' . $this->simpleUser->slug);
+        $this->assertEquals(200, $response->status());
 
-        $this->visit('/users')
-            ->press('delete_'.$this->simpleUser->slug)
-//            ->seePageIs('/users')
-            ->seeIsSoftDeletedInDatabase('users',['name' => $this->simpleUser->name])
-            ->seeIsSoftDeletedInDatabase('tournament',['user_id' => $this->simpleUser->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
+
+        $this->seeIsSoftDeletedInDatabase('users', ['name' => $this->simpleUser->name])
+            ->seeIsSoftDeletedInDatabase('tournament', ['user_id' => $this->simpleUser->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament', ['id' => $ct1->id])
             ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
-
-        ;
+            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);;
 
     }
 
@@ -228,12 +223,12 @@ class UserTest extends TestCase
 
         // User 2 can edit his info
         $this->logWithUser($owner);
-        $this->visit('/users/'.$owner->slug.'/edit')
-        ->see(trans_choice('core.user', 1));
+        $this->visit('/users/' . $owner->slug . '/edit')
+            ->see(trans_choice('core.user', 1));
 
         // Now superuser can also edit User 2 Info
         $this->logWithUser($this->root);
-        $this->visit('/users/'.$this->simpleUser->slug.'/edit')
+        $this->visit('/users/' . $this->simpleUser->slug . '/edit')
             ->see(trans_choice('core.user', 1));
 
         //Now superuser cannot edit User 2 info
@@ -247,12 +242,12 @@ class UserTest extends TestCase
      */
     public function check_you_can_see_user_info()
     {
-        $user2 = factory(User::class)->create(['name'=>'AnotherUser' ]);
+        $user2 = factory(User::class)->create(['name' => 'AnotherUser']);
 
         $this->logWithUser($this->simpleUser);
-        $this->visit('/users/'.$user2->slug)
+        $this->visit('/users/' . $user2->slug)
             ->dontSee("403")
-            ->visit('/users/'.$user2->slug.'/edit')
+            ->visit('/users/' . $user2->slug . '/edit')
             ->see("403");
 //            $this->visit('/users/'.$user->slug.'/edit')
     }
@@ -261,15 +256,15 @@ class UserTest extends TestCase
      */
     public function user_can_see_tournament_info_but_cannot_edit_it()
     {
-        $owner = factory(User::class)->create(['name'=>'AnotherUser' ]);
+        $owner = factory(User::class)->create(['name' => 'AnotherUser']);
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
 
         $this->logWithUser($this->simpleUser);
 
-        $this->visit('/tournaments/'.$tournament->slug)
+        $this->visit('/tournaments/' . $tournament->slug)
             ->dontSee("403")
-            ->visit('/tournaments/'.$tournament->slug.'/edit')
+            ->visit('/tournaments/' . $tournament->slug . '/edit')
             ->see("403");
 //            $this->visit('/users/'.$user->slug.'/edit')
     }

@@ -17,19 +17,19 @@ class FederationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            $userLogged = Auth::user();
-            $url = $request->url();
-            if ($userLogged->isSuperAdmin())
-                return $next($request);
-
-            if (preg_match('@/federations/(\d+)/edit@', $url, $match)) {
-                $federationId = $match[1];
-                if (Auth::user()->federationOwned->id == $federationId) {
+//        if (Auth::check()) {
+//            $userLogged = Auth::user();
+//            $url = $request->url();
+//            if ($userLogged->isSuperAdmin())
+//                return $next($request);
+//
+//            if (preg_match('@/federations/(\d+)/edit@', $url, $match)) {
+//                $federationId = $match[1];
+//                if (Auth::user()->federationOwned->id == $federationId) {
                     return $next($request);
-                }
-            }
-        }
-        throw new UnauthorizedException;
+//                }
+//            }
+//        }
+//        throw new UnauthorizedException;
     }
 }

@@ -85,7 +85,6 @@ class FederationTest extends TestCase
             ->type($federation->address, 'address')
             ->type($federation->phone, 'phone')
             ->press(trans('core.save'))
-            ->seePageIs('/federations')
             ->seeInDatabase('federation',
                 ['name' => $federation->name,
                     'address' => $federation->address,
@@ -110,6 +109,7 @@ class FederationTest extends TestCase
             ->dontSee(403);
 
         $federation = factory(Federation::class)->make();
+//        $federation->president_id = $myFederation->president_id;
         $this->fillFederationData($federation);
     }
 
