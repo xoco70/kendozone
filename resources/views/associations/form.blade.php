@@ -96,7 +96,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                 </div>
                 <br/>
                 <div align="right">
-                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    <button type="submit" class="btn btn-success" id="save"><i></i>{{trans("core.save")}}</button>
                 </div>
             </div>
         </div>

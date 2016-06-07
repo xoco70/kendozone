@@ -23,14 +23,9 @@ class FederationMiddleware
             if ($userLogged->isSuperAdmin())
                 return $next($request);
 
-            if (preg_match('@/federations/(\d+)/edit@', $url, $match)) {
+            if (preg_match('@/federations/(\d+)/*@', $url, $match)) {
                 $federationId = $match[1];
-                if (Auth::user()->federationOwned->id == $federationId) {
-                    return $next($request);
-                }
-            }
-            if ($request->url() == '/federations') {
-                if (Auth::user()->isSuperAdmin()) {
+                if (Auth::user()->federationOwned != null && Auth::user()->federationOwned->id == $federationId) {
                     return $next($request);
                 }
             }

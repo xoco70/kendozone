@@ -123,6 +123,7 @@ class AssociationTest extends TestCase
      */
     private function fillAssociationData(User $user, Association $association) //TODO I don't have here to change president
     {
+
         $this->type($association->name, 'name')
             ->type($association->address, 'address')
             ->type($association->phone, 'phone');
@@ -130,6 +131,12 @@ class AssociationTest extends TestCase
         if ($user->isFederationPresident()) {
             $this->seeElement('input', ['name' => 'federation', 'disabled' => 'disabled'])
                 ->seeElement('input', ['name' => 'federation_id', 'type' => 'hidden']);
+        }else {
+            // Get list of federations
+//            $federations = Federation::lists('name');
+//            $federation = array_rand($federations);
+            // Fill Federation
+//            $this->
         }
 
         $this->press(trans('core.save'))
