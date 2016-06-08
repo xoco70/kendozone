@@ -21,21 +21,24 @@ class AssociationMiddleware
 
         if (Auth::check()) {
             $userLogged = Auth::user();
-            if (!$userLogged->isSuperAdmin() && !$userLogged->isFederationPresident()) {
-                if (!$userLogged->isAssociationPresident()) {
-                    throw new UnauthorizedException;
-                } else{
-                    if ($request->associations != null) {
-                            $association = Association::findOrFail($request->associations);
-                        if ($association->president_id != $userLogged->id) {
-                            throw new UnauthorizedException;
-                        }
-                    }
+            $url = $request->url();
+            if ($userLogged->isSuperAdmin())
+                return $next($request);
+
+
+            if (preg_match('@/associations/(\d+)/*@', $url, $match)) {
+                $associationId = $match[1];
+                if (Auth::user()->associationOwned != null && Auth::user()->associationOwned->id == $associationId) {
+                    return $next($request);
                 }
 
+                $association = Association::find($associationId);
+                if ($userLogged->isFederationPresident() && $userLogged->federation->id == $association->federation->id)
+                    return $next($request);
             }
         }
+        throw new UnauthorizedException;
 
-        return $next($request);
+
     }
 }

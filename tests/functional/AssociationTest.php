@@ -7,8 +7,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 /**
  * List of Federation Test
  *
- *  only_superAdmin_can_access_federations
- *  it_can_edit_federation
+ *  superAdmin_can_see_create_update_delete_association
+ *  federationPresident_can_do_everything_but_is_stuck_to_his_federation
+ *  a_association_president_can_change_his_association_data
+ *
  *
  * User: juliatzin
  * Date: 10/11/2015

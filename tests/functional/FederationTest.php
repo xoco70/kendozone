@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  *
  *  only_superAdmin_can_access_federations
  *  it_can_edit_federation
- *
+ *  a_federation_president_can_change_his_federation_data
+ *  
  * User: juliatzin
  * Date: 10/11/2015
  * Time: 23:14

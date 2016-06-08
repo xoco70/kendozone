@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use URL;
 use View;
 
 class AssociationController extends Controller
@@ -134,7 +135,8 @@ class AssociationController extends Controller
         $association->update($request->all());
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);
-        return redirect("associations");
+        return redirect(URL::action('AssociationController@edit', $association->id));
+
     }
 
     /**
