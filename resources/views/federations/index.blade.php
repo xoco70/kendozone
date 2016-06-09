@@ -30,13 +30,21 @@
                     {{--<th class="text-center" data-hide="all">{{ trans('core.federation.treasurer') }}</th>--}}
                     {{--<th class="text-center" data-hide="all">{{ trans('core.federation.admin') }}</th>--}}
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
-
+                    @if (Auth::user()->isSuperAdmin())
+                        <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
+                    @endif
                 </tr>
                 </thead>
                 @foreach($federations as $federation)
                     <tr>
-                        <td><a href="{!!   URL::action('FederationController@edit',  $federation->id) !!}">{{ $federation->name }}</a></td>
+                        <td>
+
+                            @if (Auth::user()->isSuperAdmin())
+                                <a href="{!!   URL::action('FederationController@edit',  $federation->id) !!}">{{ $federation->name }}</a>
+                            @else
+                                {{ $federation->name }}
+                            @endif
+                        </td>
                         <td align="center">{{ $federation->president->name }}</td>
                         <td align="center">{{ $federation->address }}</td>
                         <td align="center">{{ $federation->president->email}}</td>
@@ -46,8 +54,9 @@
                         {{--<td align="center">{{ $federation->treasurer->name }}</td>--}}
                         {{--<td align="center">{{ $federation->admin->name }}</td>--}}
                         <td align="center">@if ($federation->country!= null) <img src="images/flags/{{ $federation->country->flag }}" />@else &nbsp; @endif</td>
-                        <td align="center"><a href="{{URL::action('FederationController@edit', $federation->id)}}"><i class="icon icon-pencil7"></i></a></td>
-
+                        @can('edit', $federation)
+                            <td align="center"><a href="{{URL::action('FederationController@edit', $federation->id)}}"><i class="icon icon-pencil7"></i></a></td>
+                        @endcan
                     </tr>
 
                 @endforeach

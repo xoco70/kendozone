@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Association;
+use App\Exceptions\NotOwningFederationException;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
-use Exceptions\NotOwningFederationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;

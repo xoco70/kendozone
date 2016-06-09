@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Exceptions\NotOwningFederationException;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
-use Exceptions\NotOwningFederationException;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Support\Facades\Auth;
 use URL;
 
@@ -51,7 +53,7 @@ class FederationController extends Controller
     {
         $federation = Federation::findOrFail($id);
         if (Auth::user()->cannot('edit', $federation)) {
-            throw new NotOwningFederationException();
+            throw new UnauthorizedException();
         }
         $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
         return view('federations.edit', compact('federation', 'users'));
@@ -63,6 +65,7 @@ class FederationController extends Controller
      * @param FederationRequest|\Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws NotOwningFederationException
      */
     public function update(FederationRequest $request, $id)
     {

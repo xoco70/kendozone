@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Exception;
-use Exceptions\NotOwningFederationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -48,12 +47,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        $code = "";
-        $message = "";
-        $quote = "";
-        $author = "";
-        $source = "";
-
         switch ($e) {
             case $e instanceof NotFoundHttpException:
                 $code = "404";

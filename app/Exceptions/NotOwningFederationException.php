@@ -1,6 +1,6 @@
 <?php
 
-namespace Exceptions;
+namespace  App\Exceptions;
 
 
 class NotOwningFederationException extends \Exception

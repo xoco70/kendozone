@@ -6,10 +6,11 @@ namespace App\Policies;
 
 use App\Federation;
 use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FederationPolicy
 {
-//    use HandlesAuthorization;
+    use HandlesAuthorization;
 
     /**
      * Create a new policy instance.
