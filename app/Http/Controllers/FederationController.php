@@ -6,15 +6,12 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
+use Exceptions\NotOwningFederationException;
+use Illuminate\Support\Facades\Auth;
 use URL;
 
 class FederationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('federation'); // , ['except' => ['index','show']]
-    }
-
 
     protected $currentModelName;
     // Only Super Admin can manage Federations
@@ -46,14 +43,17 @@ class FederationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Federation $federation
      * @return \Illuminate\Http\Response
+     * @throws NotOwningFederationException
      */
     public function edit($id)
     {
         $federation = Federation::findOrFail($id);
+        if (Auth::user()->cannot('edit', $federation)) {
+            throw new NotOwningFederationException();
+        }
         $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
-
         return view('federations.edit', compact('federation', 'users'));
     }
 
@@ -67,6 +67,9 @@ class FederationController extends Controller
     public function update(FederationRequest $request, $id)
     {
         $federation = Federation::findOrFail($id);
+        if (Auth::user()->cannot('update', $federation)) {
+            throw new NotOwningFederationException();
+        }
         $federation->update($request->all());
         $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
         $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);

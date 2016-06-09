@@ -22,18 +22,33 @@ class AssociationMiddleware
         if (Auth::check()) {
             $userLogged = Auth::user();
             $url = $request->url();
+            $path = $request->path();
             if ($userLogged->isSuperAdmin())
                 return $next($request);
 
 
-            if (preg_match('@/associations/(\d+)/*@', $url, $match)) {
+            if ($path == 'associations/create' && $userLogged->isFederationPresident()){
+                return $next($request);
+            }
+            if ($request->method() == 'POST' && $userLogged->isFederationPresident()){
+                return $next($request);
+            }
+
+            if (preg_match('@/associations/(\d+)/*@', $url, $match) ) {
+
                 $associationId = $match[1];
+
                 if (Auth::user()->associationOwned != null && Auth::user()->associationOwned->id == $associationId) {
                     return $next($request);
                 }
 
-                $association = Association::find($associationId);
-                if ($userLogged->isFederationPresident() && $userLogged->federation->id == $association->federation->id)
+                $association = Association::findOrFail($associationId);
+                if ($userLogged->federationOwned != null
+                    && $association->federation != null
+                    && $userLogged->isFederationPresident()
+                    && $userLogged->federationOwned->id == $association->federation->id
+                )
+
                     return $next($request);
             }
         }

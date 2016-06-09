@@ -23,7 +23,7 @@ class AssociationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('association'); // , ['except' => ['index','show']]
+        $this->middleware('association', ['except' => ['index','show']]); //
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -50,8 +50,8 @@ class AssociationController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
+     * @throws NotOwningFederationException
      */
     public function create()
     {
@@ -142,9 +142,9 @@ class AssociationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Association $association
+     * @param $associationId
      * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @internal param Association $association
      */
     public function destroy($associationId)
     {

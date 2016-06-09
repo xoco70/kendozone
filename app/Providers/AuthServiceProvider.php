@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
-use App\Permission;
+use App\Association;
+use App\Club;
+use App\Federation;
+use App\Policies\AssociationPolicy;
+use App\Policies\ClubPolicy;
+use App\Policies\FederationPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,36 +20,22 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
 
-//        \App\Place::class => \App\Policies\PlacePolicy::class,
+        Federation::class => FederationPolicy::class,
+        Association::class => AssociationPolicy::class,
+        Club::class => ClubPolicy::class,
+
     ];
 
     /**
      * Register any application authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
      * @return void
      */
     public function boot(GateContract $gate)
     {
         parent::registerPolicies($gate);
-        // Dynamically register permissions with Laravel's Gate.
-        if (Schema::hasTable('permissions')){
-            foreach ($this->getPermissions() as $permission) {
-                $gate->define($permission->name, function ($user) use ($permission) {
-                    return $user->hasPermission($permission);
-                });
-        }
 
-        }
     }
 
-    /**
-     * Fetch the collection of site permissions.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    protected function getPermissions()
-    {
-        return Permission::with('roles')->get();
-    }
 }

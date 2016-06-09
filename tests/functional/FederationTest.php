@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 /**
  * List of Federation Test
  *
- *  only_superAdmin_can_access_federations
+ *  everybody_can_access_federations
  *  it_can_edit_federation
  *  a_federation_president_can_change_his_federation_data
  *  
@@ -40,7 +40,7 @@ class FederationTest extends TestCase
      *
      * a user must be superAdmin to access federation
      */
-    public function only_superAdmin_can_access_federations()
+    public function everybody_can_access_federations()
     {
         foreach ($this->mortalUsers as $user) {
             $this->logWithUser($user);
@@ -49,14 +49,13 @@ class FederationTest extends TestCase
                 ->dontSee('federations');
 
             $this->visit("/federations")
-                ->see('403');
+                ->dontSee('403');
         }
 
         $this->logWithUser($this->root);
 
         $this->visit("/");
         $this->click("federations");
-//        $this->dontSee('403');
     }
 
     /** @test
