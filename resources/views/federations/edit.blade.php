@@ -27,7 +27,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                     <fieldset title="{{Lang::get('core.general_data')}}">
                         <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
-                        <h2><img src = "/images/flags/{{ $federation->country->flag}}">{{ $federation->country->name }}</h2>
+                        <h2><img src = "/images/flags/{{ $federation->country->flag}}" class="mr-20">{{ $federation->country->name }}</h2>
                         <br/>
 
                         <div class="form-group">
@@ -50,7 +50,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         <br/>
                         {!!  Form::label('address', trans('core.federation.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.federation.address') }}</span>
+
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                             <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
@@ -62,7 +62,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.federation.phone') }}</span>
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>

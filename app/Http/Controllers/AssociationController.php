@@ -8,6 +8,7 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class AssociationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('association', ['except' => ['index','show']]); //
+//        $this->middleware('association', ['except' => ['index','show']]); //
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -37,12 +38,13 @@ class AssociationController extends Controller
      */
     public function index()
     {
+        //TODO Will fail if Auth::user()->associationOwned->federation is null
+
         $associations = Association::with('president', 'federation.country')
-            ->whereHas('federation', function ($query) {
-                if (!Auth::user()->isSuperAdmin()) {
-                    $query->where('president_id', Auth::user()->id);
-                }
-            })->get();
+            ->has('federation')
+            ->where('association.federation_id','=',Auth::user()->associationOwned->federation->id)
+            ->get();
+
 
         return view('associations.index', compact('associations'));
     }
@@ -59,11 +61,12 @@ class AssociationController extends Controller
         $federations = new Collection;
         $federation = new Federation;
 
+        // Assoc Policy
+        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
+            throw new UnauthorizedException();
+        }
+
         if (Auth::user()->isFederationPresident()) {
-            $federation = Auth::user()->federationOwned;
-            if ($federation == null) {
-                throw new NotOwningFederationException();
-            }
             $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
         } else {
             // User is SuperAdmin
@@ -84,7 +87,10 @@ class AssociationController extends Controller
      */
     public function store(AssociationRequest $request)
     {
-
+        // Assoc Policy
+        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
+            throw new UnauthorizedException();
+        }
 
         $association = Association::create($request->all());
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
@@ -115,6 +121,11 @@ class AssociationController extends Controller
     public function edit($id)
     {
         $association = Association::findOrFail($id);
+
+        if (Auth::user()->cannot('edit', $association)) {
+            throw new UnauthorizedException();
+        }
+
         $users = User::where('country_id', '=', $association->federation->country_id)->lists('name', 'id');
         $federations = Federation::lists('name', 'id');
         $federation = $association->federation;
@@ -130,8 +141,12 @@ class AssociationController extends Controller
      */
     public function update(AssociationRequest $request, $id)
     {
-
         $association = Association::findOrFail($id);
+
+        if (Auth::user()->cannot('update', $association)) {
+            throw new UnauthorizedException();
+        }
+
         $association->update($request->all());
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);

@@ -55,8 +55,8 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             {!!  Form::select('federation_id', $federations,$federation->id, ['class' => 'form-control']) !!}
                         @elseif (Auth::user()->isFederationPresident())
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::text('federation',$federation->name, ['class' => 'form-control disabled', 'disabled']) !!}
-                            {!!  Form::hidden('federation_id', $federation->id) !!}
+                            {!!  Form::text('federation',Auth::user()->federationOwned->name, ['class' => 'form-control disabled', 'disabled']) !!}
+                            {!!  Form::hidden('federation_id', Auth::user()->federationOwned->id) !!}
                         @endif
 
 
@@ -74,7 +74,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         <br/>
                         {!!  Form::label('address', trans('core.association.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.association.address') }}</span>
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                             <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
@@ -85,7 +84,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.association.phone') }}</span>
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>

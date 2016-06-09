@@ -292,11 +292,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(CategoryTournament::class)
             ->withTimestamps();
     }
-
+    public function federation()
+    {
+        return $this->belongsTo(Federation::class);
+    }
     public function association()
     {
         return $this->belongsTo(Association::class);
     }
+    
 
     public function associations()
     {

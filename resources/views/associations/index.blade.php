@@ -40,21 +40,27 @@
                 </thead>
                 @foreach($associations as $association)
                     <tr>
-                        <td><a
-                                    href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">{{ $association->name }}</a>
+                        <td>
+                            @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
+                                <a href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">{{ $association->name }}</a>
+                            @endif
                         </td>
                         <td>{{ $association->federation->name }}</td>
                         <td align="center">{{ $association->president != null ? $association->president->name : " - "}}</td>
                         <td align="center">{{ $association->president != null ? $association->president->email : " - " }}</td>
                         <td align="center">{{ $association->address }}</td>
                         <td align="center">{{ $association->phone }}</td>
-                        <td align="center">{!!   $association->federation !=null && $association->federation->country !=null? "<img src=images/flags/".$association->federation->country->flag. " />" : '&nbsp;' !!}</td>
+                        <td align="center">{!!   $association->federation !=null && $association->federation->country !=null? "<img src=/images/flags/".$association->federation->country->flag. " />" : '&nbsp;' !!}</td>
                         <td align="center">
-                            <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i
-                                        class="icon icon-pencil7"></i></a>
-                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteAssociation', 'action' => ['AssociationController@destroy', $association->id], 'style'=>"display: inline-block"]) !!}
-                            {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteAssociation', 'id'=>'delete_'.$association->id, 'data-id' => $association->id ] ) !!}
-                            {!! Form::close() !!}
+
+                            @can('edit', $association)
+                                <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i class="icon icon-pencil7"></i></a>
+                            @endcan
+                            @can('delete', $association)
+                                {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteAssociation', 'action' => ['AssociationController@destroy', $association->id], 'style'=>"display: inline-block"]) !!}
+                                {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteAssociation', 'id'=>'delete_'.$association->id, 'data-id' => $association->id ] ) !!}
+                                {!! Form::close() !!}
+                            @endcan
                         </td>
 
                     </tr>
