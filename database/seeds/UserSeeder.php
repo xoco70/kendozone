@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'flordcactus@gmail.com',
             'password' => '$2y$10$1PtkhrFJK953dQYFb5pKMugryyRprg8r9hLHMDNJwXB8oKZWvjfau', // 111111
             'grade_id' => $faker->randomElement($grades),
-            'country_id' => $faker->randomElement($countries),
+            'country_id' => 484,
 //            'federation_id' => $faker->randomElement($federations),
 //            'association_id' => $faker->randomElement($associations),
 //            'club_id' => $faker->randomElement($clubs),
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
         factory(User::class)->create(
             [   'name' => 'root',
                 'email' => 'superuser@kendozone.com',
-                'country_id' => $faker->randomElement($countries),
+                'country_id' => 484,
 //                'federation_id' => $faker->randomElement($federations),
 //                'association_id' => $faker->randomElement($associations),
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),

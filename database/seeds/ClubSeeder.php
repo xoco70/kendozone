@@ -23,7 +23,9 @@ class ClubSeeder extends Seeder {
                 'email' => 'naucali@aikem.com',
                 'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
                 'password' => bcrypt('naucali'),
-                'verified' => 1,]);
+                'verified' => 1,
+                'country_id' => 484,
+            ]);
 
         factory(Club::class,5)->create();
 

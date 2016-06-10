@@ -25,6 +25,7 @@ class FederationSeeder extends Seeder
                 'email' => 'fmk@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('fmk'),
+                'country_id' => 484,
                 'verified' => 1]);
 
         

@@ -43,6 +43,8 @@
                         <td>
                             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
                                 <a href="{!!   URL::action('AssociationController@edit',  $association->id) !!}">{{ $association->name }}</a>
+                            @else
+                                {{ $association->name }}
                             @endif
                         </td>
                         <td>{{ $association->federation->name }}</td>

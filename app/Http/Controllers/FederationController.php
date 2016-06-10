@@ -55,6 +55,7 @@ class FederationController extends Controller
         if (Auth::user()->cannot('edit', $federation)) {
             throw new UnauthorizedException();
         }
+
         $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
         return view('federations.edit', compact('federation', 'users'));
     }

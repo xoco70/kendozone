@@ -22,7 +22,14 @@ class AssociationSeeder extends Seeder
 
         Association::create(['name' => 'core.no_association', 'president_id' => '1']);
         // Create Martin
-        $aikem_presidente = factory(User::class)->create(['name' => 'AIKEM_President','email' => 'presidencia@aikem.com','role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),'password' => bcrypt('aikem'),'verified' => 1,]);
+        $aikem_presidente = factory(User::class)->create(
+            ['name' => 'AIKEM_President',
+                'email' => 'presidencia@aikem.com',
+                'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+                'password' => bcrypt('aikem'),
+                'verified' => 1,
+                'country_id' => 484,
+            ]);
 
         Association::create(['federation_id'=> 37,'name' => 'Asociación de Kendo y Artes Marciales Afines del Distrito Federal, A.C.', 'president_id' => '1', 'address' => '', 'phone' => '55 17 63 48 59', 'state' => 'Distrito Federal']);
         Association::create(['federation_id'=> 37,'name' => 'Asociación de Kendo del Estado de Nuevo León, A.C.	', 'president_id' => '1', 'address' => '', 'phone' => '811 486 0071', 'state' => 'Nuevo Léon']);
