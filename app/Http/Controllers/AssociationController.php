@@ -40,10 +40,14 @@ class AssociationController extends Controller
     {
         //TODO Will fail if Auth::user()->associationOwned->federation is null
 
+        // 2 Cases, if root, show everything, else show only for your country
         $associations = Association::with('president', 'federation.country')
-            ->has('federation')
-            ->where('association.federation_id','=',Auth::user()->associationOwned->federation->id)
-            ->get();
+            ->whereHas('federation', function ($query) {
+                if (!Auth::user()->isSuperAdmin()) {
+                    $query->where('country_id', Auth::user()->country_id);
+                }
+            })->get();
+
 
 
         return view('associations.index', compact('associations'));

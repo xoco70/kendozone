@@ -72,6 +72,9 @@ class AssociationPolicy
     public function edit(User $user, Association $association)
     {
 
+        if ($user->isFederationPresident() && $user->federationOwned->id == $association->federation->id)
+            return true;
+
         if ($user->isAssociationPresident() &&
             $user->associationOwned!= null &&
             $association->id == $user->associationOwned->id) {
@@ -82,6 +85,9 @@ class AssociationPolicy
 
     public function update(User $user, Association $association)
     {
+        if ($user->isFederationPresident() && $user->federationOwned->id == $association->federation->id)
+            return true;
+        
         if ($user->isAssociationPresident() &&
             $user->associationOwned!= null &&
             $association->id == $user->associationOwned->id) {

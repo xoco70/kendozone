@@ -34,29 +34,23 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $clubs = Club::with('president');
-
-        if (!Auth::user()->isSuperAdmin()) {
-            $clubs->whereHas('association.federation', function ($query) {
-                $query->where('president_id', Auth::user()->id);
-            });
-        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
-            $clubs->whereHas('association.federation', function ($query) {
-                $query->where('president_id', Auth::user()->id);
-            });
-        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident() && !Auth::user()->isAssociationPresident()) {
+        $clubs = Club::with('president', 'association.federation');
+        
+        if (Auth::user()->isAssociationPresident()) {
             $clubs->whereHas('association', function ($query) {
-                if (Auth::user()->isAssociationPresident()) {
-                    $query->where('president_id', Auth::user()->id);
-                }
+                $query->where('id', Auth::user()->associationOwned->id);
             });
-        } else if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident() && !Auth::user()->isAssociationPresident() && !Auth::user()->isClubPresident()) {
-            $clubs->where('president_id', '=', Auth::user()->id);
+        }
+        if (Auth::user()->isFederationPresident()) {
+            $clubs->whereHas('association.federation', function ($query) {
+                $query->where('federation_id', Auth::user()->federationOwned->id);
+            });
         }
 
-        $clubs = $clubs->get();
-//            ->get();
 
+        $clubs = $clubs->get();
+
+//        dd($clubs);
         return view('clubs.index', compact('clubs'));
     }
 

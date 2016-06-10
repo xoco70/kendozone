@@ -15,8 +15,11 @@ class ClubSeeder extends Seeder {
 
     public function run()
     {
+        $associations = Association::all()->pluck('id')->toArray();
 
         Club::truncate();
+        $faker = Faker\Factory::create();
+
         Club::create(['name' => 'core.no_club', 'president_id' => '1']);
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
@@ -27,7 +30,8 @@ class ClubSeeder extends Seeder {
                 'country_id' => 484,
             ]);
 
-        factory(Club::class,5)->create();
+        factory(Club::class,5)->create(['association_id' => 7]);
+        factory(Club::class,5)->create(['association_id' => $faker->randomElement($associations)]);
 
 
 
