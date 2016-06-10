@@ -14,14 +14,14 @@
             {{--            @include('layouts.noFederations')--}}
         @else
 
-            @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident() || Auth::user()->isAssociationPresident())
+            @can('create', new App\Club)
                 <span class="pl-10 pull-right">
-                <a href="{!!   URL::action('ClubController@create') !!}"
-                   class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                    @lang('core.addModel', ['currentModelName' => $currentModelName])
-                </a>
-            </span>
-            @endif
+                    <a href="{!!   URL::action('ClubController@create') !!}"
+                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
+                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                    </a>
+                </span>
+            @endcan
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>

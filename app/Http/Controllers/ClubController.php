@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Association;
 use App\Club;
+use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;
 use Auth;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Response;
 use View;
 
@@ -35,7 +38,7 @@ class ClubController extends Controller
     public function index()
     {
         $clubs = Club::with('president', 'association.federation');
-        
+
         if (Auth::user()->isAssociationPresident()) {
             $clubs->whereHas('association', function ($query) {
                 $query->where('id', Auth::user()->associationOwned->id);
@@ -63,10 +66,32 @@ class ClubController extends Controller
     public function create()
     {
         $club = new Club;
-        $users = User::lists('name', 'id');; // TODO BADDDDD
-        $associations = Association::lists('name', 'id');
+
+        if (Auth::user()->cannot('create', $club)) {
+            throw new UnauthorizedException();
+        }
+
+        if (Auth::user()->isFederationPresident()) {
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->lists('name', 'id');
+            $federations = Auth::user()->federationOwned->lists('name', 'id');
+            $associations = Auth::user()->federationOwned->associations->lists('name', 'id');
+        }
+        if (Auth::user()->isAssociationPresident()) {
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->lists('name', 'id');
+            $federation = Auth::user()->associationOwned->federation;
+            $association = Auth::user()->associationOwned;
+            dd(Auth::user()->associationOwned);
+        } else {
+            // User is SuperAdmin
+            $users = User::lists('name', 'id');
+            $federations = Federation::lists('name', 'id');
+            $associations = Association::lists('name', 'id');
+        }
+
+
+
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('clubs.form', compact('club', 'users', 'associations', 'submitButton')); //
+        return view('clubs.form', compact('club', 'users', 'federations','associations', 'submitButton')); //
     }
 
     /**

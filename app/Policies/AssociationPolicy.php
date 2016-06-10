@@ -26,13 +26,13 @@ class AssociationPolicy
      * @param User $user
      * @return bool
      */
-//    public function create(User $user)
-//    {
-//        if ($user->isFederationPresident()) {
-//            return true;
-//        }
-//        return false;
-//    }
+    public function create(User $user, Association $association)
+    {
+        if ($user->isFederationPresident()) {
+            return true;
+        }
+        return false;
+    }
 
     // Only SuperAdmin And FederationPresident should be able to create Associations
     /**

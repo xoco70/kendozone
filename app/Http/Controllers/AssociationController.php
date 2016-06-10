@@ -49,7 +49,6 @@ class AssociationController extends Controller
             })->get();
 
 
-
         return view('associations.index', compact('associations'));
     }
 
@@ -65,8 +64,7 @@ class AssociationController extends Controller
         $federations = new Collection;
         $federation = new Federation;
 
-        // Assoc Policy
-        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
+        if (Auth::user()->cannot('create', new Association)) {
             throw new UnauthorizedException();
         }
 
@@ -80,7 +78,7 @@ class AssociationController extends Controller
 
 
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('associations.form', compact('association', 'users', 'federation','federations', 'submitButton')); //
+        return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
 
     /**
@@ -133,7 +131,7 @@ class AssociationController extends Controller
         $users = User::where('country_id', '=', $association->federation->country_id)->lists('name', 'id');
         $federations = Federation::lists('name', 'id');
         $federation = $association->federation;
-        return view('associations.form', compact('association', 'users', 'federations','federation'));
+        return view('associations.form', compact('association', 'users', 'federations', 'federation'));
     }
 
     /**
