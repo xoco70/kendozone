@@ -29,7 +29,7 @@ class FederationController extends Controller
         $federations = Federation::with('president', 'country'); // ,'vicepresident','secretary','treasurer','admin'
 
         if (Request::ajax()) {
-            return $federations->orderBy('id', 'asc')->get(['id as value', 'name as text'])->toArray();
+            return $federations->orderBy('id', 'asc')-> get(['id as value', 'name as text'])->toArray();
         } else {
             $federations = $federations->get();
             return view('federations.index', compact('federations'));

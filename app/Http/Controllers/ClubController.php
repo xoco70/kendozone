@@ -92,7 +92,6 @@ class ClubController extends Controller
             $association = Auth::user()->associationOwned;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            // NO REGRESA USUARIOS PARA EDOMEX, INVESTIGAR
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else {
             // User is SuperAdmin
@@ -105,8 +104,7 @@ class ClubController extends Controller
         }
 
 
-        $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('clubs.form', compact('club', 'users', 'federations', 'associations', 'submitButton')); //
+        return view('clubs.form', compact('club', 'users', 'federations', 'associations')); //
     }
 
     /**
@@ -118,8 +116,7 @@ class ClubController extends Controller
     public function store(ClubRequest $request)
     {
 
-
-        $club = Club::create($request->all());
+        $club = Club::create($request->except(['federation_id']));
         $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
         flash()->success($msg);
         return redirect("clubs");
@@ -147,9 +144,44 @@ class ClubController extends Controller
     public function edit($id)
     {
         $club = Club::findOrFail($id);
-        $users = User::lists('name', 'id');; // TODO BADDDDD
-        $associations = Association::lists('name', 'id');
-        return view('clubs.form', compact('club', 'users', 'associations')); //
+        $federations = new Collection();
+        $associations = new Collection();
+
+        if (Auth::user()->cannot('edit', $club)) {
+            throw new UnauthorizedException();
+        }
+        //TODO Set Users to Void and set it with VueJS through APIs
+        if (Auth::user()->isFederationPresident()) {
+
+            $federation = Auth::user()->federationOwned;
+            $federations->push($federation);
+            $federations = $federations->pluck('name', 'id');
+
+            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
+//            $users = new Collection; // This will be set by JS
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
+
+        } else if (Auth::user()->isAssociationPresident()) {
+            $federation = Auth::user()->associationOwned->federation;
+            $federations->push($federation);
+
+            $federations = $federations->pluck('name', 'id');
+
+            $association = Auth::user()->associationOwned;
+            $associations->push($association);
+            $associations = $associations->pluck('name', 'id');
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
+        } else {
+            // User is SuperAdmin
+            $users = User::pluck('name', 'id');
+            $federations = Federation::pluck('name', 'id');
+            $associations = Association::pluck('name', 'id');
+//            $federations = Federation::pluck('name', 'id');
+//            $associations = new Collection; // This will be set by JS
+//            $users = new Collection; // This will be set by JS
+        }
+
+        return view('clubs.form', compact('club', 'users', 'associations','federations')); //
     }
 
     /**
@@ -163,7 +195,7 @@ class ClubController extends Controller
     {
 
         $club = Club::findOrFail($id);
-        $club->update($request->all());
+        $club->update($request->except(['federation_id']));
         $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
         flash()->success($msg);
         return redirect("clubs");
