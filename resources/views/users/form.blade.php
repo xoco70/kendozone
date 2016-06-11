@@ -216,8 +216,10 @@
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+
                                                 <div class="form-group">
                                                     @if (!is_null($user->id))
+                                                        {!!  Form::label('email', trans('core.email'),['class' => 'text-bold']) !!}
                                                         {!!  Form::label('email', $user->email, ['class' => 'form-control', "disabled" ]) !!}
                                                         {!!  Form::hidden('email', $user->email) !!}
                                                     @else

@@ -43,7 +43,11 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
 
                         </div>
+                        {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                        {!!  Form::select('federation_id', $federations,$club->federation_id, ['class' => 'form-control']) !!}
 
+
+                        <br/>
                         {!!  Form::label('association', trans_choice('core.association',1),['class' => 'text-bold' ]) !!}
                         {!!  Form::select('association_id', $associations,$club->association_id, ['class' => 'form-control']) !!}
 
@@ -62,7 +66,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         <br/>
                         {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.club.address') }}</span>
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                             <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
@@ -73,7 +76,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 
                         <div class="input-group">
-                            <span class="input-group-addon">{{trans('core.club.phone') }}</span>
                             {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
                             <span class="input-group-addon"><i class="icon-phone"></i></span>
                         </div>

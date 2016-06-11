@@ -66,32 +66,43 @@ class ClubController extends Controller
     public function create()
     {
         $club = new Club;
-
+        $federations = new Collection();
+        $associations = new Collection();
         if (Auth::user()->cannot('create', $club)) {
             throw new UnauthorizedException();
         }
 
         if (Auth::user()->isFederationPresident()) {
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->lists('name', 'id');
-            $federations = Auth::user()->federationOwned->lists('name', 'id');
-            $associations = Auth::user()->federationOwned->associations->lists('name', 'id');
-        }
-        if (Auth::user()->isAssociationPresident()) {
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->lists('name', 'id');
+
+            $federation = Auth::user()->federationOwned;
+            $federations->push($federation);
+
+            $federations = $federations->pluck('name', 'id');
+            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
+            $users = new Collection; // This will be set by JS
+
+        } else if (Auth::user()->isAssociationPresident()) {
+
+
             $federation = Auth::user()->associationOwned->federation;
+            $federations->push($federation);
+            $federations = $federations->pluck('name', 'id');
+
             $association = Auth::user()->associationOwned;
-            dd(Auth::user()->associationOwned);
+            $associations->push($association);
+            $associations = $associations->pluck('name', 'id');
+            // NO REGRESA USUARIOS PARA EDOMEX, INVESTIGAR
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else {
             // User is SuperAdmin
-            $users = User::lists('name', 'id');
-            $federations = Federation::lists('name', 'id');
-            $associations = Association::lists('name', 'id');
+            $federations = Federation::pluck('name', 'id');
+            $associations = new Collection; // This will be set by JS
+            $users = new Collection; // This will be set by JS
         }
-
 
 
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        return view('clubs.form', compact('club', 'users', 'federations','associations', 'submitButton')); //
+        return view('clubs.form', compact('club', 'users', 'federations', 'associations', 'submitButton')); //
     }
 
     /**

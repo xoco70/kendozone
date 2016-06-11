@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Webpatser\Countries\Countries;
 
 class Federation extends Model
 {
@@ -42,12 +43,12 @@ class Federation extends Model
 
     public function associations()
     {
-        return $this->hasMany('Association');
+        return $this->hasMany(Association::Class);
     }
 
     public function country()
     {
-        return $this->belongsTo('Webpatser\Countries\Countries');
+        return $this->belongsTo(Countries::Class);
     }
 
 }
