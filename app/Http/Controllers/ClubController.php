@@ -71,7 +71,7 @@ class ClubController extends Controller
         if (Auth::user()->cannot('create', $club)) {
             throw new UnauthorizedException();
         }
-
+        //TODO Set Users to Void and set it with VueJS through APIs
         if (Auth::user()->isFederationPresident()) {
 
             $federation = Auth::user()->federationOwned;
@@ -79,7 +79,8 @@ class ClubController extends Controller
 
             $federations = $federations->pluck('name', 'id');
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
-            $users = new Collection; // This will be set by JS
+//            $users = new Collection; // This will be set by JS
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
 
         } else if (Auth::user()->isAssociationPresident()) {
 
@@ -95,9 +96,12 @@ class ClubController extends Controller
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else {
             // User is SuperAdmin
+            $users = User::pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
-            $associations = new Collection; // This will be set by JS
-            $users = new Collection; // This will be set by JS
+            $associations = Association::pluck('name', 'id');
+//            $federations = Federation::pluck('name', 'id');
+//            $associations = new Collection; // This will be set by JS
+//            $users = new Collection; // This will be set by JS
         }
 
 

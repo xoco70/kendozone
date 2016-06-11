@@ -101,14 +101,15 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
 
 //APIS
-Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
-//    Route::get('authenticate', 'Api\AuthenticateController@index');
-//    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
-//    Route::resource('tournaments', 'Api\TournamentController');
-    Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
+                Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
+                //    Route::get('authenticate', 'Api\AuthenticateController@index');
+                //    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
+                //    Route::resource('tournaments', 'Api\TournamentController');
+                    Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
-    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
-    Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
-    Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
+                //    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
+                    Route::get("federations", 'FederationController@index');
+                    Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
+                    Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
 
-});
+                });

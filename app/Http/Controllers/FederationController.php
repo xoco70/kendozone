@@ -10,6 +10,7 @@ use App\Http\Requests\FederationRequest;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Support\Facades\Auth;
+use Request;
 use URL;
 
 class FederationController extends Controller
@@ -25,8 +26,15 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = Federation::with('president', 'country')->get(); // ,'vicepresident','secretary','treasurer','admin'
-        return view('federations.index', compact('federations'));
+        $federations = Federation::with('president', 'country'); // ,'vicepresident','secretary','treasurer','admin'
+
+        if (Request::ajax()) {
+            return $federations->orderBy('id', 'asc')->get(['id as value', 'name as text'])->toArray();
+        } else {
+            $federations = $federations->get();
+            return view('federations.index', compact('federations'));
+        }
+
     }
 
 
