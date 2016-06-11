@@ -48,6 +48,14 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         switch ($e) {
+
+            case $e instanceof NotFoundHttpException:
+                $code = "404";
+                $message = "Not Found";
+                $quote = "I will search for you through 1000 worlds and 10000 lifetimes!";
+                $author = "Kai";
+                $source = "47 Ronin";
+                break;
             case $e instanceof NotFoundHttpException:
                 $code = "404";
                 $message = "Not Found";
@@ -85,7 +93,12 @@ class Handler extends ExceptionHandler
                 break;
 
             default:
-                return parent::render($request, $e);
+                $code = "500";
+                $message = $e->getMessage();
+                $quote = "";
+                $author = "Admin";
+                $source = "";
+                break;
         }
         return response()->view('errors.general',
             ['code' => $code,
