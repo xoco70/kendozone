@@ -69,7 +69,7 @@ class AssociationController extends Controller
         }
 
         if (Auth::user()->isFederationPresident()) {
-            $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
+            $users = User::where('country_id', '=', Auth::user()->federationOwned->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
         } else {
             // User is SuperAdmin
             $users = User::lists('name', 'id'); //TODO Should be list of user which belongs to association

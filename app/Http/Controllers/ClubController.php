@@ -150,6 +150,7 @@ class ClubController extends Controller
         if (Auth::user()->cannot('edit', $club)) {
             throw new UnauthorizedException();
         }
+
         //TODO Set Users to Void and set it with VueJS through APIs
         if (Auth::user()->isFederationPresident()) {
 
