@@ -7,7 +7,6 @@
 @section('content')
 
 
-
     <div class="container-fluid">
 
         @if (sizeof($clubs)==0)

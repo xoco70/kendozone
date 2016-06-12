@@ -39,15 +39,20 @@ class ClubController extends Controller
     {
         $clubs = Club::with('president', 'association.federation');
 
+        if (Auth::user()->isFederationPresident()) {
+            $clubs->whereHas('association.federation', function ($query) {
+                $query->where('federation_id', Auth::user()->federationOwned->id);
+            });
+        }
+
         if (Auth::user()->isAssociationPresident()) {
             $clubs->whereHas('association', function ($query) {
                 $query->where('id', Auth::user()->associationOwned->id);
             });
         }
-        if (Auth::user()->isFederationPresident()) {
-            $clubs->whereHas('association.federation', function ($query) {
-                $query->where('federation_id', Auth::user()->federationOwned->id);
-            });
+
+        if (Auth::user()->isClubPresident()) {
+            $clubs->where('id', Auth::user()->clubOwned->id);
         }
 
 
@@ -93,7 +98,7 @@ class ClubController extends Controller
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
-        } else {
+        }  else {
             // User is SuperAdmin
             $users = User::pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
@@ -172,7 +177,18 @@ class ClubController extends Controller
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
-        } else {
+        } else if (Auth::user()->isClubPresident()) {
+            $federation = Auth::user()->clubOwned->association->federation;
+            $federations->push($federation);
+
+            $federations = $federations->pluck('name', 'id');
+
+            $association = Auth::user()->clubOwned->association;
+            $associations->push($association);
+            $associations = $associations->pluck('name', 'id');
+            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
+        }
+        else {
             // User is SuperAdmin
             $users = User::pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
@@ -182,7 +198,7 @@ class ClubController extends Controller
 //            $users = new Collection; // This will be set by JS
         }
 
-        return view('clubs.form', compact('club', 'users', 'associations','federations')); //
+        return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //
     }
 
     /**
@@ -194,8 +210,12 @@ class ClubController extends Controller
      */
     public function update(ClubRequest $request, $id)
     {
-
         $club = Club::findOrFail($id);
+
+        if (Auth::user()->cannot('update', $club)) {
+            throw new UnauthorizedException();
+        }
+
         $club->update($request->except(['federation_id']));
         $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
         flash()->success($msg);

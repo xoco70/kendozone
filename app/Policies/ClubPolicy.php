@@ -44,9 +44,29 @@ class ClubPolicy
         } else if ($user->isAssociationPresident()) {
                 if ($user->associationOwned->id == $club->association->id)
                 return true;
+        }else if ($user->isClubPresident()) {
+            if ($user->clubOwned->id == $club->id)
+                return true;
         }
         return false;
     }
+
+    public function update(User $user, Club $club)
+    {
+        if ($user->isFederationPresident()) {
+            if ($user->federationOwned->id == $club->association->federation->id)
+                return true;
+
+        } else if ($user->isAssociationPresident()) {
+            if ($user->associationOwned->id == $club->association->id)
+                return true;
+        }else if ($user->isClubPresident()) {
+            if ($user->clubOwned->id == $club->id)
+                return true;
+        }
+        return false;
+    }
+
     public function store(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
