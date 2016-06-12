@@ -42,6 +42,7 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td>
+
                                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}"><img
                                                         src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                         </td>
@@ -59,7 +60,8 @@
                                                  alt="{{ $user->country->name }}"/></td>
 
                                         <td class="text-center">
-                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteUser', 'action' => ['UserController@destroy', $user->slug]]) !!}
+                                            <a href="{{URL::action('UserController@edit', $user->slug)}}"><i class="icon icon-pencil7"></i></a>
+                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteUser', 'action' => ['UserController@destroy', $user->slug], 'style'=>"display: inline-block"]) !!}
                                             {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteUser', 'id'=>'delete_'.$user->slug, 'data-id' => $user->slug ] ) !!}
                                             {!! Form::close() !!}
                                         </td>

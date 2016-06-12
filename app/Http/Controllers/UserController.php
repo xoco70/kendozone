@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('ownUser', ['except' => ['index', 'show']]);
+//        $this->middleware('ownUser', ['except' => ['index', 'show']]);
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         $this->modelPlural = trans_choice('core.user', 1);
@@ -47,7 +47,20 @@ class UserController extends Controller
 //        $users = new Collection(User::class)  ;
         if (Auth::user()->isSuperAdmin()) {
             $users = User::with('country', 'role')->paginate(Config::get('constants.PAGINATION'));
-        } else {
+        } else if (Auth::user()->isFederationPresident()) {
+            $users = User::with('country', 'role')
+                ->where('federation_id', '=', Auth::user()->federationOwned->id)
+                ->paginate(Config::get('constants.PAGINATION'));
+
+        } else if (Auth::user()->isAssociationPresident()) {
+            $users = User::with('country', 'role')
+                ->where('association_id', '=', Auth::user()->associationOwned->id)
+                ->paginate(Config::get('constants.PAGINATION'));
+        } else if (Auth::user()->isClubPresident()) {
+            $users = User::with('country', 'role')
+                ->where('club_id', '=', Auth::user()->clubOwned->id)
+                ->paginate(Config::get('constants.PAGINATION'));
+        } else if (Auth::user()->isFederationPresident()) {
             throw new UnauthorizedException();
         }
         return view('users.index', compact('users'));
