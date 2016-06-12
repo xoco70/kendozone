@@ -29,6 +29,8 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@registerTournamentInvite');
 Route::post('tournaments/{tournament}/invite/{invite}/categories', 'InviteController@registerCategories');
 
+Route::get('lang/{lang}', 'LanguageController@update');
+
 Route::group(['middleware' => ['guest']],
     function () {
         Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -66,7 +68,6 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
 
-        Route::get('lang/change/{lang}', 'LanguageController@change');
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');

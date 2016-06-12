@@ -1,6 +1,9 @@
 @extends('layouts.guest')
 
 @section('content')
+    <?php
+//            dd(App::getLocale());
+            ?>
 <form id="login-form" class="login-form" method="POST" action="{!!   URL::action('Auth\AuthController@postLogin') !!}">
 
     {!! csrf_field() !!}
