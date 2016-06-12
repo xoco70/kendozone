@@ -21,6 +21,7 @@
 </head>
 
 <body>
+@include('layouts.headmenu')
 
 <!-- Page container -->
 <div class="page-container login-container">

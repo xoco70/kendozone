@@ -2,12 +2,14 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="{{ URL::action('DashboardController@index') }}"><img src="/images/logored.png"
                                                                                            alt=""></a>
+        @if(Auth::check())
         <ul class="nav navbar-nav visible-xs-block mt-15">
             <li><a data-toggle="collapse" data-target="#navbar-second-toggle"><img src="{!! Auth::getUser()->avatar !!}"
                                                                                    width="28"
                                                                                    alt="kendozone_avatar"></a></li>
             <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
         </ul>
+        @endif
     </div>
 
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
@@ -16,9 +18,11 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+            @if(Auth::check())
             <li class="head_create_tournament"><a href="{{ URL::action('TournamentController@create') }}"
                                                   class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}</a>
             </li>
+
             <li>
                 <ul class="dropdown-menu dropdown-menu-right icons-right">
                     <li><a href="{!! URL::to('/settings')!!}"><i
@@ -28,7 +32,7 @@
                     </li>
                 </ul>
             </li>
-
+            @endif
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
                     @if (App::getLocale() =='es')
@@ -47,7 +51,7 @@
                             <img src="/images/flags/GB.png" alt="English"> English</a></li>
                 </ul>
             </li>
-
+            @if(Auth::check())
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                     @if(Auth::check())
@@ -133,6 +137,7 @@
 
                 </ul>
             </li>
+           @endif
         </ul>
     </div>
 </div>
