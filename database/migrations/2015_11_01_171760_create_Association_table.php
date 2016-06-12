@@ -9,7 +9,7 @@ class CreateAssociationTable extends Migration {
 	{
 		Schema::create('association', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('name')->unique();
+			$table->string('name');
 			$table->integer('federation_id')->unsigned();
 			$table->integer('president_id')->unsigned();
 			$table->string('state')->nullable();
@@ -21,6 +21,8 @@ class CreateAssociationTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';
+
+			$table->unique(['name','deleted_at'], 'association_name_unique');
 
 			$table->foreign('president_id')
 				->references('id')

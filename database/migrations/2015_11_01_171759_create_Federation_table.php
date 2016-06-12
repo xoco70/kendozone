@@ -9,7 +9,7 @@ class CreateFederationTable extends Migration {
 	{
 		Schema::create('federation', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('name')->unique();
+			$table->string('name');
 			$table->integer('president_id')->nullable()->unsigned();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
@@ -24,6 +24,7 @@ class CreateFederationTable extends Migration {
 
 			$table->timestamps();
 			$table->engine = 'InnoDB';
+			$table->unique(['name','deleted_at'], 'federation_name_unique');
 
 			$table->foreign('president_id')
 				->references('id')
