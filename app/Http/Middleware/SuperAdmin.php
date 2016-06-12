@@ -22,7 +22,6 @@ class SuperAdmin
             if (!$userLogged->isSuperAdmin()) {
                 throw new UnauthorizedException;
             }
-            // Check if user own tournament
         }
 
 
