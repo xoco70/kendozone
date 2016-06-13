@@ -64,7 +64,7 @@ Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
         Route::get('/', 'DashboardController@index');
-        Route::resource('federations', 'FederationController');
+        Route::resource('federations', 'FederationController', ['names' => ['index' => 'federations.index', 'create' => 'federations.create', 'edit' => 'federations.edit', 'store' => 'federations.store', 'update' => 'federations.update']]);
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
 
@@ -109,7 +109,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
                     Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
 
                 //    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
-                    Route::get("federations", 'FederationController@index');
+                    Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
                     Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
                     Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
 

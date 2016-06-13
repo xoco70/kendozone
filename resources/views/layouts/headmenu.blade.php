@@ -67,7 +67,7 @@
 
                         <li>
                             <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"
-                               href="{!! URL::action('FederationController@index') !!}" id="federations"><i
+                               href="{!! route('federations.index') !!}" id="federations"><i
                                         class="icon-starburst position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
                             </a>
                         </li>
