@@ -62,11 +62,12 @@
                         <tr id="{!! $tournament->slug !!}">
                             <td>
                                 @if (!$tournament->isDeleted())
-                                    @if (Auth::user()->canEditTournament($tournament))
+                                    @can('edit',$tournament)
+
                                         <a href="{!!   URL::action('TournamentController@edit',  $tournament->slug) !!}">{{ $tournament->name }}</a>
                                     @else
                                         <a href="{!!   URL::action('TournamentController@show',  $tournament->slug) !!}">{{ $tournament->name }}</a>
-                                    @endif
+                                    @endcan
                                 @else
                                     {{ $tournament->name }}
                                 @endif

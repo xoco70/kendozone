@@ -8,7 +8,9 @@ use App\Federation;
 use App\Policies\AssociationPolicy;
 use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
+use App\Policies\TournamentPolicy;
 use App\Policies\UserPolicy;
+use App\Tournament;
 use App\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -21,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-
+        Tournament::class => TournamentPolicy::class,
         User::class => UserPolicy::class,
         Federation::class => FederationPolicy::class,
         Association::class => AssociationPolicy::class,

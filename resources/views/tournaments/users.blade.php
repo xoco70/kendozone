@@ -22,7 +22,7 @@ else
 
                     <div class="container-fluid">
 
-                        @if (Auth::user()->canEditTournament($tournament))
+                        @can('edit',$tournament)
                             {{--<a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"--}}
                             {{--class="btn bg-teal btn-xs pull-right ml-20"><b><i--}}
                             {{--class="icon-tree7 mr-5"></i>{{ trans('core.generate_trees') }}</b>--}}
@@ -34,7 +34,7 @@ else
                                data-name="{!! $categoryTournament->category->buildName($grades) !!}"><b><i
                                             class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                             </a>
-                        @endif
+                        @endcan
 
                         <a name="{{ str_slug($categoryTournament->category->buildName($grades), "-") }}">
                             <legend class="text-semibold">{{ $categoryTournament->category->buildName($grades) }}</legend>
@@ -49,9 +49,9 @@ else
                                 <th align="center" class="phone">{{ trans_choice('core.category',1) }}</th>
                                 <th align="center" class="phone">{{ trans('core.confirmed') }}</th>
                                 <th class="phone">{{ trans('core.country') }}</th>
-                                @if (Auth::user()->canEditTournament($tournament))
+                                @can('edit',$tournament)
                                     <th class="all">{{ trans('core.action') }}</th>
-                                @endif
+                                @endcan
                             </tr>
                             </thead>
 
@@ -67,11 +67,11 @@ else
                                                     src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                     </td>
                                     <td>
-                                        @if (Auth::user()->canEditTournament($tournament))
+                                        @can('edit',$tournament)
                                             <a href="{!!   URL::action('UserController@edit',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
                                         @else
                                             <a href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
-                                        @endif
+                                        @endcan
 
 
                                     </td>
@@ -85,7 +85,7 @@ else
                                             <?php $class = "glyphicon glyphicon-remove-sign text-danger ";?>
                                         @endif
 
-                                        @if (Auth::user()->canEditTournament($tournament))
+                                        @can('edit',$tournament)
                                             {!! Form::open(['method' => 'PUT', 'id' => 'formConfirmTCU',
                                         'action' => ['TournamentUserController@confirmUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
 
@@ -103,7 +103,7 @@ else
                                             <i class="{!! $class  !!} "></i>
 
 
-                                        @endif
+                                        @endcan
 
 
                                     </td>
@@ -112,7 +112,7 @@ else
                                     <td class="text-center"><img src="/images/flags/{{ $country->flag }}"
                                                                  alt="{{ $country->name }}"/></td>
 
-                                    @if (Auth::user()->canEditTournament($tournament))
+                                    @can('edit',$tournament)
                                         <td class="text-center">
 
                                             {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
@@ -128,7 +128,7 @@ else
                                             </button>
                                             {!! Form::close() !!}
                                         </td>
-                                    @endif
+                                    @endcan
                                 </tr>
 
                             @endforeach

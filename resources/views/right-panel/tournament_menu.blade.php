@@ -70,7 +70,7 @@
         </div>
     </div>
     <br/>
-    @if (Auth::user()->canEditTournament($tournament))
+    @can('edit',$tournament)
         <div class="row">
             <div class="col-md-12">
                 <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button"
@@ -80,7 +80,7 @@
 
             </div>
         </div>
-    @endif
+    @endcan
     <br/>
     <?php
     $link = "";

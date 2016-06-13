@@ -10,23 +10,22 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                     <legend class="text-semibold">{{ trans('core.tournaments_created') }}</legend>
                 </fieldset>
 
-                    <table width="100%">
-                        @foreach($tournamentsCreated->sortByDesc('created_at')->take(3) as $tournament)
-                            <tr class="dashboard-table">
-                                <td width="80%">{{$tournament->name}}</td>
-                                <td width="20%" align="right"><a
-                                            class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
-                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
-                                </td>
-                            </tr>
-                        @endforeach
+                <table width="100%">
+                    @foreach($tournamentsCreated->sortByDesc('created_at')->take(3) as $tournament)
+                        <tr class="dashboard-table">
+                            <td width="80%">{{$tournament->name}}</td>
+                            <td width="20%" align="right"><a
+                                        class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
+                                        href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
+                            </td>
+                        </tr>
+                    @endforeach
 
-                    </table>
-                    <div align="right" class="mt-20 pt-20">
-                        <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "
-                           href="{!! URL::to('tournaments')!!}">{{trans('core.see_all')}}</a>
-                    </div>
-
+                </table>
+                <div align="right" class="mt-20 pt-20">
+                    <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "
+                       href="{!! URL::to('tournaments')!!}">{{trans('core.see_all')}}</a>
+                </div>
 
 
             </div>
@@ -53,15 +52,15 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
 
                             <tr class="dashboard-table" height="100px" valign="middle">
                                 <td width="80%">{{$tournament->name}}</td>
-                                <td width="20%" align="right"><a
-                                            class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
-                                            @if(Auth::user()->isSuperAdmin() || Auth::user()->ownsTournament($tournament))
-                                            href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
+                                <td width="20%" align="right">
+                                    <a class="btn border-success text-success btn-flat border-4 seeall pl-20 pr-20 "
+                                    @can('edit',$tournament)
+                                       href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}">EDIT</a>
                                     @else
                                         {{--TODO Permission problems--}}
-                                        href="{!! URL::action('TournamentController@show', $tournament->slug) !!}
-                                        ">VER</a>
-                                    @endif
+                                       href="{!! URL::action('TournamentController@show', $tournament->slug) !!}
+                                       ">VER</a>
+                                    @endcan
                                 </td>
                             </tr>
 
@@ -71,7 +70,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                     <div align="right" class="mt-20 pt-20">
                         <a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall"
                            href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug) !!}"
-                                   >{{trans('core.see_all')}}</a>
+                        >{{trans('core.see_all')}}</a>
                     </div>
                 @endif
 
@@ -116,54 +115,54 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
             </div>
         </div>
         {{--<div class="row">--}}
-            {{--<div class="panel panel-body">--}}
+        {{--<div class="panel panel-body">--}}
 
-                {{--<fieldset title="ULTIMOS MENSAJES">--}}
-                    {{--<legend class="text-semibold">ULTIMAS NOTIFICACIONES</legend>--}}
-                {{--</fieldset>--}}
-
-
-                {{--<ul class="media-list">--}}
-                    {{--<li class="media">--}}
-                        {{--<div class="media-left">--}}
-                            {{--<img src="/images/demo/users/face10.jpg" class="img-circle img-xs" alt="">--}}
-                            {{--<span class="badge bg-danger-400 media-badge">8</span>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="media-body">--}}
-                            {{--<a href="#">--}}
-                                {{--Jesus Maya--}}
-                                {{--<span class="media-annotation pull-right">14:58</span>--}}
-                            {{--</a>--}}
-
-                            {{--<span class="display-block text-muted">Practica en Amecameca mañana... 4 horas de geiko para que se les quite lo p...</span>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
-
-                    {{--<li class="media">--}}
-                        {{--<div class="media-left">--}}
-                            {{--<img src="/images/demo/users/face3.jpg" class="img-circle img-xs" alt="">--}}
-                        {{--</div>--}}
-
-                        {{--<div class="media-body">--}}
-                            {{--<a href="#">--}}
-                                {{--FMK--}}
-                                {{--<span class="media-annotation pull-right">12:16</span>--}}
-                            {{--</a>--}}
-
-                            {{--<span class="display-block text-muted">¡Examen de Iaido! No se apendejen!!!</span>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
+        {{--<fieldset title="ULTIMOS MENSAJES">--}}
+        {{--<legend class="text-semibold">ULTIMAS NOTIFICACIONES</legend>--}}
+        {{--</fieldset>--}}
 
 
-                {{--</ul>--}}
+        {{--<ul class="media-list">--}}
+        {{--<li class="media">--}}
+        {{--<div class="media-left">--}}
+        {{--<img src="/images/demo/users/face10.jpg" class="img-circle img-xs" alt="">--}}
+        {{--<span class="badge bg-danger-400 media-badge">8</span>--}}
+        {{--</div>--}}
 
-                {{--<div align="right" class="pt-20">--}}
-                    {{--<a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "--}}
-                       {{--href="#">{{trans('core.see_all')}}</a>--}}
-                {{--</div>--}}
+        {{--<div class="media-body">--}}
+        {{--<a href="#">--}}
+        {{--Jesus Maya--}}
+        {{--<span class="media-annotation pull-right">14:58</span>--}}
+        {{--</a>--}}
 
-            {{--</div>--}}
+        {{--<span class="display-block text-muted">Practica en Amecameca mañana... 4 horas de geiko para que se les quite lo p...</span>--}}
+        {{--</div>--}}
+        {{--</li>--}}
+
+        {{--<li class="media">--}}
+        {{--<div class="media-left">--}}
+        {{--<img src="/images/demo/users/face3.jpg" class="img-circle img-xs" alt="">--}}
+        {{--</div>--}}
+
+        {{--<div class="media-body">--}}
+        {{--<a href="#">--}}
+        {{--FMK--}}
+        {{--<span class="media-annotation pull-right">12:16</span>--}}
+        {{--</a>--}}
+
+        {{--<span class="display-block text-muted">¡Examen de Iaido! No se apendejen!!!</span>--}}
+        {{--</div>--}}
+        {{--</li>--}}
+
+
+        {{--</ul>--}}
+
+        {{--<div align="right" class="pt-20">--}}
+        {{--<a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "--}}
+        {{--href="#">{{trans('core.see_all')}}</a>--}}
+        {{--</div>--}}
+
+        {{--</div>--}}
         {{--</div>--}}
     </div>
 

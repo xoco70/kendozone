@@ -393,21 +393,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-    public function ownsTournament(Tournament $tournament)
-    {
-        return $this->id == $tournament->user_id;
-    }
+//    public function ownsTournament(Tournament $tournament)
+//    {
+//        return $this->id == $tournament->user_id;
+//    }
 
 
-    public function canEditTournament($tournament)
-    {
-        return ($this->id == $tournament->user_id || $this->isSuperAdmin());
-    }
+//    public function canEditTournament($tournament)
+//    {
+//        return ($this->id == $tournament->user_id || $this->isSuperAdmin());
+//    }
 
-    public function canEditUser($user)
-    {
-        return ($this->id == $user->user_id || $this->isSuperAdmin());
-    }
+//    public function canEditUser($user)
+//    {
+//        return ($this->id == $user->user_id || $this->isSuperAdmin());
+//    }
 
     public function isFederationPresident($federation = null)
     {

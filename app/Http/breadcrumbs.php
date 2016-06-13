@@ -29,7 +29,7 @@ Breadcrumbs::register('associations.index', function ($breadcrumbs) {
 
 Breadcrumbs::register('associations.create', function ($breadcrumbs) {
     $breadcrumbs->parent('associations.index');
-    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => trans_choice('core.association',1)]), route('associations.create'));
+    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]), route('associations.create'));
 
 });
 
@@ -81,7 +81,7 @@ Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentMode
 // Home > Tournaments > Edit Tournament
 Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
-    if (Auth::user()->canEditTournament($tournament)) {
+    if (policy($tournament)->edit(Auth::user(), $tournament)) {
         $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
     } else {
         $breadcrumbs->push($tournament->name, route('tournaments.show', $tournament->slug));
@@ -97,14 +97,16 @@ Breadcrumbs::register('invites.index', function ($breadcrumbs) {
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
-
-    if (Auth::user()->canEditTournament($tournament)) {
-        $breadcrumbs->parent('tournaments.edit', $tournament);
-    } else {
-        $breadcrumbs->parent('tournaments.show', $tournament);
+    if ($tournament != null){
+        if (policy($tournament)->edit(Auth::user(), $tournament)) {
+            $breadcrumbs->parent('tournaments.edit', $tournament);
+        } else {
+            $breadcrumbs->parent('tournaments.show', $tournament);
+        }
+        $breadcrumbs->push(trans('core.invite_competitors'), route('invites.show', $tournament->slug));
     }
 
-    $breadcrumbs->push(trans('core.invite_competitors'), route('invites.show', $tournament->slug));
+
 });
 
 // Home > Tournaments > MyTournament > List Competitors
@@ -115,7 +117,7 @@ Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tourna
 
 // Home > Tournaments > MyTournament > Add Competitors
 Breadcrumbs::register('tournaments.users.create', function ($breadcrumbs, $tournament) {
-    if (Auth::user()->canEditTournament($tournament)) {
+    if (policy($tournament)->edit(Auth::user(), $tournament)) {
         $breadcrumbs->parent('tournaments.edit', $tournament);
     } else {
         $breadcrumbs->parent('tournaments.show', $tournament);
@@ -132,7 +134,7 @@ Breadcrumbs::register('tournaments.users.show', function ($breadcrumbs, $tournam
 // Home > Edit Profile
 Breadcrumbs::register('users.edit', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
-    if (Auth::user()->canEditUser($user)) {
+    if (policy($user)->edit(Auth::user(), $user)) {
         $breadcrumbs->push($user->name, route('users.edit', $user->slug));
     } else {
         $breadcrumbs->push($user->name, route('users.show', $user->slug));
