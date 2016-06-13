@@ -26,6 +26,7 @@
                 <tr>
 
                     <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans_choice('core.federation',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans_choice('core.association',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.club.president') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
@@ -40,6 +41,7 @@
                         <td><a
                                     href="{!!   URL::action('ClubController@edit',  $club->id) !!}">{{ $club->name }}</a>
                         </td>
+                        <td>{{ $club->association !=null ? $club->association->federation->name : "-"}}</td>
                         <td>{{ $club->association !=null ? $club->association->name : "-"}}</td>
                         <td align="center">{{ $club->president !=null ? $club->president->name : " - " }}</td>
                         <td align="center">{{ $club->president != null ? $club->president->email : " - "}}</td>

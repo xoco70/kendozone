@@ -55,8 +55,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                             {!!  Form::select('federation_id', $federations,$federation->id, ['class' => 'form-control']) !!}
                         @elseif (Auth::user()->isFederationPresident())
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::text('federation',Auth::user()->federationOwned->name, ['class' => 'form-control disabled', 'disabled']) !!}
-                            {!!  Form::hidden('federation_id', Auth::user()->federationOwned->id) !!}
+                            {!!  Form::select('federation_id',$federations,Auth::user()->federationOwned->id ,['class' => 'form-control']) !!}
                         @endif
 
 

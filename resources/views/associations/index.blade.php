@@ -47,7 +47,7 @@
                                 {{ $association->name }}
                             @endif
                         </td>
-                        <td>{{ $association->federation->name }}</td>
+                        <td align="center">{{ $association->federation != null ? $association->federation->name : " - "}}</td>
                         <td align="center">{{ $association->president != null ? $association->president->name : " - "}}</td>
                         <td align="center">{{ $association->president != null ? $association->president->email : " - " }}</td>
                         <td align="center">{{ $association->address }}</td>
