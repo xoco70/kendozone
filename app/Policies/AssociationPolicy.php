@@ -71,8 +71,9 @@ class AssociationPolicy
      */
     public function edit(User $user, Association $association)
     {
-
-        if ($user->isFederationPresident() && $user->federationOwned->id == $association->federation->id)
+        if ($user->isFederationPresident()
+            && $association->federation!= null
+            && $user->federationOwned->id == $association->federation->id)
             return true;
 
         if ($user->isAssociationPresident() &&

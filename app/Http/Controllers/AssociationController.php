@@ -24,7 +24,6 @@ class AssociationController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('association', ['except' => ['index','show']]); //
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -51,7 +50,7 @@ class AssociationController extends Controller
     public function create()
     {
         $association = new Association;
-        $federations = new Collection;
+        $federation = new Collection;
 
         if (Auth::user()->cannot('create', new Association)) {
             throw new UnauthorizedException();
@@ -112,7 +111,7 @@ class AssociationController extends Controller
 
         $association = Association::findOrFail($id);
         $federation = $association->federation;
-        
+
         if (Auth::user()->cannot('edit', $association)) {
             throw new UnauthorizedException();
         }

@@ -128,18 +128,8 @@ class AssociationTest extends TestCase
 
         $this->type($association->name, 'name')
             ->type($association->address, 'address')
-            ->type($association->phone, 'phone');
-
-        if ($user->isFederationPresident()) {
-            $this->seeElement('input', ['name' => 'federation', 'disabled' => 'disabled'])
-                ->seeElement('input', ['name' => 'federation_id', 'type' => 'hidden']);
-        }else {
-            // Get list of federations
-//            $federations = Federation::lists('name');
-//            $federation = array_rand($federations);
-            // Fill Federation
-//            $this->
-        }
+            ->type($association->phone, 'phone')
+            ->select($association->federation->id, 'federation_id');
 
         $this->press(trans('core.save'))
             ->seeInDatabase('association',

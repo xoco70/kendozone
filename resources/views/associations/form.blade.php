@@ -52,7 +52,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         @if (Auth::user()->isSuperAdmin())
 
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::select('federation_id', $federations,$federation->id, ['class' => 'form-control']) !!}
+                            {!!  Form::select('federation_id', $federations,$federation->has('id') ? $federation->id : 0, ['class' => 'form-control']) !!}
                         @elseif (Auth::user()->isFederationPresident())
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
                             {!!  Form::select('federation_id',$federations,Auth::user()->federationOwned->id ,['class' => 'form-control']) !!}
