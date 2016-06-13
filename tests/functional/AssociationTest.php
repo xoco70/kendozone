@@ -142,7 +142,6 @@ class AssociationTest extends TestCase
         }
 
         $this->press(trans('core.save'))
-            ->seePageIs('/associations')
             ->seeInDatabase('association',
                 ['name' => $association->name,
                     'address' => $association->address,
