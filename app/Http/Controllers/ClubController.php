@@ -37,28 +37,10 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $clubs = Club::with('president', 'association.federation');
+        $clubs = Club::with('president', 'association.federation')
+            ->forUser(Auth::user())
+            ->get();
 
-        if (Auth::user()->isFederationPresident()) {
-            $clubs->whereHas('association.federation', function ($query) {
-                $query->where('federation_id', Auth::user()->federationOwned->id);
-            });
-        }
-
-        if (Auth::user()->isAssociationPresident()) {
-            $clubs->whereHas('association', function ($query) {
-                $query->where('id', Auth::user()->associationOwned->id);
-            });
-        }
-
-        if (Auth::user()->isClubPresident()) {
-            $clubs->where('id', Auth::user()->clubOwned->id);
-        }
-
-
-        $clubs = $clubs->get();
-
-//        dd($clubs);
         return view('clubs.index', compact('clubs'));
     }
 

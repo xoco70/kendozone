@@ -38,17 +38,7 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        //TODO Will fail if Auth::user()->associationOwned->federation is null
-
-        // 2 Cases, if root, show everything, else show only for your country
-        $associations = Association::with('president', 'federation.country')
-            ->whereHas('federation', function ($query) {
-                if (!Auth::user()->isSuperAdmin()) {
-                    $query->where('country_id', Auth::user()->country_id);
-                }
-            })->get();
-
-
+        $associations = Association::with('president', 'federation.country')->forUser(Auth::user())->get();
         return view('associations.index', compact('associations'));
     }
 
@@ -62,20 +52,14 @@ class AssociationController extends Controller
     {
         $association = new Association;
         $federations = new Collection;
-        $federation = new Federation;
 
         if (Auth::user()->cannot('create', new Association)) {
             throw new UnauthorizedException();
         }
 
-        if (Auth::user()->isFederationPresident()) {
-            $users = User::where('country_id', '=', Auth::user()->federationOwned->country_id)->lists('name', 'id'); //TODO Should be list of user which belongs to association
-        } else {
-            // User is SuperAdmin
-            $users = User::lists('name', 'id'); //TODO Should be list of user which belongs to association
-            $federations = Federation::lists('name', 'id');
-        }
 
+        $users = User::forUser(Auth::user())->pluck('name', 'id');
+        $federations = Federation::forUser(Auth::user())->lists('name', 'id');
 
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
@@ -87,7 +71,8 @@ class AssociationController extends Controller
      * @param AssociationRequest $request
      * @return Response
      */
-    public function store(AssociationRequest $request)
+    public
+    function store(AssociationRequest $request)
     {
         // Assoc Policy
         if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
@@ -107,7 +92,8 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
 
         $association = Association::findOrFail($id);
@@ -120,17 +106,20 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
-        $association = Association::findOrFail($id);
 
+        $association = Association::findOrFail($id);
+        $federation = $association->federation;
+        
         if (Auth::user()->cannot('edit', $association)) {
             throw new UnauthorizedException();
         }
 
-        $users = User::where('country_id', '=', $association->federation->country_id)->lists('name', 'id');
-        $federations = Federation::lists('name', 'id');
-        $federation = $association->federation;
+        $users = User::forUser(Auth::user())->pluck('name', 'id');
+        $federations = Federation::forUser(Auth::user())->lists('name', 'id');
+
         return view('associations.form', compact('association', 'users', 'federations', 'federation'));
     }
 
@@ -141,7 +130,8 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AssociationRequest $request, $id)
+    public
+    function update(AssociationRequest $request, $id)
     {
         $association = Association::findOrFail($id);
 
@@ -149,7 +139,7 @@ class AssociationController extends Controller
             throw new UnauthorizedException();
         }
 
-        $association->update($request->all());
+        $association->update($request->except(['federation_id']));
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);
         return redirect(URL::action('AssociationController@edit', $association->id));
@@ -163,7 +153,8 @@ class AssociationController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param Association $association
      */
-    public function destroy($associationId)
+    public
+    function destroy($associationId)
     {
         $association = Association::find($associationId);
 //        dd($association);
@@ -178,7 +169,8 @@ class AssociationController extends Controller
      * @param $tournamentSlug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function restore($id)
+    public
+    function restore($id)
 
     {
         $association = Association::withTrashed()->find($id);
@@ -190,7 +182,8 @@ class AssociationController extends Controller
     }
 
 
-    public function changePresident()
+    public
+    function changePresident()
     {
         // Open Transaction
         // Get the current president

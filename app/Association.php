@@ -43,7 +43,7 @@ class Association extends Model
 
     public function president()
     {
-        return $this->hasOne(User::class,'id','president_id');
+        return $this->hasOne(User::class, 'id', 'president_id');
     }
 
 //    public function vicepresident()
@@ -77,4 +77,12 @@ class Association extends Model
         return $this->belongsTo(Federation::class);
     }
 
+    public function scopeForUser($query, User $user)
+    {
+        if (!$user->isSuperAdmin()) {
+            $query->whereHas('federation', function ($query) use ($user) {
+                $query->where('country_id', $user->country_id);
+            });
+        }
+    }
 }

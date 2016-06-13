@@ -51,4 +51,17 @@ class Federation extends Model
         return $this->belongsTo(Countries::Class);
     }
 
+    public function scopeForUser($query, User $user)
+    {
+        if ($user->isSuperAdmin()) {
+            return $query;
+        } else if ($user->isFederationPresident()){
+            return $query->where('id', '=', $user->federationOwned->id);
+        }  else if ($user->isAssociationPresident()){
+            return $query->where('id', '=', $user->associationOwned->federation->id);
+        } else if ($user->isClubPresident()){
+            return $query->where('id', '=', $user->clubOwned->association->federation->id);
+        } 
+    }
+
 }

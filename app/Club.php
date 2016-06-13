@@ -43,7 +43,7 @@ class Club extends Model
 
     public function president()
     {
-        return $this->hasOne(User::class,'id','president_id');
+        return $this->hasOne(User::class, 'id', 'president_id');
     }
 
 //    public function vicepresident()
@@ -77,4 +77,24 @@ class Club extends Model
         return $this->belongsTo(Association::class);
     }
 
+    public function scopeForUser($query, User $user)
+    {
+
+        if ($user->isFederationPresident()) {
+        $query->whereHas('association.federation', function ($query) use ($user) {
+            $query->where('federation_id', $user->federationOwned->id);
+        });
+    }
+
+        if ($user->isAssociationPresident()) {
+            $query->whereHas('association', function ($query) use ($user) {
+                $query->where('id', $user->associationOwned->id);
+            });
+        }
+
+        if ($user->isClubPresident()) {
+            $query->where('id', $user->clubOwned->id);
+        }
+
+    }
 }
