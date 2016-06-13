@@ -73,6 +73,9 @@ class UserPolicy
         if ($user->isClubPresident()){
             return $user->clubOwned->id == $userModel->club_id;
         }
+        if ($user->isUser()){
+            return $user->id == $userModel->id;
+        }
 
 
     }
@@ -85,6 +88,9 @@ class UserPolicy
 
         if ($user->isAssociationPresident()){
             return $user->associationOwned->id == $userModel->association_id;
+        }
+        if ($user->isUser()){
+            return $user->id == $userModel->id;
         }
     }
 

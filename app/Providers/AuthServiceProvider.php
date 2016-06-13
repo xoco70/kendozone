@@ -8,6 +8,8 @@ use App\Federation;
 use App\Policies\AssociationPolicy;
 use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
+use App\Policies\UserPolicy;
+use App\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
 
+        User::class => UserPolicy::class,
         Federation::class => FederationPolicy::class,
         Association::class => AssociationPolicy::class,
         Club::class => ClubPolicy::class,

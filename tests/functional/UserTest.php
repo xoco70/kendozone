@@ -245,7 +245,7 @@ class UserTest extends TestCase
         $user2 = factory(User::class)->create(['name' => 'AnotherUser']);
 
         $this->logWithUser($this->simpleUser);
-        $this->visit('/users/' . $user2->slug)
+        $this->visit('/users/' . $this->simpleUser->slug)
             ->dontSee("403")
             ->visit('/users/' . $user2->slug . '/edit')
             ->see("403");

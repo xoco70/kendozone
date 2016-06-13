@@ -44,10 +44,11 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $users = User::with('country', 'role')
             ->forUser(Auth::user())
             ->paginate(Config::get('constants.PAGINATION'));
-        
+
         return view('users.index', compact('users'));
     }
 
@@ -59,6 +60,10 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
+        if (Auth::user()->cannot('create', $user)) {
+            throw new UnauthorizedException();
+        }
+
         $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
@@ -89,8 +94,13 @@ class UserController extends Controller
         $data['verified'] = 1;
 
         $user = new User;
+
         $user->fill($data);
         $user->password = bcrypt(Input::get('password'));
+
+        if (Auth::user()->cannot('store', $user)) {
+            throw new UnauthorizedException();
+        }
 
         if ($user->save()) {
             flash()->success(trans('msg.user_create_successful'));
@@ -119,6 +129,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (Auth::user()->cannot('edit', $user)) {
+            throw new UnauthorizedException();
+        }
         $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
@@ -135,6 +148,9 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        if (Auth::user()->cannot('update', $user)) {
+            throw new UnauthorizedException();
+        }
         $except = [];
         if (trim(Input::get('role_id')) == '') {
             array_push($except, 'role_id');
