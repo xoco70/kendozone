@@ -91,14 +91,15 @@ class Handler extends ExceptionHandler
                 $author = "Admin";
                 $source = "";
                 break;
-
             default:
-                $code = "500";
-                $message = $e->getMessage();
-                $quote = "";
-                $author = "Admin";
-                $source = "";
-                break;
+                return parent::render($request, $e);
+//            default:
+//                $code = "500";
+//                $message = $e->getMessage();
+//                $quote = "";
+//                $author = "Admin";
+//                $source = "";
+//                break;
         }
         return response()->view('errors.general',
             ['code' => $code,

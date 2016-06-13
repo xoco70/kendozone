@@ -44,25 +44,10 @@ class UserController extends Controller
      */
     public function index()
     {
-//        $users = new Collection(User::class)  ;
-        if (Auth::user()->isSuperAdmin()) {
-            $users = User::with('country', 'role')->paginate(Config::get('constants.PAGINATION'));
-        } else if (Auth::user()->isFederationPresident()) {
-            $users = User::with('country', 'role')
-                ->where('federation_id', '=', Auth::user()->federationOwned->id)
-                ->paginate(Config::get('constants.PAGINATION'));
-
-        } else if (Auth::user()->isAssociationPresident()) {
-            $users = User::with('country', 'role')
-                ->where('association_id', '=', Auth::user()->associationOwned->id)
-                ->paginate(Config::get('constants.PAGINATION'));
-        } else if (Auth::user()->isClubPresident()) {
-            $users = User::with('country', 'role')
-                ->where('club_id', '=', Auth::user()->clubOwned->id)
-                ->paginate(Config::get('constants.PAGINATION'));
-        } else if (Auth::user()->isFederationPresident()) {
-            throw new UnauthorizedException();
-        }
+        $users = User::with('country', 'role')
+            ->forUser(Auth::user())
+            ->paginate(Config::get('constants.PAGINATION'));
+        
         return view('users.index', compact('users'));
     }
 
@@ -74,7 +59,7 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        $roles = Role::lists('name', 'id');
+        $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
         $grades = Grade::lists('name', 'id');
         $countries = Countries::lists('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
@@ -134,7 +119,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::lists('name', 'id');
+        $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
         $grades = Grade::orderBy('order')->lists('name', 'id');
         $countries = Countries::lists('name', 'id');
 //        $federations = AdministrativeStructureController::getFederations();
@@ -257,5 +242,6 @@ class UserController extends Controller
         return $data;
 
     }
+
 
 }

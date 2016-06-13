@@ -10,6 +10,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -430,5 +431,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return ($this->isModerator());
         else
             return ($this->isModerator() && $this->id == $club->president_id);
+    }
+
+    public function scopeForUser($query, User $user)
+    {
+        if ($user->isSuperAdmin()) {
+            return $query;
+        } else if ($user->isFederationPresident()) {
+            return $query->where('federation_id', '=', $user->federationOwned->id);
+        } else if ($user->isAssociationPresident()) {
+            return $query->where('association_id', '=', $user->associationOwned->id);
+        } else if ($user->isClubPresident()) {
+            return $query->where('club_id', '=', $user->clubOwned->id);
+        } else if ($user->isUser()) {
+            throw new UnauthorizedException();
+        }
     }
 }
