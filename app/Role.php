@@ -22,8 +22,14 @@ class Role extends Model
      * @param  Permission $permission
      * @return mixed
      */
-    public function givePermissionTo(Permission $permission)
+    public function scopeGrantedRoles($query, $userType)
     {
-        return $this->permissions()->save($permission);
+        return $query->where('id','>=', $userType);
     }
+
+
+
+
+
+
 }
