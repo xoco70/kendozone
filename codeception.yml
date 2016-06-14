@@ -15,7 +15,6 @@ extensions:
 modules:
     config:
         Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+            dsn: '52.26.132.113'
+            user: 'forge'
+            password: '2R6fbHd2rDH6hRf3hlI6'
