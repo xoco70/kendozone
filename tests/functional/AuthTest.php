@@ -115,12 +115,4 @@ class AuthTest extends TestCase
     public function remember_me()
     {
     }
-
-// FB Connection don't work in local :( 
-    /** @test */
-    public function loginWithFB()
-    {
-
-    }
-
 }

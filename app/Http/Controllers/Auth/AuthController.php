@@ -141,7 +141,7 @@ class AuthController extends Controller
 
     public function getRegister()
     {
-        $role = Role::where('name', '=', "Admin")->firstOrFail();
+        $role = Role::where('name', '=', "FederationPresident")->firstOrFail();
         $role_id = $role->id;
 //        dd($roleObj);
         $countries = Countries::lists('name', 'id');

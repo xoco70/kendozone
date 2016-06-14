@@ -11,7 +11,7 @@
     <div class="container-fluid">
 
         @if (sizeof($associations)==0)
-            {{--            @include('layouts.noFederations')--}}
+           @include('layouts.noAssociations')
         @else
 
             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())

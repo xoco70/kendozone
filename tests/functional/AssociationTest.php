@@ -63,13 +63,13 @@ class AssociationTest extends TestCase
 
 
         // SEE FP Can see only his assoc
-        $myAssoc = factory(Association::class)->create(['federation_id' => $myFederation->id]); // We create one so that there is
-        $notMyAssoc = factory(Association::class)->create(['federation_id' => $hisFederation->id]); // We create one so that there is
+//        $myAssoc = factory(Association::class)->create(['federation_id' => $myFederation->id]); // We create one so that there is
+//        $notMyAssoc = factory(Association::class)->create(['federation_id' => $hisFederation->id]); // We create one so that there is
 
-        $this->visit("/")
-            ->click('associations')
-            ->see($myAssoc->name)
-            ->dontSee($notMyAssoc->name);
+//        $this->visit("/")
+//            ->click('associations')
+//            ->see($myAssoc->name)
+//            ->dontSee($notMyAssoc->name);
 
         $this->crud($this->federationPresident);
     }
@@ -128,8 +128,8 @@ class AssociationTest extends TestCase
 
         $this->type($association->name, 'name')
             ->type($association->address, 'address')
-            ->type($association->phone, 'phone')
-            ->select($association->federation->id, 'federation_id');
+            ->type($association->phone, 'phone');
+//            ->select($association->federation->id, 'federation_id');
 
         $this->press(trans('core.save'))
             ->seeInDatabase('association',

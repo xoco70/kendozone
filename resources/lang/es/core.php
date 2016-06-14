@@ -291,6 +291,8 @@ return [
     'association.phone' => 'Teléfono',
     'association.no_user_in_this_country' => 'No hay usuarios registrados en este país',
     'association.add' => 'Agregar Associación',
+    'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
+    'add_new_association' => 'Agregar una nueva asociación',
 
     // Clubs
     'club' => 'Club|Clubs',

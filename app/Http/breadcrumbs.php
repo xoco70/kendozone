@@ -97,14 +97,15 @@ Breadcrumbs::register('invites.index', function ($breadcrumbs) {
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
-    if ($tournament != null){
-        if (policy($tournament)->edit(Auth::user(), $tournament)) {
-            $breadcrumbs->parent('tournaments.edit', $tournament);
-        } else {
-            $breadcrumbs->parent('tournaments.show', $tournament);
-        }
-        $breadcrumbs->push(trans('core.invite_competitors'), route('invites.show', $tournament->slug));
-    }
+    //TODO Removed to go on
+//    if ($tournament != null){
+//        if (policy($tournament)->edit(Auth::user(), $tournament)) {
+//            $breadcrumbs->parent('tournaments.edit', $tournament);
+//        } else {
+//            $breadcrumbs->parent('tournaments.show', $tournament);
+//        }
+//        $breadcrumbs->push(trans('core.invite_competitors'), route('invites.show', $tournament->slug));
+//    }
 
 
 });
