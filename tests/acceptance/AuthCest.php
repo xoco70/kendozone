@@ -29,7 +29,7 @@ class AuthCest
         $I->amOnPage('/auth/login');
         $I->click('#fb');
         $I->fillField('email', 'xoco70@hotmail.com');
-        $I->fillField('pass', 'Zee2shoo');
+        $I->fillField('pass', 'Zee1shoo');
         $I->click('login'); // press???
         $I->see(env('APP_NAME')); // Footer is the only common screen
 

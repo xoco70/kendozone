@@ -48,10 +48,12 @@ class UserCest
         $I->selectOption('form select[name=grade_id]', $gradeId);
 
         $I->selectOption('form select[name=country_id]', $countryId);
-
+        $I->wait(1);
         $I->click('#federation_id');
         $I->selectOption('form select[name=federation_id]', "Mexican Kendo Federation");
+        $I->wait(2);
         $I->selectOption('form select[name=association_id]', "Asociación Mexiquense de Kendo, A.C.");
+        $I->wait(2);
         $I->selectOption('form select[name=club_id]', "Naucali");
 //
 //        $I->attachFile('input[type="file"]',  'avatar2.png'); // TODO Aqui podria simular Dropzone de verdad
@@ -68,7 +70,7 @@ class UserCest
 //                'country_id' => $countryId,
                 'federation_id' => 37,
                 'association_id' => 7,
-                'club_id' => 7,
+                'club_id' => 12,
             ]);
 
         $this->user->delete();
@@ -103,9 +105,14 @@ class UserCest
         $I->selectOption('form select[name=grade_id]', $gradeId);
         $I->selectOption('form select[name=country_id]', $countryId);
 
+        // Seed those test so they always pass
+        $I->wait(1);
         $I->click('#federation_id');
+        $I->wait(2);
         $I->selectOption('form select[name=federation_id]', "Mexican Kendo Federation");
+        $I->wait(2);
         $I->selectOption('form select[name=association_id]', "ASOCIACION DE KENSHI DEL ESTADO DE PUEBLA, A.C.");
+        $I->wait(3);
         $I->selectOption('form select[name=club_id]', "Nash Reinger");
 
         $I->click("#save1");
