@@ -18,7 +18,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class AssociationTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     protected $user, $users, $root, $simpleUser, $clubPresident, $associationPresident, $federationPresident; // $addUser,  $editUser,
     protected $mortalUsers, $stateUsers, $clubUsers;
@@ -34,7 +34,6 @@ class AssociationTest extends TestCase
 
 //        $this->mortalUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident, $this->federationPresident];
         $this->stateUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
-//        $this->clubUsers = [$this->simpleUser, $this->clubPresident];
 
     }
 
@@ -43,11 +42,11 @@ class AssociationTest extends TestCase
      *
      * superAdmin can do everything
      */
-    public function superAdmin_can_see_create_update_delete_association()
+    public function superAdmin_can_see_create_read_update_delete_association()
     {
         $this->logWithUser($this->root);
+        $this->crud();
 
-        $this->crud($this->root);
     }
 
     /** @test
@@ -58,20 +57,7 @@ class AssociationTest extends TestCase
     {
         $this->logWithUser($this->federationPresident);
 
-        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
-        $hisFederation = factory(Federation::class)->create(['president_id' => 3]);
-
-
-        // SEE FP Can see only his assoc
-//        $myAssoc = factory(Association::class)->create(['federation_id' => $myFederation->id]); // We create one so that there is
-//        $notMyAssoc = factory(Association::class)->create(['federation_id' => $hisFederation->id]); // We create one so that there is
-
-//        $this->visit("/")
-//            ->click('associations')
-//            ->see($myAssoc->name)
-//            ->dontSee($notMyAssoc->name);
-
-        $this->crud($this->federationPresident);
+        $this->crud();
     }
 
     /** @test
@@ -91,39 +77,14 @@ class AssociationTest extends TestCase
             ->dontSee(403);
 
         $association = factory(Association::class)->make();
-        $this->fillAssociationData($this->associationPresident, $association);
+        $this->fillAssocAndCheck($association);
     }
 
 
     /**
-     * @param User $user
-     */
-    public function crud(User $user)
-    {
-        $this->visit_addAssociation();
-        $association = factory(Association::class)->make();
-
-        $this->fillAssociationData($user, $association);
-//        $association = $this->getFullAssociationObject($association);
-        // Update
-
-//        $this->click($association->name);
-//        $association->name = "MyAssociation2";
-//        $association->address = "MyAdress2";
-//        $association->phone = "6666666666";
-//        $this->fillAssociationData($user, $association);
-
-        // Delete
-
-//        $this->press("delete_" . $association->id)
-//            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
-    }
-
-    /**
-     * @param User $user
      * @param Association $association
      */
-    private function fillAssociationData(User $user, Association $association) //TODO I don't have here to change president
+    private function fillAssocAndCheck(Association $association) //TODO I don't have here to change president
     {
 
         $this->type($association->name, 'name')
@@ -133,7 +94,7 @@ class AssociationTest extends TestCase
 
         $this->press(trans('core.save'))
             ->seeInDatabase('association',
-                ['name' => $association->name,
+                [   'name' => $association->name,
                     'address' => $association->address,
                     'phone' => $association->phone,
                 ]);
@@ -143,7 +104,8 @@ class AssociationTest extends TestCase
     {
         $this->visit("/")
             ->click('associations')
-            ->click('addAssociation');
+            ->click('addAssociation')
+            ->dump();
     }
 
     /**
@@ -159,7 +121,67 @@ class AssociationTest extends TestCase
         return $association;
     }
 
+    /**
+     * Create an association with the specified User
+     */
+    private function readAll()
+    {
+        $this->visit("/associations")
+             ->dontSee('403');
 
+
+    }
+
+    /**
+     * Create an association with the specified User
+     * @param Association $association
+     */
+    private function create(Association $association)
+    {
+        $this->visit_addAssociation();
+        $this->fillAssocAndCheck($association);
+
+    }
+
+    /**
+     * Create an association with the specified User
+     * @param Association $association
+     */
+    private function update(Association $association)
+    {
+//        $this->visit("/associations/".$association->id."/edit");
+//        $associationData = factory(Association::class)->make();
+//        $this->fillAssocAndCheck($associationData);
+
+    }
+
+    public function crud()
+    {
+        $this->readAll(); // R
+
+        $associationData = factory(Association::class)->make();
+        $this->create($associationData); // C
+
+        // Get Association Full Object
+
+        $association = $this->getFullAssociationObject($associationData);
+
+        $this->update($association); // C
+    }
+
+    /**
+     * Create an association with the specified User
+     * @param Association $association
+     */
+    private function delet(Association $association)
+    {
+        // Don't include it because of pagination
+//        $this->press("delete_" . $association->id)
+//            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
+
+    }
+
+//
 //    /** @test
 //     *
 //     * a user must be superAdmin to access federation

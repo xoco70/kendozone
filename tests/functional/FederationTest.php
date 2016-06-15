@@ -36,11 +36,12 @@ class FederationTest extends TestCase
 
     }
 
+
     /** @test
      *
      * a user must be superAdmin to access federation
      */
-    public function everybody_can_access_federations()
+    public function everybody_can_see_federations()
     {
         foreach ($this->mortalUsers as $user) {
             $this->logWithUser($user);
@@ -53,16 +54,16 @@ class FederationTest extends TestCase
         }
 
         $this->logWithUser($this->root);
-
         $this->visit("/");
-        $this->click("federations");
+        $this->click("federations")
+             ->dontSee('403');
     }
 
     /** @test
      *
      * a user must be superAdmin to access federation
      */
-    public function it_can_edit_federation()
+    public function only_superadmin_can_edit_federation()
     {
 
         $federation = factory(Federation::class)->create();
@@ -76,7 +77,49 @@ class FederationTest extends TestCase
             ->seePageIs('/federations/' . $federation->id . '/edit')
             ->fillFederationData($federation);
 
+        foreach ($this->mortalUsers as $user) {
+            $this->logWithUser($user);
+            $this->visit("/federations/".$federation->id."/edit")
+                 ->see('403');
+
+        }
     }
+
+    /** @test
+     *
+     * a user must be superAdmin to access federation
+     */
+    public function a_federation_president_can_change_his_federation_data()
+    {
+        $this->logWithUser($this->federationPresident);
+
+        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
+        $hisFederation = factory(Federation::class)->create();
+
+        $this->visit("/federations/" . $hisFederation->id . "/edit")
+            ->see('403');
+        $this->visit("/")
+            ->click($myFederation->name)
+            ->seePageIs("/federations/" . $myFederation->id . "/edit")
+            ->dontSee('403');
+//
+        $federationData = factory(Federation::class)->make();
+        $this->fillFederationData($federationData);
+
+        $federation = Federation::where('name', $federationData->name)
+            ->where('address', $federationData->address)
+            ->where('phone', $federationData->phone)
+            ->first();
+
+        $users = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
+        foreach ($users as $user) {
+            $this->logWithUser($user);
+            $this->visit("/federations/".$federation->id."/edit");
+            $this->see('403');
+
+        }
+    }
+
 
 
     private function fillFederationData(Federation $federation) //TODO Country??? President???
@@ -90,27 +133,6 @@ class FederationTest extends TestCase
                     'address' => $federation->address,
                     'phone' => $federation->phone,
                 ]);
-    }
-
-    /** @test
-     *
-     * a user must be superAdmin to access federation
-     */
-    public function a_federation_president_can_change_his_federation_data()
-    {
-        $this->logWithUser($this->federationPresident);
-
-        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
-
-
-        $this->visit("/")
-            ->click($myFederation->name)
-            ->seePageIs("/federations/" . $myFederation->id . "/edit")
-            ->dontSee(403);
-
-        $federation = factory(Federation::class)->make();
-//        $federation->president_id = $myFederation->president_id;
-        $this->fillFederationData($federation);
     }
 
 }
