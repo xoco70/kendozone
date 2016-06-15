@@ -25,8 +25,6 @@ use Illuminate\Support\Facades\Lang;
 class UserTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
-
 
     protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
 
@@ -35,34 +33,19 @@ class UserTest extends TestCase
         parent::setUp();
         $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-
-
-//        trans_choice('core.user', 1) = trans_choice('core.user', 1);
-//        trans_choice('core.user', 2) = trans_choice('core.user', 2);
-//        $this->addUser = trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]);
-//        $this->editUser = trans('core.updateModel', ['currentModelName' => trans_choice('core.user', 1)]);
     }
 
     /** @test */
     public function it_denies_creating_an_empty_user()
     {
-
-        $this->logWithUser($this->simpleUser);
-
-        $this->visit("/users")
-            ->see('403');
-
         $this->logWithUser($this->root);
 
-        $this->visit("/users")
-//            ->see(trans_choice('core.user', 2))
-            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
+        $this->visit("/users/create")
             ->press(trans('core.save'))
             ->seePageIs('/users/create')
             ->see(trans('validation.filled', ['attribute' => "name"]))
             ->see(trans('validation.filled', ['attribute' => "email"]))
-            ->see(trans('validation.filled', ['attribute' => "password"]))
-            ->notSeeInDatabase('users', ['name' => '']);
+            ->see(trans('validation.filled', ['attribute' => "password"]));
 
     }
 
