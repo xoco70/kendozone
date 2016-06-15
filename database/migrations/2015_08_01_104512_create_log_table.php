@@ -19,6 +19,8 @@ class CreateLogTable extends Migration
             $table->text('old_value')->nullable();
             $table->text('new_value')->nullable();
             $table->string('type');
+            $table->string('route');
+            $table->string('ip');
             $table->timestamps();
         });
     }
