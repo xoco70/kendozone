@@ -26,6 +26,7 @@ class FederationSeeder extends Seeder
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('fmk'),
                 'country_id' => 484,
+                'federation_id' => 37, // FK Check unactive
                 'verified' => 1]);
 
         

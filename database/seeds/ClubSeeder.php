@@ -28,6 +28,11 @@ class ClubSeeder extends Seeder {
                 'password' => bcrypt('naucali'),
                 'verified' => 1,
                 'country_id' => 484,
+                'federation_id' => 37,
+                'association_id' => 7,
+                'club_id' => 7,
+                // FK Check unactive
+
             ]);
 
         factory(Club::class,5)->create(['association_id' => 7]);

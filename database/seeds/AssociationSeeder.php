@@ -24,11 +24,13 @@ class AssociationSeeder extends Seeder
         // Create Martin
         $aikem_presidente = factory(User::class)->create(
             ['name' => 'AIKEM_President',
-                'email' => 'presidencia@aikem.com',
+                'email' => 'aikem@kendozone.com',
                 'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
                 'password' => bcrypt('aikem'),
                 'verified' => 1,
                 'country_id' => 484,
+                'federation_id' => 37,
+                'association_id' => 7, // FK Check unactive
             ]);
 
         Association::create(['federation_id'=> 37,'name' => 'Asociación de Kendo y Artes Marciales Afines del Distrito Federal, A.C.', 'president_id' => '1', 'address' => '', 'phone' => '55 17 63 48 59', 'state' => 'Distrito Federal']);
@@ -46,7 +48,10 @@ class AssociationSeeder extends Seeder
         Association::create(['federation_id'=> 37,'name' => 'Asociación de Kendo del Estado de Morelos', 'president_id' => '1', 'address' => '', 'phone' => '045-777-303-1202', 'state' => 'Morelos']);
         Association::create(['federation_id'=> 37,'name' => 'ASOCIACIÓN ESTATAL DE KENDO E IAIDO DE AGUASCALIENTES, A.C.', 'president_id' => '1', 'address' => '', 'phone' => '4492094939', 'state' => 'Aguascalientes']);
 
+        factory(Association::class, 5)->create(['federation_id' => 3]);
         factory(Association::class, 5)->create();
+
+
         $this->command->info('Associations Seeded!');
     }
 }

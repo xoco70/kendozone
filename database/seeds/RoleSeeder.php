@@ -15,10 +15,10 @@ class RoleSeeder extends Seeder
 
         DB::table('roles')->truncate();
         Role::create(['name' => "SuperAdmin",'label' => 'SuperAdmin']);
-        Role::create(['name' => "Owner",'label' => 'Owner']);
-        Role::create(['name' => "Admin",'label' => 'Admin']);
-        Role::create(['name' => "Moderator",'label' => 'Moderator']);
-        Role::create(['name' => "User",'label' => 'User']);
+        Role::create(['name' => "FederationPresident",'label' => 'roles.federation.president']);
+        Role::create(['name' => "AssociationPresident",'label' => 'roles.association.president']);
+        Role::create(['name' => "ClubPresident",'label' => 'roles.club.president']);
+        Role::create(['name' => "user",'label' => 'roles.user']);
 
         $this->command->info('Roles seeded!');
     }
