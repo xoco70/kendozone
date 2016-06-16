@@ -358,31 +358,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return implode($pass); //turn the array into a string
     }
 
-    public function isSuperAdmin()
-    {
-        return $this->role_id == Config::get('constants.ROLE_SUPERADMIN');
-    }
-
-    public function isOwner()
-    {
-        return $this->role_id == Config::get('constants.ROLE_FEDERATION_PRESIDENT');
-    }
-
-    public function isAdmin()
-    {
-        return $this->role_id == Config::get('constants.ROLE_ASSOCIATION_PRESIDENT');
-    }
-
-    public function isModerator()
-    {
-        return $this->role_id == Config::get('constants.ROLE_CLUB_PRESIDENT');
-    }
-
-    public function isUser()
-    {
-        return $this->role_id == Config::get('constants.ROLE_USER');
-    }
-
     public function isDeleted()
     {
         return $this->deleted_at != null;
@@ -393,55 +368,41 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-//    public function ownsTournament(Tournament $tournament)
-//    {
-//        return $this->id == $tournament->user_id;
-//    }
-
-
-//    public function canEditTournament($tournament)
-//    {
-//        return ($this->id == $tournament->user_id || $this->isSuperAdmin());
-//    }
-
-//    public function canEditUser($user)
-//    {
-//        return ($this->id == $user->user_id || $this->isSuperAdmin());
-//    }
-
-    public function isFederationPresident($federation = null)
+    public function isSuperAdmin()
     {
-        if ($federation == null)
-            return ($this->isOwner());
-        else
-            return ($this->isOwner() && $this->id == $federation->president_id);
+        return $this->role_id == Config::get('constants.ROLE_SUPERADMIN');
     }
 
-    public function isAssociationPresident($association = null)
+    public function isFederationPresident()
     {
-        if ($association == null)
-            return ($this->isAdmin());
-        else
-            return ($this->isAdmin() && $this->id == $association->president_id);
+        return $this->role_id == Config::get('constants.ROLE_FEDERATION_PRESIDENT');
     }
 
-    public function isClubPresident($club = null)
+    public function isAssociationPresident()
     {
-        if ($club == null)
-            return ($this->isModerator());
-        else
-            return ($this->isModerator() && $this->id == $club->president_id);
+        return $this->role_id == Config::get('constants.ROLE_ASSOCIATION_PRESIDENT');    }
+
+    public function isClubPresident()
+    {
+        return $this->role_id == Config::get('constants.ROLE_CLUB_PRESIDENT');
     }
+    public function isUser()
+    {
+        return $this->role_id == Config::get('constants.ROLE_USER');
+    }
+
 
     public function scopeForUser($query, User $user)
     {
+        // If user manage a structure, he will be limited to see entity of this structure
+        // If user has the role but manage no structure --> UnauthorizedException
         if ($user->isSuperAdmin()) {
             return $query;
-        } else if ($user->isFederationPresident()) {
+        } else if ($user->isFederationPresident() && $user->federationOwned!=null ) {
             return $query->where('federation_id', '=', $user->federationOwned->id);
-        } else if ($user->isAssociationPresident()) {
+        } else if ($user->isAssociationPresident() && $user->associationOwned) {
             return $query->where('association_id', '=', $user->associationOwned->id);
-        } else if ($user->isClubPresident()) {
+        } else if ($user->isClubPresident() && $user->associationOwned != null) {
             return $query->where('club_id', '=', $user->clubOwned->id);
         } else if ($user->isUser()) {
             throw new UnauthorizedException();

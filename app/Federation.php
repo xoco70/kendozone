@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Countries\Countries;
 
@@ -51,17 +52,24 @@ class Federation extends Model
         return $this->belongsTo(Countries::Class);
     }
 
+    /**
+     * @param $query
+     * @param User $user
+     * @return mixed
+     */
     public function scopeForUser($query, User $user)
     {
         if ($user->isSuperAdmin()) {
             return $query;
-        } else if ($user->isFederationPresident()){
+        } else if ($user->isFederationPresident() && $user->federationOwned!=null){
             return $query->where('id', '=', $user->federationOwned->id);
-        }  else if ($user->isAssociationPresident()){
+        }  else if ($user->isAssociationPresident() && $user->associationOwned){
             return $query->where('id', '=', $user->associationOwned->federation->id);
-        } else if ($user->isClubPresident()){
+        } else if ($user->isClubPresident() && $user->clubOwned){
             return $query->where('id', '=', $user->clubOwned->association->federation->id);
-        } 
+        } else{
+            throw new UnauthorizedException();
+        }
     }
 
 }

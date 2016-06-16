@@ -55,7 +55,8 @@ class AssociationTest extends TestCase
      */
     public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
     {
-        $this->logWithUser($this->federationPresident);
+        $fmk = User::where('email', '=','fmk@kendozone.com')->first();
+        $this->logWithUser($fmk);
 
         $this->crud();
     }
@@ -104,8 +105,7 @@ class AssociationTest extends TestCase
     {
         $this->visit("/")
             ->click('associations')
-            ->click('addAssociation')
-            ->dump();
+            ->click('addAssociation');
     }
 
     /**

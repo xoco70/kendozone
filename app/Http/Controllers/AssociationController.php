@@ -56,7 +56,7 @@ class AssociationController extends Controller
             throw new UnauthorizedException();
         }
 
-
+//        dd(Auth::user()->role);
         $users = User::forUser(Auth::user())->pluck('name', 'id');
         $federations = Federation::forUser(Auth::user())->lists('name', 'id');
 

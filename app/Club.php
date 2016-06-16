@@ -80,19 +80,19 @@ class Club extends Model
     public function scopeForUser($query, User $user)
     {
 
-        if ($user->isFederationPresident()) {
-        $query->whereHas('association.federation', function ($query) use ($user) {
-            $query->where('federation_id', $user->federationOwned->id);
-        });
-    }
+        if ($user->isFederationPresident() && $user->federationOwned != null) {
+            $query->whereHas('association.federation', function ($query) use ($user) {
+                $query->where('federation_id', $user->federationOwned->id);
+            });
+        }
 
-        if ($user->isAssociationPresident()) {
+        if ($user->isAssociationPresident() && $user->associationOwned) {
             $query->whereHas('association', function ($query) use ($user) {
                 $query->where('id', $user->associationOwned->id);
             });
         }
 
-        if ($user->isClubPresident()) {
+        if ($user->isClubPresident() && $user->clubOwned) {
             $query->where('id', $user->clubOwned->id);
         }
 
