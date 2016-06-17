@@ -21,7 +21,7 @@ class ClubPolicy
 
     public function create(User $user, Club $club)
     {
-        if ($user->isFederationPresident() || $user->isAssociationPresident() ) {
+        if ($user->isFederationPresident() || $user->isAssociationPresident()) {
             return true;
         }
 //        if ($user->isFederationPresident()) {
@@ -38,31 +38,28 @@ class ClubPolicy
     public function edit(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
-            if ($user->federationOwned->id == $club->association->federation->id)
-                return true;
-
-        } else if ($user->isAssociationPresident()) {
-                if ($user->associationOwned->id == $club->association->id)
-                return true;
-        }else if ($user->isClubPresident()) {
-            if ($user->clubOwned->id == $club->id)
-                return true;
+            return $club->belongsToFederationPresident($user);
+        }
+        if ($user->isAssociationPresident()) {
+            return $club->belongsToAssociationPresident($user);
+        }
+        if ($user->isClubPresident()) {
+            return $club->belongsToClubPresident($user);
         }
         return false;
+
     }
 
     public function update(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
-            if ($user->federationOwned->id == $club->association->federation->id)
-                return true;
-
-        } else if ($user->isAssociationPresident()) {
-            if ($user->associationOwned->id == $club->association->id)
-                return true;
-        }else if ($user->isClubPresident()) {
-            if ($user->clubOwned->id == $club->id)
-                return true;
+            return $club->belongsToFederationPresident($user);
+        }
+        if ($user->isAssociationPresident()) {
+            return $club->belongsToAssociationPresident($user);
+        }
+        if ($user->isClubPresident()) {
+            return $club->belongsToClubPresident($user);
         }
         return false;
     }
@@ -70,12 +67,11 @@ class ClubPolicy
     public function store(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
-            if ($user->federationOwned->id == $club->association->federation->id)
-                return true;
+            return $club->belongsToFederationPresident($user);
 
-        } else if ($user->isAssociationPresident()) {
-            if ($user->associationOwned->id == $club->association->id)
-                return true;
+        }
+        if ($user->isAssociationPresident()) {
+            return $club->belongsToAssociationPresident($user);
         }
         return false;
     }
@@ -83,12 +79,11 @@ class ClubPolicy
     public function destroy(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
-            if ($user->federationOwned->id == $club->association->federation->id)
-                return true;
+            return $club->belongsToFederationPresident($user);
 
-        } else if ($user->isAssociationPresident()) {
-            if ($user->associationOwned->id == $club->association->id)
-                return true;
+        }
+        if ($user->isAssociationPresident()) {
+            return $club->belongsToAssociationPresident($user);
         }
         return false;
     }

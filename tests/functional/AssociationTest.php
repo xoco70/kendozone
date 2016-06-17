@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\UnauthorizedException;
  * List of Association Test
  *
  *  superAdmin_can_see_create_update_delete_association
- *  federationPresident_can_do_everything_but_is_stuck_to_his_federation
+ *  federationPresident_can_do_everything_in_his_own_federation
  *  a_association_president_can_change_his_association_data
  *  check_denied_access_to_create_association
  *  check_denied_access_to_edit_association
@@ -42,7 +42,7 @@ class AssociationTest extends TestCase
     /** @test
      *
      * superAdmin can do everything
-     * @expectedException UnauthorizedException
+     * @expectedException Exception
      */
     public function test_exception()
     {
@@ -67,7 +67,7 @@ class AssociationTest extends TestCase
      *
      * a user must be superAdmin to access federation
      */
-    public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
+    public function federationPresident_can_do_everything_in_his_own_federation()
     {
         $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
         $this->logWithUser($fmk);
@@ -101,9 +101,10 @@ class AssociationTest extends TestCase
     /** @test
      *
      */
-    public function a_federation_president_shoud_edit_an_association_if_it_belongs_to(){
+    public function a_federation_president_cant_edit_or_delete_an_association_that_doesnt_belongs_to_him(){
 
     }
+
 
     /**
      * @param Association $association
@@ -156,7 +157,7 @@ class AssociationTest extends TestCase
     }
 
     /**
-     * @expectedException UnauthorizedException
+     *
      */
     private function cannotRead()
     {
@@ -199,7 +200,7 @@ class AssociationTest extends TestCase
 
     }
 
-    public function crud()
+    private function crud()
     {
         $this->canRead(); // R
 

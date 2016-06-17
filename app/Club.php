@@ -95,6 +95,31 @@ class Club extends Model
         if ($user->isClubPresident() && $user->clubOwned) {
             $query->where('id', $user->clubOwned->id);
         }
+    }
+
+    public function belongsToFederationPresident(User $user) // Should be FederationUser????
+    {
+        return
+            $user->federationOwned  != null &&
+            $this->association      != null &&
+            $this->association->federation != null &&
+            $user->federationOwned->id == $this->association->federation->id;
 
     }
+
+    public function belongsToAssociationPresident(User $user)
+    {
+        return  $user->associationOwned !=null &&
+                $this->association != null &&
+                $user->associationOwned->id == $this->association->id;
+
+    }
+
+    public function belongsToClubPresident(User $user)
+    {
+        return  $user->clubOwned != null &&
+                $user->clubOwned->id == $this->id;
+
+    }
+
 }
