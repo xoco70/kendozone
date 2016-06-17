@@ -56,13 +56,7 @@ class Handler extends ExceptionHandler
                 $author = "Kai";
                 $source = "47 Ronin";
                 break;
-            case $e instanceof NotFoundHttpException:
-                $code = "404";
-                $message = "Not Found";
-                $quote = "I will search for you through 1000 worlds and 10000 lifetimes!";
-                $author = "Kai";
-                $source = "47 Ronin";
-                break;
+
             case $e instanceof HttpException:
                 $code = "500";
                 $message = "Server Error";

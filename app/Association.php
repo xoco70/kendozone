@@ -46,27 +46,6 @@ class Association extends Model
         return $this->hasOne(User::class, 'id', 'president_id');
     }
 
-//    public function vicepresident()
-//    {
-//        return $this->hasOne(User::class,'id','vicepresident_id');
-//    }
-//
-//    public function secretary()
-//    {
-//        return $this->hasOne(User::class,'id','secretary_id');
-//    }
-//
-//    public function treasurer()
-//    {
-//        return $this->hasOne(User::class,'id','treasurer_id');
-//    }
-
-//    public function admin()
-//    {
-//        return $this->hasOne(User::class,'id','admin_id');
-//    }
-
-
     public function clubs()
     {
         return $this->hasMany('Club');
@@ -85,4 +64,27 @@ class Association extends Model
             });
         }
     }
+
+    public function belongsToFederationPresident(User $user)
+    {
+        if ($user->isFederationPresident() &&
+            $user->federationOwned != null &&
+            $this->federation->id == $user->federationOwned->id){
+
+            return true;
+        }
+        return false;
+    }
+
+    public function belongsToAssociationPresident(User $user)
+    {
+        if ($user->isAssociationPresident() &&
+            $user->associationOwned != null &&
+            $this->id == $user->associationOwned->id
+        ) {
+        }
+        return true;
+
+    }
+
 }

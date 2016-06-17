@@ -56,44 +56,38 @@ class AssociationPolicy
      */
     public function delete(User $user, Association $association)
     {
-        if ($user->isFederationPresident() &&
-            $user->federationOwned!= null &&
-            $association->federation->id == $user->federationOwned->id) {
-            return true;
-        }
-        return false;
+        return $association->belongsToFederationPresident($user);
     }
 
     /**
-     * 
+     *
      * @param User $user
      * @param Association $association
      * @return bool
      */
     public function edit(User $user, Association $association)
     {
-        if ($user->isFederationPresident()
-            && $association->federation!= null
-            && $user->federationOwned->id == $association->federation->id)
-            return true;
 
-        if ($user->isAssociationPresident() &&
-            $user->associationOwned!= null &&
-            $association->id == $user->associationOwned->id) {
-            return true;
+        if ($user->isFederationPresident()) {
+            return $association->belongsToFederationPresident($user);
+        }
+
+        if ($user->isAssociationPresident()) {
+            return $association->belongsToAssociationPresident($user);
+
         }
         return false;
     }
 
     public function update(User $user, Association $association)
     {
-        if ($user->isFederationPresident() && $user->federationOwned->id == $association->federation->id)
-            return true;
-        
-        if ($user->isAssociationPresident() &&
-            $user->associationOwned!= null &&
-            $association->id == $user->associationOwned->id) {
-            return true;
+        if ($user->isFederationPresident()) {
+            return $association->belongsToFederationPresident($user);
+        }
+
+        if ($user->isAssociationPresident()) {
+            return $association->belongsToAssociationPresident($user);
+
         }
         return false;
     }
