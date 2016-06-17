@@ -14,6 +14,9 @@ extensions:
         - Codeception\Extension\RunFailed
 modules:
     config:
+        WebDriver:
+            url: 'https://kendozone.com'
+            browser: 'phantomjs'
         Db:
             dsn: '52.26.132.113'
             user: 'forge'

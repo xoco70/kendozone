@@ -65,6 +65,7 @@ class AssociationPolicy
     }
 
     /**
+     * 
      * @param User $user
      * @param Association $association
      * @return bool

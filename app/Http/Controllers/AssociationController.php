@@ -70,8 +70,7 @@ class AssociationController extends Controller
      * @param AssociationRequest $request
      * @return Response
      */
-    public
-    function store(AssociationRequest $request)
+    public function store(AssociationRequest $request)
     {
         // Assoc Policy
         if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
@@ -91,8 +90,7 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show($id)
+    public function show($id)
     {
 
         $association = Association::findOrFail($id);
@@ -105,8 +103,7 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit($id)
+    public function edit($id)
     {
 
         $association = Association::findOrFail($id);
@@ -129,8 +126,7 @@ class AssociationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(AssociationRequest $request, $id)
+    public function update(AssociationRequest $request, $id)
     {
         $association = Association::findOrFail($id);
 
@@ -152,8 +148,7 @@ class AssociationController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param Association $association
      */
-    public
-    function destroy($associationId)
+    public function destroy($associationId)
     {
         $association = Association::find($associationId);
 //        dd($association);
@@ -168,8 +163,7 @@ class AssociationController extends Controller
      * @param $tournamentSlug
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function restore($id)
+    public function restore($id)
 
     {
         $association = Association::withTrashed()->find($id);
@@ -181,8 +175,7 @@ class AssociationController extends Controller
     }
 
 
-    public
-    function changePresident()
+    public function changePresident()
     {
         // Open Transaction
         // Get the current president

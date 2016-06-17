@@ -1,15 +1,16 @@
 <?php
 use App\Association;
-use App\Federation;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Contracts\Validation\UnauthorizedException;
 
 /**
- * List of Federation Test
+ * List of Association Test
  *
  *  superAdmin_can_see_create_update_delete_association
  *  federationPresident_can_do_everything_but_is_stuck_to_his_federation
  *  a_association_president_can_change_his_association_data
+ *  check_denied_access_to_create_association
+ *  check_denied_access_to_edit_association
  *
  *
  * User: juliatzin
@@ -41,6 +42,19 @@ class AssociationTest extends TestCase
     /** @test
      *
      * superAdmin can do everything
+     * @expectedException UnauthorizedException
+     */
+    public function test_exception()
+    {
+//        \PHPUnit_Framework_TestCase::setExpectedException(UnauthorizedException::class);
+
+        $this->logWithUser($this->simpleUser);
+        $this->visit("/associations/1/edit");
+
+    }
+    /** @test
+     *
+     * superAdmin can do everything
      */
     public function superAdmin_can_see_create_read_update_delete_association()
     {
@@ -55,7 +69,7 @@ class AssociationTest extends TestCase
      */
     public function federationPresident_can_do_everything_but_is_stuck_to_his_federation()
     {
-        $fmk = User::where('email', '=','fmk@kendozone.com')->first();
+        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
         $this->logWithUser($fmk);
 
         $this->crud();
@@ -78,14 +92,23 @@ class AssociationTest extends TestCase
             ->dontSee(403);
 
         $association = factory(Association::class)->make();
-        $this->fillAssocAndCheck($association);
+        $this->fillAssocAndSee($association);
     }
 
+
+    // Root, FMK, AIKEM, NAUCALLI --> Assoc
+
+    /** @test
+     *
+     */
+    public function a_federation_president_shoud_edit_an_association_if_it_belongs_to(){
+
+    }
 
     /**
      * @param Association $association
      */
-    private function fillAssocAndCheck(Association $association) //TODO I don't have here to change president
+    private function fillAssocAndSee(Association $association) //TODO I don't have here to change president
     {
 
         $this->type($association->name, 'name')
@@ -95,7 +118,7 @@ class AssociationTest extends TestCase
 
         $this->press(trans('core.save'))
             ->seeInDatabase('association',
-                [   'name' => $association->name,
+                ['name' => $association->name,
                     'address' => $association->address,
                     'phone' => $association->phone,
                 ]);
@@ -122,32 +145,53 @@ class AssociationTest extends TestCase
     }
 
     /**
-     * Create an association with the specified User
+     * @return true if User can create an association
      */
-    private function readAll()
+    private function canRead()
     {
         $this->visit("/associations")
-             ->dontSee('403');
+            ->dontSee('403');
 
 
     }
 
     /**
-     * Create an association with the specified User
-     * @param Association $association
+     * @expectedException UnauthorizedException
      */
-    private function create(Association $association)
+    private function cannotRead()
+    {
+        $this->visit("/associations");
+
+
+    }
+
+    /**
+     * @return true if User cannot create an association
+     * @param Association $association
+     * @
+     */
+    private function cannotCreate(Association $association)
     {
         $this->visit_addAssociation();
-        $this->fillAssocAndCheck($association);
+        $this->fillAssocAndSee($association);
 
     }
 
     /**
+     * @return true if User can create an association
+     * @param Association $association
+     */
+    private function canCreate(Association $association)
+    {
+        $this->visit_addAssociation();
+        $this->fillAssocAndSee($association);
+
+    }
+    /**
      * Create an association with the specified User
      * @param Association $association
      */
-    private function update(Association $association)
+    private function canUpdate(Association $association)
     {
 //        $this->visit("/associations/".$association->id."/edit");
 //        $associationData = factory(Association::class)->make();
@@ -157,16 +201,16 @@ class AssociationTest extends TestCase
 
     public function crud()
     {
-        $this->readAll(); // R
+        $this->canRead(); // R
 
         $associationData = factory(Association::class)->make();
-        $this->create($associationData); // C
+        $this->canCreate($associationData); // C
 
         // Get Association Full Object
 
         $association = $this->getFullAssociationObject($associationData);
 
-        $this->update($association); // C
+        $this->canUpdate($association); // C
     }
 
     /**
