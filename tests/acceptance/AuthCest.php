@@ -2,7 +2,11 @@
 
 class AuthCest
 {
-    // test
+    /**
+     * This test will be executed only in 'test' because in prod it fails
+     *
+     * @env test
+     */
     public function loginGoogle(\AcceptanceTester $I)
     {
         App::setLocale('en');
