@@ -143,7 +143,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
         $country = Countries::where('name', '=', $location['country'])->first();
         if (is_null($country)) {
-            $countryId = Config::get('constants.COUNTRY_ID_DEFAULT');
+            $countryId = config('constants.COUNTRY_ID_DEFAULT');
             $city = "Paris";
             $latitude = 48.858222;
             $longitude = 2.2945;
@@ -186,7 +186,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if ($file != null && $file->isValid()) {
 
-            $destinationPath = Config::get('constants.RELATIVE_AVATAR_PATH');
+            $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
             $date = new DateTime();
             $timestamp = $date->getTimestamp();
             $ext = $file->getClientOriginalExtension();
@@ -235,7 +235,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if (!str_contains($avatar, 'http')) {
 
-            $avatar = Config::get('constants.AVATAR_PATH') . $avatar;
+            $avatar = config('constants.AVATAR_PATH') . $avatar;
         } else {
 
         }
@@ -370,25 +370,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isSuperAdmin()
     {
-        return $this->role_id == Config::get('constants.ROLE_SUPERADMIN');
+        return $this->role_id == config('constants.ROLE_SUPERADMIN');
     }
 
     public function isFederationPresident()
     {
-        return $this->role_id == Config::get('constants.ROLE_FEDERATION_PRESIDENT');
+        return $this->role_id == config('constants.ROLE_FEDERATION_PRESIDENT');
     }
 
     public function isAssociationPresident()
     {
-        return $this->role_id == Config::get('constants.ROLE_ASSOCIATION_PRESIDENT');    }
+        return $this->role_id == config('constants.ROLE_ASSOCIATION_PRESIDENT');    }
 
     public function isClubPresident()
     {
-        return $this->role_id == Config::get('constants.ROLE_CLUB_PRESIDENT');
+        return $this->role_id == config('constants.ROLE_CLUB_PRESIDENT');
     }
     public function isUser()
     {
-        return $this->role_id == Config::get('constants.ROLE_USER');
+        return $this->role_id == config('constants.ROLE_USER');
     }
 
 

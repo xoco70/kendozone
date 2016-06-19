@@ -375,8 +375,8 @@ function avatar($width = 75)
 //	}
 //
 //	 function encryptID($id,$decript=false,$pass='',$separator='-', & $data=array()) {
-//		$pass = $pass?$pass:Config::get('app.key');
-//		$pass2 = Config::get('app.url');;
+//		$pass = $pass?$pass:config('app.key');
+//		$pass2 = config('app.url');;
 //		$bignum = 200000000;
 //		$multi1 = 500;
 //		$multi2 = 50;

@@ -12,7 +12,7 @@ class AuthRequest extends Request
     {
         // add roleId
 
-        $request->request->add(['role_id' => Config::get('constants.ROLE_USER')]);
+        $request->request->add(['role_id' => config('constants.ROLE_USER')]);
 
         $token = $request->get("token");
         if (!isNullOrEmptyString($token)) {

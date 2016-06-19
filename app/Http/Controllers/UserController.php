@@ -47,7 +47,7 @@ class UserController extends Controller
 
         $users = User::with('country', 'role')
             ->forUser(Auth::user())
-            ->paginate(Config::get('constants.PAGINATION'));
+            ->paginate(config('constants.PAGINATION'));
 
         return view('users.index', compact('users'));
     }
@@ -214,7 +214,7 @@ class UserController extends Controller
     {
         $tournaments = Auth::user()->myTournaments()->with('owner')
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('constants.PAGINATION'));;
+            ->paginate(config('constants.PAGINATION'));;
 
         $title = trans('core.tournaments_registered');
 

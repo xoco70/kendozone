@@ -165,9 +165,9 @@ class ApiController extends Controller
         $data = array_merge($data, [
             'paginator' => [
                 'total_count' => $tournaments->count(),
-                'total_pages' => ceil($tournaments->count() / Config::get('constants.PAGINATION')),
+                'total_pages' => ceil($tournaments->count() / config('constants.PAGINATION')),
                 'current_page' => 1, // TODO CHANGE
-                'limit' => Config::get('constants.PAGINATION')
+                'limit' => config('constants.PAGINATION')
             ]
         ]);
 

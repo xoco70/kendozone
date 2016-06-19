@@ -27,7 +27,7 @@ class UserRepository
                     'slug' => str_slug($userData->name),
                     'email' => $userData->email,
                     'avatar' => $avatar,
-                    'role_id' => Config::get('constants.ROLE_USER'),
+                    'role_id' => config('constants.ROLE_USER'),
                     'verified' => 1,
                 ]);
             }

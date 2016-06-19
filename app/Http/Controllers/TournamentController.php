@@ -40,9 +40,9 @@ class TournamentController extends Controller
         $currentModelName = trans_choice('core.tournament', 2);
 
         if (Auth::user()->isSuperAdmin()) {
-            $tournaments = Tournament::with('owner')->orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
+            $tournaments = Tournament::with('owner')->orderBy('created_at', 'desc')->paginate(config('constants.PAGINATION'));
         } else {
-            $tournaments = Auth::user()->tournaments()->with('owner')->orderBy('created_at', 'desc')->paginate(Config::get('constants.PAGINATION'));
+            $tournaments = Auth::user()->tournaments()->with('owner')->orderBy('created_at', 'desc')->paginate(config('constants.PAGINATION'));
         }
         $title = trans('core.tournaments_created');
         return view('tournaments.index', compact('tournaments', 'currentModelName', 'title'));
@@ -246,12 +246,12 @@ class TournamentController extends Controller
             $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
                 ->orderBy('tournament.created_at', 'desc')
-                ->paginate(Config::get('constants.PAGINATION'));
+                ->paginate(config('constants.PAGINATION'));
         } else {
             $tournaments = Auth::user()->tournaments()->with('owner')
                 ->onlyTrashed()
                 ->orderBy('created_at', 'desc')
-                ->paginate(Config::get('constants.PAGINATION'));
+                ->paginate(config('constants.PAGINATION'));
         }
         $title = trans('core.tournaments_deleted');
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
@@ -275,7 +275,7 @@ class TournamentController extends Controller
                 $generalSettings = Auth::user()->settings;
 
                 if (is_null($generalSettings) || sizeof($generalSettings) == 0)
-                    $fightingAreas = Config::get('constants.CAT_FIGHTING_AREAS');
+                    $fightingAreas = config('constants.CAT_FIGHTING_AREAS');
             } else {
                 $fightingAreas = $settings->fightingAreas;
             }
