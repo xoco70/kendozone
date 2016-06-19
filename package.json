@@ -4,8 +4,9 @@
     "gulp": "^3.8.8"
   },
   "dependencies": {
-    "laravel-elixir": "^4.0.0",
     "bootstrap-sass": "^3.0.0",
+    "laravel-elixir": "^4.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
     "vue": "^1.0.18",
     "vue-resource": "^0.7.0"
   }

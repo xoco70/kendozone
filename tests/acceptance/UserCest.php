@@ -1,5 +1,8 @@
 <?php
 
+use App\Association;
+use App\Club;
+use App\Federation;
 use App\Grade;
 use App\User;
 use Faker\Factory as Faker;
@@ -47,14 +50,18 @@ class UserCest
 
         $I->selectOption('form select[name=grade_id]', $gradeId);
 
+        $federation = Federation::where('name', 'Mexican Kendo Federation')->first();
+        $association = Association::where('name', 'Asociación Mexiquense de Kendo, A.C.')->first();
+        $club = Club::where('name', 'Naucali')->first();
+
         $I->selectOption('form select[name=country_id]', $countryId);
         $I->wait(1);
         $I->click('#federation_id');
-        $I->selectOption('form select[name=federation_id]', "Mexican Kendo Federation");
+        $I->selectOption('form select[name=federation_id]', $federation->name);
         $I->wait(2);
-        $I->selectOption('form select[name=association_id]', "Asociación Mexiquense de Kendo, A.C.");
+        $I->selectOption('form select[name=association_id]', $association->name);
         $I->wait(2);
-        $I->selectOption('form select[name=club_id]', "Naucali");
+        $I->selectOption('form select[name=club_id]', $club->name);
 //
 //        $I->attachFile('input[type="file"]',  'avatar2.png'); // TODO Aqui podria simular Dropzone de verdad
         $I->click("#save1");
@@ -68,9 +75,9 @@ class UserCest
                 'lastname' => $this->user->lastname,
 //                'grade_id' => $gradeId,
 //                'country_id' => $countryId,
-                'federation_id' => 37,
-                'association_id' => 7,
-                'club_id' => 12,
+                'federation_id' => $federation->id,
+                'association_id' => $association->id,
+                'club_id' => $club->id,
             ]);
 
         $this->user->delete();
@@ -93,6 +100,9 @@ class UserCest
 
         $I->amOnPage('/users/' . $this->user->slug . '/edit/');
 //        $I->makeScreenshot('edit');
+        $federation = Federation::where('name', 'Mexican Kendo Federation')->first();
+        $association = Association::where('name', 'Asociación de Iaido y Kendo del Instituto Politécnico Nacional')->first();
+        $club = Club::where('association_id', $association->id)->first();
 
         $I->fillField('name', "juju2");
         $I->fillField('firstname', 'may');
@@ -109,23 +119,28 @@ class UserCest
         $I->wait(1);
         $I->click('#federation_id');
         $I->wait(2);
-        $I->selectOption('form select[name=federation_id]', "Mexican Kendo Federation");
-        $I->wait(2);
-        $I->selectOption('form select[name=association_id]', "ASOCIACION DE KENSHI DEL ESTADO DE PUEBLA, A.C.");
-        $I->wait(3);
-        $I->selectOption('form select[name=club_id]', "Nash Reinger");
+        $I->selectOption('form select[name=federation_id]', $federation->name);
+        if ($association != null) {
+            $I->wait(2);
+            $I->selectOption('form select[name=association_id]', $association->name);
+            $I->wait(3);
+        }
+        if ($club != null) {
+            $I->selectOption('form select[name=club_id]', $club->name);
+
+        }
 
         $I->click("#save1");
         $I->seeInSource(trans('msg.user_update_successful'));
         $I->seeInDatabase('ken_users',
-            [   'name' => "juju2",
+            ['name' => "juju2",
                 'firstname' => "may",
                 'lastname' => "orozco",
                 'grade_id' => $gradeId,
                 'country_id' => $countryId,
-                'federation_id' => 37,
-                'association_id' => 6,
-                'club_id' => 6,
+                'federation_id' => $federation->id,
+                'association_id' => $association->id,
+                'club_id' => $club->id,
             ]);
 
 
@@ -139,9 +154,9 @@ class UserCest
         $this->user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $I = new SuperAdmin($scenario);
         $I->logAsSuperAdmin();
-        $I->amOnPage("/users/".$this->user->slug."/edit/");
-        $I->fillField('password','333333');
-        $I->fillField('password_confirmation','333333');
+        $I->amOnPage("/users/" . $this->user->slug . "/edit/");
+        $I->fillField('password', '333333');
+        $I->fillField('password_confirmation', '333333');
         $I->click("#save1");
         $I->seeInSource(trans('msg.user_update_successful'));
 //
@@ -154,7 +169,6 @@ class UserCest
         $I->fillField('password', '333333');
         $I->click("#login");
         $I->seeCurrentUrlEquals('/');
-
 
 
     }

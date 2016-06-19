@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 //        $federations = Federation::all()->pluck('id')->toArray();
 //        $associations = Association::all()->pluck('id')->toArray();
 //        $clubs = Club::all()->pluck('id')->toArray();
-//        $countries = Countries::all()->pluck('id')->toArray();
+        $countries = Countries::all()->pluck('id')->toArray();
         User::create([
             'name' => 'No User',
             'email' => 'nouser@nouser.com',
@@ -57,42 +57,42 @@ class UserSeeder extends Seeder
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
                 'password' => bcrypt('superuser'),
                 'verified' => 1,]); // Root UI
-//        factory(User::class)->create(
-//            [   'name' => 'federation',
-//                'email' => 'federation@kendozone.com',
-//                'country_id' => $faker->randomElement($countries),
-////                'federation_id' => $faker->randomElement($federations),
-////                'association_id' => $faker->randomElement($associations),
-//                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
-//                'password' => bcrypt('federation'),
-//                'verified' => 1,]); // Federation Random Country : Pass federation
-//        factory(User::class)->create(
-//            [   'name' => 'association',
-//                'email' => 'association@kendozone.com',
-//                'country_id' => $faker->randomElement($countries),
-////                'federation_id' => $faker->randomElement($federations),
-////                'association_id' => $faker->randomElement($associations),
-//                'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
-//                'password' => bcrypt('association'),
-//                'verified' => 1,]);
+        factory(User::class)->create(
+            [   'name' => 'federation',
+                'email' => 'federation@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
+                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+                'password' => bcrypt('federation'),
+                'verified' => 1,]); // Federation Random Country : Pass federation
+        factory(User::class)->create(
+            [   'name' => 'association',
+                'email' => 'association@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
+                'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+                'password' => bcrypt('association'),
+                'verified' => 1,]);
 
-//        factory(User::class)->create(
-//            [   'name' => 'club',
-//                'email' => 'club@kendozone.com',
-//                'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
-//                'password' => bcrypt('club'),
-//                'verified' => 1,]);
-//
-//
-//        factory(User::class)->create(
-//            [   'name' => 'user',
-//                'email' => 'user@kendozone.com',
-//                'country_id' => $faker->randomElement($countries),
-////                'federation_id' => $faker->randomElement($federations),
-////                'association_id' => $faker->randomElement($associations),
-//                'role_id' => Config::get('constants.ROLE_USER'),
-//                'password' => bcrypt('user'),
-//                'verified' => 1,]);
+        factory(User::class)->create(
+            [   'name' => 'club',
+                'email' => 'club@kendozone.com',
+                'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+                'password' => bcrypt('club'),
+                'verified' => 1,]);
+
+
+        factory(User::class)->create(
+            [   'name' => 'user',
+                'email' => 'user@kendozone.com',
+                'country_id' => $faker->randomElement($countries),
+//                'federation_id' => $faker->randomElement($federations),
+//                'association_id' => $faker->randomElement($associations),
+                'role_id' => Config::get('constants.ROLE_USER'),
+                'password' => bcrypt('user'),
+                'verified' => 1,]);
 
 //        foreach ($countries as $country){
 //            factory(User::class)->create(

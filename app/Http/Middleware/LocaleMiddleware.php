@@ -25,7 +25,7 @@ class LocaleMiddleware
             }
             else {
                 $locale = Lang::getLocale();
-                Lang::setLocale($locale);
+//                Lang::setLocale($locale);
                 app()->setLocale($locale);
             }
         return $next($request);

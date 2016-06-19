@@ -35,6 +35,8 @@ class ClubSeeder extends Seeder {
 
             ]);
 
+
+
         factory(Club::class,5)->create(['association_id' => 7]);
         factory(Club::class,5)->create(['association_id' => $faker->randomElement($associations)]);
 
@@ -45,6 +47,17 @@ class ClubSeeder extends Seeder {
                 'president_id' => $naucali_presidente->id,
                 'name' => 'Naucali'
             ]);
+
+        factory(Club::class)->create(
+            ['association_id' => 8,
+                'name' => 'UNAM'
+            ]);
+
+        factory(Club::class)->create(
+            ['association_id' => 12,
+                'name' => 'Zacatenco'
+            ]);
+
         $this->command->info('Clubs Seeded!');
     }
 }
