@@ -1,0 +1,11 @@
+# `prod` environment config goes here
+modules:
+    config:
+        WebDriver:
+            url: 'https://kendozone.com'
+            browser: 'phantomjs'
+            window_size: 1024x768
+        Db:
+            dsn: 'mysql:host=kendozone.com;dbname=kendo'
+            user: 'forge'
+            password: '2R6fbHd2rDH6hRf3hlI6'

@@ -12,12 +12,3 @@ settings:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-modules:
-    config:
-        WebDriver:
-            url: 'https://kendozone.com'
-            browser: 'phantomjs'
-        Db:
-            dsn: '52.26.132.113'
-            user: 'forge'
-            password: '2R6fbHd2rDH6hRf3hlI6'
