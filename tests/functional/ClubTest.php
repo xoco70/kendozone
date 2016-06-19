@@ -1,4 +1,5 @@
 <?php
+use App\Association;
 use App\Club;
 use App\Federation;
 use App\User;
@@ -18,155 +19,221 @@ class ClubTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $user, $users, $root, $simpleUser, $clubPresident, $associationPresident; // $addUser,  $editUser,
-    protected $mortalUsers, $stateUsers, $clubUsers;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $this->clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
-        $this->associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
-        $this->clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
-        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-
-//        $this->mortalUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident, $this->clubPresident];
-        $this->stateUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
-//        $this->clubUsers = [$this->simpleUser, $this->clubPresident];
-
-    }
-
 
     /** @test
      *
      * superAdmin can do everything
      */
-    public function superAdmin_can_see_create_update_delete_club()
+    public function superAdmin_can_see_create_read_update_delete_club()
     {
-        $this->logWithUser($this->root);
+        $root = User::findOrFail(2);
 
-        $this->crud($this->root);
+        $this->logWithUser($root);
+        $club = factory(Club::class)->make();
+        $this->crud($club);
+
     }
 
     /** @test
      *
-     * a user must be superAdmin to access club
+     * a user must be superAdmin to access federation
      */
-    public function clubPresident_can_do_everything_but_is_stuck_to_his_club()
+    public function federationPresident_can_do_everything_in_his_own_federation()
     {
-        $this->logWithUser($this->clubPresident);
+        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+        $this->logWithUser($fmk);
 
-//        $myFederation = factory(Federation::class)->create(['president_id' => $this->clubPresident->id]);
-//        $hisFederation = factory(Federation::class)->create(['president_id' => 3]);
-//
-//
-//        // SEE FP Can see only his assoc
-//        $myAssoc = factory(Club::class)->create(['club_id' => $myFederation->id]); // We create one so that there is
-//        $notMyAssoc = factory(Club::class)->create(['club_id' => $hisFederation->id]); // We create one so that there is
-//
-//        $this->visit("/")
-//            ->click('clubs')
-//            ->see($myAssoc->name)
-//            ->dontSee($notMyAssoc->name);
-//
-//        $this->crud($this->clubPresident);
+        $association = factory(Association::class)->create(['federation_id' => $fmk->federation->id]);
+        $club = factory(Club::class)->create(['association_id' => $association->id]);
+
+        $this->crud($club);
     }
 
     /** @test
      *
-     * a user must be superAdmin to access club
+     * a user must be superAdmin to access federation
+     */
+    public function associationPresident_can_do_everything_in_his_own_association()
+    {
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $association = factory(Association::class)->create(['president_id' => $associationPresident->id]);
+        $club = factory(Club::class)->make(['association_id' => $association->id]);
+        $this->logWithUser($associationPresident);
+
+        $this->crud($club);
+    }
+
+    /** @test
+     *
+     * a user must be superAdmin to access federation
      */
     public function a_club_president_can_change_his_club_data()
     {
-//        $this->logWithUser($this->clubPresident);
-//
-//        $myClub = factory(Club::class)->create(['president_id' => $this->clubPresident->id]);
-//
-//
-//        $this->visit("/")
-//            ->click($myClub->name)
-//            ->seePageIs("/clubs/" . $myClub->id . "/edit");
-//
-//        $club = factory(Club::class)->make();
-//        $this->fillClubData($this->clubPresident, $club);
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+        $myClub = factory(Club::class)->create(['president_id' => $clubPresident->id]);
+
+        $this->logWithUser($clubPresident);
+
+        $this->visit("/")
+            ->click($myClub->name)
+            ->seePageIs("/clubs/" . $myClub->id . "/edit")
+            ->dontSee("403.png");
+
+        $club = factory(Club::class)->make(['association_id' => $myClub->association_id]);
+        $this->fillClubAndSee($club);
     }
 
 
-    /**
-     * @param User $user
+    // Root, FMK, AIKEM, NAUCALLI --> Assoc
+
+    /** @test
      */
-    public function crud(User $user)
-    {
-//        $this->visit_addClub();
-//        $club = factory(Club::class)->make();
-//
-//        $this->fillClubData($user, $club);
-//        $club = $this->getFullClubObject($club);
-//        // Update
-//
-//        $this->click($club->name);
-//        $club->name = "MyClub2";
-//        $club->address = "MyAdress2";
-//        $club->phone = "6666666666";
-//        $this->fillClubData($user, $club);
-//
-//        // Delete
-//
-//        $this->press("delete_" . $club->id)
-//            ->seeIsSoftDeletedInDatabase('club', ['id' => $club->id]);
+    public function a_federation_president_cannot_edit_a_club_that_doesnt_belongs_to_him(){ // Delete rule is the same, I don't do 2 tests
+        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+
+        $this->visitEditClubPage($federationPresident);
+        $this->see("403.png");
+
+
+    }
+    /** @test
+     */
+    public function a_association_president_cannot_edit_or_delete_a_club_that_doesnt_belongs_to_him(){
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+
+        $this->visitEditClubPage($associationPresident);
+        $this->see("403.png");
+    }
+    /** @test
+     *
+     */
+    public function a_club_president_cannot_edit_or_delete_a_club(){
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+        $this->visitEditClubPage($clubPresident);
+//        $this->see("403.png");
+    }
+    /** @test
+     *
+     */
+    public function clubPres_and_simple_user_cannot_create_association(){
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+
+        $users = [$clubPresident, $simpleUser];
+        foreach ($users as $user){
+            $this->logWithUser($user);
+            $this->visitCreateClubPage($clubPresident);
+            $this->see("403.png");
+        }
+
+
     }
 
     /**
-     * @param User $user
      * @param Club $club
      */
-    private function fillClubData(User $user, Club $club) //TODO I don't have here to change president
+    private function fillClubAndSee(Club $club) //TODO I don't have here to change president
     {
-//        $this->type($club->name, 'name')
-//            ->type($club->address, 'address')
-//            ->type($club->phone, 'phone');
-//
-//        if ($user->isClubPresident()) {
-//            $this->seeElement('input', ['name' => 'club', 'disabled' => 'disabled'])
-//                ->seeElement('input', ['name' => 'club_id', 'type' => 'hidden']);
-//        }
-//
-//        $this->press(trans('core.save'))
-//            ->seePageIs('/clubs')
-//            ->seeInDatabase('club',
-//                ['name' => $club->name,
-//                    'address' => $club->address,
-//                    'phone' => $club->phone,
-//                ]);
+
+
+        $this->type($club->name, 'name')
+            ->type($club->address, 'address')
+            ->type($club->phone, 'phone')
+            ->select($club->association_id, 'association_id');
+
+        $this->press(trans('core.save'))
+            ->seeInDatabase('club',
+                ['name' => $club->name,
+                    'address' => $club->address,
+                    'phone' => $club->phone,
+                ]);
     }
 
     private function visit_addClub()
     {
-//        $this->visit("/")
-//            ->click('clubs')
-//            ->click('addClub');
+        $this->visit("/")
+            ->click('clubs')
+            ->click('addClub');
     }
 
     /**
      * @param $club
      * @return mixed
      */
-    private function getFullClubObject($club)
+    private function getFullClubObject(Club $club)
     {
-//        $club = Club::where('name', $club->name)
-//            ->where('address', $club->address)
-//            ->where('phone', $club->phone)
-//            ->first();
-//        return $club;
+        $club = Club::where('name', $club->name)
+            ->where('address', $club->address)
+            ->where('phone', $club->phone)
+            ->first();
+        return $club;
+    }
+
+    /**
+     * @return true if User can create an association
+     */
+    private function canRead()
+    {
+        $this->visit("/clubs")
+            ->dontSee('403.png');
+
+
+    }
+
+    public function visitEditClubPage(User $user)
+    {
+        $this->logWithUser($user);
+
+        $club = factory(Club::class)->create();
+
+        $this->visit('/clubs/' . $club->id . '/edit');
+
+    }
+
+    public function visitCreateClubPage(User $user)
+    {
+        $this->logWithUser($user);
+        $this->visit('/clubs/create');
+
     }
 
 
-//    /** @test
-//     *
-//     * a user must be superAdmin to access club
-//     */
-//    public function changePresident(User $old, User $new)
-//    {
-//
-//    }
-}
+    /**
+     *
+     * @param Club $club
+     * @return true if User can create an association
+     */
+    private function canCreate(Club $club)
+    {
+        $this->visit_addClub();
+        $this->fillClubAndSee($club);
+
+    }
+
+    /**
+     * Create an association with the specified User
+     * @param Club $club
+     */
+    private function canUpdate(Club $club)
+    {
+        $this->visit("/clubs/".$club->id."/edit");
+        $clubData = factory(Club::class)->make(['association_id' => $club->association_id]);
+        $this->fillClubAndSee($clubData);
+
+    }
+
+    private function crud(Club $clubData)
+    {
+        $this->canRead(); // R
+
+        $this->canCreate($clubData); // C
+
+//        // Get Club Full Object
+
+        $club = $this->getFullClubObject($clubData);
+
+        $this->canUpdate($club); // C
+
+//        $this->canDelete($association); // C
+
+    }}

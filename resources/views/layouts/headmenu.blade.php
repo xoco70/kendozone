@@ -82,7 +82,7 @@
                     @endif
                     @if (!Auth::user()->isUser() && !Auth::user()->isClubPresident())
                         <li>
-                            <a class="protip" data-pt-title="{{ trans('core.clubs') }}"
+                            <a id="clubs" class="protip" data-pt-title="{{ trans('core.clubs') }}"
                                href="{!! URL::action('ClubController@index') !!}"><i
                                         class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
                             </a>

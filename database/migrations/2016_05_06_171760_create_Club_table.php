@@ -31,7 +31,7 @@ class CreateClubTable extends Migration {
 
 			$table->foreign('association_id')
 				->references('id')
-				->on('federation')
+				->on('association')
 				->onUpdate('cascade')
 				->onDelete('cascade');
 

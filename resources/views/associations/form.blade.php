@@ -49,18 +49,9 @@
 
                             </div>
 
-                            @if (Auth::user()->isSuperAdmin())
 
-                                {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                                {!!  Form::select('federation_id', $federations,$federation->has('id') ? $federation->id : 0, ['class' => 'form-control']) !!}
-                            @elseif (Auth::user()->isFederationPresident())
-                                {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                                {!!  Form::select('federation_id',$federations,Auth::user()->federationOwned->id ,['class' => 'form-control']) !!}
-                            @elseif (Auth::user()->isAssociationPresident())
-                                {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                                {!!  Form::select('federation_id',$federations,Auth::user()->associationOwned->federation->id ,['class' => 'form-control']) !!}
-
-                            @endif
+                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::select('federation_id',$federations,old('federation_id'),['class' => 'form-control']) !!}
 
 
                             <br/>

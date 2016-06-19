@@ -80,11 +80,10 @@ class Association extends Model
     {
         if ($user->isAssociationPresident() &&
             $user->associationOwned != null &&
-            $this->id == $user->associationOwned->id
-        ) {
+            $this->id == $user->associationOwned->id){
+            return true;
         }
-        return true;
-
+        return false;
     }
 
 }

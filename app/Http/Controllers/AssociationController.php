@@ -146,7 +146,6 @@ class AssociationController extends Controller
      *
      * @param $associationId
      * @return \Illuminate\Http\Response
-     * @internal param Association $association
      */
     public function destroy($associationId)
     {
@@ -160,7 +159,7 @@ class AssociationController extends Controller
     }
 
     /**
-     * @param $tournamentSlug
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function restore($id)

@@ -32,8 +32,6 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
             <div class="panel-body">
                 <div class="container-fluid">
-
-
                     <fieldset title="{{Lang::get('core.general_data')}}">
                         <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
 
@@ -44,7 +42,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
                         {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('federation_id', $federations,$club->federation_id, ['class' => 'form-control']) !!}
+                        {!!  Form::select('federation_id', $federations,old('federation_id'), ['class' => 'form-control']) !!}
 
 
                         <br/>

@@ -26,16 +26,9 @@ class FederationTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $this->clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
-        $this->associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
-        $this->federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
-        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
 
-        $this->mortalUsers = [$this->simpleUser, $this->clubPresident, $this->associationPresident, $this->federationPresident];
 
     }
-
 
     /** @test
      *
@@ -43,20 +36,29 @@ class FederationTest extends TestCase
      */
     public function everybody_can_see_federations()
     {
-        foreach ($this->mortalUsers as $user) {
+
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+        $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+
+        $mortalUsers = [$simpleUser, $clubPresident, $associationPresident, $federationPresident];
+
+        foreach ($mortalUsers as $user) {
             $this->logWithUser($user);
 
             $this->visit("/")
                 ->dontSee('federations');
 
             $this->visit("/federations")
-                ->dontSee('403');
+                ->dontSee('403.png');
         }
 
-        $this->logWithUser($this->root);
+        $this->logWithUser($root);
         $this->visit("/");
         $this->click("federations")
-             ->dontSee('403');
+             ->dontSee('403.png');
     }
 
     /** @test
@@ -65,11 +67,17 @@ class FederationTest extends TestCase
      */
     public function only_superadmin_can_edit_federation()
     {
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+        $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $mortalUsers = [$simpleUser, $clubPresident, $associationPresident, $federationPresident];
 
-        $federation = factory(Federation::class)->create();
+        $federation = Federation::find(2);
 
 
-        $this->logWithUser($this->root);
+        $this->logWithUser($root);
 
 
         $this->visit("/federations")
@@ -77,10 +85,10 @@ class FederationTest extends TestCase
             ->seePageIs('/federations/' . $federation->id . '/edit')
             ->fillFederationData($federation);
 
-        foreach ($this->mortalUsers as $user) {
+        foreach ($mortalUsers as $user) {
             $this->logWithUser($user);
             $this->visit("/federations/".$federation->id."/edit")
-                 ->see('403');
+                 ->see('403.png');
 
         }
     }
@@ -91,9 +99,14 @@ class FederationTest extends TestCase
      */
     public function a_federation_president_can_change_his_federation_data()
     {
-        $this->logWithUser($this->federationPresident);
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
 
-        $myFederation = factory(Federation::class)->create(['president_id' => $this->federationPresident->id]);
+        $this->logWithUser($federationPresident);
+
+        $myFederation = factory(Federation::class)->create(['president_id' => $federationPresident->id]);
         $hisFederation = factory(Federation::class)->create();
 
         $this->visit("/federations/" . $hisFederation->id . "/edit")
@@ -111,7 +124,7 @@ class FederationTest extends TestCase
             ->where('phone', $federationData->phone)
             ->first();
 
-        $users = [$this->simpleUser, $this->clubPresident, $this->associationPresident];
+        $users = [$simpleUser, $clubPresident, $associationPresident];
         foreach ($users as $user) {
             $this->logWithUser($user);
             $this->visit("/federations/".$federation->id."/edit");

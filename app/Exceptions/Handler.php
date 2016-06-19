@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Validation\ValidationException;
+use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -44,9 +45,13 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request $request
      * @param  \Exception $e
      * @return \Illuminate\Http\Response
+     * @throws Exception
      */
     public function render($request, Exception $e)
     {
+//        if (App::environment() == 'testing') {
+//            throw $e;
+//        }
         switch ($e) {
 
             case $e instanceof NotFoundHttpException:

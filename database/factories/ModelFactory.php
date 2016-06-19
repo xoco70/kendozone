@@ -49,8 +49,8 @@ $factory->define(App\Association::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Club::class, function (Faker\Generator $faker) {
-    $users = User::all()->pluck('id')->toArray();
     $associations = Association::all()->pluck('id')->toArray();
+    $users = User::all()->pluck('id')->toArray();
 
     return [
         'name' => $faker->name,
@@ -64,9 +64,9 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     $countries = Countries::all()->pluck('id')->toArray();
-    $federations = Federation::all()->pluck('id')->toArray();
-    $associations = Association::all()->pluck('id')->toArray();
-    $clubs = Club::all()->pluck('id')->toArray();
+//    $federations = Federation::all()->pluck('id')->toArray();
+//    $associations = Association::all()->pluck('id')->toArray();
+//    $clubs = Club::all()->pluck('id')->toArray();
 
     $email = $faker->email;
     return [

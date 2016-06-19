@@ -76,7 +76,7 @@ class ClubPolicy
         return false;
     }
 
-    public function destroy(User $user, Club $club)
+    public function delete(User $user, Club $club)
     {
         if ($user->isFederationPresident()) {
             return $club->belongsToFederationPresident($user);
