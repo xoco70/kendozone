@@ -23,7 +23,6 @@ class Kernel extends HttpKernel
         ShareErrorsFromSession::class,
 //        Middleware\VerifyCsrfToken::class,
         Middleware\OwnTournament::class,
-        Middleware\LocaleMiddleware::class,
 //        Middleware\FederationMiddleware::class,
 //        'throttle:60,1',
     ];
@@ -36,12 +35,14 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => Middleware\Authenticate::class,
         'guest' => Middleware\RedirectIfAuthenticated::class,
-        'roles' => Middleware\CheckRole::class,
+//        'roles' => Middleware\CheckRole::class,
         'ownTournament' => Middleware\OwnTournament::class,
-        'ownUser' => Middleware\OwnUser::class,
-        'federation' => Middleware\FederationMiddleware::class,
-        'association' => Middleware\AssociationMiddleware::class,
+//        'ownUser' => Middleware\OwnUser::class,
+//        'federation' => Middleware\FederationMiddleware::class,
+//        'association' => Middleware\AssociationMiddleware::class,
 //        'root' => Middleware\SuperAdmin::class,
+        'locale' => Middleware\LocaleMiddleware::class,
+
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 //        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
 //        'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

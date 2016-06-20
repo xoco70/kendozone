@@ -20,14 +20,10 @@ class LocaleMiddleware
 
     public function handle($request, Closure $next)
     {
-            if (Auth::check()) {
-                app()->setLocale(Auth::user()->locale);
-            }
-            else {
-                $locale = Lang::getLocale();
-//                Lang::setLocale($locale);
-                app()->setLocale($locale);
-            }
+
+        app()->setLocale(Auth::user()->locale);
+
+
         return $next($request);
     }
 }
