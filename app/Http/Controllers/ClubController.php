@@ -146,7 +146,7 @@ class ClubController extends Controller
 
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
 //            $users = new Collection; // This will be set by JS
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
+            $users = $this->users->findByField('federation_id', Auth::user()->federationOwned->id)->pluck('name', 'id');
 
         } else if (Auth::user()->isAssociationPresident()) {
             $federation = Auth::user()->associationOwned->federation;
@@ -157,7 +157,7 @@ class ClubController extends Controller
             $association = Auth::user()->associationOwned;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
+            $users = $this->users->findByField('association_id', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident()) {
             $federation = Auth::user()->clubOwned->association->federation;
             $federations->push($federation);
@@ -167,11 +167,11 @@ class ClubController extends Controller
             $association = Auth::user()->clubOwned->association;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
+            $users = $this->users->findByField('club_id', Auth::user()->clubOwned->id)->pluck('name', 'id');
         }
         else {
             // User is SuperAdmin
-            $users = User::pluck('name', 'id');
+            $users = $this->users->all()->pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
             $associations = Association::pluck('name', 'id');
 //            $federations = Federation::pluck('name', 'id');

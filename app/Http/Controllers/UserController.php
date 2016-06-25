@@ -203,7 +203,7 @@ class UserController extends Controller
             $excel->setDescription('A list of users');
             $excel->sheet(trans_choice('core.user', 2), function ($sheet) {
                 //TODO Here we should join grade, role, country to print name not FK
-                $users = User::all();
+                $users = $this->users->all();
 //                $users = User::with(['grade', 'role'])->get();
                 $sheet->fromArray($users);
             });
@@ -244,7 +244,7 @@ class UserController extends Controller
     public function restore($userSlug)
 
     {
-        $user = User::withTrashed()->whereSlug($userSlug)->first();
+        $user = $this->users->getSoftDeletedUserBySlug($userSlug);
         if ($user->restore()) {
             return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'success']);
         } else {

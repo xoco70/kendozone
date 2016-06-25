@@ -75,7 +75,7 @@ class TournamentUserController extends Controller
         
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
 
-        $user = User::registerUserToCategory([
+        $user = $this->users->registerUserToCategory([
             'name' => $request->username,
             'email' => $request->email
 
@@ -132,7 +132,7 @@ class TournamentUserController extends Controller
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
-        $user = User::findBySlug($userSlug);
+        $user = $this->users->findBySlug($userSlug);
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id);
 

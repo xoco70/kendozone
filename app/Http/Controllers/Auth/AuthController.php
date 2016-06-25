@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
+use App\Repositories\Eloquent\UserRepository;
 use App\Role;
 use App\Tournament;
 use App\User;
@@ -48,10 +49,21 @@ class AuthController extends Controller
      */
 
 
+    private $user;
+    /**
+     * @var UserRepository
+     */
+    private $users;
 
-    public function __construct(Socialite $socialite)
+    /**
+     * AuthController constructor.
+     * @param Socialite $socialite
+     * @param UserRepository $users
+     */
+    public function __construct(Socialite $socialite, UserRepository $users)
     {
         $this->socialite = $socialite;
+        $this->users = $users;
     }
 
     /**
@@ -151,7 +163,7 @@ class AuthController extends Controller
     /**
      * Perform the registration.
      *
-     * @param  Request $request
+     * @param AuthRequest
      * @param  AppMailer $mailer
      * @return \Redirect
      */
@@ -159,7 +171,7 @@ class AuthController extends Controller
     {
 
 
-        $user = User::create([  'name' => $request->name,
+        $user = $this->users->create([  'name' => $request->name,
                                 'email' => $request->email,
                                 'password' => bcrypt($request->password),
                                 'country_id' => $request->country_id,
@@ -192,7 +204,7 @@ class AuthController extends Controller
         $token = $request->get("token");
         $invite = Invite::getActiveTournamentInvite($token);
         if (!is_null($invite)) {
-            $user = User::create($request->all());
+            $user = $this->users->create($request->all());
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }
@@ -218,7 +230,10 @@ class AuthController extends Controller
      */
     public function confirmEmail($token)
     {
-        User::whereToken($token)->firstOrFail()->confirmEmail();
+        $this->users
+            ->firstByField('token', $token)
+            ->confirmEmail();
+
         flash()->success(Lang::get('auth.tx_for_confirm'));
         return redirect(URL::action('Auth\AuthController@getLogin'));
     }

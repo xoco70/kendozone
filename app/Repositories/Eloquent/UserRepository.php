@@ -11,6 +11,11 @@ class UserRepository implements UserRepositoryInterface
         return User::get($columns);
     }
 
+    public function create($columns = array('*'))
+    {
+        return User::create($columns);
+    }
+
     public function findByUserNameOrCreate($userData, $provider)
     {
 
@@ -130,6 +135,43 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::with('country','role');
     }
+    public function getSoftDeletedUserBySlug($slug){
+        return User::onlyTrashed()->where('slug', '=', $slug)->first();
+
+    }
+    public function getSoftDeletedUser(User $user){
+        return User::onlyTrashed()->where('email', '=', $user->email)->first();
+    }
+
+    /**
+     * @param $attributes
+     * @return static $user
+     */
+    public static function registerUserToCategory($attributes)
+    {
+        $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
+
+        if ($user == null) {
+            $password = null;
+            $user = new User;
+            $user->name = $attributes['name'];
+            $user->email = $attributes['email'];
+            $password = User::generatePassword();
+            $user->password = bcrypt($password);
+            $user->verified = 1;
+            $user->save();
+            $user->clearPassword = $password;
+        } // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
+        else if ($user->isDeleted()) {
+            $user->deleted_at = null;
+            $user->save();
+        }
+
+        // Fire Events
+
+        return $user;
+    }
+
 
 //    public function with($relations)
 //    {
