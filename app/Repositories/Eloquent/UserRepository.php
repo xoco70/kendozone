@@ -1,21 +1,12 @@
 <?php
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Exceptions\ValidatorException;
 use App\User;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository
 {
-    public function all($columns = array('*'))
-    {
-        return User::get($columns);
-    }
-
-    public function create($columns = array('*'))
-    {
-        return User::create($columns);
-    }
-
+    
     public function findByUserNameOrCreate($userData, $provider)
     {
 
@@ -100,24 +91,13 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function findByField($field = null, $value = null, $columns = ['*'])
-    {
-        return User::where($field, '=', $value)->get($columns);
-
-    }
 
     public function firstByField($field = null, $value = null, $columns = ['*'])
     {
         return User::where($field, '=', $value)->first($columns);
 
     }
-
-    public function find($value = null, $columns = ['*'])
-    {
-        return User::where('id', '=', $value)->first($columns);
-
-    }
-
+    
     public function findBySlug($userSlug = null)
     {
         return User::findBySlug($userSlug);
@@ -192,4 +172,148 @@ class UserRepository implements UserRepositoryInterface
 //
 //        return $this;
 //    }
+    /**
+     * Retrieve data array for populate field select
+     *
+     * @param string $column
+     * @param string|null $key
+     *
+     * @return \Illuminate\Support\Collection|array
+     */
+    public function lists($column, $key = null)
+    {
+        // TODO: Implement lists() method.
+    }
+
+    /**
+     * Retrieve all data of repository, paginated
+     *
+     * @param null $limit
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function paginate($limit = null, $columns = ['*'])
+    {
+        // TODO: Implement paginate() method.
+    }
+
+    /**
+     * Retrieve all data of repository, simple paginated
+     *
+     * @param null $limit
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function simplePaginate($limit = null, $columns = ['*'])
+    {
+        // TODO: Implement simplePaginate() method.
+    }
+
+    /**
+     * Find data by multiple fields
+     *
+     * @param array $where
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhere(array $where, $columns = ['*'])
+    {
+        // TODO: Implement findWhere() method.
+    }
+
+    /**
+     * Find data by multiple values in one field
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhereIn($field, array $values, $columns = ['*'])
+    {
+        // TODO: Implement findWhereIn() method.
+    }
+
+    /**
+     * Find data by excluding multiple values in one field
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhereNotIn($field, array $values, $columns = ['*'])
+    {
+        // TODO: Implement findWhereNotIn() method.
+    }
+
+    /**
+     * Update a entity in repository by id
+     *
+     * @param array $attributes
+     * @param       $id
+     *
+     * @return mixed
+     */
+    public function update(array $attributes, $id)
+    {
+        // TODO: Implement update() method.
+    }
+
+    /**
+     * Update or Create an entity in repository
+     *
+     * @throws ValidatorException
+     *
+     * @param array $attributes
+     * @param array $values
+     *
+     * @return mixed
+     */
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        // TODO: Implement updateOrCreate() method.
+    }
+
+    /**
+     * Delete a entity in repository by id
+     *
+     * @param $id
+     *
+     * @return int
+     */
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    /**
+     * Order collection by a given column
+     *
+     * @param string $column
+     * @param string $direction
+     *
+     * @return $this
+     */
+    public function orderBy($column, $direction = 'asc')
+    {
+        // TODO: Implement orderBy() method.
+    }
+
+    /**
+     * Load relations
+     *
+     * @param $relations
+     *
+     * @return $this
+     */
+    public function with($relations)
+    {
+        // TODO: Implement with() method.
+    }
 }
