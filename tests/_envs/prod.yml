@@ -8,4 +8,4 @@ modules:
         Db:
             dsn: 'mysql:host=kendozone.com;dbname=kendo'
             user: 'forge'
-            password: '2R6fbHd2rDH6hRf3hlI6'
+            password: 'cxlHOGX0urLxoY66rJKQ'
