@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Eloquent\UserRepository;
 use App\Tournament;
 use App\User;
 use Carbon\Carbon;
@@ -23,9 +25,10 @@ class InviteController extends Controller
 {
 
     protected $currentModelName;
-
-    public function __construct()
+    private $users;
+    public function __construct(UserRepository $users)
     {
+        $this->users = $users;
         $this->currentModelName = trans_choice('core.tournament_invitations', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -59,9 +62,9 @@ class InviteController extends Controller
      * @param $tournamentSlug
      * @param $token
      * @return View
-     * @internal param $tournamentId
-     * @internal param Request $request
-     * @internal param AppMailer $mailer
+     * @throws InvitationExpiredException
+     * @throws InvitationNeededException
+     * @throws InvitationNotActiveException
      */
     public function registerTournamentInvite($tournamentSlug, $token)
     {
@@ -82,7 +85,8 @@ class InviteController extends Controller
         $currentModelName = trans('core.select_categories_to_register');
         // Check if user is already registered
         if (!is_null($invite)) {
-            $user = User::where('email', $invite->email)->first();
+
+            $user = $this->users->firstByField('email', $invite->email);
             if (is_null($user)) {
                 // Redirect to user creation
                 return view('auth/invite', compact('token'));
@@ -125,7 +129,8 @@ class InviteController extends Controller
         $tournament = Tournament::findBySlug($tournamentSlug);
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
-            $user = User::find(Auth::user()->id);
+
+            $user = $this->users->find(Auth::user()->id);
             $user->categoryTournaments()->sync($categories);
             if (is_null($invite)) {
                 $invite = new Invite();
@@ -174,9 +179,6 @@ class InviteController extends Controller
         flash()->success(trans('msg.invitation_sent'));
 
         return redirect(URL::action('TournamentController@edit', $tournament->slug));
-
-
-//        dd($recipients);
     }
 
     /**

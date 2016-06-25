@@ -1,11 +1,16 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Eloquent;
 
+use App\Repositories\Contracts\UserRepositoryInterface;
 use App\User;
-use Illuminate\Support\Facades\Config;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
+    public function all($columns = array('*'))
+    {
+        return User::get($columns);
+    }
+
     public function findByUserNameOrCreate($userData, $provider)
     {
 
@@ -13,12 +18,11 @@ class UserRepository
         if (!$user) {
             // Check if there is no other user with same email
             $user = User::where('email', '=', $userData->email)->first();
-            if (!$user){
+            if (!$user) {
 
                 // get Large avatar
                 $avatar = str_replace('sz=50', 'sz=200', $userData->avatar);
                 $avatar = str_replace('type=normal', 'type=large ', $avatar);
-//dd (str_slug($userData->email));
                 $user = User::create([
                     'provider' => $provider,
                     'provider_id' => $userData->id,
@@ -30,9 +34,7 @@ class UserRepository
                     'role_id' => config('constants.ROLE_USER'),
                     'verified' => 1,
                 ]);
-            }
-
-            else{
+            } else {
                 return null;
             }
         }
@@ -73,4 +75,79 @@ class UserRepository
             $user->save();
         }
     }
+
+    /**
+     * Specify Model class name
+     *
+     * @return mixed
+     */
+    function model()
+    {
+        return User::class;
+    }
+
+    /**
+     * Find data by field and value
+     *
+     * @param       $field
+     * @param       $value
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findByField($field = null, $value = null, $columns = ['*'])
+    {
+        return User::where($field, '=', $value)->get($columns);
+
+    }
+
+    public function firstByField($field = null, $value = null, $columns = ['*'])
+    {
+        return User::where($field, '=', $value)->first($columns);
+
+    }
+
+    public function find($value = null, $columns = ['*'])
+    {
+        return User::where('id', '=', $value)->first($columns);
+
+    }
+
+    public function findBySlug($userSlug = null)
+    {
+        return User::findBySlug($userSlug);
+
+    }
+
+    public function findBySlugWithTrashed($userSlug = null, $columns = ['*'])
+    {
+        return User::withTrashed()->whereSlug($userSlug)->get($columns) ;
+
+    }
+
+
+    public function getUsersWithCountriesAndRoles()
+    {
+        return User::with('country','role');
+    }
+
+//    public function with($relations)
+//    {
+//        if (is_string($relations)) $relations = func_get_args();
+//
+//        $this->with = $relations;
+//
+//        return $this;
+//    }
+
+//    protected function eagerLoadRelations($with)
+//    {
+//        if (!is_null($with)) {
+//            foreach ($with as $relation) {
+//                $this->with($relation);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }

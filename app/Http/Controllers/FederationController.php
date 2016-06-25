@@ -7,6 +7,7 @@ use App\Exceptions\NotOwningFederationException;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
+use App\Repositories\Eloquent\UserRepository;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,13 @@ use URL;
 class FederationController extends Controller
 {
 
-    protected $currentModelName;
+    private $users;
+
+    public function __construct(UserRepository $users)
+    {
+        $this->users = $users;
+    }
+
     // Only Super Admin can manage Federations
 
     /**
@@ -64,7 +71,7 @@ class FederationController extends Controller
             throw new UnauthorizedException();
         }
 
-        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
+        $users = $this->users->findByField('country_id', $federation->country_id)->lists('name', 'id');
         return view('federations.edit', compact('federation', 'users'));
     }
 
@@ -83,7 +90,7 @@ class FederationController extends Controller
             throw new NotOwningFederationException();
         }
         $federation->update($request->all());
-        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
+        $users = $this->users->findByField('country_id', $federation->country_id)->lists('name', 'id');
         $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
         flash()->success($msg);
 

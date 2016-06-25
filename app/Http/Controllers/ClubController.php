@@ -7,6 +7,7 @@ use App\Club;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
+use App\Repositories\Eloquent\UserRepository;
 use App\User;
 use Auth;
 use Illuminate\Contracts\Validation\UnauthorizedException;
@@ -20,9 +21,11 @@ class ClubController extends Controller
     // Only Super Admin and Club President can manage Clubs
 
     protected $currentModelName;
+    private $users;
 
-    public function __construct()
+    public function __construct(UserRepository $users)
     {
+        $this->users = $users;
         $this->currentModelName = trans_choice('core.club', 1);
         View::share('currentModelName', $this->currentModelName);
 
@@ -66,12 +69,9 @@ class ClubController extends Controller
 
             $federations = $federations->pluck('name', 'id');
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
-//            $users = new Collection; // This will be set by JS
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
+            $users = $this->users->findByField('federation_id', Auth::user()->federationOwned->id)->pluck('name', 'id');
 
         } else if (Auth::user()->isAssociationPresident()) {
-
-
             $federation = Auth::user()->associationOwned->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
@@ -79,7 +79,7 @@ class ClubController extends Controller
             $association = Auth::user()->associationOwned;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
+            $users = $this->users->findByField('association_id', Auth::user()->associationOwned->id)->pluck('name', 'id');
         }  else {
             // User is SuperAdmin
             $users = User::pluck('name', 'id');
@@ -89,7 +89,6 @@ class ClubController extends Controller
 //            $associations = new Collection; // This will be set by JS
 //            $users = new Collection; // This will be set by JS
         }
-
 
         return view('clubs.form', compact('club', 'users', 'federations', 'associations')); //
     }

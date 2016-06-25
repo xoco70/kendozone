@@ -1,6 +1,6 @@
 <?php namespace App;
 // AuthenticateUser.php
-use App\Repositories\UserRepository;
+use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;

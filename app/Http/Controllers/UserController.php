@@ -7,6 +7,7 @@ use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
+use App\Repositories\Eloquent\UserRepository;
 use App\Role;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
@@ -24,15 +25,16 @@ use Webpatser\Countries\Countries;
 class UserController extends Controller
 {
     protected $currentModelName;
+    private $users;
 
-    public function __construct()
+
+    public function __construct(UserRepository $users)
     {
-//        $this->middleware('ownUser', ['except' => ['index', 'show']]);
+        $this->users = $users;
+
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
-        $this->modelPlural = trans_choice('core.user', 1);
         View::share('currentModelName', $this->currentModelName);
-        View::share('modelPlural', $this->modelPlural);
 
 
     }
@@ -45,7 +47,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with('country', 'role')
+        $users = $this->users->getUsersWithCountriesAndRoles()
             ->forUser(Auth::user())
             ->paginate(config('constants.PAGINATION'));
 

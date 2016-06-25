@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentUserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
+use App\Repositories\Eloquent\UserRepository;
 use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,9 +20,10 @@ use URL;
 class TournamentUserController extends Controller
 {
     protected $currentModelName;
-
-    public function __construct()
+    private $users;
+    public function __construct(UserRepository $users)
     {
+        $this->users = $users;
         $this->currentModelName = trans_choice('core.tournament', 2);
         View::share('currentModelName', $this->currentModelName);
     }
@@ -47,6 +49,8 @@ class TournamentUserController extends Controller
     /**
      * Show the form for creating a new competitor.
      *
+     * @param Request $request
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, Tournament $tournament)
@@ -106,7 +110,7 @@ class TournamentUserController extends Controller
      */
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
-        $user = User::findBySlug($userSlug);
+        $user = $this->users->findBySlug($userSlug);
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id)->first();
 

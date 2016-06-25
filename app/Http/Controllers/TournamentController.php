@@ -137,10 +137,10 @@ class TournamentController extends Controller
         }
         $categories = $categories->sortBy(function ($key) {
             return $key;
-        })->lists('name', 'id');
+        })->pluck('name', 'id');
 
 
-        $levels = TournamentLevel::lists('name', 'id');
+        $levels = TournamentLevel::pluck('name', 'id');
 
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors'));
     }
@@ -224,6 +224,7 @@ class TournamentController extends Controller
     /**
      * @param Tournament $tournament
      * @return mixed
+     * @throws InvitationNeededException
      */
     public function register(Tournament $tournament)
     {

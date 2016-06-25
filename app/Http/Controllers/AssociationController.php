@@ -21,9 +21,11 @@ class AssociationController extends Controller
     // Only Super Admin and Association President can manage Associations
 
     protected $currentModelName;
+    private $users;
 
     public function __construct()
     {
+
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
