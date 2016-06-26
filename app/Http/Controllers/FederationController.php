@@ -60,9 +60,8 @@ class FederationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Federation $federation
+     * @param $id
      * @return \Illuminate\Http\Response
-     * @throws NotOwningFederationException
      */
     public function edit($id)
     {
@@ -71,7 +70,7 @@ class FederationController extends Controller
             throw new UnauthorizedException();
         }
 
-        $users = $this->users->findByField('country_id', $federation->country_id)->lists('name', 'id');
+        $users = $this->users->findByField('country_id', $federation->country_id)->pluck('name', 'id');
         return view('federations.edit', compact('federation', 'users'));
     }
 

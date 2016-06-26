@@ -27,6 +27,15 @@ abstract class BaseRepository implements RepositoryInterface
     abstract public function model();
 
     /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+        $this->makeModel();
+
+    }
+    /**
      * @return Model
      * @throws RepositoryException
      */
@@ -93,14 +102,14 @@ abstract class BaseRepository implements RepositoryInterface
      *
      * @return mixed
      */
-    public function paginate($limit = null, $columns = ['*'], $method = "paginate")
-    {
-        $limit = is_null($limit) ? config('repository.pagination.limit', 15) : $limit;
-        $results = $this->model->{$method}($limit, $columns);
-        $results->appends(request()->query());
-
-        return $results;
-    }
+//    public function paginate($limit = null, $columns = ['*'], $method = "paginate")
+//    {
+//        $limit = is_null($limit) ? config('repository.pagination.limit', 15) : $limit;
+//        $results = $this->model->{$method}($limit, $columns);
+//        $results->appends(request()->query());
+//
+//        return $results;
+//    }
     /**
      * Retrieve all data of repository, simple paginated
      *
@@ -109,10 +118,10 @@ abstract class BaseRepository implements RepositoryInterface
      *
      * @return mixed
      */
-    public function simplePaginate($limit = null, $columns = ['*'])
-    {
-        return $this->paginate($limit, $columns, "simplePaginate");
-    }
+//    public function simplePaginate($limit = null, $columns = ['*'])
+//    {
+//        return $this->paginate($limit, $columns, "simplePaginate");
+//    }
 
 
 
