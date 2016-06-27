@@ -1,10 +1,9 @@
 <?php
 namespace App\Repositories\Eloquent;
 
-use App\Federation;
-use App\User;
+use App\Invite;
 
-class FederationRepository extends BaseRepository
+class InviteRepository extends BaseRepository
 {
 
 
@@ -15,7 +14,7 @@ class FederationRepository extends BaseRepository
      */
     function model()
     {
-        return Federation::class;
+        return Invite::class;
     }
 
 }

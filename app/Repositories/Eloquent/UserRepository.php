@@ -180,10 +180,9 @@ class UserRepository extends BaseRepository
      *
      * @return \Illuminate\Support\Collection|array
      */
-    public function lists($column, $key = null)
-    {
-        // TODO: Implement lists() method.
-    }
+//    public function lists($column, $key = null)
+//    {
+//    }
 
     /**
      * Retrieve all data of repository, paginated
@@ -193,10 +192,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function paginate($limit = null, $columns = ['*'])
-    {
-        // TODO: Implement paginate() method.
-    }
+//    public function paginate($limit = null, $columns = ['*'])
+//    {
+//    }
 
     /**
      * Retrieve all data of repository, simple paginated
@@ -206,10 +204,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function simplePaginate($limit = null, $columns = ['*'])
-    {
-        // TODO: Implement simplePaginate() method.
-    }
+//    public function simplePaginate($limit = null, $columns = ['*'])
+//    {
+//    }
 
     /**
      * Find data by multiple fields
@@ -219,10 +216,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function findWhere(array $where, $columns = ['*'])
-    {
-        // TODO: Implement findWhere() method.
-    }
+//    public function findWhere(array $where, $columns = ['*'])
+//    {
+//    }
 
     /**
      * Find data by multiple values in one field
@@ -233,10 +229,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function findWhereIn($field, array $values, $columns = ['*'])
-    {
-        // TODO: Implement findWhereIn() method.
-    }
+//    public function findWhereIn($field, array $values, $columns = ['*'])
+//    {
+//    }
 
     /**
      * Find data by excluding multiple values in one field
@@ -247,10 +242,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function findWhereNotIn($field, array $values, $columns = ['*'])
-    {
-        // TODO: Implement findWhereNotIn() method.
-    }
+//    public function findWhereNotIn($field, array $values, $columns = ['*'])
+//    {
+//    }
 
     /**
      * Update a entity in repository by id
@@ -260,10 +254,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function update(array $attributes, $id)
-    {
-        // TODO: Implement update() method.
-    }
+//    public function update(array $attributes, $id)
+//    {
+//    }
 
     /**
      * Update or Create an entity in repository
@@ -275,10 +268,9 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function updateOrCreate(array $attributes, array $values = [])
-    {
-        // TODO: Implement updateOrCreate() method.
-    }
+//    public function updateOrCreate(array $attributes, array $values = [])
+//    {
+//    }
 
     /**
      * Delete a entity in repository by id
@@ -287,10 +279,9 @@ class UserRepository extends BaseRepository
      *
      * @return int
      */
-    public function delete($id)
-    {
-        // TODO: Implement delete() method.
-    }
+//    public function delete($id)
+//    {
+//    }
 
     /**
      * Order collection by a given column
@@ -300,10 +291,9 @@ class UserRepository extends BaseRepository
      *
      * @return $this
      */
-    public function orderBy($column, $direction = 'asc')
-    {
-        // TODO: Implement orderBy() method.
-    }
+//    public function orderBy($column, $direction = 'asc')
+//    {
+//    }
 
     /**
      * Load relations
@@ -312,8 +302,7 @@ class UserRepository extends BaseRepository
      *
      * @return $this
      */
-    public function with($relations)
-    {
-        // TODO: Implement with() method.
-    }
+//    public function with($relations)
+//    {
+//    }
 }

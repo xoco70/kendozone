@@ -7,6 +7,7 @@ use App\Exceptions\NotOwningFederationException;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
+use App\Repositories\Eloquent\AssociationRepository;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
@@ -21,14 +22,19 @@ class AssociationController extends Controller
     // Only Super Admin and Association President can manage Associations
 
     protected $currentModelName;
-    private $users;
+    private $associations;
 
-    public function __construct()
+    /**
+     * AssociationController constructor.
+     * @param AssociationRepository $associations
+     */
+    public function __construct(AssociationRepository $associations)
     {
 
         $this->currentModelName = trans_choice('core.association', 1);
         View::share('currentModelName', $this->currentModelName);
 
+        $this->associations = $associations;
     }
 
 
@@ -39,7 +45,8 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::with('president', 'federation.country')->forUser(Auth::user())->get();
+        $associations = $this->associations->getAssociationWithPresidentAndCountry()->forUser(Auth::user())->get();
+//        $associations = Association::with('president', 'federation.country')->forUser(Auth::user())->get();
         return view('associations.index', compact('associations'));
     }
 
@@ -78,8 +85,7 @@ class AssociationController extends Controller
         if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
             throw new UnauthorizedException();
         }
-
-        $association = Association::create($request->all());
+        $association = $this->associations->create($request->all());
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);
         return redirect("associations");
@@ -95,7 +101,7 @@ class AssociationController extends Controller
     public function show($id)
     {
 
-        $association = Association::findOrFail($id);
+        $association = $this->associations->find($id);
         return view('associations.show', compact('association'));
     }
 
@@ -108,7 +114,8 @@ class AssociationController extends Controller
     public function edit($id)
     {
 
-        $association = Association::findOrFail($id);
+        $association = $this->associations->find($id);
+
         $federation = $association->federation;
 
         if (Auth::user()->cannot('edit', $association)) {
@@ -130,7 +137,7 @@ class AssociationController extends Controller
      */
     public function update(AssociationRequest $request, $id)
     {
-        $association = Association::findOrFail($id);
+        $association = $this->associations->find($id);
 
         if (Auth::user()->cannot('update', $association)) {
             throw new UnauthorizedException();
@@ -151,7 +158,7 @@ class AssociationController extends Controller
      */
     public function destroy($associationId)
     {
-        $association = Association::find($associationId);
+        $association = $this->associations->find($associationId);
 //        dd($association);
         if ($association->delete()) {
             return Response::json(['msg' => trans('msg.association_delete_successful', ['name' => $association->name]), 'status' => 'success']);
@@ -165,9 +172,9 @@ class AssociationController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function restore($id)
-
     {
-        $association = Association::withTrashed()->find($id);
+        $association = $this->associations->findByIdWithTrash($id);
+        
         if ($association->restore()) {
             return Response::json(['msg' => trans('msg.association_restored_successful', ['name' => $association->name]), 'status' => 'success']);
         } else {
