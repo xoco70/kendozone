@@ -18,4 +18,9 @@ class FederationRepository extends BaseRepository
         return Federation::class;
     }
 
-}
+    public function getFederationWithPresidentAndCountry()
+    {
+        return Federation::with('president', 'country');
+    }
+
+}    

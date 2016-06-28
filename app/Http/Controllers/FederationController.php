@@ -7,6 +7,7 @@ use App\Exceptions\NotOwningFederationException;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
+use App\Repositories\Eloquent\FederationRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
@@ -17,11 +18,17 @@ use URL;
 class FederationController extends Controller
 {
 
-    private $users;
+    private $users, $federations;
 
-    public function __construct(UserRepository $users)
+    /**
+     * FederationController constructor.
+     * @param UserRepository $users
+     * @param FederationRepository $federations
+     */
+    public function __construct(UserRepository $users, FederationRepository $federations)
     {
         $this->users = $users;
+        $this->federations = $federations;
     }
 
     // Only Super Admin can manage Federations
@@ -33,7 +40,7 @@ class FederationController extends Controller
      */
     public function index()
     {
-        $federations = Federation::with('president', 'country'); // ,'vicepresident','secretary','treasurer','admin'
+        $federations = $this->federations->getFederationWithPresidentAndCountry(); // ,'vicepresident','secretary','treasurer','admin'
 
         if (Request::ajax()) {
             return $federations->orderBy('id', 'asc')-> get(['id as value', 'name as text'])->toArray();
@@ -53,7 +60,7 @@ class FederationController extends Controller
      */
     public function show($id)
     {
-        $federation = Federation::findOrFail($id);
+        $federation = $this->federations->find($id);
         return view('federations.show', compact('federation'));
     }
 
@@ -65,7 +72,7 @@ class FederationController extends Controller
      */
     public function edit($id)
     {
-        $federation = Federation::findOrFail($id);
+        $federation = $this->federations->find($id);
         if (Auth::user()->cannot('edit', $federation)) {
             throw new UnauthorizedException();
         }
@@ -84,7 +91,7 @@ class FederationController extends Controller
      */
     public function update(FederationRequest $request, $id)
     {
-        $federation = Federation::findOrFail($id);
+        $federation = $this->federations->find($id);
         if (Auth::user()->cannot('update', $federation)) {
             throw new NotOwningFederationException();
         }

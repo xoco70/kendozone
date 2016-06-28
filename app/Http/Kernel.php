@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         AddQueuedCookiesToResponse::class,
         StartSession::class,
         ShareErrorsFromSession::class,
+        Middleware\LocaleMiddleware::class,
 //        Middleware\VerifyCsrfToken::class,
         Middleware\OwnTournament::class,
 //        Middleware\FederationMiddleware::class,
@@ -41,7 +42,6 @@ class Kernel extends HttpKernel
 //        'federation' => Middleware\FederationMiddleware::class,
 //        'association' => Middleware\AssociationMiddleware::class,
 //        'root' => Middleware\SuperAdmin::class,
-        'locale' => Middleware\LocaleMiddleware::class,
 
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 //        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,

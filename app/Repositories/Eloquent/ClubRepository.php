@@ -17,4 +17,10 @@ class ClubRepository extends BaseRepository
         return Club::class;
     }
 
+    public function getFederationWithPresidentAndFederation()
+    {
+        return Club::with('president', 'association.federation');
+    }
+
+
 }
