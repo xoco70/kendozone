@@ -16,10 +16,12 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class);
     }
+
     /**
      * Grant the given permission to a role.
      *
-     * @param  Permission $permission
+     * @param $query
+     * @param $userType
      * @return mixed
      */
     public function scopeGrantedRoles($query, $userType)

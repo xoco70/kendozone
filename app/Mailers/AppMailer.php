@@ -57,7 +57,7 @@ class AppMailer
         $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
         //TODO Not translated
         $this->to = $user->email;
-        $this->subject = 'Activación de tu cuenta '.$appName;
+        $this->subject = trans('mail.activation_account').$appName;
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
@@ -66,7 +66,7 @@ class AppMailer
     public function sendEmailInvitationTo( $email , $tournament, $code, $category = null, $password = null)
     {
         $this->to = $email;
-        $this->subject = 'Invitación al torneo: '.$tournament->name;
+        $this->subject = trans('email.invite_to_tournament').$tournament->name;
         $this->view = 'emails.invite';
         $this->data = compact('tournament','code','category','email', 'password');
         $this->deliver();

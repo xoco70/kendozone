@@ -14,7 +14,6 @@ use App\TournamentLevel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Response;
@@ -26,9 +25,10 @@ class TournamentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('ownTournament', ['except' => ['index','show']]);
-        
+        $this->middleware('ownTournament', ['except' => ['index', 'show']]);
+
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,22 +87,7 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        // get categoryTournament Team Registered
-//        $teams = CategoryTournament::with(
-//            ['ctus' => function ($query) {
-//                $query->where('user_id', '=', Auth::user()->id);
-//
-//            }]
-////            ,
-////            ['category' => function ($query) {
-////                $query->where('isTeam', '=', 1);
-////
-////            }]
-//        )->get();
-        $teams ="";
-        // CTU where UserId -> categoryTournament -> category where isTeam = 1 --> return Collection (categoryTournaments)
-
-//        dd($ctTeams);
+        $teams = "";
         $grades = Grade::lists('name', 'id');
         return view('tournaments.show', compact('tournament', 'grades', 'teams'));
     }
@@ -117,7 +102,6 @@ class TournamentController extends Controller
     {
 
         $tournament = Tournament::with('competitors', 'categorySettings', 'categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
-//        dd($tournament->competitors->groupBy('user_id'));
         // Statistics for Right Panel
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $settingSize = $tournament->categorySettings->count();
@@ -164,10 +148,6 @@ class TournamentController extends Controller
         }
 //        }
 
-//        $tournament->update($request->all());
-//        $tournament->categories()->sync($request->input('category'));
-//        flash()->success(trans('core.operation_successful'));
-//        return redirect("tournaments/$tournament->id/edit");
     }
 
 

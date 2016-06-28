@@ -7,10 +7,6 @@ use App\Club;
 use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
-use App\Repositories\Eloquent\AssociationRepository;
-use App\Repositories\Eloquent\ClubRepository;
-use App\Repositories\Eloquent\FederationRepository;
-use App\Repositories\Eloquent\UserRepository;
 use App\User;
 use Auth;
 use Illuminate\Contracts\Validation\UnauthorizedException;
@@ -24,19 +20,12 @@ class ClubController extends Controller
     // Only Super Admin and Club President can manage Clubs
 
     protected $currentModelName;
-    private $users, $federations, $associations, $clubs;
 
-    public function __construct(UserRepository $users,
-                                FederationRepository $federations,
-                                AssociationRepository $associations,
-                                ClubRepository $clubs)
+    public function __construct()
     {
-        $this->users = $users;
-        $this->federations = $federations;
-        $this->associations = $associations;
-        $this->clubs = $clubs;
         $this->currentModelName = trans_choice('core.club', 1);
         View::share('currentModelName', $this->currentModelName);
+
 
     }
 
@@ -48,7 +37,7 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $clubs = $this->clubs->getFederationWithPresidentAndFederation()
+        $clubs = Club::with('president', 'association.federation')
             ->forUser(Auth::user())
             ->get();
 
@@ -77,9 +66,12 @@ class ClubController extends Controller
 
             $federations = $federations->pluck('name', 'id');
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
-            $users = $this->users->findByField('federation_id', Auth::user()->federationOwned->id)->pluck('name', 'id');
+//            $users = new Collection; // This will be set by JS
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
 
         } else if (Auth::user()->isAssociationPresident()) {
+
+
             $federation = Auth::user()->associationOwned->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
@@ -87,16 +79,17 @@ class ClubController extends Controller
             $association = Auth::user()->associationOwned;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = $this->users->findByField('association_id', Auth::user()->associationOwned->id)->pluck('name', 'id');
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         }  else {
             // User is SuperAdmin
-            $users = $this->users->lists('name', 'id');
-            $federations = $this->federations->lists('name', 'id');
-            $associations = $this->associations->lists('name', 'id');
+            $users = User::pluck('name', 'id');
+            $federations = Federation::pluck('name', 'id');
+            $associations = Association::pluck('name', 'id');
 //            $federations = Federation::pluck('name', 'id');
 //            $associations = new Collection; // This will be set by JS
 //            $users = new Collection; // This will be set by JS
         }
+
 
         return view('clubs.form', compact('club', 'users', 'federations', 'associations')); //
     }
@@ -154,7 +147,7 @@ class ClubController extends Controller
 
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
 //            $users = new Collection; // This will be set by JS
-            $users = $this->users->findByField('federation_id', Auth::user()->federationOwned->id)->pluck('name', 'id');
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
 
         } else if (Auth::user()->isAssociationPresident()) {
             $federation = Auth::user()->associationOwned->federation;
@@ -165,7 +158,7 @@ class ClubController extends Controller
             $association = Auth::user()->associationOwned;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = $this->users->findByField('association_id', Auth::user()->associationOwned->id)->pluck('name', 'id');
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident()) {
             $federation = Auth::user()->clubOwned->association->federation;
             $federations->push($federation);
@@ -175,13 +168,13 @@ class ClubController extends Controller
             $association = Auth::user()->clubOwned->association;
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
-            $users = $this->users->findByField('club_id', Auth::user()->clubOwned->id)->pluck('name', 'id');
+            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
         }
         else {
             // User is SuperAdmin
-            $users = $this->users->all()->pluck('name', 'id');
-            $federations = $this->federations->lists('name', 'id');
-            $associations = $this->associations->lists('name', 'id');
+            $users = User::pluck('name', 'id');
+            $federations = Federation::pluck('name', 'id');
+            $associations = Association::pluck('name', 'id');
 //            $federations = Federation::pluck('name', 'id');
 //            $associations = new Collection; // This will be set by JS
 //            $users = new Collection; // This will be set by JS

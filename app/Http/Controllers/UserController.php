@@ -7,13 +7,11 @@ use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
-use App\Repositories\Eloquent\UserRepository;
 use App\Role;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
@@ -25,13 +23,10 @@ use Webpatser\Countries\Countries;
 class UserController extends Controller
 {
     protected $currentModelName;
-    private $users;
 
-
-    public function __construct(UserRepository $users)
+    public function __construct()
     {
-        $this->users = $users;
-
+//        $this->middleware('ownUser', ['except' => ['index', 'show']]);
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         View::share('currentModelName', $this->currentModelName);
@@ -47,7 +42,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = $this->users->getUsersWithCountriesAndRoles()
+        $users = User::with('country', 'role')
             ->forUser(Auth::user())
             ->paginate(config('constants.PAGINATION'));
 
@@ -175,14 +170,12 @@ class UserController extends Controller
             flash()->success(trans('msg.user_update_successful'));
         } else
             flash()->success(Lang::get('msg.user_update_error'));
-
-
+        
         if ($user->id == Auth::user()->id) {
             return redirect(URL::action('UserController@edit', Auth::user()->slug));
         } else {
             return redirect(URL::action('UserController@index'));
         }
-
     }
 
 
@@ -203,7 +196,7 @@ class UserController extends Controller
             $excel->setDescription('A list of users');
             $excel->sheet(trans_choice('core.user', 2), function ($sheet) {
                 //TODO Here we should join grade, role, country to print name not FK
-                $users = $this->users->all();
+                $users = User::all();
 //                $users = User::with(['grade', 'role'])->get();
                 $sheet->fromArray($users);
             });
@@ -244,7 +237,7 @@ class UserController extends Controller
     public function restore($userSlug)
 
     {
-        $user = $this->users->getSoftDeletedUserBySlug($userSlug);
+        $user = User::withTrashed()->whereSlug($userSlug)->first();
         if ($user->restore()) {
             return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'success']);
         } else {

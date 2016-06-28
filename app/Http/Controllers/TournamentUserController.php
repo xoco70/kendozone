@@ -9,7 +9,6 @@ use App\Http\Requests;
 use App\Http\Requests\TournamentUserRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
-use App\Repositories\Eloquent\UserRepository;
 use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,10 +19,9 @@ use URL;
 class TournamentUserController extends Controller
 {
     protected $currentModelName;
-    private $users;
-    public function __construct(UserRepository $users)
+
+    public function __construct()
     {
-        $this->users = $users;
         $this->currentModelName = trans_choice('core.tournament', 2);
         View::share('currentModelName', $this->currentModelName);
     }
@@ -49,8 +47,6 @@ class TournamentUserController extends Controller
     /**
      * Show the form for creating a new competitor.
      *
-     * @param Request $request
-     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, Tournament $tournament)
@@ -75,7 +71,7 @@ class TournamentUserController extends Controller
         
         $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
 
-        $user = $this->users->registerUserToCategory([
+        $user = User::registerUserToCategory([
             'name' => $request->username,
             'email' => $request->email
 
@@ -110,7 +106,7 @@ class TournamentUserController extends Controller
      */
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
-        $user = $this->users->findBySlug($userSlug);
+        $user = User::findBySlug($userSlug);
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id)->first();
 
@@ -132,7 +128,7 @@ class TournamentUserController extends Controller
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
-        $user = $this->users->findBySlug($userSlug);
+        $user = User::findBySlug($userSlug);
         $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
             ->where('user_id', $user->id);
 

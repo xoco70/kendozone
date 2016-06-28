@@ -8,28 +8,6 @@ use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
-//    protected $currentModelName,$defaultSettings;
-
-    public function __construct()
-    {
-        // Fetch the Site Settings object
-//        $this->middleware('auth');
-//        $this->currentModelName = trans_choice('core.category', 2);
-//        View::share('currentModelName', $this->currentModelName);
-//        $this->defaultSettings = CategorySettings::getDefaultSettings();
-
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function index(Tournament $tournament)
-//    {
-//        $categories = $tournament->categories;
-//        $defaultSettings =  $this->defaultSettings;
-//        return view("categories.index", compact('categories','defaultSettings'));
-//    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,12 +17,6 @@ class CategoryController extends Controller
     public function create()
     {
         $currentModelName = trans_choice('core.category', 1);
-
-
-//        $grades = Grade::orderBy('order', 'asc')->lists('name', 'id');
-
-
-
         return view('categories.create', compact('currentModelName'));
     }
 
@@ -68,7 +40,6 @@ class CategoryController extends Controller
      */
     public function edit($categorySettingsId)
     {
-//        dd("CC");
 
     }
 
