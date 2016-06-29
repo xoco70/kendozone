@@ -1,0 +1,15 @@
+{
+  "name": "jquery-locationpicker-plugin",
+  "homepage": "https://github.com/Logicify/jquery-locationpicker-plugin",
+  "version": "0.1.12",
+  "_release": "0.1.12",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.12",
+    "commit": "9a79df79b7860d5efae5b94942e3e4444bf7b31f"
+  },
+  "_source": "https://github.com/Logicify/jquery-locationpicker-plugin.git",
+  "_target": "^0.1.12",
+  "_originalSource": "jquery-locationpicker-plugin",
+  "_direct": true
+}

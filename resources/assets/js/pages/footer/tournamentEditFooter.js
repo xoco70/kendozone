@@ -19,7 +19,7 @@ $(function () {
     }));
 
     $('#name').blur(function () {
-        if (!$(this).val() || $(this).length <6) {
+        if (!$(this).val() || $(this).length < 6) {
             $(this).closest('div').addClass('has-error');
         } else {
             $(this).closest('div').removeClass('has-error').addClass('has-success');
@@ -54,6 +54,8 @@ $(function () {
         }
     });
 
+
+
     $('input[name="isTeam"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="teamSize"]').prop('disabled', !isChecked);
@@ -68,7 +70,7 @@ $(function () {
         $(this).closest('form').find('[name="roundRobinWinner"]').prop('disabled', !isChecked);
     });
 
-    // EDIT TOURNAMENT
+// EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
         var inputData = $('#form').serialize();
@@ -76,7 +78,7 @@ $(function () {
         var name = $('#name');
 
 
-        if (name.val() =='' || name.val().length <6) {
+        if (name.val() == '' || name.val().length < 6) {
             name.closest('div').addClass('has-error');
         } else {
             name.closest('div').removeClass('has-error').addClass('has-success');
@@ -154,7 +156,7 @@ $(function () {
                         dataType: 'json',
                         dismissQueue: true,
                         timeout: 5000,
-                        text:  data.responseText ,
+                        text: data.responseText,
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
@@ -170,10 +172,10 @@ $(function () {
 
     });
 
-    //EDIT CATEGORIES
+//EDIT CATEGORIES
     var categoriesSize = null;
 
-    // 'form_'.$tournament->slug.'_'.$categoryId.'_'.$setting->id
+// 'form_'.$tournament->slug.'_'.$categoryId.'_'.$setting->id
     $('.save_category').on('click', function (e) {
         e.preventDefault();
         var inputData = $('.save_category').serialize();
@@ -313,10 +315,10 @@ $(function () {
             pickerFin.set('min', this.get('select'));
             pickerLimit.set('min', this.get('select'));
 
-            if (pickerFin.get() < this.get()){
+            if (pickerFin.get() < this.get()) {
                 pickerFin.clear();
             }
-            if (pickerLimit.get() < this.get()){
+            if (pickerLimit.get() < this.get()) {
                 pickerLimit.clear();
             }
 
@@ -325,20 +327,19 @@ $(function () {
     });
 
 
-
-    // $('#dateIni').on('change', function (e) {
-    // alert($.format.date(this.value, "yy"));
-    // $('#registerDateLimit').val(this.value);
-
-
-    // $dateFin.val(this.value);
-    // $dateFin.pickadate({
-    //         min: [, , ,]
-    //
-    // });
+// $('#dateIni').on('change', function (e) {
+// alert($.format.date(this.value, "yy"));
+// $('#registerDateLimit').val(this.value);
 
 
-    // });
+// $dateFin.val(this.value);
+// $dateFin.pickadate({
+//         min: [, , ,]
+//
+// });
+
+
+// });
 
     $('.datelimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
@@ -356,22 +357,23 @@ $(function () {
             type: "info"
         });
     });
-    // $(".accordion-sortable").sortable({
-    //     connectWith: '.accordion-sortable',
-    //     items: '.panel',
-    //     helper: 'original',
-    //     cursor: 'move',
-    //     handle: '[data-action=move]',
-    //     revert: 100,
-    //     containment: '.content',
-    //     forceHelperSize: true,
-    //     placeholder: 'sortable-placeholder',
-    //     forcePlaceholderSize: true,
-    //     tolerance: 'pointer',
-    //     start: function (e, ui) {
-    //         ui.placeholder.height(ui.item.outerHeight());
-    //     }
-    // });
+// $(".accordion-sortable").sortable({
+//     connectWith: '.accordion-sortable',
+//     items: '.panel',
+//     helper: 'original',
+//     cursor: 'move',
+//     handle: '[data-action=move]',
+//     revert: 100,
+//     containment: '.content',
+//     forceHelperSize: true,
+//     placeholder: 'sortable-placeholder',
+//     forcePlaceholderSize: true,
+//     tolerance: 'pointer',
+//     start: function (e, ui) {
+//         ui.placeholder.height(ui.item.outerHeight());
+//     }
+// });
 
 
-});
+})
+;
