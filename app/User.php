@@ -380,4 +380,33 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             throw new UnauthorizedException();
         }
     }
+
+    /**
+     * @param $attributes
+     * @return static $user
+     */
+    public static function registerUserToCategory($attributes)
+    {
+        $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
+
+        if ($user == null) {
+            $password = null;
+            $user = new User;
+            $user->name = $attributes['name'];
+            $user->email = $attributes['email'];
+            $password = User::generatePassword();
+            $user->password = bcrypt($password);
+            $user->verified = 1;
+            $user->save();
+            $user->clearPassword = $password;
+        } // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
+        else if ($user->isDeleted()) {
+            $user->deleted_at = null;
+            $user->save();
+        }
+
+        // Fire Events
+
+        return $user;
+    }
 }

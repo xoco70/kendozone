@@ -140,7 +140,7 @@ class TournamentController extends Controller
     public function update(TournamentRequest $request, Tournament $tournament)
     {
 //        if ($request->ajax()) {
-        if ($tournament->update($request->all())) {
+        if ($tournament->update($request->except(['_token', 'fightingAreas', 'fightDuration', 'cost', 'hasRoundRobin', 'hasEncho', 'hasHantei']))) {
             $tournament->categories()->sync($request->input('category'));
             return Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
         } else {
