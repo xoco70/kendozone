@@ -26,7 +26,7 @@
             </ul>
 
             <div class="row">
-                <div class="col-lg-11 col-lg-offset-1">
+                <div class="col-lg-12">
                 {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
 
                 <!-- Simple panel 1 : General Data-->
