@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Validation\ValidationException;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -37,11 +38,22 @@ class Handler extends ExceptionHandler
     public function report(Exception $e)
     {
         if ($this->shouldReport($e)) {
-            app('sentry')->captureException($e);
+            $params = [];
+            if (Auth::check()) {
+                $params = [
+                    'user' => [
+                        'id' => Auth::user()->id,
+                        'email' => Auth::user()->email
+                    ],
+//                    'extra' => ['foo' => 'bar'],
+//                    'tags' => array('Francia' => 'Campeon!!!')
+                ];
+            }
+            app('sentry')->captureException($e, $params);
         }
+
         parent::report($e);
     }
-
     /**
      * Render an exception into an HTTP response.
      *
