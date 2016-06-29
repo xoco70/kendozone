@@ -2645,7 +2645,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 
 .nav-tabs.nav-justified[class*=bg-]>li>a,
 .nav-tabs.nav-justified.nav-tabs-solid>li>a {
-    border-color: transparent
+    border-color: transparent;
+    padding:10px;
 }
 
 @media (min-width:769px) {
@@ -2823,8 +2824,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 .nav-tabs.nav-tabs-solid>.active>a,
 .nav-tabs.nav-tabs-solid>.active>a:hover,
 .nav-tabs.nav-tabs-solid>.active>a:focus {
-    background-color: #2196f3;
-    border-color: #2196f3;
+    background-color: #ff5663;
+    border-color: #ff5663;
     color: #fff
 }
 
