@@ -27,12 +27,13 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+
 
                 <!-- Simple panel 1 : General Data-->
 
 
                     <div class="tab-content">
+                        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
                         <div class="tab-pane active" id="tab1">
                             <div class="panel panel-flat">
 
@@ -156,7 +157,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="tab-pane" id="tab2">
                             <!-- Simple panel 2 : Venue -->
                             <div class="panel panel-flat">
@@ -218,7 +218,6 @@
                             </div>
 
                         </div>
-
                         <div class="tab-pane" id="tab3">
                             <!-- Categorias Panel -->
                             <div class="panel panel-flat">
@@ -262,6 +261,7 @@
                             </div>
 
                         </div>
+                        {!! Form::close()!!}
 
                         <div class="tab-pane" id="tab4">
                             <div class="panel panel-flat category-settings">
@@ -354,7 +354,6 @@
                 </div>
 
 
-            {!! Form::close()!!}
 
             <!-- /simple panel acordion -->
 
