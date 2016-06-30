@@ -42,18 +42,18 @@ $(function () {
         }
     });
 
-
-    $('#locationpicker-default').locationpicker({
-        location: {latitude: latitude, longitude: longitude},
-        radius: 300,
-        inputBinding: {
-            latitudeInput: $('#latitude'),
-            longitudeInput: $('#longitude'),
-            radiusInput: $('#us2-radius'),
-            locationNameInput: $('#city')
-        }
+    $('#menu2').click(function () {
+        $('#locationpicker-default').locationpicker({
+            location: {latitude: latitude, longitude: longitude},
+            radius: 300,
+            inputBinding: {
+                latitudeInput: $('#latitude'),
+                longitudeInput: $('#longitude'),
+                radiusInput: $('#us2-radius'),
+                locationNameInput: $('#city')
+            }
+        });
     });
-
 
 
     $('input[name="isTeam"]').on('switchChange.bootstrapSwitch', function (event, state) {

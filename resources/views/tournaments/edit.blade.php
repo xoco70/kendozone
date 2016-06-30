@@ -19,7 +19,7 @@
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
                 <li class="active"><a href="#tab1" data-toggle="tab">{{trans('core.general_data')}}</a></li>
-                <li><a href="#tab2" data-toggle="tab">{{trans('core.venue')}}</a></li>
+                <li><a href="#tab2" data-toggle="tab" id="menu2">{{trans('core.venue')}}</a></li>
                 <li><a href="#tab3" data-toggle="tab">{{trans_choice('core.category',2)}}</a></li>
                 <li><a href="#tab4" data-toggle="tab">{{trans_choice('core.categorySettings',2)}}</a></li>
 
