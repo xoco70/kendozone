@@ -5,7 +5,7 @@ class AuthCest
     /**
      * This test will be executed only in 'test' because in prod it fails
      *
-     * @env test
+     * @env local
      */
     public function loginGoogle(\AcceptanceTester $I)
     {

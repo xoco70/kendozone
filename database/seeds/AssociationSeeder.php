@@ -16,7 +16,10 @@ class AssociationSeeder extends Seeder
     public function run()
     {
         Association::truncate();
-        Association::create(['name' => 'core.no_association', 'president_id' => '1']);
+        Association::create([
+            'name' => 'core.no_association',
+            'president_id' => '1',
+            'federation_id' => 1]);
         // Create Martin
         $aikem_presidente = factory(User::class)->create(
             ['name' => 'AIKEM_President',

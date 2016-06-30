@@ -16,7 +16,16 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         //Seed the countries
         $this->command->info('Seeded the countries!');
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        switch (DB::getDriverName()) {
+            case 'mysql':
+                DB::statement('SET FOREIGN_KEY_CHECKS=0');
+                break;
+            case 'sqlite':
+                DB::statement('PRAGMA foreign_keys = OFF');
+                break;
+        }
+
         DB::table('users')->truncate();
 
 
@@ -39,8 +48,14 @@ class DatabaseSeeder extends Seeder
         $this->command->info('All tables seeded!');
 
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
+        switch (DB::getDriverName()) {
+            case 'mysql':
+                DB::statement('SET FOREIGN_KEY_CHECKS=1');
+                break;
+            case 'sqlite':
+                DB::statement('PRAGMA foreign_keys = ON');
+                break;
+        }
         Model::reguard();
     }
 }

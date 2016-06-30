@@ -20,7 +20,10 @@ class ClubSeeder extends Seeder {
         Club::truncate();
         $faker = Faker\Factory::create();
 
-        Club::create(['name' => 'core.no_club', 'president_id' => '1']);
+        Club::create([
+            'name' => 'core.no_club',
+            'president_id' => '1',
+            'association_id' => '1']);
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
                 'email' => 'naucali@aikem.com',
