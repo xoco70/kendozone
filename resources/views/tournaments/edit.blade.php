@@ -356,36 +356,9 @@
                 <!-- /simple panel acordion -->
 
 
-            {{-- If open Tournament--}}
-            @if ($tournament->type==1)
-
-                <!-- /simple panel -->
-                    <div class="panel panel-flat" id="share_tournament">
-                        <div class="panel-body">
-                            <div class="container-fluid">
-
-
-                                <fieldset title="1">
-                                    <legend class="text-semibold ">{{ trans('core.invite_with_link') }}</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2 class="form-group text-center">
-                                                <br/>
-                                                {{ URL::action('TournamentController@register',$tournament->slug) }}
-                                            </h2>
-
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
-    </div>
-    <!-- /detached content -->
+        <!-- /detached content -->
     </div>
     @include("right-panel.tournament_menu")
     @include("modals.create_category")

@@ -42,8 +42,8 @@
                             </a></li>
 
 
-
-                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i class="icon-users"></i>
+                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i
+                                        class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)
                                     <span class="badge badge-success">{{$numCompetitors }}</span>
@@ -74,7 +74,8 @@
         <div class="row">
             <div class="col-md-12">
                 <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button"
-                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b><i class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}
+                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b><i
+                                    class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}
                     </a>
                 </p>
 
@@ -82,31 +83,58 @@
         </div>
     @endcan
     <br/>
-    <?php
-    $link = "";
-    $id = "";
-    if ($settingSize > 0 && $settingSize == $categorySize) {
-        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-        $id = "";
-    } else {
-        // For showing Modal
-        $link = "#";
-        $id = 'id="generate_tree"';
-    }
+    {{-- If open Tournament--}}
+    @if ($tournament->isOpen())
+
+    <!-- /simple panel -->
+        <div class="panel panel-flat" id="share_tournament">
+            <div class="panel-body">
+                <div class="container-fluid">
 
 
-    ?>
+                    <fieldset title="1">
+                        <legend class="text-semibold ">{{ trans('core.invite_with_link') }}</legend>
 
-    {{--@if (Auth::user()->canEditTournament($tournament))--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-md-12">--}}
-                {{--<p><a href="{!!  $link  !!}" {!! $id !!} type="button" class="btn bg-teal btn-labeled btn-xlg"--}}
-                      {{--style="width: 100%;"><b><i class="icon-tree7"></i></b>{{ trans('core.generate_trees') }}</a></p>--}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="form-group text-center">
+                                    <br/>
+                                    {{ URL::action('TournamentController@register',$tournament->slug) }}
+                                </h2>
 
-            {{--</div>--}}
-
-        {{--</div>--}}
-        {{--<br/>--}}
-    {{--@endif--}}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
+<?php
+$link = "";
+$id = "";
+if ($settingSize > 0 && $settingSize == $categorySize) {
+    $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    $id = "";
+} else {
+    // For showing Modal
+    $link = "#";
+    $id = 'id="generate_tree"';
+}
+
+
+?>
+
+{{--@if (Auth::user()->canEditTournament($tournament))--}}
+{{--<div class="row">--}}
+{{--<div class="col-md-12">--}}
+{{--<p><a href="{!!  $link  !!}" {!! $id !!} type="button" class="btn bg-teal btn-labeled btn-xlg"--}}
+{{--style="width: 100%;"><b><i class="icon-tree7"></i></b>{{ trans('core.generate_trees') }}</a></p>--}}
+
+{{--</div>--}}
+
+{{--</div>--}}
+{{--<br/>--}}
+{{--@endif--}}
+
 <!-- /detached sidebar -->
