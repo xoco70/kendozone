@@ -182,11 +182,9 @@ class AuthController extends Controller
                                 'verified' => 0,
 
         ]);
+        
         $mailer->sendEmailConfirmationTo($user);
-        flash()->success(trans('msg.user_create_successful'));
-//        else flash('error', 'operation_failed!');
-//        return redirect("tournaments/$tournament->slug/edit")
-        flash()->success(Lang::get('auth.check_your_email'));
+        flash()->success(trans('auth.check_your_email'));
         return redirect (URL::action('Auth\AuthController@getLogin'));
     }
 

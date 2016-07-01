@@ -1,5 +1,6 @@
 <?php
 namespace App\Mailers;
+
 use App\User;
 use Illuminate\Contracts\Mail\Mailer;
 
@@ -37,6 +38,7 @@ class AppMailer
      * @var array
      */
     protected $data = [];
+
     /**
      * Create a new app mailer instance.
      *
@@ -46,6 +48,7 @@ class AppMailer
     {
         $this->mailer = $mailer;
     }
+
     /**
      * Deliver the email confirmation.
      *
@@ -54,21 +57,21 @@ class AppMailer
      */
     public function sendEmailConfirmationTo(User $user)
     {
-        $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+        $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
         //TODO Not translated
         $this->to = $user->email;
-        $this->subject = trans('mail.activation_account').$appName;
+        $this->subject = trans('mail.activation_account') . " " . $appName;
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
     }
 
-    public function sendEmailInvitationTo( $email , $tournament, $code, $category = null, $password = null)
+    public function sendEmailInvitationTo($email, $tournament, $code, $category = null, $password = null)
     {
         $this->to = $email;
-        $this->subject = trans('email.invite_to_tournament').$tournament->name;
+        $this->subject = trans('email.invite_to_tournament') . $tournament->name;
         $this->view = 'emails.invite';
-        $this->data = compact('tournament','code','category','email', 'password');
+        $this->data = compact('tournament', 'code', 'category', 'email', 'password');
         $this->deliver();
     }
 
@@ -79,13 +82,16 @@ class AppMailer
      */
     public function deliver()
     {
+        $from = $this->from;
+        $to = $this->to;
+        $subject = $this->subject;
 
-        $this->mailer->send($this->view, $this->data, function ($message) {
-            $appName = (app()->environment()=='local' ? getenv('APP_NAME') : config('app.name'));
+        $this->mailer->queue($this->view, $this->data, function ($message) use ($from, $to, $subject) {
+            $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
 
-            $message->from($this->from, $appName)
-                ->to($this->to)
-                ->subject($this->subject);
+            $message->from($from, $appName)
+                ->to($to)
+                ->subject($subject);
         });
     }
 }

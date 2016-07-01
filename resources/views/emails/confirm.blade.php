@@ -7,9 +7,9 @@
 <body>
 <h1>{{ trans('mail.tx_for_signup') }}</h1>
 
+{{ trans('mail.please_click_link_to_confirm_account') }}
 <p>
-    {{--//TODO Frase sin traducir--}}
-    We just need you to <a href='{{ url("auth/register/confirm/{$user->token}") }}'>confirm your email address</a> real quick!
+    <a href="{{url("auth/register/confirm/{$user->token}")}}">{{ url("auth/register/confirm/{$user->token}") }}</a>
 </p>
 </body>
 </html>
