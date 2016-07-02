@@ -70,6 +70,28 @@
         </div>
     </div>
     <br/>
+    @if ($tournament->isOpen())
+
+    <div class="sidebar-category">
+        <div class="category-title">
+            <span>{{ trans('core.share') }}</span>
+            <ul class="icons-list">
+                <li><a href="#" data-action="collapse"></a></li>
+            </ul>
+        </div>
+
+        <div class="category-content no-padding">
+            <ul class="navigation navigation-alt navigation-accordion">
+                <li> <a href={{ URL::action('TournamentController@register',$tournament->slug) }}>LINK</a> </li>
+
+
+            </ul>
+        </div>
+    </div>
+    @endif
+    {{-- If open Tournament--}}
+
+
     @can('edit',$tournament)
         <div class="row">
             <div class="col-md-12">
@@ -83,32 +105,7 @@
         </div>
     @endcan
     <br/>
-    {{-- If open Tournament--}}
-    @if ($tournament->isOpen())
 
-    <!-- /simple panel -->
-        <div class="panel panel-flat" id="share_tournament">
-            <div class="panel-body">
-                <div class="container-fluid">
-
-
-                    <fieldset title="1">
-                        <legend class="text-semibold ">{{ trans('core.invite_with_link') }}</legend>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2 class="form-group text-center">
-                                    <br/>
-                                    {{ URL::action('TournamentController@register',$tournament->slug) }}
-                                </h2>
-
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-    @endif
 </div>
 <?php
 $link = "";

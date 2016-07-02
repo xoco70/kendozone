@@ -49,21 +49,15 @@ class AuthController extends Controller
      */
 
 
-    private $user;
-    /**
-     * @var UserRepository
-     */
-    private $users;
 
     /**
      * AuthController constructor.
      * @param Socialite $socialite
      * @param UserRepository $users
      */
-    public function __construct(Socialite $socialite, UserRepository $users)
+    public function __construct(Socialite $socialite)
     {
         $this->socialite = $socialite;
-        $this->users = $users;
     }
 
     /**
@@ -171,7 +165,7 @@ class AuthController extends Controller
     {
 
 
-        $user = $this->users->create([  'name' => $request->name,
+        $user = User::create([  'name' => $request->name,
                                 'email' => $request->email,
                                 'password' => bcrypt($request->password),
                                 'country_id' => $request->country_id,
@@ -182,7 +176,7 @@ class AuthController extends Controller
                                 'verified' => 0,
 
         ]);
-        
+
         $mailer->sendEmailConfirmationTo($user);
         flash()->success(trans('auth.check_your_email'));
         return redirect (URL::action('Auth\AuthController@getLogin'));
@@ -202,7 +196,7 @@ class AuthController extends Controller
         $token = $request->get("token");
         $invite = Invite::getActiveTournamentInvite($token);
         if (!is_null($invite)) {
-            $user = $this->users->create($request->all());
+            $user = User::create($request->all());
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }
@@ -228,7 +222,7 @@ class AuthController extends Controller
      */
     public function confirmEmail($token)
     {
-        $this->users
+        User::whereToken($token)->firstOrFail()
             ->firstByField('token', $token)
             ->confirmEmail();
 
