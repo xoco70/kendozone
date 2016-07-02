@@ -49,11 +49,9 @@ class AuthController extends Controller
      */
 
 
-
     /**
      * AuthController constructor.
      * @param Socialite $socialite
-     * @param UserRepository $users
      */
     public function __construct(Socialite $socialite)
     {
@@ -222,8 +220,8 @@ class AuthController extends Controller
      */
     public function confirmEmail($token)
     {
-        User::whereToken($token)->firstOrFail()
-            ->firstByField('token', $token)
+        User::where($token,$token)
+            ->firstOrFail()
             ->confirmEmail();
 
         flash()->success(Lang::get('auth.tx_for_confirm'));
