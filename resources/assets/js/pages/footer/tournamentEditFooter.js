@@ -51,6 +51,9 @@ $(function () {
                 longitudeInput: $('#longitude'),
                 radiusInput: $('#us2-radius'),
                 locationNameInput: $('#city')
+            }, onchanged: function (currentLocation, radius, isMarkerDropped) {
+                $("#latitude").val(currentLocation.latitude);
+                $("#longitude").val(currentLocation.longitude);
             }
         });
     });

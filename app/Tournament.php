@@ -44,12 +44,6 @@ class Tournament extends Model implements SluggableInterface
         'venue',
         'latitude',
         'longitude',
-        'teamSize',
-        'fightingAreas',
-        'hasRoundRobin',
-        'roundRobinWinner',
-        'fightDuration',
-        'hasEncho',
         'type',
         'level_id',
 

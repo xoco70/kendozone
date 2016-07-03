@@ -112,36 +112,6 @@ class AuthController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-//    /**
-//     * Create a new user instance after a valid registration.
-//     *
-//     * @param  array $data
-//     * @return User
-//     */
-//    protected function create(AuthRequest $request)
-//    {
-//        $location = GeoIP::getLocation(config('constants.CLIENT_IP')); // Simulating IP in Mexico DF
-//        $country = $location['country'];
-//        // Get id from country
-//        $country = Countries::where('name', '=', $country)->first();
-//
-//        dd($request->name);
-//        return User::create([
-//            'name' => $request->name,
-//            'email' => $data['email'],
-//            'password' => bcrypt($data['password']),
-//            'country_id' => $country->id,
-//            'role_id' => $data['role_id'],
-//            'city' => $location['city'],
-//            'latitude' => $location['lat'],
-//            'longitude' => $location['lon'],
-//            'provider' => 'manual',
-//            'provider_id' => $data['email']
-//
-//        ]);
-//    }
-
-
     public function getRegister()
     {
         $role = Role::where('name', '=', "FederationPresident")->firstOrFail();
@@ -220,7 +190,7 @@ class AuthController extends Controller
      */
     public function confirmEmail($token)
     {
-        User::where($token,$token)
+        User::where('token',$token)
             ->firstOrFail()
             ->confirmEmail();
 
