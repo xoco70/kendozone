@@ -92,7 +92,7 @@
                                                         {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
 
                                                     <div class="checkbox-switch">
                                                         <label>
@@ -104,6 +104,15 @@
 
                                                         </label>
                                                     </div>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::select('rule_id', $rules,null, ['class' => 'form-control']) !!}
+                                                    </div>
+
 
                                                 </div>
 

@@ -106,6 +106,7 @@ class TournamentController extends Controller
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $settingSize = $tournament->categorySettings->count();
         $categorySize = $tournament->categoryTournaments->count();
+        $rules = config('options.rules');
 
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
@@ -126,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors','rules'));
     }
 
     /**
@@ -139,9 +140,6 @@ class TournamentController extends Controller
      */
     public function update(Request $request, Tournament $tournament)
     {
-//        if ($request->ajax()) {
-
-
         if ($request->has('category')) {
             $res = $tournament->categories()->sync($request->input('category'));
         } else {
@@ -163,8 +161,7 @@ class TournamentController extends Controller
      * @param $categorySettingsId
      * @return mixed
      */
-    public
-    function updateCategory(Request $request, $categorySettingsId)
+    public function updateCategory(Request $request, $categorySettingsId)
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
         if ($categorySettings->update($request->all())) {
@@ -184,8 +181,7 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public
-    function destroy(Tournament $tournament)
+    public function destroy(Tournament $tournament)
     {
         if ($tournament->delete()) {
             return Response::json(['msg' => Lang::get('msg.tournament_delete_successful', ['name' => $tournament->name]), 'status' => 'success']);
@@ -198,8 +194,7 @@ class TournamentController extends Controller
      * @param $tournamentSlug
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function restore($tournamentSlug)
+    public function restore($tournamentSlug)
 
     {
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
@@ -215,8 +210,7 @@ class TournamentController extends Controller
      * @return mixed
      * @throws InvitationNeededException
      */
-    public
-    function register(Tournament $tournament)
+    public function register(Tournament $tournament)
     {
 
 
@@ -230,8 +224,7 @@ class TournamentController extends Controller
     /**
      * @return mixed
      */
-    public
-    function getDeleted()
+    public function getDeleted()
     {
         $currentModelName = trans_choice('core.tournament', 2);
         if (Auth::user()->isSuperAdmin()) {
@@ -252,11 +245,9 @@ class TournamentController extends Controller
     /**
      * @param $tournamentId
      */
-    public
-    function generateTrees($tournamentId)
+    public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
-//        $competitors = $tournament->competitors();
         $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
         foreach ($tournamentCategories as $tcat) {
             // Get number of area for this category

@@ -161,8 +161,6 @@ class Tournament extends Model implements SluggableInterface
     public function invites()
     {
         return $this->morphMany(Invite::class, 'object');
-
-
     }
 
     /**
@@ -186,16 +184,6 @@ class Tournament extends Model implements SluggableInterface
         return $this->categories->lists('id')->all();
     }
 
-
-    public function getDateAttribute($date)
-    {
-        return $date;
-    }
-
-    public function getRegisterDateLimitAttribute($date)
-    {
-        return $date;
-    }
 
     public function setDateIniAttribute($date)
     {

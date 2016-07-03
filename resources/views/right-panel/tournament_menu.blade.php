@@ -74,7 +74,7 @@
 
     <div class="sidebar-category">
         <div class="category-title">
-            <span>{{ trans('core.share') }}</span>
+            <span>{{ trans('core.share_link') }}</span>
             <ul class="icons-list">
                 <li><a href="#" data-action="collapse"></a></li>
             </ul>
