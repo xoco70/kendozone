@@ -47,7 +47,7 @@
                         </td>
                         <td align="center">{{ $federation->president->name }}</td>
                         <td align="center">{{ $federation->address }}</td>
-                        <td align="center">{{ $federation->president->email}}</td>
+                        <td align="center">{{ $federation->email}}</td>
                         <td align="center">{{ $federation->phone }}</td>
                         {{--<td align="center">{{ $federation->vicepresident->name }}</td>--}}
                         {{--<td align="center">{{ $federation->secretary->name }}</td>--}}
