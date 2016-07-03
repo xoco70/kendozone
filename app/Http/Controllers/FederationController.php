@@ -31,7 +31,7 @@ class FederationController extends Controller
         if (Request::ajax()) {
             return $federations->orderBy('id', 'asc')-> get(['id as value', 'name as text'])->toArray();
         } else {
-            $federations = $federations->get();
+            $federations = $federations->where('id','>',1)->get();
             return view('federations.index', compact('federations'));
         }
 

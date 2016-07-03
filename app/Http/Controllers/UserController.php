@@ -44,6 +44,7 @@ class UserController extends Controller
 
         $users = User::with('country', 'role')
             ->forUser(Auth::user())
+            ->where('id','>',1)
             ->paginate(config('constants.PAGINATION'));
 
         return view('users.index', compact('users'));
