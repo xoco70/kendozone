@@ -73,7 +73,7 @@ $(function () {
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
-        var inputData = $('#form').serialize();
+        var inputData = $(this).parents('form:first').serialize();
         var dataId = $(this).data('id');
         var name = $('#name');
 
@@ -181,7 +181,6 @@ $(function () {
         var inputData = $('.save_category').serialize();
         var form = $(this).parents('form:first');
         inputData = form.serialize();
-        // console.log(inputData);
         var tournamentId = form.data('tournament');
         var categoryId = form.data('category');
         var settingId = form.data('setting');

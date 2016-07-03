@@ -28,13 +28,13 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
-                <!-- Simple panel 1 : General Data-->
+                    <!-- Simple panel 1 : General Data-->
 
 
                     <div class="tab-content">
 
                         <div class="tab-pane active" id="tab1">
+                            {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
                             <div class="panel panel-flat">
 
                                 <div class="panel-body">
@@ -156,9 +156,11 @@
                                     </div>
                                 </div>
                             </div>
+                            {!! Form::close()!!}
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <!-- Simple panel 2 : Venue -->
+                        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+                        <!-- Simple panel 2 : Venue -->
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
@@ -175,8 +177,8 @@
                                                 {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
                                             </div>
 
-                                            {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control']) !!}
-                                            {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control']) !!}
+                                            {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control', 'id' =>'latitude']) !!}
+                                            {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control','id' =>'longitude']) !!}
 
 
                                         </div>
@@ -201,7 +203,7 @@
                                             $latitude = $userLat;
                                             $longitude = $userLng;
                                         } else {
-                                            // Should popup for user localization
+                                            //TODO Should popup for user localization
                                             $latitude = 0;
                                             $longitude = 0;
                                         }
@@ -216,10 +218,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            {!! Form::close()!!}
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <!-- Categorias Panel -->
+                        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+                        <!-- Categorias Panel -->
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
@@ -259,6 +262,7 @@
                                 </div>
                                 <!-- /simple panel -->
                             </div>
+                            {!! Form::close()!!}
 
                         </div>
                         <div class="tab-pane" id="tab4">
@@ -349,7 +353,6 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::close()!!}
                 </div>
 
 

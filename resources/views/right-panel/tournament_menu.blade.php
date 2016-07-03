@@ -81,13 +81,10 @@
         </div>
 
         <div class="category-content no-padding">
-            <ul class="navigation navigation-alt navigation-accordion">
-                <li> <a href={{ URL::action('TournamentController@register',$tournament->slug) }}>LINK</a> </li>
-
-
-            </ul>
+            <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}" class="p-10 full-width" >
         </div>
     </div>
+    <br/>
     @endif
     {{-- If open Tournament--}}
 

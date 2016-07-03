@@ -137,27 +137,34 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(TournamentRequest $request, Tournament $tournament)
+    public function update(Request $request, Tournament $tournament)
     {
 //        if ($request->ajax()) {
-        if ($tournament->update($request->except(['_token', 'fightingAreas', 'fightDuration', 'cost', 'hasRoundRobin', 'hasEncho', 'hasHantei']))) {
-            $tournament->categories()->sync($request->input('category'));
-            return Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+
+
+        if ($request->has('category')) {
+            $res = $tournament->categories()->sync($request->input('category'));
         } else {
-            return Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error']);
+            $res = $tournament->update($request->all());
         }
+        $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
+            : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+        return $result;
+
+
 //        }
 
     }
 
 
-    //TODO is it used???
+//TODO is it used???
     /**
      * @param Request $request
      * @param $categorySettingsId
      * @return mixed
      */
-    public function updateCategory(Request $request, $categorySettingsId)
+    public
+    function updateCategory(Request $request, $categorySettingsId)
     {
         $categorySettings = CategorySettings::findOrFail($categorySettingsId);
         if ($categorySettings->update($request->all())) {
@@ -177,7 +184,8 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(Tournament $tournament)
+    public
+    function destroy(Tournament $tournament)
     {
         if ($tournament->delete()) {
             return Response::json(['msg' => Lang::get('msg.tournament_delete_successful', ['name' => $tournament->name]), 'status' => 'success']);
@@ -190,7 +198,8 @@ class TournamentController extends Controller
      * @param $tournamentSlug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function restore($tournamentSlug)
+    public
+    function restore($tournamentSlug)
 
     {
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
@@ -206,7 +215,8 @@ class TournamentController extends Controller
      * @return mixed
      * @throws InvitationNeededException
      */
-    public function register(Tournament $tournament)
+    public
+    function register(Tournament $tournament)
     {
 
 
@@ -220,7 +230,8 @@ class TournamentController extends Controller
     /**
      * @return mixed
      */
-    public function getDeleted()
+    public
+    function getDeleted()
     {
         $currentModelName = trans_choice('core.tournament', 2);
         if (Auth::user()->isSuperAdmin()) {
@@ -241,7 +252,8 @@ class TournamentController extends Controller
     /**
      * @param $tournamentId
      */
-    public function generateTrees($tournamentId)
+    public
+    function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
 //        $competitors = $tournament->competitors();
