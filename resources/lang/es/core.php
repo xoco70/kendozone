@@ -39,13 +39,6 @@ return [
     'account' => 'Cuenta',
     'limitDateRegistration' => 'Fecha límite de registro',
     'limitDate' => 'Fecha límite',
-    'teamSize' => 'Tamaño de equipos',
-    'fightingAreas' => 'Áreas',
-    'fightDuration' =>'Duración',
-    'hasRoundRobin' => 'Round Robin',
-    'roundRobinWinner' => 'Ganadores x Round Robin',
-    'hasEncho' => '¿Encho?',
-    'hasHantei' => '¿Hantei?',
     'general_data' => 'Datos generales',
     'level' => 'Nivel',
     'cost' => 'Costo',
@@ -72,7 +65,7 @@ return [
     'configure' => 'Configurar',
     'configured' => 'Configurada',
     'add_custom_category' => 'Agregar una categoría',
-
+    'rules' => 'Reglas',
 
     // Categories
     'category' => 'Categoría|Categorías',
@@ -109,6 +102,13 @@ return [
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorías',
+    'teamSize' => 'Tamaño de equipos',
+    'fightingAreas' => 'Áreas',
+    'fightDuration' =>'Duración',
+    'hasRoundRobin' => 'Round Robin',
+    'roundRobinWinner' => 'Ganadores x Round Robin',
+    'hasEncho' => '¿Encho?',
+    'hasHantei' => '¿Hantei?',
     'isTeam' => 'Equipo',
 
 
@@ -190,6 +190,7 @@ return [
 
     // Share
     'share' => 'Compartir',
+    'share_link' => 'Compartir link',
 
     // Dashboard
 

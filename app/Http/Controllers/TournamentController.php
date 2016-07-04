@@ -106,6 +106,7 @@ class TournamentController extends Controller
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $settingSize = $tournament->categorySettings->count();
         $categorySize = $tournament->categoryTournaments->count();
+        $rules = config('options.rules');
 
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
@@ -126,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules'));
     }
 
     /**
@@ -137,21 +138,31 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(TournamentRequest $request, Tournament $tournament)
+    public function update(Request $request, Tournament $tournament)
     {
-//        if ($request->ajax()) {
-        if ($tournament->update($request->except(['_token', 'fightingAreas', 'fightDuration', 'cost', 'hasRoundRobin', 'hasEncho', 'hasHantei']))) {
-            $tournament->categories()->sync($request->input('category'));
-            return Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+        if ($request->has('category')) {
+            $res = $tournament->categories()->sync($request->input('category'));
         } else {
-            return Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error']);
+            $res = $tournament->update($request->all());
         }
+        if ($request->ajax()) {
+            $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
+                : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+            return $result;
+        }else{
+            $res == 0 ?  flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+                      :  flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
+            return redirect(URL::action('TournamentController@edit', $tournament->slug));
+
+        }
+
+
 //        }
 
     }
 
 
-    //TODO is it used???
+//TODO is it used???
     /**
      * @param Request $request
      * @param $categorySettingsId
@@ -244,7 +255,6 @@ class TournamentController extends Controller
     public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
-//        $competitors = $tournament->competitors();
         $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
         foreach ($tournamentCategories as $tcat) {
             // Get number of area for this category

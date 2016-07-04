@@ -18,7 +18,7 @@
                         <div class="icon-object border-success text-success"><i class="icon-plus3"></i>
                         </div>
                         <h5 class="content-group-lg">{{  Lang::get('auth.title_register') }}
-                            <small class="display-block">{{  Lang::get('core.all_fields_required') }}</small>
+{{--                            <small class="display-block">{{  Lang::get('core.all_fields_required') }}</small>--}}
                         </h5>
                     </div>
 

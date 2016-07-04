@@ -12,6 +12,9 @@ return [
     'signup_confirmation' => 'Confirmación de registro.',
     'tx_for_signup' => '¡Gracias por registrarte!',
     'activation_account' => 'Activación de tu cuenta',
+    'please_click_link_to_confirm_account' => 'Activa tu cuenta dando click en el link siguiente;',
+
+
 
 
 
@@ -29,5 +32,5 @@ return [
     'dont_forget_to_pay' => '  No olvides que se tienen que cubrir las cuotas respectivas a cada categoría para aplicar al sorteo',
     'before_day' => 'antes del día',
     'your_connection_data' => 'Tus datos de conexión son',
-    
+
 ];

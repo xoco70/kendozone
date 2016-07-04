@@ -11,14 +11,15 @@ class CreateFederationTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->unique();
 			$table->integer('president_id')->nullable()->unsigned();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
+			$table->string('email')->nullable();
+			$table->string('address')->nullable();
+			$table->string('phone')->nullable();
 //			$table->integer('vicepresident_id')->unsigned()->nullable();
 //			$table->integer('secretary_id')->unsigned()->nullable();
 //			$table->integer('treasurer_id')->unsigned()->nullable();
 //			$table->integer('admin_id')->unsigned()->nullable();
 			$table->integer('country_id')->unsigned();
-            $table->string('website')->nullable();
+			$table->string('website')->nullable();
 
             // Direction, phone, contact
 

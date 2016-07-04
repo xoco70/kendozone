@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use URL;
 
@@ -42,18 +41,9 @@ class InviteController extends Controller
         $invites = Auth::user()->invites()->with('tournament.owner')->paginate(config('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
-//user has a lot of tournament through invites
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
+     * Register a User to a Tournament
      * Triggered when User click Activation Link received in mail
      *
      * @param $tournamentSlug

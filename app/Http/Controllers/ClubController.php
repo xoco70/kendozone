@@ -39,6 +39,7 @@ class ClubController extends Controller
     {
         $clubs = Club::with('president', 'association.federation')
             ->forUser(Auth::user())
+            ->where('id','>',1)
             ->get();
 
         return view('clubs.index', compact('clubs'));

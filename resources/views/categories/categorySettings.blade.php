@@ -15,6 +15,7 @@ $currency = Auth::user()->country->currency_code;
                                 $tournament->slug,
                                 $categoryId
                              ],
+                 'id' => 'form_'.$key,
                  'data-tournament' => $tournament->slug,
                  'data-category' => $categoryId,
                  'class' => 'form-settings',

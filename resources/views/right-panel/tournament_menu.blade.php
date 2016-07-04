@@ -22,13 +22,13 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="{{ URL::action('TournamentController@edit',$tournament->slug ) }}#place"><i
+                        <li><a href="#"><i
                                         class="icon-location4"></i> Lugar
 
                                 <span class="badge badge-success" id="venue-status"><i
                                             class=" icon icon-checkmark2"></i></span>
                             </a></li>
-                        <li><a href="{{ URL::action('TournamentController@edit',$tournament->slug ) }}#categories">
+                        <li><a href="#">
                                 <i class="icon-cog2"></i>{{trans_choice('core.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)
@@ -42,8 +42,8 @@
                             </a></li>
 
 
-
-                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i class="icon-users"></i>
+                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i
+                                        class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)
                                     <span class="badge badge-success">{{$numCompetitors }}</span>
@@ -70,11 +70,31 @@
         </div>
     </div>
     <br/>
+    @if ($tournament->isOpen())
+
+    <div class="sidebar-category">
+        <div class="category-title">
+            <span>{{ trans('core.share_link') }}</span>
+            <ul class="icons-list">
+                <li><a href="#" data-action="collapse"></a></li>
+            </ul>
+        </div>
+
+        <div class="category-content no-padding">
+            <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}" class="p-10 full-width" >
+        </div>
+    </div>
+    <br/>
+    @endif
+    {{-- If open Tournament--}}
+
+
     @can('edit',$tournament)
         <div class="row">
             <div class="col-md-12">
                 <p><a href="{!!   URL::action('InviteController@inviteUsers',  $tournament->slug) !!}" type="button"
-                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b><i class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}
+                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b><i
+                                    class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}
                     </a>
                 </p>
 
@@ -82,31 +102,33 @@
         </div>
     @endcan
     <br/>
-    <?php
-    $link = "";
-    $id = "";
-    if ($settingSize > 0 && $settingSize == $categorySize) {
-        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-        $id = "";
-    } else {
-        // For showing Modal
-        $link = "#";
-        $id = 'id="generate_tree"';
-    }
 
-
-    ?>
-
-    {{--@if (Auth::user()->canEditTournament($tournament))--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-md-12">--}}
-                {{--<p><a href="{!!  $link  !!}" {!! $id !!} type="button" class="btn bg-teal btn-labeled btn-xlg"--}}
-                      {{--style="width: 100%;"><b><i class="icon-tree7"></i></b>{{ trans('core.generate_trees') }}</a></p>--}}
-
-            {{--</div>--}}
-
-        {{--</div>--}}
-        {{--<br/>--}}
-    {{--@endif--}}
 </div>
+<?php
+$link = "";
+$id = "";
+if ($settingSize > 0 && $settingSize == $categorySize) {
+    $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    $id = "";
+} else {
+    // For showing Modal
+    $link = "#";
+    $id = 'id="generate_tree"';
+}
+
+
+?>
+
+{{--@if (Auth::user()->canEditTournament($tournament))--}}
+{{--<div class="row">--}}
+{{--<div class="col-md-12">--}}
+{{--<p><a href="{!!  $link  !!}" {!! $id !!} type="button" class="btn bg-teal btn-labeled btn-xlg"--}}
+{{--style="width: 100%;"><b><i class="icon-tree7"></i></b>{{ trans('core.generate_trees') }}</a></p>--}}
+
+{{--</div>--}}
+
+{{--</div>--}}
+{{--<br/>--}}
+{{--@endif--}}
+
 <!-- /detached sidebar -->

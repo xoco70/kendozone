@@ -107,7 +107,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
         'registerDateLimit' => $dateIni,
         'sport' => 1,
         'type' => $faker->boolean(),
-        'mustPay' => $faker->boolean(),
+//        'mustPay' => $faker->boolean(),
         'venue' => $faker->address,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,

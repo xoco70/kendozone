@@ -37,7 +37,10 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::with('president', 'federation.country')->forUser(Auth::user())->get();
+        $associations = Association::with('president', 'federation.country')
+            ->forUser(Auth::user())
+            ->where('id','>',1)
+            ->get();
         return view('associations.index', compact('associations'));
     }
 

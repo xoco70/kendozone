@@ -77,16 +77,16 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
 
                                     </div>
-                                    <div class="col-md-3">
+                                    {{--<div class="col-md-3">--}}
 
 
-                                        {!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}
-                                        <br/>
+                                        {{--{!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}--}}
+                                        {{--<br/>--}}
 
-                                        {{ $tournament->mustPay == 1 ? trans('core.yes') : trans('core.no') }}
+                                        {{--{{ $tournament->mustPay == 1 ? trans('core.yes') : trans('core.no') }}--}}
 
 
-                                    </div>
+                                    {{--</div>--}}
                                     <div class="col-md-3">
 
                                         <div class="checkbox-switch">

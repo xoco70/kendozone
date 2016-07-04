@@ -40,16 +40,10 @@ class Tournament extends Model implements SluggableInterface
         'registerDateLimit',
         'sport',
         'cost',
-        'mustPay',
+//        'mustPay',
         'venue',
         'latitude',
         'longitude',
-        'teamSize',
-        'fightingAreas',
-        'hasRoundRobin',
-        'roundRobinWinner',
-        'fightDuration',
-        'hasEncho',
         'type',
         'level_id',
 
@@ -167,8 +161,6 @@ class Tournament extends Model implements SluggableInterface
     public function invites()
     {
         return $this->morphMany(Invite::class, 'object');
-
-
     }
 
     /**
@@ -192,11 +184,6 @@ class Tournament extends Model implements SluggableInterface
         return $this->categories->lists('id')->all();
     }
 
-
-    public function getDateAttribute($date)
-    {
-        return $date;
-    }
 
     public function getRegisterDateLimitAttribute($date)
     {

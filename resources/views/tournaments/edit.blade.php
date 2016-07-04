@@ -28,23 +28,25 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
-                <!-- Simple panel 1 : General Data-->
+                    <!-- Simple panel 1 : General Data-->
 
 
                     <div class="tab-content">
 
                         <div class="tab-pane active" id="tab1">
+                            {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
                             <div class="panel panel-flat">
 
                                 <div class="panel-body">
                                     <div class="container-fluid">
 
 
-                                        <fieldset title="{{trans('core.general_data')}}">
-                                            <legend class="text-semibold">{{trans('core.general_data')}}</legend>
+                                        <fieldset title="{{trans('core.general_data')}}" class="mt-20 pt-20">
+
 
                                             <div class="row">
+                                                <div class="col-md-2"></div>
+
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
@@ -54,7 +56,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
 
@@ -68,7 +70,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
 
                                                     {!!  Form::label('dateFin', trans('core.eventDateFin'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
@@ -82,17 +84,29 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                            </div><br/>
                                             <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-2">
+                                                    {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                                    <br/>
 
-                                                <div class="col-md-4">
+                                                    <div class="input-group">
+
+                                                        {!!  Form::input('text', 'registerDateLimit', ($tournament->registerDateLimit == '0000-00-00') ? '' : old('registerDateLimit') , ['class' => 'form-control dateLimit']) !!}
+                                                        <span class="input-group-addon"><i
+                                                                    class="icon-calendar3"></i></span>
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
                                                         <br/>
                                                         {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
 
                                                     <div class="checkbox-switch">
                                                         <label>
@@ -106,77 +120,43 @@
                                                     </div>
 
                                                 </div>
-
-                                            </div>
-
-                                            <legend class="text-semibold">{{Lang::get('core.competitors_register')}}</legend>
-
-                                            <div class="row">
-                                                <div class="col-md-4">
-
-
-                                                    {!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}
-                                                    <br/>
-
-                                                    <div class="checkbox-switch">
-                                                        <label>
-                                                            {!!     Form::hidden('mustPay', 0) !!}
-                                                            {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>trans('core.yes'), 'data-off-text'=>trans('core.no')]) !!}
-                                                        </label>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::select('rule_id', $rules,null, ['class' => 'form-control']) !!}
                                                     </div>
-
-                                                </div>
-                                                <div class="col-md-4">
-                                                    {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
-                                                    <br/>
-
-                                                    <div class="input-group">
-
-                                                        {!!  Form::input('text', 'registerDateLimit', ($tournament->registerDateLimit == '0000-00-00') ? '' : old('registerDateLimit') , ['class' => 'form-control dateLimit']) !!}
-                                                        <span class="input-group-addon"><i
-                                                                    class="icon-calendar3"></i></span>
-                                                    </div>
-                                                    <br/>
 
 
                                                 </div>
 
-
                                             </div>
-
 
                                         </fieldset>
-
-
                                     </div>
                                     <div align="right">
-                                        <button type="submit" class="btn btn-success btn-update-tour">
-                                            <i></i>{{trans("core.save")}}
+                                        <button type="submit" class="btn btn-success">
+                                            {{trans("core.save")}}
                                         </button>
                                     </div>
                                 </div>
                             </div>
+                            {!! Form::close()!!}
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <!-- Simple panel 2 : Venue -->
+                        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+                        <!-- Simple panel 2 : Venue -->
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
-
-
-                                        <fieldset title="{{trans('core.venue')}}">
-                                            <a name="place">
-                                                <legend class="text-semibold">{{trans('core.venue')}}</legend>
-                                            </a>
-                                        </fieldset>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 mt-20" >
                                             <div class="form-group">
                                                 {!!  Form::label('venue', trans('core.name'),['class' => 'text-bold' ]) !!}
                                                 {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}
                                             </div>
 
-                                            {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control']) !!}
-                                            {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control']) !!}
+                                            {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control', 'id' =>'latitude']) !!}
+                                            {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control','id' =>'longitude']) !!}
 
 
                                         </div>
@@ -201,7 +181,7 @@
                                             $latitude = $userLat;
                                             $longitude = $userLng;
                                         } else {
-                                            // Should popup for user localization
+                                            //TODO Should popup for user localization
                                             $latitude = 0;
                                             $longitude = 0;
                                         }
@@ -211,26 +191,20 @@
                                     </div>
                                     <div align="right">
                                         <button type="submit"
-                                                class="btn btn-success btn-update-tour">{{trans("core.save")}}
+                                                class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
+                            {!! Form::close()!!}
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <!-- Categorias Panel -->
+                        {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+                        <!-- Categorias Panel -->
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
-                                        <fieldset title="{{trans_choice('core.category',2)}}">
-                                            <a name="categories">
-                                                <legend class="text-semibold">{{trans_choice('core.category',2)}}</legend>
-                                            </a>
-                                        </fieldset>
-
                                         <div class="panel-body">
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <p class="coutent-group">{{trans('core.select_tournament_categories')}}</p>
@@ -259,21 +233,14 @@
                                 </div>
                                 <!-- /simple panel -->
                             </div>
+                            {!! Form::close()!!}
 
                         </div>
                         <div class="tab-pane" id="tab4">
                             <div class="panel panel-flat category-settings">
                                 <div class="panel-body">
                                     <div class="container-fluid">
-                                        <fieldset title="{{trans_choice('core.categorySettings',2)}}">
-                                            <a name="categories">
-                                                <legend class="text-semibold">{{trans_choice('core.categorySettings',2)}}</legend>
-                                            </a>
-                                        </fieldset>
-
-
                                         <div class="panel-group" id="accordion-styled">
-
                                             @foreach($tournament->categoryTournaments as $key => $categoryTournament)
                                                 {{--TODO This is making X query, have to cache it--}}
                                                 <?php
@@ -349,43 +316,15 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::close()!!}
                 </div>
 
 
                 <!-- /simple panel acordion -->
 
 
-            {{-- If open Tournament--}}
-            @if ($tournament->type==1)
-
-                <!-- /simple panel -->
-                    <div class="panel panel-flat" id="share_tournament">
-                        <div class="panel-body">
-                            <div class="container-fluid">
-
-
-                                <fieldset title="1">
-                                    <legend class="text-semibold ">{{ trans('core.invite_with_link') }}</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2 class="form-group text-center">
-                                                <br/>
-                                                {{ URL::action('TournamentController@register',$tournament->slug) }}
-                                            </h2>
-
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
-    </div>
-    <!-- /detached content -->
+        <!-- /detached content -->
     </div>
     @include("right-panel.tournament_menu")
     @include("modals.create_category")
