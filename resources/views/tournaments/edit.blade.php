@@ -20,8 +20,8 @@
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
                 <li class="active"><a href="#tab1" data-toggle="tab">{{trans('core.general_data')}}</a></li>
                 <li><a href="#tab2" data-toggle="tab" id="menu2">{{trans('core.venue')}}</a></li>
-                <li><a href="#tab3" data-toggle="tab">{{trans_choice('core.category',2)}}</a></li>
-                <li><a href="#tab4" data-toggle="tab">{{trans_choice('core.categorySettings',2)}}</a></li>
+                <li><a href="#tab3" data-toggle="tab">{{trans_choice('categories.category',2)}}</a></li>
+                <li><a href="#tab4" data-toggle="tab">{{trans_choice('categories.categorySettings',2)}}</a></li>
 
             </ul>
 
@@ -45,9 +45,8 @@
 
 
                                             <div class="row">
-                                                <div class="col-md-2"></div>
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 col-md-offset-1">
                                                     <div class="form-group">
                                                         {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
                                                         <br/>
@@ -56,7 +55,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
 
@@ -70,7 +69,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
 
                                                     {!!  Form::label('dateFin', trans('core.eventDateFin'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
@@ -86,8 +85,7 @@
                                                 </div>
                                             </div><br/>
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3 col-md-offset-1">
                                                     {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                                     <br/>
 

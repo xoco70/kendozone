@@ -107,7 +107,7 @@ class TournamentController extends Controller
         $settingSize = $tournament->categorySettings->count();
         $categorySize = $tournament->categoryTournaments->count();
         $rules = config('options.rules');
-
+        $hanteiLimit =config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
 
@@ -127,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules','hanteiLimit'));
     }
 
     /**
