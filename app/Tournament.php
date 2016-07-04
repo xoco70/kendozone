@@ -40,7 +40,7 @@ class Tournament extends Model implements SluggableInterface
         'registerDateLimit',
         'sport',
         'cost',
-        'mustPay',
+//        'mustPay',
         'venue',
         'latitude',
         'longitude',

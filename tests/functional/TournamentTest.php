@@ -113,7 +113,7 @@ class TournamentTest extends TestCase
             ->type('2015-12-15', 'dateIni')
             ->type('2015-12-15', 'dateFin')
             ->type('2015-12-16', 'registerDateLimit')
-            ->type('1', 'mustPay')
+//            ->type('1', 'mustPay')
             ->type('1', 'type')
 //            ->type('5000', 'cost')
             ->type('2', 'level_id')
@@ -128,7 +128,7 @@ class TournamentTest extends TestCase
                     'dateIni' => '2015-12-15',
                     'dateFin' => '2015-12-15',
                     'registerDateLimit' => '2015-12-16',
-                    'mustPay' => '1',
+//                    'mustPay' => '1',
                     'type' => '1',
 //                    'cost' => '5000',
                     'level_id' => '2',
