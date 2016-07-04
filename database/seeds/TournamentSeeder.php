@@ -30,7 +30,7 @@ class TournamentSeeder extends Seeder
             'registerDateLimit' =>  $dateIni,
             'sport' => 1,
             'type' => 0,
-            'mustPay' => 1,
+//            'mustPay' => 1,
             'venue' => "CDOM",
 
 

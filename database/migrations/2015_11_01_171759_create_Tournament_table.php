@@ -33,7 +33,7 @@ class CreateTournamentTable extends Migration {
 //            $table->tinyInteger('fightDuration')->unsigned()->default(3);
 //            $table->boolean('hasEncho')->default(true);
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
-            $table->boolean('mustPay');
+//            $table->boolean('mustPay');
 
             $table->string("venue");
             $table->string("latitude");

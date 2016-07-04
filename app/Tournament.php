@@ -185,6 +185,11 @@ class Tournament extends Model implements SluggableInterface
     }
 
 
+    public function getRegisterDateLimitAttribute($date)
+    {
+        return $date;
+    }
+
     public function setDateIniAttribute($date)
     {
         $this->attributes['dateIni'] = Carbon::createFromFormat('Y-m-d', $date);

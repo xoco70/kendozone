@@ -127,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors','rules'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules'));
     }
 
     /**
@@ -145,9 +145,16 @@ class TournamentController extends Controller
         } else {
             $res = $tournament->update($request->all());
         }
-        $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
-            : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
-        return $result;
+        if ($request->ajax()) {
+            $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
+                : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+            return $result;
+        }else{
+            $res == 0 ?  flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+                      :  flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
+            return redirect(URL::action('TournamentController@edit', $tournament->slug));
+
+        }
 
 
 //        }

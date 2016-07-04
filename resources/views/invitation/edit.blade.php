@@ -67,20 +67,20 @@
 
 
                                         </div>
-                                        <div class="col-md-3">
+                                        {{--<div class="col-md-3">--}}
 
 
-                                            {!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}
-                                            <br/>
+                                            {{--{!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}--}}
+                                            {{--<br/>--}}
 
-                                            <div class="checkbox-switch">
-                                                <label>
-                                                    {!!     Form::hidden('mustPay', 0) !!}
-                                                    {!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}
-                                                </label>
-                                            </div>
+                                            {{--<div class="checkbox-switch">--}}
+                                                {{--<label>--}}
+                                                    {{--{!!     Form::hidden('mustPay', 0) !!}--}}
+                                                    {{--{!!       Form::checkbox('mustPay', 1, $tournament->mustPay, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No"]) !!}--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
 
-                                        </div>
+                                        {{--</div>--}}
                                         <div class="col-md-3">
 
                                             <div class="checkbox-switch">

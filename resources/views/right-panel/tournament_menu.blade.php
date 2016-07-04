@@ -22,13 +22,13 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="{{ URL::action('TournamentController@edit',$tournament->slug ) }}#place"><i
+                        <li><a href="#"><i
                                         class="icon-location4"></i> Lugar
 
                                 <span class="badge badge-success" id="venue-status"><i
                                             class=" icon icon-checkmark2"></i></span>
                             </a></li>
-                        <li><a href="{{ URL::action('TournamentController@edit',$tournament->slug ) }}#categories">
+                        <li><a href="#">
                                 <i class="icon-cog2"></i>{{trans_choice('core.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)
