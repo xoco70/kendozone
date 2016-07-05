@@ -15,6 +15,7 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('alias');
             $table->string('gender');
             $table->integer('isTeam')->unsigned()->default(0);
             $table->integer('ageCategory')->unsigned()->default(0); // 0 = none, 1 = child, 2= teenager, 3 = adult, 4 = master
@@ -23,6 +24,7 @@ class CreateCategoryTable extends Migration
             $table->integer('gradeCategory')->unsigned()->default(0);
             $table->integer('gradeMin')->unsigned()->default(0);
             $table->integer('gradeMax')->unsigned()->default(0);
+            $table->integer('limitByEntity')->unsigned()->default(0);
 //            $table->foreign('gradeMin')
 //                ->references('id')
 //                ->on('grade');
