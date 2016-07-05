@@ -34,6 +34,7 @@ class CreateCategorySettingsTable extends Migration
             $table->text('enchoDuration');
             $table->boolean('hasHantei');
             $table->smallInteger('cost');
+            $table->smallInteger('seed');
 
             $table->timestamps();
             $table->softDeletes();

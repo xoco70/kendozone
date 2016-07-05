@@ -12,11 +12,10 @@ class CategoryController extends ApiController
 
     public function getNameAndInsertIfNotExists($isTeam, $gender, $ageCategory, $ageMin, $ageMax,$gradeCategory, $gradeMin, $gradeMax)
     {
-        $category = DB::table('category')
-            ->select('name')
-            ->where('isTeam', '=', $isTeam)
+        $category = Category::where('isTeam', '=', $isTeam)
             ->where('gender', '=', $gender)
             ->where('gradeCategory', '=', 0)
+            ->select('name')
             ->first();
 
         $newCategoryName = Category::firstOrCreate(
@@ -31,7 +30,6 @@ class CategoryController extends ApiController
                 'gradeMin' => $gradeMin,
                 'gradeMax' => $gradeMax
             ]);
-
         return $newCategoryName;
     }
 

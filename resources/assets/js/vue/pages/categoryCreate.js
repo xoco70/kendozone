@@ -101,20 +101,15 @@ new Vue({
         addCategory: function addCategory() {
             this.error = '';
             // Get Get Category Name and Id
-            // console.log(this.isTeam + " - " + this.genderSelect + " - " + this.ageCategorySelect + " - " + this.ageMin + " - " + this.ageMax + " - " + this.gradeMin + " - " + this.gradeMax);
             var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
                     + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
                     + '/grade/' +this.gradeSelect+ '/'+ this.gradeMin + '/' + +this.gradeMax;
-            // console.log(url);
+
             dualListIds = [];
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
             });
             $.getJSON(url, function (data) {
-                // console.log(data);
-                // console.log(dualListIds);
-                // console.log(data.id);
-                // console.log(dualListIds.indexOf('' +data.id));
                 if (dualListIds.indexOf('' + data.id) == -1){
                     var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
                     // console.log(option);
@@ -133,7 +128,6 @@ new Vue({
         },
         getSelectText: function getSelectText(myArray, val) {
             var newVal = '';
-            // console.log(myArray);
             myArray.map(function (el) {
                 if (val == el.value) {
                     newVal = el.text;

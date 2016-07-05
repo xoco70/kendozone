@@ -36,6 +36,7 @@ class Category extends Model
 
     public function getNameAttribute($name)
     {
+
         return trans($name);
     }
 
