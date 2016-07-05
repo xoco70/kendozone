@@ -14,21 +14,27 @@ class CategorySeeder extends Seeder
     {
         Category::truncate();
         // Presets
-        Category::create(['name' => 'categories.man_first_force', 'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 0, 'gradeCategory' => 1]);
-        Category::create(['name' => 'categories.man_second_force', 'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 0, 'gradeCategory' => 2]);
-        Category::create(['name' => 'categories.men_single',    'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 0]);
-        Category::create(['name' => 'categories.men_team',      'gender' => 'M', 'isTeam' => 1, 'ageCategory' => 0]);
 
-        Category::create(['name' => 'categories.woman_first_force', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 0, 'gradeCategory' => 1]);
-        Category::create(['name' => 'categories.woman_second_force', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 0, 'gradeCategory' => 2]);
-        Category::create(['name' => 'categories.ladies_single', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 0]);
-        Category::create(['name' => 'categories.ladies_team',   'gender' => 'F', 'isTeam' => 1, 'ageCategory' => 0]);
+        Category::create(['name' => 'categories.junior', 'gender' => 'X', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
+        Category::create(['name' => 'categories.junior_team', 'gender' => 'X', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
 
+        Category::create(['name' => 'categories.men_single',    'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18',]);
+        Category::create(['name' => 'categories.men_single',    'gender' => 'M', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18',]);
 
-        Category::create(['name' => 'categories.mixed_single',  'gender' => 'X', 'isTeam' => 0, 'ageCategory' => 0]);
-        Category::create(['name' => 'categories.mixed_team',    'gender' => 'X', 'isTeam' => 1, 'ageCategory' => 0]);
+        Category::create(['name' => 'categories.ladies_single', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18']);
+        Category::create(['name' => 'categories.ladies_team',   'gender' => 'F', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18']);
+
+        Category::create(['name' => 'categories.master',   'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '50', 'gradeMin' => '8']); // 8 = Shodan
 
 
+        // Junior Team :  3 - 5
+        // Junior Individual,
+        
+        // Senior Male Team : Team 5 - 7
+        // Senior Female Team : Team 5 - 7
+        
+        // Senior Female Individual,
+        // Senior Male Individual
 
 
     }
