@@ -25,7 +25,7 @@
 
             <div class=" form-group">
 
-                {!!     Form::label('isTeam', trans('core.isTeam'),['class' => 'text-bold' ])  !!}
+                {!!     Form::label('isTeam', trans('categories.isTeam'),['class' => 'text-bold' ])  !!}
                 <br/>
 
                 <div>
@@ -45,7 +45,7 @@
 
         <div class="col-md-4">
             <div class=" form-group">
-                {!!  Form::label('ageCategory', trans('core.ageCategory'),['class' => 'text-bold' ]) !!}
+                {!!  Form::label('ageCategory', trans('categories.ageCategory'),['class' => 'text-bold' ]) !!}
                 <select v-model="ageCategorySelect" class="form-control">
                     <option v-for="ageCategory in ageCategories" v-bind:value="ageCategory.value">
                         @{{ decodeHtml(ageCategory.text) }}
@@ -55,9 +55,9 @@
         </div>
         <div class="col-md-4" v-if='ageCategorySelect==5'>
             <div class=" form-group">
-                {!!  Form::label('ageMin', trans('core.min_age'),['class' => 'text-bold' ]) !!}
+                {!!  Form::label('ageMin', trans('categories.min_age'),['class' => 'text-bold' ]) !!}
                 <select v-model="ageMin" class="form-control">
-                    <option value="0">No age limit</option>
+                    <option value="0">{{trans('categories.no_age_restriction')}}</option>
                     <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
 
                 </select>
@@ -67,9 +67,9 @@
         </div>
         <div class="col-md-4" v-if='ageCategorySelect==5'>
             <div class=" form-group">
-                {!!  Form::label('ageMax', trans('core.max_age'),['class' => 'text-bold' ]) !!}
+                {!!  Form::label('ageMax', trans('categories.max_age'),['class' => 'text-bold' ]) !!}
                 <select v-model="ageMax" class="form-control">
-                    <option value="0">No age limit</option>
+                    <option value="0">{{trans('categories.no_age_restriction')}}</option>
                     <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
 
                 </select>
@@ -87,15 +87,15 @@
                 {!!  Form::label('gradesSelect', trans('core.grade'),['class' => 'text-bold' ]) !!}
 
                 <select v-model="gradeSelect" class="form-control">
-                    <option value="0">{{trans('core.no_grade_restriction')}}</option>
-                    <option value="3">{{trans('core.custom')}}</option>
+                    <option value="0">{{trans('categories.no_grade_restriction')}}</option>
+                    <option value="3">{{trans('categories.custom')}}</option>
 
                 </select>
             </div>
         </div>
         <div class="col-md-4" v-if='gradeSelect==3'>
             <div class=" form-group">
-                {!!  Form::label('gradeMin', trans('core.min_grade'),['class' => 'text-bold' ]) !!}
+                {!!  Form::label('gradeMin', trans('categories.min_grade'),['class' => 'text-bold' ]) !!}
                 <select v-model="gradeMin" class="form-control" v-show="gradesSelect!=0">
                     <option v-for="(grade, val) in grades" :value="val.value">@{{ val.text | html }}</option>
 
@@ -106,7 +106,7 @@
         </div>
         <div class="col-md-4" v-if='gradeSelect==3'>
             <div class=" form-group">
-                {!!  Form::label('gradeMax', trans('core.max_grade'),['class' => 'text-bold' ]) !!}
+                {!!  Form::label('gradeMax', trans('categories.max_grade'),['class' => 'text-bold' ]) !!}
                 <select v-model="gradeMax" class="form-control" v-show="gradesSelect!=0">
                     <option v-for="(grade, val) in grades" v-bind:value="val.value">@{{ val.text | html }}</option>
                 </select>
@@ -128,26 +128,25 @@
 
 {{--FullName : @{{ categoryFullName }}<br/>--}}
 
-
 <script>
 
-    var team = "{{trans('core.isTeam')}}";
-    var single = "{{trans('core.single')}}";
+    var team = "{{trans('categories.isTeam')}}";
+    var single = "{{trans('categories.single')}}";
 
-    var no_age = "{{trans('core.no_age_restriction')}}";
-    var no_grade = "{{trans('core.no_grade_restriction')}}";
-    var childs = "{{trans('core.children')}}";
-    var students = "{{trans('core.students')}}";
-    var adults = "{{trans('core.adults')}}";
-    var masters = "{{trans('core.masters')}}";
-    var custom = "{{trans('core.custom')}}";
+    var no_age = "{{trans('categories.no_age_restriction')}}";
+    var no_grade = "{{trans('categories.no_grade_restriction')}}";
+    var childs = "{{trans('categories.children')}}";
+    var students = "{{trans('categories.students')}}";
+    var adults = "{{trans('categories.adults')}}";
+    var masters = "{{trans('categories.masters')}}";
+    var custom = "{{trans('categories.custom')}}";
 
-    var male = "{{trans('core.male')}}";
-    var female = "{{trans('core.female')}}";
-    var mixt = "{{trans('core.mixt')}}";
+    var male = "{{trans('categories.male')}}";
+    var female = "{{trans('categories.female')}}";
+    var mixt = "{{trans('categories.mixt')}}";
 
-    var grade = "{{trans('core.grade')}}";
-    var age = "{{trans('core.age')}}";
-    var years = "{{trans('core.years')}}";
+    var grade = "{{trans('categories.grade')}}";
+    var age = "{{trans('categories.age')}}";
+    var years = "{{trans('categories.years')}}";
 
 </script>
