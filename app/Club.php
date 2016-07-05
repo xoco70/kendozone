@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
@@ -79,29 +80,32 @@ class Club extends Model
 
     public function scopeForUser($query, User $user)
     {
-
-        if ($user->isFederationPresident() && $user->federationOwned != null) {
-            $query->whereHas('association.federation', function ($query) use ($user) {
-                $query->where('federation_id', $user->federationOwned->id);
-            });
+        switch (true) {
+            case $user->isSuperAdmin():
+                return $query;
+            case $user->isFederationPresident() && $user->federationOwned != null:
+                return $query->whereHas('association.federation', function ($query) use ($user) {
+                    $query->where('federation_id', $user->federationOwned->id);
+                });
+            case
+                $user->isAssociationPresident() && $user->associationOwned:
+                return $query->whereHas('association', function ($query) use ($user) {
+                    $query->where('id', $user->associationOwned->id);
+                });
+            case $user->isClubPresident() && $user->clubOwned:
+                return  $query->where('id', $user->clubOwned->id);
+            default:
+                throw new UnauthorizedException();
         }
 
-        if ($user->isAssociationPresident() && $user->associationOwned) {
-            $query->whereHas('association', function ($query) use ($user) {
-                $query->where('id', $user->associationOwned->id);
-            });
-        }
 
-        if ($user->isClubPresident() && $user->clubOwned) {
-            $query->where('id', $user->clubOwned->id);
-        }
     }
 
     public function belongsToFederationPresident(User $user) // Should be FederationUser????
     {
         return
-            $user->federationOwned  != null &&
-            $this->association      != null &&
+            $user->federationOwned != null &&
+            $this->association != null &&
             $this->association->federation != null &&
             $user->federationOwned->id == $this->association->federation->id;
 
@@ -109,16 +113,16 @@ class Club extends Model
 
     public function belongsToAssociationPresident(User $user)
     {
-        return  $user->associationOwned !=null &&
-                $this->association != null &&
-                $user->associationOwned->id == $this->association->id;
+        return $user->associationOwned != null &&
+        $this->association != null &&
+        $user->associationOwned->id == $this->association->id;
 
     }
 
     public function belongsToClubPresident(User $user)
     {
-        return  $user->clubOwned != null &&
-                $user->clubOwned->id == $this->id;
+        return $user->clubOwned != null &&
+        $user->clubOwned->id == $this->id;
 
     }
 

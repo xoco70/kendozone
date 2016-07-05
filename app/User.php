@@ -14,7 +14,6 @@ use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -108,7 +107,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
     }
 
-    
 
     function addGeoData()
     {
@@ -265,10 +263,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(CategoryTournament::class)
             ->withTimestamps();
     }
+
     public function federation()
     {
         return $this->belongsTo(Federation::class);
     }
+
     public function association()
     {
         return $this->belongsTo(Association::class);
@@ -352,12 +352,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isAssociationPresident()
     {
-        return $this->role_id == config('constants.ROLE_ASSOCIATION_PRESIDENT');    }
+        return $this->role_id == config('constants.ROLE_ASSOCIATION_PRESIDENT');
+    }
 
     public function isClubPresident()
     {
         return $this->role_id == config('constants.ROLE_CLUB_PRESIDENT');
     }
+
     public function isUser()
     {
         return $this->role_id == config('constants.ROLE_USER');
@@ -368,17 +370,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         // If user manage a structure, he will be limited to see entity of this structure
         // If user has the role but manage no structure --> UnauthorizedException
-        if ($user->isSuperAdmin()) {
-            return $query;
-        } else if ($user->isFederationPresident() && $user->federationOwned!=null ) {
-            return $query->where('federation_id', '=', $user->federationOwned->id);
-        } else if ($user->isAssociationPresident() && $user->associationOwned) {
-            return $query->where('association_id', '=', $user->associationOwned->id);
-        } else if ($user->isClubPresident() && $user->associationOwned != null) {
-            return $query->where('club_id', '=', $user->clubOwned->id);
-        } else if ($user->isUser()) {
-            throw new UnauthorizedException();
+        switch (true) {
+            case $user->isSuperAdmin():
+                return $query;
+            case $user->isFederationPresident() && $user->federationOwned != null:
+                return $query->where('federation_id', '=', $user->federationOwned->id);
+            case $user->isAssociationPresident() && $user->associationOwned:
+                return $query->where('association_id', '=', $user->associationOwned->id);
+            case $user->isClubPresident() && $user->associationOwned != null:
+                return $query->where('club_id', '=', $user->clubOwned->id);
+            default:
+                throw new UnauthorizedException();
         }
+
     }
 
     /**

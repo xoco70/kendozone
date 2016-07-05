@@ -15,12 +15,11 @@ class Federation extends Model
     protected $guarded = ['id'];
 
 
-
     public function president()
     {
-        return $this->hasOne(User::class,'id','president_id');
+        return $this->hasOne(User::class, 'id', 'president_id');
     }
-    
+
 
     public function associations()
     {
@@ -39,17 +38,20 @@ class Federation extends Model
      */
     public function scopeForUser($query, User $user)
     {
-        if ($user->isSuperAdmin()) {
-            return $query;
-        } else if ($user->isFederationPresident() && $user->federationOwned!=null){
-            return $query->where('id', '=', $user->federationOwned->id);
-        }  else if ($user->isAssociationPresident() && $user->associationOwned){
-            return $query->where('id', '=', $user->associationOwned->federation->id);
-        } else if ($user->isClubPresident() && $user->clubOwned){
-            return $query->where('id', '=', $user->clubOwned->association->federation->id);
-        } else{
-            throw new UnauthorizedException();
+        switch (true) {
+            case $user->isSuperAdmin():
+                return $query;
+            case $user->isFederationPresident() && $user->federationOwned != null:
+                return $query->where('id', '=', $user->federationOwned->id);
+
+            case $user->isAssociationPresident() && $user->associationOwned:
+                return $query->where('id', '=', $user->associationOwned->federation->id);
+
+            case $user->isClubPresident() && $user->clubOwned:
+                return $query->where('id', '=', $user->clubOwned->association->federation->id);
+            default:
+                throw new UnauthorizedException();
+
         }
     }
-
 }
