@@ -38,10 +38,10 @@ class CategoryController extends Controller
             ->select('name')
             ->first();
 
-
         $newCategoryName = Category::firstOrCreate(
             [
                 'name' => $category->name,
+                'alias' => $request->alias,
                 'isTeam' => $request->isTeam,
                 'gender' => $request->gender,
                 'ageCategory' => $request->age,

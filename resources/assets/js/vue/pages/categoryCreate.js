@@ -4,6 +4,7 @@ new Vue({
     el: 'body',
     data: {
         isTeam: 0,
+        alias: '',
         genderSelect: 'M',
         ageCategorySelect: 0,
         ageMin: 0,
@@ -114,7 +115,7 @@ new Vue({
                 url: '/api/v1/category/create',
                 type: 'POST',
                 data: {
-                    "isTeam": this.isTeam, "gender": this.genderSelect, // , "alias":this.alias
+                    "isTeam": this.isTeam, "gender": this.genderSelect, "alias": this.alias,
                     "age": this.ageCategorySelect, "ageMin": this.ageMin, "ageMax": this.ageMax,
                     "grade": this.gradeSelect, "gradeMin": this.gradeMin, "gradeMax": this.gradeMax
                 },
@@ -122,7 +123,12 @@ new Vue({
             })
                 .done(function (data, textStatus, jqXHR) {
                     if (dualListIds.indexOf('' + data.id) == -1) {
-                        var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
+                        var option;
+                        console.log(this.alias);
+                        if (this.alias != '')
+                            option = '<option value=' + data.id + ' selected>' + this.alias + '</option>';
+                        else
+                            option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
                         // console.log(option);
                         dualList.append(option);
                         dualList.bootstrapDualListbox('refresh');
@@ -132,7 +138,7 @@ new Vue({
                     }
                 }.bind(this))
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("error:" + textStatus);
+                    console.log("error:" + textStatus + "- " + errorThrown.toString());
                 });
         },
 

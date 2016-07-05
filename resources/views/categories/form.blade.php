@@ -14,7 +14,7 @@
         <div class="col-md-12">
             {!!  Form::label('alias', trans('categories.alias'),['class' => 'text-bold' ]) !!}
             <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.aliasTooltip')}}"></i>
-            {!!  Form::input('text', 'alias', null, ['class' => 'form-control']) !!}
+            {!!  Form::input('text', 'alias', null, ['class' => 'form-control',"v-model"=>"alias"]) !!}
 
         </div>
     </div><br/>
