@@ -8,6 +8,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'junior' => 'Junior',
+    'junior_team' => 'Junior por Equipo',
+
     'man_first_force' => 'Varonil Primera Fuerza',
     'man_second_force' => 'Varonil Segunda Fuerza',
     'woman_first_force' => 'Femenil Primera Fuerza',
@@ -20,6 +23,7 @@ return [
     'men_team' => 'Varonil por Equipo',
     'ladies_team' => 'Femenil por Equipo',
 
+    'master' => 'Master (> 50 años)',
 
     // Categories
     'category' => 'Categoría|Categorías',
@@ -68,6 +72,7 @@ return [
     'hasHantei' => '¿Hantei?',
     'hanteiLimit' => 'Limite para Hantei',
     'isTeam' => 'Equipo',
+    'alias' => 'Alias',
 
 
     // Tooltips
@@ -82,6 +87,8 @@ return [
     'hasHanteiTooltip' => '¿Se usará hantei?',
     'isTeamTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'hanteilimitTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
+    'aliasTooltip' => 'Eliga un nombre personalizado para la categoría ( Opcional )',
+
 
 
 ];

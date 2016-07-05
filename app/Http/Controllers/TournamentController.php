@@ -110,14 +110,14 @@ class TournamentController extends Controller
         $hanteiLimit =config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
-
         // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::lists('name', 'id');
         $categories = new Collection();
         foreach ($categories1 as $category) {
 
-            $category->name = trim($category->buildName($grades));
+            $category->alias != '' ? $category->name = $category->alias
+                                   : $category->name =trim($category->buildName($grades));
             $categories->push($category);
         }
         $categories = $categories->sortBy(function ($key) {

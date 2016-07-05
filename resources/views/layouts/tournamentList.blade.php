@@ -50,9 +50,9 @@
                 <table class="table table-togglable table-hover">
                     <thead>
                     <tr>
-                        <th data-toggle="true">{{ trans('core.name') }}</th>
-                        <th data-hide="phone">{{ trans('core.date') }}</th>
-                        <th data-hide="phone">{{ trans('core.owner') }}</th>
+                        <th data-toggle="true" class="text-center">{{ trans('core.name') }}</th>
+                        <th data-hide="phone" class="text-center">{{ trans('core.date') }}</th>
+                        <th data-hide="phone" class="text-center">{{ trans('core.owner') }}</th>
                         @if ($title == trans('core.tournaments_created') || $title == trans('core.tournaments_deleted') )
                             <th class="text-center">{{ trans('core.action') }}</th>
                         @endif

@@ -103,12 +103,21 @@ new Vue({
             // Get Get Category Name and Id
             var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
                     + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
-                    + '/grade/' +this.gradeSelect+ '/'+ this.gradeMin + '/' + +this.gradeMax;
+                    + '/grade/' +this.gradeSelect+ '/'+ this.gradeMin + '/'  +this.gradeMax;
+
+            //TODO CHange this to post
 
             dualListIds = [];
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
             });
+            // $.ajax({
+            //     url: '/api/v1/category/team/create',
+            //     type: 'POST',
+            //     data: 'isTeam=' + this.isTeam + '&gender=' + this.genderSelect
+            //     + '&age=' + this.ageCategorySelect + '&ageMin=' + this.ageMin + '&ageMax=' + +this.ageMax
+            //     + '&grade=' + this.gradeSelect + '&gradeMin=' + this.gradeMin + '&gradeMax=' + this.gradeMax,
+            //     dataType:'json'});
             $.getJSON(url, function (data) {
                 if (dualListIds.indexOf('' + data.id) == -1){
                     var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';

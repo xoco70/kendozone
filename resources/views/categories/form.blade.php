@@ -11,6 +11,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            {!!  Form::label('alias', trans('categories.alias'),['class' => 'text-bold' ]) !!}
+            <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.aliasTooltip')}}"></i>
+            {!!  Form::input('text', 'alias', null, ['class' => 'form-control']) !!}
+
+        </div>
+    </div><br/>
+    <div class="row">
         <div class="col-md-4">
             {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
 

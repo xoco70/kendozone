@@ -2,9 +2,9 @@
 return array(
     'rules' => [
         '1' => '-',
-        '2' => 'FIK',
-        '3' => 'EKF',
-        '4' => 'LAKC',
+        '2' => 'Internation Kendo Federation (IKF)',
+        '3' => 'European Kendo Federation (EKF)',
+        '4' => 'LatinoAmerican Kendo Federation (LAKC)',
     ],
     'hanteiLimit' => [
         '1' => '-',
@@ -24,11 +24,11 @@ return array(
     ],
 
 
-    // Junior Team :  3 - 5 , Junior Individual,
-    // Senior Male Team : Team 5 - 7
-    // Senior Female Team : Team 5 - 7
-    // Senior Female Individual,
-    // Senior Male Individual
+    // Junior Team :  3 - 5 , Junior Individual, ( 1 )
+    // Senior Male Team : Team 5 - 7 ( 2 )
+    // Senior Female Team : Team 5 - 7 ( 6 )
+    // Senior Female Individual, (5)
+    // Senior Male Individual (3)
     // Limit x association: 4
     'ekf_settings' => [ // categories.man_first_force
         '1' => [
@@ -51,7 +51,7 @@ return array(
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
         ],
-        '4' => [ // categories.man_team
+        '3' => [ // woman_second_force
             'duration' => '04:00',
             'roundRobin' => '1',
             'roundRobinWinner' => '1',
@@ -71,7 +71,7 @@ return array(
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
         ],
-        '6' => [ // woman_second_force
+        '6' => [ // categories.man_team
             'duration' => '04:00',
             'roundRobin' => '1',
             'roundRobinWinner' => '1',
@@ -81,36 +81,8 @@ return array(
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
         ],
-        '8' => [ //ladies_team
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
-        '100'  => [ //master
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
-        '110'  => [ //junior
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
+
+
 
     ],
     'lakc_settings' => [

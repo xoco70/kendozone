@@ -24,6 +24,7 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        'alias',
         'gender',
         'isTeam',
         'ageCategory',
@@ -159,12 +160,13 @@ class Category extends Model
     {
 
         $genders = [
-            'M' => trans('core.male'),
-            'F' => trans('core.female'),
-            'X' => trans('core.mixt')
+            'M' => trans('categories.male'),
+            'F' => trans('categories.female'),
+            'X' => trans('categories.mixt')
         ];
 
-        $teamText = $this->isTeam == 1 ? trans('core.isTeam') : trans('core.single');
+        
+        $teamText = $this->isTeam == 1 ? trans('categories.isTeam') : trans('categories.single');
         $ageCategoryText = $this->getAgeString();
         $gradeText = $this->getGradeString($grades);
 
