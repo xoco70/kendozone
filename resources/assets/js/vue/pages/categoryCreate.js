@@ -11,7 +11,7 @@ new Vue({
         gradeSelect: 0,
         gradeMin: 0,
         gradeMax: 0,
-        error:'',
+        error: '',
         grades: [
             {value: 0, text: no_grade},
             {value: 2, text: '7 Kyu'},
@@ -60,7 +60,7 @@ new Vue({
                     if (this.ageMin != 0 && this.ageMax != 0) {
                         if (this.ageMin == this.ageMax) {
                             ageCategoryText += this.ageMax + ' ' + years;
-                        }else{
+                        } else {
                             ageCategoryText += this.ageMin + ' - ' + this.ageMax + ' ' + years;
                         }
                     } else if (this.ageMin == 0 && this.ageMax != 0) {
@@ -80,7 +80,7 @@ new Vue({
                 if (this.gradeMin != 0 && this.gradeMax != 0) {
                     if (this.gradeMin == this.gradeMax) {
                         gradeText += this.getSelectText(this.grades, this.gradeMin);
-                    }else {
+                    } else {
                         gradeText += this.getSelectText(this.grades, this.gradeMin) + ' - ' + this.getSelectText(this.grades, this.gradeMax);
                     }
 
@@ -101,35 +101,54 @@ new Vue({
         addCategory: function addCategory() {
             this.error = '';
             // Get Get Category Name and Id
-            var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
-                    + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
-                    + '/grade/' +this.gradeSelect+ '/'+ this.gradeMin + '/'  +this.gradeMax;
+            // var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
+            //     + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
+            //     + '/grade/' + this.gradeSelect + '/' + this.gradeMin + '/' + this.gradeMax;
 
-            //TODO CHange this to post
 
             dualListIds = [];
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
             });
-            // $.ajax({
-            //     url: '/api/v1/category/team/create',
-            //     type: 'POST',
-            //     data: 'isTeam=' + this.isTeam + '&gender=' + this.genderSelect
-            //     + '&age=' + this.ageCategorySelect + '&ageMin=' + this.ageMin + '&ageMax=' + +this.ageMax
-            //     + '&grade=' + this.gradeSelect + '&gradeMin=' + this.gradeMin + '&gradeMax=' + this.gradeMax,
-            //     dataType:'json'});
-            $.getJSON(url, function (data) {
-                if (dualListIds.indexOf('' + data.id) == -1){
-                    var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
-                    // console.log(option);
-                    dualList.append(option);
-                    dualList.bootstrapDualListbox('refresh');
-                }else{
-                    // Print message
-                    this.error =" Ya existe el elemento";
-                }
-            }.bind(this));
+            $.ajax({
+                url: '/api/v1/category/create',
+                type: 'POST',
+                data: {
+                    "isTeam": this.isTeam, "gender": this.genderSelect, // , "alias":this.alias
+                    "age": this.ageCategorySelect, "ageMin": this.ageMin, "ageMax": this.ageMax,
+                    "grade": this.gradeSelect, "gradeMin": this.gradeMin, "gradeMax": this.gradeMax
+                },
+                dataType: "json"
+            })
+                .done(function (data, textStatus, jqXHR) {
+                    if (dualListIds.indexOf('' + data.id) == -1) {
+                        var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
+                        // console.log(option);
+                        dualList.append(option);
+                        dualList.bootstrapDualListbox('refresh');
+                    } else {
+                        // Print message
+                        this.error = " Ya existe el elemento";
+                    }
+                }.bind(this))
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log("error:" + textStatus);
+                });
         },
+
+        // $.getJSON(url, function (data) {
+        //     if (dualListIds.indexOf('' + data.id) == -1){
+        //         var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
+        //         // console.log(option);
+        //         dualList.append(option);
+        //         dualList.bootstrapDualListbox('refresh');
+        //     }else{
+        //         // Print message
+        //         this.error =" Ya existe el elemento";
+        //     }
+        // }.bind(this));
+
+
         decodeHtml: function decodeHtml(html) {
             var txt = document.createElement("textarea");
             txt.innerHTML = html;
@@ -145,14 +164,14 @@ new Vue({
             return newVal;
         },
         resetModalValues: function resetModalValues() {
-                this.isTeam = 0;
-                this.genderSelect = 'M';
-                this.ageCategorySelect= 0;
-                this.ageMin= 0;
-                this.ageMax= 0;
-                this.gradeSelect= 0;
-                this.gradeMin= 0;
-                this.gradeMax= 0;
+            this.isTeam = 0;
+            this.genderSelect = 'M';
+            this.ageCategorySelect = 0;
+            this.ageMin = 0;
+            this.ageMax = 0;
+            this.gradeSelect = 0;
+            this.gradeMin = 0;
+            this.gradeMax = 0;
         }
     },
     filters: {

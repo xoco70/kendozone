@@ -54,6 +54,7 @@ class Handler extends ExceptionHandler
 
         parent::report($e);
     }
+
     /**
      * Render an exception into an HTTP response.
      *
@@ -64,9 +65,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-//        if (App::environment() == 'testing') {
-//            throw $e;
-//        }
+        if (App::environment('local')) {
+            return parent::render($request, $e);
+        }
         switch ($e) {
 
             case $e instanceof NotFoundHttpException:
@@ -78,11 +79,13 @@ class Handler extends ExceptionHandler
                 break;
 
             case $e instanceof HttpException:
+
                 $code = "500";
                 $message = "Server Error";
                 $quote = "Failure is the key to success; each mistake teaches us something";
                 $author = "Morihei Ueshiba";
                 $source = "";
+
                 break;
             case $e instanceof UnauthorizedException:
                 $code = "403";

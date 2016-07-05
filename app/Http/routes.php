@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
                 //    Route::get('authenticate', 'Api\AuthenticateController@index');
                 //    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
                 //    Route::resource('tournaments', 'Api\TournamentController');
-                    Route::get("/category/team/{isTeam}/gender/{gender}/age/{age}/{ageMin}/{ageMax}/grade/{gradeCategory}/{gradeMin}/{gradeMax}", 'Api\CategoryController@getNameAndInsertIfNotExists');
+                    Route::post("category/create", 'CategoryController@store');
 
                 //    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
                     Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
