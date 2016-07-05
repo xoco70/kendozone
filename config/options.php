@@ -13,9 +13,23 @@ return array(
         '4' => '1/2 Final',
         '5' => 'Final',
     ],
+    'gender' => [
+        '1' => '-',
+        '2' => 'M',
+        '3' => 'F',
+    ],
+
 
     'fik_settings' => [
     ],
+
+
+    // Junior Team :  3 - 5 , Junior Individual,
+    // Senior Male Team : Team 5 - 7
+    // Senior Female Team : Team 5 - 7
+    // Senior Female Individual,
+    // Senior Male Individual
+    // Limit x association: 4
     'ekf_settings' => [ // categories.man_first_force
         '1' => [
             'duration' => '04:00',

@@ -26,12 +26,12 @@ class CreateCategorySettingsTable extends Migration
             $table->boolean('isTeam');
             $table->tinyInteger('teamSize')->default(5);
             $table->tinyInteger('fightingAreas')->unsigned()->nullable()->default(1);
-            $table->text('fightDuration')->default('03:00');
+            $table->text('fightDuration');
             $table->boolean('hasRoundRobin')->default(1);
             $table->tinyInteger('roundRobinWinner');
             $table->boolean('hasEncho')->default(1);
             $table->tinyInteger('enchoQty');
-            $table->text('enchoDuration')->default('02:00');
+            $table->text('enchoDuration');
             $table->boolean('hasHantei');
             $table->smallInteger('cost');
             $table->smallInteger('seedQuantity')->default(4);
