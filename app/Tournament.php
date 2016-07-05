@@ -35,19 +35,15 @@ class Tournament extends Model implements SluggableInterface
 
     protected $fillable = [
         'name',
-        'dateIni',
-        'dateFin',
-        'registerDateLimit',
-        'sport',
-        'cost',
-//        'mustPay',
-        'venue',
-        'latitude',
-        'longitude',
-        'type',
-        'level_id',
+        'dateIni','dateFin', 'registerDateLimit',
+        'sport', 'cost',
+        'venue', 'latitude', 'longitude',
+        'type', 'level_id',
+        'promoter','host_organization','technical_assistance'
+
 
     ];
+
     protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 
     protected static function boot()
