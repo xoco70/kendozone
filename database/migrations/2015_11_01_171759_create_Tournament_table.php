@@ -24,11 +24,11 @@ class CreateTournamentTable extends Migration {
 			$table->date('dateFin');
             $table->date('registerDateLimit');
 //            $table->smallInteger('cost')->unsigned()->nullable();
-            $table->Integer('sport')->unsigned()->default(1); // Default is Kendo for now
+            $table->integer('sport')->unsigned()->default(1); // Default is Kendo for now
 			$table->string('promoter')->nullable();
 			$table->string('host_organization')->nullable();
 			$table->string('technical_assistance')->nullable();
-
+			$table->integer('rule_id')->default(1);
 //            $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
 
 //            $table->boolean('hasRoundRobin')->default(true);

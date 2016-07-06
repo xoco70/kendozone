@@ -39,8 +39,7 @@ class Tournament extends Model implements SluggableInterface
         'dateFin',
         'registerDateLimit',
         'sport',
-        'cost',
-//        'mustPay',
+        'rule_id',
         'venue',
         'latitude',
         'longitude',
@@ -74,6 +73,7 @@ class Tournament extends Model implements SluggableInterface
         });
 
     }
+
     function addGeoData()
     {
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
@@ -90,6 +90,7 @@ class Tournament extends Model implements SluggableInterface
 
 
     }
+
     /**
      * A tournament is owned by a user
      *
@@ -166,16 +167,15 @@ class Tournament extends Model implements SluggableInterface
     /**
      * @return mixed
      */
-    public function settings()
+    public function settingsbak()
     {
         $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
         $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
         return $settings;
     }
 
-    public function settings2()
+    public function settings()
     {
-        //TODO Should use hasManyThrough
         return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
     }
 
@@ -214,12 +214,49 @@ class Tournament extends Model implements SluggableInterface
     {
         return $this->type == 0;
     }
+
     public function getRouteKeyName()
     {
         return 'slug';
     }
-    public function isDeleted(){
-        return $this->deleted_at !=null;
+
+    public function isDeleted()
+    {
+        return $this->deleted_at != null;
     }
+
+
+    public function setAndConfigureCategories($ruleId)
+    {
+        switch ($ruleId) {
+            case 1: // No preset selected
+                return;
+            case 2:
+                $options = config('options.ikf_settings');
+                break;
+            case 3:
+                $options = config('options.ekf_settings');
+                break;
+            case 4:
+                $options = config('options.lakc_settings');
+                break;
+            default:
+                return;
+        }
+        $arrCategoryTournament = array_keys($options);
+        
+        // Create Tournament Categories
+        
+        $this->categories()->sync($arrCategoryTournament);
+        
+        // Configure each category creating categorySetting Object
+
+        $categories = array_map([$this, 'categoryModel'], $arrCategoryTournament);
+    }
+    public function categoryModel($id)
+    {
+        return Category::findOrFail($id);
+    }
+
 
 }

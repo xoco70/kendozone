@@ -143,6 +143,9 @@ class TournamentController extends Controller
         if ($request->has('category')) {
             $res = $tournament->categories()->sync($request->input('category'));
         } else {
+
+            // Check if user will use preset ( IKF, EKF, LAKC)
+            $tournament->setAndConfigureCategories($request->rule_id);
             $res = $tournament->update($request->all());
         }
         if ($request->ajax()) {

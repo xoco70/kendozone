@@ -122,7 +122,7 @@
                                                     <div class="form-group">
                                                         {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
                                                         <br/>
-                                                        {!!  Form::select('rule_id', $rules,null, ['class' => 'form-control']) !!}
+                                                        {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
                                                     </div>
 
 
@@ -133,7 +133,7 @@
                                         </fieldset>
                                     </div>
                                     <div align="right">
-                                        <button type="submit" class="btn btn-success">
+                                        <button type="submit" class="btn btn-success" id="saveTournament">
                                             {{trans("core.save")}}
                                         </button>
                                     </div>
@@ -240,7 +240,7 @@
                                     <div class="container-fluid">
                                         <div class="panel-group" id="accordion-styled">
                                             @foreach($tournament->categoryTournaments as $key => $categoryTournament)
-                                                {{--TODO This is making X query, have to cache it--}}
+                                                {{--TODO This is making n+1 query, have to cache it--}}
                                                 <?php
                                                 // Set defaults
                                                 $setting = $tournament->categoryTournaments->get($key)->settings;
@@ -249,10 +249,10 @@
                                                 $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
 
                                                 $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
-                                                        ? $setting->fightDuration : Config::get('constants.CAT_FIGHT_DURATION');
+                                                        ? $setting->fightDuration : config('constants.CAT_FIGHT_DURATION');
 
                                                 $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
-                                                        ? $setting->enchoDuration : Config::get('constants.CAT_ENCHO_DURATION');
+                                                        ? $setting->enchoDuration : config('constants.CAT_ENCHO_DURATION');
 
 
                                                 ?>

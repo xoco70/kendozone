@@ -17,16 +17,17 @@
                         @foreach($tournament->categoryTournaments as $categoryTournament)
 
                             <li><a href="#{{ str_slug($categoryTournament->category->buildName($grades), "-") }}"></i>
-                                    <div >
+                                    <div>
                                         <?php
 
                                         $name = $categoryTournament->category->buildName($grades);
-                                        echo str_limit($name,25);
+                                        echo str_limit($name, 25);
 
 
                                         ?>
 
-                                        <span  data-id="{{ $categoryTournament->id}}" class="menu label  label-striped">{{  sizeof($categoryTournament->users) }}</span>
+                                        <span data-id="{{ $categoryTournament->id}}"
+                                              class="menu label  label-striped">{{  sizeof($categoryTournament->users) }}</span>
                                     </div>
                                 </a>
 
@@ -35,7 +36,21 @@
                     </ul>
                 </div>
             </div>
-            <!-- /sub navigation -->
+            @if($link!="")
+
+                <div class="sidebar-category">
+
+                    <div class="category-content no-padding">
+                        <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
+                           class="btn bg-teal btn-xs pull-right p-20 ml-20 mt-20 full-width"  ><b><i
+                                        class="icon-tree7 mr-5 "></i>{{ trans('core.generate_trees') }}</b>
+                        </a>
+
+                    </div>
+                </div>
+        @endif
+
+        <!-- /sub navigation -->
 
 
         </div>

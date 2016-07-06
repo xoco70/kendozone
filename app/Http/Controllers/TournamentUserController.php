@@ -35,7 +35,7 @@ class TournamentUserController extends Controller
     public function index(Tournament $tournament)
     {
         $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
-        $settingSize = $tournament->settings()->count();
+        $settingSize = $tournament->categorySettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::lists('name','id');
 
@@ -47,6 +47,8 @@ class TournamentUserController extends Controller
     /**
      * Show the form for creating a new competitor.
      *
+     * @param Request $request
+     * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, Tournament $tournament)
@@ -60,7 +62,7 @@ class TournamentUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TournamentUserRequest $request
      * @param Tournament $tournament
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response

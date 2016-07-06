@@ -20,7 +20,57 @@ return array(
     ],
 
 
-    'fik_settings' => [
+    'ikf_settings' => [
+        '1' => [
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
+        '2' => [ // man_second_force
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
+        '3' => [ // woman_second_force
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
+        '4' => [ // woman_first_force
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
+        '6' => [ // categories.man_team
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
     ],
 
 
@@ -86,6 +136,26 @@ return array(
 
     ],
     'lakc_settings' => [
+        '1' => [
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
+        '2' => [ // man_second_force
+            'duration' => '04:00',
+            'roundRobin' => '1',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'hanteiLimit' => '3', // 1/2 Finals
+        ],
     ],
 
 );

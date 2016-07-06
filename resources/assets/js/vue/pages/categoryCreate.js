@@ -121,7 +121,7 @@ new Vue({
                 },
                 dataType: "json"
             })
-                .done(function (data, textStatus, jqXHR) {
+                .done(function (data, textStatus, jqXHR) {  
                     if (dualListIds.indexOf('' + data.id) == -1) {
                         var option;
                         console.log(this.alias);
