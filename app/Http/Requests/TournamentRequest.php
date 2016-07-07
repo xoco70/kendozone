@@ -5,18 +5,6 @@ namespace App\Http\Requests;
 class TournamentRequest extends Request
 {
 
-    public function __construct(\Illuminate\Http\Request $request)
-    {
-//        dd($request);
-        if (!$request->has('sport')){
-            $request->request->add(['sport' => 1]);
-        }
-
-
-        if (!$request->has("mustPay")) $request->request->add(['mustPay' => 0]);
-        if (!$request->has("type"))    $request->request->add(['type' => 0]);
-
-    }
     /**
      * Determine if the user is authorized to make this request.
      *

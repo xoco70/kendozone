@@ -47,7 +47,7 @@ class DashboardTest extends TestCase
 
 
         // Create 1 tournament
-        $this->logWithUser($this->simpleUser);
+            $this->logWithUser($this->simpleUser);
 
         $tournament0 = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
 

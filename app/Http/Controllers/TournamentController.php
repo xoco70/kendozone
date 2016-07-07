@@ -66,12 +66,12 @@ class TournamentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TournamentRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(TournamentRequest $request)
     {
-        $tournament = Auth::user()->tournaments()->create($request->all());
+        $tournament = Auth::user()->tournaments()->create($request->except('category'));
         $tournament->categories()->sync($request->input('category'));
         $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
         flash()->success($msg);
