@@ -24,7 +24,6 @@ class CreateCategoryTable extends Migration
             $table->integer('gradeCategory')->unsigned()->default(0);
             $table->integer('gradeMin')->unsigned()->default(0);
             $table->integer('gradeMax')->unsigned()->default(0);
-            $table->integer('limitByEntity')->unsigned()->default(0);
 //            $table->foreign('gradeMin')
 //                ->references('id')
 //                ->on('grade');

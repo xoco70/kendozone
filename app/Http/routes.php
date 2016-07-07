@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController', ['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
         Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
-        Route::resource('settings', 'SettingsController');
+//        Route::resource('settings', 'SettingsController');
 
         //Restoring
         Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');

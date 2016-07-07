@@ -19,57 +19,82 @@ return array(
         '3' => 'F',
     ],
 
-
+// 1 = Junior, 2 = Junior Team, 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team, 7 = Master
     'ikf_settings' => [
-        '1' => [
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '1' => [ // Junior
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
         ],
-        '2' => [ // man_second_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '2' => [ /// Junior Team
+            'teamSize' => '3',
+            'teamReserve' => '2',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
         ],
-        '3' => [ // woman_second_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '3' => [ // Men Individual
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
             'hanteiLimit' => '3', // 1/2 Finals
-        ],
-        '4' => [ // woman_first_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
-        '6' => [ // categories.man_team
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
+            '4' => [ // Men Teams
+                'teamSize' => '5',
+                'fightDuration' => '04:00',
+                'hasRoundRobin' => '1',
+                'roundRobinGroupSize' => '3',
+                'roundRobinDuration' => '4',
+                'roundRobinWinner' => '1',
+                'hasEncho' => '1',
+                'enchoQty' => '10',
+                'enchoDuration' => '03:00',
+                'hasHantei' => '1',
+                'hanteiLimit' => '3', // 1/2 Finals
+                'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+                'limitByEntity' => '4',
+            ],
+            '6' => [ // Ladies Team
+                'teamSize' => '',
+                'teamReserve' => '2',
+                'fightDuration' => '04:00',
+                'hasRoundRobin' => '1',
+                'roundRobinGroupSize' => '3',
+                'roundRobinDuration' => '4',
+                'roundRobinWinner' => '1',
+                'hasEncho' => '1',
+                'enchoQty' => '10',
+                'enchoDuration' => '03:00',
+                'hasHantei' => '1',
+                'hanteiLimit' => '3', // 1/2 Finals
+                'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+                'limitByEntity' => '4',
+            ],
         ],
     ],
 
@@ -80,95 +105,166 @@ return array(
     // Senior Female Individual, (5)
     // Senior Male Individual (3)
     // Limit x association: 4
+
+    // 1 = Junior, 2 = Junior Team, 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team, 7 = Master
+    // Encho preliminary???
+    // Encho knockout = 1
+    // Encho Junior = 6 Min, then Hantei
+    // Encho Master = no time limit
     'ekf_settings' => [ // categories.man_first_force
-        '1' => [
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '1' => [ // Junior
+            'fightingAreas' => '1',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '06:00',
+            'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
+            'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
+        ],
+        '2' => [ /// Junior Team
+            'teamSize' => '3',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
+            'roundRobinWinner' => '2',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '06:00',
+            'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
+            'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+        ],
+        '3' => [ // Men Individual
+            'teamSize' => '',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '05:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
         ],
-        '2' => [ // man_second_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '4' => [ // Men Team
+            'teamSize' => '5',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '05:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
+            'roundRobinWinner' => '2',
+            'hasEncho' => '1',
+            'enchoQty' => '10',
+            'enchoDuration' => '03:00',
+            'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
+            'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+        ],
+        '5' => [ // Ladies Individual
+            'teamSize' => '',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '05:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
         ],
-        '3' => [ // woman_second_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
+        '6' => [ // Ladies Team
+            'teamSize' => '5',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '05:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
+            'roundRobinWinner' => '2',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
         ],
-        '5' => [ // woman_first_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
-        '6' => [ // categories.man_team
-            'duration' => '04:00',
-            'roundRobin' => '1',
-            'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-        ],
-
 
 
     ],
+    // 1 = Junior, 2 = Junior Team, 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team, 7 = Master
     'lakc_settings' => [
-        '1' => [
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '1' => [ // Junior
+            'teamSize' => '',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
         ],
-        '2' => [ // man_second_force
-            'duration' => '04:00',
-            'roundRobin' => '1',
+        '2' => [ /// Junior Team
+            'teamSize' => '',
+            'teamReserve' => '2',
+            'fightingAreas' => '1',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
             'enchoQty' => '10',
             'enchoDuration' => '03:00',
             'hasHantei' => '1',
+            'cost' => '',
+            'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-        ],
-    ],
+            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'limitByEntity' => '4',
+        ]
+    ]
 
 );
 ?>
-
-
-<!--1	categories.man_first_force	M	0	0	0	0	1	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--2	categories.man_second_force	M	0	0	0	0	2	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--3	categories.men_single	M	0	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--4	categories.men_team	M	1	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--5	categories.woman_first_force	F	0	0	0	0	1	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--6	categories.woman_second_force	F	0	0	0	0	2	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--7	categories.ladies_single	F	0	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--8	categories.ladies_team	F	1	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--9	categories.mixed_single	X	0	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->
-<!--10	categories.mixed_team	X	1	0	0	0	0	0	0	2016-06-27 10:26:58	2016-06-27 10:26:58-->

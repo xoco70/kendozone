@@ -167,17 +167,17 @@ class Tournament extends Model implements SluggableInterface
     /**
      * @return mixed
      */
-    public function settingsbak()
-    {
-        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
-        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
-        return $settings;
-    }
+//    public function settingsbak()
+//    {
+//        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
+//        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
+//        return $settings;
+//    }
 
-    public function settings()
-    {
-        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
-    }
+//    public function settings()
+//    {
+//        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
+//    }
 
     public function getCategoryList()
     {
@@ -228,34 +228,43 @@ class Tournament extends Model implements SluggableInterface
 
     public function setAndConfigureCategories($ruleId)
     {
-        switch ($ruleId) {
-            case 1: // No preset selected
-                return;
-            case 2:
-                $options = config('options.ikf_settings');
-                break;
-            case 3:
-                $options = config('options.ekf_settings');
-                break;
-            case 4:
-                $options = config('options.lakc_settings');
-                break;
-            default:
-                return;
-        }
-        $arrCategoryTournament = array_keys($options);
-        
+        $options = $this->loadRulesOptions($ruleId);
+
         // Create Tournament Categories
-        
+        $arrCategoryTournament = array_keys($options);
         $this->categories()->sync($arrCategoryTournament);
-        
+
         // Configure each category creating categorySetting Object
 
-        $categories = array_map([$this, 'categoryModel'], $arrCategoryTournament);
+        foreach ($arrCategoryTournament as $ctId) {
+            (new CategorySettings)->createCategorySettingFromOptions($options, $ctId);
+        }
+
     }
-    public function categoryModel($id)
+
+    private function categoryModel($id)
     {
         return Category::findOrFail($id);
+    }
+
+
+    private function loadRulesOptions($ruleId)
+    {
+        switch ($ruleId) {
+            case 1: // No preset selected
+                return null;
+            case 2:
+                return $options = config('options.ikf_settings');
+                break;
+            case 3:
+                return $options = config('options.ekf_settings');
+                break;
+            case 4:
+                return $options = config('options.lakc_settings');
+                break;
+            default:
+                return null;
+        }
     }
 
 

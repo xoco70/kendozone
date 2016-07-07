@@ -33,6 +33,21 @@ class CategorySettings extends Model
         return $this->belongsTo(CategoryTournament::class);
     }
 
+    /**
+     * @param $options
+     * @param $ctId
+     */
+    public function createCategorySettingFromOptions($options, $ctId)
+    {
+        $rules = $options[$ctId];
+        $this->id = $ctId;
+        foreach ($rules as $key => $value) {
+            $this->$key = $value;
+        }
+        $this->save();
+    }
+
+
     //option to seed competitors
 
 //    public static function getDefaultSettings()

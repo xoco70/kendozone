@@ -23,18 +23,23 @@ class CreateCategorySettingsTable extends Migration
 
 
             // Category Section
-            $table->boolean('isTeam');
-            $table->tinyInteger('teamSize')->default(5);
+            $table->tinyInteger('teamSize')->nullable(); // Default is null
+            $table->tinyInteger('teamReserve')->nullable(); // Default is null
             $table->tinyInteger('fightingAreas')->unsigned()->nullable()->default(1);
-            $table->text('fightDuration');
+            $table->text('fightDuration'); // Can't apply default because text
             $table->boolean('hasRoundRobin')->default(1);
-            $table->tinyInteger('roundRobinWinner');
+            $table->boolean('roundRobinGroupSize')->default(3);
+            $table->tinyInteger('roundRobinWinner'); // Number of Competitors that go to next level
+            $table->tinyInteger('roundRobinDuration'); // Match Duration in preliminary round
             $table->boolean('hasEncho')->default(1);
             $table->tinyInteger('enchoQty');
             $table->text('enchoDuration');
             $table->boolean('hasHantei');
-            $table->smallInteger('cost');
-            $table->smallInteger('seedQuantity')->default(4);
+            $table->smallInteger('cost'); // Cost of competition
+            $table->smallInteger('seedQuantity')->default(4);  // Competitors seeded in tree
+            $table->smallInteger('hanteiLimit')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
+            $table->smallInteger('enchoTimeLimitless')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
+            $table->integer('limitByEntity')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
