@@ -159,13 +159,15 @@ class Category extends Model
     public function buildName($grades)
     {
 
+        if ($this->alias != null && $this->alias != '') return $this->alias;
+
         $genders = [
             'M' => trans('categories.male'),
             'F' => trans('categories.female'),
             'X' => trans('categories.mixt')
         ];
 
-        
+
         $teamText = $this->isTeam == 1 ? trans('categories.isTeam') : trans('categories.single');
         $ageCategoryText = $this->getAgeString();
         $gradeText = $this->getGradeString($grades);
