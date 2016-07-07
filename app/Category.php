@@ -72,7 +72,7 @@ class Category extends Model
 
     public function isTeam()
     {
-        return $this->team;
+        return $this->isTeam;
     }
 
     public function isForMen()

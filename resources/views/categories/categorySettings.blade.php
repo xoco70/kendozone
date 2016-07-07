@@ -37,21 +37,13 @@ $currency = Auth::user()->country->currency_code;
 @endif
 <div class="tab-pane" id="category">
     <div class="row">
-        <div class="col-md-3">
-                {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                   data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
-                {!!  Form::select('fightingAreas', [1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
+        <div class="col-md-2">
+            {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
+            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+               data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
+            {!!  Form::select('fightingAreas', [1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
         </div>
-        @if ($tournament->categoryTournaments->get($key)->category->isTeam())
-            <div class="col-md-3">
-                {!!  Form::label('teamSize', trans('categories.teamSize')) !!}<br/>
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                   data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
-                {!!  Form::select('teamSize', config('options.teamsize'),old('teamsize'), ['class' => 'form-control']) !!}
-            </div>
-        @endif
-        <div class="col-md-3">
+        <div class="col-md-2">
 
             {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -62,7 +54,7 @@ $currency = Auth::user()->country->currency_code;
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 {!!  Form::label('cost', trans('categories.cost'). ' ('. $currency  .')' ) !!}
                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -70,7 +62,19 @@ $currency = Auth::user()->country->currency_code;
                 {!!  Form::input('number','cost',old('cost'), ['class' => 'form-control']) !!}
             </div>
         </div>
-        <div class="col-md-3">
+
+        @if ($tournament->categoryTournaments->get($key)->category->isTeam())
+
+            <div class="col-md-2">
+                {!!  Form::label('teamSize', trans('categories.teamSize')) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
+                {!!  Form::select('teamSize', config('options.teamSize'),old('teamSize'), ['class' => 'form-control']) !!}
+            </div>
+
+
+        @endif
+        <div class="col-md-2">
             <div class="form-group">
                 {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -193,6 +197,8 @@ $currency = Auth::user()->country->currency_code;
         </div>
 
     </div>
+
+
     <div align="right">
         <button type="submit" class="btn btn-success save_category" id="save{{$key}}"><i></i>{{trans("core.save")}}
         </button>

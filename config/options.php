@@ -22,9 +22,9 @@ return array(
     'roundRobinGroupSize' => [3, 4, 5],
     'roundRobinWinner' => [1, 2, 3],
     'enchoQty' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    'teamSize' => [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    'teamSize' => [2, 3, 4, 5, 6, 7, 8, 9, 10],
     'teamReserve' => [1, 2, 3, 4],
-    'limitByEntity' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    'limitByEntity' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 
 // 1 = Junior, 2 = Junior Team, 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team, 7 = Master
     'ikf_settings' => [
