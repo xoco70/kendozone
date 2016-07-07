@@ -38,25 +38,24 @@ $currency = Auth::user()->country->currency_code;
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-3">
-            <div class="">
                 {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
                 {!!  Form::select('fightingAreas', [1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
-
-            </div>
         </div>
         @if ($tournament->categoryTournaments->get($key)->category->isTeam())
             <div class="col-md-3">
                 {!!  Form::label('teamSize', trans('categories.teamSize')) !!}<br/>
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
-
-                {!!  Form::select('teamSize', [2,3,4,5,6,7,8,9,10,11,12,13,14,15],old('teamsize'), ['class' => 'form-control']) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
+                {!!  Form::select('teamSize', config('options.teamsize'),old('teamsize'), ['class' => 'form-control']) !!}
             </div>
         @endif
         <div class="col-md-3">
 
             {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
-            <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.fightDurationTooltip')}}"></i>
+            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+               data-original-title="{{trans('categories.fightDurationTooltip')}}"></i>
 
             <div class="input-group">
                 {!!  Form::input('text','fightDuration',$fightDuration, ['class' => 'form-control fightDuration','id' => 'fightDuration'.$key]) !!}
@@ -66,8 +65,18 @@ $currency = Auth::user()->country->currency_code;
         <div class="col-md-3">
             <div class="form-group">
                 {!!  Form::label('cost', trans('categories.cost'). ' ('. $currency  .')' ) !!}
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.costTooltip')}}"></i>
-                {!!  Form::input('number','cost',is_null($setting) ? 0 : $setting->cost, ['class' => 'form-control']) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.costTooltip')}}"></i>
+                {!!  Form::input('number','cost',old('cost'), ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
+                {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
+
             </div>
         </div>
     </div>
@@ -78,21 +87,33 @@ $currency = Auth::user()->country->currency_code;
                 <label>
 
                     {!!  Form::label('hasRoundRobin', trans('categories.hasRoundRobin')) !!}
-                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.hasRoundRobinTooltip')}}"></i>
+                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                       data-original-title="{{trans('categories.hasRoundRobinTooltip')}}"></i>
                     <br/>
                     {!!   Form::hidden('hasRoundRobin', 0,['id'=>'hasRoundRobin'.$key ]) !!}
-                    {!!   Form::checkbox('hasRoundRobin', 1, is_null($setting) ? 0 : $setting->hasRoundRobin,
+                    {!!   Form::checkbox('hasRoundRobin', 1, old('hasRoundRobin'),
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasRoundRobin'.$key]) !!}
 
                 </label>
             </div>
         </div>
-        <div class="col-md-3 col-md-offset-1">
+
+        <div class="col-md-2 ">
+            <div class="form-group">
+                {!!  Form::label('roundRobinGroupSize', trans('categories.roundRobinGroupSize')) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.roundRobinGroupSizeTooltip')}}"></i>
+
+                {!!  Form::select('roundRobinGroupSize', config('options.roundRobinGroupSize'), old('roundRobinGroupSize'),['class' => 'form-control',$disableRoundRobin]) !!}
+            </div>
+        </div>
+        <div class="col-md-2 ">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('categories.roundRobinWinner')) !!}
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.roundRobinWinnerTooltip')}}"></i>
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.roundRobinWinnerTooltip')}}"></i>
 
-                {!!  Form::select('roundRobinWinner', [1,2,3], old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
+                {!!  Form::select('roundRobinWinner', config('options.roundRobinWinner'), old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
     </div>
@@ -103,30 +124,42 @@ $currency = Auth::user()->country->currency_code;
                 <label>
 
                     {!!  Form::label('hasEncho', trans('categories.hasEncho')) !!}
-                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
+                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                       data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
                     <br/>
                     {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
-                    {!!   Form::checkbox('hasEncho', 1, is_null($setting) ? 0 : $setting->hasEncho,
+                    {!!   Form::checkbox('hasEncho', 1, old('hasEncho'),
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
                 </label>
             </div>
         </div>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-2">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
-                <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.enchoQtyTooltip')}}"></i>
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.enchoQtyTooltip')}}"></i>
 
-                {!!  Form::select('enchoQty', [0,1,2,3,4,5,6,7,8,9,10], old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
+                {!!  Form::select('enchoQty', config('options.enchoQty'), old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
                 <small class="display-block">{{ trans('categories.encho_infinite') }}</small>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2 col-md-offset-1">
             {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
-            <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
+            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+               data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
             <div class="input-group ">
                 {!!  Form::input('text','enchoDuration', $enchoDuration, ['class' => 'form-control enchoDuration','id' => 'enchoDuration'.$key, $disableEncho]) !!}
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <div class="form-group">
+                {!!  Form::label('enchoTimeLimitless', trans('categories.enchoTimeLimitless')) !!}
+                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                   data-original-title="{{trans('categories.enchoTimeLimitlessTooltip')}}"></i>
+
+                {!!  Form::select('enchoTimeLimitless', [0,1,2,3,4,5,6,7,8,9,10], old('enchoTimeLimitless'),['class' => 'form-control',$disableEncho]) !!}
             </div>
         </div>
     </div>
@@ -137,7 +170,8 @@ $currency = Auth::user()->country->currency_code;
                 <label>
 
                     {!!  Form::label('hasHantei', trans('categories.hasHantei')) !!}
-                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.hasHanteiTooltip')}}"></i>
+                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                       data-original-title="{{trans('categories.hasHanteiTooltip')}}"></i>
                     <br/>
                     {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
                     {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
@@ -150,7 +184,8 @@ $currency = Auth::user()->country->currency_code;
                 <label>
 
                     {!!  Form::label('hanteiLimit', trans('categories.hanteiLimit')) !!}
-                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.hanteilimitTooltip')}}"></i><br/>
+                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                       data-original-title="{{trans('categories.hanteilimitTooltip')}}"></i><br/>
                     {!!  Form::select('hanteiLimit', $hanteiLimit , old('hanteiLimit'),['class' => 'form-control']) !!}
 
                 </label>

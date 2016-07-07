@@ -107,7 +107,7 @@ class TournamentController extends Controller
         $settingSize = $tournament->categorySettings->count();
         $categorySize = $tournament->categoryTournaments->count();
         $rules = config('options.rules');
-        $hanteiLimit =config('options.hanteiLimit');
+        $hanteiLimit = config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
         // Gives me a list of category containing
@@ -117,7 +117,7 @@ class TournamentController extends Controller
         foreach ($categories1 as $category) {
 
             $category->alias != '' ? $category->name = $category->alias
-                                   : $category->name =trim($category->buildName($grades));
+                : $category->name = trim($category->buildName($grades));
             $categories->push($category);
         }
         $categories = $categories->sortBy(function ($key) {
@@ -127,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules','hanteiLimit'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit'));
     }
 
     /**
@@ -143,7 +143,6 @@ class TournamentController extends Controller
         if ($request->has('category')) {
             $res = $tournament->categories()->sync($request->input('category'));
         } else {
-
             // Check if user will use preset ( IKF, EKF, LAKC)
             $tournament->setAndConfigureCategories($request->rule_id);
             $res = $tournament->update($request->all());
@@ -152,9 +151,9 @@ class TournamentController extends Controller
             $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
                 : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
             return $result;
-        }else{
-            $res == 0 ?  flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
-                      :  flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
+        } else {
+            $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+                : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
             return redirect(URL::action('TournamentController@edit', $tournament->slug));
 
         }
@@ -165,23 +164,23 @@ class TournamentController extends Controller
     }
 
 
-//TODO is it used???
-    /**
-     * @param Request $request
-     * @param $categorySettingsId
-     * @return mixed
-     */
-    public function updateCategory(Request $request, $categorySettingsId)
-    {
-        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
-        if ($categorySettings->update($request->all())) {
-            flash()->success(trans('msg.category_update_successful'));
-        } else {
-            flash()->error(trans('msg.category_update_error'));
-        }
-
-        return view("tournaments/categories", compact('categories'));
-    }
+////TODO is it used???
+//    /**
+//     * @param Request $request
+//     * @param $categorySettingsId
+//     * @return mixed
+//     */
+//    public function updateCategory(Request $request, $categorySettingsId)
+//    {
+//        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
+//        if ($categorySettings->update($request->all())) {
+//            flash()->success(trans('msg.category_update_successful'));
+//        } else {
+//            flash()->error(trans('msg.category_update_error'));
+//        }
+//
+//        return view("tournaments/categories", compact('categories'));
+//    }
 
 
     /**
@@ -222,13 +221,10 @@ class TournamentController extends Controller
      */
     public function register(Tournament $tournament)
     {
-
-
-        if ($tournament->type == 1) {
-            // Tournament is open
+        if ($tournament->isOpen()) {
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
-        } else
-            throw new InvitationNeededException();
+        }
+        throw new InvitationNeededException();
     }
 
     /**

@@ -73,6 +73,10 @@ return [
     'hanteiLimit' => 'Limite para Hantei',
     'isTeam' => 'Equipo',
     'alias' => 'Alias',
+    'roundRobinGroupSize' => 'Tamaño del grupo',
+    'enchoTimeLimitless' => 'Hasta la muerte',
+    'limitByEntity' => 'Limite de competidores',
+
 
 
     // Tooltips
@@ -80,7 +84,7 @@ return [
     'fightDurationTooltip' => 'El tiempo de cada combate',
     'costTooltip' => 'Cuanto se cobra para participar a esta categoría',
     'hasRoundRobinTooltip' => '¿Uso de Round Robin para la primera fase?',
-    'roundRobinWinnerTooltip' => 'Cuantos competidores salen del round robin (Sobre una base de 3)',
+    'roundRobinWinnerTooltip' => 'Cuantos competidores salen del round robin',
     'hasEnchoTooltip' => '¿Se usará encho?',
     'enchoQtyTooltip' => 'Hasta cuantos enchos habrá despues de un empate?',
     'enchoDurationTooltip' => 'Cuanto dura cada encho',
@@ -88,7 +92,9 @@ return [
     'isTeamTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'hanteilimitTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'aliasTooltip' => 'Eliga un nombre personalizado para la categoría ( Opcional )',
-
-
+    'roundRobinGroupSizeTooltip' => 'Cantidad de competidores por grupo',
+    'enchoTimeLimitlessTooltip' => 'Nivel de la competencia en donde el encho ya no tiene tiempo límite (0 para todos)',
+    'limitByEntityTooltip' => 'Cantidad de competidor autorizados por entidad',
+    'rulesTooltip' => 'Crea y se configura de forma automatica las categorías según el modelo de reglas elegido',
 
 ];

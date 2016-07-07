@@ -36,7 +36,7 @@ class CreateCategorySettingsTable extends Migration
             $table->text('enchoDuration');
             $table->boolean('hasHantei');
             $table->smallInteger('cost'); // Cost of competition
-            $table->smallInteger('seedQuantity')->default(4);  // Competitors seeded in tree
+            $table->smallInteger('seedQuantity')->nullable();  // Competitors seeded in tree
             $table->smallInteger('hanteiLimit')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
             $table->smallInteger('enchoTimeLimitless')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
             $table->integer('limitByEntity')->unsigned()->nullable();

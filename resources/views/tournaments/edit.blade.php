@@ -42,20 +42,52 @@
 
 
                                         <fieldset title="{{trans('core.general_data')}}" class="mt-20 pt-20">
-
-
                                             <div class="row">
-
-                                                <div class="col-md-4 col-md-offset-1">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
                                                         <br/>
                                                         {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="checkbox-switch">
+                                                        <label>
 
+                                                            {!!  Form::label('type', trans('core.tournamentType'),['class' => 'text-bold' ]) !!}
+                                                            <br/>
+                                                            {!!   Form::hidden('type', 0) !!}
+                                                            {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>trans('core.open'), 'data-off-text'=>trans_choice('core.invitation', 1)]) !!}
+
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
+                                                        <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                                           data-original-title="{{trans('categories.rulesTooltip')}}"></i>
+                                                        <br/>
+                                                        {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
                                                     </div>
 
+
                                                 </div>
-                                                <div class="col-md-3">
+
+                                            </div>
+                                            <br/>
+                                            <hr/>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1" >
                                                     {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
 
@@ -83,9 +115,8 @@
                                                     </div>
 
                                                 </div>
-                                            </div><br/>
-                                            <div class="row">
-                                                <div class="col-md-3 col-md-offset-1">
+                                                <div class="col-md-3">
+
                                                     {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
                                                     <br/>
 
@@ -97,39 +128,33 @@
                                                     </div>
                                                     <br/>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
-                                                        <br/>
-                                                        {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-
-                                                    <div class="checkbox-switch">
-                                                        <label>
-
-                                                            {!!  Form::label('type', trans('core.tournamentType'),['class' => 'text-bold' ]) !!}
-                                                            <br/>
-                                                            {!!   Form::hidden('type', 0) !!}
-                                                            {!!   Form::checkbox('type', 1, $tournament->type, ['class' => 'switch', 'data-on-text'=>trans('core.open'), 'data-off-text'=>trans_choice('core.invitation', 1)]) !!}
-
-                                                        </label>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
-                                                        <br/>
-                                                        {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
-                                                    </div>
-
-
-                                                </div>
-
                                             </div>
-
+                                            <br/>
+                                            <hr/>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('promoter', trans('core.promoter'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::text('promoter', old('promoter'), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('host_organization', trans('core.host_organization'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::text('host_organization', old('host_organization'), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        {!!  Form::label('technical_assistance', trans('core.technical_assistance'),['class' => 'text-bold' ]) !!}
+                                                        <br/>
+                                                        {!!  Form::text('technical_assistance', old('technical_assistance'), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                     </div>
                                     <div align="right">
@@ -147,7 +172,7 @@
                             <div class="panel panel-flat">
                                 <div class="panel-body">
                                     <div class="container-fluid">
-                                        <div class="col-lg-12 mt-20" >
+                                        <div class="col-lg-12 mt-20">
                                             <div class="form-group">
                                                 {!!  Form::label('venue', trans('core.name'),['class' => 'text-bold' ]) !!}
                                                 {!!  Form::text('venue', old('venue'), ['class' => 'form-control']) !!}

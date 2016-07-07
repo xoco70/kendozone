@@ -4,7 +4,7 @@ $(function () {
 
     {
         'minTime': '2:00',
-        'maxTime': '5:00',
+        'maxTime': '10:00',
         'timeFormat': 'H:i',
         'step': '15'
     }));
@@ -13,7 +13,7 @@ $(function () {
 
     {
         'minTime': '1:00',
-        'maxTime': '5:00',
+        'maxTime': '10:00',
         'timeFormat': 'H:i',
         'step': '15'
     }));
@@ -67,10 +67,18 @@ $(function () {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
+        $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
     });
     $('input[name="hasRoundRobin"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
+        $(this).closest('form').find('[name="roundRobinGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="roundRobinWinner"]').prop('disabled', !isChecked);
+
+    });
+
+    $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
+        var isChecked = $(this).is(':checked');
+        $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
     });
 
 // EDIT TOURNAMENT
@@ -328,21 +336,6 @@ $(function () {
 
     });
 
-
-// $('#dateIni').on('change', function (e) {
-// alert($.format.date(this.value, "yy"));
-// $('#registerDateLimit').val(this.value);
-
-
-// $dateFin.val(this.value);
-// $dateFin.pickadate({
-//         min: [, , ,]
-//
-// });
-
-
-// });
-
     $('.datelimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
@@ -359,23 +352,5 @@ $(function () {
             type: "info"
         });
     });
-// $(".accordion-sortable").sortable({
-//     connectWith: '.accordion-sortable',
-//     items: '.panel',
-//     helper: 'original',
-//     cursor: 'move',
-//     handle: '[data-action=move]',
-//     revert: 100,
-//     containment: '.content',
-//     forceHelperSize: true,
-//     placeholder: 'sortable-placeholder',
-//     forcePlaceholderSize: true,
-//     tolerance: 'pointer',
-//     start: function (e, ui) {
-//         ui.placeholder.height(ui.item.outerHeight());
-//     }
-// });
-
-
 })
 ;

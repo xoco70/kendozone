@@ -14,20 +14,7 @@ class CategorySettings extends Model
 
     protected $table = 'category_settings';
     public $timestamps = true;
-    protected $fillable = [
-        "category_tournament_id",
-        "isTeam",
-        "teamSize",
-        "fightingAreas",
-        "fightDuration",
-        "hasEncho",
-        "enchoQty",
-        "enchoDuration",
-        "hasRoundRobin",
-        "roundRobinWinner",
-        "hasHantei",
-        "cost",
-    ];
+    protected $guarded = ['id'];
 
     public function categoryTournament(){
         return $this->belongsTo(CategoryTournament::class);
@@ -37,14 +24,16 @@ class CategorySettings extends Model
      * @param $options
      * @param $ctId
      */
-    public function createCategorySettingFromOptions($options, $ctId)
+    public function createCategorySettingFromOptions($options,CategoryTournament $categoryTournament)
     {
-        $rules = $options[$ctId];
-        $this->id = $ctId;
+        $cs = static::firstOrNew(['category_tournament_id' => $categoryTournament->id]);
+        $rules = $options[$categoryTournament->category->id];
+//        $this->id = $ctId;
+        $cs->category_tournament_id = $categoryTournament->id;
         foreach ($rules as $key => $value) {
-            $this->$key = $value;
+            $cs->$key = $value;
         }
-        $this->save();
+        $cs->save();
     }
 
 

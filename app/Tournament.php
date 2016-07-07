@@ -33,20 +33,20 @@ class Tournament extends Model implements SluggableInterface
     protected $table = 'tournament';
     public $timestamps = true;
 
-    protected $fillable = [
-        'name',
-        'dateIni',
-        'dateFin',
-        'registerDateLimit',
-        'sport',
-        'rule_id',
-        'venue',
-        'latitude',
-        'longitude',
-        'type',
-        'level_id',
+    protected $guarded = ['id'];
+//        'name',
+//        'dateIni',
+//        'dateFin',
+//        'registerDateLimit',
+//        'sport',
+//        'rule_id',
+//        'venue',
+//        'latitude',
+//        'longitude',
+//        'type',
+//        'level_id',
+//
 
-    ];
     protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 
     protected static function boot()
@@ -228,16 +228,18 @@ class Tournament extends Model implements SluggableInterface
 
     public function setAndConfigureCategories($ruleId)
     {
+        if ($ruleId == 1) return; // No Rules Selected
+
         $options = $this->loadRulesOptions($ruleId);
 
         // Create Tournament Categories
-        $arrCategoryTournament = array_keys($options);
-        $this->categories()->sync($arrCategoryTournament);
+        $arrCategories = array_keys($options);
+        $this->categories()->sync($arrCategories);
 
         // Configure each category creating categorySetting Object
 
-        foreach ($arrCategoryTournament as $ctId) {
-            (new CategorySettings)->createCategorySettingFromOptions($options, $ctId);
+        foreach ($this->categoryTournaments as $categoryTournament) {
+            (new CategorySettings)->createCategorySettingFromOptions($options, $categoryTournament);
         }
 
     }

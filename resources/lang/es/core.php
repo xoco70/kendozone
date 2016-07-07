@@ -65,6 +65,11 @@ return [
     'configured' => 'Configurada',
     'add_custom_category' => 'Agregar una categoría',
     'rules' => 'Reglas',
+    'promoter' => 'Promotor',
+    'host_organization' => 'Anfitrión',
+    'technical_assistance' => 'Asistencia Técnica',
+
+
 
     // Places
     'venue' => 'Lugar del encuentro',
