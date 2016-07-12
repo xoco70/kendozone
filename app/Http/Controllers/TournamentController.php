@@ -59,8 +59,9 @@ class TournamentController extends Controller
         $levels = TournamentLevel::lists('name', 'id');
         $categories = Category::take(10)->orderBy('id', 'asc')->lists('name', 'id');
         $tournament = new Tournament();
+        $rules = config('options.rules');
 
-        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules'));
     }
 
     /**
@@ -72,7 +73,12 @@ class TournamentController extends Controller
     public function store(TournamentRequest $request)
     {
         $tournament = Auth::user()->tournaments()->create($request->except('category'));
-        $tournament->categories()->sync($request->input('category'));
+        if ($request->rule_id == 1) {
+            $tournament->categories()->sync($request->input('category'));
+        } else {
+            $tournament->setAndConfigureCategories($request->rule_id);
+        }
+
         $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
         flash()->success($msg);
 //        else flash('error', 'operation_failed!');
@@ -136,26 +142,23 @@ class TournamentController extends Controller
      * @param TournamentRequest|Request $request
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
-     * @internal param int $id
      */
     public function update(Request $request, Tournament $tournament)
     {
-        if ($request->has('category')) {
+
+
+        if ($request->ajax() && $request->has('category')) { // Category Request goes through AJAX
             $res = $tournament->categories()->sync($request->input('category'));
-        } else {
-            // Check if user will use preset ( IKF, EKF, LAKC)
-            $tournament->setAndConfigureCategories($request->rule_id);
-            $res = $tournament->update($request->all());
-        }
-        if ($request->ajax()) {
             $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
                 : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
             return $result;
         } else {
+            // Check if user will use preset ( IKF, EKF, LAKC)
+            $tournament->setAndConfigureCategories($request->rule_id);
+            $res = $tournament->update($request->all());
             $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
                 : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
             return redirect(URL::action('TournamentController@edit', $tournament->slug));
-
         }
 
 

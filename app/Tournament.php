@@ -33,19 +33,23 @@ class Tournament extends Model implements SluggableInterface
     protected $table = 'tournament';
     public $timestamps = true;
 
-    protected $guarded = ['id'];
-//        'name',
-//        'dateIni',
-//        'dateFin',
-//        'registerDateLimit',
-//        'sport',
-//        'rule_id',
-//        'venue',
-//        'latitude',
-//        'longitude',
-//        'type',
-//        'level_id',
-//
+    protected $fillable = [
+        'name',
+        'dateIni',
+        'dateFin',
+        'registerDateLimit',
+        'sport',
+        'promoter',
+        'host_organization',
+        'technical_assistance',
+        'rule_id',
+        'type',
+        'venue',
+        'latitude',
+        'longitude',
+        'level_id'
+        ];
+
 
     protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 

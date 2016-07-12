@@ -11,13 +11,13 @@
                 </fieldset>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class=" form-group">
                             {!!  Form::label('name', trans('core.name'),['class' => 'text-bold ']) !!}
                             {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold ']) !!}
                         <div class="form-group">
                             <div class="input-group">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
 
                         {!!  Form::label('dateFin', trans('core.eventDateFin'),['class' => 'text-bold ' ]) !!}
                         <div class="form-group">
@@ -40,6 +40,15 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
+                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                               data-original-title="{{trans('categories.rulesTooltip')}}"></i>
+                            <br/>
+                            {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
+                        </div>
                     </div>
 
                 </div>

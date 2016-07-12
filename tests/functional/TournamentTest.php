@@ -105,8 +105,7 @@ class TournamentTest extends TestCase
     {
         if ($tournament == null) {
             $tournament = factory(Tournament::class)->create(['name' => 'MyTournament']);
-            factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
-
+            $category = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
         }
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')

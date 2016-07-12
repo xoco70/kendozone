@@ -78,8 +78,6 @@
                                                         <br/>
                                                         {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
                                                     </div>
-
-
                                                 </div>
 
                                             </div>
