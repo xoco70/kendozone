@@ -47,18 +47,18 @@
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                data-original-title="{{trans('categories.rulesTooltip')}}"></i>
                             <br/>
-                            {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
+                            {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control', 'v-model'=> "ruleSelect"]) !!}
                         </div>
                     </div>
 
                 </div>
-                <div class="row">
+                <div class="row" :disabled="ruleSelect!=1">
                     <div class="col-md-12">
 
                         <p>{{trans('core.select_categories_to_register')}}</p>
 
                         <div class="form-group multiselect">
-                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple", "disabled"]) !!} <!-- Default 1st Dan-->
                         </div>
 
                     </div>
@@ -70,7 +70,7 @@
                         </span>
 
                     </div>
-                    <div class="col-md-6 mb-20 mt-20 pt-20">
+                    <div class="col-md-6 mb-20 mt-20 pt-20" disabled="ruleSelect==1">
                         {{--<button type="button" class="btn btn-primary"--}}
                         {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
                         <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black" @click="resetModalValues()">+ {{ trans('core.add_custom_category') }}</a>

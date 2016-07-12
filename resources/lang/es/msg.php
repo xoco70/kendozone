@@ -82,6 +82,6 @@ return [
     'club_restored_successful' => 'Club <br/><b>:name</b><br/> restaurado exitosamente',
     'club_restored_error' => 'Hubo un problema al restaurar el club',
 
-
+    ''
 
 ];

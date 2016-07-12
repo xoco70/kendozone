@@ -7,7 +7,6 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Lang;
 
 /**
  * List of User Test
@@ -50,7 +49,6 @@ class TournamentTest extends TestCase
 //            ->see(trans('validation.filled', ['attribute' => "dateIni"])) // It's inserting spaces
 //            ->see(trans('validation.filled', ['attribute' => "dateFin"]))
             ->see(trans('validation.filled', ['attribute' => "category"]))
-
             ->notSeeInDatabase('tournament', ['name' => '']);
 
     }
@@ -110,28 +108,26 @@ class TournamentTest extends TestCase
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->type('MyTournamentXXX', 'name')
-//            ->type('2015-12-15', 'dateIni')
-//            ->type('2015-12-15', 'dateFin')
-//            ->type('2015-12-16', 'registerDateLimit')
-//            ->type('1', 'type')
-//            ->type('2', 'level_id')
+            ->type('2015-12-15', 'dateIni')
+            ->type('2015-12-15', 'dateFin')
+            ->type('2015-12-16', 'registerDateLimit')
+            ->type('1', 'type')
+            ->type('2', 'level_id')
 //            ->type('CDOM', 'venue')
 //            ->type('1.11111', 'latitude')
 //            ->type('2.22222', 'longitude')
             ->press('saveTournament')
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournamentXXX',
-//                    'dateIni' => '2015-12-15',
-//                    'dateFin' => '2015-12-15',
-//                    'registerDateLimit' => '2015-12-16',
-//                    'type' => '1',
-//                    'level_id' => '2',
+                    'dateIni' => '2015-12-15',
+                    'dateFin' => '2015-12-15',
+                    'registerDateLimit' => '2015-12-16',
+                    'type' => '1',
+                    'level_id' => '2',
 //                    'venue' => 'CDOM',
 //                    'latitude' => '1.11111',
 //                    'longitude' => '2.22222',
                 ]);
-//        $t = Tournament::where('name','MyTournamentXXX')->first();
-//        dd($t);
     }
 
 
@@ -217,12 +213,12 @@ class TournamentTest extends TestCase
     /** @test */
     public function you_must_own_tournament_or_be_superuser_to_edit_it()
     {
-        $root =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-        $user =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $otherUser =  factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+        $otherUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $this->logWithUser($root);
 
-        $myTournament = factory(Tournament::class)->create(['user_id' => $root->id ]);
+        $myTournament = factory(Tournament::class)->create(['user_id' => $root->id]);
 
         //add categories
 
@@ -252,11 +248,51 @@ class TournamentTest extends TestCase
         $this->visit("/tournaments")
             ->see(trans_choice('core.tournament', 2))
             ->press("delete_" . $tournament->slug)
-            ->seeIsSoftDeletedInDatabase('tournament',['id' => $tournament->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament',['id' => $ct2->id]);
+            ->seeIsSoftDeletedInDatabase('tournament', ['id' => $tournament->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament', ['id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('category_tournament', ['id' => $ct2->id]);
 //            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
 //            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
 
     }
+
+    /** @test */
+    public function it_create_tournament_with_rules()
+    {
+        $this->visit('/tournaments/create')
+            ->type('My Tournament', 'name')
+            ->type('2015-12-13', 'dateIni')
+            ->type('2015-12-13', 'dateFin')
+            ->type('3', 'rule_id')
+            ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
+            ->seeInDatabase('tournament', ['name' => 'My Tournament']);
+
+        $categoriesAdded = [1, 2, 3, 4, 5, 6];
+        // See categories is added
+        $tournament = Tournament::where("name", "My Tournament")->first();
+        $categories = DB::table("category_tournament")->where("tournament_id", '=', $tournament->id)->get();
+        foreach ($categories as $item) {
+            $this->assertContains($item->category_id, $categoriesAdded);
+            // Check that all categories are configured
+
+        }
+
+    }
+
+
+    /** @test */
+    public
+    function it_edit_tournament_with_rules()
+    {
+
+    }
+
+    public
+    function setTournamentRules(Tournament $tournament, $ruleId)
+    {
+
+
+    }
+
+
 }

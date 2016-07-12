@@ -41,7 +41,7 @@
                 <div class="sidebar-category">
 
                     <div class="category-content no-padding">
-                        <a href="{!!   $link !!}" id="generate_tree{!! $categoryTournament->id !!}"
+                        <a href="{!!   $link !!}" id="generate_tree"
                            class="btn bg-teal btn-xs pull-right p-20 ml-20 mt-20 full-width"  ><b><i
                                         class="icon-tree7 mr-5 "></i>{{ trans('core.generate_trees') }}</b>
                         </a>

@@ -34,7 +34,7 @@
                     <div class="tab-content">
 
                         <div class="tab-pane active" id="tab1">
-                            {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form', "action" => ["TournamentController@update", $tournament->slug]]) !!}
+                            {!! Form::model($tournament, ['method'=>"PATCH", 'id'=>'form1', "action" => ["TournamentController@update", $tournament->slug]]) !!}
                             <div class="panel panel-flat">
 
                                 <div class="panel-body">
@@ -73,7 +73,8 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
-                                                        <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                                        <i class="icon-help" data-popup="tooltip" title=""
+                                                           data-placement="right"
                                                            data-original-title="{{trans('categories.rulesTooltip')}}"></i>
                                                         <br/>
                                                         {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
@@ -85,7 +86,7 @@
                                             <hr/>
                                             <br/>
                                             <div class="row">
-                                                <div class="col-md-3 col-md-offset-1" >
+                                                <div class="col-md-3 col-md-offset-1">
                                                     {!!  Form::label('dateIni', trans('core.eventDateIni'),['class' => 'text-bold' ]) !!}
                                                     {{--<br/>--}}
 
@@ -370,6 +371,7 @@
         var allCategoriesSize = '{!! $categorySize !!}';
         var dualListIds = [];
         var dualList;
+{{--        var rule_warning = "{{ trans('') }}";--}}
     </script>
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}

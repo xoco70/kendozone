@@ -1,5 +1,14 @@
 $(function () {
 
+    // $('#form1').submit(function() {
+    //     if (allCategoriesSize != 0){
+    //         return true;
+    //     }else{
+    //         confirm(rule_warning);
+    //         return false;
+    //     }
+    //
+    // });
     $('.fightDuration').timepicker(('option',
 
     {
