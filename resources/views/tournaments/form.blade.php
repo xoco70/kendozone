@@ -41,24 +41,36 @@
                         </div>
 
                     </div>
+
+
+                </div>
+
+<br/>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                data-original-title="{{trans('categories.rulesTooltip')}}"></i>
                             <br/>
-                            {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control', 'v-model'=> "ruleSelect"]) !!}
+                            {!!  Form::select('rule_id', $rules,$tournament->rule_id == null ? 0 : $tournament->rule_id, ['class' => 'form-control', 'id' => 'rules']) !!}
                         </div>
                     </div>
-
+                    <div class="col-md-9">
+                        <div class="alert alert-info alert-styled-left alert-arrow-left alert-component">
+                            <h6 class="alert-heading text-semibold">Preconfigurar las categorías con reglas</h6>
+                            Al seleccionar un modelo de competencia, el sistema creará y configurara de forma automatica las diferentes categorias de referencia
+                        </div>
+                    </div>
                 </div>
-                <div class="row" :disabled="ruleSelect!=1">
+
+                <div class="row">
                     <div class="col-md-12">
 
                         <p>{{trans('core.select_categories_to_register')}}</p>
 
                         <div class="form-group multiselect">
-                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple", "disabled"]) !!} <!-- Default 1st Dan-->
+                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
 
                     </div>
@@ -70,10 +82,12 @@
                         </span>
 
                     </div>
-                    <div class="col-md-6 mb-20 mt-20 pt-20" disabled="ruleSelect==1">
+                    <div class="col-md-6 mb-20 mt-20 pt-20">
                         {{--<button type="button" class="btn btn-primary"--}}
                         {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
-                        <a href="#" data-toggle="modal" data-target="#create_category" class="text-semibold text-black" @click="resetModalValues()">+ {{ trans('core.add_custom_category') }}</a>
+                        <a href="#" data-toggle="modal" data-target="#create_category"
+                           class="text-semibold text-black" @click="resetModalValues()">
+                        + {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
                 <div class=" text-right mt-15">

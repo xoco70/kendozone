@@ -1,10 +1,10 @@
 <?php
 return array(
     'rules' => [
-        '1' => '-',
-        '2' => 'Internation Kendo Federation (IKF)',
-        '3' => 'European Kendo Federation (EKF)',
-        '4' => 'LatinoAmerican Kendo Federation (LAKC)',
+        '0' => '-',
+        '1' => 'Internation Kendo Federation (IKF)',
+        '2' => 'European Kendo Federation (EKF)',
+        '3' => 'LatinoAmerican Kendo Federation (LAKC)',
     ],
     'hanteiLimit' => [
         '1' => '-',

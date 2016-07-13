@@ -169,10 +169,7 @@ class UserCest
         $I->fillField('password', '333333');
         $I->click("#login");
         $I->seeCurrentUrlEquals('/');
-
-
     }
-
 
 }
 

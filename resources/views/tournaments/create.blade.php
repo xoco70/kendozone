@@ -64,6 +64,17 @@ $day = $now->day;
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
             });
+
+            $('#rules').on('change', function() {
+                if (this.value == 0){
+                    $('select[name="category[]_helper1"]').prop('disabled', false);
+                    $('select[name="category[]_helper2"]').prop('disabled', false);
+                }else{
+                    $('select[name="category[]_helper1"]').prop('disabled', true);
+                    $('select[name="category[]_helper2"]').prop('disabled', true);
+
+                }
+            });
         });
     </script>
 @stop

@@ -42,6 +42,7 @@ class Tournament extends Model implements SluggableInterface
         'promoter',
         'host_organization',
         'technical_assistance',
+        'category',
         'rule_id',
         'type',
         'venue',
@@ -232,7 +233,7 @@ class Tournament extends Model implements SluggableInterface
 
     public function setAndConfigureCategories($ruleId)
     {
-        if ($ruleId == 1) return; // No Rules Selected
+        if ($ruleId == 0) return; // No Rules Selected
 
         $options = $this->loadRulesOptions($ruleId);
 
@@ -257,15 +258,15 @@ class Tournament extends Model implements SluggableInterface
     private function loadRulesOptions($ruleId)
     {
         switch ($ruleId) {
-            case 1: // No preset selected
+            case 0: // No preset selected
                 return null;
-            case 2:
+            case 1:
                 return $options = config('options.ikf_settings');
                 break;
-            case 3:
+            case 2:
                 return $options = config('options.ekf_settings');
                 break;
-            case 4:
+            case 3:
                 return $options = config('options.lakc_settings');
                 break;
             default:
