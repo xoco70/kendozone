@@ -50,7 +50,7 @@
                                                         {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3 col-md-offset-1">
                                                     <div class="checkbox-switch">
                                                         <label>
 
@@ -62,25 +62,13 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
                                                         <br/>
                                                         {!!  Form::select('level_id', $levels,null, ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        {!!  Form::label('rule_id', trans('core.rules'),['class' => 'text-bold' ]) !!}
-                                                        <i class="icon-help" data-popup="tooltip" title=""
-                                                           data-placement="right"
-                                                           data-original-title="{{trans('categories.rulesTooltip')}}"></i>
-                                                        <br/>
-                                                        {!!  Form::select('rule_id', $rules,$tournament->rule_id, ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-
                                             </div>
                                             <br/>
                                             <hr/>

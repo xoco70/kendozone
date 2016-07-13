@@ -74,7 +74,7 @@ $currency = Auth::user()->country->currency_code;
 
 
         @endif
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -111,7 +111,7 @@ $currency = Auth::user()->country->currency_code;
                 {!!  Form::select('roundRobinGroupSize', config('options.roundRobinGroupSize'), old('roundRobinGroupSize'),['class' => 'form-control',$disableRoundRobin]) !!}
             </div>
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-3 ">
             <div class="form-group">
                 {!!  Form::label('roundRobinWinner', trans('categories.roundRobinWinner')) !!}
                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -138,7 +138,7 @@ $currency = Auth::user()->country->currency_code;
                 </label>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -148,7 +148,7 @@ $currency = Auth::user()->country->currency_code;
                 <small class="display-block">{{ trans('categories.encho_infinite') }}</small>
             </div>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-3 col-md-offset-1">
             {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
