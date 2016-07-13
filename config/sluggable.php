@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Collection;
+
 return [
 
     /**
@@ -75,6 +77,11 @@ return [
      */
 
     'unique' => true,
+    'uniqueSuffix' => function ($slug, $separator, Collection $list) {
+        $size = count($list);
+
+        return chr($size + 96);
+    },
 
     /**
      * Should we include the trashed items when generating a unique slug?
@@ -83,7 +90,7 @@ return [
      * If set to "true", then uniqueness is enforced across trashed and existing models.
      */
 
-    'include_trashed' => false,
+    'include_trashed' => true,
 
     /**
      * Whether to update the slug value when a model is being
@@ -117,6 +124,6 @@ return [
      * and continue from there.
      */
 
-    'reserved' => null,
+    'reserved' => ['create','add','edit','update','store', 'delete'],
 
 ];

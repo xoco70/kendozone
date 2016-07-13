@@ -2,9 +2,14 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
 class TournamentRequest extends Request
 {
 
+//    public function __construct(\Illuminate\Http\Request $request){
+//        dd($request);
+//    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -22,13 +27,32 @@ class TournamentRequest extends Request
      */
     public function rules()
     {
+        // If the rules are defined, categories are no longer mandatory
+        if ($this->rule_id == 0) {
+            return [
+                'name' => 'required|min:6',
+                'dateIni' => 'required|date',
+                'dateFin' => 'required|date',
+                'category' => 'required',
+            ];
+        }
 
         return [
             'name' => 'required|min:6',
             'dateIni' => 'required|date',
             'dateFin' => 'required|date',
-            'category' => 'required', // Disabled for Phpunit
-
         ];
+
+    }
+
+    public function persist()
+    {
+        $tournament = Auth::user()->tournaments()->create($this->except('category'));
+        if ($this->rule_id == 0) {
+            $tournament->categories()->sync($this->input('category'));
+        } else {
+            $tournament->setAndConfigureCategories($this->rule_id);
+        }
+        return $tournament;
     }
 }
