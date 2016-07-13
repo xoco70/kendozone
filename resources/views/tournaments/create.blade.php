@@ -32,6 +32,10 @@ $day = $now->day;
     {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
     <script>
+        var ikf_categories = "{{ implode(',',$rulesCategories[0]) }}";
+        var ekf_categories = "{{ implode(',',$rulesCategories[1]) }}";
+        var lakc_categories = "{{ implode(',',$rulesCategories[2]) }}";
+
         var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false,
             infoTextEmpty: '',
@@ -81,6 +85,26 @@ $day = $now->day;
                 $('select[name="category[]_helper2"]').prop('disabled', false);
                 $('select[name="rule_id"]').prop('disabled', true);
             });
+
+            $('#rules').on('change', function () {
+                if (this.value == 0) {
+                    $('#categories_desc').text("");
+                }
+                else if (this.value == 1) {
+                    console.log(ikf_categories);
+                    $('#categories_desc').text(ikf_categories);
+                } else if (this.value == 2) {
+                    console.log(ekf_categories);
+                    $('#categories_desc').text(ekf_categories);
+                } else if (this.value == 3) {
+                    console.log(lakc_categories);
+                    $('#categories_desc').text(lakc_categories);
+                }
+            });
+
+
         });
+
+
     </script>
 @stop

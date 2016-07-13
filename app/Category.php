@@ -35,6 +35,40 @@ class Category extends Model
         'gradeMax',
     ];
 
+    public function getCategorieslabelByRule($ruleId = null)
+    {
+        //TODO Refactor Redundancy
+
+        $ikf_settings = null;
+        $ekf_settings = null;
+        $lakc_settings = null;
+
+        if ($ruleId == null) {
+            $ikf_settings = static::whereIn('id',array_keys(config('options.ikf_settings')))->select('alias')->get();
+            $ikf_settings = $multiplied = $ikf_settings->map(function ($item, $key) {
+                return $item->alias;
+            })->toArray();
+
+            $ekf_settings = static::whereIn('id',array_keys(config('options.ekf_settings')))->select('alias')->get();
+            $ekf_settings = $multiplied = $ekf_settings->map(function ($item, $key) {
+                return $item->alias;
+            })->toArray();
+
+            $lakc_settings = static::whereIn('id',array_keys(config('options.lakc_settings')))->select('alias')->get();
+            $lakc_settings = $multiplied = $lakc_settings->map(function ($item, $key) {
+                return $item->alias;
+            })->toArray();
+        } else {
+
+        }
+        $result = [$ikf_settings, $ekf_settings, $lakc_settings];
+        return $result;
+    }
+
+    public function getAliasString(){
+        return $this->alias;
+    }
+
     public function getNameAttribute($name)
     {
 

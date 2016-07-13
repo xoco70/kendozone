@@ -249,10 +249,10 @@ class Tournament extends Model implements SluggableInterface
 
     }
 
-    private function categoryModel($id)
-    {
-        return Category::findOrFail($id);
-    }
+//    private function categoryModel($id)
+//    {
+//        return Category::findOrFail($id);
+//    }
 
 
     private function loadRulesOptions($ruleId)

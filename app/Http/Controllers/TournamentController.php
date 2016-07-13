@@ -60,8 +60,8 @@ class TournamentController extends Controller
         $categories = Category::take(10)->orderBy('id', 'asc')->lists('name', 'id');
         $tournament = new Tournament();
         $rules = config('options.rules');
-
-        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules'));
+        $rulesCategories = (new Category)->getCategorieslabelByRule();
+        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules','rulesCategories'));
     }
 
     /**
@@ -155,30 +155,7 @@ class TournamentController extends Controller
                 : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
             return redirect(URL::action('TournamentController@edit', $tournament->slug));
         }
-
-
-//        }
-
     }
-
-
-////TODO is it used???
-//    /**
-//     * @param Request $request
-//     * @param $categorySettingsId
-//     * @return mixed
-//     */
-//    public function updateCategory(Request $request, $categorySettingsId)
-//    {
-//        $categorySettings = CategorySettings::findOrFail($categorySettingsId);
-//        if ($categorySettings->update($request->all())) {
-//            flash()->success(trans('msg.category_update_successful'));
-//        } else {
-//            flash()->error(trans('msg.category_update_error'));
-//        }
-//
-//        return view("tournaments/categories", compact('categories'));
-//    }
 
 
     /**

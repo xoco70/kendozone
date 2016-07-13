@@ -72,7 +72,9 @@
                     <div class="col-md-3 col-md-offset-2">
                         {!!  Form::select('rule_id', $rules,$tournament->rule_id == null ? 0 : $tournament->rule_id, ['class' => 'form-control', 'id' => 'rules']) !!}
                     </div>
-                </div>
+                    <div class="col-md-7">
+                        <small id="categories_desc"></small>
+                    </div>
                 <div class="row">
                     <div class="col-md-11 col-md-offset-1"><hr/></div>
                 </div>
