@@ -65,15 +65,21 @@ $day = $now->day;
                 dualListIds.push(this.value);
             });
 
-            $('#rules').on('change', function() {
-                if (this.value == 0){
-                    $('select[name="category[]_helper1"]').prop('disabled', false);
-                    $('select[name="category[]_helper2"]').prop('disabled', false);
-                }else{
-                    $('select[name="category[]_helper1"]').prop('disabled', true);
-                    $('select[name="category[]_helper2"]').prop('disabled', true);
 
-                }
+            $('select[name="category[]_helper1"]').prop('disabled', true);
+            $('select[name="category[]_helper2"]').prop('disabled', true);
+
+            $('#c1').on('click', function () {
+                $('select[name="category[]_helper1"]').prop('disabled', true);
+                $('select[name="category[]_helper2"]').prop('disabled', true);
+                $('select[name="rule_id"]').prop('disabled', false);
+
+            });
+
+            $('#c2').on('click', function () {
+                $('select[name="category[]_helper1"]').prop('disabled', false);
+                $('select[name="category[]_helper2"]').prop('disabled', false);
+                $('select[name="rule_id"]').prop('disabled', true);
             });
         });
     </script>
