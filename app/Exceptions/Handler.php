@@ -79,12 +79,13 @@ class Handler extends ExceptionHandler
                 break;
 
             case $e instanceof HttpException:
+                return parent::render($request, $e);
 
-                $code = "500";
-                $message = "Server Error";
-                $quote = "Failure is the key to success; each mistake teaches us something";
-                $author = "Morihei Ueshiba";
-                $source = "";
+//                $code = "500";
+//                $message = "Server Error";
+//                $quote = "Failure is the key to success; each mistake teaches us something";
+//                $author = "Morihei Ueshiba";
+//                $source = "";
 
                 break;
             case $e instanceof UnauthorizedException:
