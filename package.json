@@ -1,7 +1,8 @@
 {
   "private": true,
   "devDependencies": {
-    "gulp": "^3.8.8"
+    "gulp": "^3.8.8",
+    "vueify": "^8.5.4"
   },
   "dependencies": {
     "bootstrap-sass": "^3.0.0",
