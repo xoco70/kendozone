@@ -32,9 +32,9 @@ $day = $now->day;
     {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
     <script>
-        var ikf_categories = "{{ implode(',',$rulesCategories[0]) }}";
-        var ekf_categories = "{{ implode(',',$rulesCategories[1]) }}";
-        var lakc_categories = "{{ implode(',',$rulesCategories[2]) }}";
+        var ikf_categories = "{{ trans_choice('core.category',2) .": ". implode(', ',$rulesCategories[0]) }}";
+        var ekf_categories = "{{ trans_choice('core.category',2) .": ".implode(', ',$rulesCategories[1]) }}";
+        var lakc_categories = "{{ trans_choice('core.category',2) .": ".implode(', ',$rulesCategories[2]) }}";
 
         var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false,
