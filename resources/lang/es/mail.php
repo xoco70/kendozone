@@ -12,7 +12,7 @@ return [
     'signup_confirmation' => 'Confirmación de registro.',
     'tx_for_signup' => '¡Gracias por registrarte!',
     'activation_account' => 'Activación de tu cuenta',
-    'please_click_link_to_confirm_account' => 'Activa tu cuenta dando click en el link siguiente;',
+    'please_click_link_to_confirm_account' => 'Activa tu cuenta dando click en el link siguiente:',
 
 
 

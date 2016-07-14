@@ -48,18 +48,39 @@ return [
 
     'category_create_error' => 'Oooops! Category creation error',
     'category_update_error' => 'Oooops! Category update error',
-    'category_delete_error' => 'Category deletion error :name',
+    'category_delete_error' => 'Error deleting category :name',
 
 
     //Invitation
 
     'invitation_needed' => 'You need an invitation to register to this tournament.',
-    'invitation_expired' => 'Invitation expired.',
+    'invitation_expired' => 'Registration date is due or invitation expired.',
     'invitation_used' => 'Invitation already used',
     'invitation_sent' => 'Invitation has been sent',
     'tx_for_register_tournament' => 'Thanks for register tournament :tournament',
     // Permisos
     'access_denied' => 'Access Denied',
+
+
+    // Federation
+    'federation_edit_successful' => 'Federation <br/><b>:name</b><br/> updated',
+
+
+    //Association
+    'association_create_successful' => 'Association <br/><b>:name</b><br/> created',
+    'association_edit_successful' => 'Association <br/><b>:name</b><br/> updated',
+    'association_delete_successful' => 'Association <br/><b>:name</b><br/> deleted',
+    'association_delete_error' => 'Error deleting Association',
+    'association_restored_successful' => 'Association <br/><b>:name</b><br/> restored',
+    'association_restored_error' => 'Error restoring Association',
+
+    //Club
+    'club_create_successful' => 'Club <br/><b>:name</b><br/> created',
+    'club_edit_successful' => 'Club <br/><b>:name</b><br/> updated',
+    'club_delete_successful' => 'Club <br/><b>:name</b><br/> deleted',
+    'club_delete_error' => 'Error deleting club',
+    'club_restored_successful' => 'Club <br/><b>:name</b><br/> restored',
+    'club_restored_error' => 'Error restoring club',
 
 
 

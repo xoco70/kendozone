@@ -15,8 +15,8 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'password_confirmation' => 'Password Confirmation',
 
+    'grade' => 'Grade',
     
     'signin' => 'Sign in',
     'signup' => 'Sign up',
@@ -30,6 +30,7 @@ return [
     'email_tip' => 'Please enter your email adress',
     'password' => 'Password',
     'password_tip' => 'Password must have at least 6 characters length',
+    'password_confirmation' => 'Password ( Confirmation )',
     'password_confirmation2' => 'Confirm your password',
     'choose_username' => 'Choose your username',
     'create_password' => 'Create your password',

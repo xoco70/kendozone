@@ -41,8 +41,9 @@ return [
     'limitDate' => 'Fecha límite',
     'general_data' => 'Datos generales',
     'level' => 'Nivel',
+
     'settings' => 'Parámetros',
-    'pay4register' => '¿Pago para registrarse?',
+
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
     'tournamentType' => 'Tipo de torneo',
@@ -152,10 +153,6 @@ return [
 
     // Dashboard
 
-    'controlpanel' => 'Configuración',
-    'myaccount' => 'Mi Cuenta',
-    'groups' => 'Grupos de usuarios',
-    'blastmail' => 'Correo Masivo',
     'logs' => 'Logs',
     'dashboard' => 'Panel de control',
     'logout' => 'Desconectar',
@@ -244,12 +241,12 @@ return [
 
 
     // Associations
-    'association' => 'Associación|Associaciones',
+    'association' => 'Asociación|Asociaciones',
     'association.president' => 'Presidente',
     'association.address' => 'Dirección',
     'association.phone' => 'Teléfono',
     'association.no_user_in_this_country' => 'No hay usuarios registrados en este país',
-    'association.add' => 'Agregar Associación',
+    'association.add' => 'Agregar Asociación',
     'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
     'add_new_association' => 'Agregar una nueva asociación',
 

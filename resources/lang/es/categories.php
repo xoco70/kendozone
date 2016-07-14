@@ -56,12 +56,9 @@ return [
     'first_force' => 'Primera Fuerza',
     'second_force' => 'Segunda Fuerza',
     'cost' => 'Costo',
-//    'single' => 'Individual',
-//    'single' => 'Individual',
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorías',
-    'teamSizeMin' => 'Tamaño minimo del equipo',
     'teamSize' => 'Tamaño del equipo',
     'teamSizeReserve' => 'Reservas',
     'fightingAreas' => 'Áreas',
@@ -89,12 +86,11 @@ return [
     'enchoQtyTooltip' => 'Hasta cuantos enchos habrá despues de un empate?',
     'enchoDurationTooltip' => 'Cuanto dura cada encho',
     'hasHanteiTooltip' => '¿Se usará hantei?',
-    'isTeamTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'hanteilimitTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'aliasTooltip' => 'Eliga un nombre personalizado para la categoría ( Opcional )',
     'roundRobinGroupSizeTooltip' => 'Cantidad de competidores por grupo',
     'enchoTimeLimitlessTooltip' => 'Nivel de la competencia en donde el encho ya no tiene tiempo límite (0 para todos)',
-    'limitByEntityTooltip' => 'Cantidad de competidor autorizados por entidad',
+    'limitByEntityTooltip' => 'Cantidad de competidor autorizados por entidad ( Federación, Asociación, ',
     'rulesTooltip' => 'Crea y se configura de forma automatica las categorías según el modelo de reglas elegido',
 
 ];

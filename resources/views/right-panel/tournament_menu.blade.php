@@ -29,7 +29,7 @@
                                             class=" icon icon-checkmark2"></i></span>
                             </a></li>
                         <li><a href="#">
-                                <i class="icon-cog2"></i>{{trans_choice('core.category',2)}}
+                                <i class="icon-cog2"></i>{{trans_choice('categories.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)
                                     $class = "badge-success";

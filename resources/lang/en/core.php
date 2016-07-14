@@ -39,18 +39,12 @@ return [
     'eventDate' => 'Event date',
     'account' => 'Account',
     'limitDateRegistration' => 'Deadline Registration Date',
-    'teamSize' => 'Team Size',
-    'fightingAreas' => 'Num of Areas',
-    'fightDuration' =>'Duration',
-    'hasRoundRobin' => 'Round Robin',
-    'roundRobinWinner' => 'Winner x Round Robin',
-    'hasEncho' => 'Encho?',
-    'hasHantei' => 'Hantei?',
+    'limitDate' => 'Limite Date',
     'general_data' => 'General Data',
     'level' => 'Level',
-    'cost' => 'Cost',
-    'settings' => 'Parameters',
-    'pay4register' => 'Must pay to compete?',
+
+    'settings' => 'Settings',
+
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
     'tournamentType' => 'Tournament Type',
@@ -70,44 +64,13 @@ return [
     'to' => 'To',
     'competitors_register' => 'Competitors registration',
     'configure' => 'Configure',
-    'add_custom_category' => 'Add custom category',
-
-
-    // Categories
-    'category' => 'Category|Categories',
-    'enchoQty' => 'How much Enchos?',
-    'encho_infinite' => '0 for infinite',
-    'enchoDuration' => '¿How long lasts each Encho?',
-    'category_not_configured' => 'Category isn\'t configured yet',
-    'add_category' => 'Add Category',
-    'gender' => 'Gender',
-    'male' => 'Men',
-    'female' => 'Ladies',
-    'mixt' => 'Mixed',
-    'ageCategory' => 'Age Category',
-    'no_age_restriction' => 'No age limit',
-    'children' => 'Children',
-    'students' => 'Students',
-    'adults' => 'Adults',
-    'masters' => 'Masters',
-    'custom' => 'Custom',
-    'years' => 'years',
-    'age' => 'Age',
-    'min_age' => 'Min Age',
-    'max_age' => 'Max Age',
-    'min_grade' => 'Min Grade',
-    'max_grade' => 'Max Grade',
-    'no_grade_restriction' => 'No grade limit',
-    'add_and_close' => 'Add',
-    'add_and_new' => 'Add and New',
-    'first_force' => 'First Force ( >1Dan )',
-    'second_force' => 'Second Force ( <1Dan)',
-
-
-    // CategorySetting
-    'categorySettings' => 'Categories Settings',
-    'isTeam' => 'Team',
-    'single' => 'Single',
+    
+    'configured' => 'Configured',
+    'add_custom_category' => 'Add a category',
+    'rules' => 'Rules',
+    'promoter' => 'Promoter',
+    'host_organization' => 'Host Organization',
+    'technical_assistance' => 'Technical Assistencie',
 
 
     // Places
@@ -182,23 +145,16 @@ return [
     'organizer' => 'Organizer',
     'select_categories_to_register' => 'Select categories to register',
 
-//    'tournament_categories_available' => 'Categorias del torneo',
-
-
-
     // Messages
     'all_categories_not_configured' => 'All categories must be configured first.',
 
 
     // Share
     'share' => 'Share',
+    'share_link' => 'Share link',
 
     // Dashboard
 
-//    'controlpanel' => 'Configuración',
-//    'myaccount' => 'Mi Cuenta',
-//    'groups' => 'Grupos de usuarios',
-//    'blastmail' => 'Correo Másivo',
     'logs' => 'Logs',
     'dashboard' => 'Dashboard',
     'logout' => 'Logout',
@@ -243,9 +199,8 @@ return [
     'still_no_tournament' => 'Still not registered in any tournaments',
     'create_new_tournament' => 'Create new Tournament',
     'congigure_categories' => 'Setup Categories',
-//    'see_open_tournaments' => 'Ver torneos abiertos',
+    'see_open_tournaments' => 'See Open Tournaments',
     'soon' => 'Soon',
-    'configured' => 'conf.',
     'configured_full' => 'configured',
     'see_all' => 'See all',
     'no_tournament_created_yet' => 'You have not registered to any tournament yet',
@@ -261,10 +216,53 @@ return [
     'past' => 'Past',
     'next' => 'Next',
 
+
+    // Logs
+
+    'object_type' => 'Object',
+    'operation_type' => 'Operation',
+    'object_id' => 'Object Id',
+    'created_at' => 'Created',
+    'updated_at' => 'Updated',
+
+
     // Teams
 
     'team' => 'Team|Teams',
 
+    // Federations
+    'federation' => 'Federation|Federations',
+    'federation.president' => 'President',
+    'federation.vicepresident' => 'Vice President',
+    'federation.secretary' => 'Secretary',
+    'federation.treasurer' => 'Tesorary',
+    'federation.admin' => 'Administrator',
+    'federation.address' => 'Address',
+    'federation.phone' => 'Phone',
+    'federation.no_user_in_this_country' => 'No user registered in this country',
 
+
+    // Associations
+    'association' => 'Association|Associations',
+    'association.president' => 'President',
+    'association.address' => 'Address',
+    'association.phone' => 'Phone',
+    'association.no_user_in_this_country' => 'No user registered in this country',
+    'association.add' => 'Add Association',
+    'no_association_yet' => 'Still not any associations in this federation',
+    'add_new_association' => 'Add a new association',
+
+    // Clubs
+    'club' => 'Club|Clubs',
+    'club.president' => 'President',
+    'club.address' => 'Address',
+    'club.phone' => 'Phone',
+    'club.no_user_in_this_country' => 'No user registered in this country',
+
+
+    'where_do_you_practice' => '¿Where do you train?',
+    'select_field' => 'Select an option',
+    'no_association_available' => 'No associations in this federation',
+    'no_club_available' => 'No clubs in this association',
 
 ];
