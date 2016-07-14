@@ -46,17 +46,17 @@ class Category extends Model
         if ($ruleId == null) {
             $ikf_settings = static::whereIn('id',array_keys(config('options.ikf_settings')))->select('name')->get();
             $ikf_settings = $multiplied = $ikf_settings->map(function ($item, $key) {
-                return $item->alias;
+                return $item->name;
             })->toArray();
 
             $ekf_settings = static::whereIn('id',array_keys(config('options.ekf_settings')))->select('name')->get();
             $ekf_settings = $multiplied = $ekf_settings->map(function ($item, $key) {
-                return $item->alias;
+                return $item->name;
             })->toArray();
 
             $lakc_settings = static::whereIn('id',array_keys(config('options.lakc_settings')))->select('name')->get();
             $lakc_settings = $multiplied = $lakc_settings->map(function ($item, $key) {
-                return $item->alias;
+                return $item->name;
             })->toArray();
         } else {
 
