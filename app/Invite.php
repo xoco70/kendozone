@@ -39,14 +39,13 @@ class Invite extends Model
      */
     public function generateTournamentInvite($email, $tournament)
     {
-
         if ($tournament->isOpen()) {
             $token = "open";
         } else {
             $token = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
         }
 
-        $invite = Invite::firstOrNew(['email' => $email, 'object_id' => $tournament->id]);
+        $invite = Invite::firstOrNew(['email' => $email, 'object_type' => 'App\Tournament', 'object_id' => $tournament->id]);
         $invite->code = $token;
         $invite->email = $email;
         $invite->object_type = 'App\Tournament';
@@ -59,7 +58,6 @@ class Invite extends Model
             return $token;
         else
             return null;
-
     }
 
 
