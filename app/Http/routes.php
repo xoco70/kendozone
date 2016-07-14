@@ -26,8 +26,8 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'InviteController@registerTournamentInvite');
-Route::post('tournaments/{tournament}/invite/{invite}/categories', 'InviteController@registerCategories');
+Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'CategoryTournamentController@create');
+Route::post('tournaments/{tournament}/invite/{invite}/categories', 'CategoryTournamentController@store');
 
 Route::get('lang/{lang}', 'LanguageController@update');
 
@@ -87,7 +87,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
         Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController', ['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
-        Route::get('tournaments/{tournament}/invite', 'InviteController@inviteUsers');
+        Route::get('tournaments/{tournament}/invite', 'InviteController@create');
 //        Route::resource('settings', 'SettingsController');
 
         //Restoring

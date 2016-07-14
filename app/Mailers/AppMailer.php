@@ -69,7 +69,7 @@ class AppMailer
     public function sendEmailInvitationTo($email, $tournament, $code, $category = null, $password = null)
     {
         $this->to = $email;
-        $this->subject = trans('email.invite_to_tournament') . $tournament->name;
+        $this->subject = trans('mail.invite_to_tournament') .": ". $tournament->name;
         $this->view = 'emails.invite';
         $this->data = compact('tournament', 'code', 'category', 'email', 'password');
         $this->deliver();

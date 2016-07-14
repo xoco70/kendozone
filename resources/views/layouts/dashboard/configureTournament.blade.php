@@ -37,7 +37,7 @@
             <div class="btn error btn-rounded btn-flat dash mr-20">
                 <span class="letter-icon">3</span>
             </div>
-            <a href="{!! URL::action('InviteController@inviteUsers', $tournament->slug) !!}">{{ trans('core.invite_competitors') }}</a>
+            <a href="{!! URL::action('InviteController@create', $tournament->slug) !!}">{{ trans('core.invite_competitors') }}</a>
         </div>
     </div>
 

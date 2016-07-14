@@ -30,7 +30,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
     </ul>
 @else
     {{trans('mail.please_clic_confirmation_link')}}: <br/>
-    <a href='{{ URL::action('InviteController@registerTournamentInvite', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}'>{{ URL::action('InviteController@registerTournamentInvite', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}</a>
+    <a href='{{ URL::action('CategoryTournamentController@create', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}'>{{ URL::action('CategoryTournamentController@create', ['tournamentSlug' => $tournament->slug, 'token' => $code] ) }}</a>
 @endif
 
 @if($password!=null)

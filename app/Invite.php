@@ -26,7 +26,8 @@ class Invite extends Model
         return $this->morphTo();
     }
 
-    public function tournament(){
+    public function tournament()
+    {
         return $this->belongsTo('App\Tournament');
     }
 
@@ -39,10 +40,14 @@ class Invite extends Model
     public function generateTournamentInvite($email, $tournament)
     {
 
-        $code = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
+        if ($tournament->isOpen()) {
+            $token = "open";
+        } else {
+            $token = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
+        }
 
         $invite = Invite::firstOrNew(['email' => $email, 'object_id' => $tournament->id]);
-        $invite->code = $code;
+        $invite->code = $token;
         $invite->email = $email;
         $invite->object_type = 'App\Tournament';
         $invite->object_id = $tournament->id;
@@ -51,7 +56,7 @@ class Invite extends Model
 //        $invite->used = false;
 
         if ($invite->save())
-            return $code;
+            return $token;
         else
             return null;
 
@@ -64,11 +69,12 @@ class Invite extends Model
 
         $this->update(['used' => 1]);
     }
+
     public static function getActiveTournamentInvite($token)
     {
         $invite = self::where('code', $token)
             ->where('active', 1)
-            ->where('object_type',"App\Tournament")
+            ->where('object_type', "App\Tournament")
 //            ->where('used', 0)
             ->first();
         return $invite;

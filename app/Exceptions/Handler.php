@@ -102,6 +102,15 @@ class Handler extends ExceptionHandler
                 $author = "Admin";
                 $source = "";
                 break;
+
+            case $e instanceof InvitationExpiredException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = trans('msg.invitation_expired');
+                $author = "Admin";
+                $source = "";
+                break;
+
             case $e instanceof NotOwningFederationException:
                 $code = "403";
                 $message = trans('core.forbidden');

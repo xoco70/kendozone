@@ -13,10 +13,10 @@ $i = 0;
 
             <h2 align="center">{{ $tournament->name }}</h2>
             @if (isset($invite))
-                {!! Form::open(['url'=> URL::action('InviteController@registerCategories',
+                {!! Form::open(['url'=> URL::action('CategoryTournamentController@store',
                     ['tournament' => $tournament->slug,'invite' => $invite->id] )]) !!}
             @else
-                {!! Form::open(['url'=> URL::action('InviteController@registerCategories',
+                {!! Form::open(['url'=> URL::action('CategoryTournamentController@store',
                     ['tournament' => $tournament->slug,'invite' => 0] )]) !!}
 
             @endif

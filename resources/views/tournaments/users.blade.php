@@ -29,7 +29,7 @@
                                    class="btn btn-primary btn-xs pull-right open-modal"
                                    data-id="{!! $categoryTournament->id !!}"
                                    data-name="{!! $categoryTournament->category->buildName($grades) !!}"><b><i
-                                                class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
+                                                class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
                             @endcan
 

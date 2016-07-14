@@ -54,7 +54,7 @@ return [
     //Invitation
 
     'invitation_needed' => 'Necesitas una invitaci&oacute;n para registarte en este torneo.',
-    'invitation_expired' => 'La invitaci&oacute;n ha expirado.',
+    'invitation_expired' => 'Ya pasó la fecha limite de registro al torneo, o tu invitaci&oacute;n ha expirado.',
     'invitation_used' => 'La invitaci&oacute;n ya ha sido usada',
     'invitation_sent' => 'La invitaci&oacute;n ha sido enviada',
     'tx_for_register_tournament' => 'Gracias por registrarte al torneo :tournament',

@@ -21,7 +21,7 @@ return [
     // Invitation
 
     'invite' => 'Invitación',
-    'invite_to_tournament' => 'Invitación al torneo:',
+    'invite_to_tournament' => 'Invitación al torneo',
     'dear_kenshi' => 'Estimado Kenshi,',
     'you_are_invited_to_tournament' => 'Estás invitado al torneo',
     'you_have_been_preregistered' => 'Has sido preregistrado en las categorías',
