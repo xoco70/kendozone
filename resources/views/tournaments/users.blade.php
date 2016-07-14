@@ -44,7 +44,7 @@
                                         data-hide="phone">{{ trans('core.avatar') }}</th>
                                     <th class="all">{{ trans('core.username') }}</th>
                                     <th class="phone">{{ trans('core.email') }}</th>
-                                    <th align="center" class="phone">{{ trans_choice('core.category',1) }}</th>
+                                    <th align="center" class="phone">{{ trans_choice('categories.category',1) }}</th>
                                     <th align="center" class="phone">{{ trans('core.confirmed') }}</th>
                                     <th class="phone">{{ trans('core.country') }}</th>
                                     @can('edit',$tournament)
@@ -65,7 +65,7 @@
                                                         src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
-                                            @can('edit',$tournament)
+                                            @can('edit',$user)
                                                 <a href="{!!   URL::action('UserController@edit',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>
                                             @else
                                                 <a href="{!!   URL::action('UserController@show',  ['users'=>$user->slug] ) !!}">{{ $user->name }}</a>

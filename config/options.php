@@ -26,23 +26,28 @@ return array(
     'teamReserve' => [1, 2, 3, 4],
     'limitByEntity' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 
-// 1 = Junior, 2 = Junior Team, 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team, 7 = Master
+// 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team
     'ikf_settings' => [
-        '1' => [ // Junior
-            'fightDuration' => '04:00',
+        '3' => [
+            'fightingAreas' => '4',
+            'fightDuration' => '05:00',
             'hasRoundRobin' => '1',
             'roundRobinGroupSize' => '3',
-            'roundRobinDuration' => '4',
+            'roundRobinDuration' => '05:00',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoQty' => '1',
+            'enchoDuration' => '0',
+            'hasHantei' => '0',
+            'hanteiLimit' => '0', // 1/2 Finals
+            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '4',
+            'cost' => '',
+            'seedQuantity' => '4',
+
         ],
-        '2' => [ /// Junior Team
+        '4' => [
+            'fightingAreas' => '4',
             'teamSize' => '3',
             'teamReserve' => '2',
             'fightDuration' => '04:00',
@@ -50,58 +55,54 @@ return array(
             'roundRobinGroupSize' => '3',
             'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
-            'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
-            'limitByEntity' => '4',
+            'hasEncho' => '0',
+            'enchoQty' => '0',
+            'enchoDuration' => '0',
+            'hasHantei' => '0',
+            'hanteiLimit' => '0', // 1/2 Finals
+            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'limitByEntity' => '1',
+            'cost' => '',
+            'seedQuantity' => '4',
+
         ],
-        '3' => [ // Men Individual
+        '5' => [
+            'fightingAreas' => '4',
             'fightDuration' => '04:00',
             'hasRoundRobin' => '1',
             'roundRobinGroupSize' => '3',
             'roundRobinDuration' => '4',
             'roundRobinWinner' => '1',
             'hasEncho' => '1',
-            'enchoQty' => '10',
-            'enchoDuration' => '03:00',
-            'hasHantei' => '1',
-            'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoQty' => '0',
+            'enchoDuration' => '0',
+            'hasHantei' => '0',
+            'hanteiLimit' => '0', // 1/2 Finals
+            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '4',
-            '4' => [ // Men Teams
-                'teamSize' => '5',
-                'fightDuration' => '04:00',
-                'hasRoundRobin' => '1',
-                'roundRobinGroupSize' => '3',
-                'roundRobinDuration' => '4',
-                'roundRobinWinner' => '1',
-                'hasEncho' => '1',
-                'enchoQty' => '10',
-                'enchoDuration' => '03:00',
-                'hasHantei' => '1',
-                'hanteiLimit' => '3', // 1/2 Finals
-                'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
-                'limitByEntity' => '4',
-            ],
-            '6' => [ // Ladies Team
-                'teamSize' => '',
-                'teamReserve' => '2',
-                'fightDuration' => '04:00',
-                'hasRoundRobin' => '1',
-                'roundRobinGroupSize' => '3',
-                'roundRobinDuration' => '4',
-                'roundRobinWinner' => '1',
-                'hasEncho' => '1',
-                'enchoQty' => '10',
-                'enchoDuration' => '03:00',
-                'hasHantei' => '1',
-                'hanteiLimit' => '3', // 1/2 Finals
-                'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
-                'limitByEntity' => '4',
-            ],
+            'cost' => '',
+            'seedQuantity' => '4',
+
+        ],
+        '6' => [
+            'fightingAreas' => '4',
+            'teamSize' => '5',
+            'teamReserve' => '2',
+            'fightDuration' => '04:00',
+            'hasRoundRobin' => '1',
+            'roundRobinGroupSize' => '3',
+            'roundRobinDuration' => '4',
+            'roundRobinWinner' => '1',
+            'hasEncho' => '0',
+            'enchoQty' => '0',
+            'enchoDuration' => '0',
+            'hasHantei' => '0',
+            'hanteiLimit' => '0', // 1/2 Finals
+            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'limitByEntity' => '1',
+            'cost' => '',
+            'seedQuantity' => '4',
+
         ],
     ],
 

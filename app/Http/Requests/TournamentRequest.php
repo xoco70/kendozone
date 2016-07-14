@@ -47,7 +47,7 @@ class TournamentRequest extends Request
 
     public function persist()
     {
-        $tournament = Auth::user()->tournaments()->create($this->except('category'));
+        $tournament = Auth::user()->tournaments()->create($this->except('category','config'));
         if ($this->rule_id == 0) {
             $tournament->categories()->sync($this->input('category'));
         } else {

@@ -72,7 +72,6 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $form)
     {
-
         $tournament = $form->persist();
         $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
         flash()->success($msg);

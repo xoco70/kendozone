@@ -68,10 +68,6 @@ $(function () {
     });
 
 
-    $('input[name="isTeam"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
-        $(this).closest('form').find('[name="teamSize"]').prop('disabled', !isChecked);
-    });
     $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);

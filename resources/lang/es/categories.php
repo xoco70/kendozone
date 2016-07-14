@@ -90,7 +90,7 @@ return [
     'aliasTooltip' => 'Eliga un nombre personalizado para la categoría ( Opcional )',
     'roundRobinGroupSizeTooltip' => 'Cantidad de competidores por grupo',
     'enchoTimeLimitlessTooltip' => 'Nivel de la competencia en donde el encho ya no tiene tiempo límite (0 para todos)',
-    'limitByEntityTooltip' => 'Cantidad de competidor autorizados por entidad ( Federación, Asociación, ',
+    'limitByEntityTooltip' => 'Cantidad de competidor que se pueden registrar',
     'rulesTooltip' => 'Crea y se configura de forma automatica las categorías según el modelo de reglas elegido',
 
 ];

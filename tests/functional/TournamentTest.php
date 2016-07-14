@@ -63,7 +63,7 @@ class TournamentTest extends TestCase
     }
 
     /** @test */
-    public function it_create_tournament()
+    public function it_create_tournament_manually()
     {
         $this->visit('/')
             ->click(trans('core.createTournament'))
@@ -83,8 +83,35 @@ class TournamentTest extends TestCase
             $this->assertContains($item->category_id, $categoriesAdded);
 
         }
+    }
+
+    /** @test */
+    public function it_create_tournament_with_rules()
+    {
+        $this->visit('/')
+            ->click(trans('core.createTournament'))
+            ->type('MyTournament', 'name')
+            ->type('2015-12-12', 'dateIni')
+            ->type('2015-12-12', 'dateFin')
+            ->select(1, 'rule_id')
+            ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
+//            ->see(trans('msg.tournament_create_successful', ['name' => 'MyTournament']))
+            ->seeInDatabase('tournament', ['name' => 'MyTournament']);
+
+        $categoriesAdded = array_keys(config('options.ikf_settings'));
+        // See categories is added
+        $tournament = Tournament::where("name", "MyTournament")->first();
+        $categories = DB::table("category_tournament")->where("tournament_id", '=', $tournament->id)->get();
+        foreach ($categories as $item) {
+            $this->assertContains($item->category_id, $categoriesAdded);
+            // Check that all categories is configured
+        }
+
+
 
     }
+
+
 
     public function storeInput($element, $text, $force = false)
     {
@@ -256,39 +283,8 @@ class TournamentTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_create_tournament_with_rules()
-    {
-        $this->visit('/tournaments/create')
-            ->type('My Tournament', 'name')
-            ->type('2015-12-13', 'dateIni')
-            ->type('2015-12-13', 'dateFin')
-            ->type('3', 'rule_id')
-            ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
-            ->seeInDatabase('tournament', ['name' => 'My Tournament']);
 
-        $categoriesAdded = [1, 2, 3, 4, 5, 6];
-        // See categories is added
-        $tournament = Tournament::where("name", "My Tournament")->first();
-        $categories = DB::table("category_tournament")->where("tournament_id", '=', $tournament->id)->get();
-        foreach ($categories as $item) {
-            $this->assertContains($item->category_id, $categoriesAdded);
-            // Check that all categories are configured
-
-        }
-
-    }
-
-
-    /** @test */
-    public
-    function it_edit_tournament_with_rules()
-    {
-
-    }
-
-    public
-    function setTournamentRules(Tournament $tournament, $ruleId)
+    public  function setTournamentRules(Tournament $tournament, $ruleId)
     {
 
 

@@ -71,7 +71,7 @@ return [
     'alias' => 'Alias',
     'roundRobinGroupSize' => 'Group size',
     'enchoTimeLimitless' => 'Till Death...',
-    'limitByEntity' => 'Competitor Limit',
+    'limitByEntity' => 'Expected Competitors',
 
 
 
@@ -89,7 +89,7 @@ return [
     'aliasTooltip' => 'Choose a custom name for the category ( optional )',
     'roundRobinGroupSizeTooltip' => 'How much competitor should a Round Robin Group have?',
     'enchoTimeLimitlessTooltip' => 'Until what level do you want that Encho has no more time limit? (0 for all)',
-    'limitByEntityTooltip' => 'How much competidor is allowed by entity ( Federation, Association, Club, etc.)',
+    'limitByEntityTooltip' => 'Expected number of the competitors who will be registered for each Championship',
     'rulesTooltip' => 'Create and configure automatically category according to the rules model you chose',
 
 ];
