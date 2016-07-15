@@ -101,16 +101,18 @@ class TournamentTest extends TestCase
         $categoriesAdded = array_keys(config('options.ikf_settings'));
         // See categories is added
         $tournament = Tournament::where("name", "MyTournament")->first();
-        $categories = DB::table("category_tournament")->where("tournament_id", '=', $tournament->id)->get();
-        foreach ($categories as $item) {
-            $this->assertContains($item->category_id, $categoriesAdded);
-            // Check that all categories is configured
+        $categories = CategoryTournament::where("tournament_id", '=', $tournament->id)->get();
+        foreach ($categories as $ct) {
+            $this->assertContains($ct->category_id, $categoriesAdded);
+            //TODO We could check the content of the setting
+            $this->seeInDatabase('category_settings',
+                ['category_tournament_id' => $ct->id,
+                ]);
+
         }
 
 
-
     }
-
 
 
     public function storeInput($element, $text, $force = false)
@@ -284,7 +286,7 @@ class TournamentTest extends TestCase
     }
 
 
-    public  function setTournamentRules(Tournament $tournament, $ruleId)
+    public function setTournamentRules(Tournament $tournament, $ruleId)
     {
 
 
