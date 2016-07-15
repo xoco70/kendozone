@@ -27,14 +27,14 @@ $day = $now->day;
 ?>
 
 @section('scripts_footer')
-    {!! Html::script('js/pages/header/tournamentCreate.js') !!}
-    {!! Html::script('js/categoryCreate.js') !!}
-    {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
+{!! Html::script('js/pages/header/tournamentCreate.js') !!}
+{!! Html::script('js/categoryCreate.js') !!}
+{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
-    <script>
-        var ikf_categories = "{{ trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) }}";
-        var ekf_categories = "{{ trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) }}";
-        var lakc_categories = "{{ trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) }}";
+<script>
+        var ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
+        var ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
+        var lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
 
         var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false,
