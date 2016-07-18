@@ -66,8 +66,6 @@ class UserCest
 //        $I->attachFile('input[type="file"]',  'avatar2.png'); // TODO Aqui podria simular Dropzone de verdad
         $I->click("#save1");
 
-//        $I->seeInCurrentUrl('/users');
-//        $I->seeInSource(trans('msg.user_create_successful'));
         $I->seeInDatabase('ken_users',
             ['name' => $this->user->name,
                 'email' => $this->user->email,
@@ -144,7 +142,8 @@ class UserCest
             ]);
 
 
-        User::where('email', $this->user->email)->delete();
+        $this->user->delete();
+
 
     }
 
@@ -169,6 +168,8 @@ class UserCest
         $I->fillField('password', '333333');
         $I->click("#login");
         $I->seeCurrentUrlEquals('/');
+        $this->user->delete();
+
     }
 
 }
