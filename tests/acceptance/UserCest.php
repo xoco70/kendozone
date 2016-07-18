@@ -87,7 +87,8 @@ class UserCest
     public function it_edit_user(\AcceptanceTester $I, $scenario)
     {
         App::setLocale('es');
-        $this->user = factory(User::class)->create();
+        $this->user = factory(User::class)->make();
+        $I->haveInDatabase('user', $this->user);
         $I = new SimpleUser($scenario);
         $I->logAsUser();
 
