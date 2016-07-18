@@ -79,7 +79,7 @@ class UserCest
             ]);
 
         $this->user->delete();
-
+        User::where('email', $this->user->email)->delete();
 
     }
 
@@ -87,29 +87,7 @@ class UserCest
     public function it_edit_user(\AcceptanceTester $I, $scenario)
     {
         App::setLocale('es');
-        $this->user = factory(User::class)->make();
-        $I->haveInDatabase('user',[
-            'name' => $this->user->name,
-            'slug' => str_slug($this->user->email),
-            'firstname' => $this->user->firstName,
-            'lastname' => $this->user->lastName,
-            'email' => $this->user->email,
-            'password' => $this->user->password,
-            'grade_id' => $this->user->grade_id,
-            'country_id' => $this->user->country_id,
-//        'federation_id' => $this->user->randomElement($federations),
-//        'association_id' => $this->user->randomElement($associations),
-//        'club_id' => $this->user->randomElement($clubs),
-            'city' => $this->user->city,
-            'latitude' => $this->user->latitude,
-            'longitude' => $this->user->longitude,
-            'role_id' => $this->user->role_id,
-            'verified' => true,
-            'remember_token' => $this->user->remember_token,
-            'provider' => '',
-            'provider_id' => $this->user->provider_id,
-            'locale' => $this->user->locale
-        ]);
+        $this->user = factory(User::class)->create();
         $I = new SimpleUser($scenario);
         $I->logAsUser();
 
@@ -164,37 +142,14 @@ class UserCest
             ]);
 
 
-        $this->user->delete();
-
+        User::where('email', $this->user->email)->delete();
 
     }
 
     // test
     public function you_can_change_your_password_and_login_with_new_data(\AcceptanceTester $I, $scenario)
     {
-        $this->user = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $I->haveInDatabase('user',[
-            'name' => $this->user->name,
-            'slug' => str_slug($this->user->email),
-            'firstname' => $this->user->firstName,
-            'lastname' => $this->user->lastName,
-            'email' => $this->user->email,
-            'password' => $this->user->password,
-            'grade_id' => $this->user->grade_id,
-            'country_id' => $this->user->country_id,
-//        'federation_id' => $this->user->randomElement($federations),
-//        'association_id' => $this->user->randomElement($associations),
-//        'club_id' => $this->user->randomElement($clubs),
-            'city' => $this->user->city,
-            'latitude' => $this->user->latitude,
-            'longitude' => $this->user->longitude,
-            'role_id' => $this->user->role_id,
-            'verified' => true,
-            'remember_token' => $this->user->remember_token,
-            'provider' => '',
-            'provider_id' => $this->user->provider_id,
-            'locale' => $this->user->locale
-        ]);
+        $this->user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $I = new SuperAdmin($scenario);
         $I->logAsSuperAdmin();
         $I->amOnPage("/users/" . $this->user->slug . "/edit/");
@@ -212,8 +167,7 @@ class UserCest
         $I->fillField('password', '333333');
         $I->click("#login");
         $I->seeCurrentUrlEquals('/');
-        $this->user->delete();
-
+        User::where('email', $this->user->email)->delete();
     }
 
 }
