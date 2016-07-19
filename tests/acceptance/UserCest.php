@@ -78,8 +78,8 @@ class UserCest
                 'club_id' => $club->id,
             ]);
 
-        $this->user->delete();
-        User::where('email', $this->user->email)->delete();
+        User::where('email', $this->user->email)->forceDelete();
+
 
     }
 
@@ -142,7 +142,7 @@ class UserCest
             ]);
 
 
-        User::where('email', $this->user->email)->delete();
+        $this->user->forceDelete();
 
     }
 
@@ -167,7 +167,7 @@ class UserCest
         $I->fillField('password', '333333');
         $I->click("#login");
         $I->seeCurrentUrlEquals('/');
-        User::where('email', $this->user->email)->delete();
+        $this->user->forceDelete();
     }
 
 }
