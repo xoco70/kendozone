@@ -137,7 +137,7 @@ class UserController extends Controller
     }
 
 
-    public function exportUsersExcel()
+    public function export()
     {
 
         Excel::create(trans_choice('core.user', 2), function ($excel) {
