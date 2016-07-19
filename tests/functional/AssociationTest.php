@@ -68,6 +68,7 @@ class AssociationTest extends TestCase
 
         $association = factory(Association::class)->make(['federation_id' => $federation->id, 'president_id' => $associationPresident->id]);
         $this->fillAssocAndSee($association);
+        $associationPresident->delete();
     }
 
 
@@ -80,6 +81,7 @@ class AssociationTest extends TestCase
 
         $this->visitEditAssociationPage($federationPresident);
         $this->see("403.png");
+        $federationPresident->delete();
 
 
     }
