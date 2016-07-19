@@ -3476,7 +3476,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 }
 
 .navbar-nav>.dropdown-user img {
-    max-height: 28px;
+    width: 28px;
+    height: 28px;
     margin-top: -2px;
     border-radius: 50%
 }
