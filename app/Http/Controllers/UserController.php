@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
-use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,7 +42,7 @@ class UserController extends Controller
 
         $users = User::with('country', 'role')
             ->forUser(Auth::user())
-            ->where('id','>',1)
+            ->where('id', '>', 1)
             ->paginate(config('constants.PAGINATION'));
 
         return view('users.index', compact('users'));
@@ -74,33 +72,12 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param UserRequest $request
+     * @param UserRequest $userForm
      * @return Response
      */
-    public function store(UserRequest $request)
+    public function store(UserRequest $userForm)
     {
-
-        $data = $request->except('_token');
-
-        if ($request->is("users")) {
-            $data['provider'] = "created";
-        } else {
-            $data['provider'] = "register";
-        }
-
-        $data['provider_id'] = $data['email'];
-        $data['verified'] = 1;
-
-        $user = new User;
-
-        $user->fill($data);
-        $user->password = bcrypt(Input::get('password'));
-
-        if (Auth::user()->cannot('store', $user)) {
-            throw new UnauthorizedException();
-        }
-
-        if ($user->save()) {
+        if ($userForm->store()) {
             flash()->success(trans('msg.user_create_successful'));
         } else
             flash()->error(trans('msg.user_create_successful'));
@@ -140,47 +117,27 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserRequest $request
+     * @param  UserRequest $userForm
      * @param User $user
      * @return Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $userForm, User $user)
     {
-        if (Auth::user()->cannot('update', $user)) {
-            throw new UnauthorizedException();
-        }
-        $except = [];
-        if (trim(Input::get('role_id')) == '') {
-            array_push($except, 'role_id');
-        }
 
-        if (trim(Input::get('password')) == '' && trim(Input::get('password_confirmation')) == '') {
-            array_push($except, 'password');
-        }
-        array_push($except, '_token');
-
-        $req = $request->except($except);
-
-        $user->fill($req);
-
-        if (!in_array('password', $except)) {
-            $user->password = bcrypt(Input::get('password'));
-        }
-
-        if ($user->save()) {
+        if ($userForm->update($user)) {
             flash()->success(trans('msg.user_update_successful'));
         } else
-            flash()->success(Lang::get('msg.user_update_error'));
-        
-        if ($user->id == Auth::user()->id) {
+            flash()->error(Lang::get('msg.user_update_error'));
+
+        if ($user->id == Auth::user()->id)
             return redirect(URL::action('UserController@edit', Auth::user()->slug));
-        } else {
-            return redirect(URL::action('UserController@index'));
-        }
+
+        return redirect(URL::action('UserController@index'));
+
     }
 
 
-    public function exportUsersExcel()
+    public function export()
     {
 
         Excel::create(trans_choice('core.user', 2), function ($excel) {
@@ -230,9 +187,9 @@ class UserController extends Controller
 
         if ($user->delete()) {
             return Response::json(['msg' => trans('msg.user_delete_successful'), 'status' => 'success']);
-        } else {
-            return Response::json(['msg' => trans('msg.user_delete_error'), 'status' => 'error']);
         }
+        return Response::json(['msg' => trans('msg.user_delete_error'), 'status' => 'error']);
+
     }
 
     public function restore($userSlug)
@@ -241,9 +198,9 @@ class UserController extends Controller
         $user = User::withTrashed()->whereSlug($userSlug)->first();
         if ($user->restore()) {
             return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'success']);
-        } else {
-            return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'error']);
         }
+        return Response::json(['msg' => trans('msg.user_restore_successful'), 'status' => 'error']);
+
     }
 
 

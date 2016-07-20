@@ -7,7 +7,6 @@ use App\CategorySettings;
 use App\CategoryTournament;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
-use App\Http\Requests;
 use App\Http\Requests\TournamentRequest;
 use App\Tournament;
 use App\TournamentLevel;
@@ -61,7 +60,7 @@ class TournamentController extends Controller
         $tournament = new Tournament();
         $rules = config('options.rules');
         $rulesCategories = (new Category)->getCategorieslabelByRule();
-        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules','rulesCategories'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules', 'rulesCategories'));
     }
 
     /**
@@ -168,9 +167,9 @@ class TournamentController extends Controller
     {
         if ($tournament->delete()) {
             return Response::json(['msg' => Lang::get('msg.tournament_delete_successful', ['name' => $tournament->name]), 'status' => 'success']);
-        } else {
-            return Response::json(['msg' => Lang::get('msg.tournament_delete_error', ['name' => $tournament->name]), 'status' => 'error']);
         }
+        return Response::json(['msg' => Lang::get('msg.tournament_delete_error', ['name' => $tournament->name]), 'status' => 'error']);
+
     }
 
     /**
@@ -183,9 +182,10 @@ class TournamentController extends Controller
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
         if ($tournament->restore()) {
             return Response::json(['msg' => Lang::get('msg.tournament_restored_successful', ['name' => $tournament->name]), 'status' => 'success']);
-        } else {
-            return Response::json(['msg' => Lang::get('msg.tournament_restored_error', ['name' => $tournament->name]), 'status' => 'error']);
         }
+
+        return Response::json(['msg' => Lang::get('msg.tournament_restored_error', ['name' => $tournament->name]), 'status' => 'error']);
+
     }
 
     /**
