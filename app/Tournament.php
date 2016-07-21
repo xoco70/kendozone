@@ -115,11 +115,6 @@ class Tournament extends Model implements SluggableInterface
         return $this->belongsTo('App\TournamentLevel', 'level_id', 'id');
     }
 
-    /**
-     * Get All categories available
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-
 
     // We can use $tournament->categories()->attach(id);
     // Or         $tournament->categories()->sync([1, 2, 3]);
@@ -146,7 +141,12 @@ class Tournament extends Model implements SluggableInterface
      */
     public function categorySettings()
     {
-        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
+        return $this->hasManyThrough(CategorySettings::class, CategoryTournament::class);
+    }
+
+    public function teams()
+    {
+        return $this->hasManyThrough(Team::class,CategoryTournament::class);
     }
 
     /**
@@ -156,7 +156,7 @@ class Tournament extends Model implements SluggableInterface
      */
     public function competitors($CategoryTournamentId = null)
     {
-        return $this->hasManyThrough('App\CategoryTournamentUser', 'App\CategoryTournament');
+        return $this->hasManyThrough(CategoryTournamentUser::class, CategoryTournament::class);
     }
 
 
@@ -168,21 +168,6 @@ class Tournament extends Model implements SluggableInterface
     {
         return $this->morphMany(Invite::class, 'object');
     }
-
-    /**
-     * @return mixed
-     */
-//    public function settingsbak()
-//    {
-//        $arrTc = CategoryTournament::select('id')->where('tournament_id', $this->id)->get();
-//        $settings = CategorySettings::whereIn('category_tournament_id', $arrTc)->get();
-//        return $settings;
-//    }
-
-//    public function settings()
-//    {
-//        return $this->hasManyThrough('App\CategorySettings', 'App\CategoryTournament');
-//    }
 
     public function getCategoryList()
     {
@@ -272,6 +257,25 @@ class Tournament extends Model implements SluggableInterface
             default:
                 return null;
         }
+    }
+
+    /**
+     * create a category List with Category name associated to categoryTournamentId
+     *
+     * @return array
+     */
+    public function buildCategoryList()
+    {
+        $cts = CategoryTournament::with('category')->where('tournament_id', $this->id)->get();
+
+        $array = [];
+        foreach ($cts as $ct){
+            $array[$ct->id]=$ct->category->name;
+
+        }
+
+        return $array;
+
     }
 
 

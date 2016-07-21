@@ -103,6 +103,7 @@ class TournamentController extends Controller
         $tournament = Tournament::with('competitors', 'categorySettings', 'categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
         // Statistics for Right Panel
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
+        $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->categorySettings->count();
         $categorySize = $tournament->categoryTournaments->count();
         $rules = config('options.rules');
@@ -126,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit','numTeams'));
     }
 
     /**

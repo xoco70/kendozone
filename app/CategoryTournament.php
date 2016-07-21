@@ -35,22 +35,23 @@ class CategoryTournament extends Model
 
     public function ctus()
     {
-        return $this->hasMany('App\CategoryTournamentUser', 'category_tournament_id', 'id');
+        return $this->hasMany(CategoryTournamentUser::class, 'category_tournament_id', 'id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function tournament()
     {
-        return $this->belongsTo('App\Tournament');
+        return $this->belongsTo(Tournament::class);
     }
+
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id')
+        return $this->belongsToMany(User::class, 'category_tournament_user', 'category_tournament_id')
             ->withPivot('confirmed')
             ->withTimestamps();
     }
@@ -59,6 +60,12 @@ class CategoryTournament extends Model
     {
         return $this->hasOne(CategorySettings::class);
     }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
+
 
 
     public function categoryTournaments()

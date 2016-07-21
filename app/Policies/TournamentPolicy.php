@@ -42,18 +42,18 @@ class TournamentPolicy
 
     public function edit(User $user, Tournament $tournament)
     {
-        return $tournament->user_id == $user->id;
+        return ($tournament->user_id == $user->id || $user->isSuperAdmin());
 
     }
 
     public function update(User $user, Tournament $tournament)
     {
-        return $tournament->user_id == $user->id;
+        return ($tournament->user_id == $user->id || $user->isSuperAdmin());
     }
 
     public function destroy(User $user, Tournament $tournament)
     {
-        return $tournament->user_id == $user->id;
+        return ($tournament->user_id == $user->id || $user->isSuperAdmin());
     }
 
 

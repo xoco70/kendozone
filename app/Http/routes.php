@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
+        Route::resource('/tournaments/{tournament}/teams', 'TeamController',['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
         Route::resource('users', 'UserController', ['names' => ['index' => 'users.index', 'create' => 'users.create', 'edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);

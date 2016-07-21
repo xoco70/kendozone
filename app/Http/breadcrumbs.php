@@ -67,6 +67,8 @@ Breadcrumbs::register('tournaments.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans_choice('core.tournament', 2), route('tournaments.index'));
 });
+
+
 Breadcrumbs::register('tournaments.deleted', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans('core.tournaments_deleted'));
@@ -88,6 +90,13 @@ Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     }
 
 });
+Breadcrumbs::register('tournaments.show', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('tournaments.index');
+    $breadcrumbs->push($tournament->name, route('tournaments.show', $tournament->slug));
+
+});
+
+
 // Home > Invites
 Breadcrumbs::register('invites.index', function ($breadcrumbs) {
 
@@ -165,8 +174,31 @@ Breadcrumbs::register('users.tournaments', function ($breadcrumbs, $user) {
 
 });
 
-
 Breadcrumbs::register('categories.create', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans('core.add_category'), route('categories.create'));
+});
+
+// Home > Tournaments > MyTournament > List Teams
+Breadcrumbs::register('teams.index', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('tournaments.edit', $tournament);
+    if (policy($tournament)->edit(Auth::user(), $tournament)) {
+        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.edit', $tournament->slug));
+    } else {
+        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.show', $tournament->slug));
+    }
+
+});
+
+Breadcrumbs::register('teams.create', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('teams.index', $tournament);
+    $breadcrumbs->push(trans_choice('core.team', 2), route('teams.index', $tournament->slug));
+
+
+});
+Breadcrumbs::register('teams.edit', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('teams.index', $tournament);
+    $breadcrumbs->push(trans_choice('core.team', 2), route('teams.index', $tournament->slug));
+
+
 });

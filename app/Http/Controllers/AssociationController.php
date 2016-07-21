@@ -20,20 +20,10 @@ class AssociationController extends Controller
 {
     // Only Super Admin and Association President can manage Associations
 
-    protected $currentModelName;
-
-    public function __construct()
-    {
-        $this->currentModelName = trans_choice('core.association', 1);
-        View::share('currentModelName', $this->currentModelName);
-
-    }
-
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -47,7 +37,7 @@ class AssociationController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return Response
+     * @return View
      * @throws NotOwningFederationException
      */
     public function create()
@@ -62,8 +52,7 @@ class AssociationController extends Controller
 //        dd(Auth::user()->role);
         $users = User::forUser(Auth::user())->pluck('name', 'id');
         $federations = Federation::forUser(Auth::user())->lists('name', 'id');
-
-        $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
+        $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
 
@@ -81,7 +70,7 @@ class AssociationController extends Controller
         }
 
         $association = Association::create($request->all());
-        $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
+        $msg = trans('msg.association_create_successful', ['name' => $association->name]);
         flash()->success($msg);
         return redirect("associations");
     }
@@ -91,7 +80,7 @@ class AssociationController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show($id)
     {
@@ -104,7 +93,7 @@ class AssociationController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit($id)
     {
@@ -148,7 +137,7 @@ class AssociationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param $associationId
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($associationId)
     {

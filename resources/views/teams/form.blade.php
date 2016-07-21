@@ -1,0 +1,67 @@
+@extends('layouts.dashboard')
+{{--@section('breadcrumbs')--}}
+{{--@if (isset($team->id))--}}
+{{--{!! Breadcrumbs::render('teams.edit',$tournament) !!}--}}
+{{--@else--}}
+{{--{!! Breadcrumbs::render('teams.create',$tournament) !!}--}}
+{{--@endif--}}
+
+
+{{--@stop--}}
+@section('content')
+    @include("errors.list")
+    <?php
+    $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
+    ?>
+
+
+    <!-- Detached content -->
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        @if (!is_null($team->id))
+            {!! Form::model($team, ['method'=>"PATCH",
+                                    "action" => ["TeamController@update", $team->id],
+                                    'enctype' => 'multipart/form-data',
+                                    'id' => 'form']) !!}
+
+        @else
+
+            {!! Form::open(['url'=>URL::action('TeamController@store', $tournament->slug),'enctype' => 'multipart/form-data']) !!}
+
+        @endif
+        <!-- Simple panel 1 : General Data-->
+
+
+            <div class="panel panel-flat">
+
+                <div class="panel-body">
+                    <div class="container-fluid">
+
+                        <div class="form-group">
+                            {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
+                            <br/>
+                            {!!  Form::select('category_tournament_id', $cts, old('category_tournament_id'), ['class' => 'form-control']) !!}
+
+                        </div>
+
+                    </div>
+
+                    <br/>
+                    <div align="right">
+                        <button type="submit" class="btn btn-success" id="save"><i></i>{{trans("core.save")}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@stop
+@section('scripts_footer')
+    {!! JsValidator::formRequest('App\Http\Requests\TeamRequest') !!}
+@stop

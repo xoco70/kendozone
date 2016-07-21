@@ -227,6 +227,8 @@ return [
     // Teams
 
     'team' => 'Equipo|Equipos',
+    'no_team_yet' => 'Aún no tienes equipos registrados en este torneo',
+    'add_new_team' => 'Agregar un equipo',
 
     // Federations
     'federation' => 'Federación|Federaciones',
@@ -262,5 +264,6 @@ return [
     'select_field' => 'Selecciona un campo',
     'no_association_available' => 'No existen asociaciones en esta federación',
     'no_club_available' => 'No existen clubes en esta asociación',
+
 
 ];

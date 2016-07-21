@@ -22,7 +22,8 @@ class TeamRequest extends Request
     public function rules()
     {
         return [
-//            'name' => 'required|min:6',
+            'name' => 'required',
+            'category_tournament_id' => 'required',
 //            'tournamentDate' => 'required|date',
 //            'limitRegistrationDate' => 'date',
         ];

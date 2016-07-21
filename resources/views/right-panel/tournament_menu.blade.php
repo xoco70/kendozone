@@ -52,13 +52,20 @@
                                 @endif
 
                             </a>
-                        <li class="disabled"><a href="#"><i
-                                        class="icon-certificate"></i>{{ trans('core.certificates') }}</a>
-                        <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>
-                        <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a>
-                        <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a>
-
                         </li>
+                        <li ><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
+                                @if($numTeams>2)
+                                    <span class="badge badge-success">{{$numTeams }}</span>
+                                @else
+                                    <span class="badge badge-primary">{{$numTeams}}</span>
+                                @endif
+                            </a></li>
+                        <li class="disabled"><a href="#"><i class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>
+                        <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a></li>
+                        <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
+                        <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>
+
+
 
 
                     </ul>
