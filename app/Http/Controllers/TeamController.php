@@ -22,16 +22,15 @@ class TeamController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the teams for a tournament.
      *
      * @param Tournament $tournament
      * @return View
      */
     public function index(Tournament $tournament)
     {
-        $teams = $tournament->teams;
-//        dd($teams);
-        return view("teams.index", compact('tournament', 'teams'));
+        $tournament = Tournament::with('teams','teams.category_tournament.category')->find($tournament->id);
+        return view("teams.index", compact('tournament'));
 
     }
 
@@ -61,7 +60,7 @@ class TeamController extends Controller
     {
 
         $team = Team::create($request->all());
-        flash()->success(trans('msg.team_add_successful', ['name' => $team->name]));
+        flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
         return redirect()->route('teams.index', $tournament->slug);
 
     }

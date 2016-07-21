@@ -2,7 +2,9 @@
 @section('breadcrumbs')
     {!! Breadcrumbs::render('teams.index', $tournament) !!}
 @stop
-
+<?php
+$teams = $tournament->teams;
+?>
 @section('content')
 
 
@@ -10,7 +12,7 @@
     <div class="container-fluid">
 
         @if (sizeof($teams)==0)
-           @include('layouts.noTeams')
+            @include('layouts.noTeams')
         @else
 
             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
@@ -36,7 +38,7 @@
                     <tr>
                         <td>
                             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
-                            {{ $team->name }}    {{--<a href="{!!   URL::action('TeamController@edit',  $team->id) !!}">{{ $team->name }}</a>--}}
+                                {{ $team->name }}    {{--<a href="{!!   URL::action('TeamController@edit',  $team->id) !!}">{{ $team->name }}</a>--}}
                             @else
                                 {{ $team->name }}
                             @endif
@@ -45,7 +47,8 @@
                         <td>
 
                             @can('edit', $team)
-                                <a href="{{URL::action('TeamController@edit', ['tournament' => $tournament->slug, 'teams' => $team->id])}}"><i class="icon icon-pencil7"></i></a>
+                                <a href="{{URL::action('TeamController@edit', ['tournament' => $tournament->slug, 'teams' => $team->id])}}"><i
+                                            class="icon icon-pencil7"></i></a>
 
                             @endcan
                             @can('delete', $team)

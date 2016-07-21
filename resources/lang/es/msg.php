@@ -82,4 +82,13 @@ return [
     'club_restored_successful' => 'Club <br/><b>:name</b><br/> restaurado exitosamente',
     'club_restored_error' => 'Hubo un problema al restaurar el club',
 
+
+    // Team
+
+    'team_create_successful' => 'Equipo <br/><b>:name</b><br/> creado exitosamente',
+    'team_edit_successful' => 'Equipo <br/><b>:name</b><br/> actualizado exitosamente',
+    'team_delete_successful' => 'Equipo <br/><b>:name</b><br/> borrado exitosamente',
+    'team_delete_error' => 'Hubo un problema al borrar el equipo',
+    'team_restored_successful' => 'Equipo <br/><b>:name</b><br/> restaurado exitosamente',
+    'team_restored_error' => 'Hubo un problema al restaurar el equipo',
 ];
