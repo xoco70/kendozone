@@ -49,7 +49,7 @@ class Tournament extends Model implements SluggableInterface
         'latitude',
         'longitude',
         'level_id'
-        ];
+    ];
 
 
     protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
@@ -146,7 +146,7 @@ class Tournament extends Model implements SluggableInterface
 
     public function teams()
     {
-        return $this->hasManyThrough(Team::class,CategoryTournament::class);
+        return $this->hasManyThrough(Team::class, CategoryTournament::class);
     }
 
     /**
@@ -269,13 +269,23 @@ class Tournament extends Model implements SluggableInterface
         $cts = CategoryTournament::with('category')->where('tournament_id', $this->id)->get();
 
         $array = [];
-        foreach ($cts as $ct){
-            $array[$ct->id]=$ct->category->name;
+        foreach ($cts as $ct) {
+            $array[$ct->id] = $ct->category->name;
 
         }
 
         return $array;
 
+    }
+
+
+    public function hasTeamCategory()
+    {
+        return $this
+            ->categorySettings()
+            ->where('teamSize', '>', '0')
+            ->where('teamSize', '<>', null)
+            ->count();
     }
 
 

@@ -52,7 +52,7 @@ class TeamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TeamRequest|TournamentUserRequest $request
+     * @param TeamRequest $request
      * @param Tournament $tournament
      * @return Response
      */

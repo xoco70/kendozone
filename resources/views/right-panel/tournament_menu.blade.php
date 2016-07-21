@@ -53,6 +53,8 @@
 
                             </a>
                         </li>
+<!--                        --><?php //dd($tournament->hasTeamCategory()) ?>
+                       @if ($tournament->hasTeamCategory())
                         <li ><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
                                 @if($numTeams>2)
                                     <span class="badge badge-success">{{$numTeams }}</span>
@@ -60,6 +62,7 @@
                                     <span class="badge badge-primary">{{$numTeams}}</span>
                                 @endif
                             </a></li>
+                        @endif
                         <li class="disabled"><a href="#"><i class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>
                         <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a></li>
                         <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
