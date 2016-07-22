@@ -205,6 +205,46 @@ class Tournament extends Model implements SluggableInterface
         return $this->type == 0;
     }
 
+    public function isInternational()
+    {
+        return $this->level_id == 8;
+    }
+
+    public function isNational()
+    {
+        return $this->level_id == 7;
+    }
+
+    public function isRegional()
+    {
+        return $this->level_id == 6;
+    }
+
+    public function isEstate()
+    {
+        return $this->level_id == 5;
+    }
+
+    public function isMunicipal()
+    {
+        return $this->level_id == 4;
+    }
+
+    public function isDistrictal()
+    {
+        return $this->level_id == 3;
+    }
+
+    public function isLocal()
+    {
+        return $this->level_id == 2;
+    }
+
+    public function hasNoLevel()
+    {
+        return $this->level_id == 1;
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
