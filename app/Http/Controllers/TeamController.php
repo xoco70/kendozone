@@ -6,6 +6,7 @@ use App\Http\Requests\TeamRequest;
 use App\Http\Requests\TournamentUserRequest;
 use App\Team;
 use App\Tournament;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\View;
 
@@ -65,6 +66,36 @@ class TeamController extends Controller
 
     }
 
+    /**
+     * Show the form for creating a new competitor.
+     *
+     * @param Tournament $tournament
+     * @param $teamId
+     * @return View
+     */
+    public function edit(Tournament $tournament, $teamId)
+    {
+        $team = Team::findOrFail($teamId);
+        $cts = $tournament->buildCategoryList();
+        return view("teams.form", compact('tournament', 'team', 'cts'));
+    }
+
+
+    /**
+     * Update a newly created resource in storage.
+     *
+     * @param TeamRequest $request
+     * @param Tournament $tournament
+     * @return Response
+     */
+    public function update(TeamRequest $request, Tournament $tournament, $teamId)
+    {
+        $team = Team::findOrFail($teamId);
+        $team->update($request->all());
+        flash()->success(trans('msg.team_update_successful', ['name' => $team->name]));
+        return redirect()->route('teams.index', $tournament->slug);
+
+    }
 
     /**
      * Display the specified resource.

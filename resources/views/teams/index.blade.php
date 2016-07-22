@@ -38,7 +38,7 @@ $teams = $tournament->teams;
                     <tr>
                         <td>
                             @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
-                                {{ $team->name }}    {{--<a href="{!!   URL::action('TeamController@edit',  $team->id) !!}">{{ $team->name }}</a>--}}
+                                <a href="{!!   URL::action('TeamController@edit',  ['tournament' => $tournament->slug, 'teams' => $team->id]) !!}">{{ $team->name }}</a>
                             @else
                                 {{ $team->name }}
                             @endif

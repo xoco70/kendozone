@@ -53,7 +53,6 @@
 
                             </a>
                         </li>
-<!--                        --><?php //dd($tournament->hasTeamCategory()) ?>
                        @if ($tournament->hasTeamCategory())
                         <li ><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
                                 @if($numTeams>2)

@@ -21,7 +21,7 @@
         <div class="col-md-8 col-md-offset-2">
         @if (!is_null($team->id))
             {!! Form::model($team, ['method'=>"PATCH",
-                                    "action" => ["TeamController@update", $team->id],
+                                    "action" => ["TeamController@update", $tournament->slug, $team->id],
                                     'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
 

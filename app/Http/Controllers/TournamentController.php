@@ -135,7 +135,7 @@ class TournamentController extends Controller
      *
      * @param TournamentRequest|Request $request
      * @param Tournament $tournament
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Tournament $tournament)
     {
