@@ -24,7 +24,6 @@ class UserController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('ownUser', ['except' => ['index', 'show']]);
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         View::share('currentModelName', $this->currentModelName);
@@ -35,7 +34,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
     public function index()
     {
@@ -51,7 +50,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
     public function create()
     {
@@ -88,7 +87,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param User $user
-     * @return Response
+     * @return View
      */
     public function show($user)
     {
@@ -100,7 +99,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @return Response
+     * @return View
      */
     public function edit(User $user)
     {
@@ -178,9 +177,8 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
-     * @internal param int $id
      */
     public function destroy(User $user)
     {
@@ -192,6 +190,10 @@ class UserController extends Controller
 
     }
 
+    /**
+     * @param $userSlug
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function restore($userSlug)
 
     {

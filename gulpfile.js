@@ -160,4 +160,9 @@ elixir(function (mix) {
         'pages/footer/clubIndexFooter.js'
     ], 'public/js/pages/footer/clubIndexFooter.js');
 
+    mix.scripts([
+        'pages/footer/teamIndexFooter.js'
+    ], 'public/js/pages/footer/teamIndexFooter.js');
+
+
 });

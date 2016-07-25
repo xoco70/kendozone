@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
-use App\Http\Requests\TournamentUserRequest;
 use App\Team;
 use App\Tournament;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 class TeamController extends Controller
@@ -30,7 +31,7 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('teams','teams.category_tournament.category')->find($tournament->id);
+        $tournament = Tournament::with('teams', 'teams.category_tournament.category')->find($tournament->id);
         return view("teams.index", compact('tournament'));
 
     }
@@ -43,7 +44,11 @@ class TeamController extends Controller
      */
     public function create(Tournament $tournament)
     {
-        $team = new Team();
+        $team = new Team;
+        if (Auth::user()->cannot('create', $team)) {
+            throw new UnauthorizedException();
+        }
+
         // category_tournanemnt_id with categoryName where isTeam == 1
 
         $cts = $tournament->buildCategoryList();
@@ -60,6 +65,12 @@ class TeamController extends Controller
     public function store(TeamRequest $request, Tournament $tournament)
     {
 
+
+//        $team = Team::make($request->all());
+        $team = new Team;
+        if (Auth::user()->cannot('store', $team)) {
+            throw new UnauthorizedException();
+        }
         $team = Team::create($request->all());
         flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
         return redirect()->route('teams.index', $tournament->slug);
@@ -76,6 +87,10 @@ class TeamController extends Controller
     public function edit(Tournament $tournament, $teamId)
     {
         $team = Team::findOrFail($teamId);
+
+        if (Auth::user()->cannot('edit', $team)) {
+            throw new UnauthorizedException();
+        }
         $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
@@ -90,7 +105,12 @@ class TeamController extends Controller
      */
     public function update(TeamRequest $request, Tournament $tournament, $teamId)
     {
+
         $team = Team::findOrFail($teamId);
+        if (Auth::user()->cannot('update', $team)) {
+            throw new UnauthorizedException();
+        }
+
         $team->update($request->all());
         flash()->success(trans('msg.team_update_successful', ['name' => $team->name]));
         return redirect()->route('teams.index', $tournament->slug);
@@ -107,4 +127,28 @@ class TeamController extends Controller
     {
 
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Tournament $tournament
+     * @param $teamId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Tournament $tournament, $teamId)
+    {
+
+        $team = Team::findOrFail($teamId);
+
+        if (Auth::user()->cannot('delete', $team)) {
+            throw new UnauthorizedException();
+        }
+
+        if ($team->forceDelete()) {
+            return Response::json(['msg' => Lang::get('msg.team_delete_successful', ['name' => $team->name]), 'status' => 'success']);
+        }
+        return Response::json(['msg' => Lang::get('msg.team_delete_error', ['name' => $team->name]), 'status' => 'error']);
+
+    }
+
 }

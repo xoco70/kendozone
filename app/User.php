@@ -365,6 +365,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->role_id == config('constants.ROLE_USER');
     }
 
+    public function isOwner($tournament)
+    {
+        return $tournament->owner_id == $this->id;
+    }
 
     public function scopeForUser($query, User $user)
     {

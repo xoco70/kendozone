@@ -161,7 +161,7 @@ class TournamentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Tournament $tournament
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function destroy(Tournament $tournament)

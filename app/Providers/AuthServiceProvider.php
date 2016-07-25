@@ -8,8 +8,10 @@ use App\Federation;
 use App\Policies\AssociationPolicy;
 use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
+use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
 use App\Policies\UserPolicy;
+use App\Team;
 use App\Tournament;
 use App\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -28,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Federation::class => FederationPolicy::class,
         Association::class => AssociationPolicy::class,
         Club::class => ClubPolicy::class,
+        Team::class => TeamPolicy::class,
 
     ];
 
