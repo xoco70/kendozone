@@ -17,9 +17,19 @@
                     {!!  Form::text('address', old('address'), ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!!  Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
-                    {!!  Form::text('address', old('address'), ['class' => 'form-control']) !!}
+                    {!!  Form::label('details', trans('core.details'),['class' => 'text-bold' ]) !!}
+                    {!!  Form::text('details', old('details'), ['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!!  Form::label('city', trans('core.city'),['class' => 'text-bold' ]) !!}
+                    {!!  Form::text('city', old('city'), ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!!  Form::label('CP', trans('core.CP'),['class' => 'text-bold' ]) !!}
+                    {!!  Form::text('CP', old('CP'), ['class' => 'form-control']) !!}
+                </div>
+            {!!  Form::label('country_id', trans('core.country'),['class' => 'text-bold']) !!}
+            {!!  Form::select('country_id', $countries,Auth::user()->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
 
             </div>
             <div class="col-lg-12">

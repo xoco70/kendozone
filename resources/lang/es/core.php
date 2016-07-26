@@ -74,9 +74,11 @@ return [
 
     // Places
     'venue' => 'Lugar del encuentro',
-    'place' => 'Lugar|Lugares',
     'coords' => 'Coordenadas',
+    'direccion' => 'Dirección',
+    'details' => 'Datos complementarios',
     'city' => 'Ciudad',
+    'CP' => 'Código Postal',
     'state' => 'Estado',
     'country' => 'País',
     'location' => 'Ubicación',

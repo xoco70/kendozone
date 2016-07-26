@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Response;
+use Webpatser\Countries\Countries;
 
 
 class TournamentController extends Controller
@@ -102,6 +103,7 @@ class TournamentController extends Controller
 
         $tournament = Tournament::with('competitors', 'categorySettings', 'categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
         // Statistics for Right Panel
+        $countries = Countries::lists('name', 'id');
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->categorySettings->count();
@@ -127,7 +129,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams','countries'));
     }
 
     /**
