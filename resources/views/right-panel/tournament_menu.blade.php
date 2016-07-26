@@ -23,15 +23,13 @@
                                 @endif
                             </a></li>
                         <li><a href="#"><i class="icon-location4"></i> Lugar
-                                <?php
-                                if ($tournament->venue != null)
-                                    $class = "badge-success";
-                                else
-                                    $class = "badge-primary";
-                                ?>
+                                @if ($tournament->venue != null)
+                                    <span class="badge badge-success" id="venue-status">
+                                        <i class=" icon icon-check"></i>
+                                    </span>
+                                @endif
 
-                                <span class="badge {!! $class !!}" id="venue-status"><i
-                                            class=" icon icon-cross3"></i></span>
+
                             </a></li>
                         <li><a href="#">
                                 <i class="icon-cog2"></i>{{trans_choice('categories.category',2)}}
@@ -58,21 +56,22 @@
 
                             </a>
                         </li>
-                       @if ($tournament->hasTeamCategory())
-                        <li ><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
-                                @if($numTeams>2)
-                                    <span class="badge badge-success">{{$numTeams }}</span>
-                                @else
-                                    <span class="badge badge-primary">{{$numTeams}}</span>
-                                @endif
-                            </a></li>
+                        @if ($tournament->hasTeamCategory())
+                            <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
+                                            class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
+                                    @if($numTeams>2)
+                                        <span class="badge badge-success">{{$numTeams }}</span>
+                                    @else
+                                        <span class="badge badge-primary">{{$numTeams}}</span>
+                                    @endif
+                                </a></li>
                         @endif
-                        <li class="disabled"><a href="#"><i class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>
-                        <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a></li>
+                        <li class="disabled"><a href="#"><i
+                                        class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>
+                        <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>
+                        </li>
                         <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
                         <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>
-
-
 
 
                     </ul>
@@ -86,19 +85,20 @@
     <br/>
     @if ($tournament->isOpen())
 
-    <div class="sidebar-category">
-        <div class="category-title">
-            <span>{{ trans('core.share_link') }}</span>
-            <ul class="icons-list">
-                <li><a href="#" data-action="collapse"></a></li>
-            </ul>
-        </div>
+        <div class="sidebar-category">
+            <div class="category-title">
+                <span>{{ trans('core.share_link') }}</span>
+                <ul class="icons-list">
+                    <li><a href="#" data-action="collapse"></a></li>
+                </ul>
+            </div>
 
-        <div class="category-content no-padding">
-            <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}" class="p-10 full-width" >
+            <div class="category-content no-padding">
+                <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}"
+                       class="p-10 full-width">
+            </div>
         </div>
-    </div>
-    <br/>
+        <br/>
     @endif
     {{-- If open Tournament--}}
 

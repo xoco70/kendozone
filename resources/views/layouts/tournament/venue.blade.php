@@ -12,6 +12,14 @@
                 {!!  Form::hidden('latitude', old('latitude'), ['class' => 'form-control', 'id' =>'latitude']) !!}
                 {!!  Form::hidden('longitude', old('longitude'), ['class' => 'form-control','id' =>'longitude']) !!}
 
+                <div class="form-group">
+                    {!!  Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
+                    {!!  Form::text('address', old('address'), ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!!  Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
+                    {!!  Form::text('address', old('address'), ['class' => 'form-control']) !!}
+                </div>
 
             </div>
             <div class="col-lg-12">
