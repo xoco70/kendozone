@@ -24,7 +24,6 @@ class CreateVenueTable extends Migration
             $table->integer("countryId");
             $table->timestamps();
             $table->engine = 'InnoDB';
-            $table->timestamps();
         });
     }
 
