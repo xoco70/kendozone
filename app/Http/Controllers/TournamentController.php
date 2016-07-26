@@ -141,8 +141,12 @@ class TournamentController extends Controller
     {
 
 
-        if ($request->ajax() && $request->has('category')) { // Category Request goes through AJAX
-            $res = $tournament->categories()->sync($request->input('category'));
+        if ($request->ajax()) { // Category Request goes through AJAX
+            if ($request->has('category')){
+                $res = $tournament->categories()->sync($request->input('category'));
+            }else{
+                $res = $tournament->update($request->all());
+            }
             $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
                 : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
             return $result;

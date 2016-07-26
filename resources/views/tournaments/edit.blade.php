@@ -352,7 +352,7 @@
 @section('scripts_footer')
     <script>
         var url_base = "{{ URL::action('TournamentController@index') }}";
-        var url_edit = url_base + '/' + "{{$tournament->slug}}";
+        var url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";
         var configured = "{{ trans('core.configured_full') }}";

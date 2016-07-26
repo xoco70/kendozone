@@ -1,14 +1,5 @@
 $(function () {
 
-    // $('#form1').submit(function() {
-    //     if (allCategoriesSize != 0){
-    //         return true;
-    //     }else{
-    //         confirm(rule_warning);
-    //         return false;
-    //     }
-    //
-    // });
     $('.fightDuration').timepicker(('option',
 
     {
@@ -90,9 +81,7 @@ $(function () {
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
         var inputData = $(this).parents('form:first').serialize();
-        var dataId = $(this).data('id');
         var name = $('#name');
-
 
         if (name.val() == '' || name.val().length < 6) {
             name.closest('div').addClass('has-error');
@@ -108,9 +97,12 @@ $(function () {
                 type: 'PUT',
                 url: url_edit,
                 data: inputData,
+
                 success: function (data) {
-                    // console.log(data.msg);
+                    console.log('success');
+
                     if (data != null && data.status == 'success') {
+
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -145,6 +137,7 @@ $(function () {
 
 
                     } else {
+                        console.log(data);
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -162,8 +155,15 @@ $(function () {
                 },
                 error: function (data) {
                     var json = data.responseText;
-                    var obj = jQuery.parseJSON(json);
-                    // console.log(obj);
+                    var obj = null;
+
+                    try{
+                        obj = jQuery.parseJSON(json);
+                    }catch(err){
+                        obj = "Server Error";
+                    }
+
+
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -172,7 +172,7 @@ $(function () {
                         dataType: 'json',
                         dismissQueue: true,
                         timeout: 5000,
-                        text: data.responseText,
+                        text: obj,
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
@@ -182,10 +182,6 @@ $(function () {
                 }
             }
         );
-
-
-        // console.log(url_edit);
-
     });
 
 //EDIT CATEGORIES
@@ -349,13 +345,13 @@ $(function () {
         close: ''
     });
 
-    $('#generate_tree').on('click', function () {
-        swal({
-            title: "{!! trans('core.information') !!}",
-            text: "{!!   trans('msg.all_categories_not_configured') !!}",
-            confirmButtonColor: "#2196F3",
-            type: "info"
-        });
-    });
+    // $('#generate_tree').on('click', function () {
+    //     swal({
+    //         title: "{!! trans('core.information') !!}",
+    //         text: "{!!   trans('msg.all_categories_not_configured') !!}",
+    //         confirmButtonColor: "#2196F3",
+    //         type: "info"
+    //     });
+    // });
 })
 ;

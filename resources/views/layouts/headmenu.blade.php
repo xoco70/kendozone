@@ -71,7 +71,7 @@
                             <li>
                                 <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"
                                    href="{!! route('federations.index') !!}" id="federations"><i
-                                            class="icon-starburst position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
+                                            class="icon-earth position-left sidemenu"></i><span>{{ trans_choice('core.federation',2) }}</span>
                                 </a>
                             </li>
                         @endif
@@ -80,7 +80,7 @@
                                 <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"
                                    id="associations"
                                    href="{!! URL::action('AssociationController@index') !!}"><i
-                                            class="icon-cube position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
+                                            class="icon-flag7 position-left sidemenu"></i><span>{{ trans_choice('core.association',2) }}</span>
                                 </a>
                             </li>
                         @endif
@@ -88,7 +88,7 @@
                             <li>
                                 <a id="clubs" class="protip" data-pt-title="{{ trans('core.clubs') }}"
                                    href="{!! URL::action('ClubController@index') !!}"><i
-                                            class="icon-home7 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
+                                            class="icon-bookmark2 position-left sidemenu"></i><span>{{ trans_choice('core.club',2) }}</span>
                                 </a>
                             </li>
                         @endif

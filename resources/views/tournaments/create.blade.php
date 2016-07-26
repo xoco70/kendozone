@@ -53,7 +53,7 @@ $day = $now->day;
             });
             var pickerFin = $input.pickadate('picker')
 
-            $('.dateIni').pickadate({
+            var $inputIni =$('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
                 format: 'yyyy-mm-dd',
                 today: '',
@@ -64,6 +64,26 @@ $day = $now->day;
                     pickerFin.set('min', this.get('select'));
                 }
             });
+            var pickerIni = $inputIni.pickadate('picker')
+
+
+            pickerIni.on({
+                open: function() {
+                    console.log('Opened up!')
+                },
+                close: function() {
+                    console.log('Closed now')
+                },
+                render: function() {
+                    console.log('Just rendered anew')
+                },
+                stop: function() {
+                    console.log('See ya')
+                },
+                set: function(thingSet) {
+                    console.log('Set stuff:', thingSet)
+                }
+            })
 
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);

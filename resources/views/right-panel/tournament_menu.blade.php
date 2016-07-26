@@ -22,11 +22,16 @@
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="#"><i
-                                        class="icon-location4"></i> Lugar
+                        <li><a href="#"><i class="icon-location4"></i> Lugar
+                                <?php
+                                if ($tournament->venue != null)
+                                    $class = "badge-success";
+                                else
+                                    $class = "badge-primary";
+                                ?>
 
-                                <span class="badge badge-success" id="venue-status"><i
-                                            class=" icon icon-checkmark2"></i></span>
+                                <span class="badge {!! $class !!}" id="venue-status"><i
+                                            class=" icon icon-cross3"></i></span>
                             </a></li>
                         <li><a href="#">
                                 <i class="icon-cog2"></i>{{trans_choice('categories.category',2)}}
