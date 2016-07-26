@@ -2,7 +2,7 @@
 
 // Home
 Breadcrumbs::register('dashboard', function ($breadcrumbs) {
-    $breadcrumbs->push('Dashboard', action('DashboardController@index'));
+    $breadcrumbs->push(trans('core.dashboard'), action('DashboardController@index'));
 });
 
 // Home > Federations
@@ -77,7 +77,7 @@ Breadcrumbs::register('tournaments.deleted', function ($breadcrumbs) {
 // Home > Create Tournament
 Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentModelName) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => $currentModelName]), route('tournaments.create'));
+    $breadcrumbs->push(trans('core.createTournament'), route('tournaments.create'));
 });
 
 // Home > Tournaments > Edit Tournament

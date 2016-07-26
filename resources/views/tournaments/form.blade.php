@@ -75,48 +75,51 @@
                     <div class="col-md-7">
                         <small id="categories_desc"></small>
                     </div>
-                <div class="row">
-                    <div class="col-md-11 col-md-offset-1"><hr/></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1 col-md-offset-1">{{ Form::radio('config', '1', false, ['id' => 'c2']) }}</div>
-                    <div class="col-md-10"><span class="text-bold">MANUAL</span><br/>
-                        {{trans('core.select_categories_to_register')}}<br/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-offset-2">
-
-                        <div class="form-group multiselect">
-                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <hr/>
                         </div>
-
                     </div>
-                </div>
-                <div class="row text-uppercase">
-                    <div class="col-md-7 mb-20 mt-20 pt-20">
+
+                    <div class="row">
+                        <div class="col-md-1 col-md-offset-1">{{ Form::radio('config', '1', false, ['id' => 'c2']) }}</div>
+                        <div class="col-md-10"><span class="text-bold">MANUAL</span><br/>
+                            {{trans('core.select_categories_to_register')}}<br/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-2">
+
+                            <div class="form-group multiselect">
+                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row text-uppercase">
+                        <div class="col-md-7 mb-20 mt-20 pt-20">
                         <span class="text-danger" v-cloak>
                             @{{ error }}
                         </span>
 
+                        </div>
+                        <div class="col-md-5 mb-20 mt-20 pt-20 disabled" id="create_category_link">
+                            {{--<button type="button" class="btn btn-primary"--}}
+                            {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
+                            <a href="#" data-toggle="modal" data-target="#create_category" id="create_category_link"
+                               class="text-semibold text-black" @click="resetModalValues()">
+                            + {{ trans('core.add_custom_category') }}</a>
+                        </div>
                     </div>
-                    <div class="col-md-5 mb-20 mt-20 pt-20">
-                        {{--<button type="button" class="btn btn-primary"--}}
-                        {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
-                        <a href="#" data-toggle="modal" data-target="#create_category"
-                           class="text-semibold text-black" @click="resetModalValues()">
-                        + {{ trans('core.add_custom_category') }}</a>
+                    <div class=" text-right mt-15">
+                        {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
                     </div>
                 </div>
-                <div class=" text-right mt-15">
-                    {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
-                </div>
+
+
             </div>
 
-
         </div>
-
     </div>
 </div>

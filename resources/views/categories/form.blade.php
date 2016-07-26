@@ -20,7 +20,7 @@
     </div><br/>
     <div class="row">
         <div class="col-md-4">
-            {!!  Form::label('gender', trans('core.gender'),['class' => 'text-bold' ]) !!}
+            {!!  Form::label('gender', trans('categories.gender'),['class' => 'text-bold' ]) !!}
 
             <select v-model="genderSelect" class="form-control">
                 <option v-for="gender in genders" v-bind:value="gender.value">

@@ -72,18 +72,25 @@ $day = $now->day;
 
             $('select[name="category[]_helper1"]').prop('disabled', true);
             $('select[name="category[]_helper2"]').prop('disabled', true);
+            $('#create_category_link').bind('click', false);
 
             $('#c1').on('click', function () {
                 $('select[name="category[]_helper1"]').prop('disabled', true);
                 $('select[name="category[]_helper2"]').prop('disabled', true);
+                $('#create_category_link').bind('click', false);
+
                 $('select[name="rule_id"]').prop('disabled', false);
+                $('select[name="rule_id"]').prop('disabled', false);
+
 
             });
 
             $('#c2').on('click', function () {
                 $('select[name="category[]_helper1"]').prop('disabled', false);
                 $('select[name="category[]_helper2"]').prop('disabled', false);
+                $('#create_category_link').unbind('click', false);
                 $('select[name="rule_id"]').prop('disabled', true);
+
             });
 
             $('#rules').on('change', function () {
