@@ -221,3 +221,7 @@ fieldset > a > legend {
 .well.error>a:hover{
     color:grey;
 }
+label[for=bootstrap-duallistbox-nonselected-list_category]
+{
+    margin-bottom:0º;
+}

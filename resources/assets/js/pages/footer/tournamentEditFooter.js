@@ -137,7 +137,6 @@ $(function () {
 
 
                     } else {
-                        console.log(data);
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -290,7 +289,9 @@ $(function () {
     dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
         showFilterInputs: false,
         infoTextEmpty: '',
-        infoText: ''
+        infoText: '',
+        nonSelectedListLabel: 'Non-selected',
+        selectedListLabel: 'Selected',
 
     });
 

@@ -127,7 +127,7 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit','numTeams'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams'));
     }
 
     /**
@@ -142,22 +142,21 @@ class TournamentController extends Controller
 
 
         if ($request->ajax()) { // Category Request goes through AJAX
-            if ($request->has('category')){
-                $res = $tournament->categories()->sync($request->input('category'));
-            }else{
-                $res = $tournament->update($request->all());
-            }
+            $res = $tournament->update($request->all());
             $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
                 : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
             return $result;
+        } else if ($request->has('category')) {
+            $res = $tournament->categories()->sync($request->input('category'));
         } else {
             // Check if user will use preset ( IKF, EKF, LAKC)
             $tournament->setAndConfigureCategories($request->rule_id);
             $res = $tournament->update($request->all());
-            $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
-                : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
-            return redirect(URL::action('TournamentController@edit', $tournament->slug));
         }
+        $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+            : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
+        return redirect(URL::action('TournamentController@edit', $tournament->slug));
+
     }
 
 
