@@ -94,11 +94,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Venue::class, function (Faker\Generator $faker) {
+    $countries = Countries::all()->pluck('id')->toArray();
 
+    return [
+        'venue_name' => $faker->colorName,
+        'address' => $faker->address,
+        'details' => $faker->address,
+        'city' => $faker->city,
+        'CP' => $faker->postcode,
+        'state' => $faker->colorName,
+        'country_id' => $faker->randomElement($countries),
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude
+    ];
+});
 $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
     $users = User::all()->pluck('id')->toArray();
     $levels = TournamentLevel::all()->pluck('id')->toArray();
     $dateIni = $faker->dateTimeBetween('now', '+2 weeks')->format('Y-m-d');
+    $venues = \App\Venue::all()->pluck('id')->toArray();
     return [
         'user_id' => $faker->randomElement($users),
         'name' => $faker->colorName,
@@ -108,9 +123,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
         'sport' => 1,
         'type' => $faker->boolean(),
 //        'mustPay' => $faker->boolean(),
-        'venue' => $faker->address,
-        'latitude' => $faker->latitude,
-        'longitude' => $faker->longitude,
+        'venue_id' => $faker->randomElement($venues),
         'level_id' => $faker->randomElement($levels),
     ];
 });

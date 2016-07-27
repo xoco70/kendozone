@@ -45,23 +45,21 @@ class Tournament extends Model implements SluggableInterface
         'category',
         'rule_id',
         'type',
-        'venue',
-        'latitude',
-        'longitude',
+        'venue_id',
         'level_id'
     ];
 
 
-    protected $dates = ['date', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['dateIni', 'dateFin', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 
     protected static function boot()
     {
         parent::boot();
-        static::creating(function ($tournament) {
-
-            $tournament->addGeoData();
-
-        });
+//        static::creating(function ($tournament) {
+//
+//            $tournament->addVenue();
+//
+//        });
         static::deleting(function ($tournament) {
             foreach ($tournament->categoryTournaments as $ct) {
                 $ct->delete();
@@ -79,21 +77,21 @@ class Tournament extends Model implements SluggableInterface
 
     }
 
-    function addGeoData()
+    function addVenue()
     {
+        $venue = new Venue;
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
         $country = Countries::where('name', '=', $location['country'])->first();
+        $venue->country_id = $country->id;
         if (is_null($country)) {
-            $latitude = 48.858222;
-            $longitude = 2.2945;
+            $venue->latitude = 48.858222;
+            $venue->longitude = 2.2945;
         } else {
-            $latitude = $location['lat'];
-            $longitude = $location['lon'];
+            $venue->latitude = $location['lat'];
+            $venue->longitude = $location['lon'];
         }
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-
-
+        $venue->save();
+        $this->venue_id = $venue->id;
     }
 
     /**
@@ -103,7 +101,7 @@ class Tournament extends Model implements SluggableInterface
      */
     public function owner()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
@@ -112,7 +110,16 @@ class Tournament extends Model implements SluggableInterface
      */
     public function level()
     {
-        return $this->belongsTo('App\TournamentLevel', 'level_id', 'id');
+        return $this->belongsTo(TournamentLevel::class, 'level_id', 'id');
+    }
+
+    /**
+     * Get Full venue object
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class);
     }
 
 
@@ -120,7 +127,7 @@ class Tournament extends Model implements SluggableInterface
     // Or         $tournament->categories()->sync([1, 2, 3]);
     public function categories()
     {
-        return $this->belongsToMany('App\Category')
+        return $this->belongsToMany(Category::class)
             ->withPivot('id')
             ->withTimestamps();
     }

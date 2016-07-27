@@ -162,7 +162,7 @@ $(function () {
                         obj = "Server Error";
                     }
 
-
+                    console.log(obj.name);
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -171,7 +171,7 @@ $(function () {
                         dataType: 'json',
                         dismissQueue: true,
                         timeout: 5000,
-                        text: obj,
+                        text: obj.name[0],
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });

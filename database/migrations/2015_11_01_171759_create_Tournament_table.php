@@ -10,7 +10,7 @@ class CreateTournamentTable extends Migration {
 	{
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
-            $table->Integer('user_id')->unsigned();
+            $table->Integer('user_id')->unsigned()->index();
 			$table->foreign('user_id')
 					->references('id')
 					->on('users')
@@ -38,14 +38,16 @@ class CreateTournamentTable extends Migration {
 			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
 //            $table->boolean('mustPay');
 
-            $table->string("venue");
-            $table->string("latitude");
-            $table->string("longitude");
+            $table->integer("venue_id")->nullable()->unsigned();
 			$table->integer("level_id")->unsigned()->default(1);
 			$table->foreign('level_id')
 					->references('id')
 					->on('tournamentLevel')
 					->onUpdate('cascade');
+
+            $table->foreign('venue_id')
+                ->references('id')
+                ->on('venue');
 
 
 //			$table->string('banner');

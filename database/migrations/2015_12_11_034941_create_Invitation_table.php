@@ -17,7 +17,7 @@ class CreateInvitationTable extends Migration
             $table->text('code', 255);
             $table->string('email');
             $table->string('object_type'); // We can invite to tournaments, teams, etc.
-            $table->integer('object_id')->unsigned();
+            $table->integer('object_id')->unsigned()->index();
 
             $table->date('expiration');
             $table->boolean('active');

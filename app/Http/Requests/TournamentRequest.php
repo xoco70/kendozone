@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Tournament;
+use App\Venue;
 use Illuminate\Support\Facades\Auth;
 
 class TournamentRequest extends Request
@@ -27,32 +29,86 @@ class TournamentRequest extends Request
      */
     public function rules()
     {
-        // If the rules are defined, categories are no longer mandatory
-        if ($this->rule_id == 0) {
-            return [
-                'name' => 'required|min:6',
-                'dateIni' => 'required|date',
-                'dateFin' => 'required|date',
-                'category' => 'required',
-            ];
+//        dd($this->exists('dateIni'));
+        switch (true) {
+
+            case $this->exists('dateIni'):
+                return [
+                    'name' => 'required|min:6',
+                    'dateIni' => 'required|date',
+                    'dateFin' => 'required|date',
+                ];
+            case $this->exists('longitude'):
+                return [
+                    'venue_name' => 'required|min:3'
+                ];
+            case $this->has('category'):
+                return [
+                    'category' => 'required'
+                ];
+
+            case $this->rule_id == 0:
+                return [
+                    'name' => 'required|min:6',
+                    'dateIni' => 'required|date',
+                    'dateFin' => 'required|date',
+                    'category' => 'required',
+                ];
+            default:
+                return [
+                    'name' => 'required|min:6',
+                    'dateIni' => 'required|date',
+                    'dateFin' => 'required|date',
+                ];
+
         }
 
-        return [
-            'name' => 'required|min:6',
-            'dateIni' => 'required|date',
-            'dateFin' => 'required|date',
-        ];
 
     }
 
+    /**
+     * @return Tournament $tournament
+     */
     public function persist()
     {
-        $tournament = Auth::user()->tournaments()->create($this->except('category','config'));
+        $tournament = Auth::user()->tournaments()->create($this->except('category', 'config'));
         if ($this->rule_id == 0) {
             $tournament->categories()->sync($this->input('category'));
+
         } else {
             $tournament->setAndConfigureCategories($this->rule_id);
         }
         return $tournament;
+    }
+
+    /**
+     * @param Tournament $tournament
+     * @return array
+     */
+    public function update(Tournament $tournament, Venue $venue)
+    {
+
+        switch (true) {
+
+            case $this->exists('dateIni'):
+
+                $res = $tournament->update($this->all());
+
+                break;
+            case $this->exists('longitude'):
+                $tournament->venue_id = $venue->id;
+                $res = $tournament->save();
+                break;
+
+            case $this->has('category'):
+                $res = $tournament->categories()->sync($this->input('category'));
+                break;
+            default:
+                $tournament->setAndConfigureCategories($this->rule_id);
+                $res = $tournament->update($this->all());
+                break;
+
+        }
+        return $res;
     }
 }

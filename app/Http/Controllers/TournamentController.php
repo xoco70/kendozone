@@ -8,8 +8,10 @@ use App\CategoryTournament;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
 use App\Http\Requests\TournamentRequest;
+use App\Http\Requests\VenueRequest;
 use App\Tournament;
 use App\TournamentLevel;
+use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +118,10 @@ class TournamentController extends Controller
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::lists('name', 'id');
         $categories = new Collection();
+        $tournament->venue == null
+            ? $venue = new Venue
+            : $venue = $tournament->venue;
+
         foreach ($categories1 as $category) {
 
             $category->alias != '' ? $category->name = $category->alias
@@ -129,32 +135,25 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams','countries'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams','countries','venue'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param TournamentRequest|Request $request
+     * @param TournamentRequest $request
      * @param Tournament $tournament
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Tournament $tournament)
+    public function update(TournamentRequest $request, VenueRequest $venueRequest, Tournament $tournament)
     {
+        $venue = new Venue;
 
-
-        if ($request->ajax()) { // Category Request goes through AJAX
-            $res = $tournament->update($request->all());
-            $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
-                : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
-            return $result;
-        } else if ($request->has('category')) {
-            $res = $tournament->categories()->sync($request->input('category'));
-        } else {
-            // Check if user will use preset ( IKF, EKF, LAKC)
-            $tournament->setAndConfigureCategories($request->rule_id);
-            $res = $tournament->update($request->all());
+        if ($venueRequest->has('venue_name')){
+            $venue->fill($venueRequest->all());
+            $venue->save();
         }
+        $res = $request->update($tournament, $venue);
         $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
             : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
         return redirect(URL::action('TournamentController@edit', $tournament->slug));

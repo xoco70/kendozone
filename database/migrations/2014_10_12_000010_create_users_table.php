@@ -24,15 +24,15 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
 
             // FK is definded in create_FK migration
-            $table->integer('federation_id')->unsigned()->default(1);
-            $table->integer('association_id')->unsigned()->default(1);
-            $table->integer('club_id')->unsigned()->default(1);
+            $table->integer('federation_id')->unsigned()->default(1)->index();
+            $table->integer('association_id')->unsigned()->default(1)->index();
+            $table->integer('club_id')->unsigned()->default(1)->index();
             $table->integer('grade_id')->unsigned()->default(1);
 
             $table->string('city')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->integer('country_id')->unsigned();
+            $table->integer('country_id')->unsigned()->index();
 
             $table->string('gender')->nullable();
             $table->string('avatar')->nullable();

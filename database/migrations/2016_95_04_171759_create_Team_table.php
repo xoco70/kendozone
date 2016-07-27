@@ -11,10 +11,10 @@ class CreateTeamTable extends Migration
         Schema::create('team', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('category_tournament_id')->unsigned(); // A checar
+            $table->integer('category_tournament_id')->unsigned()->index(); // A checar
             $table->string('picture')->nullable();
             $table->string('entity_type')->nullable(); // Club, Assoc, Fed
-            $table->integer('entity_id')->unsigned()->nullable();
+            $table->integer('entity_id')->unsigned()->nullable()->index();
             $table->timestamps();
 
 

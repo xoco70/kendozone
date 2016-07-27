@@ -3,6 +3,7 @@
 use App\CategoryTournament;
 use App\CategoryTournamentUser;
 use App\Tournament;
+use App\Venue;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,7 @@ class TournamentSeeder extends Seeder
     public function run()
     {
 //        $faker = Faker::create();
-//        $users = User::all()->pluck('id')->toArray();
+        $venues = Venue::all()->pluck('id')->toArray();
 
         // Tournament creation
         Tournament::truncate();
@@ -30,8 +31,7 @@ class TournamentSeeder extends Seeder
             'registerDateLimit' =>  $dateIni,
             'sport' => 1,
             'type' => 0,
-//            'mustPay' => 1,
-            'venue' => "CDOM",
+            'venue_id' => $faker->randomElement($venues),
 
 
         ]);
