@@ -87,7 +87,7 @@ class TournamentRequest extends Request
      */
     public function update(Tournament $tournament, Venue $venue)
     {
-
+        $res = null;
         switch (true) {
 
             case $this->exists('dateIni'):

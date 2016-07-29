@@ -7,7 +7,7 @@
             <div class="col-lg-12 mt-20">
                 <div class="form-group">
                     {!! Form::label('venue_name', trans('core.name'),['class' => 'text-bold' ]) !!}
-                    {!! Form::text('venue_name', $venue->name, ['class' => 'form-control']) !!}
+                    {!! Form::text('venue_name', $venue->venue_name, ['class' => 'form-control']) !!}
                 </div>
 
                 {!! Form::hidden('latitude', $venue->latitude, ['id' =>'latitude']) !!}

@@ -13,7 +13,6 @@ use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
@@ -122,6 +121,8 @@ class TournamentController extends Controller
             ? $venue = new Venue
             : $venue = $tournament->venue;
 
+
+
         foreach ($categories1 as $category) {
 
             $category->alias != '' ? $category->name = $category->alias
@@ -135,28 +136,38 @@ class TournamentController extends Controller
 
         $levels = TournamentLevel::pluck('name', 'id');
 
-        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams','countries','venue'));
+        return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams', 'countries', 'venue'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param TournamentRequest $request
+     * @param VenueRequest $venueRequest
      * @param Tournament $tournament
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(TournamentRequest $request, VenueRequest $venueRequest, Tournament $tournament)
     {
         $venue = new Venue;
+//        $club->update($request->except(['federation_id']));
+        if ($venueRequest->has('venue_name')) {
 
-        if ($venueRequest->has('venue_name')){
             $venue->fill($venueRequest->all());
             $venue->save();
         }
         $res = $request->update($tournament, $venue);
-        $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
-            : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
-        return redirect(URL::action('TournamentController@edit', $tournament->slug));
+
+        if ($request->ajax()) {
+            $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
+                : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
+            return $result;
+        } else {
+            $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+                : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
+            return redirect(URL::action('TournamentController@edit', $tournament->slug));
+        }
+
 
     }
 

@@ -25,19 +25,19 @@ class AuthCest
 
 
     // test
-    public function loginFB(\AcceptanceTester $I)
-    {
-        App::setLocale('en');
-
-        Auth::logout();
-        $I->amOnPage('/auth/login');
-        $I->click('#fb');
-        $I->fillField('email', 'xoco70@hotmail.com');
-        $I->fillField('pass', 'C4t3m4c000');
-        $I->click('login'); // press???
-        $I->see(env('APP_NAME')); // Footer is the only common screen
-
-    }
+//    public function loginFB(\AcceptanceTester $I)
+//    {
+//        App::setLocale('en');
+//
+//        Auth::logout();
+//        $I->amOnPage('/auth/login');
+//        $I->click('#fb');
+//        $I->fillField('email', 'xoco70@hotmail.com');
+//        $I->fillField('pass', '');
+//        $I->click('login'); // press???
+//        $I->see(env('APP_NAME')); // Footer is the only common screen
+//
+//    }
 
     
 

@@ -123,12 +123,10 @@ $(function () {
                         else $('#share_tournament').hide();
 
                         // Set Venue Badge
-                        var venueSize = $('[name="venue"]').val().length;
+                        var venueSize = $('[name="venue_name"]').val().length;
                         var latSize = $('[name="latitude"]').val().length;
                         var longSize = $('[name="longitude"]').val().length;
-                        // console.log(venueSize);
-                        // console.log(latSize);
-                        // console.log(longSize);
+
                         if (venueSize > 0 && latSize > 0 && longSize > 0) {
                             $('#venue-status').show();
                         } else {
@@ -137,32 +135,44 @@ $(function () {
 
 
                     } else {
+                        console.log(data);
+                        btnUpdateTour.prop("disabled", false);
+                        btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
-                            type: 'error',
+                            type: 'warning',
                             width: 200,
                             dismissQueue: true,
                             timeout: 5000,
                             text: url_edit,
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
-                        btnUpdateTour.prop("disabled", false);
-                        btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                     }
 
                 },
                 error: function (data) {
+                    var text = "";
                     var json = data.responseText;
                     var obj = null;
-
-                    try{
+                    console.log("responseText:" + data.responseText);
+                    try {
                         obj = jQuery.parseJSON(json);
-                    }catch(err){
-                        obj = "Server Error";
+                        if (obj.hasOwnProperty('venue_name')) {
+                            text += obj.venue_name[0] + "<br/>";
+                        }
+                        if (obj.hasOwnProperty('CP')) {
+                            text += obj.CP[0] + "<br/>";
+                        }
+                        console.log("text:" + text);
+                    } catch (err) {
+                        text = "Server Error";
                     }
 
-                    console.log(obj.name);
+                    console.log(text);
+
+                    btnUpdateTour.prop("disabled", false);
+                    btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -171,12 +181,11 @@ $(function () {
                         dataType: 'json',
                         dismissQueue: true,
                         timeout: 5000,
-                        text: obj.name[0],
+                        text: text,
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
-                    btnUpdateTour.prop("disabled", false);
-                    btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
+
 
                 }
             }

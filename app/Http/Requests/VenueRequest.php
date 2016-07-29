@@ -21,10 +21,13 @@ class VenueRequest extends Request
      */
     public function rules()
     {
-        return [
-            'venue_name' => 'required',
-            'CP' => 'numeric|digits:5',
-            'country_id' => 'required'
-        ];
+        if ($this->exists('venue_name')){
+            return [
+                'venue_name' => 'required',
+                'CP' => 'numeric|digits:5',
+                'country_id' => 'required'
+            ];
+        }
+        return [];
     }
 }

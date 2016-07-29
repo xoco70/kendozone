@@ -31,7 +31,8 @@ class AssociationController extends Controller
             ->forUser(Auth::user())
             ->where('id','>',1)
             ->get();
-        return view('associations.index', compact('associations'));
+        $currentModelName = trans_choice('core.association',1);
+        return view('associations.index', compact('associations', 'currentModelName'));
     }
 
 

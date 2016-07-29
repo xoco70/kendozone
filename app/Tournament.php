@@ -182,7 +182,22 @@ class Tournament extends Model implements SluggableInterface
     }
 
 
+    public function getDateAttribute($date)
+    {
+        return $date;
+    }
+
     public function getRegisterDateLimitAttribute($date)
+    {
+        return $date;
+    }
+
+    public function getDateIniAttribute($date)
+    {
+        return $date;
+    }
+
+    public function getDateFinAttribute($date)
     {
         return $date;
     }

@@ -15,15 +15,15 @@ class CreateVenueTable extends Migration
         Schema::create('venue', function (Blueprint $table) {
             $table->increments('id');
             $table->string("venue_name");
-            $table->string("coords");
-            $table->string("address");
-            $table->string("details");
-            $table->string("city");
-            $table->integer("CP");
+            $table->string("coords")->nullable();
+            $table->string("address")->nullable();
+            $table->string("details")->nullable();
+            $table->string("city")->nullable();
+            $table->string("CP")->nullable();
             $table->string("state")->nullable();
-            $table->integer("country_id");
-            $table->string("latitude");
-            $table->string("longitude");
+            $table->integer("country_id")->nullable();
+            $table->string("latitude")->nullable();
+            $table->string("longitude")->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
