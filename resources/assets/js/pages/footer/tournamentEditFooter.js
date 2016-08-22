@@ -77,6 +77,22 @@ $(function () {
         $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
     });
 
+
+
+// EDIT CATEGORY ALIAS
+    $('#tbl').on('click','.xx',function() {
+
+        var t = $(this).text();
+        $(this).text('').append($('<input />',{'value' : t}));
+        $('input').focus();
+
+
+    });
+
+    $('#tbl').on('blur','input',function() {
+        $(this).parent().text($(this).val());
+    });
+
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
@@ -195,7 +211,6 @@ $(function () {
 //EDIT CATEGORIES
     var categoriesSize = null;
 
-// 'form_'.$tournament->slug.'_'.$categoryId.'_'.$setting->id
     $('.save_category').on('click', function (e) {
         e.preventDefault();
         var inputData = $('.save_category').serialize();
@@ -333,8 +348,11 @@ $(function () {
         close: '',
 
         onSet: function () {
-            pickerFin.set('min', this.get('select'));
-            pickerLimit.set('min', this.get('select'));
+            if (this.get('select')!=null){
+                pickerFin.set('min', this.get('select'));
+                pickerLimit.set('min', this.get('select'));
+
+            }
 
             if (pickerFin.get() < this.get()) {
                 pickerFin.clear();
@@ -355,13 +373,5 @@ $(function () {
         close: ''
     });
 
-    // $('#generate_tree').on('click', function () {
-    //     swal({
-    //         title: "{!! trans('core.information') !!}",
-    //         text: "{!!   trans('msg.all_categories_not_configured') !!}",
-    //         confirmButtonColor: "#2196F3",
-    //         type: "info"
-    //     });
-    // });
 })
 ;

@@ -44,13 +44,10 @@ $day = $now->day;
         var dualListIds = [];
 
 
-        var month = "{{$month}}";
-        console.log(month);
-        monthIndex = typeof value == 'string' ? 1 : 0
-        console.log(monthIndex);
+        var minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
         $(function () {
             var $input = $('.dateFin').pickadate({
-                min: ["{{$year}}", "{{$month}}", "{{$day}}"],
+                min: minDay,
                 format: 'yyyy-mm-dd',
                 today: '',
                 clear: '',
@@ -66,29 +63,11 @@ $day = $now->day;
                 close: '',
 
                 onSet: function () {
-                    pickerFin.set('min', this.get('select'));
+                    if (this.get('select') != null)
+                        pickerFin.set('min', this.get('select'));
                 }
             });
             var pickerIni = $inputIni.pickadate('picker')
-
-
-            pickerIni.on({
-                open: function() {
-                    console.log('Opened up!')
-                },
-                close: function() {
-                    console.log('Closed now')
-                },
-                render: function() {
-                    console.log('Just rendered anew')
-                },
-                stop: function() {
-                    console.log('See ya')
-                },
-                set: function(thingSet) {
-                    console.log('Set stuff:', thingSet)
-                }
-            })
 
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
