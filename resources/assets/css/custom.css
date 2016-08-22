@@ -1,20 +1,20 @@
 /* col-xs */
-@media (max-width: 767px) {
+@media (max-width: 950px) {
     .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament, .protip-container {
         display: none;
     }
 
 }
 
-
 .undo_link {
     color: #FFF;
     font-weight: 700;
 }
 
-.btn, legend{
+.btn, legend {
     font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
+
 ul > ol.breadcrumb > li {
     font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -68,22 +68,25 @@ fieldset > a > legend {
 
 }
 
-.btn.text-primary.border-primary.border-4.seeall{
-    width:107px;
+.btn.text-primary.border-primary.border-4.seeall {
+    width: 107px;
 
 }
-.btn.text-success.border-success.border-4.seeall{
-    width:107px;
+
+.btn.text-success.border-success.border-4.seeall {
+    width: 107px;
 
 }
+
 .btn.text-success.border-success.border-4:hover {
-    color: #FFF!important;
+    color: #FFF !important;
     background-color: #7CD69C;
-    border-color: #7CD69C!important;
+    border-color: #7CD69C !important;
 
 }
-.btn.text-primary.border-4:hover{
-    color: #FFF!important;
+
+.btn.text-primary.border-4:hover {
+    color: #FFF !important;
     background-color: #ff5663;
     border-color: #ff5663;
 }
@@ -146,17 +149,20 @@ fieldset > a > legend {
     }
 
 }
-.noty_message > .row > .noty_icon > .icon-trophy2{
- font-size: 40px;
- padding-top: 10px;
- padding-bottom: 10px;
+
+.noty_message > .row > .noty_icon > .icon-trophy2 {
+    font-size: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
 }
-.noty_message > .row > .noty_icon > .icon-warning{
+
+.noty_message > .row > .noty_icon > .icon-warning {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 40px;
 }
+
 .ui-tooltip {
     background: #666;
     color: white;
@@ -164,10 +170,12 @@ fieldset > a > legend {
     padding: 0;
     opacity: 1;
 }
+
 .ui-tooltip-content {
     position: relative;
     padding: 1em;
 }
+
 .ui-tooltip-content::after {
     content: '';
     position: absolute;
@@ -175,6 +183,7 @@ fieldset > a > legend {
     display: block;
     width: 0;
 }
+
 .right .ui-tooltip-content::after {
     top: 18px;
     left: -10px;
@@ -189,7 +198,8 @@ fieldset > a > legend {
 .form-group.multiselect {
     margin-bottom: -20px;
 }
-.border-solid{
+
+.border-solid {
     border-style: solid;
 }
 
@@ -206,22 +216,27 @@ fieldset > a > legend {
 [v-cloak] {
     display: none;
 }
-.add_category{
+
+.add_category {
     margin-top: -20px;
 }
-.well.dash{
+
+.well.dash {
     border: 0;
     border-bottom: 4px solid;
-    border-radius:0
-}
-.well.error>a{
-    color:black;
+    border-radius: 0
 }
 
-.well.error>a:hover{
-    color:grey;
+.well.error > a {
+    color: black;
 }
-label[for=bootstrap-duallistbox-nonselected-list_category]
-{
-    margin-bottom:0;
+
+.well.error > a:hover {
+    color: grey;
 }
+
+label[for=bootstrap-duallistbox-nonselected-list_category] {
+    margin-bottom: 0;
+}
+
+
