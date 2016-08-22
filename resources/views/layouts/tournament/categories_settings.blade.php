@@ -29,7 +29,8 @@
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
 
-                                            {{trans($categoryTournament->category->buildName($grades))}}
+                                            {{trans($categoryTournament->category->buildName($grades))}} <i
+                                                    class="glyphicon  glyphicon-edit  status-icon"></i>
                                         </h6>
                                     </div>
                                 </a>
@@ -67,10 +68,21 @@
                     </div>
                 @endforeach
 
-
             </div>
+
+
         </div>
 
+
+        @if ($settingSize > 0 && $settingSize == $categorySize)
+            <br/>
+            <a href="{{ URL::action('InviteController@create',  $tournament->slug) }}" id="add_competitors" type="button"
+               class="btn btn-success p-20 mr-10 pull-right" > @lang('core.invite_competitors') <i class="glyphicon glyphicon-chevron-right"></i></a>
+        @else
+            <br/>
+            <a href="{{ URL::action('InviteController@create',  $tournament->slug) }}" id="add_competitors" type="button"
+               class="hide btn btn-success mr-10 pull-right p-20"> @lang('core.invite_competitors') <i class="glyphicon glyphicon-chevron-right"></i> </a>
+        @endif
 
     </div>
     <!-- /simple panel -->
