@@ -21,7 +21,7 @@
 <?php
 $now = Carbon\Carbon::now();
 $year = $now->year;
-$month = $now->month;
+$month = $now->month-1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
 $day = $now->day;
 
 ?>
@@ -43,9 +43,14 @@ $day = $now->day;
         });
         var dualListIds = [];
 
+
+        var month = "{{$month}}";
+        console.log(month);
+        monthIndex = typeof value == 'string' ? 1 : 0
+        console.log(monthIndex);
         $(function () {
             var $input = $('.dateFin').pickadate({
-                min: [{{$year}}, {{$month}}, {{$day}}],
+                min: ["{{$year}}", "{{$month}}", "{{$day}}"],
                 format: 'yyyy-mm-dd',
                 today: '',
                 clear: '',

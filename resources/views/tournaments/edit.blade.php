@@ -64,7 +64,7 @@
     <?php
     $now = Carbon\Carbon::now();
     $year = $now->year;
-    $month = $now->month;
+    $month = $now->month-1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
     $day = $now->day;
 
     $userLat = Auth::getUser()->latitude;
