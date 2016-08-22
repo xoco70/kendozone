@@ -56,7 +56,7 @@ return [
     'invitation_needed' => 'You need an invitation to register to this tournament.',
     'invitation_expired' => 'Registration date is due or invitation expired.',
     'invitation_used' => 'Invitation already used',
-    'invitation_sent' => 'Invitation has been sent',
+    'invitation_sent' => 'Invitations have been sent',
     'tx_for_register_tournament' => 'Thanks for register tournament :tournament',
     // Permisos
     'access_denied' => 'Access Denied',

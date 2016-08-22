@@ -4,6 +4,14 @@
 <div class="panel panel-flat">
     <div class="panel-body">
         <div class="container-fluid">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    {!! Form::label('name', trans('core.coords'),['class' => 'text-bold' ]) !!}
+                    <div class="map-wrapper locationpicker-default"
+                         id="locationpicker-default"></div>
+                </div>
+            </div>
+
             <div class="col-lg-12 mt-20">
                 <div class="form-group">
                     {!! Form::label('venue_name', trans('core.name'),['class' => 'text-bold' ]) !!}
@@ -37,17 +45,9 @@
                 ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
 
             </div>
-            <div class="col-lg-12">
-                <div class="form-group">
-                    {!! Form::label('name', trans('core.coords'),['class' => 'text-bold' ]) !!}
-                    <div class="map-wrapper locationpicker-default"
-                         id="locationpicker-default"></div>
-                </div>
-            </div>
         </div>
         <div align="right">
-            <button type="submit"
-                    class="btn btn-success btn-update-tour"><i></i>{{trans("core.save")}}
+            <button type="submit" class="btn btn-success btn-update-tour mr-20 mt-20"><i></i>{{trans("core.save")}}
             </button>
         </div>
     </div>

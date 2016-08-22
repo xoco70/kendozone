@@ -1,17 +1,13 @@
 $(function () {
 
-    $('.fightDuration').timepicker(('option',
-
-    {
+    $('.fightDuration').timepicker(('option', {
         'minTime': '2:00',
         'maxTime': '10:00',
         'timeFormat': 'H:i',
         'step': '15'
     }));
 
-    $('.enchoDuration').timepicker(('option',
-
-    {
+    $('.enchoDuration').timepicker(('option', {
         'minTime': '1:00',
         'maxTime': '10:00',
         'timeFormat': 'H:i',
@@ -50,14 +46,27 @@ $(function () {
                 latitudeInput: $('#latitude'),
                 longitudeInput: $('#longitude'),
                 radiusInput: $('#us2-radius'),
-                locationNameInput: $('#city')
-            }, onchanged: function (currentLocation, radius, isMarkerDropped) {
+                locationNameInput: $('#address')
+            },
+            enableAutocomplete: true,
+            onchanged: function (currentLocation, radius, isMarkerDropped) {
+                var addressComponents = $(this).locationpicker('map').location.addressComponents;
                 $("#latitude").val(currentLocation.latitude);
                 $("#longitude").val(currentLocation.longitude);
+                updateControls(addressComponents);
+
+            }, oninitialized: function(component) {
+                var addressComponents = $(component).locationpicker('map').location.addressComponents;
+                updateControls(addressComponents);
             }
+
         });
     });
 
+    function updateControls(addressComponents) {
+        $('#city').val(addressComponents.city);
+        $('#CP').val(addressComponents.postalCode);
+    }
 
     $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
@@ -78,18 +87,17 @@ $(function () {
     });
 
 
-
 // EDIT CATEGORY ALIAS
-    $('#tbl').on('click','.xx',function() {
+    $('#tbl').on('click', '.xx', function () {
 
         var t = $(this).text();
-        $(this).text('').append($('<input />',{'value' : t}));
+        $(this).text('').append($('<input />', {'value': t}));
         $('input').focus();
 
 
     });
 
-    $('#tbl').on('blur','input',function() {
+    $('#tbl').on('blur', 'input', function () {
         $(this).parent().text($(this).val());
     });
 
@@ -270,6 +278,8 @@ $(function () {
                         // console.log(allCategoriesSize);
                         if (categoriesSize == allCategoriesSize) {
                             $('#categories-status').removeClass().addClass('badge badge-success');
+                            // Show Add Competitors Button
+                            $('#add_competitors').removeClass('hide');
                         }
 
 
@@ -348,7 +358,7 @@ $(function () {
         close: '',
 
         onSet: function () {
-            if (this.get('select')!=null){
+            if (this.get('select') != null) {
                 pickerFin.set('min', this.get('select'));
                 pickerLimit.set('min', this.get('select'));
 

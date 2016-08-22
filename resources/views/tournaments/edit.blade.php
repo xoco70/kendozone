@@ -101,7 +101,7 @@
         {{--        var rule_warning = "{{ trans('') }}";--}}
     </script>
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
-    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
     {!! Html::script('js/categoryCreate.js') !!}
 
 @stop
