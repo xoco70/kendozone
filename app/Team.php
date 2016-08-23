@@ -9,17 +9,17 @@ class Team extends Model
 
     protected $table = 'team';
     public $timestamps = true;
-    protected $fillable = ['name', 'category_tournament_id'];
+    protected $fillable = ['name', 'championship_id'];
 
 
-    public function category_tournament()
+    public function championship()
     {
-        return $this->belongsTo(CategoryTournament::class);
+        return $this->belongsTo(Championship::class);
     }
 
     public function category()
     {
-        return $this->hasManyThrough(Category::class, CategoryTournament::class);
+        return $this->hasManyThrough(Category::class, Championship::class);
     }
 
     /**

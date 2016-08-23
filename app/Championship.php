@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CategoryTournament extends Model
+class Championship extends Model
 {
     use SoftDeletes;
     protected $dates = ['created_at', 'updated_at','deleted_at'];
-    protected $table = 'category_tournament';
+    protected $table = 'championship';
 
     public $timestamps = true;
     protected $fillable = [
@@ -22,20 +22,20 @@ class CategoryTournament extends Model
     {
         parent::boot();
 
-        static::deleting(function ($categoryTournament) {
-            $categoryTournament->ctus()->delete();
-            $categoryTournament->settings()->delete();
+        static::deleting(function ($championship) {
+            $championship->ctus()->delete();
+            $championship->settings()->delete();
         });
-        static::restoring(function ($categoryTournament) {
-            $categoryTournament->ctus()->restore();
-            $categoryTournament->settings()->restore();
+        static::restoring(function ($championship) {
+            $championship->ctus()->restore();
+            $championship->settings()->restore();
 
         });
     }
 
     public function ctus()
     {
-        return $this->hasMany(CategoryTournamentUser::class, 'category_tournament_id', 'id');
+        return $this->hasMany(ChampionshipUser::class, 'championship_id', 'id');
     }
 
     public function category()
@@ -51,7 +51,7 @@ class CategoryTournament extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'category_tournament_user', 'category_tournament_id')
+        return $this->belongsToMany(User::class, 'championship_user', 'championship_id')
             ->withPivot('confirmed')
             ->withTimestamps();
     }
@@ -68,9 +68,9 @@ class CategoryTournament extends Model
 
 
 
-    public function categoryTournaments()
+    public function championships()
     {
-        return $this->belongsToMany(CategoryTournament::class, 'category_tournament_user');
+        return $this->belongsToMany(Championship::class, 'championship_user');
     }
 
     public function setting()

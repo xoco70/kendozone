@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
 
-class CategoryTournamentUser extends Model
+class ChampionshipUser extends Model
 {
     use SoftDeletes;
     use AuditingTrait;
     protected $DATES = ['created_at', 'updated_at','deleted_at'];
 
 
-    protected $table = 'category_tournament_user';
+    protected $table = 'championship_user';
     public $timestamps = true;
     protected $fillable = [
         "tournament_category_id",
@@ -22,30 +22,30 @@ class CategoryTournamentUser extends Model
     ];
 
 
-    public function categoryTournament($ctId)
+    public function championship($ctId)
     {
-        $tcu = CategoryTournamentUser::where('category_tournament_id', $ctId)->first();
-        $CategoryTournamentId = $tcu->category_tournament_id;
-        $tc = CategoryTournament::find($CategoryTournamentId);
+        $tcu = ChampionshipUser::where('championship_id', $ctId)->first();
+        $championshipId = $tcu->championship_id;
+        $championship = Championship::find($championshipId);
 
-        return $tc;
+        return $championship;
     }
     public function category($ctuId)
     {
-        $tc = $this->categoryTournament($ctuId);
-        $categoryId = $tc->category_id;
+        $championship = $this->championship($ctuId);
+        $categoryId = $championship->category_id;
         $cat = Category::find($categoryId);
         return $cat;
     }
 
 
-    public function categoryTournament2(){
-        return $this->hasOne('App\CategoryTournament');
+    public function championship2(){
+        return $this->hasOne('App\Championship');
 
 
     }
     public function tournament($ctuId){
-        $tc = $this->categoryTournament($ctuId);
+        $tc = $this->championship($ctuId);
         $tourmanentId = $tc->tournament_id;
         $tour = Tournament::findOrNew($tourmanentId);
         return $tour;

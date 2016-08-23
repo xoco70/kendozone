@@ -31,7 +31,7 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('teams', 'teams.category_tournament.category')->find($tournament->id);
+        $tournament = Tournament::with('teams', 'teams.championship.category')->find($tournament->id);
         return view("teams.index", compact('tournament'));
 
     }

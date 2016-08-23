@@ -14,6 +14,7 @@ require('laravel-elixir-vueify');
 
 elixir(function (mix) {
     mix.browserify('vue/pages/categoryCreate.js');
+    mix.browserify('vue/pages/AddAliasToCategory.js');
     mix.browserify('vue/pages/userForm.js');
 
 
@@ -39,14 +40,6 @@ elixir(function (mix) {
         'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
-    // mix.scripts([
-    //     'plugins/tables/footable/footable.min.js',
-    // ], 'public/js/pages/header/tournamentIndex.js');
-    //
-    // mix.scripts([
-    //     'plugins/tables/footable/footable.min.js',
-    // ], 'public/js/pages/header/userIndex.js');
-
 
     mix.scripts([
         'plugins/tables/footable/footable.min.js'
@@ -57,7 +50,6 @@ elixir(function (mix) {
         'plugins/pickers/pickadate/picker.js',
         'plugins/pickers/pickadate/picker.date.js',
         'plugins/notifications/bootbox.min.js',
-        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentCreate.js');
 
     mix.scripts([
@@ -75,7 +67,6 @@ elixir(function (mix) {
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
         'plugins/forms/inputs/duallistbox.min.js',
-        // 'plugins/pickers/location/location.js',
         'components/jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js',
         'plugins/pickers/pickadate/picker.js',
         'plugins/pickers/pickadate/picker.date.js',
@@ -83,7 +74,6 @@ elixir(function (mix) {
         'jquery.timepicker.js',
         'plugins/jquery-dateFormat.min.js',
         'pages/footer/tournamentEditFooter.js',
-        // 'vue/pages/categoryCreate.js'
     ], 'public/js/pages/header/tournamentEdit.js');
 
     mix.scripts([

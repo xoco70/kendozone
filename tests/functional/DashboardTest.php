@@ -1,7 +1,7 @@
 <?php
 
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
+use App\Championship;
+use App\ChampionshipUser;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -58,18 +58,18 @@ class DashboardTest extends TestCase
 
         // Now configure 2/2 categories
 
-        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament0->id,'category_id'=>1]);
-        $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament0->id,'category_id'=>2]);
+        $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>1]);
+        $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>2]);
 
-        $cs1 = factory(App\CategorySettings::class)->create(['category_tournament_id' => $ct1->id]);
-        $cs2 = factory(App\CategorySettings::class)->create(['category_tournament_id' => $ct2->id]);
+        $cs1 = factory(App\CategorySettings::class)->create(['championship_id' => $ct1->id]);
+        $cs2 = factory(App\CategorySettings::class)->create(['championship_id' => $ct2->id]);
 
         $this->visit('/')
             ->seeInElement("span.text-muted", trans('core.congigure_categories'));
 
         // Now add ctu
 
-        factory(CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id]);
+        factory(ChampionshipUser::class)->create(['championship_id' => $ct1->id]);
 
         $this->visit('/')
             ->see(trans('core.tournaments_created'))

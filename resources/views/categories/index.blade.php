@@ -29,13 +29,13 @@
                                 </thead>
                                 @foreach($categories as $category)
                                     <?php
-                                     $categoryTournament = DB::table('category_tournament')
+                                     $championship = DB::table('championship')
                                                             ->where('category_id',$category->id)
                                                             ->where('tournament_id',$category->pivot->tournament_id)
                                                             ->first();
 
                                      $settings = DB::table('category_settings')
-                                             ->where('category_tournament_id',$categoryTournament->id)
+                                             ->where('championship_id',$championship->id)
                                              ->first();
 
                                         
@@ -47,7 +47,7 @@
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
-                                    'category_tournament_id' => $categoryTournament->id,
+                                    'championship_id' => $championship->id,
                                     'settings' => $settings->id
                                     ]) !!}">
                                                     {{ $category->id }}</a>
@@ -55,7 +55,7 @@
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@edit',
                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                     'category_tournament_id' => $categoryTournament->id,
+                                     'championship_id' => $championship->id,
                                      'settings' => $settings->id]) !!}">
                                                     {{ $category->name }}</a>
 
@@ -70,7 +70,7 @@
                                                 <a class=" text-info "
                                                    href="{!! URL::action('CategorySettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
-                                   'category_tournament_id' => $categoryTournament->id,
+                                   'championship_id' => $championship->id,
                                    'settings' => $settings->id]) !!}">
                                                     <span class="text-slate glyphicon glyphicon-cog"></span></a>
                                             </td>
@@ -80,13 +80,13 @@
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@create',
                                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                                     'category_tournament_id' =>$category->id]) !!}">
+                                                     'championship_id' =>$category->id]) !!}">
                                                     {{ $category->id }}</a>
                                             </td>
                                             <td>
                                                 <a href="{!!   URL::action('CategorySettingsController@create',
                                                  ['tournamentId'=> $category->pivot->tournament_id,
-                                                  'category_tournament_id' => $category->id]) !!}">
+                                                  'championship_id' => $category->id]) !!}">
                                                     {{ $category->name }}</a>
                                             </td>
                                             <td class="text-center">{!!  $defaultSettings->isTeam == 1 ? $ok : $nok!!}</td>
@@ -99,7 +99,7 @@
                                                 <a class=" text-info "
                                                    href="{!! URL::action('CategorySettingsController@create',
                                                     ['tournamentId'=> $category->pivot->tournament_id,
-                                                     'category_tournament_id' => $category->id]) !!}"><span
+                                                     'championship_id' => $category->id]) !!}"><span
                                                             class="text-slate glyphicon glyphicon-cog"></span></a>
                                             </td>
                                         </tr>

@@ -61,7 +61,7 @@ class Tournament extends Model implements SluggableInterface
 //
 //        });
         static::deleting(function ($tournament) {
-            foreach ($tournament->categoryTournaments as $ct) {
+            foreach ($tournament->championships as $ct) {
                 $ct->delete();
             }
             $tournament->invites()->delete();
@@ -69,7 +69,7 @@ class Tournament extends Model implements SluggableInterface
         });
         static::restoring(function ($tournament) {
 
-            foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
+            foreach ($tournament->championships()->withTrashed()->get() as $ct) {
                 $ct->restore();
             }
 
@@ -127,7 +127,7 @@ class Tournament extends Model implements SluggableInterface
     // Or         $tournament->categories()->sync([1, 2, 3]);
     public function categories()
     {
-        return $this->belongsToMany(Category::class)
+        return $this->belongsToMany(Category::class,'championship')
             ->withPivot('id')
             ->withTimestamps();
     }
@@ -136,9 +136,9 @@ class Tournament extends Model implements SluggableInterface
      * Get All categoriesTournament that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function categoryTournaments()
+    public function championships()
     {
-        return $this->hasMany(CategoryTournament::class);
+        return $this->hasMany(Championship::class);
     }
 
 
@@ -148,22 +148,22 @@ class Tournament extends Model implements SluggableInterface
      */
     public function categorySettings()
     {
-        return $this->hasManyThrough(CategorySettings::class, CategoryTournament::class);
+        return $this->hasManyThrough(CategorySettings::class, Championship::class);
     }
 
     public function teams()
     {
-        return $this->hasManyThrough(Team::class, CategoryTournament::class);
+        return $this->hasManyThrough(Team::class, Championship::class);
     }
 
     /**
      * Get All competitors that belongs to a tournament
-     * @param null $CategoryTournamentId
+     * @param null $championshipId
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function competitors($CategoryTournamentId = null)
+    public function competitors($championshipId = null)
     {
-        return $this->hasManyThrough(CategoryTournamentUser::class, CategoryTournament::class);
+        return $this->hasManyThrough(ChampionshipUser::class, Championship::class);
     }
 
 
@@ -290,8 +290,8 @@ class Tournament extends Model implements SluggableInterface
 
         // Configure each category creating categorySetting Object
 
-        foreach ($this->categoryTournaments as $categoryTournament) {
-            (new CategorySettings)->createCategorySettingFromOptions($options, $categoryTournament);
+        foreach ($this->championships as $championship) {
+            (new CategorySettings)->createCategorySettingFromOptions($options, $championship);
         }
 
     }
@@ -322,13 +322,13 @@ class Tournament extends Model implements SluggableInterface
     }
 
     /**
-     * create a category List with Category name associated to categoryTournamentId
+     * create a category List with Category name associated to championshipId
      *
      * @return array
      */
     public function buildCategoryList()
     {
-        $cts = CategoryTournament::with('category')->where('tournament_id', $this->id)->get();
+        $cts = Championship::with('category')->where('tournament_id', $this->id)->get();
 
         $array = [];
         foreach ($cts as $ct) {

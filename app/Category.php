@@ -96,12 +96,12 @@ class Category extends Model
     }
 
 //    public function user(){
-//        return $this->belongsToMany('App\User', 'category_tournament_user', 'category_tournament_id');
+//        return $this->belongsToMany('App\User', 'championship_user', 'championship_id');
 //    }
 
-    public function categoryTournament()
+    public function championship()
     {
-        return $this->hasMany(CategoryTournament::class);
+        return $this->hasMany(Championship::class);
     }
 
     public function isTeam()

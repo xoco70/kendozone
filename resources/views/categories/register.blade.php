@@ -1,5 +1,5 @@
 <?php
-$categoryTournaments = $tournament->categoryTournaments;
+$championships = $tournament->championships;
 $i = 0;
 ?>
 
@@ -13,10 +13,10 @@ $i = 0;
 
             <h2 align="center">{{ $tournament->name }}</h2>
             @if (isset($invite))
-                {!! Form::open(['url'=> URL::action('CategoryTournamentController@store',
+                {!! Form::open(['url'=> URL::action('ChampionshipController@store',
                     ['tournament' => $tournament->slug,'invite' => $invite->id] )]) !!}
             @else
-                {!! Form::open(['url'=> URL::action('CategoryTournamentController@store',
+                {!! Form::open(['url'=> URL::action('ChampionshipController@store',
                     ['tournament' => $tournament->slug,'invite' => 0] )]) !!}
 
             @endif
@@ -27,7 +27,7 @@ $i = 0;
                         <legend class="text-semibold">{{Lang::get('core.select_categories_to_register')}}</legend>
 
 
-                        @foreach($categoryTournaments as $categoryTournament)
+                        @foreach($championships as $championship)
                             {{--{{ $key }}--}}
                             @if ($i % 4 == 0)
                                 <div class="row">
@@ -35,11 +35,11 @@ $i = 0;
                                     <div class="col-md-3">
                                         <p>
                                             {{--TODO 1 query x row--}}
-                                            {!!  Form::label('cat['.$categoryTournament->id.']', trans($categoryTournament->category->name)) !!}
+                                            {!!  Form::label('cat['.$championship->id.']', trans($championship->category->name)) !!}
                                             <br/>
-                                            {!!   Form::checkbox('cat['.$categoryTournament->id.']',
-                                                $categoryTournament->id,
-                                                $categoryTournament->users()->where('users.id',Auth::user()->id)->count(),
+                                            {!!   Form::checkbox('cat['.$championship->id.']',
+                                                $championship->id,
+                                                $championship->users()->where('users.id',Auth::user()->id)->count(),
                                                  ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>

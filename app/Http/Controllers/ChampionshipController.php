@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 
-class CategoryTournamentController extends Controller
+class ChampionshipController extends Controller
 {
 
 
@@ -96,7 +96,7 @@ class CategoryTournamentController extends Controller
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
-            $user->categoryTournaments()->sync($categories);
+            $user->championships()->sync($categories);
             if (is_null($invite)) {
                 $invite = new Invite();
                 $invite->code = 'open';

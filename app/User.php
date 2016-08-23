@@ -95,11 +95,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             foreach ($user->tournaments as $tournament) {
                 $tournament->delete();
             }
-            $user->categoryTournamentUsers()->delete();
+            $user->championshipUsers()->delete();
 
         });
         static::restoring(function ($user) {
-            $user->categoryTournamentUsers()->withTrashed()->restore();
+            $user->championshipUsers()->withTrashed()->restore();
             foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
                 $tournament->restore();
             }
@@ -255,12 +255,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'category_tournament_user', 'user_id', 'category_tournament_id');
+        return $this->belongsToMany('App\Category', 'championship_user', 'user_id', 'championship_id');
     }
 
-    public function categoryTournaments()
+    public function championships()
     {
-        return $this->belongsToMany(CategoryTournament::class)
+        return $this->belongsToMany(Championship::class)
             ->withTimestamps();
     }
 
@@ -302,17 +302,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Club::class);
     }
 
-    public function categoryTournamentUsers()
+    public function championshipUsers()
     {
-        return $this->hasMany(CategoryTournamentUser::class);
+        return $this->hasMany(ChampionshipUser::class);
     }
 
     public function myTournaments()
     {
 //        return User::with('')->find($this->id);
-        return Tournament::leftJoin('category_tournament', 'category_tournament.tournament_id', '=', 'tournament.id')
-            ->leftJoin('category_tournament_user', 'category_tournament_user.category_tournament_id', '=', 'category_tournament.id')
-            ->where('category_tournament_user.user_id', '=', $this->id)
+        return Tournament::leftJoin('championship', 'championship.tournament_id', '=', 'tournament.id')
+            ->leftJoin('championship_user', 'championship_user.championship_id', '=', 'championship.id')
+            ->where('championship_user.user_id', '=', $this->id)
             ->select('tournament.*')
             ->distinct();
     }

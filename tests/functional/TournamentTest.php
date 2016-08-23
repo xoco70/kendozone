@@ -1,7 +1,7 @@
 <?php
 use App\CategorySettings;
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
+use App\Championship;
+use App\ChampionshipUser;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -78,7 +78,7 @@ class TournamentTest extends TestCase
         $categoriesAdded = [1, 2];
         // See categories is added
         $tournament = Tournament::where("name", "MyTournament")->first();
-        $categories = DB::table("category_tournament")->where("tournament_id", '=', $tournament->id)->get();
+        $categories = DB::table("championship")->where("tournament_id", '=', $tournament->id)->get();
         foreach ($categories as $item) {
             $this->assertContains($item->category_id, $categoriesAdded);
 
@@ -101,12 +101,12 @@ class TournamentTest extends TestCase
         $categoriesAdded = array_keys(config('options.ikf_settings'));
         // See categories is added
         $tournament = Tournament::where("name", "MyTournament")->first();
-        $categories = CategoryTournament::where("tournament_id", '=', $tournament->id)->get();
+        $categories = Championship::where("tournament_id", '=', $tournament->id)->get();
         foreach ($categories as $ct) {
             $this->assertContains($ct->category_id, $categoriesAdded);
             //TODO We could check the content of the setting
             $this->seeInDatabase('category_settings',
-                ['category_tournament_id' => $ct->id,
+                ['championship_id' => $ct->id,
                 ]);
 
         }
@@ -132,7 +132,7 @@ class TournamentTest extends TestCase
     {
         if ($tournament == null) {
             $tournament = factory(Tournament::class)->create(['name' => 'MyTournament']);
-            $category = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
+            $category = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
         }
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
@@ -165,11 +165,11 @@ class TournamentTest extends TestCase
     {
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
-        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
+        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
 //            ->type('1', 'isTeam0')
@@ -186,7 +186,7 @@ class TournamentTest extends TestCase
             ->press('save0')
 //            ->see(htmlentities(trans('core.operation_successful')))
             ->seeInDatabase('category_settings',
-                ['category_tournament_id' => $ct0->id,
+                ['championship_id' => $ct0->id,
                     'cost' => '100',
 //                    'roundRobinWinner' => '1',
                 ]);
@@ -200,8 +200,8 @@ class TournamentTest extends TestCase
 //    public function it_can_edit_venue()
 //    {
 //        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-//        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-//        $venue = factory(CategoryTournament::class)->create();
+//        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+//        $venue = factory(Championship::class)->create();
 //        $this->visit('/tournaments/' . $tournament->slug . '/edit#tab2')
 //            ->type($venue->name, 'venue_name')
 //            ->type($venue->latitude, 'latitude')
@@ -225,14 +225,14 @@ class TournamentTest extends TestCase
     {
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
-        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
-        factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
+        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
 
         factory(CategorySettings::class)->create([
-            'category_tournament_id' => $ct0->id,
+            'championship_id' => $ct0->id,
             'hasRoundRobin' => 1,
             'roundRobinWinner' => 2,
             'cost' => 100,
@@ -253,7 +253,7 @@ class TournamentTest extends TestCase
             ->press('save0')
 //            ->see(htmlentities(trans('core.operation_successful')))
             ->seeInDatabase('category_settings',
-                ['category_tournament_id' => $ct0->id,
+                ['championship_id' => $ct0->id,
                     'cost' => '200',
                     'roundRobinWinner' => '1',
                 ]);
@@ -275,7 +275,7 @@ class TournamentTest extends TestCase
 
         //add categories
 
-        factory(CategoryTournament::class)->create(['tournament_id' => $myTournament->id]);
+        factory(Championship::class)->create(['tournament_id' => $myTournament->id]);
 
         $this->it_edit_tournament($myTournament); // it must be OK because tournament is mine
         $hisTournament = factory(Tournament::class)->create(['user_id' => $user->id]);
@@ -292,20 +292,20 @@ class TournamentTest extends TestCase
     {
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-        $ct1 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        $ct2 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(CategorySettings::class)->create(['category_tournament_id' => $ct1->id]);
-        factory(CategoryTournamentUser::class)->create(['category_tournament_id' => $ct1->id]);
+        $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(CategorySettings::class)->create(['championship_id' => $ct1->id]);
+        factory(ChampionshipUser::class)->create(['championship_id' => $ct1->id]);
 
         // Check that tournament is gone
         $this->visit("/tournaments")
             ->see(trans_choice('core.tournament', 2))
             ->press("delete_" . $tournament->slug)
             ->seeIsSoftDeletedInDatabase('tournament', ['id' => $tournament->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament', ['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('category_tournament', ['id' => $ct2->id]);
-//            ->seeIsSoftDeletedInDatabase('category_settings', ['category_tournament_id' => $ct1->id])
-//            ->seeIsSoftDeletedInDatabase('category_tournament_user', ['category_tournament_id' => $ct1->id]);
+            ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct2->id]);
+//            ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $ct1->id])
+//            ->seeIsSoftDeletedInDatabase('championship_user', ['championship_id' => $ct1->id]);
 
     }
 

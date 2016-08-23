@@ -26,7 +26,7 @@ class TournamentUserRequest extends Request
         return [
             'username' => 'required|max:255',
             'email' => 'email|required',
-            'categoryTournamentId' => 'required',
+            'championshipId' => 'required',
 
         ];
     }

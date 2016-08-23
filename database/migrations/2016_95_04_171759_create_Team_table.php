@@ -11,16 +11,16 @@ class CreateTeamTable extends Migration
         Schema::create('team', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('category_tournament_id')->unsigned()->index(); // A checar
+            $table->integer('championship_id')->unsigned()->index(); // A checar
             $table->string('picture')->nullable();
             $table->string('entity_type')->nullable(); // Club, Assoc, Fed
             $table->integer('entity_id')->unsigned()->nullable()->index();
             $table->timestamps();
 
 
-            $table->foreign('category_tournament_id')
+            $table->foreign('championship_id')
                 ->references('id')
-                ->on('category_tournament')
+                ->on('championship')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

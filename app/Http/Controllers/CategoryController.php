@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\CategoryTournament;
+use App\Championship;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     function show($tournamentId, $categoryId)
     {
 
-        $tc = CategoryTournament::where('tournament_id', $tournamentId)
+        $tc = Championship::where('tournament_id', $tournamentId)
             ->where('category_id', $categoryId)->first();
 
         dd($tc->category);

@@ -1,6 +1,6 @@
 <?php
 
-use App\CategoryTournament;
+use App\Championship;
 use App\Invite;
 use App\Tournament;
 use App\User;
@@ -36,7 +36,7 @@ class InviteTest extends TestCase
         $categoriesTournament = new Collection;
         for ($i = 0; $i < 5; $i++) {
             try {
-                $categoriesTournament->push(factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]));
+                $categoriesTournament->push(factory(Championship::class)->create(['tournament_id' => $tournament->id]));
             } catch (Exception $e) {
             }
         }
@@ -109,8 +109,8 @@ class InviteTest extends TestCase
         $this->press(trans("core.save"));
 
         foreach ($categoriesTournament as $key => $ct) {
-            $this->seeInDatabase('category_tournament_user',
-                ['category_tournament_id' => $ct->id,
+            $this->seeInDatabase('championship_user',
+                ['championship_id' => $ct->id,
                     'user_id' => Auth::user()->id,
                 ]);
         }
@@ -128,7 +128,7 @@ class InviteTest extends TestCase
 
         for ($i = 0; $i < 5; $i++) {
             try {
-                $ct = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id]);
+                $ct = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
                 $categoriesTournament->push($ct);
             } catch (Exception $e) {
             }
@@ -156,8 +156,8 @@ class InviteTest extends TestCase
         $this->press(trans("core.save"));
 //
         foreach ($categoriesTournament as $key => $ct) {
-            $this->seeInDatabase('category_tournament_user',
-                ['category_tournament_id' => $ct->id,
+            $this->seeInDatabase('championship_user',
+                ['championship_id' => $ct->id,
                     'user_id' => $user->id,
                 ]);
         }

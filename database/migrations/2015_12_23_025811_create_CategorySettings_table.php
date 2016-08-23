@@ -14,11 +14,11 @@ class CreateCategorySettingsTable extends Migration
     {
         Schema::create('category_settings', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_tournament_id')->unsigned()->unique();
-            $table->foreign('category_tournament_id')
+            $table->integer('championship_id')->unsigned()->unique();
+            $table->foreign('championship_id')
                 ->references('id')
                 ->onUpdate('cascade')
-                ->on('category_tournament')
+                ->on('championship')
                 ->onDelete('cascade');
 
 

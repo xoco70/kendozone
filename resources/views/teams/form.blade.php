@@ -46,7 +46,7 @@
                         <div class="form-group">
                             {!!  Form::label('name', trans_choice('categories.category',1),['class' => 'text-bold' ]) !!}
                             <br/>
-                            {!!  Form::select('category_tournament_id', $cts, old('category_tournament_id'), ['class' => 'form-control']) !!}
+                            {!!  Form::select('championship_id', $cts, old('championship_id'), ['class' => 'form-control']) !!}
 
                         </div>
 

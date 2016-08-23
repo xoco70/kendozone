@@ -14,20 +14,20 @@
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        @foreach($tournament->categoryTournaments as $categoryTournament)
+                        @foreach($tournament->championships as $championship)
 
-                            <li><a href="#{{ str_slug($categoryTournament->category->buildName($grades), "-") }}"></i>
+                            <li><a href="#{{ str_slug($championship->category->buildName($grades), "-") }}"></i>
                                     <div>
                                         <?php
 
-                                        $name = $categoryTournament->category->buildName($grades);
+                                        $name = $championship->category->buildName($grades);
                                         echo str_limit($name, 25);
 
 
                                         ?>
 
-                                        <span data-id="{{ $categoryTournament->id}}"
-                                              class="menu label  label-striped">{{  sizeof($categoryTournament->users) }}</span>
+                                        <span data-id="{{ $championship->id}}"
+                                              class="menu label  label-striped">{{  sizeof($championship->users) }}</span>
                                     </div>
                                 </a>
 

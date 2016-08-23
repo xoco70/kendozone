@@ -10,7 +10,7 @@
         <div class="row col-md-10 col-md-offset-2 custyle">
 
             <?php
-            $categoryTournament = \App\CategoryTournament::findOrFail($categoryTournamentId);
+            $championship = \App\Championship::findOrFail($championshipId);
             ?>
             {!! Form::open(['url'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
 
@@ -31,7 +31,7 @@
 
 
                                         <fieldset title="add_competitor">
-                                            <legend class="text-semibold">{{trans('core.add_competitor_to_category',['category' => $categoryTournament->category->name])}}</legend>
+                                            <legend class="text-semibold">{{trans('core.add_competitor_to_category',['category' => $championship->category->name])}}</legend>
                                         </fieldset>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -52,7 +52,7 @@
                                             </div>
                                         </div>
                                         <br/>
-                                        {!!  Form::hidden('categoryTournamentId',$categoryTournamentId) !!}
+                                        {!!  Form::hidden('championshipId',$championshipId) !!}
 
 
                                         <div align="right">

@@ -36,7 +36,7 @@ class CreateCategoryTable extends Migration
 
         });
 
-        Schema::create('category_tournament', function (Blueprint $table) {
+        Schema::create('championship', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tournament_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
@@ -62,12 +62,12 @@ class CreateCategoryTable extends Migration
         });
 
 
-        Schema::create('category_tournament_user', function (Blueprint $table) {
+        Schema::create('championship_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_tournament_id')->unsigned()->index();
-            $table->foreign('category_tournament_id')
+            $table->integer('championship_id')->unsigned()->index();
+            $table->foreign('championship_id')
                 ->references('id')
-                ->on('category_tournament')
+                ->on('championship')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -79,7 +79,7 @@ class CreateCategoryTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->unique(array('category_tournament_id', 'user_id'));
+            $table->unique(array('championship_id', 'user_id'));
 
             $table->boolean('confirmed');
 
@@ -99,8 +99,8 @@ class CreateCategoryTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('category_tournament_user');
-        Schema::dropIfExists('category_tournament');
+        Schema::dropIfExists('championship_user');
+        Schema::dropIfExists('championship');
         Schema::dropIfExists('category');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 

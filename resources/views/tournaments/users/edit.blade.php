@@ -32,12 +32,12 @@
                                             @foreach($tournament->categories as $key => $category)
 
                                                 <?php
-                                                $CategoryTournament = DB::table('category_tournament')
+                                                $Championship = DB::table('championship')
                                                         ->where('tournament_id', $tournament->id)
                                                         ->where('category_id', $category->id)
                                                         ->first();
-                                                $old = DB::table('category_tournament_user')
-                                                        ->where('category_tournament_id', $CategoryTournament->id)
+                                                $old = DB::table('championship_user')
+                                                        ->where('championship_id', $Championship->id)
                                                         ->where('user_id', $user->id)
                                                         ->count();
                                                 ?>
@@ -50,7 +50,7 @@
 
                                                                 {!!  Form::label('cat['.$key.']', trans($category->name)) !!}
                                                                 <br/>
-                                                                {!!   Form::checkbox('cat['.$key.']', $CategoryTournament->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                                                {!!   Form::checkbox('cat['.$key.']', $Championship->id,$old, ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                                             </p>
                                                         </div>
                                                         @if ($key % 2 == 0 && $key != 0)

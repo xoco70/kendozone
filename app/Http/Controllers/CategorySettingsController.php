@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CategorySettings;
-use App\CategoryTournament;
+use App\Championship;
 use App\Http\Requests;
 use App\Tournament;
 use Illuminate\Http\Request;
@@ -27,16 +27,16 @@ class CategorySettingsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, $tournamentSlug, $categoryId)
     {
         $tournament = Tournament::findBySlug($tournamentSlug);
 
-        $categoryTournament = CategoryTournament::where('tournament_id', $tournament->id)
+        $championship = Championship::where('tournament_id', $tournament->id)
             ->where('category_id', $categoryId)->first();
 
-        $request->request->add(['category_tournament_id' => $categoryTournament->id]);
+        $request->request->add(['championship_id' => $championship->id]);
 
         if ($setting = CategorySettings::create($request->all())) {
             return Response::json(['settingId' =>$setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
@@ -53,7 +53,7 @@ class CategorySettingsController extends Controller
      * @param $tournamentId
      * @param $categoryId
      * @param $categorySettingsId
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
@@ -68,7 +68,7 @@ class CategorySettingsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param CategorySettings $cs
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(CategorySettings $cs)
     {

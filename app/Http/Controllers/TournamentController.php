@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\CategorySettings;
-use App\CategoryTournament;
+use App\Championship;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
 use App\Http\Requests\TournamentRequest;
@@ -102,18 +102,18 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
 
-        $tournament = Tournament::with('competitors', 'categorySettings', 'categoryTournaments.settings', 'categoryTournaments.category')->find($tournament->id);
+        $tournament = Tournament::with('competitors', 'categorySettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
         $countries = Countries::lists('name', 'id');
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->categorySettings->count();
-        $categorySize = $tournament->categoryTournaments->count();
+        $categorySize = $tournament->championships->count();
         $rules = config('options.rules');
         $hanteiLimit = config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;
         $baseCategories = Category::take(10)->get();
-        // Gives me a list of category containing
+//        // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::lists('name', 'id');
         $categories = new Collection();
@@ -244,11 +244,11 @@ class TournamentController extends Controller
     public function generateTrees($tournamentId)
     {
         $tournament = Tournament::findOrFail($tournamentId);
-        $tournamentCategories = CategoryTournament::where('tournament_id', $tournamentId)->get();
+        $tournamentCategories = Championship::where('tournament_id', $tournamentId)->get();
         foreach ($tournamentCategories as $tcat) {
             // Get number of area for this category
             $fightingAreas = null;
-            $settings = CategorySettings::where('category_tournament_id', $tcat->id)->get();
+            $settings = CategorySettings::where('championship_id', $tcat->id)->get();
             if (is_null($settings) || sizeof($settings) == 0) {
 
                 // Check general user settings
@@ -261,7 +261,7 @@ class TournamentController extends Controller
             }
 
             echo "<h3>" . $tcat->category->name . "</h3>";
-            $competitors = $tournament->competitors()->where('category_tournament_id', $tcat->id);
+            $competitors = $tournament->competitors()->where('championship_id', $tcat->id);
             echo $competitors;
         }
     }

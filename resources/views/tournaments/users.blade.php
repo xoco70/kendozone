@@ -16,7 +16,7 @@
     <!-- Detached content -->
     <div class="container-detached">
         <div class="content-detached">
-            @foreach($tournament->categoryTournaments as $categoryTournament)
+            @foreach($tournament->championships as $championship)
                 <div class="panel panel-flat">
 
                     <div class="panel-body">
@@ -24,20 +24,20 @@
                         <div class="container-fluid">
 
                             @can('edit',$tournament)
-                                <a href="#categoryTournamentId={{$categoryTournament->id}}" data-toggle="modal"
+                                <a href="#championshipId={{$championship->id}}" data-toggle="modal"
                                    data-target="#create_tournament_user"
                                    class="btn btn-primary btn-xs pull-right open-modal"
-                                   data-id="{!! $categoryTournament->id !!}"
-                                   data-name="{!! $categoryTournament->category->buildName($grades) !!}"><b><i
+                                   data-id="{!! $championship->id !!}"
+                                   data-name="{!! $championship->category->buildName($grades) !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
                             @endcan
 
-                            <a name="{{ str_slug($categoryTournament->category->buildName($grades), "-") }}">
-                                <legend class="text-semibold">{{ $categoryTournament->category->buildName($grades) }}</legend>
+                            <a name="{{ str_slug($championship->category->buildName($grades), "-") }}">
+                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }}</legend>
                             </a>
 
-                            <table class="table datatable-responsive" id="table{{ $categoryTournament->id }}">
+                            <table class="table datatable-responsive" id="table{{ $championship->id }}">
                                 <thead>
                                 <tr>
                                     <th class="min-tablet text-center "
@@ -54,7 +54,7 @@
                                 </thead>
 
 
-                                @foreach($categoryTournament->users as $user)
+                                @foreach($championship->users as $user)
                                     <?php
                                     $arr_country = $countries->where('id', $user->country_id)->all();
                                     $country = array_first($arr_country, null);
@@ -74,7 +74,7 @@
 
                                         </td>
                                         <td>{{ $user->email }}</td>
-                                        <td class="text-center">{{ $categoryTournament->category->buildName($grades)}}</td>
+                                        <td class="text-center">{{ $championship->category->buildName($grades)}}</td>
 
                                         <td class="text-center">
                                             @if ($user->pivot->confirmed)
@@ -85,14 +85,14 @@
 
                                             @can('edit',$tournament)
                                                 {!! Form::open(['method' => 'PUT', 'id' => 'formConfirmTCU',
-                                            'action' => ['TournamentUserController@confirmUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
+                                            'action' => ['TournamentUserController@confirmUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
 
 
                                                 <button type="submit"
                                                         class="btn btn-flat btnConfirmTCU"
-                                                        id="confirm_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
+                                                        id="confirm_{!! $tournament->slug !!}_{!! $championship->id !!}_{!! $user->slug !!}"
                                                         data-tournament="{!! $tournament->slug !!}"
-                                                        data-category="{!! $categoryTournament->id !!}"
+                                                        data-category="{!! $championship->id !!}"
                                                         data-user="{!! $user->slug !!}">
                                                     <i class="{!! $class  !!} "></i>
                                                 </button>
@@ -114,13 +114,13 @@
                                             <td class="text-center">
 
                                                 {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
-                                             'action' => ['TournamentUserController@deleteUser', $tournament->slug, $categoryTournament->id,$user->slug  ]]) !!}
+                                             'action' => ['TournamentUserController@deleteUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
 
                                                 <button type="submit"
                                                         class="btn text-warning-600 btn-flat btnDeleteTCU"
-                                                        id="delete_{!! $tournament->slug !!}_{!! $categoryTournament->id !!}_{!! $user->slug !!}"
+                                                        id="delete_{!! $tournament->slug !!}_{!! $championship->id !!}_{!! $user->slug !!}"
                                                         data-tournament="{!! $tournament->slug !!}"
-                                                        data-category="{!! $categoryTournament->id !!}"
+                                                        data-category="{!! $championship->id !!}"
                                                         data-user="{!! $user->slug !!}">
                                                     <i class="glyphicon glyphicon-remove"></i>
                                                 </button>
@@ -158,13 +158,13 @@
         var url = "{{ URL::action('TournamentController@show',$tournament->slug) }}";
 
         $(document).on("click", ".open-modal", function () {
-            categoryTournamentId = $(this).data('id');
-            categoryTournamentName = $(this).data('name');
+            championshipId = $(this).data('id');
+            championshipName = $(this).data('name');
 
             newUserName = $('#newUsername');
             newUserEmail = $('#newUserEmail');
 
-            $("#categoryTournamentId").val(categoryTournamentId);
+            $("#championshipId").val(championshipId);
         });
 
 

@@ -26,7 +26,7 @@ class Club extends Model
 
 //            $club->clubs
             //TODO Unlink all clubs/users from assoc
-//            foreach ($tournament->categoryTournaments as $ct) {
+//            foreach ($tournament->championships as $ct) {
 //                $ct->delete();
 //            }
 //            $tournament->invites()->delete();
@@ -34,7 +34,7 @@ class Club extends Model
         });
         static::restoring(function ($club) {
 
-//            foreach ($tournament->categoryTournaments()->withTrashed()->get() as $ct) {
+//            foreach ($tournament->championships()->withTrashed()->get() as $ct) {
 //                $ct->restore();
 //            }
 

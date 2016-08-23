@@ -2,11 +2,11 @@
     <div class="panel-body">
         <div class="container-fluid">
             <div class="panel-group" id="accordion-styled">
-                @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                @foreach($tournament->championships as $key => $championship)
                     {{--TODO This is making n+1 query, have to cache it--}}
                     <?php
                     // Set defaults
-                    $setting = $tournament->categoryTournaments->get($key)->settings;
+                    $setting = $tournament->championships->get($key)->settings;
                     $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
                     $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
                     $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
@@ -29,7 +29,7 @@
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
 
-                                            {{trans($categoryTournament->category->buildName($grades))}} <i
+                                            {{trans($championship->category->buildName($grades))}} <i
                                                     class="glyphicon  glyphicon-edit  status-icon"></i>
                                         </h6>
                                     </div>

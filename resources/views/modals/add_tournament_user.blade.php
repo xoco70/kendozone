@@ -26,8 +26,8 @@
                     </div>
                 </div>
                 <br/>
-                {!!  Form::hidden('categoryTournamentId',null, ["id" => 'categoryTournamentId']) !!}
-                {!!  Form::hidden('categoryTournamentName',null, ["id" => 'categoryTournamentName']) !!}
+                {!!  Form::hidden('championshipId',null, ["id" => 'championshipId']) !!}
+                {!!  Form::hidden('championshipName',null, ["id" => 'championshipName']) !!}
             </div>
 
             <div class="modal-footer">

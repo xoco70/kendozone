@@ -1,5 +1,5 @@
 <?php
-$categoryId = $categoryTournament->category->id;
+$categoryId = $championship->category->id;
 if (is_null($setting)) {
     $disableEncho = $disableRoundRobin = "disabled";
 } else {
@@ -63,7 +63,7 @@ $currency = Auth::user()->country->currency_code;
             </div>
         </div>
 
-        @if ($tournament->categoryTournaments->get($key)->category->isTeam())
+        @if ($tournament->championships->get($key)->category->isTeam())
 
             <div class="col-md-2">
                 {!!  Form::label('teamSize', trans('categories.teamSize')) !!}

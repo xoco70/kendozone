@@ -104,7 +104,7 @@ INSERT INTO `test_category` VALUES ('10', 'categories.mixed_team', 'X', '1', '0'
 DROP TABLE IF EXISTS `test_category_settings`;
 CREATE TABLE `test_category_settings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `category_tournament_id` int(10) unsigned NOT NULL,
+  `championship_id` int(10) unsigned NOT NULL,
   `isTeam` tinyint(1) NOT NULL,
   `teamSize` tinyint(4) NOT NULL,
   `fightingAreas` tinyint(3) unsigned DEFAULT NULL,
@@ -120,8 +120,8 @@ CREATE TABLE `test_category_settings` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `category_settings_category_tournament_id_unique` (`category_tournament_id`),
-  CONSTRAINT `category_settings_category_tournament_id_foreign` FOREIGN KEY (`category_tournament_id`) REFERENCES `test_category_tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `category_settings_championship_id_unique` (`championship_id`),
+  CONSTRAINT `category_settings_championship_id_foreign` FOREIGN KEY (`championship_id`) REFERENCES `test_championship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -129,10 +129,10 @@ CREATE TABLE `test_category_settings` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for test_category_tournament
+-- Table structure for test_championship
 -- ----------------------------
-DROP TABLE IF EXISTS `test_category_tournament`;
-CREATE TABLE `test_category_tournament` (
+DROP TABLE IF EXISTS `test_championship`;
+CREATE TABLE `test_championship` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tournament_id` int(10) unsigned NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
@@ -140,73 +140,73 @@ CREATE TABLE `test_category_tournament` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `category_tournament_tournament_id_category_id_unique` (`tournament_id`,`category_id`),
-  KEY `category_tournament_tournament_id_index` (`tournament_id`),
-  KEY `category_tournament_category_id_index` (`category_id`),
-  CONSTRAINT `category_tournament_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `test_category` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `category_tournament_tournament_id_foreign` FOREIGN KEY (`tournament_id`) REFERENCES `test_tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `championship_tournament_id_category_id_unique` (`tournament_id`,`category_id`),
+  KEY `championship_tournament_id_index` (`tournament_id`),
+  KEY `championship_category_id_index` (`category_id`),
+  CONSTRAINT `championship_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `test_category` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `championship_tournament_id_foreign` FOREIGN KEY (`tournament_id`) REFERENCES `test_tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of test_category_tournament
+-- Records of test_championship
 -- ----------------------------
-INSERT INTO `test_category_tournament` VALUES ('1', '5', '4', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('2', '4', '10', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('3', '6', '7', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('4', '5', '5', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('5', '5', '6', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('6', '1', '3', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('7', '5', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('8', '1', '5', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('9', '6', '4', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament` VALUES ('10', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('1', '5', '4', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('2', '4', '10', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('3', '6', '7', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('4', '5', '5', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('5', '5', '6', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('6', '1', '3', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('7', '5', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('8', '1', '5', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('9', '6', '4', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship` VALUES ('10', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
 
 -- ----------------------------
--- Table structure for test_category_tournament_user
+-- Table structure for test_championship_user
 -- ----------------------------
-DROP TABLE IF EXISTS `test_category_tournament_user`;
-CREATE TABLE `test_category_tournament_user` (
+DROP TABLE IF EXISTS `test_championship_user`;
+CREATE TABLE `test_championship_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `category_tournament_id` int(10) unsigned NOT NULL,
+  `championship_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `category_tournament_user_category_tournament_id_user_id_unique` (`category_tournament_id`,`user_id`),
-  KEY `category_tournament_user_category_tournament_id_index` (`category_tournament_id`),
-  KEY `category_tournament_user_user_id_index` (`user_id`),
-  CONSTRAINT `category_tournament_user_category_tournament_id_foreign` FOREIGN KEY (`category_tournament_id`) REFERENCES `test_category_tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `category_tournament_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `test_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `championship_user_championship_id_user_id_unique` (`championship_id`,`user_id`),
+  KEY `championship_user_championship_id_index` (`championship_id`),
+  KEY `championship_user_user_id_index` (`user_id`),
+  CONSTRAINT `championship_user_championship_id_foreign` FOREIGN KEY (`championship_id`) REFERENCES `test_championship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `championship_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `test_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of test_category_tournament_user
+-- Records of test_championship_user
 -- ----------------------------
-INSERT INTO `test_category_tournament_user` VALUES ('1', '4', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('3', '2', '7', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('4', '6', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('5', '8', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('6', '2', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('7', '10', '6', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('8', '7', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('10', '5', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('11', '3', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('12', '4', '3', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('13', '1', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('15', '3', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('16', '2', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('17', '2', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('19', '4', '6', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('20', '8', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('21', '6', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('25', '3', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('26', '1', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('27', '2', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('28', '4', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('29', '8', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_category_tournament_user` VALUES ('30', '1', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('1', '4', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('3', '2', '7', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('4', '6', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('5', '8', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('6', '2', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('7', '10', '6', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('8', '7', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('10', '5', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('11', '3', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('12', '4', '3', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('13', '1', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('15', '3', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('16', '2', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('17', '2', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('19', '4', '6', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('20', '8', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('21', '6', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('25', '3', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('26', '1', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('27', '2', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('28', '4', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('29', '8', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_championship_user` VALUES ('30', '1', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
 
 -- ----------------------------
 -- Table structure for test_club
@@ -693,29 +693,29 @@ INSERT INTO `test_logs` VALUES ('20', null, 'App\\Tournament', '3', 'null', '{\"
 INSERT INTO `test_logs` VALUES ('21', null, 'App\\Tournament', '4', 'null', '{\"user_id\":6,\"name\":\"MediumSpringGreen\",\"dateIni\":{\"date\":\"2016-05-25 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"dateFin\":{\"date\":\"2016-05-25 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"registerDateLimit\":\"2016-05-25 00:00:00\",\"sport\":1,\"type\":true,\"mustPay\":false,\"venue\":\"29697 Dorian Shoals Apt. 146\\nVernicehaven, OK 64052\",\"latitude\":-19.38708,\"longitude\":-91.548175,\"level_id\":3}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
 INSERT INTO `test_logs` VALUES ('22', null, 'App\\Tournament', '5', 'null', '{\"user_id\":7,\"name\":\"MediumOrchid\",\"dateIni\":{\"date\":\"2016-05-25 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"dateFin\":{\"date\":\"2016-05-25 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"registerDateLimit\":\"2016-05-25 00:00:00\",\"sport\":1,\"type\":true,\"mustPay\":false,\"venue\":\"179 Jody Hills Apt. 787\\nSouth Marquisechester, WV 02648\",\"latitude\":-65.633594,\"longitude\":-58.399489,\"level_id\":7}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
 INSERT INTO `test_logs` VALUES ('23', null, 'App\\Tournament', '6', 'null', '{\"user_id\":3,\"name\":\"Azure\",\"dateIni\":{\"date\":\"2016-05-30 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"dateFin\":{\"date\":\"2016-05-30 22:29:59.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Mexico_City\"},\"registerDateLimit\":\"2016-05-30 00:00:00\",\"sport\":1,\"type\":false,\"mustPay\":true,\"venue\":\"1760 Carter Ferry Apt. 689\\nSouth Ceceliahaven, PA 14788\",\"latitude\":74.5233,\"longitude\":6.28613,\"level_id\":2}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('24', null, 'App\\CategoryTournamentUser', '1', 'null', '{\"category_tournament_id\":4,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('25', null, 'App\\CategoryTournamentUser', '3', 'null', '{\"category_tournament_id\":2,\"user_id\":7,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('26', null, 'App\\CategoryTournamentUser', '4', 'null', '{\"category_tournament_id\":6,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('27', null, 'App\\CategoryTournamentUser', '5', 'null', '{\"category_tournament_id\":8,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('28', null, 'App\\CategoryTournamentUser', '6', 'null', '{\"category_tournament_id\":2,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('29', null, 'App\\CategoryTournamentUser', '7', 'null', '{\"category_tournament_id\":10,\"user_id\":6,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('30', null, 'App\\CategoryTournamentUser', '8', 'null', '{\"category_tournament_id\":7,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('31', null, 'App\\CategoryTournamentUser', '10', 'null', '{\"category_tournament_id\":5,\"user_id\":3,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('32', null, 'App\\CategoryTournamentUser', '11', 'null', '{\"category_tournament_id\":3,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('33', null, 'App\\CategoryTournamentUser', '12', 'null', '{\"category_tournament_id\":4,\"user_id\":3,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('34', null, 'App\\CategoryTournamentUser', '13', 'null', '{\"category_tournament_id\":1,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('35', null, 'App\\CategoryTournamentUser', '15', 'null', '{\"category_tournament_id\":3,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('36', null, 'App\\CategoryTournamentUser', '16', 'null', '{\"category_tournament_id\":2,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('37', null, 'App\\CategoryTournamentUser', '17', 'null', '{\"category_tournament_id\":2,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('38', null, 'App\\CategoryTournamentUser', '19', 'null', '{\"category_tournament_id\":4,\"user_id\":6,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('39', null, 'App\\CategoryTournamentUser', '20', 'null', '{\"category_tournament_id\":8,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('40', null, 'App\\CategoryTournamentUser', '21', 'null', '{\"category_tournament_id\":6,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('41', null, 'App\\CategoryTournamentUser', '25', 'null', '{\"category_tournament_id\":3,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('42', null, 'App\\CategoryTournamentUser', '26', 'null', '{\"category_tournament_id\":1,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('43', null, 'App\\CategoryTournamentUser', '27', 'null', '{\"category_tournament_id\":2,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('44', null, 'App\\CategoryTournamentUser', '28', 'null', '{\"category_tournament_id\":4,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('45', null, 'App\\CategoryTournamentUser', '29', 'null', '{\"category_tournament_id\":8,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
-INSERT INTO `test_logs` VALUES ('46', null, 'App\\CategoryTournamentUser', '30', 'null', '{\"category_tournament_id\":1,\"user_id\":3,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('24', null, 'App\\ChampionshipUser', '1', 'null', '{\"championship_id\":4,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('25', null, 'App\\ChampionshipUser', '3', 'null', '{\"championship_id\":2,\"user_id\":7,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('26', null, 'App\\ChampionshipUser', '4', 'null', '{\"championship_id\":6,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('27', null, 'App\\ChampionshipUser', '5', 'null', '{\"championship_id\":8,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('28', null, 'App\\ChampionshipUser', '6', 'null', '{\"championship_id\":2,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('29', null, 'App\\ChampionshipUser', '7', 'null', '{\"championship_id\":10,\"user_id\":6,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('30', null, 'App\\ChampionshipUser', '8', 'null', '{\"championship_id\":7,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('31', null, 'App\\ChampionshipUser', '10', 'null', '{\"championship_id\":5,\"user_id\":3,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('32', null, 'App\\ChampionshipUser', '11', 'null', '{\"championship_id\":3,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('33', null, 'App\\ChampionshipUser', '12', 'null', '{\"championship_id\":4,\"user_id\":3,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('34', null, 'App\\ChampionshipUser', '13', 'null', '{\"championship_id\":1,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('35', null, 'App\\ChampionshipUser', '15', 'null', '{\"championship_id\":3,\"user_id\":4,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('36', null, 'App\\ChampionshipUser', '16', 'null', '{\"championship_id\":2,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('37', null, 'App\\ChampionshipUser', '17', 'null', '{\"championship_id\":2,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('38', null, 'App\\ChampionshipUser', '19', 'null', '{\"championship_id\":4,\"user_id\":6,\"confirmed\":1}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('39', null, 'App\\ChampionshipUser', '20', 'null', '{\"championship_id\":8,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('40', null, 'App\\ChampionshipUser', '21', 'null', '{\"championship_id\":6,\"user_id\":1,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('41', null, 'App\\ChampionshipUser', '25', 'null', '{\"championship_id\":3,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('42', null, 'App\\ChampionshipUser', '26', 'null', '{\"championship_id\":1,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('43', null, 'App\\ChampionshipUser', '27', 'null', '{\"championship_id\":2,\"user_id\":5,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('44', null, 'App\\ChampionshipUser', '28', 'null', '{\"championship_id\":4,\"user_id\":2,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('45', null, 'App\\ChampionshipUser', '29', 'null', '{\"championship_id\":8,\"user_id\":7,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
+INSERT INTO `test_logs` VALUES ('46', null, 'App\\ChampionshipUser', '30', 'null', '{\"championship_id\":1,\"user_id\":3,\"confirmed\":0}', 'created', '2016-05-18 22:29:59', '2016-05-18 22:29:59');
 INSERT INTO `test_logs` VALUES ('47', null, 'App\\User', '8', 'null', '{\"name\":\"FMK\",\"firstname\":\"Keely\",\"lastname\":\"Hansen\",\"email\":\"fmk@kendozone.com\",\"password\":\"$2y$10$YD1brhOJmE0BCfXF3.N1WuKEcZMZEIKWqEQxtBySZJ8mpoVMxqJda\",\"grade_id\":5,\"country_id\":612,\"city\":\"Pourosborough\",\"latitude\":-43.740957,\"longitude\":177.607075,\"role_id\":\"2\",\"verified\":1,\"remember_token\":\"4ihlZYuEMw\",\"provider\":\"\",\"provider_id\":\"dheOy\",\"locale\":\"es\"}', 'created', '2016-05-18 22:30:00', '2016-05-18 22:30:00');
 INSERT INTO `test_logs` VALUES ('48', null, 'App\\Association', '1', 'null', '{\"name\":\"core.no_association\",\"president_id\":\"1\"}', 'created', '2016-05-18 22:30:00', '2016-05-18 22:30:00');
 INSERT INTO `test_logs` VALUES ('49', null, 'App\\User', '9', 'null', '{\"name\":\"AIKEM_President\",\"firstname\":\"Shayna\",\"lastname\":\"Muller\",\"email\":\"presidencia@aikem.com\",\"password\":\"$2y$10$S1NTsGWaF\\/qh74rbn30AP.rbI\\/mSHeXD5JpktCoGsNO3mee9IMksy\",\"grade_id\":1,\"country_id\":292,\"city\":\"West Lisandro\",\"latitude\":-29.659687,\"longitude\":-83.932016,\"role_id\":\"3\",\"verified\":1,\"remember_token\":\"Hev8524uY4\",\"provider\":\"\",\"provider_id\":\"K9Ty8\",\"locale\":\"en\"}', 'created', '2016-05-18 22:30:00', '2016-05-18 22:30:00');
@@ -948,14 +948,14 @@ CREATE TABLE `test_settings` (
 DROP TABLE IF EXISTS `test_team`;
 CREATE TABLE `test_team` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `category_tournament_id` int(10) unsigned NOT NULL,
+  `championship_id` int(10) unsigned NOT NULL,
   `name` int(10) unsigned NOT NULL,
   `picture` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `team_category_tournament_id_foreign` (`category_tournament_id`),
-  CONSTRAINT `team_category_tournament_id_foreign` FOREIGN KEY (`category_tournament_id`) REFERENCES `test_category_tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `team_championship_id_foreign` (`championship_id`),
+  CONSTRAINT `team_championship_id_foreign` FOREIGN KEY (`championship_id`) REFERENCES `test_championship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------

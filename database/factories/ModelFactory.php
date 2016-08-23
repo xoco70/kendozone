@@ -13,7 +13,7 @@
 
 use App\Association;
 use App\Category;
-use App\CategoryTournament;
+use App\Championship;
 use App\Club;
 use App\Federation;
 use App\Tournament;
@@ -129,7 +129,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(App\CategoryTournament::class, function (Faker\Generator $faker) {
+$factory->define(App\Championship::class, function (Faker\Generator $faker) {
     $tournaments = Tournament::all()->pluck('id')->toArray();
     $categories = Category::all()->pluck('id')->toArray();
 
@@ -138,12 +138,12 @@ $factory->define(App\CategoryTournament::class, function (Faker\Generator $faker
         'category_id' => $faker->randomElement($categories),
     ];
 });
-$factory->define(App\CategoryTournamentUser::class, function (Faker\Generator $faker) {
-    $tcs = CategoryTournament::all()->pluck('id')->toArray();
+$factory->define(App\ChampionshipUser::class, function (Faker\Generator $faker) {
+    $tcs = Championship::all()->pluck('id')->toArray();
     $users = User::all()->pluck('id')->toArray();
 
     return [
-        'category_tournament_id' => $faker->randomElement($tcs),
+        'championship_id' => $faker->randomElement($tcs),
         'user_id' => $faker->randomElement($users),
         'confirmed' => $faker->numberBetween(0, 1),
     ];
@@ -151,10 +151,10 @@ $factory->define(App\CategoryTournamentUser::class, function (Faker\Generator $f
 
 
 $factory->define(App\CategorySettings::class, function (Faker\Generator $faker) use ($factory) {
-    $tcs = CategoryTournament::all()->pluck('id')->toArray();
+    $tcs = Championship::all()->pluck('id')->toArray();
 
     return [
-        'category_tournament_id' => $faker->randomElement($tcs),
+        'championship_id' => $faker->randomElement($tcs),
 //        'isTeam' => $faker->boolean(),
         'teamSize' => $faker->numberBetween(0, 6),
         'fightingAreas' => $faker->numberBetween(0, 4),

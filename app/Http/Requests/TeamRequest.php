@@ -23,7 +23,7 @@ class TeamRequest extends Request
     {
         return [
             'name' => 'required',
-            'category_tournament_id' => 'required',
+            'championship_id' => 'required',
 //            'tournamentDate' => 'required|date',
 //            'limitRegistrationDate' => 'date',
         ];

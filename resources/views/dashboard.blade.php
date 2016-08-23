@@ -19,7 +19,7 @@
         <?php
             $tournament = $tournaments->first();
             $settingSize = $tournament->categorySettings()->count();
-            $categorySize = $tournament->categoryTournaments()->count();
+            $categorySize = $tournament->championships()->count();
             $ctuSize = $tournament->competitors()->count();
 
             if ($settingSize != $categorySize || $ctuSize == 0)

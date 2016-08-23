@@ -164,10 +164,10 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                     <div class="panel-group" id="accordion-styled">
 
 
-                                        @foreach($tournament->categoryTournaments as $key => $categoryTournament)
+                                        @foreach($tournament->championships as $key => $championship)
                                             <?php
 
-                                            $setting = $tournament->categoryTournaments->get($key)->settings;
+                                            $setting = $tournament->championships->get($key)->settings;
 //                                            $teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
 //                                            $enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
 //                                            $fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
@@ -180,7 +180,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">
-                                                            {{trans($categoryTournament->category->buildName($grades))}}
+                                                            {{trans($championship->category->buildName($grades))}}
                                                         </h6>
                                                     </div>
                                                 </a>

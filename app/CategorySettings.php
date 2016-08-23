@@ -16,20 +16,20 @@ class CategorySettings extends Model
     public $timestamps = true;
     protected $guarded = ['id'];
 
-    public function categoryTournament(){
-        return $this->belongsTo(CategoryTournament::class);
+    public function championship(){
+        return $this->belongsTo(Championship::class);
     }
 
     /**
      * @param $options
      * @param $ctId
      */
-    public function createCategorySettingFromOptions($options,CategoryTournament $categoryTournament)
+    public function createCategorySettingFromOptions($options, Championship $championship)
     {
-        $cs = static::firstOrNew(['category_tournament_id' => $categoryTournament->id]);
-        $rules = $options[$categoryTournament->category->id];
+        $cs = static::firstOrNew(['championship_id' => $championship->id]);
+        $rules = $options[$championship->category->id];
 //        $this->id = $ctId;
-        $cs->category_tournament_id = $categoryTournament->id;
+        $cs->championship_id = $championship->id;
         foreach ($rules as $key => $value) {
             $cs->$key = $value;
         }

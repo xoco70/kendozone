@@ -1,5 +1,5 @@
 <?php
- $tournament = \App\Tournament::with('categoryTournaments.users')->find($tournament->id);
+ $tournament = \App\Tournament::with('championships.users')->find($tournament->id);
 ?>
 <div class="col-lg-6">
     <div class="panel panel-info panel-bordered">
@@ -20,7 +20,7 @@
                         </li>
                         <li class="text-left">
                             <div class="text-semibold"><a class="text-default" href="{!! URL::action('TournamentController@edit', $tournament->slug) !!}"> {{ trans_choice('core.category',2) }}</a></div>
-                            <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->categoryTournaments) }} </div>
+                            <div class="text-muted"><span class="status-mark border-success position-left"></span> {{ sizeof($tournament->championships) }} </div>
                         </li>
                     </ul>
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CategoryTournament;
-use App\CategoryTournamentUser;
+use App\Championship;
+use App\ChampionshipUser;
 use App\Grade;
 use App\Http\Requests;
 use App\Http\Requests\TournamentUserRequest;
@@ -30,11 +30,11 @@ class TournamentUserController extends Controller
      * Display a listing of the resource.
      *
      * @param Tournament $tournament
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('categoryTournaments.users', 'categoryTournaments.category')->find($tournament->id);
+        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
         $settingSize = $tournament->categorySettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::lists('name','id');
@@ -49,14 +49,14 @@ class TournamentUserController extends Controller
      *
      * @param Request $request
      * @param Tournament $tournament
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create(Request $request, Tournament $tournament)
     {
-        $categoryTournamentId = $request->get('categoryId');
+        $championshipId = $request->get('categoryId');
         $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
 
-        return view("tournaments/users/create", compact('tournament', 'currentModelName', 'categoryTournamentId')); //, compact()
+        return view("tournaments/users/create", compact('tournament', 'currentModelName', 'championshipId')); //, compact()
     }
 
     /**
@@ -69,9 +69,9 @@ class TournamentUserController extends Controller
      */
     public function store(TournamentUserRequest $request, Tournament $tournament, AppMailer $mailer)
     {
-        $categoryTournamentId = $request->categoryTournamentId;
+        $championshipId = $request->championshipId;
         
-        $categoryTournament = CategoryTournament::findOrFail($categoryTournamentId);
+        $championship = Championship::findOrFail($championshipId);
 
         $user = User::registerUserToCategory([
             'name' => $request->username,
@@ -79,20 +79,20 @@ class TournamentUserController extends Controller
 
         ]);
 
-        $ctu = $user->categoryTournaments();
+        $ctu = $user->championships();
 
-        if ($ctu->get()->contains($categoryTournament)) {
+        if ($ctu->get()->contains($championship)) {
             flash()->error(trans('msg.user_already_registered_in_category'));
             return redirect(URL::action('TournamentUserController@index', $tournament->slug));
         } else {
-            $ctu->attach($categoryTournamentId, ['confirmed' => 0]);
+            $ctu->attach($championshipId, ['confirmed' => 0]);
         }
 
 
         // We send him an email with detail (and user /password if new)
         $invite = new Invite();
         $code = $invite->generateTournamentInvite($user->email, $tournament);
-        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $categoryTournament->category->name, $user->clearPassword);
+        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $championship->category->name, $user->clearPassword);
 
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
         return redirect(URL::action('TournamentUserController@index', $tournament->slug));
@@ -109,7 +109,7 @@ class TournamentUserController extends Controller
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
         $user = User::findBySlug($userSlug);
-        $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
+        $ctu = ChampionshipUser::where('championship_id', $tcId)
             ->where('user_id', $user->id)->first();
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
@@ -131,7 +131,7 @@ class TournamentUserController extends Controller
     {
 
         $user = User::findBySlug($userSlug);
-        $ctu = CategoryTournamentUser::where('category_tournament_id', $tcId)
+        $ctu = ChampionshipUser::where('championship_id', $tcId)
             ->where('user_id', $user->id);
 
         if ($ctu->forceDelete()) {
@@ -147,7 +147,7 @@ class TournamentUserController extends Controller
      *
      * @param Tournament $tournament
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Tournament $tournament, User $user)
     {
@@ -159,13 +159,13 @@ class TournamentUserController extends Controller
      *
      * @param Tournament $tournament
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(Tournament $tournament, User $user)
     {
 
-        $user = User::with('categorytournaments.tournament', 'categoryTournaments.category')->find($user->id);
-        dd($user->categoryTournaments);
+        $user = User::with('categorytournaments.tournament', 'championships.category')->find($user->id);
+        dd($user->championships);
         $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments/users/edit", compact('tournament', 'currentModelName', 'user')); //, compact()
 
