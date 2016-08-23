@@ -23,21 +23,12 @@ class CreateTournamentTable extends Migration {
 			$table->date('dateIni');
 			$table->date('dateFin');
             $table->date('registerDateLimit');
-//            $table->smallInteger('cost')->unsigned()->nullable();
             $table->integer('sport')->unsigned()->default(1); // Default is Kendo for now
 			$table->string('promoter')->nullable();
 			$table->string('host_organization')->nullable();
 			$table->string('technical_assistance')->nullable();
 			$table->integer('rule_id')->default(1);
-//            $table->tinyInteger('teamSize')->unsigned()->default(6)->nullable(); // Max Competitors in each team
-
-//            $table->boolean('hasRoundRobin')->default(true);
-//            $table->tinyInteger('roundRobinWinner')->unsigned()->default(1); // How much competitor get out of round robin
-//            $table->tinyInteger('fightDuration')->unsigned()->default(3);
-//            $table->boolean('hasEncho')->default(true);
-			$table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
-//            $table->boolean('mustPay');
-
+            $table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
             $table->integer("venue_id")->nullable()->unsigned();
 			$table->integer("level_id")->unsigned()->default(1);
 			$table->foreign('level_id')
@@ -48,17 +39,6 @@ class CreateTournamentTable extends Migration {
             $table->foreign('venue_id')
                 ->references('id')
                 ->on('venue');
-
-
-//			$table->string('banner');
-//			$table->string('PassingTeams');
-
-//			$table->tinyInteger('type')->unsigned()->default(1)->nullable(); // Tournament type
-//			$table->integer('ScoreWin');
-//			$table->integer('ScoreDraw');
-//			$table->integer('ScoreType');
-//			$table->string('Diploma');
-//			$table->string('Accreditation');
 
 			$table->timestamps();
 			$table->softDeletes();

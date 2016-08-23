@@ -153,21 +153,4 @@ class TournamentUserController extends Controller
     {
         return view('users.show', compact('tournament', 'user'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Tournament $tournament
-     * @param User $user
-     * @return View
-     */
-    public function edit(Tournament $tournament, User $user)
-    {
-
-        $user = User::with('categorytournaments.tournament', 'championships.category')->find($user->id);
-        dd($user->championships);
-        $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/users/edit", compact('tournament', 'currentModelName', 'user')); //, compact()
-
-    }
 }
