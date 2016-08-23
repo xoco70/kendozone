@@ -196,6 +196,30 @@ class TournamentTest extends TestCase
 
     }
 
+//    /** @test */
+//    public function it_can_edit_venue()
+//    {
+//        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+//        $ct0 = factory(CategoryTournament::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+//        $venue = factory(CategoryTournament::class)->create();
+//        $this->visit('/tournaments/' . $tournament->slug . '/edit#tab2')
+//            ->type($venue->name, 'venue_name')
+//            ->type($venue->latitude, 'latitude')
+//            ->type($venue->longitude, 'longitude')
+//            ->type($venue->details, 'details')
+//            ->select($venue->country_id, 'country_id')
+//            ->press('update_venue')
+//            ->seeInDatabase('venue',
+//                ['venue_name' => $venue->name,
+//                    'latitude' => $venue->latitude,
+//                    'longitude' => $venue->longitude,
+//                    'details' => $venue->details,
+//                    'country_id' => $venue->country_id,
+//                ]);
+//
+//
+//    }
+
     /** @test */
     public function it_edit_tournament_category_conf()
     {

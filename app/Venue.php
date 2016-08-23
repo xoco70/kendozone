@@ -10,7 +10,6 @@ class Venue extends Model
     public $timestamps = true;
     protected $fillable = [
         'venue_name',
-        'coords',
         'address',
         'details',
         'city',

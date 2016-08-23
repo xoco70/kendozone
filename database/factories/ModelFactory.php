@@ -99,8 +99,8 @@ $factory->define(App\Venue::class, function (Faker\Generator $faker) {
 
     return [
         'venue_name' => $faker->colorName,
-        'address' => $faker->address,
-        'details' => $faker->address,
+        'address' => $faker->streetName,
+        'details' => $faker->streetName,
         'city' => $faker->city,
         'CP' => $faker->postcode,
         'state' => $faker->colorName,

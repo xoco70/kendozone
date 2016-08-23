@@ -44,7 +44,7 @@
             </div>
         </div>
         <div align="right">
-            <button type="submit" class="btn btn-success btn-update-tour mr-20 mt-20"><i></i>{{trans("core.save")}}
+            <button type="submit" class="btn btn-success btn-update-tour mr-20 mt-20 " id="update_venue"><i></i>{{trans("core.save")}}
             </button>
         </div>
     </div>
