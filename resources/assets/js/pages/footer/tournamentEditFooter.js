@@ -56,8 +56,15 @@ $(function () {
                 updateControls(addressComponents);
 
             }, oninitialized: function(component) {
-                var addressComponents = $(component).locationpicker('map').location.addressComponents;
-                updateControls(addressComponents);
+
+                $('#venue_name').val(venue.venue_name);
+                $('#address').val(venue.address);
+                $('#details').val(venue.details);
+                $('#city').val(venue.city);
+                $('#CP').val(venue.CP);
+                $('#state').val(venue.state);
+                $('#latitude').val(venue.latitude);
+                $('#longitude').val(venue.longitude);
             }
 
         });
@@ -66,6 +73,8 @@ $(function () {
     function updateControls(addressComponents) {
         $('#city').val(addressComponents.city);
         $('#CP').val(addressComponents.postalCode);
+        $('#state').val(addressComponents.stateOrProvince);
+
     }
 
     $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {

@@ -28,6 +28,13 @@
                                 <fieldset title="{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}">
                                     <legend class="text-semibold">{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}</legend>
 
+                                    <p>
+                                        Tienes 2 opciones para invitar competidores:
+                                        <ul>
+                                            <li>Ingresando el email de los competidores separandolos por commas</li>
+                                            <li>Importando un archivo excel ( El archivo debe contener un email por linea en la primera columna )</li>
+                                        </ul>
+                                    </p>
                                     <div class="container-fluid">
 
                                         {!! Form::open(['url'=>URL::action('InviteController@store')]) !!}
@@ -42,6 +49,24 @@
                                         </div>
 
                                         {!! Form::close()!!}
+
+                                        <div class="content-divider text-muted form-group">
+                                            <span>{{  trans('core.or') }}</span></div>
+                                        <p>
+                                            Load a csv file<br/>
+                                        <form id="uploadAndImport" enctype="multipart/form-data" method="post" action="#">
+                                            <input id="fileupload" name="myfile" type="file"/>
+                                            <input type="submit" value="submit" id="submit"/>
+                                            <div class="form-group">
+
+                                                {!!  Form::submit(trans('core.import_excel'), ['class' => 'btn btn-primary form-control']) !!}
+                                            </div>
+                                        </form>
+
+
+
+                                        </p>
+
 
                                     </div>
 

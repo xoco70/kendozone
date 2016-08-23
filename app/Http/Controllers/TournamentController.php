@@ -149,8 +149,8 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, VenueRequest $venueRequest, Tournament $tournament)
     {
-        $venue = new Venue;
-//        $club->update($request->except(['federation_id']));
+
+        $venue = $tournament->venue;
         if ($venueRequest->has('venue_name')) {
 
             $venue->fill($venueRequest->all());

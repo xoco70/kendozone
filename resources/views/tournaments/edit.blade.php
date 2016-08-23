@@ -69,12 +69,12 @@
 
     $userLat = Auth::getUser()->latitude;
     $userLng = Auth::getUser()->longitude;
-    $oldLatitude = $tournament->latitude;
-    $oldLongitude = $tournament->longitude;
+    $venueLat = $venue->latitude;
+    $venueLong = $venue->longitude;
 
-    if (!isNullOrEmptyString($oldLongitude) && !isNullOrEmptyString($oldLongitude)) {
-        $latitude = $oldLatitude;
-        $longitude = $oldLongitude;
+    if (!isNullOrEmptyString($venueLong) && !isNullOrEmptyString($venueLong)) {
+        $latitude = $venueLat;
+        $longitude = $venueLong;
 
     } else if (!isNullOrEmptyString($userLat) && !isNullOrEmptyString($userLng)) {
         $latitude = $userLat;
@@ -98,7 +98,8 @@
         var allCategoriesSize = '{!! $categorySize !!}';
         var dualListIds = [];
         var dualList;
-        {{--        var rule_warning = "{{ trans('') }}";--}}
+        var venue = "{!! addcslashes($venue, '"') !!}";
+        venue = JSON.parse(venue);
     </script>
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}

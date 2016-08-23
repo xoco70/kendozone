@@ -17,6 +17,8 @@ class Venue extends Model
         'CP',
         'state',
         'country_id',
+        'latitude',
+        'longitude',
     ];
 
     public function country(){
