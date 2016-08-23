@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
 
-class ChampionshipUser extends Model
+class Competitor extends Model
 {
     use SoftDeletes;
     use AuditingTrait;
     protected $DATES = ['created_at', 'updated_at','deleted_at'];
 
 
-    protected $table = 'championship_user';
+    protected $table = 'competitor';
     public $timestamps = true;
     protected $fillable = [
         "tournament_category_id",
@@ -24,7 +24,7 @@ class ChampionshipUser extends Model
 
     public function championship($ctId)
     {
-        $tcu = ChampionshipUser::where('championship_id', $ctId)->first();
+        $tcu = Competitor::where('championship_id', $ctId)->first();
         $championshipId = $tcu->championship_id;
         $championship = Championship::find($championshipId);
 

@@ -138,7 +138,7 @@ $factory->define(App\Championship::class, function (Faker\Generator $faker) {
         'category_id' => $faker->randomElement($categories),
     ];
 });
-$factory->define(App\ChampionshipUser::class, function (Faker\Generator $faker) {
+$factory->define(App\Competitor::class, function (Faker\Generator $faker) {
     $tcs = Championship::all()->pluck('id')->toArray();
     $users = User::all()->pluck('id')->toArray();
 

@@ -96,7 +96,7 @@ class Category extends Model
     }
 
 //    public function user(){
-//        return $this->belongsToMany('App\User', 'championship_user', 'championship_id');
+//        return $this->belongsToMany('App\User', 'competitor', 'championship_id');
 //    }
 
     public function championship()

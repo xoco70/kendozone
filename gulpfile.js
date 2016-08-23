@@ -90,14 +90,14 @@ elixir(function (mix) {
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
         'plugins/notifications/sweet_alert.min.js'
-    ], 'public/js/pages/header/tournamentUserCreate.js');
+    ], 'public/js/pages/header/competitorCreate.js');
 
     mix.scripts([
         'plugins/tables/datatables/datatables.min.js',
         'plugins/tables/datatables/extensions/responsive.min.js',
         'plugins/forms/selects/select2.min.js',
-        'pages/footer/tournamentUserIndexFooter.js'
-    ], 'public/js/pages/header/tournamentUserIndex.js');
+        'pages/footer/competitorIndexFooter.js'
+    ], 'public/js/pages/header/competitorIndex.js');
 
     mix.scripts([
         'plugins/multiple-emails.js'

@@ -62,7 +62,7 @@ class CreateCategoryTable extends Migration
         });
 
 
-        Schema::create('championship_user', function (Blueprint $table) {
+        Schema::create('competitor', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->index();
             $table->foreign('championship_id')
@@ -99,7 +99,7 @@ class CreateCategoryTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('championship_user');
+        Schema::dropIfExists('competitor');
         Schema::dropIfExists('championship');
         Schema::dropIfExists('category');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

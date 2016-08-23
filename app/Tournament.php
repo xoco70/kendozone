@@ -163,7 +163,7 @@ class Tournament extends Model implements SluggableInterface
      */
     public function competitors($championshipId = null)
     {
-        return $this->hasManyThrough(ChampionshipUser::class, Championship::class);
+        return $this->hasManyThrough(Competitor::class, Championship::class);
     }
 
 

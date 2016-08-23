@@ -19,7 +19,6 @@ class AdministrativeStructureController extends ApiController
 
     public static function getAssociations($federationId)
     {
-        // Todo Change it to Repository
         return Association::where('federation_id', $federationId)->orderBy('id', 'asc')->get(['id as value', 'name as text'])->toArray();
 
     }

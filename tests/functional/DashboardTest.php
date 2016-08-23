@@ -1,7 +1,7 @@
 <?php
 
 use App\Championship;
-use App\ChampionshipUser;
+use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -69,7 +69,7 @@ class DashboardTest extends TestCase
 
         // Now add ctu
 
-        factory(ChampionshipUser::class)->create(['championship_id' => $ct1->id]);
+        factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         $this->visit('/')
             ->see(trans('core.tournaments_created'))

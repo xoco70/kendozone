@@ -1,7 +1,7 @@
 <?php
 use App\CategorySettings;
 use App\Championship;
-use App\ChampionshipUser;
+use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -184,7 +184,7 @@ class UserTest extends TestCase
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         factory(CategorySettings::class)->create(['championship_id' => $ct1->id]);
-        factory(ChampionshipUser::class)->create(['championship_id' => $ct1->id]);
+        factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         $response = $this->call('DELETE', '/users/' . $this->simpleUser->slug);
         $this->assertEquals(200, $response->status());
@@ -194,7 +194,7 @@ class UserTest extends TestCase
             ->seeIsSoftDeletedInDatabase('tournament', ['user_id' => $this->simpleUser->id])
             ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
             ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('championship_user', ['championship_id' => $ct1->id]);;
+            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $ct1->id]);;
 
     }
 

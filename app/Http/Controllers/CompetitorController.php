@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\ChampionshipUser;
+use App\Competitor;
 use App\Grade;
-use App\Http\Requests;
-use App\Http\Requests\TournamentUserRequest;
+use App\Http\Requests\CompetitorRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
@@ -16,7 +15,7 @@ use Illuminate\Support\Facades\View;
 use Response;
 use URL;
 
-class TournamentUserController extends Controller
+class CompetitorController extends Controller
 {
     protected $currentModelName;
 
@@ -62,15 +61,15 @@ class TournamentUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TournamentUserRequest $request
+     * @param CompetitorRequest $request
      * @param Tournament $tournament
      * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(TournamentUserRequest $request, Tournament $tournament, AppMailer $mailer)
+    public function store(CompetitorRequest $request, Tournament $tournament, AppMailer $mailer)
     {
         $championshipId = $request->championshipId;
-        
+
         $championship = Championship::findOrFail($championshipId);
 
         $user = User::registerUserToCategory([
@@ -78,14 +77,13 @@ class TournamentUserController extends Controller
             'email' => $request->email
 
         ]);
-
-        $ctu = $user->championships();
-
-        if ($ctu->get()->contains($championship)) {
+        
+        $championships = $user->championships();
+        if ($championships->get()->contains($championship)) {
             flash()->error(trans('msg.user_already_registered_in_category'));
-            return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+            return redirect(URL::action('CompetitorController@index', $tournament->slug));
         } else {
-            $ctu->attach($championshipId, ['confirmed' => 0]);
+            $championships->attach($championshipId, ['confirmed' => 0]);
         }
 
 
@@ -95,7 +93,7 @@ class TournamentUserController extends Controller
         $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $championship->category->name, $user->clearPassword);
 
         flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
-        return redirect(URL::action('TournamentUserController@index', $tournament->slug));
+        return redirect(URL::action('CompetitorController@index', $tournament->slug));
 
 
     }
@@ -109,7 +107,7 @@ class TournamentUserController extends Controller
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
         $user = User::findBySlug($userSlug);
-        $ctu = ChampionshipUser::where('championship_id', $tcId)
+        $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id)->first();
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
@@ -131,7 +129,7 @@ class TournamentUserController extends Controller
     {
 
         $user = User::findBySlug($userSlug);
-        $ctu = ChampionshipUser::where('championship_id', $tcId)
+        $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id);
 
         if ($ctu->forceDelete()) {

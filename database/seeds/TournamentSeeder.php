@@ -1,7 +1,7 @@
 <?php
 
 use App\Championship;
-use App\ChampionshipUser;
+use App\Competitor;
 use App\Tournament;
 use App\Venue;
 use Illuminate\Database\QueryException;
@@ -51,10 +51,10 @@ class TournamentSeeder extends Seeder
 
         // Tournament categories users
 
-        ChampionshipUser::truncate();
+        Competitor::truncate();
         for ($i = 0; $i < 30; $i++) {
             try {
-                factory(ChampionshipUser::class)->create();
+                factory(Competitor::class)->create();
             } catch (QueryException $e) {
 //                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
             } catch (PDOException $e) {

@@ -12,7 +12,7 @@
             <?php
             $championship = \App\Championship::findOrFail($championshipId);
             ?>
-            {!! Form::open(['url'=>URL::action("TournamentUserController@index",$tournament->slug)]) !!}
+            {!! Form::open(['url'=>URL::action("CompetitorController@index",$tournament->slug)]) !!}
 
 
             <div class="container-fluid">
@@ -86,6 +86,6 @@
 @stop
 
 @section('scripts_footer')
-    {!! Html::script('js/pages/header/tournamentUserCreate.js') !!}
-    {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
+    {!! Html::script('js/pages/header/competitorCreate.js') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
 @stop

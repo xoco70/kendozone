@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 class CompetitorRequest extends Request
 {
+
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -22,6 +24,10 @@ class CompetitorRequest extends Request
     public function rules()
     {
         return [
+            'username' => 'required|max:255',
+            'email' => 'email|required',
+            'championshipId' => 'required',
+
         ];
     }
 }

@@ -85,7 +85,7 @@
 
                                             @can('edit',$tournament)
                                                 {!! Form::open(['method' => 'PUT', 'id' => 'formConfirmTCU',
-                                            'action' => ['TournamentUserController@confirmUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
+                                            'action' => ['CompetitorController@confirmUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
 
 
                                                 <button type="submit"
@@ -114,7 +114,7 @@
                                             <td class="text-center">
 
                                                 {!! Form::model(null, ['method' => 'DELETE', 'id' => 'formDeleteTCU',
-                                             'action' => ['TournamentUserController@deleteUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
+                                             'action' => ['CompetitorController@deleteUser', $tournament->slug, $championship->id,$user->slug  ]]) !!}
 
                                                 <button type="submit"
                                                         class="btn text-warning-600 btn-flat btnDeleteTCU"
@@ -149,9 +149,9 @@
     @include("modals.add_tournament_user")
 @stop
 @section("scripts_footer")
-    {!! Html::script('js/pages/header/tournamentUserIndex.js') !!}
+    {!! Html::script('js/pages/header/competitorIndex.js') !!}
 
-    {!! JsValidator::formRequest('App\Http\Requests\TournamentUserRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
     <script>
 
 

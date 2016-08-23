@@ -95,11 +95,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             foreach ($user->tournaments as $tournament) {
                 $tournament->delete();
             }
-            $user->championshipUsers()->delete();
+            $user->competitors()->delete();
 
         });
         static::restoring(function ($user) {
-            $user->championshipUsers()->withTrashed()->restore();
+            $user->competitors()->withTrashed()->restore();
             foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
                 $tournament->restore();
             }
@@ -255,12 +255,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'championship_user', 'user_id', 'championship_id');
+        return $this->belongsToMany('App\Category', 'competitor', 'user_id', 'championship_id');
     }
 
     public function championships()
     {
-        return $this->belongsToMany(Championship::class)
+        return $this->belongsToMany(Championship::class,'competitor')
             ->withTimestamps();
     }
 
@@ -302,17 +302,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Club::class);
     }
 
-    public function championshipUsers()
+    public function competitors()
     {
-        return $this->hasMany(ChampionshipUser::class);
+        return $this->hasMany(Competitor::class);
     }
 
     public function myTournaments()
     {
 //        return User::with('')->find($this->id);
         return Tournament::leftJoin('championship', 'championship.tournament_id', '=', 'tournament.id')
-            ->leftJoin('championship_user', 'championship_user.championship_id', '=', 'championship.id')
-            ->where('championship_user.user_id', '=', $this->id)
+            ->leftJoin('competitor', 'competitor.championship_id', '=', 'championship.id')
+            ->where('competitor.user_id', '=', $this->id)
             ->select('tournament.*')
             ->distinct();
     }

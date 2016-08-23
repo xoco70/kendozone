@@ -39,7 +39,7 @@
                                             ->where('tournament_id', $tournament->id)
                                             ->where('category_id', $category->id)
                                             ->first();
-                                    $old = DB::table('championship_user')
+                                    $old = DB::table('competitor')
                                             ->where('championship_id', $Championship->id)
                                             ->where('user_id', Auth::user()->id)
                                             ->count();

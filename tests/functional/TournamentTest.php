@@ -1,7 +1,7 @@
 <?php
 use App\CategorySettings;
 use App\Championship;
-use App\ChampionshipUser;
+use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -295,7 +295,7 @@ class TournamentTest extends TestCase
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
         factory(CategorySettings::class)->create(['championship_id' => $ct1->id]);
-        factory(ChampionshipUser::class)->create(['championship_id' => $ct1->id]);
+        factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         // Check that tournament is gone
         $this->visit("/tournaments")
@@ -305,7 +305,7 @@ class TournamentTest extends TestCase
             ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
             ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct2->id]);
 //            ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $ct1->id])
-//            ->seeIsSoftDeletedInDatabase('championship_user', ['championship_id' => $ct1->id]);
+//            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $ct1->id]);
 
     }
 

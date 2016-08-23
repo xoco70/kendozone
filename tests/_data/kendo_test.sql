@@ -162,10 +162,10 @@ INSERT INTO `test_championship` VALUES ('9', '6', '4', '2016-05-18 22:29:59', '2
 INSERT INTO `test_championship` VALUES ('10', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
 
 -- ----------------------------
--- Table structure for test_championship_user
+-- Table structure for test_competitor
 -- ----------------------------
-DROP TABLE IF EXISTS `test_championship_user`;
-CREATE TABLE `test_championship_user` (
+DROP TABLE IF EXISTS `test_competitor`;
+CREATE TABLE `test_competitor` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `championship_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -174,39 +174,39 @@ CREATE TABLE `test_championship_user` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `championship_user_championship_id_user_id_unique` (`championship_id`,`user_id`),
-  KEY `championship_user_championship_id_index` (`championship_id`),
-  KEY `championship_user_user_id_index` (`user_id`),
-  CONSTRAINT `championship_user_championship_id_foreign` FOREIGN KEY (`championship_id`) REFERENCES `test_championship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `championship_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `test_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `competitor_championship_id_user_id_unique` (`championship_id`,`user_id`),
+  KEY `competitor_championship_id_index` (`championship_id`),
+  KEY `competitor_user_id_index` (`user_id`),
+  CONSTRAINT `competitor_championship_id_foreign` FOREIGN KEY (`championship_id`) REFERENCES `test_championship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `competitor_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `test_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of test_championship_user
+-- Records of test_competitor
 -- ----------------------------
-INSERT INTO `test_championship_user` VALUES ('1', '4', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('3', '2', '7', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('4', '6', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('5', '8', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('6', '2', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('7', '10', '6', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('8', '7', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('10', '5', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('11', '3', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('12', '4', '3', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('13', '1', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('15', '3', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('16', '2', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('17', '2', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('19', '4', '6', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('20', '8', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('21', '6', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('25', '3', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('26', '1', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('27', '2', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('28', '4', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('29', '8', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
-INSERT INTO `test_championship_user` VALUES ('30', '1', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('1', '4', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('3', '2', '7', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('4', '6', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('5', '8', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('6', '2', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('7', '10', '6', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('8', '7', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('10', '5', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('11', '3', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('12', '4', '3', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('13', '1', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('15', '3', '4', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('16', '2', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('17', '2', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('19', '4', '6', '1', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('20', '8', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('21', '6', '1', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('25', '3', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('26', '1', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('27', '2', '5', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('28', '4', '2', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('29', '8', '7', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
+INSERT INTO `test_competitor` VALUES ('30', '1', '3', '0', '2016-05-18 22:29:59', '2016-05-18 22:29:59', null);
 
 -- ----------------------------
 -- Table structure for test_club

@@ -45,7 +45,7 @@
                             </a></li>
 
 
-                        <li><a href="{{ URL::action('TournamentUserController@index',$tournament->slug) }}"><i
+                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}"><i
                                         class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)

@@ -35,7 +35,7 @@ class Championship extends Model
 
     public function ctus()
     {
-        return $this->hasMany(ChampionshipUser::class, 'championship_id', 'id');
+        return $this->hasMany(Competitor::class, 'championship_id', 'id');
     }
 
     public function category()
@@ -51,7 +51,7 @@ class Championship extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'championship_user', 'championship_id')
+        return $this->belongsToMany(User::class, 'competitor', 'championship_id')
             ->withPivot('confirmed')
             ->withTimestamps();
     }
@@ -70,7 +70,7 @@ class Championship extends Model
 
     public function championships()
     {
-        return $this->belongsToMany(Championship::class, 'championship_user');
+        return $this->belongsToMany(Championship::class, 'competitor');
     }
 
     public function setting()

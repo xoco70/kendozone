@@ -33,14 +33,14 @@ class InviteTest extends TestCase
     {
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 0]);
-        $categoriesTournament = new Collection;
+        $championships = new Collection;
         for ($i = 0; $i < 5; $i++) {
             try {
-                $categoriesTournament->push(factory(Championship::class)->create(['tournament_id' => $tournament->id]));
+                $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
+                $championships->push($championship);
             } catch (Exception $e) {
             }
         }
-
 
         // Check that inviting one user by email
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
@@ -102,14 +102,14 @@ class InviteTest extends TestCase
 
         // Get all categories for this tournament
         // Now we are on category Selection page
-        foreach ($categoriesTournament as $key => $ct) {
+        foreach ($championships as $key => $ct) {
             $this->type($ct->id, 'cat[' . $ct->id . ']');
         }
 
         $this->press(trans("core.save"));
 
-        foreach ($categoriesTournament as $key => $ct) {
-            $this->seeInDatabase('championship_user',
+        foreach ($championships as $key => $ct) {
+            $this->seeInDatabase('competitor',
                 ['championship_id' => $ct->id,
                     'user_id' => Auth::user()->id,
                 ]);
@@ -124,12 +124,12 @@ class InviteTest extends TestCase
         Auth::logout();
         // Given
         $tournament = factory(Tournament::class)->create(['type' => 1]);
-        $categoriesTournament = new Collection;
+        $championships = new Collection;
 
         for ($i = 0; $i < 5; $i++) {
             try {
                 $ct = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
-                $categoriesTournament->push($ct);
+                $championships->push($ct);
             } catch (Exception $e) {
             }
         }
@@ -149,14 +149,14 @@ class InviteTest extends TestCase
 //
 //        // Get all categories for this tournament
 //        // Now we are on category Selection page
-        foreach ($categoriesTournament as $ct) {
+        foreach ($championships as $ct) {
             $this->type($ct->id, 'cat[' . $ct->id . ']');
 //
         }
         $this->press(trans("core.save"));
 //
-        foreach ($categoriesTournament as $key => $ct) {
-            $this->seeInDatabase('championship_user',
+        foreach ($championships as $key => $ct) {
+            $this->seeInDatabase('competitor',
                 ['championship_id' => $ct->id,
                     'user_id' => $user->id,
                 ]);

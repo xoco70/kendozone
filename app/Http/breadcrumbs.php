@@ -122,7 +122,7 @@ Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
 // Home > Tournaments > MyTournament > List Competitors
 Breadcrumbs::register('tournaments.users.index', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.edit', $tournament);
-    $breadcrumbs->push(trans_choice('core.competitor', 2), action('TournamentUserController@index', [$tournament->slug]));
+    $breadcrumbs->push(trans_choice('core.competitor', 2), action('CompetitorController@index', [$tournament->slug]));
 });
 
 // Home > Tournaments > MyTournament > Add Competitors
@@ -132,13 +132,13 @@ Breadcrumbs::register('tournaments.users.create', function ($breadcrumbs, $tourn
     } else {
         $breadcrumbs->parent('tournaments.show', $tournament);
     }
-    $breadcrumbs->push(trans('core.add_competitor'), action('TournamentUserController@create', [$tournament->slug]));
+    $breadcrumbs->push(trans('core.add_competitor'), action('CompetitorController@create', [$tournament->slug]));
 });
 
 // Home > Tournaments > MyTournament > show Competitor
 Breadcrumbs::register('tournaments.users.show', function ($breadcrumbs, $tournament, $user) {
     $breadcrumbs->parent('tournaments.users.index', $tournament);
-    $breadcrumbs->push($user->name, action('TournamentUserController@index', [$tournament->slug, $user->slug]));
+    $breadcrumbs->push($user->name, action('CompetitorController@index', [$tournament->slug, $user->slug]));
 });
 
 // Home > Edit Profile
