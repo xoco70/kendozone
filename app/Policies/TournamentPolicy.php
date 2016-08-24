@@ -27,7 +27,7 @@ class TournamentPolicy
     }
 
     // You can create a user if you are not a simple user
-    public function create(User $user, Tournament $tournament)
+    public function create(User $user)
     {
 
         return true;

@@ -26,7 +26,7 @@ class AssociationPolicy
      * @param User $user
      * @return bool
      */
-    public function create(User $user, Association $association)
+    public function create(User $user)
     {
         if ($user->isFederationPresident()) {
             return true;

@@ -35,10 +35,11 @@ class InviteController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
+        dd("hola");
         $invites = Auth::user()->invites()->with('tournament.owner')->paginate(config('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
@@ -46,12 +47,11 @@ class InviteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $tournamentSlug
-     * @return \Illuminate\Http\Response
+     * @param Tournament $tournament
+     * @return View
      */
-    public function create($tournamentSlug)
+    public function create(Tournament $tournament)
     {
-        $tournament = Tournament::findBySlug($tournamentSlug);
         return view('invitation.show', compact('tournament'));
     }
 

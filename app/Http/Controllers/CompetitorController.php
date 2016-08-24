@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Championship;
 use App\Competitor;
+use App\Country;
 use App\Grade;
 use App\Http\Requests\CompetitorRequest;
 use App\Invite;
@@ -37,9 +38,9 @@ class CompetitorController extends Controller
         $settingSize = $tournament->categorySettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::pluck('name','id');
-
+        $countries = Country::all();
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize','grades'));
+        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize','grades','countries'));
 
     }
 

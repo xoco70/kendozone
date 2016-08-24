@@ -19,19 +19,11 @@ class ClubPolicy
         return null;
     }
 
-    public function create(User $user, Club $club)
+    public function create(User $user)
     {
         if ($user->isFederationPresident() || $user->isAssociationPresident()) {
             return true;
         }
-//        if ($user->isFederationPresident()) {
-//            if ($user->federationOwned->id == $club->association->federation->id)
-//                return true;
-//
-//        } else if ($user->isAssociationPresident()) {
-//                if ($user->associationOwned->id == $club->association->id)
-//                return true;
-//        }
         return false;
     }
 

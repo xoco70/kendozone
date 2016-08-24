@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\AuthRequest;
+use App\Invite;
 use App\Mailers\AppMailer;
+use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -40,6 +44,30 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function postInvite(AuthRequest $request)
+    {
+        $request->request->add(['role_id' => config('constants.ROLE_USER')]);
+        //Check token
+        $user = null;
+        $token = $request->get("token");
+        $invite = Invite::getActiveTournamentInvite($token);
+        if (!is_null($invite)) {
+            $user = User::create($request->all());
+            if (!is_null($user)) {
+                Auth::loginUsingId($user->id);
+            }
+            $tournament = Tournament::find($invite->object_id);
+            $userId = $user->id;
+//            $invite->consume();
+
+            flash()->success(Lang::get('auth.registration_completed'));
+            return view("categories.register", compact('userId', 'tournament', 'invite'));
+
+        } else {
+            flash()->error(Lang::get('auth.no_invite'));
+            return redirect(URL::action('Auth\AuthController@postLogin'))->with('status', 'error');
+        }
+    }
     /**
      * Handle a registration request for the application.
      *

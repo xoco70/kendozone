@@ -3297,7 +3297,7 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 
 @media (max-width:768px) {
     .navbar-header .navbar-nav>li+li {
-        margin-top: 0
+        margin-top: 4px;
     }
     .navbar-collapse>.navbar-header {
         margin-left: 0

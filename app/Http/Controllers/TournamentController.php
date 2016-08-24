@@ -27,6 +27,7 @@ class TournamentController extends Controller
     public function __construct()
     {
 
+
     }
 
     /**
@@ -87,7 +88,6 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        dd("ok");
         $teams = "";
         $grades = Grade::pluck('name', 'id');
         return view('tournaments.show', compact('tournament', 'grades', 'teams'));
@@ -155,6 +155,8 @@ class TournamentController extends Controller
 
             $venue->fill($venueRequest->all());
             $venue->save();
+        }else{
+            $venue = new Venue();
         }
         $res = $request->update($tournament, $venue);
 

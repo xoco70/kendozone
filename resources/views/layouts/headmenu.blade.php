@@ -8,7 +8,7 @@
                                 src="{!! Auth::getUser()->avatar !!}"
                                 width="28"
                                 alt="kendozone_avatar"></a></li>
-                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3 mobile-menu"></i></a></li>
             </ul>
         @endif
     </div>

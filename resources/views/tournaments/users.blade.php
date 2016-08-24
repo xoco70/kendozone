@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <?php
-    $countries = Countries::all();
+//    $countries = Countries::all();
     $link = "";
     if ($settingSize > 0 && $settingSize == $categorySize)
         $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);

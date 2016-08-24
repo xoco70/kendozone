@@ -27,7 +27,7 @@ class UserPolicy
     }
 
     // You can create a user if you are not a simple user
-    public function create(User $user, User $userModel)
+    public function create(User $user)
     {
         if (!$user->isUser()) {
             return true;
@@ -36,7 +36,7 @@ class UserPolicy
     }
 
     // You can store a user if you are not a simple user
-    public function store(User $user, User $userModel)
+    public function store(User $user)
     {
         if (!$user->isUser()) {
             return true;
