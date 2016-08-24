@@ -4,7 +4,7 @@
     <?php
 //            dd(App::getLocale());
             ?>
-<form id="login-form" class="login-form" method="POST" action="{!!   URL::action('Auth\AuthController@postLogin') !!}">
+<form id="login-form" class="login-form" method="POST" action="{!!   URL::action('Auth\LoginController@login') !!}">
 
     {!! csrf_field() !!}
     <div class="panel panel-body login-form">
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="col-xs-6 text-right">
-                    <a href="{!! URL::action('Auth\PasswordController@getEmail') !!}">{{  trans('auth.lost_password') }}</a>
+                    <a href="{!! URL::action('Auth\ForgotPasswordController@showLinkRequestForm') !!}">{{  trans('auth.lost_password') }}</a>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
 
         <div class="mt-20">
             <a class="btn full-width text-primary border-primary border-4 text-uppercase "
-               href="{!! URL::action('Auth\AuthController@getRegister') !!}">{{  trans('auth.signup') }}</a>
+               href="{!! URL::action('Auth\RegisterController@showRegistrationForm') !!}">{{  trans('auth.signup') }}</a>
         </div>
     </div>
 

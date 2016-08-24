@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'fetch' => PDO::FETCH_CLASS,
+    'fetch' => PDO::FETCH_OBJ,
 
     /*
     |--------------------------------------------------------------------------
@@ -46,22 +46,11 @@ return [
 
     'connections' => [
 
-        'sqlite_orig' => [
-            'driver' => 'sqlite',
-            'database' => 'tests/_data/kz_org.sqlite',
-            'prefix' => '',
-        ],
-
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => 'tests/_data/kz.sqlite',
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
-//        'sqlite_memory' => [
-//            'driver' => 'sqlite',
-//            'database' => ':memory:',
-//            'prefix' => 'ken_',
-//        ],
 
         'mysql' => [
             'driver' => 'mysql',
@@ -75,26 +64,17 @@ return [
             'strict' => false,
         ],
 
-
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
+            'sslmode' => 'prefer',
         ],
 
     ],
@@ -128,8 +108,9 @@ return [
         'cluster' => false,
 
         'default' => [
-            'host' => '127.0.0.1',
-            'port' => 6379,
+            'host' => env('REDIS_HOST', 'localhost'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 

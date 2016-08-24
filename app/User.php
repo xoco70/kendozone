@@ -14,6 +14,7 @@ use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -31,7 +32,7 @@ use Webpatser\Countries\Countries;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait,Notifiable;
 
 
     /**

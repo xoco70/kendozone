@@ -13,8 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-//        \App\Console\Commands\Inspire::class,
-        \Spatie\LinkChecker\CheckLinksCommand::class,
+        //
     ];
 
     /**
@@ -25,9 +24,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('inspire')->hourly();
-        $schedule->command('backup:clean')->daily()->at('01:00');
-        $schedule->command('backup:run')->daily()->at('02:00');
-        $schedule->command('link-checker:run')->sundays();
+        // $schedule->command('inspire')
+        //          ->hourly();
+    }
+
+    /**
+     * Register the Closure based commands for the application.
+     *
+     * @return void
+     */
+    protected function commands()
+    {
+        require base_path('routes/console.php');
     }
 }
