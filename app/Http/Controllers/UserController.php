@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests\UserRequest;
 use App\Role;
 use App\User;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -56,12 +56,12 @@ class UserController extends Controller
     {
         $user = new User();
         if (Auth::user()->cannot('create', $user)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
-        $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
-        $grades = Grade::lists('name', 'id');
-        $countries = Countries::lists('name', 'id');
+        $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
+        $grades = Grade::pluck('name', 'id');
+        $countries = Countries::pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = AdministrativeStructureController::getFederations();
 
@@ -89,8 +89,9 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function show($user)
+    public function show(User $user)
     {
+
 
         return view('users.show', compact('user'));
     }
@@ -104,11 +105,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if (Auth::user()->cannot('edit', $user)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
-        $roles = Role::grantedRoles(Auth::user()->role_id)->lists('name', 'id');
-        $grades = Grade::orderBy('order')->lists('name', 'id');
-        $countries = Countries::lists('name', 'id');
+        $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
+        $grades = Grade::orderBy('order')->pluck('name', 'id');
+        $countries = Countries::pluck('name', 'id');
 //        $federations = AdministrativeStructureController::getFederations();
         return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
     }

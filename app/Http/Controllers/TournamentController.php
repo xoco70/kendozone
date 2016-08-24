@@ -26,7 +26,6 @@ class TournamentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('ownTournament', ['except' => ['index', 'show']]);
 
     }
 
@@ -57,8 +56,8 @@ class TournamentController extends Controller
     public function create()
     {
         $currentModelName = trans_choice('core.tournament', 1);
-        $levels = TournamentLevel::lists('name', 'id');
-        $categories = Category::take(10)->orderBy('id', 'asc')->lists('name', 'id');
+        $levels = TournamentLevel::pluck('name', 'id');
+        $categories = Category::take(10)->orderBy('id', 'asc')->pluck('name', 'id');
         $tournament = new Tournament();
         $rules = config('options.rules');
         $rulesCategories = (new Category)->getCategorieslabelByRule();
@@ -88,8 +87,9 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
+        dd("ok");
         $teams = "";
-        $grades = Grade::lists('name', 'id');
+        $grades = Grade::pluck('name', 'id');
         return view('tournaments.show', compact('tournament', 'grades', 'teams'));
     }
 
@@ -104,7 +104,7 @@ class TournamentController extends Controller
 
         $tournament = Tournament::with('competitors', 'categorySettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
-        $countries = Countries::lists('name', 'id');
+        $countries = Countries::pluck('name', 'id');
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->categorySettings->count();
@@ -115,7 +115,7 @@ class TournamentController extends Controller
         $baseCategories = Category::take(10)->get();
 //        // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
-        $grades = Grade::lists('name', 'id');
+        $grades = Grade::pluck('name', 'id');
         $categories = new Collection();
         $tournament->venue == null
             ? $venue = new Venue

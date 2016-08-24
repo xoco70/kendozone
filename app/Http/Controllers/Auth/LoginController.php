@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AuthenticateUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -25,15 +28,27 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+    /**
+     * @var Socialite
+     */
+    private $socialite;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Socialite $socialite)
     {
         $this->middleware('guest', ['except' => 'logout']);
+        $this->socialite = $socialite;
     }
+
+    public function getSocialAuth(AuthenticateUser $authenticateUser, Request $request, $provider = null)
+    {
+
+        return $authenticateUser->execute($request->all(), $this, $provider);
+    }
+
 }

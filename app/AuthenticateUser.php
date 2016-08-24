@@ -32,7 +32,7 @@ class AuthenticateUser {
         }else{
             Session::flash('error', Lang::get('auth.account_already_exists'));
 
-            return redirect(URL::action('Auth\AuthController@getLogin'));
+            return redirect(URL::action('Auth\LoginController@login'));
         }
 
 

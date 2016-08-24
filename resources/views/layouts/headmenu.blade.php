@@ -133,7 +133,7 @@
 
                         {{--====================================== Logout ======================================--}}
                         <li class="divider"></li>
-                        <li><a href="{{  URL::action('Auth\AuthController@getLogout') }}" id="logout"><i
+                        <li><a href="{{  url('/logout') }}" id="logout"><i
                                         class="icon-switch2"></i> {!! Lang::get('core.logout') !!}
                             </a>
                         </li>

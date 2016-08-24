@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;
 use Auth;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Response;
@@ -57,7 +57,7 @@ class ClubController extends Controller
         $federations = new Collection();
         $associations = new Collection();
         if (Auth::user()->cannot('create', $club)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
         //TODO Set Users to Void and set it with VueJS through APIs
         if (Auth::user()->isFederationPresident()) {
@@ -136,7 +136,7 @@ class ClubController extends Controller
         $associations = new Collection();
 
         if (Auth::user()->cannot('edit', $club)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         //TODO Set Users to Void and set it with VueJS through APIs
@@ -196,7 +196,7 @@ class ClubController extends Controller
         $club = Club::findOrFail($id);
 
         if (Auth::user()->cannot('update', $club)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         $club->update($request->except(['federation_id']));

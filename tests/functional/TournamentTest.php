@@ -59,7 +59,7 @@ class TournamentTest extends TestCase
     {
         Auth::logout();
         $this->visit('/tournaments')
-            ->seePageIs('/auth/login');
+            ->seePageIs('/login');
     }
 
     /** @test */

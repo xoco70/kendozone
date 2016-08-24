@@ -7,6 +7,8 @@ use App\Grade;
 use App\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
+use Webpatser\Countries\Countries;
 
 class UserSeeder extends Seeder
 {

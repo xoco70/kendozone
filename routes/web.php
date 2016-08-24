@@ -1,5 +1,7 @@
 <?php
 Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -45,18 +47,18 @@ Route::group(['middleware' => ['guest']],
 
 //        Route::get('register', 'Auth\RegisterController@getRegister');
 //        Route::post('register', 'Auth\AuthController@postRegister');
-        Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
+//        Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
 
         //Social Login
         Route::get('auth/login/{provider?}', [
-            'uses' => 'Auth\AuthController@getSocialAuth',
+            'uses' => 'Auth\LoginController@getSocialAuth',
             'as' => 'auth.getSocialAuth'
         ]);
 
 
         Route::get('/login/callback/{provider?}', [
-            'uses' => 'Auth\AuthController@getSocialAuthCallback',
+            'uses' => 'Auth\LoginController@getSocialAuthCallback',
             'as' => 'auth.getSocialAuthCallback'
         ]);
     });
@@ -73,12 +75,12 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
 
-        Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
+        Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'show' => 'tournaments.show', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
-        Route::resource('users', 'UserController', ['names' => ['index' => 'users.index', 'create' => 'users.create', 'edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);
+        Route::resource('users', 'UserController', ['names' => ['index' => 'users.index', 'show' => 'users.show', 'create' => 'users.create', 'edit' => 'users.edit', 'store' => 'users.store', 'update' => 'users.update']]);
 
         Route::get('users/{user}/tournaments', [
             'uses' => 'UserController@getMyTournaments',
@@ -87,10 +89,10 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
 
         Route::get('export', 'UserController@export');
-        Route::resource('tournaments/{tournament}/users', 'CompetitorController', ['names' => ['index' => 'tournament.users.index', 'create' => 'tournament.users.create', 'edit' => 'tournament.users.edit', 'store' => 'tournament.users.store', 'update' => 'tournament.users.update']]);
+        Route::resource('tournaments/{tournament}/users', 'CompetitorController', ['names' => ['index' => 'tournament.users.index', 'show' => 'tournament.users.show', 'create' => 'tournament.users.create', 'edit' => 'tournament.users.edit', 'store' => 'tournament.users.store', 'update' => 'tournament.users.update']]);
         Route::delete('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/delete', 'CompetitorController@deleteUser');
         Route::put('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/confirm', 'CompetitorController@confirmUser');
-        Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
+//        Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
         Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController', ['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');

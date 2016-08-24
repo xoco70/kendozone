@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Countries\Countries;
 
@@ -34,7 +34,8 @@ class Federation extends Model
     /**
      * @param $query
      * @param User $user
-     * @return mixed
+     * @return Builder
+     * @throws AuthorizationException
      */
     public function scopeForUser($query, User $user)
     {
@@ -50,7 +51,7 @@ class Federation extends Model
             case $user->isClubPresident() && $user->clubOwned:
                 return $query->where('id', '=', $user->clubOwned->association->federation->id);
             default:
-                throw new UnauthorizedException();
+                throw new AuthorizationException();
 
         }
     }

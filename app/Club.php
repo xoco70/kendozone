@@ -2,7 +2,8 @@
 
 namespace App;
 
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
@@ -78,6 +79,12 @@ class Club extends Model
         return $this->belongsTo(Association::class);
     }
 
+    /**
+     * @param $query
+     * @param User $user
+     * @return Builder
+     * @throws AuthorizationException
+     */
     public function scopeForUser($query, User $user)
     {
         switch (true) {
@@ -95,7 +102,7 @@ class Club extends Model
             case $user->isClubPresident() && $user->clubOwned:
                 return  $query->where('id', $user->clubOwned->id);
             default:
-                throw new UnauthorizedException();
+                throw new AuthorizationException();
         }
 
 

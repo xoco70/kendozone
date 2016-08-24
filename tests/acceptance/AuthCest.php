@@ -12,7 +12,7 @@ class AuthCest
         App::setLocale('en');
 
         Auth::logout();
-        $I->amOnPage('/auth/login');
+        $I->amOnPage('/login');
         $I->click('#google');
         $I->fillField('Email', 'julien@t4b.mx');
         $I->click('#next');

@@ -8,7 +8,7 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Request;
 use URL;
@@ -61,10 +61,10 @@ class FederationController extends Controller
     {
         $federation = Federation::findOrFail($id);
         if (Auth::user()->cannot('edit', $federation)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
-        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
+        $users = User::where('country_id', '=', $federation->country_id)->pluck('name', 'id');
         return view('federations.edit', compact('federation', 'users'));
     }
 
@@ -83,7 +83,7 @@ class FederationController extends Controller
             throw new NotOwningFederationException();
         }
         $federation->update($request->all());
-        $users = User::where('country_id', '=', $federation->country_id)->lists('name', 'id');
+        $users = User::where('country_id', '=', $federation->country_id)->pluck('name', 'id');
         $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
         flash()->success($msg);
 

@@ -66,7 +66,7 @@ class AuthTest extends TestCase
     {
         $user = $user ?: factory(User::class)->create(['password' => bcrypt('password')]);
 
-        return $this->visit('/auth/login')
+        return $this->visit('/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
             ->press(trans('auth.signin'));
@@ -102,7 +102,7 @@ class AuthTest extends TestCase
             ->press(trans('auth.reset_password'));
 
         Auth::logout();
-        $this->visit('/auth/login')
+        $this->visit('/login')
             ->type($user->email, 'email')
             ->type('222222', 'password')
             ->press(trans('auth.signin'))

@@ -6,11 +6,12 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use DateTime;
 use GeoIP;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -371,10 +372,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $tournament->owner_id == $this->id;
     }
 
+    /**
+     * @param $query
+     * @param User $user
+     * @return Builder
+     * @throws AuthorizationException
+     */
     public function scopeForUser($query, User $user)
     {
         // If user manage a structure, he will be limited to see entity of this structure
-        // If user has the role but manage no structure --> UnauthorizedException
+        // If user has the role but manage no structure --> AuthorizationException
         switch (true) {
             case $user->isSuperAdmin():
                 return $query;
@@ -385,7 +392,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             case $user->isClubPresident() && $user->associationOwned != null:
                 return $query->where('club_id', '=', $user->clubOwned->id);
             default:
-                throw new UnauthorizedException();
+                throw new AuthorizationException();
         }
 
     }

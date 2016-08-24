@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\User;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 
 class UserRequest extends Request
 {
@@ -65,7 +64,7 @@ class UserRequest extends Request
         $user->password = bcrypt($this->password);
 
         if (Auth::user()->cannot('store', $user)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
         return $user->save();
     }
@@ -73,7 +72,7 @@ class UserRequest extends Request
     public function update(User $user){
 
         if (Auth::user()->cannot('update', $user)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
         $except = [];
         if (trim($this->role_id) == '') {

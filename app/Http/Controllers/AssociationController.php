@@ -8,7 +8,7 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -47,12 +47,12 @@ class AssociationController extends Controller
         $federation = new Collection;
 
         if (Auth::user()->cannot('create', new Association)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
 //        dd(Auth::user()->role);
         $users = User::forUser(Auth::user())->pluck('name', 'id');
-        $federations = Federation::forUser(Auth::user())->lists('name', 'id');
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
@@ -67,7 +67,7 @@ class AssociationController extends Controller
     {
         // Assoc Policy
         if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         $association = Association::create($request->all());
@@ -103,11 +103,11 @@ class AssociationController extends Controller
         $federation = $association->federation;
 
         if (Auth::user()->cannot('edit', $association)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         $users = User::forUser(Auth::user())->pluck('name', 'id');
-        $federations = Federation::forUser(Auth::user())->lists('name', 'id');
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
 
         return view('associations.form', compact('association', 'users', 'federations', 'federation'));
     }
@@ -124,7 +124,7 @@ class AssociationController extends Controller
         $association = Association::findOrFail($id);
 
         if (Auth::user()->cannot('update', $association)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         $association->update($request->except(['federation_id']));

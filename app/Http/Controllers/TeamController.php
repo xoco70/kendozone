@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeamRequest;
 use App\Team;
 use App\Tournament;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -46,7 +46,7 @@ class TeamController extends Controller
     {
         $team = new Team;
         if (Auth::user()->cannot('create', $team)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         // category_tournanemnt_id with categoryName where isTeam == 1
@@ -69,7 +69,7 @@ class TeamController extends Controller
 //        $team = Team::make($request->all());
         $team = new Team;
         if (Auth::user()->cannot('store', $team)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
         $team = Team::create($request->all());
         flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
@@ -89,7 +89,7 @@ class TeamController extends Controller
         $team = Team::findOrFail($teamId);
 
         if (Auth::user()->cannot('edit', $team)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
         $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
@@ -108,7 +108,7 @@ class TeamController extends Controller
 
         $team = Team::findOrFail($teamId);
         if (Auth::user()->cannot('update', $team)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         $team->update($request->all());
@@ -141,7 +141,7 @@ class TeamController extends Controller
         $team = Team::findOrFail($teamId);
 
         if (Auth::user()->cannot('delete', $team)) {
-            throw new UnauthorizedException();
+            throw new AuthorizationException();
         }
 
         if ($team->forceDelete()) {

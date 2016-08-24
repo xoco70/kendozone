@@ -2,8 +2,8 @@
 use App\Association;
 use App\Federation;
 use App\User;
-use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Config;
 
 /**
  * List of Association Test

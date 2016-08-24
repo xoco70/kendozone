@@ -178,7 +178,7 @@ class Tournament extends Model implements SluggableInterface
 
     public function getCategoryList()
     {
-        return $this->categories->lists('id')->all();
+        return $this->categories->pluck('id')->all();
     }
 
 

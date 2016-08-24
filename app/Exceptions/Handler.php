@@ -3,11 +3,11 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -63,9 +63,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (App::environment('local')) {
-            return parent::render($request, $exception);
-        }
+//        if (App::environment('local')) {
+//            return parent::render($request, $exception);
+//        }
         switch ($exception) {
 
             case $exception instanceof NotFoundHttpException:
@@ -86,7 +86,7 @@ class Handler extends ExceptionHandler
 //                $source = "";
 
                 break;
-            case $exception instanceof UnauthorizedException:
+            case $exception instanceof AuthorizationException:
                 $code = "403";
                 $message = trans('core.forbidden');
                 $quote = '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”';

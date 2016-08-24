@@ -53,7 +53,7 @@ class UserTest extends TestCase
     public function mustBeAuthenticated()
     {
         $this->visit('/users')
-            ->seePageIs('/auth/login');
+            ->seePageIs('/login');
     }
 
 //    /** @test */

@@ -11,7 +11,7 @@ use App\Tournament;
 use App\User;
 use Auth;
 use Carbon\Carbon;
-use Illuminate\Contracts\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
@@ -72,7 +72,7 @@ class ChampionshipController extends Controller
                 throw new InvitationNeededException();
 
             } else {
-                throw new UnauthorizedException;
+                throw new AuthorizationException;
             }
         }
     }

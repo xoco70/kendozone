@@ -54,11 +54,6 @@ class CategoryController extends Controller
         return $newCategoryName;
     }
 
-//    public function getBaseCategories()
-//    {
-//        return Category::take(2)->orderBy('id', 'asc')->lists('name', 'id');
-//
-//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -66,14 +61,12 @@ class CategoryController extends Controller
      * @param $categorySettingsId
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit($categorySettingsId)
+    public function edit($categorySettingsId)
     {
 
     }
 
-    public
-    function show($tournamentId, $categoryId)
+    public function show($tournamentId, $categoryId)
     {
 
         $tc = Championship::where('tournament_id', $tournamentId)

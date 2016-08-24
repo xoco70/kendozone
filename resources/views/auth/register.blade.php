@@ -7,6 +7,7 @@
         {{--@include("errors.list")--}}
 
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+            {!! csrf_field() !!}
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
                     @include('layouts.flash')
@@ -17,14 +18,12 @@
 
                                 <div class="icon-object border-success text-success"><i class="icon-plus3"></i>
                                 </div>
-                                <h5 class="content-group-lg">{{  Lang::get('auth.title_register') }}
-                                    {{--                            <small class="display-block">{{  Lang::get('core.all_fields_required') }}</small>--}}
-                                </h5>
+                                <h5 class="content-group-lg">{{  Lang::get('auth.title_register') }}</h5>
                             </div>
 
 
                             <div class="row">
-                                <div class="col-lg-6 col-lg-offset-3">
+                                <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
                                     <div class="form-group has-feedback">
                                         <input type="text" name="name" class="form-control" id=""
                                                value="{{ old('name') }}"
@@ -37,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6 col-lg-offset-3">
+                                <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
                                     <div class="form-group has-feedback">
                                         <input type="email" id="email" name="email" class="form-control"
                                                value="{{ old('email') }}"
@@ -53,7 +52,7 @@
 
 
                             <div class="row">
-                                <div class="col-lg-6 col-lg-offset-3">
+                                <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
                                     <div class="form-group has-feedback">
                                         <input type="password" id="password" name="password"
                                                placeholder="{{  Lang::get('auth.create_password') }}"
@@ -67,7 +66,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6 col-lg-offset-3">
+                                <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
                                     <div class="form-group has-feedback">
                                         <input type="password" id="password_confirmation"
                                                name="password_confirmation"
