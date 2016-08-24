@@ -36,11 +36,10 @@ class AuthenticateUser {
         }
 
 
-        return $listener->userHasLoggedIn($user);
+        return redirect(URL::action('DashboardController@index'));
     }
 
     private function getAuthorizationFirst($provider) {
-
         return $this->socialite->driver($provider)->redirect();
     }
 

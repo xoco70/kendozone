@@ -1,12 +1,12 @@
 <?php
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Exceptions\ValidatorException;
 use App\User;
+use Illuminate\Support\Collection;
 
 class UserRepository extends BaseRepository
 {
-    
+
     public function findByUserNameOrCreate($userData, $provider)
     {
 
@@ -89,7 +89,7 @@ class UserRepository extends BaseRepository
      * @param       $value
      * @param array $columns
      *
-     * @return mixed
+     * @return Collection
      */
 
     public function firstByField($field = null, $value = null, $columns = ['*'])
@@ -97,29 +97,53 @@ class UserRepository extends BaseRepository
         return User::where($field, '=', $value)->first($columns);
 
     }
-    
+
+    /**
+     * @param null $userSlug
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function findBySlug($userSlug = null)
     {
         return User::findBySlug($userSlug);
 
     }
 
+    /**
+     * @param null $userSlug
+     * @param array $columns
+     * @return Collection
+     */
     public function findBySlugWithTrashed($userSlug = null, $columns = ['*'])
     {
-        return User::withTrashed()->whereSlug($userSlug)->get($columns) ;
+        return User::withTrashed()->whereSlug($userSlug)->get($columns);
 
     }
 
 
+    /**
+     * @return User|\Illuminate\Database\Eloquent\Builder
+     */
     public function getUsersWithCountriesAndRoles()
     {
-        return User::with('country','role');
+        return User::with('country', 'role');
     }
-    public function getSoftDeletedUserBySlug($slug){
+
+    /**
+     * @param $slug
+     * @return Collection
+     */
+    public function getSoftDeletedUserBySlug($slug)
+    {
         return User::onlyTrashed()->where('slug', '=', $slug)->first();
 
     }
-    public function getSoftDeletedUser(User $user){
+
+    /**
+     * @param User $user
+     * @return Collection
+     */
+    public function getSoftDeletedUser(User $user)
+    {
         return User::onlyTrashed()->where('email', '=', $user->email)->first();
     }
 }

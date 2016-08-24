@@ -51,7 +51,7 @@ Route::group(['middleware' => ['guest']],
 
 
         //Social Login
-        Route::get('auth/login/{provider?}', [
+        Route::get('/login/{provider?}', [
             'uses' => 'Auth\LoginController@getSocialAuth',
             'as' => 'auth.getSocialAuth'
         ]);
