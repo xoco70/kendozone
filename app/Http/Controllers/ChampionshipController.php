@@ -27,6 +27,7 @@ class ChampionshipController extends Controller
      * @param $tournamentSlug
      * @param $token
      * @return View
+     * @throws AuthorizationException
      * @throws InvitationExpiredException
      * @throws InvitationNeededException
      * @throws InvitationNotActiveException
@@ -77,7 +78,7 @@ class ChampionshipController extends Controller
         }
     }
     /**
-     * Store a newly created resource in storage.
+     * Store a new championship
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response

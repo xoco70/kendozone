@@ -9,6 +9,7 @@ use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -45,14 +46,21 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function postInvite(AuthRequest $request)
+    /**
+     * Called when
+     * @param AuthRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function registerFromInvite(AuthRequest $request)
     {
+        dd($request->all());
         $request->request->add(['role_id' => config('constants.ROLE_USER')]);
         //Check token
         $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveTournamentInvite($token);
         if (!is_null($invite)) {
+
             $user = User::create($request->all());
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
@@ -78,6 +86,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request, AppMailer $mailer)
     {
+        dd($request->all());
         $user = User::create([  'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),

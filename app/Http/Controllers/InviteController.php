@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Requests\InviteRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -33,19 +31,18 @@ class InviteController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of all invitations.
      *
      * @return View
      */
     public function index()
     {
-        dd("hola");
         $invites = Auth::user()->invites()->with('tournament.owner')->paginate(config('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the UI for inviting competitors
      *
      * @param Tournament $tournament
      * @return View
@@ -84,6 +81,18 @@ class InviteController extends Controller
         flash()->success(trans('msg.invitation_sent'));
 
         return redirect(URL::action('TournamentController@edit', $tournament->slug));
+
+    }
+
+    /**
+     * Consume registration.
+     * Send to user creation, or categories selection
+     * @param Request $request
+     * @internal param Invite $invitation
+     */
+    public function consume(Request $request){
+
+
 
     }
 

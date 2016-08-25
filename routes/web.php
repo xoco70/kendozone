@@ -18,7 +18,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 
 
-Route::post('auth/invite', 'Auth\RegisterController@postInvite');
+Route::post('auth/invite', 'Auth\RegisterController@registerFromInvite');
 
 
 Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'ChampionshipController@create');

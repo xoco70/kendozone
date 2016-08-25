@@ -2,7 +2,7 @@
 
 @section('content')
         <!-- Registration form -->
-{!! Form::open(['url'=>URL::action('Auth\RegisterController@postInvite') , 'class'=> "form-signin"]) !!}
+{!! Form::open(['url'=>URL::action('Auth\RegisterController@registerFromInvite') , 'class'=> "form-signin"]) !!}
 <div class="row">
     <div class="col-lg-4 col-lg-offset-4">
 
@@ -19,7 +19,7 @@
 
 
                 <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-10 col-lg-offset-1">
                         <div class="form-group has-feedback">
                             <input type="text" name="name" class="form-control" id=""
                                    value="{{ old('name') }}"
@@ -35,7 +35,7 @@
 
 
                 <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-10 col-lg-offset-1">
                         <div class="form-group has-feedback">
                             <input type="password" id="password" name="password"
                                    placeholder="{{  Lang::get('auth.create_password') }}"
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-10 col-lg-offset-1">
                         <div class="form-group has-feedback">
                             <input type="password" id="password_confirmation"
                                    name="password_confirmation"
@@ -67,7 +67,7 @@
 
                 <div class="text-right">
                     <button type="submit"
-                            class="btn bg-teal-400 btn-labeled btn-labeled-right ml-10">
+                            class="btn bg-teal-400 btn-labeled btn-labeled-right ml-10" id="create-account">
                         <b><i class="icon-plus3"></i></b>{{  Lang::get('auth.create_account') }}
                     </button>
                 </div>

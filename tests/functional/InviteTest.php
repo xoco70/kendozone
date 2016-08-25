@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class InviteTest extends TestCase
 {
@@ -31,10 +32,10 @@ class InviteTest extends TestCase
     /** @test */
     public function an_admin_may_invite_users_but_users_must_register_after()
     {
-        // Given
+        // Create a closed tournament with championships
         $tournament = factory(Tournament::class)->create(['type' => 0]);
         $championships = new Collection;
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             try {
                 $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
                 $championships->push($championship);
@@ -42,7 +43,7 @@ class InviteTest extends TestCase
             }
         }
 
-        // Check that inviting one user by email
+        // Invite a user
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
             ->type('["john@example.com","john2@example.com"]', 'recipients')// Must simulate js plugin
             ->press(trans('core.send_invites'))
@@ -62,12 +63,13 @@ class InviteTest extends TestCase
                     'used' => 0,
                 ]);
 
+        // Get Full invitation Object
         $invitation = Invite::where('object_id', $tournament->id)
             ->where('object_type', 'App\Tournament')
             ->where('email', 'john@example.com')
             ->first();
 
-
+        // Get Full user object
         $user = User::where('email', 'john@example.com')->first();
 
         //Bad Code or no code
