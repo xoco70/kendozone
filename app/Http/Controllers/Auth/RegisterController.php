@@ -9,6 +9,7 @@ use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,7 +66,7 @@ class RegisterController extends Controller
 
         } else {
             flash()->error(Lang::get('auth.no_invite'));
-            return redirect(URL::action('Auth\AuthController@postLogin'))->with('status', 'error');
+            return redirect(URL::action('Auth\LoginController@login'))->with('status', 'error');
         }
     }
     /**
@@ -91,7 +92,7 @@ class RegisterController extends Controller
 
         $mailer->sendEmailConfirmationTo($user);
         flash()->success(trans('auth.check_your_email'));
-        return redirect (URL::action('Auth\AuthController@getLogin'));
+        return redirect (URL::action('Auth\LoginController@login'));
 //        $this->validator($request->all())->validate();
 //
 //        $this->guard()->login($this->create($request->all()));

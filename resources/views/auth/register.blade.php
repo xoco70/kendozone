@@ -6,7 +6,7 @@
         <!-- Registration form -->
         {{--@include("errors.list")--}}
 
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+        <form method="POST" action="{{ url('/register') }}">
             {!! csrf_field() !!}
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
@@ -38,9 +38,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
                                     <div class="form-group has-feedback">
-                                        <input type="email" id="email" name="email" class="form-control"
-                                               value="{{ old('email') }}"
-                                               placeholder="{{  Lang::get('auth.your_email') }}">
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="{{  Lang::get('auth.your_email') }}">
 
                                         <div class="form-control-feedback">
                                             <i class="icon-mention text-muted"></i>

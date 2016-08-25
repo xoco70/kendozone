@@ -22,8 +22,6 @@ class AuthRequest extends Request
                 $request->request->add(['verified' => 1]);
             }
         }
-
-//        User::insertCoordsInRequest($request);
     }
 
     /**

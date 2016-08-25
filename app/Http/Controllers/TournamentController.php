@@ -26,7 +26,7 @@ class TournamentController extends Controller
 
     public function __construct()
     {
-
+        $this->middleware('ownTournament', ['except' => ['index', 'show']]);
 
     }
 
@@ -151,6 +151,9 @@ class TournamentController extends Controller
     {
 
         $venue = $tournament->venue;
+        if ($venue == null)
+            $venue = new Venue;
+
         if ($venueRequest->has('venue_name')) {
 
             $venue->fill($venueRequest->all());
@@ -213,6 +216,7 @@ class TournamentController extends Controller
      */
     public function register(Tournament $tournament)
     {
+
         if ($tournament->isOpen()) {
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         }

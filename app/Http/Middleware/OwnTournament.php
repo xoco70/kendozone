@@ -28,7 +28,6 @@ class OwnTournament
                 $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournament;
                 if ($tournament != null) {
-
                     if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
 
                         throw new AuthorizationException();

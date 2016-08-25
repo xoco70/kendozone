@@ -33,6 +33,7 @@ class TournamentPolicy
         return true;
     }
 
+
     // You can store a user if you are not a simple user
     public function store(User $user, Tournament $tournament)
     {

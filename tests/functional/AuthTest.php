@@ -51,7 +51,7 @@ class AuthTest extends TestCase
     {
         $user = factory(User::class)->make();
         // When we register...
-        $this->visit('/auth/register')
+        $this->visit('/register')
             ->type($user->name, 'name')
             ->type($user->email, 'email')
             ->type('password', 'password')
@@ -81,12 +81,12 @@ class AuthTest extends TestCase
             'role_id' => Config::get('constants.ROLE_USER'),
             'verified' => 1,]);
 
-        $this->visit('/auth/login')
+        $this->visit('/login')
             ->click(trans('auth.lost_password'))
-            ->seePageIs('/password/email')
+            ->seePageIs('/password/reset')
             ->type($user->email, 'email')
             ->press(trans('auth.send_password'))
-            ->seePageIs('/password/email')
+            ->seePageIs('/password/reset')
             ->see(trans('passwords.sent'));
 
         $reset = DB::table('password_resets')->where('email', $user->email)
@@ -97,6 +97,7 @@ class AuthTest extends TestCase
 
 
         $this->visit('/password/reset/' . $reset->token)
+            ->type($user->email, 'email')
             ->type('222222', 'password')
             ->type('222222', 'password_confirmation')
             ->press(trans('auth.reset_password'));
