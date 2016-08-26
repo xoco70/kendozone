@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
 use App\Tournament;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -53,7 +52,7 @@ class RegisterController extends Controller
      */
     public function registerFromInvite(AuthRequest $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $request->request->add(['role_id' => config('constants.ROLE_USER')]);
         //Check token
         $user = null;
@@ -77,17 +76,21 @@ class RegisterController extends Controller
             return redirect(URL::action('Auth\LoginController@login'))->with('status', 'error');
         }
     }
+
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param AuthRequest $request
      * @param AppMailer $mailer
-     * @return \Illuminate\Http\Response
+     * @return bool
      */
-    public function register(Request $request, AppMailer $mailer)
+    public function register(AuthRequest $request, AppMailer $mailer)
     {
-        dd($request->all());
-        $user = User::create([  'name' => $request->name,
+//        if ($request->ajax()) { // JsValidation Unicity
+//            return (boolean)User::where('email', $request->email)->count() == 1;
+//        }
+//        else {
+        $user = User::create(['name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'country_id' => $request->country_id,
@@ -101,7 +104,9 @@ class RegisterController extends Controller
 
         $mailer->sendEmailConfirmationTo($user);
         flash()->success(trans('auth.check_your_email'));
-        return redirect (URL::action('Auth\LoginController@login'));
+        return redirect(URL::action('Auth\LoginController@login'));
+
+//        }
 //        $this->validator($request->all())->validate();
 //
 //        $this->guard()->login($this->create($request->all()));
@@ -113,7 +118,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -128,7 +133,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -139,4 +144,22 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
+    /**
+     * Confirm a user's email address.
+     *
+     * @param  string $token
+     * @return mixed
+     */
+    public function confirmEmail($token)
+    {
+        $user = User::where('token', $token)->firstOrFail();
+        $user->confirmEmail();
+
+        Auth::loginUsingId($user->id);
+        flash()->success(Lang::get('auth.tx_for_confirm'));
+        return redirect(URL::action('DashboardController@index'));
+    }
+
 }

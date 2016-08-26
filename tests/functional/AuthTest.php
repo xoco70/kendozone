@@ -40,7 +40,7 @@ class AuthTest extends TestCase
         $user = User::whereName($user->name)->first();
         // You can't login until you confirm your email address.
         $this->login($user)->see(trans('auth.account_not_activated'));
-        $this->visit("auth/register/confirm/".$user->token)
+        $this->visit("register/confirm/".$user->token)
             ->see(trans('auth.tx_for_confirm'))
             ->seeInDatabase('users', ['name' => $user->name, 'verified' => 1]);
 

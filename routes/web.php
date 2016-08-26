@@ -28,19 +28,10 @@ Route::get('lang/{lang}', 'LanguageController@update');
 
 Route::group(['middleware' => ['guest']],
     function () {
-//        Route::post('login', 'Auth\LoginController@postLogin');
-//        Route::get('login', 'Auth\LoginController@getLogin');
 
         // Registration routes...
 
-//        Route::get('register', 'Auth\LoginController@getRegister');
-//        Route::post('register', 'Auth\AuthController@postRegister');
-//        Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
-
-//        Route::get('register', 'Auth\RegisterController@getRegister');
-//        Route::post('register', 'Auth\AuthController@postRegister');
-//        Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
-
+        Route::get('register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
 
         //Social Login
         Route::get('/login/{provider?}', [
