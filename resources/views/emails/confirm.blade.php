@@ -9,7 +9,7 @@
 
 {{ trans('mail.please_click_link_to_confirm_account') }}
 <p>
-    <a href="{{url("auth/register/confirm/{$user->token}")}}">{{ url("/register/confirm/{$user->token}") }}</a>
+    <a href="{{url("/register/confirm/{$user->token}")}}">{{ url("/register/confirm/{$user->token}") }}</a>
 </p>
 </body>
 </html>
