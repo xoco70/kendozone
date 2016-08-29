@@ -21,7 +21,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('auth/invite', 'Auth\RegisterController@registerFromInvite');
 
 
-Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'ChampionshipController@create');
+Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'ChampionshipController@create'); //TODO this route has no sense
 Route::post('tournaments/{tournament}/invite/{invite}/categories', 'ChampionshipController@store');
 
 Route::get('lang/{lang}', 'LanguageController@update');

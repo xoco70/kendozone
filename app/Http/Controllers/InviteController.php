@@ -49,6 +49,7 @@ class InviteController extends Controller
      */
     public function create(Tournament $tournament)
     {
+    	// Should dd $tournament
         return view('invitation.show', compact('tournament'));
     }
 

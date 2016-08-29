@@ -52,15 +52,17 @@ class RegisterController extends Controller
      */
     public function registerFromInvite(AuthRequest $request)
     {
-//        dd($request->all());
+        dd($request);
         $request->request->add(['role_id' => config('constants.ROLE_USER')]);
         //Check token
         $user = null;
         $token = $request->get("token");
         $invite = Invite::getActiveTournamentInvite($token);
+
         if (!is_null($invite)) {
 
             $user = User::create($request->all());
+            dd($user);
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }

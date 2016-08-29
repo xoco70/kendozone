@@ -86,7 +86,7 @@ class ChampionshipController extends Controller
     public function store(Request $request)
     {
         $categories = $request->get('cat');
-        $inviteId = $request->inviteId;
+        $inviteId = $request->invite;
         if ($inviteId != 0)
             $invite = Invite::findOrFail($inviteId);
         else
@@ -97,7 +97,14 @@ class ChampionshipController extends Controller
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
-            $user->championships()->sync($categories);
+            if ($categories != null){
+                $user->championships()->sync($categories);
+            }else{
+                flash()->error(trans('msg.you_must_choose_at_least_one_championship'));
+                return redirect()->back();
+
+            }
+
             if (is_null($invite)) {
                 $invite = new Invite();
                 $invite->code = 'open';

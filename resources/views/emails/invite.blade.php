@@ -11,11 +11,13 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 <h2>{{ trans('mail.invite_to_tournament') }}: {{ $tournament->name }} </h2>
 
 <p>{{ trans('mail.dear_kenshi') }}<br/>
-
+    {{ $tournament->venue->longitude}}
     {{ trans('mail.you_are_invited_to_tournament') }}: {{ $tournament->name }} <BR/>
 
     @if ($tournament->venue != null)
-        <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue }}<br/>
+        <strong>{{trans('core.venue')}}:</strong> {{ $tournament->venue->name }}<br/>
+        <strong>{{trans('core.address')}}:</strong> {{ $tournament->venue->address }}<br/>
+        {{--<a href="https://www.google.com/maps/preview/?q="{{ $tournament->venue->longitude  }},{{ $tournament->venue->latitude }},8z>{{ $tournament->venue->address }}</a><br/>--}}
     @endif
     <strong>{{trans('core.eventDateIni')}}:</strong> {{ $tournament->dateIni }}<br/>
     <strong>{{trans('core.eventDateFin')}}:</strong> {{ $tournament->dateFin }}<br/>

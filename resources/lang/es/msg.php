@@ -41,7 +41,7 @@ return [
     'user_status_error' => 'Hubo un error al actualizar :name',
 
 
-    // Categoria
+    // Championship
     'category_create_successful' => 'La categor&iacute;a se configur&oacute; de forma exitosa',
     'category_update_successful' => 'La categor&iacute;a se actualiz&oacute; de forma exitosa',
     'category_delete_successful' => 'La categor&iacute;a se borr&oacute; de forma exitosa',
@@ -49,6 +49,7 @@ return [
     'category_create_error' => 'Hubo un problema al crear la categor&iacute;a',
     'category_update_error' => 'Hubo un problema al actualizar la categor&iacute;a',
     'category_delete_error' => '¡Oooops! Hubo un problema al borrar la categor&iacute;a',
+    'you_must_choose_at_least_one_championship' => 'Debes de seleccionar al menos una categoría',
 
 
     //Invitation

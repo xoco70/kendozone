@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 
 class InviteTest extends TestCase
@@ -18,7 +19,7 @@ class InviteTest extends TestCase
      * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB 
      */
 
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     protected $root;
 
@@ -32,6 +33,9 @@ class InviteTest extends TestCase
     /** @test */
     public function an_admin_may_invite_users_but_users_must_register_after()
     {
+        $fakeUser1 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
+        $fakeUser2 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
+        $fakeUser3 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
         // Create a closed tournament with championships
         $tournament = factory(Tournament::class)->create(['type' => 0]);
         $championships = new Collection;
@@ -45,18 +49,18 @@ class InviteTest extends TestCase
 
         // Invite a user
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
-            ->type('["john@example.com","john2@example.com"]', 'recipients')// Must simulate js plugin
+            ->type('["'.$fakeUser1->email.'","'.$fakeUser2->email.'"]', 'recipients')// Must simulate js plugin
             ->press(trans('core.send_invites'))
             ->seePageIs('/tournaments/' . $tournament->slug . '/edit')
             ->seeInDatabase('invitation',
-                ['email' => 'john@example.com',
+                ['email' => $fakeUser1->email,
                     'object_id' => $tournament->id,
                     'expiration' => $tournament->registerDateLimit,
                     'active' => 1,
                     'used' => 0,
                 ])
             ->seeInDatabase('invitation',
-                ['email' => 'john2@example.com',
+                ['email' => $fakeUser2->email,
                     'object_id' => $tournament->id,
                     'expiration' => $tournament->registerDateLimit,
                     'active' => 1,
@@ -66,11 +70,11 @@ class InviteTest extends TestCase
         // Get Full invitation Object
         $invitation = Invite::where('object_id', $tournament->id)
             ->where('object_type', 'App\Tournament')
-            ->where('email', 'john@example.com')
+            ->where('email', $fakeUser1->email)
             ->first();
 
         // Get Full user object
-        $user = User::where('email', 'john@example.com')->first();
+        $user = User::where('email', $fakeUser1->email)->first();
 
         //Bad Code or no code
         $this->visit("/tournaments/" . $invitation->object->slug . "/invite/123456s")
@@ -85,34 +89,36 @@ class InviteTest extends TestCase
             $this->see("403");
         }
 
-
         $this->visit("/tournaments/" . $invitation->object->slug. "/invite/" . $invitation->code);
+
         // If user didn't exit, check that it is created
         if (is_null($user)) {
+
             // System redirect to user creation
-            $this->type('Johnny', 'name')
+            $this->type($fakeUser3->name, 'name')
                 ->type('222222', 'password')
                 ->type('222222', 'password_confirmation')
-                ->press(Lang::get('auth.create_account'))
-                ->seeInDatabase('users', ['email' => 'john@example.com', 'verified' => '1'])
+                ->press(trans('auth.create_account'))
+                ->seeInDatabase('users', ['email' => $fakeUser1->email, 'verified' => '1'])
                 ->see(trans('auth.registration_completed'));
 
         } // Unconfirmed User
         elseif ($user->verified == 0){
-
+            $user->verified  = 1;
+            $user->save();
         }
 
         // Get all categories for this tournament
         // Now we are on category Selection page
-        foreach ($championships as $key => $ct) {
-            $this->type($ct->id, 'cat[' . $ct->id . ']');
+        foreach ($championships as $championship) {
+            $this->type($championship->id, 'cat[' . $championship->id . ']');
         }
 
         $this->press(trans("core.save"));
 
-        foreach ($championships as $key => $ct) {
+        foreach ($championships as $key => $championship) {
             $this->seeInDatabase('competitor',
-                ['championship_id' => $ct->id,
+                ['championship_id' => $championship->id,
                     'user_id' => Auth::user()->id,
                 ]);
         }

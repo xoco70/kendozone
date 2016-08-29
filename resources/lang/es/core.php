@@ -72,7 +72,7 @@ return [
 
 
 
-    // Places
+    // Venue
     'venue' => 'Lugar del encuentro',
     'coords' => 'Coordenadas',
     'address' => 'Dirección',
