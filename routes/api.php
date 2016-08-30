@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+//Route::get('/user', function (Request $request) {
+//    return $request->user();
+//})->middleware('auth:api');
+
+Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:api'
+    Route::post("category/create", 'CategoryController@store');
+    Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
+    Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
+    Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
+
+});
+

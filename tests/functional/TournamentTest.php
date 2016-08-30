@@ -309,7 +309,16 @@ class TournamentTest extends TestCase
 
     }
 
+    /** @test */
+    public function it_restore_tournament()
+    {
+        $tournament = factory(Tournament::class)->create([
+            'name' => 't1',
+            'user_id' => Auth::user()->id,
+            'deleted_at' => '20015-12-12'    ]);
 
+
+    }
     public function setTournamentRules(Tournament $tournament, $ruleId)
     {
 

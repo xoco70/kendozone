@@ -94,14 +94,5 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
 //APIS
 Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
-    //    Route::get('authenticate', 'Api\AuthenticateController@index');
-    //    Route::post('authenticate', 'Api\AuthenticateController@authenticate');
-    //    Route::resource('tournaments', 'Api\TournamentController');
-    Route::post("category/create", 'CategoryController@store');
-
-    //    Route::get("federations", 'Api\AdministrativeStructureController@getFederations');
-    Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
-    Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
-    Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
 
 });

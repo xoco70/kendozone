@@ -5,8 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -20,9 +20,9 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         \Illuminate\Auth\AuthenticationException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class,
-        \Symfony\Component\HttpKernel\Exception\HttpException::class,
-        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+//        \Illuminate\Auth\Access\AuthorizationException::class,
+//        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+//        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
@@ -32,7 +32,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -52,20 +52,28 @@ class Handler extends ExceptionHandler
             app('sentry')->captureException($exception, $params);
         }
 
-        parent::report($exception);    }
+        parent::report($exception);
+    }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
+
 //        if (App::environment('local')) {
 //            return parent::render($request, $exception);
 //        }
+        $code = "";
+        $message = "";
+        $quote = "";
+        $author = "";
+        $source = "";
+
         switch ($exception) {
 
             case $exception instanceof NotFoundHttpException:
@@ -76,14 +84,16 @@ class Handler extends ExceptionHandler
                 $source = "47 Ronin";
                 break;
 
+            case $exception instanceof ModelNotFoundException:
+                break;
             case $exception instanceof HttpException:
-                return parent::render($request, $exception);
+//                return parent::render($request, $exception);
 
-//                $code = "500";
-//                $message = "Server Error";
-//                $quote = "Failure is the key to success; each mistake teaches us something";
-//                $author = "Morihei Ueshiba";
-//                $source = "";
+                $code = "500";
+                $message = "Server Error";
+                $quote = "Failure is the key to success; each mistake teaches us something";
+                $author = "Morihei Ueshiba";
+                $source = "";
 
                 break;
             case $exception instanceof AuthorizationException:
@@ -116,9 +126,9 @@ class Handler extends ExceptionHandler
                 $author = "Admin";
                 $source = "";
                 break;
+
             default:
                 return parent::render($request, $exception);
-
         }
         return response()->view('errors.general',
             ['code' => $code,
@@ -133,8 +143,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
