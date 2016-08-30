@@ -229,6 +229,7 @@ return [
     // Teams
 
     'team' => 'Team|Teams',
+    'registered_team' => 'Teams registered',
 
     // Federations
     'federation' => 'Federation|Federations',

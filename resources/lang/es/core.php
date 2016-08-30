@@ -231,6 +231,7 @@ return [
     'team' => 'Equipo|Equipos',
     'no_team_yet' => 'Aún no tienes equipos registrados en este torneo',
     'add_new_team' => 'Agregar un equipo',
+    'registered_team' => 'Equipos registrados',
 
     // Federations
     'federation' => 'Federación|Federaciones',

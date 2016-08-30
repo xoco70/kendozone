@@ -19,7 +19,7 @@ class InviteTest extends TestCase
      * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB 
      */
 
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $root;
 
@@ -31,11 +31,12 @@ class InviteTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_may_invite_users_but_users_must_register_after()
+    public function an_admin_invite_users_and_users_register()
     {
+        // FakeUs3
         $fakeUser1 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $fakeUser2 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $fakeUser3 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
+        $fakeUser2 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+
         // Create a closed tournament with championships
         $tournament = factory(Tournament::class)->create(['type' => 0]);
         $championships = new Collection;
@@ -89,13 +90,16 @@ class InviteTest extends TestCase
             $this->see("403");
         }
 
+        // Logout root, and begin user registration
+        Auth::logout();
+
         $this->visit("/tournaments/" . $invitation->object->slug. "/invite/" . $invitation->code);
 
         // If user didn't exit, check that it is created
         if (is_null($user)) {
 
             // System redirect to user creation
-            $this->type($fakeUser3->name, 'name')
+            $this->type($fakeUser1->name, 'name')
                 ->type('222222', 'password')
                 ->type('222222', 'password_confirmation')
                 ->press(trans('auth.create_account'))
@@ -130,8 +134,8 @@ class InviteTest extends TestCase
     public function a_user_may_register_an_open_tournament()
     {
         Auth::logout();
-        // Given
-        $tournament = factory(Tournament::class)->create(['type' => 1]);
+        // Create an open tournament
+        $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.OPEN_TOURNAMENT')]);
         $championships = new Collection;
 
         for ($i = 0; $i < 5; $i++) {

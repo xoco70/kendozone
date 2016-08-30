@@ -57,7 +57,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
 
                                         <div class="input-group">
-                                            {{ $tournament->date }}
+                                            {{ $tournament->dateIni }} / {{ $tournament->dateFin }}
                                         </div>
 
 
@@ -77,16 +77,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
 
                                     </div>
-                                    {{--<div class="col-md-3">--}}
 
-
-                                        {{--{!!     Form::label('mustPay', trans('core.pay4register'),['class' => 'text-bold' ])  !!}--}}
-                                        {{--<br/>--}}
-
-                                        {{--{{ $tournament->mustPay == 1 ? trans('core.yes') : trans('core.no') }}--}}
-
-
-                                    {{--</div>--}}
                                     <div class="col-md-3">
 
                                         <div class="checkbox-switch">
@@ -102,19 +93,6 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
 
                                     </div>
                                 </div>
-
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-md-6">--}}
-                                        {{--<div class="form-group">--}}
-                                            {{--{!!  Form::label('rules', trans('core.rules'),['class' => 'text-bold' ]) !!}--}}
-                                            {{--<br/>--}}
-                                            {{--rules--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-
-
-                                {{--</div>--}}
-
 
                             </fieldset>
 
@@ -133,9 +111,50 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                             <fieldset title="{{Lang::get('core.venue')}}">
                                 <a name="place">
                                     <legend class="text-semibold">{{Lang::get('core.venue')}}
-                                        : {{ $tournament->venue }}</legend>
+                                        : {{ $tournament->venue->venue_name }}</legend>
                                 </a>
                             </fieldset>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
+                                        <br/>
+                                        {{ $tournament->venue->address }}
+
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        {!!  Form::label('details', trans('core.details'),['class' => 'text-bold' ]) !!}
+                                        <br/>
+                                        {{ $tournament->venue->details }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('state', trans('core.state'),['class' => 'text-bold' ]) !!}
+                                        <br/>
+                                        {{ $tournament->venue->state }}
+
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        {!!  Form::label('country', trans('core.country'),['class' => 'text-bold' ]) !!}
+                                        <br/>
+                                        {{ $tournament->venue->country->name }}&nbsp; <img src="/images/flags/{{ $tournament->venue->country->flag }}" alt="{{ $tournament->venue->country->name }}"/>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="map-container map-basic"></div>
@@ -151,9 +170,9 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                 <div class="panel panel-flat category-settings">
                     <div class="panel-body">
                         <div class="container-fluid">
-                            <fieldset title="{{trans_choice('core.categorySettings',2)}}">
+                            <fieldset title="{{trans_choice('categories.categorySettings',2)}}">
                                 <a name="categories">
-                                    <legend class="text-semibold">{{trans_choice('core.categorySettings',2)}}</legend>
+                                    <legend class="text-semibold">{{trans_choice('categories.categorySettings',2)}}</legend>
                                 </a>
                             </fieldset>
 
@@ -190,7 +209,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                                                         @if ($setting !=null)
                                                             @include('categories.categorySettingsShow')
                                                         @else
-                                                            {{ trans('core.category_not_configured') }}
+                                                            {{ trans('categories.category_not_configured') }}
                                                         @endif
                                                     </div>
 
@@ -224,7 +243,7 @@ $appURL = (app()->environment()=='local' ? getenv('URL_BASE') : config('app.url'
                             </fieldset>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    Team you've registered:
+                                    {{ trans('core.registered_team') }}
                                     {{ $teams }}
 
 

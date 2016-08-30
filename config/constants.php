@@ -20,6 +20,8 @@ return [
     'CAT_ENCHO_DURATION' => '01:30',
     'CAT_HASHANTEI' => '0',
 
+    'INVITATION_TOURNAMENT' => '0',
+    'OPEN_TOURNAMENT' => '1',
 
     'CLIENT_IP' => '201.141.101.190',//$_SERVER['REMOTE_ADDR'],
     'COUNTRY_ID_DEFAULT' => '250', // France
