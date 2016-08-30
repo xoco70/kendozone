@@ -52,7 +52,7 @@ class RegisterController extends Controller
      */
     public function registerFromInvite(AuthRequest $request)
     {
-        dd($request);
+
         $request->request->add(['role_id' => config('constants.ROLE_USER')]);
         //Check token
         $user = null;
@@ -60,9 +60,15 @@ class RegisterController extends Controller
         $invite = Invite::getActiveTournamentInvite($token);
 
         if (!is_null($invite)) {
+//            dump($request->all());
+//            $user = User::create($request->all());
+            $user = User::create(['name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role_id' => config('constants.ROLE_USER'),
+                'verified' => 1,
 
-            $user = User::create($request->all());
-            dd($user);
+            ]);
             if (!is_null($user)) {
                 Auth::loginUsingId($user->id);
             }
@@ -88,10 +94,7 @@ class RegisterController extends Controller
      */
     public function register(AuthRequest $request, AppMailer $mailer)
     {
-//        if ($request->ajax()) { // JsValidation Unicity
-//            return (boolean)User::where('email', $request->email)->count() == 1;
-//        }
-//        else {
+
         $user = User::create(['name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -107,13 +110,6 @@ class RegisterController extends Controller
         $mailer->sendEmailConfirmationTo($user);
         flash()->success(trans('auth.check_your_email'));
         return redirect(URL::action('Auth\LoginController@login'));
-
-//        }
-//        $this->validator($request->all())->validate();
-//
-//        $this->guard()->login($this->create($request->all()));
-
-//        return redirect($this->redirectPath());
     }
 
 
