@@ -147,7 +147,7 @@ class InviteTest extends TestCase
         }
 
         $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'),
-            'password' => bcrypt('111111') // 111111
+            'password' => bcrypt('111111')
         ]);
 
         $this->visit("/tournaments/" . $tournament->slug . "/register");
