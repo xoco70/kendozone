@@ -24,7 +24,6 @@ class VenueRequest extends Request
         if ($this->exists('venue_name')){
             return [
                 'venue_name' => 'required',
-                'CP' => 'numeric|digits:5',
                 'country_id' => 'required'
             ];
         }
