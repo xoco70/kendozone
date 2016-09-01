@@ -132,7 +132,7 @@ $(function () {
                 data: inputData,
 
                 success: function (data) {
-                    console.log('success');
+                    // console.log(data);
 
                     if (data != null && data.status == 'success') {
 
@@ -168,7 +168,7 @@ $(function () {
 
 
                     } else {
-                        console.log(data);
+                        // console.log(data);
                         btnUpdateTour.prop("disabled", false);
                         btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                         noty({

@@ -53,9 +53,9 @@ class FederationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Federation $federation
+     * @param $id
      * @return \Illuminate\Http\Response
-     * @throws NotOwningFederationException
+     * @throws AuthorizationException
      */
     public function edit($id)
     {

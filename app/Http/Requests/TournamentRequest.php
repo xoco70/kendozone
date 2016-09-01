@@ -97,7 +97,7 @@ class TournamentRequest extends Request
                 break;
             case $this->exists('longitude'):
                 $tournament->venue_id = $venue->id;
-                $res = $tournament->save();
+                $res = $tournament->update();
                 break;
 
             case $this->has('category'):
