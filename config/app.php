@@ -179,6 +179,8 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -258,6 +260,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
+
     ],
 
 ];

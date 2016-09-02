@@ -4,10 +4,10 @@
                                                                                            alt=""></a>
         @if(Auth::check())
             <ul class="nav navbar-nav visible-xs-block mt-15">
-                <li><a data-toggle="collapse" data-target="#navbar-second-toggle"><img
-                                src="{!! Auth::getUser()->avatar !!}"
-                                width="28"
-                                alt="kendozone_avatar"></a></li>
+                <li><a data-toggle="collapse" data-target="#navbar-second-toggle">
+                        @include('layouts.avatar')
+                    </a>
+                </li>
                 <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3 mobile-menu"></i></a></li>
             </ul>
         @endif
@@ -57,8 +57,7 @@
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                         @if(Auth::check())
-
-                            <img src="{!! Auth::getUser()->avatar !!}" alt="kendozone_avatar">
+                            @include('layouts.avatar')
                             <span>{!! Auth::getUser()->name !!}</span>
                             <i class="caret"></i>
                         @endif

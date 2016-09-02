@@ -1,8 +1,8 @@
 <?php
-use App\Association;
-use App\Federation;
+
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Config;
 
 
 class CategoryTest extends TestCase
@@ -24,7 +24,10 @@ class CategoryTest extends TestCase
      */
     public function create_category()
     {
-
+        $this->json('POST', '/user', ['name' => 'Sally'])
+            ->seeJson([
+                'created' => true,
+            ]);
     }
 
     /** @test

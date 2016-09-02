@@ -16,9 +16,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use Laravolt\Avatar\Avatar;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
@@ -33,7 +35,7 @@ use Webpatser\Countries\Countries;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait,Notifiable;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait, Notifiable;
 
 
     /**
@@ -195,21 +197,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getAvatarAttribute($avatar)
     {
 
-        if (is_null($avatar) || strlen($avatar) == 0) {
-            // Check if it has gravatar
-            if (Gravatar::exists($this->email)) {
+        if (!isset($avatar) && Gravatar::exists($this->email)) {
                 $avatar = Gravatar::src($this->email);
-            } else {
-                $avatar = 'avatar.png';
-            }
-
         }
 
-        if (!str_contains($avatar, 'http')) {
+        if (!str_contains($avatar, 'http') && isset($avatar)) {
 
             $avatar = config('constants.AVATAR_PATH') . $avatar;
-        } else {
-
         }
         return $avatar;
     }
@@ -262,7 +256,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function championships()
     {
-        return $this->belongsToMany(Championship::class,'competitor')
+        return $this->belongsToMany(Championship::class, 'competitor')
             ->withTimestamps();
     }
 

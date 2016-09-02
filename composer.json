@@ -27,7 +27,8 @@
         "fzaninotto/faker": "1.*",
         "graham-campbell/htmlmin": "4.*",
         "codeception/codeception": "*",
-        "sentry/sentry-laravel": "0.3.*"
+        "sentry/sentry-laravel": "0.3.*",
+        "laravolt/avatar": "~0.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
