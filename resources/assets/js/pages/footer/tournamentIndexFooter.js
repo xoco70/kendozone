@@ -1,7 +1,8 @@
 $(function () {
     var disabled = false;
     var tr = null;
-
+    console.log(url);
+    console.log(url_restore);
     // Initialize responsive functionality
     $('.table-togglable').footable();
     $(document).on('click', '.undo', function (e) {
@@ -11,8 +12,8 @@ $(function () {
 
         $.ajax(
             {
-                type: 'GET',
-                url: url + '/' + dataRestore + '/restore',
+                type: 'POST',
+                url: url_restore + '/' + dataRestore + '/restore',
                 data: dataRestore,
                 success: function (data) {
                     // console.log(data);

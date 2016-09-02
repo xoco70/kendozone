@@ -81,8 +81,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');
 //        Route::resource('settings', 'SettingsController');
 
-        //Restoring
-        Route::get('tournaments/{tournament}/restore', 'TournamentController@restore');
+        //Restoring -- TODO Should be posting so nobody can restore tournament
         Route::get('users/{user}/restore', 'UserController@restore');
         Route::get('associations/{association}/restore', 'AssociationController@restore');
         Route::get('clubs/{club}/restore', 'ClubController@restore');

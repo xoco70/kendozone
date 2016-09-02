@@ -23,5 +23,10 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
     Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
     Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
     Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
+
+    // Restoring
+    Route::get('tournaments', 'TournamentController@index')->name('tournaments_api');
+    Route::post('tournaments/{tournament}/restore', 'TournamentController@restore');
+
 });
 

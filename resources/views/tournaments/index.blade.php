@@ -11,7 +11,8 @@
 @section("scripts_footer")
     <script>
 
-        var url ="{{ URL::action('TournamentController@index') }}";
+        var url ="{{ route('tournaments.index') }}";
+        var url_restore ="{{ route('tournaments_api') }}";
 
     </script>
     {!! Html::script('js/pages/header/footable.js') !!}
