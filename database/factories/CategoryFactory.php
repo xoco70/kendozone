@@ -9,12 +9,13 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'categories.ladies_team',
         'categories.master'
     ];
+    $gender = ['M', 'F', 'X'];
 
     return [
         'name' => $faker->randomElement($name),
         'alias' => $faker->name,
-        'gender' => $faker->randomElements(['M', 'F', 'X']),
-        'isTeam' => $faker->boolean(),
+        'gender' => $faker->randomElement($gender),
+        'isTeam' => $faker->numberBetween(0,1),
         'ageCategory' => $faker->numberBetween(0, 5),
         'ageMin' => $faker->numberBetween(1, 90),
         'ageMax' => $faker->numberBetween(1, 90),

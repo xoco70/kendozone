@@ -65,14 +65,4 @@ class CategoryController extends Controller
     {
 
     }
-
-//    public function show($tournamentId, $categoryId)
-//    {
-//
-//        $tc = Championship::where('tournament_id', $tournamentId)
-//            ->where('category_id', $categoryId)->first();
-//
-//        dd($tc->category);
-//    }
-
 }
