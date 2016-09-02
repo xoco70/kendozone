@@ -22,6 +22,6 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
     Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
     Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
     Route::get("federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
-
+    Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 });
 

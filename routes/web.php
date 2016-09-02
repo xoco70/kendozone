@@ -86,13 +86,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('users/{user}/restore', 'UserController@restore');
         Route::get('associations/{association}/restore', 'AssociationController@restore');
         Route::get('clubs/{club}/restore', 'ClubController@restore');
-        Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
+
 
         Route::get('logs', 'LogsController@index');
     });
-
-
-//APIS
-Route::group(['prefix' => 'api/v1'], function () { // , 'middleware' => 'AuthApi', 'middleware' => 'simpleauth'
-
-});

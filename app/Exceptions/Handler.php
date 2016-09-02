@@ -68,8 +68,8 @@ class Handler extends ExceptionHandler
 //        if (App::environment('local')) {
 //            return parent::render($request, $exception);
 //        }
-        $code = "";
-        $message = "";
+        $code = "500";
+        $message = get_class($exception);
         $quote = "";
         $author = "";
         $source = "";
@@ -85,6 +85,11 @@ class Handler extends ExceptionHandler
                 break;
 
             case $exception instanceof ModelNotFoundException:
+                $code = "500";
+                $message = "Model Not Found";
+                $quote = "To be stupid, selfish, and have good health are three requirements for happiness, though if stupidity is lacking, all is lost.";
+                $author = "Gustave Flaubert";
+                $source = "";
                 break;
             case $exception instanceof HttpException:
 //                return parent::render($request, $exception);
@@ -160,3 +165,5 @@ class Handler extends ExceptionHandler
 //Those who are possessed by nothing possess everything.
 //Economy is the basis of society. When the economy is stable, society develops. The ideal economy combines the spiritual and the material, and the best commodities to trade in are sincerity and love.
 //“There are 3 reasons for why you can't beat me. First, I'm better looking than you are. Second, your blows are too light. And third, there's nothing in the world I can't tear up.”
+//There is truth in vine.
+// The only true langage in the world is a Men (Musset Adaptation)

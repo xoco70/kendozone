@@ -1,6 +1,8 @@
 <?php
 
 // Home
+use Illuminate\Support\Facades\Auth;
+
 Breadcrumbs::register('dashboard', function ($breadcrumbs) {
     $breadcrumbs->push(trans('core.dashboard'), action('DashboardController@index'));
 });
@@ -145,7 +147,11 @@ Breadcrumbs::register('tournaments.users.show', function ($breadcrumbs, $tournam
 Breadcrumbs::register('users.edit', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('dashboard');
     if (policy($user)->edit(Auth::user(), $user)) {
-        $breadcrumbs->push($user->name, route('users.edit', $user->slug));
+        if (Auth::user()->name == $user->name) {
+            $breadcrumbs->push(trans('core.profile'), route('users.edit', $user->slug));
+        } else {
+            $breadcrumbs->push($user->name, route('users.show', $user->slug));
+        }
     } else {
         $breadcrumbs->push($user->name, route('users.show', $user->slug));
     }
