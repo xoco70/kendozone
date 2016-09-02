@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Kendozone is a online tournament Kendo Software. With Kendozone, you will be able to register tournaments, generate documentation, and score live with the future mobile app">
+    <meta name="description"
+          content="Kendozone is a online tournament Kendo Software. With Kendozone, you will be able to register tournaments, generate documentation, and score live with the future mobile app">
     <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }}</title>
     <!-- Global stylesheets -->
     {!! Html::style('css/app.css')!!}
@@ -15,14 +16,12 @@
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
 
-
-
-
 </head>
 
 <body>
-@include('layouts.headmenu')
-
+<div align="right">
+    @include('layouts.languageSwitcher')
+</div>
 <!-- Page container -->
 <div class="page-container login-container">
 
