@@ -80,7 +80,7 @@ class UserController extends Controller
             flash()->success(trans('msg.user_create_successful'));
         } else
             flash()->error(trans('msg.user_create_successful'));
-        return redirect(URL::action('UserController@index'));
+        return redirect(route('users.index'));
     }
 
     /**
@@ -132,7 +132,7 @@ class UserController extends Controller
         if ($user->id == Auth::user()->id)
             return redirect(URL::action('UserController@edit', Auth::user()->slug));
 
-        return redirect(URL::action('UserController@index'));
+        return redirect(route('users.index'));
 
     }
 

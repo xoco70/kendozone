@@ -7,12 +7,12 @@ $(function () {
     $(document).on('click', '.undo', function (e) {
         e.preventDefault();
         //e.stopPropagation();
-        var dataRestore      =   $(this).data('restore');
+        var dataRestore = $(this).data('restore');
 
         $.ajax(
             {
-                type: 'GET',
-                url: url+ '/' + dataRestore + '/restore',
+                type: 'POST',
+                url: url_restore + '/' + dataRestore + '/restore',
                 data: dataRestore,
                 success: function (data) {
                     console.log(data);
@@ -57,7 +57,7 @@ $(function () {
     $('.btnDeleteUser').on('click', function (e) {
         e.preventDefault();
         var inputData = $('#formDeleteUser').serialize();
-        var dataId      =   $(this).data('id');
+        var dataId = $(this).data('id');
 //                console.log(inputData);
         console.log(url + '/' + dataId);
         tr = $(this).closest('tr');
@@ -87,7 +87,7 @@ $(function () {
                             "</div>"
 
 
-                    });
+                        });
                         $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-trash');
                         tr.hide();
                     } else {
@@ -127,7 +127,6 @@ $(function () {
 
     });
 });
-
 
 
 //<tournaments></tournaments>

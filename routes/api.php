@@ -25,8 +25,12 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
     Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
     // Restoring
-    Route::get('tournaments', 'TournamentController@index')->name('tournaments_api');
+    Route::get('tournaments', 'TournamentController@index')->name('tournaments.api');
     Route::post('tournaments/{tournament}/restore', 'TournamentController@restore');
+
+    Route::get('users', 'TournamentController@index')->name('users.api');
+    Route::post('users/{user}/restore', 'UserController@restore');
+
 
 });
 

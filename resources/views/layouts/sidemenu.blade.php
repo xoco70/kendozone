@@ -14,7 +14,7 @@
                     </li>
 
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
-                        <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}" href="{!! URL::action('TournamentController@index') !!}"><i
+                        <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}" href="{!! route('tournaments.index') !!}"><i
                                     class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.tournaments_created') }}</span>
                         </a>
                     </li>

@@ -15,8 +15,8 @@ $(function () {
 
         $.ajax(
             {
-                type: 'GET',
-                url: url + '/' + dataRestore + '/restore',
+                type: 'POST',
+                url: url_restore + '/' + dataRestore + '/restore',
                 data: dataRestore,
                 success: function (data) {
                     // console.log(data);
