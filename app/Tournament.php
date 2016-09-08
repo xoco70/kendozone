@@ -202,20 +202,20 @@ class Tournament extends Model implements SluggableInterface
         return $date;
     }
 
-    public function setDateIniAttribute($date)
-    {
-        $this->attributes['dateIni'] = Carbon::createFromFormat('Y-m-d', $date);
-    }
-
-    public function setDateFinAttribute($date)
-    {
-        $this->attributes['dateFin'] = Carbon::createFromFormat('Y-m-d', $date);
-    }
-
-    public function setLimitRegisterDateAttribute($date)
-    {
-        $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date);
-    }
+//    public function setDateIniAttribute($date)
+//    {
+//        $this->attributes['dateIni'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
+//    }
+//
+//    public function setDateFinAttribute($date)
+//    {
+//        $this->attributes['dateFin'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
+//    }
+//
+//    public function setLimitRegisterDateAttribute($date)
+//    {
+//        $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
+//    }
 
     public function isOpen()
     {

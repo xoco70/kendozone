@@ -4,6 +4,7 @@ use App\Championship;
 use App\Competitor;
 use App\Tournament;
 use App\User;
+use App\Venue;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -95,18 +96,17 @@ class TournamentTest extends TestCase
             ->type('2015-12-12', 'dateFin')
             ->select(1, 'rule_id')
             ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
-//            ->see(trans('msg.tournament_create_successful', ['name' => 'MyTournament']))
             ->seeInDatabase('tournament', ['name' => 'MyTournament']);
 
         $categoriesAdded = array_keys(config('options.ikf_settings'));
         // See categories is added
         $tournament = Tournament::where("name", "MyTournament")->first();
-        $categories = Championship::where("tournament_id", '=', $tournament->id)->get();
-        foreach ($categories as $ct) {
-            $this->assertContains($ct->category_id, $categoriesAdded);
+        $championships = Championship::where("tournament_id", '=', $tournament->id)->get();
+        foreach ($championships as $championship) {
+            $this->assertContains($championship->category_id, $categoriesAdded);
             //TODO We could check the content of the setting
             $this->seeInDatabase('category_settings',
-                ['championship_id' => $ct->id,
+                ['championship_id' => $championship->id,
                 ]);
 
         }
@@ -313,18 +313,56 @@ class TournamentTest extends TestCase
     public function it_restore_tournament()
     {
         $tournament = factory(Tournament::class)->create([
-            'name' => 't1',
             'user_id' => Auth::user()->id,
             'deleted_at' => '2015-12-12']);
 
-        $this->json('POST', '/api/v1/tournaments/'.$tournament->slug.'/restore')
+        $this->json('POST', '/api/v1/tournaments/' . $tournament->slug . '/restore')
             ->seeInDatabase('tournament', [
                 'id' => $tournament->id,
                 'deleted_at' => null
             ]);
     }
+
     public function setTournamentRules(Tournament $tournament, $ruleId)
     {
+
+
+    }
+
+    /** @test */
+    public function update_general_info_in_tournament()
+    {
+
+        $tournament = factory(Tournament::class)->create();
+        $newTournament = factory(Tournament::class)->make(['user_id' => $tournament->user_id]);
+        $arrNewTournament = json_decode(json_encode($newTournament), true);
+
+        $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
+            ->seeInDatabase('tournament', $arrNewTournament);
+    }
+
+    /** @test */
+    public function update_venue_info_in_tournament()
+    {
+        // Se prueba el webservice completo
+
+        $venue = factory(Venue::class)->make();
+        $tournament = factory(Tournament::class)->create();
+
+        // Test changing general data
+
+
+    }
+
+    /** @test */
+    public function update_championship_info_tournament()
+    {
+        // Se prueba el webservice completo
+
+        $venue = factory(Venue::class)->make();
+        $tournament = factory(Tournament::class)->create();
+
+        // Test changing general data
 
 
     }

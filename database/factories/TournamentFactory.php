@@ -9,7 +9,7 @@ $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
     $venues = \App\Venue::all()->pluck('id')->toArray();
     return [
         'user_id' => $faker->randomElement($users),
-        'name' => $faker->colorName,
+        'name' => $faker->name,
         'dateIni' => $dateIni,
         'dateFin' => $dateIni,
         'registerDateLimit' => $dateIni,
