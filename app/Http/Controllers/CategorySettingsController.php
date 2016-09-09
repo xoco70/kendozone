@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CategorySettings;
+use App\ChampionshipSettings;
 use App\Championship;
 use App\Http\Requests;
 use App\Tournament;
@@ -38,7 +38,7 @@ class CategorySettingsController extends Controller
 
         $request->request->add(['championship_id' => $championship->id]);
 
-        if ($setting = CategorySettings::create($request->all())) {
+        if ($setting = ChampionshipSettings::create($request->all())) {
             return Response::json(['settingId' =>$setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
         } else {
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
@@ -57,7 +57,7 @@ class CategorySettingsController extends Controller
      */
     public function update(Request $request, $tournamentId, $categoryId, $categorySettingsId)
     {
-        if (CategorySettings::findOrFail($categorySettingsId)->update($request->all())) {
+        if (ChampionshipSettings::findOrFail($categorySettingsId)->update($request->all())) {
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } else {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);
@@ -67,10 +67,10 @@ class CategorySettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param CategorySettings $cs
+     * @param ChampionshipSettings $cs
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(CategorySettings $cs)
+    public function destroy(ChampionshipSettings $cs)
     {
         if ($cs->delete) {
             return Response::json(['msg' => trans('msg.category_delete_succesful'), 'status' => 'success']);

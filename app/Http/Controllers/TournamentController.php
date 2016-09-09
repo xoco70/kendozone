@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\CategorySettings;
+use App\ChampionshipSettings;
 use App\Championship;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
@@ -255,7 +255,7 @@ class TournamentController extends Controller
         foreach ($tournamentCategories as $tcat) {
             // Get number of area for this category
             $fightingAreas = null;
-            $settings = CategorySettings::where('championship_id', $tcat->id)->get();
+            $settings = ChampionshipSettings::where('championship_id', $tcat->id)->get();
             if (is_null($settings) || sizeof($settings) == 0) {
 
                 // Check general user settings

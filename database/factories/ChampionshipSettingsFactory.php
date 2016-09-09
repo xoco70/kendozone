@@ -3,12 +3,11 @@
 
 use App\Championship;
 
-$factory->define(App\CategorySettings::class, function (Faker\Generator $faker) use ($factory) {
+$factory->define(App\ChampionshipSettings::class, function (Faker\Generator $faker) use ($factory) {
     $tcs = Championship::all()->pluck('id')->toArray();
 
     return [
         'championship_id' => $faker->randomElement($tcs),
-//        'isTeam' => $faker->boolean(),
         'teamSize' => $faker->numberBetween(0, 6),
         'fightingAreas' => $faker->numberBetween(0, 4),
         'fightDuration' => "03:00",

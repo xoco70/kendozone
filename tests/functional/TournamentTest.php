@@ -1,6 +1,6 @@
 <?php
-use App\CategorySettings;
 use App\Championship;
+use App\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
 use App\User;
@@ -105,7 +105,7 @@ class TournamentTest extends TestCase
         foreach ($championships as $championship) {
             $this->assertContains($championship->category_id, $categoriesAdded);
             //TODO We could check the content of the setting
-            $this->seeInDatabase('category_settings',
+            $this->seeInDatabase('championship_settings',
                 ['championship_id' => $championship->id,
                 ]);
 
@@ -130,10 +130,7 @@ class TournamentTest extends TestCase
      */
     public function it_edit_tournament($tournament = null)
     {
-        if ($tournament == null) {
-            $tournament = factory(Tournament::class)->create(['name' => 'MyTournament']);
-            $category = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
-        }
+        $tournament  = $tournament ?? factory(Tournament::class)->create(['name' => 'MyTournament']);
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->type('MyTournamentXXX', 'name')
@@ -142,9 +139,6 @@ class TournamentTest extends TestCase
             ->type('2015-12-16', 'registerDateLimit')
             ->type('1', 'type')
             ->type('2', 'level_id')
-//            ->type('CDOM', 'venue')
-//            ->type('1.11111', 'latitude')
-//            ->type('2.22222', 'longitude')
             ->press('saveTournament')
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournamentXXX',
@@ -153,115 +147,9 @@ class TournamentTest extends TestCase
                     'registerDateLimit' => '2015-12-16',
                     'type' => '1',
                     'level_id' => '2',
-//                    'venue' => 'CDOM',
-//                    'latitude' => '1.11111',
-//                    'longitude' => '2.22222',
                 ]);
     }
 
-
-    /** @test */
-    public function it_create_tournament_category_conf()
-    {
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-
-        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
-
-        $this->visit('/tournaments/' . $tournament->slug . '/edit')
-//            ->type('1', 'isTeam0')
-//            ->type('1', 'hasEncho0')
-//            ->type('1', 'hasRoundRobin0')
-//            ->type('1', 'hasHantei0')
-            ->type('100', 'cost')
-//            ->type('1', 'roundRobinWinner')
-//            ->type('1', 'fightDuration0')
-//            ->type('1', 'enchoDuration0')
-//            ->type('2', 'teamSize0')
-//            ->type('2', 'enchoQty0')
-//            ->type('2', 'fightingAreas0')
-            ->press('save0')
-//            ->see(htmlentities(trans('core.operation_successful')))
-            ->seeInDatabase('category_settings',
-                ['championship_id' => $ct0->id,
-                    'cost' => '100',
-//                    'roundRobinWinner' => '1',
-                ]);
-//
-//        ;
-
-
-    }
-
-//    /** @test */
-//    public function it_can_edit_venue()
-//    {
-//        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-//        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-//        $venue = factory(Championship::class)->create();
-//        $this->visit('/tournaments/' . $tournament->slug . '/edit#tab2')
-//            ->type($venue->name, 'venue_name')
-//            ->type($venue->latitude, 'latitude')
-//            ->type($venue->longitude, 'longitude')
-//            ->type($venue->details, 'details')
-//            ->select($venue->country_id, 'country_id')
-//            ->press('update_venue')
-//            ->seeInDatabase('venue',
-//                ['venue_name' => $venue->name,
-//                    'latitude' => $venue->latitude,
-//                    'longitude' => $venue->longitude,
-//                    'details' => $venue->details,
-//                    'country_id' => $venue->country_id,
-//                ]);
-//
-//
-//    }
-
-    /** @test */
-    public function it_edit_tournament_category_conf()
-    {
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-
-        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 5]);
-
-        factory(CategorySettings::class)->create([
-            'championship_id' => $ct0->id,
-            'hasRoundRobin' => 1,
-            'roundRobinWinner' => 2,
-            'cost' => 100,
-        ]);
-
-        $this->visit('/tournaments/' . $tournament->slug . '/edit')
-//            ->type('1', 'isTeam0')
-//            ->type('1', 'hasEncho0')
-//            ->type('1', 'hasRoundRobin0')
-//            ->type('1', 'hasHantei0')
-            ->type('200', 'cost')
-            ->type('1', 'roundRobinWinner')
-//            ->type('1', 'fightDuration0')
-//            ->type('1', 'enchoDuration0')
-//            ->type('2', 'teamSize0')
-//            ->type('2', 'enchoQty0')
-//            ->type('2', 'fightingAreas0')
-            ->press('save0')
-//            ->see(htmlentities(trans('core.operation_successful')))
-            ->seeInDatabase('category_settings',
-                ['championship_id' => $ct0->id,
-                    'cost' => '200',
-                    'roundRobinWinner' => '1',
-                ]);
-//
-//        ;
-
-
-    }
 
     /** @test */
     public function you_must_own_tournament_or_be_superuser_to_edit_it()
@@ -294,7 +182,7 @@ class TournamentTest extends TestCase
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(CategorySettings::class)->create(['championship_id' => $ct1->id]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
         factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         // Check that tournament is gone
@@ -340,6 +228,30 @@ class TournamentTest extends TestCase
         $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
             ->seeInDatabase('tournament', $arrNewTournament);
     }
+
+    //    /** @test */
+//    public function it_can_edit_venue()
+//    {
+//        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+//        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+//        $venue = factory(Championship::class)->create();
+//        $this->visit('/tournaments/' . $tournament->slug . '/edit#tab2')
+//            ->type($venue->name, 'venue_name')
+//            ->type($venue->latitude, 'latitude')
+//            ->type($venue->longitude, 'longitude')
+//            ->type($venue->details, 'details')
+//            ->select($venue->country_id, 'country_id')
+//            ->press('update_venue')
+//            ->seeInDatabase('venue',
+//                ['venue_name' => $venue->name,
+//                    'latitude' => $venue->latitude,
+//                    'longitude' => $venue->longitude,
+//                    'details' => $venue->details,
+//                    'country_id' => $venue->country_id,
+//                ]);
+//
+//
+//    }
 
     /** @test */
     public function update_venue_info_in_tournament()

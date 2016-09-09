@@ -58,7 +58,7 @@ class Championship extends Model
 
     public function settings()
     {
-        return $this->hasOne(CategorySettings::class);
+        return $this->hasOne(ChampionshipSettings::class);
     }
 
     public function teams()
@@ -75,7 +75,7 @@ class Championship extends Model
 
     public function setting()
     {
-        return $this->belongsTo(CategorySettings::class);
+        return $this->belongsTo(ChampionshipSettings::class);
     }
 
 

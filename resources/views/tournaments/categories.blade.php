@@ -9,9 +9,9 @@
         <ul class="nav nav-tabs nav-tabs-bottom bottom-divided nav-justified">
             <?php $first = true ?>
             @foreach($categories  as $category)
-            <li {{$first ? 'class=active':'' }}>
-                <?php $first = false ?>
-                <a href="#{{$category->id}}" data-toggle="tab">{{Lang::get($category->name) }}</a></li>
+                <li {{$first ? 'class=active':'' }}>
+                    <?php $first = false ?>
+                    <a href="#{{$category->id}}" data-toggle="tab">{{Lang::get($category->name) }}</a></li>
             @endforeach
         </ul>
         <div class="row">
@@ -19,11 +19,10 @@
                 <div class="tab-content">
                     <?php  $first = true ?>
                     @foreach($categories as $category)
-                    <div class="tab-pane {{$first ? 'active':'' }}" id="{{$category->id}}">
+                        <div class="tab-pane {{$first ? 'active':'' }}" id="{{$category->id}}">
                         <?php $first = false;
-                        $categorySettings = DB::table('category_settings')
-                                ->where("tournament_id",$tournamentId)
-                                ->where("category_id",$category->id)
+                        $categorySettings = \App\ChampionshipSettings::where("tournament_id", $tournamentId)
+                                ->where("category_id", $category->id)
                                 ->first();
 
                         ?>
@@ -31,7 +30,7 @@
                         @if (is_null($categorySettings))
                             {!! Form::open(["route" => "tournaments.{tournamentId}.categorySettings.store"]) !!}
                         @else
-                        {!! Form::model($categorySettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $categorySettings->id), 'method' => 'PATCH')) !!}
+                            {!! Form::model($categorySettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $categorySettings->id), 'method' => 'PATCH')) !!}
                         @endif
 
                         {!! Form::hidden('tournament_id', $tournamentId) !!}
@@ -39,9 +38,8 @@
                         @include('categories.categorySettings')
                         {!! Form::close() !!}
                         <!-- END TAB CATEGORIES DEFAULT SETTING -->
-                    </div>
+                        </div>
                     @endforeach
-
 
 
                 </div>

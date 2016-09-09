@@ -148,7 +148,7 @@ class Tournament extends Model implements SluggableInterface
      */
     public function categorySettings()
     {
-        return $this->hasManyThrough(CategorySettings::class, Championship::class);
+        return $this->hasManyThrough(ChampionshipSettings::class, Championship::class);
     }
 
     public function teams()
@@ -291,7 +291,7 @@ class Tournament extends Model implements SluggableInterface
         // Configure each category creating categorySetting Object
 
         foreach ($this->championships as $championship) {
-            (new CategorySettings)->createCategorySettingFromOptions($options, $championship);
+            (new ChampionshipSettings)->createCategorySettingFromOptions($options, $championship);
         }
 
     }

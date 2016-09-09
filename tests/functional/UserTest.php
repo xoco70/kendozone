@@ -1,5 +1,5 @@
 <?php
-use App\CategorySettings;
+use App\ChampionshipSettings;
 use App\Championship;
 use App\Competitor;
 use App\Tournament;
@@ -183,7 +183,7 @@ class UserTest extends TestCase
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(CategorySettings::class)->create(['championship_id' => $ct1->id]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
         factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         $response = $this->call('DELETE', '/users/' . $this->simpleUser->slug);
@@ -193,7 +193,7 @@ class UserTest extends TestCase
         $this->seeIsSoftDeletedInDatabase('users', ['name' => $this->simpleUser->name])
             ->seeIsSoftDeletedInDatabase('tournament', ['user_id' => $this->simpleUser->id])
             ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $ct1->id])
+            ->seeIsSoftDeletedInDatabase('championship_settings', ['championship_id' => $ct1->id])
             ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $ct1->id]);;
 
     }
@@ -232,7 +232,6 @@ class UserTest extends TestCase
             ->dontSee("403")
             ->visit('/users/' . $user2->slug . '/edit')
             ->see("403");
-//            $this->visit('/users/'.$user->slug.'/edit')
     }
 
     /** @test

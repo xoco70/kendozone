@@ -61,8 +61,8 @@ class DashboardTest extends TestCase
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>1]);
         $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>2]);
 
-        $cs1 = factory(App\CategorySettings::class)->create(['championship_id' => $ct1->id]);
-        $cs2 = factory(App\CategorySettings::class)->create(['championship_id' => $ct2->id]);
+        $cs1 = factory(App\ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
+        $cs2 = factory(App\ChampionshipSettings::class)->create(['championship_id' => $ct2->id]);
 
         $this->visit('/')
             ->seeInElement("span.text-muted", trans('core.congigure_categories'));

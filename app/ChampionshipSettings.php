@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
 
-class CategorySettings extends Model
+class ChampionshipSettings extends Model
 {
     use SoftDeletes;
     use AuditingTrait;
     protected $dates = ['created_at', 'updated_at','deleted_at'];
 
-    protected $table = 'category_settings';
+    protected $table = 'championship_settings';
     public $timestamps = true;
     protected $guarded = ['id'];
 

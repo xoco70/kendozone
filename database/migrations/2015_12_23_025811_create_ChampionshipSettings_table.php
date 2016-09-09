@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCategorySettingsTable extends Migration
+class CreateChampionshipSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCategorySettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_settings', function(Blueprint $table) {
+        Schema::create('championship_settings', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->unique();
             $table->foreign('championship_id')
@@ -55,7 +55,7 @@ class CreateCategorySettingsTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('category_settings');
+        Schema::dropIfExists('championship_settings');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
