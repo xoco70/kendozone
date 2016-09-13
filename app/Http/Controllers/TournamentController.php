@@ -15,8 +15,8 @@ use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
-use Response;
 use Webpatser\Countries\Countries;
 
 
@@ -149,7 +149,6 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, VenueRequest $venueRequest, Tournament $tournament)
     {
-
         $venue = $tournament->venue;
         if ($venue == null)
             $venue = new Venue;
@@ -162,13 +161,14 @@ class TournamentController extends Controller
             $venue = new Venue();
         }
         $res = $request->update($tournament, $venue);
-
         if ($request->ajax()) {
-            $res == 0 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
+            $res == 0
+                ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])
                 : $result = Response::json(['msg' => trans('msg.tournament_update_successful', ['name' => $tournament->name]), 'status' => 'success']);
             return $result;
         } else {
-            $res == 0 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
+            $res == 0
+                ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
                 : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
             return redirect(URL::action('TournamentController@edit', $tournament->slug));
         }

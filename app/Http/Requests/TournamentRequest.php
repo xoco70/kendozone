@@ -87,6 +87,7 @@ class TournamentRequest extends Request
      */
     public function update(Tournament $tournament, Venue $venue)
     {
+
         $res = null;
         switch (true) {
 
@@ -97,7 +98,8 @@ class TournamentRequest extends Request
                 break;
             case $this->exists('longitude'):
                 $tournament->venue_id = $venue->id;
-                $res = $tournament->update();
+                $tournament->update();
+                $res = true;
                 break;
 
             case $this->has('category'):

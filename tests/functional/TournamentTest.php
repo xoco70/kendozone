@@ -1,4 +1,5 @@
 <?php
+use App\Category;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Competitor;
@@ -130,7 +131,7 @@ class TournamentTest extends TestCase
      */
     public function it_edit_tournament($tournament = null)
     {
-        $tournament  = $tournament ?? factory(Tournament::class)->create(['name' => 'MyTournament']);
+        $tournament = $tournament ?? factory(Tournament::class)->create(['name' => 'MyTournament']);
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
             ->type('MyTournamentXXX', 'name')
@@ -229,55 +230,36 @@ class TournamentTest extends TestCase
             ->seeInDatabase('tournament', $arrNewTournament);
     }
 
-    //    /** @test */
-//    public function it_can_edit_venue()
-//    {
-//        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-//        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-//        $venue = factory(Championship::class)->create();
-//        $this->visit('/tournaments/' . $tournament->slug . '/edit#tab2')
-//            ->type($venue->name, 'venue_name')
-//            ->type($venue->latitude, 'latitude')
-//            ->type($venue->longitude, 'longitude')
-//            ->type($venue->details, 'details')
-//            ->select($venue->country_id, 'country_id')
-//            ->press('update_venue')
-//            ->seeInDatabase('venue',
-//                ['venue_name' => $venue->name,
-//                    'latitude' => $venue->latitude,
-//                    'longitude' => $venue->longitude,
-//                    'details' => $venue->details,
-//                    'country_id' => $venue->country_id,
-//                ]);
-//
-//
-//    }
-
     /** @test */
     public function update_venue_info_in_tournament()
     {
-        // Se prueba el webservice completo
-
-        $venue = factory(Venue::class)->make();
         $tournament = factory(Tournament::class)->create();
-
-        // Test changing general data
-
-
+        $venue = factory(Venue::class)->make();
+        $arrVenue = json_decode(json_encode($venue), true);
+        $this->json('PUT', '/tournaments/' . $tournament->slug, $arrVenue)
+            ->seeInDatabase('venue', $arrVenue);
     }
+
 
     /** @test */
-    public function update_championship_info_tournament()
-    {
-        // Se prueba el webservice completo
-
-        $venue = factory(Venue::class)->make();
-        $tournament = factory(Tournament::class)->create();
-
-        // Test changing general data
-
-
-    }
+//    public function update_championships_in_tournament()
+//    {
+//        $tournament = factory(Tournament::class)->create();
+//
+//        $categories = Category::get()->take(5);
+//        $ids = $categories->map(function ($category) {
+//            return $category->id;
+//        });
+//        $ids = json_decode(json_encode($ids), true);
+//
+//        $res = $this->json('PUT', '/tournaments/' . $tournament->slug, $ids);
+//        dd($res);
+////        foreach ($categories as $category){
+////            $this->seeInDatabase('championship', ['tournament_id' => $tournament->id, 'category_id' => $category->id ]);
+////        }
+//
+//
+//    }
 
 
 }

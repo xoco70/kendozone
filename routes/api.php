@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
 
     // Restoring
     Route::get('tournaments', 'TournamentController@index')->name('tournaments.api');
+
     Route::post('tournaments/{tournament}/restore', 'TournamentController@restore');
 
     Route::get('users', 'TournamentController@index')->name('users.api');

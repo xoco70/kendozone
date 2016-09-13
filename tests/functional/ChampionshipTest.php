@@ -29,7 +29,10 @@ class ChampionshipTest extends TestCase
         $this->logWithUser($this->root);
     }
 
+    /** @test */
+    public function it_create_custom_championship(){
 
+    }
 
     /** @test */
     public function it_create_championship_settings()
@@ -45,11 +48,7 @@ class ChampionshipTest extends TestCase
 
         $this->json('POST', '/tournaments/' . $tournament->slug . '/categories/' . $ct0->category_id . '/settings', $arrCs0)
             ->seeInDatabase('championship_settings', $arrCs0);
-
-
     }
-
-
 
     /** @test */
     public function it_edit_championship_settings()
