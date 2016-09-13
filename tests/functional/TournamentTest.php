@@ -9,21 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-/**
- * List of User Test
- *
- * it_denies_creating_an_empty_tournament()
- * mustBeAuthenticated()
- * it_create_tournament($delete = true)
- * it_edit_tournament()
- * you_must_own_tournament_to_edit_it_or_be_superuser()
- * it_configure_a_tournament_category
- * it_delete_tournament
- *
- * User: juliatzin
- * Date: 10/11/2015
- * Time: 23:14
- */
 class TournamentTest extends TestCase
 {
     use DatabaseTransactions;
@@ -240,27 +225,6 @@ class TournamentTest extends TestCase
     }
 
 
-    /** @test */
-//    public function update_championships_in_tournament()
-//    {
-//        $tournament = factory(Tournament::class)->create();
-//
-//        $categories = Category::get()->take(5);
-//        $ids = $categories->map(function ($category) {
-//            return $category->id;
-//        });
-//        $ids = json_decode(json_encode($ids), true);
-//
-//        $res = $this->json('PUT', '/tournaments/' . $tournament->slug, $ids);
-//        dd($res);
-////        foreach ($categories as $category){
-////            $this->seeInDatabase('championship', ['tournament_id' => $tournament->id, 'category_id' => $category->id ]);
-////        }
-//
-//
-//    }
-
-
     /** @test
      */
     public function user_can_see_tournament_info_but_cannot_edit_it()
@@ -275,7 +239,6 @@ class TournamentTest extends TestCase
             ->dontSee("403")
             ->visit('/tournaments/' . $tournament->slug . '/edit')
             ->see("403");
-//            $this->visit('/users/'.$user->slug.'/edit')
     }
 
 

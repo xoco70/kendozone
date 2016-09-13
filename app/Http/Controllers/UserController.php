@@ -49,8 +49,8 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return View
+     * @throws AuthorizationException
      */
     public function create()
     {

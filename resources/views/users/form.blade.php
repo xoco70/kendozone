@@ -163,10 +163,6 @@
                                             class="form-control" @change="getClubs(associationSelected)">
                                     <option value="1"
                                             v-if="associations!=null && associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
-                                    <option value="1"
-                                            v-if="associations!=null && associations.length!=0 && federationSelected!=0">
-                                        -
-                                    </option>
                                     <option v-for="association in associations" v-bind:value="association.value"
                                             selected="@{{ associationId==association.value }}">
                                         @{{ association.text }}
