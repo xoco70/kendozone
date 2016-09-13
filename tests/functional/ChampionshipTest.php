@@ -31,7 +31,13 @@ class ChampionshipTest extends TestCase
 
     /** @test */
     public function it_create_custom_championship(){
+//        category/create
+        $category = factory(\App\Category::class)->make();
+        $arrCat1 = json_decode(json_encode($category), true);
 
+        $response = $this->json('POST', '/api/v1/category/create', $arrCat1);
+        unset($arrCat1['name']); // Remove category name that is translated and make test fail
+        $this->seeInDatabase('category', $arrCat1);
     }
 
     /** @test */

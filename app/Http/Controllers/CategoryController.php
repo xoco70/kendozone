@@ -38,16 +38,17 @@ class CategoryController extends Controller
             ->select('name')
             ->first();
 
+
         $newCategoryName = Category::firstOrCreate(
             [
                 'name' => $category->name,
                 'alias' => $request->alias,
                 'isTeam' => $request->isTeam,
                 'gender' => $request->gender,
-                'ageCategory' => $request->age,
+                'ageCategory' => $request->ageCategory,
                 'ageMin' => $request->ageMin,
                 'ageMax' => $request->ageMax,
-                'gradeCategory' => $request->grade,
+                'gradeCategory' => $request->gradeCategory,
                 'gradeMin' => $request->gradeMin,
                 'gradeMax' => $request->gradeMax
             ]);

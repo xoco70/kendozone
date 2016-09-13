@@ -116,8 +116,8 @@ new Vue({
                 type: 'POST',
                 data: {
                     "isTeam": this.isTeam, "gender": this.genderSelect, "alias": this.alias,
-                    "age": this.ageCategorySelect, "ageMin": this.ageMin, "ageMax": this.ageMax,
-                    "grade": this.gradeSelect, "gradeMin": this.gradeMin, "gradeMax": this.gradeMax
+                    "ageCategory": this.ageCategorySelect, "ageMin": this.ageMin, "ageMax": this.ageMax,
+                    "gradeCategory": this.gradeSelect, "gradeMin": this.gradeMin, "gradeMax": this.gradeMax
                 },
                 dataType: "json"
             })
