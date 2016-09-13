@@ -5,6 +5,7 @@ use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Lang;
  */
 class UserTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
 
@@ -210,9 +211,8 @@ class UserTest extends TestCase
         $user = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
         $arrUser = json_decode(json_encode($user), true);
 
-        $response = $this->json('POST', '/users', $arrUser);
-//        dump($response);
-        $this->seeInDatabase('users', $arrUser);
+        $this->json('POST', '/users', $arrUser)
+            ->seeInDatabase('users', $arrUser);
 
     }
 
@@ -220,63 +220,71 @@ class UserTest extends TestCase
     /** @test */
     public function edit_user()
     {
-        $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+
+        $this->logWithUser($this->simpleUser);
+
+        $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
+        $arrNewUser = json_decode(json_encode($newUser), true);
+
+        $this->json('PUT', '/users/' . $this->simpleUser->slug, $arrNewUser)
+            ->seeInDatabase('users', $arrNewUser);
     }
 
 
+    /** @test */
+    public function it_allow_editing_user_without_password()
+    {
+        $this->logWithUser($this->root);
 
-//    /** @test */
-//    public function it_allow_editing_user_without_password()
-//    {
-//        $this->logWithUser($this->root);
-//
-//        $user = factory(User::class)->create(
-//            [   'name' => 'MyUser',
-//                'email' => 'MyUser@kendozone.com',
-//                'role_id' => Config::get('constants.ROLE_USER'),
-//                'password' => bcrypt('111111'),
-//                'verified' => 1,]);
-//
-//        $oldPass = $user->password;
-//        $this->visit('/users')
-//            ->click("MyUser")
-//            ->type('juju', 'name')
-//            ->type('juju@juju.com', 'email')
-//            ->type('may', 'firstname')
-//            ->type('1', 'lastname')
-////            ->select('3', 'role_id')
-//            ->press(Lang::get('core.save'))
-//            ->seePageIs('/users/')
-//            ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
-//
+        $user = factory(User::class)->create(
+            ['name' => 'MyUser',
+                'email' => 'MyUser@kendozone.com',
+                'role_id' => Config::get('constants.ROLE_USER'),
+                'password' => bcrypt('111111'),
+                'verified' => 1,]);
+
+        $newUser = factory(User::class)->make();
+
+        $oldPass = $user->password;
+
+        $arrNewData = [
+            'name' => $newUser->name,
+            'email' => $newUser->email,
+            'firstname' => $newUser->firstname,
+            'lastname' => $newUser->lastname,
+            'role_id' => $newUser->role_id,
+        ];
+
+        $this->json('PUT', '/users/' . $user->slug, $arrNewData)
+            ->seeInDatabase('users', $arrNewData);
+
 //        // Check that password remains unchanged
-//        $user = User::where('email', '=', "juju@juju.com")->first();
-//        $newPass = $user->password;
-//        assert($oldPass == $newPass, true);
-//
-//    }
+        $user = User::where('email', '=', $newUser->email)->first();
+        $newPass = $user->password;
+        assert($oldPass == $newPass, true);
+
+    }
 
 
-//    /** @test
-//     */
-//    public function you_can_change_your_password_and_login_with_new_data()
-//    {
-//        $this->simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-//        $this->logWithUser($this->simpleUser);
-//        $this->visit("/users/".$this->simpleUser->slug."/edit/")
-//            ->type('222222', 'password')
-//            ->type('222222', 'password_confirmation')
-//            ->press(trans('core.save'))
-//            ->see(trans('msg.user_update_successful'));
-//
-//        //Logout
-//        $this->click(trans('core.logout'))
-//            ->seePageIs('auth/login');
-//
-//        // Login Again with new Data
-//        $this->type($this->simpleUser->email, 'email')
-//             ->type('222222', 'password')
-//            ->press(trans('auth.signin'))
-//            ->seePageIs('/');
-//    }
+    /** @test
+     */
+    public function you_can_change_your_password_and_login_with_new_data()
+    {
+        $this->logWithUser($this->simpleUser);
+
+        $this->json('PUT', '/users/' . $this->simpleUser->id,
+            ['password' => '222222',
+                'password_confirmation' => '222222'
+            ]);
+
+        //Logout
+        Auth::logout();
+
+        $this->json('POST', '/login/',[
+            'email', $this->simpleUser->email,
+            'password' => '222222']);
+
+        assert(Auth::check(), true);
+
+    }
 }
