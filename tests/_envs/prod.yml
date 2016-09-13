@@ -6,6 +6,16 @@ modules:
             browser: 'phantomjs'
             window_size: 1024x768
         Db:
-            dsn: 'mysql:host=kendozone.com;dbname=kendo'
-            user: 'forge'
-            password: 'cxlHOGX0urLxoY66rJKQ'
+            dsn: 'mysql:host=kendozone.cp90iogazqzc.us-west-2.rds.amazonaws.com;dbname=kendozone'
+            user: 'kendozone'
+            password: '3j8^vKJqfzWnjs'
+
+
+
+
+
+
+DB_HOST=
+DB_DATABASE=
+DB_USERNAME=kendozone
+DB_PASSWORD=3j8^vKJqfzWnjs
