@@ -27,8 +27,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'role_id' => $faker->numberBetween(1, 5),
         'verified' => true,
         'remember_token' => str_random(10),
-        'provider' => '',
-        'provider_id' => str_random(5),
+        'provider' => 'created',
+        'provider_id' => $email,
         'locale' => $faker->randomElement(['es','en'])
 
     ];

@@ -1,5 +1,4 @@
 <?php
-use App\Category;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Competitor;
@@ -260,6 +259,24 @@ class TournamentTest extends TestCase
 //
 //
 //    }
+
+
+    /** @test
+     */
+    public function user_can_see_tournament_info_but_cannot_edit_it()
+    {
+        $owner = factory(User::class)->create(['name' => 'AnotherUser']);
+
+        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
+
+        $this->logWithUser($this->simpleUser);
+
+        $this->visit('/tournaments/' . $tournament->slug)
+            ->dontSee("403")
+            ->visit('/tournaments/' . $tournament->slug . '/edit')
+            ->see("403");
+//            $this->visit('/users/'.$user->slug.'/edit')
+    }
 
 
 }

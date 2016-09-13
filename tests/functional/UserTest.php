@@ -1,10 +1,11 @@
 <?php
-use App\ChampionshipSettings;
 use App\Championship;
+use App\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 
 /**
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Lang;
  */
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
 
@@ -56,67 +57,6 @@ class UserTest extends TestCase
             ->seePageIs('/login');
     }
 
-//    /** @test */
-//    public function it_create_user($delete = true)
-//    {
-//        $this->logWithUser($this->simpleUser);
-//        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
-//
-//        $this->logWithUser($this->root);
-//
-//        $test_file_path = base_path() . '/avatar2.png';
-////        dd($test_file_path);
-//        $this->assertTrue(file_exists($test_file_path), 'Test file does not exist');
-//
-//
-//        $this->visit('/')
-//            ->click(trans_choice('core.user', 2))
-////            ->see(trans_choice('core.user', 2))
-//            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
-//            ->type('MyUser', 'name')
-//            ->type('julien@cappiello.fr2', 'email')
-//            ->type('julien', 'firstname')
-//            ->type('cappiello', 'lastname')
-//            ->type('111111', 'password')
-//            ->type('111111', 'password_confirmation')
-//            ->attach($test_file_path, 'avatar')
-////            //File input avatar
-//            ->press(trans('core.save'))
-//            ->seePageIs('/users')
-//            ->see(trans('msg.user_create_successful'))
-//            ->seeInDatabase('users', ['name' => 'MyUser']);
-//
-//        $user = User::where('name', 'MyUser')->first();
-//        File::delete(base_path() . '/'.$user->avatar);
-//
-//    }
-//
-//    /** @test */
-//    public function it_edit_user()
-//    {
-//
-//
-//        $this->logWithUser($this->simpleUser);
-//        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
-//
-//        $this->logWithUser($this->root);
-//
-//
-//        $this->visit('/users')
-//            ->click($this->simpleUser->name)
-//            ->type('juju', 'name')
-//            ->type('juju@juju.com', 'email')
-//            ->type('may', 'firstname')
-//            ->type('1', 'lastname')
-//            ->type('222222', 'password')
-//            ->type('222222', 'password_confirmation')
-//            ->type('44', 'avatar')
-//            ->press(Lang::get('core.save'))
-//            ->seePageIs('/users/')
-//            ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
-//
-//    }
-
 
     /** @test */
     public function it_denies_creating_user_without_password()
@@ -135,8 +75,6 @@ class UserTest extends TestCase
             ->type('julien@cappiello.fr3', 'email')
             ->type('julien', 'firstname')
             ->type('cappiello', 'lastname')
-//            ->select('3', 'role_id')
-//            //File input avatar
             ->press(Lang::get('core.save'))
             ->seePageIs('/users/create')
             ->see(Lang::get('validation.required', ['attribute' => "password"]))
@@ -144,36 +82,6 @@ class UserTest extends TestCase
 
     }
 
-//    /** @test */
-//    public function it_allow_editing_user_without_password()
-//    {
-//        $this->logWithUser($this->root);
-//
-//        $user = factory(User::class)->create(
-//            [   'name' => 'MyUser',
-//                'email' => 'MyUser@kendozone.com',
-//                'role_id' => Config::get('constants.ROLE_USER'),
-//                'password' => bcrypt('111111'),
-//                'verified' => 1,]);
-//
-//        $oldPass = $user->password;
-//        $this->visit('/users')
-//            ->click("MyUser")
-//            ->type('juju', 'name')
-//            ->type('juju@juju.com', 'email')
-//            ->type('may', 'firstname')
-//            ->type('1', 'lastname')
-////            ->select('3', 'role_id')
-//            ->press(Lang::get('core.save'))
-//            ->seePageIs('/users/')
-//            ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
-//
-//        // Check that password remains unchanged
-//        $user = User::where('email', '=', "juju@juju.com")->first();
-//        $newPass = $user->password;
-//        assert($oldPass == $newPass, true);
-//
-//    }
 
     /** @test */
     public function it_delete_user()
@@ -234,22 +142,120 @@ class UserTest extends TestCase
             ->see("403");
     }
 
-    /** @test
-     */
-    public function user_can_see_tournament_info_but_cannot_edit_it()
+    //    /** @test */
+//    public function it_create_user($delete = true)
+//    {
+//        $this->logWithUser($this->simpleUser);
+//        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
+//
+//        $this->logWithUser($this->root);
+//
+//        $test_file_path = base_path() . '/avatar2.png';
+////        dd($test_file_path);
+//        $this->assertTrue(file_exists($test_file_path), 'Test file does not exist');
+//
+//
+//        $this->visit('/')
+//            ->click(trans_choice('core.user', 2))
+////            ->see(trans_choice('core.user', 2))
+//            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
+//            ->type('MyUser', 'name')
+//            ->type('julien@cappiello.fr2', 'email')
+//            ->type('julien', 'firstname')
+//            ->type('cappiello', 'lastname')
+//            ->type('111111', 'password')
+//            ->type('111111', 'password_confirmation')
+//            ->attach($test_file_path, 'avatar')
+////            //File input avatar
+//            ->press(trans('core.save'))
+//            ->seePageIs('/users')
+//            ->see(trans('msg.user_create_successful'))
+//            ->seeInDatabase('users', ['name' => 'MyUser']);
+//
+//        $user = User::where('name', 'MyUser')->first();
+//        File::delete(base_path() . '/'.$user->avatar);
+//
+//    }
+//
+//    /** @test */
+//    public function it_edit_user()
+//    {
+//
+//
+//        $this->logWithUser($this->simpleUser);
+//        $this->visit('/')->dontSee(trans_choice('core.user', 2).' </a></li>');
+//
+//        $this->logWithUser($this->root);
+//
+//
+//        $this->visit('/users')
+//            ->click($this->simpleUser->name)
+//            ->type('juju', 'name')
+//            ->type('juju@juju.com', 'email')
+//            ->type('may', 'firstname')
+//            ->type('1', 'lastname')
+//            ->type('222222', 'password')
+//            ->type('222222', 'password_confirmation')
+//            ->type('44', 'avatar')
+//            ->press(Lang::get('core.save'))
+//            ->seePageIs('/users/')
+//            ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
+//
+//    }
+
+    /** @test */
+    public function create_user()
     {
-        $owner = factory(User::class)->create(['name' => 'AnotherUser']);
+        $this->logWithUser($this->root);
+        $user = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
+        $arrUser = json_decode(json_encode($user), true);
 
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
+        $response = $this->json('POST', '/users', $arrUser);
+//        dump($response);
+        $this->seeInDatabase('users', $arrUser);
 
-        $this->logWithUser($this->simpleUser);
-
-        $this->visit('/tournaments/' . $tournament->slug)
-            ->dontSee("403")
-            ->visit('/tournaments/' . $tournament->slug . '/edit')
-            ->see("403");
-//            $this->visit('/users/'.$user->slug.'/edit')
     }
+
+
+    /** @test */
+    public function edit_user()
+    {
+        $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+    }
+
+
+
+//    /** @test */
+//    public function it_allow_editing_user_without_password()
+//    {
+//        $this->logWithUser($this->root);
+//
+//        $user = factory(User::class)->create(
+//            [   'name' => 'MyUser',
+//                'email' => 'MyUser@kendozone.com',
+//                'role_id' => Config::get('constants.ROLE_USER'),
+//                'password' => bcrypt('111111'),
+//                'verified' => 1,]);
+//
+//        $oldPass = $user->password;
+//        $this->visit('/users')
+//            ->click("MyUser")
+//            ->type('juju', 'name')
+//            ->type('juju@juju.com', 'email')
+//            ->type('may', 'firstname')
+//            ->type('1', 'lastname')
+////            ->select('3', 'role_id')
+//            ->press(Lang::get('core.save'))
+//            ->seePageIs('/users/')
+//            ->seeInDatabase('users', ['name' => 'juju', 'email' => 'juju@juju.com']);
+//
+//        // Check that password remains unchanged
+//        $user = User::where('email', '=', "juju@juju.com")->first();
+//        $newPass = $user->password;
+//        assert($oldPass == $newPass, true);
+//
+//    }
+
 
 //    /** @test
 //     */
