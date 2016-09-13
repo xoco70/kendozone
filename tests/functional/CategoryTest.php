@@ -38,20 +38,6 @@ class CategoryTest extends TestCase
             'alias' => $category->alias,
             'isTeam' => $category->isTeam,
             'gender' => $category->gender,
-            'age' => $category->ageCategory,
-            'ageMin' => $category->ageMin,
-            'ageMax' => $category->ageMax,
-            'grade' => $category->gradeCategory,
-            'gradeMin' => $category->gradeMin,
-            'gradeMax' => $category->gradeMax
-        ];
-
-        // difference : ageCategory and gradeCategory
-        $dataToSee = [
-            'name' => $cat->name,
-            'alias' => $category->alias,
-            'isTeam' => $category->isTeam,
-            'gender' => $category->gender,
             'ageCategory' => $category->ageCategory,
             'ageMin' => $category->ageMin,
             'ageMax' => $category->ageMax,
@@ -60,8 +46,22 @@ class CategoryTest extends TestCase
             'gradeMax' => $category->gradeMax
         ];
 
+        // difference : ageCategory and gradeCategory
+//        $dataToSee = [
+//            'name' => $cat->name,
+//            'alias' => $category->alias,
+//            'isTeam' => $category->isTeam,
+//            'gender' => $category->gender,
+//            'ageCategory' => $category->ageCategory,
+//            'ageMin' => $category->ageMin,
+//            'ageMax' => $category->ageMax,
+//            'gradeCategory' => $category->gradeCategory,
+//            'gradeMin' => $category->gradeMin,
+//            'gradeMax' => $category->gradeMax
+//        ];
+
         $this->json('POST', '/api/v1/category/create',$data)
-            ->seeJson($dataToSee)
-            ->seeInDatabase('category', $dataToSee);
+            ->seeJson($data)
+            ->seeInDatabase('category', $data);
     }
 }
