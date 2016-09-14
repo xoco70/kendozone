@@ -45,6 +45,4 @@ let vm = new Vue({
             }
         }
     },
-
-    filters: {}
 });

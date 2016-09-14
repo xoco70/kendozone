@@ -54,7 +54,7 @@ class CompetitorTest extends TestCase
         foreach ($usersToAdd as $user) {
             $this->add_tcu($tournament, $user);
         }
-
+        // It sends a mail...
 
     }
 

@@ -147,7 +147,6 @@
                                 </fieldset>
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
-                                    {{--{!!  Form::select('federation_id', new Illuminate\Support\Collection() ,null, ['class' => 'form-control']) !!}--}}
                                     <select name="federation_id" v-model="federationSelected" id="federation_id"
                                             class="form-control" @change="getAssociations(federationSelected)">
                                     <option v-for="federation in federations" v-bind:value="federation.value"
@@ -159,7 +158,7 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
-                                    <select name="association_id" v-model="associationSelected"
+                                    <select name="association_id" v-model="associationSelected" id="association_id"
                                             class="form-control" @change="getClubs(associationSelected)">
                                     <option value="1"
                                             v-if="associations!=null && associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
@@ -172,7 +171,7 @@
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
-                                    <select name="club_id" v-model="clubSelected" class="form-control">
+                                    <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
                                         <option value="1"
                                                 v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
                                         <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0"> -

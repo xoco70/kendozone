@@ -240,13 +240,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * A user can have many tournaments
+     * Get all user's created tournmanents
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tournaments()
     {
         return $this->hasMany('App\Tournament');
+    }
+
+    /**
+     * Get all deleted user's tournmanents
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tournamentsDeleted()
+    {
+        return $this->hasMany('App\Tournament')->onlyTrashed();
     }
 
     public function categories()
@@ -305,7 +315,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function myTournaments()
     {
-//        return User::with('')->find($this->id);
         return Tournament::leftJoin('championship', 'championship.tournament_id', '=', 'tournament.id')
             ->leftJoin('competitor', 'competitor.championship_id', '=', 'championship.id')
             ->where('competitor.user_id', '=', $this->id)

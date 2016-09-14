@@ -6,9 +6,9 @@
     <?php
 //    $countries = Countries::all();
     $link = "";
-    if ($settingSize > 0 && $settingSize == $categorySize)
-        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-    else
+//    if ($settingSize > 0 && $settingSize == $categorySize)
+//        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+//    else
         // For showing Modal
         $link = "";
 
