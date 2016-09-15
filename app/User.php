@@ -229,10 +229,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    public function tournamentsInvited()
-    {
-        return $this->hasManyThrough('App\Invite', 'App\Tournament');
-    }
+//    public function tournamentsInvited()
+//    {
+//        return $this->hasManyThrough('App\Invite', 'App\Tournament');
+//    }
 
     public function country()
     {

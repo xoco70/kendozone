@@ -44,63 +44,64 @@
                         </li>
                     @endif
 
-                    @if (Auth::user()->isSuperAdmin())
-                        <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"
-                               href="{!! route('federations.index') !!}" id="federations">
-                                <i class="icon-earth position-left sidemenu"></i>
-                                <span>{{ trans_choice('core.federation',2) }}</span>
-                            </a>
-                        </li>
-                    @endif
+                    {{--@if (Auth::user()->isSuperAdmin())--}}
+                        {{--<li>--}}
+                            {{--<a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"--}}
+                               {{--href="{!! route('federations.index') !!}" id="federations">--}}
+                                {{--<i class="icon-earth position-left sidemenu"></i>--}}
+                                {{--<span>{{ trans_choice('core.federation',2) }}</span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--@endif--}}
 
-                    @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
-                        <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"
-                               id="associations"
-                               href="{!! URL::action('AssociationController@index') !!}">
-                                <i class="icon-flag7 position-left sidemenu"></i>
-                                <span>{{ trans_choice('core.association',2) }}</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if (!Auth::user()->isUser() && !Auth::user()->isClubPresident())
-                        <li>
-                            <a class="protip" data-pt-title="{{ trans_choice('core.club',2) }}"
-                               id="associations"
-                               href="{!! URL::action('ClubController@index') !!}">
-                                <i class="icon-bookmark2 position-left sidemenu"></i>
-                                <span>{{ trans_choice('core.club',2) }}</span>
-                            </a>
-                        </li>
-                    @endif
+                    {{--@if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())--}}
+                        {{--<li>--}}
+                            {{--<a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"--}}
+                               {{--id="associations"--}}
+                               {{--href="{!! URL::action('AssociationController@index') !!}">--}}
+                                {{--<i class="icon-flag7 position-left sidemenu"></i>--}}
+                                {{--<span>{{ trans_choice('core.association',2) }}</span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--@endif--}}
+                    {{--@if (!Auth::user()->isUser() && !Auth::user()->isClubPresident())--}}
+                        {{--<li>--}}
+                            {{--<a class="protip" data-pt-title="{{ trans_choice('core.club',2) }}"--}}
+                               {{--id="associations"--}}
+                               {{--href="{!! URL::action('ClubController@index') !!}">--}}
+                                {{--<i class="icon-bookmark2 position-left sidemenu"></i>--}}
+                                {{--<span>{{ trans_choice('core.club',2) }}</span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--@endif--}}
 
-                    @if(Auth::user()->isSuperAdmin() || Auth::user()->tournaments()->count())
+{{--                    @if(Auth::user()->isSuperAdmin() || Auth::user()->tournaments()->count())--}}
                         <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
                             <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}"
                                href="{!! route('tournaments.index') !!}"><i
                                         class="icon-trophy2 position-left sidemenu"></i><span>{{ trans('core.tournaments_created') }}</span>
                             </a>
                         </li>
-                    @endif
 
-                    @if (Auth::user()->isSuperAdmin() || Auth::user()->myTournaments()->count() > 0)
+                    {{--@endif--}}
+
+{{--                    @if (Auth::user()->isSuperAdmin() || Auth::user()->myTournaments()->count() > 0)--}}
                         <li {{ (Request::is('users/'.Auth::user()->slug.'/tournaments') ? 'class=active' : '') }}>
                             <a class="protip" data-pt-title="{{ trans('core.participations') }}"
                                href="{!! URL::action('UserController@getMyTournaments', Auth::user()->slug ) !!}">
                                 <i class="icon-medal2 position-left sidemenu"></i><span>{{ trans('core.participations') }}</span>
                             </a>
                         </li>
-                    @endif
-
-                    {{--@if (Auth::user()->isSuperAdmin() || Auth::user()->tournamentsInvited()->count() > 0)--}}
-                        {{--<li {{ (Request::is('invites') ? 'class=active' : '') }}>--}}
-                            {{--<a class="protip" data-pt-title="{{ trans_choice('core.invitation',2) }}"--}}
-                               {{--href="{!! URL::action('InviteController@index') !!}"><i--}}
-                                        {{--class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('core.invitation',2) }}</span>--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
                     {{--@endif--}}
+
+                    @if (Auth::user()->isSuperAdmin() || Auth::user()->invites()->count() > 0)
+                        <li {{ (Request::is('invites') ? 'class=active' : '') }}>
+                            <a class="protip" data-pt-title="{{ trans_choice('core.invitation',2) }}"
+                               href="{!! URL::action('InviteController@index') !!}"><i
+                                        class="icon-envelop3 position-left sidemenu"></i><span>{{ trans_choice('core.invitation',2) }}</span>
+                            </a>
+                        </li>
+                    @endif
 
 
                 </ul>
