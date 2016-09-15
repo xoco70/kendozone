@@ -47,13 +47,12 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-//Route::get('/admin', 'DashboardController@index')->middleware(['auth']);
 
 Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
-        Route::get('/', 'DashboardController@index');
+        Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('federations', 'FederationController', ['names' => ['index' => 'federations.index', 'create' => 'federations.create', 'edit' => 'federations.edit', 'store' => 'federations.store', 'update' => 'federations.update']]);
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
@@ -76,10 +75,8 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::delete('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/delete', 'CompetitorController@deleteUser');
         Route::put('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/confirm', 'CompetitorController@confirmUser');
         Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
-        Route::resource('tournaments/{tournament}/categories/{category}/settings', 'CategorySettingsController', ['names' => ['index' => 'category.settings.index', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');
-//        Route::resource('settings', 'SettingsController');
 
         //Restoring -- TODO Should be posting so nobody can restore tournament
         Route::get('associations/{association}/restore', 'AssociationController@restore');
@@ -87,4 +84,9 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
 
         Route::get('logs', 'LogsController@index');
+
+
+        //TODO Change tournaments/{tournament}/categories/{category} to championships/{id}
+//        Route::resource('tournaments/{tournament}/categories/{category}/settings', 'ChampionshipSettingsController', ['names' => ['index' => 'º', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
+
     });

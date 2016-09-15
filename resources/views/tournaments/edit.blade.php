@@ -90,7 +90,9 @@
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ URL::action('TournamentController@index') }}";
+        var url_base = "{{ route('tournaments.index') }}";
+        var url_api_base = "{{ route('tournaments.api') }}";
+        var url_api_root = "{{ route('api.root') }}";
         var url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
         var longitude = "{{$longitude }}";
         var latitude = "{{$latitude }}";

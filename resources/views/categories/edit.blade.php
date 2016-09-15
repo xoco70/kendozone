@@ -13,7 +13,7 @@
             {!! Form::model($categorySetting,
                 ['method'=>"PATCH",
                 'class' => 'form-pricing',
-                 "action" => ["CategorySettingsController@update",
+                 "action" => ["ChampionshipSettingsController@update",
                  $tournamentId,
                  $categoryId,
                  $categorySetting->id]]) !!}

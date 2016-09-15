@@ -1,6 +1,6 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="{{ URL::action('DashboardController@index') }}"><img src="/images/logored.png"
+        <a class="navbar-brand" href="{{ route('dashboard') }}"><img src="/images/logored.png"
                                                                                            alt=""></a>
         @if(Auth::check())
             <ul class="nav navbar-nav visible-xs-block mt-15">

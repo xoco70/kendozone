@@ -55,7 +55,7 @@ $(function () {
                 $("#longitude").val(currentLocation.longitude);
                 updateControls(addressComponents);
 
-            }, oninitialized: function(component) {
+            }, oninitialized: function (component) {
 
                 $('#venue_name').val(venue.venue_name);
                 $('#address').val(venue.address);
@@ -233,8 +233,8 @@ $(function () {
         var inputData = $('.save_category').serialize();
         var form = $(this).parents('form:first');
         inputData = form.serialize();
-        var tournamentId = form.data('tournament');
-        var categoryId = form.data('category');
+        // var tournamentId = form.data('tournament');
+        var championshipId = form.data('championship');
         var settingId = form.data('setting');
 
         $(this).find('i').removeClass();
@@ -244,13 +244,12 @@ $(function () {
 
         var method = null;
         var url = null;
-
         if ((typeof settingId === "undefined")) {
             method = 'POST';
-            url = url_base + '/' + tournamentId + '/categories/' + categoryId + '/settings';
+            url = url_api_root + '/championships/' + championshipId + '/settings';
         } else {
             method = 'PUT';
-            url = url_base + '/' + tournamentId + '/categories/' + categoryId + '/settings/' + settingId;
+            url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
 
         }
         // console.log(url);

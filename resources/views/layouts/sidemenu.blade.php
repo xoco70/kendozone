@@ -7,9 +7,9 @@
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
                     <li {{ (Request::is('/') ? 'class=active' : '') }}>
-                        <a href="{{ URL::action('DashboardController@index') }}" class="protip"
+                        <a href="{{ route('dashboard') }}" class="protip"
                            data-pt-title="Dashboard">
-                            <i class="icon-display4 position-left sidemenu" title data-original-title="Main pages"></i>
+                            <i class="icon-display4 position-left sidemenu" title data-original-title="Main"></i>
                             <span>Dashboard</span>
 
                         </a>

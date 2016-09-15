@@ -43,7 +43,7 @@
 
                                     <tr>
                                         <td>
-                                            <a href="{!!   URL::action('CategorySettingsController@edit',
+                                            <a href="{!!   URL::action('ChampionshipSettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
                                     'championship_id' => $championship->id,
                                     'settings' => $settings->id
@@ -51,7 +51,7 @@
                                                 {{ $category->id }}</a>
                                         </td>
                                         <td>
-                                            <a href="{!!   URL::action('CategorySettingsController@edit',
+                                            <a href="{!!   URL::action('ChampionshipSettingsController@edit',
                                     ['tournamentId'=> $category->pivot->tournament_id,
                                      'championship_id' => $championship->id,
                                      'settings' => $settings->id]) !!}">
@@ -66,7 +66,7 @@
 
                                         <td class="text-center">
                                             <a class=" text-info "
-                                               href="{!! URL::action('CategorySettingsController@edit',
+                                               href="{!! URL::action('ChampionshipSettingsController@edit',
                                    ['tournamentId'=> $category->pivot->tournament_id,
                                    'championship_id' => $championship->id,
                                    'settings' => $settings->id]) !!}">
@@ -76,13 +76,13 @@
                                 @else
                                     <tr>
                                         <td>
-                                            <a href="{!!   URL::action('CategorySettingsController@create',
+                                            <a href="{!!   URL::action('ChampionshipSettingsController@create',
                                                     ['tournamentId'=> $category->pivot->tournament_id,
                                                      'championship_id' =>$category->id]) !!}">
                                                 {{ $category->id }}</a>
                                         </td>
                                         <td>
-                                            <a href="{!!   URL::action('CategorySettingsController@create',
+                                            <a href="{!!   URL::action('ChampionshipSettingsController@create',
                                                  ['tournamentId'=> $category->pivot->tournament_id,
                                                   'championship_id' => $category->id]) !!}">
                                                 {{ $category->name }}</a>

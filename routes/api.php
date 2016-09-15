@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 //})->middleware('auth:api');
 
 Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:api'
+    Route::get('/', 'DashboardController@index')->name('api.root');
+
     Route::post("category/create", 'CategoryController@store');
     Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
     Route::get("federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
@@ -31,6 +33,17 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
 
     Route::get('users', 'TournamentController@index')->name('users.api');
     Route::post('users/{user}/restore', 'UserController@restore');
+
+
+
+    Route::resource('championships/{championship}/settings', 'ChampionshipSettingsController',
+        ['names' => ['index' => 'api.championships.index',
+            'create' => 'api.championships.create',
+            'edit' => 'api.championships.edit',
+            'store' => 'api.championships.store',
+            'update' => 'api.championships.update']]);
+
+
 
 
 });

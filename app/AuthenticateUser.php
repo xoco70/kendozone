@@ -36,7 +36,7 @@ class AuthenticateUser {
         }
 
 
-        return redirect(URL::action('DashboardController@index'));
+        return redirect(route('dashboard'));
     }
 
     private function getAuthorizationFirst($provider) {

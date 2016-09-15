@@ -11,13 +11,11 @@ $currency = Auth::user()->country->currency_code;
 
 @if (is_null($setting))
     {!! Form::open([
-                 'action' => ['CategorySettingsController@store',
-                                $tournament->slug,
-                                $categoryId
+                 'action' => ['ChampionshipSettingsController@store',
+                                $championship->id
                              ],
                  'id' => 'form_'.$key,
-                 'data-tournament' => $tournament->slug,
-                 'data-category' => $categoryId,
+                 'data-championship' => $championship->id,
                  'class' => 'form-settings',
 
 ]) !!}
@@ -26,12 +24,10 @@ $currency = Auth::user()->country->currency_code;
                 ['method'=>"PATCH",
                 'class' => 'form-settings',
                  'id' => 'form_'.$key,
-                 'data-tournament' => $tournament->slug,
-                 'data-category' => $categoryId,
+                 'data-championship' => $championship->id,
                  'data-setting' => $setting->id,
-                 "action" => ["CategorySettingsController@update",
-                             $tournament->slug,
-                             $categoryId,
+                 "action" => ["ChampionshipSettingsController@update",
+                            'data-championship' => $championship->id,
                              $setting->id]]) !!}
 
 @endif
