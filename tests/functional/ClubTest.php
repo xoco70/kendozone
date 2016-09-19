@@ -1,7 +1,6 @@
 <?php
 use App\Association;
 use App\Club;
-use App\Federation;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -24,7 +23,7 @@ class ClubTest extends TestCase
      *
      * superAdmin can do everything
      */
-    public function superAdmin_can_see_create_read_update_delete_club()
+    public function superAdmin_can_crud_club()
     {
         $root = User::findOrFail(2);
 
@@ -74,9 +73,7 @@ class ClubTest extends TestCase
 
         $this->logWithUser($clubPresident);
 
-        $this->visit("/")
-            ->click($myClub->name)
-            ->seePageIs("/clubs/" . $myClub->id . "/edit")
+        $this->visit("/clubs/" . $myClub->id . "/edit")
             ->dontSee("403.png");
 
         $club = factory(Club::class)->make(['association_id' => $myClub->association_id]);
@@ -88,7 +85,8 @@ class ClubTest extends TestCase
 
     /** @test
      */
-    public function a_federation_president_cannot_edit_a_club_that_doesnt_belongs_to_him(){ // Delete rule is the same, I don't do 2 tests
+    public function a_federation_president_cannot_edit_a_club_that_doesnt_belongs_to_him()
+    { // Delete rule is the same, I don't do 2 tests
         $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
 
         $this->visitEditClubPage($federationPresident);
@@ -96,31 +94,37 @@ class ClubTest extends TestCase
 
 
     }
+
     /** @test
      */
-    public function a_association_president_cannot_edit_or_delete_a_club_that_doesnt_belongs_to_him(){
+    public function a_association_president_cannot_edit_or_delete_a_club_that_doesnt_belongs_to_him()
+    {
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
 
         $this->visitEditClubPage($associationPresident);
         $this->see("403.png");
     }
+
     /** @test
      *
      */
-    public function a_club_president_cannot_edit_or_delete_a_club(){
+    public function a_club_president_cannot_edit_or_delete_a_club()
+    {
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $this->visitEditClubPage($clubPresident);
 //        $this->see("403.png");
     }
+
     /** @test
      *
      */
-    public function clubPres_and_simple_user_cannot_create_association(){
+    public function clubPres_and_simple_user_cannot_create_association()
+    {
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
 
         $users = [$clubPresident, $simpleUser];
-        foreach ($users as $user){
+        foreach ($users as $user) {
             $this->logWithUser($user);
             $this->visitCreateClubPage($clubPresident);
             $this->see("403.png");
@@ -151,8 +155,7 @@ class ClubTest extends TestCase
 
     private function visit_addClub()
     {
-        $this->visit("/")
-            ->click('clubs')
+        $this->visit("/clubs")
             ->click('addClub');
     }
 
@@ -216,7 +219,7 @@ class ClubTest extends TestCase
      */
     private function canUpdate(Club $club)
     {
-        $this->visit("/clubs/".$club->id."/edit");
+        $this->visit("/clubs/" . $club->id . "/edit");
         $clubData = factory(Club::class)->make(['association_id' => $club->association_id]);
         $this->fillClubAndSee($clubData);
 
@@ -236,4 +239,5 @@ class ClubTest extends TestCase
 
 //        $this->canDelete($association); // C
 
-    }}
+    }
+}

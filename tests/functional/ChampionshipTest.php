@@ -1,13 +1,10 @@
 <?php
-use App\ChampionshipSettings;
 use App\Championship;
-use App\Competitor;
+use App\ChampionshipSettings;
 use App\Tournament;
 use App\User;
-use App\Venue;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 /**
  * User: juliatzin
@@ -30,7 +27,8 @@ class ChampionshipTest extends TestCase
     }
 
     /** @test */
-    public function it_create_custom_championship(){
+    public function it_create_custom_championship()
+    {
 //        category/create
         $category = factory(\App\Category::class)->make();
         $arrCat1 = json_decode(json_encode($category), true);
@@ -45,14 +43,12 @@ class ChampionshipTest extends TestCase
     {
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
-        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->make();
         $arrCs0 = json_decode(json_encode($cs0), true);
 
 
-        //TODO Endpoint should be /championships/{id}/settings
-
-        $this->json('POST', '/tournaments/' . $tournament->slug . '/categories/' . $ct0->category_id . '/settings', $arrCs0)
+        $result = $this->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
             ->seeInDatabase('championship_settings', $arrCs0);
     }
 
@@ -61,7 +57,7 @@ class ChampionshipTest extends TestCase
     {
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
-        $ct0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->create();
         $cs1 = factory(ChampionshipSettings::class)->make();
         $arrCs1 = json_decode(json_encode($cs1), true);
@@ -69,11 +65,10 @@ class ChampionshipTest extends TestCase
 
         //TODO Endpoint should be /championships/{id}/settings
 
-        $this->json('PUT', '/tournaments/' . $tournament->slug . '/categories/' . $ct0->category_id . '/settings/'.$cs0->id, $arrCs1)
+        $this->json('PUT', '/api/v1/championships/' . $champ0->id . '/settings/' . $cs0->id, $arrCs1)
             ->seeInDatabase('championship_settings', $arrCs1);
 
     }
-
 
 
 }

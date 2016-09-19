@@ -7,6 +7,7 @@ use App\User;
 use App\Venue;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class TournamentTest extends TestCase
@@ -230,10 +231,11 @@ class TournamentTest extends TestCase
     public function user_can_see_tournament_info_but_cannot_edit_it()
     {
         $owner = factory(User::class)->create(['name' => 'AnotherUser']);
+        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
 
-        $this->logWithUser($this->simpleUser);
+        $this->logWithUser($simpleUser);
 
         $this->visit('/tournaments/' . $tournament->slug)
             ->dontSee("403")

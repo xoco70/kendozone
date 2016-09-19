@@ -32,7 +32,7 @@ class ChampionshipSettingsController extends Controller
     public function store(Request $request, $championshipId)
     {
         $request->request->add(['championship_id' => $championshipId]);
-        
+
         $setting = ChampionshipSettings::create($request->all());
         if ($setting != null) {
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);

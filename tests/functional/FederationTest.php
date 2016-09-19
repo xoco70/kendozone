@@ -57,8 +57,6 @@ class FederationTest extends TestCase
 
         $this->logWithUser($root);
         $this->visit("/");
-        $this->click("federations")
-             ->dontSee('403.png');
     }
 
     /** @test
