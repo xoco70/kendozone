@@ -113,7 +113,7 @@
                                     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
                                         {!!  Form::label('country_id', trans('core.country'),['class' => 'text-bold']) !!}
-                                        {!!  Form::select('country_id', $countries,Auth::user()->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                        {!!  Form::select('country_id', $countries,$user->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                         </div>
                                     </div>
                                 </div>
@@ -290,9 +290,9 @@
 @stop
 @section('scripts_footer')
     <script>
-        var federationId = "{{ (Auth::user()->federation_id != 0)? Auth::user()->federation_id : 1}}";
-        var associationId = "{{ (Auth::user()->association_id != 0)? Auth::user()->association_id : 1}}";
-        var clubId = "{{ (Auth::user()->club_id != 0)? Auth::user()->club_id : 1}}";
+        var federationId = "{{ $user->federation_id}}";
+        var associationId = "{{ ($user->association_id != 0)? $user->association_id : 1}}";
+        var clubId = "{{ ($user->club_id != 0)? $user->club_id : 1}}";
 
 
     </script>

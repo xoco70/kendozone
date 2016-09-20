@@ -38,8 +38,10 @@ let vm = new Vue({
         },
     }, ready: function () {
         this.getFederations();
+        this.associationSelected = associationId;
         if (this.federationSelected != 1) {
             this.getAssociations(this.federationSelected);
+            this.clubSelected = clubId;
             if (this.associationSelected != 1) {
                 this.getClubs(this.associationSelected);
             }
