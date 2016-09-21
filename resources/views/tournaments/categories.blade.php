@@ -21,16 +21,16 @@
                     @foreach($categories as $category)
                         <div class="tab-pane {{$first ? 'active':'' }}" id="{{$category->id}}">
                         <?php $first = false;
-                        $categorySettings = \App\ChampionshipSettings::where("tournament_id", $tournamentId)
+                        $championshipSettings = \App\ChampionshipSettings::where("tournament_id", $tournamentId)
                                 ->where("category_id", $category->id)
                                 ->first();
 
                         ?>
                         <!-- TAB CATEGORIES DEFAULT SETTING -->
-                        @if (is_null($categorySettings))
+                        @if (is_null($championshipSettings))
                             {!! Form::open(["route" => "tournaments.{tournamentId}.categorySettings.store"]) !!}
                         @else
-                            {!! Form::model($categorySettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $categorySettings->id), 'method' => 'PATCH')) !!}
+                            {!! Form::model($championshipSettings, array('route' => array('tournaments.{tournamentId}.categorySettings.update', $championshipSettings->id), 'method' => 'PATCH')) !!}
                         @endif
 
                         {!! Form::hidden('tournament_id', $tournamentId) !!}

@@ -18,7 +18,7 @@
     @elseif (sizeof($tournaments) == 1)
         <?php
             $tournament = $tournaments->first();
-            $settingSize = $tournament->categorySettings()->count();
+            $settingSize = $tournament->championshipSettings()->count();
             $categorySize = $tournament->championships()->count();
             $ctuSize = $tournament->competitors()->count();
 

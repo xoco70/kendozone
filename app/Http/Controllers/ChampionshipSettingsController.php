@@ -47,13 +47,13 @@ class ChampionshipSettingsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param $championshipId
-     * @param $categorySettingsId
+     * @param $championshipSettingsId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $championshipId, $categorySettingsId)
+    public function update(Request $request, $championshipId, $championshipSettingsId)
     {
         try {
-            ChampionshipSettings::findOrFail($categorySettingsId)->update($request->all());
+            ChampionshipSettings::findOrFail($championshipSettingsId)->update($request->all());
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);

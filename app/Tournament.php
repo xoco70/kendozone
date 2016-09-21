@@ -146,7 +146,7 @@ class Tournament extends Model implements SluggableInterface
      * Get All categoriesSettings that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function categorySettings()
+    public function championshipSettings()
     {
         return $this->hasManyThrough(ChampionshipSettings::class, Championship::class);
     }
@@ -344,7 +344,7 @@ class Tournament extends Model implements SluggableInterface
     public function hasTeamCategory()
     {
         return $this
-            ->categorySettings()
+            ->championshipSettings()
             ->where('teamSize', '>', '0')
             ->where('teamSize', '<>', null)
             ->count();

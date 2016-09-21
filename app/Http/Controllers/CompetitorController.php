@@ -35,7 +35,7 @@ class CompetitorController extends Controller
     public function index(Tournament $tournament)
     {
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
-        $settingSize = $tournament->categorySettings()->count();
+        $settingSize = $tournament->championshipSettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::pluck('name','id');
         $countries = Country::all();

@@ -92,7 +92,7 @@ class Category extends Model
 
     public function settings()
     {
-        return $this->hasOne('App\CategorySettings');
+        return $this->hasOne('App\ChampionshipSettings');
     }
 
 //    public function user(){

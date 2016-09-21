@@ -54,16 +54,4 @@ class CategoryController extends Controller
             ]);
         return $newCategoryName;
     }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $categorySettingsId
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($categorySettingsId)
-    {
-
-    }
 }

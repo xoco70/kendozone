@@ -102,33 +102,37 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
 
-        $tournament = Tournament::with('competitors', 'categorySettings', 'championships.settings', 'championships.category')->find($tournament->id);
+        $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
         $countries = Countries::pluck('name', 'id');
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $numTeams = $tournament->teams()->count();
-        $settingSize = $tournament->categorySettings->count();
+        $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
         $rules = config('options.rules');
         $hanteiLimit = config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;
+
         $baseCategories = Category::take(10)->get();
 //        // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::pluck('name', 'id');
         $categories = new Collection();
-        $tournament->venue == null
-            ? $venue = new Venue
-            : $venue = $tournament->venue;
+//        $tournament->venue == null
+//            ? $venue = new Venue
+//            : $venue = $tournament->venue;
 
+        $venue =  $tournament->venue ?? new Venue;
 
-
+//        dd($categories1);
         foreach ($categories1 as $category) {
 
-            $category->alias != '' ? $category->name = $category->alias
+            $category->alias != ''
+                ? $category->name = $category->alias
                 : $category->name = trim($category->buildName($grades));
             $categories->push($category);
         }
+
         $categories = $categories->sortBy(function ($key) {
             return $key;
         })->pluck('name', 'id');
