@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::put('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/confirm', 'CompetitorController@confirmUser');
         Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
+        Route::post('invites/upload', 'InviteController@upload');
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');
 
         //Restoring -- TODO Should be posting so nobody can restore tournament

@@ -10,14 +10,14 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            {!!  Form::label('alias', trans('categories.alias'),['class' => 'text-bold' ]) !!}
-            <i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.aliasTooltip')}}"></i>
-            {!!  Form::input('text', 'alias', null, ['class' => 'form-control',"v-model"=>"alias"]) !!}
+    {{--<div class="row">--}}
+        {{--<div class="col-md-12">--}}
+            {{--{!!  Form::label('alias', trans('categories.alias'),['class' => 'text-bold' ]) !!}--}}
+            {{--<i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.aliasTooltip')}}"></i>--}}
+            {{--{!!  Form::input('text', 'alias', null, ['class' => 'form-control',"v-model"=>"alias"]) !!}--}}
 
-        </div>
-    </div><br/>
+        {{--</div>--}}
+    {{--</div><br/>--}}
     <div class="row">
         <div class="col-md-4">
             {!!  Form::label('gender', trans('categories.gender'),['class' => 'text-bold' ]) !!}
@@ -124,17 +124,6 @@
     </div>
 
 </div>
-
-{{--Grades : @{{ grades }}<br/>--}}
-{{--isTeam @{{ isTeam }}<br/> - @{{ isTeam  }} <br/>--}}
-{{--Gender @{{ genderSelect }} - @{{ genderSelect | selectText genders}} <br/>--}}
-{{--ageCategorySelect @{{ ageCategorySelect }}<br/>--}}
-
-{{--GradeSelect : @{{ gradeSelect }}<br/>--}}
-{{--GradeMin : @{{ gradeMin}} GradeMax : @{{ gradeMax }}<br/>--}}
-{{--AgeMin : @{{ ageMin }} AgeMax : @{{ ageMax }}<br/>--}}
-
-{{--FullName : @{{ categoryFullName }}<br/>--}}
 
 <script>
 

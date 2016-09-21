@@ -242,5 +242,14 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
 .mobile-menu{
     font-size: 25px;
 }
+@media (max-width: 768px) {
+    .nav>li>a>img {
+        max-width: none;
+        width: 28px;
+        height: 28px;
+        margin-top: 2px;
+        border-radius: 50%;
+    }
 
+}
 

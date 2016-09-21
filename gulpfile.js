@@ -101,7 +101,9 @@ elixir(function (mix) {
     ], 'public/js/pages/header/competitorIndex.js');
 
     mix.scripts([
-        'plugins/multiple-emails.js'
+        'plugins/multiple-emails.js',
+        'plugins/uploaders/fileinput.min.js',
+        'pages/uploader_bootstrap.js',
     ], 'public/js/pages/header/tournamentInvite.js');
 
     mix.styles([

@@ -9,6 +9,7 @@ use App\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
 use URL;
 
 class InviteController extends Controller
@@ -49,7 +50,7 @@ class InviteController extends Controller
      */
     public function create(Tournament $tournament)
     {
-    	// Should dd $tournament
+        // Should dd $tournament
         return view('invitation.show', compact('tournament'));
     }
 
@@ -59,7 +60,6 @@ class InviteController extends Controller
      *
      * @param InviteRequest|Request $request
      * @return \Illuminate\Http\Response
-     * @internal param AppMailer $mailer
      */
     public function store(Request $request)
     {
@@ -89,12 +89,56 @@ class InviteController extends Controller
      * Consume registration.
      * Send to user creation, or categories selection
      * @param Request $request
-     * @internal param Invite $invitation
      */
-    public function consume(Request $request){
-
+    public function consume(Request $request)
+    {
 
 
     }
+
+    /**
+     * Send an email to competitor and store invitation.
+     *
+     * @param InviteRequest|Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upload(Request $request)
+    {
+        $file = $request->file('invites')->store('invites');
+        $tournament = Tournament::findBySlug($request->tournamentSlug);
+        // Parse Csv File
+
+        $reader = Excel::load("storage/app/" . $file, function ($reader) {
+        })->get();
+
+        // Checking if malformed email
+        $reader->each(function ($sheet) use ($tournament) {
+
+            // Loop through all rows
+            $sheet->each(function ($row) use ($tournament) {
+                // Check email
+                if (!filter_var($row, FILTER_VALIDATE_EMAIL)) {
+                    flash()->error(trans('msg.email_not_valid', ['email' => $row]));
+                    return redirect(URL::action('TournamentController@show', $tournament->slug));
+                }
+            });
+        });
+
+        // Mass Invite
+        $reader->each(function ($sheet) use ($tournament) {
+
+            // Loop through all rows
+            $sheet->each(function ($row) use ($tournament) {
+                // Check email
+                $invite = new Invite();
+                $code = $invite->generateTournamentInvite($row, $tournament);
+                $this->mailer->sendEmailInvitationTo($row, $tournament, $code);
+            });
+        });
+        flash()->success(trans('msg.invitation_sent'));
+        return redirect(URL::action('TournamentController@show', $tournament->slug));
+
+    }
+
 
 }

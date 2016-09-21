@@ -29,6 +29,7 @@ return [
     //Common
     'preview' => ' Vista Previa',
     'thanks' => ' ¡Gracias!',
+    'or' => 'o',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -268,5 +269,13 @@ return [
     'no_association_available' => 'No existen asociaciones en esta federación',
     'no_club_available' => 'No existen clubes en esta asociación',
 
+
+    //Excel
+
+    'import_excel' => 'Importar datos de Excel',
+    'upload_file_to_csv_format' => 'El formato del archivo debe de ser csv.',
+    'how_to_save_to_csv' => 'En Excel, puede guardalo con: Archivo > Guardar Como. En "Formato del archivo", seleccionar ".csv',
+    'bulk_upload' => 'Invitar competidores con un archivo Excel',
+    'download_layout' => 'Archivo modelo ( Layout )'
 
 ];

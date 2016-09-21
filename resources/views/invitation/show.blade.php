@@ -30,10 +30,12 @@
 
                                     <p>
                                         Tienes 2 opciones para invitar competidores:
-                                        <ul>
-                                            <li>Ingresando el email de los competidores separandolos por commas</li>
-                                            <li>Importando un archivo excel ( El archivo debe contener un email por linea en la primera columna )</li>
-                                        </ul>
+                                    <ul>
+                                        <li>Ingresando el email de los competidores separandolos por commas</li>
+                                        <li>Importando un archivo excel ( El archivo debe contener un email por linea en
+                                            la primera columna )
+                                        </li>
+                                    </ul>
                                     </p>
                                     <div class="container-fluid">
 
@@ -52,17 +54,18 @@
 
                                         <div class="content-divider text-muted form-group">
                                             <span>{{  trans('core.or') }}</span></div>
-                                        <p>
-                                            Load a csv file<br/>
-                                        <form id="uploadAndImport" enctype="multipart/form-data" method="post" action="#">
-                                            <input id="fileupload" name="myfile" type="file"/>
-                                            <input type="submit" value="submit" id="submit"/>
-                                            <div class="form-group">
+                                        <p align="center">
+                                            <strong> {{ trans('core.bulk_upload') }} - <a
+                                                        href="{{ url('layouts/invitations.csv') }}">{{ trans('core.download_layout') }}</a></strong><br/><br/>
 
-                                                {!!  Form::submit(trans('core.import_excel'), ['class' => 'btn btn-primary form-control']) !!}
-                                            </div>
-                                        </form>
 
+                                            {!! Form::open(['url'=>URL::action('InviteController@upload'),'enctype' => 'multipart/form-data','id' => 'invites']) !!}
+
+                                            <input id="invites" name="invites" type="file" class="file-input">
+                                            <span class="help-block">{{ trans('core.upload_file_to_csv_format') }}<br>
+                                                {{ trans('core.how_to_save_to_csv') }}<br></span>
+                                            {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
+                                            {!! Form::close()!!}
 
 
                                         </p>

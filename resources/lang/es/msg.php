@@ -58,7 +58,9 @@ return [
     'invitation_expired' => 'Ya pasó la fecha limite de registro al torneo, o tu invitaci&oacute;n ha expirado.',
     'invitation_used' => 'La invitaci&oacute;n ya ha sido usada',
     'invitation_sent' => 'Las invitaciones han sido enviadas',
+    'email_not_valid' => 'El email :email no esta válido. Operación Cancelada',
     'tx_for_register_tournament' => 'Gracias por registrarte al torneo :tournament',
+
     // Permisos
     'access_denied' => 'No tiene acceso a esta secci&oacute;n',
 

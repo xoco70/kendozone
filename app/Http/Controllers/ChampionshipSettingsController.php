@@ -31,12 +31,19 @@ class ChampionshipSettingsController extends Controller
      */
     public function store(Request $request, $championshipId)
     {
-        $request->request->add(['championship_id' => $championshipId]);
 
-        $setting = ChampionshipSettings::create($request->all());
-        if ($setting != null) {
+        try{
+            $championship = Championship::find($championshipId);
+
+            $category = $championship->category;
+            $category->alias = $request->alias;
+            $category->save();
+
+            $request->request->add(['championship_id' => $championshipId]);
+
+            $setting = ChampionshipSettings::create($request->except('alias'));
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
-        } else {
+        } catch (Exception $e){
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
         }
     }
@@ -53,7 +60,11 @@ class ChampionshipSettingsController extends Controller
     public function update(Request $request, $championshipId, $championshipSettingsId)
     {
         try {
-            ChampionshipSettings::findOrFail($championshipSettingsId)->update($request->all());
+            $championship = Championship::find($championshipId);
+            $category = $championship->category;
+            $category->alias = $request->alias;
+            $category->save();
+            ChampionshipSettings::findOrFail($championshipSettingsId)->update($request->except('alias'));
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);

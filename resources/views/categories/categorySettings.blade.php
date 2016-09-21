@@ -51,9 +51,9 @@ $currency = Auth::user()->country->currency_code;
                href="#accordion-styled-group{!! $key !!}">
 
                 <div class="panel-heading">
+
                     <h6 class="panel-title">
-                        {{trans($championship->category->buildName($grades))}}
-                        <i class="glyphicon  glyphicon-edit  status-icon"></i>
+                            {!!  Form::input('text','alias',trans($championship->category->buildName($grades)), ['class' => 'form-control alias','id' => 'alias'.$key]) !!}
                     </h6>
                 </div>
             </a>
