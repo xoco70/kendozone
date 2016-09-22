@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
 //                    'tags' => array('Francia' => 'Campeon!!!')
                 ];
             }
-            $this->sentryID = app('sentry')->captureException($e);
+            $this->sentryID = app('sentry')->captureException($exception);
         }
 
         parent::report($exception);
