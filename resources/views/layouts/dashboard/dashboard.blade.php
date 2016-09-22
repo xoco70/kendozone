@@ -1,6 +1,11 @@
 <?php
-$tournamentsCreated = Auth::user()->tournaments;
-$tournamentsParticipated = Auth::user()->myTournaments()->get();
+$tournamentsCreatedQuery = Auth::user()->tournaments();
+$tournamentsCreated = $tournamentsCreatedQuery->get();
+$tournamentsParticipatedQuery = Auth::user()->myTournaments();
+$tournamentsParticipated = $tournamentsParticipatedQuery->get();
+
+//dd($tournamentsParticipatedQuery->where('dateFin','<', new \DateTime('today'))->getQuery()->toSql());
+//dd(new \DateTime('today'));
 ?>
 <div class="row">
     <div class="col-md-6">
@@ -81,7 +86,7 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
     <div class="col-lg-4 col-md-6">
         <div class="row">
             <div class="panel panel-body">
-                <fieldset title="NUMEROS">
+                <fieldset title="{{ trans('core.numbers') }}">
                     <legend class="text-semibold">{{ trans('core.numbers') }}</legend>
                 </fieldset>
                 <div class="row">
@@ -100,12 +105,12 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <div class="square bg-primary">{{ $tournamentsCreated->where('dateFin','<', new \DateTime('today'))->count() }}
+                        <div class="square bg-primary">{{ $tournamentsParticipated->where('dateFin','<', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">{{ trans('core.past') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="square bg-success">{{ $tournamentsCreated->where('dateFin','>=', new \DateTime('today'))->count() }}
+                        <div class="square bg-success">{{ $tournamentsParticipated->where('dateFin','>=', new \DateTime('today'))->count() }}
                             <div class="text-size-large text-uppercase">{{ trans('core.next') }}</div>
                         </div>
                     </div>
@@ -114,56 +119,6 @@ $tournamentsParticipated = Auth::user()->myTournaments()->get();
 
             </div>
         </div>
-        {{--<div class="row">--}}
-        {{--<div class="panel panel-body">--}}
-
-        {{--<fieldset title="ULTIMOS MENSAJES">--}}
-        {{--<legend class="text-semibold">ULTIMAS NOTIFICACIONES</legend>--}}
-        {{--</fieldset>--}}
-
-
-        {{--<ul class="media-list">--}}
-        {{--<li class="media">--}}
-        {{--<div class="media-left">--}}
-        {{--<img src="/images/demo/users/face10.jpg" class="img-circle img-xs" alt="">--}}
-        {{--<span class="badge bg-danger-400 media-badge">8</span>--}}
-        {{--</div>--}}
-
-        {{--<div class="media-body">--}}
-        {{--<a href="#">--}}
-        {{--Jesus Maya--}}
-        {{--<span class="media-annotation pull-right">14:58</span>--}}
-        {{--</a>--}}
-
-        {{--<span class="display-block text-muted">Practica en Amecameca mañana... 4 horas de geiko para que se les quite lo p...</span>--}}
-        {{--</div>--}}
-        {{--</li>--}}
-
-        {{--<li class="media">--}}
-        {{--<div class="media-left">--}}
-        {{--<img src="/images/demo/users/face3.jpg" class="img-circle img-xs" alt="">--}}
-        {{--</div>--}}
-
-        {{--<div class="media-body">--}}
-        {{--<a href="#">--}}
-        {{--FMK--}}
-        {{--<span class="media-annotation pull-right">12:16</span>--}}
-        {{--</a>--}}
-
-        {{--<span class="display-block text-muted">¡Examen de Iaido! No se apendejen!!!</span>--}}
-        {{--</div>--}}
-        {{--</li>--}}
-
-
-        {{--</ul>--}}
-
-        {{--<div align="right" class="pt-20">--}}
-        {{--<a class="btn border-primary text-primary btn-flat border-4 text-uppercase seeall "--}}
-        {{--href="#">{{trans('core.see_all')}}</a>--}}
-        {{--</div>--}}
-
-        {{--</div>--}}
-        {{--</div>--}}
     </div>
 
 </div>

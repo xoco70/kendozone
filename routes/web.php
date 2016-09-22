@@ -86,8 +86,4 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
         Route::get('logs', 'LogsController@index');
 
-
-        //TODO Change tournaments/{tournament}/categories/{category} to championships/{id}
-//        Route::resource('tournaments/{tournament}/categories/{category}/settings', 'ChampionshipSettingsController', ['names' => ['index' => 'º', 'create' => 'category.settings.create', 'edit' => 'category.settings.edit', 'store' => 'category.settings.store', 'update' => 'category.settings.update']]);
-
     });

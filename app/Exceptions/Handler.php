@@ -13,6 +13,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    private $sentryID;
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -49,7 +51,7 @@ class Handler extends ExceptionHandler
 //                    'tags' => array('Francia' => 'Campeon!!!')
                 ];
             }
-            app('sentry')->captureException($exception, $params);
+            $this->sentryID = app('sentry')->captureException($e);
         }
 
         parent::report($exception);
@@ -64,7 +66,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
+        return response()->view('errors.500', [
+            'sentryID' => $this->sentryID,
+        ], 500);
 //        if (App::environment('local')) {
 //            return parent::render($request, $exception);
 //        }

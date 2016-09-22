@@ -240,7 +240,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get all user's created tournmanents
+     * Get all user's created (owned) tournmanents
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
