@@ -32,7 +32,7 @@ class UserRequest extends Request
         $uniqueUser = '';
         $passwordRules = '';
         if ($this->method == 'POST') {
-            $passwordRules = '|required|min:1';
+            $passwordRules = '|required';
             $uniqueUser = '|unique:users';
         }
 
@@ -40,7 +40,7 @@ class UserRequest extends Request
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
-            'password' => 'confirmed' . $passwordRules,
+            'password' => 'confirmed|min:6' . $passwordRules,
         ];
     }
 
