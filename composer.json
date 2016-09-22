@@ -12,7 +12,7 @@
         "webpatser/laravel-countries": "dev-master",
         "laravel/socialite": "2.*",
         "torann/geoip": "0.2.*@dev",
-        "maatwebsite/excel": "~2.1.*",
+        "maatwebsite/excel": "~2.1.0",
         "barryvdh/laravel-debugbar": "2.*",
         "barryvdh/laravel-ide-helper": "2.*",
         "davejamesmiller/laravel-breadcrumbs": "3.*",
