@@ -8,16 +8,17 @@ use App\Mailers\AppMailer;
 use App\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
-use URL;
 
 class InviteController extends Controller
 {
 
     protected $currentModelName;
     protected $mailer;
-
+    protected $emailBadFormat;
+    protected $wrongEmail;
     /**
      * InviteController constructor.
      * @param AppMailer $mailer
@@ -104,6 +105,7 @@ class InviteController extends Controller
      */
     public function upload(Request $request)
     {
+        $this->emailBadFormat = false;
         $file = $request->file('invites')->store('invites');
         $tournament = Tournament::findBySlug($request->tournamentSlug);
         // Parse Csv File
@@ -118,25 +120,31 @@ class InviteController extends Controller
             $sheet->each(function ($row) use ($tournament) {
                 // Check email
                 if (!filter_var($row, FILTER_VALIDATE_EMAIL)) {
-                    flash()->error(trans('msg.email_not_valid', ['email' => $row]));
-                    return redirect(URL::action('TournamentController@show', $tournament->slug));
+                    $this->emailBadFormat = true;
+                    $this->wrongEmail = $row;
                 }
             });
         });
 
-        // Mass Invite
-        $reader->each(function ($sheet) use ($tournament) {
+        if ($this->emailBadFormat == true) {
+            flash()->error(trans('msg.email_not_valid', ['email' => $this->wrongEmail]));
+            return redirect(URL::action('InviteController@create', $tournament->slug));
+        } else {
+//            Mass Invite
+            $reader->each(function ($sheet) use ($tournament) {
 
-            // Loop through all rows
-            $sheet->each(function ($row) use ($tournament) {
-                // Check email
-                $invite = new Invite();
-                $code = $invite->generateTournamentInvite($row, $tournament);
-                $this->mailer->sendEmailInvitationTo($row, $tournament, $code);
+                // Loop through all rows
+                $sheet->each(function ($row) use ($tournament) {
+                    // Check email
+                    $invite = new Invite();
+                    $code = $invite->generateTournamentInvite($row, $tournament);
+                    $this->mailer->sendEmailInvitationTo($row, $tournament, $code);
+                });
             });
-        });
-        flash()->success(trans('msg.invitation_sent'));
-        return redirect(URL::action('TournamentController@show', $tournament->slug));
+            flash()->success(trans('msg.invitation_sent'));
+            return redirect(URL::action('InviteController@create', $tournament->slug));
+
+        }
 
     }
 
