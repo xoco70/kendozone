@@ -93,4 +93,13 @@ return [
     'limitByEntityTooltip' => 'Cantidad de competidor que se pueden registrar',
     'rulesTooltip' => 'Crea y se configura de forma automatica las categorías según el modelo de reglas elegido',
 
+
+    'configure_categories' => 'Configura las categorías',
+    'configure_categories_text' => 'Selecciona una de las 2 opciones para configurar las categorias del torneo',
+
+    'presettings' => 'Preconfigurada',
+    'presettings_text' => 'Elige el reglamento bajo el que tu torneo este regido. Las categorias se crearan y se configuraran de forma automatica',
+
+    'manual' => 'Manual',
+    'presettings' => 'Preconfigurada',
 ];

@@ -11,10 +11,10 @@
                 </fieldset>
 
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-xs-2 col-md-1">
                         <span class="btn btn-flat border-grey-800 btn-rounded text-bold ">1</span>
                     </div>
-                    <div class="col-md-10"><span class="text-bold">DATOS GENERALES</span><BR/>Escriba el nombre y la
+                    <div class="col-xs-10"><span class="text-bold">DATOS GENERALES</span><BR/>Escriba el nombre y la
                         fecha de tu torneo
                     </div>
                 </div>
@@ -53,73 +53,75 @@
                 </div>
                 <hr/>
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-xs-2 col-md-1">
                         <span class="btn btn-flat border-grey-800 btn-rounded text-bold ">2</span>
                     </div>
-                    <div class="col-md-10"><span class="text-bold">CONFIGURA LAS CATEGORIAS</span><BR/>
-                        Selecciona una de las 2 opciones para configurar las categorias del torneo
+                    <div class="col-xs-10"><span class="text-bold">{{ strtoupper(trans('categories.configure_categories')) }}</span><BR/>
+                        {{ trans('categories.configure_categories_text') }}
+                        <br/>
                     </div>
                 </div>
                 <br/><br/>
                 <div class="row">
-                    <div class="col-md-1 col-md-offset-1">{{ Form::radio('config', '0',true, ['id' => 'c1']) }}</div>
-                    <div class="col-md-10"><span class="text-bold">PRECONFIGURADA</span><br/>
-                        Elige el reglamento bajo el que tu torneo este regido. Las categorias se crearan y se
-                        configuraran de forma automatica<br/>
+                    <div class="col-xs-1 col-md-offset-1">{{ Form::radio('config', '0',true, ['id' => 'c1']) }}</div>
+                    <div class="col-md-10"><span class="text-bold">{{ strtoupper(trans('categories.presettings')) }}</span><br/>
+                        {{ trans('categories.presettings_text') }}
+                        <br/><br/>
                     </div>
                 </div>
-                <div class="row mt-10">
+                <div class="row md-10">
                     <div class="col-md-3 col-md-offset-2">
                         {!!  Form::select('rule_id', $rules,$tournament->rule_id == null ? 0 : $tournament->rule_id, ['class' => 'form-control', 'id' => 'rules']) !!}
                     </div>
                     <div class="col-md-7">
                         <small id="categories_desc"></small>
                     </div>
-                    <div class="row">
-                        <div class="col-md-11 col-md-offset-1">
-                            <hr/>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                        <hr/>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-1 col-md-offset-1">{{ Form::radio('config', '1', false, ['id' => 'c2']) }}</div>
-                        <div class="col-md-10"><span class="text-bold">MANUAL</span><br/>
-                            {{trans('core.select_categories_to_register')}}<br/>
-                        </div>
+                <div class="row">
+                    <div class="col-xs-1 col-md-offset-1">{{ Form::radio('config', '1', false, ['id' => 'c2']) }}</div>
+                    <div class="col-md-10"><span class="text-bold">{{ strtoupper(trans('categories.manual')) }}</span><br/>
+                        {{trans('core.select_categories_to_register')}}<br/>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-offset-2">
+                <div class="row">
+                    <div class="col-md-offset-2">
 
-                            <div class="form-group multiselect">
-                            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
-                            </div>
-
+                        <div class="form-group multiselect">
+                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                         </div>
+
                     </div>
-                    <div class="row text-uppercase">
-                        <div class="col-md-7 mb-20 mt-20 pt-20">
+                </div>
+                <div class="row text-uppercase">
+                    <div class="col-md-7 mb-20 mt-20 pt-20">
                         <span class="text-danger" v-cloak>
                             @{{ error }}
                         </span>
 
-                        </div>
-                        <div class="col-md-5 mb-20 mt-20 pt-20 disabled" id="create_category_link">
-                            {{--<button type="button" class="btn btn-primary"--}}
-                            {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
-                            <a href="#" data-toggle="modal" data-target="#create_category" id="create_category_link"
-                               class="text-semibold text-black" @click="resetModalValues()">
-                            + {{ trans('core.add_custom_category') }}</a>
-                        </div>
                     </div>
-                    <div class=" text-right mt-15">
-                        {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
+                    <div class="col-md-5 mb-20 mt-20 pt-20 disabled" id="create_category_link">
+                        {{--<button type="button" class="btn btn-primary"--}}
+                        {{--id="demo2-add">{{ trans('core.add_and_new') }}</button>--}}
+                        <a href="#" data-toggle="modal" data-target="#create_category" id="create_category_link"
+                           class="text-semibold text-black" @click="resetModalValues()">
+                        + {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
-
-
+                <div class=" text-right mt-15">
+                    {!!  Form::submit($submitButton, ['class' => 'btn btn-success ']) !!}
+                </div>
             </div>
 
+
         </div>
+
     </div>
+</div>
 </div>

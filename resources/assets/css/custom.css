@@ -42,18 +42,18 @@ fieldset > a > legend {
     vertical-align: middle;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row >  .cat-status > a > .panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-status > a > .panel-heading {
     text-align: right;
     letter-spacing: 2px;
     vertical-align: middle;
     text-transform: uppercase;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row >  .cat-title > a > .panel-heading > span {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-title > a > .panel-heading > span {
     font-size: 18px;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row >  .cat-status > a > .panel-heading > span > i {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-status > a > .panel-heading > span > i {
     font-size: 30px;
     margin-left: 10px;
 
@@ -239,16 +239,25 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     margin-bottom: 0;
 }
 
-.mobile-menu{
+.mobile-menu {
     font-size: 25px;
 }
+
 @media (max-width: 768px) {
-    .nav>li>a>img {
+    .nav > li > a > img {
         max-width: none;
         width: 28px;
         height: 28px;
         margin-top: 2px;
         border-radius: 50%;
+    }
+
+    .content {
+        padding: 10px 10px;
+    }
+    .multiselect{
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
 }
