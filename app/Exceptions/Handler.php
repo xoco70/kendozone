@@ -66,9 +66,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return response()->view('errors.500', [
-            'sentryID' => $this->sentryID,
-        ], 500);
 //        if (App::environment('local')) {
 //            return parent::render($request, $exception);
 //        }
@@ -145,6 +142,7 @@ class Handler extends ExceptionHandler
                 'quote' => $quote,
                 'author' => $author,
                 'source' => $source,
+                'sentryID' => $this->sentryID,
             ]
         );
     }
