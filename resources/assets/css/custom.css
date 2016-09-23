@@ -259,6 +259,9 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
         padding-left: 12px;
         padding-right: 12px;
     }
+    .cat-state{
+        display: none;
+    }
 
 }
 
