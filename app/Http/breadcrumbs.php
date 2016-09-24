@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Auth;
 
 Breadcrumbs::register('dashboard', function ($breadcrumbs) {
-    $breadcrumbs->push(trans('core.dashboard'), action('DashboardController@index'));
+    $breadcrumbs->push(trans('core.dashboard'), route('dashboard'));
 });
 
 // Home > Federations
