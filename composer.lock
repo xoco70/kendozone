@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cee2aac274e4a279c058e91309536aa9",
-    "content-hash": "4f5007523d8ba4a088e809dc49f00431",
+    "hash": "3ccf7a1e2fe2b556fdb9b918e58151de",
+    "content-hash": "8b3c74239f5fd962616a3e3681fd05e1",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -60,28 +60,28 @@
         },
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "V2.2.3",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd"
+                "reference": "0c87981df959c7c1943abe227baf607c92f204f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd",
-                "reference": "ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/0c87981df959c7c1943abe227baf607c92f204f9",
+                "reference": "0c87981df959c7c1943abe227baf607c92f204f9",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.1.*|5.2.*|5.3.*",
-                "maximebf/debugbar": "~1.11.0|~1.12.0",
+                "maximebf/debugbar": "~1.13.0",
                 "php": ">=5.5.9",
                 "symfony/finder": "~2.7|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -110,7 +110,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2016-07-29 15:00:36"
+            "time": "2016-09-15 14:05:56"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -229,16 +229,16 @@
         },
         {
             "name": "behat/gherkin",
-            "version": "v4.4.2",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "d26757dc970e67b50ed0ee47b95273daeb84fea6"
+                "reference": "cf8cc94647101e02a33d690245896d83d880aea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/d26757dc970e67b50ed0ee47b95273daeb84fea6",
-                "reference": "d26757dc970e67b50ed0ee47b95273daeb84fea6",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/cf8cc94647101e02a33d690245896d83d880aea1",
+                "reference": "cf8cc94647101e02a33d690245896d83d880aea1",
                 "shasum": ""
             },
             "require": {
@@ -284,7 +284,7 @@
                 "gherkin",
                 "parser"
             ],
-            "time": "2016-09-03 07:28:57"
+            "time": "2016-09-18 12:16:14"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -604,21 +604,21 @@
         },
         {
             "name": "danielstjules/stringy",
-            "version": "1.10.0",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danielstjules/Stringy.git",
-                "reference": "4749c205db47ee5b32e8d1adf6d9aff8db6caf3b"
+                "reference": "4e214a5195fae3fb558e81b1c6010678f7600643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/4749c205db47ee5b32e8d1adf6d9aff8db6caf3b",
-                "reference": "4749c205db47ee5b32e8d1adf6d9aff8db6caf3b",
+                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/4e214a5195fae3fb558e81b1c6010678f7600643",
+                "reference": "4e214a5195fae3fb558e81b1c6010678f7600643",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
+                "php": ">=5.3.0",
+                "symfony/polyfill-mbstring": "~1.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -656,7 +656,7 @@
                 "utility",
                 "utils"
             ],
-            "time": "2015-07-23 00:54:12"
+            "time": "2016-05-02 15:18:10"
         },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",
@@ -1451,16 +1451,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.3.6",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c63a7fb7066fea2bce91ace5c830c01d503abe6c"
+                "reference": "6febb0ee61999cde3bc7b2963c8903032bb22691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c63a7fb7066fea2bce91ace5c830c01d503abe6c",
-                "reference": "c63a7fb7066fea2bce91ace5c830c01d503abe6c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6febb0ee61999cde3bc7b2963c8903032bb22691",
+                "reference": "6febb0ee61999cde3bc7b2963c8903032bb22691",
                 "shasum": ""
             },
             "require": {
@@ -1508,6 +1508,7 @@
                 "illuminate/http": "self.version",
                 "illuminate/log": "self.version",
                 "illuminate/mail": "self.version",
+                "illuminate/notifications": "self.version",
                 "illuminate/pagination": "self.version",
                 "illuminate/pipeline": "self.version",
                 "illuminate/queue": "self.version",
@@ -1574,7 +1575,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-09-01 14:06:47"
+            "time": "2016-09-20 13:46:16"
         },
         {
             "name": "laravel/socialite",
@@ -1691,26 +1692,27 @@
         },
         {
             "name": "laravolt/avatar",
-            "version": "0.3.3",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravolt/avatar.git",
-                "reference": "98d39041ccb6cb16b6806d5a0bd33c654a6543ae"
+                "reference": "35af0d7c95184f93f436d16f32648bb358632c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravolt/avatar/zipball/98d39041ccb6cb16b6806d5a0bd33c654a6543ae",
-                "reference": "98d39041ccb6cb16b6806d5a0bd33c654a6543ae",
+                "url": "https://api.github.com/repos/laravolt/avatar/zipball/35af0d7c95184f93f436d16f32648bb358632c11",
+                "reference": "35af0d7c95184f93f436d16f32648bb358632c11",
                 "shasum": ""
             },
             "require": {
-                "danielstjules/stringy": "~1.8",
-                "illuminate/cache": "~5.1",
-                "illuminate/support": "~5.1",
+                "danielstjules/stringy": "~2.2",
+                "illuminate/cache": "~5.2",
+                "illuminate/support": "~5.2",
                 "intervention/image": "^2.1",
                 "php": ">=5.5.0"
             },
             "require-dev": {
+                "mockery/mockery": "0.9.*",
                 "phpunit/phpunit": "4.*"
             },
             "type": "library",
@@ -1743,7 +1745,7 @@
                 "laravel",
                 "laravolt"
             ],
-            "time": "2016-01-24 03:53:48"
+            "time": "2016-08-16 05:26:39"
         },
         {
             "name": "league/flysystem",
@@ -1893,16 +1895,16 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "2.1.4",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "b5c91156f6bd29f68f4f2c51186faae4310a5a68"
+                "reference": "700eba02f76f2971c81726a4f6a04121c1977e64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/b5c91156f6bd29f68f4f2c51186faae4310a5a68",
-                "reference": "b5c91156f6bd29f68f4f2c51186faae4310a5a68",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/700eba02f76f2971c81726a4f6a04121c1977e64",
+                "reference": "700eba02f76f2971c81726a4f6a04121c1977e64",
                 "shasum": ""
             },
             "require": {
@@ -1956,20 +1958,20 @@
                 "import",
                 "laravel"
             ],
-            "time": "2016-08-28 20:25:51"
+            "time": "2016-09-15 21:03:21"
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.12.0",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988"
+                "reference": "5f49a5ed6cfde81d31d89378806670d77462526e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
-                "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/5f49a5ed6cfde81d31d89378806670d77462526e",
+                "reference": "5f49a5ed6cfde81d31d89378806670d77462526e",
                 "shasum": ""
             },
             "require": {
@@ -1988,7 +1990,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -2017,20 +2019,20 @@
                 "debug",
                 "debugbar"
             ],
-            "time": "2016-05-15 13:11:34"
+            "time": "2016-09-15 14:01:59"
         },
         {
             "name": "maxmind-db/reader",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-                "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff"
+                "reference": "8da3b4fcd439779d4b16bba0a4ba98365f78d788"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/1383655533aa2f13a990b27b075fdde8b7bdd5ff",
-                "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/8da3b4fcd439779d4b16bba0a4ba98365f78d788",
+                "reference": "8da3b4fcd439779d4b16bba0a4ba98365f78d788",
                 "shasum": ""
             },
             "require": {
@@ -2038,7 +2040,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "4.2.*",
-                "satooshi/php-coveralls": "dev-master",
+                "satooshi/php-coveralls": "1.0.*",
                 "squizlabs/php_codesniffer": "2.*"
             },
             "type": "library",
@@ -2067,7 +2069,7 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2016-01-04 15:38:11"
+            "time": "2016-09-15 21:26:50"
         },
         {
             "name": "maxmind/web-service-common",
@@ -2282,16 +2284,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.1",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "a8773992b362b58498eed24bf85005f363c34771"
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/a8773992b362b58498eed24bf85005f363c34771",
-                "reference": "a8773992b362b58498eed24bf85005f363c34771",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
                 "shasum": ""
             },
             "require": {
@@ -2320,7 +2322,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2015-11-20 12:04:31"
+            "time": "2016-09-16 13:37:59"
         },
         {
             "name": "nesbot/carbon",
@@ -2371,16 +2373,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
                 "shasum": ""
             },
             "require": {
@@ -2418,7 +2420,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-04-19 13:41:41"
+            "time": "2016-09-16 12:04:44"
         },
         {
             "name": "owen-it/laravel-auditing",
@@ -3115,16 +3117,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.6",
+            "version": "3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49"
+                "reference": "546898a2c0c356ef2891b39dd7d07f5d82c8ed0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
-                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/546898a2c0c356ef2891b39dd7d07f5d82c8ed0a",
+                "reference": "546898a2c0c356ef2891b39dd7d07f5d82c8ed0a",
                 "shasum": ""
             },
             "require": {
@@ -3170,7 +3172,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-08-26 05:51:59"
+            "time": "2016-09-06 16:07:45"
         },
         {
             "name": "proengsoft/laravel-jsvalidation",
@@ -3283,22 +3285,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
+                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3312,12 +3322,13 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-09-19 16:02:08"
         },
         {
             "name": "psy/psysh",
@@ -3986,16 +3997,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "1.1.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "33fbf98955cdfe34e99fe43ef8bdd874253675dd"
+                "reference": "fe51e53217f983ad58c5db27c7d78f9d8759b379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/33fbf98955cdfe34e99fe43ef8bdd874253675dd",
-                "reference": "33fbf98955cdfe34e99fe43ef8bdd874253675dd",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/fe51e53217f983ad58c5db27c7d78f9d8759b379",
+                "reference": "fe51e53217f983ad58c5db27c7d78f9d8759b379",
                 "shasum": ""
             },
             "require": {
@@ -4016,7 +4027,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -4040,7 +4051,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2016-07-30 18:28:24"
+            "time": "2016-09-20 21:52:11"
         },
         {
             "name": "sentry/sentry-laravel",
@@ -4098,16 +4109,16 @@
         },
         {
             "name": "spatie/crawler",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/crawler.git",
-                "reference": "363bedb83c716a39fb94e0012336c4710f5272ba"
+                "reference": "c83bef7eecc247f67a0a0a96957c9fb2ebb0806d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/crawler/zipball/363bedb83c716a39fb94e0012336c4710f5272ba",
-                "reference": "363bedb83c716a39fb94e0012336c4710f5272ba",
+                "url": "https://api.github.com/repos/spatie/crawler/zipball/c83bef7eecc247f67a0a0a96957c9fb2ebb0806d",
+                "reference": "c83bef7eecc247f67a0a0a96957c9fb2ebb0806d",
                 "shasum": ""
             },
             "require": {
@@ -4148,7 +4159,7 @@
                 "spatie",
                 "website"
             ],
-            "time": "2016-08-18 20:57:47"
+            "time": "2016-09-13 13:13:44"
         },
         {
             "name": "spatie/db-dumper",
