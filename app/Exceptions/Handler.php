@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Exceptions\NoFederationOwnedException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -125,11 +126,28 @@ class Handler extends ExceptionHandler
                 $source = "";
                 break;
 
+
             case $exception instanceof NotOwningFederationException:
                 $code = "403";
                 $message = trans('core.forbidden');
-                $quote = trans('msg.invitation_needed');
-                $author = "Admin";
+                $quote = trans('msg.you_dont_own_federation');
+                $author = trans('msg.please_ask_superadmin');
+                $source = "";
+                break;
+
+            case $exception instanceof NotOwningAssociationException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = trans('msg.you_dont_own_association');
+                $author = trans('msg.please_ask_federationPresident');
+                $source = "";
+                break;
+
+            case $exception instanceof NotOwningClubException:
+                $code = "403";
+                $message = trans('core.forbidden');
+                $quote = trans('msg.you_dont_own_club');
+                $author = trans('msg.please_ask_associationPresident');
                 $source = "";
                 break;
 

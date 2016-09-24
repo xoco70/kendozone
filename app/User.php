@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Exceptions\NotOwningAssociationException;
+use App\Exceptions\NotOwningClubException;
+use App\Exceptions\NotOwningFederationException;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use DateTime;
@@ -380,6 +383,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param User $user
      * @return Builder
      * @throws AuthorizationException
+     * @throws NotOwningAssociationException
+     * @throws NotOwningClubException
+     * @throws NotOwningFederationException
      */
     public function scopeForUser($query, User $user)
     {
@@ -392,8 +398,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return $query->where('federation_id', '=', $user->federationOwned->id);
             case $user->isAssociationPresident() && $user->associationOwned:
                 return $query->where('association_id', '=', $user->associationOwned->id);
-            case $user->isClubPresident() && $user->associationOwned != null:
+            case $user->isClubPresident() && $user->clubOwned != null:
                 return $query->where('club_id', '=', $user->clubOwned->id);
+
+            case $user->isFederationPresident() && ! $user->federationOwned != null:
+                throw new NotOwningFederationException();
+            case $user->isAssociationPresident() && ! $user->associationOwned:
+                throw new NotOwningAssociationException();
+            case $user->isClubPresident() && $user->clubOwned == null:
+                throw new NotOwningClubException();
             default:
                 throw new AuthorizationException();
         }

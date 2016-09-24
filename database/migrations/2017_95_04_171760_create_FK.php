@@ -12,23 +12,8 @@ class CreateFK extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->foreign('federation_id')
-                ->references('id')
-                ->on('federation')
-                ->onUpdate('cascade');
 
-            $table->foreign('association_id')
-                ->references('id')
-                ->on('association')
-                ->onUpdate('cascade');
 
-            $table->foreign('club_id')
-                ->references('id')
-                ->on('club')
-                ->onUpdate('cascade');
-
-        });
 
 
     }
@@ -40,12 +25,7 @@ class CreateFK extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropForeign('users_club_id_foreign');
-            $table->dropForeign('users_association_id_foreign');
-            $table->dropForeign('users_federation_id_foreign');
 
-        });
 
     }
 }

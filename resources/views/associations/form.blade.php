@@ -14,7 +14,9 @@
     $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
     ?>
 
-
+    @if (!is_null($association->id))
+        @include('layouts.displayMenuMyEntitiesOnTop')
+    @endif
     <!-- Detached content -->
 
     <div class="row">

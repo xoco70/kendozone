@@ -13,7 +13,6 @@ class CreateCompetitorTable extends Migration {
 			$table->string('surname');
 			$table->integer('user_id')->unsigned();
 			$table->integer('club_id')->unsigned();
-//			$table->string('picture');
 			$table->timestamps();
 			$table->engine = 'InnoDB';
 
@@ -21,24 +20,6 @@ class CreateCompetitorTable extends Migration {
 				->references('id')
 				->on('users')
 				->onDelete('cascade');
-
-//			$table->foreign('club_id')
-//					->references('id')
-//					->on('club')
-//					->onDelete('cascade');
-
-//
-//			$table->foreign('shiaiCategoryId')
-//					->references('id')
-//					->on('ShiaiCategory')
-//					->onDelete('cascade');
-//
-//
-//			$table->foreign('tournamentId')
-//					->references('id')
-//					->on('Tournament')
-//					->onDelete('cascade');
-
 		});
 	}
 

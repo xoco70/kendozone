@@ -11,7 +11,7 @@ class CreateClubTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->integer('association_id')->unsigned();
-			$table->integer('president_id')->unsigned();
+			$table->integer('president_id')->nullable()->unsigned();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();
 			$table->string('website')->nullable();

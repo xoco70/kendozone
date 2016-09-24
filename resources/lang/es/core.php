@@ -30,6 +30,7 @@ return [
     'preview' => ' Vista Previa',
     'thanks' => ' ¡Gracias!',
     'or' => 'o',
+    'export_excel' => 'Exportar a Excel',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',

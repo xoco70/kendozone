@@ -16,82 +16,8 @@
                     </li>
 
                     {{--Link to directly edit your structure information--}}
-                    <li>
-                        <a class="protip" data-pt-title="{{  trans_choice('core.federation',2) }}"
-                           href="{{  route('federations.index') }}">
-                            <i class="icon-cabinet"></i><span>{{  trans_choice('core.federation',2) }}</span>
-                        </a>
-                    </li>
+                    @include('layouts.displayMyEntityOnLeftSide')
 
-
-                    {{--@if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned!=null)--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ Auth::user()->federationOwned->name }}"--}}
-                    {{--href="{{  URL::action('FederationController@edit', Auth::user()->federationOwned->id ) }}">--}}
-                    {{--<i class="icon-starburst"></i><span>{{  Auth::user()->federationOwned->name }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-
-
-
-                    {{--@if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned!=null)--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ Auth::user()->associationOwned->name  }}"--}}
-                    {{--href="{{  URL::action('AssociationController@edit', Auth::user()->associationOwned->id ) }}">--}}
-                    {{--<i class="icon-starburst"></i><span>{{  Auth::user()->associationOwned->name }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-                    {{--@if (Auth::user()->isClubPresident() && Auth::user()->clubOwned!=null)--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ Auth::user()->clubOwned->name  }}">--}}
-                    {{--href="{{  URL::action('ClubController@edit', Auth::user()->clubOwned->id ) }}">--}}
-                    {{--<i class="icon-starburst"></i><span>{{  Auth::user()->clubOwned->name }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-
-                    {{--@if (Auth::user()->isSuperAdmin())--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ trans_choice('core.federation',2) }}"--}}
-                    {{--href="{!! route('federations.index') !!}" id="federations">--}}
-                    {{--<i class="icon-earth position-left sidemenu"></i>--}}
-                    {{--<span>{{ trans_choice('core.federation',2) }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-
-                    {{--@if (Auth::user()->isFederationPresident())--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ trans_choice('core.association',2) }}"--}}
-                    {{--id="associations"--}}
-                    {{--href="{!! URL::action('AssociationController@index') !!}">--}}
-                    {{--<i class="icon-flag7 position-left sidemenu"></i>--}}
-                    {{--<span>{{ trans_choice('core.association',2) }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-                    {{--@if (Auth::user()->isAssociationPresident())--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ trans_choice('core.club',2) }}"--}}
-                    {{--id="associations"--}}
-                    {{--href="{!! URL::action('ClubController@index') !!}">--}}
-                    {{--<i class="icon-bookmark2 position-left sidemenu"></i>--}}
-                    {{--<span>{{ trans_choice('core.club',2) }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
-                    {{--@if (Auth::user()->isClubPresident())--}}
-                    {{--<li>--}}
-                    {{--<a class="protip" data-pt-title="{{ trans_choice('core.club',2) }}"--}}
-                    {{--id="associations"--}}
-                    {{--href="{!! URL::action('ClubController@show',Auth::user()->clubOwned->id ) !!}">--}}
-                    {{--<i class="icon-bookmark2 position-left sidemenu"></i>--}}
-                    {{--<span>{{ trans_choice('core.club',2) }}</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
 
                     <li {{ (Request::is('tournaments') ? 'class=active' : '') }}>
                         <a class="protip" data-pt-title="{{ trans('core.tournaments_created') }}"

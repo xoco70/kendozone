@@ -7,14 +7,10 @@
 @section('content')
 
 
-    <!-- Tabs -->
-    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
-        <li class="active"><a href="#"><i class="position-left"></i> {{trans_choice('core.federation',2)}}</a></li>
-        <li><a href="{{ route('associations.index') }}"><i class="position-left"></i> {{trans_choice('core.association',2)}}</a></li>
-        <li><a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a></li>
-        <li><a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a></li>
-    </ul>
-    <!-- /tabs -->
+    <!-- Submenu -->
+    @include('layouts.displayMenuMyEntitiesOnTop')
+    <!-- /Submenu -->
+
     <div class="container-fluid">
 
         @if (sizeof($federations)==0)
@@ -29,10 +25,6 @@
                     <th class="text-center" data-hide="phone">{{ trans('core.federation.address') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.federation.phone') }}</th>
-                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.vicepresident') }}</th>--}}
-                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.secretary') }}</th>--}}
-                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.treasurer') }}</th>--}}
-                    {{--<th class="text-center" data-hide="all">{{ trans('core.federation.admin') }}</th>--}}
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
                     @if (Auth::user()->isSuperAdmin())
                         <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
@@ -49,14 +41,10 @@
                                 {{ $federation->name }}
                             @endif
                         </td>
-                        <td align="center">{{ $federation->president->name }}</td>
+                        <td align="center">@if ($federation->president != null) {{ $federation->president->name }} @endif</td>
                         <td align="center">{{ $federation->address }}</td>
                         <td align="center">{{ $federation->email}}</td>
                         <td align="center">{{ $federation->phone }}</td>
-                        {{--<td align="center">{{ $federation->vicepresident->name }}</td>--}}
-                        {{--<td align="center">{{ $federation->secretary->name }}</td>--}}
-                        {{--<td align="center">{{ $federation->treasurer->name }}</td>--}}
-                        {{--<td align="center">{{ $federation->admin->name }}</td>--}}
                         <td align="center">@if ($federation->country!= null) <img
                                     src="images/flags/{{ $federation->country->flag }}"/>@else &nbsp; @endif</td>
                         @can('edit', $federation)

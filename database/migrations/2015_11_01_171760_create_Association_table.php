@@ -10,8 +10,8 @@ class CreateAssociationTable extends Migration {
 		Schema::create('association', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('federation_id')->unsigned();
-			$table->integer('president_id')->unsigned();
+			$table->integer('federation_id')->nullable()->unsigned();
+			$table->integer('president_id')->nullable()->unsigned();
 			$table->string('state')->nullable();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();

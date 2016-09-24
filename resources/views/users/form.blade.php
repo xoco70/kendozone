@@ -11,7 +11,6 @@
     @endif
 @stop
 @section('content')
-
     @include("errors.list")
 
     <div class="container" xmlns:v-bind="http://symfony.com/schema/routing">
@@ -147,17 +146,39 @@
                                 </fieldset>
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
-                                    <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                            class="form-control" @change="getAssociations(federationSelected)">
-                                    <option v-for="federation in federations" v-bind:value="federation.value"
-                                            selected="@{{ federationId==federation.value }}">
-                                        @{{ federation.text }}
-                                    </option>
-                                    </select>
-
+                                    @if (Auth::user()->isSuperAdmin())
+                                        <select name="federation_id" v-model="federationSelected" id="federation_id"
+                                                class="form-control" @change="getAssociations(federationSelected)">
+                                        <option v-for="federation in federations" v-bind:value="federation.value"
+                                                selected="@{{ federationId==federation.value }}">
+                                            @{{ federation.text }}
+                                        </option>
+                                        </select>
+                                    @elseif (Auth::user()->isFederationPresident())
+                                        {!!  Form::label('federation_id', Auth::user()->federationOwned->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('federation_id', Auth::user()->federationOwned->id) !!}
+                                    @elseif (Auth::user()->isAssociationPresident())
+                                        {!!  Form::label('federation_id', Auth::user()->associationOwned->federation->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('federation_id', Auth::user()->associationOwned->federation->id) !!}
+                                    @elseif (Auth::user()->isClubPresident())
+                                        {!!  Form::label('federation_id', Auth::user()->clubOwned->association->federation->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('federation_id', Auth::user()->clubOwned->association->federation->id) !!}
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
+                                    @if (Auth::user()->isSuperAdmin())
+                                        <select name="association_id" v-model="associationSelected" id="association_id"
+                                                class="form-control" @change="getClubs(associationSelected)">
+                                        <option value="1"
+                                                v-if="associations!=null && associations.length==0 && federationSelected!=0">{{ trans('core.no_association_available') }}</option>
+                                        <option v-for="association in associations" v-bind:value="association.value"
+                                                selected="@{{ associationId==association.value }}">
+                                            @{{ association.text }}
+                                        </option>
+                                        </select>
+
+                                    @elseif (Auth::user()->isFederationPresident()) {{--Filter to display only association that belongs to Federation--}}
                                     <select name="association_id" v-model="associationSelected" id="association_id"
                                             class="form-control" @change="getClubs(associationSelected)">
                                     <option value="1"
@@ -167,19 +188,56 @@
                                         @{{ association.text }}
                                     </option>
                                     </select>
+                                    @elseif (Auth::user()->isAssociationPresident())
+                                        {!!  Form::label('association_id', Auth::user()->associationOwned->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('association_id', Auth::user()->associationOwned->id) !!}
+                                    @elseif (Auth::user()->isClubPresident())
+                                        {!!  Form::label('association_id', Auth::user()->clubOwned->association->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('association_id', Auth::user()->clubOwned->association->id) !!}
+                                    @endif
 
                                 </div>
+
                                 <div class="form-group">
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
-                                    <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
-                                        <option value="1"
-                                                v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
-                                        <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0"> -
-                                        </option>
-                                        <option v-for="club in clubs" v-bind:value="club.value">
-                                            @{{ club.text }}
-                                        </option>
-                                    </select>
+                                    @if (Auth::user()->isSuperAdmin())
+                                        <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
+                                            <option value="1"
+                                                    v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                            <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0">
+                                                -
+                                            </option>
+                                            <option v-for="club in clubs" v-bind:value="club.value">
+                                                @{{ club.text }}
+                                            </option>
+                                        </select>
+                                    @elseif (Auth::user()->isFederationPresident())
+                                        <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
+                                            <option value="1"
+                                                    v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                            <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0">
+                                                -
+                                            </option>
+                                            <option v-for="club in clubs" v-bind:value="club.value">
+                                                @{{ club.text }}
+                                            </option>
+                                        </select>
+                                    @elseif (Auth::user()->isAssociationPresident())
+                                        <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
+                                            <option value="1"
+                                                    v-if="clubs!=null && clubs.length==0 && clubSelected!=0">{{ trans('core.no_club_available') }}</option>
+                                            <option value="1" v-if="clubs!=null && clubs.length!=0 && clubSelected!=0">
+                                                -
+                                            </option>
+                                            <option v-for="club in clubs" v-bind:value="club.value">
+                                                @{{ club.text }}
+                                            </option>
+                                        </select>
+                                    @elseif (Auth::user()->isClubPresident())
+                                        {!!  Form::label('club_id', Auth::user()->clubOwned->association->federation->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('club_id', Auth::user()->clubOwned->association->federation->id) !!}
+
+                                    @endif
 
                                 </div>
 
@@ -237,7 +295,15 @@
                                                             {!!  Form::select('role_id', $roles,Config::get('constants.ROLE_USER'), ['class' => 'form-control']) !!}
                                                         @endif
                                                     @else
-                                                        {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
+                                                        @if (!is_null($user->id))
+                                                            {!!  Form::label('role_id', $user->role->name, ['class' => 'form-control', "disabled"]) !!}
+                                                            {!!  Form::hidden('role_id', $user->role->id) !!}
+                                                        @else
+                                                            {!!  Form::label('role_id', \App\Role::find(Config::get('constants.ROLE_USER'))->name, ['class' => 'form-control', "disabled"]) !!}
+                                                            {!!  Form::hidden('role_id', Config::get('constants.ROLE_USER')) !!}
+
+                                                        @endif
+
                                                     @endif
 
                                                 </div>

@@ -4,26 +4,10 @@
 @stop
 @section('content')
     <!-- Tabs -->
-    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
-        <li><a href="{{ route('federations.index') }}"><i
-                        class="position-left"></i> {{trans_choice('core.federation',2)}}</a></li>
-        <li><a href="{{ route('associations.index') }}"><i
-                        class="position-left"></i> {{trans_choice('core.association',2)}}</a></li>
-        <li ><a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a></li>
-        <li class="active"><a href="#"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a></li>
-        <span class="pl-10 pull-right">
-                <a href="{!!   URL::action('UserController@create') !!}" id="adduser"
-                   class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                    @lang('core.addModel', ['currentModelName' => $currentModelName])
-                </a>
-            </span>
-        <a href="{!!   URL::action('UserController@export') !!}"
-           class="btn btn-success btn-xs pull-right">
-            <i class="icon-file-excel position-left"></i>Export to Excel
-        </a>
 
 
-    </ul>
+    @include('layouts.displayMenuMyEntitiesOnTop')
+
     <!-- /tabs -->
     <div class="container-fluid">
         <div class="row">
@@ -50,7 +34,7 @@
                         <td>
 
                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}"><img
-                                        src="{{ $user->avatar ?? Avatar::create(Auth::getUser()->email)->toBase64() }}"
+                                        src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}"
                                         class="img-circle img-sm"/></a>
                         </td>
 
