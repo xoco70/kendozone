@@ -86,6 +86,9 @@ elixir(function (mix) {
         'pages/footer/tournamentShowFooter.js'
     ], 'public/js/pages/header/tournamentShow.js');
 
+    mix.scripts([
+        'plugins/tables/footable/footable.min.js',
+    ], 'public/js/pages/header/tournamentIndex.js');
 
     mix.scripts([
         'plugins/ui/nicescroll.min.js',
