@@ -225,6 +225,8 @@ return [
     'object_id' => 'Id del objeto',
     'created_at' => 'Creado',
     'updated_at' => 'Actualizado',
+    'old_value' => 'Antiguo',
+    'new_value' => 'Nuevo',
 
 
     // Teams

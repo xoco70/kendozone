@@ -1,9 +1,11 @@
 /* col-xs */
 @media (max-width: 950px) {
-    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .head_create_tournament, .protip-container {
+    .breadcrumb, ul.nav.navbar-nav.breadcrumbs,  .protip-container {
         display: none;
     }
-
+    .head_create_tournament{
+        display: none!important;
+    }
 }
 
 .undo_link {
@@ -191,8 +193,12 @@ fieldset > a > legend {
     border-width: 10px 10px 10px 0;
 }
 
-.language-switch {
+.language-switch-desktop {
     margin-top: 10px;
+}
+
+.language-switch-mobile {
+    margin-top: -10px;
 }
 
 .form-group.multiselect {
@@ -241,6 +247,7 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
 
 .mobile-menu {
     font-size: 25px;
+    margin-top: 5px;
 }
 
 @media (max-width: 768px) {
@@ -255,13 +262,34 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     .content {
         padding: 10px 10px;
     }
-    .multiselect{
+
+    .multiselect {
         padding-left: 12px;
         padding-right: 12px;
     }
-    .cat-state{
+
+    .cat-state {
         display: none;
     }
 
+    .language-switch-desktop {
+        display: none!important;
+    }
+    .navbar-header .navbar-nav>li+li{
+        margin-top: 0;
+    }
+    .create-tournament{
+        width:100%;
+        margin-bottom: 10px;
+        margin-left: 0!important;
+        text-transform: uppercase;
+    }
 }
+@media (min-width: 768px) {
+    .create-tournament{
+        display: none;
+
+    }
+}
+
 

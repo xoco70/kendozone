@@ -34,6 +34,10 @@
             <!-- Content area -->
 
             <div class="content">
+                <a href="{{ URL::action('TournamentController@create') }}"
+                   class="create-tournament navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}
+                </a>
+
                 @yield('content')
                 @include('layouts.footer')
             </div>
