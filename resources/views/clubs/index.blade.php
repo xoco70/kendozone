@@ -5,7 +5,24 @@
 @stop
 
 @section('content')
-
+    <!-- Tabs -->
+    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
+        <li><a href="{{ route('federations.index') }}"><i class="position-left"></i> {{trans_choice('core.federation',2)}}</a></li>
+        <li><a href="{{ route('associations.index') }}"><i class="position-left"></i> {{trans_choice('core.association',2)}}</a></li>
+        <li class="active"><a href="#"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a></li>
+        <li><a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a></li>
+        @if (sizeof($clubs)!=0)
+            @can('create', new App\Club)
+                <span class="pl-10 pull-right">
+                    <a id="addClub" href="{!!   URL::action('ClubController@create') !!}"
+                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
+                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                    </a>
+                </span>
+            @endcan
+        @endif
+    </ul>
+    <!-- /tabs -->
 
     <div class="container-fluid">
 
@@ -13,14 +30,6 @@
             @include('layouts.noClubs')
         @else
 
-            @can('create', new App\Club)
-                <span class="pl-10 pull-right">
-                    <a id="addClub" href="{!!   URL::action('ClubController@create') !!}"
-                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5" ></i></b>
-                        @lang('core.addModel', ['currentModelName' => $currentModelName])
-                    </a>
-                </span>
-            @endcan
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>
@@ -79,7 +88,7 @@
     {!! Html::script('js/pages/header/footable.js') !!}
 
     <script>
-        var url ="{{ URL::action('ClubController@index') }}";
+        var url = "{{ URL::action('ClubController@index') }}";
     </script>
     {!! Html::script('js/pages/footer/clubIndexFooter.js') !!}
 @stop

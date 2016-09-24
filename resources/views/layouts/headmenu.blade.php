@@ -42,16 +42,6 @@
                     <span>{!! Auth::getUser()->name !!}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-
-
-                    @if (!Auth::user()->isUser())
-                        <li>
-                            <a href="{{ route('users.index') }}" id="users">
-                                <i class="icon-users"></i>{!!trans_choice('core.user',2) !!}
-                            </a>
-                        </li>
-                    @endif
-
                     <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
 

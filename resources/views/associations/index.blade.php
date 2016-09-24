@@ -5,24 +5,34 @@
 @stop
 
 @section('content')
-
+    <!-- Tabs -->
+    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
+        <li><a href="{{ route('federations.index') }}"><i
+                        class="position-left"></i> {{trans_choice('core.federation',2)}}</a></li>
+        <li class="active"><a href="#"><i class="position-left"></i> {{trans_choice('core.association',2)}}</a></li>
+        <li><a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a></li>
+        <li><a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a></li>
+        @if (sizeof($associations)>0)
+            @can('create', new App\Association)
+                <span class="pl-10 pull-right">
+                    <a href="{!!   URL::action('AssociationController@create') !!}" id="addAssociation"
+                       class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
+                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                    </a>
+                </span>
+            @endcan
+        @endif
+    </ul>
+    <!-- /tabs -->
 
 
     <div class="container-fluid">
 
         @if (sizeof($associations)==0)
-           @include('layouts.noAssociations')
+            @include('layouts.noAssociations')
         @else
 
-            @if (Auth::user()->isSuperAdmin() || Auth::user()->isFederationPresident())
-                <span class="pl-10 pull-right">
-                <a href="{!!   URL::action('AssociationController@create') !!}" id="addAssociation"
-                   class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                    @lang('core.addModel', ['currentModelName' => $currentModelName])
-                </a>
-            </span>
 
-            @endif
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>
@@ -56,7 +66,8 @@
                         <td align="center">
 
                             @can('edit', $association)
-                                <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i class="icon icon-pencil7"></i></a>
+                                <a href="{{URL::action('AssociationController@edit', $association->id)}}"><i
+                                            class="icon icon-pencil7"></i></a>
                             @endcan
                             @can('delete', $association)
                                 {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteAssociation', 'action' => ['AssociationController@destroy', $association->id], 'style'=>"display: inline-block"]) !!}

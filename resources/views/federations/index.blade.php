@@ -7,15 +7,19 @@
 @section('content')
 
 
-
+    <!-- Tabs -->
+    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
+        <li class="active"><a href="#"><i class="position-left"></i> {{trans_choice('core.federation',2)}}</a></li>
+        <li><a href="{{ route('associations.index') }}"><i class="position-left"></i> {{trans_choice('core.association',2)}}</a></li>
+        <li><a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a></li>
+        <li><a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a></li>
+    </ul>
+    <!-- /tabs -->
     <div class="container-fluid">
 
         @if (sizeof($federations)==0)
             {{--            @include('layouts.noFederations')--}}
         @else
-
-
-
             <table class="table table-togglable table-hover">
                 <thead>
                 <tr>
@@ -53,9 +57,12 @@
                         {{--<td align="center">{{ $federation->secretary->name }}</td>--}}
                         {{--<td align="center">{{ $federation->treasurer->name }}</td>--}}
                         {{--<td align="center">{{ $federation->admin->name }}</td>--}}
-                        <td align="center">@if ($federation->country!= null) <img src="images/flags/{{ $federation->country->flag }}" />@else &nbsp; @endif</td>
+                        <td align="center">@if ($federation->country!= null) <img
+                                    src="images/flags/{{ $federation->country->flag }}"/>@else &nbsp; @endif</td>
                         @can('edit', $federation)
-                            <td align="center"><a href="{{URL::action('FederationController@edit', $federation->id)}}"><i class="icon icon-pencil7"></i></a></td>
+                            <td align="center"><a
+                                        href="{{URL::action('FederationController@edit', $federation->id)}}"><i
+                                            class="icon icon-pencil7"></i></a></td>
                         @endcan
                     </tr>
 
