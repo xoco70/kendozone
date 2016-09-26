@@ -65,7 +65,6 @@ class ClubController extends Controller
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $clubs = Club::fillSelect();
         $users = User::fillSelect();
 
 
@@ -123,8 +122,7 @@ class ClubController extends Controller
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $clubs = Club::fillSelect();
-        $users = User::fillSelect();
+        $users = User::getClubPresidentsList();
 
 
         return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //

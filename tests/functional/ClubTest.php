@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Config;
  */
 class ClubTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
 
     /** @test
@@ -131,21 +131,17 @@ class ClubTest extends TestCase
             $this->visitCreateClubPage($clubPresident);
             $this->see("403.png");
         }
-
-
     }
 
     /**
      * @param Club $club
      */
-    private function fillClubAndSee(Club $club) //TODO I don't have here to change president
+    private function fillClubAndSee(Club $club)
     {
-
-
         $this->type($club->name, 'name')
             ->type($club->address, 'address')
-            ->type($club->phone, 'phone')
-            ->select($club->association_id, 'association_id');
+            ->type($club->phone, 'phone');
+//            ->select($club->association_id, 'association_id')
 
         $this->press(trans('core.save'))
             ->seeInDatabase('club',

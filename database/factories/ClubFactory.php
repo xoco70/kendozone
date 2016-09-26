@@ -7,7 +7,7 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
     $users = User::all()->pluck('id')->toArray();
 
     return [
-        'name' => $faker->name,
+        'name' => $faker->country,
         'association_id' => $faker->randomElement($associations),
         'president_id' => $faker->randomElement($users),
         'address' => $faker->address,

@@ -38,21 +38,34 @@ class ClubSeeder extends Seeder
                 'club_id' => 12,
             ]);
 
-        factory(Club::class)->create(
-            ['association_id' => 7,
-                'president_id' => $naucali_presidente->id,
-                'name' => 'Naucali'
-            ]);
+        try {
+            factory(Club::class)->create(
+                ['association_id' => 7,
+                    'president_id' => $naucali_presidente->id,
+                    'name' => 'Naucali'
+                ]);
+        } catch (Exception $e) {
 
-        factory(Club::class)->create(
-            ['association_id' => 8,
-                'name' => 'UNAM'
-            ]);
+        }
 
-        factory(Club::class)->create(
-            ['association_id' => 12,
-                'name' => 'Zacatenco'
-            ]);
+        try {
+            factory(Club::class)->create(
+                ['association_id' => 8,
+                    'name' => 'UNAM'
+                ]);
+
+        } catch (Exception $e) {
+
+        }
+        try {
+            factory(Club::class)->create(
+                ['association_id' => 12,
+                    'name' => 'Zacatenco'
+                ]);
+
+        } catch (Exception $e) {
+
+        }
 
         try {
             factory(Club::class, 5)->create(['association_id' => 7]);
@@ -62,8 +75,6 @@ class ClubSeeder extends Seeder
             factory(Club::class, 5)->create(['association_id' => $faker->randomElement($associations)]);
         } catch (Exception $e) {
         }
-
-
 
 
         $this->command->info('Clubs Seeded!');

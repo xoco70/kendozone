@@ -460,4 +460,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $users;
     }
 
+    public static function getClubPresidentsList(){
+        $users = new Collection();
+        if (Auth::user()->isSuperAdmin()) {
+            $users = User::pluck('name', 'id');
+        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
+        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
+        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
+            $users = User::where('association_id', '=', Auth::user()->clubOwned->association->id)->pluck('name', 'id');
+        }
+        return $users;
+
+    }
+
+
 }
