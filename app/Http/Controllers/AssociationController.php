@@ -10,6 +10,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use URL;
@@ -198,10 +199,10 @@ class AssociationController extends Controller
         // Close transaction
     }
 
-    public static function myAssociations()
-    {
-        return Association::fillSelect();
-    }
+//    public static function myAssociations()
+//    {
+//        return Association::fillSelect();
+//    }
 
 
 

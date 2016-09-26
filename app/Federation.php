@@ -82,23 +82,23 @@ class Federation extends Model
     }
 
 
-    public static function fillSelect($user)
+    public static function fillSelect()
     {
         $federations = new Collection();
 
-        if ($user->isSuperAdmin()) {
+        if (Auth::user()->isSuperAdmin()) {
             // User is SuperAdmin
             $federations = Federation::pluck('name', 'id');
-        } else if ($user->isFederationPresident()) {
-            $federation = $user->federationOwned;
+        } else if (Auth::user()->isFederationPresident()) {
+            $federation = Auth::user()->federationOwned;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
-        } else if ($user->isAssociationPresident()) {
-            $federation = $user->associationOwned->federation;
+        } else if (Auth::user()->isAssociationPresident()) {
+            $federation = Auth::user()->associationOwned->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
-        } else if ($user->isClubPresident()) {
-            $federation = $user->clubOwned->association->federation;
+        } else if (Auth::user()->isClubPresident()) {
+            $federation = Auth::user()->clubOwned->association->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
         }

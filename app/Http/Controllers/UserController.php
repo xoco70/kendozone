@@ -228,7 +228,7 @@ class UserController extends Controller
         return Federation::fillSelect2($user);
     }
 
-    public function myAssociations($federationId, User $user)
+    public function myAssociations(User $user,$federationId)
     {
         return Association::fillSelect2($user,$federationId);
     }
