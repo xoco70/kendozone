@@ -9,6 +9,7 @@
 $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
 ?>
 
+@include('layouts.displayMenuMyEntitiesOnTop')
 
         <!-- Detached content -->
 

@@ -5,7 +5,8 @@ use App\Club;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class ClubSeeder extends Seeder {
+class ClubSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
@@ -39,10 +40,14 @@ class ClubSeeder extends Seeder {
             ]);
 
 
-
-        factory(Club::class,5)->create(['association_id' => 7]);
-        factory(Club::class,5)->create(['association_id' => $faker->randomElement($associations)]);
-
+        try {
+            factory(Club::class, 5)->create(['association_id' => 7]);
+        } catch (Exception $e) {
+        }
+        try {
+            factory(Club::class, 5)->create(['association_id' => $faker->randomElement($associations)]);
+        } catch (Exception $e) {
+        }
 
 
         factory(Club::class)->create(

@@ -20,7 +20,9 @@ class CreateFederationTable extends Migration {
             // Direction, phone, contact
 
 			$table->timestamps();
+            $table->softDeletes();
 			$table->engine = 'InnoDB';
+            $table->unique(['president_id'], 'fed_president_unique');
 
 			$table->foreign('president_id')
 				->references('id')
@@ -33,6 +35,8 @@ class CreateFederationTable extends Migration {
 				->on('countries')
 				->onUpdate('cascade')
 				->onDelete('cascade');
+
+
 
 
 		});

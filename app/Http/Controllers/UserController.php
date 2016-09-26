@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Association;
+use App\Club;
+use App\Federation;
 use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests\UserRequest;
@@ -63,9 +66,10 @@ class UserController extends Controller
         $grades = Grade::pluck('name', 'id');
         $countries = Countries::pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        $federations = AdministrativeStructureController::getFederations();
-
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations')); //
+        $federations = Federation::fillSelect();
+        $associations = Association::fillSelect();
+        $club = Club::fillSelect();
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations','associations','clubs')); //
     }
 
     /**

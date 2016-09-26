@@ -22,6 +22,7 @@ class CreateClubTable extends Migration {
 			$table->engine = 'InnoDB';
 
 			$table->unique(['name','deleted_at'], 'club_name_unique');
+            $table->unique(['president_id'], 'club_president_unique');
 
 			$table->foreign('president_id')
 				->references('id')

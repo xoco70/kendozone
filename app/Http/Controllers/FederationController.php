@@ -87,7 +87,7 @@ class FederationController extends Controller
         $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
         flash()->success($msg);
 
-        return redirect(URL::action('FederationController@edit', $federation->id))->with('users');
+        return redirect(route('federations.index'));
     }
 
 }

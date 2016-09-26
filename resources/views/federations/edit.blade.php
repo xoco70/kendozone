@@ -11,7 +11,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 
         <!-- Detached content -->
-
+@include('layouts.displayMenuMyEntitiesOnTop')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         {!! Form::model($federation, ['method'=>"PATCH", 'id'=>'form', "action" => ["FederationController@update", $federation->id]]) !!}

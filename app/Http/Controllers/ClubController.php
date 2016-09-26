@@ -9,7 +9,9 @@ use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;
 use Auth;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Response;
@@ -39,7 +41,7 @@ class ClubController extends Controller
     {
         $clubs = Club::with('president', 'association.federation')
             ->forUser(Auth::user())
-            ->where('id','>',1)
+            ->where('id', '>', 1)
             ->get();
 
         return view('clubs.index', compact('clubs'));
@@ -48,8 +50,8 @@ class ClubController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return View
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -59,7 +61,7 @@ class ClubController extends Controller
         if (Auth::user()->cannot('create', $club)) {
             throw new AuthorizationException();
         }
-        //TODO Set Users to Void and set it with VueJS through APIs
+
         if (Auth::user()->isFederationPresident()) {
 
             $federation = Auth::user()->federationOwned;
@@ -81,7 +83,7 @@ class ClubController extends Controller
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
-        }  else {
+        } else {
             // User is SuperAdmin
             $users = User::pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
@@ -103,11 +105,18 @@ class ClubController extends Controller
      */
     public function store(ClubRequest $request)
     {
+        try {
+            $club = Club::create($request->except(['federation_id']));
+            $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
+            flash()->success($msg);
+            return redirect("clubs");
+        } catch (QueryException $e) {
+            // Already
+            $msg = "User" . $request->id . "is already president of another club";
+            flash()->error($msg);
+            return redirect()->back();
+        }
 
-        $club = Club::create($request->except(['federation_id']));
-        $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
-        flash()->success($msg);
-        return redirect("clubs");
     }
 
 
@@ -128,6 +137,7 @@ class ClubController extends Controller
      *
      * @param  int $id
      * @return View
+     * @throws AuthorizationException
      */
     public function edit($id)
     {
@@ -170,8 +180,7 @@ class ClubController extends Controller
             $associations->push($association);
             $associations = $associations->pluck('name', 'id');
             $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
-        }
-        else {
+        } else {
             // User is SuperAdmin
             $users = User::pluck('name', 'id');
             $federations = Federation::pluck('name', 'id');
@@ -190,6 +199,7 @@ class ClubController extends Controller
      * @param ClubRequest|Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws AuthorizationException
      */
     public function update(ClubRequest $request, $id)
     {
@@ -198,11 +208,17 @@ class ClubController extends Controller
         if (Auth::user()->cannot('update', $club)) {
             throw new AuthorizationException();
         }
-
-        $club->update($request->except(['federation_id']));
-        $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
-        flash()->success($msg);
-        return redirect("clubs");
+        try {
+            $club->update($request->except(['federation_id']));
+            $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
+            flash()->success($msg);
+            return redirect("clubs");
+        } catch (QueryException $e) {
+            // Already
+            $msg = "User" . $request->id . "is already president of another club";
+            flash()->error($msg);
+            return redirect()->back();
+        }
     }
 
     /**

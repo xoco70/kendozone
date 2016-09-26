@@ -18,7 +18,7 @@
     </li>
 
 
-    @if (isset($associations) && sizeof($associations)!=0)
+    @if (Route::getFacadeRoot()->current()->uri() == 'associations')
         @can('create', new App\Association)
             <span class="pl-10 pull-right">
                     <a id="addAssociation" href="{!!   URL::action('AssociationController@create') !!}"
@@ -28,7 +28,7 @@
                 </span>
         @endcan
 
-    @elseif (isset($clubs) && sizeof($clubs)!=0)
+    @elseif (Route::getFacadeRoot()->current()->uri() == 'clubs')
         @can('create', new App\Club)
             <span class="pl-10 pull-right">
                     <a id="addClub" href="{!!   URL::action('ClubController@create') !!}"
@@ -38,7 +38,7 @@
                 </span>
         @endcan
 
-    @elseif (isset($users) && sizeof($users)!=0)
+    @elseif (Route::getFacadeRoot()->current()->uri() == 'users')
         <span class="pl-10 pull-right">
                     <a href="{!!   URL::action('UserController@create') !!}" id="adduser"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>

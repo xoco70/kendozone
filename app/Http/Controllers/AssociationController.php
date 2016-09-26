@@ -12,9 +12,9 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Response;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 use URL;
-use View;
 
 class AssociationController extends Controller
 {
@@ -39,7 +39,7 @@ class AssociationController extends Controller
     /**
      * Show the form for creating a new resource.
      * @return View
-     * @throws NotOwningFederationException
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -62,6 +62,7 @@ class AssociationController extends Controller
      *
      * @param AssociationRequest $request
      * @return Response
+     * @throws AuthorizationException
      */
     public function store(AssociationRequest $request)
     {
@@ -73,7 +74,7 @@ class AssociationController extends Controller
         $association = Association::create($request->all());
         $msg = trans('msg.association_create_successful', ['name' => $association->name]);
         flash()->success($msg);
-        return redirect("associations");
+        return redirect(route("associations.index"));
     }
 
 
@@ -95,10 +96,11 @@ class AssociationController extends Controller
      *
      * @param  int $id
      * @return View
+     * @throws AuthorizationException
      */
     public function edit($id)
     {
-
+        $currentModelName = trans_choice('core.association',1);
         $association = Association::findOrFail($id);
         $federation = $association->federation;
 
@@ -109,7 +111,7 @@ class AssociationController extends Controller
         $users = User::forUser(Auth::user())->pluck('name', 'id');
         $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
 
-        return view('associations.form', compact('association', 'users', 'federations', 'federation'));
+        return view('associations.form', compact('currentModelName','association', 'users', 'federations', 'federation'));
     }
 
     /**
@@ -118,6 +120,7 @@ class AssociationController extends Controller
      * @param AssociationRequest|Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws AuthorizationException
      */
     public function update(AssociationRequest $request, $id)
     {
@@ -130,7 +133,7 @@ class AssociationController extends Controller
         $association->update($request->except(['federation_id']));
         $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
         flash()->success($msg);
-        return redirect(URL::action('AssociationController@edit', $association->id));
+        return redirect(route('associations.index'));
 
     }
 
