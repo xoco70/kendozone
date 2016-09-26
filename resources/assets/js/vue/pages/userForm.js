@@ -16,22 +16,22 @@ let vm = new Vue({
 
     methods: {
         getFederations: function () {
-            var url = '/api/v1/federations';
-
+            var url = '/api/v1/users/'+user+'/federations/';
+            console.log(url);
             $.getJSON(url, function (data) {
                 vm.federations = data;
             });
             this.associationSelected = 1;
         },
         getAssociations: function (federationSelected) {
-            var url = '/api/v1/federations/' + federationSelected + '/associations';
+            var url = '/api/v1/users/'+user+'/federations/' + federationSelected + '/associations';
             $.getJSON(url, function (data) {
                 vm.associations = data;
             });
             this.clubSelected = 1;
         },
         getClubs: function (associationSelected) {
-            var url = '/api/v1/federations/' + this.federationSelected + '/associations/' + associationSelected + "/clubs/";
+            var url = '/api/v1/users/'+user+'/associations/' + associationSelected + "/clubs/";
             $.getJSON(url, function (data) {
                 vm.clubs = data;
             });

@@ -28,6 +28,11 @@ class Federation extends Model
         return $this->hasMany(Association::Class);
     }
 
+    public function clubs()
+    {
+        return $this->hasManyThrough(Club::class, Association::class);
+    }
+
     public function country()
     {
         return $this->belongsTo(Countries::Class);
@@ -58,24 +63,42 @@ class Federation extends Model
         }
     }
 
-    public static function fillSelect()
+    public static function fillSelect2($user)
     {
         $federations = new Collection();
 
-        if (Auth::user()->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
+            // User is SuperAdmin
+            $federations = Federation::get(['id as value', 'name as text']);
+        } else if ($user->isFederationPresident()) {
+            $federations = $user->federationOwned()->get(['id as value', 'name as text']);
+        } else if ($user->isAssociationPresident()) {
+            $federations = $user->associationOwned->federation()->get(['id as value', 'name as text']);
+        } else if ($user->isClubPresident()) {
+            $federations = $user->clubOwned->association->federation()->get(['id as value', 'name as text']);
+        }
+
+        return $federations;
+    }
+
+
+    public static function fillSelect($user)
+    {
+        $federations = new Collection();
+
+        if ($user->isSuperAdmin()) {
             // User is SuperAdmin
             $federations = Federation::pluck('name', 'id');
-        } else if (Auth::user()->isFederationPresident()) {
-            $federation = Auth::user()->federationOwned;
+        } else if ($user->isFederationPresident()) {
+            $federation = $user->federationOwned;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
-
-        } else if (Auth::user()->isAssociationPresident()) {
-            $federation = Auth::user()->associationOwned->federation;
+        } else if ($user->isAssociationPresident()) {
+            $federation = $user->associationOwned->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
-        } else if (Auth::user()->isClubPresident()) {
-            $federation = Auth::user()->clubOwned->association->federation;
+        } else if ($user->isClubPresident()) {
+            $federation = $user->clubOwned->association->federation;
             $federations->push($federation);
             $federations = $federations->pluck('name', 'id');
         }

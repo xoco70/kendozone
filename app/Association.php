@@ -109,4 +109,25 @@ class Association extends Model
         return $associations;
     }
 
+    public static function fillSelect2($user, $federationId)
+    {
+        $associations = new Collection();
+        if ($user->isSuperAdmin()) {
+            $associations = Association::get(['id as value', 'name as text']);
+        } else if ($user->isFederationPresident()) {
+            $associations = $user->federationOwned->associations()
+                ->where('federation_id', $federationId)
+                ->get(['id as value', 'name as text']);
+        } else if ($user->isAssociationPresident()) {
+            $associations = $user->associationOwned()
+                ->where('federation_id', $federationId)
+                ->get(['id as value', 'name as text']);;
+        } else if ($user->isClubPresident()) {
+            $associations = $user->clubOwned->association()
+                ->where('federation_id', $federationId)
+                ->get(['id as value', 'name as text']);
+        }
+        return $associations;
+    }
+
 }

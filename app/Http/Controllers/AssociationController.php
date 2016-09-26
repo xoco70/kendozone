@@ -8,7 +8,6 @@ use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -22,16 +21,20 @@ class AssociationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return Association|View
      */
     public function index()
     {
-        $associations = Association::with('president', 'federation.country')
-            ->forUser(Auth::user())
-            ->where('id', '>', 1)
-            ->get();
-        $currentModelName = trans_choice('core.association', 1);
-        return view('associations.index', compact('associations', 'currentModelName'));
+        if (Request::ajax()) {
+            return Association::fillSelect();
+        } else {
+            $associations = Association::with('president', 'federation.country')
+                ->forUser(Auth::user())
+                ->where('id', '>', 1)
+                ->get();
+            $currentModelName = trans_choice('core.association', 1);
+            return view('associations.index', compact('associations', 'currentModelName'));
+        }
     }
 
 
@@ -194,5 +197,12 @@ class AssociationController extends Controller
         // Save
         // Close transaction
     }
+
+    public static function myAssociations()
+    {
+        return Association::fillSelect();
+    }
+
+
 
 }

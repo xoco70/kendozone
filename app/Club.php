@@ -141,18 +141,32 @@ class Club extends Model
         if (Auth::user()->isSuperAdmin()) {
             $clubs = Club::pluck('name', 'id');
         } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $federation = Federation::with('associations.clubs')->find(Auth::user()->federationOwned->id);
-            foreach ($federation->associations as $association) {
-                if (sizeof($association->clubs) > 0){
-                    foreach ($association->clubs as $club){
-                        $clubs->push($club);
-                    }
-                }
-            }
+            $clubs = Auth::user()->federationOwned->clubs;
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
             $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
             $clubs = Auth::user()->clubOwned->pluck('name', 'id');
+        }
+        return $clubs;
+    }
+
+    public static function fillSelect2(User $user,$associationId)
+    {
+        $clubs = new Collection();
+        if ($user->isSuperAdmin()) {
+            $clubs = Club::get(['id as value', 'name as text']);
+        } else if ($user->isFederationPresident() && $user->federationOwned != null) {
+            $clubs = $user->federationOwned->clubs()
+                ->where('association_id', $associationId)
+                ->get(['club.id as value', 'club.name as text']);
+        } else if ($user->isAssociationPresident() && $user->associationOwned != null) {
+            $clubs = $user->associationOwned->clubs()
+                ->where('association_id', $associationId)
+                ->get(['club.id as value', 'club.name as text']);
+        } else if ($user->isClubPresident() && $user->clubOwned != null) {
+            $clubs = $user->clubOwned()
+                ->where('association_id',$associationId)
+                ->get(['club.id as value', 'club.name as text']);
         }
         return $clubs;
     }

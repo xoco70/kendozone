@@ -140,24 +140,14 @@
                                 </fieldset>
                                 <div class="form-group">
                                     {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
-                                    @if (Auth::user()->isSuperAdmin())
-                                        <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                                class="form-control" @change="getAssociations(federationSelected)">
-                                        <option v-for="federation in federations" v-bind:value="federation.value"
-                                                selected="@{{ federationId==federation.value }}">
-                                            @{{ federation.text }}
-                                        </option>
-                                        </select>
-                                    @elseif (Auth::user()->isFederationPresident())
-                                        {!!  Form::label('federation_id', Auth::user()->federationOwned->name, ['class' => 'form-control', "disabled" ]) !!}
-                                        {!!  Form::hidden('federation_id', Auth::user()->federationOwned->id) !!}
-                                    @elseif (Auth::user()->isAssociationPresident())
-                                        {!!  Form::label('federation_id', Auth::user()->associationOwned->federation->name, ['class' => 'form-control', "disabled" ]) !!}
-                                        {!!  Form::hidden('federation_id', Auth::user()->associationOwned->federation->id) !!}
-                                    @elseif (Auth::user()->isClubPresident())
-                                        {!!  Form::label('federation_id', Auth::user()->clubOwned->association->federation->name, ['class' => 'form-control', "disabled" ]) !!}
-                                        {!!  Form::hidden('federation_id', Auth::user()->clubOwned->association->federation->id) !!}
-                                    @endif
+                                    <select name="federation_id" v-model="federationSelected" id="federation_id"
+                                            class="form-control" @change="getAssociations(federationSelected)">
+                                    <option v-for="federation in federations" v-bind:value="federation.value"
+                                            selected="@{{ federationId==federation.value }}">
+                                        @{{ federation.text }}
+                                    </option>
+                                    </select>
+
                                 </div>
                                 <div class="form-group">
                                     {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
@@ -350,9 +340,10 @@
 @stop
 @section('scripts_footer')
     <script>
-        var federationId = "{{ $user->federation_id}}";
-        var associationId = "{{ ($user->association_id != 0)? $user->association_id : 1}}";
-        var clubId = "{{ ($user->club_id != 0)? $user->club_id : 1}}";
+        var federationId = "{{ $user->federation_id ?? Auth::user()->federation_id }}";
+        var associationId = "{{ $user->association_id ?? Auth::user()->association_id }}";
+        var clubId = "{{ ($user->club_id != 0)?? Auth::user()->club_id}}";
+        var user = "{{ $user->slug ?? Auth::user()->slug }}";
 
 
     </script>

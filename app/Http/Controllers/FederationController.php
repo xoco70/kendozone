@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\NotOwningFederationException;
 use App\Federation;
-use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -23,18 +22,15 @@ class FederationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Federation
      */
     public function index()
     {
         $federations = Federation::with('president', 'country'); // ,'vicepresident','secretary','treasurer','admin'
 
-        if (Request::ajax()) {
-            return $federations->orderBy('id', 'asc')-> get(['id as value', 'name as text'])->toArray();
-        } else {
-            $federations = $federations->where('id','>',1)->get();
-            return view('federations.index', compact('federations'));
-        }
+        $federations = $federations->where('id', '>', 1)->get();
+        return view('federations.index', compact('federations'));
+
 
     }
 
@@ -83,7 +79,7 @@ class FederationController extends Controller
         if (Auth::user()->cannot('update', $federation)) {
             throw new NotOwningFederationException();
         }
-        try{
+        try {
             $federation->update($request->all());
             $users = User::where('country_id', '=', $federation->country_id)->pluck('name', 'id');
             $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
@@ -91,7 +87,7 @@ class FederationController extends Controller
 
             return redirect(route('federations.index'));
 
-        }catch (QueryException $e){
+        } catch (QueryException $e) {
 
             $msg = trans('msg.federation_president_already_exists');
             flash()->error($msg);
@@ -99,5 +95,4 @@ class FederationController extends Controller
 
         }
     }
-
 }

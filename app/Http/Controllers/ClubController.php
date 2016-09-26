@@ -5,17 +5,15 @@ namespace App\Http\Controllers;
 use App\Association;
 use App\Club;
 use App\Federation;
-use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;
-use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Response;
-use View;
 
 class ClubController extends Controller
 {
@@ -35,16 +33,21 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return Association | View
      */
     public function index()
     {
-        $clubs = Club::with('president', 'association.federation')
-            ->forUser(Auth::user())
-            ->where('id', '>', 1)
-            ->get();
+        if (Request::ajax()) {
+            return Association::fillSelect();
+        } else {
+            $clubs = Club::with('president', 'association.federation')
+                ->forUser(Auth::user())
+                ->where('id', '>', 1)
+                ->get();
 
-        return view('clubs.index', compact('clubs'));
+            return view('clubs.index', compact('clubs'));
+        }
+
     }
 
 
@@ -124,7 +127,6 @@ class ClubController extends Controller
         $users = User::fillSelect();
 
 
-
         return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //
     }
 
@@ -159,9 +161,9 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Club $club
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @param $clubId
+     * @return JsonResponse
+     * @internal param Club $club
      */
     public function destroy($clubId)
     {
@@ -175,7 +177,7 @@ class ClubController extends Controller
     }
 
     /**
-     * @param $tournamentSlug
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function restore($id)
@@ -188,5 +190,11 @@ class ClubController extends Controller
             return Response::json(['msg' => trans('msg.club_restored_error', ['name' => $club->name]), 'status' => 'error']);
         }
     }
+
+    public static function myClubs()
+    {
+        return Club::fillSelect();
+    }
+
 
 }

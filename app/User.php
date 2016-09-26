@@ -307,6 +307,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Club::class, 'id', 'president_id');
     }
 
+
     public function club()
     {
         return $this->belongsTo(Club::class);
