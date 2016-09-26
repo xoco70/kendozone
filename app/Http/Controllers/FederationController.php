@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\FederationRequest;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Request;
 use URL;
@@ -82,12 +83,21 @@ class FederationController extends Controller
         if (Auth::user()->cannot('update', $federation)) {
             throw new NotOwningFederationException();
         }
-        $federation->update($request->all());
-        $users = User::where('country_id', '=', $federation->country_id)->pluck('name', 'id');
-        $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
-        flash()->success($msg);
+        try{
+            $federation->update($request->all());
+            $users = User::where('country_id', '=', $federation->country_id)->pluck('name', 'id');
+            $msg = trans('msg.federation_edit_successful', ['name' => $federation->name]);
+            flash()->success($msg);
 
-        return redirect(route('federations.index'));
+            return redirect(route('federations.index'));
+
+        }catch (QueryException $e){
+
+            $msg = trans('msg.federation_president_already_exists');
+            flash()->error($msg);
+            return redirect()->back();
+
+        }
     }
 
 }

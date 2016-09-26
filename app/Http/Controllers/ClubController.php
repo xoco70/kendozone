@@ -8,12 +8,12 @@ use App\Federation;
 use App\Http\Requests;
 use App\Http\Requests\ClubRequest;
 use App\User;
-use Auth;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use View;
 
@@ -56,42 +56,14 @@ class ClubController extends Controller
     public function create()
     {
         $club = new Club;
-        $federations = new Collection();
-        $associations = new Collection();
         if (Auth::user()->cannot('create', $club)) {
             throw new AuthorizationException();
         }
 
-        if (Auth::user()->isFederationPresident()) {
-
-            $federation = Auth::user()->federationOwned;
-            $federations->push($federation);
-
-            $federations = $federations->pluck('name', 'id');
-            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
-//            $users = new Collection; // This will be set by JS
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
-
-        } else if (Auth::user()->isAssociationPresident()) {
-
-
-            $federation = Auth::user()->associationOwned->federation;
-            $federations->push($federation);
-            $federations = $federations->pluck('name', 'id');
-
-            $association = Auth::user()->associationOwned;
-            $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
-        } else {
-            // User is SuperAdmin
-            $users = User::pluck('name', 'id');
-            $federations = Federation::pluck('name', 'id');
-            $associations = Association::pluck('name', 'id');
-//            $federations = Federation::pluck('name', 'id');
-//            $associations = new Collection; // This will be set by JS
-//            $users = new Collection; // This will be set by JS
-        }
+        $federations = Federation::fillSelect();
+        $associations = Association::fillSelect();
+        $clubs = Club::fillSelect();
+        $users = User::fillSelect();
 
 
         return view('clubs.form', compact('club', 'users', 'federations', 'associations')); //
@@ -111,8 +83,8 @@ class ClubController extends Controller
             flash()->success($msg);
             return redirect("clubs");
         } catch (QueryException $e) {
-            // Already
-            $msg = "User" . $request->id . "is already president of another club";
+
+            $msg = trans('msg.club_president_already_exists');
             flash()->error($msg);
             return redirect()->back();
         }
@@ -142,53 +114,16 @@ class ClubController extends Controller
     public function edit($id)
     {
         $club = Club::findOrFail($id);
-        $federations = new Collection();
-        $associations = new Collection();
-
         if (Auth::user()->cannot('edit', $club)) {
             throw new AuthorizationException();
         }
 
-        //TODO Set Users to Void and set it with VueJS through APIs
-        if (Auth::user()->isFederationPresident()) {
+        $federations = Federation::fillSelect();
+        $associations = Association::fillSelect();
+        $clubs = Club::fillSelect();
+        $users = User::fillSelect();
 
-            $federation = Auth::user()->federationOwned;
-            $federations->push($federation);
-            $federations = $federations->pluck('name', 'id');
 
-            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
-//            $users = new Collection; // This will be set by JS
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
-
-        } else if (Auth::user()->isAssociationPresident()) {
-            $federation = Auth::user()->associationOwned->federation;
-            $federations->push($federation);
-
-            $federations = $federations->pluck('name', 'id');
-
-            $association = Auth::user()->associationOwned;
-            $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
-        } else if (Auth::user()->isClubPresident()) {
-            $federation = Auth::user()->clubOwned->association->federation;
-            $federations->push($federation);
-
-            $federations = $federations->pluck('name', 'id');
-
-            $association = Auth::user()->clubOwned->association;
-            $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
-            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
-        } else {
-            // User is SuperAdmin
-            $users = User::pluck('name', 'id');
-            $federations = Federation::pluck('name', 'id');
-            $associations = Association::pluck('name', 'id');
-//            $federations = Federation::pluck('name', 'id');
-//            $associations = new Collection; // This will be set by JS
-//            $users = new Collection; // This will be set by JS
-        }
 
         return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //
     }

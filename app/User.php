@@ -19,11 +19,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
-use Laravolt\Avatar\Avatar;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Webpatser\Countries\Countries;
@@ -201,7 +201,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
 
         if (!isset($avatar) && Gravatar::exists($this->email)) {
-                $avatar = Gravatar::src($this->email);
+            $avatar = Gravatar::src($this->email);
         }
 
         if (!str_contains($avatar, 'http') && isset($avatar)) {
@@ -298,6 +298,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function associationOwned()
     {
+//        dd($this->belongsTo(Association::class, 'id', 'president_id')->getQuery()->toSql(),Auth::user()->id);
         return $this->belongsTo(Association::class, 'id', 'president_id');
     }
 
@@ -401,9 +402,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             case $user->isClubPresident() && $user->clubOwned != null:
                 return $query->where('club_id', '=', $user->clubOwned->id);
 
-            case $user->isFederationPresident() && ! $user->federationOwned != null:
+            case $user->isFederationPresident() && !$user->federationOwned != null:
                 throw new NotOwningFederationException();
-            case $user->isAssociationPresident() && ! $user->associationOwned:
+            case $user->isAssociationPresident() && !$user->associationOwned:
                 throw new NotOwningAssociationException();
             case $user->isClubPresident() && $user->clubOwned == null:
                 throw new NotOwningClubException();
@@ -441,4 +442,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return $user;
     }
+
+    public static function fillSelect()
+    {
+
+        $users = new Collection();
+        if (Auth::user()->isSuperAdmin()) {
+            $users = User::pluck('name', 'id');
+        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id');
+        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
+        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
+            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id');
+        }
+        return $users;
+    }
+
 }

@@ -25,6 +25,7 @@ class ClubSeeder extends Seeder
             'name' => 'core.no_club',
             'president_id' => '1',
             'association_id' => '1']);
+
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
                 'email' => 'naucali@aikem.com',
@@ -35,20 +36,7 @@ class ClubSeeder extends Seeder
                 'federation_id' => 37,
                 'association_id' => 7,
                 'club_id' => 12,
-                // FK Check unactive
-
             ]);
-
-
-        try {
-            factory(Club::class, 5)->create(['association_id' => 7]);
-        } catch (Exception $e) {
-        }
-        try {
-            factory(Club::class, 5)->create(['association_id' => $faker->randomElement($associations)]);
-        } catch (Exception $e) {
-        }
-
 
         factory(Club::class)->create(
             ['association_id' => 7,
@@ -65,6 +53,18 @@ class ClubSeeder extends Seeder
             ['association_id' => 12,
                 'name' => 'Zacatenco'
             ]);
+
+        try {
+            factory(Club::class, 5)->create(['association_id' => 7]);
+        } catch (Exception $e) {
+        }
+        try {
+            factory(Club::class, 5)->create(['association_id' => $faker->randomElement($associations)]);
+        } catch (Exception $e) {
+        }
+
+
+
 
         $this->command->info('Clubs Seeded!');
     }

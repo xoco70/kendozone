@@ -2,7 +2,9 @@
 use App\Association;
 use App\Club;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Config;
 
 /**
  * List of Federation Test
@@ -238,6 +240,22 @@ class ClubTest extends TestCase
         $this->canUpdate($club); // C
 
 //        $this->canDelete($association); // C
+
+    }
+    /** @test  */
+    public function a_club_president_cant_be_in_2_club()
+    {
+        $this->expectException(QueryException::class);
+
+        $clubPresident1 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+
+        $club1 = factory(Club::class)->create();
+        $club2 = factory(Club::class)->create();
+
+        $club1->president_id = $clubPresident1->id;
+        $club2->president_id = $clubPresident1->id;
+        $club1->save();
+        $club2->save();
 
     }
 }

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Association;
-use App\Exceptions\NotOwningFederationException;
 use App\Federation;
-use App\Http\Requests;
 use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -29,9 +28,9 @@ class AssociationController extends Controller
     {
         $associations = Association::with('president', 'federation.country')
             ->forUser(Auth::user())
-            ->where('id','>',1)
+            ->where('id', '>', 1)
             ->get();
-        $currentModelName = trans_choice('core.association',1);
+        $currentModelName = trans_choice('core.association', 1);
         return view('associations.index', compact('associations', 'currentModelName'));
     }
 
@@ -71,10 +70,19 @@ class AssociationController extends Controller
             throw new AuthorizationException();
         }
 
-        $association = Association::create($request->all());
-        $msg = trans('msg.association_create_successful', ['name' => $association->name]);
-        flash()->success($msg);
-        return redirect(route("associations.index"));
+        try {
+            $association = Association::create($request->all());
+            $msg = trans('msg.association_create_successful', ['name' => $association->name]);
+            flash()->success($msg);
+            return redirect(route("associations.index"));
+
+        } catch (QueryException $e) {
+
+            $msg = trans('msg.association_president_already_exists');
+            flash()->error($msg);
+            return redirect()->back();
+
+        }
     }
 
 
@@ -100,7 +108,7 @@ class AssociationController extends Controller
      */
     public function edit($id)
     {
-        $currentModelName = trans_choice('core.association',1);
+        $currentModelName = trans_choice('core.association', 1);
         $association = Association::findOrFail($id);
         $federation = $association->federation;
 
@@ -111,7 +119,7 @@ class AssociationController extends Controller
         $users = User::forUser(Auth::user())->pluck('name', 'id');
         $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
 
-        return view('associations.form', compact('currentModelName','association', 'users', 'federations', 'federation'));
+        return view('associations.form', compact('currentModelName', 'association', 'users', 'federations', 'federation'));
     }
 
     /**
@@ -129,11 +137,19 @@ class AssociationController extends Controller
         if (Auth::user()->cannot('update', $association)) {
             throw new AuthorizationException();
         }
+        try {
+            $association->update($request->except(['federation_id']));
+            $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
+            flash()->success($msg);
+            return redirect(route('associations.index'));
 
-        $association->update($request->except(['federation_id']));
-        $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
-        flash()->success($msg);
-        return redirect(route('associations.index'));
+        } catch (QueryException $e) {
+
+            $msg = trans('msg.association_president_already_exists');
+            flash()->error($msg);
+            return redirect()->back();
+
+        }
 
     }
 

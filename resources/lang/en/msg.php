@@ -83,5 +83,8 @@ return [
     'club_restored_error' => 'Error restoring club',
 
 
+    'club_president_already_exists' => "User :user is already president of another club",
+    'association_president_already_exists' => "User :user is already president of another association",
+    'federation_president_already_exists' => "User :user is already president of another federation",
 
 ];

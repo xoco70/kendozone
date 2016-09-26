@@ -53,6 +53,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         <br/>
                         {!!  Form::label('president', trans('core.club.president'),['class' => 'text-bold' ]) !!}
+
                         @if(sizeof($users)==0)
                             {!!  Form::text('president_id', trans('core.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
                             {!!  Form::hidden('president_id', 1) !!}

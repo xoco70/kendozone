@@ -2,6 +2,7 @@
 use App\Association;
 use App\Federation;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 
@@ -240,6 +241,23 @@ class AssociationTest extends TestCase
         // Don't include it because of pagination
 //        $this->press("delete_" . $association->id)
 //            ->seeIsSoftDeletedInDatabase('association', ['id' => $association->id]);
+
+    }
+
+    /** @test  */
+    public function an_association_president_cant_be_in_2_association()
+    {
+        $this->expectException(QueryException::class);
+
+        $associationPresident1 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+
+        $association1 = factory(Association::class)->create();
+        $association2 = factory(Association::class)->create();
+
+        $association1->president_id = $associationPresident1->id;
+        $association2->president_id = $associationPresident1->id;
+        $association1->save();
+        $association2->save();
 
     }
 

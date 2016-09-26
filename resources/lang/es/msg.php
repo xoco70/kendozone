@@ -106,4 +106,9 @@ return [
     'team_delete_error' => 'Hubo un problema al borrar el equipo',
     'team_restored_successful' => 'Equipo <br/><b>:name</b><br/> restaurado exitosamente',
     'team_restored_error' => 'Hubo un problema al restaurar el equipo',
+
+    'club_president_already_exists' => "El usuario :user ya esta siendo presidente de otro club",
+    'association_president_already_exists' => "El usuario :user ya esta siendo presidente de otra asociación",
+    'federation_president_already_exists' => "El usuario :user ya esta siendo presidente de otra federación",
+
 ];

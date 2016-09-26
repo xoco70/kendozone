@@ -68,7 +68,7 @@ class UserController extends Controller
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $club = Club::fillSelect();
+        $clubs = Club::fillSelect();
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations','associations','clubs')); //
     }
 
@@ -105,6 +105,7 @@ class UserController extends Controller
      *
      * @param User $user
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(User $user)
     {
@@ -114,8 +115,11 @@ class UserController extends Controller
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::orderBy('order')->pluck('name', 'id');
         $countries = Countries::pluck('name', 'id');
-//        $federations = AdministrativeStructureController::getFederations();
-        return view('users.form', compact('user', 'grades', 'countries', 'roles')); //
+        $federations = Federation::fillSelect();
+        $associations = Association::fillSelect();
+        $clubs = Club::fillSelect();
+
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations','associations','clubs')); //
     }
 
     /**

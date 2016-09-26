@@ -6,6 +6,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
 
 class Club extends Model
@@ -100,7 +102,7 @@ class Club extends Model
                     $query->where('id', $user->associationOwned->id);
                 });
             case $user->isClubPresident() && $user->clubOwned:
-                return  $query->where('id', $user->clubOwned->id);
+                return $query->where('id', $user->clubOwned->id);
             default:
                 throw new AuthorizationException();
         }
@@ -132,5 +134,28 @@ class Club extends Model
         $user->clubOwned->id == $this->id;
 
     }
+
+    public static function fillSelect()
+    {
+        $clubs = new Collection();
+        if (Auth::user()->isSuperAdmin()) {
+            $clubs = Club::pluck('name', 'id');
+        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
+            $federation = Federation::with('associations.clubs')->find(Auth::user()->federationOwned->id);
+            foreach ($federation->associations as $association) {
+                if (sizeof($association->clubs) > 0){
+                    foreach ($association->clubs as $club){
+                        $clubs->push($club);
+                    }
+                }
+            }
+        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
+            $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
+        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
+            $clubs = Auth::user()->clubOwned->pluck('name', 'id');
+        }
+        return $clubs;
+    }
+
 
 }

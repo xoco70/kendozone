@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Webpatser\Countries\Countries;
 
 class Federation extends Model
@@ -55,4 +57,30 @@ class Federation extends Model
 
         }
     }
+
+    public static function fillSelect()
+    {
+        $federations = new Collection();
+
+        if (Auth::user()->isSuperAdmin()) {
+            // User is SuperAdmin
+            $federations = Federation::pluck('name', 'id');
+        } else if (Auth::user()->isFederationPresident()) {
+            $federation = Auth::user()->federationOwned;
+            $federations->push($federation);
+            $federations = $federations->pluck('name', 'id');
+
+        } else if (Auth::user()->isAssociationPresident()) {
+            $federation = Auth::user()->associationOwned->federation;
+            $federations->push($federation);
+            $federations = $federations->pluck('name', 'id');
+        } else if (Auth::user()->isClubPresident()) {
+            $federation = Auth::user()->clubOwned->association->federation;
+            $federations->push($federation);
+            $federations = $federations->pluck('name', 'id');
+        }
+
+        return $federations;
+    }
+
 }

@@ -49,13 +49,7 @@
                                             <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     {!!  Form::label('name', trans('core.username'),['class' => 'text-bold']) !!}
-                                                    {{--@if (!is_null($user->id))--}}
-                                                    {{--{!!  Form::label('name', $user->name, ['class' => 'form-control', "disabled" ]) !!}--}}
-                                                    {{--{!!  Form::hidden('name', $user->name) !!}--}}
-                                                    {{--@else--}}
                                                     {!!  Form::text('name', $user->name, ['class' => 'form-control' ]) !!}
-                                                    {{--@endif--}}
-
                                                     @if (strpos($user->avatar, 'http') !== false)
                                                         {!!  Form::hidden('avatar',$user->avatar) !!}
                                                     @else
@@ -126,7 +120,7 @@
 
 
                         <!-- /simple panel -->
-                        <!-- Simple panel 2 : Venue -->
+                        <!-- Simple panel 2 : Fed / Asoc / Club -->
                     </div>
 
 
@@ -234,8 +228,8 @@
                                             </option>
                                         </select>
                                     @elseif (Auth::user()->isClubPresident())
-                                        {!!  Form::label('club_id', Auth::user()->clubOwned->association->federation->name, ['class' => 'form-control', "disabled" ]) !!}
-                                        {!!  Form::hidden('club_id', Auth::user()->clubOwned->association->federation->id) !!}
+                                        {!!  Form::label('club_id', Auth::user()->clubOwned->name, ['class' => 'form-control', "disabled" ]) !!}
+                                        {!!  Form::hidden('club_id', Auth::user()->clubOwned->id) !!}
 
                                     @endif
 

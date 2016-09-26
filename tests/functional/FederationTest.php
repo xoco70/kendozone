@@ -1,7 +1,9 @@
 <?php
 use App\Federation;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Config;
 
 /**
  * List of Federation Test
@@ -146,4 +148,21 @@ class FederationTest extends TestCase
                 ]);
     }
 
+    /** @test
+     */
+    public function a_federation_president_cant_be_in_2_federations()
+    {
+        $this->expectException(QueryException::class);
+
+        $federationPresident1 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+
+        $federation1 = factory(Federation::class)->create();
+        $federation2 = factory(Federation::class)->create();
+
+        $federation1->president_id = $federationPresident1->id;
+        $federation2->president_id = $federationPresident1->id;
+        $federation1->save();
+        $federation2->save();
+
+    }
 }

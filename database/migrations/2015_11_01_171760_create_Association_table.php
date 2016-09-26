@@ -23,7 +23,7 @@ class CreateAssociationTable extends Migration {
 			$table->engine = 'InnoDB';
 
 			$table->unique(['name','deleted_at'], 'association_name_unique');
-            $table->unique(['president_id','deleted_at'], 'club_president_unique');
+            $table->unique(['president_id'], 'association_president_unique');
 
 			$table->foreign('president_id')
 				->references('id')
