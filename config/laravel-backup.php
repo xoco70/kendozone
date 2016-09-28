@@ -144,7 +144,7 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => 'contact@kendozone.com',
+            'from' => 'admin@kendozone.com',
             'to'   => 'julien@cappiello.fr',
         ],
 

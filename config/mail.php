@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => env('MAIL_DRIVER', 'log'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'secure46.inmotionhosting.com    '),
+    'host' => env('MAIL_HOST', 'lgo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'contact@kendozone.com', 'name' => 'Kendozone Team'],
+    'from' => ['address' => 'admin@kendozone.com', 'name' => 'Kendozone Team'],
 
     /*
     |--------------------------------------------------------------------------

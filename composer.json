@@ -28,7 +28,9 @@
         "graham-campbell/htmlmin": "4.*",
         "codeception/codeception": "*",
         "sentry/sentry-laravel": "^0.3.0",
-        "laravolt/avatar": "^1.8"
+        "laravolt/avatar": "^1.8",
+        "aws/aws-sdk-php": "~3.0"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
