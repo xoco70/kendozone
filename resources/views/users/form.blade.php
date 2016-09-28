@@ -106,7 +106,7 @@
                                     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
                                         <div class="form-group">
                                         {!!  Form::label('country_id', trans('core.country'),['class' => 'text-bold']) !!}
-                                        {!!  Form::select('country_id', $countries,$user->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
+                                        {!!  Form::select('country_id', $countries,$user->country_id ?? Auth::user()->country_id, ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
                                         </div>
                                     </div>
                                 </div>
@@ -290,6 +290,7 @@
         var federationId = "{{ $user->federation_id ?? Auth::user()->federation_id }}";
         var associationId = "{{ $user->association_id ?? Auth::user()->association_id }}";
         var clubId = "{{ $user->club_id ?? Auth::user()->club_id}}";
+        console.log(clubId);
         var user = "{{ $user->slug ?? Auth::user()->slug }}";
 
 

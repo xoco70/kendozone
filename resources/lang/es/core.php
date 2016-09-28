@@ -247,7 +247,7 @@ return [
     'federation.address' => 'Dirección',
     'federation.phone' => 'Teléfono',
     'federation.no_user_in_this_country' => 'No hay usuarios registrados en este país',
-
+    'no_federation' => 'Sin federación ',
 
     // Associations
     'association' => 'Asociación|Asociaciones',
@@ -258,6 +258,7 @@ return [
     'association.add' => 'Agregar Asociación',
     'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
     'add_new_association' => 'Agregar una nueva asociación',
+    'no_association' => ' Sin asociación ',
 
     // Clubs
     'club' => 'Club|Clubs',

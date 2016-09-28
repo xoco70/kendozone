@@ -292,4 +292,9 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     }
 }
 
-
+#avatar {
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}

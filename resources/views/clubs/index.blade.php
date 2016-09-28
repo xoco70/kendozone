@@ -26,7 +26,7 @@
                     <th class="text-center" data-hide="phone">{{ trans('core.club.president') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
                     <th class="text-center" data-hide="all">{{ trans('core.club.address') }}</th>
-                    <th class="text-center" data-hide="tablet">{{ trans('core.club.phone') }}</th>
+                    <th class="text-center" data-hide="all">{{ trans('core.club.phone') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
 
                 </tr>
@@ -47,8 +47,8 @@
                         <td align="center">{{ $club->phone }}</td>
                         <td align="center">
                             @can('edit',$club)
-                                <a href="{{URL::action('ClubController@edit', $club->id)}}"><i
-                                            class="icon icon-pencil7"></i></a>
+                                <a href="{{URL::action('ClubController@edit', $club->id)}}">
+                                    <i class="icon icon-pencil7"></i></a>
                             @endcan
                             @can('delete',$club)
                                 {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteClub', 'action' => ['ClubController@destroy', $club->id], 'style'=>"display: inline-block"]) !!}

@@ -26,7 +26,7 @@
                     <th class="text-center" data-hide="phone">{{ trans('core.association.president') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
                     <th class="text-center" data-hide="all">{{ trans('core.association.address') }}</th>
-                    <th class="text-center" data-hide="tablet">{{ trans('core.association.phone') }}</th>
+                    <th class="text-center" data-hide="all">{{ trans('core.association.phone') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
 

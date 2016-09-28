@@ -19,10 +19,10 @@
             <i class="icon-home2 position-left sidemenu"></i><span>{{ trans('core.my_club') }}</span>
         </a>
     </li>
-{{--@elseif(Auth::user()->isSuperAdmin())--}}
-    {{--<li>--}}
-        {{--<a class="protip" data-pt-title="{{ trans_choice('core.federation',2)  }}"--}}
-           {{--href="{{  URL::action('FederationController@index') }}">--}}
-            {{--<i class="icon-home2 position-left sidemenu"></i><span>{{ trans_choice('core.federation',2)  }}</span>--}}
-        {{--</a>--}}
+@elseif(Auth::user()->isSuperAdmin())
+    <li>
+        <a class="protip" data-pt-title="{{ trans_choice('core.federation',2)  }}"
+           href="{{  route('federations.index') }}">
+            <i class="icon-home2 position-left sidemenu"></i><span>{{ trans_choice('core.federation',2)  }}</span>
+        </a>
 @endif

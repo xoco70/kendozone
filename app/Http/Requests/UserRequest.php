@@ -48,6 +48,9 @@ class UserRequest extends Request
     public function store(){
 
         $data = $this->except('_token');
+        if ($this->avatar == ""){
+            $data['avatar'] = null;
+        }
 
         if ($this->is("users")) {
             $data['provider'] = "created";
@@ -59,6 +62,7 @@ class UserRequest extends Request
         $data['verified'] = 1;
 
         $user = new User;
+
 
         $user->fill($data);
         $user->password = bcrypt($this->password);
@@ -85,6 +89,9 @@ class UserRequest extends Request
         array_push($except, '_token');
 
         $req = $this->except($except);
+        if ($this->avatar == ""){
+            $req['avatar'] = null;
+        }
 
         $user->fill($req);
         if (!in_array('password', $except)) {
