@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 
 class CategoryTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
 
     public function setUp()

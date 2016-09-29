@@ -62,9 +62,7 @@ class AssociationTest extends TestCase
         $myAssociation = factory(Association::class)->create(['federation_id' => $federation->id, 'president_id' => $associationPresident->id]);
 
 
-        $this->visit("/")
-            ->click($myAssociation->name)
-            ->seePageIs("/associations/" . $myAssociation->id . "/edit")
+        $this->visit("/associations/" . $myAssociation->id . "/edit")
             ->dontSee("403.png");
 
         $association = factory(Association::class)->make(['federation_id' => $federation->id, 'president_id' => $associationPresident->id]);
@@ -82,7 +80,6 @@ class AssociationTest extends TestCase
 
         $this->visitEditAssociationPage($federationPresident);
         $this->see("403.png");
-        $federationPresident->delete();
 
 
     }
@@ -151,9 +148,13 @@ class AssociationTest extends TestCase
     public function visitEditAssociationPage(User $user)
     {
         $this->logWithUser($user);
+        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+        $federation = factory(Federation::class)->create(['president_id' => $federationPresident->id]);
+
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
 
 
-        $association = factory(Association::class)->create(['federation_id' => 2, 'president_id' => 2]); // British
+        $association = factory(Association::class)->create(['federation_id' => $federation->id, 'president_id' => $associationPresident->id]); // British
         $this->visit('/associations/' . $association->id . '/edit');
 
     }
@@ -249,13 +250,13 @@ class AssociationTest extends TestCase
     {
         $this->expectException(QueryException::class);
 
-        $associationPresident1 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
 
         $association1 = factory(Association::class)->create();
         $association2 = factory(Association::class)->create();
 
-        $association1->president_id = $associationPresident1->id;
-        $association2->president_id = $associationPresident1->id;
+        $association1->president_id = $associationPresident->id;
+        $association2->president_id = $associationPresident->id;
         $association1->save();
         $association2->save();
 

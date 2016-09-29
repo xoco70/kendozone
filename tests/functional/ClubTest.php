@@ -1,6 +1,7 @@
 <?php
 use App\Association;
 use App\Club;
+use App\Federation;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Config;
  */
 class ClubTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
 
     /** @test
@@ -30,7 +31,23 @@ class ClubTest extends TestCase
         $root = User::findOrFail(2);
 
         $this->logWithUser($root);
-        $club = factory(Club::class)->make();
+
+
+        $federation = factory(Federation::class)->create(['president_id' => null]);
+        $associationPresident = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+            'federation_id' => $federation->id]);
+
+        $association = factory(Association::class)->create(['president_id' => $associationPresident->id]);
+
+        $associationPresident->association_id = $association->id;
+        $associationPresident->save();
+
+        $club = factory(Club::class)->make([
+            'federation_id' => $federation->id,
+            'association_id' => $association->id,
+            'president_id' => $associationPresident->id]);
+
         $this->crud($club);
 
     }
@@ -42,10 +59,26 @@ class ClubTest extends TestCase
     public function federationPresident_can_do_everything_in_his_own_federation()
     {
         $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+
         $this->logWithUser($fmk);
 
-        $association = factory(Association::class)->create(['federation_id' => $fmk->federation->id]);
-        $club = factory(Club::class)->create(['association_id' => $association->id]);
+        $associationPresident = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+            'federation_id' => $fmk->id]);
+
+        $association = factory(Association::class)->create([
+            'federation_id' => $fmk->federation->id,
+            'president_id' => $associationPresident->id]);
+
+        $clubPresident = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+            'association_id' => $association->id]);
+
+
+        $club = factory(Club::class)->create(['association_id' => $association->id, 'president_id' => $clubPresident->id]);
+        $clubPresident->club_id = $club->id;
+        $clubPresident->save();
+
 
         $this->crud($club);
     }
@@ -56,9 +89,18 @@ class ClubTest extends TestCase
      */
     public function associationPresident_can_do_everything_in_his_own_association()
     {
-        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+        $federation = factory(Federation::class)->create(['president_id' => null]);
+        $associationPresident = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+            'federation_id' => $federation->id]);
+
         $association = factory(Association::class)->create(['president_id' => $associationPresident->id]);
-        $club = factory(Club::class)->make(['association_id' => $association->id]);
+
+        $associationPresident->association_id = $association->id;
+        $associationPresident->save();
+
+        $club = factory(Club::class)->make(['association_id' => $association->id, 'president_id' => $associationPresident->id]);
+
         $this->logWithUser($associationPresident);
 
         $this->crud($club);
@@ -68,18 +110,30 @@ class ClubTest extends TestCase
      *
      * a user must be superAdmin to access federation
      */
-    public function a_club_president_can_change_his_club_data()
+    public function a_club_president_can_change_his_club_data() // But not to another club_president
     {
-        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
-        $myClub = factory(Club::class)->create(['president_id' => $clubPresident->id]);
+        $federation = factory(Federation::class)->create(['president_id' => null]);
+        $association = factory(Association::class)->create(['president_id' => null]);
+        $myClub = factory(Club::class)->create(['president_id' => null]);
+
+        $clubPresident = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+            'federation_id' => $federation->id,
+            'association_id' => $association->id,
+            'club_id' => $myClub->id]);
+
+        $myClub->president_id = $clubPresident->id;
+        $myClub->save();
 
         $this->logWithUser($clubPresident);
 
         $this->visit("/clubs/" . $myClub->id . "/edit")
             ->dontSee("403.png");
 
-        $club = factory(Club::class)->make(['association_id' => $myClub->association_id]);
+        $club = factory(Club::class)->make(['association_id' => $myClub->association_id, 'president_id' => $myClub->president_id]);
         $this->fillClubAndSee($club);
+
+
     }
 
 
@@ -140,15 +194,17 @@ class ClubTest extends TestCase
     {
         $this->type($club->name, 'name')
             ->type($club->address, 'address')
-            ->type($club->phone, 'phone');
-//            ->select($club->association_id, 'association_id')
-
-        $this->press(trans('core.save'))
-            ->seeInDatabase('club',
-                ['name' => $club->name,
-                    'address' => $club->address,
-                    'phone' => $club->phone,
-                ]);
+            ->type($club->phone, 'phone')
+            ->select($club->association_id, 'association_id')
+            ->select($club->president_id, 'president_id');
+        $this->press(trans('core.save'));
+        $this->seeInDatabase('club',
+            ['name' => $club->name,
+                'address' => $club->address,
+                'phone' => $club->phone,
+                'president_id' => $club->president_id,
+                'association_id' => $club->association_id
+            ]);
     }
 
     private function visit_addClub()
@@ -185,7 +241,7 @@ class ClubTest extends TestCase
     {
         $this->logWithUser($user);
 
-        $club = factory(Club::class)->create();
+        $club = factory(Club::class)->create(['president_id' => $user->id]);
 
         $this->visit('/clubs/' . $club->id . '/edit');
 
@@ -218,7 +274,11 @@ class ClubTest extends TestCase
     private function canUpdate(Club $club)
     {
         $this->visit("/clubs/" . $club->id . "/edit");
-        $clubData = factory(Club::class)->make(['association_id' => $club->association_id]);
+        $clubData = factory(Club::class)->make([
+            'federation_id' => $club->federation_id,
+            'association_id' => $club->association_id,
+            'president_id' => $club->president_id,
+        ]);
         $this->fillClubAndSee($clubData);
 
     }
@@ -232,13 +292,13 @@ class ClubTest extends TestCase
 //        // Get Club Full Object
 
         $club = $this->getFullClubObject($clubData);
-
         $this->canUpdate($club); // C
 
 //        $this->canDelete($association); // C
 
     }
-    /** @test  */
+
+    /** @test */
     public function a_club_president_cant_be_in_2_club()
     {
         $this->expectException(QueryException::class);

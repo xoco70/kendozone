@@ -103,17 +103,17 @@ class FederationTest extends TestCase
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
         $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+        $federationPresident2 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
 
         $this->logWithUser($federationPresident);
 
         $myFederation = factory(Federation::class)->create(['president_id' => $federationPresident->id]);
-        $hisFederation = factory(Federation::class)->create();
+        $hisFederation = factory(Federation::class)->create(['president_id' => $federationPresident2->id]);
 
         $this->visit("/federations/" . $hisFederation->id . "/edit")
             ->see('403');
         $this->visit("/")
-            ->click($myFederation->name)
-            ->seePageIs("/federations/" . $myFederation->id . "/edit")
+            ->visit("/federations/" . $myFederation->id . "/edit")
             ->dontSee('403');
 //
         $federationData = factory(Federation::class)->make();

@@ -35,7 +35,7 @@ class ClubSeeder extends Seeder
                 'country_id' => 484,
                 'federation_id' => 37,
                 'association_id' => 7,
-                'club_id' => 12,
+                'club_id' => 2,
             ]);
 
         try {
