@@ -9,12 +9,17 @@ use App\Federation;
 use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests\UserRequest;
+use App\Mail\confirmUserAccount;
+use App\Notifications\AccountCreated;
 use App\Role;
 use App\User;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,7 +48,7 @@ class UserController extends Controller
     {
 
 
-        $users = User::with('country', 'role','association','federation')
+        $users = User::with('country', 'role', 'association', 'federation')
             ->forUser(Auth::user())
             ->where('id', '>', 1)
             ->paginate(config('constants.PAGINATION'));
@@ -70,7 +75,7 @@ class UserController extends Controller
         $federations = Federation::fillSelect(Auth::user());
         $associations = Association::fillSelect();
         $clubs = Club::fillSelect();
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations','associations','clubs')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //
     }
 
     /**
@@ -81,10 +86,14 @@ class UserController extends Controller
      */
     public function store(UserRequest $userForm)
     {
-        if ($userForm->store()) {
+        try {
+            $userForm->store();
+            $user = User::where('email', $userForm->email)->first();
+            $user->notify(new AccountCreated($user));
             flash()->success(trans('msg.user_create_successful'));
-        } else
-            flash()->error(trans('msg.user_create_successful'));
+        } catch (QueryException $e) {
+            flash()->error(trans('msg.user_already_exists'));
+        }
         return redirect(route('users.index'));
     }
 
@@ -120,7 +129,7 @@ class UserController extends Controller
         $associations = Association::fillSelect();
         $clubs = Club::fillSelect();
 
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations','associations','clubs')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations', 'associations', 'clubs')); //
     }
 
     /**
@@ -229,14 +238,14 @@ class UserController extends Controller
         return Federation::fillSelect2($user);
     }
 
-    public function myAssociations(User $user,$federationId)
+    public function myAssociations(User $user, $federationId)
     {
-        return Association::fillSelect2($user,$federationId);
+        return Association::fillSelect2($user, $federationId);
     }
 
     public function myClubs(User $user, $associationId)
     {
-        return Club::fillSelect2($user,$associationId);
+        return Club::fillSelect2($user, $associationId);
     }
 
 }

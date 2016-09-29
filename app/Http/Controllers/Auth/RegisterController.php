@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Mailers\AppMailer;
+use App\Notifications\AccountCreated;
 use App\Tournament;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -89,27 +91,32 @@ class RegisterController extends Controller
      * Handle a registration request for the application.
      *
      * @param AuthRequest $request
-     * @param AppMailer $mailer
      * @return bool
      */
-    public function register(AuthRequest $request, AppMailer $mailer)
+    public function register(AuthRequest $request)
     {
+        try {
+            $user = User::create(['name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'country_id' => $request->country_id,
+                'city' => $request->city,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'role_id' => config('constants.ROLE_USER'),
+                'verified' => 0,
 
-        $user = User::create(['name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'country_id' => $request->country_id,
-            'city' => $request->city,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'role_id' => config('constants.ROLE_USER'),
-            'verified' => 0,
+            ]);
 
-        ]);
+        } catch (QueryException $e) {
+            flash()->error(trans('msg.user_create_error'));
+            return redirect()->back();
+        }
 
-        $mailer->sendEmailConfirmationTo($user);
+        $user->notify(new AccountCreated($user));
         flash()->success(trans('auth.check_your_email'));
         return redirect(URL::action('Auth\LoginController@login'));
+
     }
 
 
@@ -157,7 +164,7 @@ class RegisterController extends Controller
 
         Auth::loginUsingId($user->id);
         flash()->success(Lang::get('auth.tx_for_confirm'));
-        return redirect(URL::action('DashboardController@index'));
+        return redirect(route('dashboard'));
     }
 
 }

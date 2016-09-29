@@ -10,6 +10,7 @@ return [
     |
     */
 
+    'user_already_exists' => 'El usuario ya esta registrado en el sistema.',
     'user_already_registered_in_category' => 'El usuario ya esta registrado en esta categoría.',
 
     // Torneo
