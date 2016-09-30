@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
-use App\Mailers\AppMailer;
 use App\Notifications\AccountCreated;
 use App\Tournament;
 use App\User;

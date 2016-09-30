@@ -37,7 +37,7 @@ class Invite extends Model
      * @param $tournament
      * @return String Invitation code | null
      */
-    public function generateTournamentInvite($email, $tournament)
+    public function generateTournamentInvite($email, Tournament $tournament)
     {
         if ($tournament->isOpen()) {
             $token = "open";

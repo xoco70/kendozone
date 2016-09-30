@@ -14,7 +14,7 @@ return [
     'activation_account' => 'Activación de tu cuenta',
     'please_click_link_to_confirm_account' => 'Activa tu cuenta dando click en el link siguiente:',
     'activate_account' => 'Activar cuenta',
-
+    'confirm_registration' => 'Confirmar registro',
 
 
 

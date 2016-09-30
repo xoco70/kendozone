@@ -8,7 +8,7 @@ use App\Country;
 use App\Grade;
 use App\Http\Requests\CompetitorRequest;
 use App\Invite;
-use App\Mailers\AppMailer;
+use App\Notifications\InviteCompetitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,10 +37,10 @@ class CompetitorController extends Controller
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
         $settingSize = $tournament->championshipSettings()->count();
         $categorySize = $tournament->categories->count();
-        $grades = Grade::pluck('name','id');
+        $grades = Grade::pluck('name', 'id');
         $countries = Country::all();
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize','grades','countries'));
+        return view("tournaments/users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize', 'grades', 'countries'));
 
     }
 
@@ -64,10 +64,9 @@ class CompetitorController extends Controller
      *
      * @param CompetitorRequest $request
      * @param Tournament $tournament
-     * @param AppMailer $mailer
      * @return \Illuminate\Http\Response
      */
-    public function store(CompetitorRequest $request, Tournament $tournament, AppMailer $mailer)
+    public function store(CompetitorRequest $request, Tournament $tournament)
     {
         $championshipId = $request->championshipId;
 
@@ -78,7 +77,7 @@ class CompetitorController extends Controller
             'email' => $request->email
 
         ]);
-        
+
         $championships = $user->championships();
         if ($championships->get()->contains($championship)) {
             flash()->error(trans('msg.user_already_registered_in_category'));
@@ -92,9 +91,10 @@ class CompetitorController extends Controller
         $invite = new Invite();
         $code = $invite->generateTournamentInvite($user->email, $tournament);
 
-        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $championship->category->name, $user->clearPassword);
+//        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $championship->category->name, $user->clearPassword);
+        $user->notify(new InviteCompetitor($user, $tournament, $code, $championship->category->name));
 
-        flash()->success(trans('msg.user_registered_successful',['tournament' => $tournament->name]));
+        flash()->success(trans('msg.user_registered_successful', ['tournament' => $tournament->name]));
         return redirect(URL::action('CompetitorController@index', $tournament->slug));
 
 
@@ -108,14 +108,14 @@ class CompetitorController extends Controller
      */
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
-        $user = User::findBySlug($userSlug);
+        $user = User::where('slug',$userSlug)->first();
         $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id)->first();
 
         $ctu->confirmed ? $ctu->confirmed = 0 : $ctu->confirmed = 1;
-        if ($ctu->save()){
+        if ($ctu->save()) {
             return Response::json(['msg' => trans('msg.user_status_successful'), 'status' => 'success']);
-        }else{
+        } else {
             return Response::json(['msg' => trans('msg.user_status_error'), 'status' => 'error']);
         }
 
@@ -130,7 +130,7 @@ class CompetitorController extends Controller
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
-        $user = User::findBySlug($userSlug);
+        $user = User::where('slug',$userSlug)->first();
         $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id);
 

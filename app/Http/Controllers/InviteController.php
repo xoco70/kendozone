@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InviteRequest;
 use App\Invite;
-use App\Mailers\AppMailer;
+use App\Notifications\InviteCompetitor;
 use App\Tournament;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
@@ -16,19 +17,16 @@ class InviteController extends Controller
 {
 
     protected $currentModelName;
-    protected $mailer;
     protected $emailBadFormat;
     protected $wrongEmail;
     /**
      * InviteController constructor.
-     * @param AppMailer $mailer
      */
-    public function __construct(AppMailer $mailer)
+    public function __construct()
     {
 
         $this->currentModelName = trans_choice('core.tournament_invitations', 1);
         View::share('currentModelName', $this->currentModelName);
-        $this->mailer = $mailer;
     }
 
 
@@ -70,14 +68,15 @@ class InviteController extends Controller
             'recipients' => 'required'
         ]);
 
-
-        $tournament = Tournament::findBySlug($request->tournamentSlug);
+        $tournament = Tournament::where('slug', $request->tournamentSlug)->first();
         $recipients = json_decode($request->get("recipients"));
         foreach ($recipients as $recipient) {
             // Mail to Recipients
             $invite = new Invite();
             $code = $invite->generateTournamentInvite($recipient, $tournament);
-            $this->mailer->sendEmailInvitationTo($recipient, $tournament, $code);
+            $user = new User();
+            $user->email = $recipient;
+            $user->notify(new InviteCompetitor($user, $tournament, $code,null));
 
         }
         flash()->success(trans('msg.invitation_sent'));
@@ -107,7 +106,7 @@ class InviteController extends Controller
     {
         $this->emailBadFormat = false;
         $file = $request->file('invites')->store('invites');
-        $tournament = Tournament::findBySlug($request->tournamentSlug);
+        $tournament = Tournament::where('slug',$request->tournamentSlug)->first();
         // Parse Csv File
 
         $reader = Excel::load("storage/app/" . $file, function ($reader) {
@@ -138,7 +137,9 @@ class InviteController extends Controller
                     // Check email
                     $invite = new Invite();
                     $code = $invite->generateTournamentInvite($row, $tournament);
-                    $this->mailer->sendEmailInvitationTo($row, $tournament, $code);
+                    $user = new User();
+                    $user->email = $row;
+                    $user->notify(new InviteCompetitor($user, $tournament, $code));
                 });
             });
             flash()->success(trans('msg.invitation_sent'));

@@ -62,7 +62,7 @@
                                     <tr>
                                         <td class="text-center">
                                             <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
-                                                        src="{{ $user->avatar }}" class="img-circle img-sm"/></a>
+                                                        src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}" class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
                                             @can('edit',$user)

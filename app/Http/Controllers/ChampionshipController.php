@@ -34,7 +34,7 @@ class ChampionshipController extends Controller
      */
     public function create($tournamentSlug, $token)
     {
-        $tournament = Tournament::findBySlug($tournamentSlug);
+        $tournament = Tournament::where('slug',$tournamentSlug)->first();
         $invite = Invite::getActiveTournamentInvite($token);
 
         // Check if invitation is expired
@@ -93,7 +93,7 @@ class ChampionshipController extends Controller
             $invite = null;
 
         $tournamentSlug = $request->tournament;
-        $tournament = Tournament::findBySlug($tournamentSlug);
+        $tournament = Tournament::where('slug',$tournamentSlug)->first();
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
