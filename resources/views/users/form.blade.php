@@ -307,7 +307,7 @@
         Dropzone.autoDiscover = false;
         $(document).ready(function () {
 
-            var initialPic = "{{ $user->avatar }}";
+            var initialPic = "{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}";
 
             var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 

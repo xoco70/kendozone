@@ -92,4 +92,13 @@ return [
     'limitByEntityTooltip' => 'Expected number of the competitors who will be registered for each Championship',
     'rulesTooltip' => 'Create and configure automatically category according to the rules model you chose',
 
+
+    'configure_categories' => 'Configure categories',
+    'configure_categories_text' => 'Select 1 option to configure tournament's championships',
+
+    'presettings' => 'Presets',
+    'presettings_text' => 'CHoose rules to create tournament's championships. Categories will be created and configured automatically',
+
+    'manual' => 'Manual',
+    'presettings' => 'Presets',
 ];

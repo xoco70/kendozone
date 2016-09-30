@@ -73,8 +73,7 @@ return [
     'technical_assistance' => 'Asistencia Técnica',
 
 
-
-    // Venue
+   // Venue
     'venue' => 'Lugar del encuentro',
     'coords' => 'Coordenadas',
     'address' => 'Dirección',
@@ -84,6 +83,7 @@ return [
     'state' => 'Estado',
     'country' => 'País',
     'location' => 'Ubicación',
+
 
     // Nivel
     'local' => 'Local',

@@ -29,7 +29,8 @@ return [
     //Common
     'preview' => ' Preview',
     'thanks' => ' Thanks',
-
+    'or' => 'or',
+    'export_excel' => 'Export to Excel',
 
     //Tournament
     'tournament' => 'Tournament|Tournaments',
@@ -73,14 +74,17 @@ return [
     'technical_assistance' => 'Technical Assistencie',
 
 
-    // Places
-    'venue' => 'Venue',
-    'place' => 'Place|Places',
-    'coords' => 'Coordinates',
+     // Venue
+    'venue' => 'Lugar del encuentro',
+    'coords' => 'Coordenadas',
+    'address' => 'Dirección',
+    'details' => 'Datos complementarios',
     'city' => 'City',
+    'CP' => 'Código Postal',
     'state' => 'State',
     'country' => 'Country',
-    'location' => 'Location',
+    'location' => 'Location',    
+
 
     // Nivel
     'local' => 'Local',
@@ -265,5 +269,14 @@ return [
     'select_field' => 'Select an option',
     'no_association_available' => 'No associations in this federation',
     'no_club_available' => 'No clubs in this association',
+
+
+    //Excel
+
+    'import_excel' => 'Import data from Excel',
+    'upload_file_to_csv_format' => 'File must be in .csv format.',
+    'how_to_save_to_csv' => 'With Excel,  you can save ti with: File > Save as. Then, in  "File Format", select ".csv',
+    'bulk_upload' => 'Invite competitors with an Excel file',
+    'download_layout' => 'Layout File'
 
 ];

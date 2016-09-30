@@ -13,6 +13,9 @@ return [
     'tx_for_signup' => '¡Thanks for signup!',
     'activation_account' => 'Activate your account',
     'please_click_link_to_confirm_account' => 'Activate your account by clicking the link below:',
+    'activate_account' => 'Activate  your account',
+    'confirm_registration' => 'Confirm registration',
+    'user_invited_you' => 'You were invited to :appName by :user',
 
 
     // Invitation

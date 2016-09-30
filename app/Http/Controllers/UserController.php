@@ -93,6 +93,7 @@ class UserController extends Controller
             flash()->success(trans('msg.user_create_successful'));
         } catch (QueryException $e) {
             flash()->error(trans('msg.user_already_exists'));
+            return redirect()->back()->withInput();
         }
         return redirect(route('users.index'));
     }

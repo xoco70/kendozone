@@ -15,7 +15,7 @@ return [
     'please_click_link_to_confirm_account' => 'Activa tu cuenta dando click en el link siguiente:',
     'activate_account' => 'Activar cuenta',
     'confirm_registration' => 'Confirmar registro',
-
+    'user_invited_you' => 'Has recibido una invitación a :appName de parte de :user',
 
 
 
