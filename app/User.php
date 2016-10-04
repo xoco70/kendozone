@@ -469,7 +469,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $users = User::where('association_id', '=', Auth::user()->clubOwned->association->id)->pluck('name', 'id');
+            $users = User::where('id',Auth::user()->id)->pluck('name', 'id');
         }
         return $users;
 
