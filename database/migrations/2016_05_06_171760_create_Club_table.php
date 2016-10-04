@@ -13,9 +13,13 @@ class CreateClubTable extends Migration {
 			$table->integer('association_id')->unsigned();
 			$table->integer('president_id')->nullable()->unsigned();
 			$table->string('address')->nullable();
+            $table->string("latitude")->nullable();
+            $table->string("longitude")->nullable();
+            $table->string('website')->nullable();
 			$table->string('phone')->nullable();
-			$table->string('website')->nullable();
-			
+
+
+
 //			$table->integer('stateId')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();

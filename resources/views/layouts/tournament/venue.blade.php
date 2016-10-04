@@ -37,8 +37,8 @@
                 {!! Form::label('country_id', trans('core.country'),['class' => 'text-bold']) !!}
                 {!! Form::select('country_id',
                 $countries,$venue->country_id == null
-                ? Auth::user()->country_id
-                : $venue->country_id ,
+                    ? Auth::user()->country_id
+                    : $venue->country_id ,
                 ['class' => 'form-control']) !!} <!-- 484 is Mexico Code -->
 
             </div>

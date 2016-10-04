@@ -12,5 +12,8 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
         'president_id' => $faker->randomElement($users),
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude
+
     ];
 });

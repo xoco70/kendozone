@@ -4,6 +4,7 @@ use App\Association;
 use App\Club;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
 
 class ClubSeeder extends Seeder
 {

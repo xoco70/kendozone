@@ -1,99 +1,121 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-{!! Breadcrumbs::render('clubs.edit',$club) !!}
+    {!! Breadcrumbs::render('clubs.edit',$club) !!}
 
 @stop
 @section('content')
-@include("errors.list")
-<?php
-$appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
-?>
+    @include("errors.list")
+    <?php
+    $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
+    ?>
 
-@include('layouts.displayMenuMyEntitiesOnTop')
+    @include('layouts.displayMenuMyEntitiesOnTop')
 
-        <!-- Detached content -->
+    <!-- Detached content -->
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
         @if (!is_null($club->id))
-        {!! Form::model($club, ['method'=>"PATCH",
-                                "action" => ["ClubController@update", $club->id],
-                                'enctype' => 'multipart/form-data',
-                                'id' => 'form']) !!}
+            {!! Form::model($club, ['method'=>"PATCH",
+                                    "action" => ["ClubController@update", $club->id],
+                                    'enctype' => 'multipart/form-data',
+                                    'id' => 'form']) !!}
 
         @else
 
-        {!! Form::open(['url'=>URL::action('ClubController@store'),'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url'=>URL::action('ClubController@store'),'enctype' => 'multipart/form-data']) !!}
 
         @endif
-                <!-- Simple panel 1 : General Data-->
+        <!-- Simple panel 1 : General Data-->
 
 
-        <div class="panel panel-flat">
+            <div class="panel panel-flat">
 
-            <div class="panel-body">
-                <div class="container-fluid">
-                    <fieldset title="{{Lang::get('core.general_data')}}">
-                        <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        <fieldset title="{{Lang::get('core.general_data')}}">
+                            <legend class="text-semibold">{{Lang::get('core.general_data')}}</legend>
 
-                        <div class="form-group">
-                            {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
+                            <div class="form-group">
+                                {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
+                                <br/>
+                                {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+
+                            </div>
+                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::select('federation_id', $federations,old('federation_id'), ['class' => 'form-control']) !!}
+
+
                             <br/>
-                            {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
-
-                        </div>
-                        {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('federation_id', $federations,old('federation_id'), ['class' => 'form-control']) !!}
+                            {!!  Form::label('association', trans_choice('core.association',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::select('association_id', $associations,$club->association_id, ['class' => 'form-control']) !!}
 
 
-                        <br/>
-                        {!!  Form::label('association', trans_choice('core.association',1),['class' => 'text-bold' ]) !!}
-                        {!!  Form::select('association_id', $associations,$club->association_id, ['class' => 'form-control']) !!}
+                            <br/>
+                            {!!  Form::label('president', trans('core.club.president'),['class' => 'text-bold' ]) !!}
+
+                            @if(sizeof($users)==0)
+                                {!!  Form::text('president_id', trans('core.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+                                {!!  Form::hidden('president_id', 1) !!}
+
+                            @else
+                                {!!  Form::select('president_id', $users,$club->president_id, ['class' => 'form-control']) !!}
+                            @endif
 
 
-                        <br/>
-                        {!!  Form::label('president', trans('core.club.president'),['class' => 'text-bold' ]) !!}
+                            <br/>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {!! Form::label('name', trans('core.coords'),['class' => 'text-bold' ]) !!}
+                                    <div class="map-wrapper locationpicker-default" id="locationpicker-default"></div>
+                                </div>
+                            </div>
 
-                        @if(sizeof($users)==0)
-                            {!!  Form::text('president_id', trans('core.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
-                            {!!  Form::hidden('president_id', 1) !!}
+                            {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
+                            <div class="input-group">
+                                {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
+                                <span class="input-group-addon"><i class="icon-envelop3"></i></span>
 
-                        @else
-                            {!!  Form::select('president_id', $users,$club->president_id, ['class' => 'form-control']) !!}
-                        @endif
+                            </div>
 
-
-                        <br/>
-                        {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
-                        <div class="input-group">
-                            {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
-                            <span class="input-group-addon"><i class="icon-envelop3"></i></span>
-
-                        </div>
-
-                        <br/>
-                        {!!  Form::label('phone', trans('core.club.phone'),['class' => 'text-bold' ]) !!}
+                            <br/>
+                            {!!  Form::label('phone', trans('core.club.phone'),['class' => 'text-bold' ]) !!}
 
 
-                        <div class="input-group">
-                            {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
-                            <span class="input-group-addon"><i class="icon-phone"></i></span>
-                        </div>
+                            <div class="input-group">
+                                {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone']) !!}
+                                <span class="input-group-addon"><i class="icon-phone"></i></span>
+                            </div>
 
-                    </fieldset>
+                            {!! Form::hidden('latitude', $club->latitude, ['id' =>'latitude']) !!}
+                            {!! Form::hidden('longitude', $club->longitude, ['id' =>'longitude']) !!}
+
+                            {!! Form::hidden('city', $club->city, ['id' =>'city']) !!}
+                            {!! Form::hidden('CP', $club->CP, ['id' =>'CP']) !!}
+                            {!! Form::hidden('state', $club->state, ['id' =>'state']) !!}
+
+                        </fieldset>
 
 
-                </div>
-                <br/>
-                <div align="right">
-                    <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    </div>
+                    <br/>
+                    <div align="right">
+                        <button type="submit" class="btn btn-success"><i></i>{{trans("core.save")}}</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 @stop
 @section('scripts_footer')
+    <script>
+        var club = "{!! addcslashes($club, '"') !!}";
+        club = JSON.parse(club);
+    </script>
+    {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
     {!! JsValidator::formRequest('App\Http\Requests\ClubRequest') !!}
+    {!! Html::script('js/pages/footer/club.js') !!}
+
+
 @stop

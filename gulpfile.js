@@ -77,6 +77,12 @@ elixir(function (mix) {
         'pages/footer/tournamentEditFooter.js',
     ], 'public/js/pages/header/tournamentEdit.js');
 
+
+    mix.scripts([
+        'components/jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js',
+        'pages/footer/clubFooter.js',
+    ], 'public/js/pages/footer/club.js');
+
     mix.scripts([
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
