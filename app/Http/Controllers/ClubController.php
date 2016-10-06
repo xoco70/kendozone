@@ -67,8 +67,11 @@ class ClubController extends Controller
         $associations = Association::fillSelect();
         $users = User::fillSelect();
 
+        $defaultLng = Auth::user()->latitude ?? geoip()->lat;
+        $defaultLat = Auth::user()->longitude ?? geoip()->lon;
 
-        return view('clubs.form', compact('club', 'users', 'federations', 'associations')); //
+
+        return view('clubs.form', compact('club', 'users', 'federations', 'associations','defaultLng','defaultLat')); //
     }
 
     /**

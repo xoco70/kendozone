@@ -87,8 +87,8 @@
                                 <span class="input-group-addon"><i class="icon-phone"></i></span>
                             </div>
 
-                            {!! Form::hidden('latitude', $club->latitude, ['id' =>'latitude']) !!}
-                            {!! Form::hidden('longitude', $club->longitude, ['id' =>'longitude']) !!}
+                            {!! Form::hidden('latitude', $club->latitude ?? $defaultLat, ['id' =>'latitude']) !!}
+                            {!! Form::hidden('longitude', $club->longitude ?? $defaultLng, ['id' =>'longitude']) !!}
 
                             {!! Form::hidden('city', $club->city, ['id' =>'city']) !!}
                             {!! Form::hidden('CP', $club->CP, ['id' =>'CP']) !!}
@@ -112,10 +112,18 @@
     <script>
         var club = "{!! addcslashes($club, '"') !!}";
         club = JSON.parse(club);
+        var longitude = "{{ $club->longitude ?? $defaultLng }}";
+        var latitude = "{{ $club->latitude ?? $defaultLat }}";
+        var address = "{{ $club->address }}";
+        var city = "{{ $club->city }}";
+        var cp = "{{ $club->cp }}";
+        var state = "{{ $club->state }}";
+
     </script>
+    {!! Html::script('js/pages/footer/club.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
     {!! JsValidator::formRequest('App\Http\Requests\ClubRequest') !!}
-    {!! Html::script('js/pages/footer/club.js') !!}
+
 
 
 @stop

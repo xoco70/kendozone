@@ -22,12 +22,12 @@ $( document ).ready(function() {
 
         }, oninitialized: function (component) {
 
-            $('#address').val(club.address);
-            $('#city').val(club.city);
-            $('#CP').val(club.CP);
-            $('#state').val(club.state);
-            $('#latitude').val(club.latitude);
-            $('#longitude').val(club.longitude);
+            $('#address').val(address);
+            $('#city').val(city);
+            $('#CP').val(cp);
+            $('#state').val(state);
+            $('#latitude').val(latitude);
+            $('#longitude').val(longitude);
         }
 
     });
