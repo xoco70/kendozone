@@ -1,19 +1,19 @@
 <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
     @include('layouts.displayMyEntityOnTop')
-    <li {{ Route::getFacadeRoot()->current()->uri() == 'federations' ? 'class=active' : '' }}>
+    <li {{ Request::is('federations*') ? 'class=active' : '' }}>
         <a href="{{ route('federations.index') }}">
             <i class="position-left"></i> {{trans_choice('core.federation',2)}}
         </a>
     </li>
-    <li {{ Route::getFacadeRoot()->current()->uri() == 'associations' ? 'class=active' : '' }}>
+    <li {{ Request::is('associations*') ? 'class=active' : '' }}>
         <a href="{{ route('associations.index') }}">
             <i class="position-left"></i> {{trans_choice('core.association',2)}}
         </a>
     </li>
-    <li {{ Route::getFacadeRoot()->current()->uri() == 'clubs' ? 'class=active' : '' }}>
+    <li {{ Request::is('clubs*') ? 'class=active' : '' }}>
         <a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a>
     </li>
-    <li {{ Route::getFacadeRoot()->current()->uri() == 'users' ? 'class=active' : '' }}>
+    <li {{ Request::is('users*') ? 'class=active' : '' }}>
         <a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a>
     </li>
 
