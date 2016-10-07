@@ -88,19 +88,19 @@ class Federation extends Model
 
         if (Auth::user()->isSuperAdmin()) {
             // User is SuperAdmin
-            $federations = Federation::pluck('name', 'id');
+            $federations = Federation::pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isFederationPresident()) {
             $federation = Auth::user()->federationOwned;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id');
+            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isAssociationPresident()) {
             $federation = Auth::user()->associationOwned->federation;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id');
+            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isClubPresident()) {
             $federation = Auth::user()->clubOwned->association->federation;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id');
+            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
         }
 
         return $federations;

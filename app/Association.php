@@ -94,17 +94,17 @@ class Association extends Model
     {
         $associations = new Collection();
         if (Auth::user()->isSuperAdmin()) {
-            $associations = Association::pluck('name', 'id');
+            $associations = Association::pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isFederationPresident()) {
-            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id');
+            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isAssociationPresident()) {
             $association = Auth::user()->associationOwned;
             $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
+            $associations = $associations->pluck('name', 'id')->prepend('-', '1');;
         } else if (Auth::user()->isClubPresident()) {
             $association = Auth::user()->clubOwned->association;
             $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
+            $associations = $associations->pluck('name', 'id')->prepend('-', '1');;
         }
         return $associations;
     }

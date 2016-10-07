@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -80,6 +81,17 @@ class Club extends Model
     {
         return $this->belongsTo(Association::class);
     }
+
+    public function federation()
+    {
+        try{
+            return $this->association->federation();
+        }catch(Exception $e){
+            return null;
+        }
+
+    }
+
 
     /**
      * @param $query

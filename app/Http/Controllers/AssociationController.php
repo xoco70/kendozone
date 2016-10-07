@@ -54,8 +54,8 @@ class AssociationController extends Controller
         }
 
 //        dd(Auth::user()->role);
-        $users = User::forUser(Auth::user())->pluck('name', 'id');
-        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
+        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');
         $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
@@ -120,8 +120,8 @@ class AssociationController extends Controller
             throw new AuthorizationException();
         }
 
-        $users = User::forUser(Auth::user())->pluck('name', 'id');
-        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
+        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');;
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');;
 
         return view('associations.form', compact('currentModelName', 'association', 'users', 'federations', 'federation'));
     }
