@@ -76,8 +76,9 @@ class Federation extends Model
             $federations = $user->associationOwned->federation()->get(['id as value', 'name as text']);
         } else if ($user->isClubPresident()) {
             $federations = $user->clubOwned->association->federation()->get(['id as value', 'name as text']);
+        } else if ($user->isUser()) {
+            $federations = $user->federation()->get(['id as value', 'name as text']);
         }
-
         return $federations;
     }
 
@@ -88,19 +89,19 @@ class Federation extends Model
 
         if (Auth::user()->isSuperAdmin()) {
             // User is SuperAdmin
-            $federations = Federation::pluck('name', 'id')->prepend('-', '1');;
+            $federations = Federation::pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isFederationPresident()) {
             $federation = Auth::user()->federationOwned;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
+            $federations = $federations->pluck('name', 'id');
         } else if (Auth::user()->isAssociationPresident()) {
             $federation = Auth::user()->associationOwned->federation;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
+            $federations = $federations->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident()) {
             $federation = Auth::user()->clubOwned->association->federation;
             $federations->push($federation);
-            $federations = $federations->pluck('name', 'id')->prepend('-', '1');;
+            $federations = $federations->pluck('name', 'id');
         }
 
         return $federations;

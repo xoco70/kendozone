@@ -84,12 +84,10 @@ class Club extends Model
 
     public function federation()
     {
-        try{
-            return $this->association->federation();
-        }catch(Exception $e){
-            return null;
-        }
-
+            if ($this->association != null)
+                return $this->association->federation();
+            else
+                return $this->association();
     }
 
 
@@ -105,9 +103,7 @@ class Club extends Model
             case $user->isSuperAdmin():
                 return $query;
             case $user->isFederationPresident() && $user->federationOwned != null:
-                return $query->whereHas('association.federation', function ($query) use ($user) {
-                    $query->where('federation_id', $user->federationOwned->id);
-                });
+                return $query->where('federation_id', $user->federationOwned->id);
             case
                 $user->isAssociationPresident() && $user->associationOwned:
                 return $query->whereHas('association', function ($query) use ($user) {
@@ -126,9 +122,7 @@ class Club extends Model
     {
         return
             $user->federationOwned != null &&
-            $this->association != null &&
-            $this->association->federation != null &&
-            $user->federationOwned->id == $this->association->federation->id;
+            $user->federationOwned->id == $this->federation_id;
 
     }
 
@@ -162,7 +156,7 @@ class Club extends Model
         return $clubs;
     }
 
-    public static function fillSelect2(User $user,$associationId)
+    public static function fillSelect2(User $user, $associationId)
     {
         $clubs = new Collection();
         if ($user->isSuperAdmin()) {
@@ -177,13 +171,13 @@ class Club extends Model
                 ->get(['club.id as value', 'club.name as text']);
         } else if ($user->isClubPresident() && $user->clubOwned != null) {
             $clubs = $user->clubOwned()
-                ->where('association_id',$associationId)
+                ->where('association_id', $associationId)
                 ->get(['club.id as value', 'club.name as text']);
+        } else if ($user->isUser()) {
+            $clubs = $user->club()->get(['club.id as value', 'club.name as text']);
         }
         return $clubs;
     }
-
-
 
 
 }

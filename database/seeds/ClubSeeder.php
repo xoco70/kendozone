@@ -41,7 +41,8 @@ class ClubSeeder extends Seeder
 
         try {
             factory(Club::class)->create(
-                ['association_id' => 7,
+                [   'federation_id' => 37,
+                    'association_id' => 7,
                     'president_id' => $naucali_presidente->id,
                     'name' => 'Naucali'
                 ]);
@@ -51,7 +52,9 @@ class ClubSeeder extends Seeder
 
         try {
             factory(Club::class)->create(
-                ['association_id' => 8,
+                [
+                    'federation_id' => 37,
+                    'association_id' => 8,
                     'name' => 'UNAM'
                 ]);
 
@@ -60,7 +63,9 @@ class ClubSeeder extends Seeder
         }
         try {
             factory(Club::class)->create(
-                ['association_id' => 12,
+                [
+                    'federation_id' => 37,
+                    'association_id' => 12,
                     'name' => 'Zacatenco'
                 ]);
 
@@ -69,7 +74,7 @@ class ClubSeeder extends Seeder
         }
 
         try {
-            factory(Club::class, 5)->create(['association_id' => 7]);
+            factory(Club::class, 5)->create(['federation_id' => 37,'association_id' => 7]);
         } catch (Exception $e) {
         }
         try {

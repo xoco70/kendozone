@@ -67,6 +67,7 @@ class ClubController extends Controller
         $associations = Association::fillSelect();
         $users = User::fillSelect();
 
+
         $defaultLng = Auth::user()->latitude ?? geoip()->lat;
         $defaultLat = Auth::user()->longitude ?? geoip()->lon;
 
@@ -83,11 +84,15 @@ class ClubController extends Controller
     public function store(ClubRequest $request)
     {
         try {
+            if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
+            if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
             $club = Club::create($request->all());
+
             $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
             flash()->success($msg);
             return redirect("clubs");
         } catch (QueryException $e) {
+            dd($e);
             $user = User::find($request->president_id);
             $msg = trans('msg.club_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);
@@ -157,6 +162,9 @@ class ClubController extends Controller
             throw new AuthorizationException();
         }
         try {
+            if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
+            if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
+
             $club->update($request->all());
             $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
             flash()->success($msg);
@@ -179,7 +187,6 @@ class ClubController extends Controller
     public function destroy($clubId)
     {
         $club = Club::find($clubId);
-//        dd($club);
         if ($club->delete()) {
             return Response::json(['msg' => trans('msg.club_delete_successful', ['name' => $club->name]), 'status' => 'success']);
         } else {

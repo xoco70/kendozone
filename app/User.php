@@ -451,11 +451,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (Auth::user()->isSuperAdmin()) {
             $users = User::pluck('name', 'id');
         } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id')->prepend('-', 0);
         }
         return $users;
     }
@@ -465,11 +465,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (Auth::user()->isSuperAdmin()) {
             $users = User::pluck('name', 'id');
         } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $users = User::where('id',Auth::user()->id)->pluck('name', 'id')->prepend('-', '1');;
+            $users = User::where('id',Auth::user()->id)->pluck('name', 'id')->prepend('-', 0);
         }
         return $users;
 

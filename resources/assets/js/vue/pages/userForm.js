@@ -17,9 +17,9 @@ let vm = new Vue({
     methods: {
         getFederations: function () {
             var url = '/api/v1/users/'+user+'/federations/';
-            console.log(url);
             $.getJSON(url, function (data) {
                 vm.federations = data;
+                console.log(url);
             });
             this.associationSelected = 1;
         },

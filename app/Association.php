@@ -94,17 +94,17 @@ class Association extends Model
     {
         $associations = new Collection();
         if (Auth::user()->isSuperAdmin()) {
-            $associations = Association::pluck('name', 'id')->prepend('-', '1');;
+            $associations = Association::pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isFederationPresident()) {
-            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id')->prepend('-', '1');;
+            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isAssociationPresident()) {
             $association = Auth::user()->associationOwned;
             $associations->push($association);
-            $associations = $associations->pluck('name', 'id')->prepend('-', '1');;
+            $associations = $associations->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isClubPresident()) {
             $association = Auth::user()->clubOwned->association;
             $associations->push($association);
-            $associations = $associations->pluck('name', 'id')->prepend('-', '1');;
+            $associations = $associations->pluck('name', 'id')->prepend('-', 0);
         }
         return $associations;
     }
@@ -126,6 +126,8 @@ class Association extends Model
             $associations = $user->clubOwned->association()
                 ->where('federation_id', $federationId)
                 ->get(['id as value', 'name as text']);
+        }else if ($user->isUser()) {
+            $associations = $user->association()->get(['id as value', 'name as text']);
         }
         return $associations;
     }

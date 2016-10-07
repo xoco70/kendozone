@@ -53,9 +53,8 @@ class AssociationController extends Controller
             throw new AuthorizationException();
         }
 
-//        dd(Auth::user()->role);
-        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');
-        $federations = Federation::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');
+        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', 0);
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
@@ -75,14 +74,16 @@ class AssociationController extends Controller
         }
 
         try {
+            if ($request->president_id == 0)
+                $request->merge([ 'president_id' => null ]);
             $association = Association::create($request->all());
             $msg = trans('msg.association_create_successful', ['name' => $association->name]);
             flash()->success($msg);
             return redirect(route("associations.index"));
 
         } catch (QueryException $e) {
-
-            $msg = trans('msg.association_president_already_exists');
+            $user = User::find($request->president_id);
+            $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);
             return redirect()->back();
 
@@ -120,8 +121,8 @@ class AssociationController extends Controller
             throw new AuthorizationException();
         }
 
-        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');;
-        $federations = Federation::forUser(Auth::user())->pluck('name', 'id')->prepend('-', '1');;
+        $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', 0);
+        $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
 
         return view('associations.form', compact('currentModelName', 'association', 'users', 'federations', 'federation'));
     }
@@ -142,14 +143,18 @@ class AssociationController extends Controller
             throw new AuthorizationException();
         }
         try {
-            $association->update($request->except(['federation_id']));
+            if ($request->president_id == 0)
+                $request->merge([ 'president_id' => null ]);
+
+            $association->update($request->all());
             $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
             flash()->success($msg);
             return redirect(route('associations.index'));
 
         } catch (QueryException $e) {
-
-            $msg = trans('msg.association_president_already_exists');
+            dd($e);
+            $user = User::find($request->president_id);
+            $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);
             return redirect()->back();
 
@@ -166,7 +171,7 @@ class AssociationController extends Controller
     public function destroy($associationId)
     {
         $association = Association::find($associationId);
-//        dd($association);
+
         if ($association->delete()) {
             return Response::json(['msg' => trans('msg.association_delete_successful', ['name' => $association->name]), 'status' => 'success']);
         } else {
