@@ -22,10 +22,10 @@ $( document ).ready(function() {
 
         }, oninitialized: function (component) {
 
-            $('#address').val(address);
-            $('#city').val(city);
-            $('#CP').val(cp);
-            $('#state').val(state);
+            $('#address').val(club.address);
+            $('#city').val(club.city);
+            $('#CP').val(club.cp);
+            $('#state').val(club.state);
             $('#latitude').val(latitude);
             $('#longitude').val(longitude);
         }

@@ -43,7 +43,7 @@
 
                             </div>
                             {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
-                            {!!  Form::select('federation_id', $federations,old('federation_id'), ['class' => 'form-control']) !!}
+                            {!!  Form::select('federation_id', $federations,$club->federation !=null ? $club->federation->id : null, ['class' => 'form-control']) !!}
 
 
                             <br/>
@@ -114,10 +114,7 @@
         club = JSON.parse(club);
         var longitude = "{{ $club->longitude ?? $defaultLng }}";
         var latitude = "{{ $club->latitude ?? $defaultLat }}";
-        var address = "{{ $club->address }}";
-        var city = "{{ $club->city }}";
-        var cp = "{{ $club->cp }}";
-        var state = "{{ $club->state }}";
+
 
     </script>
     {!! Html::script('js/pages/footer/club.js') !!}
