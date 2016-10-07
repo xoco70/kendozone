@@ -10,6 +10,7 @@ class CreateClubTable extends Migration {
 		Schema::create('club', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
+            $table->integer('federation_id')->unsigned();
 			$table->integer('association_id')->unsigned();
 			$table->integer('president_id')->nullable()->unsigned();
 			$table->string('address')->nullable();
@@ -39,7 +40,13 @@ class CreateClubTable extends Migration {
 				->onUpdate('cascade')
 				->onDelete('cascade');
 
-			$table->foreign('association_id')
+            $table->foreign('federation_id')
+                ->references('id')
+                ->on('federation')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('association_id')
 				->references('id')
 				->on('association')
 				->onUpdate('cascade')

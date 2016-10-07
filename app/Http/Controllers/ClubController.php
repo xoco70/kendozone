@@ -71,7 +71,7 @@ class ClubController extends Controller
         $defaultLat = Auth::user()->longitude ?? geoip()->lon;
 
 
-        return view('clubs.form', compact('club', 'users', 'federations', 'associations','defaultLng','defaultLat')); //
+        return view('clubs.form', compact('club', 'users', 'federations', 'associations', 'defaultLng', 'defaultLat')); //
     }
 
     /**
@@ -83,13 +83,13 @@ class ClubController extends Controller
     public function store(ClubRequest $request)
     {
         try {
-            $club = Club::create($request->except(['federation_id']));
+            $club = Club::create($request->all());
             $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
             flash()->success($msg);
             return redirect("clubs");
         } catch (QueryException $e) {
             $user = User::find($request->president_id);
-            $msg = trans('msg.club_president_already_exists',['user' => $user->name] );
+            $msg = trans('msg.club_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);
             return redirect()->back();
         }
@@ -118,6 +118,9 @@ class ClubController extends Controller
      */
     public function edit($id)
     {
+//        $federation = new Federation();
+//        $association = new Association();
+
         $club = Club::findOrFail($id);
         if (Auth::user()->cannot('edit', $club)) {
             throw new AuthorizationException();
@@ -127,6 +130,13 @@ class ClubController extends Controller
         $associations = Association::fillSelect();
         $users = User::getClubPresidentsList();
 
+//        $association = $club->association();
+//        if ($association->get() != null) {
+//            $federation = $association->federation;
+//        }
+
+
+//        $oldFederation =
 
         return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //
     }
@@ -147,7 +157,7 @@ class ClubController extends Controller
             throw new AuthorizationException();
         }
         try {
-            $club->update($request->except(['federation_id']));
+            $club->update($request->all());
             $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
             flash()->success($msg);
             return redirect("clubs");

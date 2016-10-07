@@ -10,7 +10,7 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
         'name' => $faker->text(10),
         'association_id' => $faker->randomElement($associations),
         'president_id' => $faker->randomElement($users),
-        'address' => $faker->address,
+        'address' => $faker->streetName,
         'phone' => $faker->phoneNumber,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude
