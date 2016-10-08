@@ -152,7 +152,6 @@ class AssociationController extends Controller
             return redirect(route('associations.index'));
 
         } catch (QueryException $e) {
-            dd($e);
             $user = User::find($request->president_id);
             $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);

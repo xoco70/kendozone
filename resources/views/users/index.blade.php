@@ -54,8 +54,8 @@
                         <td><img src="/images/flags/{{ $user->country->flag }}"
                                  alt="{{ $user->country->name }}"/></td>
 
-                        <td>{{ trans($user->federation->name) }}</td>
-                        <td>{{trans($user->association->name) }}</td>
+                        <td>{{ $user->federation != null ? trans($user->federation->name) : " - "}}</td>
+                        <td>{{ $user->association != null ? trans($user->association->name) : " - " }}</td>
                         <td class="text-center">
                             <a href="{{URL::action('UserController@edit', $user->slug)}}">
                                 <i class="icon icon-pencil7"></i></a>
