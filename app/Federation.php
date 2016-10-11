@@ -63,26 +63,6 @@ class Federation extends Model
         }
     }
 
-    public static function fillSelect2($user)
-    {
-        $federations = new Collection();
-
-        if ($user->isSuperAdmin()) {
-            // User is SuperAdmin
-            $federations = Federation::get(['id as value', 'name as text']);
-        } else if ($user->isFederationPresident()) {
-            $federations = $user->federationOwned()->get(['id as value', 'name as text']);
-        } else if ($user->isAssociationPresident()) {
-            $federations = $user->associationOwned->federation()->get(['id as value', 'name as text']);
-        } else if ($user->isClubPresident()) {
-            $federations = $user->clubOwned->association->federation()->get(['id as value', 'name as text']);
-        } else if ($user->isUser()) {
-            $federations = $user->federation()->get(['id as value', 'name as text']);
-        }
-        return $federations;
-    }
-
-
     public static function fillSelect()
     {
         $federations = new Collection();
@@ -106,5 +86,25 @@ class Federation extends Model
 
         return $federations;
     }
+
+    public static function fillSelectForVueJs($user)
+    {
+        $federations = new Collection();
+
+        if ($user->isSuperAdmin()) {
+            // User is SuperAdmin
+            $federations = Federation::get(['id as value', 'name as text']);
+        } else if ($user->isFederationPresident()) {
+            $federations = $user->federationOwned()->get(['id as value', 'name as text']);
+        } else if ($user->isAssociationPresident()) {
+            $federations = $user->associationOwned->federation()->get(['id as value', 'name as text']);
+        } else if ($user->isClubPresident()) {
+            $federations = $user->clubOwned->association->federation()->get(['id as value', 'name as text']);
+        } else if ($user->isUser()) {
+            $federations = $user->federation()->get(['id as value', 'name as text']);
+        }
+        return $federations;
+    }
+
 
 }

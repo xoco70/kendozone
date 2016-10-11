@@ -236,17 +236,17 @@ class UserController extends Controller
 
     public function myFederations(User $user)
     {
-        return Federation::fillSelect2($user);
+        return Federation::fillSelectForVueJs($user);
     }
 
     public function myAssociations(User $user, $federationId)
     {
-        return Association::fillSelect2($user, $federationId);
+        return Association::fillSelectForVuejs($user, $federationId);
     }
 
     public function myClubs(User $user, $associationId)
     {
-        return Club::fillSelect2($user, $associationId);
+        return Club::fillSelectForVueJs($user, $associationId);
     }
 
 }

@@ -109,7 +109,7 @@ class Association extends Model
         return $associations;
     }
 
-    public static function fillSelect2($user, $federationId)
+    public static function fillSelectForVueJs($user, $federationId)
     {
         $associations = new Collection();
         if ($user->isSuperAdmin()) {

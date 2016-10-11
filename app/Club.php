@@ -156,7 +156,7 @@ class Club extends Model
         return $clubs;
     }
 
-    public static function fillSelect2(User $user, $associationId)
+    public static function fillSelectForVueJs(User $user, $associationId)
     {
         $clubs = new Collection();
         if ($user->isSuperAdmin()) {
