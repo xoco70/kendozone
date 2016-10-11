@@ -17,10 +17,10 @@ class FederationSeeder extends Seeder
     {
 
         Federation::truncate();
-        Federation::create([
-            'name' => 'core.no_federation',
-            'president_id' =>null,
-            'country_id' => 484]);
+//        Federation::create([
+//            'name' => 'core.no_federation',
+//            'president_id' =>null,
+//            'country_id' => 484]);
         // Create Maya
         $fmk_president = factory(User::class)->create(
             ['name' => 'FMK',
@@ -28,7 +28,7 @@ class FederationSeeder extends Seeder
                 'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
                 'password' => bcrypt('fmk'),
                 'country_id' => 484,
-                'federation_id' => 37, // FK Check unactive
+                'federation_id' => 36, // FK Check unactive
                 'verified' => 1]);
 
         

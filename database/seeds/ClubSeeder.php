@@ -22,10 +22,10 @@ class ClubSeeder extends Seeder
         Club::truncate();
         $faker = Faker\Factory::create();
 
-        Club::create([
-            'name' => 'core.no_club',
-            'president_id' => '1',
-            'association_id' => '1']);
+//        Club::create([
+//            'name' => 'core.no_club',
+//            'president_id' => '1',
+//            'association_id' => '1']);
 
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
@@ -34,15 +34,15 @@ class ClubSeeder extends Seeder
                 'password' => bcrypt('naucali'),
                 'verified' => 1,
                 'country_id' => 484,
-                'federation_id' => 37,
-                'association_id' => 7,
+                'federation_id' => 36,
+                'association_id' => 6,
                 'club_id' => 2,
             ]);
 
         try {
             factory(Club::class)->create(
-                [   'federation_id' => 37,
-                    'association_id' => 7,
+                [   'federation_id' => 36,
+                    'association_id' => 6,
                     'president_id' => $naucali_presidente->id,
                     'name' => 'Naucali'
                 ]);
@@ -53,8 +53,8 @@ class ClubSeeder extends Seeder
         try {
             factory(Club::class)->create(
                 [
-                    'federation_id' => 37,
-                    'association_id' => 8,
+                    'federation_id' => 36,
+                    'association_id' => 7,
                     'name' => 'UNAM'
                 ]);
 
@@ -64,8 +64,8 @@ class ClubSeeder extends Seeder
         try {
             factory(Club::class)->create(
                 [
-                    'federation_id' => 37,
-                    'association_id' => 12,
+                    'federation_id' => 36,
+                    'association_id' => 11,
                     'name' => 'Zacatenco'
                 ]);
 
@@ -74,7 +74,7 @@ class ClubSeeder extends Seeder
         }
 
         try {
-            factory(Club::class, 5)->create(['federation_id' => 37,'association_id' => 7]);
+            factory(Club::class, 5)->create(['federation_id' => 36,'association_id' => 7]);
         } catch (Exception $e) {
         }
         try {

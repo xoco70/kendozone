@@ -101,7 +101,8 @@ class Federation extends Model
         } else if ($user->isClubPresident()) {
             $federations = $user->clubOwned->association->federation()->get(['id as value', 'name as text']);
         } else if ($user->isUser()) {
-            $federations = $user->federation()->get(['id as value', 'name as text']);
+            $federations = Federation::orderBy('id','asc')->get(['id as value', 'name as text'])->prepend(['value' =>'0', 'text' => '-']);
+
         }
         return $federations;
     }

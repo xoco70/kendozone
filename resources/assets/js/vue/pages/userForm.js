@@ -4,11 +4,11 @@ let vm = new Vue({
     el: 'body',
     data: {
         federations: [],
-        federationSelected: federationId,
+        federationSelected: currentFederationId,
         associations: [],
-        associationSelected: associationId,
+        associationSelected: currentAssociationId,
         clubs: [],
-        clubSelected: clubId,
+        clubSelected: currentClubId,
 
 
     },
@@ -19,16 +19,18 @@ let vm = new Vue({
             var url = '/api/v1/users/'+user+'/federations/';
             $.getJSON(url, function (data) {
                 vm.federations = data;
-                console.log(url);
             });
-            this.associationSelected = 1;
+            console.log(url);
+            this.associationSelected = 0;
         },
         getAssociations: function (federationSelected) {
+
             var url = '/api/v1/users/'+user+'/federations/' + federationSelected + '/associations';
             $.getJSON(url, function (data) {
                 vm.associations = data;
             });
-            this.clubSelected = 1;
+            console.log(url);
+            this.clubSelected = 0;
         },
         getClubs: function (associationSelected) {
             var url = '/api/v1/users/'+user+'/associations/' + associationSelected + "/clubs/";
@@ -38,11 +40,14 @@ let vm = new Vue({
         },
     }, ready: function () {
         this.getFederations();
-        this.associationSelected = associationId;
-        if (this.federationSelected != 1) {
+        console.log("currentFedId:"+currentFederationId);
+        console.log("currentAssocId:"+currentAssociationId);
+        console.log("currentClubId:"+currentClubId);
+        this.associationSelected = currentAssociationId;
+        if (this.federationSelected != 0) {
             this.getAssociations(this.federationSelected);
-            this.clubSelected = clubId;
-            if (this.associationSelected != 1) {
+            this.clubSelected = currentClubId;
+            if (this.associationSelected != 0) {
                 this.getClubs(this.associationSelected);
             }
         }

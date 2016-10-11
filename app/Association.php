@@ -100,7 +100,7 @@ class Association extends Model
         } else if (Auth::user()->isAssociationPresident()) {
             $association = Auth::user()->associationOwned;
             $associations->push($association);
-            $associations = $associations->pluck('name', 'id')->prepend('-', 0);
+            $associations = $associations->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident()) {
             $association = Auth::user()->clubOwned->association;
             $associations->push($association);
@@ -109,6 +109,7 @@ class Association extends Model
         return $associations;
     }
 
+    // Only used for the User UI
     public static function fillSelectForVueJs($user, $federationId)
     {
         $associations = new Collection();
@@ -126,8 +127,11 @@ class Association extends Model
             $associations = $user->clubOwned->association()
                 ->where('federation_id', $federationId)
                 ->get(['id as value', 'name as text']);
-        }else if ($user->isUser()) {
-            $associations = $user->association()->get(['id as value', 'name as text']);
+        } else if ($user->isUser()) {
+            $associations = Association::where('federation_id', $federationId)
+                ->get(['id as value', 'name as text'])
+                ->prepend(['value' => '0', 'text' => '-']);
+
         }
         return $associations;
     }

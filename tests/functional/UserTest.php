@@ -167,7 +167,7 @@ class UserTest extends TestCase
         $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
 
 //        $federation = Federation::inRandomOrder()->first();
-        $federation = Federation::inRandomOrder()->find(37);
+        $federation = Federation::inRandomOrder()->find(36);
 //        $association = Association::inRandomOrder()->where('federation_id', $federation->id)->first();
         $association = Association::find(8); // UNAM
         $club = Club::find(13); // UNAM

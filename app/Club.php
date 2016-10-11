@@ -2,7 +2,6 @@
 
 namespace App;
 
-use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -84,10 +83,10 @@ class Club extends Model
 
     public function federation()
     {
-            if ($this->association != null)
-                return $this->association->federation();
-            else
-                return $this->association();
+        if ($this->association != null)
+            return $this->association->federation();
+        else
+            return $this->association();
     }
 
 
@@ -151,7 +150,7 @@ class Club extends Model
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
             $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $clubs = Auth::user()->clubOwned->pluck('name', 'id');
+            $clubs = Auth::user()->clubOwned;
         }
         return $clubs;
     }
@@ -174,7 +173,9 @@ class Club extends Model
                 ->where('association_id', $associationId)
                 ->get(['club.id as value', 'club.name as text']);
         } else if ($user->isUser()) {
-            $clubs = $user->club()->get(['club.id as value', 'club.name as text']);
+            $clubs = Club::where('association_id', $associationId)
+                ->get(['id as value', 'name as text'])
+                ->prepend(['value' => '0', 'text' => '-']);
         }
         return $clubs;
     }

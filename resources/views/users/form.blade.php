@@ -143,7 +143,7 @@
                                     <select name="federation_id" v-model="federationSelected" id="federation_id"
                                             class="form-control" @change="getAssociations(federationSelected)">
                                     @if (Auth::user()->isSuperAdmin())
-                                        <option value="0"> - </option>
+                                        <option value="0"> -</option>
                                     @endif
                                     <option v-for="federation in federations" v-bind:value="federation.value"
                                             selected="@{{ federationId==federation.value }}">
@@ -157,7 +157,6 @@
 
                                     <select name="association_id" v-model="associationSelected" id="association_id"
                                             class="form-control" @change="getClubs(associationSelected)">
-                                    <option value="0"> - </option>
                                     <option v-for="association in associations" v-bind:value="association.value"
                                             selected="@{{ associationId==association.value }}">
                                         @{{ association.text }}
@@ -169,7 +168,6 @@
                                     {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
 
                                     <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
-                                        <option value="0"> -</option>
                                         <option v-for="club in clubs" v-bind:value="club.value">
                                             @{{ club.text }}
                                         </option>
@@ -288,12 +286,22 @@
     </div>
 @stop
 @section('scripts_footer')
+    <?php
+
+
+    ?>
+
+
+
     <script>
-        var federationId = "{{ $user->federation_id ?? Auth::user()->federation_id }}";
-        var associationId = "{{ $user->association_id ?? Auth::user()->association_id }}";
-        var clubId = "{{ $user->club_id ?? Auth::user()->club_id}}";
-        console.log(clubId);
-        var user = "{{ $user->slug ?? Auth::user()->slug }}";
+        var federationId = "{{ Auth::user()->federation_id }}";
+        var associationId = "{{ Auth::user()->association_id }}";
+        var clubId = "{{ Auth::user()->club_id}}";
+        var user = "{{ Auth::user()->slug }}";
+
+        var currentFederationId = "{{$user->federation_id ?? Auth::user()->federation_id }}";
+        var currentAssociationId = "{{$user->association_id ?? Auth::user()->association_id}}";
+        var currentClubId = "{{ $user->club_id ?? Auth::user()->club_id }}";
 
 
     </script>

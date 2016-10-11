@@ -92,7 +92,6 @@ class ClubController extends Controller
             flash()->success($msg);
             return redirect("clubs");
         } catch (QueryException $e) {
-            dd($e);
             $user = User::find($request->president_id);
             $msg = trans('msg.club_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);
