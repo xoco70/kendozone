@@ -2,6 +2,7 @@
 
 use App\Association;
 use App\Club;
+use App\Country;
 use App\Federation;
 use App\Grade;
 use App\User;
@@ -25,7 +26,7 @@ class UserSeeder extends Seeder
 //        $federations = Federation::all()->pluck('id')->toArray();
 //        $associations = Association::all()->pluck('id')->toArray();
 //        $clubs = Club::all()->pluck('id')->toArray();
-        $countries = Countries::pluck('id')->toArray();
+        $countries = Country::pluck('id')->toArray();
 
         User::create([
             'name' => 'No User',
