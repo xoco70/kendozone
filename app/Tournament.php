@@ -2,13 +2,12 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+
 use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
-use Webpatser\Countries\Countries;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 
 /**
@@ -19,16 +18,31 @@ use Webpatser\Countries\Countries;
  * @property mixed updated_at
  * @property mixed deleted_at
  */
-class Tournament extends Model implements SluggableInterface
+class Tournament extends Model
 {
     use SoftDeletes;
-    use SluggableTrait;
+    use Sluggable;
     use AuditingTrait;
 
-    protected $sluggable = [
-        'build_from' => 'name',
-        'save_to' => 'slug',
-    ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+//    protected $sluggable = [
+//        'build_from' => 'name',
+//        'save_to' => 'slug',
+//    ];
     protected $table = 'tournament';
     public $timestamps = true;
 

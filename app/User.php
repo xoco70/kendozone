@@ -5,8 +5,8 @@ namespace App;
 use App\Exceptions\NotOwningAssociationException;
 use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 use DateTime;
 use GeoIP;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -36,9 +36,9 @@ use Webpatser\Countries\Countries;
  * @property mixed token
  * @property  mixed clearPassword
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, SluggableTrait, AuditingTrait, Notifiable;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, Sluggable, AuditingTrait, Notifiable;
 
 
     /**
@@ -50,10 +50,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 //    protected $appends = [''];
 
-    protected $sluggable = [
-        'build_from' => 'email',
-        'save_to' => 'slug',
-    ];
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'email'
+            ]
+        ];
+    }
+
+//    protected $sluggable = [
+//        'build_from' => 'email',
+//        'save_to' => 'slug',
+//    ];
 
     /**
      * The attributes that are mass assignable.

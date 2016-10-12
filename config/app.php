@@ -167,7 +167,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Spatie\LinkChecker\LinkCheckerServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
