@@ -3,7 +3,7 @@
 use Webpatser\Countries\Countries;
 
 $factory->define(App\Venue::class, function (Faker\Generator $faker) {
-    $countries = Countries::all()->pluck('id')->toArray();
+    $countries = Countries::pluck('id')->toArray();
 
     return [
         'venue_name' => $faker->colorName,

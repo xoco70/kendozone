@@ -3,7 +3,7 @@ use Webpatser\Countries\Countries;
 use App\User;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    $countries = Countries::all()->pluck('id')->toArray();
+    $countries = Countries::pluck('id')->toArray();
 //    $federations = Federation::all()->pluck('id')->toArray();
 //    $associations = Association::all()->pluck('id')->toArray();
 //    $clubs = Club::all()->pluck('id')->toArray();
