@@ -35,7 +35,7 @@ class Federation extends Model
 
     public function country()
     {
-        return $this->belongsTo(Countries::Class);
+        return $this->belongsTo(Country::Class);
     }
 
     /**

@@ -118,7 +118,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     function addGeoData()
     {
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
-        $country = Countries::where('name', '=', $location['country'])->first();
+        $country = Country::where('name', '=', $location['country'])->first();
         if (is_null($country)) {
             $countryId = config('constants.COUNTRY_ID_DEFAULT');
             $city = "Paris";

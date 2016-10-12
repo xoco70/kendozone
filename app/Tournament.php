@@ -2,14 +2,13 @@
 
 namespace App;
 
-use Carbon\Carbon;
-use Countries;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
+use Webpatser\Countries\Countries;
 
 
 /**
@@ -81,7 +80,7 @@ class Tournament extends Model implements SluggableInterface
     {
         $venue = new Venue;
         $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
-        $country = Countries::where('name', '=', $location['country'])->first();
+        $country = Country::where('name', '=', $location['country'])->first();
         $venue->country_id = $country->id;
         if (is_null($country)) {
             $venue->latitude = 48.858222;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Association;
 use App\Club;
+use App\Country;
 use App\Federation;
 use App\Grade;
 use App\Http\Controllers\Api\AdministrativeStructureController;
@@ -70,7 +71,7 @@ class UserController extends Controller
 
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::pluck('name', 'id');
-        $countries = Countries::pluck('name', 'id');
+        $countries = Country::pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect(Auth::user());
         $associations = Association::fillSelect();
@@ -125,7 +126,7 @@ class UserController extends Controller
         }
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::orderBy('order')->pluck('name', 'id');
-        $countries = Countries::pluck('name', 'id');
+        $countries = Country::pluck('name', 'id');
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
         $clubs = Club::fillSelect();

@@ -2,12 +2,14 @@
 
 use App\Association;
 use App\Club;
+use App\Country;
 use App\Federation;
 use App\Grade;
 use App\User;
 use Faker\Factory as Faker;
 use Step\Acceptance\SimpleUser;
 use Step\Acceptance\SuperAdmin;
+use Webpatser\Countries\Countries;
 
 class UserCest
 {
@@ -17,7 +19,7 @@ class UserCest
     {
         $this->user = factory(User::class)->make();;
         $this->grades = Grade::all()->pluck('id')->toArray();
-        $this->countries = Countries::pluck('id')->toArray();
+        $this->countries = Country::pluck('id')->toArray();
 
     }
 

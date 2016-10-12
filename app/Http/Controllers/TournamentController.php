@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\ChampionshipSettings;
 use App\Championship;
+use App\Country;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
 use App\Http\Requests\TournamentRequest;
@@ -104,7 +105,7 @@ class TournamentController extends Controller
 
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
-        $countries = Countries::pluck('name', 'id');
+        $countries = Country::pluck('name', 'id');
         $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
         $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->championshipSettings->count();

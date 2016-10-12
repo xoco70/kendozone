@@ -1,9 +1,10 @@
 <?php
 
+use App\Country;
 use Webpatser\Countries\Countries;
 
 $factory->define(App\Venue::class, function (Faker\Generator $faker) {
-    $countries = Countries::pluck('id')->toArray();
+    $countries = Country::pluck('id')->toArray();
 
     return [
         'venue_name' => $faker->colorName,

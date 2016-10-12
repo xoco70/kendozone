@@ -1,9 +1,10 @@
 <?php
+use App\Country;
 use Webpatser\Countries\Countries;
 use App\User;
 
 $factory->define(App\Federation::class, function (Faker\Generator $faker) {
-    $countries = Countries::pluck('id')->toArray();
+    $countries = Country::pluck('id')->toArray();
 
     $users = User::all()->pluck('id')->toArray();
 
