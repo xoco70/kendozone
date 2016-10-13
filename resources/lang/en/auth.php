@@ -21,7 +21,7 @@ return [
     'signin' => 'Sign in',
     'signup' => 'Sign up',
     'remember' => 'Remember',
-    'lost_password' => 'Lost passowrd?',
+    'lost_password' => 'Lost password?',
     'create_account' => 'Create account',
     'title_login' => 'Login to Kendozone',
     'title_register' => 'Register to Kendozone',
