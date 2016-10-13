@@ -50,7 +50,9 @@ class AccountCreated extends Notification
         return (new MailMessage)
             ->subject($subject)
             ->greeting(trans('mail.dear_kenshi'))
-            ->line(trans('mail.user_invited_you', ['user' => Auth::user()->name, 'appName' => $appName]))
+            ->line(trans('mail.user_invited_you', [
+                'user' => $this->user->name,
+                'appName' => $appName]))
             ->line(trans('mail.please_click_link_to_confirm_account'))
             ->action(trans('mail.activate_account'), url("/register/confirm/{$this->user->token}"))
             ->line(trans('mail.tx_for_signup'));

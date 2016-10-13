@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class ChampionshipTest extends TestCase
 {
-    use DatabaseTransactions;
-//    use WithoutMiddleware;
+//    use DatabaseTransactions;
 
     protected $root;
 
@@ -44,11 +43,10 @@ class ChampionshipTest extends TestCase
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        $cs0 = factory(ChampionshipSettings::class)->make();
+        $cs0 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
         $arrCs0 = json_decode(json_encode($cs0), true);
 
-
-        $result = $this->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
+        $this->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
             ->seeInDatabase('championship_settings', $arrCs0);
     }
 
@@ -61,9 +59,6 @@ class ChampionshipTest extends TestCase
         $cs0 = factory(ChampionshipSettings::class)->create();
         $cs1 = factory(ChampionshipSettings::class)->make();
         $arrCs1 = json_decode(json_encode($cs1), true);
-
-
-        //TODO Endpoint should be /championships/{id}/settings
 
         $this->json('PUT', '/api/v1/championships/' . $champ0->id . '/settings/' . $cs0->id, $arrCs1)
             ->seeInDatabase('championship_settings', $arrCs1);

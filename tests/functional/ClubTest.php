@@ -35,7 +35,7 @@ class ClubTest extends TestCase
 
         $federation = factory(Federation::class)->create(['president_id' => null]);
 
-        $association = factory(Association::class)->create(['president_id' => null ] );
+        $association = factory(Association::class)->create(['president_id' => null]);
 
         $clubPresident = factory(User::class)->create([
             'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
@@ -71,7 +71,7 @@ class ClubTest extends TestCase
             'federation_id' => $fmk->federation->id,
             'association_id' => $association->id]);
 
-        $clubData = factory(Club::class)->make(['association_id' => $association->id, 'president_id' => $clubPresident->id]);
+        $clubData = factory(Club::class)->make(['federation_id' => $fmk->federation->id, 'association_id' => $association->id, 'president_id' => $clubPresident->id]);
         $this->crud($clubData);
     }
 
@@ -86,12 +86,16 @@ class ClubTest extends TestCase
             'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
             'federation_id' => $federation->id]);
 
-        $association = factory(Association::class)->create(['president_id' => $associationPresident->id]);
-
+        $association = factory(Association::class)->create([
+            'federation_id' => $federation->id,
+            'president_id' => $associationPresident->id]);
         $associationPresident->association_id = $association->id;
         $associationPresident->save();
 
-        $club = factory(Club::class)->make(['association_id' => $association->id, 'president_id' => $associationPresident->id]);
+        $club = factory(Club::class)->make([
+            'federation_id' => $federation->id,
+            'association_id' => $association->id,
+            'president_id' => $associationPresident->id]);
 
         $this->logWithUser($associationPresident);
 
@@ -104,9 +108,19 @@ class ClubTest extends TestCase
      */
     public function a_club_president_can_change_his_club_data() // But not to another club_president
     {
-        $federation = factory(Federation::class)->create(['president_id' => null]);
-        $association = factory(Association::class)->create(['president_id' => null]);
-        $myClub = factory(Club::class)->create(['president_id' => null]);
+//        $federation = factory(Federation::class)->create(['president_id' => null]);
+                $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+        $federation = $fmk->federation;
+
+        $association = factory(Association::class)->create([
+            'federation_id' => $federation->id,
+            'president_id' => null]);
+
+        $myClub = factory(Club::class)->create([
+            'federation_id' => $federation->id,
+            'association_id' => $association->id,
+            'president_id' => null,
+        ]);
 
         $clubPresident = factory(User::class)->create([
             'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
@@ -119,12 +133,13 @@ class ClubTest extends TestCase
 
         $this->logWithUser($clubPresident);
 
+        $club = factory(Club::class)->make([
+            'federation_id' => $federation->id,
+            'association_id' => $myClub->association_id,
+            'president_id' => $clubPresident->id ]);
+
         $this->visit("/clubs/" . $myClub->id . "/edit")
-            ->dontSee("403.png");
-
-        $club = factory(Club::class)->make(['association_id' => $myClub->association_id, 'president_id' => $myClub->president_id]);
-        $this->fillClubAndSee($club);
-
+            ->fillClubAndSee($club);
 
     }
 
@@ -184,20 +199,21 @@ class ClubTest extends TestCase
      */
     private function fillClubAndSee(Club $club)
     {
-        $clubs = Club::all();
-
         $this->type($club->name, 'name')
             ->type($club->address, 'address')
             ->type($club->phone, 'phone')
             ->select($club->federation_id, 'federation_id')
             ->select($club->association_id, 'association_id')
             ->select($club->president_id, 'president_id');
+
         $this->press(trans('core.save'));
+
         $this->seeInDatabase('club',
             ['name' => $club->name,
                 'address' => $club->address,
                 'phone' => $club->phone,
                 'president_id' => $club->president_id,
+                'federation_id' => $club->federation_id,
                 'association_id' => $club->association_id
             ]);
     }

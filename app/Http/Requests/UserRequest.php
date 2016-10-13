@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class UserRequest extends Request
 {
@@ -31,12 +32,10 @@ class UserRequest extends Request
     {
         $uniqueUser = '';
         $passwordRules = '';
-        if ($this->method == 'POST') {
+        if (Route::getCurrentRoute()->getPath() == 'users/create') {
             $passwordRules = '|required';
             $uniqueUser = '|unique:users';
         }
-
-
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,

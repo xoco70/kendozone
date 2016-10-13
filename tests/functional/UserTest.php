@@ -50,24 +50,19 @@ class UserTest extends TestCase
     /** @test */
     public function it_denies_creating_user_without_password()
     {
-        $this->logWithUser($this->simpleUser);
-        $this->visit('/')->dontSee(trans_choice('core.user', 2) . ' </a></li>');
-
-
         $this->logWithUser($this->root);
 
-        $this->visit('/')
-            ->click(trans_choice('core.user', 2))
-            ->see(trans_choice('core.user', 2))
-            ->click(trans('core.addModel', ['currentModelName' => trans_choice('core.user', 1)]))
-            ->type('MyUser', 'name')
-            ->type('julien@cappiello.fr3', 'email')
-            ->type('julien', 'firstname')
-            ->type('cappiello', 'lastname')
-            ->press(Lang::get('core.save'))
-            ->seePageIs('/users/create')
-            ->see(Lang::get('validation.required', ['attribute' => "password"]))
-            ->notSeeInDatabase('users', ['name' => 'MyUser']);
+        $user = new User;
+        $user->name = "MyUser";
+        $user->email = "julien@cappiello.fr3";
+        $user->firstname = 'julien';
+        $user->lastname = "cappiello";
+
+        $arrUser = json_decode(json_encode($user), true);
+
+        $this->json('POST', '/users/create', $arrUser);
+
+        $this->notSeeInDatabase('users', ['name' => 'MyUser']);
 
     }
 
