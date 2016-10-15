@@ -22,8 +22,6 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
 
     Route::post("category/create", 'CategoryController@store');
     Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
-//    Route::get("users/{user}/federations/{federation}/associations/", 'Api\AdministrativeStructureController@getAssociations');
-//    Route::get("users/{user}/federations/{federation}/associations/{association}/clubs/", 'Api\AdministrativeStructureController@getClubs');
     Route::get("users/{user}/federations/", 'UserController@myFederations');
     Route::get("users/{user}/federations/{id}/associations", 'UserController@myAssociations');
     Route::get("users/{user}/associations/{id}/clubs", 'UserController@myClubs');
@@ -41,7 +39,8 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
 
 
     Route::resource('championships/{championship}/settings', 'ChampionshipSettingsController',
-        ['names' => ['index' => 'api.championships.index',
+        ['names' => [
+            'index' => 'api.championships.index',
             'create' => 'api.championships.create',
             'edit' => 'api.championships.edit',
             'store' => 'api.championships.store',

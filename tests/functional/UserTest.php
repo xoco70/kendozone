@@ -7,10 +7,10 @@ use App\Competitor;
 use App\Federation;
 use App\Tournament;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Lang;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 class UserTest extends TestCase
 {
@@ -223,16 +223,19 @@ class UserTest extends TestCase
     {
         $this->logWithUser($this->simpleUser);
 
-        $this->json('PUT', '/users/' . $this->simpleUser->id,
-            ['password' => '222222',
+        $this->json('PUT', '/users/' . $this->simpleUser->slug,
+            ['name' => $this->simpleUser->name,
+                'email' => $this->simpleUser->email,
+                'password' => '222222',
                 'password_confirmation' => '222222'
             ]);
+
 
         //Logout
         Auth::logout();
 
-        $this->json('POST', '/login/', [
-            'email', $this->simpleUser->email,
+        $this->json('POST', '/login', [
+            'email' => $this->simpleUser->email,
             'password' => '222222']);
 
         assert(Auth::check(), true);

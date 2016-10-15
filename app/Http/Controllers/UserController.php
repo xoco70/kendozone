@@ -149,8 +149,9 @@ class UserController extends Controller
         } else
             flash()->error(Lang::get('msg.user_update_error'));
 
-        if ($user->id == Auth::user()->id)
+        if ($user->id == Auth::user()->id){
             return redirect(URL::action('UserController@edit', Auth::user()->slug));
+        }
 
         return redirect(route('users.index'));
 

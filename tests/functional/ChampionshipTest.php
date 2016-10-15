@@ -56,8 +56,8 @@ class ChampionshipTest extends TestCase
         $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        $cs0 = factory(ChampionshipSettings::class)->create();
-        $cs1 = factory(ChampionshipSettings::class)->make();
+        $cs0 = factory(ChampionshipSettings::class)->create(['championship_id' => $champ0->id]);
+        $cs1 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
         $arrCs1 = json_decode(json_encode($cs1), true);
 
         $this->json('PUT', '/api/v1/championships/' . $champ0->id . '/settings/' . $cs0->id, $arrCs1)

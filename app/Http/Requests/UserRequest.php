@@ -36,6 +36,7 @@ class UserRequest extends Request
             $passwordRules = '|required';
             $uniqueUser = '|unique:users';
         }
+
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
@@ -83,6 +84,7 @@ class UserRequest extends Request
         }
 
         if (trim($this->password) == '' && trim($this->password_confirmation) == '') {
+
             array_push($except, 'password');
         }
         array_push($except, '_token');
@@ -93,6 +95,7 @@ class UserRequest extends Request
         }
 
         $user->fill($req);
+
         if (!in_array('password', $except)) {
             $user->password = bcrypt($this->password);
         }

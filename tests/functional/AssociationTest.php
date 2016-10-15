@@ -58,7 +58,7 @@ class AssociationTest extends TestCase
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
         $this->logWithUser($associationPresident);
 
-        $federation = factory(Federation::class)->create();
+        $federation = factory(Federation::class)->create(['president_id' => null]);
         $myAssociation = factory(Association::class)->create(['federation_id' => $federation->id, 'president_id' => $associationPresident->id]);
 
 
