@@ -85,6 +85,7 @@ class ClubController extends Controller
     {
         try {
             if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
+            if ($request->federation_id == 0) $request->merge([ 'federation_id' => null ]);
             if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
             $club = Club::create($request->all());
 
@@ -92,6 +93,7 @@ class ClubController extends Controller
             flash()->success($msg);
             return redirect("clubs");
         } catch (QueryException $e) {
+            dd($e);
             $user = User::find($request->president_id);
             $msg = trans('msg.club_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);

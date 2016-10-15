@@ -28,12 +28,12 @@ class UserSeeder extends Seeder
 //        $clubs = Club::all()->pluck('id')->toArray();
         $countries = Country::pluck('id')->toArray();
 
-        User::create([
-            'name' => 'No User',
-            'email' => 'nouser@nouser.com',
-            'password' => bcrypt('0'),
-            'provider' => '0',
-        ]);
+//        User::create([
+//            'name' => 'No User',
+//            'email' => 'nouser@nouser.com',
+//            'password' => bcrypt('0'),
+//            'provider' => '0',
+//        ]);
         User::create([
             'name' => 'Juliatzin Del torro',
             'email' => 'flordcactus@gmail.com',

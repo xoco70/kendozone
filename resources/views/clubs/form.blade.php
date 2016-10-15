@@ -109,11 +109,17 @@
     </div>
 @stop
 @section('scripts_footer')
+    <?php
+    $venue = $venue ?? new App\Venue;
+    $club = $club ?? new App\Club;
+    $venue = $venue->setDefaultLocation($club->latitude, $club->longitude);
+    ?>
+
     <script>
         var club = "{!! addcslashes($club, '"') !!}";
         club = JSON.parse(club);
-        var longitude = "{{ $club->longitude ?? $defaultLng }}";
-        var latitude = "{{ $club->latitude ?? $defaultLat }}";
+        var longitude = "{{ $venue->longitude }}";
+        var latitude = "{{ $venue->latitude }}";
 
 
     </script>

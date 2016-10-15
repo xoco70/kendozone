@@ -463,7 +463,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $users = new Collection();
         if (Auth::user()->isSuperAdmin()) {
-            $users = User::pluck('name', 'id');
+            $users = User::pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
             $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {

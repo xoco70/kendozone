@@ -67,23 +67,8 @@
     $month = $now->month-1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
     $day = $now->day;
 
-    $userLat = Auth::getUser()->latitude;
-    $userLng = Auth::getUser()->longitude;
-    $venueLat = $venue->latitude;
-    $venueLong = $venue->longitude;
+    $venue = $venue->setDefaultLocation($venue->latitude, $venue->longitude);
 
-    if (!isNullOrEmptyString($venueLong) && !isNullOrEmptyString($venueLong)) {
-        $latitude = $venueLat;
-        $longitude = $venueLong;
-
-    } else if (!isNullOrEmptyString($userLat) && !isNullOrEmptyString($userLng)) {
-        $latitude = $userLat;
-        $longitude = $userLng;
-    } else {
-        //TODO Should popup for user localization
-        $latitude = 0;
-        $longitude = 0;
-    }
     ?>
 
 @stop
@@ -94,8 +79,8 @@
         var url_api_base = "{{ route('tournaments.api') }}";
         var url_api_root = "{{ route('api.root') }}";
         var url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
-        var longitude = "{{$longitude }}";
-        var latitude = "{{$latitude }}";
+        var longitude = "{{$venue->longitude }}";
+        var latitude = "{{$venue->latitude }}";
         var configured = "{{ trans('core.configured_full') }}";
         var allCategoriesSize = '{!! $categorySize !!}';
         var dualListIds = [];
