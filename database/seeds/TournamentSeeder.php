@@ -16,7 +16,7 @@ class TournamentSeeder extends Seeder
      */
     public function run()
     {
-//        $faker = Faker::create();
+        $this->command->info('Tournament seeding!');
         $venues = Venue::all()->pluck('id')->toArray();
 
         // Tournament creation
@@ -43,9 +43,8 @@ class TournamentSeeder extends Seeder
             try {
                 factory(Championship::class)->create();
             } catch (QueryException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
             } catch (PDOException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+
             }
         }
 
@@ -56,23 +55,11 @@ class TournamentSeeder extends Seeder
             try {
                 factory(Competitor::class)->create();
             } catch (QueryException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+
             } catch (PDOException $e) {
-//                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
+
             }
         }
-
-
-//        CategorySettings::truncate();
-//        for ($i = 0; $i < 50; $i++) {
-//            try {
-//                factory(CategorySettings::class)->create();
-//            } catch (QueryException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            } catch (PDOException $e) {
-////                $this->command->error("SQL Error: " . $e->getMessage() . "\n");
-//            }
-//        }
 
     }
 }

@@ -12,7 +12,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-
+        $this->command->info('Roles seeding!');
         DB::table('roles')->truncate();
         Role::create(['name' => "SuperAdmin",'label' => 'SuperAdmin']);
         Role::create(['name' => "FederationPresident",'label' => 'roles.federation.president']);
@@ -20,6 +20,6 @@ class RoleSeeder extends Seeder
         Role::create(['name' => "ClubPresident",'label' => 'roles.club.president']);
         Role::create(['name' => "user",'label' => 'roles.user']);
 
-        $this->command->info('Roles seeded!');
+
     }
 }

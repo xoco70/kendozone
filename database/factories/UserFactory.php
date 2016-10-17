@@ -4,9 +4,6 @@ use App\User;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     $countries = Country::pluck('id')->toArray();
-//    $federations = Federation::all()->pluck('id')->toArray();
-//    $associations = Association::all()->pluck('id')->toArray();
-//    $clubs = Club::all()->pluck('id')->toArray();
 
     $email = $faker->email;
     return [
@@ -18,9 +15,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => bcrypt(str_random(10)),
         'grade_id' => $faker->numberBetween(1, 5),
         'country_id' => $faker->randomElement($countries),
-//        'federation_id' => $faker->randomElement($federations),
-//        'association_id' => $faker->randomElement($associations),
-//        'club_id' => $faker->randomElement($clubs),
         'city' => $faker->city,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,

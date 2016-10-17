@@ -17,15 +17,11 @@ class ClubSeeder extends Seeder
 
     public function run()
     {
+        $this->command->info('Clubs Seeding!');
         $associations = Association::all()->pluck('id')->toArray();
 
         Club::truncate();
         $faker = Faker\Factory::create();
-
-//        Club::create([
-//            'name' => 'core.no_club',
-//            'president_id' => '1',
-//            'association_id' => '1']);
 
         $naucali_presidente = factory(User::class)->create(
             ['name' => 'naucali_President',
@@ -41,7 +37,7 @@ class ClubSeeder extends Seeder
 
         try {
             factory(Club::class)->create(
-                [   'federation_id' => 36,
+                ['federation_id' => 36,
                     'association_id' => 6,
                     'president_id' => $naucali_presidente->id,
                     'name' => 'Naucali'
@@ -74,15 +70,12 @@ class ClubSeeder extends Seeder
         }
 
         try {
-            factory(Club::class, 5)->create(['federation_id' => 36,'association_id' => 7]);
+            factory(Club::class, 5)->create(['federation_id' => 36, 'association_id' => 7]);
         } catch (Exception $e) {
         }
         try {
             factory(Club::class, 5)->create(['association_id' => $faker->randomElement($associations)]);
         } catch (Exception $e) {
         }
-
-
-        $this->command->info('Clubs Seeded!');
     }
 }

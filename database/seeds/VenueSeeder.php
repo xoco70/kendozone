@@ -12,10 +12,10 @@ class VenueSeeder extends Seeder
      */
     public function run()
     {
-
+        $this->command->info('Venues seeding!');
         DB::table('venue')->truncate();
         factory(Venue::class, 5)->create();
 
-        $this->command->info('Venues seeded!');
+
     }
 }

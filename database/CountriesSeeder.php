@@ -12,6 +12,7 @@ class CountriesSeeder extends Seeder {
      */
     public function run()
     {
+        $this->command->info('Countries seeding!');
         //Empty the countries table
         DB::table(\Config::get('countries.table_name'))->delete();
 

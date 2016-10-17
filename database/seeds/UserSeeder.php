@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->info('Users seeding!');
         $faker = Faker::create();
 
         $grades = Grade::all()->pluck('id')->toArray();
@@ -108,7 +109,7 @@ class UserSeeder extends Seeder
 
 
 
-        $this->command->info('Users seeded!');
+
 
     }
 }

@@ -16,11 +16,9 @@ class AssociationSeeder extends Seeder
 
     public function run()
     {
+        $this->command->info('Associations Seeding!');
+
         Association::truncate();
-//        Association::create([
-//            'name' => 'core.no_association',
-//            'president_id' => null,
-//            'federation_id' => null]);
         // Create Martin
         $aikem_presidente = factory(User::class)->create(
             ['name' => 'AIKEM_President',
@@ -61,6 +59,5 @@ class AssociationSeeder extends Seeder
         }
 
 
-        $this->command->info('Associations Seeded!');
     }
 }

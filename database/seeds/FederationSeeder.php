@@ -15,12 +15,8 @@ class FederationSeeder extends Seeder
 
     public function run()
     {
-
+        $this->command->info('Federations Seeding!');
         Federation::truncate();
-//        Federation::create([
-//            'name' => 'core.no_federation',
-//            'president_id' =>null,
-//            'country_id' => 484]);
         // Create Maya
         $fmk_president = factory(User::class)->create(
             ['name' => 'FMK',
@@ -84,7 +80,7 @@ class FederationSeeder extends Seeder
         Federation::create(['name' => 'New Zealand Kendo Federation', 'president_id' =>null, 'address' => '82a Bay Rd., St. Heliers, Aukland, New Zealand', 'phone' => '64-21-274-2415', 'country_id' => '554', 'website' => 'www.kendo.org.nz','email' =>'grahams@north21.co.nz']); //
 
 
-        $this->command->info('Federations Seeded!');
+
 
 
     }
