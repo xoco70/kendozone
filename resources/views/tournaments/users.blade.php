@@ -45,7 +45,7 @@
                                     <th class="all">{{ trans('core.username') }}</th>
                                     <th class="phone">{{ trans('core.email') }}</th>
                                     <th align="center" class="phone">{{ trans_choice('categories.category',1) }}</th>
-                                    <th align="center" class="phone">{{ trans('core.confirmed') }}</th>
+                                    <th align="center" class="phone">{{ trans('core.paid') }}</th>
                                     <th class="phone">{{ trans('core.country') }}</th>
                                     @can('edit',$tournament)
                                         <th class="all">{{ trans('core.action') }}</th>

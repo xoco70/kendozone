@@ -28,16 +28,10 @@ class UserCest
     {
         App::setLocale('es');
 
-        $I = new SimpleUser($scenario);
-        $I->logAsUser();
-        $I->dontSee(trans_choice('core.user', 2) . ' </a></li>');
-        $I->logout();
         $I = new SuperAdmin($scenario);
         $I->logAsSuperAdmin();
 
-        $I->click('#dropdown-user');
-        $I->click('#users');
-        $I->click('#adduser');
+        $I->amOnPage('/users/create');
         $I->fillField('name', $this->user->name);
         $I->fillField('email', $this->user->email);
         $I->fillField('firstname', $this->user->firstname);

@@ -65,12 +65,12 @@ class CompetitorTest extends TestCase
         foreach ($championships as $championship) {
 
 
-            $this->post('/tournaments/' . $tournament->slug . '/users/',
+                $this->post('/tournaments/' . $tournament->slug . '/users/',
                 ['championshipId' => $championship->id,
                     'username' => $user->name,
                     'email' => $user->email]);
 
-            $myUser = User::where('email', $user->email)->first();
+            $myUser = User::where('email', $user->email)->firstOrFail();
 
             $this->seeInDatabase('competitor',
                 ['championship_id' => $championship->id,

@@ -123,7 +123,7 @@ return [
     'add_competitor_to_category' => 'Agregar Competidor a la categoría :category',
     'select_competitor_categories' => 'Selecciona las categorías en las cuales deseas registrarte',
     'select_tournament_categories' => 'Selecciona las categorías abiertas para tu torneo',
-
+    'paid' => 'Pagado',
 
 
     // Invitation
