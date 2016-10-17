@@ -29,7 +29,8 @@
         "sentry/sentry-laravel": "^0.3.0",
         "laravolt/avatar": "^1.8",
         "aws/aws-sdk-php": "~3.0",
-        "cviebrock/eloquent-sluggable": "^4.1"
+        "cviebrock/eloquent-sluggable": "^4.1",
+        "laravel/passport": "^1.0"
 
     },
     "require-dev": {

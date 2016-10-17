@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
-use Webpatser\Countries\Countries;
 
 /**
  * @property  mixed name
@@ -38,7 +38,7 @@ use Webpatser\Countries\Countries;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, Sluggable, AuditingTrait, Notifiable;
+    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, Sluggable, AuditingTrait, Notifiable,HasApiTokens;
 
 
     /**

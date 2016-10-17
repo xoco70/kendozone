@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //})->middleware('auth:api');
 
-Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:api'
+Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     Route::get('/', 'DashboardController@index')->name('api.root');
 
     Route::post("category/create", 'CategoryController@store');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'v1'], function () { //TODO , 'middleware' => 'auth:ap
 
     Route::post('tournaments/{tournament}/restore', 'TournamentController@restore');
 
-    Route::get('users', 'TournamentController@index')->name('users.api');
+    Route::get('users', 'TournamentController@index')->name('users.api')->middleware('auth:api');
     Route::post('users/{user}/restore', 'UserController@restore');
 
 

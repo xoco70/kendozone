@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Http\Request;
+
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -93,4 +95,31 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 
         Route::get('logs', 'LogsController@index');
 
+
+//        Route::get('oauth', function(){
+//           return view('auth/oauth2');
+//        });
+
+
     });
+Route::get('/auth/callback', function (Request $request) {
+    $http = new GuzzleHttp\Client;
+
+    $response = $http->post('https://laravel.dev/oauth/token', [
+        'form_params' => [
+            'grant_type' => 'authorization_code',
+            'client_id' => '6',
+            'client_secret' => 'A0srL90BUGWT0ATUeFFmDeiqTVkk4sH93PvMp5FS',
+            'redirect_uri' => 'http://laravel.dev/auth/callback',
+            'code' => $request->code,
+        ],
+    ]);
+
+    return json_decode((string) $response->getBody(), true);
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

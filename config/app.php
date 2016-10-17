@@ -180,6 +180,8 @@ return [
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+
 
 
         /*
