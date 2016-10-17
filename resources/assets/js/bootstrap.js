@@ -31,6 +31,23 @@ Vue.http.interceptors.push((request, next) => {
     next();
 });
 
+Vue.http.interceptors.push((request, next ) => {
+    next((response) => {
+        if( 'Content-Type' in response.headers
+            && response.headers['Content-Type'] == 'application/json' ){
+            if( typeof response.data != 'object' ){
+                response.data = JSON.parse( response.data );
+            }
+        }
+
+        if( 'content-type' in response.headers
+            && response.headers['content-type'] == 'application/json' ){
+            if( typeof response.data != 'object' ){
+                response.data = JSON.parse( response.data );
+            }
+        }
+    });
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

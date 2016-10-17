@@ -123,3 +123,23 @@ Route::get('/auth/callback', function (Request $request) {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/auth/oauth', function(){
+    return view('auth.oauth');
+});
+
+Route::get('/callback', function (Request $request) {
+    $http = new GuzzleHttp\Client;
+
+    $response = $http->post('https://laravel.dev/oauth/token', [
+        'form_params' => [
+            'grant_type' => 'authorization_code',
+            'client_id' => '10',
+            'client_secret' => 'LdI1CLUsWOqfsuyGApZSTbns0wQcoSpKE7LRzSPc',
+            'redirect_uri' => 'https://laravel.dev/callback',
+            'code' => $request->code,
+        ],
+    ]);
+
+    return json_decode((string) $response->getBody(), true);
+});

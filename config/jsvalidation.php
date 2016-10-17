@@ -17,7 +17,7 @@ return array(
      * If you change the focus on detect some error then active
      * this parameter to move the focus to the first error found.
      */
-    'focus_on_error' => false,
+    'focus_on_error' => true,
 
     /*
      * Duration time for the animation when We are moving the focus
