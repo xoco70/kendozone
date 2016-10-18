@@ -52,10 +52,19 @@
 
 </div>
 <!-- /page container -->
+<script>
+    window.Laravel = {
+        csrfToken: "{{ csrf_token() }}"
+    };
 
+</script>
+{!! Html::script('js/bootstrap.js')!!}
+<script>
 
+</script>
 {!! Html::script('js/app.js')!!}
 {!! Html::script('js/analytics.js') !!}
+
 <script>
     $(document).ready(function () {
         $.protip();

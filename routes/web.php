@@ -128,6 +128,10 @@ Route::get('/auth/oauth', function(){
     return view('auth.oauth');
 });
 
+Route::get('/oauth_test', function(){
+    return view('oauth_ajax_test');
+});
+
 Route::get('/callback', function (Request $request) {
     $http = new GuzzleHttp\Client;
 

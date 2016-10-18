@@ -1,4 +1,3 @@
-let Vue = require('vue');
 
 let vm = new Vue({
     el: 'body',
@@ -17,32 +16,31 @@ let vm = new Vue({
     methods: {
         getFederations: function () {
             var url = '/api/v1/users/'+user+'/federations/';
-            $.getJSON(url, function (data) {
-                vm.federations = data;
-            });
-            console.log(url);
+            this.$http.get(url).then(response => {
+                    vm.federations = response.data;
+                });
+
             this.associationSelected = 0;
         },
         getAssociations: function (federationSelected) {
 
             var url = '/api/v1/users/'+user+'/federations/' + federationSelected + '/associations';
-            $.getJSON(url, function (data) {
-                vm.associations = data;
+            this.$http.get(url).then(response => {
+                vm.associations = response.data;
             });
-            console.log(url);
             this.clubSelected = 0;
         },
         getClubs: function (associationSelected) {
             var url = '/api/v1/users/'+user+'/associations/' + associationSelected + "/clubs/";
-            $.getJSON(url, function (data) {
-                vm.clubs = data;
+            this.$http.get(url).then(response => {
+                vm.clubs = response.data;
             });
         },
     }, ready: function () {
         this.getFederations();
-        console.log("currentFedId:"+currentFederationId);
-        console.log("currentAssocId:"+currentAssociationId);
-        console.log("currentClubId:"+currentClubId);
+        // console.log("currentFedId:"+currentFederationId);
+        // console.log("currentAssocId:"+currentAssociationId);
+        // console.log("currentClubId:"+currentClubId);
         this.associationSelected = currentAssociationId;
         if (this.federationSelected != 0) {
             this.getAssociations(this.federationSelected);

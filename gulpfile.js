@@ -18,6 +18,8 @@ elixir(function (mix) {
     mix.browserify('vue/pages/AddAliasToCategory.js');
     mix.browserify('vue/pages/userForm.js');
     mix.browserify('oauth.js');
+    mix.browserify('bootstrap.js');
+
 
 
     // General Styles for app
@@ -39,7 +41,7 @@ elixir(function (mix) {
         'components/noty/js/noty/packaged/jquery.noty.packaged.js',
         'plugins/forms/styling/switch.min.js',
         'vendor/jsvalidation/js/jsvalidation.js',
-        'components/protip/protip.min.js'
+        'components/protip/protip.min.js',
     ], 'public/js/app.js');
 
 

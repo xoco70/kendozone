@@ -305,6 +305,7 @@
 
 
     </script>
+    {{--Dropzone--}}
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('js/userForm.js') !!}
 

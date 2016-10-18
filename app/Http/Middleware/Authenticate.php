@@ -51,6 +51,7 @@ class Authenticate
      */
     protected function authenticate(array $guards)
     {
+
         if (empty($guards)) {
             return $this->auth->authenticate();
         }
@@ -60,7 +61,7 @@ class Authenticate
             }
         }
 
-        if ($this->auth->user()->verified == 0){
+        if ($this->auth->user()!= null && $this->auth->user()->verified == 0){
             flash()->error(trans('auth.account_not_activated'));
             return redirect()->guest('/login');
         }
