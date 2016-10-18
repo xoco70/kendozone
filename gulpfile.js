@@ -38,8 +38,8 @@ elixir(function (mix) {
         'core/app.js',
         'components/noty/js/noty/packaged/jquery.noty.packaged.js',
         'plugins/forms/styling/switch.min.js',
-        // 'vendor/jsvalidation/js/jsvalidation.js',
-        // 'components/protip/protip.min.js'
+        'vendor/jsvalidation/js/jsvalidation.js',
+        'components/protip/protip.min.js'
     ], 'public/js/app.js');
 
 

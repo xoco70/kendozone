@@ -56,11 +56,11 @@
 
 {!! Html::script('js/app.js')!!}
 {!! Html::script('js/analytics.js') !!}
-{{--<script>--}}
-    {{--$(document).ready(function () {--}}
-        {{--$.protip();--}}
-    {{--});--}}
-{{--</script>--}}
+<script>
+    $(document).ready(function () {
+        $.protip();
+    });
+</script>
 @include('layouts.flash')
 @yield('scripts_footer')
 
