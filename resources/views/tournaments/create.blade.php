@@ -53,7 +53,7 @@ $day = $now->day;
                 clear: '',
                 close: ''
             });
-            var pickerFin = $input.pickadate('picker')
+            var pickerFin = $input.pickadate('picker');
 
             var $inputIni =$('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
@@ -67,7 +67,7 @@ $day = $now->day;
                         pickerFin.set('min', this.get('select'));
                 }
             });
-            var pickerIni = $inputIni.pickadate('picker')
+            var pickerIni = $inputIni.pickadate('picker');
 
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
@@ -102,20 +102,17 @@ $day = $now->day;
                     $('#categories_desc').text("");
                 }
                 else if (this.value == 1) {
-                    console.log(ikf_categories);
+//                    console.log(ikf_categories);
                     $('#categories_desc').text(ikf_categories);
                 } else if (this.value == 2) {
-                    console.log(ekf_categories);
+//                    console.log(ekf_categories);
                     $('#categories_desc').text(ekf_categories);
                 } else if (this.value == 3) {
-                    console.log(lakc_categories);
+//                    console.log(lakc_categories);
                     $('#categories_desc').text(lakc_categories);
                 }
             });
-
-
         });
-
 
     </script>
 @stop
