@@ -38,11 +38,6 @@ class Authenticate
     public function handle($request, Closure $next, ...$guards)
     {
         $this->authenticate($guards);
-        if ($this->auth->user()->verified == 0){
-            flash()->error(trans('auth.account_not_activated'));
-            return redirect()->guest('/login');
-        }
-
         return $next($request);
     }
 
@@ -56,8 +51,6 @@ class Authenticate
      */
     protected function authenticate(array $guards)
     {
-
-
         if (empty($guards)) {
             return $this->auth->authenticate();
         }
@@ -67,7 +60,12 @@ class Authenticate
             }
         }
 
+        if ($this->auth->user()->verified == 0){
+            flash()->error(trans('auth.account_not_activated'));
+            return redirect()->guest('/login');
+        }
 
         throw new AuthenticationException;
     }
+
 }
