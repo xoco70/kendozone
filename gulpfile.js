@@ -127,9 +127,9 @@ elixir(function (mix) {
 
     // FOOTER
 
-    mix.scripts([
-        'pages/footer/categoryCreateFooter.js'
-    ], 'public/js/pages/footer/categoryCreateFooter.js');
+    // mix.scripts([
+    //     'pages/footer/categoryCreateFooter.js'
+    // ], 'public/js/pages/footer/categoryCreateFooter.js');
 
 
     mix.scripts([

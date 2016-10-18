@@ -20,11 +20,11 @@ Route::get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     Route::get('/', 'DashboardController@index')->name('api.root');
 
-    Route::post("category/create", 'CategoryController@store');
+    Route::post("category/create", 'CategoryController@store'); // Protected by OAuth2.0
     Route::get("federations", 'FederationController@index', ['names' => ['index' => 'api.federations.index', 'create' => 'api.federations.create', 'edit' => 'api.federations.edit', 'store' => 'api.federations.store', 'update' => 'api.federations.update']]);
-    Route::get("users/{user}/federations/", 'UserController@myFederations');
-    Route::get("users/{user}/federations/{id}/associations", 'UserController@myAssociations');
-    Route::get("users/{user}/associations/{id}/clubs", 'UserController@myClubs');
+    Route::get("users/{user}/federations/", 'UserController@myFederations'); // Protected by OAuth2.0
+    Route::get("users/{user}/federations/{id}/associations", 'UserController@myAssociations'); // Protected by OAuth2.0
+    Route::get("users/{user}/associations/{id}/clubs", 'UserController@myClubs'); // Protected by OAuth2.0
 
     Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 

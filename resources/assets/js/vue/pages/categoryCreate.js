@@ -1,5 +1,3 @@
-var Vue = require('vue');
-
 new Vue({
     el: 'body',
     data: {
@@ -45,7 +43,8 @@ new Vue({
             {value: 'F', text: female},
             {value: 'X', text: mixt}
         ],
-        categoryFullName: 'Individual Men'
+        categoryFullName: 'Individual Men',
+        url: '/api/v1/category/create',
 
 
     },
@@ -111,35 +110,36 @@ new Vue({
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
             });
-            $.ajax({
-                url: '/api/v1/category/create',
-                type: 'POST',
-                data: {
-                    "isTeam": this.isTeam, "gender": this.genderSelect, "alias": this.alias,
-                    "ageCategory": this.ageCategorySelect, "ageMin": this.ageMin, "ageMax": this.ageMax,
-                    "gradeCategory": this.gradeSelect, "gradeMin": this.gradeMin, "gradeMax": this.gradeMax
-                },
-                dataType: "json"
-            })
-                .done(function (data, textStatus, jqXHR) {  
-                    if (dualListIds.indexOf('' + data.id) == -1) {
-                        var option;
-                        console.log(this.alias);
-                        if (this.alias != '')
-                            option = '<option value=' + data.id + ' selected>' + this.alias + '</option>';
-                        else
-                            option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
-                        // console.log(option);
-                        dualList.append(option);
-                        dualList.bootstrapDualListbox('refresh');
-                    } else {
-                        // Print message
-                        this.error = " Ya existe el elemento";
-                    }
-                }.bind(this))
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("error:" + textStatus + "- " + errorThrown.toString());
-                });
+
+            let categoryData = {
+                "isTeam": this.isTeam,
+                "gender": this.genderSelect,
+                "alias": this.alias,
+                "ageCategory": this.ageCategorySelect,
+                "ageMin": this.ageMin,
+                "ageMax": this.ageMax,
+                "gradeCategory": this.gradeSelect,
+                "gradeMin": this.gradeMin,
+                "gradeMax": this.gradeMax
+            }
+
+
+            this.$http.post(this.url, categoryData).then(response => {
+                if (dualListIds.indexOf('' + response.data.id) == -1) {
+                    var option;
+                    console.log(this.alias);
+                    if (this.alias != '')
+                        option = '<option value=' + response.data.id + ' selected>' + this.alias + '</option>';
+                    else
+                        option = '<option value=' + response.data.id + ' selected>' + this.categoryFullName + '</option>';
+                    // console.log(option);
+                    dualList.append(option);
+                    dualList.bootstrapDualListbox('refresh');
+                } else {
+                    // Print message
+                    this.error = " Ya existe el elemento";
+                }
+            });
         },
 
         // $.getJSON(url, function (data) {
