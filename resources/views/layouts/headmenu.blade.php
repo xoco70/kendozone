@@ -56,7 +56,12 @@
                     @if (Auth::user()->isSuperAdmin())
                         <li><a href="{!! URL::to('logs')!!}">
                                 <i class="icon-file-text"></i> {!! Lang::get('core.logs') !!}
-                            </a></li>
+                            </a>
+                        </li>
+                        <li><a href="{!! URL::to('auth/oauth')!!}">
+                                <i class="icon-lock5"></i>Tokens
+                            </a>
+                        </li>
                     @endif
                     {{--====================================== Logout ======================================--}}
                     <li class="divider"></li>
