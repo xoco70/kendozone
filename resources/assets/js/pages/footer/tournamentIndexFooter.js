@@ -1,3 +1,8 @@
+
+$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
+});
+
 $(function () {
     var disabled = false;
     var tr = null;
@@ -63,8 +68,7 @@ $(function () {
         e.preventDefault();
         var inputData = $('#formDeleteTournament').serialize();
         var dataId = $(this).data('id');
-//                console.log(inputData);
-        console.log(dataId);
+
         tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');

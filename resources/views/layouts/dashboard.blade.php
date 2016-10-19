@@ -56,7 +56,7 @@
     window.Laravel = {
         csrfToken: "{{ csrf_token() }}"
     };
-
+    var csrfToken = "{{csrf_token()}}";
 </script>
 {!! Html::script('js/bootstrap.js')!!}
 <script>

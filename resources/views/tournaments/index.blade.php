@@ -12,7 +12,7 @@
     <script>
 
         var url ="{{ route('tournaments.index') }}";
-        var url_restore ="{{ route('tournaments.api') }}";
+        var url_restore ="{{ route('api.tournaments.index') }}";
 
     </script>
     {!! Html::script('js/pages/header/footable.js') !!}

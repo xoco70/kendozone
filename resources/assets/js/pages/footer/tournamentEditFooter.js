@@ -1,4 +1,7 @@
 $(function () {
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
+    });
 
     $('.fightDuration').timepicker(('option', {
         'minTime': '2:00',

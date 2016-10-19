@@ -76,7 +76,7 @@
 @section('scripts_footer')
     <script>
         var url_base = "{{ route('tournaments.index') }}";
-        var url_api_base = "{{ route('tournaments.api') }}";
+        var url_api_base = "{{ route('api.tournaments.index') }}";
         var url_api_root = "{{ route('api.root') }}";
         var url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
         var longitude = "{{$venue->longitude }}";

@@ -1,3 +1,7 @@
+$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
+});
+
 $(function () {
     var disabled = false;
     var tr = null;

@@ -81,7 +81,7 @@
 @section("scripts_footer")
     <script>
         var url = "{{ route('users.index') }}";
-        var url_restore = "{{ route('users.api') }}";
+        var url_restore = "{{ route('api.users.index') }}";
     </script>
     {!! Html::script('js/pages/header/footable.js') !!}
     {!! Html::script('js/pages/footer/userIndexFooter.js') !!}

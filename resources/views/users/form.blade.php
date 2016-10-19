@@ -335,6 +335,9 @@
                 dictDefaultMessage: 'Upload file',
                 addRemoveLinks: 'dictRemoveFile',
                 url: uploadUrl,
+                headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                },
                 maxFiles: 1,
 
                 init: function () {

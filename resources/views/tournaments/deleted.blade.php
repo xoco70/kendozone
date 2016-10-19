@@ -13,7 +13,7 @@
 @section("scripts_footer")
     <script>
         var url ="{{ route('tournaments.index') }}";
-        var url_restore ="{{ route('tournaments.api') }}";
+        var url_restore ="{{ route('api.tournament.index') }}";
 
 
     </script>
