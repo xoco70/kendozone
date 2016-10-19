@@ -190,7 +190,8 @@ class TournamentTest extends TestCase
             'user_id' => Auth::user()->id,
             'deleted_at' => '2015-12-12']);
 
-        $this->json('POST', '/api/v1/tournaments/' . $tournament->slug . '/restore')
+        $this->actingAs($this->root, 'api')
+            ->json('POST', '/api/v1/tournaments/' . $tournament->slug . '/restore')
             ->seeInDatabase('tournament', [
                 'id' => $tournament->id,
                 'deleted_at' => null

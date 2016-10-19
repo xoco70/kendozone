@@ -32,7 +32,8 @@ class ChampionshipTest extends TestCase
         $category = factory(\App\Category::class)->make();
         $arrCat1 = json_decode(json_encode($category), true);
 
-        $response = $this->json('POST', '/api/v1/category/create', $arrCat1);
+        $this->actingAs($this->root, 'api')
+            ->json('POST', '/api/v1/category/create', $arrCat1);
         unset($arrCat1['name']); // Remove category name that is translated and make test fail
         $this->seeInDatabase('category', $arrCat1);
     }
@@ -46,7 +47,8 @@ class ChampionshipTest extends TestCase
         $cs0 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
         $arrCs0 = json_decode(json_encode($cs0), true);
 
-        $this->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
+        $this->actingAs($this->root, 'api')
+            ->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
             ->seeInDatabase('championship_settings', $arrCs0);
     }
 
@@ -60,7 +62,9 @@ class ChampionshipTest extends TestCase
         $cs1 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
         $arrCs1 = json_decode(json_encode($cs1), true);
 
-        $this->json('PUT', '/api/v1/championships/' . $champ0->id . '/settings/' . $cs0->id, $arrCs1)
+
+        $this->actingAs($this->root, 'api')
+            ->json('PUT', '/api/v1/championships/' . $champ0->id . '/settings/' . $cs0->id, $arrCs1)
             ->seeInDatabase('championship_settings', $arrCs1);
 
     }
