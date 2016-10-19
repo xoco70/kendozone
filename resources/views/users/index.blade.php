@@ -51,8 +51,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role->name }}</td>
 
-                        <td><img src="/images/flags/{{ $user->country->flag }}"
-                                 alt="{{ $user->country->name }}"/></td>
+                        <td><img src="/images/flags/{{ $user->country->flag ?? "no_flag.png"}}"alt="{{ $user->country->name }}"/></td>
 
                         <td>{{ $user->federation != null ? trans($user->federation->name) : " - "}}</td>
                         <td>{{ $user->association != null ? trans($user->association->name) : " - " }}</td>

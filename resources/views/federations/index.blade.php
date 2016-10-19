@@ -45,8 +45,8 @@
                         <td align="center">{{ $federation->address }}</td>
                         <td align="center">{{ $federation->email}}</td>
                         <td align="center">{{ $federation->phone }}</td>
-                        <td align="center">@if ($federation->country!= null) <img
-                                    src="images/flags/{{ $federation->country->flag }}"/>@else &nbsp; @endif</td>
+                        <td align="center">@if ($federation->country!= null)
+                                <img src="images/flags/{{ $federation->country->flag ?? "no_flag.png"}}"/>@else &nbsp; @endif</td>
                         @can('edit', $federation)
                             <td align="center"><a
                                         href="{{URL::action('FederationController@edit', $federation->id)}}"><i
