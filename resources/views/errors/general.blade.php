@@ -9,7 +9,7 @@
                 eventId: '{{ $sentryID }}',
 
                 // use the public DSN (dont include your secret!)
-                dsn: 'http://12b22a4d7f744c36988a88b521796f2a@bugs.kendozone.com/2'
+                dsn: '{{env('SENTRY_DSN_PUBLIC')}}'
             });
         </script>
     @endunless
