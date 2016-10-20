@@ -1,10 +1,20 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-
-
 @stop
 
 @section('content')
+    <ul class="nav nav-lg nav-tabs nav-tabs-bottom search-results-tabs">
+        <li {{ Request::is('logs*') ? 'class=active' : '' }}>
+            <a href="{{ route('logs.index') }}">
+                <i class="position-left"></i> Logs
+            </a>
+        </li>
+        <li {{ Request::is('debug*') ? 'class=active' : '' }}>
+            <a href="{{ route('debug.index') }}">
+                <i class="position-left"></i> Debug
+            </a>
+        </li>
+    </ul>
 
     <table class="table table-togglable table-hover">
         <thead>

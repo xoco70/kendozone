@@ -215,7 +215,7 @@ class TournamentTest extends TestCase
 
         $response = $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
             ->seeInDatabase('tournament', $arrNewTournament);
-        dump($response);
+
     }
 
     /** @test */

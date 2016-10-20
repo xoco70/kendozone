@@ -93,7 +93,8 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('clubs/{club}/restore', 'ClubController@restore');
 
 
-        Route::get('logs', 'LogsController@index');
+        Route::get('logs', 'LogsController@index')->name('logs.index');
+        Route::get('debug', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('debug.index');
 
 
 //        Route::get('oauth', function(){

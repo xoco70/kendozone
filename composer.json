@@ -30,7 +30,8 @@
         "laravolt/avatar": "^1.8",
         "aws/aws-sdk-php": "~3.0",
         "cviebrock/eloquent-sluggable": "^4.1",
-        "laravel/passport": "^1.0"
+        "laravel/passport": "^1.0",
+        "rap2hpoutre/laravel-log-viewer": "^0.7.0"
 
     },
     "require-dev": {

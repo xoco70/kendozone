@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
 
 
