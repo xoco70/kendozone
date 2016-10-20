@@ -213,8 +213,9 @@ class TournamentTest extends TestCase
         $newTournament = factory(Tournament::class)->make(['user_id' => $tournament->user_id]);
         $arrNewTournament = json_decode(json_encode($newTournament), true);
 
-        $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
+        $response = $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
             ->seeInDatabase('tournament', $arrNewTournament);
+        dump($response);
     }
 
     /** @test */
