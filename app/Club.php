@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
+use stdClass;
 
 class Club extends Model
 {
@@ -159,7 +160,8 @@ class Club extends Model
     {
         $clubs = new Collection();
         if ($user->isSuperAdmin()) {
-            $clubs = Club::get(['id as value', 'name as text']);
+            $clubs = Club::where('association_id', $associationId)
+            ->get(['id as value', 'name as text']);
         } else if ($user->isFederationPresident() && $user->federationOwned != null) {
             $clubs = $user->federationOwned->clubs()
                 ->where('association_id', $associationId)
@@ -177,6 +179,14 @@ class Club extends Model
                 ->get(['id as value', 'name as text'])
                 ->prepend(['value' => '0', 'text' => '-']);
         }
+
+        if (sizeof($clubs) == 0 ){
+            $object = new stdClass;
+            $object->value = 0;
+            $object->text = trans('core.no_club_available');
+            $clubs->push($object);
+        };
+
         return $clubs;
     }
 

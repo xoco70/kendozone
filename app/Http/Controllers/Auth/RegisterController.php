@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
 use App\Notifications\AccountCreated;
+use App\Notifications\AccountRegistered;
 use App\Tournament;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -112,7 +113,7 @@ class RegisterController extends Controller
             return redirect()->back();
         }
 
-        $user->notify(new AccountCreated($user));
+        $user->notify(new AccountRegistered());
         flash()->success(trans('auth.check_your_email'));
         return redirect(URL::action('Auth\LoginController@login'));
 

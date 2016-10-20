@@ -83,7 +83,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param UserRequest $userForm
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|Response
      */
     public function store(UserRequest $userForm)
     {

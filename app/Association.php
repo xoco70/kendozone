@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
+use stdClass;
 
 class Association extends Model
 {
@@ -114,7 +115,8 @@ class Association extends Model
     {
         $associations = new Collection();
         if ($user->isSuperAdmin()) {
-            $associations = Association::get(['id as value', 'name as text']);
+            $associations = Association::where('federation_id', $federationId)
+                ->get(['id as value', 'name as text']);
         } else if ($user->isFederationPresident()) {
             $associations = $user->federationOwned->associations()
                 ->where('federation_id', $federationId)
@@ -133,6 +135,12 @@ class Association extends Model
                 ->prepend(['value' => '0', 'text' => '-']);
 
         }
+        if (sizeof($associations) == 0 ){
+            $object = new stdClass;
+            $object->value = 0;
+            $object->text = trans('core.no_association_yet');
+            $associations->push($object);
+        };
         return $associations;
     }
 

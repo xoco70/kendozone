@@ -36,12 +36,13 @@ class UserRequest extends Request
             $passwordRules = '|required';
             $uniqueUser = '|unique:users';
         }
-
-        return [
+        $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
             'password' => 'confirmed|min:6' . $passwordRules,
         ];
+
+        return $rules;
     }
 
 
