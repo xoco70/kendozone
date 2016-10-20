@@ -209,6 +209,7 @@ class TournamentTest extends TestCase
     {
 
         $tournament = factory(Tournament::class)->create();
+        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $newTournament = factory(Tournament::class)->make(['user_id' => $tournament->user_id]);
         $arrNewTournament = json_decode(json_encode($newTournament), true);
 

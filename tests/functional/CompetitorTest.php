@@ -34,7 +34,7 @@ class CompetitorTest extends TestCase
     }
 
     /** @test */
-    public function it_add_a_user_to_tournament_category()
+    public function it_add_a_user_to_championship()
     {
         $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
         factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
@@ -52,20 +52,20 @@ class CompetitorTest extends TestCase
 
 
         foreach ($usersToAdd as $user) {
-            $this->add_tcu($tournament, $user);
+            $this->addCompetitor($tournament, $user);
         }
         // It sends a mail...
 
     }
 
-    public function add_tcu($tournament, $user)
+    public function addCompetitor($tournament, $user)
     {
 
         $championships = $tournament->championships;
         foreach ($championships as $championship) {
 
-
-                $this->post('/tournaments/' . $tournament->slug . '/users/',
+            $this->actingAs($this->root, 'api')
+                ->post('/tournaments/' . $tournament->slug . '/users/',
                 ['championshipId' => $championship->id,
                     'username' => $user->name,
                     'email' => $user->email]);
