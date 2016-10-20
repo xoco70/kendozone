@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "71bf0fa273cba019a73d450754238d36",
-    "content-hash": "8898f03dbd04dc1d431b5710ad77f035",
+    "hash": "276e6417cdce5e60d0903a27f909c575",
+    "content-hash": "7bd6244345b77aa18e22eaf1541eb56f",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -6013,16 +6013,16 @@
         },
         {
             "name": "torann/geoip",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-geoip.git",
-                "reference": "f16f839160b1ab1fe41382e18ec9a32dd09b10fd"
+                "reference": "ae77f4ad99926fa35c89378f00a6a7295a7246ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/f16f839160b1ab1fe41382e18ec9a32dd09b10fd",
-                "reference": "f16f839160b1ab1fe41382e18ec9a32dd09b10fd",
+                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/ae77f4ad99926fa35c89378f00a6a7295a7246ea",
+                "reference": "ae77f4ad99926fa35c89378f00a6a7295a7246ea",
                 "shasum": ""
             },
             "require": {
@@ -6031,18 +6031,26 @@
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "phpspec/phpspec": "~2.1",
-                "phpunit/phpunit": "~4.0"
+                "geoip2/geoip2": "~2.1",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "geoip2/geoip2": "Required to use the MaxMind database or web service with GeoIP (~2.1).",
+                "monolog/monolog": "Allows for storing location not found errors to the log"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
                 "psr-4": {
-                    "Torann\\GeoIP\\": "src/Torann/GeoIP"
+                    "Torann\\GeoIP\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6052,18 +6060,21 @@
             "authors": [
                 {
                     "name": "Daniel Stainback",
-                    "email": "daniel@lyften.com"
+                    "email": "torann@gmail.com"
                 }
             ],
-            "description": "Supports the two main GeoIP services (infoDB and Maxmind).",
+            "description": "Support for multiple GeoIP services.",
             "keywords": [
+                "IP API",
                 "geoip",
                 "geolocation",
+                "infoDB",
                 "laravel",
                 "laravel 5",
-                "location"
+                "location",
+                "maxmind"
             ],
-            "time": "2015-06-30 16:13:35"
+            "time": "2016-10-17 17:29:40"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -6384,8 +6395,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "laravelcollective/html": 20,
-        "webpatser/laravel-countries": 20,
-        "torann/geoip": 20
+        "webpatser/laravel-countries": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
