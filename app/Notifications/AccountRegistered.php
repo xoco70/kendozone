@@ -13,6 +13,16 @@ class AccountRegistered extends Notification
 {
     use Queueable;
 
+    protected $user;
+
+    /**
+     * AccountCreated constructor.
+     * @param User $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     /**
      * Get the notification's delivery channels.
      *

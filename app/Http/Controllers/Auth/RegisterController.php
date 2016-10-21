@@ -113,7 +113,7 @@ class RegisterController extends Controller
             return redirect()->back();
         }
 
-        $user->notify(new AccountRegistered());
+        $user->notify(new AccountRegistered($user));
         flash()->success(trans('auth.check_your_email'));
         return redirect(URL::action('Auth\LoginController@login'));
 
