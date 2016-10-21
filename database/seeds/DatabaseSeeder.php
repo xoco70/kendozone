@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -10,8 +10,8 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        if (App::environment() === 'production') {
-            exit('Te acabo de salvar el pellejo. Estas en produccion pend***.');
+        if (! $this->confirmToProceed()) {
+            return;
         }
         Model::unguard();
         //Seed the countries
@@ -35,9 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
 
         $this->call(UserSeeder::class);
-//        $this->call(PermissionSeeder::class);
-//        $this->call(PermissionRoleSeeder::class);
-//        $this->call(UserRoleSeeder::class);
         $this->call(TournamentLevelSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TournamentSeeder::class);
@@ -58,5 +55,32 @@ class DatabaseSeeder extends Seeder
                 break;
         }
         Model::reguard();
+    }
+
+
+    public function confirmToProceed($warning = 'Application In Production!', $callback = null)
+    {
+        $shouldConfirm = $callback instanceof Closure ? call_user_func($callback) : $callback;
+
+        if ($shouldConfirm) {
+            if ($this->option('force')) {
+                return true;
+            }
+
+            $this->comment(str_repeat('*', strlen($warning) + 12));
+            $this->comment('*     '.$warning.'     *');
+            $this->comment(str_repeat('*', strlen($warning) + 12));
+            $this->output->writeln('');
+
+            $confirmed = Command::confirm('Do you really wish to run this command?');
+
+            if (! $confirmed) {
+                $this->comment('Command Cancelled!');
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }
