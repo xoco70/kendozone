@@ -8,7 +8,6 @@ use App\Exceptions\NotOwningFederationException;
 use Cviebrock\EloquentSluggable\Sluggable;
 
 use DateTime;
-use GeoIP;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -27,6 +26,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
+use Torann\GeoIP\Facades\GeoIP;
 
 /**
  * @property  mixed name
@@ -131,7 +131,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     function addGeoData()
     {
-        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
+        $location = geoip(getIP()); // Simulating IP in Mexico DF
         $country = Country::where('name', '=', $location['country'])->first();
         if (is_null($country)) {
             $countryId = config('constants.COUNTRY_ID_DEFAULT');
