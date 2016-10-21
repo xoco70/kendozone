@@ -25,7 +25,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
 
-        $this->baseUrl = env('APP_BASE', $this->baseUrl);
+        $this->baseUrl = env('URL_BASE', $this->baseUrl);
 //        $this->baseUrl = (app()->environment()=='local' ? getenv('APP_BASE') : config('app.url'));
 //        $this->baseUrl .= App::getLocale()."/";
 
