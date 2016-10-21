@@ -131,7 +131,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     function addGeoData()
     {
-        $ip = getIP();
+        $ip = Request::ip();
         $location = geoip($ip);
         $country = Country::where('name', '=', $location->country)->first();
         if (is_null($country)) {
