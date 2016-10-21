@@ -6,6 +6,6 @@ modules:
             browser: 'phantomjs'
             window_size: 1024x768
         Db:
-            dsn: 'mysql:host=kendozone.cp90iogazqzc.us-west-2.rds.amazonaws.com;dbname=kendozone'
+            dsn: 'mysql:host=kendozone.c2lndxw6n44r.us-east-1.rds.amazonaws.com;dbname=kendozone_test'
             user: 'kendozone'
             password: '3j8^vKJqfzWnjs'
