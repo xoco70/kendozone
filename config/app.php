@@ -250,7 +250,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Countries' => Webpatser\Countries\CountriesFacade::class,
         'Socialize' => Laravel\Socialite\Facades\Socialite::class,
-        'GeoIP' => Torann\GeoIP\GeoIPFacade::class,
+        'GeoIP' => Torann\GeoIP\Facades\GeoIP::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
