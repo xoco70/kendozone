@@ -19,7 +19,7 @@ class UserCest
     {
         $this->user = factory(User::class)->make();;
         $this->grades = Grade::all()->pluck('id')->toArray();
-        $this->countries = Country::pluck('id')->toArray();
+        $this->countries = Country::all()->pluck('id')->toArray();
 
     }
 
