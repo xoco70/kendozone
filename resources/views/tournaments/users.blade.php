@@ -6,9 +6,9 @@
     <?php
 //    $countries = Countries::all();
     $link = "";
-//    if ($settingSize > 0 && $settingSize == $categorySize)
-//        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-//    else
+    if ($settingSize > 0 && $settingSize == $categorySize)
+        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    else
         // For showing Modal
         $link = "";
 
@@ -31,10 +31,17 @@
                                    data-name="{!! $championship->category->buildName($grades) !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
+                                <a href="{{route('storeTree', [ 'championshipId' => $championship->id])}}"
+                                   class="btn bg-teal btn-xs pull-right mr-10">
+                                    <b><i class="icon-tree6 mr-5"></i></b>
+                                    Generate Tree
+                                </a>
+
                             @endcan
 
                             <a name="{{ str_slug($championship->category->buildName($grades), "-") }}">
-                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }}</legend>
+                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }} </legend>
+
                             </a>
 
                             <table class="table datatable-responsive" id="table{{ $championship->id }}">

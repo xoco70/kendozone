@@ -50,7 +50,7 @@ Route::group(['middleware' => ['guest']],
 
 
 
-Route::get('tournaments/deleted', 'TournamentController@getDeleted');
+
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
         Route::get('tournaments/{tournament}/register', 'TournamentController@register');
+        Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
         Route::resource('users', 'UserController', ['names' => [
             'index' => 'users.index',
@@ -101,6 +102,8 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 //           return view('auth/oauth2');
 //        });
 
+        Route::post('tournaments/{tournamentId}/trees/', 'TreeController@store')->name('storeAllTree');
+        Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('storeTree');;
 
     });
 Route::get('/auth/callback', function (Request $request) {
