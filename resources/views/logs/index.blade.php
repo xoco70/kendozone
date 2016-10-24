@@ -33,7 +33,7 @@
         @foreach($logs as $log)
             <tr>
                 <td>{!! $log->id !!}</td>
-                <td>{{ $log->user_id}}</td>
+                <td>@if ($log->user!= null) {{ $log->user->name }} @endif</td>
                 <td>{{ $log->owner_type }}</td>
                 <td>{{ $log->owner_id }}</td>
                 <td>{{ $log->type }}</td>
