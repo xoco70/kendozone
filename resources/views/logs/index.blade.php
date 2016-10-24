@@ -20,10 +20,10 @@
         <thead>
         <tr>
             <th data-toggle="true">ID</th>
-            <th >{{ trans_choice('core.user',1) }}</th>
-            <th >{{ trans('core.object_type') }}</th>
-            <th >{{ trans('core.object_id') }}</th>
-            <th >{{ trans('core.operation_type') }}</th>
+            <th>{{ trans_choice('core.user',1) }}</th>
+            <th>{{ trans('core.object_type') }}</th>
+            <th>{{ trans('core.object_id') }}</th>
+            <th>{{ trans('core.operation_type') }}</th>
             <th data-hide="all">{{ trans('core.old_value') }}</th>
             <th data-hide="all">{{ trans('core.new_value') }}</th>
             <th data-hide="phone">{{ trans('core.created_at') }}</th>
@@ -33,7 +33,7 @@
         @foreach($logs as $log)
             <tr>
                 <td>{!! $log->id !!}</td>
-                <td>{{ $log->user_id}}</td>
+                <td>@if ($log->user!= null) {{ $log->user->name }} @endif</td>
                 <td>{{ $log->owner_type }}</td>
                 <td>{{ $log->owner_id }}</td>
                 <td>{{ $log->type }}</td>
