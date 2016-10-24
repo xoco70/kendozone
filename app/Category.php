@@ -128,28 +128,28 @@ class Category extends Model
     {
         $ageCategoryText = '';
         $ageCategories = [
-            0 => trans('core.no_age'),
-            1 => trans('core.children'),
-            2 => trans('core.students'),
-            3 => trans('core.adults'),
-            4 => trans('core.masters'),
-            5 => trans('core.custom')
+            0 => trans('categories.no_age'),
+            1 => trans('categories.children'),
+            2 => trans('categories.students'),
+            3 => trans('categories.adults'),
+            4 => trans('categories.masters'),
+            5 => trans('categories.custom')
         ];
 
         if ($this->ageCategory != 0) {
             if ($this->ageCategory == 5) {
-                $ageCategoryText = ' - ' . trans('core.age') . ' : ';
+                $ageCategoryText = ' - ' . trans('categories.age') . ' : ';
                 if ($this->ageMin != 0 && $this->ageMax != 0) {
                     if ($this->ageMin == $this->ageMax) {
-                        $ageCategoryText .= $this->ageMax . ' ' . trans('core.years');
+                        $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
                     } else {
-                        $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('core.years');
+                        $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
                     }
 
                 } else if ($this->ageMin == 0 && $this->ageMax != 0) {
-                    $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('core.years');
+                    $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('categories.years');
                 } else if ($this->ageMin != 0 && $this->ageMax == 0) {
-                    $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('core.years');
+                    $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('categories.years');
                 } else {
                     $ageCategoryText = '';
                 }
@@ -164,9 +164,9 @@ class Category extends Model
     {
         $gradeText = '';
         if ($this->gradeCategory == 1) {
-            $gradeText = trans('core.first_force');
+            $gradeText = trans('categories.first_force');
         } else if ($this->gradeCategory == 2) {
-            $gradeText = trans('core.second_force');
+            $gradeText = trans('categories.second_force');
         } else if ($this->gradeCategory == 3) {
 
             $gradeText = ' - ' . trans('categories.grade') . ' : ';
