@@ -69,7 +69,7 @@ return [
     'federation_edit_successful' => 'Federation <br/><b>:name</b><br/> updated',
 
     'you_dont_own_federation' => 'You don\'t own any federation',
-    'please_ask_superadmin' => 'Update official FIK data and make a request to administrator (admin@kendozone.com)',
+    'please_ask_superadmin' => 'Update official FIK data and make a request to administrator (contact@kendozone.com)',
 
     //Association
     'association_create_successful' => 'Association <br/><b>:name</b><br/> created',

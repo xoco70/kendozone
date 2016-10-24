@@ -31,7 +31,7 @@ return [
             /**
              * The from address to be used by the mail reporter.
              */
-            'fromAddress' => 'admin@kendozone.com',
+            'fromAddress' => 'contact@kendozone.com',
             
             /**
              * The to address to be used by the mail reporter.

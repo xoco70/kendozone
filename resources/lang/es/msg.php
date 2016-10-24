@@ -70,7 +70,7 @@ return [
     'federation_edit_successful' => 'Federación <br/><b>:name</b><br/> actualizada exitosamente',
 
     'you_dont_own_federation' => 'No tienes federación asociada a tu cuenta',
-    'please_ask_superadmin' => 'Actualiza los registros oficiales de la FIK, y solicita al administrador (admin@kendozone.com)',
+    'please_ask_superadmin' => 'Actualiza los registros oficiales de la FIK, y solicita al administrador (contact@kendozone.com)',
 
 
 

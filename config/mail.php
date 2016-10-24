@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'admin@kendozone.com', 'name' => 'Kendozone Team'],
+    'from' => ['address' => 'contact@kendozone.com', 'name' => 'Kendozone Team'],
 
     /*
     |--------------------------------------------------------------------------
