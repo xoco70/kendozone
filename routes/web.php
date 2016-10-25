@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('tournaments/{tournament}/users', 'CompetitorController', ['names' => ['index' => 'tournament.users.index', 'show' => 'tournament.users.show', 'create' => 'tournament.users.create', 'edit' => 'tournament.users.edit', 'store' => 'tournament.users.store', 'update' => 'tournament.users.update']]);
         Route::delete('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/delete', 'CompetitorController@deleteUser');
         Route::put('tournaments/{tournamentId}/categories/{championshipId}/users/{userId}/confirm', 'CompetitorController@confirmUser');
-        Route::get('tournaments/{tournamentId}/trees/', 'TournamentController@generateTrees');
+
         Route::resource('invites', 'InviteController', ['names' => ['index' => 'invites.index', 'store' => 'invites.store', 'show' => 'invites.show']]);
         Route::post('invites/upload', 'InviteController@upload');
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');

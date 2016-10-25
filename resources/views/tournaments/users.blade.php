@@ -5,11 +5,11 @@
 @section('content')
     <?php
 //    $countries = Countries::all();
-    $link = "";
-    if ($settingSize > 0 && $settingSize == $categorySize)
-        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-    else
-        // For showing Modal
+//    $link = "";
+//    if ($settingSize > 0 && $settingSize == $categorySize)
+//        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+//    else
+//        // For showing Modal
         $link = "";
 
     ?>
@@ -31,11 +31,16 @@
                                    data-name="{!! $championship->category->buildName($grades) !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
-                                <a href="{{route('storeTree', [ 'championshipId' => $championship->id])}}"
-                                   class="btn bg-teal btn-xs pull-right mr-10">
-                                    <b><i class="icon-tree6 mr-5"></i></b>
-                                    Generate Tree
-                                </a>
+
+                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+                                             'action' => ['TreeController@store', $championship->id]]) !!}
+
+                                <button type="submit"
+                                        class="btn bg-teal btn-xs pull-right mr-10">
+                                    <i class="icon-tree6 mr-5"></i>Generate Trees
+                                </button>
+                                {!! Form::close() !!}
+
 
                             @endcan
 

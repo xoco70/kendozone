@@ -122,7 +122,8 @@
 $link = "";
 $id = "";
 if ($settingSize > 0 && $settingSize == $categorySize) {
-    $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    //$link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    $link = "";
     $id = "";
 } else {
     // For showing Modal
