@@ -29,7 +29,15 @@ return [
 
     'MIN_COMPETITOR' => 12,
 
-
+    // Tournament Levels
+    'ND' => 1,
+    'local' => 2,
+    'district' => 3,
+    'city' => 4,
+    'state' => 5,
+    'regional' => 6,
+    'national' => 7,
+    'international' => 8,
 
 
 ];

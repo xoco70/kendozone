@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Championship;
 use App\PreliminaryTree;
-use App\Tournament;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use Illuminate\Support\Collection;
-
-class TreeController extends Controller
+class PreliminaryTreeController extends Controller
 {
     /**
      * Display a listing of trees.
@@ -26,24 +21,29 @@ class TreeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|string
      */
     public function store(Request $request)
     {
 
         $championships = PreliminaryTree::getChampionships($request);
 
-        foreach ($championships as $championship){
+        foreach ($championships as $championship) {
+            // If no settings has been defined, take default
             $settings = $championship->settings;
+            $pt = PreliminaryTree::find($championship->id);
+            // Check if PT has already been generated
+            if ($pt!=null) {
+                return "tree has already been generated";
+            }
 
+            $generation = PreliminaryTree::getGenerationStrategy($settings);
+            $generation->run();
         }
 
 
-
-
-
         // Check if tree
-        
+
         // Get all settings
 //        return redirect()->back();
     }
