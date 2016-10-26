@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
+use App\PreliminaryTree;
+use App\Tournament;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Collection;
 
 class TreeController extends Controller
 {
@@ -27,11 +30,19 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-        $championshipId = $request->championshipId;
-        $championship = Championship::with('settings')->find($championshipId);
-        $settings = $championship->settings;
+
+        $championships = PreliminaryTree::getChampionships($request);
+
+        foreach ($championships as $championship){
+            $settings = $championship->settings;
+
+        }
 
 
+
+
+
+        // Check if tree
         
         // Get all settings
 //        return redirect()->back();
