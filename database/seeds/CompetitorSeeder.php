@@ -1,0 +1,56 @@
+<?php
+
+use App\Association;
+use App\Club;
+use App\Competitor;
+use App\Country;
+use App\Federation;
+use App\Grade;
+use App\User;
+use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
+use Webpatser\Countries\Countries;
+
+class CompetitorSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->command->info('Competitors seeding!');
+        $faker = Faker::create();
+
+//        $grades = Grade::all()->pluck('id')->toArray();
+//        $federations = Federation::all()->pluck('id')->toArray();
+//        $associations = Association::all()->pluck('id')->toArray();
+//        $clubs = Club::all()->pluck('id')->toArray();
+//        $countries = Country::pluck('id')->toArray();
+
+
+        for ($i = 0; $i < 15; $i++) {
+            $collection = factory(User::class, 5)->create(
+                [   'country_id' => 484,
+                    'federation_id' => 36,
+                    'association_id' => $i,
+                    'role_id' => Config::get('constants.ROLE_USER'),
+                    'password' => bcrypt('111111'),
+                    'verified' => 1]);
+            foreach ($collection as $user){
+                factory(Competitor::class)->create([
+                    'championship_id' => 1,
+                    'user_id' => $user->id,
+                    'confirmed' => 1,
+                ]);
+            }
+
+        }
+
+
+
+
+    }
+}

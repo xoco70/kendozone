@@ -49,9 +49,6 @@ class UserRequest extends Request
     public function store(){
 
         $data = $this->except('_token');
-        if ($this->avatar == ""){
-            $data['avatar'] = null;
-        }
 
         if ($this->is("users")) {
             $data['provider'] = "created";

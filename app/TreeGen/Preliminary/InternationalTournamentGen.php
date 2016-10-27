@@ -4,9 +4,9 @@
 namespace App\TreeGen\Preliminary;
 
 
-use App\Contracts\PreliminaryTournamentGenerable;
+use App\Contracts\PreliminaryTreeGenerable;
 
-class InternationalTournamentGen implements PreliminaryTournamentGenerable
+class InternationalTournamentGen implements PreliminaryTreeGenerable
 {
 
     public function run()

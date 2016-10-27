@@ -2,14 +2,13 @@
 
 namespace App;
 
-use App\TreeGen\Preliminary\NationalTournamentGen;
+use App\TreeGen\Preliminary\InternationalTournamentGen;
+use App\TreeGen\Preliminary\PreliminaryTreeGen;
+use App\TreeGen\Preliminary\RegionalTournamentGen;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use OwenIt\Auditing\AuditingTrait;
-use TreeGen\Preliminary\InternationalTournamentGen;
-use TreeGen\Preliminary\RegionalTournamentGen;
-
 
 class PreliminaryTree extends Model
 {
@@ -45,31 +44,36 @@ class PreliminaryTree extends Model
         return $championships;
     }
 
-    public static function getGenerationStrategy(ChampionshipSettings $settings)
+    public static function getGenerationStrategy(Championship $championship)
     {
-        $tournament = $settings->championship->tournament;
+        $tournament = $championship->tournament;
         switch($tournament->level_id){
             case Config::get('constants.ND'):
+                return new PreliminaryTreeGen($championship, null);
                 break;
             case Config::get('constants.local'):
+                return new PreliminaryTreeGen($championship, null);
                 break;
             case Config::get('constants.district'):
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.city'):
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.state'):
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.regional'):
-                return new RegionalTournamentGen;
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.national'):
-                return new NationalTournamentGen;
+                return new PreliminaryTreeGen($championship, 'association_id');
                 break;
             case Config::get('constants.international'):
-                return new InternationalTournamentGen;
+                return new PreliminaryTreeGen($championship, 'federation_id');
                 break;
         }
-        return "ND";
+        return null;
 
         // get Area number
         // get tournament type, and get criteria to repart

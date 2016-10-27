@@ -23,17 +23,17 @@ class Championship extends Model
         parent::boot();
 
         static::deleting(function ($championship) {
-            $championship->ctus()->delete();
+            $championship->competitors()->delete();
             $championship->settings()->delete();
         });
         static::restoring(function ($championship) {
-            $championship->ctus()->restore();
+            $championship->competitors()->restore();
             $championship->settings()->restore();
 
         });
     }
 
-    public function ctus()
+    public function competitors()
     {
         return $this->hasMany(Competitor::class, 'championship_id', 'id');
     }

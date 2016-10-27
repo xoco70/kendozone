@@ -4,7 +4,7 @@
 namespace App\Contracts;
 
 
-interface PreliminaryTournamentGenerable
+interface PreliminaryTreeGenerable
 {
     public function run();
 

@@ -53,7 +53,7 @@ $currency = Auth::user()->country->currency_code;
                 <div class="panel-heading">
 
                     <h6 class="panel-title">
-                            {!!  Form::input('text','alias',trans($championship->category->buildName($grades)), ['class' => 'form-control alias','id' => 'alias'.$key]) !!}
+                        {!!  Form::input('text','alias',trans($championship->category->buildName($grades)), ['class' => 'form-control alias','id' => 'alias'.$key]) !!}
                     </h6>
                 </div>
             </a>
@@ -88,7 +88,7 @@ $currency = Auth::user()->country->currency_code;
                         {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
-                        {!!  Form::select('fightingAreas', [1,2,4,8], old('fightingAreas'),['class' => 'form-control']) !!}
+                        {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
                     </div>
                     <div class="col-md-2">
 

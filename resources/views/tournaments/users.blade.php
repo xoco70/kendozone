@@ -4,13 +4,13 @@
 @stop
 @section('content')
     <?php
-//    $countries = Countries::all();
-//    $link = "";
-//    if ($settingSize > 0 && $settingSize == $categorySize)
-//        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-//    else
-//        // For showing Modal
-        $link = "";
+    //    $countries = Countries::all();
+    //    $link = "";
+    //    if ($settingSize > 0 && $settingSize == $categorySize)
+    //        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    //    else
+    //        // For showing Modal
+    $link = "";
 
     ?>
     <!-- Detached content -->
@@ -32,14 +32,15 @@
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
 
-                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
-                                             'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
+                                {{--{!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',--}}
+                                {{--'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}--}}
 
-                                <button type="submit"
+                                <button type="button" @click="loadButton()"
                                         class="btn bg-teal btn-xs pull-right mr-10">
-                                    <i class="icon-tree6 mr-5"></i>Generate Trees
+                                    <i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees
+
                                 </button>
-                                {!! Form::close() !!}
+                                {{--{!! Form::close() !!}--}}
 
 
                             @endcan
@@ -73,8 +74,8 @@
                                     ?>
                                     <tr>
                                         <td class="text-center">
-                                            <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
-                                                        src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}" class="img-circle img-sm"/></a>
+                                            {{--<a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img--}}
+                                            {{--src="{{ is_null($user->avatar) ? "/images/avatar/avatar.png" : $user->avatar  }}" class="img-circle img-sm"/></a>--}}
                                         </td>
                                         <td>
                                             @can('edit',$user)
@@ -162,7 +163,7 @@
 @stop
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
-
+    {!! Html::script('js/loadingButton.js') !!}
     {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
     <script>
 
