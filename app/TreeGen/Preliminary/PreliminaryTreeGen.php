@@ -7,6 +7,7 @@ namespace App\TreeGen\Preliminary;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Contracts\PreliminaryTreeGenerable;
+use App\PreliminaryTree;
 use Illuminate\Support\Collection;
 
 class PreliminaryTreeGen implements PreliminaryTreeGenerable
@@ -34,9 +35,27 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
             $users = $this->getUsersByEntity();
         }
 
+        // Chunk list by Areas
 
 
+        $usersByArea = $users->chunk(sizeof($users) / $areas);
 
+        $area = 1;
+
+        foreach ($usersByArea as $users) {
+
+            $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
+
+            $order = 1;
+            $numCompetitor = 0;
+            $pt = new PreliminaryTree;
+            $pt->area = $area;
+            $pt->order = $order;
+
+
+//
+            $area++;
+        }
 
 
         // Distribute competitors by State
