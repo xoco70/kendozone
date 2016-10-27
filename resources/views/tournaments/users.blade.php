@@ -35,13 +35,24 @@
                                 {{--{!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',--}}
                                 {{--'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}--}}
 
-                                <button type="button" @click="loadButton()"
-                                        class="btn bg-teal btn-xs pull-right mr-10">
-                                    <i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees
+                                {{--<button type="button" @click="loadButton()"--}}
+                                        {{--class="btn bg-teal btn-xs pull-right mr-10">--}}
+                                    {{--<i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees--}}
 
-                                </button>
+                                {{--</button>--}}
                                 {{--{!! Form::close() !!}--}}
 
+                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+                                'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
+
+                                <button type="submit"
+                                class="btn bg-teal btn-xs pull-right mr-10">
+                                <i class="mr-5"></i>Generate Trees
+
+                                </button>
+
+
+                                {!! Form::close() !!}
 
                             @endcan
 
@@ -74,8 +85,8 @@
                                     ?>
                                     <tr>
                                         <td class="text-center">
-                                            {{--<a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img--}}
-                                            {{--src="{{ is_null($user->avatar) ? "/images/avatar/avatar.png" : $user->avatar  }}" class="img-circle img-sm"/></a>--}}
+                                            <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
+                                            src="{{ $user->avatar}}" class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
                                             @can('edit',$user)

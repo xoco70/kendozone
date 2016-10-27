@@ -7,6 +7,7 @@ namespace App\TreeGen\Preliminary;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Contracts\PreliminaryTreeGenerable;
+use Illuminate\Support\Collection;
 
 class PreliminaryTreeGen implements PreliminaryTreeGenerable
 {
@@ -26,20 +27,57 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         // Get Areas
         $areas = $settings->fightingAreas;
 
-        // Get Competitors by statew
-        if ($this->groupBy == null){
+        // Get Competitor's list
+        if ($this->groupBy == null) {
             $users = $this->championship->users; // Single Collection -  Easier
-        }else{
-            $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
-            foreach ($userGroups as $userGroup){
-                // Parcours 15 subcollections with distinct size - Get Max Size
-
-            }
+        } else {
+            $users = $this->getUsersByEntity();
         }
+
+
+
 
 
 
         // Distribute competitors by State
         dd('Run national Generation');
+    }
+
+    /**
+     * @param $userGroups
+     * @return int
+     */
+    private function getMaxCompetitorByEntity($userGroups):int
+    {
+        $max = 0;
+        foreach ($userGroups as $userGroup) {
+            if (sizeof($userGroup) > $max) {
+                $max = sizeof($userGroup);
+            }
+
+        }
+        return $max;
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getUsersByEntity():Collection
+    {
+        $competitors = new Collection();
+
+        $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+        // Get biggest group.
+        $max = $this->getMaxCompetitorByEntity($userGroups);
+
+        for ($i = 0; $i < $max; $i++) {
+            foreach ($userGroups as $userGroup) {
+                $competitor = $userGroup->get($i);
+                if (isset($competitor)) {
+                    $competitors->push($userGroup->get($i));
+                }
+            }
+        }
+        return $competitors;
     }
 }
