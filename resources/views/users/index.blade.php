@@ -37,8 +37,8 @@
 
                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">
 
-                                    <img id="avatar" src="{{ $user->avatar ?? "/images/avatar/avatar.png" }}"/>
-
+                                    <img class="img-circle img-sm" src="{{ $user->avatar ?? "/images/avatar/avatar.png" }}"/>
+                                {{--Avatar::create($user->email)->toBase64()--}}
                             </a>
                         </td>
 

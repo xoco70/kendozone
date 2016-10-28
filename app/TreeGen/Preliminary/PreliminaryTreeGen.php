@@ -23,7 +23,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
     /*
      * TODO Definir: Min competitor by championship
-     *               Min competitor by areas
+     *               Min competitor by areas = 20
      *
      */
     public function run()
@@ -41,22 +41,22 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
             $users = $this->getUsersByEntity();
         }
 
-        // Chunk list by Areas
+        if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
+            dd ("Se requiere un minimo de ".config('constants.MIN_COMPETITORS_X_AREA'). " por area. Disminuya la cantidad de areas, o invita más competidores");
+        }
 
-//        dump(sizeof($users));
-//        dump($areas);
         $usersByArea = $users->chunk(sizeof($users) / $areas);
 
         $area = 1;
-//        dump($usersByArea);
+
         foreach ($usersByArea as $users) {
             $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
+            $order = 1;
 
             // Before doing anything, check last group if numUser = 1
-            foreach ($roundRobinGroups as $robinGroup){
+            foreach ($roundRobinGroups as $robinGroup) {
                 $robinGroup = $robinGroup->shuffle()->values();
 
-                $order = 1;
                 $pt = new PreliminaryTree;
                 $pt->area = $area;
                 $pt->order = $order;
@@ -73,10 +73,12 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
                 if (isset($c2)) $pt->c2 = $c2->id;
                 if (isset($c3)) $pt->c3 = $c3->id;
                 if (isset($c4)) $pt->c4 = $c4->id;
-                if (isset($c5)) $pt->c5 = $c5->id/**/;
+                if (isset($c5)) $pt->c5 = $c5->id/**/
+                ;
 
                 $pt->save();
                 $preliminiaryTress->push($pt);
+                $order++;
             }
             $area++;
         }

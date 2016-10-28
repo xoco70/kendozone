@@ -32,7 +32,7 @@ class PreliminaryTreeController extends Controller
             // If no settings has been defined, take default
             $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
             // Check if PT has already been generated
-            if ($preliminaryTree != null) {
+            if ($preliminaryTree != null && $preliminaryTree->count()>0) {
                 dump("PT has already been generated");
                 return view('preliminaryTree.index', compact('preliminaryTree'));
             } else {
@@ -40,14 +40,6 @@ class PreliminaryTreeController extends Controller
                 $preliminaryTree = $generation->run();
                 return view('preliminaryTree.index', compact('preliminaryTree'));
             }
-
-
         }
-
-        // Check if tree
-
-        // Get all settings
-
-        // return redirect()->back();
     }
 }
