@@ -7,6 +7,7 @@
         <p class="text-muted text-size-large">{{ trans('core.welcome_text') }}</p>
 
         <br/>
+        @include('layouts.dashboard.openInvites')
         <div align="center" class="mt-20 pt-20">
 
             <a href="{!! URL::action('TournamentController@create') !!}" type="button"

@@ -204,6 +204,7 @@ return [
     'create_new_tournament' => 'Create new Tournament',
     'congigure_categories' => 'Setup Categories',
     'see_open_tournaments' => 'See Open Tournaments',
+    'open_tournaments_in_your_country' => 'Open Tournaments in your country',
     'soon' => 'Soon',
     'configured_full' => 'configured',
     'see_all' => 'See all',
