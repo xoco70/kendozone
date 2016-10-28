@@ -28,6 +28,33 @@ class PreliminaryTree extends Model
         return $request->championshipId != null; // has return false, don't know why
     }
 
+    public function championship()
+    {
+        return $this->belongsTo(Championship::class);
+    }
+
+    public function user1()
+    {
+        return $this->belongsTo(User::class, 'c1','id');
+    }
+    public function user2()
+    {
+        return $this->belongsTo(User::class, 'c2','id');
+    }
+    public function user3()
+    {
+        return $this->belongsTo(User::class, 'c3','id');
+    }
+    public function user4()
+    {
+        return $this->belongsTo(User::class, 'c4','id');
+    }
+    public function user5()
+    {
+        return $this->belongsTo(User::class, 'c5','id');
+    }
+
+
     /**
      * @param $request
      * @return Collection

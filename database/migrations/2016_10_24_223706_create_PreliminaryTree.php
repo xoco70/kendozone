@@ -20,35 +20,35 @@ class CreatePreliminaryTree extends Migration
             $table->integer('c1')->unsigned()->index();
             $table->foreign('c1')
                 ->references('id')
-                ->on('competitor')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->integer('c2')->unsigned()->index();
             $table->foreign('c2')
                 ->references('id')
-                ->on('competitor')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('c3')->unsigned()->index();
+            $table->integer('c3')->nullable()->unsigned()->index();
             $table->foreign('c3')
                 ->references('id')
-                ->on('competitor')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('c4')->unsigned()->index();
+            $table->integer('c4')->nullable()->unsigned()->index();
             $table->foreign('c4')
                 ->references('id')
-                ->on('competitor')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('c5')->unsigned()->index();
+            $table->integer('c5')->nullable()->unsigned()->index();
             $table->foreign('c5')
                 ->references('id')
-                ->on('competitor')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

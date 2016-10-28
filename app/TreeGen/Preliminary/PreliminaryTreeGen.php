@@ -21,8 +21,14 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $this->groupBy = $groupBy;
     }
 
+    /*
+     * TODO Definir: Min competitor by championship
+     *               Min competitor by areas
+     *
+     */
     public function run()
     {
+        $preliminiaryTress = new Collection();
         $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.ikf_settings')[3]);
 
         // Get Areas
@@ -37,29 +43,44 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
         // Chunk list by Areas
 
-
+//        dump(sizeof($users));
+//        dump($areas);
         $usersByArea = $users->chunk(sizeof($users) / $areas);
 
         $area = 1;
-
+//        dump($usersByArea);
         foreach ($usersByArea as $users) {
-
             $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
 
-            $order = 1;
-            $numCompetitor = 0;
-            $pt = new PreliminaryTree;
-            $pt->area = $area;
-            $pt->order = $order;
+            // Before doing anything, check last group if numUser = 1
+            foreach ($roundRobinGroups as $robinGroup){
+                $robinGroup = $robinGroup->shuffle()->values();
+
+                $order = 1;
+                $pt = new PreliminaryTree;
+                $pt->area = $area;
+                $pt->order = $order;
+                $pt->championship_id = $this->championship->id;
 
 
-//
+                $c1 = $robinGroup->get(0);
+                $c2 = $robinGroup->get(1);
+                $c3 = $robinGroup->get(2);
+                $c4 = $robinGroup->get(3);
+                $c5 = $robinGroup->get(4);
+
+                if (isset($c1)) $pt->c1 = $c1->id;
+                if (isset($c2)) $pt->c2 = $c2->id;
+                if (isset($c3)) $pt->c3 = $c3->id;
+                if (isset($c4)) $pt->c4 = $c4->id;
+                if (isset($c5)) $pt->c5 = $c5->id/**/;
+
+                $pt->save();
+                $preliminiaryTress->push($pt);
+            }
             $area++;
         }
-
-
-        // Distribute competitors by State
-        dd('Run national Generation');
+        return $preliminiaryTress;
     }
 
     /**

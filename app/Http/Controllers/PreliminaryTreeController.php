@@ -38,7 +38,8 @@ class PreliminaryTreeController extends Controller
                 dump("tree has already been generated");
             } else {
                 $generation = PreliminaryTree::getGenerationStrategy($championship);
-                $generation->run();
+                $preliminaryTree = $generation->run();
+                return view('preliminaryTree.index', compact('preliminaryTree'));
             }
 
 
