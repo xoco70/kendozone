@@ -73,12 +73,13 @@ class UserTest extends TestCase
         $this->logWithUser($this->root);
         // Given
 
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $this->simpleUser->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id]);
         $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         factory(ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
         factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
-        $response = $this->call('DELETE', '/users/' . $this->simpleUser->slug);
+        $response = $this->actingAs($this->root,'api')->json('DELETE', '/users/' . $this->simpleUser->slug);
+        $this->dump();
         $this->assertEquals(200, $response->status());
 
 
@@ -206,10 +207,11 @@ class UserTest extends TestCase
             'role_id' => $newUser->role_id,
         ];
 
-        $this->json('PUT', '/users/' . $user->slug, $arrNewData)
+        $response = $this->json('PUT', '/users/' . $user->slug, $arrNewData)
             ->seeInDatabase('users', $arrNewData);
 
 //        // Check that password remains unchanged
+        dump($response);
         $user = User::where('email', '=', $newUser->email)->first();
         $newPass = $user->password;
         assert($oldPass == $newPass, true);
