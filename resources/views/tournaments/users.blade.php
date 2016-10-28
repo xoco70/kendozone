@@ -10,7 +10,7 @@
     //        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
     //    else
     //        // For showing Modal
-    $link = "";
+    $link = route('workingonit');
 
     ?>
     <!-- Detached content -->
@@ -36,23 +36,34 @@
                                 {{--'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}--}}
 
                                 {{--<button type="button" @click="loadButton()"--}}
-                                        {{--class="btn bg-teal btn-xs pull-right mr-10">--}}
-                                    {{--<i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees--}}
+                                {{--class="btn bg-teal btn-xs pull-right mr-10">--}}
+                                {{--<i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees--}}
 
                                 {{--</button>--}}
                                 {{--{!! Form::close() !!}--}}
 
-                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
-                                'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
+                                @if (App::environment('production'))
+                                    <a href="{{ route('workingonit') }}"
+                                       data-target="#create_tournament_user"
+                                       class="btn bg-teal btn-xs pull-right mr-10"><b>
+                                            <i class="mr-5"></i>Generate Trees</b>
+                                    </a>
 
-                                <button type="submit"
-                                class="btn bg-teal btn-xs pull-right mr-10">
-                                <i class="mr-5"></i>Generate Trees
+                                @else
+                                    {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
 
-                                </button>
+                                    <button type="submit"
+                                            class="btn bg-teal btn-xs pull-right mr-10">
+                                        <i class="mr-5"></i>Generate Trees
+
+                                    </button>
 
 
-                                {!! Form::close() !!}
+                                    {!! Form::close() !!}
+                                @endif
+
+
 
                             @endcan
 
@@ -86,7 +97,7 @@
                                     <tr>
                                         <td class="text-center">
                                             <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
-                                            src="{{ $user->avatar}}" class="img-circle img-sm"/></a>
+                                                        src="{{ $user->avatar}}" class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
                                             @can('edit',$user)

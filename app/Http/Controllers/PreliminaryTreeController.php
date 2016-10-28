@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ChampionshipSettings;
 use App\PreliminaryTree;
-use ClassPreloader\Factory;
 use Illuminate\Http\Request;
 
 class PreliminaryTreeController extends Controller
@@ -32,10 +30,11 @@ class PreliminaryTreeController extends Controller
 
         foreach ($championships as $championship) {
             // If no settings has been defined, take default
-            $pt = PreliminaryTree::find($championship->id);
+            $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
             // Check if PT has already been generated
-            if ($pt != null) {
-                dump("tree has already been generated");
+            if ($preliminaryTree != null) {
+                dump("PT has already been generated");
+                return view('preliminaryTree.index', compact('preliminaryTree'));
             } else {
                 $generation = PreliminaryTree::getGenerationStrategy($championship);
                 $preliminaryTree = $generation->run();

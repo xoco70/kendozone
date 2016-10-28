@@ -107,6 +107,10 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::post('tournaments/{tournamentId}/trees/', 'PreliminaryTreeController@store')->name('storeAllTree');
         Route::post('championships/{championshipId}/trees/', 'PreliminaryTreeController@store')->name('storeTree');;
 
+        Route::get('workingonit', function(){
+            return view('workingonit');
+        })->name('workingonit');
+
     });
 Route::get('/auth/callback', function (Request $request) {
     $http = new GuzzleHttp\Client;
