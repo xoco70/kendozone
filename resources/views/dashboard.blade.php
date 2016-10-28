@@ -20,9 +20,9 @@
             $tournament = $tournaments->first();
             $settingSize = $tournament->championshipSettings()->count();
             $categorySize = $tournament->championships()->count();
-            $ctuSize = $tournament->competitors()->count();
+            $competitorsSize = $tournament->competitors()->count();
 
-            if ($settingSize != $categorySize || $ctuSize == 0)
+            if ($settingSize != $categorySize || $competitorsSize == 0)
                 $configurationNotFinished = true;
 
 

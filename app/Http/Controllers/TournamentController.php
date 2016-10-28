@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Webpatser\Countries\Countries;
 
@@ -222,7 +223,10 @@ class TournamentController extends Controller
      */
     public function register(Tournament $tournament)
     {
-
+        if (!Auth::check()){
+            Session::flash('message', trans('msg.please_create_account_before_playing', ['tournament' => $tournament->name]));
+            return redirect(URL::action('Auth\LoginController@login'));
+        }
         if ($tournament->isOpen()) {
             return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
         }

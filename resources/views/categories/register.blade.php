@@ -65,7 +65,7 @@ $i = 0;
     <script>
 
         $(function () {
-            $(" .switch").bootstrapSwitch();
+            $(".switch").bootstrapSwitch();
         });
     </script>
 @stop
