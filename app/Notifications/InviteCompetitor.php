@@ -91,7 +91,7 @@ class InviteCompetitor extends Notification
             $message->line(trans('mail.before_day') . ":" . $this->tournament->registerDateLimit);
         }
 
-        $message->line(trans('mail.thanks'));
+        $message->line(trans('core.thanks'));
 
         return $message;
     }

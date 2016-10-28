@@ -13,8 +13,6 @@ class CreateGradeTable extends Migration {
             $table->tinyInteger("order");
 			$table->timestamps();
 			$table->engine = 'InnoDB';
-
-
 		});
 	}
 

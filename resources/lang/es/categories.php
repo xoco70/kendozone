@@ -101,5 +101,4 @@ return [
     'presettings_text' => 'Elige el reglamento bajo el que tu torneo este regido. Las categorias se crearan y se configuraran de forma automatica',
 
     'manual' => 'Manual',
-    'presettings' => 'Preconfigurada',
 ];

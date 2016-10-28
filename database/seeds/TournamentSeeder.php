@@ -31,6 +31,7 @@ class TournamentSeeder extends Seeder
             'registerDateLimit' =>  $dateIni,
             'sport' => 1,
             'type' => 0,
+            'level_id' => 7,
             'venue_id' => $faker->randomElement($venues),
 
 
@@ -39,6 +40,7 @@ class TournamentSeeder extends Seeder
 
 
         Championship::truncate();
+        factory(Championship::class)->create(['tournament_id' => 1]);
         for ($i = 0; $i < 10; $i++) {
             try {
                 factory(Championship::class)->create();
@@ -50,16 +52,16 @@ class TournamentSeeder extends Seeder
 
         // Tournament categories users
 
-        Competitor::truncate();
-        for ($i = 0; $i < 30; $i++) {
-            try {
-                factory(Competitor::class)->create();
-            } catch (QueryException $e) {
-
-            } catch (PDOException $e) {
-
-            }
-        }
+//        Competitor::truncate();
+//        for ($i = 0; $i < 30; $i++) {
+//            try {
+//                factory(Competitor::class)->create();
+//            } catch (QueryException $e) {
+//
+//            } catch (PDOException $e) {
+//
+//            }
+//        }
 
     }
 }

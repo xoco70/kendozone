@@ -4,13 +4,13 @@
 @stop
 @section('content')
     <?php
-//    $countries = Countries::all();
+    //    $countries = Countries::all();
+    //    $link = "";
+    //    if ($settingSize > 0 && $settingSize == $categorySize)
+    //        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
+    //    else
+    //        // For showing Modal
     $link = "";
-//    if ($settingSize > 0 && $settingSize == $categorySize)
-//        $link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
-//    else
-        // For showing Modal
-        $link = "";
 
     ?>
     <!-- Detached content -->
@@ -31,10 +31,34 @@
                                    data-name="{!! $championship->category->buildName($grades) !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
+
+                                {{--{!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',--}}
+                                {{--'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}--}}
+
+                                {{--<button type="button" @click="loadButton()"--}}
+                                        {{--class="btn bg-teal btn-xs pull-right mr-10">--}}
+                                    {{--<i v-cloak v-show="loading" class="icon-spinner spinner mr-5"></i>Generate Trees--}}
+
+                                {{--</button>--}}
+                                {{--{!! Form::close() !!}--}}
+
+                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+                                'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
+
+                                <button type="submit"
+                                class="btn bg-teal btn-xs pull-right mr-10">
+                                <i class="mr-5"></i>Generate Trees
+
+                                </button>
+
+
+                                {!! Form::close() !!}
+
                             @endcan
 
                             <a name="{{ str_slug($championship->category->buildName($grades), "-") }}">
-                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }}</legend>
+                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }} </legend>
+
                             </a>
 
                             <table class="table datatable-responsive" id="table{{ $championship->id }}">
@@ -62,7 +86,7 @@
                                     <tr>
                                         <td class="text-center">
                                             <a href="{!!   URL::action('UserController@show',  $user->slug) !!}"><img
-                                                        src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}" class="img-circle img-sm"/></a>
+                                            src="{{ $user->avatar}}" class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
                                             @can('edit',$user)
@@ -150,7 +174,7 @@
 @stop
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
-
+    {!! Html::script('js/loadingButton.js') !!}
     {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
     <script>
 

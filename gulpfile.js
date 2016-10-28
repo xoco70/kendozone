@@ -19,6 +19,7 @@ elixir(function (mix) {
     mix.browserify('vue/pages/userForm.js');
     mix.browserify('oauth.js');
     mix.browserify('bootstrap.js');
+    mix.browserify('vue/pages/loadingButton.js');
 
 
 
@@ -108,7 +109,6 @@ elixir(function (mix) {
     mix.scripts([
         'plugins/tables/datatables/datatables.min.js',
         'plugins/tables/datatables/extensions/responsive.min.js',
-        'plugins/forms/selects/select2.min.js',
         'pages/footer/competitorIndexFooter.js'
     ], 'public/js/pages/header/competitorIndex.js');
 

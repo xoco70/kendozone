@@ -25,7 +25,19 @@ return [
 
     'CLIENT_IP' => '201.141.101.190',//$_SERVER['REMOTE_ADDR'],
     'COUNTRY_ID_DEFAULT' => '250', // France
-    'PAGINATION' => '20'
+    'PAGINATION' => '20',
+
+    'MIN_COMPETITOR' => 12,
+
+    // Tournament Levels
+    'ND' => 1,
+    'local' => 2,
+    'district' => 3,
+    'city' => 4,
+    'state' => 5,
+    'regional' => 6,
+    'national' => 7,
+    'international' => 8,
 
 
 ];
