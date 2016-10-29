@@ -1,4 +1,4 @@
-<br/><br/><br/><br/><br/><br/>
+<br/><br/>
 <div class="row text-center">
     <div class="col-md-6 col-md-offset-3">
         {{--<div class="panel panel-body border-top-primary">--}}
