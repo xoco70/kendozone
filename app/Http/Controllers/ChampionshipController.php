@@ -86,15 +86,20 @@ class ChampionshipController extends Controller
      */
     public function store(Request $request)
     {
+        $tournamentSlug = $request->tournament;
+        $tournament = Tournament::where('slug',$tournamentSlug)->first();
+
         $categories = $request->get('cat');
         $inviteId = $request->invite;
         if ($inviteId != 0)
             $invite = Invite::findOrFail($inviteId);
         else
-            $invite = null;
+            $invite = Invite::where('code','open')
+                            ->where('email', Auth::user()->email)
+                            ->where('object_type', 'App\Tournament')
+                            ->where('object_id', $tournament->id)
+                            ->get();
 
-        $tournamentSlug = $request->tournament;
-        $tournament = Tournament::where('slug',$tournamentSlug)->first();
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
@@ -120,7 +125,7 @@ class ChampionshipController extends Controller
         }
 
 
-        if (isset($invite)) $invite->consume();
+//        if (isset($invite)) $invite->consume();
 
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' => $tournament->name]));
         return redirect(URL::action('InviteController@index'));
