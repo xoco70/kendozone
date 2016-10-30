@@ -27,6 +27,7 @@ Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'ChampionshipControll
 Route::post('tournaments/{tournament}/invite/{invite}/categories', 'ChampionshipController@store');
 
 Route::get('lang/{lang}', 'LanguageController@update');
+Route::get('tournaments/{tournament}/register', 'TournamentController@register');
 
 Route::group(['middleware' => ['guest']],
     function () {
@@ -52,7 +53,7 @@ Route::group(['middleware' => ['guest']],
 
 
 
-Route::get('tournaments/{tournament}/register', 'TournamentController@register');
+
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
@@ -64,7 +65,6 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index', 'show' => 'tournaments.show', 'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
-        Route::get('tournaments/{tournament}/register', 'TournamentController@register');
         Route::get('tournaments/deleted', 'TournamentController@getDeleted');
 
         Route::resource('users', 'UserController', ['names' => [

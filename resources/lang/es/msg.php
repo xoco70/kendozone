@@ -112,6 +112,5 @@ return [
     'association_president_already_exists' => "El usuario :user ya esta siendo presidente de otra asociación",
     'federation_president_already_exists' => "El usuario :user ya esta siendo presidente de otra federación",
 
-    'please_create_account_before_playing' => 'Para registrarte en el torneo :tournament, necesitas crear una cuenta en Kendozone.
-    Despues de esto, necesitarás volver a dar clic en el link de invitación! Gambate!!!'
+    'please_create_account_before_playing' => 'Para registrarte en el torneo :tournament, necesitas crear una cuenta en Kendozone. Gambate!!!'
 ];
