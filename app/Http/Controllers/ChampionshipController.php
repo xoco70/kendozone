@@ -7,6 +7,7 @@ use App\Exceptions\InvitationNeededException;
 use App\Exceptions\InvitationNotActiveException;
 use App\Http\Requests;
 use App\Invite;
+use App\Notifications\RegisteredToChampionship;
 use App\Tournament;
 use App\User;
 use Auth;
@@ -99,6 +100,7 @@ class ChampionshipController extends Controller
             $user = User::find(Auth::user()->id);
             if ($categories != null){
                 $user->championships()->sync($categories);
+                $tournament->owner->notify(new RegisteredToChampionship($user, $tournament));
             }else{
                 flash()->error(trans('msg.you_must_choose_at_least_one_championship'));
                 return redirect()->back();
@@ -119,6 +121,7 @@ class ChampionshipController extends Controller
 
 
         if (isset($invite)) $invite->consume();
+
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' => $tournament->name]));
         return redirect(URL::action('InviteController@index'));
     }
