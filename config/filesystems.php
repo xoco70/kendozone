@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => 'AKIAJJHFIWUJZMRCQQAQ',
+            'secret' => 'QkZ/onoeeYQ0fYjDRghpE/oDcty19V+teAPZ9bGt',
+            'region' => 'us-east-1',
+            'bucket' => 'kendozone-bucket',
         ],
 
     ],
