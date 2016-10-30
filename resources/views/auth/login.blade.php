@@ -10,7 +10,6 @@
     <div class="panel panel-body login-form">
         <div class="text-center pt-10 pb-20" >
             <div class="pb-10"><img src="/images/logoLogin.png" width=200" /></div>
-            {{--<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>--}}
 
         </div>
 

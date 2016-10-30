@@ -186,7 +186,7 @@
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
     {!! Html::script('js/loadingButton.js') !!}
-    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
+    {{--{!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!} // Generate exception that I can't fix --}}
     <script>
 
 

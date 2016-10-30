@@ -23,7 +23,10 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
     /*
      * TODO Definir: Min competitor by championship
-     *               Min competitor by areas = 20
+     *               Min competitor by areas = 6
+     *               Max competitor by championship
+     *               Max competitor by areas =
+
      *
      */
     public function run()
@@ -42,15 +45,31 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         }
 
         if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
-            dd ("Se requiere un minimo de ".config('constants.MIN_COMPETITORS_X_AREA'). " por area. Disminuya la cantidad de areas, o invita más competidores");
+            dd("Se requiere un minimo de " . config('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores");
         }
+
+        // Chunk user by areas
 
         $usersByArea = $users->chunk(sizeof($users) / $areas);
 
+        // 75 users, 39 A + 36 B
         $area = 1;
 
+        // loop on areas
         foreach ($usersByArea as $users) {
+
+            // Chunking to make small round robin groups
             $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
+
+
+            // We must check groups quantity, must be a multiple of 4
+
+
+
+            // We must check last group
+
+
+
             $order = 1;
 
             // Before doing anything, check last group if numUser = 1
