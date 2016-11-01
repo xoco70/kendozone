@@ -58,7 +58,7 @@ class RegisteredToChampionship extends Notification
                 ['user_name' => $this->user->name]));
 
         foreach ($this->user->championships as $championship) {
-            $message->line(" - ".$championship->category->name);
+            $message->line(" <strong>- ".$championship->category->name."</strong>");
         }
         $message->line(trans('msg.success_to_all'));
         return $message;

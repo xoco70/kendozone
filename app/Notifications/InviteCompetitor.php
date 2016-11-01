@@ -59,36 +59,36 @@ class InviteCompetitor extends Notification
 
         if ($this->tournament->venue_id != null) {
             $message
-                ->line(trans('core.venue') . ': ' . $this->tournament->venue->name)
-                ->line(trans('core.address') . ': ' . $this->tournament->venue->address);
+                ->line("<strong>".trans('core.venue') . ': </strong>' . $this->tournament->venue->name)
+                ->line("<strong>".trans('core.address') . ': </strong>' . $this->tournament->venue->address);
         }
         $message
-            ->line(trans('core.eventDateIni') . ': ' . $this->tournament->dateIni)
-            ->line(trans('core.eventDateFin') . ': ' . $this->tournament->dateFin);
+            ->line(trans("<strong>".trans('core.eventDateIni') . ': </strong>' . $this->tournament->dateIni))
+            ->line(trans("<strong>".trans('core.eventDateFin') . ': </strong>' . $this->tournament->dateFin));
 
         if ($this->tournament->cost != null) {
-            $message->line(trans('core.cost') . ': ' . $this->tournament->cost);
+            $message->line("<strong>".trans('core.cost') . ': </strong>' . $this->tournament->cost);
         }
 
         if ($this->tournament->registerDateLimit != null && $this->tournament->registerDateLimit != '0000-00-00') {
-            $message->line(trans('core.limitDateRegistration') . ': ' . $this->tournament->limitDateRegistration);
+            $message->line("<strong>".trans('core.limitDateRegistration') . ': </strong>' . $this->tournament->limitDateRegistration);
         }
         if (isset($this->category)) {
-            $message->line(trans('mail.you_have_been_preregistered'))
+            $message->line("<strong>".trans('mail.you_have_been_preregistered')."</strong>")
                 ->line('- ' . $this->category);
         } else {
             $message->action(trans('mail.confirm_registration'), URL::action('ChampionshipController@create', ['tournamentSlug' => $this->tournament->slug, 'token' => $this->code]));
         }
         if ($this->user->password != null) {
-            $message->line(trans('mail.your_connection_data') . ":")
-                ->line(trans('core.username') . ":" . $this->user->email)
-                ->line(trans('core.password') . ":" . $this->user->clearPassword);
+            $message->line("<strong>".trans('mail.your_connection_data') . ":</strong>")
+                ->line("<strong>".trans('core.username') . ":</strong>" . $this->user->email)
+                ->line("<strong>".trans('core.password') . ":</strong>" . $this->user->clearPassword);
         }
-//        $message->line(trans('mail.dont_forget_to_pay'));
+//        $message->line("<strong>".trans('mail.dont_forget_to_pay'));
 
 
         if ($this->tournament->registerDateLimit != null && $this->tournament->registerDateLimit != '0000-00-00') {
-            $message->line(trans('mail.before_day') . ":" . $this->tournament->registerDateLimit);
+            $message->line(trans('mail.before_day'). $this->tournament->registerDateLimit);
         }
 
         $message->line(trans('core.thanks'));
