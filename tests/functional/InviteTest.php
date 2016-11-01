@@ -131,14 +131,14 @@ class InviteTest extends TestCase
     }
 
     /** @test */
-    public function a_user_may_register_an_open_tournament()
+    public function a_user_may_register_an_open_tournament_with_existing_account()
     {
         Auth::logout();
         // Create an open tournament
         $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.OPEN_TOURNAMENT')]);
         $championships = new Collection;
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             try {
                 $ct = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
                 $championships->push($ct);
@@ -146,7 +146,8 @@ class InviteTest extends TestCase
             }
         }
 
-        $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'),
+        $user = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_USER'),
             'password' => bcrypt('111111')
         ]);
 
@@ -156,11 +157,12 @@ class InviteTest extends TestCase
 
         $this->type($user->email, 'email')
             ->type('111111', 'password')
-            ->press(Lang::get('auth.signin'))
-            ->seePageIs('/tournaments/' . $tournament->slug . '/register');
-//
-//        // Get all categories for this tournament
-//        // Now we are on category Selection page
+            ->press(trans('auth.signin'));
+
+        $this->visit("/tournaments/" . $tournament->slug . "/register");
+
+        // Get all categories for this tournament
+        // Now we are on category Selection page
         foreach ($championships as $ct) {
             $this->type($ct->id, 'cat[' . $ct->id . ']');
 //

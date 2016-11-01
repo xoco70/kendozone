@@ -165,21 +165,21 @@ class TournamentTest extends TestCase
     public function it_delete_tournament()
     {
 
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
-        $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        $ct2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-        factory(ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
-        factory(Competitor::class)->create(['championship_id' => $ct1->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
+        $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        $championship2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
+        factory(Competitor::class)->create(['championship_id' => $championship1->id]);
 
         // Check that tournament is gone
         $this->visit("/tournaments")
             ->see(trans_choice('core.tournament', 2))
             ->press("delete_" . $tournament->slug)
             ->seeIsSoftDeletedInDatabase('tournament', ['id' => $tournament->id])
-            ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct2->id]);
-//            ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $ct1->id])
-//            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $ct1->id]);
+            ->seeIsSoftDeletedInDatabase('championship', ['id' => $championship1->id])
+            ->seeIsSoftDeletedInDatabase('championship', ['id' => $championship2->id]);
+//            ->seeIsSoftDeletedInDatabase('category_settings', ['championship_id' => $championship1->id])
+//            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $championship1->id]);
 
     }
 
@@ -236,14 +236,14 @@ class TournamentTest extends TestCase
         $owner = factory(User::class)->create(['name' => 'AnotherUser']);
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => $owner->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => $owner->id]);
 
         $this->logWithUser($simpleUser);
 
         $this->visit('/tournaments/' . $tournament->slug)
-            ->dontSee("403")
+            ->dontSee("403.png")
             ->visit('/tournaments/' . $tournament->slug . '/edit')
-            ->see("403");
+            ->see("403.png");
     }
 
 

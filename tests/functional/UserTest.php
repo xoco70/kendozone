@@ -74,19 +74,18 @@ class UserTest extends TestCase
         // Given
 
         $tournament = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id]);
-        $ct1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(ChampionshipSettings::class)->create(['championship_id' => $ct1->id]);
-        factory(Competitor::class)->create(['championship_id' => $ct1->id]);
+        $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
+        factory(Competitor::class)->create(['championship_id' => $championship1->id]);
 
         $response = $this->actingAs($this->root,'api')->json('DELETE', '/users/' . $this->simpleUser->slug);
-        $this->assertEquals(200, $response->status());
-
+        $response->assertResponseStatus(200);
 
         $this->seeIsSoftDeletedInDatabase('users', ['name' => $this->simpleUser->name])
             ->seeIsSoftDeletedInDatabase('tournament', ['user_id' => $this->simpleUser->id])
-            ->seeIsSoftDeletedInDatabase('championship', ['id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('championship_settings', ['championship_id' => $ct1->id])
-            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $ct1->id]);;
+            ->seeIsSoftDeletedInDatabase('championship', ['id' => $championship1->id])
+            ->seeIsSoftDeletedInDatabase('championship_settings', ['championship_id' => $championship1->id])
+            ->seeIsSoftDeletedInDatabase('competitor', ['championship_id' => $championship1->id]);;
 
     }
 
@@ -121,7 +120,7 @@ class UserTest extends TestCase
 
         $this->logWithUser($this->simpleUser);
         $this->visit('/users/' . $this->simpleUser->slug)
-            ->dontSee("403")
+            ->dontSee("403.png")
             ->visit('/users/' . $user2->slug . '/edit')
             ->see("403");
     }
@@ -206,11 +205,11 @@ class UserTest extends TestCase
             'role_id' => $newUser->role_id,
         ];
 
-        $response = $this->json('PUT', '/users/' . $user->slug, $arrNewData)
+        $this->json('PUT', '/users/' . $user->slug, $arrNewData)
             ->seeInDatabase('users', $arrNewData);
 
 //        // Check that password remains unchanged
-        dump($response);
+
         $user = User::where('email', '=', $newUser->email)->first();
         $newPass = $user->password;
         assert($oldPass == $newPass, true);

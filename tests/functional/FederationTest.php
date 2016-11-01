@@ -111,10 +111,10 @@ class FederationTest extends TestCase
         $hisFederation = factory(Federation::class)->create(['president_id' => $federationPresident2->id]);
 
         $this->visit("/federations/" . $hisFederation->id . "/edit")
-            ->see('403');
+            ->see('403.png');
         $this->visit("/")
             ->visit("/federations/" . $myFederation->id . "/edit")
-            ->dontSee('403');
+            ->dontSee('403.png');
 //
         $federationData = factory(Federation::class)->make();
         $this->fillFederationData($federationData);

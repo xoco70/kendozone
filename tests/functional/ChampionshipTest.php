@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class ChampionshipTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $root;
 
@@ -41,7 +41,7 @@ class ChampionshipTest extends TestCase
     /** @test */
     public function it_create_championship_settings()
     {
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
@@ -55,7 +55,7 @@ class ChampionshipTest extends TestCase
     /** @test */
     public function it_edit_championship_settings()
     {
-        $tournament = factory(Tournament::class)->create(['name' => 't1', 'user_id' => Auth::user()->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->create(['championship_id' => $champ0->id]);
