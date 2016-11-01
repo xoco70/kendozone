@@ -79,7 +79,6 @@ class UserTest extends TestCase
         factory(Competitor::class)->create(['championship_id' => $ct1->id]);
 
         $response = $this->actingAs($this->root,'api')->json('DELETE', '/users/' . $this->simpleUser->slug);
-        $this->dump();
         $this->assertEquals(200, $response->status());
 
 
