@@ -143,13 +143,15 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         return $competitors;
     }
 
-    private function chunk_by_num_competitor_by_area($users, $roundRobinGroupSize = 3)
+    private function chunk_by_num_competitor_by_area(Collection $users, $roundRobinGroupSize = 3)
     {
         $newUsers = new Collection();
         $groupsConfig = Config::get(('options.chunk_by_num_competitor_by_area.15'));
-        $count = 0;
         foreach ($groupsConfig as $groupSize){
-                        
+             $splice = $users->splice(0,$groupSize);
+            $newUsers->push($splice);
         }
+        dd($newUsers);
+        return $newUsers;
     }
 }
