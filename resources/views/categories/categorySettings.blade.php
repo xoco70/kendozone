@@ -84,13 +84,13 @@ $currency = Auth::user()->country->currency_code;
         <div class="panel-body">
             <div class="tab-pane" id="category">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                         {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
                         {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
 
                         {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -101,7 +101,7 @@ $currency = Auth::user()->country->currency_code;
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             {!!  Form::label('cost', trans('categories.cost'). ' ('. $currency  .')' ) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -112,7 +112,7 @@ $currency = Auth::user()->country->currency_code;
 
                     @if ($tournament->championships->get($key)->category->isTeam())
 
-                        <div class="col-md-2">
+                        <div class="col-lg-3">
                             {!!  Form::label('teamSize', trans('categories.teamSize')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
@@ -121,7 +121,7 @@ $currency = Auth::user()->country->currency_code;
 
 
                     @endif
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -133,7 +133,7 @@ $currency = Auth::user()->country->currency_code;
                 </div>
                 <hr/>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                         <div class="checkbox-switch ">
                             <label>
 
@@ -149,7 +149,7 @@ $currency = Auth::user()->country->currency_code;
                         </div>
                     </div>
 
-                    <div class="col-md-2 ">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             {!!  Form::label('roundRobinGroupSize', trans('categories.roundRobinGroupSize')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -158,7 +158,7 @@ $currency = Auth::user()->country->currency_code;
                             {!!  Form::select('roundRobinGroupSize', config('options.roundRobinGroupSize'), old('roundRobinGroupSize'),['class' => 'form-control',$disableRoundRobin]) !!}
                         </div>
                     </div>
-                    <div class="col-md-3 ">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             {!!  Form::label('roundRobinWinner', trans('categories.roundRobinWinner')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -170,7 +170,7 @@ $currency = Auth::user()->country->currency_code;
                 </div>
                 <hr/>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                         <div class="checkbox-switch">
                             <label>
 
@@ -185,7 +185,7 @@ $currency = Auth::user()->country->currency_code;
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -195,7 +195,7 @@ $currency = Auth::user()->country->currency_code;
                             <small class="display-block">{{ trans('categories.encho_infinite') }}</small>
                         </div>
                     </div>
-                    <div class="col-md-3 col-md-offset-1">
+                    <div class="col-lg-4">
                         {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
@@ -204,7 +204,7 @@ $currency = Auth::user()->country->currency_code;
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-md-offset-1">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             {!!  Form::label('enchoTimeLimitless', trans('categories.enchoTimeLimitless')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
@@ -216,7 +216,7 @@ $currency = Auth::user()->country->currency_code;
                 </div>
                 <hr/>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                         <div class="checkbox-switch">
                             <label>
 
@@ -230,7 +230,7 @@ $currency = Auth::user()->country->currency_code;
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <div class="checkbox-switch">
                             <label>
 
