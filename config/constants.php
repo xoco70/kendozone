@@ -27,8 +27,8 @@ return [
     'COUNTRY_ID_DEFAULT' => '250', // France
     'PAGINATION' => '20',
 
-    'MIN_COMPETITOR' => 12,
-    'MIN_COMPETITORS_X_AREA' => 20,
+    'MIN_COMPETITOR' => 2,
+    'MIN_COMPETITORS_X_AREA' => 6,
 
     // Tournament Levels
     'ND' => 1,

@@ -9,6 +9,7 @@ use App\ChampionshipSettings;
 use App\Contracts\PreliminaryTreeGenerable;
 use App\PreliminaryTree;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
 
 class PreliminaryTreeGen implements PreliminaryTreeGenerable
 {
@@ -59,8 +60,8 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
-
+//            $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
+            $roundRobinGroups = $this->chunk_by_num_competitor_by_area($users); // , $settings->roundRobinGroupSize
 
             // We must check groups quantity, must be a multiple of 4
 
@@ -140,5 +141,15 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
             }
         }
         return $competitors;
+    }
+
+    private function chunk_by_num_competitor_by_area($users, $roundRobinGroupSize = 3)
+    {
+        $newUsers = new Collection();
+        $groupsConfig = Config::get(('options.chunk_by_num_competitor_by_area.15'));
+        $count = 0;
+        foreach ($groupsConfig as $groupSize){
+                        
+        }
     }
 }
