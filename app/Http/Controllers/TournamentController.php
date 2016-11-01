@@ -228,7 +228,10 @@ class TournamentController extends Controller
             return redirect(URL::action('Auth\LoginController@login'));
         }
         if ($tournament->isOpen()) {
-            return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
+            $grades = Grade::pluck('name', 'id');
+            $tournament = Tournament::with('championships.category','championships.users')->find($tournament->id);
+//            dd($tournament);
+            return view("categories.register", compact('tournament', 'invite', 'currentModelName','grades'));
         }
         throw new InvitationNeededException();
     }

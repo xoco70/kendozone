@@ -24,22 +24,20 @@ $i = 0;
 
                 <div class="panel-body">
                     <div class="container-fluid">
-                        <legend class="text-semibold">{{Lang::get('core.select_categories_to_register')}}</legend>
+                        <legend class="text-semibold">{{trans('core.select_categories_to_register')}}</legend>
 
 
                         @foreach($championships as $championship)
-                            {{--{{ $key }}--}}
                             @if ($i % 4 == 0)
                                 <div class="row">
                                     @endif
                                     <div class="col-md-3">
                                         <p>
-                                            {{--TODO 1 query x row--}}
-                                            {!!  Form::label('cat['.$championship->id.']', trans($championship->category->name)) !!}
+                                            {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName($grades)) !!}
                                             <br/>
                                             {!!   Form::checkbox('cat['.$championship->id.']',
                                                 $championship->id,
-                                                $championship->users()->where('users.id',Auth::user()->id)->count(),
+                                                $championship->users->where('users.id',Auth::user()->id)->count(),
                                                  ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
                                         </p>
                                     </div>
