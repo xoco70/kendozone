@@ -37,8 +37,9 @@
 
                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">
 
-                                    <img class="img-circle img-sm" src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}"/>
-                                {{----}}
+                                <img class="img-circle img-sm"
+                                     src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}"/>
+
                             </a>
                         </td>
 
@@ -51,7 +52,8 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role->name }}</td>
 
-                        <td><img src="/images/flags/{{ $user->country->flag ?? "no_flag.png"}}"alt="{{ $user->country->name }}"/></td>
+                        <td><img src="/images/flags/{{ $user->country->flag ?? "no_flag.png"}}"
+                                 alt="{{ $user->country->name }}"/></td>
 
                         <td>{{ $user->federation != null ? trans($user->federation->name) : " - "}}</td>
                         <td>{{ $user->association != null ? trans($user->association->name) : " - " }}</td>
