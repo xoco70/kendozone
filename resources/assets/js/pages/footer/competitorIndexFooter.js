@@ -176,6 +176,8 @@ $.extend($.fn.dataTable.defaults, {
     autoWidth: false,
     responsive: true,
     paging: false,
+    bInfo : false,
+
     columnDefs: [{
         orderable: false,
         width: '100px',
