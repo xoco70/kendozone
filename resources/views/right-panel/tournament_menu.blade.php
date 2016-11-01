@@ -1,8 +1,6 @@
 <!-- Detached sidebar -->
 <div class="sidebar-detached">
-
     <div class="sidebar sidebar-default">
-
         <div class="sidebar-content">
 
 

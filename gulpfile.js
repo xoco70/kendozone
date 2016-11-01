@@ -109,7 +109,9 @@ elixir(function (mix) {
     mix.scripts([
         'plugins/tables/datatables/datatables.min.js',
         'plugins/tables/datatables/extensions/responsive.min.js',
-        'pages/footer/competitorIndexFooter.js'
+        'pages/footer/competitorIndexFooter.js',
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
     ], 'public/js/pages/header/competitorIndex.js');
 
     mix.scripts([

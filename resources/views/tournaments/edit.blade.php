@@ -15,7 +15,6 @@
 
     <!-- Detached content -->
     <div class="container-detached">
-
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
                 <li class="active"><a href="#tab1" data-toggle="tab">{{trans('core.general_data')}}</a></li>

@@ -239,6 +239,7 @@ class TournamentController extends Controller
     public function getDeleted()
     {
         $currentModelName = trans_choice('core.tournament', 2);
+
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
