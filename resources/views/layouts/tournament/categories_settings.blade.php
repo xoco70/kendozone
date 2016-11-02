@@ -3,7 +3,6 @@
         <div class="container-fluid">
             <div class="panel-group" id="accordion-styled">
                 @foreach($tournament->championships as $key => $championship)
-                    {{--TODO This is making n+1 query--}}
                     @include('categories.categorySettings')
                 @endforeach
             </div>

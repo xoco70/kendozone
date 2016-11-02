@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Grade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
@@ -77,9 +78,9 @@ class RegisterController extends Controller
             $tournament = Tournament::find($invite->object_id);
             $userId = $user->id;
 //            $invite->consume();
-
+            $grades = Grade::pluck('name', 'id');
             flash()->success(Lang::get('auth.registration_completed'));
-            return view("categories.register", compact('userId', 'tournament', 'invite'));
+            return view("categories.register", compact('userId', 'tournament', 'invite','grades'));
 
         } else {
             flash()->error(Lang::get('auth.no_invite'));
