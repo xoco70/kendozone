@@ -30,16 +30,30 @@ class PreliminaryTreeController extends Controller
 
         foreach ($championships as $championship) {
             // If no settings has been defined, take default
+
+
+            $hasPreliminary = $championship->settings->hasPreliminary;
             $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
-            // Check if PT has already been generated
-            if ($preliminaryTree != null && $preliminaryTree->count()>0) {
-                dump("PT has already been generated");
-                return view('preliminaryTree.index', compact('preliminaryTree'));
-            } else {
-                $generation = PreliminaryTree::getGenerationStrategy($championship);
-                $preliminaryTree = $generation->run();
-                return view('preliminaryTree.index', compact('preliminaryTree'));
+
+            if ($hasPreliminary){
+                // Check if PT has already been generated
+                if ($preliminaryTree != null && $preliminaryTree->count()>0) {
+                    return view('preliminaryTree.index', compact('preliminaryTree'));
+                } else {
+                    $generation = PreliminaryTree::getGenerationStrategy($championship);
+                    $preliminaryTree = $generation->run();
+                    return view('preliminaryTree.index', compact('preliminaryTree'));
+                }
+            }else{
+                if ($tree != null && $preliminaryTree->count()>0) {
+                    return view('preliminaryTree.index', compact('preliminaryTree'));
+                } else {
+                    $generation = PreliminaryTree::getGenerationStrategy($championship);
+                    $preliminaryTree = $generation->run();
+                    return view('preliminaryTree.index', compact('preliminaryTree'));
+                }
             }
+
         }
     }
 }

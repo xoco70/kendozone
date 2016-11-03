@@ -13,7 +13,7 @@ class CreatePreliminaryTree extends Migration
      */
     public function up()
     {
-        Schema::create('preliminary_tree', function(Blueprint $table) {
+        Schema::create('tree', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->index();
 
@@ -31,28 +31,6 @@ class CreatePreliminaryTree extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('c3')->nullable()->unsigned()->index();
-            $table->foreign('c3')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->integer('c4')->nullable()->unsigned()->index();
-            $table->foreign('c4')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->integer('c5')->nullable()->unsigned()->index();
-            $table->foreign('c5')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-
             $table->tinyInteger("area");
             $table->tinyInteger("order");
             $table->timestamps();
@@ -69,7 +47,7 @@ class CreatePreliminaryTree extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('preliminary_tree');
+        Schema::dropIfExists('tree');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

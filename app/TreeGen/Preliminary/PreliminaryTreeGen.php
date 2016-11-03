@@ -8,6 +8,7 @@ use App\Championship;
 use App\ChampionshipSettings;
 use App\Contracts\PreliminaryTreeGenerable;
 use App\PreliminaryTree;
+use App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 
@@ -22,14 +23,6 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $this->groupBy = $groupBy;
     }
 
-    /*
-     * TODO Definir: Min competitor by championship
-     *               Min competitor by areas = 6
-     *               Max competitor by championship
-     *               Max competitor by areas =
-
-     *
-     */
     public function run()
     {
         $preliminiaryTress = new Collection();
@@ -46,8 +39,9 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         }
 
         if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
-            dd("Se requiere un minimo de " . config('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores");
+            dd("Se requiere un minimo de " . Config::get('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores");
         }
+
 
         // Chunk user by areas
 
@@ -61,14 +55,12 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
             // Chunking to make small round robin groups
 //            $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
-            $roundRobinGroups = $this->chunk_by_num_competitor_by_area($users); // , $settings->roundRobinGroupSize
+            $roundRobinGroups = $users->chunk(3)->shuffle(); // , $settings->roundRobinGroupSize
 
             // We must check groups quantity, must be a multiple of 4
 
 
-
             // We must check last group
-
 
 
             $order = 1;
@@ -129,6 +121,12 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $competitors = new Collection();
 
         $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+
+        // We must add another group that has bye
+
+        $byeGroup = $this->getByeGroup($this->championship);
+        $userGroups->push($byeGroup);
+
         // Get biggest group.
         $max = $this->getMaxCompetitorByEntity($userGroups);
 
@@ -140,18 +138,66 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
                 }
             }
         }
+
+
         return $competitors;
     }
 
-    private function chunk_by_num_competitor_by_area(Collection $users, $roundRobinGroupSize = 3)
+//    private function chunk_by_num_competitor_by_area(Collection $users, $roundRobinGroupSize = 3)
+//    {
+//        $newUsers = new Collection();
+//        $groupsConfig = Config::get(('options.chunk_by_num_competitor_by_area.15'));
+//        foreach ($groupsConfig as $groupSize){
+//             $splice = $users->splice(0,$groupSize);
+//            $newUsers->push($splice);
+//        }
+//        dd($newUsers);
+//        return $newUsers;
+//    }
+
+    private function getByeGroup(Championship $championship)
     {
-        $newUsers = new Collection();
-        $groupsConfig = Config::get(('options.chunk_by_num_competitor_by_area.15'));
-        foreach ($groupsConfig as $groupSize){
-             $splice = $users->splice(0,$groupSize);
-            $newUsers->push($splice);
+        // Deterime Bye Quantity
+
+        $userCount = $championship->users->count();
+        $treeSize = $this->getTreeSize($userCount, $championship->settings->preliminaryGroupSize);
+        $byeCount = $treeSize - $userCount;
+
+        return $this->createNullsGroup($byeCount);
+    }
+
+    /**
+     * @param $userCount
+     * @return integer
+     */
+    private function getTreeSize($userCount, $groupSize)
+    {
+        $square = collect([2, 4, 8, 16, 32, 64]);
+        $squareMultiplied = $square->map(function ($item, $key) use ($groupSize) {
+            return $item * $groupSize;
+        });
+
+        foreach ($squareMultiplied as $limit) {
+            if ($userCount < $limit) {
+                return $limit;
+            }
         }
-        dd($newUsers);
-        return $newUsers;
+        return 64 * $groupSize;
+
+    }
+
+    /**
+     * @param $byeCount
+     * @return Collection
+     */
+    private function createNullsGroup($byeCount):Collection
+    {
+        $nullUser = new User();
+
+        $byeGroup = new Collection();
+        for ($i = 0; $i < $byeCount; $i++) {
+            $byeGroup->push($nullUser);
+        }
+        return $byeGroup;
     }
 }
