@@ -27,10 +27,10 @@ class CreateChampionshipSettingsTable extends Migration
             $table->tinyInteger('teamReserve')->nullable(); // Default is null
             $table->tinyInteger('fightingAreas')->unsigned()->nullable()->default(1);
             $table->text('fightDuration'); // Can't apply default because text
-            $table->boolean('hasRoundRobin')->default(1);
-            $table->boolean('roundRobinGroupSize')->default(3);
-            $table->tinyInteger('roundRobinWinner'); // Number of Competitors that go to next level
-            $table->tinyInteger('roundRobinDuration'); // Match Duration in preliminary round
+            $table->boolean('hasPreliminary')->default(1);
+            $table->boolean('preliminaryGroupSize')->default(3);
+            $table->tinyInteger('preliminaryWinner'); // Number of Competitors that go to next level
+            $table->tinyInteger('preliminaryDuration'); // Match Duration in preliminary heat
             $table->boolean('hasEncho')->default(1);
             $table->tinyInteger('enchoQty');
             $table->text('enchoDuration');

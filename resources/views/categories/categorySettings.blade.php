@@ -13,10 +13,10 @@ $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "
 
 $categoryId = $championship->category->id;
 if (is_null($setting)) {
-    $disableEncho = $disableRoundRobin = "disabled";
+    $disableEncho = $disablePreliminary = "disabled";
 } else {
     $disableEncho = $setting->hasEncho ? "" : "disabled";
-    $disableRoundRobin = $setting->hasRoundRobin ? "" : "disabled";
+    $disablePreliminary = $setting->hasPreliminary ? "" : "disabled";
 }
 $currency = Auth::user()->country->currency_code;
 ?>
@@ -90,8 +90,8 @@ $currency = Auth::user()->country->currency_code;
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
                         {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
                     </div>
-                    <div class="col-lg-2">
 
+                    <div class="col-lg-2">
                         {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightDurationTooltip')}}"></i>
@@ -130,6 +130,7 @@ $currency = Auth::user()->country->currency_code;
 
                         </div>
                     </div>
+
                 </div>
                 <hr/>
                 <div class="row">
@@ -137,13 +138,13 @@ $currency = Auth::user()->country->currency_code;
                         <div class="checkbox-switch ">
                             <label>
 
-                                {!!  Form::label('hasRoundRobin', trans('categories.hasRoundRobin')) !!}
+                                {!!  Form::label('hasPreliminary', trans('categories.hasPreliminary')) !!}
                                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                                   data-original-title="{{trans('categories.hasRoundRobinTooltip')}}"></i>
+                                   data-original-title="{{trans('categories.hasPreliminaryTooltip')}}"></i>
                                 <br/>
-                                {!!   Form::hidden('hasRoundRobin', 0,['id'=>'hasRoundRobin'.$key ]) !!}
-                                {!!   Form::checkbox('hasRoundRobin', 1, old('hasRoundRobin'),
-                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasRoundRobin'.$key]) !!}
+                                {!!   Form::hidden('hasPreliminary', 0,['id'=>'hasPreliminary'.$key ]) !!}
+                                {!!   Form::checkbox('hasPreliminary', 1, old('hasPreliminary'),
+                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key]) !!}
 
                             </label>
                         </div>
@@ -151,24 +152,27 @@ $currency = Auth::user()->country->currency_code;
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            {!!  Form::label('roundRobinGroupSize', trans('categories.roundRobinGroupSize')) !!}
+                            {!!  Form::label('preliminaryGroupSize', trans('categories.preliminaryGroupSize')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.roundRobinGroupSizeTooltip')}}"></i>
+                               data-original-title="{{trans('categories.preliminaryGroupSizeTooltip')}}"></i>
 
-                            {!!  Form::select('roundRobinGroupSize', config('options.roundRobinGroupSize'), old('roundRobinGroupSize'),['class' => 'form-control',$disableRoundRobin]) !!}
+                            {!!  Form::select('preliminaryGroupSize', config('options.preliminaryGroupSize'), old('preliminaryGroupSize'),['class' => 'form-control',$disablePreliminary]) !!}
                         </div>
                     </div>
+
                     <div class="col-lg-4">
                         <div class="form-group">
-                            {!!  Form::label('roundRobinWinner', trans('categories.roundRobinWinner')) !!}
+                            {!!  Form::label('preliminaryWinner', trans('categories.preliminaryWinner')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.roundRobinWinnerTooltip')}}"></i>
+                               data-original-title="{{trans('categories.preliminaryWinnerTooltip')}}"></i>
 
-                            {!!  Form::select('roundRobinWinner', config('options.roundRobinWinner'), old('roundRobinWinner'),['class' => 'form-control',$disableRoundRobin]) !!}
+                            {!!  Form::select('preliminaryWinner', config('options.preliminaryWinner'), old('preliminaryWinner'),['class' => 'form-control',$disablePreliminary]) !!}
                         </div>
                     </div>
+
                 </div>
                 <hr/>
+
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="checkbox-switch">

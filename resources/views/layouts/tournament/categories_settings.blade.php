@@ -2,6 +2,7 @@
     <div class="panel-body">
         <div class="container-fluid">
             <div class="panel-group" id="accordion-styled">
+
                 @foreach($tournament->championships as $key => $championship)
                     @include('categories.categorySettings')
                 @endforeach
