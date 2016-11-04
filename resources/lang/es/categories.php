@@ -59,6 +59,9 @@ return [
 
     // CategorySetting
     'categorySettings' => 'Configuración de categorías',
+    'treeType' => 'Tipo de arbol',
+    'roundRobin' => 'Round Robin',
+    'direct_elimination' => 'Eliminación directa',
     'teamSize' => 'Tamaño del equipo',
     'teamSizeReserve' => 'Reservas',
     'fightingAreas' => 'Áreas',
@@ -71,8 +74,9 @@ return [
     'isTeam' => 'Equipo',
     'alias' => 'Alias',
     'preliminaryGroupSize' => 'Tamaño del grupo',
-    'enchoTimeLimitless' => 'Hasta la muerte',
+    'enchoGoldPoint' => 'Punto de oro',
     'limitByEntity' => 'Limite de competidores',
+
 
 
 
@@ -89,7 +93,7 @@ return [
     'hanteilimitTooltip' => 'Hasta que nivel de la competencia desea que se aplique la regla de Hantei',
     'aliasTooltip' => 'Eliga un nombre personalizado para la categoría ( Opcional )',
     'preliminaryGroupSizeTooltip' => 'Cantidad de competidores por grupo',
-    'enchoTimeLimitlessTooltip' => 'Nivel de la competencia en donde el encho ya no tiene tiempo límite (0 para todos)',
+    'enchoGoldPointTooltip' => 'Nivel de la competencia en donde el encho ya no tiene tiempo límite (0 para todos)',
     'limitByEntityTooltip' => 'Cantidad de competidor que se pueden registrar',
     'rulesTooltip' => 'Crea y se configura de forma automatica las categorías según el modelo de reglas elegido',
 

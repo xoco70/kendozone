@@ -3,19 +3,19 @@ $(function () {
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 
-    // $('.fightDuration').timepicker(('option', {
-    //     'minTime': '2:00',
-    //     'maxTime': '10:00',
-    //     'timeFormat': 'H:i',
-    //     'step': '15'
-    // }));
+    $('.fightDuration').timepicker(('option', {
+        'minTime': '2:00',
+        'maxTime': '10:00',
+        'timeFormat': 'H:i',
+        'step': '15'
+    }));
 
-    // $('.enchoDuration').timepicker(('option', {
-    //     'minTime': '1:00',
-    //     'maxTime': '10:00',
-    //     'timeFormat': 'H:i',
-    //     'step': '15'
-    // }));
+    $('.enchoDuration').timepicker(('option', {
+        'minTime': '1:00',
+        'maxTime': '10:00',
+        'timeFormat': 'H:i',
+        'step': '15'
+    }));
 
     $('#name').blur(function () {
         if (!$(this).val() || $(this).length < 6) {
@@ -80,12 +80,12 @@ $(function () {
 
     }
 
-    // $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
-    //     var isChecked = $(this).is(':checked');
-    //     $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
-    //     $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
-    //     $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
-    // });
+    $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
+        var isChecked = $(this).is(':checked');
+        $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
+        $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
+        $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
+    });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
@@ -93,10 +93,10 @@ $(function () {
 
     });
 
-    // $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
-    //     var isChecked = $(this).is(':checked');
-    //     $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
-    // });
+    $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
+        var isChecked = $(this).is(':checked');
+        $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
+    });
 
 
 // EDIT CATEGORY ALIAS

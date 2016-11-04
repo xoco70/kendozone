@@ -51,7 +51,7 @@
 
                                 @else
                                     {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
-'action' => ['PreliminaryTreeController@store', $championship->id]]) !!}
+'action' => ['TreeController@store', $championship->id]]) !!}
 
                                     <button type="submit"
                                             class="btn bg-teal btn-xs pull-right mr-10">

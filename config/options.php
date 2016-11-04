@@ -70,7 +70,7 @@ return array(
             'enchoDuration' => '0',
             'hasHantei' => '0',
             'hanteiLimit' => '0', // 1/2 Finals
-            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '4',
             'cost' => '',
             'seedQuantity' => '4',
@@ -90,7 +90,7 @@ return array(
             'enchoDuration' => '0',
             'hasHantei' => '0',
             'hanteiLimit' => '0', // 1/2 Finals
-            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '1',
             'cost' => '',
             'seedQuantity' => '4',
@@ -108,7 +108,7 @@ return array(
             'enchoDuration' => '0',
             'hasHantei' => '0',
             'hanteiLimit' => '0', // 1/2 Finals
-            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '4',
             'cost' => '',
             'seedQuantity' => '4',
@@ -128,7 +128,7 @@ return array(
             'enchoDuration' => '0',
             'hasHantei' => '0',
             'hanteiLimit' => '0', // 1/2 Finals
-            'enchoTimeLimitless' => '0', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '0', // Step where Encho has no more time limit
             'limitByEntity' => '1',
             'cost' => '',
             'seedQuantity' => '4',
@@ -164,7 +164,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
             'limitByEntity' => '4',
         ],
         '2' => [ /// Junior Team
@@ -183,7 +183,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
         ],
         '3' => [ // Men Individual
             'teamSize' => '',
@@ -201,7 +201,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
             'limitByEntity' => '4',
         ],
         '4' => [ // Men Team
@@ -220,7 +220,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
         ],
         '5' => [ // Ladies Individual
             'teamSize' => '',
@@ -238,7 +238,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
             'limitByEntity' => '4',
         ],
         '6' => [ // Ladies Team
@@ -257,7 +257,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
         ],
 
 
@@ -280,7 +280,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
             'limitByEntity' => '4',
         ],
         '2' => [ /// Junior Team
@@ -299,7 +299,7 @@ return array(
             'cost' => '',
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
-            'enchoTimeLimitless' => '3', // Step where Encho has no more time limit
+            'enchoGoldPoint' => '3', // Step where Encho has no more time limit
             'limitByEntity' => '4',
         ]
     ]

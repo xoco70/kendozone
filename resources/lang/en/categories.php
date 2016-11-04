@@ -70,7 +70,7 @@ return [
     'isTeam' => 'Team?',
     'alias' => 'Alias',
     'preliminaryGroupSize' => 'Group size',
-    'enchoTimeLimitless' => 'Till Death...',
+    'enchoGoldPoint' => 'Gold Point',
     'limitByEntity' => 'Expected Competitors',
 
 
@@ -88,7 +88,7 @@ return [
     'hanteilimitTooltip' => 'Until what level do you want to apply Hantei rule?',
     'aliasTooltip' => 'Choose a custom name for the category ( optional )',
     'preliminaryGroupSizeTooltip' => 'How much competitor should a Round Robin Group have?',
-    'enchoTimeLimitlessTooltip' => 'Until what level do you want that Encho has no more time limit? (0 for all)',
+    'enchoGoldPointTooltip' => 'Until what level do you want that Encho has no more time limit? (0 for all)',
     'limitByEntityTooltip' => 'Expected number of the competitors who will be registered for each Championship',
     'rulesTooltip' => 'Create and configure automatically category according to the rules model you chose',
 

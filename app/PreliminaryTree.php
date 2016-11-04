@@ -20,7 +20,6 @@ class PreliminaryTree extends Model
     public static function hasTournament($request)
     {
         return $request->tournamentId != null;
-
     }
 
     public static function hasChampionship($request)
@@ -66,7 +65,8 @@ class PreliminaryTree extends Model
             $championship = Championship::with('settings')->find($request->championshipId);
             $championships->push($championship);
         }else if (PreliminaryTree::hasTournament($request)){
-            $championships = Tournament::with('championships.settings')->find($request->tournamentId);
+            $tournament = Tournament::with('championships.settings')->where('slug',$request->tournamentId)->first();
+            $championships = $tournament->championships;
         }
         return $championships;
     }

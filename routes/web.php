@@ -104,8 +104,9 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 //           return view('auth/oauth2');
 //        });
 
-        Route::post('tournaments/{tournamentId}/trees/', 'PreliminaryTreeController@store')->name('storeAllTree');
-        Route::post('championships/{championshipId}/trees/', 'PreliminaryTreeController@store')->name('storeTree');;
+        Route::get('tournaments/{tournamentId}/trees/', 'TreeController@index');
+        Route::post('tournaments/{tournamentId}/trees/', 'TreeController@store')->name('storeAllTree');
+        Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('storeTree');;
 
         Route::get('workingonit', function(){
             return view('workingonit');

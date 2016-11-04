@@ -23,23 +23,36 @@ class CreateChampionshipSettingsTable extends Migration
 
 
             // Category Section
-            $table->tinyInteger('teamSize')->nullable(); // Default is null
-            $table->tinyInteger('teamReserve')->nullable(); // Default is null
+            $table->tinyInteger('treeType')->default(1); // 0 - RoundRobin; 1 - Direct Elimination;
             $table->tinyInteger('fightingAreas')->unsigned()->nullable()->default(1);
-            $table->text('fightDuration'); // Can't apply default because text
+            $table->integer('limitByEntity')->unsigned()->nullable();
+
+            // Preliminary
             $table->boolean('hasPreliminary')->default(1);
             $table->boolean('preliminaryGroupSize')->default(3);
             $table->tinyInteger('preliminaryWinner'); // Number of Competitors that go to next level
             $table->tinyInteger('preliminaryDuration'); // Match Duration in preliminary heat
+
+            // Team
+            $table->tinyInteger('teamSize')->nullable(); // Default is null
+            $table->tinyInteger('teamReserve')->nullable(); // Default is null
+
+            // Seed
+            $table->smallInteger('seedQuantity')->nullable();  // Competitors seeded in tree
+
+
+            //TODO This should go in another table that is not for tree construction but for rules
+            // Rules
             $table->boolean('hasEncho')->default(1);
             $table->tinyInteger('enchoQty');
             $table->text('enchoDuration');
             $table->boolean('hasHantei');
             $table->smallInteger('cost'); // Cost of competition
-            $table->smallInteger('seedQuantity')->nullable();  // Competitors seeded in tree
+
+            $table->text('fightDuration'); // Can't apply default because text
             $table->smallInteger('hanteiLimit')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
-            $table->smallInteger('enchoTimeLimitless')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
-            $table->integer('limitByEntity')->unsigned()->nullable();
+            $table->smallInteger('enchoGoldPoint')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
+
 
             $table->timestamps();
             $table->softDeletes();

@@ -43,8 +43,8 @@
                             </a></li>
 
 
-                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}"><i
-                                        class="icon-users"></i>
+                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}">
+                                <i class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)
                                     <span class="badge badge-success">{{$numCompetitors }}</span>
@@ -54,7 +54,16 @@
 
                             </a>
                         </li>
-                        @if ($tournament->hasTeamCategory())
+                        <li><a href="{{ URL::action('TreeController@index',$tournament->slug) }}">
+                                <i class="icon-tree7"></i> {{trans("core.see_trees")}}
+                            </a>
+                        </li>
+                        {{--<li><a href="{{ URL::action('FightController@index',$tournament->slug) }}">--}}
+                                {{--<i class="icon-tree7"></i> {{trans("core.see_fight_list")}}--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+
+                    @if ($tournament->hasTeamCategory())
                             <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
                                             class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
                                     @if($numTeams>2)
@@ -64,10 +73,10 @@
                                     @endif
                                 </a></li>
                         @endif
-                        <li class="disabled"><a href="#"><i
-                                        class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>
-                        <li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>
-                        </li>
+                        {{--<li class="disabled"><a href="#"><i--}}
+                                        {{--class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>--}}
+                        {{--<li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>--}}
+                        {{--</li>--}}
                         <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
                         <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>
 

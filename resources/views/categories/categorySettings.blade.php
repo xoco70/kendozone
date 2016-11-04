@@ -1,8 +1,9 @@
 <?php
 $setting = $tournament->championships->get($key)->settings;
-$teamSize = isset($setting->teamSize) ? $setting->teamSize : 0;
-$enchoQty = isset($setting->enchoQty) ? $setting->enchoQty : 0;
-$fightingAreas = isset($setting->fightingAreas) ? $setting->fightingAreas : 0;
+$treeType = $setting->treeType ?? 1;
+$teamSize = $setting->teamSize ?? 0;
+$enchoQty = $setting->enchoQty ?? 0;
+$fightingAreas = $setting->fightingAreas ?? 0;
 
 $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
         ? $setting->fightDuration : config('constants.CAT_FIGHT_DURATION');
@@ -78,18 +79,38 @@ $currency = Auth::user()->country->currency_code;
         </div>
     </div>
 
-
+    {{--First Line--}}
     <div id="accordion-styled-group{!! $key !!}"
          class="panel-collapse collapse {!! $key==0 ? "in" : "" !!} ">
         <div class="panel-body">
             <div class="tab-pane" id="category">
                 <div class="row">
+                    <div class="col-lg-3">
+                        {!!  Form::label('treeType', trans('categories.treeType')) !!}
+                        {!!  Form::select('treeType', [0 => "RoundRobin",1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
+                    </div>
+
                     <div class="col-lg-2">
                         {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
                         {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
                     </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
+                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                               data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
+                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
+
+                        </div>
+                    </div>
+
+                </div>
+                <hr/>
+
+                <div class="row">
 
                     <div class="col-lg-2">
                         {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
@@ -121,15 +142,6 @@ $currency = Auth::user()->country->currency_code;
 
 
                     @endif
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
-                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
-                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
-
-                        </div>
-                    </div>
 
                 </div>
                 <hr/>
@@ -210,11 +222,11 @@ $currency = Auth::user()->country->currency_code;
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            {!!  Form::label('enchoTimeLimitless', trans('categories.enchoTimeLimitless')) !!}
+                            {!!  Form::label('enchoGoldPoint', trans('categories.enchoGoldPoint')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.enchoTimeLimitlessTooltip')}}"></i>
+                               data-original-title="{{trans('categories.enchoGoldPointTooltip')}}"></i>
 
-                            {!!  Form::select('enchoTimeLimitless', [0,1,2,3,4,5,6,7,8,9,10], old('enchoTimeLimitless'),['class' => 'form-control',$disableEncho]) !!}
+                            {!!  Form::select('enchoGoldPoint', [0,1,2,3,4,5,6,7,8,9,10], old('enchoGoldPoint'),['class' => 'form-control',$disableEncho]) !!}
                         </div>
                     </div>
                 </div>

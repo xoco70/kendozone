@@ -22,7 +22,7 @@ $factory->define(App\ChampionshipSettings::class, function (Faker\Generator $fak
         'roundRobinDuration' => $faker->numberBetween(0, 10),
         'seedQuantity' => $faker->numberBetween(0, 4),
         'hanteiLimit' => $faker->numberBetween(0, 10), // 1/2 Finals
-        'enchoTimeLimitless' => $faker->numberBetween(0, 10), // Step where Encho has no more time limit
+        'enchoGoldPoint' => $faker->numberBetween(0, 10), // Step where Encho has no more time limit
         'limitByEntity' => $faker->numberBetween(0, 10),
 
     ];
