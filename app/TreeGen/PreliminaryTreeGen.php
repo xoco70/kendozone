@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\TreeGen\Preliminary;
+namespace App\TreeGen;
 
 
 use App\Championship;

@@ -41,4 +41,8 @@ return [
     'international' => 8,
 
 
+    'ROUND_ROBIN' => 0,
+    'DIRECT_ELIMINATION' => 1,
+
+
 ];

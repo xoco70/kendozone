@@ -2,73 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
 use App\PreliminaryTree;
+use App\Tree;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class TreeController extends Controller
 {
     /**
      * Display a listing of trees.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-
+        $grades = Grade::pluck('name', 'id');
         $championships = PreliminaryTree::getChampionships($request);
-        dd($championships);
         foreach ($championships as $championship) {
-            $hasPreliminary = $championship->settings->hasPreliminary;
-            if ($hasPreliminary) {
+
+            if ($championship->hasPreliminary()) {
                 $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
                 $championship->tree = $preliminaryTree;
             } else {
                 // RoundRobin or Direct Elimination
-
+                $championship->tree = null;
             }
 
         }
 
-        return view('preliminaryTree.index');
+        return view('trees.index', compact('championships', 'grades'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Build Tree
      *
      * @param Request $request
      * @return \Illuminate\Http\Response|string
      */
     public function store(Request $request)
     {
-
+        $grades = Grade::pluck('name', 'id');
         $championships = PreliminaryTree::getChampionships($request);
 
         foreach ($championships as $championship) {
             // If no settings has been defined, take default
-
-
-            $hasPreliminary = $championship->settings->hasPreliminary;
-            $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
-
-            if ($hasPreliminary) {
-                // Check if PT has already been generated
-                if ($preliminaryTree != null && $preliminaryTree->count() > 0) {
-                    return view('preliminaryTree.index', compact('preliminaryTree'));
-                } else {
-                    $generation = PreliminaryTree::getGenerationStrategy($championship);
-                    $preliminaryTree = $generation->run();
-                    return view('preliminaryTree.index', compact('preliminaryTree'));
-                }
-            } else {
-                if ($preliminaryTree != null && $preliminaryTree->count() > 0) {
-                    return view('preliminaryTree.index', compact('preliminaryTree'));
-                } else {
-                    $generation = PreliminaryTree::getGenerationStrategy($championship);
-                    $preliminaryTree = $generation->run();
-                    return view('preliminaryTree.index', compact('preliminaryTree'));
-                }
-            }
-
+                $generation = Tree::getGenerationStrategy($championship);
+                $tree = $generation->run();
+                $championship->tree = $tree;
         }
+        return view('trees.index', compact('championships','grades'));
+
     }
 }
