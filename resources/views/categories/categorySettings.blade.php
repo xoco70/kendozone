@@ -85,32 +85,6 @@ $currency = Auth::user()->country->currency_code;
         <div class="panel-body">
             <div class="tab-pane" id="category">
                 <div class="row">
-                    <div class="col-lg-3">
-                        {!!  Form::label('treeType', trans('categories.treeType')) !!}
-                        {!!  Form::select('treeType', [0 => "RoundRobin",1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
-                    </div>
-
-                    <div class="col-lg-2">
-                        {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
-                        <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                           data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
-                        {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
-                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
-                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
-
-                        </div>
-                    </div>
-
-                </div>
-                <hr/>
-
-                <div class="row">
 
                     <div class="col-lg-2">
                         {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
@@ -184,6 +158,33 @@ $currency = Auth::user()->country->currency_code;
 
                 </div>
                 <hr/>
+                <div class="row">
+                    <div class="col-lg-3">
+                        {!!  Form::label('treeType', trans('categories.treeType')) !!}
+                        {!!  Form::select('treeType', [0 => "RoundRobin",1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="col-lg-2">
+                        {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
+                        <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                           data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
+                        {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
+                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                               data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
+                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
+
+                        </div>
+                    </div>
+
+                </div>
+                <hr/>
+
+
 
                 <div class="row">
                     <div class="col-lg-2">
