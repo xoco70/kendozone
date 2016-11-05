@@ -70,13 +70,21 @@
                                     </tr>
                                 @endforeach
                             </table><br/>
+                        @endforeach
+                    @else
+
+                        <div>No hay arbol generado</div>
+
+                    @endif
+                @endforeach
             </div>
-            @endforeach
-            @else
-                <div>No hay arbol generado</div>
-            @endif
-            @endforeach
         </div>
+
+    </div>
+
+
+
+
 
     @include("errors.list")
 @stop

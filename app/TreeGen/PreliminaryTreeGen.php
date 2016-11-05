@@ -25,6 +25,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
     public function run()
     {
+        $this->championship->tree()->delete();
         $preliminiaryTress = new Collection();
         $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.ikf_settings')[3]);
 
