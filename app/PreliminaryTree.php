@@ -2,9 +2,8 @@
 
 namespace App;
 
-use App\TreeGen\Preliminary\InternationalTournamentGen;
-use App\TreeGen\Preliminary\PreliminaryTreeGen;
-use App\TreeGen\Preliminary\RegionalTournamentGen;
+
+use App\TreeGen\PreliminaryTreeGen;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -60,12 +59,24 @@ class PreliminaryTree extends Model
      */
     public static function getChampionships($request)
     {
+
         $championships = new Collection();
         if (PreliminaryTree::hasChampionship($request)){
-            $championship = Championship::with('settings')->find($request->championshipId);
+            $championship = Championship::with('settings', 'category')->find($request->championshipId);
             $championships->push($championship);
         }else if (PreliminaryTree::hasTournament($request)){
-            $tournament = Tournament::with('championships.settings')->where('slug',$request->tournamentId)->first();
+
+            $tournament = Tournament::with(
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+
+            )->where('slug',$request->tournamentId)->first();
+
             $championships = $tournament->championships;
         }
         return $championships;

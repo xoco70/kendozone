@@ -39,7 +39,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         }
 
         if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
-            dd("Se requiere un minimo de " . Config::get('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores");
+            return "Se requiere un minimo de " . Config::get('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores";
         }
 
 
@@ -85,8 +85,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
                 if (isset($c2)) $pt->c2 = $c2->id;
                 if (isset($c3)) $pt->c3 = $c3->id;
                 if (isset($c4)) $pt->c4 = $c4->id;
-                if (isset($c5)) $pt->c5 = $c5->id/**/
-                ;
+                if (isset($c5)) $pt->c5 = $c5->id;
 
                 $pt->save();
                 $preliminiaryTress->push($pt);
@@ -160,7 +159,8 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         // Deterime Bye Quantity
 
         $userCount = $championship->users->count();
-        $treeSize = $this->getTreeSize($userCount, $championship->settings->preliminaryGroupSize);
+        $preliminaryGroupSize = $championship->settings != null ? $championship->settings->preliminaryGroupSize : "3";
+        $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
         $byeCount = $treeSize - $userCount;
 
         return $this->createNullsGroup($byeCount);

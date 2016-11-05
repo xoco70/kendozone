@@ -7,6 +7,7 @@ use App\PreliminaryTree;
 use App\Tree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 
 class TreeController extends Controller
 {
@@ -20,18 +21,6 @@ class TreeController extends Controller
     {
         $grades = Grade::pluck('name', 'id');
         $championships = PreliminaryTree::getChampionships($request);
-        foreach ($championships as $championship) {
-
-            if ($championship->hasPreliminary()) {
-                $preliminaryTree = PreliminaryTree::where('championship_id', $championship->id)->get();
-                $championship->tree = $preliminaryTree;
-            } else {
-                // RoundRobin or Direct Elimination
-                $championship->tree = null;
-            }
-
-        }
-
         return view('trees.index', compact('championships', 'grades'));
     }
 
@@ -48,10 +37,16 @@ class TreeController extends Controller
 
         foreach ($championships as $championship) {
             // If no settings has been defined, take default
-                $generation = Tree::getGenerationStrategy($championship);
+            $generation = Tree::getGenerationStrategy($championship);
+            if (is_string($generation)){
+                flash()->error($generation);
+            }else{
                 $tree = $generation->run();
                 $championship->tree = $tree;
+                flash()->success("Success");
+            }
         }
+
         return view('trees.index', compact('championships','grades'));
 
     }

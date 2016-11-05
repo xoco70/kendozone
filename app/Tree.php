@@ -4,7 +4,7 @@ namespace App;
 
 use App\TreeGen\DirectEliminationTreeGen;
 use App\TreeGen\PreliminaryTreeGen;
-use App\TreeGen\Preliminary\RoundRobinTreeGen;
+use App\TreeGen\RoundRobinTreeGen;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -68,6 +68,8 @@ class Tree extends Model
             return new DirectEliminationTreeGen($championship, $level);
         }
 
+
+        return new PreliminaryTreeGen($championship, $level);
 
     }
 }

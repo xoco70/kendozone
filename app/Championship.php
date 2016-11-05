@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Championship extends Model
 {
     use SoftDeletes;
-    protected $dates = ['created_at', 'updated_at','deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     protected $table = 'championship';
 
     public $timestamps = true;
@@ -68,7 +68,6 @@ class Championship extends Model
     }
 
 
-
     public function championships()
     {
         return $this->belongsToMany(Championship::class, 'competitor');
@@ -94,5 +93,16 @@ class Championship extends Model
         return ($this->settings != null && $this->settings->treeType == Config::get('constants.DIRECT_ELIMINATION'));
     }
 
+    public function tree()
+    {
+//        if ($this->hasPreliminary()){
+            return $this->hasMany(PreliminaryTree::class,'championship_id');
+//        }
+
+//        if ($this->isRoundRobinType())
+//            return $this->belongsToMany(PreliminaryTree::class);
+//        if ($this->isDirectEliminationType())
+//            return $this->belongsToMany(PreliminaryTree::class);
+    }
 
 }
