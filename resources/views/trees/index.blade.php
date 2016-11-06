@@ -100,13 +100,13 @@
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
-                        title: "Are you sure?",
-                        text: "You will not be able to recover this imaginary file!",
+                        title: "{{ trans('msg.are_you_sure') }}",
+                        text: "{{ trans('msg.this_will_delete_previous_tree') }}",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, delete it!',
-                        cancelButtonText: "No, cancel plx!",
+                        confirmButtonText: "{{ trans('msg.do_it_again') }}",
+                        cancelButtonText: "{{ trans('msg.cancel_it') }}",
                         closeOnConfirm: false,
                         closeOnCancel: false
                     },
@@ -114,7 +114,7 @@
                         if (isConfirm) {
                             form.submit();
                         } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                            swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
                         }
                     });
         });

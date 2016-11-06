@@ -117,4 +117,12 @@ return [
     'user_has_registered_to_championships' => ':user_name se ha registrado en la categorías siguientes:',
     'success_to_all' => '¡Exito a todos!',
 
+    'are_you_sure' => '¿Reemplazar el árbol?',
+    'this_will_delete_previous_tree' => 'Ésta acción borrará el árbol existente',
+    'cancel_it' => 'Cancelar',
+    'do_it_again' => 'Ok',
+    'cancelled' => 'Cancelado',
+    'operation_cancelled' => 'Operación cancelada',
+
+
 ];
