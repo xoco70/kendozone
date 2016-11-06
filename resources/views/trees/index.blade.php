@@ -5,6 +5,7 @@
 
 @section('styles')
     {!! Html::style('css/pages/trees.css')!!}
+
 @stop
 
 @section('breadcrumbs')
@@ -21,11 +22,11 @@
 
 
                 @foreach($championships as $championship)
-                    <h1> {{$championship->category->buildName($grades)}}</h1>
+                    <h1> {{$championship->category->buildName($grades)}}
                     @if (App::environment('production'))
                         <a href="{{ route('workingonit') }}"
                            data-target="#create_tournament_user"
-                           class="btn bg-teal btn-xs pull-right mr-10"><b>
+                           class="btn bg-teal btn-xs mr-10"><b>
                                 <i class="mr-5"></i>Generate Trees</b>
                         </a>
 
@@ -41,6 +42,7 @@
 
                         {!! Form::close() !!}
                     @endif
+                    </h1>
                     @if ($championship->tree != null && $championship->tree->count() != 0)
                         @foreach($championship->tree->groupBy('area') as $ptByArea)
                             <table class="table-bordered">

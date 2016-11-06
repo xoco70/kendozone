@@ -1,10 +1,11 @@
 /* col-xs */
 @media (max-width: 950px) {
-    .breadcrumb, ul.nav.navbar-nav.breadcrumbs,  .protip-container {
+    .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .protip-container {
         display: none;
     }
-    .head_create_tournament{
-        display: none!important;
+
+    .head_create_tournament {
+        display: none !important;
     }
 }
 
@@ -273,20 +274,23 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     }
 
     .language-switch-desktop {
-        display: none!important;
+        display: none !important;
     }
-    .navbar-header .navbar-nav>li+li{
+
+    .navbar-header .navbar-nav > li + li {
         margin-top: 0;
     }
-    .create-tournament{
-        width:100%;
+
+    .create-tournament {
+        width: 100%;
         margin-bottom: 10px;
-        margin-left: 0!important;
+        margin-left: 0 !important;
         text-transform: uppercase;
     }
 }
+
 @media (min-width: 768px) {
-    .create-tournament{
+    .create-tournament {
         display: none;
 
     }
@@ -297,4 +301,9 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+}
+
+#storeTree {
+    display: inline-block;
+    vertical-align: middle;
 }
