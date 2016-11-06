@@ -1,4 +1,12 @@
 @extends('layouts.dashboard')
+@section('scripts')
+    {!! Html::script('js/pages/footer/trees.js')!!}
+@stop
+
+@section('styles')
+    {!! Html::style('css/pages/trees.css')!!}
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('trees.index', $championships->get(0)->tournament) !!}
 @stop
@@ -22,18 +30,16 @@
                         </a>
 
                     @else
-                        <span>
-                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
-'action' => ['TreeController@store', $championship->id]]) !!}
 
-                            <button type="submit"
-                                    class="btn bg-teal btn-xs pull-right mr-10">
-                    <i class="mr-5"></i>Generate Trees
+                        {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+                            'action' => ['TreeController@store', $championship->id]]) !!}
 
-                </button>
+                        <button type="button" class="btn bg-teal btn-xs pull-right mr-10" id="generate">
+                            Generate Tree
+                        </button>
 
 
-                            {!! Form::close() !!}</span>
+                        {!! Form::close() !!}
                     @endif
                     @if ($championship->tree != null && $championship->tree->count() != 0)
                         @foreach($championship->tree->groupBy('area') as $ptByArea)
@@ -89,4 +95,31 @@
     @include("errors.list")
 @stop
 @section('scripts_footer')
+    <script>
+        $('#generate').on('click', function (e) {
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: "No, cancel plx!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            form.submit();
+                        } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    });
+        });
+
+
+    </script>
+
 @stop

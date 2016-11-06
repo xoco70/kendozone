@@ -22,7 +22,6 @@ elixir(function (mix) {
     mix.browserify('vue/pages/loadingButton.js');
 
 
-
     // General Styles for app
     mix.styles([
         //'icons/icomoon/styles.css',
@@ -124,7 +123,13 @@ elixir(function (mix) {
         'multiple-emails.css'
     ], 'public/css/pages/tournamentInvite.css');
 
+    mix.scripts([
+        'components/sweetalert/dist/sweetalert.min.js',
+    ], 'public/js/pages/footer/trees.js');
 
+    mix.styles([
+        '../js/components/sweetalert/dist/sweetalert.css',
+    ], 'public/css/pages/trees.css');
 
 
     // FOOTER
