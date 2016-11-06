@@ -46,7 +46,7 @@
                                     <a href="{{ route('workingonit') }}"
                                        data-target="#create_tournament_user"
                                        class="btn bg-teal btn-xs pull-right mr-10"><b>
-                                            <i class="mr-5"></i>Generate Trees</b>
+                                            {{ trans_choice('core.generate_tree',1) }}</b>
                                     </a>
 
                                 @else
@@ -55,7 +55,7 @@
 
                                     <button type="submit"
                                             class="btn bg-teal btn-xs pull-right mr-10">
-                                        <i class="mr-5"></i>Generate Trees
+                                        {{ trans_choice('core.generate_tree',1) }}
 
                                     </button>
 

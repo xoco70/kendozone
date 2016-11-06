@@ -57,7 +57,7 @@ return [
     'broadcast' => 'Transmitir',
     'publish' => 'Publicar',
     'invite_competitors' => 'Invita competidores',
-    'generate_trees' => 'Generar Árboles',
+    'generate_tree' => 'Generar Árbol|Generar Árboles',
     'admin_tournaments' => 'Administrar torneos',
     'eventDateIni' => 'Fecha Inicial',
     'eventDateFin' => 'Fecha Final',

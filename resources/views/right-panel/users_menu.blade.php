@@ -36,24 +36,36 @@
                     </ul>
                 </div>
             </div>
-            @if($link!="")
 
-                <div class="sidebar-category">
-
-                    <div class="category-content no-padding">
-                        <a href="{!!   $link !!}" id="generate_tree"
-                           class="btn bg-teal btn-xs pull-right p-20 ml-20 mt-20 full-width"  ><b><i
-                                        class="icon-tree7 mr-5 "></i>{{ trans('core.generate_trees') }}</b>
-                        </a>
-
-                    </div>
-                </div>
-        @endif
-
-        <!-- /sub navigation -->
+            <!-- /sub navigation -->
 
 
         </div>
+
     </div>
+    @if (App::environment('production'))
+        <a href="{{ route('workingonit') }}"
+           data-target="#create_tournament_user"
+           class="btn bg-teal btn-xs pull-right mr-10"><b>
+                {{ trans_choice('core.generate_tree',2) }}</b>
+        </a>
+
+    @else
+        {!! Form::model(null, [
+            'method' => 'POST', 'id' => 'storeAllTree', 'class'=>'full-width',
+            'route' => ['storeAllTree', $tournament->slug]
+            ])   !!}
+
+
+        <button type="submit" class="btn bg-teal pt-10 pb-10  mt-10 full-width ">
+            <b><i class="icon-tree7 mr-5 "></i>{{ trans_choice('core.generate_tree',2) }}
+            </b>
+
+
+        </button>
+
+
+        {!! Form::close() !!}
+    @endif
 </div>
 <!-- /detached sidebar -->
