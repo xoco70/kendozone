@@ -43,7 +43,7 @@ class TreeController extends Controller
             }else{
                 $tree = $generation->run();
                 $championship->tree = $tree;
-                flash()->success("Success");
+                flash()->success(trans('msg.championships_tree_generation_success'));
             }
         }
 

@@ -123,6 +123,6 @@ return [
     'do_it_again' => 'Ok',
     'cancelled' => 'Cancelado',
     'operation_cancelled' => 'Operación cancelada',
-
+    'championships_tree_generation_success' => 'Generación de arboles exitosa!'
 
 ];
