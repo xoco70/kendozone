@@ -95,7 +95,7 @@
         </div>
         <div class="col-md-5">
             <div class="">
-                {!!  Form::label('fightingAreas', trans('CATEGORIES.fightingAreas')) !!}
+                {!!  Form::label('fightingAreas', trans_choice('categories.fightingArea',2)) !!}
                 <br/>
                 {{ $setting->fightingAreas }}
 

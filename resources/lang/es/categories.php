@@ -64,7 +64,7 @@ return [
     'direct_elimination' => 'Eliminación directa',
     'teamSize' => 'Tamaño del equipo',
     'teamSizeReserve' => 'Reservas',
-    'fightingAreas' => 'Áreas',
+    'fightingArea' => 'Área|Áreas',
     'fightDuration' =>'Duración',
     'hasPreliminary' => 'Preliminarios',
     'preliminaryWinner' => 'Ganadores x grupo',

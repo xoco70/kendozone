@@ -26,6 +26,23 @@ class PreliminaryTree extends Model
         return $request->championshipId != null; // has return false, don't know why
     }
 
+    public static function getTournament($request)
+    {
+        $tournament = Tournament::with(
+            'championships.settings',
+            'championships.category',
+            'championships.tree.user1',
+            'championships.tree.user2',
+            'championships.tree.user3',
+            'championships.tree.user4',
+            'championships.tree.user5'
+
+        )->where('slug', $request->tournamentId)->first();
+
+
+        return $tournament;
+    }
+
     public function championship()
     {
         return $this->belongsTo(Championship::class);
@@ -33,23 +50,27 @@ class PreliminaryTree extends Model
 
     public function user1()
     {
-        return $this->belongsTo(User::class, 'c1','id');
+        return $this->belongsTo(User::class, 'c1', 'id');
     }
+
     public function user2()
     {
-        return $this->belongsTo(User::class, 'c2','id');
+        return $this->belongsTo(User::class, 'c2', 'id');
     }
+
     public function user3()
     {
-        return $this->belongsTo(User::class, 'c3','id');
+        return $this->belongsTo(User::class, 'c3', 'id');
     }
+
     public function user4()
     {
-        return $this->belongsTo(User::class, 'c4','id');
+        return $this->belongsTo(User::class, 'c4', 'id');
     }
+
     public function user5()
     {
-        return $this->belongsTo(User::class, 'c5','id');
+        return $this->belongsTo(User::class, 'c5', 'id');
     }
 
 
@@ -61,10 +82,10 @@ class PreliminaryTree extends Model
     {
 
         $championships = new Collection();
-        if (PreliminaryTree::hasChampionship($request)){
+        if (PreliminaryTree::hasChampionship($request)) {
             $championship = Championship::with('settings', 'category')->find($request->championshipId);
             $championships->push($championship);
-        }else if (PreliminaryTree::hasTournament($request)){
+        } else if (PreliminaryTree::hasTournament($request)) {
 
             $tournament = Tournament::with(
                 'championships.settings',
@@ -75,7 +96,7 @@ class PreliminaryTree extends Model
                 'championships.tree.user4',
                 'championships.tree.user5'
 
-            )->where('slug',$request->tournamentId)->first();
+            )->where('slug', $request->tournamentId)->first();
 
             $championships = $tournament->championships;
         }
@@ -85,7 +106,7 @@ class PreliminaryTree extends Model
     public static function getGenerationStrategy(Championship $championship)
     {
         $tournament = $championship->tournament;
-        switch($tournament->level_id){
+        switch ($tournament->level_id) {
             case Config::get('constants.ND'):
                 return new PreliminaryTreeGen($championship, null);
                 break;

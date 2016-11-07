@@ -3,6 +3,7 @@
 namespace App;
 
 
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,6 +24,7 @@ class Tournament extends Model
     use SoftDeletes;
     use Sluggable;
     use AuditingTrait;
+    use SluggableScopeHelpers;
 
 
     /**

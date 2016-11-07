@@ -120,13 +120,8 @@ class TournamentController extends Controller
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::pluck('name', 'id');
         $categories = new Collection();
-//        $tournament->venue == null
-//            ? $venue = new Venue
-//            : $venue = $tournament->venue;
-
         $venue =  $tournament->venue ?? new Venue;
 
-//        dd($categories1);
         foreach ($categories1 as $category) {
 
             $category->alias != ''

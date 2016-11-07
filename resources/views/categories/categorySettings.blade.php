@@ -165,7 +165,7 @@ $currency = Auth::user()->country->currency_code;
                     </div>
 
                     <div class="col-lg-2">
-                        {!!  Form::label('fightingAreas', trans('categories.fightingAreas')) !!}
+                        {!!  Form::label('fightingAreas', trans_choice('categories.fightingArea',2)) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
                         {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}

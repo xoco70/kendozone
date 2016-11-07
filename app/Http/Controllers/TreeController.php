@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\PreliminaryTree;
+use App\Tournament;
 use App\Tree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -20,8 +21,12 @@ class TreeController extends Controller
     public function index(Request $request)
     {
         $grades = Grade::pluck('name', 'id');
-        $championships = PreliminaryTree::getChampionships($request);
-        return view('trees.index', compact('championships', 'grades'));
+        $tournament = PreliminaryTree::getTournament($request);
+        $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
+        $numTeams = $tournament->teams()->count();
+        $settingSize = $tournament->championshipSettings->count();
+        $categorySize = $tournament->championships->count();
+        return view('trees.index', compact('tournament', 'grades','numCompetitors','numTeams','settingSize','categorySize'));
     }
 
     /**

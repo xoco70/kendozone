@@ -286,6 +286,7 @@ return [
     'bulk_upload' => 'Invitar competidores con un archivo Excel',
     'download_layout' => 'Archivo modelo ( Layout )',
 
+    // Trees
     'tree' => 'Arbol|Arboles',
-
+    'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
 ];
