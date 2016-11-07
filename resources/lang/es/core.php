@@ -190,7 +190,7 @@ return [
     // Right Menu
 
     'sumary' => 'Resumen',
-    'see_trees' => 'Arboles de competencia',
+    'see_trees' => 'Gráficas',
     //Settings
 
     'social_networks' => 'Redes Sociales',

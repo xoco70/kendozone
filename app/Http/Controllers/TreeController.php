@@ -22,10 +22,6 @@ class TreeController extends Controller
     {
         $grades = Grade::pluck('name', 'id');
         $tournament = PreliminaryTree::getTournament($request);
-        $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
-        $numTeams = $tournament->teams()->count();
-        $settingSize = $tournament->championshipSettings->count();
-        $categorySize = $tournament->championships->count();
         return view('trees.index', compact('tournament', 'grades','numCompetitors','numTeams','settingSize','categorySize'));
     }
 
@@ -38,9 +34,8 @@ class TreeController extends Controller
     public function store(Request $request)
     {
         $grades = Grade::pluck('name', 'id');
-        $championships = PreliminaryTree::getChampionships($request);
-
-        foreach ($championships as $championship) {
+        $tournament = PreliminaryTree::getTournament($request);
+        foreach ($tournament->championships as $championship) {
             // If no settings has been defined, take default
             $generation = Tree::getGenerationStrategy($championship);
             if (is_string($generation)){
@@ -52,7 +47,7 @@ class TreeController extends Controller
             }
         }
 
-        return view('trees.index', compact('championships','grades'));
+        return view('trees.index', compact('tournament','grades'));
 
     }
 }

@@ -44,7 +44,7 @@
                                     {!! Form::close() !!}
                                 @endif
                             </h1>
-                            @if ($championship->tree != null && $championship->tree->count() != 0)
+                            @if ($championship->tree != null && !is_string($championship->tree) && $championship->tree->count() != 0)
                                 @foreach($championship->tree->groupBy('area') as $ptByArea)
                                     <table class="table-bordered full-width">
                                         {{--<th class="p-10">ID</th>--}}
@@ -114,8 +114,6 @@
                     function (isConfirm) {
                         if (isConfirm) {
                             form.submit();
-                        } else {
-                            swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
                         }
                     });
         });

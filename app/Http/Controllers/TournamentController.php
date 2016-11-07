@@ -107,10 +107,9 @@ class TournamentController extends Controller
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
         $countries = Country::pluck('name', 'id');
-        $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
-        $numTeams = $tournament->teams()->count();
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
+
         $rules = config('options.rules');
         $hanteiLimit = config('options.hanteiLimit');
         $selectedCategories = $tournament->categories;

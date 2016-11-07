@@ -1,3 +1,11 @@
+<?php
+$generatedTreeCount = $tournament->trees->groupBy('championship_id')->count();
+$numCompetitors = $tournament->competitors->groupBy('user_id')->count();
+$numTeams = $tournament->teams()->count();
+$settingSize = $tournament->championshipSettings->count();
+$categorySize = $tournament->championships->count();
+
+?>
 <!-- Detached sidebar -->
 <div class="sidebar-detached">
     <div class="sidebar sidebar-default">
@@ -56,14 +64,21 @@
                         </li>
                         <li><a href="{{ URL::action('TreeController@index',$tournament->slug) }}">
                                 <i class="icon-tree7"></i> {{trans("core.see_trees")}}
+                                @if ($tournament->trees->groupBy('championship_id')->count() < $categorySize)
+                                    <span class="badge badge-primary">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                @else
+                                    <span class="badge badge-success">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                @endif
+
+
                             </a>
                         </li>
                         {{--<li><a href="{{ URL::action('FightController@index',$tournament->slug) }}">--}}
-                                {{--<i class="icon-tree7"></i> {{trans("core.see_fight_list")}}--}}
-                            {{--</a>--}}
+                        {{--<i class="icon-tree7"></i> {{trans("core.see_fight_list")}}--}}
+                        {{--</a>--}}
                         {{--</li>--}}
 
-                    @if ($tournament->hasTeamCategory())
+                        @if ($tournament->hasTeamCategory())
                             <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
                                             class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
                                     @if($numTeams>2)
@@ -74,7 +89,7 @@
                                 </a></li>
                         @endif
                         {{--<li class="disabled"><a href="#"><i--}}
-                                        {{--class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>--}}
+                        {{--class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>--}}
                         {{--<li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>--}}
                         {{--</li>--}}
                         <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
@@ -129,7 +144,6 @@
 $link = "";
 $id = "";
 if ($settingSize > 0 && $settingSize == $categorySize) {
-    //$link = URL::action('TournamentController@generateTrees', ['tournamentId' => $tournament->slug]);
     $link = "";
     $id = "";
 } else {

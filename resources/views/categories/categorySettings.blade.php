@@ -17,7 +17,8 @@ if (is_null($setting)) {
     $disableEncho = $disablePreliminary = "disabled";
 } else {
     $disableEncho = $setting->hasEncho ? "" : "disabled";
-    $disablePreliminary = $setting->hasPreliminary ? "" : "disabled";
+//    $disablePreliminary = $setting->hasPreliminary ? "" : "disabled";
+    $disablePreliminary = "disabled";
 }
 $currency = Auth::user()->country->currency_code;
 ?>
@@ -129,8 +130,8 @@ $currency = Auth::user()->country->currency_code;
                                    data-original-title="{{trans('categories.hasPreliminaryTooltip')}}"></i>
                                 <br/>
                                 {!!   Form::hidden('hasPreliminary', 0,['id'=>'hasPreliminary'.$key ]) !!}
-                                {!!   Form::checkbox('hasPreliminary', 1, old('hasPreliminary'),
-                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key]) !!}
+                                {!!   Form::checkbox('hasPreliminary', 1, 1,
+                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key, $disablePreliminary]) !!}
 
                             </label>
                         </div>
@@ -161,7 +162,7 @@ $currency = Auth::user()->country->currency_code;
                 <div class="row">
                     <div class="col-lg-3">
                         {!!  Form::label('treeType', trans('categories.treeType')) !!}
-                        {!!  Form::select('treeType', [0 => "RoundRobin",1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
+                        {!!  Form::select('treeType', [1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
                     </div>
 
                     <div class="col-lg-2">

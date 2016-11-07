@@ -181,6 +181,15 @@ class Tournament extends Model
         return $this->hasManyThrough(Competitor::class, Championship::class);
     }
 
+    /**
+     * Get All trees that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function trees()
+    {
+        return $this->hasManyThrough(PreliminaryTree::class, Championship::class);
+    }
+
 
     /**
      * Get all Invitations that belongs to a tournament
@@ -216,21 +225,6 @@ class Tournament extends Model
     {
         return $date;
     }
-
-//    public function setDateIniAttribute($date)
-//    {
-//        $this->attributes['dateIni'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
-//    }
-//
-//    public function setDateFinAttribute($date)
-//    {
-//        $this->attributes['dateFin'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
-//    }
-//
-//    public function setLimitRegisterDateAttribute($date)
-//    {
-//        $this->attributes['registerDateLimit'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
-//    }
 
     public function isOpen()
     {
