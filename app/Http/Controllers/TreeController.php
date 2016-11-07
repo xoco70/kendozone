@@ -6,6 +6,7 @@ use App\Grade;
 use App\PreliminaryTree;
 use App\Tournament;
 use App\Tree;
+use App\TreeGen\TreeGenError;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
@@ -38,10 +39,12 @@ class TreeController extends Controller
         foreach ($tournament->championships as $championship) {
             // If no settings has been defined, take default
             $generation = Tree::getGenerationStrategy($championship);
-            if (is_string($generation)){
-                flash()->error($generation);
+            $tree = $generation->run();
+
+            if (isset($generation->error)){
+                flash()->error($generation->error);
             }else{
-                $tree = $generation->run();
+
                 $championship->tree = $tree;
                 flash()->success(trans('msg.championships_tree_generation_success'));
             }

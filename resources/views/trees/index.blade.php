@@ -23,7 +23,9 @@
                                         <b><i class="mr-5"></i>{{ trans_choice('core.generate_tree',1) }}</b>
                                     </a>
                                 @else
-                                    {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
+                                    {!! Form::model(null,
+                                        ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
+                                         'data-gen' => !is_string($championship->tree) ? 1 :0,
                                         'action' => ['TreeController@store', $championship->id]]) !!}
 
                                     <button type="button" class="btn bg-teal btn-xs generate" id="">
@@ -35,7 +37,7 @@
                                 @endif
                             </h1>
 
-                            @if ($championship->tree != null && !is_string($championship->tree) && $championship->tree->count() != 0)
+                            @if ($championship->tree != null && ! $championship->tree instanceof \App\TreeGen\TreeGenError && $championship->tree->count() != 0)
                                 @foreach($championship->tree->groupBy('area') as $ptByArea)
                                     <table class="table-bordered full-width">
                                         {{--<th class="p-10">ID</th>--}}

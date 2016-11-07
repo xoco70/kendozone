@@ -16,6 +16,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 {
 
     protected $championship, $groupBy;
+    public $error;
 
     public function __construct(Championship $championship, $groupBy)
     {
@@ -23,6 +24,9 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $this->groupBy = $groupBy;
     }
 
+    /**
+     * @return PreliminaryTreeGen
+     */
     public function run()
     {
         $this->championship->tree()->delete();
@@ -40,7 +44,9 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         }
 
         if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
-            return "Se requiere un minimo de " . Config::get('constants.MIN_COMPETITORS_X_AREA') . " por area. Disminuya la cantidad de areas, o invita más competidores";
+            $this->error = trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]);
+            return $this;
+
         }
 
 
@@ -48,21 +54,13 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
         $usersByArea = $users->chunk(sizeof($users) / $areas);
 
-        // 75 users, 39 A + 36 B
         $area = 1;
 
         // loop on areas
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-//            $roundRobinGroups = $users->chunk($settings->roundRobinGroupSize)->shuffle();
             $roundRobinGroups = $users->chunk(3)->shuffle(); // , $settings->roundRobinGroupSize
-
-            // We must check groups quantity, must be a multiple of 4
-
-
-            // We must check last group
-
 
             $order = 1;
 
