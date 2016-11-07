@@ -1,7 +1,4 @@
 @extends('layouts.dashboard')
-@section('scripts')
-    {!! Html::script('js/pages/footer/trees.js')!!}
-@stop
 
 @section('styles')
     {!! Html::style('css/pages/trees.css')!!}
@@ -16,27 +13,20 @@
     <div class="container-detached">
         <div class="content-detached">
             <div class="panel panel-flat">
-
                 <div class="panel-body">
-
                     <div class="container-fluid">
-
-
                         @foreach($tournament->championships as $championship)
                             <h1> {{$championship->category->buildName($grades)}}
                                 @if (App::environment('production'))
                                     <a href="{{ route('workingonit') }}"
-                                       data-target="#create_tournament_user"
-                                       class="btn bg-teal btn-xs mr-10"><b>
-                                            <i class="mr-5"></i>{{ trans_choice('core.generate_tree',1) }}</b>
+                                       data-target="#create_tournament_user" class="btn bg-teal btn-xs mr-10">
+                                        <b><i class="mr-5"></i>{{ trans_choice('core.generate_tree',1) }}</b>
                                     </a>
-
                                 @else
-
                                     {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
                                         'action' => ['TreeController@store', $championship->id]]) !!}
 
-                                    <button type="button" class="btn bg-teal btn-xs" id="generate">
+                                    <button type="button" class="btn bg-teal btn-xs generate" id="">
                                         {{ trans_choice('core.generate_tree',1) }}
                                     </button>
 
@@ -44,6 +34,7 @@
                                     {!! Form::close() !!}
                                 @endif
                             </h1>
+
                             @if ($championship->tree != null && !is_string($championship->tree) && $championship->tree->count() != 0)
                                 @foreach($championship->tree->groupBy('area') as $ptByArea)
                                     <table class="table-bordered full-width">
@@ -96,8 +87,13 @@
     @include("errors.list")
 @stop
 @section('scripts_footer')
+    {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
-        $('#generate').on('click', function (e) {
+
+        $('.generate').on('click', function (e) {
+            // Check if there is a previous
+
+
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -114,6 +110,8 @@
                     function (isConfirm) {
                         if (isConfirm) {
                             form.submit();
+                        } else {
+                            swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
                         }
                     });
         });

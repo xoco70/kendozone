@@ -124,6 +124,9 @@ elixir(function (mix) {
     ], 'public/css/pages/tournamentInvite.css');
 
     mix.scripts([
+
+        'plugins/ui/nicescroll.min.js',
+        'sidebar_detached_sticky_custom.js',
         'components/sweetalert/dist/sweetalert.min.js',
     ], 'public/js/pages/footer/trees.js');
 
