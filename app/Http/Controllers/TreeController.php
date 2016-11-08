@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\PreliminaryTree;
-use App\Tournament;
 use App\Tree;
-use App\TreeGen\TreeGenError;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\URL;
 
 class TreeController extends Controller
 {
@@ -23,7 +19,7 @@ class TreeController extends Controller
     {
         $grades = Grade::pluck('name', 'id');
         $tournament = PreliminaryTree::getTournament($request);
-        return view('trees.index', compact('tournament', 'grades','numCompetitors','numTeams','settingSize','categorySize'));
+        return view('trees.index', compact('tournament', 'grades', 'numCompetitors', 'numTeams', 'settingSize', 'categorySize'));
     }
 
     /**
@@ -39,18 +35,20 @@ class TreeController extends Controller
         foreach ($tournament->championships as $championship) {
             // If no settings has been defined, take default
             $generation = Tree::getGenerationStrategy($championship);
+            $generation->championship = $championship;
+            dd($generation);
             $tree = $generation->run();
-
-            if (isset($generation->error)){
+            dd($tree);
+            if ($tree->error != null) {
                 flash()->error($generation->error);
-            }else{
+            } else {
 
                 $championship->tree = $tree;
                 flash()->success(trans('msg.championships_tree_generation_success'));
             }
         }
 
-        return view('trees.index', compact('tournament','grades'));
+        return view('trees.index', compact('tournament', 'grades'));
 
     }
 }

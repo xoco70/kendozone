@@ -25,10 +25,10 @@
                                 @else
                                     {!! Form::model(null,
                                         ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
-                                         'data-gen' => !is_string($championship->tree) ? 1 :0,
+                                         'data-gen' => $championship->tree->count(),
                                         'action' => ['TreeController@store', $championship->id]]) !!}
 
-                                    <button type="button" class="btn bg-teal btn-xs generate" id="">
+                                    <button type="button" class="btn bg-teal btn-xs generate">
                                         {{ trans_choice('core.generate_tree',1) }}
                                     </button>
 
@@ -37,7 +37,7 @@
                                 @endif
                             </h1>
 
-                            @if ($championship->tree != null && ! $championship->tree instanceof \App\TreeGen\TreeGenError && $championship->tree->count() != 0)
+                            @if ($championship->tree != null  && $championship->tree->count() != 0)
                                 @foreach($championship->tree->groupBy('area') as $ptByArea)
                                     <table class="table-bordered full-width">
                                         {{--<th class="p-10">ID</th>--}}
@@ -93,30 +93,37 @@
     <script>
 
         $('.generate').on('click', function (e) {
-            // Check if there is a previous
-
-
             e.preventDefault();
-            var form = $(this).parents('form');
-            swal({
-                        title: "{{ trans('msg.are_you_sure') }}",
-                        text: "{{ trans('msg.this_will_delete_previous_tree') }}",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
-                        confirmButtonText: "{{ trans('msg.do_it_again') }}",
-                        cancelButtonText: "{{ trans('msg.cancel_it') }}",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            form.submit();
-                        } else {
-                            swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
-                        }
-                    });
+            var form = $(this).parents('form:first');
+            inputData = form.serialize();
+            var count = form.data('gen');
+            if (count != 0) {
+                var form = $(this).parents('form');
+                swal({
+                            title: "{{ trans('msg.are_you_sure') }}",
+                            text: "{{ trans('msg.this_will_delete_previous_tree') }}",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: "{{ trans('msg.do_it_again') }}",
+                            cancelButtonText: "{{ trans('msg.cancel_it') }}",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                form.submit();
+                            } else {
+                                swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
+                            }
+                        });
+            }else{
+                form.submit();
+            }
+
         });
+
+
 
 
     </script>

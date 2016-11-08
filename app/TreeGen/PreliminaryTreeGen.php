@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Config;
 class PreliminaryTreeGen implements PreliminaryTreeGenerable
 {
 
-    protected $championship, $groupBy;
-    public $error;
+    protected $groupBy;
+    public $championship, $error;
+
 
     public function __construct(Championship $championship, $groupBy)
     {
         $this->championship = $championship;
         $this->groupBy = $groupBy;
+        $this->error = "hola";
     }
 
     /**
@@ -30,23 +32,24 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
     public function run()
     {
         $this->championship->tree()->delete();
-        $preliminiaryTress = new Collection();
+        $preliminiaryTree = new Collection();
         $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.ikf_settings')[3]);
 
         // Get Areas
         $areas = $settings->fightingAreas;
+        dd($this->championship);
+        if ($this->championship->users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
 
-        // Get Competitor's list
-        if ($this->groupBy == null) {
-            $users = $this->championship->users; // Single Collection -  Easier
-        } else {
-            $users = $this->getUsersByEntity();
-        }
-
-        if ($users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
             $this->error = trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]);
             return $this;
 
+        }
+        // Get Competitor's list
+        if ($this->groupBy == null) {
+            $users = $this->championship->users; // Single Collection -  Easier
+
+        } else {
+            $users = $this->getUsersByEntity();
         }
 
 
@@ -87,12 +90,12 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
                 if (isset($c5)) $pt->c5 = $c5->id;
 
                 $pt->save();
-                $preliminiaryTress->push($pt);
+                $preliminiaryTree->push($pt);
                 $order++;
             }
             $area++;
         }
-        return $preliminiaryTress;
+        return $preliminiaryTree;
     }
 
     /**
