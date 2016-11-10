@@ -34,16 +34,18 @@ class TreeController extends Controller
         $grades = Grade::pluck('name', 'id');
         $tournament = PreliminaryTree::getTournament($request);
         foreach ($tournament->championships as $championship) {
-            // If no settings has been defined, take default
-            $generation = Tree::getGenerationStrategy($championship);
-            $generation->championship = $championship;
-            $tree = $generation->run();
-            if (!$tree instanceof Collection) {
-                flash()->error($generation->error);
-            } else {
-                $championship->tree = $tree;
-                flash()->success(trans('msg.championships_tree_generation_success'));
+            if (! $championship->isRoundRobinType()){
+                $generation = Tree::getGenerationStrategy($championship);
+                $generation->championship = $championship;
+                $tree = $generation->run();
+                if (!$tree instanceof Collection) {
+                    flash()->error($generation->error);
+                } else {
+                    $championship->tree = $tree;
+                    flash()->success(trans('msg.championships_tree_generation_success'));
+                }
             }
+            // If no settings has been defined, take default
         }
 
         return redirect(route('indexTree', $tournament->slug));

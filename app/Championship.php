@@ -2,9 +2,9 @@
 
 namespace App;
 
-use ClassPreloader\Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Config;
 
 class Championship extends Model
 {
@@ -80,7 +80,7 @@ class Championship extends Model
 
     public function hasPreliminary()
     {
-        return ($this->settings != null && $this->settings->hasPreliminary);
+        return ($this->settings == null || $this->settings->hasPreliminary);
     }
 
     public function isRoundRobinType()
@@ -90,7 +90,7 @@ class Championship extends Model
 
     public function isDirectEliminationType()
     {
-        return ($this->settings != null && $this->settings->treeType == Config::get('constants.DIRECT_ELIMINATION'));
+        return ($this->settings == null || $this->settings->treeType == Config::get('constants.DIRECT_ELIMINATION'));
     }
 
     public function tree()
