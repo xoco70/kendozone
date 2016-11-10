@@ -42,7 +42,7 @@
                                 {{--</button>--}}
                                 {{--{!! Form::close() !!}--}}
 
-                                    {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
+                                    {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class' => 'pull-right',
 'action' => ['TreeController@store', $championship->id]]) !!}
 
                                     <button type="submit"
