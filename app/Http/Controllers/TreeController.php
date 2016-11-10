@@ -6,6 +6,7 @@ use App\Grade;
 use App\PreliminaryTree;
 use App\Tree;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class TreeController extends Controller
 {
@@ -36,19 +37,16 @@ class TreeController extends Controller
             // If no settings has been defined, take default
             $generation = Tree::getGenerationStrategy($championship);
             $generation->championship = $championship;
-            dd($generation);
             $tree = $generation->run();
-            dd($tree);
-            if ($tree->error != null) {
+            if (!$tree instanceof Collection) {
                 flash()->error($generation->error);
             } else {
-
                 $championship->tree = $tree;
                 flash()->success(trans('msg.championships_tree_generation_success'));
             }
         }
 
-        return view('trees.index', compact('tournament', 'grades'));
+        return redirect(route('indexTree', $tournament->slug));
 
     }
 }

@@ -28,22 +28,36 @@ class PreliminaryTree extends Model
 
     public static function getTournament($request)
     {
+        $tournament = new Tournament;
         if (PreliminaryTree::hasTournament($request)) {
             $tournamentSlug = $request->tournamentId;
+            $tournament = Tournament::with(
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+
+            )->where('slug', $tournamentSlug)->first();
         } elseif (PreliminaryTree::hasChampionship($request)) {
             $tournamentSlug = Championship::find($request->championshipId)->tournament->slug;
+            $tournament = Tournament::with([
+                'championships' => function ($query) use ($request) {
+                    $query->where('id', '=', $request->championshipId);
+                },
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+            ])->first();
         }
 
-        return $tournament = Tournament::with(
-            'championships.settings',
-            'championships.category',
-            'championships.tree.user1',
-            'championships.tree.user2',
-            'championships.tree.user3',
-            'championships.tree.user4',
-            'championships.tree.user5'
-
-        )->where('slug', $tournamentSlug)->first();
+        return $tournament;
     }
 
 

@@ -42,14 +42,6 @@
                                 {{--</button>--}}
                                 {{--{!! Form::close() !!}--}}
 
-                                @if (App::environment('production'))
-                                    <a href="{{ route('workingonit') }}"
-                                       data-target="#create_tournament_user"
-                                       class="btn bg-teal btn-xs pull-right mr-10"><b>
-                                            {{ trans_choice('core.generate_tree',1) }}</b>
-                                    </a>
-
-                                @else
                                     {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree',
 'action' => ['TreeController@store', $championship->id]]) !!}
 
@@ -61,7 +53,6 @@
 
 
                                     {!! Form::close() !!}
-                                @endif
 
 
 

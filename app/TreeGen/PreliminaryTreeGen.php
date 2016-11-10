@@ -23,7 +23,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
     {
         $this->championship = $championship;
         $this->groupBy = $groupBy;
-        $this->error = "hola";
+//        $this->error = null;
     }
 
     /**
@@ -37,7 +37,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
         // Get Areas
         $areas = $settings->fightingAreas;
-        dd($this->championship);
+//        dd($this->championship->users->count() / $areas);
         if ($this->championship->users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
 
             $this->error = trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]);

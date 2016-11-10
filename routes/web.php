@@ -104,7 +104,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 //           return view('auth/oauth2');
 //        });
 
-        Route::get('tournaments/{tournamentId}/trees/', 'TreeController@index');
+        Route::get('tournaments/{tournamentId}/trees/', 'TreeController@index')->name('indexTree');
         Route::post('tournaments/{tournamentId}/trees/', 'TreeController@store')->name('storeAllTree');
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('storeTree');;
 

@@ -43,14 +43,6 @@
         </div>
 
     </div>
-    @if (App::environment('production'))
-        <a href="{{ route('workingonit') }}"
-           data-target="#create_tournament_user"
-           class="btn bg-teal btn-xs pull-right mr-10"><b>
-                {{ trans_choice('core.generate_tree',2) }}</b>
-        </a>
-
-    @else
         {!! Form::model(null, [
             'method' => 'POST', 'id' => 'storeAllTree', 'class'=>'full-width',
             'route' => ['storeAllTree', $tournament->slug]
@@ -66,6 +58,5 @@
 
 
         {!! Form::close() !!}
-    @endif
 </div>
 <!-- /detached sidebar -->
