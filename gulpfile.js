@@ -128,10 +128,12 @@ elixir(function (mix) {
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
         'components/sweetalert/dist/sweetalert.min.js',
+        'components/jquery-bracket/dist/jquery.bracket.min.js',
     ], 'public/js/pages/footer/trees.js');
 
     mix.styles([
         '../js/components/sweetalert/dist/sweetalert.css',
+        '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
     ], 'public/css/pages/trees.css');
 
 

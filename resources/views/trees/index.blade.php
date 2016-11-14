@@ -42,6 +42,10 @@
                                 <div>{{trans('core.no_generated_tree')}}</div>
                             @endif
                         @endforeach
+                        Bracket TEST <br/>
+
+
+
                     </div>
                 </div>
             </div>
