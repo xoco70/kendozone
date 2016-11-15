@@ -63,7 +63,12 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            $roundRobinGroups = $users->chunk(3)->shuffle(); // , $settings->roundRobinGroupSize
+            if ($this->championship->hasPreliminary()){
+                $roundRobinGroups = $users->chunk(3)->shuffle();
+            } // , $settings->roundRobinGroupSize
+            else{
+                $roundRobinGroups = $users->chunk(2)->shuffle();
+            }
 
             $order = 1;
 
@@ -88,7 +93,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
                 if (isset($c3)) $pt->c3 = $c3->id;
                 if (isset($c4)) $pt->c4 = $c4->id;
                 if (isset($c5)) $pt->c5 = $c5->id;
-
+//                dd($pt);
                 $pt->save();
                 $preliminiaryTree->push($pt);
                 $order++;
@@ -158,10 +163,16 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
     private function getByeGroup(Championship $championship)
     {
+        $groupSizeDefault = 3;
         // Deterime Bye Quantity
 
         $userCount = $championship->users->count();
-        $preliminaryGroupSize = $championship->settings != null ? $championship->settings->preliminaryGroupSize : "3";
+        if ($championship->isDirectEliminationType()){
+            $groupSizeDefault = 2;
+        }
+        $preliminaryGroupSize = $championship->settings != null
+            ? $championship->settings->preliminaryGroupSize
+            : $groupSizeDefault;
         $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
         $byeCount = $treeSize - $userCount;
 

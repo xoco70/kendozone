@@ -65,7 +65,7 @@ class Tree extends Model
             return new RoundRobinTreeGen($championship, $level);
         }
         if ($championship->isDirectEliminationType()) {
-            return new DirectEliminationTreeGen($championship, $level);
+            return new PreliminaryTreeGen($championship, $level);
         }
 
 

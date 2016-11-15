@@ -31,14 +31,16 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
+
         $grades = Grade::pluck('name', 'id');
         $tournament = PreliminaryTree::getTournament($request);
         foreach ($tournament->championships as $championship) {
-            if (! $championship->isRoundRobinType()){
+            if (!$championship->isRoundRobinType()) {
                 $generation = Tree::getGenerationStrategy($championship);
                 $generation->championship = $championship;
+
                 $tree = $generation->run();
-                if (!$tree instanceof Collection) {
+                if ($tree != null && ! $tree instanceof Collection) {
                     flash()->error($generation->error);
                 } else {
                     $championship->tree = $tree;

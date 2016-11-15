@@ -34,6 +34,8 @@
                                 @foreach($championship->tree->groupBy('area') as $ptByArea)
                                     @if ($championship->hasPreliminary())
                                         @include('layouts.tree.preliminary')
+                                    @elseif ($championship->isDirectEliminationType())
+                                        @include('layouts.tree.directElimination')
                                     @endif
                                 @endforeach
                             @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
@@ -42,10 +44,7 @@
                                 <div>{{trans('core.no_generated_tree')}}</div>
                             @endif
                         @endforeach
-                        Bracket TEST <br/>
-
-
-
+                            <br/>
                     </div>
                 </div>
             </div>
@@ -58,7 +57,17 @@
 @section('scripts_footer')
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
+        var minimalData = {
+            teams : [
+                ["Team 1", "Team 2"], /* first matchup */
+                ["Team 3", "Team 4"]  /* second matchup */
+            ]
+        }
 
+        $(function() {
+            $('#brackets').bracket({
+                init: minimalData /* data to initialize the bracket with */ })
+        })
         $('.generate').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form:first');

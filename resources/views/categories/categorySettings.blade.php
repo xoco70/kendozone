@@ -162,7 +162,7 @@ $currency = Auth::user()->country->currency_code;
                 <div class="row">
                     <div class="col-lg-3">
                         {!!  Form::label('treeType', trans('categories.treeType')) !!}
-                        {!!  Form::select('treeType', [0 => trans('categories.roundRobin'),null => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
+                        {!!  Form::select('treeType', [0 => trans('categories.roundRobin'),1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
                     </div>
 
                     <div class="col-lg-2">
