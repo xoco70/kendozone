@@ -35,6 +35,15 @@
                                     @if ($championship->hasPreliminary())
                                         @include('layouts.tree.preliminary')
                                     @elseif ($championship->isDirectEliminationType())
+                                        <?php
+                                        $directEliminationTree = $championship->tree->map(function ($item, $key) {
+                                            $user1 = $item->user1 != null ? $item->user1->name : "Bye";
+                                            $user2 = $item->user2 != null ? $item->user2->name : "Bye";
+                                            return [$user1, $user2];
+                                        })->toArray();
+                                        //                                dd($directEliminationTree);
+                                        ?>
+
                                         @include('layouts.tree.directElimination')
                                     @endif
                                 @endforeach
@@ -44,7 +53,7 @@
                                 <div>{{trans('core.no_generated_tree')}}</div>
                             @endif
                         @endforeach
-                            <br/>
+                        <br/>
                     </div>
                 </div>
             </div>
@@ -57,16 +66,21 @@
 @section('scripts_footer')
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
-        var minimalData = {
-            teams : [
-                ["Team 1", "Team 2"], /* first matchup */
-                ["Team 3", "Team 4"]  /* second matchup */
-            ]
-        }
+        var minimalData = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
+        //        var minimalData = {
+        //                    teams: [
+        //                        ["Team 1", "Team 2"], /* first matchup */
+        //                        ["Team 3", "Team 4"],  /* second matchup */
+        //                        ["Team 1", "Team 2"], /* first matchup */
+        //                        ["Team 1", "Team 2"],
+        //                    ]
+        //                }
+        console.log(minimalData);
 
-        $(function() {
+        $(function () {
             $('#brackets').bracket({
-                init: minimalData /* data to initialize the bracket with */ })
+                init: minimalData /* data to initialize the bracket with */
+            })
         })
         $('.generate').on('click', function (e) {
             e.preventDefault();

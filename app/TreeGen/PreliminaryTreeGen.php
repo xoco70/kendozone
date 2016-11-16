@@ -127,7 +127,6 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $competitors = new Collection();
 
         $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
-
         // We must add another group that has bye
 
         $byeGroup = $this->getByeGroup($this->championship);
@@ -168,12 +167,17 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
         $userCount = $championship->users->count();
         if ($championship->isDirectEliminationType()){
-            $groupSizeDefault = 2;
+            $preliminaryGroupSize = 2;
+        }else{
+            $preliminaryGroupSize = $championship->settings != null
+                ? $championship->settings->preliminaryGroupSize
+                : "3";
+
         }
-        $preliminaryGroupSize = $championship->settings != null
-            ? $championship->settings->preliminaryGroupSize
-            : $groupSizeDefault;
+
+
         $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
+
         $byeCount = $treeSize - $userCount;
 
         return $this->createNullsGroup($byeCount);
@@ -189,9 +193,9 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
         $squareMultiplied = $square->map(function ($item, $key) use ($groupSize) {
             return $item * $groupSize;
         });
-
         foreach ($squareMultiplied as $limit) {
             if ($userCount < $limit) {
+
                 return $limit;
             }
         }

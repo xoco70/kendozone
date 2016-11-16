@@ -68,7 +68,6 @@ class Tree extends Model
             return new PreliminaryTreeGen($championship, $level);
         }
 
-
         return new PreliminaryTreeGen($championship, $level);
 
     }
