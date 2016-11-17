@@ -307,3 +307,7 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
     display: inline-block;
     vertical-align: middle;
 }
+
+div.team div.label {
+    color: black;
+}

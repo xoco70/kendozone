@@ -41,10 +41,11 @@
                                             $user2 = $item->user2 != null ? $item->user2->name : "Bye";
                                             return [$user1, $user2];
                                         })->toArray();
-                                        //                                dd($directEliminationTree);
                                         ?>
-
                                         @include('layouts.tree.directElimination')
+                                        <script>
+                                            var minimalData = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
+                                        </script>
                                     @endif
                                 @endforeach
                             @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
@@ -66,22 +67,32 @@
 @section('scripts_footer')
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
-        var minimalData = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
-        //        var minimalData = {
-        //                    teams: [
-        //                        ["Team 1", "Team 2"], /* first matchup */
-        //                        ["Team 3", "Team 4"],  /* second matchup */
-        //                        ["Team 1", "Team 2"], /* first matchup */
-        //                        ["Team 1", "Team 2"],
-        //                    ]
-        //                }
-        console.log(minimalData);
+
+        function render_fn(container, data, score, state) {
+            switch (state) {
+                case "empty-bye":
+                    container.append("No team")
+                    return;
+                case "empty-tbd":
+                    container.append("Upcoming")
+                    return;
+
+                case "entry-no-score":
+                case "entry-default-win":
+                case "entry-complete":
+                    container.append('<img src="site/png/' + data.flag + '.png" /> ').append(data.name)
+                    return;
+            }
+        }
 
         $(function () {
             $('#brackets').bracket({
-                init: minimalData /* data to initialize the bracket with */
+                init: minimalData, /* data to initialize the bracket with */
+                teamWidth: 100,
             })
-        })
+        });
+
+
         $('.generate').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form:first');
