@@ -2,6 +2,9 @@
 @section('styles')
     {!! Html::style('js/jquery.timepicker.css')!!}
 @stop
+@section('title')
+    <title>{{ trans('core.editModel', ['currentModelName' => trans_choice('core.tournament',1)]) }}</title>
+@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.edit',$tournament) !!}
 
