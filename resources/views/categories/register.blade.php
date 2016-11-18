@@ -1,23 +1,9 @@
 <?php
 $championships = $tournament->championships;
 $i = 0;
-$appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
-
 ?>
 
 @extends('layouts.dashboard')
-@section('title')
-    <title> {{ $appName  }} - {{  trans('core.competitors_register') }} </title>
-    <meta property="og:title" content="{{trans('core.competitors_register') }}"/>
-    <meta name=" twitter:title" content="{{trans('core.competitors_register')}}"/>
-@stop
-@section('description')
-    <meta name="description" content="Registrate en el torneo {{ $tournament->name }}"/>
-    <meta property="og:description" content="Registrate en el torneo {{ $tournament->name }}" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:description" content="Registrate en el torneo {{ $tournament->name }}" />
-@stop
-
 @section('content')
 
     @include("errors.list")

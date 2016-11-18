@@ -19,12 +19,13 @@ class RedirectCrawlers
     {
         $crawlers = [
             'facebookexternalhit/1.1',
+            'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',
             'Facebot',
-            'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
+            'Twitterbot',
         ];
 
         $userAgent = $request->header('User-Agent');
-        
+
         if (str_contains($userAgent, $crawlers)) {
             switch (Route::getCurrentRoute()->getPath()) {
                 case "tournaments/{tournament}/register":

@@ -219,7 +219,6 @@ class TournamentController extends Controller
      */
     public function register(Request $request, Tournament $tournament)
     {
-        $userAgent = $request->header('User-Agent');
 
         if (!Auth::check()){
             Session::flash('message', trans('msg.please_create_account_before_playing', ['tournament' => $tournament->name]));
