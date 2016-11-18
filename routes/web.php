@@ -33,7 +33,6 @@ Route::group(['middleware' => ['guest']],
     function () {
 
         // Registration routes...
-
         Route::get('register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
 
         //Social Login

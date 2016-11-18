@@ -14,6 +14,7 @@ use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -211,12 +212,15 @@ class TournamentController extends Controller
 
     /**
      * Called when a user want to register an open tournament
+     * @param Request $request
      * @param Tournament $tournament
      * @return mixed
      * @throws InvitationNeededException
      */
-    public function register(Tournament $tournament)
+    public function register(Request $request, Tournament $tournament)
     {
+        $userAgent = $request->header('User-Agent');
+
         if (!Auth::check()){
             Session::flash('message', trans('msg.please_create_account_before_playing', ['tournament' => $tournament->name]));
             return redirect(URL::action('Auth\LoginController@login'));
