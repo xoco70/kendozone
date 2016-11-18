@@ -67,9 +67,9 @@
 @section('scripts_footer')
     <?php
         $championshipWithBrackets = $tournament->championships->filter(function ($championship, $key) {
-            return $championship->isDirectEliminationType();
+            return ($championship->isDirectEliminationType() && !$championship->hasPreliminary()) ;
         });
-            dd($championshipWithBrackets);
+
     ?>
 
 
