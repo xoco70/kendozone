@@ -131,8 +131,8 @@ $currency = Auth::user()->country->currency_code;
                                    data-original-title="{{trans('categories.hasPreliminaryTooltip')}}"></i>
                                 <br/>
 
-                                {!!   Form::hidden('hasPreliminary', $hasPreliminary,['id'=>'hasPreliminary'.$key ]) !!}
-                                {!!   Form::checkbox('hasPreliminary', $hasPreliminary, $hasPreliminary,
+                                {!!   Form::hidden('hasPreliminary', 0,['id'=>'hasPreliminary'.$key ]) !!}
+                                {!!   Form::checkbox('hasPreliminary', 1, null,
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key]) !!}
 
                             </label>
@@ -198,7 +198,7 @@ $currency = Auth::user()->country->currency_code;
                                    data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
                                 <br/>
                                 {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
-                                {!!   Form::checkbox('hasEncho', 1, old('hasEncho'),
+                                {!!   Form::checkbox('hasEncho', 1, null, // $hasPreliminary
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
                             </label>
