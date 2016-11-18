@@ -42,7 +42,7 @@
                                             return [$user1, $user2];
                                         })->toArray();
                                         ?>
-                                        @include('layouts.tree.directElimination')
+                                        <div id="brackets_{{ $championship->id }}"></div>
                                         <script>
                                             var minimalData_{{ $championship->id }} = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
                                         </script>
@@ -66,17 +66,18 @@
 @stop
 @section('scripts_footer')
     <?php
-        $championshipWithBrackets = $tournament->championships->filter(function ($championship, $key) {
-            return ($championship->isDirectEliminationType() && !$championship->hasPreliminary()) ;
-        });
+    $championshipWithBrackets = $tournament->championships
+            ->filter(function ($championship, $key) {
+                return ($championship->isDirectEliminationType() && !$championship->hasPreliminary());
+            })->map(function ($championship, $key) {
+                return $championship->id;
+            })->toArray();
+
 
     ?>
 
-
-
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
-
         function render_fn(container, data, score, state) {
             switch (state) {
                 case "empty-bye":
@@ -93,13 +94,16 @@
                     return;
             }
         }
+        @foreach($championshipWithBrackets as $championshipId)
 
-        $(function () {
-            $('#brackets').bracket({
-                init: minimalData, /* data to initialize the bracket with */
+            $(function () {
+            $('#brackets_{{ $championshipId }}').bracket({
+                init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
                 teamWidth: 100,
             })
         });
+        @endforeach
+
 
 
         $('.generate').on('click', function (e) {
