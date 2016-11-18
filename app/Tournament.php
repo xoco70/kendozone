@@ -187,7 +187,7 @@ class Tournament extends Model
      */
     public function trees()
     {
-        return $this->hasManyThrough(PreliminaryTree::class, Championship::class);
+        return $this->hasManyThrough(Tree::class, Championship::class);
     }
 
 

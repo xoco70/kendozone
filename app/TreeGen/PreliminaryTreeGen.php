@@ -6,14 +6,14 @@ namespace App\TreeGen;
 
 use App\Championship;
 use App\ChampionshipSettings;
-use App\Contracts\PreliminaryTreeGenerable;
+use App\Contracts\TreeGenerable;
 use App\Exceptions\TreeGenerationException;
-use App\PreliminaryTree;
+use App\Tree;
 use App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 
-class PreliminaryTreeGen implements PreliminaryTreeGenerable
+class PreliminaryTreeGen implements TreeGenerable
 {
 
     protected $groupBy;
@@ -75,7 +75,7 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
             foreach ($roundRobinGroups as $robinGroup) {
                 $robinGroup = $robinGroup->shuffle()->values();
 
-                $pt = new PreliminaryTree;
+                $pt = new Tree;
                 $pt->area = $area;
                 $pt->order = $order;
                 $pt->championship_id = $this->championship->id;

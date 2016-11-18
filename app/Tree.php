@@ -2,15 +2,64 @@
 
 namespace App;
 
-use App\TreeGen\DirectEliminationTreeGen;
+
 use App\TreeGen\PreliminaryTreeGen;
-use App\TreeGen\RoundRobinTreeGen;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
+use OwenIt\Auditing\AuditingTrait;
 
 class Tree extends Model
 {
+    protected $table = 'tree';
+    public $timestamps = true;
+    protected $guarded = ['id'];
+    use AuditingTrait;
+
+    public static function hasTournament($request)
+    {
+        return $request->tournamentId != null;
+    }
+
+    public static function hasChampionship($request)
+    {
+        return $request->championshipId != null; // has return false, don't know why
+    }
+
+    public static function getTournament($request)
+    {
+        $tournament = new Tournament;
+        if (Tree::hasTournament($request)) {
+            $tournamentSlug = $request->tournamentId;
+            $tournament = Tournament::with(
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+
+            )->where('slug', $tournamentSlug)->first();
+        } elseif (Tree::hasChampionship($request)) {
+            $tournamentSlug = Championship::find($request->championshipId)->tournament->slug;
+            $tournament = Tournament::with([
+                'championships' => function ($query) use ($request) {
+                    $query->where('id', '=', $request->championshipId);
+                },
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+            ])->first();
+        }
+
+        return $tournament;
+    }
+
 
     /**
      * @param $request
@@ -18,57 +67,97 @@ class Tree extends Model
      */
     public static function getChampionships($request)
     {
+
         $championships = new Collection();
-        if (PreliminaryTree::hasChampionship($request)) {
-            $championship = Championship::with('settings')->find($request->championshipId);
+        if (Tree::hasChampionship($request)) {
+            $championship = Championship::with('settings', 'category')->find($request->championshipId);
             $championships->push($championship);
-        } else if (PreliminaryTree::hasTournament($request)) {
-            $tournament = Tournament::with('championships.settings')->where('slug', $request->tournamentId)->first();
+        } else if (Tree::hasTournament($request)) {
+
+            $tournament = Tournament::with(
+                'championships.settings',
+                'championships.category',
+                'championships.tree.user1',
+                'championships.tree.user2',
+                'championships.tree.user3',
+                'championships.tree.user4',
+                'championships.tree.user5'
+
+            )->where('slug', $request->tournamentId)->first();
+
             $championships = $tournament->championships;
         }
         return $championships;
     }
 
+    public function championship()
+    {
+        return $this->belongsTo(Championship::class);
+    }
+
+    public function user1()
+    {
+        return $this->belongsTo(User::class, 'c1', 'id');
+    }
+
+    public function user2()
+    {
+        return $this->belongsTo(User::class, 'c2', 'id');
+    }
+
+    public function user3()
+    {
+        return $this->belongsTo(User::class, 'c3', 'id');
+    }
+
+    public function user4()
+    {
+        return $this->belongsTo(User::class, 'c4', 'id');
+    }
+
+    public function user5()
+    {
+        return $this->belongsTo(User::class, 'c5', 'id');
+    }
+
+
     public static function getGenerationStrategy(Championship $championship)
     {
-        $level = null;
         $tournament = $championship->tournament;
         switch ($tournament->level_id) {
             case Config::get('constants.ND'):
+                return new PreliminaryTreeGen($championship, null);
                 break;
             case Config::get('constants.local'):
+                return new PreliminaryTreeGen($championship, null);
                 break;
             case Config::get('constants.district'):
-                $level = 'club_id';
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.city'):
-                $level = 'club_id';
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.state'):
-                $level = 'club_id';
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.regional'):
-                $level = 'club_id';
+                return new PreliminaryTreeGen($championship, 'club_id');
                 break;
             case Config::get('constants.national'):
-                $level = 'association_id';
+                return new PreliminaryTreeGen($championship, 'association_id');
                 break;
             case Config::get('constants.international'):
-                $level = 'federation_id';
+                return new PreliminaryTreeGen($championship, 'federation_id');
                 break;
         }
-//        dd($championship->hasPreliminary());
-        if ($championship->hasPreliminary()) {
-            return new PreliminaryTreeGen($championship, $level);
-        }
-        if ($championship->isRoundRobinType()) {
-            return new RoundRobinTreeGen($championship, $level);
-        }
-        if ($championship->isDirectEliminationType()) {
-            return new PreliminaryTreeGen($championship, $level);
-        }
+        return null;
 
-        return new PreliminaryTreeGen($championship, $level);
+        // get Area number
+        // get tournament type, and get criteria to repart
+        // repart into areas
+        // Shuffle
+        // Analyse Number of competitors to repart Byes
+        // Store / Print
 
     }
 }

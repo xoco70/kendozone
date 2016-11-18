@@ -4,7 +4,7 @@
 namespace App\Contracts;
 
 
-interface PreliminaryTreeGenerable
+interface TreeGenerable
 {
     public function run();
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreliminaryTree extends Migration
+class CreateTree extends Migration
 {
     /**
      * Run the migrations.
@@ -69,7 +69,7 @@ class CreatePreliminaryTree extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('preliminary_tree');
+        Schema::dropIfExists('tree');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

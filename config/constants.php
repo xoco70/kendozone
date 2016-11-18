@@ -9,7 +9,7 @@ return [
     'ROLE_CLUB_PRESIDENT' => '4',
     'ROLE_USER' => '5',
 
-    'CAT_FIGHTING_AREAS' => '0',
+    'CAT_FIGHTING_AREAS' => '1',
     'CAT_FIGHT_DURATION' => '03:00',
     'CAT_ISTEAM' => '0',
     'CAT_TEAM_SIZE' => '5',

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\TreeGenerationException;
 use App\Grade;
-use App\PreliminaryTree;
 use App\Tree;
 use Illuminate\Http\Request;
 
@@ -19,7 +18,7 @@ class TreeController extends Controller
     public function index(Request $request)
     {
         $grades = Grade::pluck('name', 'id');
-        $tournament = PreliminaryTree::getTournament($request);
+        $tournament = Tree::getTournament($request);
         return view('trees.index', compact('tournament', 'grades', 'numCompetitors', 'numTeams', 'settingSize', 'categorySize'));
     }
 
@@ -31,7 +30,7 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-        $tournament = PreliminaryTree::getTournament($request);
+        $tournament = Tree::getTournament($request);
         foreach ($tournament->championships as $championship) {
             if (!$championship->isRoundRobinType()) {
                 $generation = Tree::getGenerationStrategy($championship);

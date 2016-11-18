@@ -6,8 +6,8 @@ namespace App\TreeGen;
 
 use App\Championship;
 use App\ChampionshipSettings;
-use App\Contracts\PreliminaryTreeGenerable;
-use App\PreliminaryTree;
+use App\Contracts\TreeGenerable;
+use App\Tree;
 use App\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;

@@ -4,19 +4,19 @@
             <div class="checkbox-switch ">
                 <label>
 
-                    {!!  Form::label('isTeam', trans('CATEGORIES.isTeam')) !!} <br/>
+                    {!!  Form::label('isTeam', trans('categories.isTeam')) !!} <br/>
                     {{ $setting->isTeam }}
 
                 </label>
             </div>
         </div>
         <div class="col-md-5">
-            {!!  Form::label('teamSize', trans('CATEGORIES.teamSize')) !!}<br/>
+            {!!  Form::label('teamSize', trans('categories.teamSize')) !!}<br/>
             {{ $setting->teamSize }}
         </div>
         <div class="col-md-5">
 
-            {!!  Form::label('fightDuration', trans('CATEGORIES.fightDuration')) !!}
+            {!!  Form::label('fightDuration', trans('categories.fightDuration')) !!}
             <br/>
             {{ $setting->fightDuration }}
 
@@ -28,7 +28,7 @@
 
             <label>
 
-                {!!  Form::label('hasEncho', trans('CATEGORIES.hasEncho')) !!} <br/>
+                {!!  Form::label('hasEncho', trans('categories.hasEncho')) !!} <br/>
                 {{ $setting->hasEncho }}
 
             </label>
@@ -36,14 +36,14 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                {!!  Form::label('enchoQty', trans('CATEGORIES.enchoQty')) !!}
+                {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
                 <br/>
                 {{ $setting->enchoQty }}
             </div>
         </div>
         <div class="col-md-5">
 
-            {!!  Form::label('enchoDuration', trans('CATEGORIES.enchoDuration')) !!}
+            {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
             <div class="input-group ">
                 {{ $setting->enchoDuration }}
             </div>
@@ -56,7 +56,7 @@
             <div class="checkbox-switch ">
                 <label>
 
-                    {!!  Form::label('hasRoundRobin', trans('CATEGORIES.hasRoundRobin')) !!} <br/>
+                    {!!  Form::label('hasRoundRobin', trans('categories.hasRoundRobin')) !!} <br/>
                     {{ $setting->hasRoundRobin }}
 
 
@@ -65,15 +65,15 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                {!!  Form::label('roundRobinWinner', trans('CATEGORIES.roundRobinWinner')) !!}
+                {!!  Form::label('preliminaryWinner', trans('categories.preliminaryWinner')) !!}
                 <br/>
-                {{ $setting->roundRobinWinner }}
+                {{ $setting->preliminaryWinner }}
 
             </div>
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                {!!  Form::label('cost', trans('CATEGORIES.cost')) !!}
+                {!!  Form::label('cost', trans('categories.cost')) !!}
                 <br/>
 
                 {{ $setting->cost }}
@@ -87,7 +87,7 @@
             <div class="checkbox-switch">
                 <label>
 
-                    {!!  Form::label('hasHantei', trans('CATEGORIES.hasHantei')) !!} <br/>
+                    {!!  Form::label('hasHantei', trans('categories.hasHantei')) !!} <br/>
                     {{ $setting->hasHantei }}
 
                 </label>

@@ -3,7 +3,7 @@
 use App\Federation;
 use App\User;
 
-$factory->define(App\PreliminaryTree::class, function (Faker\Generator $faker) {
+$factory->define(App\Tree::class, function (Faker\Generator $faker) {
 
     return [
 //        'name' => $faker->name,

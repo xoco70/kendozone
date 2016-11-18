@@ -4,9 +4,9 @@
 namespace App\TreeGen;
 
 
-use App\Contracts\PreliminaryTreeGenerable;
+use App\Contracts\TreeGenerable;
 
-class DirectEliminationTreeGen implements PreliminaryTreeGenerable
+class DirectEliminationTreeGen implements TreeGenerable
 {
 
     public function run()

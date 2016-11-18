@@ -4,9 +4,9 @@
 namespace App\TreeGen;
 
 
-use App\Contracts\PreliminaryTreeGenerable;
+use App\Contracts\TreeGenerable;
 
-class RoundRobinTreeGen implements PreliminaryTreeGenerable
+class RoundRobinTreeGen implements TreeGenerable
 {
 
     public function run()
