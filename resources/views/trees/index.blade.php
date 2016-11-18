@@ -44,7 +44,7 @@
                                         ?>
                                         @include('layouts.tree.directElimination')
                                         <script>
-                                            var minimalData = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
+                                            var minimalData_{{ $championship->id }} = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
                                         </script>
                                     @endif
                                 @endforeach
@@ -65,6 +65,15 @@
     @include("errors.list")
 @stop
 @section('scripts_footer')
+    <?php
+        $championshipWithBrackets = $tournament->championships->filter(function ($championship, $key) {
+            return $championship->isDirectEliminationType();
+        });
+            dd($championshipWithBrackets);
+    ?>
+
+
+
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
 

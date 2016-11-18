@@ -31,8 +31,6 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-
-        $grades = Grade::pluck('name', 'id');
         $tournament = PreliminaryTree::getTournament($request);
         foreach ($tournament->championships as $championship) {
             if (!$championship->isRoundRobinType()) {

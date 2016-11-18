@@ -88,6 +88,7 @@ $(function () {
     });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
+        console.log(isChecked);
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
 
@@ -97,21 +98,6 @@ $(function () {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
     });
-
-
-// EDIT CATEGORY ALIAS
-//     $('#tbl').on('click', '.xx', function () {
-//
-//         var t = $(this).text();
-//         $(this).text('').append($('<input />', {'value': t}));
-//         $('input').focus();
-//
-//
-//     });
-//
-//     $('#tbl').on('blur', 'input', function () {
-//         $(this).parent().text($(this).val());
-//     });
 
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
@@ -135,7 +121,6 @@ $(function () {
                 data: inputData,
 
                 success: function (data) {
-                    // console.log(data);
 
                     if (data != null && data.status == 'success') {
 

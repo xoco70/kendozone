@@ -1,25 +1,26 @@
 <?php
 $setting = $tournament->championships->get($key)->settings;
-$treeType = $setting->treeType ?? 1;
-$teamSize = $setting->teamSize ?? 0;
-$enchoQty = $setting->enchoQty ?? 0;
-$fightingAreas = $setting->fightingAreas ?? 0;
+$treeType = $setting->treeType ?? config('constants.CAT_TREE_TYPE');
+$hasPreliminary = $setting->hasPreliminary ?? config('constants.CAT_HASPRELIMINARY');
+$hasEncho = $setting->hasEncho ?? config('constants.CAT_HASENCHO');
+$teamSize = $setting->teamSize ?? config('constants.CAT_TEAM_SIZE');
+$enchoQty = $setting->enchoQty ?? config('constants.CAT_ENCHO_QTY'); // 0
+$fightingAreas = $setting->fightingAreas ?? config('constants.CAT_FIGHTING_AREAS'); // 0
 
 $fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
-        ? $setting->fightDuration : config('constants.CAT_FIGHT_DURATION');
+        ? $setting->fightDuration
+        : config('constants.CAT_FIGHT_DURATION');
 
 $enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
-        ? $setting->enchoDuration : config('constants.CAT_ENCHO_DURATION');
+        ? $setting->enchoDuration
+        : config('constants.CAT_ENCHO_DURATION');
 
 
 $categoryId = $championship->category->id;
-if (is_null($setting)) {
-    $disableEncho = $disablePreliminary = "disabled";
-} else {
-    $disableEncho = $setting->hasEncho ? "" : "disabled";
-//    $disablePreliminary = $setting->hasPreliminary ? "" : "disabled";
-    $disablePreliminary = $setting->hasPreliminary ? "" : "disabled";
-}
+$disableEncho = $hasEncho ? "" : "disabled";
+$disablePreliminary = $hasPreliminary ? "" : "disabled";
+
+
 $currency = Auth::user()->country->currency_code;
 ?>
 
@@ -129,8 +130,9 @@ $currency = Auth::user()->country->currency_code;
                                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                    data-original-title="{{trans('categories.hasPreliminaryTooltip')}}"></i>
                                 <br/>
-                                {!!   Form::hidden('hasPreliminary', 0,['id'=>'hasPreliminary'.$key ]) !!}
-                                {!!   Form::checkbox('hasPreliminary', 1, null,
+
+                                {!!   Form::hidden('hasPreliminary', $hasPreliminary,['id'=>'hasPreliminary'.$key ]) !!}
+                                {!!   Form::checkbox('hasPreliminary', $hasPreliminary, $hasPreliminary,
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key]) !!}
 
                             </label>
@@ -184,7 +186,6 @@ $currency = Auth::user()->country->currency_code;
 
                 </div>
                 <hr/>
-
 
 
                 <div class="row">

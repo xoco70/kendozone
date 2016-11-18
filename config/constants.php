@@ -9,7 +9,7 @@ return [
     'ROLE_CLUB_PRESIDENT' => '4',
     'ROLE_USER' => '5',
 
-    'CAT_FIGHTING_AREAS' => '1',
+    'CAT_FIGHTING_AREAS' => '0',
     'CAT_FIGHT_DURATION' => '03:00',
     'CAT_ISTEAM' => '0',
     'CAT_TEAM_SIZE' => '5',
@@ -19,6 +19,8 @@ return [
     'CAT_ENCHO_QTY' => '2',
     'CAT_ENCHO_DURATION' => '01:30',
     'CAT_HASHANTEI' => '0',
+    'CAT_HASPRELIMINARY' => '1',
+    'CAT_TREE_TYPE' => '1',
 
     'INVITATION_TOURNAMENT' => '0',
     'OPEN_TOURNAMENT' => '1',
