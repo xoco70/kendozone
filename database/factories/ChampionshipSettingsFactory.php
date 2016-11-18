@@ -11,7 +11,7 @@ $factory->define(App\ChampionshipSettings::class, function (Faker\Generator $fak
         'teamSize' => $faker->numberBetween(0, 6),
         'fightingAreas' => $faker->numberBetween(0, 4),
         'fightDuration' => "03:00",
-        'hasRoundRobin' => $faker->boolean(),
+        'hasPreliminary' => $faker->boolean(),
         'roundRobinWinner' => $faker->numberBetween(1, 2),
         'hasEncho' => $faker->boolean(),
         'enchoQty' => $faker->numberBetween(0, 4),

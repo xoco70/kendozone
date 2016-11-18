@@ -13,7 +13,7 @@ class CreatePreliminaryTree extends Migration
      */
     public function up()
     {
-        Schema::create('preliminary_tree', function(Blueprint $table) {
+        Schema::create('tree', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->index();
 
