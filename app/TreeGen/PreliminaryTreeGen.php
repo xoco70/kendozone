@@ -7,6 +7,7 @@ namespace App\TreeGen;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Contracts\PreliminaryTreeGenerable;
+use App\Exceptions\TreeGenerationException;
 use App\PreliminaryTree;
 use App\User;
 use Illuminate\Support\Collection;
@@ -27,7 +28,8 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
     }
 
     /**
-     * @return PreliminaryTreeGen
+     * @return Collection
+     * @throws TreeGenerationException
      */
     public function run()
     {
@@ -37,11 +39,8 @@ class PreliminaryTreeGen implements PreliminaryTreeGenerable
 
         // Get Areas
         $areas = $settings->fightingAreas;
-//        dd($this->championship->users->count() / $areas);
         if ($this->championship->users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
-
-            $this->error = trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]);
-            return $this;
+            throw new TreeGenerationException(trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]));
 
         }
         // Get Competitor's list

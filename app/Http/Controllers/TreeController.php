@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TreeGenerationException;
 use App\Grade;
 use App\PreliminaryTree;
 use App\Tree;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class TreeController extends Controller
 {
@@ -38,19 +38,17 @@ class TreeController extends Controller
             if (!$championship->isRoundRobinType()) {
                 $generation = Tree::getGenerationStrategy($championship);
                 $generation->championship = $championship;
-
-                $tree = $generation->run();
-                if ($tree != null && ! $tree instanceof Collection) {
-                    flash()->error($generation->error);
-                } else {
+                try {
+                    $tree = $generation->run();
                     $championship->tree = $tree;
                     flash()->success(trans('msg.championships_tree_generation_success'));
+                } catch (TreeGenerationException $e) {
+                    flash()->error($e->message);
+                } finally {
+                    return redirect(route('indexTree', $tournament->slug));
                 }
             }
-            // If no settings has been defined, take default
         }
-
         return redirect(route('indexTree', $tournament->slug));
-
     }
 }
