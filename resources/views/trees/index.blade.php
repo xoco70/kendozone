@@ -10,11 +10,15 @@
 @stop
 
 @section('content')
+
     <div class="container-detached">
+
         <div class="content-detached">
+            @include('layouts.tree.topTree')
             <div class="panel panel-flat">
                 <div class="panel-body">
                     <div class="container-fluid">
+
                         @foreach($tournament->championships as $championship)
                             <h1> {{$championship->category->buildName($grades)}}
                                 {!! Form::model(null,

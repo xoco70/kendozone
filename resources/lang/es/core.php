@@ -289,4 +289,7 @@ return [
     // Trees
     'tree' => 'Arbol|Arboles',
     'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
+
+    'fight' => 'Combate|Combates',
+    'document' => 'Documento|Documentos',
 ];
