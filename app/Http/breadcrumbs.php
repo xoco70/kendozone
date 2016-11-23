@@ -218,6 +218,10 @@ Breadcrumbs::register('teams.create', function ($breadcrumbs, $tournament) {
 Breadcrumbs::register('teams.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('teams.index', $tournament);
     $breadcrumbs->push(trans_choice('core.team', 2), route('teams.index', $tournament->slug));
+});
 
-
+// Home > Tournaments > MyTournament > List Fights
+Breadcrumbs::register('fights.index', function ($breadcrumbs, $tournament) {
+    $breadcrumbs->parent('tournaments.show', $tournament);
+    $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.show', $tournament->slug));
 });

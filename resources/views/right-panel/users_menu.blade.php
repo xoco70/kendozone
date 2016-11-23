@@ -43,6 +43,7 @@
         </div>
 
     </div>
+    @can('generateTree', $tournament)
         {!! Form::model(null, [
             'method' => 'POST', 'id' => 'storeAllTree', 'class'=>'full-width',
             'route' => ['tree.storeAll', $tournament->slug]
@@ -58,5 +59,6 @@
 
 
         {!! Form::close() !!}
+    @endcan
 </div>
 <!-- /detached sidebar -->

@@ -21,7 +21,7 @@ class TreeController extends Controller
     {
         $grades = Grade::pluck('name', 'id');
         $tournament = Tree::getTournament($request);
-        return view('trees.index', compact('tournament', 'grades', 'numCompetitors', 'numTeams', 'settingSize', 'categorySize'));
+        return view('trees.index', compact('tournament', 'grades'));
     }
 
     /**

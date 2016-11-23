@@ -18,7 +18,7 @@ class Tree extends Model
 
     public static function hasTournament($request)
     {
-        return $request->tournamentId != null;
+        return $request->tournamentSlug != null;
     }
 
     public static function hasChampionship($request)
@@ -30,7 +30,7 @@ class Tree extends Model
     {
         $tournament = new Tournament;
         if (Tree::hasTournament($request)) {
-            $tournamentSlug = $request->tournamentId;
+            $tournamentSlug = $request->tournamentSlug;
             $tournament = Tournament::with(
                 'championships.settings',
                 'championships.category',

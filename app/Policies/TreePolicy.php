@@ -19,6 +19,11 @@ class TreePolicy
         return null;
     }
 
+    // You can store a user if you are not a simple user
+    public function edit(User $user, Tournament $tournament)
+    {
+        return ($tournament->user_id == $user->id);
+    }
 
     // You can store a user if you are not a simple user
     public function generateTree(User $user, Tournament $tournament)

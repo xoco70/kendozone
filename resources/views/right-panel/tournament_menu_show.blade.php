@@ -1,6 +1,11 @@
 <?php
 $competitors = $tournament->competitors();
 $numCompetitors = $competitors->count();
+$generatedTreeCount = $tournament->trees->groupBy('championship_id')->count();
+$numTeams = $tournament->teams()->count();
+$settingSize = $tournament->championshipSettings->count();
+$categorySize = $tournament->championships->count();
+
 ?>
 
         <!-- Detached sidebar -->
@@ -34,6 +39,17 @@ $numCompetitors = $competitors->count();
                                 @else
                                     <span class="badge badge-warning">{{$numCompetitors}}</span>
                                 @endif
+
+                            </a>
+                        </li>
+                        <li><a href="{{ URL::action('TreeController@index',$tournament->slug) }}">
+                                <i class="icon-tree7"></i> {{trans("core.see_trees")}}
+                                @if ($tournament->trees->groupBy('championship_id')->count() < $categorySize)
+                                    <span class="badge badge-primary">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                @else
+                                    <span class="badge badge-success">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                @endif
+
 
                             </a>
                         </li>

@@ -5,7 +5,7 @@
         </a>
     </li>
     <li {{ Request::is('*/fights') ? 'class=active' : '' }}>
-        <a href="{{ route('workingonit') }}">
+        <a href="{{ route('fights.index', $tournament->slug) }}">
             <i class="position-left"></i> {{trans_choice('core.fight',2)}}
         </a>
     </li>
