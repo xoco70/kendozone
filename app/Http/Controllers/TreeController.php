@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Exceptions\TreeGenerationException;
 use App\Grade;
 use App\Tree;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TreeController extends Controller
 {
@@ -27,10 +29,15 @@ class TreeController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\Response|string
+     * @throws AuthorizationException
      */
     public function store(Request $request)
     {
         $tournament = Tree::getTournament($request);
+        if (Auth::user()->cannot('generateTree', $tournament)) {
+            throw new AuthorizationException();
+        }
+
         foreach ($tournament->championships as $championship) {
             if (!$championship->isRoundRobinType()) {
                 $generation = Tree::getGenerationStrategy($championship);

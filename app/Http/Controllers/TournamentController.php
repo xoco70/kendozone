@@ -150,6 +150,7 @@ class TournamentController extends Controller
      */
     public function update(TournamentRequest $request, VenueRequest $venueRequest, Tournament $tournament)
     {
+        //TODO Shouldn't I have a Policy???
         $venue = $tournament->venue;
         if ($venue == null)
             $venue = new Venue;
