@@ -21,15 +21,17 @@
 
                         @foreach($tournament->championships as $championship)
                             <h1> {{$championship->category->buildName($grades)}}
-                                {!! Form::model(null,
-                                    ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
-                                     'data-gen' => $championship->tree->count(),
-                                    'action' => ['TreeController@store', $championship->id]]) !!}
+                                @can('generateTree', $tournament)
 
-                                <button type="button" class="btn bg-teal btn-xs generate">
-                                    {{ trans_choice('core.generate_tree',1) }}
-                                </button>
+                                    {!! Form::model(null,
+                                        ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
+                                         'data-gen' => $championship->tree->count(),
+                                        'action' => ['TreeController@store', $championship->id]]) !!}
 
+                                    <button type="button" class="btn bg-teal btn-xs generate">
+                                        {{ trans_choice('core.generate_tree',1) }}
+                                    </button>
+                                @endcan
 
                                 {!! Form::close() !!}
                             </h1>
