@@ -45,7 +45,7 @@
     </div>
         {!! Form::model(null, [
             'method' => 'POST', 'id' => 'storeAllTree', 'class'=>'full-width',
-            'route' => ['storeAllTree', $tournament->slug]
+            'route' => ['tree.storeAll', $tournament->slug]
             ])   !!}
 
 
