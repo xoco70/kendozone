@@ -18,7 +18,6 @@ class FightController extends Controller
     {
         $grades = Grade::pluck('name', 'id');
         $tournament = Tournament::with('championships.tree.fights')->where('slug',$request->tournamentSlug)->first();
-        dd($tournament);
         return view('fights.index', compact('tournament','grades'));
 
     }

@@ -98,6 +98,11 @@ class Championship extends Model
         return $this->hasMany(Tree::class, 'championship_id');
     }
 
+    public function fights()
+    {
+        return $this->hasManyThrough(Fight::class, Tree::class);
+    }
+
 
 
 }

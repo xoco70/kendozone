@@ -30,6 +30,15 @@ class Fight extends Model
         'c2'
     ];
 
+    public function user1()
+    {
+        return $this->belongsTo(User::class, 'c1', 'id');
+    }
+
+    public function user2()
+    {
+        return $this->belongsTo(User::class, 'c2', 'id');
+    }
     public static function saveFightRound($tree, $numRound)
     {
         $c1 = $c2 = $c3 = null;
