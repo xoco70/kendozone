@@ -41,7 +41,7 @@ $(function () {
         }
     });
 
-    $('#menu2').click(function () {
+    $('#venue').click(function () {
         $('#locationpicker-default').locationpicker({
             location: {latitude: latitude, longitude: longitude},
             radius: 300,

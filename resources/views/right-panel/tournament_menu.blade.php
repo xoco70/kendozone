@@ -23,12 +23,12 @@ $categorySize = $tournament->championships->count();
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        <li><a href="#"><i class="icon-trophy2"></i> {{ trans('core.general') }}
+                        <li><a href="#tab1"><i class="icon-trophy2"></i> {{ trans('core.general') }}
                                 @if(!isNullOrEmptyString($tournament->registerDateLimit) && !isNullOrEmptyString($tournament->fightingAreas) && $tournament->level_id!=1)
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="#"><i class="icon-location4"></i> Lugar
+                        <li><a href="#tab2"><i class="icon-location4"></i> Lugar
                                 @if ($tournament->venue != null)
                                     <span class="badge badge-success" id="venue-status">
                                         <i class=" icon icon-check"></i>
@@ -37,7 +37,7 @@ $categorySize = $tournament->championships->count();
 
 
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="#tab3">
                                 <i class="icon-cog2"></i>{{trans_choice('categories.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)

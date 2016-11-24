@@ -20,10 +20,10 @@
     <div class="container-detached">
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
-                <li class="active"><a href="#tab1" data-toggle="tab">{{trans('core.general_data')}}</a></li>
-                <li><a href="#tab2" data-toggle="tab" id="menu2">{{trans('core.venue')}}</a></li>
-                <li><a href="#tab3" data-toggle="tab">{{trans_choice('categories.category',2)}}</a></li>
-                <li><a href="#tab4" data-toggle="tab">{{trans_choice('categories.categorySettings',2)}}</a></li>
+                <li class="active"><a href="#general" data-toggle="tab" id="tab1">{{trans('core.general_data')}}</a></li>
+                <li><a href="#venue" data-toggle="tab" id="tab2">{{trans('core.venue')}}</a></li>
+                <li><a href="#categories" data-toggle="tab" id="tab3">{{trans_choice('categories.category',2)}}</a></li>
+                <li><a href="#category_setting" data-toggle="tab" id="tab4">{{trans_choice('categories.categorySettings',2)}}</a></li>
 
             </ul>
 
@@ -35,17 +35,17 @@
 
                     <div class="tab-content">
 
-                        <div class="tab-pane active" id="tab1">
+                        <div class="tab-pane active" id="general">
                             @include("layouts.tournament.general")
                         </div>
-                        <div class="tab-pane" id="tab2">
+                        <div class="tab-pane" id="venue">
                             @include("layouts.tournament.venue")
                         </div>
-                        <div class="tab-pane" id="tab3">
+                        <div class="tab-pane" id="categories">
                             @include("layouts.tournament.categories")
 
                         </div>
-                        <div class="tab-pane" id="tab4">
+                        <div class="tab-pane" id="category_setting">
                             @include("layouts.tournament.categories_settings")
                         </div>
                     </div>
@@ -66,7 +66,7 @@
     <?php
     $now = Carbon\Carbon::now();
     $year = $now->year;
-    $month = $now->month-1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
+    $month = $now->month - 1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
     $day = $now->day;
 
     $venue = $venue->setDefaultLocation($venue->latitude, $venue->longitude);
@@ -89,6 +89,16 @@
         var dualList;
         var venue = "{!! addcslashes($venue, '"') !!}";
         venue = JSON.parse(venue);
+
+        $("a").on('click', function () {
+
+            var href = $(this).attr('href');
+            var id = href.replace("#", "");
+            console.log(id);
+            if ($("a[data-toggle='tab'][id='" + id + "']")) {
+                $("#" + id).click();
+            }
+        });
     </script>
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
