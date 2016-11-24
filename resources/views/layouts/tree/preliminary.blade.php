@@ -1,6 +1,5 @@
 <table class="table-bordered full-width">
     {{--<th class="p-10">ID</th>--}}
-    <th class="p-10" width="35%">{{ trans_choice('categories.category',1) }}</th>
     <th class="p-10" width="5%">{{ trans_choice('categories.fightingArea',1) }}</th>
     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 1</th>
     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 2</th>
@@ -15,8 +14,6 @@
     @endif
     @foreach($ptByArea as $pt)
         <tr>
-            {{--<td class="p-10">{{$pt->id}}</td>--}}
-            <td class="p-10">{{$championship->category->name}}</td>
             <td class="p-10">{{$pt->area}}</td>
             <td class="p-10">{{$pt->user1!= null ? $pt->user1->name : ''}}</td>
             <td class="p-10">{{$pt->user2!= null ? $pt->user2->name : ''}}</td>

@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\TreeGen\PreliminaryTreeGen;
+use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -95,6 +96,11 @@ class Tree extends Model
         return $this->belongsTo(Championship::class);
     }
 
+    public function fights()
+    {
+        return $this->hasMany(Fight::class, 'tree_id', 'id');
+    }
+
     public function user1()
     {
         return $this->belongsTo(User::class, 'c1', 'id');
@@ -159,5 +165,46 @@ class Tree extends Model
         // Analyse Number of competitors to repart Byes
         // Store / Print
 
+    }
+
+    public static function generateFights(Collection $tree)
+    {
+
+        // Delete previous fight for this championship
+
+        $arrayTreeId = $tree->map(function ($value, $key) {
+            return $value->id;
+        })->toArray();
+//        Fight::destroy($arrayTreeId);
+        foreach ($tree as $treeGroup) {
+            // First limited to 3 competitors in Preliminary
+            // Fights will be be generated like that: A -> B, B -> C, C -> A
+            try {
+                $fight = Fight::create([
+                        'tree_id' => $treeGroup->id,
+                        'c1' => $treeGroup->c1 != null
+                            ? $treeGroup->c1->id
+                            : null,
+                        'c2' => $treeGroup->c2 != null
+                            ? $treeGroup->c2->id
+                            : null]
+                );
+
+//                $fight1 = new Fight;
+//                $fight1->c1 = $treeGroup->c1;
+//                $fight1->c2 = $treeGroup->c2;
+//                $fight1->save();
+//                $fight2 = new Fight($treeGroup->c2, $treeGroup->c3);
+//                $fight2->save();
+//                $fight3 = new Fight($treeGroup->c3, $treeGroup->c1);
+//                $fight3->save();
+            } catch (Exception $e) {
+                dd($e->getMessage());
+            }
+
+        }
+
+
+        return null;
     }
 }

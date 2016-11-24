@@ -45,6 +45,9 @@ class TreeController extends Controller
                 try {
                     $tree = $generation->run();
                     $championship->tree = $tree;
+
+                    Tree::generateFights($tree);
+
                     flash()->success(trans('msg.championships_tree_generation_success'));
                 } catch (TreeGenerationException $e) {
                     flash()->error($e->message);

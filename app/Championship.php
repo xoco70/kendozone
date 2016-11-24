@@ -95,14 +95,9 @@ class Championship extends Model
 
     public function tree()
     {
-//        if ($this->hasPreliminary()){
-            return $this->hasMany(Tree::class,'championship_id');
-//        }
-
-//        if ($this->isRoundRobinType())
-//            return $this->belongsToMany(PreliminaryTree::class);
-//        if ($this->isDirectEliminationType())
-//            return $this->belongsToMany(PreliminaryTree::class);
+        return $this->hasMany(Tree::class, 'championship_id');
     }
+
+
 
 }
