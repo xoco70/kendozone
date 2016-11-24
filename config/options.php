@@ -42,6 +42,7 @@ return array(
         'enchoGoldPoint' => '0', // Step where Encho has no more time limit
         'limitByEntity' => '4',
         'cost' => '',
+        'treeType' => '1',
         'seedQuantity' => '4',
 
     ],
@@ -64,6 +65,8 @@ return array(
             'limitByEntity' => '4',
             'cost' => '',
             'seedQuantity' => '4',
+            'treeType' => '1',
+
 
         ],
         '4' => [
@@ -84,6 +87,7 @@ return array(
             'limitByEntity' => '1',
             'cost' => '',
             'seedQuantity' => '4',
+            'treeType' => '1',
 
         ],
         '5' => [
@@ -102,6 +106,7 @@ return array(
             'limitByEntity' => '4',
             'cost' => '',
             'seedQuantity' => '4',
+            'treeType' => '1',
 
         ],
         '6' => [
@@ -122,6 +127,7 @@ return array(
             'limitByEntity' => '1',
             'cost' => '',
             'seedQuantity' => '4',
+            'treeType' => '1',
 
         ],
     ],
@@ -155,6 +161,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
             'limitByEntity' => '4',
         ],
         '2' => [ /// Junior Team
@@ -174,6 +181,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
         ],
         '3' => [ // Men Individual
             'teamSize' => '',
@@ -192,6 +200,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
             'limitByEntity' => '4',
         ],
         '4' => [ // Men Team
@@ -211,6 +220,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
         ],
         '5' => [ // Ladies Individual
             'teamSize' => '',
@@ -229,6 +239,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
             'limitByEntity' => '4',
         ],
         '6' => [ // Ladies Team
@@ -248,6 +259,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
         ],
 
 
@@ -271,6 +283,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
             'limitByEntity' => '4',
         ],
         '2' => [ /// Junior Team
@@ -290,6 +303,7 @@ return array(
             'seedQuantity' => '',
             'hanteiLimit' => '3', // 1/2 Finals
             'enchoGoldPoint' => '3', // Step where Encho has no more time limit
+            'treeType' => 1,
             'limitByEntity' => '4',
         ]
     ]
