@@ -52,7 +52,7 @@ class TreeController extends Controller
                 } catch (TreeGenerationException $e) {
                     flash()->error($e->message);
                 } finally {
-                    return redirect(route('tree.index', $tournament->slug));
+//                    return redirect(route('tree.index', $tournament->slug));
                 }
             }
         }

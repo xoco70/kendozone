@@ -175,36 +175,14 @@ class Tree extends Model
         $arrayTreeId = $tree->map(function ($value, $key) {
             return $value->id;
         })->toArray();
-//        Fight::destroy($arrayTreeId);
-        foreach ($tree as $treeGroup) {
-            // First limited to 3 competitors in Preliminary
-            // Fights will be be generated like that: A -> B, B -> C, C -> A
-            try {
-                $fight = Fight::create([
-                        'tree_id' => $treeGroup->id,
-                        'c1' => $treeGroup->c1 != null
-                            ? $treeGroup->c1->id
-                            : null,
-                        'c2' => $treeGroup->c2 != null
-                            ? $treeGroup->c2->id
-                            : null]
-                );
+        Fight::destroy($arrayTreeId);
+//        dd($tree);
 
-//                $fight1 = new Fight;
-//                $fight1->c1 = $treeGroup->c1;
-//                $fight1->c2 = $treeGroup->c2;
-//                $fight1->save();
-//                $fight2 = new Fight($treeGroup->c2, $treeGroup->c3);
-//                $fight2->save();
-//                $fight3 = new Fight($treeGroup->c3, $treeGroup->c1);
-//                $fight3->save();
-            } catch (Exception $e) {
-                dd($e->getMessage());
-            }
 
+        $settings = $tree->championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+
+        for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
+            Fight::saveFightRound($tree, $numRound);
         }
-
-
-        return null;
     }
 }

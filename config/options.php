@@ -26,10 +26,10 @@ return array(
     'teamReserve' => [1 => 1, 2 => 2, 3 => 3, 4 => 4],
     'limitByEntity' => [0 => '-', 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10],
     'chunk_by_num_competitor_by_area' => [
-        6  => [0 => 3, 1 => 3],
-        7  => [0 => 2, 1 => 2, 2 => 2, 3 => 1],
-        8  => [0 => 2, 1 => 2, 2 => 2, 3 => 2],
-        9  => [0 => 2, 1 => 2, 2 => 2, 3 => 2],
+        6 => [0 => 3, 1 => 3],
+        7 => [0 => 2, 1 => 2, 2 => 2, 3 => 1],
+        8 => [0 => 2, 1 => 2, 2 => 2, 3 => 2],
+        9 => [0 => 2, 1 => 2, 2 => 2, 3 => 2],
         10 => [0 => 0, 1 => 1, 2 => 2, 3 => 3],
         11 => [0 => 0, 1 => 1, 2 => 2, 3 => 3],
         12 => [0 => 3, 1 => 3, 2 => 3, 3 => 3],
@@ -54,12 +54,29 @@ return array(
     ],
 
 
+    'default_settings' => [
+        'fightingAreas' => '1',
+        'fightDuration' => '05:00',
+        'hasPreliminary' => '1',
+        'preliminaryGroupSize' => '3',
+        'preliminaryDuration' => '05:00',
+        'preliminaryWinner' => '1',
+        'hasEncho' => '1',
+        'enchoQty' => '1',
+        'enchoDuration' => '0',
+        'hasHantei' => '0',
+        'hanteiLimit' => '0', // 1/2 Finals
+        'enchoGoldPoint' => '0', // Step where Encho has no more time limit
+        'limitByEntity' => '4',
+        'cost' => '',
+        'seedQuantity' => '4',
 
+    ],
 
 // 3= Men Individual, 4 = Men Team, 5 = Ladies Individual, 6 = Ladies Team
     'ikf_settings' => [
         '3' => [
-            'fightingAreas' => '4',
+            'fightingAreas' => '1',
             'fightDuration' => '05:00',
             'hasPreliminary' => '1',
             'preliminaryGroupSize' => '3',

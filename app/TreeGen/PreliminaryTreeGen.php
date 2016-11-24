@@ -35,8 +35,7 @@ class PreliminaryTreeGen implements TreeGenerable
     {
         $this->championship->tree()->delete();
         $preliminiaryTree = new Collection();
-        $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.ikf_settings')[3]);
-
+        $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.default_settings'));
         // Get Areas
         $areas = $settings->fightingAreas;
         if ($this->championship->users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
