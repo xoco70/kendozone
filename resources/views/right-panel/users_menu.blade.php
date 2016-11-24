@@ -50,7 +50,7 @@
             ])   !!}
 
 
-        <button type="submit" class="btn bg-teal pt-10 pb-10  mt-10 full-width ">
+        <button type="submit" class="btn bg-success pt-10 pb-10  mt-10 full-width ">
             <b><i class="icon-tree7 mr-5 "></i>{{ trans_choice('core.generate_tree',2) }}
             </b>
 

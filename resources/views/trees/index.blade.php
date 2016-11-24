@@ -28,7 +28,7 @@
                                          'data-gen' => $championship->tree->count(),
                                         'action' => ['TreeController@store', $championship->id]]) !!}
 
-                                    <button type="button" class="btn bg-teal btn-xs generate">
+                                    <button type="button" class="btn bg-success btn-xs generate">
                                         {{ trans_choice('core.generate_tree',1) }}
                                     </button>
                                 @endcan
