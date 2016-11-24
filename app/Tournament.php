@@ -300,7 +300,9 @@ class Tournament extends Model
         // Configure each category creating categorySetting Object
 
         foreach ($this->championships as $championship) {
-            (new ChampionshipSettings)->createCategorySettingFromOptions($options, $championship);
+            $rules = $options[$championship->category->id];
+            $rules['championship_id'] = $championship->id;
+            ChampionshipSettings::create($rules);
         }
 
     }

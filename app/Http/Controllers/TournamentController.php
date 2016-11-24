@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\ChampionshipSettings;
-use App\Championship;
 use App\Country;
 use App\Exceptions\InvitationNeededException;
 use App\Grade;
@@ -20,7 +18,6 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Webpatser\Countries\Countries;
 
 
 class TournamentController extends Controller
@@ -29,7 +26,7 @@ class TournamentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('ownTournament', ['except' => ['index', 'show','register']]);
+        $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
 
     }
 
@@ -120,7 +117,7 @@ class TournamentController extends Controller
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::pluck('name', 'id');
         $categories = new Collection();
-        $venue =  $tournament->venue ?? new Venue;
+        $venue = $tournament->venue ?? new Venue;
 
         foreach ($categories1 as $category) {
 
@@ -159,7 +156,7 @@ class TournamentController extends Controller
 
             $venue->fill($venueRequest->all());
             $venue->save();
-        }else{
+        } else {
             $venue = new Venue();
         }
         $res = $request->update($tournament, $venue);
@@ -221,15 +218,15 @@ class TournamentController extends Controller
     public function register(Request $request, Tournament $tournament)
     {
 
-        if (!Auth::check()){
+        if (!Auth::check()) {
             Session::flash('message', trans('msg.please_create_account_before_playing', ['tournament' => $tournament->name]));
             return redirect(URL::action('Auth\LoginController@login'));
         }
         if ($tournament->isOpen()) {
             $grades = Grade::pluck('name', 'id');
-            $tournament = Tournament::with('championships.category','championships.users')->find($tournament->id);
+            $tournament = Tournament::with('championships.category', 'championships.users')->find($tournament->id);
 //            dd($tournament);
-            return view("categories.register", compact('tournament', 'invite', 'currentModelName','grades'));
+            return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
         }
         throw new InvitationNeededException();
     }
@@ -256,31 +253,4 @@ class TournamentController extends Controller
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }
 
-    /**
-     * @param $tournamentId
-     */
-    public function generateTrees($tournamentId)
-    {
-        $tournament = Tournament::findOrFail($tournamentId);
-        $tournamentCategories = Championship::where('tournament_id', $tournamentId)->get();
-        foreach ($tournamentCategories as $tcat) {
-            // Get number of area for this category
-            $fightingAreas = null;
-            $settings = ChampionshipSettings::where('championship_id', $tcat->id)->get();
-            if (is_null($settings) || sizeof($settings) == 0) {
-
-                // Check general user settings
-                $generalSettings = Auth::user()->settings;
-
-                if (is_null($generalSettings) || sizeof($generalSettings) == 0)
-                    $fightingAreas = config('constants.CAT_FIGHTING_AREAS');
-            } else {
-                $fightingAreas = $settings->fightingAreas;
-            }
-
-            echo "<h3>" . $tcat->category->name . "</h3>";
-            $competitors = $tournament->competitors()->where('championship_id', $tcat->id);
-            echo $competitors;
-        }
-    }
 }
