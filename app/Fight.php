@@ -42,9 +42,8 @@ class Fight extends Model
     public static function saveFightRound($tree, $numRound)
     {
         $c1 = $c2 = $c3 = null;
-
         foreach ($tree as $treeGroup) {
-            dump($numRound);
+
             switch ($numRound) {
                 case 1:
                     $c1 = $treeGroup->c1 != null
@@ -79,6 +78,8 @@ class Fight extends Model
             $fight->tree_id = $treeGroup->id;
             $fight->c1 = $c1;
             $fight->c2 = $c2;
+//            $fight->order = $order++;
+            $fight->area = $treeGroup->area;
             $fight->save();
         }
 

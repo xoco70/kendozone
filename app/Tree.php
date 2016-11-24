@@ -176,8 +176,6 @@ class Tree extends Model
             return $value->id;
         })->toArray();
         Fight::destroy($arrayTreeId);
-//        dd($tree);
-
 
         $settings = $tree->championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
 

@@ -37,6 +37,8 @@ class ChampionshipSettingsController extends Controller
 
             $category = $championship->category;
             $category->alias = $request->alias;
+
+
             $category->save();
 
             $request->request->add(['championship_id' => $championshipId]);

@@ -10,9 +10,9 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        if (! $this->confirmToProceed()) {
-            return;
-        }
+//        if (! $this->confirmToProceed()) {
+//            return;
+//        }
         Model::unguard();
         //Seed the countries
         $this->command->info('Seeded the countries!');
@@ -59,29 +59,29 @@ class DatabaseSeeder extends Seeder
     }
 
 
-    public function confirmToProceed($warning = 'Application In Production!', $callback = null)
-    {
-        $shouldConfirm = $callback instanceof Closure ? call_user_func($callback) : $callback;
-
-        if ($shouldConfirm) {
-            if ($this->option('force')) {
-                return true;
-            }
-
-            $this->comment(str_repeat('*', strlen($warning) + 12));
-            $this->comment('*     '.$warning.'     *');
-            $this->comment(str_repeat('*', strlen($warning) + 12));
-            $this->output->writeln('');
-
-            $confirmed = Command::confirm('Do you really wish to run this command?');
-
-            if (! $confirmed) {
-                $this->comment('Command Cancelled!');
-
-                return false;
-            }
-        }
-
-        return true;
-    }
+//    public function confirmToProceed($warning = 'Application In Production!', $callback = null)
+//    {
+//        $shouldConfirm = $callback instanceof Closure ? call_user_func($callback) : $callback;
+//
+//        if ($shouldConfirm) {
+//            if ($this->option('force')) {
+//                return true;
+//            }
+//
+//            $this->comment(str_repeat('*', strlen($warning) + 12));
+//            $this->comment('*     '.$warning.'     *');
+//            $this->comment(str_repeat('*', strlen($warning) + 12));
+//            $this->output->writeln('');
+//
+//            $confirmed = Command::confirm('Do you really wish to run this command?');
+//
+//            if (! $confirmed) {
+//                $this->comment('Command Cancelled!');
+//
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
 }

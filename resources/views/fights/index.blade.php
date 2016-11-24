@@ -25,6 +25,7 @@
                                     <th class="p-10" width="5%">Id</th>
                                     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 1</th>
                                     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 2</th>
+                                    <?php dd($championship->fights) ?>
                                     @foreach($championship->fights as $fight)
                                         <tr>
                                             <td class="p-10">{{$fight->id}}</td>

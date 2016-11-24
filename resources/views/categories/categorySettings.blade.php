@@ -1,32 +1,27 @@
 <?php
-$setting = $tournament->championships->get($key)->settings;
-$treeType = $setting->treeType ?? config('constants.CAT_TREE_TYPE');
-$hasPreliminary = $setting->hasPreliminary ?? config('constants.CAT_HASPRELIMINARY');
-$hasEncho = $setting->hasEncho ?? config('constants.CAT_HASENCHO');
-$teamSize = $setting->teamSize ?? config('constants.CAT_TEAM_SIZE');
-$enchoQty = $setting->enchoQty ?? config('constants.CAT_ENCHO_QTY'); // 0
-$fightingAreas = $setting->fightingAreas ?? config('constants.CAT_FIGHTING_AREAS'); // 0
+$setting = $championship->settings ?? new \App\ChampionshipSettings(config('options.default_settings'));
 
-$fightDuration = (isset($setting->fightDuration) && $setting->fightDuration != "")
-        ? $setting->fightDuration
-        : config('constants.CAT_FIGHT_DURATION');
+$treeType = $setting->treeType;
+$hasPreliminary = $setting->hasPreliminary;
+$hasEncho = $setting->hasEncho;
+$teamSize = $setting->teamSize;
+$enchoQty = $setting->enchoQty;
+$fightingAreas = $setting->fightingAreas; // 0
 
-$enchoDuration = (isset($setting->enchoDuration) && $setting->enchoDuration != "")
-        ? $setting->enchoDuration
-        : config('constants.CAT_ENCHO_DURATION');
+$fightDuration = $setting->fightDuration;
+$enchoDuration = $setting->enchoDuration;
 
 
 $categoryId = $championship->category->id;
 $disableEncho = $hasEncho ? "" : "disabled";
 $disablePreliminary = $hasPreliminary ? "" : "disabled";
 
-
 $currency = Auth::user()->country->currency_code;
 ?>
 
 
 <div class="panel">
-    @if (is_null($setting))
+    @if (is_null($championship->settings))
         {!! Form::open([
                      'action' => ['ChampionshipSettingsController@store',
                                     $championship->id
@@ -65,7 +60,7 @@ $currency = Auth::user()->country->currency_code;
             <a data-toggle="collapse" data-parent="#accordion-styled"
                href="#accordion-styled-group{!! $key !!}">
                 <div class="panel-heading">
-                    @if (is_null($setting))
+                    @if (is_null($championship->settings))
                         <span class="text-orange-600">
                             <span class="cat-state">{{ trans('core.configure') }}</span>
                             <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i>
@@ -132,7 +127,7 @@ $currency = Auth::user()->country->currency_code;
                                 <br/>
 
                                 {!!   Form::hidden('hasPreliminary', 0,['id'=>'hasPreliminary'.$key ]) !!}
-                                {!!   Form::checkbox('hasPreliminary', 1, null,
+                                {!!   Form::checkbox('hasPreliminary', 1, $setting->hasPreliminary,
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasPreliminary'.$key]) !!}
 
                             </label>
@@ -198,7 +193,7 @@ $currency = Auth::user()->country->currency_code;
                                    data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
                                 <br/>
                                 {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
-                                {!!   Form::checkbox('hasEncho', 1, null, // $hasPreliminary
+                                {!!   Form::checkbox('hasEncho', 1, $setting->hasEncho, // $hasPreliminary
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
                             </label>
@@ -244,7 +239,7 @@ $currency = Auth::user()->country->currency_code;
                                    data-original-title="{{trans('categories.hasHanteiTooltip')}}"></i>
                                 <br/>
                                 {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
-                                {!!   Form::checkbox('hasHantei', 1,is_null($setting) ? 0 : $setting->hasHantei,
+                                {!!   Form::checkbox('hasHantei', 1,$setting->hasHantei,
                                                      ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}
                             </label>
                         </div>

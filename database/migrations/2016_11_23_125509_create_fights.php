@@ -35,6 +35,7 @@ class CreateFights extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            $table->tinyInteger("area");
             $table->tinyInteger("order");
             $table->timestamps();
             $table->engine = 'InnoDB';
@@ -48,6 +49,8 @@ class CreateFights extends Migration
      */
     public function down()
     {
-        //
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('fight');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
