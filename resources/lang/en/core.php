@@ -192,6 +192,7 @@ return [
     // Right Menu
 
     'sumary' => 'Summary',
+    'see_trees' => 'Trees',
     //Settings
 
     'social_networks' => 'Social Networks',
@@ -201,6 +202,7 @@ return [
     'welcome' => '¡Welcome!',
     'welcome_text' => 'Almost there! You still need a few steps to enjoy the App',
     'still_no_tournament' => 'Still not registered in any tournaments',
+    'still_no_open_tournament' => 'Still no open tournaments in your country',
     'create_new_tournament' => 'Create new Tournament',
     'congigure_categories' => 'Setup Categories',
     'see_open_tournaments' => 'See Open Tournaments',
@@ -229,11 +231,15 @@ return [
     'object_id' => 'Object Id',
     'created_at' => 'Created',
     'updated_at' => 'Updated',
+    'old_value' => 'Old Value',
+    'new_value' => 'New Value',
 
 
     // Teams
 
     'team' => 'Team|Teams',
+    'no_team_yet' => 'Still no teams registered in this tournament',
+    'add_new_team' => 'Add team',
     'registered_team' => 'Teams registered',
 
     // Federations
@@ -246,7 +252,7 @@ return [
     'federation.address' => 'Address',
     'federation.phone' => 'Phone',
     'federation.no_user_in_this_country' => 'No user registered in this country',
-
+    'no_federation' => 'No federation ',
 
     // Associations
     'association' => 'Association|Associations',
@@ -257,6 +263,7 @@ return [
     'association.add' => 'Add Association',
     'no_association_yet' => 'Still not any associations in this federation',
     'add_new_association' => 'Add a new association',
+    'no_association' => 'No association ',
 
     // Clubs
     'club' => 'Club|Clubs',
@@ -280,4 +287,9 @@ return [
     'bulk_upload' => 'Invite competitors with an Excel file',
     'download_layout' => 'Layout File'
 
+    // Trees
+    'tree' => 'Tree|Trees',
+    'no_generated_tree' => 'Still no tree generated in this championship',
+    'fight' => 'Fight|Fights',
+    'document' => 'Document|Documents',
 ];

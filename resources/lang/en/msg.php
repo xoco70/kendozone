@@ -104,4 +104,17 @@ return [
     'association_president_already_exists' => "User :user is already president of another association",
     'federation_president_already_exists' => "User :user is already president of another federation",
 
+    'please_create_account_before_playing' => 'To register the tournament :tournament, you need to create a Kendozone Account. Gambate!!!',
+    'user_has_registered_to_tournament' => ':user_name has registered to tournament :tournament',
+    'user_has_registered_to_championships' => ':user_name has registered to championships:',
+    'success_to_all' => '¡Success to all!',
+
+    'are_you_sure' => '¿Replace Tree?',
+    'this_will_delete_previous_tree' => 'This action will erase existing tree',
+    'cancel_it' => 'Cancel',
+    'do_it_again' => 'Ok',
+    'cancelled' => 'Canceled',
+    'operation_cancelled' => 'Operation canceled',
+    'championships_tree_generation_success' => 'Tree generation Successful!',
+    'min_competitor_required' => "You need a min. of :number by area. Decrease areas quantity, or invite more competitors",
 ];

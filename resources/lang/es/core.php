@@ -262,7 +262,7 @@ return [
     'association.add' => 'Agregar Asociación',
     'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
     'add_new_association' => 'Agregar una nueva asociación',
-    'no_association' => ' Sin asociación ',
+    'no_association' => 'Sin asociación ',
 
     // Clubs
     'club' => 'Club|Clubs',
@@ -289,7 +289,6 @@ return [
     // Trees
     'tree' => 'Arbol|Arboles',
     'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
-
     'fight' => 'Combate|Combates',
     'document' => 'Documento|Documentos',
 ];

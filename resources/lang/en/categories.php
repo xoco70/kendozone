@@ -58,6 +58,9 @@ return [
 
     // CategorySetting
     'categorySettings' => 'Category Settings',
+    'treeType' => 'Tree Type',
+    'roundRobin' => 'Round Robin',
+    'direct_elimination' => 'Direct Elimination',
     'teamSize' => 'Team size',
     'teamSizeReserve' => 'Team Reserve',
     'fightingAreas' => 'Areas',
