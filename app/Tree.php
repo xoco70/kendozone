@@ -4,7 +4,6 @@ namespace App;
 
 
 use App\TreeGen\PreliminaryTreeGen;
-use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -167,7 +166,7 @@ class Tree extends Model
 
     }
 
-    public static function generateFights(Collection $tree)
+    public static function generateFights(Collection $tree, $settings)
     {
 
         // Delete previous fight for this championship
@@ -177,10 +176,16 @@ class Tree extends Model
         })->toArray();
         Fight::destroy($arrayTreeId);
 
-        $settings = $tree->championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+        if ($settings->hasPreliminary) {
+            for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
 
-        for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
-            Fight::saveFightRound($tree, $numRound);
+                Fight::saveFightRound($tree, $numRound);
+            }
+        } elseif ($settings->treeType == config('constants.DIRECT_ELIMINATION')) {
+            Fight::saveFightRound($tree); // Always C1 x C2
+        } elseif ($settings->treeType == config('constants.ROUND_ROBIN')) {
+
         }
+
     }
 }

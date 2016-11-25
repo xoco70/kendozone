@@ -39,46 +39,33 @@ class Fight extends Model
     {
         return $this->belongsTo(User::class, 'c2', 'id');
     }
-    public static function saveFightRound($tree, $numRound)
+    public static function saveFightRound($tree, $numRound = 1)
     {
+
         $c1 = $c2 = $c3 = null;
+        $order = 0;
+
         foreach ($tree as $treeGroup) {
 
             switch ($numRound) {
                 case 1:
-                    $c1 = $treeGroup->c1 != null
-                        ? $treeGroup->c1
-                        : null;
-
-
-                    $c2 = $treeGroup->c2 != null
-                        ? $treeGroup->c2
-                        : null;
+                    $c1 = $treeGroup->c1 ?? null;
+                    $c2 = $treeGroup->c2 ?? null;
                     break;
                 case 2:
-                    $c1 = $treeGroup->c2 != null
-                        ? $treeGroup->c2
-                        : null;
-
-                    $c2 = $treeGroup->c3 != null
-                        ? $treeGroup->c3
-                        : null;
+                    $c1 = $treeGroup->c2 ?? null;
+                    $c2 = $treeGroup->c3 ?? null;
                     break;
                 case 3:
-                    $c1 = $treeGroup->c3 != null
-                        ? $treeGroup->c3
-                        : null;
-
-                    $c2 = $treeGroup->c1 != null
-                        ? $treeGroup->c1
-                        : null;
+                    $c1 = $treeGroup->c3 ?? null;
+                    $c2 = $treeGroup->c1 ?? null;
                     break;
             }
             $fight = new Fight();
             $fight->tree_id = $treeGroup->id;
             $fight->c1 = $c1;
             $fight->c2 = $c2;
-//            $fight->order = $order++;
+            $fight->order = $order++;
             $fight->area = $treeGroup->area;
             $fight->save();
         }

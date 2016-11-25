@@ -20,20 +20,26 @@
                             <h1> {{$championship->category->buildName($grades)}}</h1>
 
 
-                                {{--Area {{ $tree->area }} <br/>--}}
+                            {{--Area {{ $tree->area }} <br/>--}}
+                            @foreach($championship->fights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered full-width">
                                     <th class="p-10" width="5%">Id</th>
+                                    <th class="p-10" width="5%">Area</th>
                                     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 1</th>
                                     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 2</th>
-                                    <?php dd($championship->fights) ?>
-                                    @foreach($championship->fights as $fight)
-                                        <tr>
-                                            <td class="p-10">{{$fight->id}}</td>
-                                            <td class="p-10">{{$fight->user1!= null ? $fight->user1->id : ''}}</td>
-                                            <td class="p-10">{{$fight->user2!= null ? $fight->user2->id : ''}}</td>
-                                        </tr>
+
+                                    @foreach($fightsByArea->sortBy('id') as $fight)
+                                    <tr>
+                                        <td class="p-10">{{$fight->id}}</td>
+                                        <th class="p-10" width="5%">{{$fight->area}}</th>
+                                        <td class="p-10">{{$fight->user1!= null ? $fight->user1->id : 'BYE'}}</td>
+                                        <td class="p-10">{{$fight->user2!= null ? $fight->user2->id : 'BYE'}}</td>
+                                    </tr>
                                     @endforeach
-                                </table><br/>
+                                </table>
+                                <br/>
+                            @endforeach
+
 
 
                         @empty

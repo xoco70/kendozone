@@ -222,6 +222,12 @@ Breadcrumbs::register('teams.edit', function ($breadcrumbs, $tournament) {
 
 // Home > Tournaments > MyTournament > List Fights
 Breadcrumbs::register('fights.index', function ($breadcrumbs, $tournament) {
-    $breadcrumbs->parent('tournaments.show', $tournament);
-    $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.show', $tournament->slug));
+    if (policy($tournament)->edit(Auth::user(), $tournament)) {
+        $breadcrumbs->parent('tournaments.edit', $tournament);
+        $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.edit', $tournament->slug));
+    } else {
+        $breadcrumbs->parent('tournaments.show', $tournament);
+        $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.show', $tournament->slug));
+    }
+
 });

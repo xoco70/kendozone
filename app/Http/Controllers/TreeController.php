@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChampionshipSettings;
 use App\Exceptions\TreeGenerationException;
 use App\Grade;
 use App\Tree;
@@ -46,7 +47,8 @@ class TreeController extends Controller
                     $tree = $generation->run();
                     $championship->tree = $tree;
 
-                    Tree::generateFights($tree);
+                    $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+                    Tree::generateFights($tree, $settings);
 
                     flash()->success(trans('msg.championships_tree_generation_success'));
                 } catch (TreeGenerationException $e) {
