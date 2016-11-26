@@ -285,7 +285,7 @@ return [
     'upload_file_to_csv_format' => 'File must be in .csv format.',
     'how_to_save_to_csv' => 'With Excel,  you can save ti with: File > Save as. Then, in  "File Format", select ".csv',
     'bulk_upload' => 'Invite competitors with an Excel file',
-    'download_layout' => 'Layout File'
+    'download_layout' => 'Layout File',
 
     // Trees
     'tree' => 'Tree|Trees',
