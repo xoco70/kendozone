@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\InvitationExpiredException;
 use App\Exceptions\InvitationNeededException;
 use App\Exceptions\InvitationNotActiveException;
+use App\Grade;
 use App\Http\Requests;
 use App\Invite;
 use App\Notifications\RegisteredToChampionship;
@@ -36,6 +37,7 @@ class ChampionshipController extends Controller
     public function create($tournamentSlug, $token)
     {
         $tournament = Tournament::where('slug',$tournamentSlug)->first();
+        $grades = Grade::pluck('name', 'id');
         $invite = Invite::getActiveTournamentInvite($token);
 
         // Check if invitation is expired
@@ -64,7 +66,7 @@ class ChampionshipController extends Controller
                 // Redirect to register category Screen
 
                 Auth::loginUsingId($user->id);
-                return view("categories.register", compact('tournament', 'invite', 'currentModelName'));
+                return view("categories.register", compact('tournament', 'invite', 'currentModelName','grades'));
 
 
             }
