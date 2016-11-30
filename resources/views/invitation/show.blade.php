@@ -29,11 +29,10 @@
                                     <legend class="text-semibold">{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}</legend>
 
                                     <p>
-                                        Tienes 2 opciones para invitar competidores:
+                                        {{trans('core.2_choices_to_invite')}}
                                     <ul>
-                                        <li>Ingresando el email de los competidores separandolos por commas</li>
-                                        <li>Importando un archivo excel ( El archivo debe contener un email por linea en
-                                            la primera columna )
+                                        <li>{{trans('core.invite_by_commas')}}</li>
+                                        <li>{{trans('core.invite_by_excel')}}
                                         </li>
                                     </ul>
                                     </p>

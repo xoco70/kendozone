@@ -15,24 +15,24 @@ class CategorySeeder extends Seeder
         Category::truncate();
         // Presets
 
-        Category::create(['name' => 'categories.junior','alias' => trans('categories.junior'), 'gender' => 'X', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
-        Category::create(['name' => 'categories.junior_team', 'alias' => trans('categories.junior_team'),'gender' => 'X', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
+        Category::create(['name' => 'categories.junior', 'gender' => 'X', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
+        Category::create(['name' => 'categories.junior_team', 'gender' => 'X', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '13', 'ageMax' => '15', 'gradeCategory' => 0]);
 
-        Category::create(['name' => 'categories.men_single', 'alias' => trans('categories.men_single'),   'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18',]);
-        Category::create(['name' => 'categories.men_team', 'alias' => trans('categories.men_team'),   'gender' => 'M', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18',]);
+        Category::create(['name' => 'categories.men_single', 'gender' => 'M', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18',]);
+        Category::create(['name' => 'categories.men_team', 'gender' => 'M', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18',]);
 
-        Category::create(['name' => 'categories.ladies_single','alias' => trans('categories.ladies_single'), 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18']);
-        Category::create(['name' => 'categories.ladies_team', 'alias' => trans('categories.ladies_team'),  'gender' => 'F', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18']);
+        Category::create(['name' => 'categories.ladies_single', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '18']);
+        Category::create(['name' => 'categories.ladies_team', 'gender' => 'F', 'isTeam' => 1, 'ageCategory' => 5, 'ageMin' => '18']);
 
-        Category::create(['name' => 'categories.master', 'alias' => trans('categories.master'),   'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '50', 'gradeMin' => '8']); // 8 = Shodan
+        Category::create(['name' => 'categories.master', 'gender' => 'F', 'isTeam' => 0, 'ageCategory' => 5, 'ageMin' => '50', 'gradeMin' => '8']); // 8 = Shodan
 
 
         // Junior Team :  3 - 5
         // Junior Individual,
-        
+
         // Senior Male Team : Team 5 - 7
         // Senior Female Team : Team 5 - 7
-        
+
         // Senior Female Individual,
         // Senior Male Individual
 

@@ -90,7 +90,8 @@ class TournamentController extends Controller
     {
         $teams = "";
         $grades = Grade::pluck('name', 'id');
-        return view('tournaments.show', compact('tournament', 'grades', 'teams'));
+        $venue = $tournament->venue ?? new Venue;
+        return view('tournaments.show', compact('tournament', 'grades', 'teams','venue'));
     }
 
     /**

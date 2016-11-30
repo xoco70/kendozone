@@ -43,6 +43,8 @@ return [
     'limitDate' => 'Fecha límite',
     'general_data' => 'Datos generales',
     'level' => 'Nivel',
+    'general_data_step1' => 'Escriba el nombre y la fecha de tu torneo',
+
 
     'settings' => 'Parámetros',
 
@@ -146,6 +148,11 @@ return [
     'latest_competitors' => 'Últimos registros',
     'organizer' => 'Organizador',
     'select_categories_to_register' => 'Selecciona las categorías del torneo en las cuales deseas participar',
+
+    '2_choices_to_invite' => 'Tienes 2 opciones para invitar competidores:',
+    'invite_by_commas' => 'Ingresando el email de los competidores separandolos por commas',
+    'Invite_by_excel' => 'Importando un archivo excel ( El archivo debe contener un email por linea en la primera columna )',
+
 
     // Messages
     'all_categories_not_configured' => 'Todas las categorías deben de ser configuradas. Ve a <strong>Torneo > Categorías</strong> para configurarlas.',

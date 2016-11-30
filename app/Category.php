@@ -202,7 +202,7 @@ class Category extends Model
         ];
 
 
-        $teamText = $this->isTeam == 1 ? trans('categories.isTeam') : trans('categories.single');
+        $teamText = $this->isTeam == 1 ? trans_choice('core.team',1) : trans('categories.single');
         $ageCategoryText = $this->getAgeString();
         $gradeText = $this->getGradeString($grades);
 

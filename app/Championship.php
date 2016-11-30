@@ -16,7 +16,6 @@ class Championship extends Model
     protected $fillable = [
         "tournament_id",
         "category_id",
-//        "confirmed",
     ];
 
     protected static function boot()

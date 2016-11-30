@@ -33,7 +33,7 @@
 
             <div class=" form-group">
 
-                {!!     Form::label('isTeam', trans('categories.isTeam'),['class' => 'text-bold' ])  !!}
+                {!!     Form::label('isTeam', trans_choice('core.team',1),['class' => 'text-bold' ])  !!}
                 <br/>
 
                 <div>
@@ -127,7 +127,7 @@
 
 <script>
 
-    var team = "{{trans('categories.isTeam')}}";
+    var team = "{{trans_choice('core.team',1)}}";
     var single = "{{trans('categories.single')}}";
 
     var no_age = "{{trans('categories.no_age_restriction')}}";

@@ -70,11 +70,6 @@ class Tournament extends Model
     protected static function boot()
     {
         parent::boot();
-//        static::creating(function ($tournament) {
-//
-//            $tournament->addVenue();
-//
-//        });
         static::deleting(function ($tournament) {
             foreach ($tournament->championships as $ct) {
                 $ct->delete();

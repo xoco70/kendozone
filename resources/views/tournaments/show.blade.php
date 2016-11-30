@@ -281,7 +281,9 @@
         <!-- /detached content -->
     </div>
     @include("right-panel.tournament_menu_show")
-
+    <?php
+        $venue = $venue->setDefaultLocation($venue->latitude, $venue->longitude);
+    ?>
     <!-- /content area -->
 
 @stop
@@ -289,8 +291,8 @@
 @section('scripts_footer')
     <script>
 
-        var latitude = "{{ $tournament->latitude }}";
-        var longitude = "{{ $tournament->longitude }}";
+        var latitude = "{{ $venue->latitude }}";
+        var longitude = "{{ $venue->longitude }}";
     </script>
     {!! Html::script('js/pages/header/tournamentShow.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}

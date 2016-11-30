@@ -65,8 +65,8 @@ return [
     'teamSizeReserve' => 'Team Reserve',
     'fightingAreas' => 'Areas',
     'fightDuration' =>'Duration',
-    'hasPreliminary' => 'Round Robin',
-    'preliminaryWinner' => 'Winners x Round Robin',
+    'hasPreliminary' => 'Preliminary',
+    'preliminaryWinner' => 'Winners x Group',
     'hasEncho' => 'Encho?',
     'hasHantei' => 'Hantei?',
     'hanteiLimit' => 'Hantei limit ',
@@ -79,6 +79,7 @@ return [
 
 
     // Tooltips
+    'fightingArea' => 'Fighting Areas',
     'fightingAreaTooltip' => 'How much areas will you use for this category',
     'fightDurationTooltip' => 'How long fights will last',
     'costTooltip' => 'How much does it cost to register the category',
@@ -100,7 +101,7 @@ return [
     'configure_categories_text' => 'Select 1 option to configure tournament\'s championships',
 
     'presettings' => 'Presets',
-    'presettings_text' => 'CHoose rules to create tournament\'s championships. Categories will be created and configured automatically',
+    'presettings_text' => 'Choose rules to create tournament\'s championships. Categories will be created and configured automatically',
 
     'manual' => 'Manual',
 ];

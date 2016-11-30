@@ -14,8 +14,8 @@
                     <div class="col-xs-2 col-md-1">
                         <span class="btn btn-flat border-grey-800 btn-rounded text-bold ">1</span>
                     </div>
-                    <div class="col-xs-10"><span class="text-bold">DATOS GENERALES</span><BR/>Escriba el nombre y la
-                        fecha de tu torneo
+                    <div class="col-xs-10"><span class="text-bold">{{ trans('core.general_data') }}</span><BR/>
+                        {{ trans('core.general_data_step1') }}
                     </div>
                 </div>
                 <br/>
@@ -94,7 +94,7 @@
                     <div class="col-md-offset-2">
 
                         <div class="form-group multiselect">
-                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!}
                         </div>
 
                     </div>

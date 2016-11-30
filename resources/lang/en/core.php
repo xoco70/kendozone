@@ -43,6 +43,7 @@ return [
     'limitDate' => 'Limite Date',
     'general_data' => 'General Data',
     'level' => 'Level',
+    'general_data_step1' => 'Enter the name and the date of your tournament',
 
     'settings' => 'Settings',
 
@@ -58,7 +59,6 @@ return [
     'publish' => 'Publish',
     'invite_competitors' => 'Invite competitors',
     'generate_trees' => 'Generate Docs',
-//    'admin_tournaments' => 'Manage Tournaments',
     'eventDateIni' => 'Initial Date',
     'eventDateFin' => 'Final Date',
     'from' => 'From',
@@ -71,16 +71,16 @@ return [
     'rules' => 'Rules',
     'promoter' => 'Promoter',
     'host_organization' => 'Host Organization',
-    'technical_assistance' => 'Technical Assistencie',
+    'technical_assistance' => 'Technical Assistence',
 
 
      // Venue
-    'venue' => 'Lugar del encuentro',
-    'coords' => 'Coordenadas',
-    'address' => 'Dirección',
-    'details' => 'Datos complementarios',
+    'venue' => 'Venue',
+    'coords' => 'Coordinates',
+    'address' => 'Address',
+    'details' => 'Complementary Data',
     'city' => 'City',
-    'CP' => 'Código Postal',
+    'CP' => 'Postal Code',
     'state' => 'State',
     'country' => 'Country',
     'location' => 'Location',    
@@ -136,7 +136,7 @@ return [
     'recipients' => 'Recipients',
     'invite_recipients' => 'Write all the recipients separated by comas',
     'invite_message' => 'Invitation message',
-    'invite_template' => "Click the link para register tournament: :tournament \n :link ",
+    'invite_template' => "Click the link to register tournament: :tournament \n :link ",
     'send_invites' => 'Send Invites',
     'invite_with_link' => 'Invite competitors with that link',
     'no_tournament_registered_yet' => 'Not registered in any tournament yet',
@@ -148,6 +148,11 @@ return [
     'latest_competitors' => 'Latest Competitors',
     'organizer' => 'Organizer',
     'select_categories_to_register' => 'Select categories to register',
+
+    '2_choices_to_invite' => 'Tienes 2 opciones para invitar competidores:',
+    'invite_by_commas' => 'Ingresando el email de los competidores separandolos por commas',
+    'invite_by_excel' => 'Importando un archivo excel ( El archivo debe contener un email por linea en la primera columna )',
+
 
     // Messages
     'all_categories_not_configured' => 'All categories must be configured first.',
@@ -238,7 +243,7 @@ return [
     // Teams
 
     'team' => 'Team|Teams',
-    'no_team_yet' => 'Still no teams registered in this tournament',
+    'no_team_yet' => 'Still no team registered in this tournament',
     'add_new_team' => 'Add team',
     'registered_team' => 'Teams registered',
 
@@ -283,7 +288,7 @@ return [
 
     'import_excel' => 'Import data from Excel',
     'upload_file_to_csv_format' => 'File must be in .csv format.',
-    'how_to_save_to_csv' => 'With Excel,  you can save ti with: File > Save as. Then, in  "File Format", select ".csv',
+    'how_to_save_to_csv' => 'With Excel, you can save it with: File > Save as. Then, in  "File Format", select ".csv',
     'bulk_upload' => 'Invite competitors with an Excel file',
     'download_layout' => 'Layout File',
 
