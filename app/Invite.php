@@ -39,12 +39,7 @@ class Invite extends Model
      */
     public function generateTournamentInvite($email, Tournament $tournament)
     {
-        if ($tournament->isOpen()) {
-            $token = "open";
-        } else {
-            $token = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
-        }
-
+        $token = $this->hash_split(hash('sha256', $email)) . $this->hash_split(hash('sha256', time()));
         $invite = Invite::firstOrNew(['email' => $email, 'object_type' => 'App\Tournament', 'object_id' => $tournament->id]);
         $invite->code = $token;
         $invite->email = $email;

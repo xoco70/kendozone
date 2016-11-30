@@ -1,3 +1,5 @@
+<?php $currency = Auth::user()->country->currency_code; ?>
+
 <div class="tab-pane" id="category">
     <div class="row">
         <div class="col-md-2">
@@ -73,7 +75,7 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                {!!  Form::label('cost', trans('categories.cost')) !!}
+                {!!  Form::label('cost', trans('categories.cost'). ' ('. $currency  .')' ) !!}
                 <br/>
 
                 {{ $setting->cost }}

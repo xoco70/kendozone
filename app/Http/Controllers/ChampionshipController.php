@@ -36,6 +36,7 @@ class ChampionshipController extends Controller
      */
     public function create($tournamentSlug, $token)
     {
+
         $tournament = Tournament::where('slug',$tournamentSlug)->first();
         $grades = Grade::pluck('name', 'id');
         $invite = Invite::getActiveTournamentInvite($token);
