@@ -58,7 +58,7 @@ return [
     'broadcast' => 'Transmit',
     'publish' => 'Publish',
     'invite_competitors' => 'Invite competitors',
-    'generate_trees' => 'Generate Docs',
+    'generate_tree' => 'Generate Tree',
     'eventDateIni' => 'Initial Date',
     'eventDateFin' => 'Final Date',
     'from' => 'From',

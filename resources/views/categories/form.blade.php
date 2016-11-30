@@ -142,7 +142,7 @@
     var female = "{{trans('categories.female')}}";
     var mixt = "{{trans('categories.mixt')}}";
 
-    var grade = "{{trans('categories.grade')}}";
+    var grade = "{{trans('core.grade')}}";
     var age = "{{trans('categories.age')}}";
     var years = "{{trans('categories.years')}}";
 

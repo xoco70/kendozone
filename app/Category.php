@@ -169,7 +169,7 @@ class Category extends Model
             $gradeText = trans('categories.second_force');
         } else if ($this->gradeCategory == 3) {
 
-            $gradeText = ' - ' . trans('categories.grade') . ' : ';
+            $gradeText = ' - ' . trans('core.grade') . ' : ';
 //            dd($grades);
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 if ($this->gradeMin == $this->gradeMax) {

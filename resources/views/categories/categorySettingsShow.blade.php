@@ -56,8 +56,8 @@
             <div class="checkbox-switch ">
                 <label>
 
-                    {!!  Form::label('hasRoundRobin', trans('categories.hasRoundRobin')) !!} <br/>
-                    {{ $setting->hasRoundRobin }}
+                    {!!  Form::label('hasPreliminary', trans('categories.hasPreliminary')) !!} <br/>
+                    {{ $setting->hasPreliminary }}
 
 
                 </label>
