@@ -15,9 +15,11 @@
 
         <div class="content-detached">
             @include('layouts.tree.topTree')
-            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+            <ul class="nav nav-tabs nav-tabs-solid nav-justified trees">
                 @foreach($tournament->championships as $championship)
-                    <li class={{ $loop->first ? "active" : "" }}><a href="#{{$championship->id}}" data-toggle="tab" id="tab{{$championship->id}}">{{$championship->category->buildName($grades)}}</a></li>
+                    <li class={{ $loop->first ? "active" : "" }}><a href="#{{$championship->id}}" data-toggle="tab"
+                                                                    id="tab{{$championship->id}}">{{$championship->category->buildName($grades)}}</a>
+                    </li>
 
                 @endforeach
             </ul>
@@ -25,48 +27,50 @@
             <div class="panel panel-flat">
                 <div class="panel-body">
                     <div class="container-fluid">
+                        <div class="tab-content">
+                            @foreach($tournament->championships as $championship)
+                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
+                                    <h1> {{$championship->category->buildName($grades)}}
+                                        @can('generateTree', $tournament)
 
-                        @foreach($tournament->championships as $championship)
-                            <h1> {{$championship->category->buildName($grades)}}
-                                @can('generateTree', $tournament)
+                                            {!! Form::model(null,
+                                                ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
+                                                 'data-gen' => $championship->tree->count(),
+                                                'action' => ['TreeController@store', $championship->id]]) !!}
 
-                                    {!! Form::model(null,
-                                        ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
-                                         'data-gen' => $championship->tree->count(),
-                                        'action' => ['TreeController@store', $championship->id]]) !!}
+                                            <button type="button" class="btn bg-success btn-xs generate">
+                                                {{ trans_choice('core.generate_tree',1) }}
+                                            </button>
+                                            {!! Form::close() !!}
+                                        @endcan
+                                    </h1>
 
-                                    <button type="button" class="btn bg-success btn-xs generate">
-                                        {{ trans_choice('core.generate_tree',1) }}
-                                    </button>
-                                @endcan
-
-                                {!! Form::close() !!}
-                            </h1>
-
-                            @if ($championship->tree != null  && $championship->tree->count() != 0)
-                                @foreach($championship->tree->groupBy('area') as $ptByArea)
-                                    @if ($championship->hasPreliminary())
-                                        @include('layouts.tree.preliminary')
-                                    @elseif ($championship->isDirectEliminationType())
-                                        <?php
-                                        $directEliminationTree = $championship->tree->map(function ($item, $key) {
-                                            $user1 = $item->user1 != null ? $item->user1->name : "Bye";
-                                            $user2 = $item->user2 != null ? $item->user2->name : "Bye";
-                                            return [$user1, $user2];
-                                        })->toArray();
-                                        ?>
-                                        <div id="brackets_{{ $championship->id }}"></div>
-                                        <script>
-                                            var minimalData_{{ $championship->id }} = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
-                                        </script>
+                                    @if ($championship->tree != null  && $championship->tree->count() != 0)
+                                        @foreach($championship->tree->groupBy('area') as $ptByArea)
+                                            @if ($championship->hasPreliminary())
+                                                @include('layouts.tree.preliminary')
+                                            @elseif ($championship->isDirectEliminationType())
+                                                <?php
+                                                $directEliminationTree = $championship->tree->map(function ($item, $key) {
+                                                    $user1 = $item->user1 != null ? $item->user1->name : "Bye";
+                                                    $user2 = $item->user2 != null ? $item->user2->name : "Bye";
+                                                    return [$user1, $user2];
+                                                })->toArray();
+                                                ?>
+                                                <div id="brackets_{{ $championship->id }}"></div>
+                                                <script>
+                                                    var minimalData_{{ $championship->id }} = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
+                                                </script>
+                                            @endif
+                                        @endforeach
+                                    @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
+                                        @include('layouts.tree.roundRobin')
+                                    @else
+                                        <div>{{trans('core.no_generated_tree')}}</div>
                                     @endif
-                                @endforeach
-                            @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
-                                @include('layouts.tree.roundRobin')
-                            @else
-                                <div>{{trans('core.no_generated_tree')}}</div>
-                            @endif
-                        @endforeach
+                                </div>
+                            @endforeach
+                        </div>
                         <br/>
                     </div>
                 </div>
