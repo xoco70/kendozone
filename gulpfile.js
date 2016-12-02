@@ -129,6 +129,7 @@ elixir(function (mix) {
         'sidebar_detached_sticky_custom.js',
         'components/sweetalert/dist/sweetalert.min.js',
         'components/jquery-bracket/dist/jquery.bracket.min.js',
+        'plugins/jquery.printPage.js',
     ], 'public/js/pages/footer/trees.js');
 
     mix.styles([
@@ -178,7 +179,7 @@ elixir(function (mix) {
     ], 'public/js/pages/footer/clubIndexFooter.js');
 
     mix.scripts([
-        'pages/footer/teamIndexFooter.js'
+        'pages/footer/teamIndexFooter.js',
     ], 'public/js/pages/footer/teamIndexFooter.js');
 
 

@@ -32,7 +32,8 @@
         "laravel/passport": "^1.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "torann/geoip": "^1.0",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "barryvdh/laravel-dompdf": "^0.7.0"
 
     },
     "require-dev": {

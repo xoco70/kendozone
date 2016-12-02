@@ -31,9 +31,15 @@
                             @foreach($tournament->championships as $championship)
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
                                     <h1> {{$championship->category->buildName($grades)}}
-                                        @can('generateTree', $tournament)
 
-                                            {!! Form::model(null,
+                                        <a class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5 disabled">
+                                            <i class="icon-printer"></i>
+                                        </a>
+
+                                        @can('generateTree', $tournament)
+                                            {!! Form::close() !!}
+
+                                            {!! Form::open(
                                                 ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
                                                  'data-gen' => $championship->tree->count(),
                                                 'action' => ['TreeController@store', $championship->id]]) !!}
@@ -43,6 +49,7 @@
                                             </button>
                                             {!! Form::close() !!}
                                         @endcan
+
                                     </h1>
 
                                     @if ($championship->tree != null  && $championship->tree->count() != 0)
@@ -120,6 +127,7 @@
             })
         });
         @endforeach
+
 
 
 
