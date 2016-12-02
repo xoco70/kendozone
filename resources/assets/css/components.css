@@ -15967,7 +15967,9 @@ label.display-block {
 .border-xlg {
     border-width: 3px
 }
-
+.border-3 {
+    border-width: 3px!important;
+}
 .border-4 {
     border-width: 4px!important;
 }

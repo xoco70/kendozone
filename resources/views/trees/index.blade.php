@@ -15,6 +15,13 @@
 
         <div class="content-detached">
             @include('layouts.tree.topTree')
+            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+                @foreach($tournament->championships as $championship)
+                    <li class={{ $loop->first ? "active" : "" }}><a href="#{{$championship->id}}" data-toggle="tab" id="tab{{$championship->id}}">{{$championship->category->buildName($grades)}}</a></li>
+
+                @endforeach
+            </ul>
+
             <div class="panel panel-flat">
                 <div class="panel-body">
                     <div class="container-fluid">
@@ -73,11 +80,11 @@
 @section('scripts_footer')
     <?php
     $championshipWithBrackets = $tournament->championships
-            ->filter(function ($championship, $key) {
-                return ($championship->isDirectEliminationType() && !$championship->hasPreliminary());
-            })->map(function ($championship, $key) {
-                return $championship->id;
-            })->toArray();
+        ->filter(function ($championship, $key) {
+            return ($championship->isDirectEliminationType() && !$championship->hasPreliminary());
+        })->map(function ($championship, $key) {
+            return $championship->id;
+        })->toArray();
 
 
     ?>
@@ -120,23 +127,23 @@
             if (count != 0) {
                 var form = $(this).parents('form');
                 swal({
-                            title: "{{ trans('msg.are_you_sure') }}",
-                            text: "{{ trans('msg.this_will_delete_previous_tree') }}",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: '#DD6B55',
-                            confirmButtonText: "{{ trans('msg.do_it_again') }}",
-                            cancelButtonText: "{{ trans('msg.cancel_it') }}",
-                            closeOnConfirm: false,
-                            closeOnCancel: false
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                form.submit();
-                            } else {
-                                swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
-                            }
-                        });
+                        title: "{{ trans('msg.are_you_sure') }}",
+                        text: "{{ trans('msg.this_will_delete_previous_tree') }}",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: "{{ trans('msg.do_it_again') }}",
+                        cancelButtonText: "{{ trans('msg.cancel_it') }}",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            form.submit();
+                        } else {
+                            swal("{{ trans('msg.cancelled') }}", "{{ trans('msg.operation_cancelled') }}", "error");
+                        }
+                    });
             } else {
                 form.submit();
             }

@@ -2646,7 +2646,8 @@ select[multiple].input-group-xs>.input-group-btn>.btn {
 .nav-tabs.nav-justified[class*=bg-]>li>a,
 .nav-tabs.nav-justified.nav-tabs-solid>li>a {
     border-color: transparent;
-    padding:10px;
+    padding: 2px 5px 2px 5px;
+    font-size: 10px;
 }
 
 @media (min-width:769px) {
