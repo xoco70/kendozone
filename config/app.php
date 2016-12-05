@@ -161,11 +161,17 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        /*
+         * Package Service Providers...
+         */
+
         Laravel\Socialite\SocialiteServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
@@ -184,13 +190,6 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
 
-
-        /*
-         * Package Service Providers...
-         */
-
-        //
-
         /*
          * Application Service Providers...
          */
@@ -199,6 +198,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -264,6 +264,8 @@ return [
         'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
 
     ],
 
