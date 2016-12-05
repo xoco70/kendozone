@@ -77,23 +77,23 @@
 
 @section('scripts_footer')
     <script>
-        var url_base = "{{ route('tournaments.index') }}";
-        var url_api_base = "{{ route('api.tournaments.index') }}";
-        var url_api_root = "{{ route('api.root') }}";
-        var url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
-        var longitude = "{{$venue->longitude }}";
-        var latitude = "{{$venue->latitude }}";
-        var configured = "{{ trans('core.configured_full') }}";
-        var allCategoriesSize = '{!! $categorySize !!}';
-        var dualListIds = [];
-        var dualList;
-        var venue = "{!! addcslashes($venue, '"') !!}";
+        let url_base = "{{ route('tournaments.index') }}";
+        let url_api_base = "{{ route('api.tournaments.index') }}";
+        let url_api_root = "{{ route('api.root') }}";
+        let url_edit = "{{ URL::action('TournamentController@update', $tournament->slug) }}";
+        let longitude = "{{$venue->longitude }}";
+        let latitude = "{{$venue->latitude }}";
+        let configured = "{{ trans('core.configured_full') }}";
+        let allCategoriesSize = '{!! $categorySize !!}';
+        let dualListIds = [];
+        let dualList;
+        let venue = "{!! addcslashes($venue, '"') !!}";
         venue = JSON.parse(venue);
 
         $("a").on('click', function () {
 
-            var href = $(this).attr('href');
-            var id = href.replace("#", "");
+            let href = $(this).attr('href');
+            let id = href.replace("#", "");
             console.log(id);
             if ($("a[data-toggle='tab'][id='" + id + "']")) {
                 $("#" + id).click();
