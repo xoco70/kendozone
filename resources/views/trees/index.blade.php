@@ -32,7 +32,8 @@
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
                                     <h1> {{$championship->category->buildName($grades)}}
 
-                                        <a class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5 disabled">
+                                        <a href="{{URL::action('TreeController@single', ['championship'=> $championship->id]) }}"
+                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">
                                             <i class="icon-printer"></i>
                                         </a>
 
@@ -53,23 +54,11 @@
                                     </h1>
 
                                     @if ($championship->tree != null  && $championship->tree->count() != 0)
-                                        @foreach($championship->tree->groupBy('area') as $ptByArea)
                                             @if ($championship->hasPreliminary())
                                                 @include('layouts.tree.preliminary')
                                             @elseif ($championship->isDirectEliminationType())
-                                                <?php
-                                                $directEliminationTree = $championship->tree->map(function ($item, $key) {
-                                                    $user1 = $item->user1 != null ? $item->user1->name : "Bye";
-                                                    $user2 = $item->user2 != null ? $item->user2->name : "Bye";
-                                                    return [$user1, $user2];
-                                                })->toArray();
-                                                ?>
-                                                <div id="brackets_{{ $championship->id }}"></div>
-                                                <script>
-                                                    var minimalData_{{ $championship->id }} = {!!     json_encode([ 'teams' => $directEliminationTree ] ) !!};
-                                                </script>
+                                                @include('layouts.tree.directElimination')
                                             @endif
-                                        @endforeach
                                     @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
                                         @include('layouts.tree.roundRobin')
                                     @else
