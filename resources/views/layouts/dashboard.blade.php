@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script data-cfasync="false">window.civchat = {
+            apiKey: "UqQXPuoajzcRnS4VrniDb1JfohA725XdaDtXW7zGThveM640NcmEkDWeXy7ZWHGo",
+            name: "",
+            email: ""
+        };</script>
+    <script data-cfasync="false" src="https://widget.userengage.io/widget.js"></script>
+
     <?php
     $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
     $title = '
-        <title> '.$appName.' </title>
+        <title> ' . $appName . ' </title>
         <meta property="og:title" content="Create Online Kendo Tournament in instants" />
         <meta name="twitter:title" content="Kendozone - Create Online Kendo Tournaments in instants" />
         ';
@@ -33,7 +40,7 @@
     <meta property="og:site_name" content="{{ $appName }}"/>
 
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }} </title>
