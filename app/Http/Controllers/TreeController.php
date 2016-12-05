@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Championship;
 use App\ChampionshipSettings;
 use App\Exceptions\TreeGenerationException;
 use App\Grade;
@@ -60,4 +61,13 @@ class TreeController extends Controller
         }
         return redirect(route('tree.index', $tournament->slug));
     }
+
+    public function single(Request $request)
+    {
+        $championship = Championship::find($request->championship);
+        $grades = Grade::pluck('name', 'id');
+        return view('pdf.tree', compact('championship','grades'));
+    }
+
+
 }
