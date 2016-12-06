@@ -266,8 +266,7 @@ return [
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-
-
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];
