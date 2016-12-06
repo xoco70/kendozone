@@ -2,5 +2,7 @@
 @section('content')
     @include("layouts.tree.preliminary")
 @stop
-@include('pdf.footer')
+@section('footer')
+    @include('pdf.footer')
+@stop
 

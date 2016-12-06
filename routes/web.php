@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('championships/{championship}/tree/', 'TreeController@single')->name('tree.single');
 
         // PDF
-        Route::get('championships/{championship}/pdf', 'PdfController@tree');
+        Route::get('championships/{championship}/pdf', 'PDFController@tree');
 
         Route::post('tournaments/{tournamentSlug}/trees/', 'TreeController@store')->name('tree.storeAll');
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('tree.store');;

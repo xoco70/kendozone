@@ -172,6 +172,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
@@ -264,7 +265,7 @@ return [
         'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
 
 
     ],

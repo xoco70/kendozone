@@ -124,12 +124,10 @@ elixir(function (mix) {
     ], 'public/css/pages/tournamentInvite.css');
 
     mix.scripts([
-
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
         'components/sweetalert/dist/sweetalert.min.js',
         'components/jquery-bracket/dist/jquery.bracket.min.js',
-        'plugins/jquery.printPage.js',
     ], 'public/js/pages/footer/trees.js');
 
     mix.styles([
@@ -137,6 +135,14 @@ elixir(function (mix) {
         '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
     ], 'public/css/pages/trees.css');
 
+    mix.styles([
+        '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
+    ], 'public/pdf/brackets.css');
+
+    mix.scripts([
+        'core/libraries/jquery.min.js', // 2.1.4
+        'components/jquery-bracket/dist/jquery.bracket.min.js',
+    ], 'public/pdf/brackets.js');
 
     // FOOTER
 
