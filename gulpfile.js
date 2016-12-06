@@ -136,6 +136,10 @@ elixir(function (mix) {
     ], 'public/css/pages/trees.css');
 
     mix.styles([
+        'custom.css',
+    ], 'public/css/pages/preliminary_trees.css');
+
+    mix.styles([
         '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
     ], 'public/pdf/brackets.css');
 
