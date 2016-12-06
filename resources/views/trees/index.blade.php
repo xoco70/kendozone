@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('styles')
-    {!! Html::style('css/pages/trees.css')!!}
+    {!! Html::style('css/pages/jquery_trees.css')!!}
 
 @stop
 
