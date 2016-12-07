@@ -330,6 +330,7 @@ img.side_flag{
     bottom: 35px;
     left: 0;
     width: 100%;
+    display:none;
 }
 .navigation-bottom{
     line-height: 0.5;
