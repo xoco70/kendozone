@@ -316,9 +316,21 @@ div.team div.label {
     background-color: #273c4a;
 }
 
-li.side_avatar{
-    padding-left:10px;
-}
 img.side_avatar{
     width:35px;
+    border-radius:2px;
+}
+img.side_flag{
+    width:35px;
+    border-radius:2px;
+}
+
+.anchor-bottom{
+    position: absolute;
+    bottom: 35px;
+    left: 0;
+    width: 100%;
+}
+.navigation-bottom{
+    line-height: 0.5;
 }
