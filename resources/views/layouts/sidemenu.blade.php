@@ -50,17 +50,20 @@
                 <li class="navigation-bottom">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                         @if (App::getLocale() =='es')
-                            <img src="/images/flags/MX.png" class="img.side_flag" alt="">
+                            <img src="/images/flags/MX.png" class="side_flag" alt="">
                         @else
-                            <img src="/images/flags/GB.png" class="img.side_flag" alt="">
+                            <img src="/images/flags/GB.png" class="side_flag" alt="">
                         @endif
                     </a>
                 </li>
-                <li class="side_avatar navigation-bottom">
+                <li class="side_avatar">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                         <img src="{!! Auth::getUser()->avatar ?? Avatar::create(Auth::getUser()->email)->toBase64() !!}"
                              alt="kendozone_avatar" class="side_avatar">
                     </a>
+
+                    <ul class="onclick-menu-content">
+                    </ul>
                 </li>
 
 
@@ -71,4 +74,7 @@
         {{--</div>--}}
     </div>
 </div>
+
+
+
 

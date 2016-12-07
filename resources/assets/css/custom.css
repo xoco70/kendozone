@@ -321,7 +321,7 @@ img.side_avatar{
     border-radius:2px;
 }
 img.side_flag{
-    width:35px;
+    width:25px;
     border-radius:2px;
 }
 
@@ -333,4 +333,35 @@ img.side_flag{
 }
 .navigation-bottom{
     line-height: 0.5;
+}
+li.side_avatar>a{
+    padding: 0;
+    min-height: 0;
+}
+li.side_avatar:last-child {
+    padding-bottom: 20px;
+}
+
+.anchor-bottom ul li ul{
+    position:absolute;
+    right:0;
+    top:25px;
+}
+
+
+.onclick-menu {
+    position: relative;
+    display: inline-block;
+}
+.onclick-menu:before {
+    content: "click me!";
+}
+.onclick-menu:focus .onclick-menu-content {
+    display: block;
+}
+.onclick-menu-content {
+    position: absolute;
+    z-index: 1;
+
+    display: none;
 }
