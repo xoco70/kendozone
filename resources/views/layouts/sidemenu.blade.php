@@ -3,9 +3,9 @@
     <div class="sidebar-content">
 
         <!-- Main navigation -->
-        <div class="sidebar-category sidebar-category-visible">
-            <div class="category-content no-padding">
-                <ul class="navigation navigation-main navigation-accordion">
+        {{--<div class="sidebar-category sidebar-category-visible">--}}
+            {{--<div class="category-content no-padding">--}}
+                <ul class="navigation navigation-main">
                     <li {{ (Request::is('/') ? 'class=active' : '') }}>
                         <a href="{{ route('dashboard') }}" class="protip"
                            data-pt-title="Dashboard">
@@ -42,10 +42,14 @@
                             </a>
                         </li>
                     @endif
+                <li class="side_avatar">
+                    <img src="{!! Auth::getUser()->avatar ?? Avatar::create(Auth::getUser()->email)->toBase64() !!}"
+                         alt="kendozone_avatar" class="side_avatar">
 
+                </li>
                 </ul>
-            </div>
-        </div>
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
-</div>
+</div>    width: 35px;
 

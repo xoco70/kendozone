@@ -311,3 +311,14 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
 div.team div.label {
     color: black;
 }
+
+.bg-dark{
+    background-color: #273c4a;
+}
+
+li.side_avatar{
+    padding-left:10px;
+}
+img.side_avatar{
+    width:35px;
+}

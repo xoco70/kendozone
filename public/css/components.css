@@ -115,10 +115,12 @@
 }
 
 .navigation {
+    height:100%;
     margin: 0;
     padding: 10px 0;
     list-style: none;
-    position: relative
+    position: relative;
+
 }
 
 .sidebar-user+.sidebar-category .navigation {

@@ -4607,7 +4607,7 @@ a.dropdown-toggle {
     margin-top: 10px;
 }
 
-.sidebar-category > .category-content > ul > li > a > i.sidemenu{
+.sidebar-content > ul > li > a > i.sidemenu{
     font-size: 24px;
 }
 .breadcrumb {
