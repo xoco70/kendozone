@@ -41,21 +41,21 @@ class TreeController extends Controller
         }
 
         foreach ($tournament->championships as $championship) {
-            if (!$championship->isRoundRobinType()) {
-                $generation = Tree::getGenerationStrategy($championship);
-                $generation->championship = $championship;
-                try {
-                    $tree = $generation->run();
-                    $championship->tree = $tree;
-
-                    $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
-                    Tree::generateFights($tree, $settings);
-
-                    flash()->success(trans('msg.championships_tree_generation_success'));
-                } catch (TreeGenerationException $e) {
-                    flash()->error($e->message);
-                } finally {
+            $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+            if (!$settings->hasPreliminary) {
+                if ($championship->isDirectEliminationType()) {
+                    $generation = Tree::getGenerationStrategy($championship);
+                    $generation->championship = $championship;
+                    try {
+                        $tree = $generation->run();
+                        $championship->tree = $tree;
+                        Tree::generateFights($tree, $settings);
+                        flash()->success(trans('msg.championships_tree_generation_success'));
+                    } catch (TreeGenerationException $e) {
+                        flash()->error($e->message);
+                    } finally {
 //                    return redirect(route('tree.index', $tournament->slug));
+                    }
                 }
             }
         }
@@ -66,7 +66,7 @@ class TreeController extends Controller
     {
         $championship = Championship::find($request->championship);
         $grades = Grade::pluck('name', 'id');
-        return view('pdf.tree', compact('championship','grades'));
+        return view('pdf.tree', compact('championship', 'grades'));
     }
 
 

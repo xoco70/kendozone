@@ -42,36 +42,32 @@ class PreliminaryTreeGen implements TreeGenerable
             throw new TreeGenerationException(trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]));
 
         }
-        // Get Competitor's list
-        if ($this->groupBy == null) {
-            $users = $this->championship->users; // Single Collection -  Easier
-
-        } else {
-            $users = $this->getUsersByEntity();
-        }
-
+        // Get Competitor's list ordered by entities
+        $users = $this->getUsersByEntity();
 
         // Chunk user by areas
 
         $usersByArea = $users->chunk(sizeof($users) / $areas);
-
         $area = 1;
 
         // loop on areas
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            if ($this->championship->hasPreliminary()){
+            if ($this->championship->isRoundRobinType()) {
                 $roundRobinGroups = $users->chunk(3)->shuffle();
+
             } // , $settings->roundRobinGroupSize
-            else{
+            else {
                 $roundRobinGroups = $users->chunk(2)->shuffle();
+
             }
 
             $order = 1;
 
             // Before doing anything, check last group if numUser = 1
             foreach ($roundRobinGroups as $robinGroup) {
+
                 $robinGroup = $robinGroup->shuffle()->values();
 
                 $pt = new Tree;
@@ -91,7 +87,6 @@ class PreliminaryTreeGen implements TreeGenerable
                 if (isset($c3)) $pt->c3 = $c3->id;
                 if (isset($c4)) $pt->c4 = $c4->id;
                 if (isset($c5)) $pt->c5 = $c5->id;
-//                dd($pt);
                 $pt->save();
                 $preliminiaryTree->push($pt);
                 $order++;
@@ -105,7 +100,7 @@ class PreliminaryTreeGen implements TreeGenerable
      * @param $userGroups
      * @return int
      */
-    private function getMaxCompetitorByEntity($userGroups):int
+    private function getMaxCompetitorByEntity($userGroups): int
     {
         $max = 0;
         foreach ($userGroups as $userGroup) {
@@ -120,56 +115,47 @@ class PreliminaryTreeGen implements TreeGenerable
     /**
      * @return Collection
      */
-    private function getUsersByEntity():Collection
+    private function getUsersByEntity(): Collection
     {
         $competitors = new Collection();
 
-        $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+        if (($this->groupBy) != null) {
+            $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+        } else {
+            $userGroups = $this->championship->users->chunk(1); // Collection of Collection
+        }
+
         // We must add another group that has bye
 
         $byeGroup = $this->getByeGroup($this->championship);
-        $userGroups->push($byeGroup);
+        $userGroups->push($byeGroup->values());
 
         // Get biggest group.
         $max = $this->getMaxCompetitorByEntity($userGroups);
-
+        //
         for ($i = 0; $i < $max; $i++) {
             foreach ($userGroups as $userGroup) {
-                $competitor = $userGroup->get($i);
-                if (isset($competitor)) {
-                    $competitors->push($userGroup->get($i));
+
+                $competitor = $userGroup->values()->get($i);
+                if ($competitor != null) {
+                    $competitors->push($competitor);
                 }
             }
         }
-
-
         return $competitors;
     }
-
-//    private function chunk_by_num_competitor_by_area(Collection $users, $roundRobinGroupSize = 3)
-//    {
-//        $newUsers = new Collection();
-//        $groupsConfig = Config::get(('options.chunk_by_num_competitor_by_area.15'));
-//        foreach ($groupsConfig as $groupSize){
-//             $splice = $users->splice(0,$groupSize);
-//            $newUsers->push($splice);
-//        }
-//        dd($newUsers);
-//        return $newUsers;
-//    }
 
     private function getByeGroup(Championship $championship)
     {
         $groupSizeDefault = 3;
-        // Deterime Bye Quantity
 
         $userCount = $championship->users->count();
-        if ($championship->isDirectEliminationType()){
+        if ($championship->isDirectEliminationType()) {
             $preliminaryGroupSize = 2;
-        }else{
+        } else {
             $preliminaryGroupSize = $championship->settings != null
                 ? $championship->settings->preliminaryGroupSize
-                : "3";
+                : $groupSizeDefault;
 
         }
 
@@ -205,7 +191,7 @@ class PreliminaryTreeGen implements TreeGenerable
      * @param $byeCount
      * @return Collection
      */
-    private function createNullsGroup($byeCount):Collection
+    private function createNullsGroup($byeCount): Collection
     {
         $nullUser = new User();
 
