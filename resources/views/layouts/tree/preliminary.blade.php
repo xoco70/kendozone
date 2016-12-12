@@ -4,7 +4,7 @@
         <h1> {{$championship->category->buildName($grades)}}</h1>
     @endif
     @foreach($championship->tree->groupBy('area') as $ptByArea)
-        <table border="1" cellpadding="5" cellspacing="0">
+        <table class = "table-bordered" cellpadding="5" cellspacing="0">
             <tr>
                 <th class="p-10">{{ trans_choice('categories.fightingArea',1) }}</th>
                 <th class="p-10"></th>

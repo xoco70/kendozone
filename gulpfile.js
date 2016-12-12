@@ -133,10 +133,10 @@ elixir(function (mix) {
     mix.styles([
         '../js/components/sweetalert/dist/sweetalert.css',
         '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
-    ], 'public/css/pages/trees.css');
+    ], 'public/css/pages/jquery_trees.css');
 
     mix.styles([
-        'custom.css',
+        'preliminary_trees.css',
     ], 'public/css/pages/preliminary_trees.css');
 
     mix.styles([

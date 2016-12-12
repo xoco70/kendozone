@@ -311,3 +311,58 @@ label[for=bootstrap-duallistbox-nonselected-list_category] {
 div.team div.label {
     color: black;
 }
+
+.bg-dark{
+    background-color: #273c4a;
+}
+
+img.side_avatar{
+    width:35px;
+    border-radius:2px;
+}
+img.side_flag{
+    width:25px;
+    border-radius:2px;
+}
+
+.anchor-bottom{
+    position: absolute;
+    bottom: 35px;
+    left: 0;
+    width: 100%;
+    display:none;
+}
+.navigation-bottom{
+    line-height: 0.5;
+}
+li.side_avatar>a{
+    padding: 0;
+    min-height: 0;
+}
+li.side_avatar:last-child {
+    padding-bottom: 20px;
+}
+
+.anchor-bottom ul li ul{
+    position:absolute;
+    right:0;
+    top:25px;
+}
+
+
+.onclick-menu {
+    position: relative;
+    display: inline-block;
+}
+.onclick-menu:before {
+    content: "click me!";
+}
+.onclick-menu:focus .onclick-menu-content {
+    display: block;
+}
+.onclick-menu-content {
+    position: absolute;
+    z-index: 1;
+
+    display: none;
+}

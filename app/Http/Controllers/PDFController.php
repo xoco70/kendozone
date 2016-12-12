@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Championship;
 use App\Grade;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Cviebrock\EloquentSluggable\Tests\Models\Post;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+
 class PdfController extends Controller
 {
     public function tree(Request $request)
@@ -28,8 +27,9 @@ class PdfController extends Controller
 //        return view ($layout, compact('championship','grades'));
         $file = 'tree-'.$championship->category->buildName($grades);
         $file = sanitize($file).'.pdf';
+
         $pdf = PDF::loadView($layout, ['championship' => $championship, 'grades' => $grades]);
-        return $pdf->download($file);
+        return $pdf->inline($file);
 
     }
 

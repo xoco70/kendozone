@@ -171,7 +171,6 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
@@ -266,8 +265,7 @@ return [
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-
-
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

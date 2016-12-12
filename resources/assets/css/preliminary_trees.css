@@ -1,0 +1,23 @@
+table, th, td {
+    border: 1px solid #CCCCCC;
+}
+
+.my-footer {
+    position: relative;
+    left: -8px;
+    bottom: -8px;
+    width: 100%;
+    padding: 20px;
+    background-color: #ff5663;
+    border-color: #ff5663;
+    color: #fff
+
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: lightgrey;
+}
