@@ -10,12 +10,12 @@
     {!! Html::script('pdf/brackets.js')!!}
 
     <script>
-        $(function () {
+        setTimeout(function() {
             $('#brackets_{{ $championship->id }}').bracket({
                 init: minimalData_{{ $championship->id }},
-                teamWidth: 100,
+                teamWidth: 100
             })
-        });
+        },5000);
     </script>
 @stop
 
