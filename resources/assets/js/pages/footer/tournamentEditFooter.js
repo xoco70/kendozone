@@ -53,7 +53,7 @@ $(function () {
             },
             enableAutocomplete: true,
             onchanged: function (currentLocation, radius, isMarkerDropped) {
-                var addressComponents = $(this).locationpicker('map').location.addressComponents;
+                let addressComponents = $(this).locationpicker('map').location.addressComponents;
                 $("#latitude").val(currentLocation.latitude);
                 $("#longitude").val(currentLocation.longitude);
                 updateControls(addressComponents);
@@ -81,13 +81,13 @@ $(function () {
     }
 
     $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
+        let isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
     });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
+        let isChecked = $(this).is(':checked');
         console.log(isChecked);
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
@@ -95,15 +95,15 @@ $(function () {
     });
 
     $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
+        let isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
     });
 
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
-        var inputData = $(this).parents('form:first').serialize();
-        var name = $('#name');
+        let inputData = $(this).parents('form:first').serialize();
+        let name = $('#name');
 
         if (name.val() == '' || name.val().length < 6) {
             name.closest('div').addClass('has-error');
@@ -112,7 +112,7 @@ $(function () {
         }
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        var btnUpdateTour = $('.btn-update-tour');
+        let btnUpdateTour = $('.btn-update-tour');
 
         $.ajax(
             {
@@ -139,14 +139,14 @@ $(function () {
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
                         // Show / Hide Share Tournament Link
-                        var tournamentType = $('[name="type"]').is(':checked');
+                        let tournamentType = $('[name="type"]').is(':checked');
                         if (tournamentType) $('#share_tournament').show();
                         else $('#share_tournament').hide();
 
                         // Set Venue Badge
-                        var venueSize = $('[name="venue_name"]').val().length;
-                        var latSize = $('[name="latitude"]').val().length;
-                        var longSize = $('[name="longitude"]').val().length;
+                        let venueSize = $('[name="venue_name"]').val().length;
+                        let latSize = $('[name="latitude"]').val().length;
+                        let longSize = $('[name="longitude"]').val().length;
 
                         if (venueSize > 0 && latSize > 0 && longSize > 0) {
                             $('#venue-status').show();
@@ -173,9 +173,9 @@ $(function () {
 
                 },
                 error: function (data) {
-                    var text = "";
-                    var json = data.responseText;
-                    var obj = null;
+                    let text = "";
+                    let json = data.responseText;
+                    let obj = null;
                     console.log("responseText:" + data.responseText);
                     try {
                         obj = jQuery.parseJSON(json);
@@ -214,24 +214,24 @@ $(function () {
     });
 
 //EDIT CATEGORIES
-    var categoriesSize = null;
+    let categoriesSize = null;
 
     $('.save_category').on('click', function (e) {
         e.preventDefault();
-        var inputData = $('.save_category').serialize();
-        var form = $(this).parents('form:first');
+        let inputData = $('.save_category').serialize();
+        let form = $(this).parents('form:first');
         inputData = form.serialize();
-        // var tournamentId = form.data('tournament');
-        var championshipId = form.data('championship');
-        var settingId = form.data('setting');
+        // let tournamentId = form.data('tournament');
+        let championshipId = form.data('championship');
+        let settingId = form.data('setting');
 
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        var panel = $(this).closest('.panel');
+        let panel = $(this).closest('.panel');
 
-        var method = null;
-        var url = null;
+        let method = null;
+        let url = null;
         if ((typeof settingId === "undefined")) {
             method = 'POST';
             url = url_api_root + '/championships/' + championshipId + '/settings';
@@ -265,7 +265,7 @@ $(function () {
                         panel.find('.cat-state').text(configured);
 
                         form.attr('data-setting', data.settingId);
-                        var catsize = $(".category-size");
+                        let catsize = $(".category-size");
                         if (method == 'POST') {
                             categoriesSize = parseInt(catsize.text(), 10) + 1;
                             catsize.html(categoriesSize)
@@ -328,14 +328,14 @@ $(function () {
     $(".switch").bootstrapSwitch();
 
 
-    var $input = $('.dateFin').pickadate({
+    let $input = $('.dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
         today: '',
         clear: '',
         close: ''
     });
-    var $input2 = $('.dateLimit').pickadate({
+    let $input2 = $('.dateLimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
         today: '',
@@ -343,8 +343,8 @@ $(function () {
         close: ''
     });
 
-    var pickerFin = $input.pickadate('picker');
-    var pickerLimit = $input2.pickadate('picker');
+    let pickerFin = $input.pickadate('picker');
+    let pickerLimit = $input2.pickadate('picker');
 
     $('.dateIni').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
