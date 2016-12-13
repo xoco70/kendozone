@@ -11,7 +11,7 @@
                 <tr class="dashboard-table">
                     <td width="30%">{{$openTournament->name}}</td>
                     <td width="20%" align="right">
-                        <a class="btn border-success text-success btn-flat border-4 seeall pl-5 pr-5 "
+                        <a class="btn border-success text-success btn-flat border-3 seeall pl-5 pr-5 "
                            href="{!! URL::action('TournamentController@register', $openTournament->slug) !!}"> {{  strtoupper(trans('auth.register')) }}</a>
                     </td>
                 </tr>

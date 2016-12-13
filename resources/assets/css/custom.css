@@ -33,7 +33,7 @@ ul > ol.breadcrumb > li.active {
 
 ul.nav > li > a.btn {
     text-transform: uppercase;
-    border-width: 4px;
+    border-width: 3px;
 }
 
 fieldset > a > legend {
@@ -71,24 +71,24 @@ fieldset > a > legend {
 
 }
 
-.btn.text-primary.border-primary.border-4.seeall {
+.btn.text-primary.border-primary.border-3.seeall {
     width: 107px;
 
 }
 
-.btn.text-success.border-success.border-4.seeall {
+.btn.text-success.border-success.border-3.seeall {
     width: 107px;
 
 }
 
-.btn.text-success.border-success.border-4:hover {
+.btn.text-success.border-success.border-3:hover {
     color: #FFF !important;
     background-color: #7CD69C;
     border-color: #7CD69C !important;
 
 }
 
-.btn.text-primary.border-4:hover {
+.btn.text-primary.border-3:hover {
     color: #FFF !important;
     background-color: #ff5663;
     border-color: #ff5663;

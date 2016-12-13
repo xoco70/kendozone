@@ -30,7 +30,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="head_create_tournament">
                 <a href="{{ URL::action('TournamentController@create') }}"
-                   class="navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}
+                   class="navbar-right btn border-primary text-primary btn-flat border-3">{{ trans('core.createTournament') }}
                 </a>
             </li>
             <li class="dropdown language-switch-desktop">
