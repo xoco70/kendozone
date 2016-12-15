@@ -62,7 +62,6 @@
             return $championship->id;
         })->toArray();
 
-
     ?>
 
     {!! Html::script('js/pages/footer/trees_show.js')!!}
