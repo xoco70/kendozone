@@ -1,4 +1,4 @@
-@foreach($tournament->championships as $championship)
+@foreach($tournamentWithTrees->championships as $championship)
 
     <div class="panel panel-flat">
         <div class="panel-body">
