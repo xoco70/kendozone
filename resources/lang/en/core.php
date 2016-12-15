@@ -297,4 +297,5 @@ return [
     'no_generated_tree' => 'Still no tree generated in this championship',
     'fight' => 'Fight|Fights',
     'document' => 'Document|Documents',
+    'print' => 'Print',
 ];

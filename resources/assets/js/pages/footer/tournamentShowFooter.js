@@ -1,40 +1,21 @@
 $(function () {
-
-
-    // $(".accordion-sortable").sortable({
-    //     connectWith: '.accordion-sortable',
-    //     items: '.panel',
-    //     helper: 'original',
-    //     cursor: 'move',
-    //     handle: '[data-action=move]',
-    //     revert: 100,
-    //     containment: '.content',
-    //     forceHelperSize: true,
-    //     placeholder: 'sortable-placeholder',
-    //     forcePlaceholderSize: true,
-    //     tolerance: 'pointer',
-    //     start: function (e, ui) {
-    //         ui.placeholder.height(ui.item.outerHeight());
-    //     }
-    // });
-
     function initialize() {
 
         // Set coordinates
-        var myLatlng = new google.maps.LatLng(latitude, longitude);
+        let myLatlng = new google.maps.LatLng(latitude, longitude);
 
         // Options
-        var mapOptions = {
+        let mapOptions = {
             zoom: 5,
             center: myLatlng
         };
 
         // Apply options
-        var map = new google.maps.Map($('.map-basic')[0], mapOptions);
+        let map = new google.maps.Map($('.map-basic')[0], mapOptions);
 
 
         // Add marker
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
             position: myLatlng,
             map: map
         });

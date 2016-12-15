@@ -298,4 +298,5 @@ return [
     'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
     'fight' => 'Combate|Combates',
     'document' => 'Documento|Documentos',
+    'print' => 'Imprimir',
 ];

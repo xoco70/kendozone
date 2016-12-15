@@ -88,7 +88,6 @@ elixir(function (mix) {
 
     mix.scripts([
         'plugins/ui/nicescroll.min.js',
-        'sidebar_detached_sticky_custom.js',
         'plugins/forms/inputs/duallistbox.min.js',
         'plugins/pickers/location/location.js',
         'plugins/notifications/sweet_alert.min.js',
@@ -129,6 +128,11 @@ elixir(function (mix) {
         'components/sweetalert/dist/sweetalert.min.js',
         'components/jquery-bracket/dist/jquery.bracket.min.js',
     ], 'public/js/pages/footer/trees.js');
+
+    mix.scripts([
+        'components/jquery-bracket/dist/jquery.bracket.min.js',
+    ], 'public/js/pages/footer/trees_show.js');
+
 
     mix.styles([
         '../js/components/sweetalert/dist/sweetalert.css',

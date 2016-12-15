@@ -10,6 +10,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Http\Requests\VenueRequest;
 use App\Tournament;
 use App\TournamentLevel;
+use App\Tree;
 use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -86,12 +87,18 @@ class TournamentController extends Controller
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
-    public function show(Tournament $tournament)
+    public function show(Request $request, Tournament $tournament)
     {
         $teams = "";
         $grades = Grade::pluck('name', 'id');
         $venue = $tournament->venue ?? new Venue;
-        return view('tournaments.show', compact('tournament', 'grades', 'teams','venue'));
+
+        // Competitors
+        $tournamentWithTrees = Tree::getTournament($request);
+        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
+        $countries = Country::all();
+
+        return view('tournaments.show', compact('tournament', 'tournamentWithTrees', 'grades', 'teams', 'venue', 'countries'));
     }
 
     /**

@@ -130,11 +130,11 @@
 
 $('.generate').on('click', function (e) {
             e.preventDefault();
-            var form = $(this).parents('form:first');
+            let form = $(this).parents('form:first');
             inputData = form.serialize();
-            var count = form.data('gen');
+            let count = form.data('gen');
             if (count != 0) {
-                var form = $(this).parents('form');
+                let form = $(this).parents('form');
                 swal({
                         title: "{{ trans('msg.are_you_sure') }}",
                         text: "{{ trans('msg.this_will_delete_previous_tree') }}",
