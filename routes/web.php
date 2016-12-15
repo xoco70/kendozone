@@ -18,8 +18,6 @@ Route::get('/logout', 'Auth\LoginController@logout');
 //Auth::loginUsingId(6); // 6 Admin, 5 User
 
 
-
-
 Route::post('auth/invite', 'Auth\RegisterController@registerFromInvite');
 
 
@@ -49,10 +47,7 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-Route::get('/tournaments/{tournament}', 'TournamentController@show');
-
-
-
+Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
@@ -61,7 +56,16 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
         Route::get('/tournaments/deleted', 'TournamentController@getDeleted');
-        Route::resource('tournaments', 'TournamentController', ['names' => ['index' => 'tournaments.index',  'create' => 'tournaments.create', 'edit' => 'tournaments.edit', 'store' => 'tournaments.store', 'update' => 'tournaments.update']]);
+        Route::resource('tournaments', 'TournamentController',
+            ['names' => ['index' => 'tournaments.index',
+                'show' => 'tournaments.show',
+                'create' => 'tournaments.create',
+                'edit' => 'tournaments.edit',
+                'store' => 'tournaments.store',
+                'update' => 'tournaments.update'
+        ],
+            'except' => ['show'],
+        ]);
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
 
@@ -113,7 +117,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::post('tournaments/{tournamentSlug}/trees/', 'TreeController@store')->name('tree.storeAll');
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('tree.store');;
 
-        Route::get('workingonit', function(){
+        Route::get('workingonit', function () {
             return view('workingonit');
         })->name('workingonit');
 
@@ -131,20 +135,19 @@ Route::get('/auth/callback', function (Request $request) {
         ],
     ]);
 
-    return json_decode((string) $response->getBody(), true);
+    return json_decode((string)$response->getBody(), true);
 });
-
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/auth/oauth', function(){
+Route::get('/auth/oauth', function () {
     return view('auth.oauth');
 });
 
-Route::get('/oauth_test', function(){
+Route::get('/oauth_test', function () {
     return view('oauth_ajax_test');
 });
 
@@ -161,5 +164,5 @@ Route::get('/callback', function (Request $request) {
         ],
     ]);
 
-    return json_decode((string) $response->getBody(), true);
+    return json_decode((string)$response->getBody(), true);
 });

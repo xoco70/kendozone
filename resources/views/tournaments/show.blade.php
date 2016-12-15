@@ -1,11 +1,8 @@
-@extends('layouts.dashboard')
+
+@extends('layouts.guest_banner')
 @section('styles')
     {!! Html::style('js/jquery.timepicker.css')!!}
     {!! Html::style('css/pages/jquery_trees.css')!!}
-@stop
-@section('breadcrumbs')
-    {!! Breadcrumbs::render('tournaments.edit',$tournament) !!}
-
 @stop
 @section('content')
     <?php
@@ -39,6 +36,7 @@
         </div>
 
     </div>
+
     <!-- Detached content -->
 
     <?php

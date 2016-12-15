@@ -1,4 +1,4 @@
-<?php $currency = Auth::user()->country->currency_code; ?>
+<?php Auth::check() ? $currency = Auth::user()->country->currency_code : $currency = "" ?>
 
 <div class="tab-pane" id="category">
     <div class="row">

@@ -366,3 +366,17 @@ li.side_avatar:last-child {
 
     display: none;
 }
+.banner{
+    width:100%;
+}
+.banner-switcher{
+    position: absolute;
+    right: 0px;
+}
+.top-banner-guest{
+    vertical-align: middle;
+    position: relative;
+    top: -42px;
+    opacity: 0.5;
+
+}

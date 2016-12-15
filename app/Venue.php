@@ -27,8 +27,8 @@ class Venue extends Model
 
 
     public function setDefaultLocation($latitude, $longitude){
-        $userLat = Auth::getUser()->latitude;
-        $userLng = Auth::getUser()->longitude;
+        $userLat = Auth::check() ? Auth::user()->latitude : "";
+        $userLng = Auth::check() ? Auth::user()->longitude : "" ;
 
 
         if (!isNullOrEmptyString($longitude) && !isNullOrEmptyString($longitude)) {
