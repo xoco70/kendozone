@@ -33,6 +33,14 @@ elixir(function (mix) {
         'protip.css',
         'nunito.css'
     ], 'public/css/app.css');
+
+    mix.scripts([
+        'plugins/loaders/pace.min.js',
+        'core/libraries/jquery.min.js', // 2.1.4
+        'core/libraries/bootstrap.min.js', // v3.3.6
+        'core/app.js',
+    ], 'public/js/guest_app.js');
+
     mix.scripts([
         'plugins/loaders/pace.min.js',
         'core/libraries/jquery.min.js', // 2.1.4
