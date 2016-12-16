@@ -47,7 +47,7 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
+//Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
 
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
@@ -58,13 +58,12 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('/tournaments/deleted', 'TournamentController@getDeleted');
         Route::resource('tournaments', 'TournamentController',
             ['names' => ['index' => 'tournaments.index',
-                'show' => 'tournaments.show',
                 'create' => 'tournaments.create',
+                'show' => 'tournaments.show',
                 'edit' => 'tournaments.edit',
                 'store' => 'tournaments.store',
                 'update' => 'tournaments.update'
         ],
-            'except' => ['show'],
         ]);
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);

@@ -28,6 +28,8 @@ class TournamentController extends Controller
     public function __construct()
     {
         $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
+        $this->middleware('auth')->except('show');
+
 
     }
 
