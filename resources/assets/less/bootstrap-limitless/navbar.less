@@ -16,9 +16,10 @@
 // Base
 .navbar {
     margin-bottom: 0;
-    border-width: 1px 0;
+    border-width: 0;
     padding-left: 0;
     padding-right: 0;
+    min-height: 60px;
 
     @media (min-width: @grid-float-breakpoint) {
         padding-left: @navbar-padding-horizontal;
@@ -285,11 +286,12 @@
 // -------------------------
 
 .navbar-brand {
-
+    padding: 0;
     // Logo, change according to your logo size
     > img {
-        margin-top: 2px;
-        height: 16px;
+        /*margin-top: 2px;*/
+        width: 56px;
+        height: 60px
     }
 }
 

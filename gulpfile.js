@@ -22,13 +22,17 @@ elixir(function (mix) {
     mix.browserify('vue/pages/loadingButton.js');
 
 
+    mix.less([
+        '_main_full/bootstrap.less',
+        '_main_full/components.less',
+        '_main_full/colors.less',
+        '_main_full/core.less'
+    ],'resources/assets/css/less.css');
+
     // General Styles for app
     mix.styles([
         //'icons/icomoon/styles.css',
-        'bootstrap.css',
-        'components.css',
-        'colors.css',
-        'core.css',
+        'less.css',
         'custom.css',
         'protip.css',
         'nunito.css'

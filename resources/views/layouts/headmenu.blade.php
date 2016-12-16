@@ -28,15 +28,15 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="head_create_tournament">
+            <li class="head_create_tournament mr-20">
                 <a href="{{ URL::action('TournamentController@create') }}"
-                   class="navbar-right btn border-primary text-primary btn-flat border-3">{{ trans('core.createTournament') }}
+                   class="navbar-right btn border-primary text-primary btn-flat border-3 p-10 mt-7">{{ trans('core.createTournament') }}
                 </a>
             </li>
             <li class="dropdown language-switch-desktop">
                 @include('layouts.language')
             </li>
-            <li class="dropdown dropdown-user">
+            <li class="dropdown dropdown-user mt-7">
                 <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                     @include('layouts.avatar')
                     <span>{!! Auth::getUser()->name !!}</span>
@@ -49,7 +49,7 @@
                         <li {{ (Request::is('tournaments/deleted') ? 'class=active' : '') }}>
                             <a class="protip" data-pt-title="{{ trans('core.tournaments_deleted') }}"
                                href="{!! URL::action('TournamentController@getDeleted') !!}"><i
-                                        class="icon-trash-alt position-left sidemenu"></i><span>{{ trans('core.tournaments_deleted') }}</span>
+                                        class="icon-trash-alt  sidemenu"></i><span>{{ trans('core.tournaments_deleted') }}</span>
                             </a>
                         </li>
                     @endif

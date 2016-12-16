@@ -1,3 +1,8 @@
+.sidebar-content > .anchor-top > ul > li > a > i.sidemenu{
+    font-size: 24px;
+}
+
+
 /* col-xs */
 @media (max-width: 950px) {
     .breadcrumb, ul.nav.navbar-nav.breadcrumbs, .protip-container {
@@ -195,7 +200,7 @@ fieldset > a > legend {
 }
 
 .language-switch-desktop {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .language-switch-mobile {

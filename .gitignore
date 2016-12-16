@@ -21,3 +21,5 @@ public/js
 public/css
 tests/_output/*
 tests/_support/_generated/
+resources/assets/css/less.css
+resources/assets/css/less.css.map
