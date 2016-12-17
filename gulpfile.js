@@ -29,14 +29,26 @@ elixir(function (mix) {
         '_main_full/core.less'
     ],'resources/assets/css/less.css');
 
+
     // General Styles for app
     mix.styles([
-        //'icons/icomoon/styles.css',
         'less.css',
         'custom.css',
         'protip.css',
         'nunito.css'
     ], 'public/css/app.css');
+
+    // General Styles for app
+    // mix.styles([
+    //     //'icons/icomoon/styles.css',
+    //     'bootstrap.css',
+    //     'components.css',
+    //     'colors.css',
+    //     'core.css',
+    //     'custom.css',
+    //     'protip.css',
+    //     'nunito.css'
+    // ], 'public/css/app.css');
 
     mix.scripts([
         'plugins/loaders/pace.min.js',
