@@ -206,7 +206,9 @@ return [
 
     // Dashboard
     'welcome' => '¡Welcome!',
-    'welcome_text' => 'Almost there! You have 2 way to start enjoying the app',
+    'welcome_text1' => 'Almost there! You still need a few steps to enjoy the App',
+    'welcome_text2' => 'Almost there! You have 2 way to start enjoying the app',
+
     'still_no_tournament' => 'Still not registered in any tournaments',
     'still_no_open_tournament' => 'Still no open tournaments in your country',
     'create_new_tournament' => 'Create new Tournament',

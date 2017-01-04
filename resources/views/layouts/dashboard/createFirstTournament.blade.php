@@ -1,7 +1,11 @@
 <br/><br/>
 <div class="row text-center">
     <h1 class="no-margin text-semibold">{{ trans('core.welcome') }}</h1>
-    <p class="text-muted text-size-large">{{ trans('core.welcome_text') }}</p>
+    @if ($openTournaments->count() == 0)
+        <p class="text-muted text-size-large">{{ trans('core.welcome_text1') }}</p>
+    @else
+        <p class="text-muted text-size-large">{{ trans('core.welcome_text2') }}</p>
+    @endif
     <br/>
 </div>
 

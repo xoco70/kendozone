@@ -31,7 +31,7 @@ return [
     'thanks' => ' ¡Gracias!',
     'or' => 'o',
     'export_excel' => 'Exportar a Excel',
-    'letsgo' => 'Crear!',
+    'letsgo' => 'Crear',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -206,7 +206,10 @@ return [
 
     // Dashboard
     'welcome' => '¡Bienvenido!',
-    'welcome_text' => 'Tienes 2 formas de empezar para disfrutar del sistema',
+    'welcome_text1' => 'Aún te faltan unos pasos para disfrutar del sistema',
+    'welcome_text2' => 'Tienes 2 formas de empezar para disfrutar del sistema',
+
+
     'still_no_tournament' => 'Aún no estas registrado en ningún torneo',
     'still_no_open_tournament' => 'Aún no hay torneo abiertos en tu país',
     'create_new_tournament' => 'Crea un nuevo torneo',
