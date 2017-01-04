@@ -1,4 +1,4 @@
-<div class="panel panel-body">
+<div class="panel panel-body h-150">
     <fieldset title="{{trans('core.open_tournaments_in_your_country')}}">
         <legend class="text-semibold">{{ trans('core.open_tournaments_in_your_country') }}</legend>
     </fieldset>

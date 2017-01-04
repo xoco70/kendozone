@@ -31,6 +31,7 @@ return [
     'thanks' => ' Thanks',
     'or' => 'or',
     'export_excel' => 'Export to Excel',
+    'letsgo' => 'Let\'s do it',
 
     //Tournament
     'tournament' => 'Tournament|Tournaments',
@@ -205,7 +206,7 @@ return [
 
     // Dashboard
     'welcome' => '¡Welcome!',
-    'welcome_text' => 'Almost there! You still need a few steps to enjoy the App',
+    'welcome_text' => 'Almost there! You have 2 way to start enjoying the app',
     'still_no_tournament' => 'Still not registered in any tournaments',
     'still_no_open_tournament' => 'Still no open tournaments in your country',
     'create_new_tournament' => 'Create new Tournament',

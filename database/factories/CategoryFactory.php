@@ -13,6 +13,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->randomElement($name),
+        'alias' => $faker->word,
         'gender' => $faker->randomElement($gender),
         'isTeam' => $faker->numberBetween(0,1),
         'ageCategory' => $faker->numberBetween(0, 5),
