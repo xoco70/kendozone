@@ -67,10 +67,6 @@ fieldset > a > legend {
 
 }
 
-.sidebar-main > .sidebar-content > .sidebar-category > .category-content > ul.navigation > li {
-    /*padding-bottom: 20px;*/
-}
-
 .category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-title > a > .panel-heading > h6 {
     padding-top: 8px;
 
