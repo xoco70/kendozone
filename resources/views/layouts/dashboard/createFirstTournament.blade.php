@@ -10,7 +10,7 @@
         <div class="col-lg-3 col-lg-offset-2">
             @include('layouts.dashboard.openInvites')
         </div>
-        <div class="col-lg-2 valign-parent h-150">
+        <div class="col-lg-2 valign-parent h-200">
             <div class="valign-child"> {{ trans('core.or') }} </div>
         </div>
         <div class="col-lg-3">
