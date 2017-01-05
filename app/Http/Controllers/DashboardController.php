@@ -31,9 +31,9 @@ class DashboardController extends Controller
                 $query->where('country_id', Auth::user()->country_id);
             })
             ->where('type', config('constants.OPEN_TOURNAMENT'))
-            ->where('dateFin' > Carbon::today()->toDateString())
+            ->where('dateFin', '>', Carbon::today()->toDateString())
             ->get();
-        
+
         return view('/dashboard',compact('openTournaments'));
 
     }

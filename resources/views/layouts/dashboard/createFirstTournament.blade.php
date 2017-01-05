@@ -9,7 +9,7 @@
     <br/>
 </div>
 
-@if ($openTournaments->count() == 0)
+@if ($openTournaments->count() != 0)
     <div class="row text-center">
         <div class="col-lg-3 col-lg-offset-2">
             @include('layouts.dashboard.openInvites')
