@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Tournament;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
@@ -30,8 +31,9 @@ class DashboardController extends Controller
                 $query->where('country_id', Auth::user()->country_id);
             })
             ->where('type', config('constants.OPEN_TOURNAMENT'))
+            ->where('dateFin' > Carbon::today()->toDateString())
             ->get();
-
+        
         return view('/dashboard',compact('openTournaments'));
 
     }

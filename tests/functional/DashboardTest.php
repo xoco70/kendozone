@@ -41,7 +41,7 @@ class DashboardTest extends TestCase
 
         // Nothing has been created, default dash
         $this->visit('/')
-            ->see(trans('core.welcome_text'))
+//            ->see(trans('core.welcome_text'))
             ->see(trans('core.create_new_tournament'))
             ->dontSee(trans('core.congigure_categories'));
 
