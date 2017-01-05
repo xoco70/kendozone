@@ -229,19 +229,6 @@ fieldset > a > legend {
     margin-top: -20px;
 }
 
-.well.dash {
-    border: 0;
-    border-bottom: 4px solid;
-    border-radius: 0
-}
-
-.well.error > a {
-    color: black;
-}
-
-.well.error > a:hover {
-    color: grey;
-}
 
 label[for=bootstrap-duallistbox-nonselected-list_category] {
     margin-bottom: 0;
@@ -386,4 +373,14 @@ li.side_avatar:last-child {
 }
 .valign-child{
     margin: auto;
+}
+
+.well.dash.well-lg.mb-15.success{
+    border-bottom: #7CD69C solid;
+    color:#7CD69C;
+}
+
+.well.dash.well-lg.error{
+    border-bottom: #ff5663 solid;
+    color:#ff5663;
 }
