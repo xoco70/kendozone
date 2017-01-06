@@ -28,24 +28,21 @@ $i = 0;
 
 
                         @foreach($championships as $championship)
-                            @if ($i % 4 == 0)
-                                <div class="row">
-                                    @endif
-                                    <div class="col-md-3">
-                                        <p>
-                                            {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName($grades)) !!}
-                                            <br/>
-                                            {!!   Form::checkbox('cat['.$championship->id.']',
-                                                $championship->id,
-                                                $championship->users->where('users.id',Auth::user()->id)->count(),
-                                                 ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
-                                        </p>
-                                    </div>
-                                    @if ($i % 3 == 0 && $i != 0)
+
+                            <div class="row mb-20">
+                                <div class="col-md-8">
+
+                                    {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName($grades)) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    {!!   Form::checkbox('cat['.$championship->id.']',
+                                        $championship->id,
+                                        $championship->users->where('users.id',Auth::user()->id)->count(),
+                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+
                                 </div>
 
-                            @endif
-                            <?php $i++; ?>
+                            </div>
                         @endforeach
 
                     </div>
