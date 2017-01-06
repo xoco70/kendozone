@@ -25,7 +25,7 @@ Route::get('/tournaments/{tournamentSlug}/invite/{token}', 'ChampionshipControll
 Route::post('tournaments/{tournament}/invite/{invite}/categories', 'ChampionshipController@store');
 
 Route::get('lang/{lang}', 'LanguageController@update');
-Route::get('tournaments/{tournament}/register', 'TournamentController@register');
+Route::get('tournaments/{tournament}/register', 'TournamentController@register')->name('register.category');
 
 Route::group(['middleware' => ['guest']],
     function () {
