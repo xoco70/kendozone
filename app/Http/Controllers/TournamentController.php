@@ -220,12 +220,11 @@ class TournamentController extends Controller
 
     /**
      * Called when a user want to register an open tournament
-     * @param Request $request
      * @param Tournament $tournament
      * @return mixed
      * @throws InvitationNeededException
      */
-    public function register(Request $request, Tournament $tournament)
+    public function register(Tournament $tournament)
     {
 
         if (!Auth::check()) {
