@@ -1,8 +1,8 @@
-<a class="dropdown-toggle pl-20 pr-20 " data-toggle="dropdown" aria-expanded="false">
+<a class="dropdown-toggle  " data-toggle="dropdown" aria-expanded="false">
     @if (App::getLocale() =='es')
-        <img src="/images/flags/MX.png" class="position-left" alt="">
+        <img src="/images/flags/MX.png"  alt="">
     @else
-        <img src="/images/flags/GB.png" class="position-left" alt="">
+        <img src="/images/flags/GB.png" alt="">
     @endif
 </a>
 <ul class="dropdown-menu">

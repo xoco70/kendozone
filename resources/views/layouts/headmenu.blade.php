@@ -36,7 +36,7 @@
             <li class="dropdown language-switch-desktop">
                 @include('layouts.language')
             </li>
-            <li class="dropdown dropdown-user mt-7">
+            <li class="dropdown dropdown-user mt-5">
                 <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                     @include('layouts.avatar')
                     <span>{!! Auth::getUser()->name !!}</span>
