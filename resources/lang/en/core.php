@@ -302,4 +302,9 @@ return [
     'fight' => 'Fight|Fights',
     'document' => 'Document|Documents',
     'print' => 'Print',
+
+    // Share
+
+    'register_in_tournament' => 'Register in tournament',
+
 ];

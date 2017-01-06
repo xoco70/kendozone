@@ -304,4 +304,8 @@ return [
     'fight' => 'Combate|Combates',
     'document' => 'Documento|Documentos',
         'print' => 'Imprimir',
+
+    // Share
+
+    'register_in_tournament' => 'Registrate en el torneo',
 ];

@@ -30,7 +30,7 @@ class RedirectCrawlers
             switch (Route::getCurrentRoute()->getPath()) {
                 case "tournaments/{tournament}/register":
                     $tournament = Tournament::where('slug', $request->tournament)->first();
-                    
+
                     return view('public/register', compact('tournament'));
             }
         }
