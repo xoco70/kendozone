@@ -495,6 +495,10 @@
 //== Form states and alerts
 //
 //## Define colors for form feedback states and, by default, alerts.
+@state-nav-text:             #fff;
+@state-nav-bg:               #273c4a;
+@state-nav-border:           darken(spin(@state-nav-bg, -10), 5%);
+
 
 @state-success-text:             #3c763d;
 @state-success-bg:               #dff0d8;
@@ -719,6 +723,11 @@
 @panel-primary-text:          #fff;
 @panel-primary-border:        @brand-primary;
 @panel-primary-heading-bg:    @brand-primary;
+
+@panel-nav-text:              @state-nav-text;
+@panel-nav-border:            @state-nav-border;
+@panel-nav-heading-bg:        @state-nav-bg;
+
 
 @panel-success-text:          @state-success-text;
 @panel-success-border:        @state-success-border;

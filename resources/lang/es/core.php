@@ -31,7 +31,7 @@ return [
     'thanks' => ' ¡Gracias!',
     'or' => 'o',
     'export_excel' => 'Exportar a Excel',
-    'letsgo' => 'Crear',
+    'letsgo' => '¡Comenzar!',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -207,7 +207,7 @@ return [
     // Dashboard
     'welcome' => '¡Bienvenido!',
     'welcome_text1' => 'Aún te faltan unos pasos para disfrutar del sistema',
-    'welcome_text2' => 'Tienes 2 formas de empezar para disfrutar del sistema',
+    'welcome_text2' => 'Elige tu forma de usar Kendozone',
 
 
     'still_no_tournament' => 'Aún no estas registrado en ningún torneo',
@@ -220,6 +220,7 @@ return [
     'soon' => 'Próximamente',
     'configured_full' => 'configurada',
     'see_all' => 'Ver Todos',
+    'see_more' => 'Ver más',
     'no_tournament_created_yet' => 'Aún no has creado ningún torneo',
     'no_tournament_deleted_yet' => 'Aún no has borrado ningún torneo',
 

@@ -15,7 +15,15 @@
             @include('layouts.dashboard.openInvites')
         </div>
         <div class="col-lg-2 valign-parent h-200">
-            <div class="valign-child"> {{ trans('core.or') }} </div>
+
+            <div class="valign-child">
+                <div class="wrapper">
+                    <div class="line"></div>
+                    <div class="wordwrapper">
+                        <div class="word">{{ trans('core.or') }} </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3">
             @include('layouts.dashboard.createNewTournament')

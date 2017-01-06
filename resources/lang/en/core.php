@@ -207,7 +207,7 @@ return [
     // Dashboard
     'welcome' => '¡Welcome!',
     'welcome_text1' => 'Almost there! You still need a few steps to enjoy the App',
-    'welcome_text2' => 'Almost there! You have 2 way to start enjoying the app',
+    'welcome_text2' => 'What do you want to do?',
 
     'still_no_tournament' => 'Still not registered in any tournaments',
     'still_no_open_tournament' => 'Still no open tournaments in your country',
@@ -218,6 +218,7 @@ return [
     'soon' => 'Soon',
     'configured_full' => 'configured',
     'see_all' => 'See all',
+    'see_more' => 'See more',
     'no_tournament_created_yet' => 'You have not registered to any tournament yet',
     'no_tournament_deleted_yet' => 'You have not deleted any tournament yet',
 
