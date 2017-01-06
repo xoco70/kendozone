@@ -3,7 +3,7 @@
         <h6 class="panel-title">{{ trans('core.open_tournaments_in_your_country') }}</h6>
     </div>
 
-    <div class="panel-body h-250">
+    <div class="panel-body h-300">
         @if ($openTournaments->count() == 0)
             <div align="center">{{ trans('core.still_no_open_tournament') }}</div>
         @else

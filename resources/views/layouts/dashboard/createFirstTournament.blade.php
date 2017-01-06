@@ -9,31 +9,23 @@
     <br/>
 </div>
 
-@if ($openTournaments->count() != 0)
-    <div class="row text-center">
-        <div class="col-lg-3 col-lg-offset-2">
-            @include('layouts.dashboard.openInvites')
-        </div>
-        <div class="col-lg-2 valign-parent h-200">
 
-            <div class="valign-child">
-                <div class="wrapper">
-                    <div class="line"></div>
-                    <div class="wordwrapper">
-                        <div class="word">{{ trans('core.or') }} </div>
-                    </div>
+<div class="row text-center">
+    <div class="col-sm-4 col-sm-offset-1">
+        @include('layouts.dashboard.openInvites')
+    </div>
+    <div class="col-sm-2 valign-parent h-200">
+
+        <div class="valign-child">
+            <div class="wrapper">
+                <div class="line"></div>
+                <div class="wordwrapper">
+                    <div class="word">{{ trans('core.or') }} </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @include('layouts.dashboard.createNewTournament')
-        </div>
     </div>
-@else
-    <div align="center" class="mt-20 pt-20">
-
-        <a href="{!! URL::action('TournamentController@create') !!}" type="button"
-           class="btn btn-primary text-uppercase p-10 ">{{ trans('core.create_new_tournament') }}
-        </a>
+    <div class="col-sm-4">
+        @include('layouts.dashboard.createNewTournament')
     </div>
-@endif
+</div>
