@@ -28,7 +28,7 @@ class TournamentController extends Controller
     public function __construct()
     {
         $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
-        $this->middleware('auth')->except('show', 'register');
+        $this->middleware('auth')->except('show','register');
 
 
     }
@@ -220,11 +220,12 @@ class TournamentController extends Controller
 
     /**
      * Called when a user want to register an open tournament
+     * @param Request $request
      * @param Tournament $tournament
      * @return mixed
      * @throws InvitationNeededException
      */
-    public function register(Tournament $tournament)
+    public function register(Request $request, Tournament $tournament)
     {
 
         if (!Auth::check()) {

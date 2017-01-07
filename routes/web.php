@@ -1,9 +1,5 @@
 <?php
 use Illuminate\Http\Request;
-
-Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,8 +11,14 @@ Route::get('/logout', 'Auth\LoginController@logout');
 |
 */
 
-//Auth::loginUsingId(6); // 6 Admin, 5 User
+Auth::routes();
 
+//Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
+// Outside to except show in controller
+Route::resource('tournaments', 'TournamentController');
+Route::get('/tournaments/deleted', 'TournamentController@getDeleted');
+
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::post('auth/invite', 'Auth\RegisterController@registerFromInvite');
 
@@ -47,24 +49,13 @@ Route::group(['middleware' => ['guest']],
     });
 
 
-//Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
-
 Route::group(['middleware' => ['auth']], // 'throttle:100,1'
     function () {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('federations', 'FederationController', ['names' => ['index' => 'federations.index', 'create' => 'federations.create', 'edit' => 'federations.edit', 'store' => 'federations.store', 'update' => 'federations.update']]);
         Route::resource('associations', 'AssociationController');
         Route::resource('clubs', 'ClubController');
-        Route::get('/tournaments/deleted', 'TournamentController@getDeleted');
-        Route::resource('tournaments', 'TournamentController',
-            ['names' => ['index' => 'tournaments.index',
-                'create' => 'tournaments.create',
-                'show' => 'tournaments.show',
-                'edit' => 'tournaments.edit',
-                'store' => 'tournaments.store',
-                'update' => 'tournaments.update'
-        ],
-        ]);
+
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
 
@@ -165,3 +156,6 @@ Route::get('/callback', function (Request $request) {
 
     return json_decode((string)$response->getBody(), true);
 });
+
+
+Route::get('/test', 'TestController@index');
