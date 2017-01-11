@@ -41,11 +41,12 @@ class TeamController extends Controller
      *
      * @param Tournament $tournament
      * @return View
+     * @throws AuthorizationException
      */
     public function create(Tournament $tournament)
     {
         $team = new Team;
-        if (Auth::user()->cannot('create', $team)) {
+        if (Auth::user()->cannot('create', $tournament)) {
             throw new AuthorizationException();
         }
 
