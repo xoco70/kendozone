@@ -15,8 +15,9 @@ use Illuminate\Http\Request;
 Auth::routes();
 
 // Outside to except show in controller
-Route::resource('tournaments', 'TournamentController');
 Route::get('/tournaments/deleted', 'TournamentController@getDeleted')->name('getDeleted'); // Already has auth middleware
+Route::resource('tournaments', 'TournamentController');
+
 
 Route::get('/logout', 'Auth\LoginController@logout');
 

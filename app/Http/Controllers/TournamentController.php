@@ -247,7 +247,6 @@ class TournamentController extends Controller
      */
     public function getDeleted()
     {
-        dd("hola");
         $currentModelName = trans_choice('core.tournament', 2);
 
         if (Auth::user()->isSuperAdmin()) {
