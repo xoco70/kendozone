@@ -3,12 +3,11 @@
 namespace App;
 
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use GeoIP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 
 /**
@@ -137,7 +136,7 @@ class Tournament extends Model
     // Or         $tournament->categories()->sync([1, 2, 3]);
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'championship')
+        return $this->belongsToMany(Category::class, 'championship')
             ->withPivot('id')
             ->withTimestamps();
     }
@@ -334,8 +333,12 @@ class Tournament extends Model
      */
     public function buildCategoryList()
     {
-        $cts = Championship::with('category')->where('tournament_id', $this->id)->get();
-
+        $cts = Championship::with('category','settings')
+            ->whereHas('settings', function($query){
+                return $query->whereNotNull('teamSize');
+            })
+            ->where('tournament_id', $this->id)
+            ->get();
         $array = [];
         foreach ($cts as $ct) {
             $array[$ct->id] = $ct->category->name;
