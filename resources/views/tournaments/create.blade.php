@@ -32,30 +32,34 @@ $day = $now->day;
 {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
 <script>
-        var ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
-        var ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
-        var lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
+        let ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
+        let ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
+        let lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
 
-        var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
+        let dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false,
             infoTextEmpty: '',
             infoText: ''
         });
-        var dualListIds = [];
+        $('.listbox-filter-disabled').on('change', function(){
+            disableSubmit();
+        });
+        let dualListIds = [];
 
 
-        var minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
+        let minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
         $(function () {
-            var $input = $('.dateFin').pickadate({
+
+            let $input = $('.dateFin').pickadate({
                 min: minDay,
                 format: 'yyyy-mm-dd',
                 today: '',
                 clear: '',
                 close: ''
             });
-            var pickerFin = $input.pickadate('picker');
+            let pickerFin = $input.pickadate('picker');
 
-            var $inputIni =$('.dateIni').pickadate({
+            let $inputIni =$('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
                 format: 'yyyy-mm-dd',
                 today: '',
@@ -67,7 +71,7 @@ $day = $now->day;
                         pickerFin.set('min', this.get('select'));
                 }
             });
-            var pickerIni = $inputIni.pickadate('picker');
+            let pickerIni = $inputIni.pickadate('picker');
 
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
@@ -79,6 +83,8 @@ $day = $now->day;
             $('#create_category_link').bind('click', false);
 
             $('#c1').on('click', function () {
+                $('.btn-success').prop('disabled', false);
+
                 $('select[name="category[]_helper1"]').prop('disabled', true);
                 $('select[name="category[]_helper2"]').prop('disabled', true);
                 $('#create_category_link').bind('click', false);
@@ -90,6 +96,8 @@ $day = $now->day;
             });
 
             $('#c2').on('click', function () {
+                disableSubmit();
+                $('.btn-success').prop('disabled', true);
                 $('select[name="category[]_helper1"]').prop('disabled', false);
                 $('select[name="category[]_helper2"]').prop('disabled', false);
                 $('#create_category_link').unbind('click', false);
@@ -112,7 +120,17 @@ $day = $now->day;
                     $('#categories_desc').text(lakc_categories);
                 }
             });
+
+
+
         });
 
+        function disableSubmit(){
+            if ($('select[name="category[]_helper2"]').text() == ""){
+                $('.btn-success').prop('disabled', true);
+            }else{
+                $('.btn-success').prop('disabled', false);
+            }
+        }
     </script>
 @stop
