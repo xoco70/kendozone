@@ -17,9 +17,9 @@ function flash($message = null)
 //    session()->flash($state, $message);
 }
 
-function isNullOrEmptyString($question)
+function isNullOrEmptyString($param)
 {
-    return (!isset($question) || trim($question) === '');
+    return (!isset($param) || $param == null || trim($param) === '');
 }
 
 function showNotification()

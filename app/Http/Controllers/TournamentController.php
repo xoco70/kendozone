@@ -28,9 +28,9 @@ class TournamentController extends Controller
     public function __construct()
     {
         $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
-        $this->middleware('auth')->except('show','register');
-
-
+        $this->middleware('auth')->except(
+            'show',
+            'register');
     }
 
     /**
@@ -127,6 +127,7 @@ class TournamentController extends Controller
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::pluck('name', 'id');
         $categories = new Collection();
+
         $venue = $tournament->venue ?? new Venue;
 
         foreach ($categories1 as $category) {
@@ -207,9 +208,9 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function restore($tournamentSlug)
-
     {
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
+
         if ($tournament->restore()) {
             return Response::json(['msg' => Lang::get('msg.tournament_restored_successful', ['name' => $tournament->name]), 'status' => 'success']);
         }
@@ -246,6 +247,7 @@ class TournamentController extends Controller
      */
     public function getDeleted()
     {
+        dd("hola");
         $currentModelName = trans_choice('core.tournament', 2);
 
         if (Auth::user()->isSuperAdmin()) {
@@ -259,6 +261,7 @@ class TournamentController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate(config('constants.PAGINATION'));
         }
+
         $title = trans('core.tournaments_deleted');
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }

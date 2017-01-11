@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 | and give it the controller to call when that URI is requested.
 |
 */
+//Auth::loginUsingId(2042); // 6 Admin, 5 User
 
 Auth::routes();
 
-//Route::get('tournaments/{tournament}', 'TournamentController@show')->name('tournaments.show');
 // Outside to except show in controller
 Route::resource('tournaments', 'TournamentController');
-Route::get('/tournaments/deleted', 'TournamentController@getDeleted');
+Route::get('/tournaments/deleted', 'TournamentController@getDeleted')->name('getDeleted'); // Already has auth middleware
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -156,6 +156,3 @@ Route::get('/callback', function (Request $request) {
 
     return json_decode((string)$response->getBody(), true);
 });
-
-
-Route::get('/test', 'TestController@index');

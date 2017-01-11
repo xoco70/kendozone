@@ -40,7 +40,7 @@
     <!-- Detached content -->
 
     <?php
-    $venue = $venue->setDefaultLocation($venue->latitude, $venue->longitude);
+    $venue = $venue->setDefaultLocation($tournament, $venue->latitude, $venue->longitude);
     ?>
     <!-- /content area -->
 

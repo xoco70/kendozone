@@ -58,7 +58,7 @@
                 </li>
                 <li class="side_avatar">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                        <img src="{!! Auth::getUser()->avatar ?? Avatar::create(Auth::getUser()->email)->toBase64() !!}"
+                        <img src="{!! Auth::user()->avatar ?? Avatar::create(Auth::user()->email)->toBase64() !!}"
                              alt="kendozone_avatar" class="side_avatar">
                     </a>
 

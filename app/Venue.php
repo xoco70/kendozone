@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Venue extends Model
 {
@@ -21,17 +20,21 @@ class Venue extends Model
         'longitude',
     ];
 
-    public function country(){
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
 
-    public function setDefaultLocation($latitude, $longitude){
-        $userLat = Auth::check() ? Auth::user()->latitude : "";
-        $userLng = Auth::check() ? Auth::user()->longitude : "" ;
+    public function setDefaultLocation($tournament, $latitude, $longitude)
+    {
+
+        $userLat = $tournament != null ? $tournament->owner->latitude : null;
+        $userLng = $tournament != null ? $tournament->owner->longitude : null;
 
 
-        if (!isNullOrEmptyString($longitude) && !isNullOrEmptyString($longitude)) {
+        if ($latitude != null && $longitude != null) {
+
             $this->latitude = $latitude;
             $this->longitude = $longitude;
 

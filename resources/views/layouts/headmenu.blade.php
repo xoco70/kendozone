@@ -39,10 +39,10 @@
             <li class="dropdown dropdown-user mt-5">
                 <a class="dropdown-toggle" data-toggle="dropdown" id="dropdown-user">
                     @include('layouts.avatar')
-                    <span>{!! Auth::getUser()->name !!}</span>
+                    <span>{!! Auth::user()->name !!}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{ URL::action('UserController@edit', Auth::getUser()->slug) }}  "><i
+                    <li><a href="{{ URL::action('UserController@edit', Auth::user()->slug) }}  "><i
                                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
 
                     @if (Auth::user()->isSuperAdmin() || Auth::user()->tournamentsDeleted()->count() > 0)

@@ -13,6 +13,7 @@
     @include("errors.list")
     <?php
     $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
+
     ?>
 
 
@@ -38,6 +39,7 @@
                         <div class="tab-pane active" id="general">
                             @include("layouts.tournament.general")
                         </div>
+
                         <div class="tab-pane" id="venue">
                             @include("layouts.tournament.venue")
                         </div>
@@ -69,7 +71,7 @@
     $month = $now->month - 1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
     $day = $now->day;
 
-    $venue = $venue->setDefaultLocation($venue->latitude, $venue->longitude);
+    $venue = $venue->setDefaultLocation($tournament, $venue->latitude, $venue->longitude);
 
     ?>
 

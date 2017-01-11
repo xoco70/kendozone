@@ -22,13 +22,14 @@
                     {!! Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
                     {!! Form::text('address', $venue->address, ['class' => 'form-control','id' =>'address']) !!}
                 </div>
+
                 <div class="form-group">
                     {!! Form::label('details', trans('core.details'),['class' => 'text-bold' ]) !!}
                     {!! Form::text('details', $venue->details, ['class' => 'form-control','id' =>'details']) !!}
                 </div>
 
-                {!! Form::hidden('latitude', $venue->setDefaultLocation($venue->latitude,$venue->longitude)->latitude, ['id' =>'latitude']) !!}
-                {!! Form::hidden('longitude',$venue->setDefaultLocation($venue->latitude,$venue->longitude)->longitude, ['id' =>'longitude']) !!}
+                {!! Form::hidden('latitude', $venue->setDefaultLocation($tournament, $venue->latitude,$venue->longitude)->latitude, ['id' =>'latitude']) !!}
+                {!! Form::hidden('longitude',$venue->setDefaultLocation($tournament, $venue->latitude,$venue->longitude)->longitude, ['id' =>'longitude']) !!}
 
                 {!! Form::hidden('city', $venue->city, ['id' =>'city']) !!}
                 {!! Form::hidden('CP', $venue->CP, ['id' =>'CP']) !!}

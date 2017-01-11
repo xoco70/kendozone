@@ -112,7 +112,7 @@
     <?php
     $venue = $venue ?? new App\Venue;
     $club = $club ?? new App\Club;
-    $venue = $venue->setDefaultLocation($club->latitude, $club->longitude);
+    $venue = $venue->setDefaultLocation(null, $club->latitude, $club->longitude);
     ?>
 
     <script>

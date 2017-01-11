@@ -87,22 +87,22 @@ class Tournament extends Model
 
     }
 
-    function addVenue()
-    {
-        $venue = new Venue;
-        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
-        $country = Country::where('name', '=', $location['country'])->first();
-        $venue->country_id = $country->id;
-        if (is_null($country)) {
-            $venue->latitude = 48.858222;
-            $venue->longitude = 2.2945;
-        } else {
-            $venue->latitude = $location['lat'];
-            $venue->longitude = $location['lon'];
-        }
-        $venue->save();
-        $this->venue_id = $venue->id;
-    }
+//    function addVenue()
+//    {
+//        $venue = new Venue;
+//        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
+//        $country = Country::where('name', '=', $location['country'])->first();
+//        $venue->country_id = $country->id;
+//        if (is_null($country)) {
+//            $venue->latitude = 48.858222;
+//            $venue->longitude = 2.2945;
+//        } else {
+//            $venue->latitude = $location['lat'];
+//            $venue->longitude = $location['lon'];
+//        }
+//        $venue->save();
+//        $this->venue_id = $venue->id;
+//    }
 
     /**
      * A tournament is owned by a user
@@ -188,7 +188,7 @@ class Tournament extends Model
 
     /**
      * Get all Invitations that belongs to a tournament
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function invites()
     {
