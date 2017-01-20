@@ -22,7 +22,7 @@
 
     </div>
 
-    <div class="navbar-collapse collapse" id="navbar-second-toggle">
+    <div class="navbar-collapse collapse" id="navbar-second-toggle"><a href="{!! URL::action('Auth\LoginController@showLoginForm') !!}"
         <ul class="nav navbar-nav breadcrumbs">
             @yield('breadcrumbs')
         </ul>
