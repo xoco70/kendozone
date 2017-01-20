@@ -78,7 +78,9 @@ fieldset > a > legend {
 
 .btn.text-success.border-success.border-3.seeall {
     width: 107px;
-
+}
+.btn.border-success.bg-success.border-3 {
+    width: 107px;
 }
 
 

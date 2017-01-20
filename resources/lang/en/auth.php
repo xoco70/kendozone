@@ -26,6 +26,7 @@ return [
     'title_login' => 'Login to Kendozone',
     'title_register' => 'Register to Kendozone',
     'register' => 'Register',
+    'registered' => 'Registered',
     'username_tip' => 'Username must only contains letters and numbers without spaces',
     'email_tip' => 'Please enter your email adress',
     'password' => 'Password',

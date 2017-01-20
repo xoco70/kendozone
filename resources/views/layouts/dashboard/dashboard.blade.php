@@ -12,11 +12,7 @@ $tournamentsParticipated = $tournamentsParticipatedQuery->get();
 
         </div>
         <div class="row ml-5 mr-10">
-            @if (sizeof($tournamentsParticipated) != 0)
-                @include('layouts.dashboard.tournamentsRegistered')
-            @else
-                @include('layouts.dashboard.openInvites')
-            @endif
+            @include('layouts.dashboard.openTournaments')
         </div>
     </div>
     <div class="col-lg-4 col-md-6">

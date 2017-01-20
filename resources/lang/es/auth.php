@@ -24,6 +24,7 @@ return [
     'title_login' => 'Conéctate a Kendozone',
     'title_register' => 'Regístrate en Kendozone',
     'register' => 'Registro',
+    'registered' => 'Registrado',
     'username_tip' => 'El nombre de usuario sólo puede contener letras y números sin espacios',
     'email_tip' => 'Por favor ingresa tu email',
     'password' => 'Contraseña',

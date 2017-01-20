@@ -489,6 +489,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $users;
 
     }
+    public function isRegisteredTo(Tournament $tournament){
+        $championships = $tournament->championships;
+        $ids = $championships->map(function ($item, $key) {
+            return $item->id;
+        })->toArray();
 
+        $isRegistered = Competitor::where('user_id',$this->id)
+            ->whereIn('championship_id',$ids)
+            ->get();
+
+        return sizeof($isRegistered)>0;
+    }
 
 }

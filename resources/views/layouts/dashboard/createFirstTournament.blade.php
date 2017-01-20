@@ -12,7 +12,7 @@
 
 <div class="row text-center">
     <div class="col-sm-4 col-sm-offset-1">
-        @include('layouts.dashboard.openInvites')
+        @include('layouts.dashboard.openTournaments')
     </div>
     <div class="col-sm-2 valign-parent h-200">
 
