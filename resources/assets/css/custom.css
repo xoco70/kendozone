@@ -81,18 +81,6 @@ fieldset > a > legend {
 
 }
 
-.btn.text-success.border-success.border-3:hover {
-    color: #FFF !important;
-    background-color: #7CD69C;
-    border-color: #7CD69C !important;
-
-}
-
-.btn.text-primary.border-3:hover {
-    color: #FFF !important;
-    background-color: #ff5663;
-    border-color: #ff5663;
-}
 
 .square {
     /* float: left; */
@@ -122,12 +110,6 @@ fieldset > a > legend {
 
 /*}*/
 
-.btn.text-success.border-success.border-xlg:hover {
-    background-color: transparent;
-    border-color: #6cc188;
-    color: #6cc188;
-    /*box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.00) inset;*/
-}
 
 @media (max-width: 860px) {
     .container-fluid {
@@ -296,9 +278,6 @@ div.team div.label {
     color: black;
 }
 
-.bg-dark {
-    background-color: #273c4a;
-}
 
 img.side_avatar {
     width: 35px;
@@ -363,7 +342,7 @@ li.side_avatar:last-child {
 
 .banner-switcher {
     position: absolute;
-    right: 0px;
+    right: 0;
 }
 
 .top-banner-guest {
@@ -381,15 +360,6 @@ li.side_avatar:last-child {
     margin: auto;
 }
 
-.well.dash.well-lg.mb-15.success {
-    border-bottom: #7CD69C solid;
-    color: #7CD69C;
-}
-
-.well.dash.well-lg.error {
-    border-bottom: #ff5663 solid;
-    color: #ff5663;
-}
 
 .wrapper {
     position: relative;
