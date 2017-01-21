@@ -37,10 +37,8 @@
 <body>
 
 <div align="right" {{ Route::currentRouteName() ==  'tournaments.show' ? "class=banner-switcher" : "" }}>
-    <ul class="nav navbar-nav navbar-right">
-        @include('layouts.guest_top_login')
-        @include('layouts.languageSwitcher')
-    </ul>
+        @include('layouts.guest_headmenu')
+
 </div>
 <div class="header">
     {{ HTML::image('images/banners/KZ-04.jpg', "Kendozone Banner", ['class' => 'banner']) }}

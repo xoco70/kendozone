@@ -20,7 +20,7 @@
 
 <body>
 <div align="right">
-    @include('layouts.languageSwitcher')
+    @include('layouts.guest_headmenu')
 </div>
 <!-- Page container -->
 <div class="page-container login-container">
