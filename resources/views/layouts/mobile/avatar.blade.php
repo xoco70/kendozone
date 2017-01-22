@@ -9,7 +9,8 @@ if (
     $img = Avatar::create($user->email)->toBase64();
 }
 ?>
-<img src="{!! $img !!}" alt="kendozone_avatar">
 
-
-
+<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <img src="{!! $img !!}" alt="kendozone_avatar">
+</a>
+@include('layouts.menus.top.user')
