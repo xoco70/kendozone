@@ -2,7 +2,7 @@
     <!-- Menu Mobile -->
     <div class="navbar-header">
         <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <img src="/images/logored.png" alt="Logo Kendozone"></a>
+            <img src="/images/logo_kendozone_beta.png" width="56" height="60" alt="Logo Kendozone"></a>
         <ul class="nav navbar-nav visible-xs-block mt-15">
             <li class="dropdown language-switch-mobile">
                 @include('layouts.language')

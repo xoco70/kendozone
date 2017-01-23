@@ -6,7 +6,14 @@
 
     <div class="panel-body h-300">
         @if ($openTournaments->count() == 0)
-            <div align="center">{{ trans('core.still_no_open_tournament') }}</div>
+
+                <div class="valign-parent h-250">
+                    <div class="valign-child">
+                        <p class="text-muted">{{ trans('core.still_no_open_tournament') }}</p><br/>
+                    </div>
+                </div>
+
+
         @else
             <table width="100%">
                 @foreach($openTournaments->sortByDesc('created_at')->take(3) as $openTournament)

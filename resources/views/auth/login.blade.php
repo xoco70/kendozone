@@ -8,7 +8,7 @@
             {!! csrf_field() !!}
             <div class="panel panel-body login-form">
                 <div class="text-center pt-10 pb-20">
-                    <div class="pb-10"><img src="/images/logoLogin.png" width=200"/></div>
+                    <div class="pb-10"><img src="/images/logo_kendozone_guest_beta.png" width=200"/></div>
 
                 </div>
 
