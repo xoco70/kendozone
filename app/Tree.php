@@ -42,19 +42,20 @@ class Tree extends Model
 
             )->where('slug', $tournamentSlug)->first();
         } elseif (Tree::hasChampionship($request)) {
-            $tournamentSlug = Championship::find($request->championshipId)->tournament->slug;
-            $tournament = Tournament::with([
-                'championships' => function ($query) use ($request) {
-                    $query->where('id', '=', $request->championshipId);
-                },
-                'championships.settings',
-                'championships.category',
-                'championships.tree.user1',
-                'championships.tree.user2',
-                'championships.tree.user3',
-                'championships.tree.user4',
-                'championships.tree.user5'
-            ])->first();
+            $tournament = Tournament::whereHas('championships', function($query) use ($request) {
+                return $query->where('id', $request->championshipId);
+            })
+                ->with(['championships' => function ($query) use ($request) {
+                    $query->where('id', '=', $request->championshipId)
+                        ->with([
+                            'settings',
+                            'category',
+                            'tree' => function($query) {
+                                return $query->with('user1', 'user2', 'user3', 'user4', 'user5');
+                            }]);
+                }])
+                ->first();
+
         }
 
         return $tournament;
