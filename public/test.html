@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kendozone </title>
-    <!-- Global stylesheets -->
-    <link media="all" type="text/css" rel="stylesheet" href="https://my.kendozone.com/css/icons/icomoon/styles.css">
-
-    <link media="all" type="text/css" rel="stylesheet" href="https://my.kendozone.com/css/app.css">
-
 </head>
+<body>
+<div class="page-container">
+    <div class="page-content">
+        <div class="content-wrapper">
+            <div class="content"><h1> Individual Varonil - Edad : &gt; 18 años </h1>
 
-
-
-<div class="navbar-header">
-    <ul class="nav navbar-nav visible-xs-block mt-15">
-        <li class="dropdown language-switch-mobile">
-            <a class="dropdown-toggle" data-toggle="dropdown"
-               aria-expanded="false"> <img src="https://my.kendozone.com/images/flags/MX.png" alt="Español"> </a>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li><a class="mexico" href="https://my.kendozone.com/lang/es"> <img src="https://my.kendozone.com/images/flags/MX.png"
-                                                                                    alt="Español"> Español</a></li>
-                <li><a class="english" href="https://my.kendozone.com/lang/en"> <img src="https://my.kendozone.com/images/flags/GB.png"
-                                                                                     alt="English"> English</a></li>
-            </ul>
-        </li>
-    </ul>
+                <div id="brackets_115"></div>
+                <script>
+                    var minimalData_115 = {"teams": [["xoco1", "xoco2"], ["Bye", "Bye"], ["xoco4@gmail.com", "xoco3"], ["xoco6@gmail.com", "xoco5@gmail.com"], ["xoco70", "xoco11@gmail.com"], ["Bye", "Bye"], ["xoco10@gmail.com", "xoco9@gmail.com"], ["xoco7@gmail.com", "xoco8@gmail.com"]]};
+                </script>
+            </div>
+        </div>
+    </div>
 </div>
+<link media="all" type="text/css" rel="stylesheet" href="https://my.kendozone.com/pdf/brackets.css">
 
+<script src="https://my.kendozone.com/pdf/brackets.js"></script>
 
 
 <script>
-
+    setTimeout(function () {
+        $('#brackets_115').bracket({
+            init: minimalData_115,
+            teamWidth: 100
+        })
+    }, 5000);
 </script>
-<script src="https://my.kendozone.com/js/app.js"></script>
-
+</body>
 </html>
