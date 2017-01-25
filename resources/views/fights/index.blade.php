@@ -32,8 +32,8 @@
                                     <tr>
                                         <td class="p-10">{{$fight->id}}</td>
                                         <th class="p-10" width="5%">{{$fight->area}}</th>
-                                        <td class="p-10">{{$fight->user1!= null ? $fight->user1->id : 'BYE'}}</td>
-                                        <td class="p-10">{{$fight->user2!= null ? $fight->user2->id : 'BYE'}}</td>
+                                        <td class="p-10">{{$fight->user1!= null ? $fight->user1->name : 'BYE'}}</td>
+                                        <td class="p-10">{{$fight->user2!= null ? $fight->user2->name : 'BYE'}}</td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -43,7 +43,7 @@
 
 
                         @empty
-                            No hay lista de combates para esta categoria
+                            {{ trans('core.no_fight_list') }}
                         @endforelse
                     </div>
                 </div>

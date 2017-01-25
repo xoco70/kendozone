@@ -35,29 +35,35 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $tournament = Tree::getTournament($request);
-        if (Auth::user()->cannot('generateTree', $tournament)) {
+//        $this->authorize('store',  $tournament,Tree::class);
+
+//        if (Auth::user()->cannot('generateTree', Tree::class,$tournament)) {
+//            throw new AuthorizationException();
+//        }
+        if (!Auth::user()->isSuperAdmin() && $tournament->user_id != Auth::user()->id) {
             throw new AuthorizationException();
         }
 
         foreach ($tournament->championships as $championship) {
             $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
-            if (!$settings->hasPreliminary) {
-                if ($championship->isDirectEliminationType()) {
-                    $generation = Tree::getGenerationStrategy($championship);
-                    $generation->championship = $championship;
-                    try {
-                        $tree = $generation->run();
-                        $championship->tree = $tree;
-                        Tree::generateFights($tree, $settings);
-                        flash()->success(trans('msg.championships_tree_generation_success'));
-                    } catch (TreeGenerationException $e) {
-                        flash()->error($e->message);
-                    } finally {
+
+            $generation = Tree::getGenerationStrategy($championship);
+            $generation->championship = $championship;
+            try {
+                $tree = $generation->run();
+                $championship->tree = $tree;
+                Tree::generateFights($tree, $settings);
+                flash()->success(trans('msg.championships_tree_generation_success'));
+            } catch (TreeGenerationException $e) {
+                flash()->error($e->message);
+            } finally {
 //                    return redirect(route('tree.index', $tournament->slug));
-                    }
-                }
+
             }
+
         }
         return redirect(route('tree.index', $tournament->slug));
     }

@@ -299,9 +299,12 @@ return [
     // Trees
     'tree' => 'Tree|Trees',
     'no_generated_tree' => 'Still no tree generated in this championship',
-    'fight' => 'Fight|Fights',
     'document' => 'Document|Documents',
     'print' => 'Print',
+
+    // Fights
+    'fight' => 'Fight|Fights',
+    'no_fight_list' => 'There is still no fight list for this championship',
 
     // Share
 

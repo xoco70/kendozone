@@ -48,16 +48,17 @@ class PreliminaryTreeGen implements TreeGenerable
         // Chunk user by areas
 
         $usersByArea = $users->chunk(sizeof($users) / $areas);
+
         $area = 1;
 
         // loop on areas
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            if ($this->championship->isRoundRobinType()) {
+            if ($this->championship->isRoundRobinType() || $this->championship->hasPreliminary()) {
                 $roundRobinGroups = $users->chunk(3)->shuffle();
 
-            } // , $settings->roundRobinGroupSize
+            }
             else {
                 $roundRobinGroups = $users->chunk(2)->shuffle();
 
@@ -102,6 +103,7 @@ class PreliminaryTreeGen implements TreeGenerable
      */
     private function getMaxCompetitorByEntity($userGroups): int
     {
+        // Surely there is a Laravel function that does it ;)
         $max = 0;
         foreach ($userGroups as $userGroup) {
             if (sizeof($userGroup) > $max) {
@@ -113,6 +115,8 @@ class PreliminaryTreeGen implements TreeGenerable
     }
 
     /**
+     * Get Competitor's list ordered by entities
+     * Countries for Internation Tournament, State for a National Tournament, etc
      * @return Collection
      */
     private function getUsersByEntity(): Collection
@@ -128,14 +132,15 @@ class PreliminaryTreeGen implements TreeGenerable
         // We must add another group that has bye
 
         $byeGroup = $this->getByeGroup($this->championship);
-        $userGroups->push($byeGroup->values());
+        if (sizeof($byeGroup)>0){
+            $userGroups->push($byeGroup->values());
+        }
 
         // Get biggest group.
         $max = $this->getMaxCompetitorByEntity($userGroups);
         //
         for ($i = 0; $i < $max; $i++) {
             foreach ($userGroups as $userGroup) {
-
                 $competitor = $userGroup->values()->get($i);
                 if ($competitor != null) {
                     $competitors->push($competitor);
@@ -145,25 +150,32 @@ class PreliminaryTreeGen implements TreeGenerable
         return $competitors;
     }
 
+    /**
+     * Calculate the Byes need to fill the Championship Tree
+     * @param Championship $championship
+     * @return Collection
+     */
     private function getByeGroup(Championship $championship)
     {
         $groupSizeDefault = 3;
 
         $userCount = $championship->users->count();
-        if ($championship->isDirectEliminationType()) {
-            $preliminaryGroupSize = 2;
-        } else {
+        if ($championship->hasPreliminary()) {
             $preliminaryGroupSize = $championship->settings != null
                 ? $championship->settings->preliminaryGroupSize
                 : $groupSizeDefault;
+        } else if ($championship->isDirectEliminationType()) {
+            $preliminaryGroupSize = 2;
 
+        } else {
+            // No Preliminary and No Direct Elimination --> Round Robin
+            $preliminaryGroupSize = 2;
+            dump('Round Robin Still not implemented');
         }
-
 
         $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
 
         $byeCount = $treeSize - $userCount;
-
         return $this->createNullsGroup($byeCount);
     }
 
@@ -177,8 +189,10 @@ class PreliminaryTreeGen implements TreeGenerable
         $squareMultiplied = $square->map(function ($item, $key) use ($groupSize) {
             return $item * $groupSize;
         });
+
+
         foreach ($squareMultiplied as $limit) {
-            if ($userCount < $limit) {
+            if ($userCount <= $limit) {
 
                 return $limit;
             }

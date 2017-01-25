@@ -301,9 +301,14 @@ return [
     // Trees
     'tree' => 'Arbol|Arboles',
     'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
-    'fight' => 'Combate|Combates',
     'document' => 'Documento|Documentos',
         'print' => 'Imprimir',
+
+
+    // Fights
+    'fight' => 'Combate|Combates',
+    'no_fight_list' => 'Aún no hay lista de combates para esta categoría',
+
 
     // Share
 

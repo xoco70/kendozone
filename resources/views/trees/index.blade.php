@@ -38,7 +38,7 @@
                                             <i class="icon-printer"></i>
                                         </a>
 
-                                        @can('generateTree', $tournament)
+                                        {{--@can('generateTree', $tournament) NOT WORKING--}}
                                             {!! Form::close() !!}
 
                                             {!! Form::open(
@@ -50,7 +50,7 @@
                                                 {{ trans_choice('core.generate_tree',1) }}
                                             </button>
                                             {!! Form::close() !!}
-                                        @endcan
+                                        {{--@endcan--}}
 
                                     </h1>
 
