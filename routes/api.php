@@ -36,7 +36,7 @@ Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {// Prot
 
 
     Route::post('users/{user}/restore', 'UserController@restore');
-
+    Route::get('users', 'UserController@index')->name('users.index');
 
 
     Route::resource('championships/{championship}/settings', 'ChampionshipSettingsController',
