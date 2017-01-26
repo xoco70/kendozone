@@ -25,40 +25,47 @@ class Association extends Model
     {
         parent::boot();
         static::deleting(function ($association) {
-
-//            $association->clubs
             //TODO Unlink all clubs/users from assoc
-//            foreach ($tournament->championships as $ct) {
-//                $ct->delete();
-//            }
-//            $tournament->invites()->delete();
 
         });
         static::restoring(function ($tournament) {
-
-//            foreach ($tournament->championships()->withTrashed()->get() as $ct) {
-//                $ct->restore();
-//            }
-
         });
 
     }
 
+    /**
+     * An association has only 1 President
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function president()
     {
         return $this->hasOne(User::class, 'id', 'president_id');
     }
 
+    /**
+     * An association has Many Clubs
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function clubs()
     {
         return $this->hasMany(Club::class);
     }
 
+    /**
+     * An association belongs To a Federations
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function federation()
     {
         return $this->belongsTo(Federation::class);
     }
 
+    /**
+     * Filter the assocation List depending on the user type
+     * Ex : SuperAdmin See all, Federation President only see his Associations, etc
+     * @param $query
+     * @param User $user
+     */
     public function scopeForUser($query, User $user)
     {
         if (!$user->isSuperAdmin()) {
@@ -68,18 +75,26 @@ class Association extends Model
         }
     }
 
+    /**
+     * Check if an Association is in the same Federation than a Federation President
+     * @param User $user
+     * @return bool
+     */
     public function belongsToFederationPresident(User $user)
     {
         if ($user->isFederationPresident() &&
             $user->federationOwned != null &&
             $this->federation->id == $user->federationOwned->id
-        ) {
-
+        )
             return true;
-        }
         return false;
     }
 
+    /**
+     * Check if an Association is in the same Association than a Association President
+     * @param User $user
+     * @return bool
+     */
     public function belongsToAssociationPresident(User $user)
     {
         if ($user->isAssociationPresident() &&
@@ -91,6 +106,10 @@ class Association extends Model
         return false;
     }
 
+    /**
+     * Fill Selects depending on the Logged user type
+     * @return Collection
+     */
     public static function fillSelect()
     {
         $associations = new Collection();
@@ -110,7 +129,12 @@ class Association extends Model
         return $associations;
     }
 
-    // Only used for the User UI
+    /**
+     * Same than fillSelect, but with VueJS Format
+     * @param $user
+     * @param $federationId
+     * @return Collection
+     */
     public static function fillSelectForVueJs($user, $federationId)
     {
         $associations = new Collection();
@@ -135,7 +159,7 @@ class Association extends Model
                 ->prepend(['value' => '0', 'text' => '-']);
 
         }
-        if (sizeof($associations) == 0 ){
+        if (sizeof($associations) == 0) {
             $object = new stdClass;
             $object->value = 0;
             $object->text = trans('core.no_association_yet');

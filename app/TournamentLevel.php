@@ -21,6 +21,9 @@ class TournamentLevel extends Model
         return Lang::get($name);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tournaments()
     {
         return $this->hasMany('App\Tournament', 'level_id', 'id');

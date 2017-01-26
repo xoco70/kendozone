@@ -40,10 +40,6 @@ class Tournament extends Model
         ];
     }
 
-//    protected $sluggable = [
-//        'build_from' => 'name',
-//        'save_to' => 'slug',
-//    ];
     protected $table = 'tournament';
     public $timestamps = true;
 
@@ -86,22 +82,6 @@ class Tournament extends Model
 
     }
 
-//    function addVenue()
-//    {
-//        $venue = new Venue;
-//        $location = GeoIP::getLocation(getIP()); // Simulating IP in Mexico DF
-//        $country = Country::where('name', '=', $location['country'])->first();
-//        $venue->country_id = $country->id;
-//        if (is_null($country)) {
-//            $venue->latitude = 48.858222;
-//            $venue->longitude = 2.2945;
-//        } else {
-//            $venue->latitude = $location['lat'];
-//            $venue->longitude = $location['lon'];
-//        }
-//        $venue->save();
-//        $this->venue_id = $venue->id;
-//    }
 
     /**
      * A tournament is owned by a user
@@ -124,7 +104,7 @@ class Tournament extends Model
 
     /**
      * Get Full venue object
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function venue()
     {
@@ -132,8 +112,11 @@ class Tournament extends Model
     }
 
 
-    // We can use $tournament->categories()->attach(id);
-    // Or         $tournament->categories()->sync([1, 2, 3]);
+    /**
+     * We can use $tournament->categories()->attach(id);
+     * Or         $tournament->categories()->sync([1, 2, 3]);
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'championship')
@@ -160,6 +143,10 @@ class Tournament extends Model
         return $this->hasManyThrough(ChampionshipSettings::class, Championship::class);
     }
 
+    /**
+     * çGet All teams that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function teams()
     {
         return $this->hasManyThrough(Team::class, Championship::class);
@@ -194,6 +181,10 @@ class Tournament extends Model
         return $this->morphMany(Invite::class, 'object');
     }
 
+    /**
+     * Get Category List with <Select> Format
+     * @return mixed
+     */
     public function getCategoryList()
     {
         return $this->categories->pluck('id')->all();
@@ -220,51 +211,83 @@ class Tournament extends Model
         return $date;
     }
 
+    /**
+     * Check if the tournament is Open
+     * @return bool
+     */
     public function isOpen()
     {
         return $this->type == 1;
     }
 
+    /**
+     * * Check if the tournament needs Invitation
+     * @return bool
+     */
     public function needsInvitation()
     {
         return $this->type == 0;
     }
 
+    /**
+     * @return bool
+     */
     public function isInternational()
     {
         return $this->level_id == 8;
     }
 
+    /**
+     * @return bool
+     */
     public function isNational()
     {
         return $this->level_id == 7;
     }
 
+    /**
+     * @return bool
+     */
     public function isRegional()
     {
         return $this->level_id == 6;
     }
 
+    /**
+     * @return bool
+     */
     public function isEstate()
     {
         return $this->level_id == 5;
     }
 
+    /**
+     * @return bool
+     */
     public function isMunicipal()
     {
         return $this->level_id == 4;
     }
 
+    /**
+     * @return bool
+     */
     public function isDistrictal()
     {
         return $this->level_id == 3;
     }
 
+    /**
+     * @return bool
+     */
     public function isLocal()
     {
         return $this->level_id == 2;
     }
 
+    /**
+     * @return bool
+     */
     public function hasNoLevel()
     {
         return $this->level_id == 1;
@@ -275,12 +298,19 @@ class Tournament extends Model
         return 'slug';
     }
 
+    /**
+     * @return bool
+     */
     public function isDeleted()
     {
         return $this->deleted_at != null;
     }
 
 
+    /**
+     * Create and Configure Championships depending the rule ( IKF, EKF, LAKF, etc )
+     * @param $ruleId
+     */
     public function setAndConfigureCategories($ruleId)
     {
         if ($ruleId == 0) return; // No Rules Selected
@@ -300,12 +330,6 @@ class Tournament extends Model
         }
 
     }
-
-//    private function categoryModel($id)
-//    {
-//        return Category::findOrFail($id);
-//    }
-
 
     private function loadRulesOptions($ruleId)
     {
@@ -350,6 +374,10 @@ class Tournament extends Model
     }
 
 
+    /**
+     * Check if the tournament has a Team Championship
+     * @return integer
+     */
     public function hasTeamCategory()
     {
         return $this

@@ -37,7 +37,10 @@ class InviteController extends Controller
      */
     public function index()
     {
-        $invites = Auth::user()->invites()->with('tournament.owner')->paginate(config('constants.PAGINATION'));
+        $invites = Auth::user()
+            ->invites()
+            ->with('tournament.owner')
+            ->paginate(config('constants.PAGINATION'));
         return view('invitation.index', compact('invites'));
     }
 
@@ -85,16 +88,6 @@ class InviteController extends Controller
 
     }
 
-    /**
-     * Consume registration.
-     * Send to user creation, or categories selection
-     * @param Request $request
-     */
-    public function consume(Request $request)
-    {
-
-
-    }
 
     /**
      * Send an email to competitor and store invitation.
@@ -132,7 +125,7 @@ class InviteController extends Controller
 //            Mass Invite
             $reader->each(function ($sheet) use ($tournament) {
 
-                // Loop through all rows
+                // Loop through all rows of spreadsheet
                 $sheet->each(function ($row) use ($tournament) {
                     // Check email
                     $invite = new Invite();

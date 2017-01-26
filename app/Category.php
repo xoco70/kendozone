@@ -35,6 +35,11 @@ class Category extends Model
         'gradeMax',
     ];
 
+    /**
+     * Get All Presets for Categories
+     * @param null $ruleId
+     * @return array
+     */
     public function getCategorieslabelByRule($ruleId = null)
     {
         //TODO Refactor Redundancy

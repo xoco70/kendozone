@@ -26,6 +26,10 @@ class Invite extends Model
         return $this->morphTo();
     }
 
+    /**
+     * Verify if it is in use - It should BE : An Invite has only 1 Tournament
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tournament()
     {
         return $this->belongsTo('App\Tournament');
@@ -56,6 +60,9 @@ class Invite extends Model
     }
 
 
+    /**
+     * Consume the invitation
+     */
     public function consume()
     {
         // Use the invitation
@@ -63,7 +70,12 @@ class Invite extends Model
         $this->update(['used' => 1]);
     }
 
-    public static function getActiveTournamentInvite($token)
+    /**
+     * Get invite from Token
+     * @param $token
+     * @return Invite
+     */
+    public static function getInviteFromToken($token)
     {
         $invite = self::where('code', $token)
             ->where('active', 1)
@@ -73,15 +85,20 @@ class Invite extends Model
         return $invite;
     }
 
+    /**
+     * Helper used to hash email into token
+     * @param $hash
+     * @return mixed
+     */
     protected function hash_split($hash)
     {
         $output = str_split($hash, 8);
         return $output[rand(0, 1)];
     }
 
-    protected function sql_timestamp()
-    {
-        return date(DB::connection()->grammar()->grammar->datetime);
-    }
+//    protected function sql_timestamp()
+//    {
+//        return date(DB::connection()->grammar()->grammar->datetime);
+//    }
 
 }

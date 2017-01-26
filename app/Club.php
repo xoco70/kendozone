@@ -28,71 +28,58 @@ class Club extends Model
         parent::boot();
         static::deleting(function ($club) {
 
-//            $club->clubs
             //TODO Unlink all clubs/users from assoc
-//            foreach ($tournament->championships as $ct) {
-//                $ct->delete();
-//            }
-//            $tournament->invites()->delete();
-
         });
         static::restoring(function ($club) {
-
-//            foreach ($tournament->championships()->withTrashed()->get() as $ct) {
-//                $ct->restore();
-//            }
-
         });
 
     }
 
+    /**
+     * A Club has only a President
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function president()
     {
         return $this->hasOne(User::class, 'id', 'president_id');
     }
 
-//    public function vicepresident()
-//    {
-//        return $this->hasOne(User::class,'id','vicepresident_id');
-//    }
-//
-//    public function secretary()
-//    {
-//        return $this->hasOne(User::class,'id','secretary_id');
-//    }
-//
-//    public function treasurer()
-//    {
-//        return $this->hasOne(User::class,'id','treasurer_id');
-//    }
-
-//    public function admin()
-//    {
-//        return $this->hasOne(User::class,'id','admin_id');
-//    }
-
-
+    /**
+     * A Club has many practicants
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function practicants()
     {
         return $this->hasMany('User');
     }
 
+    /**
+     * A Club belongs to an Association
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function association()
     {
         return $this->belongsTo(Association::class);
     }
 
+    /**
+     * Get the Federation that federate the Club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function federation()
     {
         if ($this->association != null)
             return $this->association->federation();
         else
-            return $this->association();
+            return $this->association(); //TODO THIS IS BAD :(
+
     }
 
 
     /**
-     * @param $query
+     * Filter the Club List depending on the user type
+     * Ex : SuperAdmin See all, Federation President only see his Clubs, etc
+     * @param $query - The builder
      * @param User $user
      * @return Builder
      * @throws AuthorizationException
@@ -118,6 +105,11 @@ class Club extends Model
 
     }
 
+    /**
+     * Check if the Club is in the same Federation than a Federation President
+     * @param User $user
+     * @return bool
+     */
     public function belongsToFederationPresident(User $user) // Should be FederationUser????
     {
         return
@@ -126,21 +118,35 @@ class Club extends Model
 
     }
 
+    /**
+     * Check if the Club is in the same Association than a Association President
+     * @param User $user
+     * @return bool
+     */
     public function belongsToAssociationPresident(User $user)
     {
         return $user->associationOwned != null &&
-        $this->association != null &&
-        $user->associationOwned->id == $this->association->id;
+            $this->association != null &&
+            $user->associationOwned->id == $this->association->id;
 
     }
 
+    /**
+     * Check if the Club is in the same Association than a Club President
+     * @param User $user
+     * @return bool
+     */
     public function belongsToClubPresident(User $user)
     {
         return $user->clubOwned != null &&
-        $user->clubOwned->id == $this->id;
+            $user->clubOwned->id == $this->id;
 
     }
 
+    /**
+     * Fill Selects depending on the Logged user type
+     * @return Collection
+     */
     public static function fillSelect()
     {
         $clubs = new Collection();
@@ -156,12 +162,18 @@ class Club extends Model
         return $clubs;
     }
 
+    /**
+     * Same than fillSelect, but with VueJS Format
+     * @param User $user
+     * @param $associationId
+     * @return Collection
+     */
     public static function fillSelectForVueJs(User $user, $associationId)
     {
         $clubs = new Collection();
         if ($user->isSuperAdmin()) {
             $clubs = Club::where('association_id', $associationId)
-            ->get(['id as value', 'name as text']);
+                ->get(['id as value', 'name as text']);
         } else if ($user->isFederationPresident() && $user->federationOwned != null) {
             $clubs = $user->federationOwned->clubs()
                 ->where('association_id', $associationId)
@@ -180,7 +192,7 @@ class Club extends Model
                 ->prepend(['value' => '0', 'text' => '-']);
         }
 
-        if (sizeof($clubs) == 0 ){
+        if (sizeof($clubs) == 0) {
             $object = new stdClass;
             $object->value = 0;
             $object->text = trans('core.no_club_available');

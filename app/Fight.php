@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fight extends Model
 {
-//    public $c1, $c2;
     /**
      * Fight constructor.
      */
     public function __construct($userId1 = null, $userId2 = null)
     {
-//        parent::__construct();
-//        dd('construct');
         $this->c1 = $userId1;
         $this->c2 = $userId2;
 
@@ -30,15 +27,29 @@ class Fight extends Model
         'c2'
     ];
 
+    /**
+     * Get First Fighter
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user1()
     {
         return $this->belongsTo(User::class, 'c1', 'id');
     }
 
+    /**
+     * Get Second Fighter
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user2()
     {
         return $this->belongsTo(User::class, 'c2', 'id');
     }
+
+    /**
+     * Save a Fight.
+     * @param $tree
+     * @param int $numRound
+     */
     public static function saveFightRound($tree, $numRound = 1)
     {
 

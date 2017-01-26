@@ -20,12 +20,23 @@ class Venue extends Model
         'longitude',
     ];
 
+    /**
+     * A Venue Belongs to a Country
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function country()
     {
         return $this->belongsTo(Country::class);
     }
 
 
+    /**
+     * Get the Current User location
+     * @param $tournament
+     * @param $latitude
+     * @param $longitude
+     * @return $this
+     */
     public function setDefaultLocation($tournament, $latitude, $longitude)
     {
 

@@ -211,7 +211,7 @@ return [
 
 
     'still_no_tournament' => 'Aún no estas registrado en ningún torneo',
-    'still_no_open_tournament' => 'Aún no hay torneo abiertos en tu país',
+    'still_no_open_tournament' => 'Aún no hay torneos abiertos en tu país',
     'create_new_tournament' => 'Crea un nuevo torneo',
     'congigure_categories' => 'Configura las diferentes categorías',
     'see_open_tournaments' => 'Ver torneos abiertos',

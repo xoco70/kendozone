@@ -16,16 +16,31 @@ class Tree extends Model
     protected $guarded = ['id'];
     use AuditingTrait;
 
+    /**
+     * Check if Request contains tournamentSlug / Should Move to TreeRequest When Built
+     * @param $request
+     * @return bool
+     */
     public static function hasTournament($request)
     {
         return $request->tournamentSlug != null;
     }
 
+    /**
+     * Check if Request contains championshipId / Should Move to TreeRequest When Built
+     * @param $request
+     * @return bool
+     */
     public static function hasChampionship($request)
     {
         return $request->championshipId != null; // has return false, don't know why
     }
 
+    /**
+     * Get tournament with a lot of stuff Inside - Should Change name
+     * @param $request
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public static function getTournament($request)
     {
         $tournament = new Tournament;
@@ -40,9 +55,10 @@ class Tree extends Model
                 'championships.tree.user4',
                 'championships.tree.user5'
 
-            )->where('slug', $tournamentSlug)->first();
+            )->where('slug', $tournamentSlug)
+                ->first();
         } elseif (Tree::hasChampionship($request)) {
-            $tournament = Tournament::whereHas('championships', function($query) use ($request) {
+            $tournament = Tournament::whereHas('championships', function ($query) use ($request) {
                 return $query->where('id', $request->championshipId);
             })
                 ->with(['championships' => function ($query) use ($request) {
@@ -50,7 +66,7 @@ class Tree extends Model
                         ->with([
                             'settings',
                             'category',
-                            'tree' => function($query) {
+                            'tree' => function ($query) {
                                 return $query->with('user1', 'user2', 'user3', 'user4', 'user5');
                             }]);
                 }])
@@ -63,6 +79,7 @@ class Tree extends Model
 
 
     /**
+     * Get Championships with a lot of stuff Inside - Should Change name
      * @param $request
      * @return Collection
      */
@@ -91,42 +108,68 @@ class Tree extends Model
         return $championships;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function championship()
     {
         return $this->belongsTo(Championship::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function fights()
     {
         return $this->hasMany(Fight::class, 'tree_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user1()
     {
         return $this->belongsTo(User::class, 'c1', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user2()
     {
         return $this->belongsTo(User::class, 'c2', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user3()
     {
         return $this->belongsTo(User::class, 'c3', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user4()
     {
         return $this->belongsTo(User::class, 'c4', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user5()
     {
         return $this->belongsTo(User::class, 'c5', 'id');
     }
 
 
+    /**
+     * Define Strategy depending on Tournament Type ( International, National, etc. )
+     * @param Championship $championship
+     * @return PreliminaryTreeGen|null
+     */
     public static function getGenerationStrategy(Championship $championship)
     {
         $tournament = $championship->tournament;
@@ -167,6 +210,10 @@ class Tree extends Model
 
     }
 
+    /**
+     * @param Collection $tree
+     * @param $settings
+     */
     public static function generateFights(Collection $tree, $settings)
     {
 

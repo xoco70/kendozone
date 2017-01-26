@@ -16,6 +16,10 @@ class ChampionshipSettings extends Model
     public $timestamps = true;
     protected $guarded = ['id'];
 
+    /**
+     * A Setting belongs to a Championship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function championship()
     {
         return $this->belongsTo(Championship::class);

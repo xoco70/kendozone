@@ -60,7 +60,7 @@ class RegisterController extends Controller
         //Check token
         $user = null;
         $token = $request->get("token");
-        $invite = Invite::getActiveTournamentInvite($token);
+        $invite = Invite::getInviteFromToken($token);
 
         if (!is_null($invite)) {
 //            dump($request->all());

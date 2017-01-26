@@ -12,11 +12,18 @@ class Team extends Model
     protected $fillable = ['name', 'championship_id'];
 
 
+    /**
+     * A Team belongs to a Championship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function championship()
     {
         return $this->belongsTo(Championship::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function category()
     {
         return $this->hasManyThrough(Category::class, Championship::class);
@@ -24,7 +31,7 @@ class Team extends Model
 
     /**
      * Get all Invitations that belongs to a team
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function invites()
     {
@@ -35,7 +42,7 @@ class Team extends Model
 
     /**
      * Get all Invitations that belongs to a team
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function requests()
     {

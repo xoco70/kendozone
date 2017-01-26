@@ -38,7 +38,7 @@ use Torann\GeoIP\Facades\GeoIP;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRole, SoftDeletes, Sluggable, AuditingTrait, Notifiable,HasApiTokens;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable,HasApiTokens;
 
 
     /**
