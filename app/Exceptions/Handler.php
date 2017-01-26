@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Exception;
-use Exceptions\NoFederationOwnedException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,18 +62,13 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Exception $exception
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
 //        if (App::environment('local')) {
 //            return parent::render($request, $exception);
 //        }
-        $code = "500";
-        $message = get_class($exception);
-        $quote = "";
-        $author = "";
-        $source = "";
 
         switch ($exception) {
 
@@ -98,8 +92,8 @@ class Handler extends ExceptionHandler
 
                 $code = "500";
                 $message = "Server Error";
-                $quote = "Failure is the key to success; each mistake teaches us something";
-                $author = "Morihei Ueshiba";
+                $quote = "Please do 1000 more Suburis! Come back after that, and issue will probably be fixed!";
+                $author = "Kendozone Admin ( You'll thank me later )";
                 $source = "";
 
                 break;

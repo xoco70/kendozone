@@ -65,9 +65,11 @@ $categorySize = $tournament->championships->count();
                         <li><a href="{{ URL::action('TreeController@index',$tournament->slug) }}">
                                 <i class="icon-tree7"></i> {{trans("core.see_trees")}}
                                 @if ($tournament->trees->groupBy('championship_id')->count() < $categorySize)
-                                    <span class="badge badge-primary">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                    <span class="badge badge-primary">{{ $generatedTreeCount }}
+                                        / {{ $categorySize }}</span>
                                 @else
-                                    <span class="badge badge-success">{{ $generatedTreeCount }} / {{ $categorySize }}</span>
+                                    <span class="badge badge-success">{{ $generatedTreeCount }}
+                                        / {{ $categorySize }}</span>
                                 @endif
 
 
@@ -93,7 +95,7 @@ $categorySize = $tournament->championships->count();
                         {{--<li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>--}}
                         {{--</li>--}}
                         <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
-                        <li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>
+                        {{--<li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>--}}
 
 
                     </ul>

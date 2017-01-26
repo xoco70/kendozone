@@ -62,6 +62,7 @@ class TeamController extends Controller
      * @param TeamRequest $request
      * @param Tournament $tournament
      * @return Response
+     * @throws AuthorizationException
      */
     public function store(TeamRequest $request, Tournament $tournament)
     {

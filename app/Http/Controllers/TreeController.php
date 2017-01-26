@@ -38,14 +38,13 @@ class TreeController extends Controller
 
 
         $tournament = Tree::getTournament($request);
-//        $this->authorize('store',  $tournament,Tree::class);
 
-//        if (Auth::user()->cannot('generateTree', Tree::class,$tournament)) {
-//            throw new AuthorizationException();
-//        }
-        if (!Auth::user()->isSuperAdmin() && $tournament->user_id != Auth::user()->id) {
+        if (Auth::user()->cannot('store', [Tree::class,$tournament])) {
             throw new AuthorizationException();
         }
+//        if (!Auth::user()->isSuperAdmin() && $tournament->user_id != Auth::user()->id) {
+//            throw new AuthorizationException();
+//        }
 
         foreach ($tournament->championships as $championship) {
             $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
