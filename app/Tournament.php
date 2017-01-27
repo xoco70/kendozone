@@ -366,7 +366,10 @@ class Tournament extends Model
             ->get();
         $array = [];
         foreach ($cts as $ct) {
-            $array[$ct->id] = $ct->category->name;
+
+            $array[$ct->id] = $ct->category->alias != ''
+                ? $ct->category->alias
+                : trim($ct->category->buildName());
 
         }
 
