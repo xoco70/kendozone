@@ -70,7 +70,7 @@ class TeamController extends Controller
 
 //        $team = Team::make($request->all());
         $team = new Team;
-        if (Auth::user()->cannot('store', $team)) {
+        if (Auth::user()->cannot('store', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
         $team = Team::create($request->all());
@@ -85,14 +85,15 @@ class TeamController extends Controller
      * @param Tournament $tournament
      * @param $teamId
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(Tournament $tournament, $teamId)
     {
         $team = Team::findOrFail($teamId);
 
-        if (Auth::user()->cannot('edit', $team)) {
-            throw new AuthorizationException();
-        }
+//        if (Auth::user()->cannot('edit',$team, $tournament)) {
+//            throw new AuthorizationException();
+//        }
         $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
@@ -103,7 +104,9 @@ class TeamController extends Controller
      *
      * @param TeamRequest $request
      * @param Tournament $tournament
+     * @param $teamId
      * @return Response
+     * @throws AuthorizationException
      */
     public function update(TeamRequest $request, Tournament $tournament, $teamId)
     {
@@ -136,6 +139,7 @@ class TeamController extends Controller
      * @param Tournament $tournament
      * @param $teamId
      * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy(Tournament $tournament, $teamId)
     {

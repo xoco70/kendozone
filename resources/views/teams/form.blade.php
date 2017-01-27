@@ -61,6 +61,7 @@
 
         </div>
     </div>
+    @include("right-panel.tournament_menu")
 @stop
 @section('scripts_footer')
     {!! JsValidator::formRequest('App\Http\Requests\TeamRequest') !!}

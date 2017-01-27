@@ -37,11 +37,11 @@ class TeamPolicy
     }
 
 
-    public function edit(User $user, Tournament $tournament)
-    {
-        return $user->isOwner($tournament);
-
-    }
+//    public function edit(User $user, Tournament $tournament)
+//    {
+//        return $user->isOwner($tournament);
+//
+//    }
 
     public function update(User $user, Tournament $tournament)
     {

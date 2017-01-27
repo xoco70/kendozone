@@ -38,7 +38,9 @@
                                             <i class="icon-printer"></i>
                                         </a>
 
-                                        {{--@can('generateTree', $tournament) NOT WORKING--}}
+                                        {{--@can('store', Tree::class, $tournament) DONT WORK HAVE TO FIX IT, Security Issue--}}
+{{--                                        @if (Auth::user()->can('store', Tree::class, $tournament))--}}
+
                                             {!! Form::close() !!}
 
                                             {!! Form::open(
@@ -50,6 +52,7 @@
                                                 {{ trans_choice('core.generate_tree',1) }}
                                             </button>
                                             {!! Form::close() !!}
+                                        {{--@endif--}}
                                         {{--@endcan--}}
 
                                     </h1>

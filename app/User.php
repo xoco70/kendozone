@@ -392,7 +392,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isOwner($tournament)
     {
-        return $tournament->owner_id == $this->id;
+        return $tournament->user_id == $this->id;
     }
 
     /**
