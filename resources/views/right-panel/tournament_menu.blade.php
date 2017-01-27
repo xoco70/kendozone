@@ -79,7 +79,9 @@ $categorySize = $tournament->championships->count();
                         {{--<i class="icon-tree7"></i> {{trans("core.see_fight_list")}}--}}
                         {{--</a>--}}
                         {{--</li>--}}
-
+                        <?php
+//                        dd($tournament->hasTeamCategory());
+                        ?>
                         @if ($tournament->hasTeamCategory())
                             <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
                                             class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
