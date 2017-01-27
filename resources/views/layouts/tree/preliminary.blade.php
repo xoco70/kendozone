@@ -23,16 +23,16 @@
 
             @foreach($ptByArea as $pt)
                 <?php
-                    if ($championship->category->isTeam){
-                        $user1 = $pt->team1!=null ? $pt->team1->name : '';
-                        $user2 = $pt->team2!=null ? $pt->team2->name : '';
-                        $user3 = $pt->team3!=null ? $pt->team3->name : '';
-                    }else{
-                        $user1 = $pt->user1!=null ? $pt->user1->name : '';
-                        $user2 = $pt->user2!=null ? $pt->user2->name : '';
-                        $user3 = $pt->user3!=null ? $pt->user3->name : '';
+                if ($championship->category->isTeam) {
+                    $user1 = $pt->team1 != null ? $pt->team1->name : '';
+                    $user2 = $pt->team2 != null ? $pt->team2->name : '';
+                    $user3 = $pt->team3 != null ? $pt->team3->name : '';
+                } else {
+                    $user1 = $pt->user1 != null ? $pt->user1->name : '';
+                    $user2 = $pt->user2 != null ? $pt->user2->name : '';
+                    $user3 = $pt->user3 != null ? $pt->user3->name : '';
 
-                    }
+                }
                 ?>
                 <tr>
                     <td class="p-10">{{$pt->area}}</td>

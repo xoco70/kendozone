@@ -8,6 +8,7 @@ use App\Championship;
 use App\ChampionshipSettings;
 use App\Contracts\TreeGenerable;
 use App\Exceptions\TreeGenerationException;
+use App\Team;
 use App\Tree;
 use App\User;
 use Illuminate\Support\Collection;
@@ -185,7 +186,12 @@ class PreliminaryTreeGen implements TreeGenerable
     {
         $groupSizeDefault = 3;
 
-        $userCount = $championship->users->count();
+        if ($championship->category->isTeam){
+            $userCount = $championship->teams->count();
+        }else{
+            $userCount = $championship->users->count();
+        }
+
         if ($championship->hasPreliminary()) {
             $preliminaryGroupSize = $championship->settings != null
                 ? $championship->settings->preliminaryGroupSize
@@ -198,11 +204,10 @@ class PreliminaryTreeGen implements TreeGenerable
             $preliminaryGroupSize = 2;
             dump('Round Robin Still not implemented');
         }
-
         $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
 
         $byeCount = $treeSize - $userCount;
-        return $this->createNullsGroup($byeCount);
+        return $this->createNullsGroup($byeCount, $championship->category->isTeam);
     }
 
     /**
@@ -231,13 +236,15 @@ class PreliminaryTreeGen implements TreeGenerable
      * @param $byeCount
      * @return Collection
      */
-    private function createNullsGroup($byeCount): Collection
+    private function createNullsGroup($byeCount, $isTeam): Collection
     {
-        $nullUser = new User();
+        $isTeam
+            ? $null = new Team()
+            : $null = new User();
 
         $byeGroup = new Collection();
         for ($i = 0; $i < $byeCount; $i++) {
-            $byeGroup->push($nullUser);
+            $byeGroup->push($null);
         }
         return $byeGroup;
     }
