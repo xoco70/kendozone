@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
-{{--@section('breadcrumbs')--}}
+@section('breadcrumbs')
 {{--@if (isset($team->id))--}}
 {{--{!! Breadcrumbs::render('teams.edit',$tournament) !!}--}}
 {{--@else--}}
-{{--{!! Breadcrumbs::render('teams.create',$tournament) !!}--}}
+{!! Breadcrumbs::render('teams.create',$tournament) !!}
 {{--@endif--}}
 
 
-{{--@stop--}}
+@stop
 @section('content')
     @include("errors.list")
     <?php

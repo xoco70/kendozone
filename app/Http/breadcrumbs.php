@@ -186,15 +186,15 @@ Breadcrumbs::register('categories.create', function ($breadcrumbs) {
 });
 
 // Home > Tournaments > MyTournament > List Teams
-Breadcrumbs::register('teams.index', function ($breadcrumbs, $tournament) {
-    $breadcrumbs->parent('tournaments.edit', $tournament);
-    if (policy($tournament)->edit(Auth::user(), $tournament)) {
-        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.edit', $tournament->slug));
-    } else {
-        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.show', $tournament->slug));
-    }
-
-});
+//Breadcrumbs::register('teams.index', function ($breadcrumbs, $tournament) {
+//    $breadcrumbs->parent('tournaments.edit', $tournament);
+//    if (policy($tournament)->edit(Auth::user(), $tournament)) {
+//        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.edit', $tournament->slug));
+//    } else {
+//        $breadcrumbs->push(trans_choice('core.team', 2), route('tournaments.show', $tournament->slug));
+//    }
+//
+//});
 
 // Home > Tournaments > MyTournament > List Trees
 Breadcrumbs::register('trees.index', function ($breadcrumbs, $tournament) {
@@ -210,10 +210,8 @@ Breadcrumbs::register('trees.index', function ($breadcrumbs, $tournament) {
 
 
 Breadcrumbs::register('teams.create', function ($breadcrumbs, $tournament) {
-    $breadcrumbs->parent('teams.index', $tournament);
+    $breadcrumbs->parent('tournaments.edit', $tournament);
     $breadcrumbs->push(trans_choice('core.team', 2), route('teams.index', $tournament->slug));
-
-
 });
 Breadcrumbs::register('teams.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('teams.index', $tournament);
