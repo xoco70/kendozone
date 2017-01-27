@@ -1,7 +1,14 @@
 <table class="table-bordered full-width">
     <th class="p-10" width="10%"></th>
 
-    @foreach ( $championship->users as $user)
+    <?php
+    if ($championship->category->isTeam) {
+        $users = $championship->teams;
+    } else {
+        $users = $championship->users;
+    }
+    ?>
+    @foreach ( $users as $user)
         <th class="p-10">{{ $user->name }}</th>
     @endforeach
 

@@ -22,8 +22,8 @@ class TreeTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-//        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
-//        $this->logWithUser($this->root);
+        $this->root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
+        $this->logWithUser($this->root);
     }
 
     /** @test */
@@ -53,19 +53,21 @@ class TreeTest extends TestCase
         $tournament = factory(Tournament::class)->create();
         $championsip = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
 
-        $users = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')],6);
+        $users = factory(User::class,6)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $competitors = new Collection();
         foreach ($users as $user){
-            $competitor = factory(User::class)->create([
+
+            $competitor = factory(Competitor::class)->create([
                 'user_id' => $user->id,
-                'championship_id',
-                $championsip->id,
+                'championship_id' => $championsip->id,
                 'confirmed' => 1]);
             $competitors->push($competitor);
         }
         $this->visit('/tournaments/'.$tournament->slug."/edit")
-            ->click('competitors')
-            ->click('generate');
+            ->click('#competitors')
+//            ->dump()
+            ->press('generate')
+            ->seeNumRecords(2, 'tree', ['championship_id' => $championsip->id]);
         // Check there is 2 rows with 3 users
 
 
