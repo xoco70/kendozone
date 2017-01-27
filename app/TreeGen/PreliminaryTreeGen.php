@@ -28,21 +28,31 @@ class PreliminaryTreeGen implements TreeGenerable
     }
 
     /**
+     * Generate tree groups for a championship
      * @return Collection
      * @throws TreeGenerationException
      */
     public function run()
     {
+        // If previous trees already exist, delete all
         $this->championship->tree()->delete();
+
+        // Get Settings
         $preliminiaryTree = new Collection();
         $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.default_settings'));
+
         // Get Areas
         $areas = $settings->fightingAreas;
-        if ($this->championship->users->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
+
+        $this->championship->category->isTeam()
+            ? $fighters = $this->championship->teams
+            : $fighters = $this->championship->users;
+
+        if ($fighters->count() / $areas < config('constants.MIN_COMPETITORS_X_AREA')) {
             throw new TreeGenerationException(trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]));
 
         }
-        // Get Competitor's list ordered by entities
+        // Get Competitor's / Team list ordered by entities ( Federation, Assoc, Club, etc...)
         $users = $this->getUsersByEntity();
 
         // Chunk user by areas
@@ -56,10 +66,9 @@ class PreliminaryTreeGen implements TreeGenerable
 
             // Chunking to make small round robin groups
             if ($this->championship->isRoundRobinType() || $this->championship->hasPreliminary()) {
-                $roundRobinGroups = $users->chunk(3)->shuffle();
+                $roundRobinGroups = $users->chunk($settings->preliminaryGroupSize)->shuffle();
 
-            }
-            else {
+            } else {
                 $roundRobinGroups = $users->chunk(2)->shuffle();
 
             }
@@ -74,6 +83,9 @@ class PreliminaryTreeGen implements TreeGenerable
                 $pt = new Tree;
                 $pt->area = $area;
                 $pt->order = $order;
+                if ($this->championship->category->isTeam()) {
+                    $pt->isTeam = 1;
+                }
                 $pt->championship_id = $this->championship->id;
 
 
@@ -123,22 +135,36 @@ class PreliminaryTreeGen implements TreeGenerable
     {
         $competitors = new Collection();
 
-        if (($this->groupBy) != null) {
-            $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+        // Right now, we are treating users and teams as equals.
+        // It doesn't matter right now, because we only need name attribute which is common to both models
+
+        // $this->groupBy contains federation_id, association_id, club_id, etc.
+        if ($this->championship->category->isTeam()) {
+            if (($this->groupBy) != null) {
+                $userGroups = $this->championship->teams->groupBy($this->groupBy); // Collection of Collection
+            } else {
+                $userGroups = $this->championship->teams->chunk(1); // Collection of Collection
+            }
         } else {
-            $userGroups = $this->championship->users->chunk(1); // Collection of Collection
+            if (($this->groupBy) != null) {
+                $userGroups = $this->championship->users->groupBy($this->groupBy); // Collection of Collection
+            } else {
+                $userGroups = $this->championship->users->chunk(1); // Collection of Collection
+            }
         }
 
         // We must add another group that has bye
 
         $byeGroup = $this->getByeGroup($this->championship);
-        if (sizeof($byeGroup)>0){
+        if (sizeof($byeGroup) > 0) {
             $userGroups->push($byeGroup->values());
         }
 
-        // Get biggest group.
+        // Get biggest competitor's group
         $max = $this->getMaxCompetitorByEntity($userGroups);
-        //
+
+        // We reacommodate them so that we can mix them up and they don't fight with another competitor of his entity.
+
         for ($i = 0; $i < $max; $i++) {
             foreach ($userGroups as $userGroup) {
                 $competitor = $userGroup->values()->get($i);

@@ -166,6 +166,30 @@ class Tree extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team1()
+    {
+        return $this->belongsTo(Team::class, 'c1', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team2()
+    {
+        return $this->belongsTo(Team::class, 'c2', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team3()
+    {
+        return $this->belongsTo(Team::class, 'c3', 'id');
+    }
+
+    /**
      * Define Strategy depending on Tournament Type ( International, National, etc. )
      * @param Championship $championship
      * @return PreliminaryTreeGen|null
@@ -226,7 +250,6 @@ class Tree extends Model
 
         if ($settings->hasPreliminary) {
             for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
-
                 Fight::saveFightRound($tree, $numRound);
             }
         } elseif ($settings->treeType == config('constants.DIRECT_ELIMINATION')) {

@@ -39,7 +39,7 @@
                                         </a>
 
                                         {{--@can('store', Tree::class, $tournament) DONT WORK HAVE TO FIX IT, Security Issue--}}
-{{--                                        @if (Auth::user()->can('store', Tree::class, $tournament))--}}
+                                        @if (Auth::user()->can('store', [App\Tree::class, $tournament]))
 
                                             {!! Form::close() !!}
 
@@ -52,7 +52,7 @@
                                                 {{ trans_choice('core.generate_tree',1) }}
                                             </button>
                                             {!! Form::close() !!}
-                                        {{--@endif--}}
+                                        @endif
                                         {{--@endcan--}}
 
                                     </h1>

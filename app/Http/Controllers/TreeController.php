@@ -42,9 +42,6 @@ class TreeController extends Controller
         if (Auth::user()->cannot('store', [Tree::class,$tournament])) {
             throw new AuthorizationException();
         }
-//        if (!Auth::user()->isSuperAdmin() && $tournament->user_id != Auth::user()->id) {
-//            throw new AuthorizationException();
-//        }
 
         foreach ($tournament->championships as $championship) {
             $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
