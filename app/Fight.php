@@ -46,6 +46,24 @@ class Fight extends Model
     }
 
     /**
+     * Get First Fighter
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team1()
+    {
+        return $this->belongsTo(Team::class, 'c1', 'id');
+    }
+
+    /**
+     * Get Second Fighter
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team2()
+    {
+        return $this->belongsTo(Team::class, 'c2', 'id');
+    }
+
+    /**
      * Save a Fight.
      * @param $tree
      * @param int $numRound
