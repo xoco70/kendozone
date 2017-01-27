@@ -17,7 +17,7 @@
                     <div class="container-fluid">
 
                         @forelse($tournament->championships as $championship)
-                            <h1> {{$championship->category->buildName($grades)}}</h1>
+                            <h1> {{$championship->category->buildName()}}</h1>
 
 
                             {{--Area {{ $tree->area }} <br/>--}}

@@ -25,7 +25,7 @@ class PdfController extends Controller
         }
         // Generate PDF
 //        return view ($layout, compact('championship','grades'));
-        $file = 'tree-'.$championship->category->buildName($grades);
+        $file = 'tree-'.$championship->category->buildName();
         $file = sanitize($file).'.pdf';
 
         $pdf = PDF::loadView($layout, ['championship' => $championship, 'grades' => $grades]);

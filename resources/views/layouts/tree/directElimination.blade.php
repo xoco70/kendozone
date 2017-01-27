@@ -6,7 +6,7 @@ $directEliminationTree = $championship->tree->map(function ($item, $key) {
 })->toArray();
 ?>
 @if (Request::is('championships/'.$championship->id.'/pdf'))
-    <h1> {{$championship->category->buildName($grades)}}</h1>
+    <h1> {{$championship->category->buildName()}}</h1>
 @endif
 
 <div id="brackets_{{ $championship->id }}"></div>

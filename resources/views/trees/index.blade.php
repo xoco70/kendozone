@@ -19,7 +19,7 @@
                 @foreach($tournament->championships as $championship)
                     <li class={{ $loop->first ? "active" : "" }}>
                         <a href="#{{$championship->id}}" data-toggle="tab"
-                           id="tab{{$championship->id}}">{{$championship->category->buildName($grades)}}</a>
+                           id="tab{{$championship->id}}">{{$championship->category->buildName()}}</a>
                     </li>
 
                 @endforeach
@@ -31,7 +31,7 @@
                         <div class="tab-content">
                             @foreach($tournament->championships as $championship)
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
-                                    <h1> {{$championship->category->buildName($grades)}}
+                                    <h1> {{$championship->category->buildName()}}
 
                                         <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">

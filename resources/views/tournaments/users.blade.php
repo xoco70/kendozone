@@ -28,7 +28,7 @@
                                    data-target="#create_tournament_user"
                                    class="btn btn-primary btn-xs pull-right open-modal"
                                    data-id="{!! $championship->id !!}"
-                                   data-name="{!! $championship->category->buildName($grades) !!}"><b><i
+                                   data-name="{!! $championship->category->buildName() !!}"><b><i
                                                 class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
                                 </a>
 
@@ -58,8 +58,8 @@
 
                             @endcan
 
-                            <a name="{{ str_slug($championship->category->buildName($grades), "-") }}">
-                                <legend class="text-semibold">{{ $championship->category->buildName($grades) }} </legend>
+                            <a name="{{ str_slug($championship->category->buildName(), "-") }}">
+                                <legend class="text-semibold">{{ $championship->category->buildName() }} </legend>
 
                             </a>
 
@@ -100,7 +100,7 @@
 
                                         </td>
                                         <td>{{ $user->email }}</td>
-                                        <td class="text-center">{{ $championship->category->buildName($grades)}}</td>
+                                        <td class="text-center">{{ $championship->category->buildName()}}</td>
 
                                         <td class="text-center">
                                             @if ($user->pivot->confirmed)

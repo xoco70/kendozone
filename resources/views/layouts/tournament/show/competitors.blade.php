@@ -5,8 +5,8 @@
             <div class="panel-body">
 
                 <div class="container-fluid">
-                    <a name="{{ str_slug($championship->category->buildName($grades), "-") }}">
-                        <legend class="text-semibold">{{ $championship->category->buildName($grades) }} </legend>
+                    <a name="{{ str_slug($championship->category->buildName(), "-") }}">
+                        <legend class="text-semibold">{{ $championship->category->buildName() }} </legend>
 
                     </a>
 

@@ -165,8 +165,9 @@ class Category extends Model
         return $ageCategoryText;
     }
 
-    public function getGradeString($grades)
+    public function getGradeString()
     {
+        $grades = Grade::all();
         $gradeText = '';
         if ($this->gradeCategory == 1) {
             $gradeText = trans('categories.first_force');
@@ -175,17 +176,16 @@ class Category extends Model
         } else if ($this->gradeCategory == 3) {
 
             $gradeText = ' - ' . trans('core.grade') . ' : ';
-//            dd($grades);
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 if ($this->gradeMin == $this->gradeMax) {
-                    $gradeText .= $grades[$this->gradeMin];
+                    $gradeText .= $grades[$this->gradeMin]->name;
                 } else {
-                    $gradeText .= $grades[$this->gradeMin] . ' - ' . $grades[$this->gradeMax];
+                    $gradeText .= $grades[$this->gradeMin]->name . ' - ' . $grades[$this->gradeMax]->name;
                 }
             } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
-                $gradeText .= ' < ' . $grades[$this->gradeMax];
+                $gradeText .= ' < ' . $grades[$this->gradeMax]->name;
             } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
-                $gradeText .= ' > ' . $grades[$this->gradeMin];
+                $gradeText .= ' > ' . $grades[$this->gradeMin]->name;
             } else {
                 $gradeText = '';
             }
@@ -195,8 +195,9 @@ class Category extends Model
     }
 
 
-    public function buildName($grades)
+    public function buildName()
     {
+
 
         if ($this->alias != null && $this->alias != '') return $this->alias;
 
@@ -209,7 +210,7 @@ class Category extends Model
 
         $teamText = $this->isTeam == 1 ? trans_choice('core.team',1) : trans('categories.single');
         $ageCategoryText = $this->getAgeString();
-        $gradeText = $this->getGradeString($grades);
+        $gradeText = $this->getGradeString();
 
         return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
     }

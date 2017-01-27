@@ -32,7 +32,7 @@ $i = 0;
                             <div class="row mb-20">
                                 <div class="col-md-8">
 
-                                    {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName($grades)) !!}
+                                    {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName()) !!}
                                 </div>
                                 <div class="col-md-4">
                                     {!!   Form::checkbox('cat['.$championship->id.']',

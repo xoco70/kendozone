@@ -26,7 +26,7 @@
 
                                         <div class="panel-heading">
                                             <h6 class="panel-title">
-                                                {{trans($championship->category->buildName($grades))}}
+                                                {{trans($championship->category->buildName())}}
                                             </h6>
                                         </div>
                                     </a>

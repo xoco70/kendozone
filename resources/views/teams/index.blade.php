@@ -46,7 +46,7 @@ $teams = $tournament->teams;
                                             {{ $team->name }}
                                         @endif
                                     </td>
-                                    <td>{{ $team->championship->category->name}}</td>
+                                    <td>{{ $team->championship->category->alias ?? $team->championship->category->name}}</td>
                                     <td>
 
                                         @can('edit', $team)

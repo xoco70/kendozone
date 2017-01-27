@@ -134,7 +134,7 @@ class TournamentController extends Controller
 
             $category->alias != ''
                 ? $category->name = $category->alias
-                : $category->name = trim($category->buildName($grades));
+                : $category->name = trim($category->buildName());
             $categories->push($category);
         }
 

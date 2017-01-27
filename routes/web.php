@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 | and give it the controller to call when that URI is requested.
 |
 */
-//Auth::loginUsingId(2042); // 6 Admin, 5 User
+//Auth::loginUsingId(3524); // 6 Admin, 5 User
 
 Auth::routes();
 

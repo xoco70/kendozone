@@ -9,10 +9,10 @@ return [
     */
 
 'junior' => 'Junior',
-    'junior_team' => 'Junior por Equipo',
+    'junior_team' => 'Junior Team',
     'man_first_force' => 'Men 1+ Dan',
     'man_second_force' => 'Men Kyus',
-    'woman_first_force' => 'Femenil 1+ Dan',
+    'woman_first_force' => 'Women 1+ Dan',
     'woman_second_force' => 'Femenil Kyus',
 
     'mixed_single' => 'Individual Mixt',

@@ -28,7 +28,7 @@ $categorySize = $tournament->championships->count();
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="#tab2"><i class="icon-location4"></i> Lugar
+                        <li><a href="#tab2"><i class="icon-location4"></i> {{trans('core.venue')}}
                                 @if ($tournament->venue != null)
                                     <span class="badge badge-success" id="venue-status">
                                         <i class=" icon icon-check"></i>
