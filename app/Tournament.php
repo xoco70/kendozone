@@ -358,8 +358,9 @@ class Tournament extends Model
     public function buildCategoryList()
     {
         $cts = Championship::with('category','settings')
-            ->whereHas('settings', function($query){
-                return $query->whereNotNull('teamSize');
+            ->whereHas('category', function($query){
+                return $query->where('isTeam',1);
+
             })
             ->where('tournament_id', $this->id)
             ->get();
@@ -381,9 +382,8 @@ class Tournament extends Model
     public function hasTeamCategory()
     {
         return $this
-            ->championshipSettings()
-            ->where('teamSize', '>', '0')
-            ->where('teamSize', '<>', null)
+            ->categories()
+            ->where('isTeam', '1')
             ->count();
     }
 
