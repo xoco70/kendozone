@@ -181,7 +181,7 @@ return [
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
-        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+//        Barryvdh\TranslationManager\ManagerServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
