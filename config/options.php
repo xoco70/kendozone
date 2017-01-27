@@ -20,7 +20,7 @@ return array(
     ],
 
     'preliminaryGroupSize' => [3 => 3],
-    'preliminaryWinner' => [1 => 1, 2 => 2, 3 => 3],
+    'preliminaryWinner' => [1 => 1], // , 2 => 2, 3 => 3
     'enchoQty' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'teamSize' => [2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10],
     'teamReserve' => [1 => 1, 2 => 2, 3 => 3, 4 => 4],

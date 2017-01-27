@@ -16,7 +16,7 @@ return [
     'PAGINATION' => '20',
 
     'MIN_COMPETITOR' => 2,
-    'MIN_COMPETITORS_X_AREA' => 6,
+    'MIN_COMPETITORS_X_AREA' => 2,
 
     // Tournament Levels
     'ND' => 1,
