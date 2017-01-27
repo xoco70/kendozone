@@ -68,14 +68,4 @@
 
 @stop
 @section('scripts_footer')
-    {{--{!! Html::script('js/pages/header/footable.js') !!}--}}
-    {{--<script>--}}
-    {{--$(function () {--}}
-
-    {{--// Initialize responsive functionality--}}
-    {{--$('.table-togglable').footable();--}}
-
-    {{--});--}}
-    {{--</script>--}}
-
 @stop
