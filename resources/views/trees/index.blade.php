@@ -39,7 +39,7 @@
                                         </a>
 
                                         {{--@can('store', Tree::class, $tournament) DONT WORK HAVE TO FIX IT, Security Issue--}}
-{{--                                        @if (Auth::user()->can('store', Tree::class, $tournament))--}}
+                                        @if (Auth::user()->can('store', [App\Tree::class, $tournament]))
 
                                             {!! Form::close() !!}
 
@@ -52,7 +52,7 @@
                                                 {{ trans_choice('core.generate_tree',1) }}
                                             </button>
                                             {!! Form::close() !!}
-                                        {{--@endif--}}
+                                        @endif
                                         {{--@endcan--}}
 
                                     </h1>
@@ -97,32 +97,32 @@
     <script>
 
         function render_fn(container, data, score, state) {
-            switch (state) {
-                case "empty-bye":
-                    container.append("No team")
-                    return;
-                case "empty-tbd":
-                    container.append("Upcoming")
-                    return;
-
-                case "entry-no-score":
-                case "entry-default-win":
-                case "entry-complete":
-                    container.append('<img src="site/png/' + data.flag + '.png" /> ').append(data.name)
-                    return;
-            }
+//            switch (state) {
+//                case "empty-bye":
+//                    container.append("No team")
+//                    return;
+//                case "empty-tbd":
+//                    container.append("Upcoming")
+//                    return;
+//
+//                case "entry-no-score":
+//                case "entry-default-win":
+//                case "entry-complete":
+//                    container.append('<img src="site/png/' + data.flag + '.png" /> ').append(data.name)
+//                    return;
+//            }
         }
         @foreach($championshipWithBrackets as $championshipId)
               @if ($loop->first)
                    $('#brackets_{{ $championshipId }}').bracket({
                         init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                        teamWidth: 100,
+                        teamWidth: 100
                     });
               @else
                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                         $('#brackets_{{ $championshipId }}').bracket({
                               init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                              teamWidth: 100,
+                              teamWidth: 100
                         })
                    });
               @endif

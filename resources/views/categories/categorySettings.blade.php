@@ -159,14 +159,18 @@ $currency = Auth::user()->country->currency_code;
                 <div class="row">
                     <div class="col-lg-3">
                         {!!  Form::label('treeType', trans('categories.treeType')) !!}
-                        {!!  Form::select('treeType', [0 => trans('categories.roundRobin'),1 => trans('categories.direct_elimination')], $treeType ,['class' => 'form-control']) !!}
+                        {!!  Form::select('treeType',
+                                [
+                                 // 0 => trans('categories.roundRobin'),
+                                 1 => trans('categories.direct_elimination')]
+                                 , $treeType ,['class' => 'form-control']) !!}
                     </div>
 
                     <div class="col-lg-2">
                         {!!  Form::label('fightingAreas', trans_choice('categories.fightingArea',2)) !!}
                         <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                            data-original-title="{{trans('categories.fightingAreaTooltip')}}"></i>
-                        {!!  Form::select('fightingAreas', [1 => 1,2 => 2,4 => 4,8 => 8], old('fightingAreas'),['class' => 'form-control']) !!}
+                        {!!  Form::select('fightingAreas', [1 => 1, /*2 => 2,4 => 4,8 => 8*/], old('fightingAreas'),['class' => 'form-control']) !!}
                     </div>
 
                     <div class="col-lg-3">
@@ -174,7 +178,7 @@ $currency = Auth::user()->country->currency_code;
                             {!!  Form::label('limitByEntity', trans('categories.limitByEntity')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                data-original-title="{{trans('categories.limitByEntityTooltip')}}"></i>
-                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control']) !!}
+                            {!!  Form::select('limitByEntity', config('options.limitByEntity'), old('limitByEntity'),['class' => 'form-control', "disabled"]) !!}
 
                         </div>
                     </div>

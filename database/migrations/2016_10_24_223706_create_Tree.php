@@ -18,41 +18,16 @@ class CreateTree extends Migration
             $table->integer('championship_id')->unsigned()->index();
 
             $table->integer('c1')->nullable()->unsigned()->index();
-            $table->foreign('c1')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
             $table->integer('c2')->nullable()->unsigned()->index();
-            $table->foreign('c2')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
             $table->integer('c3')->nullable()->unsigned()->index();
-            $table->foreign('c3')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
             $table->integer('c4')->nullable()->unsigned()->index();
-            $table->foreign('c4')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
             $table->integer('c5')->nullable()->unsigned()->index();
-            $table->foreign('c5')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
-
+            $table->tinyInteger("isTeam")->unsigned();
             $table->tinyInteger("area");
             $table->tinyInteger("order");
             $table->timestamps();

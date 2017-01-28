@@ -46,7 +46,7 @@
 'action' => ['TreeController@store', $championship->id]]) !!}
 
                                     <button type="submit"
-                                            class="btn bg-success btn-xs pull-right mr-10">
+                                            class="btn bg-success btn-xs pull-right mr-10" id="generate">
                                         {{ trans_choice('core.generate_tree',1) }}
 
                                     </button>

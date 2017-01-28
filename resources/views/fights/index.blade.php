@@ -29,12 +29,26 @@
                                     <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 2</th>
 
                                     @foreach($fightsByArea->sortBy('id') as $fight)
-                                    <tr>
-                                        <td class="p-10">{{$fight->id}}</td>
-                                        <th class="p-10" width="5%">{{$fight->area}}</th>
-                                        <td class="p-10">{{$fight->user1!= null ? $fight->user1->name : 'BYE'}}</td>
-                                        <td class="p-10">{{$fight->user2!= null ? $fight->user2->name : 'BYE'}}</td>
-                                    </tr>
+
+                                        <?php
+
+                                        if ($championship->category->isTeam) {
+                                            $user1 = $fight->team1 != null ? $fight->team1->name : 'BYE';
+                                            $user2 = $fight->team2 != null ? $fight->team2->name : 'BYE';
+                                        } else {
+                                            $user1 = $fight->user1 != null ? $fight->user1->name : 'BYE';
+                                            $user2 = $fight->user2 != null ? $fight->user2->name : 'BYE';
+                                        }
+
+                                        ?>
+
+
+                                        <tr>
+                                            <td class="p-10">{{$fight->id}}</td>
+                                            <th class="p-10" width="5%">{{$fight->area}}</th>
+                                            <td class="p-10">{{ $user1 }}</td>
+                                            <td class="p-10">{{ $user2 }}</td>
+                                        </tr>
                                     @endforeach
                                 </table>
                                 <br/>
@@ -54,14 +68,4 @@
 
 @stop
 @section('scripts_footer')
-    {{--{!! Html::script('js/pages/header/footable.js') !!}--}}
-    {{--<script>--}}
-    {{--$(function () {--}}
-
-    {{--// Initialize responsive functionality--}}
-    {{--$('.table-togglable').footable();--}}
-
-    {{--});--}}
-    {{--</script>--}}
-
 @stop

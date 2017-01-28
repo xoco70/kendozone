@@ -2447,16 +2447,7 @@ laravelValidation = {
                 $.extend(rules, cache[element.name][name]);
             } else {
                 cache[element.name][name]={};
-                var nameParts = name.split("[*]");
-                var regexpParts = nameParts.map(function(currentValue, index) {
-                    if (index % 2 === 0) {
-                        currentValue = currentValue + '[';
-                    } else {
-                        currentValue = ']' +currentValue;
-                    }
-                    return laravelValidation.helpers.escapeRegExp(currentValue);
-                });
-                var nameRegExp = new RegExp('^'+regexpParts.join('.*')+'$');
+                var nameRegExp = laravelValidation.helpers.regexFromWildcard(name);
                 if (element.name.match(nameRegExp)) {
                     var newRules = $.validator.normalizeRule( tmpRules ) || {};
                     cache[element.name][name]=newRules;
@@ -2478,6 +2469,7 @@ laravelValidation = {
         $.validator.addMethod("laravelValidation", function (value, element, params) {
             var validator = this;
             var validated = true;
+            var previous = this.previousValue( element );
 
             // put Implicit rules in front
             var rules=[];
@@ -2499,13 +2491,25 @@ laravelValidation = {
                     return false;
                 }
 
-
                 if (laravelValidation.methods[rule]!==undefined) {
-                    validated = laravelValidation.methods[rule].call(validator, value, element, param[1]);
-                    /*
-                } else if($.validator.methods[rule]!==undefined) {
-                    validated = $.validator.methods[rule].call(validator, value, element, param[1]);
-                    */
+                    validated = laravelValidation.methods[rule].call(validator, value, element, param[1], function(valid) {
+                        validator.settings.messages[ element.name ].laravelValidationRemote = previous.originalMessage;
+                        if ( valid ) {
+                            var submitted = validator.formSubmitted;
+                            validator.prepareElement( element );
+                            validator.formSubmitted = submitted;
+                            validator.successList.push( element );
+                            delete validator.invalid[ element.name ];
+                            validator.showErrors();
+                        } else {
+                            var errors = {};
+                            errors[ element.name ] = previous.message = $.isFunction( message ) ? message( value ) : message;
+                            validator.invalid[ element.name ] = true;
+                            validator.showErrors( errors );
+                        }
+                        validator.showErrors(validator.errorMap);
+                        previous.valid = valid;
+                    });
                 } else {
                     validated=false;
                 }
@@ -2669,15 +2673,23 @@ $.extend(true, laravelValidation, {
          * Gets the file information from file input
          *
          * @param fieldObj
+         * @param index
          * @returns {{file: *, extension: string, size: number}}
          */
-        fileinfo: function (fieldObj) {
+        fileinfo: function (fieldObj, index) {
             var FileName = fieldObj.value;
-            return {
-                file: FileName,
-                extension: FileName.substr(FileName.lastIndexOf('.') + 1),
-                size: fieldObj.files[0].size / 1024
-            };
+            index = typeof index !== 'undefined' ? index : 0;
+            if ( fieldObj.files !== null ) {
+                if (typeof fieldObj.files[index] !== 'undefined') {
+                    return {
+                        file: FileName,
+                        extension: FileName.substr(FileName.lastIndexOf('.') + 1),
+                        size: fieldObj.files[index].size / 1024,
+                        type: fieldObj.files[index].type
+                    };
+                }
+            }
+            return false;
         },
 
 
@@ -2725,16 +2737,27 @@ $.extend(true, laravelValidation, {
             }
 
             var validator = $.data(element.form, "validator");
-            var objRules = validator.settings.rules[element.name];
-            if ('laravelValidation' in objRules) {
-                var _rules=objRules.laravelValidation;
-                for (var i = 0; i < _rules.length; i++) {
-                    if ($.inArray(_rules[i][0],rules) !== -1) {
-                        found = true;
-                        break;
+            var listRules = [];
+            var cache = validator.arrayRulesCache;
+            if (element.name in cache) {
+                $.each(cache[element.name], function (index, arrayRule) {
+                    listRules.push(arrayRule);
+                });
+            }
+            if (element.name in validator.settings.rules) {
+                listRules.push(validator.settings.rules[element.name]);
+            }
+            $.each(listRules, function(index,objRules){
+                if ('laravelValidation' in objRules) {
+                    var _rules=objRules.laravelValidation;
+                    for (var i = 0; i < _rules.length; i++) {
+                        if ($.inArray(_rules[i][0],rules) !== -1) {
+                            found = true;
+                            return false;
+                        }
                     }
                 }
-            }
+            });
 
             return found;
         },
@@ -2766,7 +2789,7 @@ $.extend(true, laravelValidation, {
             } else if ($.isArray(value)) {
                 return parseFloat(value.length);
             } else if (element.type === 'file') {
-                return parseFloat(Math.ceil(this.fileinfo(element).size));
+                return parseFloat(Math.floor(this.fileinfo(element).size));
             }
 
             return parseFloat(this.strlen(value));
@@ -2931,13 +2954,37 @@ $.extend(true, laravelValidation, {
         },
 
         /**
-         * Scapes string to use as Regular Expression
+         * Escape string to use as Regular Expression
          * @param str
          * @returns string
          */
-        escapeRegExp: function escapeRegExp(str) {
+        escapeRegExp: function (str) {
             return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        },
+
+        /**
+         * Generate RegExp from wildcard attributes
+         * @param name
+         * @returns {RegExp}
+         */
+        regexFromWildcard: function(name) {
+            var nameParts = name.split("[*]");
+            if (nameParts.length === 1) {
+                nameParts.push('');
+            }
+            var regexpParts = nameParts.map(function(currentValue, index) {
+                if (index % 2 === 0) {
+                    currentValue = currentValue + '[';
+                } else {
+                    currentValue = ']' +currentValue;
+                }
+
+                return laravelValidation.helpers.escapeRegExp(currentValue);
+            });
+
+            return new RegExp('^'+regexpParts.join('.*')+'$');
         }
+
 
     }
 });
@@ -3452,7 +3499,24 @@ $.extend(true, laravelValidation, {
             return true;
         },
 
+        /**
+         * Bail This is the default behaivour os JSValidation.
+         * Always returns true, just lets us put sometimes in rules.*
+         * @return {boolean}
+         */
+        Bail: function() {
+            return true;
+        },
 
+        /**
+         * "Indicate" validation should pass if value is null.
+         * Always returns true, just lets us put "nullable" in rules.
+         * @return {boolean}
+         */
+        Nullable: function() {
+            return true;
+        },
+        
         /**
          * Validate the given attribute is filled if it is present.
          */
@@ -3662,6 +3726,62 @@ $.extend(true, laravelValidation, {
         },
 
         /**
+         * Validate that the values of an attribute is in another attribute.
+         * @param value
+         * @param element
+         * @param params
+         * @returns {boolean}
+         * @constructor
+         */
+        InArray: function (value, element, params) {
+            if (typeof params[0] === 'undefined') {
+                return false;
+            }
+            var elements = this.elements();
+            var found = false;
+            var nameRegExp = laravelValidation.helpers.regexFromWildcard(params[0]);
+
+            for ( var i = 0; i < elements.length ; i++ ) {
+                var targetName = elements[i].name;
+                if (targetName.match(nameRegExp)) {
+                    var equals = laravelValidation.methods.Same.call(this,value, element, [targetName]);
+                    found = found || equals;
+                }
+            }
+
+            return found;
+        },
+
+        /**
+         * Validate an attribute is unique among other values.
+         * @param value
+         * @param element
+         * @param params
+         * @returns {boolean}
+         */
+        Distinct: function (value, element, params) {
+            if (typeof params[0] === 'undefined') {
+                return false;
+            }
+
+            var elements = this.elements();
+            var found = false;
+            var nameRegExp = laravelValidation.helpers.regexFromWildcard(params[0]);
+
+            for ( var i = 0; i < elements.length ; i++ ) {
+                var targetName = elements[i].name;
+                if (targetName !== element.name && targetName.match(nameRegExp)) {
+                    var equals = laravelValidation.methods.Same.call(this,value, element, [targetName]);
+                    found = found || equals;
+                }
+            }
+
+            return !found;
+        },
+
+
+
+        /**
          * Validate that an attribute is different from another attribute.
          * @return {boolean}
          */
@@ -3815,16 +3935,53 @@ $.extend(true, laravelValidation, {
         },
 
         /**
+         * The field under validation must be a successfully uploaded file.
+         * @return {boolean}
+         */
+        File: function(value, element) {
+            if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+                return true;
+            }
+            if ('files' in element ) {
+                return (element.files.length > 0);
+            }
+            return false;
+        },
+
+        /**
          * Validate the MIME type of a file upload attribute is in a set of MIME types.
          * @return {boolean}
          */
         Mimes: function(value, element, params) {
+            if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+                return true;
+            }
             var lowerParams = $.map(params, function(item) {
                 return item.toLowerCase();
             });
-            
-            return (!window.File || !window.FileReader || !window.FileList || !window.Blob) ||
-                lowerParams.indexOf(laravelValidation.helpers.fileinfo(element).extension.toLowerCase())!==-1;
+
+            var fileinfo = laravelValidation.helpers.fileinfo(element);
+            return (fileinfo !== false && lowerParams.indexOf(fileinfo.extension.toLowerCase())!==-1);
+        },
+
+        /**
+         * The file under validation must match one of the given MIME types
+         * @return {boolean}
+         */
+        Mimetypes: function(value, element, params) {
+            if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+                return true;
+            }
+            var lowerParams = $.map(params, function(item) {
+                return item.toLowerCase();
+            });
+
+            var fileinfo = laravelValidation.helpers.fileinfo(element);
+
+            if (fileinfo === false) {
+                return false;
+            }
+            return (lowerParams.indexOf(fileinfo.type.toLowerCase())!==-1);
         },
 
         /**
@@ -3834,6 +3991,45 @@ $.extend(true, laravelValidation, {
             return laravelValidation.methods.Mimes.call(this, value, element, ['jpg', 'png', 'gif', 'bmp', 'svg']);
         },
 
+        /**
+         * Validate dimensions of Image
+         * @return {boolean|string}
+         */
+        Dimensions: function(value, element, params, callback) {
+            if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+                return true;
+            }
+            if (element.files === null || typeof element.files[0] === 'undefined') {
+                return false;
+            }
+
+
+            var fr = new FileReader;
+            fr.onload = function () {
+                var img = new Image();
+                img.onload = function () {
+                    var height = parseFloat(img.naturalHeight);
+                    var width = parseFloat(img.naturalWidth);
+                    var ratio = width / height;
+                    var notValid = ((params['width']) && parseFloat(params['width'] !== width)) ||
+                        ((params['min_width']) && parseFloat(params['min_width']) > width) ||
+                        ((params['max_width']) && parseFloat(params['max_width']) < width) ||
+                        ((params['height']) && parseFloat(params['height']) !== height) ||
+                        ((params['min_height']) && parseFloat(params['min_height']) > height) ||
+                        ((params['max_height']) && parseFloat(params['max_height']) < height) ||
+                        ((params['ratio']) && ratio !== parseFloat(eval(params['ratio']))
+                        );
+                    callback(! notValid);
+                };
+                img.onerror = function() {
+                    callback(false);
+                };
+                img.src = fr.result;
+            };
+            fr.readAsDataURL(element.files[0]);
+
+            return 'pending';
+        },
 
         /**
          * Validate that an attribute contains only alphabetic characters.

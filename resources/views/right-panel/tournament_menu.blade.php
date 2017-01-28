@@ -51,7 +51,7 @@ $categorySize = $tournament->championships->count();
                             </a></li>
 
 
-                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}">
+                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}" id="competitors">
                                 <i class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)
