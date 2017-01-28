@@ -23,7 +23,6 @@
         "intervention/image": "2.*",
         "owen-it/laravel-auditing": "2.*",
         "fzaninotto/faker": "1.*",
-        "graham-campbell/htmlmin": "4.*",
         "codeception/codeception": "*",
         "sentry/sentry-laravel": "^0.3.0",
         "laravolt/avatar": "^1.8",
