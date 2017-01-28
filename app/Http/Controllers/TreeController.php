@@ -50,6 +50,7 @@ class TreeController extends Controller
             $generation->championship = $championship;
             try {
                 $tree = $generation->run();
+
                 $championship->tree = $tree;
                 Tree::generateFights($tree, $settings);
                 flash()->success(trans('msg.championships_tree_generation_success'));

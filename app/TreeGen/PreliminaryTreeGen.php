@@ -107,6 +107,7 @@ class PreliminaryTreeGen implements TreeGenerable
             }
             $area++;
         }
+
         return $preliminiaryTree;
     }
 

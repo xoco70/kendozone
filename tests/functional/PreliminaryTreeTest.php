@@ -3,6 +3,7 @@ use App\Championship;
 use App\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
+use App\Tree;
 use App\User;
 use App\Venue;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-class TreeTest extends TestCase
+class PreliminaryTreeTest extends TestCase
 {
     use DatabaseTransactions;
 //    use WithoutMiddleware;
@@ -49,9 +50,21 @@ class TreeTest extends TestCase
     /** @test */
     public function it_create_a_tree_with_6_competitors()
     {
-        // Having
+
         $tournament = factory(Tournament::class)->create();
-        $championsip = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
+
+        $championship = factory(Championship::class)->create([
+            'tournament_id' => $tournament->id,
+            'category_id' => 1,
+        ]);
+        factory(ChampionshipSettings::class)->create([
+            'championship_id' => $championship->id,
+            'hasPreliminary' => 1,
+            'teamSize' => null,
+            'fightingAreas' => 1,
+            'preliminaryWinner' => 1,
+            'preliminaryGroupSize' => 3,
+        ]);
 
         $users = factory(User::class,6)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $competitors = new Collection();
@@ -59,17 +72,18 @@ class TreeTest extends TestCase
 
             $competitor = factory(Competitor::class)->create([
                 'user_id' => $user->id,
-                'championship_id' => $championsip->id,
+                'championship_id' => $championship->id,
                 'confirmed' => 1]);
             $competitors->push($competitor);
         }
         $this->visit('/tournaments/'.$tournament->slug."/edit")
             ->click('#competitors')
-//            ->dump()
-            ->press('generate')
-            ->seeNumRecords(2, 'tree', ['championship_id' => $championsip->id]);
-        // Check there is 2 rows with 3 users
+            ->press('generate');
 
+        $count = Tree::where('championship_id', $championship->id )->count();
+
+        // Check there is 2 rows with 3 users
+        $this->assertTrue($count == 2);
 
 
     }
