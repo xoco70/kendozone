@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('scripts')
+@section('content')
     @unless(empty($sentryID))
         <!-- Sentry JS SDK 2.1.+ required -->
         <script src="https://cdn.ravenjs.com/3.3.0/raven.min.js"></script>
@@ -13,8 +13,6 @@
             });
         </script>
     @endunless
-@stop
-@section('content')
 
 
     <div class="page-container login-container">
