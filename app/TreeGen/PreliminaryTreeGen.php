@@ -217,7 +217,7 @@ class PreliminaryTreeGen implements TreeGenerable
      */
     private function getTreeSize($userCount, $groupSize)
     {
-        $square = collect([2, 4, 8, 16, 32, 64]);
+        $square = collect([1, 2, 4, 8, 16, 32, 64]);
         $squareMultiplied = $square->map(function ($item, $key) use ($groupSize) {
             return $item * $groupSize;
         });
