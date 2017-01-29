@@ -19,6 +19,10 @@
             </a>
         </li>
     @endif
+    {{--<li><a href="{!! URL::to('about')!!}">--}}
+            {{--<i class="icon-help"></i>{{trans('core.about')}}--}}
+        {{--</a>--}}
+    {{--</li>--}}
     {{--====================================== Logout ======================================--}}
     <li class="divider"></li>
     <li><a href="{{  url('/logout') }}" id="logout"><i

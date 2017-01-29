@@ -309,5 +309,5 @@ return [
     // Share
 
     'register_in_tournament' => 'Register in tournament',
-
+    'about' => "About Kendozone"
 ];
