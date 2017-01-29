@@ -106,12 +106,8 @@ $currency = Auth::user()->country->currency_code;
 
                         <div class="col-lg-3">
                             {!!  Form::label('teamSize', trans('categories.teamSize')) !!}
-                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.teamsizeTooltip')}}"></i>
                             {!!  Form::select('teamSize', config('options.teamSize'),old('teamSize'), ['class' => 'form-control']) !!}
                         </div>
-
-
                     @endif
 
                 </div>
@@ -161,7 +157,7 @@ $currency = Auth::user()->country->currency_code;
                         {!!  Form::label('treeType', trans('categories.treeType')) !!}
                         {!!  Form::select('treeType',
                                 [
-                                 // 0 => trans('categories.roundRobin'),
+                                 0 => trans('categories.roundRobin'),
                                  1 => trans('categories.direct_elimination')]
                                  , $treeType ,['class' => 'form-control']) !!}
                     </div>

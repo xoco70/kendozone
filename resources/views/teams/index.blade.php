@@ -6,9 +6,6 @@
 $teams = $tournament->teams;
 ?>
 @section('content')
-
-
-
     <div class="container-detached">
         <div class="content-detached">
 

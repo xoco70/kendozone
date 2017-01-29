@@ -150,9 +150,9 @@ return [
     'organizer' => 'Organizer',
     'select_categories_to_register' => 'Select categories to register',
 
-    '2_choices_to_invite' => 'Tienes 2 opciones para invitar competidores:',
-    'invite_by_commas' => 'Ingresando el email de los competidores separandolos por commas',
-    'invite_by_excel' => 'Importando un archivo excel ( El archivo debe contener un email por linea en la primera columna )',
+    '2_choices_to_invite' => 'You have 2 options to invite competitors:',
+    'invite_by_commas' => 'Write the competitors email separated by comas',
+    'invite_by_excel' => 'Import an Excel file( File must contain one email per line in the first column)',
 
 
     // Messages

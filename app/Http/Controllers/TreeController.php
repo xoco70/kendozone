@@ -9,6 +9,7 @@ use App\Grade;
 use App\Tree;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class TreeController extends Controller
@@ -39,7 +40,7 @@ class TreeController extends Controller
 
         $tournament = Tree::getTournament($request);
 
-        if (Auth::user()->cannot('store', [Tree::class,$tournament])) {
+        if (Auth::user()->cannot('store', [Tree::class, $tournament])) {
             throw new AuthorizationException();
         }
 
@@ -49,10 +50,12 @@ class TreeController extends Controller
             $generation = Tree::getGenerationStrategy($championship);
             $generation->championship = $championship;
             try {
-                $tree = $generation->run();
 
+                $tree = $generation->run();
                 $championship->tree = $tree;
-                Tree::generateFights($tree, $settings);
+
+
+                Tree::generateFights($tree, $settings, $championship);
                 flash()->success(trans('msg.championships_tree_generation_success'));
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
