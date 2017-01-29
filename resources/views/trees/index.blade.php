@@ -113,18 +113,24 @@
 //            }
         }
         @foreach($championshipWithBrackets as $championshipId)
-              @if ($loop->first)
-                   $('#brackets_{{ $championshipId }}').bracket({
-                        init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                        teamWidth: 100
-                    });
-              @else
-                   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                        $('#brackets_{{ $championshipId }}').bracket({
-                              init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                              teamWidth: 100
-                        })
-                   });
+              <?php
+               $championship = \App\Championship::find($championshipId);
+
+              ?>
+              @if ($championship->tree->count())
+                  @if ($loop->first)
+                       $('#brackets_{{ $championshipId }}').bracket({
+                            init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
+                            teamWidth: 100
+                        });
+                  @else
+                       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                            $('#brackets_{{ $championshipId }}').bracket({
+                                  init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
+                                  teamWidth: 100
+                            })
+                       });
+                  @endif
               @endif
         @endforeach
 
