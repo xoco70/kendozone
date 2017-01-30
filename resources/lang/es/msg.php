@@ -124,5 +124,5 @@ return [
     'cancelled' => 'Cancelado',
     'operation_cancelled' => 'Operación cancelada',
     'championships_tree_generation_success' => 'Generación de arboles exitosa!',
-    'min_competitor_required' => "Se requiere un minimo de :number por area. Disminuya la cantidad de areas, o invita más competidores",
+    'min_competitor_required' => "Se requiere un minimo de :number competitodres por area. Disminuya la cantidad de areas, o invita más competidores",
 ];

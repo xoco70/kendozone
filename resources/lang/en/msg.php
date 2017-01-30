@@ -116,5 +116,5 @@ return [
     'cancelled' => 'Canceled',
     'operation_cancelled' => 'Operation canceled',
     'championships_tree_generation_success' => 'Tree generation Successful!',
-    'min_competitor_required' => "You need a min. of :number by area. Decrease areas quantity, or invite more competitors",
+    'min_competitor_required' => "You need a min. of :number competitors by area. Decrease areas quantity, or invite more competitors",
 ];
