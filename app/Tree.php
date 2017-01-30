@@ -238,7 +238,7 @@ class Tree extends Model
      * @param Collection $tree
      * @param $settings
      */
-    public static function generateFights(Collection $tree, $settings)
+    public static function generateFights(Collection $tree, $settings, Championship $championship = null)
     {
 
         // Delete previous fight for this championship
@@ -255,7 +255,7 @@ class Tree extends Model
         } elseif ($settings->treeType == config('constants.DIRECT_ELIMINATION')) {
             Fight::saveFightRound($tree); // Always C1 x C2
         } elseif ($settings->treeType == config('constants.ROUND_ROBIN')) {
-
+            Fight::saveRoundRobinFight($championship, $tree); // Always C1 x C2
         }
 
     }

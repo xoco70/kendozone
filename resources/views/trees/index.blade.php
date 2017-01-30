@@ -30,15 +30,14 @@
                     <div class="container-fluid">
                         <div class="tab-content">
                             @foreach($tournament->championships as $championship)
+
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
                                     <h1> {{$championship->category->buildName()}}
-
                                         <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">
                                             <i class="icon-printer"></i>
                                         </a>
 
-                                        {{--@can('store', Tree::class, $tournament) DONT WORK HAVE TO FIX IT, Security Issue--}}
                                         @if (Auth::user()->can('store', [App\Tree::class, $tournament]))
 
                                             {!! Form::close() !!}
@@ -53,18 +52,16 @@
                                             </button>
                                             {!! Form::close() !!}
                                         @endif
-                                        {{--@endcan--}}
 
                                     </h1>
-
                                     @if ($championship->tree != null  && $championship->tree->count() != 0)
                                         @if ($championship->hasPreliminary())
                                             @include('layouts.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
                                             @include('layouts.tree.directElimination')
+                                        @elseif ($championship->isRoundRobinType())
+                                            @include('layouts.tree.roundRobin')
                                         @endif
-                                    @elseif (! $championship->hasPreliminary() && $championship->isRoundRobinType())
-                                        @include('layouts.tree.roundRobin')
                                     @else
                                         <div>{{trans('core.no_generated_tree')}}</div>
                                     @endif
@@ -113,18 +110,24 @@
 //            }
         }
         @foreach($championshipWithBrackets as $championshipId)
-              @if ($loop->first)
-                   $('#brackets_{{ $championshipId }}').bracket({
-                        init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                        teamWidth: 100
-                    });
-              @else
-                   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                        $('#brackets_{{ $championshipId }}').bracket({
-                              init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                              teamWidth: 100
-                        })
-                   });
+              <?php
+               $championship = \App\Championship::find($championshipId);
+
+              ?>
+              @if ($championship->tree->count())
+                  @if ($loop->first)
+                       $('#brackets_{{ $championshipId }}').bracket({
+                            init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
+                            teamWidth: 100
+                        });
+                  @else
+                       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                            $('#brackets_{{ $championshipId }}').bracket({
+                                  init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
+                                  teamWidth: 100
+                            })
+                       });
+                  @endif
               @endif
         @endforeach
 

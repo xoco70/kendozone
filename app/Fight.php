@@ -98,8 +98,31 @@ class Fight extends Model
             $fight->area = $treeGroup->area;
             $fight->save();
         }
+    }
 
 
+    public static function saveRoundRobinFight(Championship $championship, $tree)
+    {
+        $championship->category->isTeam
+            ? $fighters = $championship->teams
+            : $fighters = $championship->users;
+
+        $reverseFighters = $fighters->reverse();
+        $order = 0;
+        foreach ($reverseFighters as $reverse) {
+            foreach ($fighters as $fighter) {
+                if ($fighter->id != $reverse->id) {
+                    $fight = new Fight();
+                    $fight->tree_id = $tree[0]->id;
+                    $fight->c1 = $fighter->id;
+                    $fight->c2 = $reverse->id;
+                    $fight->order = $order++;
+                    $fight->area = 1;
+                    $fight->save();
+                    $order++;
+                }
+            }
+        }
     }
 
 }

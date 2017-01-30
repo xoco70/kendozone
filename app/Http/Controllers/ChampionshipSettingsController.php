@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Tournament;
+use App\Tree;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -32,7 +33,7 @@ class ChampionshipSettingsController extends Controller
     public function store(Request $request, $championshipId)
     {
 
-        try{
+        try {
             $championship = Championship::find($championshipId);
 
             $category = $championship->category;
@@ -45,7 +46,7 @@ class ChampionshipSettingsController extends Controller
 
             $setting = ChampionshipSettings::create($request->except('alias'));
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
         }
     }
@@ -66,7 +67,13 @@ class ChampionshipSettingsController extends Controller
             $category = $championship->category;
             $category->alias = $request->alias;
             $category->save();
-            ChampionshipSettings::findOrFail($championshipSettingsId)->update($request->except('alias'));
+            $cs = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->except('alias'));
+
+            // If we changed one of those data, remove tree
+            if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {
+                Tree::where('championship_id', $championshipId)->delete();
+            }
+            $cs->save();
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);

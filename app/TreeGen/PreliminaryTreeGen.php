@@ -186,6 +186,7 @@ class PreliminaryTreeGen implements TreeGenerable
     private function getByeGroup(Championship $championship)
     {
         $groupSizeDefault = 3;
+        $preliminaryGroupSize = 2;
 
         if ($championship->category->isTeam){
             $userCount = $championship->teams->count();
@@ -202,8 +203,7 @@ class PreliminaryTreeGen implements TreeGenerable
 
         } else {
             // No Preliminary and No Direct Elimination --> Round Robin
-            $preliminaryGroupSize = 2;
-            dump('Round Robin Still not implemented');
+            // Should Have no tree
         }
         $treeSize = $this->getTreeSize($userCount, $preliminaryGroupSize);
 
