@@ -169,6 +169,8 @@ class Category extends Model
     {
         $grades = Grade::all();
         $gradeText = '';
+
+
         if ($this->gradeCategory == 1) {
             $gradeText = trans('categories.first_force');
         } else if ($this->gradeCategory == 2) {
@@ -178,14 +180,14 @@ class Category extends Model
             $gradeText = ' - ' . trans('core.grade') . ' : ';
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 if ($this->gradeMin == $this->gradeMax) {
-                    $gradeText .= $grades[$this->gradeMin]->name;
+                    $gradeText .= $grades[$this->gradeMin-1]->name;
                 } else {
-                    $gradeText .= $grades[$this->gradeMin]->name . ' - ' . $grades[$this->gradeMax]->name;
+                    $gradeText .= $grades[$this->gradeMin-1]->name . ' - ' . $grades[$this->gradeMax-1]->name;
                 }
             } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
-                $gradeText .= ' < ' . $grades[$this->gradeMax]->name;
+                $gradeText .= ' < ' . $grades[$this->gradeMax-1]->name;
             } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
-                $gradeText .= ' > ' . $grades[$this->gradeMin]->name;
+                $gradeText .= ' > ' . $grades[$this->gradeMin-1]->name;
             } else {
                 $gradeText = '';
             }
