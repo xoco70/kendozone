@@ -101,28 +101,74 @@ class Fight extends Model
     }
 
 
-    public static function saveRoundRobinFight(Championship $championship, $tree)
-    {
-        $championship->category->isTeam
-            ? $fighters = $championship->teams
-            : $fighters = $championship->users;
+//    public static function saveRoundRobinFight(Championship $championship, $tree)
+//    {
+//        $championship->category->isTeam
+//            ? $fighters = $championship->teams
+//            : $fighters = $championship->users;
+//
+//        $reverseFighters = $fighters->reverse();
+//        $order = 0;
+//        foreach ($reverseFighters as $reverse) {
+//            foreach ($fighters as $fighter) {
+//                if ($fighter->id != $reverse->id) {
+//                    $fight = new Fight();
+//                    $fight->tree_id = $tree[0]->id;
+//                    $fight->c1 = $fighter->id;
+//                    $fight->c2 = $reverse->id;
+//                    $fight->order = $order++;
+//                    $fight->area = 1;
+//                    $fight->save();
+//                    $order++;
+//                }
+//            }
+//        }
+//    }
 
-        $reverseFighters = $fighters->reverse();
-        $order = 0;
-        foreach ($reverseFighters as $reverse) {
-            foreach ($fighters as $fighter) {
-                if ($fighter->id != $reverse->id) {
-                    $fight = new Fight();
-                    $fight->tree_id = $tree[0]->id;
-                    $fight->c1 = $fighter->id;
-                    $fight->c2 = $reverse->id;
-                    $fight->order = $order++;
-                    $fight->area = 1;
-                    $fight->save();
-                    $order++;
-                }
+    public static function saveRoundRobinFights(Championship $championship, $tree)
+    {
+
+        $round = [];
+        if ($championship->category->isTeam) {
+            $fighters = $championship->teams;
+            if (!sizeof($fighters) % 2 == 0){
+                $fighters->push(new Team(['name' => "BYE"]));
+            }
+        } else {
+            $fighters = $championship->users;
+            if (!sizeof($fighters) % 2 == 0){
+                $fighters->push(new User(['name' => "BYE"]));
             }
         }
+
+
+        $away = $fighters->splice(sizeof($fighters) / 2);  // 2
+
+        $home = $fighters; // 1
+
+        $order = 1;
+
+        for ($i = 0; $i < sizeof($home) + sizeof($away) - 1; $i++) { // 0 -> 2
+            for ($j = 0; $j < sizeof($home); $j++) {  // 1 no mas
+
+                $round[$i][$j]["Home"] = $home[$j];
+                $round[$i][$j]["Away"] = $away[$j];
+                $fight = new Fight();
+                $fight->tree_id = $tree[0]->id;
+                $fight->c1 = $round[$i][$j]["Home"]->id;
+                $fight->c2 = $round[$i][$j]["Away"]->id;
+                $fight->order = $order++;
+                $fight->area = 1;
+                $fight->save();
+                $order++;
+
+            }
+            if (sizeof($home) + sizeof($away) - 1 > 2) {
+                $away->prepend($home->splice(1, 1)->shift());
+                $home->push($away->pop());
+            }
+        }
+        return $round;
     }
 
 }
