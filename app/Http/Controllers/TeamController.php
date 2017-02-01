@@ -46,7 +46,7 @@ class TeamController extends Controller
     public function create(Tournament $tournament)
     {
         $team = new Team;
-        if (Auth::user()->cannot('create', $tournament)) {
+        if (Auth::user()->cannot('create', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
 
@@ -66,10 +66,6 @@ class TeamController extends Controller
      */
     public function store(TeamRequest $request, Tournament $tournament)
     {
-
-
-//        $team = Team::make($request->all());
-        $team = new Team;
         if (Auth::user()->cannot('store', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
@@ -91,9 +87,9 @@ class TeamController extends Controller
     {
         $team = Team::findOrFail($teamId);
 
-//        if (Auth::user()->cannot('edit',$team, $tournament)) {
-//            throw new AuthorizationException();
-//        }
+        if (Auth::user()->cannot('edit', [Team::class, $tournament])) {
+            throw new AuthorizationException();
+        }
         $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
@@ -112,12 +108,12 @@ class TeamController extends Controller
     {
 
         $team = Team::findOrFail($teamId);
-        if (Auth::user()->cannot('update', $team)) {
+        if (Auth::user()->cannot('update', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
 
         $team->update($request->all());
-        flash()->success(trans('msg.team_update_successful', ['name' => $team->name]));
+        flash()->success(trans('msg.team_edit_successful', ['name' => $team->name]));
         return redirect()->route('teams.index', $tournament->slug);
 
     }
@@ -146,7 +142,7 @@ class TeamController extends Controller
 
         $team = Team::findOrFail($teamId);
 
-        if (Auth::user()->cannot('delete', $team)) {
+        if (Auth::user()->cannot('delete', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
 
