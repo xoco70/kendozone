@@ -53,6 +53,7 @@ class PreliminaryTreeGen implements TreeGenerable
             throw new TreeGenerationException(trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]));
 
         }
+
         // Get Competitor's / Team list ordered by entities ( Federation, Assoc, Club, etc...)
         $users = $this->getUsersByEntity();
 
@@ -135,7 +136,7 @@ class PreliminaryTreeGen implements TreeGenerable
      */
     private function getUsersByEntity(): Collection
     {
-        $competitors = new Collection();
+//        $competitors = new Collection();
 
         // Right now, we are treating users and teams as equals.
         // It doesn't matter right now, because we only need name attribute which is common to both models
@@ -155,27 +156,22 @@ class PreliminaryTreeGen implements TreeGenerable
             }
         }
 
-        // We must add another group that has bye
+        $tmpUserGroups = clone $userGroups;
 
         $byeGroup = $this->getByeGroup($this->championship);
-        if (sizeof($byeGroup) > 0) {
-            $userGroups->push($byeGroup->values());
-        }
+
 
         // Get biggest competitor's group
-        $max = $this->getMaxCompetitorByEntity($userGroups);
+        $max = $this->getMaxCompetitorByEntity($tmpUserGroups);
 
         // We reacommodate them so that we can mix them up and they don't fight with another competitor of his entity.
 
-        for ($i = 0; $i < $max; $i++) {
-            foreach ($userGroups as $userGroup) {
-                $competitor = $userGroup->values()->get($i);
-                if ($competitor != null) {
-                    $competitors->push($competitor);
-                }
-            }
-        }
+        $competitors = $this->repart($userGroups, $max);
+
+        $competitors = $this->insertByes($competitors, $byeGroup);
+
         return $competitors;
+
     }
 
     /**
@@ -188,9 +184,9 @@ class PreliminaryTreeGen implements TreeGenerable
         $groupSizeDefault = 3;
         $preliminaryGroupSize = 2;
 
-        if ($championship->category->isTeam){
+        if ($championship->category->isTeam) {
             $userCount = $championship->teams->count();
-        }else{
+        } else {
             $userCount = $championship->users->count();
         }
 
@@ -248,5 +244,59 @@ class PreliminaryTreeGen implements TreeGenerable
             $byeGroup->push($null);
         }
         return $byeGroup;
+    }
+
+    /**
+     * @param $userGroups
+     * @param $max
+     * @return Collection
+     */
+    private function repart($userGroups, $max)
+    {
+        $competitors = new Collection;
+        for ($i = 0; $i < $max; $i++) {
+            foreach ($userGroups as $userGroup) {
+                $competitor = $userGroup->values()->get($i);
+                if ($competitor != null) {
+                    $competitors->push($competitor);
+                }
+            }
+        }
+        return $competitors;
+    }
+
+    /**
+     * Insert byes in an homogen way
+     * @param Collection $competitors
+     * @param Collection $byeGroup
+     * @return Collection
+     */
+    private function insertByes(Collection $competitors, Collection $byeGroup)
+    {
+        $bye = sizeof($byeGroup) > 0 ? $byeGroup[0] : [];
+        $sizeCompetitors = sizeof($competitors);
+        $sizeGroupBy = sizeof($byeGroup);
+//        $totalSize = $sizeCompetitors + $sizeGroupBy;
+
+        $frequency = $sizeGroupBy != 0
+            ?  (int)floor($sizeCompetitors / $sizeGroupBy)
+            : -1;
+
+        // Create Copy of $competitors
+        $newCompetitors = new Collection;
+        $i = 0;
+        $byeCount = 0;
+        foreach ($competitors as $competitor) {
+
+            if ($frequency != -1 && $i % $frequency == 0 && $byeCount < $sizeGroupBy) {
+                $newCompetitors->push($bye);
+                $byeCount++;
+            }
+            $newCompetitors->push($competitor);
+            $i++;
+
+        }
+        
+        return $newCompetitors;
     }
 }

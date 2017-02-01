@@ -29,7 +29,6 @@ class TournamentRequest extends Request
      */
     public function rules()
     {
-//        dd($this->exists('dateIni'));
         switch (true) {
 
             case $this->exists('dateIni'):

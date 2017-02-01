@@ -255,7 +255,8 @@ class Tree extends Model
         } elseif ($settings->treeType == config('constants.DIRECT_ELIMINATION')) {
             Fight::saveFightRound($tree); // Always C1 x C2
         } elseif ($settings->treeType == config('constants.ROUND_ROBIN')) {
-            Fight::saveRoundRobinFight($championship, $tree); // Always C1 x C2
+            Fight::saveRoundRobinFights($championship, $tree);
+
         }
 
     }

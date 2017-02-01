@@ -24,8 +24,6 @@ class TeamRequest extends Request
         return [
             'name' => 'required',
             'championship_id' => 'required',
-//            'tournamentDate' => 'required|date',
-//            'limitRegistrationDate' => 'date',
         ];
     }
 }

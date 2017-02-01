@@ -30,6 +30,13 @@ class TeamPolicy
         return $user->isOwner($tournament);
     }
 
+
+    public function edit(User $user, Tournament $tournament)
+    {
+        return $user->isOwner($tournament);
+    }
+
+
     // You can store a user if you are not a simple user
     public function store(User $user, Tournament $tournament)
     {
@@ -44,6 +51,11 @@ class TeamPolicy
 //    }
 
     public function update(User $user, Tournament $tournament)
+    {
+        return $user->isOwner($tournament);
+    }
+
+    public function delete(User $user, Tournament $tournament)
     {
         return $user->isOwner($tournament);
     }

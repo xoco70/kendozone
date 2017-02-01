@@ -14,7 +14,7 @@
             @include('layouts.tree.topTree')
             <div class="panel panel-flat">
                 <div class="panel-body">
-                    <div class="container-fluid">
+                    <div class="container-fluid" align="center">
 
                         @forelse($tournament->championships as $championship)
                             <h1> {{$championship->category->buildName()}}</h1>
@@ -22,11 +22,11 @@
 
                             {{--Area {{ $tree->area }} <br/>--}}
                             @foreach($championship->fights->groupBy('area') as $fightsByArea)
-                                <table class="table-bordered full-width">
-                                    <th class="p-10" width="5%">Id</th>
-                                    <th class="p-10" width="5%">Area</th>
-                                    <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 1</th>
-                                    <th class="p-10" width="20%">{{trans_choice('core.competitor',1)}} 2</th>
+                                <table class="table-bordered text-center">
+                                    <th class="p-10" >Id</th>
+                                    <th class="p-10" >Area</th>
+                                    <th class="p-10" >{{trans_choice('core.competitor',1)}} 1</th>
+                                    <th class="p-10" >{{trans_choice('core.competitor',1)}} 2</th>
 
                                     @foreach($fightsByArea->sortBy('id') as $fight)
 
@@ -45,7 +45,7 @@
 
                                         <tr>
                                             <td class="p-10">{{$fight->id}}</td>
-                                            <th class="p-10" width="5%">{{$fight->area}}</th>
+                                            <th class="p-10">{{$fight->area}}</th>
                                             <td class="p-10">{{ $user1 }}</td>
                                             <td class="p-10">{{ $user2 }}</td>
                                         </tr>

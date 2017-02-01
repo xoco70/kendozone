@@ -24,7 +24,9 @@ class CreateTeamTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            $table->unique(['championship_id', 'name']);
         });
+
 
 //        Schema::create('team_member', function (Blueprint $table) {
 //            $table->increments('id');

@@ -31,6 +31,7 @@ return [
 
     'ROUND_ROBIN' => 0,
     'DIRECT_ELIMINATION' => 1,
+    'GRADE_MINUTES' => 525600 // a Year
 
 
 ];

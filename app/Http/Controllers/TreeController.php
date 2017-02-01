@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Championship;
 use App\ChampionshipSettings;
 use App\Exceptions\TreeGenerationException;
+use App\Fight;
 use App\Grade;
 use App\Tree;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,7 +23,7 @@ class TreeController extends Controller
      */
     public function index(Request $request)
     {
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $tournament = Tree::getTournament($request);
         return view('trees.index', compact('tournament', 'grades'));
     }
@@ -56,6 +57,7 @@ class TreeController extends Controller
 
 
                 Tree::generateFights($tree, $settings, $championship);
+
                 flash()->success(trans('msg.championships_tree_generation_success'));
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
@@ -71,7 +73,7 @@ class TreeController extends Controller
     public function single(Request $request)
     {
         $championship = Championship::find($request->championship);
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         return view('pdf.tree', compact('championship', 'grades'));
     }
 

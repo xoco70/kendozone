@@ -10,7 +10,7 @@ class AuthRequest extends Request
 
     public function __construct(\Illuminate\Http\Request $request)
     {
-        // add roleId
+        // Insert needed fields in request if not present
 
         $request->request->add(['role_id' => config('constants.ROLE_USER')]);
 

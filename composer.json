@@ -16,8 +16,6 @@
         "barryvdh/laravel-ide-helper": "2.*",
         "davejamesmiller/laravel-breadcrumbs": "3.*",
         "spatie/laravel-backup": "3.*",
-        "spatie/laravel-link-checker": "1.*",
-        "artesaos/seotools": "0.8.*",
         "proengsoft/laravel-jsvalidation": "~1.1",
         "thomaswelton/laravel-gravatar": "1.*",
         "intervention/image": "2.*",

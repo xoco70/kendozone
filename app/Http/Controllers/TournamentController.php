@@ -92,7 +92,7 @@ class TournamentController extends Controller
     public function show(Request $request, Tournament $tournament)
     {
         $teams = "";
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $venue = $tournament->venue ?? new Venue;
 
         // Competitors
@@ -125,7 +125,7 @@ class TournamentController extends Controller
         $baseCategories = Category::take(10)->get();
 //        // Gives me a list of category containing
         $categories1 = $selectedCategories->merge($baseCategories)->unique();
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $categories = new Collection();
 
         $venue = $tournament->venue ?? new Venue;
@@ -234,7 +234,7 @@ class TournamentController extends Controller
             return redirect(URL::action('Auth\LoginController@login'));
         }
         if ($tournament->isOpen()) {
-            $grades = Grade::pluck('name', 'id');
+            $grades = Grade::getAllPlucked();
             $tournament = Tournament::with('championships.category', 'championships.users')->find($tournament->id);
 //            dd($tournament);
             return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));

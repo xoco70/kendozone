@@ -37,7 +37,7 @@ class CompetitorController extends Controller
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
         $settingSize = $tournament->championshipSettings()->count();
         $categorySize = $tournament->categories->count();
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $countries = Country::all();
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments.users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize', 'grades', 'countries'));
