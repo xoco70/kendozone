@@ -131,16 +131,15 @@ class Fight extends Model
         $round = [];
         if ($championship->category->isTeam) {
             $fighters = $championship->teams;
-            if (!sizeof($fighters) % 2 == 0){
+            if (sizeof($fighters) % 2 != 0){
                 $fighters->push(new Team(['name' => "BYE"]));
             }
         } else {
             $fighters = $championship->users;
-            if (!sizeof($fighters) % 2 == 0){
+            if (sizeof($fighters) % 2 != 0){
                 $fighters->push(new User(['name' => "BYE"]));
             }
         }
-
 
         $away = $fighters->splice(sizeof($fighters) / 2);  // 2
 
