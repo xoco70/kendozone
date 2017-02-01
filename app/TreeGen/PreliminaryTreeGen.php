@@ -53,6 +53,7 @@ class PreliminaryTreeGen implements TreeGenerable
             throw new TreeGenerationException(trans('msg.min_competitor_required', ['number' => Config::get('constants.MIN_COMPETITORS_X_AREA')]));
 
         }
+
         // Get Competitor's / Team list ordered by entities ( Federation, Assoc, Club, etc...)
         $users = $this->getUsersByEntity();
 
@@ -135,7 +136,7 @@ class PreliminaryTreeGen implements TreeGenerable
      */
     private function getUsersByEntity(): Collection
     {
-        $competitors = new Collection();
+//        $competitors = new Collection();
 
         // Right now, we are treating users and teams as equals.
         // It doesn't matter right now, because we only need name attribute which is common to both models
@@ -156,10 +157,9 @@ class PreliminaryTreeGen implements TreeGenerable
         }
 
         $tmpUserGroups = clone $userGroups;
+
         $byeGroup = $this->getByeGroup($this->championship);
-        if (sizeof($byeGroup) > 0) {
-            $tmpUserGroups->push($byeGroup->values());
-        }
+
 
         // Get biggest competitor's group
         $max = $this->getMaxCompetitorByEntity($tmpUserGroups);
@@ -167,7 +167,9 @@ class PreliminaryTreeGen implements TreeGenerable
         // We reacommodate them so that we can mix them up and they don't fight with another competitor of his entity.
 
         $competitors = $this->repart($userGroups, $max);
+
         $competitors = $this->insertByes($competitors, $byeGroup);
+
         return $competitors;
 
     }
@@ -274,10 +276,10 @@ class PreliminaryTreeGen implements TreeGenerable
         $bye = sizeof($byeGroup) > 0 ? $byeGroup[0] : [];
         $sizeCompetitors = sizeof($competitors);
         $sizeGroupBy = sizeof($byeGroup);
-        $totalSize = $sizeCompetitors + $sizeGroupBy;
+//        $totalSize = $sizeCompetitors + $sizeGroupBy;
 
         $frequency = $sizeGroupBy != 0
-            ? $totalSize / $sizeGroupBy
+            ?  (int)floor($sizeCompetitors / $sizeGroupBy)
             : -1;
 
         // Create Copy of $competitors
@@ -294,6 +296,7 @@ class PreliminaryTreeGen implements TreeGenerable
             $i++;
 
         }
+        
         return $newCompetitors;
     }
 }
