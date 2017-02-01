@@ -1,4 +1,5 @@
 $(function () {
+    let dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
@@ -18,24 +19,26 @@ $(function () {
     }));
 
     $('#name').blur(function () {
-        if (!$(this).val() || $(this).length < 6) {
-            $(this).closest('div').addClass('has-error');
+        let name = $(this).val();
+        if (!name || name < 6) {
+            $(this).closest('div').removeClass('has-success').addClass('has-error');
         } else {
             $(this).closest('div').removeClass('has-error').addClass('has-success');
         }
     });
 
     $('#dateIni').blur(function () {
-        if (!$(this).val()) {
-            $(this).closest('div').addClass('has-error');
+        let dateIni = $(this).val();
+        if (!dateIni) {
+            $(this).closest('div').removeClass('has-success').addClass('has-error');
         } else {
             $(this).closest('div').removeClass('has-error').addClass('has-success');
         }
     });
 
     $('#dateFin').blur(function () {
-        if (!$(this).val()) {
-            $(this).closest('div').addClass('has-error');
+        if (!dateFin) {
+            $(this).closest('div').removeClass('has-success').addClass('has-error');
         } else {
             $(this).closest('div').removeClass('has-error').addClass('has-success');
         }
@@ -88,12 +91,10 @@ $(function () {
     });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
         let isChecked = $(this).is(':checked');
-        console.log(isChecked);
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
 
     });
-
     $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
         let isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
@@ -106,7 +107,7 @@ $(function () {
         let name = $('#name');
 
         if (name.val() == '' || name.val().length < 6) {
-            name.closest('div').addClass('has-error');
+            name.closest('div').removeClass('has-success').addClass('has-error');
         } else {
             name.closest('div').removeClass('has-error').addClass('has-success');
         }
@@ -156,7 +157,6 @@ $(function () {
 
 
                     } else {
-                        // console.log(data);
                         btnUpdateTour.prop("disabled", false);
                         btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
                         noty({
@@ -176,7 +176,6 @@ $(function () {
                     let text = "";
                     let json = data.responseText;
                     let obj = null;
-                    console.log("responseText:" + data.responseText);
                     try {
                         obj = jQuery.parseJSON(json);
                         if (obj.hasOwnProperty('venue_name')) {
@@ -185,12 +184,9 @@ $(function () {
                         if (obj.hasOwnProperty('CP')) {
                             text += obj.CP[0] + "<br/>";
                         }
-                        console.log("text:" + text);
                     } catch (err) {
                         text = "Server Error";
                     }
-
-                    console.log(text);
 
                     btnUpdateTour.prop("disabled", false);
                     btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
@@ -240,7 +236,6 @@ $(function () {
             url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
 
         }
-        // console.log(url);
         $.ajax(
             {
                 type: method,
@@ -270,8 +265,6 @@ $(function () {
                             categoriesSize = parseInt(catsize.text(), 10) + 1;
                             catsize.html(categoriesSize)
                         }
-                        // console.log(categoriesSize);
-                        // console.log(allCategoriesSize);
                         if (categoriesSize == allCategoriesSize) {
                             $('#categories-status').removeClass().addClass('badge badge-success');
                             // Show Add Competitors Button
@@ -357,7 +350,6 @@ $(function () {
             if (this.get('select') != null) {
                 pickerFin.set('min', this.get('select'));
                 pickerLimit.set('min', this.get('select'));
-
             }
 
             if (pickerFin.get() < this.get()) {
