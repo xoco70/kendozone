@@ -78,7 +78,7 @@ class RegisterController extends Controller
             $tournament = Tournament::find($invite->object_id);
             $userId = $user->id;
 //            $invite->consume();
-            $grades = Grade::pluck('name', 'id');
+            $grades = Grade::getAllPlucked();
             flash()->success(Lang::get('auth.registration_completed'));
             return view("categories.register", compact('userId', 'tournament', 'invite','grades'));
 

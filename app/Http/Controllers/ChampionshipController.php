@@ -38,7 +38,7 @@ class ChampionshipController extends Controller
     {
 
         $tournament = Tournament::where('slug',$tournamentSlug)->first();
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $invite = Invite::getInviteFromToken($token);
 
         // Check if invitation is expired

@@ -70,7 +70,7 @@ class UserController extends Controller
         }
 
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $countries = Country::pluck('name', 'id');
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect(Auth::user());

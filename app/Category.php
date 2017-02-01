@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\AuditingTrait;
 
 /**
@@ -167,7 +168,7 @@ class Category extends Model
 
     public function getGradeString()
     {
-        $grades = Grade::all();
+        $grades = Grade::getAll();
         $gradeText = '';
 
 

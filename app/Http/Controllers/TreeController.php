@@ -23,7 +23,7 @@ class TreeController extends Controller
      */
     public function index(Request $request)
     {
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         $tournament = Tree::getTournament($request);
         return view('trees.index', compact('tournament', 'grades'));
     }
@@ -73,7 +73,7 @@ class TreeController extends Controller
     public function single(Request $request)
     {
         $championship = Championship::find($request->championship);
-        $grades = Grade::pluck('name', 'id');
+        $grades = Grade::getAllPlucked();
         return view('pdf.tree', compact('championship', 'grades'));
     }
 

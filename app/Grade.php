@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
-class Grade extends Model {
+class Grade extends Model
+{
 
-	protected $table = 'grade';
-	public $timestamps = true;
+    protected $table = 'grade';
+    public $timestamps = true;
 
     protected $fillable = [
         'id',
@@ -19,6 +21,20 @@ class Grade extends Model {
     {
 
         return trans($name);
+    }
+
+    public static function getAll()
+    {
+//        return Cache::remember('grades', config('constants.GRADE_MINUTES'), function () {
+        return Grade::all();
+//        });
+    }
+
+    public static function getAllPlucked()
+    {
+//        return Cache::remember('grades', config('constants.GRADE_MINUTES'), function () {
+        return Grade::pluck('name', 'id');
+//        });
     }
 
 }
