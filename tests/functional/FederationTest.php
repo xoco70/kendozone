@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Config;
 class FederationTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
 
 
     protected $user, $users, $root, $simpleUser, $clubPresident, $associationPresident, $federationPresident; // $addUser,  $editUser,
