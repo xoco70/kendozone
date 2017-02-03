@@ -249,8 +249,12 @@ class Tree extends Model
         Fight::destroy($arrayTreeId);
 
         if ($settings->hasPreliminary) {
-            for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
-                Fight::saveFightRound($tree, $numRound);
+            if ($settings->preliminaryGroupSize == 3){
+                for ($numRound = 1; $numRound <= $settings->preliminaryGroupSize; $numRound++) {
+                    Fight::saveFightRound($tree, $numRound);
+                }
+            }else{
+                Fight::saveRoundRobinFights($championship, $tree);
             }
         } elseif ($settings->treeType == config('constants.DIRECT_ELIMINATION')) {
             Fight::saveFightRound($tree); // Always C1 x C2

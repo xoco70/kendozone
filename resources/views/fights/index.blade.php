@@ -33,11 +33,11 @@
                                         <?php
 
                                         if ($championship->category->isTeam) {
-                                            $user1 = $fight->team1 != null ? $fight->team1->name : 'BYE';
-                                            $user2 = $fight->team2 != null ? $fight->team2->name : 'BYE';
+                                            $user1 = $fight->team1->name;
+                                            $user2 = $fight->team2->name;
                                         } else {
-                                            $user1 = $fight->user1 != null ? $fight->user1->name : 'BYE';
-                                            $user2 = $fight->user2 != null ? $fight->user2->name : 'BYE';
+                                            $user1 = $fight->user1->name;
+                                            $user2 = $fight->user2->name;
                                         }
 
                                         ?>

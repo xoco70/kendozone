@@ -67,7 +67,7 @@ class PreliminaryTreeGen implements TreeGenerable
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            if ($this->championship->hasPreliminary()) {
+                if ($this->championship->hasPreliminary()) {
                 $roundRobinGroups = $users->chunk($settings->preliminaryGroupSize)->shuffle();
 
             } else if ($this->championship->isDirectEliminationType()) {
@@ -287,7 +287,6 @@ class PreliminaryTreeGen implements TreeGenerable
         $bye = sizeof($byeGroup) > 0 ? $byeGroup[0] : [];
         $sizeCompetitors = sizeof($competitors);
         $sizeGroupBy = sizeof($byeGroup);
-//        $totalSize = $sizeCompetitors + $sizeGroupBy;
 
         $frequency = $sizeGroupBy != 0
             ? (int)floor($sizeCompetitors / $sizeGroupBy)

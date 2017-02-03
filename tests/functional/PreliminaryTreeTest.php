@@ -5,7 +5,6 @@ use App\Competitor;
 use App\Tournament;
 use App\Tree;
 use App\User;
-use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Config;
 class PreliminaryTreeTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
 
     protected $root, $tournament, $championship;
 

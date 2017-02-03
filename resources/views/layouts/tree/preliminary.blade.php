@@ -13,13 +13,15 @@
                 <th class="p-10">{{trans_choice('core.competitor',1)}} 2</th>
                 <th class="p-10"></th>
                 <th class="p-10">{{trans_choice('core.competitor',1)}} 3</th>
+                @if ($championship->settings!= null && $championship->settings->preliminaryGroupSize > 3)
+                    <th class="p-10"></th>
+                    <th class="p-10">{{trans_choice('core.competitor',1)}} 4</th>
+                @endif
+                @if ($championship->settings!= null && $championship->settings->preliminaryGroupSize > 4)
+                    <th class="p-10"></th>
+                    <th class="p-10">{{trans_choice('core.competitor',1)}} 5</th>
+                @endif
             </tr>
-            {{--@if ($championship->settings!= null && $championship->settings->preliminaryGroupSize>3)--}}
-            {{--<th class="p-10">Competidor 4</th>--}}
-            {{--@endif--}}
-            {{--@if ($championship->settings!= null && $championship->settings->preliminaryGroupSize==5)--}}
-            {{--<th class="p-10">Competidor 5</th>--}}
-            {{--@endif--}}
 
             @foreach($ptByArea as $pt)
                 <?php
@@ -27,10 +29,14 @@
                     $user1 = $pt->team1 != null ? $pt->team1->name : '';
                     $user2 = $pt->team2 != null ? $pt->team2->name : '';
                     $user3 = $pt->team3 != null ? $pt->team3->name : '';
+                    $user4 = $pt->team4 != null ? $pt->team4->name : '';
+                    $user5 = $pt->team5 != null ? $pt->team5->name : '';
                 } else {
                     $user1 = $pt->user1 != null ? $pt->user1->name : '';
                     $user2 = $pt->user2 != null ? $pt->user2->name : '';
                     $user3 = $pt->user3 != null ? $pt->user3->name : '';
+                    $user4 = $pt->user4 != null ? $pt->user4->name : '';
+                    $user5 = $pt->user5 != null ? $pt->user5->name : '';
 
                 }
                 ?>
@@ -42,6 +48,14 @@
                     <td class="p-10">{{ $user2 }}</td>
                     <td class="p-10">c</td>
                     <td class="p-10">{{ $user3 }}</td>
+                    @if ($championship->settings!= null && $championship->settings->preliminaryGroupSize > 3)
+                        <td class="p-10">d</td>
+                        <td class="p-10">{{ $user4 }}</td>
+                    @endif
+                    @if ($championship->settings!= null && $championship->settings->preliminaryGroupSize > 3)
+                        <td class="p-10">e</td>
+                        <td class="p-10">{{ $user5 }}</td>
+                    @endif
 
                     {{--@if ($championship->settings!= null && $championship->settings->preliminaryGroupSize>3)--}}
                     {{--<td class="p-10">{{$pt->user4!= null ? $pt->user4->name : ''}}</td>--}}
