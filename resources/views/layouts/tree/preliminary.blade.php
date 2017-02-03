@@ -48,6 +48,7 @@
                     <td class="p-10">{{ $user2 }}</td>
                     <td class="p-10">c</td>
                     <td class="p-10">{{ $user3 }}</td>
+
                     @if ($championship->settings!= null && $championship->settings->preliminaryGroupSize > 3)
                         <td class="p-10">d</td>
                         <td class="p-10">{{ $user4 }}</td>

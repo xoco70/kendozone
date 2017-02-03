@@ -55,6 +55,6 @@ return [
     'go_to_password_reset' => 'Click the link to reset your password',
     'password_reset_successfull' => 'Password resetted!',
      'enter_new_passwords' => 'Enter new password',
-    'enter_new_passwords_description' => 'Confirm your new password'
-
+    'enter_new_passwords_description' => 'Confirm your new password',
+    'fb_is_not_sharing_email' => 'You are not sharing you email in Facebook. Share your email in Facebook settings, or create an account with Google'
 ];

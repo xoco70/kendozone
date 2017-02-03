@@ -69,7 +69,8 @@ class PreliminaryTreeTest extends TestCase
                         $expected = (int)($numGroupsExpected[$numCompetitors - 1] / $numArea);
 
                         if ($count != $expected) {
-                            dd(["NumCompetitors" => $numCompetitors],
+                            dd(["Type" => "RoundRobin"],
+                                ["NumCompetitors" => $numCompetitors],
                                 ["NumArea" => $numArea],
                                 ["Real" => $count],
                                 ["Excepted" => $expected],
