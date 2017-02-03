@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeamRequest;
 use App\Team;
 use App\Tournament;
+use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -69,8 +71,14 @@ class TeamController extends Controller
         if (Auth::user()->cannot('store', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
-        $team = Team::create($request->all());
-        flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
+        try{
+            $team = Team::create($request->all());
+            flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
+        }catch (QueryException $e) {
+            flash()->error(trans('msg.team_create_error_already_exists', ['name' => $request->name]));
+        }
+
+
         return redirect()->route('teams.index', $tournament->slug);
 
     }

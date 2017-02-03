@@ -39,7 +39,7 @@ class PreliminaryTreeGen implements TreeGenerable
         $this->championship->tree()->delete();
 
         // Get Settings
-        $preliminiaryTree = new Collection();
+        $trees = new Collection();
         $settings = $this->championship->settings ??  new ChampionshipSettings(config('options.default_settings'));
 
         // Get Areas
@@ -67,12 +67,23 @@ class PreliminaryTreeGen implements TreeGenerable
         foreach ($usersByArea as $users) {
 
             // Chunking to make small round robin groups
-            if ($this->championship->isRoundRobinType() || $this->championship->hasPreliminary()) {
+                if ($this->championship->hasPreliminary()) {
                 $roundRobinGroups = $users->chunk($settings->preliminaryGroupSize)->shuffle();
 
-            } else {
+            } else if ($this->championship->isDirectEliminationType()) {
                 $roundRobinGroups = $users->chunk(2)->shuffle();
+            }else{
+                $roundRobinGroups = new Collection();
 
+                // Not so good, Round Robin has no trees
+                $pt = new Tree;
+                $pt->area = $area;
+                $pt->championship_id = $this->championship->id;
+                if ($this->championship->category->isTeam()) {
+                    $pt->isTeam = 1;
+                }
+                $pt->save();
+                $trees->push($pt);
             }
 
             $order = 1;
@@ -103,13 +114,13 @@ class PreliminaryTreeGen implements TreeGenerable
                 if (isset($c4)) $pt->c4 = $c4->id;
                 if (isset($c5)) $pt->c5 = $c5->id;
                 $pt->save();
-                $preliminiaryTree->push($pt);
+                $trees->push($pt);
                 $order++;
             }
             $area++;
         }
 
-        return $preliminiaryTree;
+        return $trees;
     }
 
     /**
@@ -276,10 +287,9 @@ class PreliminaryTreeGen implements TreeGenerable
         $bye = sizeof($byeGroup) > 0 ? $byeGroup[0] : [];
         $sizeCompetitors = sizeof($competitors);
         $sizeGroupBy = sizeof($byeGroup);
-//        $totalSize = $sizeCompetitors + $sizeGroupBy;
 
         $frequency = $sizeGroupBy != 0
-            ?  (int)floor($sizeCompetitors / $sizeGroupBy)
+            ? (int)floor($sizeCompetitors / $sizeGroupBy)
             : -1;
 
         // Create Copy of $competitors
@@ -296,7 +306,7 @@ class PreliminaryTreeGen implements TreeGenerable
             $i++;
 
         }
-        
+
         return $newCompetitors;
     }
 }

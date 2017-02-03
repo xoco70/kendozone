@@ -95,6 +95,7 @@ return [
     // Team
 
     'team_create_successful' => 'Team <br/><b>:name</b><br/> created',
+    'team_create_error_already_exists' => 'Team <br/><b>:name</b><br/> already exists',
     'team_edit_successful' => 'Team <br/><b>:name</b><br/> updated',
     'team_delete_successful' => 'Team <br/><b>:name</b><br/> deleted',
     'team_delete_error' => 'Error deleting team',

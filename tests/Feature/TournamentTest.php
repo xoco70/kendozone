@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 class TournamentTest extends TestCase
 {
     use DatabaseTransactions;
-//    use WithoutMiddleware;
 
     protected $root;
 

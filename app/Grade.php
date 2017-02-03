@@ -25,16 +25,16 @@ class Grade extends Model
 
     public static function getAll()
     {
-//        return Cache::remember('grades', config('constants.GRADE_MINUTES'), function () {
-        return Grade::all();
-//        });
+        return Cache::remember('grades', config('constants.GRADE_MINUTES'), function () {
+            return Grade::all();
+        });
     }
 
     public static function getAllPlucked()
     {
-//        return Cache::remember('grades', config('constants.GRADE_MINUTES'), function () {
-        return Grade::pluck('name', 'id');
-//        });
+        return Cache::remember('grades_pluck', config('constants.GRADE_MINUTES'), function () {
+            return Grade::pluck('name', 'id');
+        });
     }
 
 }

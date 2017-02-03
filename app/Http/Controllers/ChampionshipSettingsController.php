@@ -63,6 +63,8 @@ class ChampionshipSettingsController extends Controller
     public function update(Request $request, $championshipId, $championshipSettingsId)
     {
         try {
+            //TODO As it is a WebService, Locale is resetted, as User info
+
             $championship = Championship::find($championshipId);
             $category = $championship->category;
             $category->alias = $request->alias;

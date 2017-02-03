@@ -102,6 +102,7 @@ return [
     // Team
 
     'team_create_successful' => 'Equipo <br/><b>:name</b><br/> creado exitosamente',
+    'team_create_error_already_exists' => 'El equipo <br/><b>:name</b><br/> ya existe',
     'team_edit_successful' => 'Equipo <br/><b>:name</b><br/> actualizado exitosamente',
     'team_delete_successful' => 'Equipo <br/><b>:name</b><br/> borrado exitosamente',
     'team_delete_error' => 'Hubo un problema al borrar el equipo',
