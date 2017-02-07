@@ -194,8 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Xoco70\LaravelTournaments\TournamentsServiceProvider::class
+        App\Providers\RouteServiceProvider::class
 
     ],
 
