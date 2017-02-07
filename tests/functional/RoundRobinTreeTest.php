@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 
-class RoundRobinTreeTest extends TestCase
+class RoundRobinTreeTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 
