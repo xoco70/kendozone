@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Xoco70\KendoTournaments\TournamentsServiceProvider::class,
         /*
          * Package Service Providers...
          */

@@ -25,3 +25,4 @@ tests/_support/_generated/
 resources/assets/css/less.css
 resources/assets/css/less.css.map
 /package/
+public/vendor/kendo-tournaments/
