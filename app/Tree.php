@@ -15,7 +15,7 @@ class Tree extends \Xoco70\KendoTournaments\Models\Tree
     {
         $tournament = null;
         if (Tree::hasTournament($request)) {
-            $tournamentSlug = $request->tournamentSlug;
+            $tournamentSlug = $request->tournament;
             $tournament = Tournament::with(['championships' => function ($query) use ($request) {
                 $query->with([
                     'settings',
@@ -25,7 +25,6 @@ class Tree extends \Xoco70\KendoTournaments\Models\Tree
                     }]);
             }])
                 ->where('slug', $tournamentSlug)->first();
-
         } elseif (Tree::hasChampionship($request)) {
             $tournament = Tournament::whereHas('championships', function ($query) use ($request) {
                 return $query->where('id', $request->championshipId);

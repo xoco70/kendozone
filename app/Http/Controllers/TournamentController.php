@@ -89,15 +89,16 @@ class TournamentController extends Controller
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Tournament $tournament)
+    public function show(Request $request, $tournamentSlug)
     {
         $teams = "";
         $grades = Grade::getAllPlucked();
-        $venue = $tournament->venue ?? new Venue;
+
 
         // Competitors
         $tournamentWithTrees = Tree::getTournament($request);
-        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
+        $venue = $tournamentWithTrees->venue ?? new Venue;
+        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
         $countries = Country::all();
 
         return view('tournaments.show', compact('tournament', 'tournamentWithTrees', 'grades', 'teams', 'venue', 'countries'));

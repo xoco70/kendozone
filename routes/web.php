@@ -98,14 +98,14 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
 //           return view('auth/oauth2');
 //        });
 
-        Route::get('tournaments/{tournamentSlug}/trees/', 'TreeController@index')->name('tree.index');
-        Route::get('tournaments/{tournamentSlug}/fights/', 'FightController@index')->name('fights.index');
+        Route::get('tournaments/{tournament}/trees/', 'TreeController@index')->name('tree.index');
+        Route::get('tournaments/{tournament}/fights/', 'FightController@index')->name('fights.index');
         Route::get('championships/{championship}/tree/', 'TreeController@single')->name('tree.single');
 
         // PDF
         Route::get('championships/{championship}/pdf', 'PDFController@tree')->name('tree_pdf');
 
-        Route::post('tournaments/{tournamentSlug}/trees/', 'TreeController@store')->name('tree.storeAll');
+        Route::post('tournaments/{tournament}/trees/', 'TreeController@store')->name('tree.storeAll');
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('tree.store');;
 
         Route::get('workingonit', function () {
