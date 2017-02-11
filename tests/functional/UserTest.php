@@ -1,7 +1,7 @@
 <?php
 use App\Association;
 use App\Championship;
-use App\ChampionshipSettings;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Club;
 use App\Competitor;
 use App\Federation;

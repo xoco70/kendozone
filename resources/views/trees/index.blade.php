@@ -6,7 +6,7 @@
 @stop
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('trees.index', $tournament) !!}
+{{--    {!! Breadcrumbs::render('trees.index', $tournament) !!}--}}
 @stop
 
 @section('content')

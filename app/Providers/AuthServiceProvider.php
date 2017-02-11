@@ -16,7 +16,6 @@ use App\Team;
 use App\Tournament;
 use App\Tree;
 use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

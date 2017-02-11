@@ -5,8 +5,6 @@ namespace App\Policies;
 use App\Tournament;
 use App\Tree;
 use App\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
 class TreePolicy
 {

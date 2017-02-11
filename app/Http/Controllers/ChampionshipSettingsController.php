@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\ChampionshipSettings;
-use App\Tournament;
-use App\Tree;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use App\Tree;
 
 class ChampionshipSettingsController extends Controller
 {

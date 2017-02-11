@@ -1,9 +1,8 @@
 <?php
 
-use App\Federation;
-use App\User;
+use App\Tree;
 
-$factory->define(App\Tree::class, function (Faker\Generator $faker) {
+$factory->define(Tree::class, function (Faker\Generator $faker) {
 
     return [
 //        'name' => $faker->name,

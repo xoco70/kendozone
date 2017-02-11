@@ -1,10 +1,10 @@
 <?php
 use App\Championship;
-use App\ChampionshipSettings;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 /**
  * User: juliatzin

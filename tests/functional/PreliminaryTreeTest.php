@@ -1,6 +1,6 @@
 <?php
 use App\Championship;
-use App\ChampionshipSettings;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
 use App\Tree;

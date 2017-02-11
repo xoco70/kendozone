@@ -7,7 +7,7 @@
     <div class="tabbable">
 
         <ul class="nav nav-tabs nav-tabs-bottom bottom-divided nav-justified">
-            <?php $first = true ?>
+            <?php use Xoco70\KendoTournaments\Models\ChampionshipSettings;$first = true ?>
             @foreach($categories  as $category)
                 <li {{$first ? 'class=active':'' }}>
                     <?php $first = false ?>
@@ -21,7 +21,7 @@
                     @foreach($categories as $category)
                         <div class="tab-pane {{$first ? 'active':'' }}" id="{{$category->id}}">
                         <?php $first = false;
-                        $championshipSettings = \App\ChampionshipSettings::where("tournament_id", $tournamentId)
+                        $championshipSettings = ChampionshipSettings::where("tournament_id", $tournamentId)
                                 ->where("category_id", $category->id)
                                 ->first();
 

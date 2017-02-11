@@ -6,6 +6,7 @@ use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class DashboardTest extends TestCase
 {
@@ -61,8 +62,8 @@ class DashboardTest extends TestCase
         $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>1]);
         $championship2 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>2]);
 
-        factory(App\ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
-        factory(App\ChampionshipSettings::class)->create(['championship_id' => $championship2->id]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
+        factory(ChampionshipSettings::class)->create(['championship_id' => $championship2->id]);
 
         $this->visit('/')
             ->seeInElement("span.text-muted", trans('core.congigure_categories'));
