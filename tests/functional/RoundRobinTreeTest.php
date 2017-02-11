@@ -29,7 +29,7 @@ class RoundRobinTreeTest extends TestCase
     public function check_number_of_row_when_generating_roundRobin()
     {
         $numCompetitors =    [1, 2, 3, 4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14];
-        $numFightsExpected = [0, 1, 3, 6, 15, 15, 28, 28, 45, 45, 66, 66, 91, 91];
+        $numFightsExpected = [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91];
         $numAreas = [1];
 
         foreach ($numAreas as $numArea) {

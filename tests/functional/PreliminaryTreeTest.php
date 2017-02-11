@@ -3,7 +3,7 @@ use App\Championship;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
-use App\Tree;
+use Xoco70\KendoTournaments\Models\Tree;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -69,7 +69,7 @@ class PreliminaryTreeTest extends TestCase
                         $expected = (int)($numGroupsExpected[$numCompetitors - 1] / $numArea);
 
                         if ($count != $expected) {
-                            dd(["Type" => "RoundRobin"],
+                            dd(["Type" => "Preliminary"],
                                 ["NumCompetitors" => $numCompetitors],
                                 ["NumArea" => $numArea],
                                 ["Real" => $count],
