@@ -2,8 +2,6 @@
 
 namespace App;
 
-use OwenIt\Auditing\AuditingTrait;
-
 class Category extends \Xoco70\KendoTournaments\Models\Category
 {
 

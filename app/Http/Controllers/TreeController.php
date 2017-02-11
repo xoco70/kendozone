@@ -24,8 +24,9 @@ class TreeController extends Controller
      */
     public function index(Request $request)
     {
+
         $grades = Grade::getAllPlucked();
-        $tournament = Tree::getTournament();
+        $tournament = Tree::getTournament($request);
         return view('trees.index', compact('tournament', 'grades'));
     }
 
@@ -38,10 +39,7 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $tournament = Tree::getTournament();
-
+        $tournament = Tree::getTournament($request);
         if (Auth::user()->cannot('store', [Tree::class, $tournament])) {
             throw new AuthorizationException();
         }
@@ -66,6 +64,7 @@ class TreeController extends Controller
             }
 
         }
+
         return redirect(route('tree.index', $tournament->slug));
     }
 
