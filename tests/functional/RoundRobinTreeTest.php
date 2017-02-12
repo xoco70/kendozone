@@ -63,12 +63,12 @@ class RoundRobinTreeTest extends TestCase
                 $this->generatePreliminaryTree($tournament);
 
                 for ($area = 1; $area <= $numArea; $area++){
-                    $tree = Round::where('championship_id', $championship->id)
+                    $rounds = Round::where('championship_id', $championship->id)
                                     ->where('area', $area)->first();
-                    if ($tree == null){
+                    if ($rounds == null){
                         $count = 0;
                     }else{
-                        $count = Fight::where('tree_id', $tree->id)
+                        $count = Fight::where('round_id', $rounds->id)
                             ->where('area', $area)
                             ->count();
 

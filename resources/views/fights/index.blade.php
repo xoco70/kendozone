@@ -20,11 +20,9 @@
                             <h1> {{$championship->category->buildName()}}</h1>
 
 
-                            {{--Area {{ $tree->area }} <br/>--}}
                             @foreach($championship->fights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered text-center">
                                     <th class="p-10" >Id</th>
-                                    {{--<th class="p-10" >Area</th>--}}
                                     <th class="p-10" >{{trans_choice('core.competitor',1)}} 1</th>
                                     <th class="p-10" >{{trans_choice('core.competitor',1)}} 2</th>
 
@@ -46,7 +44,6 @@
 
                                         <tr>
                                             <td class="p-10">{{$id + 1}}</td>
-{{--                                            <th class="p-10">{{$fight->area}}</th>--}}
                                             <td class="p-10">{{ $fighter1 }}</td>
                                             <td class="p-10">{{ $fighter2 }}</td>
                                         </tr>
