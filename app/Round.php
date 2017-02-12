@@ -21,7 +21,7 @@ class Round extends \Xoco70\KendoTournaments\Models\Round
                     'settings',
                     'category',
                     'tree' => function ($query) {
-                        return $query->with('user1', 'user2', 'user3', 'user4', 'user5');
+                        return $query->with('teams','competitors');
                     }]);
             }])
                 ->where('slug', $tournamentSlug)->first();
@@ -35,7 +35,7 @@ class Round extends \Xoco70\KendoTournaments\Models\Round
                             'settings',
                             'category',
                             'tree' => function ($query) {
-                                return $query->with('user1', 'user2', 'user3', 'user4', 'user5');
+                                return $query->with('teams','competitors');
                             }]);
                 }])
                 ->first();

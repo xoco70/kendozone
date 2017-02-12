@@ -3,7 +3,7 @@
     @if (Request::is('championships/'.$championship->id.'/pdf'))
         <h1> {{$championship->category->buildName()}}</h1>
     @endif
-    @foreach($championship->tree->groupBy('area') as $ptByArea)
+    @foreach($championship->tree->groupBy('area') as $roundsByArea)
         <table class="table-bordered" cellpadding="5" cellspacing="0">
             <tr>
                 <th class="p-10">{{ trans_choice('categories.fightingArea',1) }}</th>
@@ -23,16 +23,16 @@
                 @endif
             </tr>
 
-            @foreach($ptByArea as $pt)
+            @foreach($roundsByArea as $round)
                 <?php
                 if ($championship->category->isTeam) {
-                    $fighter1 = $round->team1 != null ? $round->team1->name : '';
-                    $fighter2 = $round->team2 != null ? $round->team2->name : '';
-                    $fighter3 = $round->team3 != null ? $round->team3->name : '';
-                    $fighter4 = $round->team4 != null ? $round->team4->name : '';
-                    $fighter5 = $round->team5 != null ? $round->team5->name : '';
+                    $fighter1 = $round->teams->get(0) != null ? $round->teams->get(0)->name : '';
+                    $fighter2 = $round->teams->get(1) != null ? $round->teams->get(1)->name : '';
+                    $fighter3 = $round->teams->get(2) != null ? $round->teams->get(2)->name : '';
+                    $fighter4 = $round->teams->get(3) != null ? $round->teams->get(3)->name : '';
+                    $fighter5 = $round->teams->get(4) != null ? $round->teams->get(4)->name : '';
                 } else {
-                    $fighter1 = $round->competitors->get(0) != null ? $round->competitors->get(0)->user->name : '';
+                    $fighter1 =$round->competitors->get(0) != null ? $round->competitors->get(0)->user->name : '';
                     $fighter2 = $round->competitors->get(1) != null ? $round->competitors->get(1)->user->name : '';
                     $fighter3 = $round->competitors->get(2) != null ? $round->competitors->get(2)->user->name : '';
                     $fighter4 = $round->competitors->get(3) != null ? $round->competitors->get(3)->user->name : '';
