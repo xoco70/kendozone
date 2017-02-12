@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Support\Collection;
 
-class Tree extends \Xoco70\KendoTournaments\Models\Tree
+class Round extends \Xoco70\KendoTournaments\Models\Round
 {
     /**
      * Get tournament with a lot of stuff Inside - Should Change name
@@ -14,7 +14,7 @@ class Tree extends \Xoco70\KendoTournaments\Models\Tree
     public static function getTournament($request)
     {
         $tournament = null;
-        if (Tree::hasTournament($request)) {
+        if (Round::hasTournamentInRequest($request)) {
             $tournamentSlug = $request->tournament;
             $tournament = Tournament::with(['championships' => function ($query) use ($request) {
                 $query->with([
@@ -25,7 +25,7 @@ class Tree extends \Xoco70\KendoTournaments\Models\Tree
                     }]);
             }])
                 ->where('slug', $tournamentSlug)->first();
-        } elseif (Tree::hasChampionship($request)) {
+        } elseif (Round::hasChampionshipInRequest($request)) {
             $tournament = Tournament::whereHas('championships', function ($query) use ($request) {
                 return $query->where('id', $request->championshipId);
             })

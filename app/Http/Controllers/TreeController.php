@@ -6,7 +6,7 @@ use App\Championship;
 
 use App\Grade;
 use App\Tournament;
-use App\Tree;
+use App\Round;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +26,7 @@ class TreeController extends Controller
     {
 
         $grades = Grade::getAllPlucked();
-        $tournament = Tree::getTournament($request);
+        $tournament = Round::getTournament($request);
         return view('trees.index', compact('tournament', 'grades'));
     }
 
@@ -39,8 +39,8 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-        $tournament = Tree::getTournament($request);
-        if (Auth::user()->cannot('store', [Tree::class, $tournament])) {
+        $tournament = Round::getTournament($request);
+        if (Auth::user()->cannot('store', [Round::class, $tournament])) {
             throw new AuthorizationException();
         }
         foreach ($tournament->championships as $championship) {
@@ -53,7 +53,7 @@ class TreeController extends Controller
                 $championship->tree = $tree;
 
 
-                Tree::generateFights($tree, $settings, $championship);
+                Round::generateFights($tree, $settings, $championship);
                 flash()->success(trans('msg.championships_tree_generation_success'));
 
             } catch (TreeGenerationException $e) {

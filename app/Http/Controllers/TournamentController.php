@@ -10,7 +10,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Http\Requests\VenueRequest;
 use App\Tournament;
 use App\TournamentLevel;
-use App\Tree;
+use App\Round;
 use App\Venue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -96,7 +96,7 @@ class TournamentController extends Controller
 
 
         // Competitors
-        $tournamentWithTrees = Tree::getTournament($request);
+        $tournamentWithTrees = Round::getTournament($request);
         $venue = $tournamentWithTrees->venue ?? new Venue;
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
         $countries = Country::all();

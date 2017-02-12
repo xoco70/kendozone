@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Tournament;
-use App\Tree;
+use App\Round;
 use App\User;
 
-class TreePolicy
+class RoundPolicy
 {
 //    use HandlesAuthorization;
 
@@ -26,7 +26,7 @@ class TreePolicy
     }
 
 
-    public function destroy(User $user, Tree $tree)
+    public function destroy(User $user, Round $tree)
     {
         $tournament = $tree->championship->tournament;
         dd($tournament);

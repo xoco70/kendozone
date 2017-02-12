@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
-use App\Tree;
+use App\Round;
 
 class ChampionshipSettingsController extends Controller
 {
@@ -73,7 +73,7 @@ class ChampionshipSettingsController extends Controller
 
             // If we changed one of those data, remove tree
             if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {
-                Tree::where('championship_id', $championshipId)->delete();
+                Round::where('championship_id', $championshipId)->delete();
             }
             $cs->save();
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f25c75966775d3263648ba349c213027",
+    "content-hash": "c3cbd37602f899925845a884d4a98e85",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -6245,16 +6245,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.7.7.6",
+            "version": "0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "bf81a558098007c4128e52009f1a24279d716d53"
+                "reference": "a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/bf81a558098007c4128e52009f1a24279d716d53",
-                "reference": "bf81a558098007c4128e52009f1a24279d716d53",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd",
+                "reference": "a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd",
                 "shasum": ""
             },
             "require": {
@@ -6285,7 +6285,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-02-11T00:18:04+00:00"
+            "time": "2017-02-12T21:23:34+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

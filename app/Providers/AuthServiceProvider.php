@@ -10,11 +10,11 @@ use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
 use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
-use App\Policies\TreePolicy;
+use App\Policies\RoundPolicy;
 use App\Policies\UserPolicy;
 use App\Team;
 use App\Tournament;
-use App\Tree;
+use App\Round;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Association::class => AssociationPolicy::class,
         Club::class => ClubPolicy::class,
         Team::class => TeamPolicy::class,
-        Tree::class => TreePolicy::class,
+        Round::class => RoundPolicy::class,
     ];
 
     /**
