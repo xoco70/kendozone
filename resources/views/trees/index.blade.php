@@ -38,7 +38,7 @@
                                             <i class="icon-printer"></i>
                                         </a>
 
-                                        @if (Auth::user()->can('store', [App\Tree::class, $tournament]))
+                                        @if (Auth::user()->can('store', [App\Round::class, $tournament]))
 
                                             {!! Form::close() !!}
 
