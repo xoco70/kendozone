@@ -1,8 +1,9 @@
 <?php
 
-use App\Tree;
 
-$factory->define(Tree::class, function (Faker\Generator $faker) {
+use App\Round;
+
+$factory->define(Round::class, function (Faker\Generator $faker) {
 
     return [
 //        'name' => $faker->name,
