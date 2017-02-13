@@ -35,7 +35,7 @@ class RoundRobinTreeTest extends TestCase
         foreach ($numAreas as $numArea) {
             foreach ($numCompetitors as $numCompetitor) {
                 $tournament = factory(Tournament::class)->create([
-                    'user_id' => 684 // julien@t4b.mx
+                    'user_id' => $this->root->id // julien@t4b.mx
                 ]);
 
                 $championship = factory(Championship::class)->create([
