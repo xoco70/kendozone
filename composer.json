@@ -6,11 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.20",
-        "laravelcollective/html": "^5.3",
+        "laravel/framework": "5.4.*",
+        "laravelcollective/html": "5.4.*-dev",
         "guzzlehttp/guzzle": "~6.0",
         "webpatser/laravel-countries": "dev-master",
-        "laravel/socialite": "2.*",
+        "laravel/socialite": "3.0",
         "maatwebsite/excel": "~2.1.0",
         "barryvdh/laravel-debugbar": "2.*",
         "barryvdh/laravel-ide-helper": "2.*",
@@ -25,7 +25,7 @@
         "laravolt/avatar": "^1.8",
         "aws/aws-sdk-php": "~3.0",
         "cviebrock/eloquent-sluggable": "^4.1",
-        "laravel/passport": "^1.0",
+        "laravel/passport": "^2.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "torann/geoip": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
@@ -34,12 +34,19 @@
         "xoco70/kendo-tournaments": "^0.8"
 
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/reganjohnson/laravel-jsvalidation"
+        }
+    ],
     "require-dev": {
-        "fzaninotto/faker": "1.*",
+        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*"
+        "symfony/dom-crawler": "3.1.*",
+        "laravel/browser-kit-testing": "^1.0"
     },
     "autoload": {
         "files": [
@@ -50,13 +57,15 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Xoco70\\LaravelTournaments\\": "package/xoco70/laravel-tournaments/src"
+            "Xoco70\\LaravelTournaments\\": "package/xoco70/laravel-tournaments/src",
+            "Tests\\": "tests/"
 
         }
     },
     "autoload-dev": {
         "classmap": [
-            "tests/functional/TestCase.php"
+            "tests/TestCase.php",
+            "tests/BrowserKitTest.php"
         ]
     },
     "scripts": {
