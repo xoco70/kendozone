@@ -1,6 +1,9 @@
 <?php
 
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+
+use App\Category;
+
+$factory->define(Category::class, function (Faker\Generator $faker) {
     $name = ['categories.junior',
         'categories.junior_team',
         'categories.men_single',

@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
+use App\Round;
 use App\Tournament;
-use App\Tree;
 use App\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
-class TreePolicy
+class RoundPolicy
 {
 //    use HandlesAuthorization;
 
@@ -28,7 +26,7 @@ class TreePolicy
     }
 
 
-    public function destroy(User $user, Tree $tree)
+    public function destroy(User $user, Round $tree)
     {
         $tournament = $tree->championship->tournament;
         dd($tournament);

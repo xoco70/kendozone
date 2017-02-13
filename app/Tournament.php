@@ -8,6 +8,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 
 /**
@@ -168,7 +169,7 @@ class Tournament extends Model
      */
     public function trees()
     {
-        return $this->hasManyThrough(Tree::class, Championship::class);
+        return $this->hasManyThrough(Round::class, Championship::class);
     }
 
 

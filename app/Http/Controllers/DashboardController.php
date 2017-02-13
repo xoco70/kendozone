@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Tournament;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

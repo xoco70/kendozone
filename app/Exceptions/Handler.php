@@ -2,11 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Http\Middleware\OwnTournament;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,6 +27,10 @@ class Handler extends ExceptionHandler
 //        \Illuminate\Auth\Access\AuthorizationException::class,
 //        \Symfony\Component\HttpKernel\Exception\HttpException::class,
 //        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        OwnTournament::class,
+        AuthorizationException::class,
+        MaintenanceModeException::class,
+        InvitationNeededException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
@@ -51,7 +57,7 @@ class Handler extends ExceptionHandler
 //                    'tags' => array('Francia' => 'Campeon!!!')
                 ];
             }
-            $this->sentryID = app('sentry')->captureException($exception,$params);
+            $this->sentryID = app('sentry')->captureException($exception, $params);
         }
 
         parent::report($exception);
@@ -148,6 +154,11 @@ class Handler extends ExceptionHandler
             default:
                 return parent::render($request, $exception);
         }
+
+        if ($exception instanceof MaintenanceModeException)
+            return response()->view('errors.503');
+
+
         return response()->view('errors.general',
             ['code' => $code,
                 'message' => $message,

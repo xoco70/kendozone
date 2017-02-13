@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Invite;
-use Illuminate\Support\Facades\Config;
 
 class AuthRequest extends Request
 {

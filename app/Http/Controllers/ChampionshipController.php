@@ -6,7 +6,6 @@ use App\Exceptions\InvitationExpiredException;
 use App\Exceptions\InvitationNeededException;
 use App\Exceptions\InvitationNotActiveException;
 use App\Grade;
-use App\Http\Requests;
 use App\Invite;
 use App\Notifications\RegisteredToChampionship;
 use App\Tournament;

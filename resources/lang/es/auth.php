@@ -53,5 +53,8 @@ return [
     'go_to_password_reset' => 'Dale clic al link para restablecer tu contraseña',
     'password_reset_successfull' => 'Contraseña restablecida!',
      'enter_new_passwords' => 'Ingresa tu nueva contraseña',
-    'enter_new_passwords_description' => 'Escribe tu contraseña 2 veces'
+    'enter_new_passwords_description' => 'Escribe tu contraseña 2 veces',
+    'fb_is_not_sharing_email' => 'No estas compartiendo tu email con Facebook. Cambia tu configuración de privacidad en Facebook o pica CREA TU CUENTA'
+
+
 ];

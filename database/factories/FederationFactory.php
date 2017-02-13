@@ -1,6 +1,5 @@
 <?php
 use App\Country;
-use Webpatser\Countries\Countries;
 use App\User;
 
 $factory->define(App\Federation::class, function (Faker\Generator $faker) {

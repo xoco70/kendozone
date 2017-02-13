@@ -20,11 +20,9 @@
                             <h1> {{$championship->category->buildName()}}</h1>
 
 
-                            {{--Area {{ $tree->area }} <br/>--}}
                             @foreach($championship->fights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered text-center">
                                     <th class="p-10" >Id</th>
-                                    {{--<th class="p-10" >Area</th>--}}
                                     <th class="p-10" >{{trans_choice('core.competitor',1)}} 1</th>
                                     <th class="p-10" >{{trans_choice('core.competitor',1)}} 2</th>
 
@@ -33,21 +31,21 @@
                                         <?php
 
                                         if ($championship->category->isTeam) {
-                                            $user1 = $fight->team1->name;
-                                            $user2 = $fight->team2->name;
+                                            $fighter1 = $fight->team1 != null ? $fight->team1->name : "BYE";
+                                            $fighter2 = $fight->team2 != null ? $fight->team2->name : "BYE";
                                         } else {
-                                            $user1 = $fight->user1->name;
-                                            $user2 = $fight->user2->name;
+                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->user->name : "BYE";
+                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->user->name : "BYE";
                                         }
+
 
                                         ?>
 
 
                                         <tr>
                                             <td class="p-10">{{$id + 1}}</td>
-{{--                                            <th class="p-10">{{$fight->area}}</th>--}}
-                                            <td class="p-10">{{ $user1 }}</td>
-                                            <td class="p-10">{{ $user2 }}</td>
+                                            <td class="p-10">{{ $fighter1 }}</td>
+                                            <td class="p-10">{{ $fighter2 }}</td>
                                         </tr>
                                     @endforeach
                                 </table>

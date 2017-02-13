@@ -32,7 +32,8 @@ class UserRequest extends Request
     {
         $uniqueUser = '';
         $passwordRules = '';
-        if (Route::getCurrentRoute()->getPath() == 'users/create') {
+
+        if (Route::getCurrentRoute()->getName() == 'users.create') {
             $passwordRules = '|required';
             $uniqueUser = '|unique:users';
         }

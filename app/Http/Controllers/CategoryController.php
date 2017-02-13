@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Championship;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 

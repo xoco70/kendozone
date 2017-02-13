@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateTree extends Migration
+class CreateRoundTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,19 @@ class CreateTree extends Migration
      */
     public function up()
     {
-        Schema::create('tree', function(Blueprint $table) {
+        Schema::create('round', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->index();
-
-            $table->integer('c1')->nullable()->unsigned()->index();
-
-            $table->integer('c2')->nullable()->unsigned()->index();
-
-            $table->integer('c3')->nullable()->unsigned()->index();
-
-            $table->integer('c4')->nullable()->unsigned()->index();
-
-            $table->integer('c5')->nullable()->unsigned()->index();
-
-            $table->tinyInteger("isTeam")->unsigned();
             $table->tinyInteger("area");
             $table->tinyInteger("order");
             $table->timestamps();
             $table->engine = 'InnoDB';
+
+            $table->foreign('championship_id')
+                ->references('id')
+                ->onUpdate('cascade')
+                ->on('championship')
+                ->onDelete('cascade');
         });
 
     }
@@ -44,7 +38,7 @@ class CreateTree extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('tree');
+        Schema::dropIfExists('round');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -11,7 +11,7 @@
                                 <i class="icon-printer"></i>
                             </a>
 
-                        @if ($championship->tree != null  && $championship->tree->count() != 0)
+                        @if ($championship->rounds != null  && $championship->rounds->count() != 0)
                                 @if ($championship->hasPreliminary())
                                     @include('layouts.tree.preliminary')
                                 @elseif ($championship->isDirectEliminationType())

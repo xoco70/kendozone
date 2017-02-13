@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\ChampionshipSettings;
-use App\Exceptions\TreeGenerationException;
-use App\Fight;
 use App\Grade;
-use App\Tree;
+use App\Round;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Xoco70\KendoTournaments\Exceptions\TreeGenerationException;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\KendoTournaments\TreeGen\TreeGen;
 
 class TreeController extends Controller
 {
@@ -23,8 +22,9 @@ class TreeController extends Controller
      */
     public function index(Request $request)
     {
+
         $grades = Grade::getAllPlucked();
-        $tournament = Tree::getTournament($request);
+        $tournament = Round::getTournament($request);
         return view('trees.index', compact('tournament', 'grades'));
     }
 
@@ -37,28 +37,23 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $tournament = Tree::getTournament($request);
-
-        if (Auth::user()->cannot('store', [Tree::class, $tournament])) {
+        $tournament = Round::getTournament($request);
+        if (Auth::user()->cannot('store', [Round::class, $tournament])) {
             throw new AuthorizationException();
         }
-
         foreach ($tournament->championships as $championship) {
             $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
-
-            $generation = Tree::getGenerationStrategy($championship);
+            $generation = new TreeGen($championship, null, $settings);
             $generation->championship = $championship;
             try {
 
                 $tree = $generation->run();
-                $championship->tree = $tree;
+                $championship->rounds = $tree;
 
 
-                Tree::generateFights($tree, $settings, $championship);
-
+                Round::generateFights($tree, $settings, $championship);
                 flash()->success(trans('msg.championships_tree_generation_success'));
+
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
             } finally {
@@ -67,6 +62,7 @@ class TreeController extends Controller
             }
 
         }
+
         return redirect(route('tree.index', $tournament->slug));
     }
 

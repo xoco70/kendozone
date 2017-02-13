@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-    class LocaleMiddleware
+class LocaleMiddleware
     {
         /**
          * Handle an incoming request.

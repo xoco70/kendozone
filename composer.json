@@ -30,7 +30,8 @@
         "torann/geoip": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "barryvdh/laravel-snappy": "^0.3.1",
-        "barryvdh/laravel-translation-manager": "^0.2.7"
+        "barryvdh/laravel-translation-manager": "^0.2.7",
+        "xoco70/kendo-tournaments": "^0.8"
 
     },
     "repositories": [
@@ -56,7 +57,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Tests\\": "tests/"
+            "Xoco70\\LaravelTournaments\\": "package/xoco70/laravel-tournaments/src"
+           "Tests\\": "tests/"
 
         }
     },

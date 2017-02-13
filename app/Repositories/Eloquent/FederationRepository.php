@@ -2,7 +2,6 @@
 namespace App\Repositories\Eloquent;
 
 use App\Federation;
-use App\User;
 
 class FederationRepository extends BaseRepository
 {

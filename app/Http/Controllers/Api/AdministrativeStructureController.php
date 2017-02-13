@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Association;
 use App\Club;
 use App\Federation;
-use App\Http\Requests;
 
 
 class AdministrativeStructureController extends ApiController

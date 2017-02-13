@@ -10,8 +10,6 @@ use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
-use Request;
-use URL;
 
 class FederationController extends Controller
 {

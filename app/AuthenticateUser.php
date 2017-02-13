@@ -1,38 +1,48 @@
 <?php namespace App;
+
 use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Contracts\Factory as Socialite;
+use PDOException;
 use URL;
 
 /**
  *  Class used by Socialite for Social Logging
  */
-
-class AuthenticateUser {
+class AuthenticateUser
+{
 
     private $socialite;
     private $auth;
     private $users;
 
-    public function __construct(Socialite $socialite, Guard $auth, UserRepository $users) {
+    public function __construct(Socialite $socialite, Guard $auth, UserRepository $users)
+    {
         $this->socialite = $socialite;
         $this->users = $users;
         $this->auth = $auth;
     }
 
-    public function execute($request, $listener, $provider) {
+    public function execute($request, $listener, $provider)
+    {
 
         if (!$request) {
 
             return $this->getAuthorizationFirst($provider);
         }
 //        dd("it passed");
-        $user = $this->users->findByUserNameOrCreate($this->getSocialUser($provider), $provider);
-        if (!is_null($user)){
+        try {
+            $user = $this->users->findByUserNameOrCreate($this->getSocialUser($provider), $provider);
+        } catch (PDOException $e) {
+            return redirect(URL::action('Auth\LoginController@login'))
+                ->with('message', Lang::get('auth.fb_is_not_sharing_email'));
+        }
+
+        if (!is_null($user)) {
             $this->auth->login($user, true);
-        }else{
+        } else {
             Session::flash('error', Lang::get('auth.account_already_exists'));
 
             return redirect(URL::action('Auth\LoginController@login'))
@@ -43,11 +53,13 @@ class AuthenticateUser {
         return redirect(route('dashboard'));
     }
 
-    private function getAuthorizationFirst($provider) {
+    private function getAuthorizationFirst($provider)
+    {
         return $this->socialite->driver($provider)->redirect();
     }
 
-    private function getSocialUser($provider) {
+    private function getSocialUser($provider)
+    {
         return $this->socialite->driver($provider)->user();
     }
 }

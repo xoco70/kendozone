@@ -3,9 +3,9 @@
                     class="icon-user"></i> {!! Lang::get('core.profile') !!}</a></li>
 
     @if (Auth::user()->isSuperAdmin() || Auth::user()->tournamentsDeleted()->count() > 0)
-        <li {{ (Request::is('tournaments/deleted') ? 'class=active' : '') }}>
-            <a href="{!! URL::action('TournamentController@getDeleted') !!}"><i
-                        class="icon-trash-alt  sidemenu"></i><span>{{ trans('core.tournaments_deleted') }}</span>
+        <li>
+            <a href="{!! URL::action('TournamentController@getDeleted') !!}">
+                <i class="icon-trash-alt"></i><span>{{ trans('core.tournaments_deleted') }}</span>
             </a>
         </li>
     @endif

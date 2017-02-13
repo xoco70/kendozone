@@ -2,39 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use OwenIt\Auditing\AuditingTrait;
-
-/**
- * @property mixed team
- * @property mixed gender
- * @property mixed ageCategory
- * @property mixed ageMin
- * @property mixed ageMax
- * @property mixed gradeMin
- * @property mixed gradeMax
- * @property mixed isTeam
- */
-class Category extends Model
+class Category extends \Xoco70\KendoTournaments\Models\Category
 {
-    use AuditingTrait;
-    protected $table = 'category';
-    public $timestamps = true;
-
-    protected $fillable = [
-        'id',
-        'name',
-        'alias',
-        'gender',
-        'isTeam',
-        'ageCategory',
-        'ageMin',
-        'ageMax',
-        'gradeCategory',
-        'gradeMin',
-        'gradeMax',
-    ];
 
     /**
      * Get All Presets for Categories
@@ -71,65 +40,11 @@ class Category extends Model
         return $result;
     }
 
-    public function getAliasString(){
-        return $this->alias;
-    }
 
-    public function getNameAttribute($name)
-    {
-
-        return trans($name);
-    }
-
-    public function getGradeAttribute($grade)
-    {
-        return trans($grade);
-    }
-
-    public function getAgeCategoryAttribute($ageCategory)
-    {
-        return trans($ageCategory);
-    }
-
-    public function tournaments()
-    {
-        return $this->belongsToMany('App\Tournament');
-    }
-
-    public function settings()
-    {
-        return $this->hasOne('App\ChampionshipSettings');
-    }
-
-//    public function user(){
-//        return $this->belongsToMany('App\User', 'competitor', 'championship_id');
-//    }
-
-    public function championship()
-    {
-        return $this->hasMany(Championship::class);
-    }
-
-    public function isTeam()
-    {
-        return $this->isTeam;
-    }
-
-    public function isForMen()
-    {
-        return $this->gender == "M";
-    }
-
-    public function isForWomen()
-    {
-        return $this->gender == "F";
-    }
-
-    public function isMixt()
-    {
-        return $this->gender == "X";
-    }
-
+    /**
+     * Build Age String
+     * @return string
+     */
     public function getAgeString()
     {
         $ageCategoryText = '';
@@ -166,6 +81,10 @@ class Category extends Model
         return $ageCategoryText;
     }
 
+    /**
+     * Build Grade String
+     * @return string
+     */
     public function getGradeString()
     {
         $grades = Grade::getAll();

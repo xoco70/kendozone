@@ -1,9 +1,11 @@
 <?php
 
+
 use App\Category;
+use App\Championship;
 use App\Tournament;
 
-$factory->define(App\Championship::class, function (Faker\Generator $faker) {
+$factory->define(Championship::class, function (Faker\Generator $faker) {
     $tournaments = Tournament::all()->pluck('id')->toArray();
     $categories = Category::all()->pluck('id')->toArray();
 

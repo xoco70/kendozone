@@ -1,10 +1,10 @@
 <?php
 use App\Championship;
-use App\ChampionshipSettings;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Fight;
 use App\Tournament;
-use App\Tree;
+use App\Round;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -29,13 +29,13 @@ class RoundRobinTreeTest extends BrowserKitTest
     public function check_number_of_row_when_generating_roundRobin()
     {
         $numCompetitors =    [1, 2, 3, 4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14];
-        $numFightsExpected = [0, 1, 6, 6, 15, 15, 28, 28, 45, 45, 66, 66, 91, 91];
+        $numFightsExpected = [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91];
         $numAreas = [1];
 
         foreach ($numAreas as $numArea) {
             foreach ($numCompetitors as $numCompetitor) {
                 $tournament = factory(Tournament::class)->create([
-                    'user_id' => 684 // julien@t4b.mx
+                    'user_id' => $this->root->id // julien@t4b.mx
                 ]);
 
                 $championship = factory(Championship::class)->create([
@@ -63,12 +63,12 @@ class RoundRobinTreeTest extends BrowserKitTest
                 $this->generatePreliminaryTree($tournament);
 
                 for ($area = 1; $area <= $numArea; $area++){
-                    $tree = Tree::where('championship_id', $championship->id)
+                    $rounds = Round::where('championship_id', $championship->id)
                                     ->where('area', $area)->first();
-                    if ($tree == null){
+                    if ($rounds == null){
                         $count = 0;
                     }else{
-                        $count = Fight::where('tree_id', $tree->id)
+                        $count = Fight::where('round_id', $rounds->id)
                             ->where('area', $area)
                             ->count();
 
@@ -80,7 +80,8 @@ class RoundRobinTreeTest extends BrowserKitTest
                         $expected = (int)($numFightsExpected[$numCompetitor - 1] / $numArea);
 
                         if ($count != $expected) {
-                            dd(["NumCompetitors" => $numCompetitor],
+                            dd(["Type" => "RoundRobin"],
+                                ["NumCompetitors" => $numCompetitor],
                                 ["NumArea" => $numArea],
                                 ["Real" => $count],
                                 ["Excepted" => $expected],

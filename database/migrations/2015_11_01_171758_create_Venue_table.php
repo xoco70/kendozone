@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateVenueTable extends Migration
 {
@@ -20,7 +20,6 @@ class CreateVenueTable extends Migration
             $table->string("city")->nullable();
             $table->string("CP")->nullable();
             $table->string("state")->nullable();
-            $table->integer("country_id")->nullable();
             $table->string("latitude")->nullable();
             $table->string("longitude")->nullable();
             $table->timestamps();

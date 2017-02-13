@@ -1,9 +1,10 @@
 <?php
 
 use App\Championship;
+use App\Competitor;
 use App\User;
 
-$factory->define(App\Competitor::class, function (Faker\Generator $faker) {
+$factory->define(Competitor::class, function (Faker\Generator $faker) {
     $tcs = Championship::all()->pluck('id')->toArray();
     $users = User::all()->pluck('id')->toArray();
 

@@ -30,8 +30,8 @@ class CreateChampionshipSettingsTable extends Migration
             // Preliminary
             $table->boolean('hasPreliminary')->default(1);
             $table->boolean('preliminaryGroupSize')->default(3);
-            $table->tinyInteger('preliminaryWinner'); // Number of Competitors that go to next level
-            $table->tinyInteger('preliminaryDuration'); // Match Duration in preliminary heat
+            $table->tinyInteger('preliminaryWinner')->default(1); // Number of Competitors that go to next level
+            $table->text('preliminaryDuration')->nullable(); // Match Duration in preliminary heat
 
             // Team
             $table->tinyInteger('teamSize')->nullable(); // Default is null
@@ -44,12 +44,12 @@ class CreateChampionshipSettingsTable extends Migration
             //TODO This should go in another table that is not for tree construction but for rules
             // Rules
             $table->boolean('hasEncho')->default(1);
-            $table->tinyInteger('enchoQty');
-            $table->text('enchoDuration');
-            $table->boolean('hasHantei');
-            $table->smallInteger('cost'); // Cost of competition
+            $table->tinyInteger('enchoQty')->default(0);
+            $table->text('enchoDuration')->nullable();
+            $table->boolean('hasHantei')->default(false);
+            $table->smallInteger('cost')->nullable(); // Cost of competition
 
-            $table->text('fightDuration'); // Can't apply default because text
+            $table->text('fightDuration')->nullable(); // Can't apply default because text
             $table->smallInteger('hanteiLimit')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
             $table->smallInteger('enchoGoldPoint')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
 

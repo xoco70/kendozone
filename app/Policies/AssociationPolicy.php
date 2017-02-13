@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Association;
 use App\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AssociationPolicy
 {

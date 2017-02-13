@@ -4,7 +4,6 @@ namespace App\Policies;
 
 //use Illuminate\Auth\Access\HandlesAuthorization;
 
-use App\Federation;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

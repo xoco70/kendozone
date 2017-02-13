@@ -1,9 +1,9 @@
 <?php
 use App\Championship;
-use App\ChampionshipSettings;
+use App\Round;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
-use App\Tree;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -59,7 +59,7 @@ class PreliminaryTreeTest extends TestCase
                 $this->makeCompetitors($championship, $users);
                 $this->generatePreliminaryTree($tournament);
                 for ($area = 1; $area <= $numArea; $area++){
-                    $count = Tree::where('championship_id', $championship->id)
+                    $count = Round::where('championship_id', $championship->id)
                                     ->where('area', $area)->count();
 
 
@@ -69,7 +69,8 @@ class PreliminaryTreeTest extends TestCase
                         $expected = (int)($numGroupsExpected[$numCompetitors - 1] / $numArea);
 
                         if ($count != $expected) {
-                            dd(["NumCompetitors" => $numCompetitors],
+                            dd(["Type" => "Preliminary"],
+                                ["NumCompetitors" => $numCompetitors],
                                 ["NumArea" => $numArea],
                                 ["Real" => $count],
                                 ["Excepted" => $expected],

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\ChampionshipSettings;
-use App\Tournament;
-use App\Tree;
+use App\Round;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class ChampionshipSettingsController extends Controller
 {
@@ -28,6 +27,7 @@ class ChampionshipSettingsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param $championshipId
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, $championshipId)
@@ -73,7 +73,7 @@ class ChampionshipSettingsController extends Controller
 
             // If we changed one of those data, remove tree
             if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {
-                Tree::where('championship_id', $championshipId)->delete();
+                Round::where('championship_id', $championshipId)->delete();
             }
             $cs->save();
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);

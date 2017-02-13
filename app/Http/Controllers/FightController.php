@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\Tournament;
-use App\Tree;
 use Illuminate\Http\Request;
 
 class FightController extends Controller
@@ -17,8 +16,8 @@ class FightController extends Controller
     public function index(Request $request)
     {
         $grades = Grade::getAllPlucked();
-        $tournament = Tournament::with('championships.tree.fights')
-            ->where('slug', $request->tournamentSlug)
+        $tournament = Tournament::with('championships.rounds.fights')
+            ->where('slug', $request->tournament)
             ->first();
         return view('fights.index', compact('tournament', 'grades'));
 
