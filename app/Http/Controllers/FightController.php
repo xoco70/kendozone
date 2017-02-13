@@ -16,7 +16,7 @@ class FightController extends Controller
     public function index(Request $request)
     {
         $grades = Grade::getAllPlucked();
-        $tournament = Tournament::with('championships.tree.fights')
+        $tournament = Tournament::with('championships.rounds.fights')
             ->where('slug', $request->tournament)
             ->first();
         return view('fights.index', compact('tournament', 'grades'));

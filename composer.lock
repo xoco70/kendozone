@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3cbd37602f899925845a884d4a98e85",
+    "content-hash": "8bf423a71ea0c4c2024778f4b3e70c73",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1813,7 +1813,7 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "5.3.x-dev",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
@@ -6245,16 +6245,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.8",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd"
+                "reference": "a217d01552b7c58d83a6aea5e75048fc73e35ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd",
-                "reference": "a0dd74f441f22b33c7e83ad7f8cadf4da160d1cd",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/a217d01552b7c58d83a6aea5e75048fc73e35ee7",
+                "reference": "a217d01552b7c58d83a6aea5e75048fc73e35ee7",
                 "shasum": ""
             },
             "require": {
@@ -6285,7 +6285,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-02-12T21:23:34+00:00"
+            "time": "2017-02-13T01:47:14+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -6453,7 +6453,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravelcollective/html": 20,
         "webpatser/laravel-countries": 20
     },
     "prefer-stable": false,
