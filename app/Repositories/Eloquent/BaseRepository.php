@@ -4,9 +4,8 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Exceptions\RepositoryException;
-use App\Repositories\Exceptions\ValidatorException;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository implements RepositoryInterface
 {

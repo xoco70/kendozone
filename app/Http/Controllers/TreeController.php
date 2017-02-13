@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-
 use App\Grade;
-use App\Tournament;
 use App\Round;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;

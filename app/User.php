@@ -6,7 +6,6 @@ use App\Exceptions\NotOwningAssociationException;
 use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
 use Cviebrock\EloquentSluggable\Sluggable;
-
 use DateTime;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
@@ -26,7 +25,6 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
-use Torann\GeoIP\Facades\GeoIP;
 
 /**
  * @property  mixed name

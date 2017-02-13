@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use OwenIt\Auditing\Log;
 
 class LogsController extends Controller

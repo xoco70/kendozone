@@ -8,13 +8,13 @@ use App\Federation;
 use App\Policies\AssociationPolicy;
 use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
+use App\Policies\RoundPolicy;
 use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
-use App\Policies\RoundPolicy;
 use App\Policies\UserPolicy;
+use App\Round;
 use App\Team;
 use App\Tournament;
-use App\Round;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

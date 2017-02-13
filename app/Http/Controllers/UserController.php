@@ -8,24 +8,20 @@ use App\Club;
 use App\Country;
 use App\Federation;
 use App\Grade;
-use App\Http\Controllers\Api\AdministrativeStructureController;
 use App\Http\Requests\UserRequest;
 use App\Mail\confirmUserAccount;
 use App\Notifications\AccountCreated;
 use App\Role;
 use App\User;
-use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use URL;
-use Webpatser\Countries\Countries;
 
 class UserController extends Controller
 {

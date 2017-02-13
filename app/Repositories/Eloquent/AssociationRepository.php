@@ -2,7 +2,6 @@
 namespace App\Repositories\Eloquent;
 
 use App\Association;
-use App\Federation;
 
 class AssociationRepository extends BaseRepository
 {

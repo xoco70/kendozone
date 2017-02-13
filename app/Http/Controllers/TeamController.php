@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeamRequest;
 use App\Team;
 use App\Tournament;
-use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;

@@ -6,7 +6,6 @@ use App\Grade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Invite;
-use App\Notifications\AccountCreated;
 use App\Notifications\AccountRegistered;
 use App\Tournament;
 use App\User;

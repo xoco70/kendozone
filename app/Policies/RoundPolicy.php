@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Tournament;
 use App\Round;
+use App\Tournament;
 use App\User;
 
 class RoundPolicy

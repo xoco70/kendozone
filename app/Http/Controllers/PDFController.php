@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Championship;
 use App\Grade;
-use Illuminate\Http\Request;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
