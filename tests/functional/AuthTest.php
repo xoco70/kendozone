@@ -4,7 +4,7 @@
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AuthTest extends TestCase
+class AuthTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 
@@ -107,6 +107,7 @@ class AuthTest extends TestCase
             ->type($user->email, 'email')
             ->type('222222', 'password')
             ->press(trans('auth.signin'))
+            ->dump()
             ->seePageIs('/');
 
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-class TournamentTest extends TestCase
+class TournamentTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

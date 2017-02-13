@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
-class DashboardTest extends TestCase
+class DashboardTest extends BrowserKitTest
 {
     /**
      * Tests inside:

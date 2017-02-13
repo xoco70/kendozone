@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Config;
  * Date: 10/11/2015
  * Time: 23:14
  */
-class FederationTest extends TestCase
+class FederationTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

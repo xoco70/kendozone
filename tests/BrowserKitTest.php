@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Contracts\Console\Kernel;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 
@@ -91,7 +91,7 @@ abstract class BrowserKitTest extends BaseTestCase
     /**
      * @param User $newUser
      */
-    public function logWithUser(User $newUser){
+    public function logWithUser(App\User $newUser){
         Auth::loginUsingId($newUser->id);
         Lang::setLocale($newUser->locale);
     }

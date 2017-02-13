@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Config;
 
 
-class CategoryTest extends TestCase
+class CategoryTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

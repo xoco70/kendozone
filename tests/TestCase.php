@@ -25,4 +25,6 @@ abstract class TestCase extends BaseTestCase
 
         return $app;
     }
+
 }
+

@@ -11,7 +11,7 @@ use Xoco70\KendoTournaments\Models\ChampionshipSettings;
  * Date: 10/11/2015
  * Time: 23:14
  */
-class ChampionshipTest extends TestCase
+class ChampionshipTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Config;
  * Date: 10/11/2015
  * Time: 23:14
  */
-class CompetitorTest extends TestCase
+class CompetitorTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

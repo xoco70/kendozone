@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 
-class PreliminaryTreeTest extends TestCase
+class PreliminaryTreeTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 

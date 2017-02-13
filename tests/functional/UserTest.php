@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 
-class UserTest extends TestCase
+class UserTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 
