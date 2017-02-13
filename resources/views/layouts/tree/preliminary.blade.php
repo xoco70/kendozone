@@ -3,7 +3,7 @@
     @if (Request::is('championships/'.$championship->id.'/pdf'))
         <h1> {{$championship->category->buildName()}}</h1>
     @endif
-    @foreach($championship->tree->groupBy('area') as $roundsByArea)
+    @foreach($championship->rounds->groupBy('area') as $roundsByArea)
         <table class="table-bordered" cellpadding="5" cellspacing="0">
             <tr>
                 <th class="p-10">{{ trans_choice('categories.fightingArea',1) }}</th>

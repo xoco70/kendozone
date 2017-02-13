@@ -50,7 +50,7 @@ class TreeController extends Controller
             try {
 
                 $tree = $generation->run();
-                $championship->tree = $tree;
+                $championship->rounds = $tree;
 
 
                 Round::generateFights($tree, $settings, $championship);

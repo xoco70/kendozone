@@ -44,7 +44,7 @@
 
                                             {!! Form::open(
                                                 ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
-                                                 'data-gen' => $championship->tree->count(),
+                                                 'data-gen' => $championship->rounds->count(),
                                                 'action' => ['TreeController@store', $championship->id]]) !!}
 
                                             <button type="button" class="btn bg-success btn-xs generate">
@@ -54,7 +54,7 @@
                                         @endif
 
                                     </h1>
-                                    @if ($championship->tree != null  && $championship->tree->count() != 0)
+                                    @if ($championship->rounds != null  && $championship->rounds->count() != 0)
                                         @if ($championship->hasPreliminary())
                                             @include('layouts.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
@@ -114,7 +114,7 @@
                $championship = \App\Championship::find($championshipId);
 
               ?>
-              @if ($championship->tree->count())
+              @if ($championship->rounds->count())
                   @if ($loop->first)
                        $('#brackets_{{ $championshipId }}').bracket({
                             init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
