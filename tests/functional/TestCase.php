@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 
 class TestCase extends BrowserKitTest
 {
