@@ -89,7 +89,7 @@ abstract class BrowserKitTest extends BaseTestCase
     }
 
     /**
-     * @param User $newUser
+     * @param \App\User $newUser
      */
     public function logWithUser(App\User $newUser){
         Auth::loginUsingId($newUser->id);

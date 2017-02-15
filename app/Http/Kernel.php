@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 
 class Kernel extends HttpKernel
 {
@@ -16,7 +17,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\TrimStrings::class,
-//        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        ConvertEmptyStringsToNull::class,
 
     ];
 
