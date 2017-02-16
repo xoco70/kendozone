@@ -27,8 +27,6 @@
                             <th class="text-center" data-hide="phone">{{ trans('core.organizer') }}</th>
                             <th class="text-center" data-hide="phone">{{ trans('core.type') }}</th>
 
-                            <th class="text-center">{{ trans('core.used') }}</th>
-
                         </tr>
                         </thead>
                         @foreach($invites as $invite)
@@ -36,9 +34,6 @@
                                 <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->object->slug) !!}">{{ $invite->object->name }}</a></td>
                                 <td align="center">{{ $invite->object->owner->name }}</td>
                                 <td align="center">{{ $invite->object->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
-                                <td align="center">{!!  $invite->used ?
-                                        '<span class=" text-success glyphicon glyphicon-ok"></span>' :
-                                        '<span class=" text-warning glyphicon glyphicon-remove"></span>'!!}</td>
 
                             </tr>
 
