@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Tournament;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,11 @@ class OwnTournament
 
                 $tournaments = $userLogged->tournaments;
                 $tournament = $request->tournament;
+                if (!$tournament instanceof Tournament){
+                    $tournament = Tournament::where('slug', $tournament)->first();
+                }
                 if ($tournament != null) {
                     if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
-
                         throw new AuthorizationException();
                     }
                 }
