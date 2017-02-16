@@ -126,7 +126,7 @@ class InviteTest extends BrowserKitTest
                     'user_id' => Auth::user()->id,
                 ]);
         }
-        $this->seePageIs('/invites');
+        $this->seePageIs('/users/'.Auth::user()->slug.'/tournaments');
 
     }
 
@@ -175,6 +175,6 @@ class InviteTest extends BrowserKitTest
                     'user_id' => $user->id,
                 ]);
         }
-        $this->seePageIs('/invites');
+        $this->seePageIs('/users/'.Auth::user()->slug.'/tournaments');
     }
 }
