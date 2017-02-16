@@ -130,6 +130,6 @@ class ChampionshipController extends Controller
 //        if (isset($invite)) $invite->consume();
 
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' => $tournament->name]));
-        return redirect(URL::action('InviteController@index'));
+        return redirect(URL::action('UserController@getMyTournaments', Auth::user()));
     }
 }
