@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const {mix} = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +11,21 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+
+
+
+
+mix.combine([
+    'resources/assets/js/plugins/loaders/pace.min.js',
+    'resources/assets/js/core/libraries/jquery.min.js', // 2.1.4
+    'resources/assets/js/core/libraries/bootstrap.min.js', // v3.3.6
+    'resources/assets/js/core/app.js',
+], 'public/js/guest_app.js');
+
+mix.less('resources/assets/less/_main_full/core.less','resources/assets/css/less.css');
+    // 'resources/assets/less/_main_full/components.less',
+    // 'resources/assets/less/_main_full/colors.less',
+    // 'resources/assets/less/_main_full/core.less'], 'resources/assets/less/less.less');
+
+// mix.less('resources/assets/less/less.less','resources/assets/css/less.css' )
+
