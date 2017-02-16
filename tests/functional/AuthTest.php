@@ -107,7 +107,6 @@ class AuthTest extends BrowserKitTest
             ->type($user->email, 'email')
             ->type('222222', 'password')
             ->press(trans('auth.signin'))
-            ->dump()
             ->seePageIs('/');
 
 

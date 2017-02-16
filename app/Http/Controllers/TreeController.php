@@ -44,12 +44,9 @@ class TreeController extends Controller
         foreach ($tournament->championships as $championship) {
             $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
             $generation = new TreeGen($championship, null, $settings);
-            $generation->championship = $championship;
             try {
 
                 $tree = $generation->run();
-                $championship->rounds = $tree;
-
 
                 Round::generateFights($tree, $settings, $championship);
                 flash()->success(trans('msg.championships_tree_generation_success'));
