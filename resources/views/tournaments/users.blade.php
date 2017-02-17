@@ -25,16 +25,15 @@
 
                             @can('edit',$tournament)
                                 @if ($championship->category->isTeam)
-                                    <a href="#championshipId={{$championship->id}}" data-toggle="modal"
+                                    <a href="#championshipId_{{$championship->id}}" data-toggle="modal"
                                        data-target="#create_tournament_team"
-                                       class="btn btn-primary btn-xs pull-right open-modal-team"
+                                       class="btn btn-primary btn-xs pull-right open-modal-user"
                                        data-id="{!! $championship->id !!}"
                                        data-name="{!! $championship->category->buildName() !!}"><b><i
                                                     class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.team',1)])
                                     </a>
                                 @else
-
-                                    <a href="#championshipId={{$championship->id}}" data-toggle="modal"
+                                    <a href="#championshipId_{{$championship->id}}" data-toggle="modal"
                                        data-target="#create_tournament_user"
                                        class="btn btn-primary btn-xs pull-right open-modal-user"
                                        data-id="{!! $championship->id !!}"
@@ -114,11 +113,12 @@
             $("#championshipId").val(championshipId);
         });
 
-        $(document).on("click", "open-modal-user-team", function () {
+        $(document).on("click", ".open-modal-team", function () {
             championshipId = $(this).data('id');
             championshipName = $(this).data('name');
 
             newTeamName = $('#newTeamname');
+            newTeamEmail = $('#newTeamEmail');
 
             $("#championshipId").val(championshipId);
         });

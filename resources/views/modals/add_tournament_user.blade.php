@@ -1,4 +1,4 @@
-<div id="create_tournament_user" class="modal-user fade">
+<div id="create_tournament_user" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">

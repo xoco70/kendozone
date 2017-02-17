@@ -67,10 +67,12 @@ class TeamController extends Controller
      */
     public function store(TeamRequest $request, Tournament $tournament)
     {
-        if (Auth::user()->cannot('store', [Team::class, $tournament])) {
-            throw new AuthorizationException();
-        }
+        dd("hola");
+//        if (Auth::user()->cannot('store', [Team::class, $tournament])) {
+//            throw new AuthorizationException();
+//        }
         try{
+            dd($request->all());
             $team = Team::create($request->all());
             flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
         }catch (QueryException $e) {
