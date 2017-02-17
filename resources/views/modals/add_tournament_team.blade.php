@@ -11,14 +11,13 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="form-group">
                             {!!  Form::label('name', trans('core.name')) !!}
-                            {!!  Form::text('name',null, ['class' => 'form-control', 'id' => 'newTeamname']) !!}
+                            {!!  Form::text('name',null, ['class' => 'form-control', 'id' => 'newTeamName']) !!}
                         </div>
                     </div>
                 </div>
                 <br/>
                 <br/>
-                {!!  Form::hidden('championshipId',null, ["id" => 'championshipId']) !!}
-                {!!  Form::hidden('championshipName',null, ["id" => 'championshipName']) !!}
+                {!!  Form::hidden('championship_id',null, ["class" => 'championshipId']) !!}
             </div>
 
             <div class="modal-footer">

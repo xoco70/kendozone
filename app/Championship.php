@@ -10,6 +10,6 @@ class Championship extends \Xoco70\KendoTournaments\Models\Championship
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(\App\Category::class);
     }
 }

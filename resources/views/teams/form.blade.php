@@ -39,25 +39,25 @@
 
                         <div class="panel-body">
                             <div class="container-fluid">
+                                <div class="row">
+                                    <div class="form-group">
+                                        {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
+                                        {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                                    </div>
 
-                                <div class="form-group">
-                                    {!!  Form::label('name', trans('core.name'),['class' => 'text-bold' ]) !!}
-                                    {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                                    <div class="form-group">
+                                        {!!  Form::label('name', trans_choice('categories.category',1),['class' => 'text-bold' ]) !!}
+                                        <br/>
+                                        {!!  Form::select('championship_id', $cts, old('championship_id'), ['class' => 'form-control']) !!}
+
+                                    </div>
+
                                 </div>
-
-                                <div class="form-group">
-                                    {!!  Form::label('name', trans_choice('categories.category',1),['class' => 'text-bold' ]) !!}
-                                    <br/>
-                                    {!!  Form::select('championship_id', $cts, old('championship_id'), ['class' => 'form-control']) !!}
-
-                                </div>
-
                             </div>
-
                             <br/>
-                            <div align="right">
-                                <button type="submit" class="btn btn-success" id="save"><i></i>{{trans("core.save")}}
-                                </button>
+                            <div class="form-group" align="right">
+                                <button type="submit" class="btn btn-success" id="save">
+                                    <i></i>{{trans("core.save")}}</button>
                             </div>
                         </div>
                     </div>

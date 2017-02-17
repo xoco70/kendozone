@@ -27,7 +27,7 @@
                                 @if ($championship->category->isTeam)
                                     <a href="#championshipId_{{$championship->id}}" data-toggle="modal"
                                        data-target="#create_tournament_team"
-                                       class="btn btn-primary btn-xs pull-right open-modal-user"
+                                       class="btn btn-primary btn-xs pull-right open-modal-team"
                                        data-id="{!! $championship->id !!}"
                                        data-name="{!! $championship->category->buildName() !!}"><b><i
                                                     class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.team',1)])
@@ -116,11 +116,11 @@
         $(document).on("click", ".open-modal-team", function () {
             championshipId = $(this).data('id');
             championshipName = $(this).data('name');
+            console.log(championshipId);
+            newTeamName = $('#newTeamName');
+            console.log(newTeamName);
 
-            newTeamName = $('#newTeamname');
-            newTeamEmail = $('#newTeamEmail');
-
-            $("#championshipId").val(championshipId);
+            $(".championshipId").val(championshipId);
         });
 
 

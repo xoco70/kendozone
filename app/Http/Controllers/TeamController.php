@@ -7,6 +7,7 @@ use App\Team;
 use App\Tournament;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -32,7 +33,7 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('teams', 'teams.championship.category')->find($tournament->id);
+        $tournament = Tournament::with('teams.championship.category')->find($tournament->id);
         return view("teams.index", compact('tournament'));
 
     }
@@ -60,19 +61,18 @@ class TeamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TeamRequest $request
+     * @param Request $request
      * @param Tournament $tournament
      * @return Response
      * @throws AuthorizationException
      */
-    public function store(TeamRequest $request, Tournament $tournament)
+    public function store(Request $request, Tournament $tournament)
     {
-        dd("hola");
-//        if (Auth::user()->cannot('store', [Team::class, $tournament])) {
-//            throw new AuthorizationException();
-//        }
+        if (Auth::user()->cannot('store', [Team::class, $tournament])) {
+            throw new AuthorizationException();
+        }
         try{
-            dd($request->all());
+
             $team = Team::create($request->all());
             flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
         }catch (QueryException $e) {
@@ -80,7 +80,7 @@ class TeamController extends Controller
         }
 
 
-        return redirect()->route('teams.index', $tournament->slug);
+        return redirect()->back();
 
     }
 

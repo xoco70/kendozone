@@ -24,9 +24,9 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         \Illuminate\Auth\AuthenticationException::class,
-//        \Illuminate\Auth\Access\AuthorizationException::class,
-//        \Symfony\Component\HttpKernel\Exception\HttpException::class,
-//        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         OwnTournament::class,
         AuthorizationException::class,
         MaintenanceModeException::class,
