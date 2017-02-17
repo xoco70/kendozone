@@ -54,10 +54,10 @@ $teams = $tournament->teams;
 
                                     @endcan
                                         @can('delete', [App\Team::class, $tournament])
-                                        {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTeam', 'action' => ['TeamController@destroy', $tournament->slug,$team->id], 'style'=>"display: inline-block"]) !!}
-                                        {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTeam', 'id'=>'delete_'.$team->id, 'data-id' => $team->id ] ) !!}
-                                        {!! Form::close() !!}
-                                    @endcan
+                                            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteTeam', 'action' => ['TeamController@destroy', $tournament->slug,$team->id], 'style'=>"display: inline-block"]) !!}
+                                            {!! Form::button( '<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat btnDeleteTeam', 'id'=>'delete_'.$team->id, 'data-id' => $team->id ] ) !!}
+                                            {!! Form::close() !!}
+                                        @endcan
                                 </td>
 
                             </tr>

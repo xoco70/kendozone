@@ -27,7 +27,9 @@
                                         ?>
 
                                         <span data-id="{{ $championship->id}}"
-                                              class="menu label  label-striped">{{  sizeof($championship->users) }}</span>
+                                              class="menu label  label-striped">{{  $championship->category->isTeam ?
+                                                                                    sizeof($championship->teams) :
+                                                                                    sizeof($championship->users) }}</span>
                                     </div>
                                 </a>
 
