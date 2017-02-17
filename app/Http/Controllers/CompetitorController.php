@@ -34,11 +34,11 @@ class CompetitorController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournament->id);
+        $tournament = Tournament::with('championships.users','championships.teams' , 'championships.category')->find($tournament->id);
         $settingSize = $tournament->championshipSettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::getAllPlucked();
-        $countries = Country::all();
+        $countries = Country::getAll();
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments.users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize', 'grades', 'countries'));
 

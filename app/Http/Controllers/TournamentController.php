@@ -98,8 +98,9 @@ class TournamentController extends Controller
         // Competitors
         $tournamentWithTrees = Round::getTournament($request);
         $venue = $tournamentWithTrees->venue ?? new Venue;
+
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
-        $countries = Country::all();
+        $countries = Country::getAll();
 
         return view('tournaments.show', compact('tournament', 'tournamentWithTrees', 'grades', 'teams', 'venue', 'countries'));
     }
