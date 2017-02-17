@@ -13,23 +13,6 @@ class Team extends Model
 
 
     /**
-     * A Team belongs to a Championship
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function championship()
-    {
-        return $this->belongsTo(Championship::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function category()
-    {
-        return $this->hasManyThrough(Category::class, Championship::class);
-    }
-
-    /**
      * Get all Invitations that belongs to a team
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
