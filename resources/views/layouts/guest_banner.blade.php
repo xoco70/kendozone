@@ -28,6 +28,8 @@
     {!! Html::style('css/app.css')!!}
     {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
 
+    {!! Html::style('css/pages/jquery_trees.css')!!}
+
     {!! Html::style('css/icons/icomoon/styles.css')!!}
     {!! Html::script('js/guest_app.js') !!}
 

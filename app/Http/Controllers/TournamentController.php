@@ -86,7 +86,8 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Tournament $tournament
+     * @param Request $request
+     * @param $tournamentSlug
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $tournamentSlug)

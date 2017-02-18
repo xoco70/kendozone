@@ -1,9 +1,5 @@
 
 @extends('layouts.guest_banner')
-@section('styles')
-    {!! Html::style('js/jquery.timepicker.css')!!}
-    {!! Html::style('css/pages/jquery_trees.css')!!}
-@stop
 @section('content')
     <?php
     $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
