@@ -402,3 +402,7 @@ li.side_avatar:last-child {
 .navbar-header .navbar-nav > li + li {
     margin-top: -13px;
 }
+.see_advanced_options{
+    border: 0;
+    background-color: transparent;
+}

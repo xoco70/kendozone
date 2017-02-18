@@ -182,86 +182,91 @@ $currency = Auth::user()->country->currency_code;
                     </div>
 
                 </div>
+
                 <hr/>
 
+                <div class="advanced_settings_{{ $championship->id }}">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="checkbox-switch">
+                                <label>
 
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="checkbox-switch">
-                            <label>
+                                    {!!  Form::label('hasEncho', trans('categories.hasEncho')) !!}
+                                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                       data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
+                                    <br/>
+                                    {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
+                                    {!!   Form::checkbox('hasEncho', 1, $setting->hasEncho, // $hasPreliminary
+                                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
 
-                                {!!  Form::label('hasEncho', trans('categories.hasEncho')) !!}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
                                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                                   data-original-title="{{trans('categories.hasEnchoTooltip')}}"></i>
-                                <br/>
-                                {!!   Form::hidden('hasEncho', 0,['id'=>'hasEncho'.$key ]) !!}
-                                {!!   Form::checkbox('hasEncho', 1, $setting->hasEncho, // $hasPreliminary
-                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasEncho'.$key]) !!}
+                                   data-original-title="{{trans('categories.enchoQtyTooltip')}}"></i>
 
-                            </label>
+                                {!!  Form::select('enchoQty', config('options.enchoQty'), old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
+                                <small class="display-block">{{ trans('categories.encho_infinite') }}</small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            {!!  Form::label('enchoQty', trans('categories.enchoQty')) !!}
+                        <div class="col-lg-4">
+                            {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.enchoQtyTooltip')}}"></i>
+                               data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
+                            <div class="input-group ">
+                                {!!  Form::input('text','enchoDuration', $enchoDuration, ['class' => 'form-control enchoDuration','id' => 'enchoDuration'.$key, $disableEncho]) !!}
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                {!!  Form::label('enchoGoldPoint', trans('categories.enchoGoldPoint')) !!}
+                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                   data-original-title="{{trans('categories.enchoGoldPointTooltip')}}"></i>
 
-                            {!!  Form::select('enchoQty', config('options.enchoQty'), old('enchoQty'),['class' => 'form-control',$disableEncho]) !!}
-                            <small class="display-block">{{ trans('categories.encho_infinite') }}</small>
+                                {!!  Form::select('enchoGoldPoint', [0,1,2,3,4,5,6,7,8,9,10], old('enchoGoldPoint'),['class' => 'form-control',$disableEncho]) !!}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        {!!  Form::label('enchoDuration', trans('categories.enchoDuration')) !!}
-                        <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                           data-original-title="{{trans('categories.enchoDurationTooltip')}}"></i>
-                        <div class="input-group ">
-                            {!!  Form::input('text','enchoDuration', $enchoDuration, ['class' => 'form-control enchoDuration','id' => 'enchoDuration'.$key, $disableEncho]) !!}
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            {!!  Form::label('enchoGoldPoint', trans('categories.enchoGoldPoint')) !!}
-                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                               data-original-title="{{trans('categories.enchoGoldPointTooltip')}}"></i>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="checkbox-switch">
+                                <label>
 
-                            {!!  Form::select('enchoGoldPoint', [0,1,2,3,4,5,6,7,8,9,10], old('enchoGoldPoint'),['class' => 'form-control',$disableEncho]) !!}
+                                    {!!  Form::label('hasHantei', trans('categories.hasHantei')) !!}
+                                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                       data-original-title="{{trans('categories.hasHanteiTooltip')}}"></i>
+                                    <br/>
+                                    {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
+                                    {!!   Form::checkbox('hasHantei', 1,$setting->hasHantei,
+                                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}
+                                </label>
+                            </div>
                         </div>
+                        <div class="col-lg-3">
+                            <div class="checkbox-switch">
+                                <label>
+
+                                    {!!  Form::label('hanteiLimit', trans('categories.hanteiLimit')) !!}
+                                    <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                       data-original-title="{{trans('categories.hanteilimitTooltip')}}"></i><br/>
+                                    {!!  Form::select('hanteiLimit', $hanteiLimit , old('hanteiLimit'),['class' => 'form-control']) !!}
+
+                                </label>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="checkbox-switch">
-                            <label>
-
-                                {!!  Form::label('hasHantei', trans('categories.hasHantei')) !!}
-                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                                   data-original-title="{{trans('categories.hasHanteiTooltip')}}"></i>
-                                <br/>
-                                {!!   Form::hidden('hasHantei', 0,['id'=>'hasHantei'.$key ]) !!}
-                                {!!   Form::checkbox('hasHantei', 1,$setting->hasHantei,
-                                                     ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No", 'id'=>'hasHantei'.$key]) !!}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="checkbox-switch">
-                            <label>
-
-                                {!!  Form::label('hanteiLimit', trans('categories.hanteiLimit')) !!}
-                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
-                                   data-original-title="{{trans('categories.hanteilimitTooltip')}}"></i><br/>
-                                {!!  Form::select('hanteiLimit', $hanteiLimit , old('hanteiLimit'),['class' => 'form-control']) !!}
-
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
-
-
+                <div align="center" class="label-striped full-width">
+                    <button type="button"
+                            class="see_more_{{ $championship->id }} noborder text-primary text-uppercase see_advanced_options">
+                        <i class="glyphicons glyphicons-arrow-down"></i> + {{ trans('core.see_more') }}</button>
+                </div><br/>
                 <div align="right">
                     <button type="submit" class="btn btn-success save_category" id="save{{$key}}">
                         <i></i>{{trans("core.save")}}

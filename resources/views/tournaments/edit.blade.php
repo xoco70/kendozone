@@ -21,10 +21,12 @@
     <div class="container-detached">
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
-                <li class="active"><a href="#general" data-toggle="tab" id="tab1">{{trans('core.general_data')}}</a></li>
+                <li class="active"><a href="#general" data-toggle="tab" id="tab1">{{trans('core.general_data')}}</a>
+                </li>
                 <li><a href="#venue" data-toggle="tab" id="tab2">{{trans('core.venue')}}</a></li>
                 <li><a href="#categories" data-toggle="tab" id="tab3">{{trans_choice('categories.category',2)}}</a></li>
-                <li><a href="#category_setting" data-toggle="tab" id="tab4">{{trans_choice('categories.categorySettings',2)}}</a></li>
+                <li><a href="#category_setting" data-toggle="tab"
+                       id="tab4">{{trans_choice('categories.categorySettings',2)}}</a></li>
 
             </ul>
 
@@ -96,11 +98,19 @@
 
             let href = $(this).attr('href');
             let id = href.replace("#", "");
-            console.log(id);
             if ($("a[data-toggle='tab'][id='" + id + "']")) {
                 $("#" + id).click();
             }
+
         });
+        @foreach ($tournament->championships as $championship)
+        $('.advanced_settings_{{ $championship->id }}').hide();
+        $(".see_more_{{ $championship->id }}").click(function () {
+            $('.advanced_settings_{{ $championship->id }}').toggle();
+        });
+        @endforeach
+
+
     </script>
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
