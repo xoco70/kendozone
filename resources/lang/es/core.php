@@ -221,6 +221,7 @@ return [
     'configured_full' => 'configurada',
     'see_all' => 'Ver Todos',
     'see_more' => 'Ver más',
+    'see_less' => 'Ver menos',
     'no_tournament_created_yet' => 'Aún no has creado ningún torneo',
     'no_tournament_deleted_yet' => 'Aún no has borrado ningún torneo',
 

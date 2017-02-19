@@ -219,6 +219,7 @@ return [
     'configured_full' => 'configured',
     'see_all' => 'See all',
     'see_more' => 'See more',
+    'see_less' => 'See less',
     'no_tournament_created_yet' => 'You have not registered to any tournament yet',
     'no_tournament_deleted_yet' => 'You have not deleted any tournament yet',
 

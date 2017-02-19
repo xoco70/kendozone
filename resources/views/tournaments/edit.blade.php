@@ -81,6 +81,9 @@
 
 @section('scripts_footer')
     <script>
+        let moreText = "{{trans('core.see_more') }}";
+            lessText = "{{trans('core.see_less') }}";
+
         let url_base = "{{ route('tournaments.index') }}";
         let url_api_base = "{{ route('api.tournaments.index') }}";
         let url_api_root = "{{ route('api.root') }}";
@@ -91,6 +94,7 @@
         let allCategoriesSize = '{!! $categorySize !!}';
         let dualListIds = [];
         let dualList;
+        let icon;
         let venue = "{!! addcslashes($venue, '"') !!}";
         venue = JSON.parse(venue);
 
@@ -106,7 +110,15 @@
         @foreach ($tournament->championships as $championship)
         $('.advanced_settings_{{ $championship->id }}').hide();
         $(".see_more_{{ $championship->id }}").click(function () {
-            $('.advanced_settings_{{ $championship->id }}').toggle();
+            console.log($(".see_more_{{ $championship->id }}").text().trim());
+            console.log(moreText );
+            icon = $(this).find("i");
+
+            $(".see_more_{{ $championship->id }}")
+                .text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);
+
+            $('.advanced_settings_{{ $championship->id }}').slideToggle("fast");
+
         });
         @endforeach
 
