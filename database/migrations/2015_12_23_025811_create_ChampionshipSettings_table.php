@@ -14,6 +14,8 @@ class CreateChampionshipSettingsTable extends Migration
     {
         Schema::create('championship_settings', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('alias')->nullable();
+
             $table->integer('championship_id')->unsigned()->unique();
             $table->foreign('championship_id')
                 ->references('id')
@@ -31,7 +33,7 @@ class CreateChampionshipSettingsTable extends Migration
             $table->boolean('hasPreliminary')->default(1);
             $table->boolean('preliminaryGroupSize')->default(3);
             $table->tinyInteger('preliminaryWinner')->default(1); // Number of Competitors that go to next level
-            $table->text('preliminaryDuration')->nullable(); // Match Duration in preliminary heat
+            $table->string('preliminaryDuration')->nullable(); // Match Duration in preliminary heat
 
             // Team
             $table->tinyInteger('teamSize')->nullable(); // Default is null
@@ -45,11 +47,11 @@ class CreateChampionshipSettingsTable extends Migration
             // Rules
             $table->boolean('hasEncho')->default(1);
             $table->tinyInteger('enchoQty')->default(0);
-            $table->text('enchoDuration')->nullable();
+            $table->string('enchoDuration')->nullable();
             $table->boolean('hasHantei')->default(false);
             $table->smallInteger('cost')->nullable(); // Cost of competition
 
-            $table->text('fightDuration')->nullable(); // Can't apply default because text
+            $table->string ('fightDuration')->nullable(); // Can't apply default because text
             $table->smallInteger('hanteiLimit')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
             $table->smallInteger('enchoGoldPoint')->default(0); // 0 = none, 1 = 1/8, 2 = 1/4, 3=1/2, 4 = FINAL
 

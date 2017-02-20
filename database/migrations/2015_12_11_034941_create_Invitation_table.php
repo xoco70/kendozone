@@ -14,7 +14,7 @@ class CreateInvitationTable extends Migration
     {
         Schema::create('invitation', function(Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->text('code', 255);
+            $table->string ('code', 255);
             $table->string('email');
             $table->string('object_type'); // We can invite to tournaments, teams, etc.
             $table->integer('object_id')->unsigned()->index();
