@@ -34,17 +34,9 @@ class ChampionshipSettingsController extends Controller
     {
 
         try {
-            $championship = Championship::find($championshipId);
-
-            $category = $championship->category;
-            $category->alias = $request->alias;
-
-
-            $category->save();
 
             $request->request->add(['championship_id' => $championshipId]);
-
-            $setting = ChampionshipSettings::create($request->except('alias'));
+            $setting = ChampionshipSettings::create($request->all());
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
@@ -65,11 +57,7 @@ class ChampionshipSettingsController extends Controller
         try {
             //TODO As it is a WebService, Locale is resetted, as User info
 
-            $championship = Championship::find($championshipId);
-            $category = $championship->category;
-            $category->alias = $request->alias;
-            $category->save();
-            $cs = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->except('alias'));
+            $cs = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->all());
 
             // If we changed one of those data, remove tree
             if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {

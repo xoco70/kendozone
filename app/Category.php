@@ -115,25 +115,4 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
 
         return $gradeText;
     }
-
-
-    public function buildName()
-    {
-
-
-        if ($this->alias != null && $this->alias != '') return $this->alias;
-
-        $genders = [
-            'M' => trans('categories.male'),
-            'F' => trans('categories.female'),
-            'X' => trans('categories.mixt')
-        ];
-
-
-        $teamText = $this->isTeam == 1 ? trans_choice('core.team',1) : trans('categories.single');
-        $ageCategoryText = $this->getAgeString();
-        $gradeText = $this->getGradeString();
-
-        return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
-    }
 }

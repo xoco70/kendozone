@@ -38,7 +38,6 @@ class CategoryTest extends BrowserKitTest
 
         $data = [
             'name' => $cat->name,
-            'alias' => $category->alias,
             'isTeam' => $category->isTeam,
             'gender' => $category->gender,
             'ageCategory' => $category->ageCategory,

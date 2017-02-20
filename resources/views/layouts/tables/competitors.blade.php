@@ -35,7 +35,7 @@
 
             </td>
             <td>{{ $user->email }}</td>
-            <td class="text-center">{{ $championship->category->buildName()}}</td>
+            <td class="text-center">{{ $championship->buildName()}}</td>
 
             <td class="text-center">
                 @if ($user->pivot->confirmed)

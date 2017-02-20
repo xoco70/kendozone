@@ -16,11 +16,11 @@
                     <ul class="navigation navigation-alt navigation-accordion">
                         @foreach($tournament->championships as $championship)
 
-                            <li><a href="#{{ str_slug($championship->category->buildName(), "-") }}"></i>
+                            <li><a href="#{{ str_slug($championship->buildName(), "-") }}"></i>
                                     <div>
                                         <?php
 
-                                        $name = $championship->category->buildName();
+                                        $name = $championship->buildName();
                                         echo str_limit($name, 25);
 
 

@@ -32,12 +32,12 @@ $i = 0;
                             <div class="row mb-20">
                                 <div class="col-md-8">
 
-                                    {!!  Form::label('cat['.$championship->id.']', $championship->category->buildName()) !!}
+                                    {!!  Form::label('cat['.$championship->id.']', $championship->buildName()) !!}
                                 </div>
                                 <div class="col-md-4">
                                     {!!   Form::checkbox('cat['.$championship->id.']',
                                         $championship->id,
-                                        $championship->users->where('users.id',Auth::user()->id)->count(),
+                                        $championship->users()->where('users.id',Auth::user()->id)->count(),
                                          ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
 
                                 </div>

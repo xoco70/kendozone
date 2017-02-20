@@ -17,7 +17,7 @@
                 {{ $team->name }}
 
             </td>
-            <td class="text-center">{{ $championship->category->buildName()}}</td>
+            <td class="text-center">{{ $championship->buildName()}}</td>
 
             <td class="text-center">
 

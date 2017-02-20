@@ -5,8 +5,8 @@
             <div class="panel-body">
 
                 <div class="container-fluid">
-                    <a name="{{ str_slug($championship->category->buildName(), "-") }}">
-                        <legend class="text-semibold">{{ $championship->category->buildName() }} </legend>
+                    <a name="{{ str_slug($championship->buildName(), "-") }}">
+                        <legend class="text-semibold">{{ $championship->buildName() }} </legend>
 
                     </a>
 
@@ -18,6 +18,7 @@
                             <th class="all">{{ trans('core.username') }}</th>
                             <th class="phone">{{ trans('core.email') }}</th>
                             <th class="phone">{{ trans('core.country') }}</th>
+                            <th></th>
                         </tr>
                         </thead>
 

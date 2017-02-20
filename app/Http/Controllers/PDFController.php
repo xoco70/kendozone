@@ -24,7 +24,7 @@ class PdfController extends Controller
             $layout = 'pdf.round_robin_tree';
         }
         // Generate PDF
-        $file = 'tree-'.$championship->category->buildName();
+        $file = 'tree-'.$championship->buildName();
         $file = sanitize($file).'.pdf';
 
         $pdf = PDF::loadView($layout, ['championship' => $championship, 'grades' => $grades]);

@@ -43,9 +43,9 @@ $teams = $tournament->teams;
                                         {{ $team->name }}
                                     @endif
                                 </td>
-                                <td>{{ $team->championship->category->alias!=""
-                                    ? $team->championship->category->alias
-                                    : trim($team->championship->category->buildName())}}</td>
+                                <td>{{ $team->championship->settings->alias!=""
+                                    ? $team->championship->settings->alias
+                                    : trim($team->championship->buildName())}}</td>
                                 <td>
 
                                     @can('edit', [App\Team::class, $tournament])

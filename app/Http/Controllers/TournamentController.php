@@ -117,7 +117,7 @@ class TournamentController extends Controller
 
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
-        $countries = Country::pluck('name', 'id');
+        $countries = Country::getAllPlucked('name', 'id');
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
 
@@ -127,24 +127,15 @@ class TournamentController extends Controller
 
         $baseCategories = Category::take(10)->get();
 //        // Gives me a list of category containing
-        $categories1 = $selectedCategories->merge($baseCategories)->unique();
+        $categories = $selectedCategories->merge($baseCategories)->unique();
         $grades = Grade::getAllPlucked();
-        $categories = new Collection();
 
         $venue = $tournament->venue ?? new Venue;
 
-        foreach ($categories1 as $category) {
-
-            $category->alias != ''
-                ? $category->name = $category->alias
-                : $category->name = trim($category->buildName());
-            $categories->push($category);
-        }
 
         $categories = $categories->sortBy(function ($key) {
             return $key;
         })->pluck('name', 'id');
-
 
         $levels = TournamentLevel::pluck('name', 'id');
 

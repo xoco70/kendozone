@@ -5,7 +5,7 @@
             <div class="container-fluid">
 
                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
-                    <h1> {{$championship->category->buildName()}}</h1>
+                    <h1> {{$championship->buildName()}}</h1>
                     <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
                        class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">{{ trans('core.print') }}
                         <i class="icon-printer"></i>

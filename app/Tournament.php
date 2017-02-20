@@ -123,6 +123,7 @@ class Tournament extends Model
         return $this->belongsToMany(Category::class, 'championship')
             ->withPivot('id')
             ->withTimestamps();
+
     }
 
     /**
@@ -365,12 +366,13 @@ class Tournament extends Model
             })
             ->where('tournament_id', $this->id)
             ->get();
+
         $array = [];
         foreach ($cts as $ct) {
 
-            $array[$ct->id] = $ct->category->alias != ''
-                ? $ct->category->alias
-                : trim($ct->category->buildName());
+            $array[$ct->id] = $ct->settings->alias != ''
+                ? $ct->settings->alias
+                : trim($ct->buildName());
 
         }
 

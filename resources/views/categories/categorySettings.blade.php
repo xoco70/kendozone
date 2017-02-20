@@ -53,7 +53,7 @@ $currency = Auth::user()->country->currency_code;
                 <div class="panel-heading">
 
                     <h6 class="panel-title">
-                        {!!  Form::input('text','alias',trans($championship->category->buildName()), ['class' => 'form-control alias','id' => 'alias'.$key]) !!}
+                        {!!  Form::input('text','alias',trans($championship->buildName()), ['class' => 'form-control alias','id' => 'alias'.$key]) !!}
                     </h6>
                 </div>
             </a>
