@@ -110,14 +110,16 @@
         @foreach ($tournament->championships as $championship)
         $('.advanced_settings_{{ $championship->id }}').hide();
         $(".see_more_{{ $championship->id }}").click(function () {
-            console.log($(".see_more_{{ $championship->id }}").text().trim());
-            console.log(moreText );
             icon = $(this).find("i");
-
+            console.log(icon);
+            icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            console.log(icon);
             $(".see_more_{{ $championship->id }}")
                 .text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);
 
+
             $('.advanced_settings_{{ $championship->id }}').slideToggle("fast");
+
 
         });
         @endforeach

@@ -183,9 +183,9 @@ $currency = Auth::user()->country->currency_code;
 
                 </div>
 
-                <hr/>
 
                 <div class="advanced_settings_{{ $championship->id }}">
+                    <hr/>
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="checkbox-switch">
@@ -262,9 +262,11 @@ $currency = Auth::user()->country->currency_code;
 
                     </div>
                 </div>
+
                 <div align="center" class="label-striped full-width">
-                    <button type="button"  class="see_more_{{ $championship->id }} noborder text-primary text-uppercase see_advanced_options text-bold">
-                        <i class="glyphicon glyphicon-chevron-down"></i> {{trans('core.see_more') }}</button>
+                    <button type="button"
+                            class="see_more_{{ $championship->id }} noborder text-primary text-uppercase see_advanced_options text-bold">
+                    <i class="glyphicon glyphicon-chevron-down"></i> {{trans('core.see_more') }}</button>
                 </div><br/>
                 <div align="right">
                     <button type="submit" class="btn btn-success save_category" id="save{{$key}}">
