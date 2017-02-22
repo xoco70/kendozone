@@ -168,8 +168,15 @@ elixir(function (mix) {
     ], 'public/css/pages/preliminary_trees.css');
 
     mix.styles([
+        '../css/brackets.css'
+    ], 'public/css/brackets.css');
+
+
+
+    mix.styles([
         '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
     ], 'public/pdf/brackets.css');
+
 
     mix.scripts([
         'core/libraries/jquery.min.js', // 2.1.4

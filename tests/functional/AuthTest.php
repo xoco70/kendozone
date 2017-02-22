@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends BrowserKitTest
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function setUp()
     {

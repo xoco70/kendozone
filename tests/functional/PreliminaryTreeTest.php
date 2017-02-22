@@ -27,8 +27,8 @@ class PreliminaryTreeTest extends BrowserKitTest
     /** @test */
     public function check_number_of_row_when_generating_tournament()
     {
-        $competitorsInTree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-        $numGroupsExpected = [0, 1, 1, 2, 2, 2, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8];
+        $competitorsInTree = [1, 2, 3, 4, 5, 6];
+        $numGroupsExpected = [0, 1, 1, 2, 2, 2];
         $numAreas = [1,2,4];
 //        $preliminarySizeGroup = 3;
         foreach ($numAreas as $numArea) {
