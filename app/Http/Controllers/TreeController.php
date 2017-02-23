@@ -60,7 +60,7 @@ class TreeController extends Controller
 
         }
 
-        return redirect(route('tree.index', $tournament->slug));
+        return redirect(route('tree.index', $tournament->slug))->with('activeTreeTab', $request->activeTreeTab);
     }
 
     public function single(Request $request)

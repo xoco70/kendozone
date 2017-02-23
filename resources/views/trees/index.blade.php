@@ -32,9 +32,10 @@
                             @foreach($tournament->championships as $championship)
 
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
-                                    @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
+                                     @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
                                     <h1> {{$championship->buildName()}}
-                                        <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}" target="_blank"
+                                        <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
+                                           target="_blank"
                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">
                                             <i class="icon-printer"></i>
                                         </a>
@@ -51,6 +52,8 @@
                                             <button type="button" class="btn bg-success btn-xs generate">
                                                 {{ trans_choice('core.generate_tree',1) }}
                                             </button>
+                                            <input type="hidden" id="activeTreeTab" name="activeTreeTab"
+                                                   value="{{$championship->id}}"/>
                                             {!! Form::close() !!}
                                         @endif
 
@@ -80,39 +83,23 @@
     @include("errors.list")
 @stop
 @section('scripts_footer')
-    <?php
-    $championshipWithBrackets = $tournament->championships
-        ->filter(function ($championship, $key) {
-            return ($championship->isDirectEliminationType() && !$championship->hasPreliminary());
-        })->map(function ($championship, $key) {
-            return $championship->id;
-        })->toArray();
-
-
-    ?>
-
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
+        <?php
 
-        function render_fn(container, data, score, state) {
-//            switch (state) {
-//                case "empty-bye":
-//                    container.append("No team")
-//                    return;
-//                case "empty-tbd":
-//                    container.append("Upcoming")
-//                    return;
-//
-//                case "entry-no-score":
-//                case "entry-default-win":
-//                case "entry-complete":
-//                    container.append('<img src="site/png/' + data.flag + '.png" /> ').append(data.name)
-//                    return;
-//            }
-        }
+        if (session()->has('activeTreeTab')) {
+            $activeTreeTab = session('activeTreeTab');
+
+            ?>
+
+            $(function () {
+            $('.trees a[href="#{{ $activeTreeTab }}"]').tab('show');
+
+        });
+        <?php } ?>
 
 
-$('.generate').on('click', function (e) {
+        $('.generate').on('click', function (e) {
             e.preventDefault();
             let form = $(this).parents('form:first');
             inputData = form.serialize();

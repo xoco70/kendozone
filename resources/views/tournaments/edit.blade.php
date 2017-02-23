@@ -77,9 +77,6 @@
     if (session()->has('activeTab')) {
         $activeTab = session('activeTab');
     }
-
-
-
     ?>
 
 @stop

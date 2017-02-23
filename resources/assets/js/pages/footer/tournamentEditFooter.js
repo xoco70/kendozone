@@ -6,7 +6,6 @@ $(function () {
     });
 
     let currentTabId= '"#' + activeTab+'"';
-    console.log(currentTabId);
     $('.nav-tabs a[href='+currentTabId+']').tab('show');
 
 
