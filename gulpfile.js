@@ -150,44 +150,13 @@ elixir(function (mix) {
         'plugins/ui/nicescroll.min.js',
         'sidebar_detached_sticky_custom.js',
         'components/sweetalert/dist/sweetalert.min.js',
-        'components/jquery-bracket/dist/jquery.bracket.min.js',
     ], 'public/js/pages/footer/trees.js');
 
-    mix.scripts([
-        'components/jquery-bracket/dist/jquery.bracket.min.js',
-    ], 'public/js/pages/footer/trees_show.js');
-
-
-    mix.styles([
-        '../js/components/sweetalert/dist/sweetalert.css',
-        '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
-    ], 'public/css/pages/jquery_trees.css');
 
     mix.styles([
         'preliminary_trees.css',
     ], 'public/css/pages/preliminary_trees.css');
 
-    mix.styles([
-        '../css/brackets.css'
-    ], 'public/css/brackets.css');
-
-
-
-    mix.styles([
-        '../js/components/jquery-bracket/dist/jquery.bracket.min.css',
-    ], 'public/pdf/brackets.css');
-
-
-    mix.scripts([
-        'core/libraries/jquery.min.js', // 2.1.4
-        'components/jquery-bracket/dist/jquery.bracket.min.js',
-    ], 'public/pdf/brackets.js');
-
-    // FOOTER
-
-    // mix.scripts([
-    //     'pages/footer/categoryCreateFooter.js'
-    // ], 'public/js/pages/footer/categoryCreateFooter.js');
 
 
     mix.scripts([

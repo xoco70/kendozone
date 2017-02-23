@@ -1,5 +1,7 @@
 <!-- Footer -->
-<div class="bg-primary my-footer p-20 full-width">
-    &copy; 2016. <a href="https://kendozone.com" class="text-white text-bold">{{ config('app.name') }}</a>
+<?php
+        ?>
+<div class="bg-primary my-footer p-20 full-width" @if($championship->isDirectEliminationType()) style="top: {{ $championship->fights->count() *2 *70}}px" @endif >
+    &copy; {{ date("Y") }}. <a href="https://kendozone.com" class="text-white text-bold">{{ config('app.name') }}</a>
 </div>
 <!-- /footer -->

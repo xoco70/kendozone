@@ -11,9 +11,9 @@ class PdfController extends Controller
 {
     public function tree(Request $request)
     {
-        $layout ='pdf.preliminary_tree';
+        $layout = 'pdf.preliminary_tree';
         // Get all data
-        $championship = Championship::with('rounds','settings','category')->find($request->championship);
+        $championship = Championship::with('rounds', 'settings', 'category')->find($request->championship);
         $grades = Grade::getAllPlucked();
         // Get Tree Type
         if ($championship->hasPreliminary()) {
@@ -23,11 +23,13 @@ class PdfController extends Controller
         } else if ($championship->isRoundRobinType()) {
             $layout = 'pdf.round_robin_tree';
         }
-        // Generate PDF
-        $file = 'tree-'.$championship->buildName();
-        $file = sanitize($file).'.pdf';
+//        return view($layout, compact('championship'));
 
-        $pdf = PDF::loadView($layout, ['championship' => $championship, 'grades' => $grades]);
+        // Generate PDF
+        $file = 'tree-' . $championship->buildName();
+        $file = sanitize($file) . '.pdf';
+
+        $pdf = PDF::loadView($layout, ['championship' => $championship]);
         return $pdf->inline($file);
 
     }

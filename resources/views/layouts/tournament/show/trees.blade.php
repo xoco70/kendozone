@@ -4,8 +4,11 @@
         <div class="panel-body">
             <div class="container-fluid">
 
-                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
-                    <h1> {{$championship->buildName()}}</h1>
+                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
+                     @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
+
+
+                <h1> {{$championship->buildName()}}</h1>
                     <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
                        class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">{{ trans('core.print') }}
                         <i class="icon-printer"></i>

@@ -5,10 +5,9 @@ $default_top2 =132;
 $top1 = $default_top1 + ($numGroup-1) * 204;
 $top2 = $default_top2 + ($numGroup-1) * 204;
 
+$top = $default_top1 + ($numGroup-1) * 204;
 
 
-$top = 81;
-$top = $top + ($numGroup-1) * 204;
 ?>
 
 

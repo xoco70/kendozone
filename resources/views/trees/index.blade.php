@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('styles')
-    {!! Html::style('css/pages/jquery_trees.css')!!}
+    {!! Html::style('vendor/kendo-tournaments/css/brackets.css')!!}
 
 @stop
 
@@ -31,9 +31,10 @@
                         <div class="tab-content">
                             @foreach($tournament->championships as $championship)
 
-                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
+                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
+                                    @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
                                     <h1> {{$championship->buildName()}}
-                                        <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
+                                        <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}" target="_blank"
                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">
                                             <i class="icon-printer"></i>
                                         </a>
@@ -109,29 +110,6 @@
 //                    return;
 //            }
         }
-        @foreach($championshipWithBrackets as $championshipId)
-              <?php
-               $championship = \App\Championship::find($championshipId);
-
-              ?>
-              @if ($championship->rounds->count())
-                  @if ($loop->first)
-                       $('#brackets_{{ $championshipId }}').bracket({
-                            init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                            teamWidth: 100
-                        });
-                  @else
-                       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                            $('#brackets_{{ $championshipId }}').bracket({
-                                  init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                                  teamWidth: 100
-                            })
-                       });
-                  @endif
-              @endif
-        @endforeach
-
-
 
 
 $('.generate').on('click', function (e) {

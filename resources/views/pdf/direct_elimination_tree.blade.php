@@ -3,20 +3,10 @@
     @include("layouts.tree.directElimination")
 @stop
 @section('footer')
-    @include('pdf.footer')
+    @include('pdf.footer', ['championship' => $championship])
 @stop
 @section('scripts_footer')
-    {!! Html::style('pdf/brackets.css')!!}
-    {!! Html::script('pdf/brackets.js')!!}
-
-    <script>
-        setTimeout(function() {
-            $('#brackets_{{ $championship->id }}').bracket({
-                init: minimalData_{{ $championship->id }},
-                teamWidth: 100
-            })
-        },5000);
-    </script>
+    {!! Html::style('css/pages/preliminary_trees.css')!!}
 @stop
 
 
