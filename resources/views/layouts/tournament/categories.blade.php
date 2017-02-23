@@ -32,4 +32,5 @@
     </div>
     <!-- /simple panel -->
 </div>
+<input type="hidden" id="activeTab" name="activeTab" value="categories" />
 {!! Form::close()!!}

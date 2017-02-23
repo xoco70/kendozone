@@ -74,6 +74,11 @@
     $day = $now->day;
 
     $venue = $venue->setDefaultLocation($tournament, $venue->latitude, $venue->longitude);
+    if (session()->has('activeTab')) {
+        $activeTab = session('activeTab');
+    }
+
+
 
     ?>
 
@@ -82,7 +87,7 @@
 @section('scripts_footer')
     <script>
         let moreText = "{{trans('core.see_more') }}";
-            lessText = "{{trans('core.see_less') }}";
+        lessText = "{{trans('core.see_less') }}";
 
         let url_base = "{{ route('tournaments.index') }}";
         let url_api_base = "{{ route('api.tournaments.index') }}";
@@ -96,6 +101,9 @@
         let dualList;
         let icon;
         let venue = "{!! addcslashes($venue, '"') !!}";
+        @if (isset($activeTab))
+            let activeTab = "{{ $activeTab }}";
+        @endif
         venue = JSON.parse(venue);
 
         $("a").on('click', function () {

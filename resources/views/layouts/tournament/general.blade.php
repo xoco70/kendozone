@@ -115,4 +115,5 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="activeTab" name="activeTab" value="general" />
 {!! Form::close()!!}

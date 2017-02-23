@@ -174,7 +174,7 @@ class TournamentController extends Controller
             $res == 0
                 ? flash()->success(trans('msg.tournament_update_error', ['name' => $tournament->name]))
                 : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
-            return redirect(URL::action('TournamentController@edit', $tournament->slug));
+            return redirect(URL::action('TournamentController@edit', $tournament->slug))->with('activeTab', $request->activeTab);
         }
 
 

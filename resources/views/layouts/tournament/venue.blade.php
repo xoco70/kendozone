@@ -50,4 +50,5 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="activeTab" name="activeTab" value="venue" />
 {!! Form::close()!!}

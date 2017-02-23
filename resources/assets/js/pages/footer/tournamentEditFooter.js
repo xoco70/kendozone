@@ -5,7 +5,19 @@ $(function () {
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 
+    let currentTabId= '"#' + activeTab+'"';
+    console.log(currentTabId);
+    $('.nav-tabs a[href='+currentTabId+']').tab('show');
 
+
+// Send active tabId in request
+    $('#tab1').click(function () {
+        $("#activeTab").val("general");
+    });
+
+    $('#tab3').click(function () {
+        $("#activeTab").val("categories");
+    });
 
 
     $('.fightDuration').timepicker(('option', {
@@ -78,7 +90,13 @@ $(function () {
             }
 
         });
+
+
     });
+
+
+
+
 
     function updateControls(addressComponents) {
         $('#city').val(addressComponents.city);
