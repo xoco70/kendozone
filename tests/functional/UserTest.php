@@ -1,15 +1,15 @@
 <?php
 use App\Association;
 use App\Championship;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Club;
 use App\Competitor;
 use App\Federation;
 use App\Tournament;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 
 class UserTest extends BrowserKitTest

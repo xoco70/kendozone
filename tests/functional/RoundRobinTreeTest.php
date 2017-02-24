@@ -1,14 +1,14 @@
 <?php
 use App\Championship;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Fight;
-use App\Tournament;
 use App\Round;
+use App\Tournament;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class RoundRobinTreeTest extends BrowserKitTest
 {

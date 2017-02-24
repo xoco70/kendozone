@@ -12,7 +12,6 @@ use App\Round;
 use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;

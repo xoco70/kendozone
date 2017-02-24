@@ -9,7 +9,6 @@ use App\User;
 use Faker\Factory as Faker;
 use Step\Acceptance\SimpleUser;
 use Step\Acceptance\SuperAdmin;
-use Webpatser\Countries\Countries;
 
 class UserCest
 {

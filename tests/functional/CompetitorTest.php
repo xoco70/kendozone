@@ -1,6 +1,5 @@
 <?php
 use App\Championship;
-use App\Team;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
