@@ -8,17 +8,6 @@ $(function () {
     let currentTabId= '"#' + activeTab+'"';
     $('.nav-tabs a[href='+currentTabId+']').tab('show');
 
-
-// Send active tabId in request
-    $('#tab1').click(function () {
-        $("#activeTab").val("general");
-    });
-
-    $('#tab3').click(function () {
-        $("#activeTab").val("categories");
-    });
-
-
     $('.fightDuration').timepicker(('option', {
         'minTime': '2:00',
         'maxTime': '10:00',

@@ -4,6 +4,12 @@ $numCompetitors = $tournament->competitors->groupBy('user_id')->count();
 $numTeams = $tournament->teams()->count();
 $settingSize = $tournament->championshipSettings->count();
 $categorySize = $tournament->championships->count();
+if (Route::currentRouteName() != 'tournaments.edit') {
+    $baseUrl =  route('tournaments.edit', ['tournament' => $tournament->slug]);
+
+} else {
+    $baseUrl = "";
+}
 
 ?>
 <!-- Detached sidebar -->
@@ -23,12 +29,12 @@ $categorySize = $tournament->championships->count();
 
                 <div class="category-content no-padding">
                     <ul class="navigation navigation-alt navigation-accordion">
-                        <li><a href="#tab1"><i class="icon-trophy2"></i> {{ trans('core.general') }}
+                        <li><a href="{{ $baseUrl }}#tab1"><i class="icon-trophy2"></i> {{ trans('core.general') }}
                                 @if(!isNullOrEmptyString($tournament->registerDateLimit) && !isNullOrEmptyString($tournament->fightingAreas) && $tournament->level_id!=1)
                                     <span class="badge badge-success"><i class=" icon icon-checkmark2"></i></span>
                                 @endif
                             </a></li>
-                        <li><a href="#tab2"><i class="icon-location4"></i> {{trans('core.venue')}}
+                        <li><a href="{{ $baseUrl }}#tab2"><i class="icon-location4"></i> {{trans('core.venue')}}
                                 @if ($tournament->venue != null)
                                     <span class="badge badge-success" id="venue-status">
                                         <i class=" icon icon-check"></i>
@@ -37,7 +43,7 @@ $categorySize = $tournament->championships->count();
 
 
                             </a></li>
-                        <li><a href="#tab3">
+                        <li><a href="{{ $baseUrl }}#tab3">
                                 <i class="icon-cog2"></i>{{trans_choice('categories.category',2)}}
                                 <?php
                                 if ($settingSize > 0 && $settingSize == $categorySize)
@@ -80,7 +86,7 @@ $categorySize = $tournament->championships->count();
                         {{--</a>--}}
                         {{--</li>--}}
                         <?php
-//                        dd($tournament->hasTeamCategory());
+                        //                        dd($tournament->hasTeamCategory());
                         ?>
                         @if ($tournament->hasTeamCategory())
                             <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
@@ -148,12 +154,12 @@ $categorySize = $tournament->championships->count();
 $link = "";
 $id = "";
 if ($settingSize > 0 && $settingSize == $categorySize) {
-    $link = "";
-    $id = "";
+$link = "";
+$id = "";
 } else {
-    // For showing Modal
-    $link = "#";
-    $id = 'id="generate_tree"';
+// For showing Modal
+$link = "#";
+$id = 'id="generate_tree"';
 }
 
 
