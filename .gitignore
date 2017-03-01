@@ -17,6 +17,7 @@ Homestead.json
 /.idea/
 public/images/avatar/
 .phpstorm.meta.php
+public/js
 public/pdf
 public/css
 tests/_output/*
