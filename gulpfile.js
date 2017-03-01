@@ -22,10 +22,10 @@ elixir(function (mix) {
 
 
     mix.less([
-        '_main_full/bootstrap.less',
-        '_main_full/components.less',
-        '_main_full/colors.less',
-        '_main_full/core.less'
+        'bootstrap.less',
+        'components.less',
+        'colors.less',
+        'core.less'
     ],'resources/assets/css/less.css');
 
 
