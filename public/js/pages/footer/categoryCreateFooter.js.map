@@ -1,0 +1,1 @@
+{"version":3,"sources":["categoryCreateFooter.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"categoryCreateFooter.js","sourcesContent":["$(function () {\n\n    // $(\".switch\").bootstrapSwitch();\n    // $('input').iCheck({\n    //     labelHover: false,\n    //     cursor: true\n    // });\n});\n"],"sourceRoot":"/source/"}
