@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class=" form-group border-grey-700">
-                <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName }} </p>
+                <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
                 <hr/>
             </div>
         </div>
