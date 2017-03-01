@@ -439,3 +439,4 @@ $(function() {
     });
 
 });
+//# sourceMappingURL=tournamentInvite.js.map

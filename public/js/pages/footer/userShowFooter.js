@@ -33,3 +33,5 @@ $(function () {
 
 
 });
+
+//# sourceMappingURL=userShowFooter.js.map

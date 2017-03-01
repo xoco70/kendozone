@@ -137,3 +137,5 @@ $(function () {
 
     });
 });
+
+//# sourceMappingURL=clubIndexFooter.js.map

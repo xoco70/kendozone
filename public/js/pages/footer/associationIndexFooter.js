@@ -137,3 +137,5 @@ $(function () {
 
     });
 });
+
+//# sourceMappingURL=associationIndexFooter.js.map

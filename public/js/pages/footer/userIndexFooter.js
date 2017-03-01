@@ -170,3 +170,4 @@ $(function () {
 //
 //    return false;
 //    });
+//# sourceMappingURL=userIndexFooter.js.map

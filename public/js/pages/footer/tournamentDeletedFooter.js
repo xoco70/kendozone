@@ -111,3 +111,4 @@ $(function () {
 //
 //    return false;
 //    });
+//# sourceMappingURL=tournamentDeletedFooter.js.map

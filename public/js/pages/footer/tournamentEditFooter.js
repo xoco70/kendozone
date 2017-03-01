@@ -383,3 +383,5 @@ $(function () {
 
 })
 ;
+
+//# sourceMappingURL=tournamentEditFooter.js.map

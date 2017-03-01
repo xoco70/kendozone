@@ -141,3 +141,5 @@ $(function () {
 
     });
 });
+
+//# sourceMappingURL=tournamentIndexFooter.js.map

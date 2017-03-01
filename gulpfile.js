@@ -19,6 +19,7 @@ elixir(function (mix) {
     mix.browserify('vue/pages/userForm.js');
     mix.browserify('oauth.js');
     mix.browserify('bootstrap.js');
+    mix.browserify('vue/pages/loadingButton.js');
 
 
     mix.less([

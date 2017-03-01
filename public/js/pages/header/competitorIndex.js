@@ -647,3 +647,5 @@ $(function() {
     }).resize();
 
 });
+
+//# sourceMappingURL=competitorIndex.js.map

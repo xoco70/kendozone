@@ -43,3 +43,4 @@ $( document ).ready(function() {
 
     }
 });
+//# sourceMappingURL=club.js.map

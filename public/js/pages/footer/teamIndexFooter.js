@@ -78,3 +78,5 @@ $(function () {
 
     });
 });
+
+//# sourceMappingURL=teamIndexFooter.js.map

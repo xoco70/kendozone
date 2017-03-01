@@ -32,3 +32,5 @@ $(function () {
 
 
 });
+
+//# sourceMappingURL=tournamentShowFooter.js.map
