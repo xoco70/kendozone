@@ -9,7 +9,7 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "jquery": "^3.1.0",
-    "laravel-mix": "^0.6.0",
+    "laravel-mix": "^0.8",
     "lodash": "^4.16.2",
     "phantomjs-prebuilt": "^2.1.7",
     "purifycss-webpack": "^0.4.3",
