@@ -96,7 +96,7 @@ class TournamentController extends Controller
 
 
         // Competitors
-        $tournamentWithTrees = Round::getTournament($request);
+        $tournamentWithTrees = Round::getTournament($request); // Sometimes is Null
         $venue = $tournamentWithTrees->venue ?? new Venue;
 
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);

@@ -33,7 +33,17 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('teams.championship.category')->find($tournament->id);
+        $tournament = Tournament::with(['championships' => function ($query) {
+            $query->whereHas('category', function($subquery) {
+                $subquery->where('isTeam', '=', 1);
+            });
+        }])->find($tournament->id);
+
+        //        $tournament = Tournament::with(['championships.teams','championships.category' => function($query){
+//            $query->whereHas('category.isTeam', '=', '1');
+//        }])->find($tournament->id);
+
+
         return view("teams.index", compact('tournament'));
 
     }
