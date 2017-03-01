@@ -1,11 +1,10 @@
-<div class="col-xs-12" xmlns:v-on="http://www.w3.org/1999/xhtml"
-     xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<div class="col-xs-12" id="modal">
 
 
     <div class="row">
         <div class="col-xs-12">
             <div class=" form-group border-grey-700">
-                <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
+                <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName }} </p>
                 <hr/>
             </div>
         </div>

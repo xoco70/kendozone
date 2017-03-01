@@ -128,11 +128,9 @@
                 </div>
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
 
-                    <div class="panel panel-flat">
+                    <div class="panel panel-flat" id="federations">
                         <div class="panel-body">
                             <div class="container-fluid">
-
-
                                 <fieldset title="dojo">
                                     <a name="dojo">
                                         <legend class="text-semibold">{{Lang::get('core.where_do_you_practice')}}</legend>

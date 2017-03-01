@@ -15,18 +15,16 @@ require('laravel-elixir-vueify');
 
 elixir(function (mix) {
     mix.browserify('vue/pages/categoryCreate.js');
-    mix.browserify('vue/pages/AddAliasToCategory.js');
     mix.browserify('vue/pages/userForm.js');
     mix.browserify('oauth.js');
     mix.browserify('bootstrap.js');
-    mix.browserify('vue/pages/loadingButton.js');
 
 
     mix.less([
-        'bootstrap.less',
-        'components.less',
-        'colors.less',
-        'core.less'
+        '_main_full/bootstrap.less',
+        '_main_full/components.less',
+        '_main_full/colors.less',
+        '_main_full/core.less'
     ],'resources/assets/css/less.css');
 
 

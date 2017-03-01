@@ -7,11 +7,12 @@
             </div>
 
             <div class="modal-body">
-               @include("categories.form")
+                @include("categories.form")
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary" @click="addCategory">{{ trans('categories.add_and_close') }}</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary" v-on:click="addCategory"
+                >{{ trans('categories.add_and_close') }}</button>
                 {{--<button type="button"  class="btn btn-success" @click="addCategory">{{ trans('core.add_and_close') }}</button>--}}
 
             </div>

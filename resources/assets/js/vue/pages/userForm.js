@@ -1,6 +1,6 @@
 
 let vm = new Vue({
-    el: 'body',
+    el: '#federations',
     data: {
         federations: [],
         federationSelected: currentFederationId,
