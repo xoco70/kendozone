@@ -6,6 +6,8 @@ use App\Championship;
 use App\Round;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
@@ -34,7 +36,9 @@ class ChampionshipSettingsController extends Controller
     {
 
         try {
-
+            if (Auth::check()) {
+                App::setLocale(Auth::user()->locale);
+            }
             $request->request->add(['championship_id' => $championshipId]);
             $setting = ChampionshipSettings::create($request->all());
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
@@ -56,7 +60,9 @@ class ChampionshipSettingsController extends Controller
     {
         try {
             //TODO As it is a WebService, Locale is resetted, as User info
-
+            if (Auth::check()) {
+                App::setLocale(Auth::user()->locale);
+            }
             $cs = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->all());
 
             // If we changed one of those data, remove tree
