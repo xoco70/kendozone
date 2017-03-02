@@ -1,11 +1,11 @@
 
 $(function () {
-    let dateFin = $('#dateFin').val();
+    var dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 
-    let currentTabId= '"#' + activeTab+'"';
+    var currentTabId= '"#' + activeTab+'"';
     $('.nav-tabs a[href='+currentTabId+']').tab('show');
 
     $('.fightDuration').timepicker(('option', {
@@ -23,7 +23,7 @@ $(function () {
     }));
 
     $('#name').blur(function () {
-        let name = $(this).val();
+        var name = $(this).val();
         if (!name || name < 6) {
             $(this).closest('div').removeClass('has-success').addClass('has-error');
         } else {
@@ -32,7 +32,7 @@ $(function () {
     });
 
     $('#dateIni').blur(function () {
-        let dateIni = $(this).val();
+        var dateIni = $(this).val();
         if (!dateIni) {
             $(this).closest('div').removeClass('has-success').addClass('has-error');
         } else {
@@ -58,9 +58,9 @@ $(function () {
                 radiusInput: $('#us2-radius'),
                 locationNameInput: $('#address')
             },
-            enableAutocomplete: true,
+            enableAutocompvare: true,
             onchanged: function (currentLocation, radius, isMarkerDropped) {
-                let addressComponents = $(this).locationpicker('map').location.addressComponents;
+                var addressComponents = $(this).locationpicker('map').location.addressComponents;
                 $("#latitude").val(currentLocation.latitude);
                 $("#longitude").val(currentLocation.longitude);
                 updateControls(addressComponents);
@@ -94,27 +94,27 @@ $(function () {
     }
 
     $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        let isChecked = $(this).is(':checked');
+        var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
     });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        let isChecked = $(this).is(':checked');
+        var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
 
     });
     $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        let isChecked = $(this).is(':checked');
+        var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
     });
 
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
         e.preventDefault();
-        let inputData = $(this).parents('form:first').serialize();
-        let name = $('#name');
+        var inputData = $(this).parents('form:first').serialize();
+        var name = $('#name');
 
         if (name.val() == '' || name.val().length < 6) {
             name.closest('div').removeClass('has-success').addClass('has-error');
@@ -123,7 +123,7 @@ $(function () {
         }
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        let btnUpdateTour = $('.btn-update-tour');
+        var btnUpdateTour = $('.btn-update-tour');
 
         $.ajax(
             {
@@ -150,14 +150,14 @@ $(function () {
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
                         // Show / Hide Share Tournament Link
-                        let tournamentType = $('[name="type"]').is(':checked');
+                        var tournamentType = $('[name="type"]').is(':checked');
                         if (tournamentType) $('#share_tournament').show();
                         else $('#share_tournament').hide();
 
                         // Set Venue Badge
-                        let venueSize = $('[name="venue_name"]').val().length;
-                        let latSize = $('[name="latitude"]').val().length;
-                        let longSize = $('[name="longitude"]').val().length;
+                        var venueSize = $('[name="venue_name"]').val().length;
+                        var latSize = $('[name="latitude"]').val().length;
+                        var longSize = $('[name="longitude"]').val().length;
 
                         if (venueSize > 0 && latSize > 0 && longSize > 0) {
                             $('#venue-status').show();
@@ -183,9 +183,9 @@ $(function () {
 
                 },
                 error: function (data) {
-                    let text = "";
-                    let json = data.responseText;
-                    let obj = null;
+                    var text = "";
+                    var json = data.responseText;
+                    var obj = null;
                     try {
                         obj = jQuery.parseJSON(json);
                         if (obj.hasOwnProperty('venue_name')) {
@@ -220,24 +220,24 @@ $(function () {
     });
 
 //EDIT CATEGORIES
-    let categoriesSize = null;
+    var categoriesSize = null;
 
     $('.save_category').on('click', function (e) {
         e.preventDefault();
-        let inputData = $('.save_category').serialize();
-        let form = $(this).parents('form:first');
+        var inputData = $('.save_category').serialize();
+        var form = $(this).parents('form:first');
         inputData = form.serialize();
-        // let tournamentId = form.data('tournament');
-        let championshipId = form.data('championship');
-        let settingId = form.data('setting');
+        // var tournamentId = form.data('tournament');
+        var championshipId = form.data('championship');
+        var settingId = form.data('setting');
 
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        let panel = $(this).closest('.panel');
+        var panel = $(this).closest('.panel');
 
-        let method = null;
-        let url = null;
+        var method = null;
+        var url = null;
         if ((typeof settingId === "undefined")) {
             method = 'POST';
             url = url_api_root + '/championships/' + championshipId + '/settings';
@@ -270,7 +270,7 @@ $(function () {
                         panel.find('.cat-state').text(configured);
 
                         form.attr('data-setting', data.settingId);
-                        let catsize = $(".category-size");
+                        var catsize = $(".category-size");
                         if (method == 'POST') {
                             categoriesSize = parseInt(catsize.text(), 10) + 1;
                             catsize.html(categoriesSize)
@@ -331,14 +331,14 @@ $(function () {
     $(".switch").bootstrapSwitch();
 
 
-    let $input = $('.dateFin').pickadate({
+    var $input = $('.dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
         today: '',
         clear: '',
         close: ''
     });
-    let $input2 = $('.dateLimit').pickadate({
+    var $input2 = $('.dateLimit').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],
         format: 'yyyy-mm-dd',
         today: '',
@@ -346,8 +346,8 @@ $(function () {
         close: ''
     });
 
-    let pickerFin = $input.pickadate('picker');
-    let pickerLimit = $input2.pickadate('picker');
+    var pickerFin = $input.pickadate('picker');
+    var pickerLimit = $input2.pickadate('picker');
 
     $('.dateIni').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],

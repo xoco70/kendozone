@@ -12,5 +12,3 @@
 
 ga('create', 'UA-72767410-1', 'auto');
 ga('send', 'pageview');/**
- * Created by juliatzin on 10/02/2016.
- */

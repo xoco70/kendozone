@@ -2,20 +2,20 @@ $(function () {
     function initialize() {
 
         // Set coordinates
-        let myLatlng = new google.maps.LatLng(latitude, longitude);
+        var myLatlng = new google.maps.LatLng(latitude, longitude);
 
         // Options
-        let mapOptions = {
+        var mapOptions = {
             zoom: 5,
             center: myLatlng
         };
 
         // Apply options
-        let map = new google.maps.Map($('.map-basic')[0], mapOptions);
+        var map = new google.maps.Map($('.map-basic')[0], mapOptions);
 
 
         // Add marker
-        let marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position: myLatlng,
             map: map
         });
@@ -27,8 +27,6 @@ $(function () {
 
     }
 
-    // Initialize map on window load
-    google.maps.event.addDomListener(window, 'load', initialize);
 
 
 });
