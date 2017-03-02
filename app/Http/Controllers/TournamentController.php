@@ -117,26 +117,30 @@ class TournamentController extends Controller
 
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
         // Statistics for Right Panel
-        $countries = Country::getAllPlucked('name', 'id');
+        $countries = Country::getAllPlucked();
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
 
-        $rules = config('options.rules');
         $hanteiLimit = config('options.hanteiLimit');
-        $selectedCategories = $tournament->categories;
+//        $selectedCategories = $tournament->categories;
+        $selectedCategories = [];
+        $baseCategories = Category::take(10)->pluck('name', 'id');
+        foreach ($tournament->championships as $championship) {
+            // get the champsionshipSetting
+            $category = $championship->category;
+            $alias = $championship->buildName();
+            $baseCategories->put($category->id, $alias);
+        }
 
-        $baseCategories = Category::take(10)->get();
-//        // Gives me a list of category containing
-        $categories = $selectedCategories->merge($baseCategories)->unique();
+        $categories = $baseCategories->sortBy('id')->toArray();
+        ////        // Gives me a list of category containing
+//        $categories = array_unique($merge);
         $grades = Grade::getAllPlucked();
 
         $venue = $tournament->venue ?? new Venue;
 
 
-        $categories = $categories->sortBy(function ($key) {
-            return $key;
-        })->pluck('name', 'id');
-
+        //TODO PUT IN CACHE
         $levels = TournamentLevel::pluck('name', 'id');
 
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams', 'countries', 'venue'));
