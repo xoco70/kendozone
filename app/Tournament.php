@@ -394,4 +394,22 @@ class Tournament extends Model
     }
 
 
+    /**
+     * @return array
+     */
+    public function getCategoriesName()
+    {
+        $baseCategories = Category::take(10)->pluck('name', 'id');
+        foreach ($this->championships as $championship) {
+            // get the champsionshipSetting
+            $category = $championship->category;
+            $alias = $championship->buildName();
+            $baseCategories->put($category->id, $alias);
+        }
+
+        $categories = $baseCategories->sortBy('id')->toArray();
+        return $categories;
+    }
+
+
 }

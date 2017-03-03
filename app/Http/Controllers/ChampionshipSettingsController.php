@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Championship;
 use App\Round;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
@@ -35,7 +36,9 @@ class ChampionshipSettingsController extends Controller
     {
 
         try {
-
+            if (Auth::check()) {
+                App::setLocale(Auth::user()->locale);
+            }
             $request->request->add(['championship_id' => $championshipId]);
             $setting = ChampionshipSettings::create($request->all());
             return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);

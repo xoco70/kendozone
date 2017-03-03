@@ -6,15 +6,11 @@
                 <h6 class="modal-title">{{ trans('core.add_custom_category') }}</h6>
             </div>
 
-            <div class="modal-body">
-               @include("categories.form")
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary" @click="addCategory">{{ trans('categories.add_and_close') }}</button>
-                {{--<button type="button"  class="btn btn-success" @click="addCategory">{{ trans('core.add_and_close') }}</button>--}}
+                @include("categories.form")
 
-            </div>
+
+
         </div>
     </div>
 </div>

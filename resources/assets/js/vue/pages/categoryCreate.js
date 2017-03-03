@@ -1,16 +1,31 @@
 new Vue({
-    el: 'body',
+    el: '#modal',
     data: {
+        name: '',
         isTeam: 0,
-        alias: '',
         genderSelect: 'M',
         ageCategorySelect: 0,
         ageMin: 0,
+        alias: '',
         ageMax: 0,
+        ageCategories: [
+            {value: 0, text: no_age},
+            {value: 1, text: childs},
+            {value: 2, text: students},
+            {value: 3, text: adults},
+            {value: 4, text: masters},
+            {value: 5, text: custom}
+        ],
+
+
+        genders: [
+            {value: 'M', text: male},
+            {value: 'F', text: female},
+            {value: 'X', text: mixt}
+        ],
         gradeSelect: 0,
         gradeMin: 0,
         gradeMax: 0,
-        error: '',
         grades: [
             {value: 0, text: no_grade},
             {value: 2, text: '7 Kyu'},
@@ -29,31 +44,67 @@ new Vue({
             {value: 15, text: '7 Dan'},
             {value: 16, text: '8 Dan'}
         ],
-        ageCategories: [
-            {value: 0, text: no_age},
-            {value: 1, text: childs},
-            {value: 2, text: students},
-            {value: 3, text: adults},
-            {value: 4, text: masters},
-            {value: 5, text: custom}
-        ],
-
-        genders: [
-            {value: 'M', text: male},
-            {value: 'F', text: female},
-            {value: 'X', text: mixt}
-        ],
-        categoryFullName: 'Individual Men',
+        // categoryFullName: 'Individual Men',
         url: '/api/v1/category/create',
-
 
     },
     computed: {
-        categoryFullName: function categoryFullName() {
-            var teamText = this.isTeam == 1 ? team : single;
-            var ageCategoryText = '';
-            var gradeText = '';
+        categoryFullName: function() {
+            let teamText = this.isTeam == 1 ? team : single;
+            this.name = teamText + ' ' +
+                this.getSelectText(this.genders, this.genderSelect) + ' ' +
+                this.getAgeText()+ ' '+
+                this.getGradeText() ;
+            
+            return this.name;
 
+        }
+    },
+    methods: {
+        addCategory: function addCategory() {
+            this.error = '';
+
+            dualListIds = [];
+            $(".listbox-filter-disabled > option").each(function () {
+                dualListIds.push(this.value);
+            });
+
+            let categoryData = {
+                "isTeam": this.isTeam,
+                "gender": this.genderSelect,
+                "alias": this.alias,
+                "ageCategory": this.ageCategorySelect,
+                "ageMin": this.ageMin,
+                "ageMax": this.ageMax,
+                "gradeCategory": this.gradeSelect,
+                "gradeMin": this.gradeMin,
+                "gradeMax": this.gradeMax
+            };
+
+
+            this.$http.post(this.url, categoryData).then(response => {
+                if (dualListIds.indexOf('' + response.data.id) == -1) {
+                    let option;
+                    console.log(this.categoryData);
+                    if (this.alias != '')
+                        option = '<option value=' + response.data.id + ' selected>' + this.alias + '</option>';
+                    else
+                        option = '<option value=' + response.data.id + ' selected>' + this.categoryFullName + '</option>';
+                    dualList.append(option);
+                    dualList.bootstrapDualListbox('refresh');
+                } else {
+                    // Print message
+                    this.error = " Ya existe el elemento";
+                }
+            });
+        },
+        decodeHtml: (html) => {
+            let txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        },
+        getAgeText: function () {
+            let ageCategoryText = '';
             if (this.ageCategorySelect != 0) {
                 if (this.ageCategorySelect == 5) {
                     ageCategoryText = ' - ' + age + ' : ';
@@ -74,7 +125,10 @@ new Vue({
                     ageCategoryText = this.getSelectText(this.ageCategories, this.ageCategorySelect);
                 }
             }
-
+            return ageCategoryText;
+        },
+        getGradeText: function () {
+            let gradeText = '';
             if (this.gradeSelect == 3) {
                 gradeText = ' - ' + grade + ' : ';
                 if (this.gradeMin != 0 && this.gradeMax != 0) {
@@ -91,77 +145,12 @@ new Vue({
                 } else {
                     gradeText = '';
                 }
+
             }
-
-            return teamText + ' ' + this.getSelectText(this.genders, this.genderSelect) + ' ' + ageCategoryText + ' ' + gradeText;
-        }
-    },
-
-    methods: {
-        addCategory: function addCategory() {
-            this.error = '';
-            // Get Get Category Name and Id
-            // var url = '/api/v1/category/team/' + this.isTeam + '/gender/' + this.genderSelect
-            //     + '/age/' + this.ageCategorySelect + '/' + this.ageMin + '/' + +this.ageMax
-            //     + '/grade/' + this.gradeSelect + '/' + this.gradeMin + '/' + this.gradeMax;
-
-
-            dualListIds = [];
-            $(".listbox-filter-disabled > option").each(function () {
-                dualListIds.push(this.value);
-            });
-
-            let categoryData = {
-                "isTeam": this.isTeam,
-                "gender": this.genderSelect,
-                "alias": this.alias,
-                "ageCategory": this.ageCategorySelect,
-                "ageMin": this.ageMin,
-                "ageMax": this.ageMax,
-                "gradeCategory": this.gradeSelect,
-                "gradeMin": this.gradeMin,
-                "gradeMax": this.gradeMax
-            }
-
-
-            this.$http.post(this.url, categoryData).then(response => {
-                if (dualListIds.indexOf('' + response.data.id) == -1) {
-                    var option;
-                    console.log(this.alias);
-                    if (this.alias != '')
-                        option = '<option value=' + response.data.id + ' selected>' + this.alias + '</option>';
-                    else
-                        option = '<option value=' + response.data.id + ' selected>' + this.categoryFullName + '</option>';
-                    // console.log(option);
-                    dualList.append(option);
-                    dualList.bootstrapDualListbox('refresh');
-                } else {
-                    // Print message
-                    this.error = " Ya existe el elemento";
-                }
-            });
+            return gradeText;
         },
-
-        // $.getJSON(url, function (data) {
-        //     if (dualListIds.indexOf('' + data.id) == -1){
-        //         var option = '<option value=' + data.id + ' selected>' + this.categoryFullName + '</option>';
-        //         // console.log(option);
-        //         dualList.append(option);
-        //         dualList.bootstrapDualListbox('refresh');
-        //     }else{
-        //         // Print message
-        //         this.error =" Ya existe el elemento";
-        //     }
-        // }.bind(this));
-
-
-        decodeHtml: function decodeHtml(html) {
-            var txt = document.createElement("textarea");
-            txt.innerHTML = html;
-            return txt.value;
-        },
-        getSelectText: function getSelectText(myArray, val) {
-            var newVal = '';
+        getSelectText: (myArray, val) => {
+            let newVal = '';
             myArray.map(function (el) {
                 if (val == el.value) {
                     newVal = el.text;
@@ -169,7 +158,7 @@ new Vue({
             });
             return newVal;
         },
-        resetModalValues: function resetModalValues() {
+        resetModalValues: () => {
             this.isTeam = 0;
             this.genderSelect = 'M';
             this.ageCategorySelect = 0;
@@ -181,11 +170,10 @@ new Vue({
         }
     },
     filters: {
-        selectText: function selectText(val, myArray) {
-            return this.getSelectText(myArray, val);
-        },
-        html: function html(_html) {
-            return this.decodeHtml(_html);
+        html: function(html){
+            let txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
         }
     }
 });

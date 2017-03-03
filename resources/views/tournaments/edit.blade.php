@@ -64,6 +64,7 @@
         <!-- /detached content -->
     </div>
     @include("right-panel.tournament_menu")
+
     @include("modals.create_category")
 
     <!-- /content area -->
@@ -98,10 +99,10 @@
         let dualList;
         let icon;
         let venue = "{!! addcslashes($venue, '"') !!}";
-        @if (isset($activeTab))
-            let activeTab = "{{ $activeTab }}";
+                @if (isset($activeTab))
+        let activeTab = "{{ $activeTab }}";
         @endif
-        venue = JSON.parse(venue);
+            venue = JSON.parse(venue);
 
         $("a").on('click', function () {
 

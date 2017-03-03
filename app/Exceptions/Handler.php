@@ -9,6 +9,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -72,9 +73,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-//        if (App::environment('local')) {
-//            return parent::render($request, $exception);
-//        }
+        if (App::environment('local')) {
+            return parent::render($request, $exception);
+        }
 
         switch ($exception) {
 

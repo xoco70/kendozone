@@ -15,11 +15,9 @@ require('laravel-elixir-vueify');
 
 elixir(function (mix) {
     mix.browserify('vue/pages/categoryCreate.js');
-    mix.browserify('vue/pages/AddAliasToCategory.js');
     mix.browserify('vue/pages/userForm.js');
     mix.browserify('oauth.js');
     mix.browserify('bootstrap.js');
-    mix.browserify('vue/pages/loadingButton.js');
 
 
     mix.less([

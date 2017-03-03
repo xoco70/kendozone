@@ -128,11 +128,9 @@
                 </div>
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
 
-                    <div class="panel panel-flat">
+                    <div class="panel panel-flat" id="federations">
                         <div class="panel-body">
                             <div class="container-fluid">
-
-
                                 <fieldset title="dojo">
                                     <a name="dojo">
                                         <legend class="text-semibold">{{Lang::get('core.where_do_you_practice')}}</legend>
@@ -146,7 +144,7 @@
                                         <option value="0"> -</option>
                                     @endif
                                     <option v-for="federation in federations" v-bind:value="federation.value"
-                                            selected="@{{ federationId==federation.value }}">
+                                    >
                                         @{{ federation.text }}
                                     </option>
                                     </select>
@@ -158,7 +156,7 @@
                                     <select name="association_id" v-model="associationSelected" id="association_id"
                                             class="form-control" @change="getClubs(associationSelected)">
                                     <option v-for="association in associations" v-bind:value="association.value"
-                                            selected="@{{ associationId==association.value }}">
+                                    >
                                         @{{ association.text }}
                                     </option>
                                     </select>
@@ -294,14 +292,14 @@
 
 
     <script>
-        var federationId = "{{ Auth::user()->federation_id }}";
-        var associationId = "{{ Auth::user()->association_id }}";
-        var clubId = "{{ Auth::user()->club_id}}";
-        var user = "{{ Auth::user()->slug }}";
+        let federationId = "{{ Auth::user()->federation_id }}";
+        let associationId = "{{ Auth::user()->association_id }}";
+        let clubId = "{{ Auth::user()->club_id}}";
+        let user = "{{ Auth::user()->slug }}";
 
-        var currentFederationId = "{{$user->federation_id ?? Auth::user()->federation_id }}";
-        var currentAssociationId = "{{$user->association_id ?? Auth::user()->association_id}}";
-        var currentClubId = "{{ $user->club_id ?? Auth::user()->club_id }}";
+        let currentFederationId = "{{$user->federation_id ?? Auth::user()->federation_id }}";
+        let currentAssociationId = "{{$user->association_id ?? Auth::user()->association_id}}";
+        let currentClubId = "{{ $user->club_id ?? Auth::user()->club_id }}";
 
 
     </script>
@@ -313,17 +311,17 @@
     {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 
     <script>
-        var maxImageWidth = 100, maxImageHeight = 100;
+        let maxImageWidth = 100, maxImageHeight = 100;
 
         Dropzone.autoDiscover = false;
         $(document).ready(function () {
 
-            var initialPic = "{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}";
+            let initialPic = "{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}";
 
-            var onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
+            let onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
-            var uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
-            var avatarHiddenField = $('input[name=avatar]');
+            let uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
+            let avatarHiddenField = $('input[name=avatar]');
 
             new Dropzone('#fileInput', {
                 autoProcessQueue: true,
@@ -341,13 +339,13 @@
                 maxFiles: 1,
 
                 init: function () {
-                    var myDropzone = this;
-                    var mockFile = {name: onlyPic, size: 2000};
+                    let myDropzone = this;
+                    let mockFile = {name: onlyPic, size: 2000};
                     myDropzone.emit("addedfile", mockFile);
                     myDropzone.emit("thumbnail", mockFile, initialPic);
                     myDropzone.emit("complete", mockFile);
                     myDropzone.files.push(mockFile);
-                    var existingFileCount = 0; // The number of files already uploaded
+                    let existingFileCount = 0; // The number of files already uploaded
                     myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
 
                     myDropzone.on("thumbnail", function (file) {
@@ -382,7 +380,7 @@
                     // callback, but I think that this is cleaner.
                 },
                 removedfile: function (file) {
-//                        var name = file.name;
+//                        let name = file.name;
 //                        $.ajax({
 //                            type: 'POST',
 //                            url: 'delete.php',
@@ -390,7 +388,7 @@
 //                            dataType: 'html'
 //                        });
                     avatarHiddenField.val('');
-                    var _ref;
+                    let _ref;
                     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
                 },
                 maxfilesexceeded: function (file) {

@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-6 add_category">
                         <a href="#" data-toggle="modal" data-target="#create_category"
-                           class="text-semibold text-black" @click="resetModalValues()">
+                           class="text-semibold text-black" v-on:click="resetModalValues()">
                         + {{ trans('core.add_custom_category') }}</a>
                     </div>
                 </div>
