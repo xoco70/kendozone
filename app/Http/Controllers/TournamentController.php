@@ -12,7 +12,6 @@ use App\Round;
 use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -122,19 +121,10 @@ class TournamentController extends Controller
         $categorySize = $tournament->championships->count();
 
         $hanteiLimit = config('options.hanteiLimit');
-//        $selectedCategories = $tournament->categories;
-        $selectedCategories = [];
-        $baseCategories = Category::take(10)->pluck('name', 'id');
-        foreach ($tournament->championships as $championship) {
-            // get the champsionshipSetting
-            $category = $championship->category;
-            $alias = $championship->buildName();
-            $baseCategories->put($category->id, $alias);
-        }
 
-        $categories = $baseCategories->sortBy('id')->toArray();
-        ////        // Gives me a list of category containing
-//        $categories = array_unique($merge);
+        $categories = $tournament->getCategoriesName();
+
+
         $grades = Grade::getAllPlucked();
 
         $venue = $tournament->venue ?? new Venue;
@@ -208,7 +198,6 @@ class TournamentController extends Controller
     public function restore($tournamentSlug)
     {
         $tournament = Tournament::withTrashed()->whereSlug($tournamentSlug)->first();
-
         if ($tournament->restore()) {
             return Response::json(['msg' => Lang::get('msg.tournament_restored_successful', ['name' => $tournament->name]), 'status' => 'success']);
         }
@@ -262,5 +251,7 @@ class TournamentController extends Controller
         $title = trans('core.tournaments_deleted');
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }
+
+
 
 }
