@@ -27,8 +27,8 @@ class RedirectCrawlers
         $userAgent = $request->header('User-Agent');
 
         if (str_contains($userAgent, $crawlers)) {
-            switch (Route::getCurrentRoute()->getPath()) {
-                case "tournaments/{tournament}/register":
+            switch (Route::getCurrentRoute()->getName()) {
+                case "register.category":
                     $tournament = Tournament::where('slug', $request->tournament)->first();
 
                     return view('public/register', compact('tournament'));
