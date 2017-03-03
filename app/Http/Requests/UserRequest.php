@@ -30,19 +30,19 @@ class UserRequest extends Request
      */
     public function rules()
     {
+
         $uniqueUser = '';
         $passwordRules = '';
-
         if (Route::getCurrentRoute()->getName() == 'users.create') {
-            $passwordRules = '|required';
+
+            $passwordRules = '|required|min:6';
             $uniqueUser = '|unique:users';
         }
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255' . $uniqueUser,
-            'password' => 'confirmed|min:6' . $passwordRules,
+            'password' => 'confirmed' . $passwordRules,
         ];
-
         return $rules;
     }
 
