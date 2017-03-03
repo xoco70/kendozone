@@ -23,7 +23,7 @@
                 @elseif ($title == trans('core.tournaments_deleted'))
                     <?php
                     $noItemYet = trans('core.no_tournament_deleted_yet');
-                    $link = '#'; //URL::action('TournamentController@joinOpenTournament') ;
+                    $link = '#';
                     $linkLabel = trans('core.join_tournament');
                     $printLink = false;
                     ?>

@@ -82,7 +82,7 @@ mix.combine([
 
 
 
-mix.js([
+mix.combine([
     'resources/assets/js/plugins/tables/footable/footable.min.js'
 ], 'public/js/pages/header/footable.js');
 
@@ -93,14 +93,14 @@ mix.combine([
     'resources/assets/js/plugins/notifications/bootbox.min.js'
 ], 'public/js/pages/header/tournamentCreate.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/plugins/dropzone.js'
 ], 'public/js/pages/header/userCreate.js');
 
-mix.js([
+mix.combine([
     'resources/assets/css/dropzone.css'
 ], 'public/css/pages/userCreate.css');
-mix.js([
+mix.combine([
     'resources/assets/js/plugins/uploaders/dropzone.js'
 ], 'public/js/userEdit.js');
 
@@ -155,7 +155,7 @@ mix.combine([
     'resources/assets/js/pages/uploader_bootstrap.js',
 ], 'public/js/pages/header/tournamentInvite.js');
 
-mix.js([
+mix.combine([
     'resources/assets/css/multiple-emails.css'
 ], 'public/css/pages/tournamentInvite.css');
 
@@ -166,45 +166,45 @@ mix.combine([
 ], 'public/js/pages/footer/trees.js');
 
 
-mix.js([
+mix.combine([
     'resources/assets/css/preliminary_trees.css',
 ], 'public/css/pages/preliminary_trees.css');
 
 
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/tournamentEditFooter.js'
 ], 'public/js/pages/footer/tournamentEditFooter.js');
 
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/tournamentDeletedFooter.js'
 ], 'public/js/pages/footer/tournamentDeletedFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/tournamentIndexFooter.js'
 ], 'public/js/pages/footer/tournamentIndexFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/tournamentShowFooter.js'
 ], 'public/js/pages/footer/tournamentShowFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/userIndexFooter.js'
 ], 'public/js/pages/footer/userIndexFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/userShowFooter.js'
 ], 'public/js/pages/footer/userShowFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/associationIndexFooter.js'
 ], 'public/js/pages/footer/associationIndexFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/clubIndexFooter.js'
 ], 'public/js/pages/footer/clubIndexFooter.js');
 
-mix.js([
+mix.combine([
     'resources/assets/js/pages/footer/teamIndexFooter.js',
 ], 'public/js/pages/footer/teamIndexFooter.js');

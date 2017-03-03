@@ -9,7 +9,6 @@ use App\Country;
 use App\Federation;
 use App\Grade;
 use App\Http\Requests\UserRequest;
-use App\Mail\confirmUserAccount;
 use App\Notifications\AccountCreated;
 use App\Role;
 use App\User;
@@ -139,7 +138,6 @@ class UserController extends Controller
      */
     public function update(UserRequest $userForm, User $user)
     {
-
         if ($userForm->update($user)) {
             flash()->success(trans('msg.user_update_successful'));
         } else
