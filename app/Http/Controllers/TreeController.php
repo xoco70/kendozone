@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
+use App\Fight;
 use App\Grade;
 use App\Round;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -70,5 +71,17 @@ class TreeController extends Controller
         return view('pdf.tree', compact('championship', 'grades'));
     }
 
+    public function update(Request $request)
+    {
+
+        $fights = $request->fights;
+        dd($fights);
+        foreach ($fights as $fightName){
+            if ($fightName != null){
+//                $fight = Fight::where('')
+            }
+        }
+
+    }
 
 }
