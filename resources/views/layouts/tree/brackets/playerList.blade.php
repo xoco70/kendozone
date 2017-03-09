@@ -1,5 +1,5 @@
 <?php
-$brackets = $treeGen->brackets[1];
+$brackets = array_merge($treeGen->brackets[1]);
 ?>
 <select name="fights[]">
     <option {{ $selected == '' ? ' selected' : '' }} ></option>

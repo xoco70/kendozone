@@ -18,7 +18,8 @@ $directEliminationTree = $championship->fights->map(function ($item, $key) use (
     return [$fighter1, $fighter2];
 })->toArray();
 
-$directEliminationTree = array_flatten($directEliminationTree);$treeGen = new DirectEliminationTreeGen($directEliminationTree);
+$directEliminationTree = array_flatten($directEliminationTree);
+$treeGen = new DirectEliminationTreeGen($directEliminationTree);
 
 ?>
 @if (Request::is('championships/'.$championship->id.'/pdf'))

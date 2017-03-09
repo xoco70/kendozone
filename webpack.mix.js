@@ -1,30 +1,5 @@
 const {mix} = require('laravel-mix');
-const path = require('path');
-const glob = require('glob');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const PurifyCSSPlugin = require('purifycss-webpack');
 
-module.exports = {
-module: {
-    rules: [
-        {
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract({
-                fallbackLoader: 'style-loader',
-                loader: 'css-loader'
-            })
-        }
-    ]
-},
-plugins: [
-    new ExtractTextPlugin('[name].[contenthash].css'),
-    // Make sure this is after ExtractTextPlugin!
-    new PurifyCSSPlugin({
-        // Give paths to parse for rules. These should be absolute!
-        paths: glob.sync(path.join(__dirname, 'app/*.html')),
-    })
-]
-};
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -41,7 +16,7 @@ mix.js('resources/assets/js/vue/pages/userForm.js','public/js/');
 mix.js('resources/assets/js/oauth.js','public/js/');
 mix.js('resources/assets/js/bootstrap.js','public/js/');
 
-
+mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
 
 mix.combine([
     'resources/assets/js/plugins/loaders/pace.min.js',
