@@ -9,6 +9,7 @@ use App\Round;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Xoco70\KendoTournaments\Exceptions\TreeGenerationException;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use Xoco70\KendoTournaments\TreeGen\TreeGen;
@@ -73,14 +74,24 @@ class TreeController extends Controller
 
     public function update(Request $request)
     {
+        $numFight = 0;
+        $championshipId = $request->championshipId;
+        $championship = Championship::find($request->championshipId);
+        $rounds = Round::with('fights')->where('championship_id', $championshipId)->get();
 
         $fights = $request->fights;
-        dd($fights);
-        foreach ($fights as $fightName){
-            if ($fightName != null){
-//                $fight = Fight::where('')
+        foreach ($rounds as $round) {
+            foreach ($round->fights as $fight) {
+                // Find the fight in array, and update order
+                $fight->c1 = $fights[$numFight++];
+                $fight->c2 = $fights[$numFight++];
+                $fight->save();
             }
         }
+
+
+        flash()->success(trans('msg.tree_edit_successful'));
+        return redirect(URL::action('TreeController@index', $championship->tournament->slug))->with('activeTab', $request->activeTab);
 
     }
 
