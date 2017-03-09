@@ -74,6 +74,7 @@ class TreeController extends Controller
 
     public function update(Request $request)
     {
+
         $numFight = 0;
         $championshipId = $request->championshipId;
         $championship = Championship::find($request->championshipId);
@@ -91,8 +92,7 @@ class TreeController extends Controller
 
 
         flash()->success(trans('msg.tree_edit_successful'));
-        return redirect(URL::action('TreeController@index', $championship->tournament->slug))->with('activeTab', $request->activeTab);
-
+        return redirect(route('tree.index', $championship->tournament->slug))->with('activeTreeTab', $request->activeTreeTab);
     }
 
 }
