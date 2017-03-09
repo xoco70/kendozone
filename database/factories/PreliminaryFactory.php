@@ -1,9 +1,9 @@
 <?php
 
 
-use App\Round;
+use App\FightersGroup;
 
-$factory->define(Round::class, function (Faker\Generator $faker) {
+$factory->define(FightersGroup::class, function (Faker\Generator $faker) {
 
     return [
 //        'name' => $faker->name,

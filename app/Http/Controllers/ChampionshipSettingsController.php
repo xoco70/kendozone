@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\Round;
+use App\FightersGroup;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -67,7 +67,7 @@ class ChampionshipSettingsController extends Controller
 
             // If we changed one of those data, remove tree
             if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {
-                Round::where('championship_id', $championshipId)->delete();
+                FightersGroup::where('championship_id', $championshipId)->delete();
             }
             $cs->save();
             return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);

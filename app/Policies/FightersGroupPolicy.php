@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Round;
+use App\FightersGroup;
 use App\Tournament;
 use App\User;
 
-class RoundPolicy
+class FightersGroupPolicy
 {
 //    use HandlesAuthorization;
 
@@ -26,7 +26,7 @@ class RoundPolicy
     }
 
 
-    public function destroy(User $user, Round $tree)
+    public function destroy(User $user, FightersGroup $tree)
     {
         $tournament = $tree->championship->tournament;
         dd($tournament);

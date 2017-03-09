@@ -4,7 +4,7 @@ use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Fight;
 use App\Tournament;
-use App\Round;
+use App\FightersGroup;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -63,12 +63,12 @@ class RoundRobinTreeTest extends BrowserKitTest
                 $this->generatePreliminaryTree($tournament);
 
                 for ($area = 1; $area <= $numArea; $area++){
-                    $rounds = Round::where('championship_id', $championship->id)
+                    $groups = FightersGroup::where('championship_id', $championship->id)
                                     ->where('area', $area)->first();
-                    if ($rounds == null){
+                    if ($groups == null){
                         $count = 0;
                     }else{
-                        $count = Fight::where('round_id', $rounds->id)
+                        $count = Fight::where('fighters_group_id', $groups->id)
                             ->where('area', $area)
                             ->count();
 

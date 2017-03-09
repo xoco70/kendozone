@@ -8,7 +8,7 @@ use App\Exceptions\InvitationNeededException;
 use App\Grade;
 use App\Http\Requests\TournamentRequest;
 use App\Http\Requests\VenueRequest;
-use App\Round;
+use App\FightersGroup;
 use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
@@ -96,7 +96,7 @@ class TournamentController extends Controller
 
 
         // Competitors
-        $tournamentWithTrees = Round::getTournament($request);
+        $tournamentWithTrees = FightersGroup::getTournament($request);
         $venue = $tournamentWithTrees->venue ?? new Venue;
 
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
