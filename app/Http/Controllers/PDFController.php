@@ -13,7 +13,7 @@ class PdfController extends Controller
     {
         $layout = 'pdf.preliminary_tree';
         // Get all data
-        $championship = Championship::with('rounds', 'settings', 'category')->find($request->championship);
+        $championship = Championship::with('fightersGroups', 'settings', 'category')->find($request->championship);
         $grades = Grade::getAllPlucked();
         // Get Tree Type
         if ($championship->hasPreliminary()) {

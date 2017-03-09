@@ -26,3 +26,5 @@ resources/assets/css/less.css
 resources/assets/css/less.css.map
 /package/
 public/vendor/kendo-tournaments/
+public/mix-manifest.json
+resources/assets/less/_main_full/main.less

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoundCompetitorTable extends Migration
+class CreateFightersGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,27 +13,21 @@ class CreateRoundCompetitorTable extends Migration
      */
     public function up()
     {
-        Schema::create('round_competitor', function (Blueprint $table) {
+        Schema::create('fighters_groups', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('competitor_id')->unsigned()->nullable()->index();
-            $table->integer('round_id')->unsigned()->index(); // A checar
+            $table->integer('championship_id')->unsigned()->index();
+            $table->tinyInteger("area");
+            $table->tinyInteger("order");
             $table->timestamps();
+            $table->engine = 'InnoDB';
 
-
-            $table->foreign('competitor_id')
+            $table->foreign('championship_id')
                 ->references('id')
-                ->on('competitor')
                 ->onUpdate('cascade')
+                ->on('championship')
                 ->onDelete('cascade');
-
-            $table->foreign('round_id')
-                ->references('id')
-                ->on('round')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->unique(['competitor_id', 'round_id']);
         });
+
     }
 
     /**
@@ -44,8 +38,7 @@ class CreateRoundCompetitorTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('round_competitor');
+        Schema::dropIfExists('fighters_groups');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-
     }
 }

@@ -8,11 +8,11 @@ use App\Federation;
 use App\Policies\AssociationPolicy;
 use App\Policies\ClubPolicy;
 use App\Policies\FederationPolicy;
-use App\Policies\RoundPolicy;
+use App\Policies\FightersGroupPolicy;
 use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
 use App\Policies\UserPolicy;
-use App\Round;
+use App\FightersGroup;
 use App\Team;
 use App\Tournament;
 use App\User;
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Association::class => AssociationPolicy::class,
         Club::class => ClubPolicy::class,
         Team::class => TeamPolicy::class,
-        Round::class => RoundPolicy::class,
+        FightersGroup::class => FightersGroupPolicy::class,
     ];
 
     /**

@@ -1,6 +1,6 @@
 <?php
 use App\Championship;
-use App\Round;
+use App\FightersGroup;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 use App\Competitor;
 use App\Tournament;
@@ -59,7 +59,7 @@ class PreliminaryTreeTest extends BrowserKitTest
                 $this->makeCompetitors($championship, $users);
                 $this->generatePreliminaryTree($tournament);
                 for ($area = 1; $area <= $numArea; $area++){
-                    $count = Round::where('championship_id', $championship->id)
+                    $count = FightersGroup::where('championship_id', $championship->id)
                                     ->where('area', $area)->count();
 
 

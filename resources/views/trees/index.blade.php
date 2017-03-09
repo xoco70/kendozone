@@ -40,13 +40,13 @@
                                             <i class="icon-printer"></i>
                                         </a>
 
-                                        @if (Auth::user()->can('store', [App\Round::class, $tournament]))
+                                        @if (Auth::user()->can('store', [App\FightersGroup::class, $tournament]))
 
                                             {!! Form::close() !!}
 
                                             {!! Form::open(
                                                 ['method' => 'POST', 'id' => 'storeTree', 'class'=> 'pull-right',
-                                                 'data-gen' => $championship->rounds->count(),
+                                                 'data-gen' => $championship->fightersGroups->count(),
                                                 'action' => ['TreeController@store', $championship->id]]) !!}
 
                                             <button type="button" class="btn bg-success btn-xs generate">
@@ -58,7 +58,7 @@
                                         @endif
 
                                     </h1>
-                                    @if ($championship->rounds != null  && $championship->rounds->count() != 0)
+                                    @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                                         @if ($championship->hasPreliminary())
                                             @include('layouts.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
