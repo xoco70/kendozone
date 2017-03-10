@@ -5,7 +5,7 @@ $numTeams = $tournament->teams()->count();
 $settingSize = $tournament->championshipSettings->count();
 $categorySize = $tournament->championships->count();
 if (Route::currentRouteName() != 'tournaments.edit') {
-    $baseUrl = route('tournaments.edit', ['tournament' => $tournament->slug]);
+    $baseUrl =  route('tournaments.edit', ['tournament' => $tournament->slug]);
 
 } else {
     $baseUrl = "";
@@ -57,8 +57,7 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                             </a></li>
 
 
-                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}"
-                               id="competitors">
+                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}" id="competitors">
                                 <i class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)

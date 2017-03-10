@@ -11,11 +11,12 @@ const {mix} = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/vue/pages/categoryCreate.js','public/js/');
-mix.js('resources/assets/js/vue/pages/userForm.js','public/js/');
-mix.js('resources/assets/js/oauth.js','public/js/');
-mix.js('resources/assets/js/bootstrap.js','public/js/');
-mix.js('resources/assets/js/vue/pages/addFighterToTeam.js','public/js/');
+mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
+mix.js('resources/assets/js/oauth.js', 'public/js/');
+mix.js('resources/assets/js/bootstrap.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/clipboard.js', 'public/js/');
 
 mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
 
@@ -45,17 +46,14 @@ mix.combine([
 ], 'resources/assets/less/_main_full/main.less');
 
 
-mix.less('resources/assets/less/_main_full/main.less','css/main.css' );
+mix.less('resources/assets/less/_main_full/main.less', 'css/main.css');
 
 mix.combine([
-     'public/css/main.css',
+    'public/css/main.css',
     'resources/assets/css/custom.css',
     'resources/assets/css/protip.css',
     'resources/assets/css/nunito.css'
 ], 'public/css/app.css');
-
-
-
 
 
 mix.combine([
@@ -91,6 +89,7 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
+    'public/js/clipboard.js'
 ], 'public/js/pages/header/tournamentEdit.js');
 
 
@@ -145,7 +144,6 @@ mix.combine([
 mix.combine([
     'resources/assets/css/preliminary_trees.css',
 ], 'public/css/pages/preliminary_trees.css');
-
 
 
 mix.combine([

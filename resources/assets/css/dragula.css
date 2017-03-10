@@ -7,7 +7,7 @@
     width: 100%;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
-    min-height: 200px;
+    min-height: 150px;
 }
 .container-dragula:nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.03);
