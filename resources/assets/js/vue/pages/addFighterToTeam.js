@@ -20,6 +20,8 @@ new Vue({
 
         copyOne: [
         ],
+        teams:myTeams,
+
         copyTwo: names
     },
     created: function () {

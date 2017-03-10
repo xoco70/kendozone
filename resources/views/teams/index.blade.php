@@ -24,9 +24,20 @@
                         <div class="tab-content" id="dragula_top">
                             @foreach($tournament->championships as $championship)
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
-                                    <h1> {{$championship->buildName()}}<span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span></h1>
 
-
+                                    {!! Form::model($tournament, ["action" => ["TeamController@store", $championship->slug]]) !!}
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h1> {{$championship->buildName()}}
+                                                <span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span>
+                                            </h1>
+                                        </div>
+                                        <div class="col-md-2" align="right">
+                                            <button type="submit" class="btn btn-success" id="saveTournament">
+                                                {{trans("core.saveTeam")}}
+                                            </button>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
 
@@ -47,7 +58,7 @@
 
                                             @include('layouts.teams.panels')
                                         @endif
-
+                                        {!! Form::close()!!}
                                     </div>
                                 </div>
                             @endforeach
@@ -60,7 +71,11 @@
 
     <?php
     $arrCompetitors = $championship->competitors->map(function ($competitor) {
-        return $competitor->user->name;
+        return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+    })->toArray();
+
+    $arrTeams = $championship->teams->map(function ($team) {
+        return ["id" => $team->id, "name" => $team->name];
     })->toArray();
     ?>
 
@@ -74,6 +89,7 @@
     <script>
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
         var names = JSON.parse('{!!   json_encode($arrCompetitors) !!}');
+        var myTeams = JSON.parse('{!!   json_encode($arrTeams) !!}');
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
 
