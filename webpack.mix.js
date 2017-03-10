@@ -15,6 +15,7 @@ mix.js('resources/assets/js/vue/pages/categoryCreate.js','public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js','public/js/');
 mix.js('resources/assets/js/oauth.js','public/js/');
 mix.js('resources/assets/js/bootstrap.js','public/js/');
+mix.js('resources/assets/js/vue/pages/addFighterToTeam.js','public/js/');
 
 mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
 
@@ -183,3 +184,7 @@ mix.combine([
 mix.combine([
     'resources/assets/js/pages/footer/teamIndexFooter.js',
 ], 'public/js/pages/footer/teamIndexFooter.js');
+
+mix.combine([
+    'resources/assets/css/dragula.css',
+], 'public/css/dragula.css');

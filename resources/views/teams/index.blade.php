@@ -3,12 +3,9 @@
     {!! Breadcrumbs::render('teams.index', $tournament) !!}
 @stop
 @section('styles')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {!! Html::style('/css/dragula.css')!!}
 @stop
 @section('content')
-    <?php
-
-    ?>
     <div class="container-detached">
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified trees">
@@ -24,10 +21,11 @@
             <div class="panel panel-flat">
                 <div class="panel-body">
                     <div class="container-fluid">
-                        <div class="tab-content">
+                        <div class="tab-content" id="dragula_top">
                             @foreach($tournament->championships as $championship)
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
-                                    <h1> {{$championship->buildName()}}</h1>
+                                    <h1> {{$championship->buildName()}}<span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span></h1>
+
 
 
                                     <div class="row">
@@ -54,38 +52,30 @@
                                 </div>
                             @endforeach
                         </div>
-
                     </div>
-                    @include("right-panel.tournament_menu")
-                    @include("errors.list")
-                    @stop
-                    @section('scripts_footer')
-                        {!! Html::script('js/pages/header/footable.js') !!}
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <script>
-                            var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
-                        </script>
-                        {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
-
-                        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                        <script>
-                            $(function () {
+    <?php
+    $arrCompetitors = $championship->competitors->map(function ($competitor) {
+        return $competitor->user->name;
+    })->toArray();
+    ?>
 
 
-                                $(".sortable").sortable({
-                                    revert: true
-                                });
+    @include("right-panel.tournament_menu")
+    @include("errors.list")
+@stop
+@section('scripts_footer')
+    {!! Html::script('js/pages/header/footable.js') !!}
 
-                                @foreach($championship->competitors as $competitor)
-                                $(".draggable").draggable({
-                                    connectToSortable: ".sortable",
-                                    revert: "invalid"
-                                });
-                                @endforeach
+    <script>
+        var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
+        var names = JSON.parse('{!!   json_encode($arrCompetitors) !!}');
+    </script>
+    {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
 
-
-
-                                $("ul, li").disableSelection();
-                            });
-                        </script>
+    <script src="/js/addFighterToTeam.js"></script>
 @stop

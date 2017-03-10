@@ -14,5 +14,9 @@
     "phantomjs-prebuilt": "^2.1.7",
     "vue": "^2.0.1",
     "vue-resource": "^0.9.3"
+  },
+  "dependencies": {
+    "vue-clipboard": "0.0.1",
+    "vue-dragula": "^2.0.0-alpha"
   }
 }

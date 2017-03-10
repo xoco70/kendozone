@@ -7,9 +7,9 @@
                 {{  $team->name }}
                 @endslot
                 @slot('content')
-                <ul class="sortable">
-                    <li class="ui-state-default">Item 1</li>
-                </ul>
+                <div class="container-dragula" v-dragula="copyOne" bag="third-bag" >
+                    <div v-for="text in copyOne" track-by="$index" v-cloak>@{{text}}</div>
+                </div>
                 @endslot
 
                 @endcomponent
@@ -17,13 +17,16 @@
             @endforeach
         </div>
     </div>
+
     <div class="col-xs-12 col-md-4 panel panel-body">
+        <h2 align="center">{{ trans_choice('core.competitor',2) }}</h2>
         <div class="row">
-            <ul>
-                @foreach($championship->competitors as $competitor)
-                    <li  class="draggable ui-state-highlight">{{ $competitor->user->name }}</li>
-                @endforeach
-            </ul>
+
+            <div class="wrapper-dragula">
+                <div class="container-dragula" v-dragula="copyTwo" bag="third-bag">
+                    <div v-for="text in copyTwo" track-by="$index" v-cloak>@{{text}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

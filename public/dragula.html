@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>vue-dragula</title>
+    <link rel="stylesheet" href="css/dragula.css">
+</head>
+<body>
+
+<div id="exx">
+
+
+    <div class="wrapper">
+        <div class="container" v-dragula="copyOne" bag="third-bag">
+            <div v-for="text in copyOne" track-by="$index">{{text}}</div>
+        </div>
+        <div class="container" v-dragula="copyTwo" bag="third-bag">
+            <div v-for="text in copyTwo" track-by="$index">{{text}}</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/addFighterToTeam.js"></script>
+</body>
+</html>
