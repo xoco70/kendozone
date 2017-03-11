@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-md-2" align="right">
                                             <button type="submit" class="btn btn-success" id="saveTournament">
-                                                {{trans("core.saveTeam")}}
+                                                {{trans("core.updateModel", ['currentModelName' => trans_choice('core.team',2) ]) }}
                                             </button>
                                         </div>
                                     </div>
@@ -58,8 +58,9 @@
 
                                             @include('layouts.teams.panels')
                                         @endif
-                                        {!! Form::close()!!}
+
                                     </div>
+                                    {!! Form::close()!!}
                                 </div>
                             @endforeach
                         </div>
@@ -71,7 +72,7 @@
 
     <?php
     $arrCompetitors = $championship->competitors->map(function ($competitor) {
-        return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+        return ["id" => $competitor->user->id, "name" => $competitor->user->name, "competitors" => []];
     })->toArray();
 
     $arrTeams = $championship->teams->map(function ($team) {
@@ -89,9 +90,8 @@
     <script>
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
         var names = JSON.parse('{!!   json_encode($arrCompetitors) !!}');
-        var myTeams = JSON.parse('{!!   json_encode($arrTeams) !!}');
+        var myTeams = JSON.parse('{!!   json_encode($arrTeams   ) !!}');
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
-
-    <script src="/js/addFighterToTeam.js"></script>
+    {!! Html::script('js/addFighterToTeam.js')!!}
 @stop

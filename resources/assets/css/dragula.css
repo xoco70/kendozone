@@ -32,7 +32,7 @@
 
 }
 .container-dragula div:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0!important;
 }
 .gu-mirror {
     cursor: grabbing;

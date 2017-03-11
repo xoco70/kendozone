@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body" >
             {{ $content }}
         </div>
     </div>

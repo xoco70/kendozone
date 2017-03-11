@@ -4,47 +4,47 @@ Vue.config.debug = true;
 
 Vue.use(VueDragula);
 
-new Vue({
+vm = new Vue({
     el: '#dragula_top',
     data: {
         colOne: [
-            'Fighter 1',
-            'Fighter 2',
-            'Fighter 3'
         ],
         colTwo: [
-            'Fighter 4',
-            'Fighter 5',
-            'Fighter 6'
         ],
 
-        copyOne: [
+        teamsArea: [
         ],
         teams:myTeams,
-
-        copyTwo: names
+        team_id:0,
+        competitorsArea: names,
+        copyOne: [
+        ],
     },
     created: function () {
-        Vue.vueDragula.options('third-bag', {
+        Vue.vueDragula.options('', {
             copy: false
         })
     },
-    ready: function () {
-        let _this = this;
-        Vue.vueDragula.eventBus.$on(
-            'drop',
-            function (args) {
-                console.log('drop: ' + args[0]);
+    mounted: function () {
+        this.$nextTick(function () {
+            let _this = this;
+            console.log(_this);
+            Vue.vueDragula.eventBus.$on(
+                'drop',
+                function (args) {
+                    console.log('drop: ' + JSON.stringify(args));
 
-            }
-        );
-        Vue.vueDragula.eventBus.$on(
-            'dropModel',
-            function (args) {
-                console.log('dropModel: ' + args);
+                }
+            );
+            Vue.vueDragula.eventBus.$on(
+                'dropModel',
+                function (args) {
+                    console.log('dropModel: ' + JSON.stringify(args));
 
-            }
-        )
+
+                }
+            )
+        })
     },
     methods: {
 
