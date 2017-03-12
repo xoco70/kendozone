@@ -317,5 +317,10 @@ return [
     'about' => "Acerca de Kendozone",
 
 
-    'championship' => 'categoría'
+    // Score Sheet
+    'championship' => 'categoría',
+    'shiajo' => 'shiajo',
+    'group' => 'grupo',
+    'leader' => 'leader',
+
 ];

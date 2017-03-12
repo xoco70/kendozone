@@ -310,5 +310,19 @@ return [
     // Share
 
     'register_in_tournament' => 'Register in tournament',
-    'about' => "About Kendozone"
+    'about' => "About Kendozone",
+
+    // Score Sheet
+    'championship' => 'Championship',
+    'shiajo' => 'Shiajo',
+    'group' => 'Group',
+    'writer' => 'Writer',
+    'leader' => 'Leader',
+    'playoff' => 'Play off',
+    'points' => 'Points',
+    'points_abrev' => 'Pts',
+    'clasify' => 'Clasify',
+    'time' => 'Time',
+
+
 ];

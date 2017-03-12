@@ -83,7 +83,7 @@ class CompetitorController extends Controller
             flash()->error(trans('msg.user_already_registered_in_category'));
             return redirect(URL::action('CompetitorController@index', $tournament->slug));
         } else {
-            $championships->attach($championshipId, ['confirmed' => 0]);
+            $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
         }
 
 
