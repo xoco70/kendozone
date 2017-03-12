@@ -1,3 +1,30 @@
-.sheet_shortid{
-    width: 20px;
+.sheet_point{
+    margin: 0 5px;
+    width:80px;
 }
+
+.total{
+    border: solid 1px;
+    margin: 5px 15px;
+    padding: 0 25px;
+
+}
+.clasify{
+    border: solid 1px;
+    padding: 0 25px;
+}
+
+input{
+    text-align: center;
+}
+
+.form-inline .form-group + .form-group {
+    margin-left: 0;
+}
+
+
+.form-group {
+    margin-bottom: 0;
+}
+
+

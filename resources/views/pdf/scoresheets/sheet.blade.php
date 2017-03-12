@@ -174,8 +174,8 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-6" align="right">
             <div class="form-group">
-                {!!  Form::text(trans('core.table_leader'), '', ['class' => 'form-control sheet_leader']) !!}
-                {!!  Form::label('leader',  trans('core.table_leader'),['class' => 'text-bold', 'align' => 'center' ]) !!}
+                {!!  Form::text(trans('core.table_leader'), '', ['class' => 'form-control']) !!}
+                {!!  Form::label('leader',  trans('core.table_leader'),['class' => 'text-bold']) !!}
             </div>
         </div>
     </div>
