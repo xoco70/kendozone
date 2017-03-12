@@ -13,11 +13,12 @@ class CreateFightersGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('fighters_groups', function(Blueprint $table) {
+        Schema::create('fighters_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('championship_id')->unsigned()->index();
-            $table->tinyInteger("area");
-            $table->tinyInteger("order");
+            $table->tinyInteger('round')->default(0); // Eliminitory, 1/8, 1/4, etc.
+            $table->tinyInteger('area');
+            $table->tinyInteger('order');
             $table->timestamps();
             $table->engine = 'InnoDB';
 
@@ -27,7 +28,6 @@ class CreateFightersGroupTable extends Migration
                 ->on('championship')
                 ->onDelete('cascade');
         });
-
     }
 
     /**

@@ -111,9 +111,14 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('tree.store');;
         Route::post('championships/{championshipId}/trees/update', 'TreeController@update')->name('tree.update');;
 
+        Route::resource('championships/{championship}/scoresheet', 'ScoreSheetController');
+
+
         Route::get('workingonit', function () {
             return view('workingonit');
         })->name('workingonit');
+
+
 
     });
 Route::get('/auth/callback', function (Request $request) {

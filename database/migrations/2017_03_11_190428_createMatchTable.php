@@ -16,7 +16,7 @@ class CreateMatchTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fight_id')->unsigned();
-
+            $table->string('writer');
 
 
             $table->timestamps();

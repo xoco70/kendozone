@@ -314,5 +314,8 @@ return [
     // Share
 
     'register_in_tournament' => 'Registrate en el torneo',
-    'about' => "Acerca de Kendozone"
+    'about' => "Acerca de Kendozone",
+
+
+    'championship' => 'categoría'
 ];
