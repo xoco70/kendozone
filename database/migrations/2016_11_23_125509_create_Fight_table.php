@@ -18,7 +18,7 @@ class CreateFightTable extends Migration
             $table->integer('fighters_group_id')->unsigned()->index();
             $table->foreign('fighters_group_id')
                 ->references('id')
-                ->on('round')
+                ->on('fighters_groups')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->integer('c1')->nullable()->unsigned()->index();
