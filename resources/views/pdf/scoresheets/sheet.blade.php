@@ -1,7 +1,9 @@
 @extends('layouts.scoreSheets.master')
 @section('content')
-    <p align="center">{{ $championship->tournament->name }}</p>
+    <h1 align="center">{{ $championship->tournament->name }}</h1>
 
+    <hr/>
+    <br/>
     <?php
     $groups = $championship->fightersGroups;
     $group = $groups->get(0);
@@ -16,35 +18,35 @@
 
     {{--        <p align="center">{{ $tournamentGroup->round }}</p>--}}
 
-    {{  Form::model($sheet, ["action" => [$sheet == null ?
-                                                "ScoreSheetController@store" :
-                                                "ScoreSheetController@update",
-     $championship->slug], 'class' => 'class="form-horizontal'] ) }}
+    {{--{{  Form::model($sheet, ["action" => [$sheet == null ?--}}
+                                                {{--"ScoreSheetController@store" :--}}
+                                                {{--"ScoreSheetController@update",--}}
+     {{--$championship->slug], 'class' => 'class="form-horizontal'] ) }}--}}
 
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-sm-5">
             <div class="form-group">
                 {!!  Form::label('championship', trans('core.championship'),['class' => 'text-bold' ]) !!}:
-                {!!  Form::text('championship', 'championship Name', ['class' => 'form-control sheet_championship']) !!}
+                {!!  Form::text('championship', $championship->category->name , ['class' => 'form-control sheet_championship']) !!}
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-sm-1">
             <div class="form-group">
                 {!!  Form::label('shiajo', trans('core.shiajo'),['class' => 'text-bold' ]) !!}:
-                {!!  Form::text('shiajo', '1', ['class' => 'form-control sheet_shiajo']) !!}
+                {!!  Form::text('shiajo', $group->area, ['class' => 'form-control sheet_shiajo']) !!}
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-sm-1">
             <div class="form-group">
                 {!!  Form::label('group', trans('core.group'),['class' => 'text-bold' ]) !!}:
                 {!!  Form::text('group', '1', ['class' => 'form-control sheet_group']) !!}
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-sm-5">
             <div class="form-group">
                 {!!  Form::label('writer', trans('core.writer'),['class' => 'text-bold' ]) !!}:
-                {!!  Form::text('writer', 'Pito Perez', ['class' => 'form-control sheet_writer']) !!}
+                {!!  Form::text('writer', '', ['class' => 'form-control sheet_writer']) !!}
             </div>
         </div>
     </div>
@@ -52,7 +54,7 @@
     <br/><br/><br/>
     <div class="row">
         {{--Competitors--}}
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="row">&nbsp;</div>
             <div class="row">&nbsp;</div>
 
@@ -60,14 +62,17 @@
 
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-2">
+                        <div class="col-sm-2">
                             {!!  Form::text('short_id[]', $fighter->short_id, ['class' => 'form-control sheet_shortid']) !!}
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-sm-10">
                             {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "BYE", ['class' => 'form-control competitor_name']) !!}
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
+                <br/>
                 <br/>
             @endforeach
 
@@ -75,7 +80,7 @@
         </div>
         {{--End Competitors--}}
         {{--Points--}}
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="row">
                 <table>
                     <tr>
@@ -88,7 +93,7 @@
                         <td align="center">I</td>
                         <td align="center">II</td>
                         <td align="center">III</td>
-                        <td align="center">Tot</td>
+                        <td align="center">Total</td>
                         <td align="center">&nbsp;</td>
                         <td align="center">{{ trans('core.clasify') }}</td>
                     </tr>
@@ -96,13 +101,18 @@
                         <tr>
                             <td align="center">&nbsp;</td>
                             @foreach($group->fights as $fight)
-                                <td align="center">
-                                    {!!  Form::select('point1[]', ['K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hantei"], 'K', ['class' => 'form-control sheet_point']) !!}
+                                <td align="center" class="cell-group">
+                                    {!!  Form::select('point1[]', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'right']) !!}
+
+                                    <div class="form-group">
+                                        {!!  Form::select('point1[]', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}
+                                    </div>
+
                                 </td>
                             @endforeach
-                            <td align="center" class="total">11</td>
+                            <td align="center" class="total"></td>
                             <td align="center">&nbsp;</td>
-                            <td align="center" class="clasify">Si</td>
+                            <td align="center" class="clasify"></td>
                         </tr>
                         <tr class="spacer">
                             <td colspan="7">&nbsp;</td>
@@ -112,7 +122,7 @@
                     <tr>
                         <td>{{ trans('core.time') }}</td>
                         @foreach($group->fights as $fight)
-                            <td>{!!  Form::text('time[]', '01:11', ['class' => 'form-control sheet_point']) !!}</td>
+                            <td>{!!  Form::text('time[]', '', ['class' => 'form-control sheet_point']) !!}</td>
                         @endforeach
                         <td colspan="2">&nbsp;</td>
                     </tr>
@@ -123,72 +133,54 @@
         </div>
     </div>
     {{--End Points--}}
+    <hr/>
 
 
 
 
 
+    <h2 align="center">{{ trans('core.playoff') }}</h2>
+    <table align="center" width="100%">
+        <tr>
+            <td align="center" width="5%">{{  trans('core.points_abrev') }} </td>
+            <td align="center" width="20%">ID</td>
+            <td align="center" width="5%">&nbsp;</td>
+            <td align="center" width="20%">ID</td>
+            <td align="center" width="5%">{{  trans('core.points_abrev') }} </td>
+            <td align="center" width="5%">&nbsp;</td>
+            <td align="center" width="5%">{{ trans('core.time') }}</td>
+        </tr>
+        @foreach($group->fights as $fight)
+            <tr>
+                <td align="center"
+                    width="5%">{!!  Form::text('point', '', ['class' => 'form-control ']) !!}</td>
+                <td align="center"
+                    width="20%">{!!  Form::text('id', $fight->competitor1->short_id, ['class' => 'form-control']) !!}</td>
+                <td align="center" width="5%"><strong>x</strong></td>
+                <td align="center"
+                    width="20%">{!!  Form::text('id', $fight->competitor2->short_id, ['class' => 'form-control']) !!}</td>
+                <td align="center"
+                    width="5%">{!!  Form::text('point', '', ['class' => 'form-control ']) !!}</td>
+                <td align="center" width="5%">&nbsp;</td>
+                <td align="center"
+                    width="5%">{!!  Form::text('time', '', ['class' => 'form-control ']) !!}</td>
 
-    {{--<p align="center">{{ trans('core.playoff') }}</p>--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::label('point',  trans('core.points_abrev'),['class' => 'text-bold' ]) !!}<br/>--}}
-    {{--</div>--}}
-    {{--<div class="col-1"> X</div>--}}
-    {{--<div class="col-5"></div>--}}
-    {{--<div class="col-1"></div>--}}
-    {{--</div>--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1"> X</div>--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1">--}}
-    {{--{!!  Form::label('time',  trans('core.points_abrev'),['class' => 'text-bold' ]) !!}<br/>--}}
-    {{--{!!  Form::text('time', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1"> X</div>--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1">--}}
-    {{--{!!  Form::label('time',  trans('core.points_abrev'),['class' => 'text-bold' ]) !!}<br/>--}}
-    {{--{!!  Form::text('time', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1"> X</div>--}}
-    {{--<div class="col-5">--}}
-    {{--{!!  Form::text('id', '1', ['class' => 'form-control']) !!}--}}
-    {{--{!!  Form::text('point', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--<div class="col-1">--}}
-    {{--{!!  Form::label('time',  trans('core.points_abrev'),['class' => 'text-bold' ]) !!}<br/>--}}
-    {{--{!!  Form::text('time', '1', ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-    {{--</div>--}}
+            </tr>
+            <tr class="spacer">
+                <td colspan="7">&nbsp;</td>
+            </tr>
+        @endforeach
+    </table>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-6" align="right">
+            <div class="form-group">
+                {!!  Form::text(trans('core.table_leader'), '', ['class' => 'form-control sheet_leader']) !!}
+                {!!  Form::label('leader',  trans('core.table_leader'),['class' => 'text-bold', 'align' => 'center' ]) !!}
+            </div>
+        </div>
+    </div>
 
 
-    {{--<div align="right">--}}
-    {{--{!!  Form::text(trans('core.leader'), 'Maya', ['class' => 'form-control sheet_leader']) !!}--}}
-    {{--{!!  Form::label('leader',  trans('core.leader'),['class' => 'text-bold' ]) !!}--}}
-    {{--</div>--}}
     {{--@if ($championship->isPreliminary())--}}
     {{--@elseif ($championship->isDirectElimination())--}}
     {{--@elseif ($championship->isRoundRobin())--}}

@@ -317,7 +317,7 @@ return [
     'shiajo' => 'Shiajo',
     'group' => 'Group',
     'writer' => 'Writer',
-    'leader' => 'Leader',
+    'table_leader' => 'Table Leader',
     'playoff' => 'Play off',
     'points' => 'Points',
     'points_abrev' => 'Pts',
