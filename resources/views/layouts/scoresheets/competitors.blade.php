@@ -1,6 +1,6 @@
 <div class="row sheet-competitors">
     {{--Competitors--}}
-    <div class="col-xs-4 fighters">
+    <div class="col-xs-4 col-md-6 fighters">
 
         @foreach($fighters as $fighter )
 
@@ -9,12 +9,12 @@
                 <table>
                     <tr>
                         <td width="20%">
-                            <div class="form-group">
+                            <div class="form-group form-group-sheets ">
                                 {!!  Form::text('short_id[]', $fighter->short_id, ['class' => 'form-control sheet_shortid']) !!}
                             </div>
                         </td>
                         <td width="80%">
-                            <div class="form-group">
+                            <div class="form-group form-group-sheets">
                                 {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "BYE", ['class' => 'form-control competitor_name']) !!}
                             </div>
                         </td>
@@ -28,12 +28,12 @@
     </div>
     {{--End Competitors--}}
     {{--Points--}}
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-md-6">
         <div class="row">
             <table>
                 <tr>
                     <td colspan="6" align="center">
-                        <small>{{ trans('core.points') }} ( {{  trans('core.points4abrev') }} )</small>
+                        <small>{{ trans('core.points') }} ( {{  trans('core.points_abrev') }} )</small>
                     </td>
                 </tr>
                 <tr class="lines">
@@ -43,7 +43,7 @@
                     <td align="center">III</td>
                     <td align="center">Total</td>
                     <td align="center">&nbsp;</td>
-                    <td align="center">{{ trans('coreclasify') }}</td>
+                    <td align="center">{{ trans('core.clasify') }}</td>
                 </tr>
                 @foreach($fighters as $fighter)
                     <tr>
@@ -52,7 +52,7 @@
                             <td align="center" class="cell-group">
                                 {!!  Form::select('point1[]', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'right']) !!}
 
-                                <div class="form-group">
+                                <div class="form-group form-group-sheets">
                                     {!!  Form::select('point1[]', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}
                                 </div>
 

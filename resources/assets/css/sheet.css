@@ -1,16 +1,35 @@
+.fighters{
+    margin-top:40px;
+}
+
+.sheet-header{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+/*.row-fighter{*/
+/*margin-bottom:55px;*/
+/*}*/
+
+.row-fighter{
+    margin-bottom:35px;
+}
+
+.sheet-competitors{
+    /*margin-top:60px;*/
+}
 .sheet_point{
     margin: 0 5px;
     width:80px;
 }
 
 .total{
-    border: solid 1px;
+    border: solid 1px lightgrey;
     margin: 5px 15px;
     padding: 0 25px;
 
 }
 .clasify{
-    border: solid 1px;
+    border: solid 1px lightgrey;
     padding: 0 25px;
 }
 
@@ -26,5 +45,10 @@ input{
 .form-group {
     margin-bottom: 0;
 }
-
-
+.playoff{
+    margin-top:80px;
+    margin-bottom:80px;
+}
+.form-group-sheets{
+    margin-bottom:0;
+}
