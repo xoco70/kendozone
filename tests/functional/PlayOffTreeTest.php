@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 
-class RoundRobinTreeTest extends BrowserKitTest
+class PlayOffTreeTest extends BrowserKitTest
 {
     use DatabaseTransactions;
 
@@ -26,7 +26,7 @@ class RoundRobinTreeTest extends BrowserKitTest
     }
 
     /** @test */
-    public function check_number_of_row_when_generating_roundRobin()
+    public function check_number_of_row_when_generating_playoff()
     {
         $numCompetitors =    [1, 2, 3, 4,  5,  6];
         $numFightsExpected = [0, 1, 3, 6, 10, 15];
@@ -80,7 +80,7 @@ class RoundRobinTreeTest extends BrowserKitTest
                         $expected = (int)($numFightsExpected[$numCompetitor - 1] / $numArea);
 
                         if ($count != $expected) {
-                            dd(["Type" => "RoundRobin"],
+                            dd(["Type" => "Play Off"],
                                 ["NumCompetitors" => $numCompetitor],
                                 ["NumArea" => $numArea],
                                 ["Real" => $count],

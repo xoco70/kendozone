@@ -1,6 +1,6 @@
 @extends('layouts.pdf')
 @section('content')
-    @include("layouts.tree.roundRobin")
+    @include("layouts.tree.playOff")
 @stop
 @section('footer')
     @include('pdf.footer')

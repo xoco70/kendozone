@@ -183,7 +183,7 @@
 
     {{--@if ($championship->isPreliminary())--}}
     {{--@elseif ($championship->isDirectElimination())--}}
-    {{--@elseif ($championship->isRoundRobin())--}}
+    {{--@elseif ($championship->isPlayOff())--}}
     {{--@endif--}}
 
 

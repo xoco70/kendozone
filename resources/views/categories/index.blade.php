@@ -21,7 +21,7 @@
                                 <th class="text-center">{{ trans('core.name') }}</th>
                                 <th class="text-center">{{ trans('core.isTeam') }}</th>
                                 <th class="text-center">{{ trans('core.fightDuration') }}</th>
-                                <th class="text-center">{{ trans('core.hasRoundRobin') }}</th>
+                                <th class="text-center">{{ trans('core.hasPlayOff') }}</th>
                                 <th class="text-center">{{ trans('core.hasEncho') }}</th>
                                 <th class="text-center">{{ trans('core.hasHantei') }}</th>
                                 <th class="text-center">{{ trans('core.action') }}</th>
@@ -60,7 +60,7 @@
                                         </td>
                                         <td class="text-center">{!! $settings->isTeam == 1 ? $ok : $nok !!}</td>
                                         <td class="text-center">{!! $settings->fightDuration !!}</td>
-                                        <td class="text-center">{!! $settings->hasRoundRobin == 1 ? $ok : $nok !!}</td>
+                                        <td class="text-center">{!! $settings->hasPlayOff == 1 ? $ok : $nok !!}</td>
                                         <td class="text-center">{!! $settings->hasEncho == 1 ? $ok : $nok !!}</td>
                                         <td class="text-center">{!! $settings->hasHantei == 1 ? $ok : $nok !!}</td>
 
@@ -89,7 +89,7 @@
                                         </td>
                                         <td class="text-center">{!!  $defaultSettings->isTeam == 1 ? $ok : $nok!!}</td>
                                         <td class="text-center">{!!  $defaultSettings->fightDuration!!}</td>
-                                        <td class="text-center">{!!  $defaultSettings->hasRoundRobin == 1 ? $ok : $nok!!}</td>
+                                        <td class="text-center">{!!  $defaultSettings->hasPlayOff == 1 ? $ok : $nok!!}</td>
                                         <td class="text-center">{!!  $defaultSettings->hasEncho == 1 ? $ok : $nok!!}</td>
                                         <td class="text-center">{!!  $defaultSettings->hasHantei == 1 ? $ok : $nok !!}</td>
 
