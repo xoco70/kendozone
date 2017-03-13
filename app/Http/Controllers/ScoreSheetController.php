@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ScoreSheetController extends Controller
 {
+    /**
+     * @param $tournamentSlug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index($tournamentSlug)
     {
         $tournament = Tournament::with('championships')->where('slug', $tournamentSlug)->first();

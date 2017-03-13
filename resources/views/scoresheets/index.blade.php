@@ -28,7 +28,7 @@
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
                                      @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
                                     <h1> {{$championship->buildName()}}
-                                        <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
+                                        <a href="{{URL::action('PDFController@scoresheets', ['championship'=> $championship->id]) }}"
                                            target="_blank"
                                            class="btn bg-teal btn-xs btnPrint pull-right ml-10 mt-5">
                                             <i class="icon-printer"></i>
@@ -36,11 +36,7 @@
 
                                     </h1>
 
-                                    @forelse($championship->fightersGroups as $group)
-                                        @include('pdf.scoresheets.sheet', ['group' => $group])
-                                    @empty
-                                        {{ trans('core.still_no_scoresheet') }}
-                                    @endforelse
+                                    @include('layouts.scoresheets.sheets', ['championship' => $championship])
 
                                 </div>
                             @endforeach
@@ -51,7 +47,7 @@
             </div>
         </div>
     </div>
-{{--    @include("right-panel.tournament_menu")--}}
+    {{--    @include("right-panel.tournament_menu")--}}
 
 @stop
 @section('scripts_footer')
