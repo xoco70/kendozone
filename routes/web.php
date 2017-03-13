@@ -111,7 +111,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::post('championships/{championshipId}/trees/', 'TreeController@store')->name('tree.store');;
         Route::post('championships/{championshipId}/trees/update', 'TreeController@update')->name('tree.update');;
 
-        Route::resource('championships/{championship}/scoresheet', 'ScoreSheetController');
+        Route::resource('tournaments/{tournament}/scoresheets', 'ScoreSheetController');
 
 
         Route::get('workingonit', function () {

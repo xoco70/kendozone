@@ -1,15 +1,9 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
     {!! Breadcrumbs::render('fights.index', $tournament) !!}
-
 @stop
-
 @section('content')
-
-
-
     <div class="container-detached">
-
         <div class="content-detached">
             @include('layouts.tree.topTree')
             <div class="panel panel-flat">

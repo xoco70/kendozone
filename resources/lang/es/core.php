@@ -318,9 +318,16 @@ return [
 
 
     // Score Sheet
-    'championship' => 'categoría',
+    'scoresheet' => 'Hoja de combate | Hojas de combate',
+    'championship' => 'Categoría',
     'shiajo' => 'shiajo',
     'group' => 'grupo',
-    'leader' => 'leader',
-
+    'writer' => 'Escritor',
+    'playoff' => 'Play off',
+    'points' => 'Puntoss',
+    'points_abrev' => 'Pts',
+    'clasify' => 'Clasifica',
+    'time' => 'Tiempo',
+    'table_leader' => 'Líder de mesa',
+    'still_no_scoresheet' => 'Aún no hay hojas de combates generadass'
 ];

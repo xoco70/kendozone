@@ -56,7 +56,7 @@ return array(
     'international' => 8,
 
 
-    'ROUND_ROBIN' => 0,
+    'PLAY_OFF' => 0,
     'DIRECT_ELIMINATION' => 1,
 
 

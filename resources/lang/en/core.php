@@ -313,16 +313,16 @@ return [
     'about' => "About Kendozone",
 
     // Score Sheet
+    'scoresheet' => 'Scoring Sheet | Scoring Sheets',
     'championship' => 'Championship',
     'shiajo' => 'Shiajo',
     'group' => 'Group',
     'writer' => 'Writer',
-    'table_leader' => 'Table Leader',
     'playoff' => 'Play off',
     'points' => 'Points',
     'points_abrev' => 'Pts',
     'clasify' => 'Clasify',
     'time' => 'Time',
-
-
+    'table_leader' => 'Table Leader',
+    'still_no_scoresheet' => 'Still no Score sheet generated'
 ];

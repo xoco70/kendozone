@@ -1,12 +1,12 @@
-@extends('layouts.scoreSheets.master')
-@section('content')
-    <h1 align="center">{{ $championship->tournament->name }}</h1>
+{{--@extends('layouts.scoreSheets.master')--}}
+{{--@section('content')--}}
+    <h1 align="center">{{ $tournament->name }}</h1>
 
     <hr/>
     <br/>
     <?php
-    $groups = $championship->fightersGroups;
-    $group = $groups->get(0);
+//    $groups = $championship->fightersGroups;
+//    $group = $groups->get(0);
     if ($championship->category->isTeam()) {
         $fighters = $group->teams;
     } else {
@@ -188,12 +188,12 @@
 
 
     {{--{{  Form::close() }}--}}
-@stop
-@section('footer')
+{{--@stop--}}
+{{--@section('footer')--}}
     {{--@include('pdf.footer')--}}
-@stop
-@section('scripts_footer')
+{{--@stop--}}
+{{--@section('scripts_footer')--}}
     {{--    {!! Html::style('css/pages/preliminary_trees.css')!!}--}}
-@stop
+{{--@stop--}}
 
 

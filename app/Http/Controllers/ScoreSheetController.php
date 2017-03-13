@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
+use App\Tournament;
 use Illuminate\Http\Request;
 
 class ScoreSheetController extends Controller
 {
-    public function index($championshipId)
+    public function index($tournamentSlug)
     {
-        $championship = Championship::find($championshipId);
+        $tournament = Tournament::with('championships')->where('slug', $tournamentSlug)->first();
+
         $sheet = null;
-        return view('pdf.scoresheets.sheet', compact('championship','sheet' ));
+        return view('scoresheets.index', compact('tournament','sheet' ));
     }
 
     public function store()
