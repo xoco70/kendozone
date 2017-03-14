@@ -12,12 +12,17 @@
 
                 @endslot
                 @slot('content')
-                <div class="container-dragula" v-dragula="copyOne" bag="third-bag">
+                <div class="container-dragula"
+                     :team-id="team.id"
+                     v-dragula="copyOne"
+                     bag="third-bag">
                     <div v-cloak
                          v-for="(competitor, index) in copyOne"
-                         :competitor="competitor"
+                         :team-id="team.id"
+                         :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
+
                     >@{{competitor.name}}</div>
                 </div>
                 @endslot
@@ -37,7 +42,7 @@
                 <div class="container-dragula" v-dragula="competitorsArea" bag="third-bag">
                     <div  v-cloak
                           v-for="(competitor, index) in competitorsArea"
-                          :competitor="competitor"
+                          :id="competitor.id"
                           :index="index"
                           :key="competitor.id"
                         >@{{competitor.name}}</div>

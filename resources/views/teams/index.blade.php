@@ -23,45 +23,48 @@
                     <div class="container-fluid">
                         <div class="tab-content" id="dragula_top">
                             @foreach($tournament->championships as $championship)
-                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
+                                @if ($championship->category->isTeam)
+                                    <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
 
-                                    {!! Form::model($tournament, ["action" => ["TeamController@store", $championship->slug]]) !!}
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <h1> {{$championship->buildName()}}
-                                                <span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span>
-                                            </h1>
-                                        </div>
-                                        <div class="col-md-2" align="right">
-                                            <button type="submit" class="btn btn-success" id="saveTournament">
-                                                {{trans("core.updateModel", ['currentModelName' => trans_choice('core.team',2) ]) }}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        @if (sizeof($championship->teams)==0)
-                                            <div class="col-md-8 col-md-offset-2">
-                                                @include('layouts.noTeams')
+                                        {!! Form::model($tournament, ["action" => ["TeamController@store",
+                                        $championship->slug]]) !!}
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h1> {{$championship->buildName()}}
+                                                    <span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span>
+                                                </h1>
                                             </div>
-                                        @else
+                                            <div class="col-md-2" align="right">
+                                                <button type="submit" class="btn btn-success" id="saveTournament">
+                                                    {{trans("core.updateModel", ['currentModelName' => trans_choice('core.team',2) ]) }}
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                            {{--@can('create', [App\Team::class, $tournament])--}}
-                                            {{--<span class="pl-10 pull-right">--}}
-                                            {{--<a href="{!!   URL::action('TeamController@create', $tournament->slug) !!}" id="addTeam"--}}
-                                            {{--class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>--}}
-                                            {{--@lang('core.addModel', ['currentModelName' => $currentModelName])--}}
-                                            {{--</a>--}}
-                                            {{--</span>--}}
-                                            {{--@endcan--}}
+                                        <div class="row">
 
-                                            @include('layouts.teams.panels')
-                                        @endif
+                                            @if (sizeof($championship->teams)==0)
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    @include('layouts.noTeams')
+                                                </div>
+                                            @else
 
+                                                {{--@can('create', [App\Team::class, $tournament])--}}
+                                                {{--<span class="pl-10 pull-right">--}}
+                                                {{--<a href="{!!   URL::action('TeamController@create', $tournament->slug) !!}" id="addTeam"--}}
+                                                {{--class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>--}}
+                                                {{--@lang('core.addModel', ['currentModelName' => $currentModelName])--}}
+                                                {{--</a>--}}
+                                                {{--</span>--}}
+                                                {{--@endcan--}}
+
+                                                @include('layouts.teams.panels')
+                                            @endif
+
+                                        </div>
+                                        {!! Form::close()!!}
                                     </div>
-                                    {!! Form::close()!!}
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>

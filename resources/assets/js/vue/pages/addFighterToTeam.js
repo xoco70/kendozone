@@ -33,6 +33,8 @@ vm = new Vue({
                 'drop',
                 function (args) {
                     console.log('drop: ' + JSON.stringify(args));
+                    alert('teams ID is:'+args[1].parentNode.getAttribute("team-id"));
+                    alert('competitors ID is: ' + args[1].getAttribute("id"));
 
                 }
             );
