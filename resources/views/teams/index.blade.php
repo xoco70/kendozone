@@ -6,9 +6,22 @@
     {!! Html::style('/css/dragula.css')!!}
 @stop
 @section('content')
+    <?php
+    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
+        $competitors = $championship->competitors->map(function ($competitor) {
+            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+        })->toArray();
+        $teams = $championship->teams->map(function ($team) {
+            return ["id" => $team->id, "name" => $team->name];
+        })->toArray();
+        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
+    })->toArray();
+
+    //    dd($arrChampionshipsWithTeamsAndCompetitors);
+    ?>
     <div class="container-detached">
         <div class="content-detached">
-            <ul class="nav nav-tabs nav-tabs-solid nav-justified trees">
+            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
                 @foreach($tournament->championships as $championship)
                     @if ($championship->category->isTeam)
                         <li class={{ $loop->first ? "active" : "" }}>
@@ -24,6 +37,8 @@
                         <div class="tab-content" id="dragula_top">
                             @foreach($tournament->championships as $championship)
                                 @if ($championship->category->isTeam)
+
+
                                     <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
 
                                         {!! Form::model($tournament, ["action" => ["TeamController@store",
@@ -64,6 +79,7 @@
                                         </div>
                                         {!! Form::close()!!}
                                     </div>
+
                                 @endif
                             @endforeach
                         </div>
@@ -73,19 +89,7 @@
         </div>
     </div>
 
-    <?php
-    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
-        $competitors = $championship->competitors->map(function ($competitor) {
-            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
-        })->toArray();
-        $teams = $championship->teams->map(function ($team) {
-            return ["id" => $team->id, "name" => $team->name];
-        })->toArray();
-        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams ];
-    })->toArray();
 
-//    dd($arrChampionshipsWithTeamsAndCompetitors);
-    ?>
 
 
     @include("right-panel.tournament_menu")
@@ -96,7 +100,8 @@
 
     <script>
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
-        var $arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
+        var arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
+
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
     {!! Html::script('js/addFighterToTeam.js')!!}

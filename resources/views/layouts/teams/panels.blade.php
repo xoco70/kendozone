@@ -1,14 +1,13 @@
-
 <div class="row">
 
 
     <div class="col-xs-12 col-md-8">
 
-        <div class="row">
-            <div v-for="team in teams"
+        <div class="row" >
+            <div  :tournament="tournament" v-for="team in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams"
                  v-cloak
-                 :championship-id= {{ $championship->id }}
-            >
+                 :championship-id= {{ $championship->id }} >
+
                 @component('components.panel')
                 @slot('title')
                     @{{team.name}}
@@ -45,7 +44,7 @@
             <div class="wrapper-dragula">
                 <div class="container-dragula" v-dragula="competitorsArea" bag="third-bag">
                     <div  v-cloak
-                          v-for="(competitor, index) in competitorsArea"
+                          v-for="(competitor, index) in tournament.find((elem) => elem.championship == {{ $championship->id }}).competitors"
                           :id="competitor.id"
                           :index="index"
                           :key="competitor.id"

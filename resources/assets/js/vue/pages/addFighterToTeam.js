@@ -14,9 +14,10 @@ vm = new Vue({
 
         teamsArea: [
         ],
-        championships:arrChampionshipsWithTeamsAndCompetitors,
         team_id:0,
-        competitorsArea: names,
+        teams:[],
+        competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
+        tournament: arrChampionshipsWithTeamsAndCompetitors,
         copyOne: [
         ],
     },
@@ -28,10 +29,10 @@ vm = new Vue({
     mounted: function () {
         this.$nextTick(function () {
             let _this = this;
-            console.log(_this);
             Vue.vueDragula.eventBus.$on(
                 'drop',
                 function (args) {
+                    console.log('championship ID is:'+args[1].parentNode.getAttribute("championship-id"));
                     console.log('teams ID is:'+args[1].parentNode.getAttribute("team-id"));
                     console.log('competitors ID is: ' + args[1].getAttribute("id"));
 
