@@ -49,8 +49,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
 
 
     Route::post('teams/create', 'TeamController@store');
-    Route::post('teams/{team}/fighters/{fighter}/add', 'FighterTeamController@store')->name('addFighterToTeam');
-    Route::post('teams/{team}/fighters/{fighter}/remove', 'FighterTeamController@destroy')->name('removeFighterToTeam');
-    Route::post('teams/{team}/fighters/{fighter}/sync', 'FighterTeamController@update')->name('syncFightersToTeam');
+    Route::post('teams/{team}/competitors/{competitor}/add', 'CompetitorTeamController@store')->name('addCompetitorToTeam');
+    Route::post('teams/{team}/competitors/{competitor}/remove', 'CompetitorTeamController@destroy')->name('removeCompetitorToTeam');
+    Route::post('teams/{team}/competitors/{competitor}/sync', 'CompetitorTeamController@update')->name('syncCompetitorsToTeam');
 });
 

@@ -1,19 +1,12 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-    {{--@if (isset($team->id))--}}
-    {{--{!! Breadcrumbs::render('teams.edit',$tournament) !!}--}}
-    {{--@else--}}
     {!! Breadcrumbs::render('teams.create',$tournament) !!}
-    {{--@endif--}}
+
 
 
 @stop
 @section('content')
     @include("errors.list")
-    <?php
-    $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
-    ?>
-
 
     <!-- Detached content -->
     <div class="container-detached">

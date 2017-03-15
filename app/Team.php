@@ -47,4 +47,5 @@ class Team extends \Xoco70\KendoTournaments\Models\Team
 
     }
 
+
 }

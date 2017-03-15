@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Team;
 
-class FighterTeamController extends Controller
+class CompetitorTeamController extends Controller
 {
-    public function store(Team $team, $fighter)
+    public function store(Team $team, $fighterId)
     {
-        dd("ok");
+        $team->competitors()->attach($fighterId);
+
     }
 
     public function update(Team $team, $fighters)

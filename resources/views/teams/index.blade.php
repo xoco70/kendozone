@@ -37,11 +37,7 @@
                                                     <span class="text-size-small ml-20">{{  trans('help.drag_competitors_name_into_team') }}</span>
                                                 </h1>
                                             </div>
-                                            <div class="col-md-2" align="right">
-                                                <button type="submit" class="btn btn-success" id="saveTournament">
-                                                    {{trans("core.updateModel", ['currentModelName' => trans_choice('core.team',2) ]) }}
-                                                </button>
-                                            </div>
+
                                         </div>
 
                                         <div class="row">
@@ -82,7 +78,7 @@
     <?php
     $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
         $competitors = $championship->competitors->map(function ($competitor) {
-            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+            return ["id" => $competitor->id, "name" => $competitor->user->name];
         })->toArray();
         $teams = $championship->teams->map(function ($team) {
             return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->competitors];

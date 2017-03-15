@@ -33,20 +33,19 @@ vm = new Vue({
                 function (args) {
                     let championshipId = args[1].parentNode.getAttribute("championship-id");
                     let teamId = args[1].parentNode.getAttribute("team-id");
-                    let fighterId = args[1].getAttribute("id");
+                    let competitorId = args[1].getAttribute("id");
 
-                    $.post(url_root_api + "/teams/" + teamId + "/fighters/" + fighterId + "/add", function () {
-                        alert("success");
+                    $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add", function () {
                     })
                         .done(function () {
-                            alert("second success");
+
                         })
                         .fail(function () {
-                            alert("error");
+
+                        })
+                        .always(function () {
+
                         });
-                        // .always(function () {
-                        //     alert("finished");
-                        // });
 
                 }
             );

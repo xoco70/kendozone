@@ -17,6 +17,7 @@ return [
 
 
     // Accion
+    'add' => 'Agregar',
     'action' => 'Acción',
     'edit' => 'Editar',
     'delete' => 'Borrar',
@@ -253,6 +254,7 @@ return [
     'no_team_yet' => 'Aún no tienes equipos registrados en este torneo',
     'add_new_team' => 'Agregar un equipo',
     'registered_team' => 'Equipos registrados',
+    'team_name' => 'Nombre del equipo',
 
     // Federations
     'federation' => 'Federación|Federaciones',
