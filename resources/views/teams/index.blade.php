@@ -6,19 +6,7 @@
     {!! Html::style('/css/dragula.css')!!}
 @stop
 @section('content')
-    <?php
-    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
-        $competitors = $championship->competitors->map(function ($competitor) {
-            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
-        })->toArray();
-        $teams = $championship->teams->map(function ($team) {
-            return ["id" => $team->id, "name" => $team->name];
-        })->toArray();
-        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
-    })->toArray();
 
-    //    dd($arrChampionshipsWithTeamsAndCompetitors);
-    ?>
     <div class="container-detached">
         <div class="content-detached">
             <ul class="nav nav-tabs nav-tabs-solid nav-justified">
@@ -88,18 +76,31 @@
             </div>
         </div>
     </div>
-
-
-
-
     @include("right-panel.tournament_menu")
     @include("errors.list")
+
+    <?php
+    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
+        $competitors = $championship->competitors->map(function ($competitor) {
+            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+        })->toArray();
+        $teams = $championship->teams->map(function ($team) {
+            return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->competitors];
+        })->toArray();
+        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
+    })->toArray();
+
+
+    ?>
 @stop
 @section('scripts_footer')
     {!! Html::script('js/pages/header/footable.js') !!}
 
+
+
     <script>
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
+        var url_root_api = "{{ route("api.root")}}";
         var arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
 
     </script>

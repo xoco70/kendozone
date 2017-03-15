@@ -41,8 +41,6 @@ class TeamController extends Controller
         }])->find($tournament->id);
 
 
-
-
         return view("teams.index", compact('tournament'));
 
     }
@@ -170,5 +168,4 @@ class TeamController extends Controller
         return Response::json(['msg' => Lang::get('msg.team_delete_error', ['name' => $team->name]), 'status' => 'error']);
 
     }
-
 }

@@ -7,19 +7,15 @@ Vue.use(VueDragula);
 vm = new Vue({
     el: '#dragula_top',
     data: {
-        colOne: [
-        ],
-        colTwo: [
-        ],
+        colOne: [],
+        colTwo: [],
 
-        teamsArea: [
-        ],
-        team_id:0,
-        teams:[],
+        teamsArea: [],
+        team_id: 0,
+        teams: [],
         competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
         tournament: arrChampionshipsWithTeamsAndCompetitors,
-        copyOne: [
-        ],
+        copyOne: [],
     },
     created: function () {
         Vue.vueDragula.options('', {
@@ -29,12 +25,28 @@ vm = new Vue({
     mounted: function () {
         this.$nextTick(function () {
             let _this = this;
+            $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+                jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
+            });
             Vue.vueDragula.eventBus.$on(
                 'drop',
                 function (args) {
-                    console.log('championship ID is:'+args[1].parentNode.getAttribute("championship-id"));
-                    console.log('teams ID is:'+args[1].parentNode.getAttribute("team-id"));
-                    console.log('competitors ID is: ' + args[1].getAttribute("id"));
+                    let championshipId = args[1].parentNode.getAttribute("championship-id");
+                    let teamId = args[1].parentNode.getAttribute("team-id");
+                    let fighterId = args[1].getAttribute("id");
+
+                    $.post(url_root_api + "/teams/" + teamId + "/fighters/" + fighterId + "/add", function () {
+                        alert("success");
+                    })
+                        .done(function () {
+                            alert("second success");
+                        })
+                        .fail(function () {
+                            alert("error");
+                        });
+                        // .always(function () {
+                        //     alert("finished");
+                        // });
 
                 }
             );
@@ -48,7 +60,5 @@ vm = new Vue({
             )
         })
     },
-    methods: {
-
-    }
+    methods: {}
 });
