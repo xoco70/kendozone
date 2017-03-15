@@ -74,13 +74,17 @@
     </div>
 
     <?php
-    $arrCompetitors = $championship->competitors->map(function ($competitor) {
-        return ["id" => $competitor->user->id, "name" => $competitor->user->name, "competitors" => []];
+    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
+        $competitors = $championship->competitors->map(function ($competitor) {
+            return ["id" => $competitor->user->id, "name" => $competitor->user->name];
+        })->toArray();
+        $teams = $championship->teams->map(function ($team) {
+            return ["id" => $team->id, "name" => $team->name];
+        })->toArray();
+        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams ];
     })->toArray();
 
-    $arrTeams = $championship->teams->map(function ($team) {
-        return ["id" => $team->id, "name" => $team->name];
-    })->toArray();
+//    dd($arrChampionshipsWithTeamsAndCompetitors);
     ?>
 
 
@@ -92,8 +96,7 @@
 
     <script>
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
-        var names = JSON.parse('{!!   json_encode($arrCompetitors) !!}');
-        var myTeams = JSON.parse('{!!   json_encode($arrTeams   ) !!}');
+        var $arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
     {!! Html::script('js/addFighterToTeam.js')!!}

@@ -14,7 +14,7 @@ vm = new Vue({
 
         teamsArea: [
         ],
-        teams:myTeams,
+        championships:arrChampionshipsWithTeamsAndCompetitors,
         team_id:0,
         competitorsArea: names,
         copyOne: [
@@ -32,9 +32,8 @@ vm = new Vue({
             Vue.vueDragula.eventBus.$on(
                 'drop',
                 function (args) {
-                    console.log('drop: ' + JSON.stringify(args));
-                    alert('teams ID is:'+args[1].parentNode.getAttribute("team-id"));
-                    alert('competitors ID is: ' + args[1].getAttribute("id"));
+                    console.log('teams ID is:'+args[1].parentNode.getAttribute("team-id"));
+                    console.log('competitors ID is: ' + args[1].getAttribute("id"));
 
                 }
             );

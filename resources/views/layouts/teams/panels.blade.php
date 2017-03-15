@@ -5,7 +5,10 @@
     <div class="col-xs-12 col-md-8">
 
         <div class="row">
-            <div v-for="team in teams" v-cloak>
+            <div v-for="team in teams"
+                 v-cloak
+                 :championship-id= {{ $championship->id }}
+            >
                 @component('components.panel')
                 @slot('title')
                     @{{team.name}}
@@ -19,6 +22,7 @@
                     <div v-cloak
                          v-for="(competitor, index) in copyOne"
                          :team-id="team.id"
+                         :championship-id= {{ $championship->id }}
                          :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
