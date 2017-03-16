@@ -29,8 +29,7 @@
 
                                     <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
 
-                                        {!! Form::model($tournament, ["action" => ["TeamController@store",
-                                        $championship->slug]]) !!}
+
                                         <div class="row">
                                             <div class="col-md-10">
                                                 <h1> {{$championship->buildName()}}
@@ -61,7 +60,7 @@
                                             @endif
 
                                         </div>
-                                        {!! Form::close()!!}
+
                                     </div>
 
                                 @endif
@@ -86,7 +85,9 @@
         return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
     })->toArray();
 
-
+    if (session()->has('activeTab')) {
+        $activeTab = session('activeTab');
+    }
     ?>
 @stop
 @section('scripts_footer')
@@ -98,6 +99,10 @@
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
         var url_root_api = "{{ route("api.root")}}";
         var arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
+
+        @if (isset($activeTab))
+        var activeTab = "{{ $activeTab }}";
+        @endif
 
     </script>
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}

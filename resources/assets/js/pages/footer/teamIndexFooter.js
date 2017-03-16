@@ -1,4 +1,9 @@
 $(function () {
+
+    var currentTabId= '"#' + activeTab+'"';
+    $('.nav-tabs a[href='+currentTabId+']').tab('show');
+
+
     var disabled = false;
     var tr = null;
 

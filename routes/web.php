@@ -91,6 +91,10 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('associations/{association}/restore', 'AssociationController@restore');
         Route::get('clubs/{club}/restore', 'ClubController@restore');
 
+        Route::post('championships/{championship}/teams', 'TeamController@store')->name('storeTeam');
+
+
+        // Other Admin Routes
 
         Route::get('logs', 'LogsController@index')->name('logs.index');
         Route::get('debug', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('debug.index');

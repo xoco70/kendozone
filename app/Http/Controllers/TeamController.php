@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Championship;
 use App\Http\Requests\TeamRequest;
 use App\Team;
 use App\Tournament;
@@ -61,7 +62,7 @@ class TeamController extends Controller
 
         // category_tournanemnt_id with categoryName where isTeam == 1
 
-        $cts = $tournament->buildCategoryList();
+//        $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
 
@@ -69,12 +70,15 @@ class TeamController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param Tournament $tournament
-     * @return Response
+     * @param Championship $championship
+     * @return View
      * @throws AuthorizationException
      */
-    public function store(Request $request, Tournament $tournament)
+    public function store(Request $request, Championship $championship)
     {
+        
+        $tournament = $championship->tournament;
+
         if (Auth::user()->cannot('store', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
@@ -86,9 +90,7 @@ class TeamController extends Controller
             flash()->error(trans('msg.team_create_error_already_exists', ['name' => $request->name]));
         }
 
-
-        return redirect()->back();
-
+        return redirect()->back()->with('activeTab', $request->activeTab);
     }
 
     /**

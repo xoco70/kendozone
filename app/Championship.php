@@ -18,7 +18,18 @@ class Championship extends \Xoco70\KendoTournaments\Models\Championship
         return $this->hasMany(\App\Team::class);
     }
 
-    public function categoryTeams() {
+    public function categoryTeams()
+    {
         return $this->hasOne(Category::class)->isTeam();
+    }
+
+    /**
+     * A championship belongs to a Tournament.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tournament()
+    {
+        return $this->belongsTo(Tournament::class);
     }
 }

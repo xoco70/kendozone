@@ -35,14 +35,14 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="activeTab" name="activeTab" value="general"/>
+
 
 
     <div class="col-xs-12 col-md-4 panel panel-body">
         <div class="row">
             <div class="col-lg-12">
 
-                {!! Form::open(['url'=>URL::action('TeamController@store', $tournament->slug), 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['url'=>URL::action('TeamController@store', ['championship' => $championship->id] ), 'class' => 'form-horizontal']) !!}
                 <div class="form-group">
                     <h2 align="center">{{ trans('core.addModel', ['currentModelName' => trans_choice ('core.team',1)]) }}</h2>
 
@@ -50,6 +50,7 @@
                         {!! Form::text('name','', ['class' => 'form-control', 'placeholder' => trans('core.team_name')]) !!}
                         <button type="submit" class="btn btn-success" id="save">{{trans("core.add")}}</button>
                         {!! Form::hidden('championship_id', $championship->id) !!}
+                        <input type="hidden" id="activeTab" name="activeTab" value="{{ $championship->id }}"/>
                     </div>
                 </div>
 

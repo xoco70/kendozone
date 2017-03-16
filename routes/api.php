@@ -48,7 +48,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
             'update' => 'championships.update']]);
 
 
-    Route::post('teams/create', 'TeamController@store');
     Route::post('teams/{team}/competitors/{competitor}/add', 'CompetitorTeamController@store')->name('addCompetitorToTeam');
     Route::post('teams/{team}/competitors/{competitor}/remove', 'CompetitorTeamController@destroy')->name('removeCompetitorToTeam');
     Route::post('teams/{team}/competitors/{competitor}/sync', 'CompetitorTeamController@update')->name('syncCompetitorsToTeam');
