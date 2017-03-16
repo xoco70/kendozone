@@ -62,7 +62,6 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
 
-
         Route::resource('users', 'UserController', ['names' => [
             'index' => 'users.index',
             'show' => 'users.show',

@@ -8,6 +8,7 @@ use App\Team;
 use App\Tournament;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -76,7 +77,7 @@ class TeamController extends Controller
      */
     public function store(Request $request, Championship $championship)
     {
-        
+
         $tournament = $championship->tournament;
 
         if (Auth::user()->cannot('store', [Team::class, $tournament])) {
@@ -150,15 +151,15 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Tournament $tournament
-     * @param $teamId
-     * @return \Illuminate\Http\JsonResponse
+     * @param Team $team
+     * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(Tournament $tournament, $teamId)
+    public function destroy(Team  $team)
     {
 
-        $team = Team::findOrFail($teamId);
+
+        $tournament = $team->championship->tournament;
 
         if (Auth::user()->cannot('delete', [Team::class, $tournament])) {
             throw new AuthorizationException();

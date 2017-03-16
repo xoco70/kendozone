@@ -51,5 +51,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::post('teams/{team}/competitors/{competitor}/add', 'CompetitorTeamController@store')->name('addCompetitorToTeam');
     Route::post('teams/{team}/competitors/{competitor}/remove', 'CompetitorTeamController@destroy')->name('removeCompetitorToTeam');
     Route::post('teams/{team}/competitors/{competitor}/sync', 'CompetitorTeamController@update')->name('syncCompetitorsToTeam');
+
+    Route::post('teams/{team}/delete', 'TeamController@destroy')->name('deleteTeam');
 });
 

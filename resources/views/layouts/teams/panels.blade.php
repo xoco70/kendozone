@@ -1,18 +1,16 @@
 <div class="row">
 
 
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-8" id="teams">
 
         <div class="row">
-            <div :tournament="tournament"
-                 v-for="team in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams"
+            <div v-for="team in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams"
                  v-cloak
                  :championship-id= {{ $championship->id }} >
 
                 @component('components.panel')
                 @slot('title')
                 @{{team.name}}
-
                 @endslot
                 @slot('content')
                 <div class="container-dragula"
@@ -35,7 +33,6 @@
             </div>
         </div>
     </div>
-
 
 
     <div class="col-xs-12 col-md-4 panel panel-body">

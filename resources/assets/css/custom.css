@@ -406,3 +406,6 @@ li.side_avatar:last-child {
     border: 0;
     background-color: transparent;
 }
+#teams{
+    min-height: 200px;
+}

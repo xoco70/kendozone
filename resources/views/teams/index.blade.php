@@ -40,24 +40,7 @@
                                         </div>
 
                                         <div class="row">
-
-                                            @if (sizeof($championship->teams)==0)
-                                                <div class="col-md-8 col-md-offset-2">
-                                                    @include('layouts.noTeams')
-                                                </div>
-                                            @else
-
-                                                {{--@can('create', [App\Team::class, $tournament])--}}
-                                                {{--<span class="pl-10 pull-right">--}}
-                                                {{--<a href="{!!   URL::action('TeamController@create', $tournament->slug) !!}" id="addTeam"--}}
-                                                {{--class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>--}}
-                                                {{--@lang('core.addModel', ['currentModelName' => $currentModelName])--}}
-                                                {{--</a>--}}
-                                                {{--</span>--}}
-                                                {{--@endcan--}}
-
-                                                @include('layouts.teams.panels')
-                                            @endif
+                                            @include('layouts.teams.panels')
 
                                         </div>
 
@@ -100,7 +83,7 @@
         var url_root_api = "{{ route("api.root")}}";
         var arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
 
-        @if (isset($activeTab))
+                @if (isset($activeTab))
         var activeTab = "{{ $activeTab }}";
         @endif
 
