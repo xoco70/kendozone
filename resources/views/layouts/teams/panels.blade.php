@@ -20,14 +20,14 @@
                      v-dragula="copyOne"
                      bag="third-bag">
                     <div v-cloak
-                         v-for="(competitor, index) in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams.competitors"
+                         v-for="(competitor, index) in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams.find((elem) => elem.id == team.id).competitors"
                          :team-id="team.id"
                          :championship-id={{ $championship->id }}
                                  :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
 
-                    >@{{competitor.name}}</div>
+                    >@{{competitor.user.name}}</div>
                 </div>
                 @endslot
 
