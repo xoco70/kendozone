@@ -17,15 +17,16 @@ vm = new Vue({
         // championship_id: championshipId,
         teams: [],
         competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
-        tournament: arrChampionshipsWithTeamsAndCompetitors,
+        championships: arrChampionshipsWithTeamsAndCompetitors,
         copyOne: [],
+        championship_id:0,
     },
     methods: {
         deleteTeam(teamId){
-            console.log(teamId);
             $.post(url_root_api + "/teams/" + teamId + "/delete", function () {
             })
                 .done(function (data) {
+
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -53,10 +54,34 @@ vm = new Vue({
                 .always(function () {
 
                 });
+        },
+        addTeam(teamId, competitorId){
+            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add", function () {
+            })
+                .done(function () {
+
+                })
+                .fail(function () {
+
+                })
+                .always(function () {
+
+                });
+        },
+        removeCompetitorFromTeam(teamId, competitorId){
+        },
+        moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2){
+            return 0;
         }
 
     },
     computed: {
+        championship(){
+            // let championship =
+            //.find((elem) => elem.championship == this.championship_id)
+            // console.log(championship);
+            return 2;
+        },
         assignedCompetitors(){
             // Get the tournament var and merge all the team->competitors
         },
@@ -78,19 +103,19 @@ vm = new Vue({
                 'drop',
                 function (args) {
                     let teamId = args[1].parentNode.getAttribute("team-id");
+                    this.championship_id = args[1].parentNode.getAttribute("championship-id");
+                    // console.log(this.championship_id);
+                    console.log(this.championship);
                     let competitorId = args[1].getAttribute("id");
 
-                    $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add", function () {
-                    })
-                        .done(function () {
+                    if (teamId == null) {
+                        vm.removeCompetitorFromTeam(teamId, competitorId)
+                    }
+                    else if(competitorId == null)
+                    {
+                        vm.moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2)
+                    }
 
-                        })
-                        .fail(function () {
-
-                        })
-                        .always(function () {
-
-                        });
 
                 }
             );

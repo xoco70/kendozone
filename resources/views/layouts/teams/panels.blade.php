@@ -1,10 +1,10 @@
 <div class="row">
 
 
-    <div class="col-xs-12 col-md-8" id="teams">
+    <div class="col-md-8" id="teams">
 
         <div class="row">
-            <div v-for="team in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams"
+            <div v-for="team in championships.find((elem) => elem.championship == {{ $championship->id }}).teams"
                  v-cloak
                  :championship-id= {{ $championship->id }} >
 
@@ -15,13 +15,13 @@
                 @slot('content')
                 <div class="container-dragula"
                      :team-id="team.id"
+                     :championship-id={{ $championship->id }}
                      v-dragula="copyOne"
                      bag="third-bag">
                     <div v-cloak
-                         v-for="(competitor, index) in tournament.find((elem) => elem.championship == {{ $championship->id }}).teams.find((elem) => elem.id == team.id).competitors"
+                         v-for="(competitor, index) in championships.find((elem) => elem.championship == {{ $championship->id }}).teams.find((elem) => elem.id == team.id).competitors"
                          :team-id="team.id"
-                         :championship-id={{ $championship->id }}
-                                 :id="competitor.id"
+                         :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
 
@@ -63,7 +63,7 @@
             <div class="wrapper-dragula">
                 <div class="container-dragula" v-dragula="competitorsArea" bag="third-bag">
                     <div v-cloak
-                         v-for="(competitor, index) in tournament.find((elem) => elem.championship == {{ $championship->id }}).competitors"
+                         v-for="(competitor, index) in championships.find((elem) => elem.championship == {{ $championship->id }}).competitors"
                          :id="competitor.id"
                          :index="index"
                          :key="competitor.id"

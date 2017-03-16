@@ -63,7 +63,7 @@
             return ["id" => $competitor->id, "name" => $competitor->user->name];
         })->toArray();
         $teams = $championship->teams->map(function ($team) {
-            return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->competitorsWithUser];
+            return ["id" => $team->id, "name" => $team->name, 'isVisible' => 1, 'competitors' => $team->competitorsWithUser];
         })->toArray();
         return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
     })->toArray();
