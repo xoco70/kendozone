@@ -9,7 +9,7 @@ class CompetitorTeamController extends Controller
 {
     public function store(Team $team, $competitorId) // add competitor to team
     {
-        $team->competitors()->attach($competitorId)->withTimestamps();
+        $team->competitors()->attach($competitorId);
     }
 
     public function update($team1Id, $team2Id, $competitorId) // move competitor to team
@@ -18,7 +18,7 @@ class CompetitorTeamController extends Controller
         $team2 = Team::find($team2Id);
 
         $team1->competitors()->detach($competitorId);
-        $team2->competitors()->attach($competitorId)->withTimestamps();
+        $team2->competitors()->attach($competitorId);
     }
 
     public function destroy(Team $team, $competitorId) // remove competitor to team
