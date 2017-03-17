@@ -67,6 +67,7 @@
                          :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
+                         :championship-id={{ $championship->id }}
                     >@{{competitor.user.name}}</div>
                 </div>
             </div>

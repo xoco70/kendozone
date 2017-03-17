@@ -38,6 +38,9 @@ vm = new Vue({
                         template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
 
                     });
+                    // Get the assigned teams, and restore it to competitors
+
+
                 })
                 .fail(function (data) {
                     noty({
@@ -55,20 +58,12 @@ vm = new Vue({
 
                 });
         },
-        addTeam(teamId, competitorId){
-            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add", function () {
-            })
-                .done(function () {
+        addCompetitorToTeam(teamId, competitorId){
+            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");
 
-                })
-                .fail(function () {
-
-                })
-                .always(function () {
-
-                });
         },
         removeCompetitorFromTeam(teamId, competitorId){
+            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/remove");
         },
         moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2){
             return 0;
@@ -85,16 +80,6 @@ vm = new Vue({
         teams(){
             return this.championships.find((elem) => elem.championship == this.championship_id).teams;
         },
-        assignedCompetitors(){
-            // Get the tournament var and merge all the team->competitors
-
-            console.log(this.teams);
-
-        },
-        freeTournament(){
-            // Get the tournament var and merge all the team->competitors
-            return this.teams.reduce((acc, team) => acc.concat(team.competitors),[]);
-        },
     },
 
     created: function () {
@@ -110,17 +95,19 @@ vm = new Vue({
                 function (args) {
                     let teamId = args[1].parentNode.getAttribute("team-id");
                     vm.championship_id = args[1].parentNode.getAttribute("championship-id");
-
+                    let championship = args[1].parentNode.getAttribute("championship-id");
                     let competitorId = args[1].getAttribute("id");
-
+                    // console.log(teamId,vm.championship_id,competitorId);
                     if (teamId == null) {
-
+                        teamId = args[3].getAttribute("team-id");
+                        console.log(teamId);
+                        vm.removeCompetitorFromTeam(teamId, competitorId)
                     }
                     else if (competitorId == null) {
                         vm.moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2)
                     } else {
                         // add competitor to team
-                        vm.addTeam(teamId, competitorId);
+                        vm.addCompetitorToTeam(teamId, competitorId);
                     }
 
 

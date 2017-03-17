@@ -6,9 +6,9 @@ use App\Team;
 
 class CompetitorTeamController extends Controller
 {
-    public function store(Team $team, $fighterId)
+    public function store(Team $team, $competitorId)
     {
-        $team->competitors()->attach($fighterId);
+        $team->competitors()->attach($competitorId);
 
     }
 
@@ -17,9 +17,9 @@ class CompetitorTeamController extends Controller
 
     }
 
-    public function destroy(Team $team, $fighter)
+    public function destroy(Team $team, $competitorId)
     {
-
+        $team->competitors()->detach($competitorId);
     }
 
 

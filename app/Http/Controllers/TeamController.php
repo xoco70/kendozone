@@ -57,10 +57,16 @@ class TeamController extends Controller
                 if (sizeof($team->competitorsWithUser) > 0)
                     return $tempAssignCompatitors->push($team->competitorsWithUser);
                 return null;
-            })->collapse();
+            });
 
-            $freeCompetitors = $championship->competitors->diff($assignedCompetitors);
 
+            if ($assignedCompetitors == null){
+                $freeCompetitors = $championship->competitors;
+            }else{
+                $assignedCompetitors = $assignedCompetitors->collapse();
+                $freeCompetitors = $championship->competitors->diff($assignedCompetitors);
+            }
+            
             return ['championship' => $championship->id, 'competitors' => $competitors, 'freeCompetitors' => $freeCompetitors, 'teams' => $teams];
         })->toArray();
 
