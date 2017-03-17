@@ -20,6 +20,8 @@ public/images/avatar/
 public/js
 public/pdf
 public/css
+
+
 tests/_output/*
 tests/_support/_generated/
 resources/assets/css/less.css
@@ -28,3 +30,9 @@ resources/assets/css/less.css.map
 public/vendor/kendo-tournaments/
 public/mix-manifest.json
 resources/assets/less/_main_full/main.less
+
+
+!public/css/icons
+!public/css/icons/icomoon/fonts/icomoon.woff
+!public/css/icons/icomoon/fonts/icomoon.ttf
+!public/js/analytics.js
