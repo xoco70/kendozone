@@ -19,17 +19,17 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
         $lakc_settings = null;
 
         if ($ruleId == null) {
-            $ikf_settings = static::whereIn('id',array_keys(config('options.ikf_settings')))->select('name')->get();
+            $ikf_settings = static::whereIn('id', array_keys(config('options.ikf_settings')))->select('name')->get();
             $ikf_settings = $multiplied = $ikf_settings->map(function ($item, $key) {
                 return $item->name;
             })->toArray();
 
-            $ekf_settings = static::whereIn('id',array_keys(config('options.ekf_settings')))->select('name')->get();
+            $ekf_settings = static::whereIn('id', array_keys(config('options.ekf_settings')))->select('name')->get();
             $ekf_settings = $multiplied = $ekf_settings->map(function ($item, $key) {
                 return $item->name;
             })->toArray();
 
-            $lakc_settings = static::whereIn('id',array_keys(config('options.lakc_settings')))->select('name')->get();
+            $lakc_settings = static::whereIn('id', array_keys(config('options.lakc_settings')))->select('name')->get();
             $lakc_settings = $multiplied = $lakc_settings->map(function ($item, $key) {
                 return $item->name;
             })->toArray();
@@ -100,19 +100,25 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
             $gradeText = ' - ' . trans('core.grade') . ' : ';
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 if ($this->gradeMin == $this->gradeMax) {
-                    $gradeText .= $grades[$this->gradeMin-1]->name;
+                    $gradeText .= $grades[$this->gradeMin - 1]->name;
                 } else {
-                    $gradeText .= $grades[$this->gradeMin-1]->name . ' - ' . $grades[$this->gradeMax-1]->name;
+                    $gradeText .= $grades[$this->gradeMin - 1]->name . ' - ' . $grades[$this->gradeMax - 1]->name;
                 }
             } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
-                $gradeText .= ' < ' . $grades[$this->gradeMax-1]->name;
+                $gradeText .= ' < ' . $grades[$this->gradeMax - 1]->name;
             } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
-                $gradeText .= ' > ' . $grades[$this->gradeMin-1]->name;
+                $gradeText .= ' > ' . $grades[$this->gradeMin - 1]->name;
             } else {
                 $gradeText = '';
             }
         }
 
         return $gradeText;
+    }
+
+
+    public function scopeIsTeam($query)
+    {
+        return $query->where('isTeam', 1);
     }
 }

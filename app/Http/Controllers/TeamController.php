@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Championship;
 use App\Http\Requests\TeamRequest;
 use App\Team;
 use App\Tournament;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -33,8 +36,39 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('teams.championship.category')->find($tournament->id);
-        return view("teams.index", compact('tournament'));
+        $tournament = Tournament::with(['championships' => function ($query) {
+            $query->with('teams')
+                ->whereHas('category', function ($subquery) {
+                    $subquery->where('isTeam', '=', 1);
+                });
+        }])->find($tournament->id);
+
+
+        $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
+            $competitors = $championship->competitors->map(function ($competitor) {
+                return ["id" => $competitor->id, "name" => $competitor->user->name];
+            })->toArray();
+            $teams = $championship->teams->map(function ($team) {
+                return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->competitorsWithUser];
+            })->toArray();
+
+            $tempAssignCompatitors = new Collection();
+            $assignedCompetitors = $championship->teams->reduce(function ($acc, $team) use ($tempAssignCompatitors) {
+                return $tempAssignCompatitors->push($team->competitorsWithUser)->collapse();
+            });
+
+
+            if ($assignedCompetitors == null) {
+                $freeCompetitors = $championship->competitors;
+            } else {
+                $freeCompetitors = $championship->competitors->diff($assignedCompetitors);
+            }
+
+            return ['championship' => $championship->id, 'competitors' => $competitors, 'freeCompetitors' => $freeCompetitors, 'teams' => $teams];
+        })->toArray();
+
+
+        return view("teams.index", compact('tournament', 'arrChampionshipsWithTeamsAndCompetitors'));
 
     }
 
@@ -54,7 +88,7 @@ class TeamController extends Controller
 
         // category_tournanemnt_id with categoryName where isTeam == 1
 
-        $cts = $tournament->buildCategoryList();
+//        $cts = $tournament->buildCategoryList();
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
 
@@ -62,26 +96,27 @@ class TeamController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param Tournament $tournament
-     * @return Response
+     * @param Championship $championship
+     * @return View
      * @throws AuthorizationException
      */
-    public function store(Request $request, Tournament $tournament)
+    public function store(Request $request, Championship $championship)
     {
+
+        $tournament = $championship->tournament;
+
         if (Auth::user()->cannot('store', [Team::class, $tournament])) {
             throw new AuthorizationException();
         }
-        try{
+        try {
 
             $team = Team::create($request->all());
             flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
-        }catch (QueryException $e) {
+        } catch (QueryException $e) {
             flash()->error(trans('msg.team_create_error_already_exists', ['name' => $request->name]));
         }
 
-
-        return redirect()->back();
-
+        return redirect()->back()->with('activeTab', $request->activeTab);
     }
 
     /**
@@ -141,15 +176,15 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Tournament $tournament
-     * @param $teamId
-     * @return \Illuminate\Http\JsonResponse
+     * @param Team $team
+     * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(Tournament $tournament, $teamId)
+    public function destroy(Team $team)
     {
 
-        $team = Team::findOrFail($teamId);
+
+        $tournament = $team->championship->tournament;
 
         if (Auth::user()->cannot('delete', [Team::class, $tournament])) {
             throw new AuthorizationException();
@@ -161,5 +196,4 @@ class TeamController extends Controller
         return Response::json(['msg' => Lang::get('msg.team_delete_error', ['name' => $team->name]), 'status' => 'error']);
 
     }
-
 }

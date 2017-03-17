@@ -50,27 +50,5 @@
     </script>
     {!! Html::script('js/pages/header/tournamentShow.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k') !!}
-    <?php
-    $championshipWithBrackets = $tournament->championships
-        ->filter(function ($championship, $key) {
-            return ($championship->isDirectEliminationType() && !$championship->hasPreliminary());
-        })->map(function ($championship, $key) {
-            return $championship->id;
-        })->toArray();
-
-    ?>
-
-    {!! Html::script('js/pages/footer/trees_show.js')!!}
-    <script>
-
-        @foreach($championshipWithBrackets as $championshipId)
-             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $('#brackets_{{ $championshipId }}').bracket({
-                init: minimalData_{{ $championshipId }}, /* data to initialize the bracket with */
-                teamWidth: 100,
-            })
-        });
-        @endforeach
-    </script>
 
 @stop

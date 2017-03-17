@@ -13,7 +13,7 @@
 @section('content')
     @include("errors.list")
 
-    <div class="container" xmlns:v-bind="http://symfony.com/schema/routing">
+    <div class="container" >
         <div class="content">
         @if (!is_null($user->id))
             {!! Form::model($user, ['method'=>"PATCH",

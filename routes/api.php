@@ -18,7 +18,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('tournaments', 'TournamentController@index')->name('tournaments.index');
 });
 
-Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {// Protected by OAuth2.0
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Protected by OAuth2.0
     Route::get('/', 'DashboardController@index')->name('root');
 
     Route::post("category/create", 'CategoryController@store');
@@ -48,7 +48,10 @@ Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {// Prot
             'update' => 'championships.update']]);
 
 
+    Route::post('teams/{team}/competitors/{competitor}/add', 'CompetitorTeamController@store')->name('addCompetitorToTeam');
+    Route::post('teams/{team}/competitors/{competitor}/remove', 'CompetitorTeamController@destroy')->name('removeCompetitorToTeam');
+    Route::post('teams/{team1}/{team2}/competitors/{competitor}/move', 'CompetitorTeamController@update')->name('moveCompetitorToAnotherTeam');
 
-
+    Route::post('teams/{team}/delete', 'TeamController@destroy')->name('deleteTeam');
 });
 

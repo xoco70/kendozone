@@ -449,3 +449,7 @@ li.side_avatar:last-child {
 }
 
 
+
+#teams{
+    min-height: 200px;
+}

@@ -1,19 +1,12 @@
 @extends('layouts.dashboard')
 @section('breadcrumbs')
-    {{--@if (isset($team->id))--}}
-    {{--{!! Breadcrumbs::render('teams.edit',$tournament) !!}--}}
-    {{--@else--}}
     {!! Breadcrumbs::render('teams.create',$tournament) !!}
-    {{--@endif--}}
+
 
 
 @stop
 @section('content')
     @include("errors.list")
-    <?php
-    $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
-    ?>
-
 
     <!-- Detached content -->
     <div class="container-detached">
@@ -48,7 +41,7 @@
                                     <div class="form-group">
                                         {!!  Form::label('name', trans_choice('categories.category',1),['class' => 'text-bold' ]) !!}
                                         <br/>
-                                        {!!  Form::select('championship_id', $cts, old('championship_id'), ['class' => 'form-control']) !!}
+                                        {!!  Form::select('championship_id', $tournament->buildCategoryList(), old('championship_id'), ['class' => 'form-control']) !!}
 
                                     </div>
 
