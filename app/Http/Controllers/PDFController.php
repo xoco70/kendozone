@@ -20,7 +20,7 @@ class PdfController extends Controller
             $layout = 'pdf.preliminary_tree';
         } else if ($championship->isDirectEliminationType()) {
             $layout = 'pdf.direct_elimination_tree';
-        } else if ($championship->isRoundRobinType()) {
+        } else if ($championship->isPlayOffType()) {
             $layout = 'pdf.round_robin_tree';
         }
 //        return view($layout, compact('championship'));
