@@ -3023,16 +3023,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.15",
+            "version": "5.7.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5"
+                "reference": "dafc78e2a7d12139b0e97078d1082326bd09363d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b99112aecc01f62acf3d81a3f59646700a1849e5",
-                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dafc78e2a7d12139b0e97078d1082326bd09363d",
+                "reference": "dafc78e2a7d12139b0e97078d1082326bd09363d",
                 "shasum": ""
             },
             "require": {
@@ -3101,7 +3101,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-02T15:22:43+00:00"
+            "time": "2017-03-15T13:02:34+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5578,16 +5578,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.9.5",
+            "version": "0.9.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "0463aab0f8924df0835a7819b2a24b8597ec0a78"
+                "reference": "703a376efdca0d942cc50cd49bc115d42e9799cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/0463aab0f8924df0835a7819b2a24b8597ec0a78",
-                "reference": "0463aab0f8924df0835a7819b2a24b8597ec0a78",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/703a376efdca0d942cc50cd49bc115d42e9799cc",
+                "reference": "703a376efdca0d942cc50cd49bc115d42e9799cc",
                 "shasum": ""
             },
             "require": {
@@ -5619,7 +5619,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-03-12T01:40:36+00:00"
+            "time": "2017-03-15T23:27:45+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
