@@ -58,15 +58,6 @@
     @include("errors.list")
 
     <?php
-    $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
-        $competitors = $championship->competitors->map(function ($competitor) {
-            return ["id" => $competitor->id, "name" => $competitor->user->name];
-        })->toArray();
-        $teams = $championship->teams->map(function ($team) {
-            return ["id" => $team->id, "name" => $team->name, 'isVisible' => 1, 'competitors' => $team->competitorsWithUser];
-        })->toArray();
-        return ['championship' => $championship->id, 'competitors' => $competitors, 'teams' => $teams];
-    })->toArray();
 
     if (session()->has('activeTab')) {
         $activeTab = session('activeTab');

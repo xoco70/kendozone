@@ -19,7 +19,7 @@ vm = new Vue({
         competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
         championships: arrChampionshipsWithTeamsAndCompetitors,
         copyOne: [],
-        championship_id:0,
+        championship_id: 0,
     },
     methods: {
         deleteTeam(teamId){
@@ -77,17 +77,23 @@ vm = new Vue({
     },
     computed: {
         championship(){
-            // let championship =
-            //.find((elem) => elem.championship == this.championship_id)
-            // console.log(championship);
-            return 2;
+            return this.championships.find((elem) => elem.championship == this.championship_id);
+        },
+        // competitors(){
+        //     return this.championships.find((elem) => elem.championship == this.championship_id).competitors;
+        // },
+        teams(){
+            return this.championships.find((elem) => elem.championship == this.championship_id).teams;
         },
         assignedCompetitors(){
             // Get the tournament var and merge all the team->competitors
+
+            console.log(this.teams);
+
         },
         freeTournament(){
             // Get the tournament var and merge all the team->competitors
-            return arrChampionshipsWithTeamsAndCompetitors;
+            return this.teams.reduce((acc, team) => acc.concat(team.competitors),[]);
         },
     },
 
@@ -98,22 +104,23 @@ vm = new Vue({
     },
     mounted: function () {
         this.$nextTick(function () {
-            let _this = this;
+            let vm = this;
             Vue.vueDragula.eventBus.$on(
                 'drop',
                 function (args) {
                     let teamId = args[1].parentNode.getAttribute("team-id");
-                    this.championship_id = args[1].parentNode.getAttribute("championship-id");
-                    // console.log(this.championship_id);
-                    console.log(this.championship);
+                    vm.championship_id = args[1].parentNode.getAttribute("championship-id");
+
                     let competitorId = args[1].getAttribute("id");
 
                     if (teamId == null) {
-                        vm.removeCompetitorFromTeam(teamId, competitorId)
+
                     }
-                    else if(competitorId == null)
-                    {
+                    else if (competitorId == null) {
                         vm.moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2)
+                    } else {
+                        // add competitor to team
+                        vm.addTeam(teamId, competitorId);
                     }
 
 

@@ -63,11 +63,11 @@
             <div class="wrapper-dragula">
                 <div class="container-dragula" v-dragula="competitorsArea" bag="third-bag">
                     <div v-cloak
-                         v-for="(competitor, index) in championships.find((elem) => elem.championship == {{ $championship->id }}).competitors"
+                         v-for="(competitor, index) in championships.find((elem) => elem.championship == {{ $championship->id }}).freeCompetitors"
                          :id="competitor.id"
                          :index="index"
                          :key="competitor.id"
-                    >@{{competitor.name}}</div>
+                    >@{{competitor.user.name}}</div>
                 </div>
             </div>
         </div>
