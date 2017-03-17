@@ -65,8 +65,8 @@ vm = new Vue({
         removeCompetitorFromTeam(teamId, competitorId){
             $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/remove");
         },
-        moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2){
-            return 0;
+        moveCompetitorToAnotherTeam(competitorId, old_team_id, new_team_id){
+            $.post(url_root_api + "/teams/" + old_team_id + "/" + new_team_id + "/competitors/" + competitorId + "/move");
         }
 
     },
@@ -95,21 +95,22 @@ vm = new Vue({
                 function (args) {
                     let teamId = args[1].parentNode.getAttribute("team-id");
                     vm.championship_id = args[1].parentNode.getAttribute("championship-id");
-                    let championship = args[1].parentNode.getAttribute("championship-id");
                     let competitorId = args[1].getAttribute("id");
-                    // console.log(teamId,vm.championship_id,competitorId);
-                    if (teamId == null) {
-                        teamId = args[3].getAttribute("team-id");
-                        console.log(teamId);
-                        vm.removeCompetitorFromTeam(teamId, competitorId)
-                    }
-                    else if (competitorId == null) {
-                        vm.moveCompetitorToAnotherTeam(competitorId, team_id1, team_id2)
-                    } else {
-                        // add competitor to team
+                    let old_team_id = args[3].getAttribute("team-id");
+
+
+                    if (competitorId != null && teamId != null && old_team_id == null) { // Add
+                        console.log("adding");
                         vm.addCompetitorToTeam(teamId, competitorId);
                     }
-
+                    else if (competitorId != null && teamId == null && old_team_id != null) { // Remove
+                        console.log("removing");
+                        vm.removeCompetitorFromTeam(old_team_id, competitorId)
+                    }
+                    else if (competitorId != null && teamId != null && old_team_id != null) { // Move
+                        console.log("moving");
+                        vm.moveCompetitorToAnotherTeam(competitorId, old_team_id, teamId);
+                    }
 
                 }
             );

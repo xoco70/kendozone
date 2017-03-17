@@ -54,21 +54,19 @@ class TeamController extends Controller
 
             $tempAssignCompatitors = new Collection();
             $assignedCompetitors = $championship->teams->reduce(function ($acc, $team) use ($tempAssignCompatitors) {
-                if (sizeof($team->competitorsWithUser) > 0)
-                    return $tempAssignCompatitors->push($team->competitorsWithUser);
-                return null;
+                return $tempAssignCompatitors->push($team->competitorsWithUser)->collapse();
             });
 
 
-            if ($assignedCompetitors == null){
+            if ($assignedCompetitors == null) {
                 $freeCompetitors = $championship->competitors;
-            }else{
-                $assignedCompetitors = $assignedCompetitors->collapse();
+            } else {
                 $freeCompetitors = $championship->competitors->diff($assignedCompetitors);
             }
-            
+
             return ['championship' => $championship->id, 'competitors' => $competitors, 'freeCompetitors' => $freeCompetitors, 'teams' => $teams];
         })->toArray();
+
 
         return view("teams.index", compact('tournament', 'arrChampionshipsWithTeamsAndCompetitors'));
 
