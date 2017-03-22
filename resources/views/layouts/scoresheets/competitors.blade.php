@@ -6,7 +6,7 @@
 
 
             <div class="row row-fighter">
-                <div class="col-xs-12">
+
                     <table>
                         <tr>
                             <td width="20%">
@@ -21,7 +21,7 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+
             </div>
         @endforeach
 

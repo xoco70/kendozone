@@ -1,13 +1,13 @@
-@media screen {
-    body {
-        background-color: #FFF!important;
-    }
 
-    div.page _print{
-        page-break-after: always;
-        page-break-inside: avoid;
-    }
+body {
+    background-color: #FFF!important;
 }
+
+div.page_print{
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+
 
 .fighters {
     margin-top: 40px;
@@ -23,7 +23,8 @@
 /*}*/
 
 .row-fighter {
-    margin-bottom: 35px;
+    margin-bottom: 56px;
+
 }
 
 .sheet-competitors {

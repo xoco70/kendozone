@@ -11,6 +11,8 @@ const {mix} = require('laravel-mix');
  |
  */
 
+mix.options({ purifyCss: true });
+
 mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
 mix.js('resources/assets/js/oauth.js', 'public/js/');
@@ -19,6 +21,7 @@ mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/clipboard.js', 'public/js/');
 
 mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
+mix.copy('resources/assets/css/sheet.css', 'public/css/pages/sheet.css');
 
 mix.combine([
     'resources/assets/js/plugins/loaders/pace.min.js',

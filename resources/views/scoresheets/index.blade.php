@@ -3,7 +3,7 @@
     {!! Breadcrumbs::render('scoresheet.index', $tournament) !!}
 @stop
 @section('styles')
-    {!! Html::style('css/pages/sheet.css')!!}
+    {{--{!! Html::style('css/pages/sheet.css')!!}--}}
 @stop
 @section('content')
 
