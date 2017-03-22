@@ -2,21 +2,19 @@
 use App\Team;
 use Xoco70\KendoTournaments\TreeGen\DirectEliminationTreeGen;
 
-$directEliminationTree = $championship->fights->map(function ($item, $key) use ($championship) {
+$directEliminationTree = $championship->fightersGroups->where('round',1)->map(function ($item, $key) use ($championship) {
+    if ($championship->category->isTeam()){
 
+        $fighter1 = $item->team1 != null ? $item->team1->name : "Bye";
+        $fighter2 = $item->team2 != null ? $item->team2->name : "Bye";
+    }else{
+        $fighter1 = $item->competitors->get(0) != null ? $item->competitors->get(0)->user->name : "Bye";
+        $fighter2 = $item->competitors->get(1) != null ? $item->competitors->get(1)->user->name : "Bye";
 
-    if ($championship->category->isTeam()) {
-        $byeFighter = new Team([null, 'Bye']);
-        $fighter1 = $item->c1 != null ? Team::find($item->c1) : $byeFighter;
-        $fighter2 = $item->c2 != null ? Team::find($item->c2) : $byeFighter;
-    } else {
-        $byeFighter = new User([null, 'Bye']);
-        $fighter1 = $item->competitors->get($key) != null ? $item->competitors->get($key)->user->name : $byeFighter;
-        $fighter2 = $item->competitors->get($key + 1) != null ? $item->competitors->get($key + 1)->user->name : $byeFighter;
     }
-
     return [$fighter1, $fighter2];
 })->toArray();
+
 
 $directEliminationTree = array_flatten($directEliminationTree);
 $treeGen = new DirectEliminationTreeGen($directEliminationTree);

@@ -1,39 +1,53 @@
-.fighters{
-    margin-top:40px;
+@media screen {
+    body {
+        background-color: #FFF!important;
+    }
+
+    div.page _print{
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
 }
 
-.sheet-header{
-    margin-top:20px;
-    margin-bottom:20px;
+.fighters {
+    margin-top: 40px;
 }
+
+.sheet-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /*.row-fighter{*/
 /*margin-bottom:55px;*/
 /*}*/
 
-.row-fighter{
-    margin-bottom:35px;
+.row-fighter {
+    margin-bottom: 35px;
 }
 
-.sheet-competitors{
+.sheet-competitors {
     /*margin-top:60px;*/
 }
-.sheet_point{
+
+.sheet_point {
     margin: 0 5px;
-    width:80px;
+    width: 80px;
 }
 
-.total{
+.total {
     border: solid 1px lightgrey;
     margin: 5px 15px;
     padding: 0 25px;
 
 }
-.clasify{
+
+.clasify {
     border: solid 1px lightgrey;
     padding: 0 25px;
 }
 
-input{
+input {
     text-align: center;
 }
 
@@ -41,14 +55,16 @@ input{
     margin-left: 0;
 }
 
-
 .form-group {
     margin-bottom: 0;
 }
-.playoff{
-    margin-top:80px;
-    margin-bottom:80px;
+
+.playoff {
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
-.form-group-sheets{
-    margin-bottom:0;
+
+.form-group-sheets {
+    margin-bottom: 0;
 }
+

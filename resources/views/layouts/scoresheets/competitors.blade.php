@@ -6,21 +6,22 @@
 
 
             <div class="row row-fighter">
-                <table>
-                    <tr>
-                        <td width="20%">
-                            <div class="form-group form-group-sheets ">
-                                {!!  Form::text('short_id[]', $fighter->short_id, ['class' => 'form-control sheet_shortid']) !!}
-                            </div>
-                        </td>
-                        <td width="80%">
-                            <div class="form-group form-group-sheets">
-                                {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "BYE", ['class' => 'form-control competitor_name']) !!}
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
+                <div class="col-xs-12">
+                    <table>
+                        <tr>
+                            <td width="20%">
+                                <div class="form-group form-group-sheets ">
+                                    {!!  Form::text('short_id[]', $fighter->short_id, ['class' => 'form-control sheet_shortid']) !!}
+                                </div>
+                            </td>
+                            <td width="80%">
+                                <div class="form-group form-group-sheets">
+                                    {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "BYE", ['class' => 'form-control competitor_name']) !!}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         @endforeach
 
