@@ -4,13 +4,22 @@
             <?php
 
 
+            use Xoco70\KendoTournaments\TreeGen\TreeGen;
             if ($championship->category->isTeam()) {
                 $fighters = $group->teams;
             } else {
                 $fighters = $group->competitors;
             }
+
+
+            if (sizeof($fighters) == 0) {
+                $treeGen = new TreeGen($championship, null, null);
+                $fighters = $treeGen->createByeGroup(2);
+            }
+
+
             ?>
-                <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
+            <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
 
             <hr/>
             <br/>

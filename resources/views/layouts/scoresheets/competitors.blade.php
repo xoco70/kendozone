@@ -16,7 +16,7 @@
                             </td>
                             <td width="80%">
                                 <div class="form-group form-group-sheets">
-                                    {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "BYE", ['class' => 'form-control competitor_name']) !!}
+                                    {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "", ['class' => 'form-control competitor_name']) !!}
                                 </div>
                             </td>
                         </tr>

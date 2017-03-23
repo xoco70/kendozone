@@ -3,7 +3,6 @@
     {!! Breadcrumbs::render('scoresheet.index', $tournament) !!}
 @stop
 @section('content')
-
     <div class="container-fluid">
         <div class="content">
             @include('layouts.tree.topTree')
