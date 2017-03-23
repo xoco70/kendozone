@@ -1,5 +1,13 @@
 @extends('pdf.scoresheets.master')
 @section('content')
+    <?php
+    if ($championship->category->isTeam()) {
+        $fighters = $championship->teams;
+    } else {
+        $fighters = $championship->competitors;
+    }
+    $roundTitles = $championship->getRoundTitle(sizeof($fighters));
+    ?>
     @forelse($championship->fightersGroups as $group)
         @include('layouts.scoresheets.sheet', ['group' => $group])
     @empty

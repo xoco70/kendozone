@@ -14,10 +14,16 @@ class ScoreSheetController extends Controller
      */
     public function index($tournamentSlug)
     {
-        $tournament = Tournament::with('championships')->where('slug', $tournamentSlug)->first();
+        $tournament = Tournament::with(
+            'championships.category',
+                     'championships.fightersGroups',
+                     'championships.fightersGroups.teams',
+                     'championships.fightersGroups.competitors'
+        )->where('slug', $tournamentSlug)->first();
+
 
         $sheet = null;
-        return view('scoresheets.index', compact('tournament','sheet' ));
+        return view('scoresheets.index', compact('tournament', 'sheet'));
     }
 
     public function store()

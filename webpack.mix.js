@@ -11,7 +11,7 @@ const {mix} = require('laravel-mix');
  |
  */
 
-mix.options({ purifyCss: true });
+// mix.options({ purifyCss: true });
 
 mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');

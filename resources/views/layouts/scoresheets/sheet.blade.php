@@ -1,41 +1,39 @@
-<div class="panel panel-flat">
+<div class="panel panel-flat page_print">
     <div class="panel-body">
         <div class="container-fluid">
-
-            <div class="page_print">
-                <h1 align="center">{{ $tournament->name }}</h1>
-
-                <hr/>
-                <br/>
-                <?php
-                if ($championship->category->isTeam()) {
-                    $fighters = $group->teams;
-                } else {
-                    $fighters = $group->competitors;
-                }
-
-                ?>
+            <?php
 
 
-                {{--        <p align="center">{{ $tournamentGroup->round }}</p>--}}
+            if ($championship->category->isTeam()) {
+                $fighters = $group->teams;
+            } else {
+                $fighters = $group->competitors;
+            }
+            ?>
+                <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
 
-                {{--{{  Form::model($sheet, ["action" => [$sheet == null ?--}}
-                {{--"ScoreSheetController@store" :--}}
-                {{--"ScoreSheetController@update",--}}
-                {{--$championship->slug], 'class' => 'class="form-horizontal'] ) }}--}}
+            <hr/>
+            <br/>
+
+            {{--        <p align="center">{{ $tournamentGroup->round }}</p>--}}
+
+            {{--{{  Form::model($sheet, ["action" => [$sheet == null ?--}}
+            {{--"ScoreSheetController@store" :--}}
+            {{--"ScoreSheetController@update",--}}
+            {{--$championship->slug], 'class' => 'class="form-horizontal'] ) }}--}}
 
 
-                @include('layouts.scoresheets.header', ['championship'=>$championship, 'group'=> $group])
+            @include('layouts.scoresheets.header', ['championship'=>$championship, 'group'=> $group])
 
 
 
-                @include('layouts.scoresheets.competitors', ['fighters'=>$fighters, 'group'=> $group])
+            @include('layouts.scoresheets.competitors', ['fighters'=>$fighters, 'group'=> $group])
 
-                {{--End Points--}}
-                <hr/>
+            {{--End Points--}}
+            <hr/>
 
-                @include('layouts.scoresheets.playoff', ['group'=> $group])
-            </div>
+            @include('layouts.scoresheets.playoff', ['group'=> $group])
+
         </div>
     </div>
 </div>

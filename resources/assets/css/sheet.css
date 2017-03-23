@@ -1,13 +1,18 @@
 
 body {
-    background-color: #FFF!important;
+    background-color: #FFF !important;
 }
 
-div.page_print{
+.panel {
+    background-color: #FFF !important;
+    border:0;
+    box-shadow: none;
+}
+
+div.page_print {
     page-break-after: always;
     page-break-inside: avoid;
 }
-
 
 .fighters {
     margin-top: 40px;
@@ -18,18 +23,11 @@ div.page_print{
     margin-bottom: 20px;
 }
 
-/*.row-fighter{*/
-/*margin-bottom:55px;*/
-/*}*/
-
 .row-fighter {
-    margin-bottom: 56px;
-
+    margin-bottom: 35px;
+    margin-left: 2px;
 }
 
-.sheet-competitors {
-    /*margin-top:60px;*/
-}
 
 .sheet_point {
     margin: 0 5px;

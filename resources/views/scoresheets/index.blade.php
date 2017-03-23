@@ -2,9 +2,6 @@
 @section('breadcrumbs')
     {!! Breadcrumbs::render('scoresheet.index', $tournament) !!}
 @stop
-@section('styles')
-    {{--{!! Html::style('css/pages/sheet.css')!!}--}}
-@stop
 @section('content')
 
     <div class="container-fluid">
@@ -22,7 +19,14 @@
 
             <div class="tab-content">
                 @foreach($tournament->championships as $championship)
-
+                    <?php
+                    if ($championship->category->isTeam()) {
+                        $fighters = $championship->teams;
+                    } else {
+                        $fighters = $championship->competitors;
+                    }
+                    $roundTitles = $championship->getRoundTitle(sizeof($fighters));
+                    ?>
                     <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
 
                         <div style=" text-align: right; margin-bottom: 10px; ">
@@ -33,7 +37,7 @@
                                 <i class="icon-printer"></i>
                             </a>
                         </div>
-                        @include('layouts.scoresheets.sheets', ['championship' => $championship])
+                        @include('layouts.scoresheets.sheets')
 
                     </div>
                 @endforeach
