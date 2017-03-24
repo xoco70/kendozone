@@ -2,19 +2,18 @@
 use App\Team;
 use Xoco70\KendoTournaments\TreeGen\DirectEliminationTreeGen;
 
-$directEliminationTree = $championship->fightersGroups->where('round',1)->map(function ($item, $key) use ($championship) {
-    if ($championship->category->isTeam()){
+$directEliminationTree = $championship->fightersGroups->where('round', 1)->map(function ($item, $key) use ($championship) {
+    if ($championship->category->isTeam()) {
 
         $fighter1 = $item->team1 != null ? $item->team1->name : "Bye";
         $fighter2 = $item->team2 != null ? $item->team2->name : "Bye";
-    }else{
+    } else {
         $fighter1 = $item->competitors->get(0) != null ? $item->competitors->get(0)->user->name : "Bye";
         $fighter2 = $item->competitors->get(1) != null ? $item->competitors->get(1)->user->name : "Bye";
 
     }
     return [$fighter1, $fighter2];
 })->toArray();
-
 
 $directEliminationTree = array_flatten($directEliminationTree);
 $treeGen = new DirectEliminationTreeGen($directEliminationTree);
@@ -50,7 +49,9 @@ $treeGen = new DirectEliminationTreeGen($directEliminationTree);
                 <div class="horizontal-connector"
                      style="top: {{  $match['hConnector2Top']  }}px; left: {{  $match['hConnector2Left']  }}px;"></div>
             @endif
+
         @endforeach
+
     @endforeach
 </div>
 <button type="submit" class="btn bg-success btn-xs align-bottom-right m-20">

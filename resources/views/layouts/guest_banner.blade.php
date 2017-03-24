@@ -26,11 +26,7 @@
 
     <!-- Global stylesheets -->
     {!! Html::style('css/app.css')!!}
-    {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
-
-    {!! Html::style('vendor/kendo-tournaments/css/brackets.css')!!}
-
-    {!! Html::style('css/icons/icomoon/styles.css')!!}
+    {!! Html::style('css/pages/trees.css')!!}
     {!! Html::script('js/guest_app.js') !!}
 
 

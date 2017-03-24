@@ -1,6 +1,6 @@
 <div align="center">
 
-    @if (Request::is('championships/'.$championship->id.'/pdf'))
+    @if (Request::is('championships/'.$championship->id.'/tree/pdf'))
         <h1> {{$championship->buildName()}}</h1>
     @endif
     @foreach($championship->fightersGroups()->where('round',1)->get()->groupBy('area') as $groupsByArea)

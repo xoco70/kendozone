@@ -4,7 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {!! Html::style('vendor/kendo-tournaments/css/brackets.css')!!}
+    {!! Html::style('css/pages/trees.css')!!}
+    {!! Html::style('css/pages/preliminary_trees.css')!!}
+
 </head>
 <body>
 <!-- Page container -->

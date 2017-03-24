@@ -33,7 +33,7 @@
 <div class="row">
     <div class="col-sm-6 col-sm-offset-6">
         <div class="form-group">
-            {!!  Form::text(trans('core.table_leader'), '', ['class' => 'form-control']) !!}
+            {!!  Form::text('leader','', ['class' => 'form-control']) !!}
             {!!  Form::label('leader',  trans('core.table_leader'),['class' => 'text-bold']) !!}
         </div>
     </div>

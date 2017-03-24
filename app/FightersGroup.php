@@ -4,6 +4,8 @@ namespace App;
 
 class FightersGroup extends \Xoco70\KendoTournaments\Models\FightersGroup
 {
+
+
     /**
      * Get tournament with a lot of stuff Inside - Should Change name
      * @param $request
@@ -41,4 +43,7 @@ class FightersGroup extends \Xoco70\KendoTournaments\Models\FightersGroup
         }
         return $tournament;
     }
+
+
+
 }

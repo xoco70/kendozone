@@ -48,7 +48,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }} </title>
     <!-- Global stylesheets -->
-    {!! Html::style('/css/icons/icomoon/styles.css')!!}
     {!! Html::style('css/app.css')!!}
     @yield('scripts')
     @yield('styles')
