@@ -6,9 +6,10 @@
 
             use Xoco70\KendoTournaments\TreeGen\TreeGen;
             if ($championship->category->isTeam()) {
-                $fighters = $group->teams;
+                $fighters = $group->teamsWithNull();
             } else {
-                $fighters = $group->competitors;
+//                $fighters = $group->competitors;
+                $fighters = $group->competitorsWithNull();
             }
 
 
