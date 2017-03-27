@@ -11,6 +11,8 @@ const {mix} = require('laravel-mix');
  |
  */
 
+// mix.options({ purifyCss: true });
+
 mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
 mix.js('resources/assets/js/oauth.js', 'public/js/');
@@ -19,6 +21,7 @@ mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/clipboard.js', 'public/js/');
 
 mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
+mix.copy('resources/assets/css/sheet.css', 'public/css/pages/sheet.css');
 
 mix.combine([
     'resources/assets/js/plugins/loaders/pace.min.js',
@@ -52,8 +55,12 @@ mix.combine([
     'public/css/main.css',
     'resources/assets/css/custom.css',
     'resources/assets/css/protip.css',
-    'resources/assets/css/nunito.css'
+    'resources/assets/css/nunito.css',
+    'resources/assets/css/icons/icomoon/styles.css',
+    // 'resources/assets/css/google-fonts.css'
 ], 'public/css/app.css');
+
+
 
 
 mix.combine([
@@ -78,6 +85,14 @@ mix.combine([
     'resources/assets/js/plugins/uploaders/dropzone.js'
 ], 'public/js/userEdit.js');
 
+
+mix.combine([
+    'resources/assets/js/jquery.timepicker.css',
+
+    ], 'public/css/pages/tournamentEdit.css');
+
+
+
 mix.combine([
     'resources/assets/js/plugins/ui/nicescroll.min.js',
     'resources/assets/js/sidebar_detached_sticky_custom.js',
@@ -89,7 +104,6 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
-    'public/js/clipboard.js'
 ], 'public/js/pages/header/tournamentEdit.js');
 
 
@@ -142,8 +156,13 @@ mix.combine([
 
 
 mix.combine([
+    'vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css',
+], 'public/css/pages/trees.css');
+
+mix.combine([
     'resources/assets/css/preliminary_trees.css',
 ], 'public/css/pages/preliminary_trees.css');
+
 
 
 mix.combine([
@@ -186,3 +205,5 @@ mix.combine([
 mix.combine([
     'resources/assets/css/dragula.css',
 ], 'public/css/dragula.css');
+
+

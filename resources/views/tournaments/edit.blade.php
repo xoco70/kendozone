@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('styles')
-    {!! Html::style('js/jquery.timepicker.css')!!}
+    {!! Html::style('css/pages/tournamentEdit.css')!!}
 @stop
 @section('title')
     <title>{{ trans('core.editModel', ['currentModelName' => trans_choice('core.tournament',1)]) }}</title>

@@ -316,5 +316,20 @@ return [
     // Share
 
     'register_in_tournament' => 'Registrate en el torneo',
-    'about' => "Acerca de Kendozone"
+    'about' => "Acerca de Kendozone",
+
+
+    // Score Sheet
+    'scoresheet' => 'Hoja de combate | Hojas de combate',
+    'championship' => 'Categoría',
+    'shiajo' => 'Shiajo',
+    'group' => 'Grupo',
+    'writer' => 'Escritor',
+    'playoff' => 'Play off',
+    'points' => 'Puntoss',
+    'points_abrev' => 'Pts',
+    'clasify' => 'Clasifica',
+    'time' => 'Tiempo',
+    'table_leader' => 'Líder de mesa',
+    'still_no_scoresheet' => 'Aún no hay hojas de combates generadas'
 ];

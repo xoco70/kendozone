@@ -1,0 +1,69 @@
+
+body {
+    background-color: #FFF !important;
+}
+
+.panel {
+    background-color: #FFF !important;
+    border:0;
+    box-shadow: none;
+}
+
+div.page_print {
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+
+.fighters {
+    margin-top: 40px;
+}
+
+.sheet-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.row-fighter {
+    margin-bottom: 35px;
+    margin-left: 2px;
+}
+
+
+.sheet_point {
+    margin: 0 5px;
+    width: 80px;
+}
+
+.total {
+    border: solid 1px lightgrey;
+    margin: 5px 15px;
+    padding: 0 25px;
+
+}
+
+.clasify {
+    border: solid 1px lightgrey;
+    padding: 0 25px;
+}
+
+input {
+    text-align: center;
+}
+
+.form-inline .form-group + .form-group {
+    margin-left: 0;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.playoff {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.form-group-sheets {
+    margin-bottom: 0;
+}
+

@@ -1,8 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('styles')
-    {!! Html::style('vendor/kendo-tournaments/css/brackets.css')!!}
-
+    {!! Html::style('css/pages/trees.css')!!}
 @stop
 
 @section('breadcrumbs')
@@ -65,6 +64,8 @@
                                             @include('layouts.tree.directElimination')
                                         @elseif ($championship->isPlayOffType())
                                             @include('layouts.tree.roundRobin')
+                                        @elseif ($championship->isPlayOffType())
+                                            @include('layouts.tree.playOff')
                                         @endif
                                     @else
                                         <div>{{trans('core.no_generated_tree')}}</div>

@@ -29,7 +29,7 @@ return [
     'international' => 8,
 
 
-    'ROUND_ROBIN' => 0,
+    'PLAY_OFF' => 0,
     'DIRECT_ELIMINATION' => 1,
     'GRADE_MINUTES' => 525600 // a Year
 

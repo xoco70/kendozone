@@ -25,10 +25,11 @@ class TournamentSeeder extends Seeder
         $dateIni = $faker->dateTimeBetween('now', '+2 weeks')->format('Y-m-d');
         Tournament::create([
             'user_id' => 1,
+            'slug' => 'fake-tournoi',
             'name' => "Fake Tournoi",
-            'dateIni' =>  $dateIni,
-            'dateFin' =>  $dateIni,
-            'registerDateLimit' =>  $dateIni,
+            'dateIni' => $dateIni,
+            'dateFin' => $dateIni,
+            'registerDateLimit' => $dateIni,
             'sport' => 1,
             'type' => 0,
             'level_id' => 7,
@@ -49,19 +50,5 @@ class TournamentSeeder extends Seeder
 
             }
         }
-
-        // Tournament categories users
-
-//        Competitor::truncate();
-//        for ($i = 0; $i < 30; $i++) {
-//            try {
-//                factory(Competitor::class)->create();
-//            } catch (QueryException $e) {
-//
-//            } catch (PDOException $e) {
-//
-//            }
-//        }
-
     }
 }

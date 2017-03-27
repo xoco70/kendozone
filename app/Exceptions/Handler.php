@@ -11,6 +11,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Swift_TransportException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -94,16 +95,6 @@ class Handler extends ExceptionHandler
                 $author = "Gustave Flaubert";
                 $source = "";
                 break;
-            case $exception instanceof HttpException:
-//                return parent::render($request, $exception);
-
-                $code = "500";
-                $message = "Server Error";
-                $quote = "Please do 1000 more Suburis! Come back after that, and issue will probably be fixed!";
-                $author = "Kendozone Admin ( You'll thank me later )";
-                $source = "";
-
-                break;
             case $exception instanceof AuthorizationException:
                 $code = "403";
                 $message = trans('core.forbidden');
@@ -152,8 +143,21 @@ class Handler extends ExceptionHandler
                 $source = "";
                 break;
 
+            case $exception instanceof Swift_TransportException:
+                $code = "550";
+                $message = $exception->getMessage();
+                $quote = "Email can't be sent. Try again after 1000 suburis.";
+                $author = "";
+                $source = "";
+                break;
             default:
-                return parent::render($request, $exception);
+
+                $code = "500";
+                $message = $exception->getMessage();
+                $quote = "Please do 1000 more Suburis! Come back after that, and issue will probably be fixed!";
+                $author = "Kendozone Admin ( You'll thank me later )";
+                $source = "";
+                break;
         }
 
         if ($exception instanceof MaintenanceModeException)

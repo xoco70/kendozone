@@ -229,3 +229,15 @@ Breadcrumbs::register('fights.index', function ($breadcrumbs, $tournament) {
     }
 
 });
+
+// Home > Tournaments > MyTournament > List Fights
+Breadcrumbs::register('scoresheet.index', function ($breadcrumbs, $tournament) {
+    if (policy($tournament)->edit(Auth::user(), $tournament)) {
+        $breadcrumbs->parent('tournaments.edit', $tournament);
+        $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.edit', $tournament->slug));
+    } else {
+        $breadcrumbs->parent('tournaments.show', $tournament);
+        $breadcrumbs->push(trans_choice('core.fight', 2), route('tournaments.show', $tournament->slug));
+    }
+
+});

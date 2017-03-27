@@ -12,9 +12,6 @@
     <title>{{ app()->environment()=='local' ? getenv('APP_NAME') : config('app.name') }}</title>
     <!-- Global stylesheets -->
     {!! Html::style('css/app.css')!!}
-    {!! Html::style('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900')!!}
-
-    {!! Html::style('css/icons/icomoon/styles.css')!!}
     {!! Html::script('js/app.js') !!}
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
