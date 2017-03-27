@@ -1,7 +1,7 @@
 <?php
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
-$setting = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+$setting = $championship->getSettings();
 
 $treeType = $setting->treeType;
 $hasPreliminary = $setting->hasPreliminary;

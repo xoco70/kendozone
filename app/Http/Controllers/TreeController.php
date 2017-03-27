@@ -44,7 +44,7 @@ class TreeController extends Controller
             throw new AuthorizationException();
         }
         foreach ($tournament->championships as $championship) {
-            $settings = $championship->settings ?? new ChampionshipSettings(config('options.default_settings'));
+            $settings = $championship->getSettings();
             $generation = new TreeGen($championship, null, $settings);
             try {
 

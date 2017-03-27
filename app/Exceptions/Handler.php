@@ -144,7 +144,7 @@ class Handler extends ExceptionHandler
                 break;
 
             case $exception instanceof Swift_TransportException:
-                $code = "550";
+                $code = "500";
                 $message = $exception->getMessage();
                 $quote = "Email can't be sent. Try again after 1000 suburis.";
                 $author = "";
