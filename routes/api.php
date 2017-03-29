@@ -26,7 +26,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
 
     Route::get("users/{user}/federations", 'UserController@myFederations');
     Route::get("users/{user}/federations/{id}/associations", 'UserController@myAssociations');
-    Route::get("users/{user}/associations/{id}/clubs", 'UserController@myClubs');
+    Route::get("users/{user}/federations/{id}/associations/{id}/clubs", 'UserController@myClubs');
 
     Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
 
@@ -57,6 +57,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::post('associations/create', 'AssociationController@store')->name('createAssociation');
     Route::post('club/create', 'ClubController@store')->name('createClub');
 
-    https://laravel.dev/api/v1/associations/create
 });
 

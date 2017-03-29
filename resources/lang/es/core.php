@@ -278,6 +278,7 @@ return [
     'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
     'add_new_association' => 'Agregar una nueva asociación',
     'no_association' => 'Sin asociación ',
+    'association_not_in_list'  => 'Tu asociación no esta en la lista?',
 
     // Clubs
     'club' => 'Club|Clubs',
@@ -285,13 +286,13 @@ return [
     'club.address' => 'Dirección',
     'club.phone' => 'Teléfono',
     'club.no_user_in_this_country' => 'No hay usuarios registrados en este país',
-
+    'add_new_club' => 'Agregar un nuevo club',
 
     'where_do_you_practice' => '¿Donde prácticas?',
     'select_field' => 'Selecciona un campo',
     'no_association_available' => 'No existen asociaciones en esta federación',
     'no_club_available' => 'No existen clubes en esta asociación',
-
+    'club_not_in_list'  => 'Tu club no esta en la lista?',
 
     //Excel
 

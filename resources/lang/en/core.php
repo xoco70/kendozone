@@ -276,6 +276,7 @@ return [
     'no_association_yet' => 'Still not any associations in this federation',
     'add_new_association' => 'Add a new association',
     'no_association' => 'No association ',
+    'association_not_in_list'  => 'Your association is not in the list?',
 
     // Clubs
     'club' => 'Club|Clubs',
@@ -283,6 +284,8 @@ return [
     'club.address' => 'Address',
     'club.phone' => 'Phone',
     'club.no_user_in_this_country' => 'No user registered in this country',
+    'add_new_club' => 'Add a new club',
+    'club_not_in_list'  => 'Your club is not in the list?',
 
 
     'where_do_you_practice' => '¿Where do you train?',

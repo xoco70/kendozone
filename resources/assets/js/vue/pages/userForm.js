@@ -28,7 +28,17 @@ let vm = new Vue({
 
                 return federation ? federation.text : '';
 
+            },
+            associationSelectedText: function () {
+
+                let association = this.associations.find(function (elt) {
+                    return elt.value == this.associationSelected;
+                }.bind(this));
+
+                return association ? association.text : '';
+
             }
+
         },
 
 
@@ -77,8 +87,8 @@ let vm = new Vue({
 
                     });
 
-            }
-            ,
+            },
+
             getFederations: function () {
                 let url = '/api/v1/users/' + user + '/federations/';
                 this.$http.get(url).then(response => {
@@ -86,8 +96,8 @@ let vm = new Vue({
                 });
 
                 this.associationSelected = 0;
-            }
-            ,
+            },
+
             getAssociations: function (federationSelected) {
 
                 let url = '/api/v1/users/' + user + '/federations/' + federationSelected + '/associations';
@@ -95,15 +105,17 @@ let vm = new Vue({
                     vm.associations = response.data;
                 });
                 this.clubSelected = 0;
-            }
-            ,
-            getClubs: function (associationSelected) {
-                let url = '/api/v1/users/' + user + '/associations/' + associationSelected + "/clubs/";
+
+                // We should also get all clubs
+                this.getClubs(federationSelected, associationSelected);
+            },
+
+            getClubs: function (federationSelected, associationSelected) {
+                let url = '/api/v1/users/' + user + '/federations/' + federationSelected + '/associations/' + associationSelected + "/clubs/";
                 this.$http.get(url).then(response => {
                     vm.clubs = response.data;
                 });
-            }
-            ,
+            },
         }
         ,
         mounted: function () {

@@ -33,12 +33,12 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Association | View
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
         if (Request::ajax()) {
-            return Association::fillSelect();
+            return Club::fillSelect();
         } else {
             $clubs = Club::with('president', 'association.federation')
                 ->forUser(Auth::user())

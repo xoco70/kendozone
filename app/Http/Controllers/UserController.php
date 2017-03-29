@@ -240,9 +240,9 @@ class UserController extends Controller
         return Association::fillSelectForVuejs($user, $federationId);
     }
 
-    public function myClubs(User $user, $associationId)
+    public function myClubs(User $user, $federationId, $associationId)
     {
-        return Club::fillSelectForVueJs($user, $associationId);
+        return Club::fillSelectForVueJs($user, $federationId, $associationId);
     }
 
 }
