@@ -53,5 +53,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::post('teams/{team1}/{team2}/competitors/{competitor}/move', 'CompetitorTeamController@update')->name('moveCompetitorToAnotherTeam');
 
     Route::post('teams/{team}/delete', 'TeamController@destroy')->name('deleteTeam');
+
+    Route::post('associations/create', 'AssociationController@store')->name('createAssociation');
+    Route::post('club/create', 'ClubController@store')->name('createClub');
+
+    https://laravel.dev/api/v1/associations/create
 });
 

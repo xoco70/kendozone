@@ -29,7 +29,7 @@
 
         @else
 
-            {!! Form::open(['url'=>URL::action('AssociationController@store'),'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url'=>URL::action('AssociationController@store')]) !!}
 
         @endif
         <!-- Simple panel 1 : General Data-->

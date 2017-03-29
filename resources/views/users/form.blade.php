@@ -13,7 +13,7 @@
 @section('content')
     @include("errors.list")
 
-    <div class="container" >
+    <div class="container" id="container">
         <div class="content">
         @if (!is_null($user->id))
             {!! Form::model($user, ['method'=>"PATCH",
@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
 
-                    <div class="panel panel-flat" id="federations">
+                    <div class="panel panel-flat" >
                         <div class="panel-body">
                             <div class="container-fluid">
                                 <fieldset title="dojo">
@@ -136,40 +136,72 @@
                                         <legend class="text-semibold">{{Lang::get('core.where_do_you_practice')}}</legend>
                                     </a>
                                 </fieldset>
-                                <div class="form-group">
-                                    {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
-                                    <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                            class="form-control" @change="getAssociations(federationSelected)">
-                                    @if (Auth::user()->isSuperAdmin())
-                                        <option value="0"> -</option>
-                                    @endif
-                                    <option v-for="federation in federations" v-bind:value="federation.value"
-                                    >
-                                        @{{ federation.text }}
-                                    </option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
+                                            <select name="federation_id" v-model="federationSelected" id="federation_id"
+                                                    class="form-control" @change="getAssociations(federationSelected)">
+                                            @if (Auth::user()->isSuperAdmin())
+                                                <option value="0"> - </option>
+                                            @endif
+                                            <option v-for="federation in federations" v-bind:value="federation.value" v-cloak>
+                                                @{{ federation.text }}
+                                            </option>
+                                            </select>
 
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
 
-                                    <select name="association_id" v-model="associationSelected" id="association_id"
-                                            class="form-control" @change="getClubs(associationSelected)">
-                                    <option v-for="association in associations" v-bind:value="association.value"
-                                    >
-                                        @{{ association.text }}
-                                    </option>
-                                    </select>
+                                            <select name="association_id" v-model="associationSelected"
+                                                    id="association_id"
+                                                    class="form-control" @change="getClubs(associationSelected)"
+                                                    v-cloak
+                                            >
+                                            <option value="0"> {{ trans('core.no_association')  }}</option>
+                                            <option v-for="association in associations" v-bind:value="association.value"
+                                            >
+
+                                                @{{ association.text }}
+                                            </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mt-5" v-if="federationSelected!=0">
+                                        <br/>Your association is not in list?<br/>
+                                        {{--<a href="{{ route('associations.create', ['federation_id' => Auth::user()->federation_id]) }}">Add--}}
+                                            {{--a new one</a>--}}
+
+
+                                        <a href="#" data-toggle="modal" data-target="#create_association"
+                                           class="text-semibold text-black">
+                                            {{ trans('core.add_new_association') }}</a>
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
 
-                                <div class="form-group">
-                                    {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
+                                            <select name="club_id" v-model="clubSelected" class="form-control"
+                                                    id="club_id">
+                                                <option v-for="club in clubs" v-bind:value="club.value">
+                                                    @{{ club.text }}
+                                                </option>
+                                            </select>
+                                        </div>
 
-                                    <select name="club_id" v-model="clubSelected" class="form-control" id="club_id">
-                                        <option v-for="club in clubs" v-bind:value="club.value">
-                                            @{{ club.text }}
-                                        </option>
-                                    </select>
+                                    </div>
+                                    <div class="col-lg-4 mt-5" v-if="associationSelected!=0">
+                                        <br/>Your club is not in list?<br/>
+                                        <a href="{{ route('clubs.create', ['association_id' => Auth::user()->association_id]) }}">
+                                            Add a new one</a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -281,7 +313,10 @@
 
         </div>
         {!! Form::close()!!}
+        @include("modals.create_association")
     </div>
+
+
 @stop
 @section('scripts_footer')
     <?php
@@ -303,7 +338,6 @@
 
 
     </script>
-    {{--Dropzone--}}
     {!! Html::script('js/pages/header/userCreate.js') !!}
     {!! Html::script('js/userForm.js') !!}
 

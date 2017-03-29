@@ -21,7 +21,7 @@ class AssociationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Association|View
+     * @return Collection
      */
     public function index()
     {
@@ -74,17 +74,29 @@ class AssociationController extends Controller
 
         try {
             if ($request->president_id == 0)
-                $request->merge([ 'president_id' => null ]);
+                $request->merge(['president_id' => null]);
+
             $association = Association::create($request->all());
-            $msg = trans('msg.association_create_successful', ['name' => $association->name]);
-            flash()->success($msg);
-            return redirect(route("associations.index"));
+            if (Request::ajax()) {
+                return Response::json(['msg' => trans('msg.association_create_successful', ['name' => $association->name]), 'status' => 'success', 'data' => $association], 200);
+            } else {
+                $msg = trans('msg.association_create_successful', ['name' => $association->name]);
+                flash()->success($msg);
+                return redirect(route("associations.index"));
+            }
+
 
         } catch (QueryException $e) {
-            $user = User::find($request->president_id);
-            $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
-            flash()->error($msg);
-            return redirect()->back();
+            if (Request::ajax()) {
+                return Response::json(['msg' => $e], 500);
+
+            } else {
+                $user = User::find($request->president_id);
+                $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
+                flash()->error($msg);
+                return redirect()->back();
+            }
+
 
         }
     }
@@ -143,7 +155,7 @@ class AssociationController extends Controller
         }
         try {
             if ($request->president_id == 0)
-                $request->merge([ 'president_id' => null ]);
+                $request->merge(['president_id' => null]);
 
             $association->update($request->all());
             $msg = trans('msg.association_edit_successful', ['name' => $association->name]);
@@ -206,7 +218,6 @@ class AssociationController extends Controller
 //    {
 //        return Association::fillSelect();
 //    }
-
 
 
 }
