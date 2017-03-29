@@ -151,13 +151,7 @@ class Handler extends ExceptionHandler
                 $source = "";
                 break;
             default:
-
-                $code = "500";
-                $message = $exception->getMessage();
-                $quote = "Please do 1000 more Suburis! Come back after that, and issue will probably be fixed!";
-                $author = "Kendozone Admin ( You'll thank me later )";
-                $source = "";
-                break;
+                return parent::render($request, $exception);
         }
 
         if ($exception instanceof MaintenanceModeException)
