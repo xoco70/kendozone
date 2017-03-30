@@ -165,39 +165,51 @@ class Club extends Model
     /**
      * Same than fillSelect, but with VueJS Format
      * @param User $user
+     * @param $federationId
      * @param $associationId
      * @return Collection
      */
-    public static function fillSelectForVueJs(User $user, $associationId)
+    public static function fillSelectForVueJs(User $user, $federationId, $associationId)
     {
-        $clubs = new Collection();
-        if ($user->isSuperAdmin()) {
+        if ($associationId == 0) {
+            // Get list of associations in the federation
+            $associationIdList = Association::where('federation_id', $federationId)->pluck('id');
+            $clubs = Club::whereIn('association_id', $associationIdList)
+                ->get(['id as value', 'name as text']);
+        } else if ($federationId != 0) {
             $clubs = Club::where('association_id', $associationId)
                 ->get(['id as value', 'name as text']);
-        } else if ($user->isFederationPresident() && $user->federationOwned != null) {
-            $clubs = $user->federationOwned->clubs()
-                ->where('association_id', $associationId)
-                ->get(['club.id as value', 'club.name as text']);
-        } else if ($user->isAssociationPresident() && $user->associationOwned != null) {
-            $clubs = $user->associationOwned->clubs()
-                ->where('association_id', $associationId)
-                ->get(['club.id as value', 'club.name as text']);
-        } else if ($user->isClubPresident() && $user->clubOwned != null) {
-            $clubs = $user->clubOwned()
-                ->where('association_id', $associationId)
-                ->get(['club.id as value', 'club.name as text']);
-        } else if ($user->isUser()) {
-            $clubs = Club::where('association_id', $associationId)
-                ->get(['id as value', 'name as text'])
-                ->prepend(['value' => '0', 'text' => '-']);
+        } else {
+            dd("you re fucked");
         }
 
-        if (sizeof($clubs) == 0) {
-            $object = new stdClass;
-            $object->value = 0;
-            $object->text = trans('core.no_club_available');
-            $clubs->push($object);
-        };
+
+//        if ($user->isSuperAdmin()) {
+//
+//        } else if ($user->isFederationPresident() && $user->federationOwned != null) {
+//            $clubs = $user->federationOwned->clubs()
+//                ->where('association_id', $associationId)
+//                ->get(['club.id as value', 'club.name as text']);
+//        } else if ($user->isAssociationPresident() && $user->associationOwned != null) {
+//            $clubs = $user->associationOwned->clubs()
+//                ->where('association_id', $associationId)
+//                ->get(['club.id as value', 'club.name as text']);
+//        } else if ($user->isClubPresident() && $user->clubOwned != null) {
+//            $clubs = $user->clubOwned()
+//                ->where('association_id', $associationId)
+//                ->get(['club.id as value', 'club.name as text']);
+//        } else if ($user->isUser()) {
+//            $clubs = Club::where('association_id', $associationId)
+//                ->get(['id as value', 'name as text'])
+//                ->prepend(['value' => '0', 'text' => '-']);
+//        }
+
+//        if (sizeof($clubs) == 0) {
+//            $object = new stdClass;
+//            $object->value = 0;
+//            $object->text = trans('core.no_club_available');
+//            $clubs->push($object);
+//        };
 
         return $clubs;
     }

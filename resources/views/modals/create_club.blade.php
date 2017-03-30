@@ -45,7 +45,7 @@
                 </div>
                 <br/>
                 <div align="right">
-                    <button type="button" class="btn btn-success" id="save" v-on:click="storeAssociation()">
+                    <button type="button" class="btn btn-success" id="save" v-on:click="storeClub()">
                         {{trans("core.save")}}
                     </button>
                 </div>

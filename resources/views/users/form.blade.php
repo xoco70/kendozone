@@ -141,11 +141,12 @@
                                         <div class="form-group">
                                             {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                             <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                                    class="form-control" @change="getAssociations(federationSelected, null)">
+                                                    class="form-control" @change="getAssociations(federationSelected)">
                                             @if (Auth::user()->isSuperAdmin())
                                                 <option value="0"> -</option>
                                             @endif
-                                            <option v-for="federation in federations" v-bind:value="federation.value"
+                                            <option v-for="federation in federations"
+                                                    v-bind:value="federation.value"
                                                     v-cloak>
                                                 @{{ federation.text }}
                                             </option>
@@ -161,13 +162,11 @@
 
                                             <select name="association_id" v-model="associationSelected"
                                                     id="association_id" class="form-control"
-                                            @change="getClubs(associationSelected)"
-                                            v-cloak
-                                            >
+                                            @change="getClubs(federationSelected, associationSelected)"
+                                            v-cloak>
                                             <option value="0"> {{ trans('core.no_association')  }}</option>
-                                            <option v-for="association in associations" v-bind:value="association.value"
-                                            >
-
+                                            <option v-for="association in associations"
+                                                    v-bind:value="association.value">
                                                 @{{ association.text }}
                                             </option>
                                             </select>

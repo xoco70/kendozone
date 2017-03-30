@@ -37,6 +37,7 @@ class ClubController extends Controller
      */
     public function index()
     {
+
         if (Request::ajax()) {
             return Club::fillSelect();
         } else {
@@ -79,7 +80,7 @@ class ClubController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ClubRequest $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(ClubRequest $request)
     {
@@ -89,9 +90,14 @@ class ClubController extends Controller
             if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
             $club = Club::create($request->all());
 
-            $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
-            flash()->success($msg);
-            return redirect("clubs");
+            if (Request::ajax()) {
+                return Response::json(['msg' => trans('msg.club_create_successful', ['name' => $club->name]), 'status' => 'success', 'data' => $club], 200);
+            }else{
+                $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
+                flash()->success($msg);
+                return redirect("clubs");
+
+            }
         } catch (QueryException $e) {
 //            dd($e);
             $user = User::find($request->president_id);

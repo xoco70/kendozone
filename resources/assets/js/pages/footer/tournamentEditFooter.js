@@ -58,7 +58,7 @@ $(function () {
                 radiusInput: $('#us2-radius'),
                 locationNameInput: $('#address')
             },
-            enableAutocompvare: true,
+            enableAutocomplete: true,
             onchanged: function (currentLocation, radius, isMarkerDropped) {
                 var addressComponents = $(this).locationpicker('map').location.addressComponents;
                 $("#latitude").val(currentLocation.latitude);
