@@ -149,10 +149,9 @@ class Club extends Model
      */
     public static function fillSelect($federationId, $associationId)
     {
-        if ($associationId == 0) {
+        if ($associationId == 0 || $associationId == null ) {
             // Get list of associations in the federation
-            $associationIdList = Association::where('federation_id', $federationId)->pluck('id');
-            $clubs = Club::whereIn('association_id', $associationIdList)->pluck('name', 'id');
+            $clubs = Club::where('federation_id', $federationId)->pluck('name', 'id');
         } else if ($federationId != 0) {
             $clubs = Club::where('association_id', $associationId)->pluck('name', 'id');
         } else {
@@ -184,8 +183,7 @@ class Club extends Model
     {
         if ($associationId == 0) {
             // Get list of associations in the federation
-            $associationIdList = Association::where('federation_id', $federationId)->pluck('id');
-            $clubs = Club::whereIn('association_id', $associationIdList)
+            $clubs = Club::where('federation_id', $federationId)
                 ->get(['id as value', 'name as text']);
         } else if ($federationId != 0) {
             $clubs = Club::where('association_id', $associationId)

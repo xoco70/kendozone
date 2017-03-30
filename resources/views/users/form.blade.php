@@ -141,7 +141,7 @@
                                         <div class="form-group">
                                             {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
                                             <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                                    class="form-control" @change="getAssociations(federationSelected)">
+                                                    class="form-control" @change="getAssociations(federationSelected)" v-cloak>
                                             @if (Auth::user()->isSuperAdmin())
                                                 <option value="0"> -</option>
                                             @endif
@@ -186,7 +186,7 @@
                                             {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
 
                                             <select name="club_id" v-model="clubSelected" class="form-control"
-                                                    id="club_id">
+                                                    id="club_id" v-cloak>
                                                 <option v-for="club in clubs" v-bind:value="club.value">
                                                     @{{ club.text }}
                                                 </option>
