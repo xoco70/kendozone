@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div>
-
+            {!! Form::close() !!}
         </div>
     </div>
 @stop

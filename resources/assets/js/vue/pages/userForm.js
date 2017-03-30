@@ -80,7 +80,7 @@ let vm = new Vue({
                             width: 200,
                             dismissQueue: true,
                             timeout: 5000,
-                            text: response.data.name[0],
+                            text: response,
                             template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
                         });
                         $('#create_association').modal('show');
@@ -156,7 +156,7 @@ let vm = new Vue({
                 this.clubSelected = 0;
 
                 // We should also get all clubs
-                // this.getClubs(federationSelected, null);
+                this.getClubs(this.federationSelected, this.associationSelected != '' ? this.associationSelected : 0);
             },
 
             getClubs: function (federationSelected, associationSelected) {
@@ -174,7 +174,6 @@ let vm = new Vue({
                 if (this.federationSelected != 0) {
                     this.getAssociations(this.federationSelected);
                     this.clubSelected = currentClubId;
-                    this.getClubs(this.federationSelected, this.associationSelected != '' ? this.associationSelected : 0);
                 }
 
             })

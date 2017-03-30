@@ -68,9 +68,9 @@ class AssociationController extends Controller
     public function store(AssociationRequest $request)
     {
         // Assoc Policy
-        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
-            throw new AuthorizationException();
-        }
+//        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
+//            throw new AuthorizationException();
+//        }
 
         try {
             if ($request->president_id == 0)

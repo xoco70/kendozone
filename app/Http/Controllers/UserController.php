@@ -70,7 +70,7 @@ class UserController extends Controller
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect(Auth::user());
         $associations = Association::fillSelect();
-        $clubs = Club::fillSelect();
+        $clubs = Club::fillSelect(0,0);
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //
     }
 
@@ -124,7 +124,7 @@ class UserController extends Controller
         $countries = Country::pluck('name', 'id');
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $clubs = Club::fillSelect();
+        $clubs = Club::fillSelect(0, 0);
 
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations', 'associations', 'clubs')); //
     }

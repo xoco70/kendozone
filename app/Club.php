@@ -147,18 +147,29 @@ class Club extends Model
      * Fill Selects depending on the Logged user type
      * @return Collection
      */
-    public static function fillSelect()
+    public static function fillSelect($federationId, $associationId)
     {
-        $clubs = new Collection();
-        if (Auth::user()->isSuperAdmin()) {
-            $clubs = Club::pluck('name', 'id');
-        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $clubs = Auth::user()->federationOwned->clubs;
-        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
-            $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
-        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $clubs = Auth::user()->clubOwned;
+        if ($associationId == 0) {
+            // Get list of associations in the federation
+            $associationIdList = Association::where('federation_id', $federationId)->pluck('id');
+            $clubs = Club::whereIn('association_id', $associationIdList)->pluck('name', 'id');
+        } else if ($federationId != 0) {
+            $clubs = Club::where('association_id', $associationId)->pluck('name', 'id');
+        } else {
+            dd("you re fucked - v2");
         }
+
+
+//        $clubs = new Collection();
+//        if (Auth::user()->isSuperAdmin()) {
+//            $clubs = Club::pluck('name', 'id');
+//        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
+//            $clubs = Auth::user()->federationOwned->clubs;
+//        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
+//            $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
+//        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
+//            $clubs = Auth::user()->clubOwned;
+//        }
         return $clubs;
     }
 

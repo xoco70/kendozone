@@ -39,7 +39,7 @@ class ClubController extends Controller
     {
 
         if (Request::ajax()) {
-            return Club::fillSelect();
+            return Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
         } else {
             $clubs = Club::with('president', 'association.federation')
                 ->forUser(Auth::user())
@@ -99,7 +99,6 @@ class ClubController extends Controller
 
             }
         } catch (QueryException $e) {
-//            dd($e);
             $user = User::find($request->president_id);
             $msg = trans('msg.club_president_already_exists', ['user' => $user->name]);
             flash()->error($msg);

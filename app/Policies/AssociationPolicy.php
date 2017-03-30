@@ -41,10 +41,10 @@ class AssociationPolicy
      */
     public function store(User $user, Association $association)
     {
-        if ($user->isFederationPresident()) {
+//        if ($user->isFederationPresident()) {
             return true;
-        }
-        return false;
+//        }
+//        return false;
     }
 
     // Only SuperAdmin And FederationPresident should be able to delete Associations

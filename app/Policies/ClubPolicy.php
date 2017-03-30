@@ -58,14 +58,15 @@ class ClubPolicy
 
     public function store(User $user, Club $club)
     {
-        if ($user->isFederationPresident()) {
-            return $club->belongsToFederationPresident($user);
-
-        }
-        if ($user->isAssociationPresident()) {
-            return $club->belongsToAssociationPresident($user);
-        }
-        return false;
+        return true;
+//        if ($user->isFederationPresident()) {
+//            return $club->belongsToFederationPresident($user);
+//
+//        }
+//        if ($user->isAssociationPresident()) {
+//            return $club->belongsToAssociationPresident($user);
+//        }
+//        return false;
     }
 
     public function delete(User $user, Club $club)
