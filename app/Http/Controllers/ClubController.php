@@ -59,10 +59,12 @@ class ClubController extends Controller
      */
     public function create()
     {
+
+
         $club = new Club;
-        if (Auth::user()->cannot('create', $club)) {
-            throw new AuthorizationException();
-        }
+//        if (Auth::user()->cannot('create', $club)) {
+//            throw new AuthorizationException();
+//        }
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
@@ -84,6 +86,7 @@ class ClubController extends Controller
      */
     public function store(ClubRequest $request)
     {
+
         try {
             if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
             if ($request->federation_id == 0) $request->merge([ 'federation_id' => null ]);
@@ -95,6 +98,7 @@ class ClubController extends Controller
             }else{
                 $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
                 flash()->success($msg);
+
                 return redirect("clubs");
 
             }
@@ -132,6 +136,9 @@ class ClubController extends Controller
 //        $federation = new Federation();
 //        $association = new Association();
 
+        $defaultLng = Auth::user()->latitude ?? geoip()->lat;
+        $defaultLat = Auth::user()->longitude ?? geoip()->lon;
+
         $club = Club::findOrFail($id);
         if (Auth::user()->cannot('edit', $club)) {
             throw new AuthorizationException();
@@ -149,7 +156,7 @@ class ClubController extends Controller
 
 //        $oldFederation =
 
-        return view('clubs.form', compact('club', 'users', 'associations', 'federations')); //
+        return view('clubs.form', compact('club', 'users', 'associations', 'federations','defaultLng','defaultLat')); //
     }
 
     /**

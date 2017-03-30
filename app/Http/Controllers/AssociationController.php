@@ -48,9 +48,9 @@ class AssociationController extends Controller
         $association = new Association;
         $federation = new Collection;
 
-        if (Auth::user()->cannot('create', new Association)) {
-            throw new AuthorizationException();
-        }
+//        if (Auth::user()->cannot('create', new Association)) {
+//            throw new AuthorizationException();
+//        }
 
         $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         $federations = Federation::forUser(Auth::user())->pluck('name', 'id');

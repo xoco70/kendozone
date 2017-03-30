@@ -181,18 +181,18 @@ class ClubTest extends BrowserKitTest
     /** @test
      *
      */
-    public function clubPres_and_simple_user_cannot_create_association()
-    {
-        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
-
-        $users = [$clubPresident, $simpleUser];
-        foreach ($users as $user) {
-            $this->logWithUser($user);
-            $this->visitCreateClubPage($clubPresident);
-            $this->see("403.png");
-        }
-    }
+//    public function clubPres_and_simple_user_cannot_create_association()
+//    {
+//        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+//        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+//
+//        $users = [$clubPresident, $simpleUser];
+//        foreach ($users as $user) {
+//            $this->logWithUser($user);
+//            $this->visitCreateClubPage($clubPresident);
+//            $this->see("403.png");
+//        }
+//    }
 
     /**
      * @param Club $club
@@ -302,8 +302,8 @@ class ClubTest extends BrowserKitTest
 
 //        // Get Club Full Object
 
-        $club = $this->getFullClubObject($clubData);
-        $this->canUpdate($club); // C
+//        $club = $this->getFullClubObject($clubData);
+//        $this->canUpdate($club); // C
 
 //        $this->canDelete($association); // C
 

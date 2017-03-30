@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('federations', 'FederationController', ['names' => ['index' => 'federations.index', 'create' => 'federations.create', 'edit' => 'federations.edit', 'store' => 'federations.store', 'update' => 'federations.update']]);
         Route::resource('associations', 'AssociationController');
-        Route::resource('clubs', 'ClubController');
+        Route::resource('clubs', 'ClubController', ['names' => ['index' => 'clubs.index', 'create' => 'clubs.create', 'edit' => 'clubs.edit', 'store' => 'clubs.store', 'update' => 'clubs.update']]);
 
         Route::resource('categories', 'CategoryController');
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
@@ -86,9 +86,6 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::post('invites/upload', 'InviteController@upload');
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');
 
-        //Restoring -- TODO Should be posting so nobody can restore tournament
-        Route::get('associations/{association}/restore', 'AssociationController@restore');
-        Route::get('clubs/{club}/restore', 'ClubController@restore');
 
         Route::post('championships/{championship}/teams', 'TeamController@store')->name('storeTeam');
 

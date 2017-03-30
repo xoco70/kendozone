@@ -33,6 +33,7 @@ return [
     'or' => 'o',
     'export_excel' => 'Exportar a Excel',
     'letsgo' => '¡Comenzar!',
+    'contact_us' => 'Contactanos',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -267,6 +268,8 @@ return [
     'federation.phone' => 'Teléfono',
     'federation.no_user_in_this_country' => 'No hay usuarios registrados en este país',
     'no_federation' => 'Sin federación ',
+    'federation_not_in_list' => 'Tu federación no esta en la lista? ',
+
 
     // Associations
     'association' => 'Asociación|Asociaciones',

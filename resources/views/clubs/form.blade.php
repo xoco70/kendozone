@@ -18,12 +18,10 @@
         @if (!is_null($club->id))
             {!! Form::model($club, ['method'=>"PATCH",
                                     "action" => ["ClubController@update", $club->id],
-                                    'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
-
         @else
 
-            {!! Form::open(['url'=>URL::action('ClubController@store'),'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url'=>route('clubs.store')]) !!}
 
         @endif
         <!-- Simple panel 1 : General Data-->

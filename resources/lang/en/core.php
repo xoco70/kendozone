@@ -33,6 +33,7 @@ return [
     'or' => 'or',
     'export_excel' => 'Export to Excel',
     'letsgo' => 'Let\'s do it',
+    'contact_us' => 'Contact Us',
 
     //Tournament
     'tournament' => 'Tournament|Tournaments',
@@ -265,6 +266,7 @@ return [
     'federation.phone' => 'Phone',
     'federation.no_user_in_this_country' => 'No user registered in this country',
     'no_federation' => 'No federation ',
+    'federation_not_in_list' => 'Your federation is not in the list?',
 
     // Associations
     'association' => 'Association|Associations',

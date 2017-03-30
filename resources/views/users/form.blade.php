@@ -154,6 +154,12 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-lg-4 mt-5">
+                                        <br/>{{trans('core.federation_not_in_list')}}<br/>
+
+                                        <a href="mailto:contact@kendozone.com" class="text-semibold text-black">
+                                            {{ trans('core.contact_us') }}</a>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-8">

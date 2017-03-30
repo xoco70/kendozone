@@ -22,14 +22,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
         @if (!is_null($association->id))
-            {!! Form::model($association, ['method'=>"PATCH",
+            {!! Form::model($association,
+                                    ['method'=>"PATCH",
                                     "action" => ["AssociationController@update", $association->id],
-                                    'enctype' => 'multipart/form-data',
                                     'id' => 'form']) !!}
+
 
         @else
 
-            {!! Form::open(['url'=>URL::action('AssociationController@store')]) !!}
+            {!! Form::open(['url'=>route('associations.store')]) !!}
 
         @endif
         <!-- Simple panel 1 : General Data-->
