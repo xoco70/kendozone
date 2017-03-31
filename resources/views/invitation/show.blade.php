@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('styles')
-    {!! Html::style('css/tournamentInvite.css') !!}
+    {!! Html::style('css/pages/tournamentInvite.css') !!}
 @stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('invites.show',$tournament) !!}
@@ -29,7 +29,7 @@
                                     <legend class="text-semibold">{{Lang::get('core.invite_send',['tournament' => $tournament->name])}}</legend>
 
                                     <p>
-                                        {{trans('core.2_choices_to_invite')}}
+                                    {{trans('core.2_choices_to_invite')}}
                                     <ul>
                                         <li>{{trans('core.invite_by_commas')}}</li>
                                         <li>{{trans('core.invite_by_excel')}}
