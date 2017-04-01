@@ -60,6 +60,7 @@ vm = new Vue({
         },
         addCompetitorToTeam(teamId, competitorId){
             $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");
+            // Vue.vueDragula.find('third-bag').drake.cancel(true);
 
         },
         removeCompetitorFromTeam(teamId, competitorId){
