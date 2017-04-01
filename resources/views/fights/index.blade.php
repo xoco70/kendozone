@@ -14,7 +14,7 @@
                             <h1> {{$championship->buildName()}}</h1>
 
 
-                            @foreach($championship->fights->groupBy('area') as $fightsByArea)
+                            @foreach($championship->firstRoundFights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered text-center">
                                     <th class="p-10" >Id</th>
                                     <th class="p-10" >{{trans_choice('core.competitor',1)}} 1</th>
