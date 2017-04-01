@@ -162,11 +162,6 @@ return [
     // Messages
     'all_categories_not_configured' => 'All categories must be configured first.',
 
-
-    // Share
-    'share' => 'Share',
-    'share_link' => 'Share link',
-
     // Dashboard
 
     'logs' => 'Logs',
@@ -317,9 +312,17 @@ return [
     'no_fight_list' => 'There is still no fight list for this championship',
 
     // Share
+    'share' => 'Share',
+    'share_link' => 'Share link',
+    'share_tournament' => 'Share tournament',
 
     'register_in_tournament' => 'Register in tournament',
     'about' => "About Kendozone",
+
+    'share_to_facebook' => 'Share to Facebook',
+    'share_to_twitter' => 'Share to Twitter',
+    'share_to_googleplus' => 'Share to Google +',
+
 
     // Score Sheet
     'scoresheet' => 'Scoring Sheet | Scoring Sheets',

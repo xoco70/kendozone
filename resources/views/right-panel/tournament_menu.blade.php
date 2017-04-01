@@ -5,7 +5,7 @@ $numTeams = $tournament->teams()->count();
 $settingSize = $tournament->championshipSettings->count();
 $categorySize = $tournament->championships->count();
 if (Route::currentRouteName() != 'tournaments.edit') {
-    $baseUrl =  route('tournaments.edit', ['tournament' => $tournament->slug]);
+    $baseUrl = route('tournaments.edit', ['tournament' => $tournament->slug]);
 
 } else {
     $baseUrl = "";
@@ -57,7 +57,8 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                             </a></li>
 
 
-                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}" id="competitors">
+                        <li><a href="{{ URL::action('CompetitorController@index',$tournament->slug) }}"
+                               id="competitors">
                                 <i class="icon-users"></i>
                                 {{trans_choice("core.competitor",2)}}
                                 @if($numCompetitors>8)
@@ -115,30 +116,44 @@ if (Route::currentRouteName() != 'tournaments.edit') {
         </div>
     </div>
     <br/>
-    @if ($tournament->isOpen())
-
-        <div class="sidebar-category">
-            <div class="category-title">
-                <span>{{ trans('core.share_link') }}</span>
-
+    <div class="panel panel-nav">
+        <div class="panel-heading">
+            <h6 class="panel-title">{{ trans('core.share_tournament') }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+            <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a href="#" data-action="collapse"></a></li>
+                    <li><a data-action="collapse"></a></li>
                 </ul>
             </div>
-
-            <div class="category-content no-padding">
-                <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}"
-                       class="p-10 full-width">
-
-            </div>
-
         </div>
-        <br/>
-    @endif
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 mb-20 text-center">
+                    <a href="#" id="shareBtnShow" title="{{ trans('core.share_to_facebook') }}"
+                       alt="{{ trans('core.share_to_facebook') }}"><img src="/images/brands/facebook.png"
+                                                                        class="img-circle img-xs"
+                                                                        alt="{{ trans('core.share_to_facebook') }}"></a>
+                    <a href="#" title="{{ trans('core.share_to_twitter') }}"
+                       alt="{{ trans('core.share_to_twitter') }}"><img src="/images/brands/twitter.png"
+                                                                       class="img-circle img-xs"
+                                                                       alt="{{ trans('core.share_to_twitter') }}"></a>
+                    <a href="#" title="{{ trans('core.share_to_googleplus') }}"
+                       alt="{{ trans('core.share_to_googleplus') }}"><img
+                                src="/images/brands/googleplus.png" class="img-circle img-xs"
+                                alt="{{ trans('core.share_to_googleplus') }}"></a>
+                </div>
+            </div>
+            <input value="{{ URL::action('TournamentController@show',$tournament->slug) }}"
+                   class="p-10 full-width">
+        </div>
+    </div>
+
     {{-- If open Tournament--}}
 
 
     @can('edit',$tournament)
+
+
         <div class="row">
             <div class="col-md-12">
                 <p><a id="shareBtn" type="button"

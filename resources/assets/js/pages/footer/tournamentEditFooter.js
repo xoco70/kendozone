@@ -19,7 +19,17 @@ $(function () {
             href: url_register,
         }, function (response) {
         });
-    }
+    };
+
+    document.getElementById('shareBtnShow').onclick = function () {
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: url_show_tournament,
+        }, function (response) {
+        });
+    };
+
 
     var dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {

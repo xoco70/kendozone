@@ -15,7 +15,6 @@ return [
     // Models
 
 
-
     // Accion
     'add' => 'Agregar',
     'action' => 'Acción',
@@ -80,7 +79,7 @@ return [
     'technical_assistance' => 'Asistencia Técnica',
 
 
-   // Venue
+    // Venue
     'venue' => 'Lugar del encuentro',
     'coords' => 'Coordenadas',
     'address' => 'Dirección',
@@ -102,7 +101,6 @@ return [
     'international' => 'Internacional',
 
 
-
     // User
     'user' => 'Usuario|Usuarios',
     'name' => 'Nombre',
@@ -121,7 +119,6 @@ return [
     'without_grade' => 'Sin grado',
     'left_password_blank' => 'Deja la contraseña vacía si no deseas cambiarla',
     'remove' => 'Borrar',
-
 
 
     // Competitor
@@ -163,9 +160,6 @@ return [
     'all_categories_not_configured' => 'Todas las categorías deben de ser configuradas. Ve a <strong>Torneo > Categorías</strong> para configurarlas.',
 
 
-    // Share
-    'share' => 'Compartir',
-    'share_link' => 'Compartir link',
 
     // Dashboard
 
@@ -191,7 +185,6 @@ return [
     'yes' => 'Si',
     'no' => 'No',
     'forbidden' => '¡Prohibido!',
-
 
 
     // Left menu
@@ -283,7 +276,7 @@ return [
     'no_association_yet' => 'Aún no hay asociaciaciones creadas en esta federación',
     'add_new_association' => 'Agregar una nueva asociación',
     'no_association' => 'Sin asociación ',
-    'association_not_in_list'  => 'Tu asociación no esta en la lista?',
+    'association_not_in_list' => 'Tu asociación no esta en la lista?',
 
     // Clubs
     'club' => 'Club|Clubs',
@@ -297,7 +290,7 @@ return [
     'select_field' => 'Selecciona un campo',
     'no_association_available' => 'No existen asociaciones en esta federación',
     'no_club_available' => 'No existen clubes en esta asociación',
-    'club_not_in_list'  => 'Tu club no esta en la lista?',
+    'club_not_in_list' => 'Tu club no esta en la lista?',
 
     //Excel
 
@@ -311,7 +304,7 @@ return [
     'tree' => 'Arbol|Arboles',
     'no_generated_tree' => 'Aún no hay arbol generado para esta categoría',
     'document' => 'Documento|Documentos',
-        'print' => 'Imprimir',
+    'print' => 'Imprimir',
 
 
     // Fights
@@ -320,9 +313,16 @@ return [
 
 
     // Share
+    'share' => 'Compartir',
+    'share_link' => 'Compartir link',
+    'share_tournament' => 'Compartir torneo',
 
     'register_in_tournament' => 'Registrate en el torneo',
     'about' => "Acerca de Kendozone",
+
+    'share_to_facebook' => 'Compartir en Facebook',
+    'share_to_twitter' => 'Compartir en Twitter',
+    'share_to_googleplus' => 'Compartir en Google +',
 
 
     // Score Sheet

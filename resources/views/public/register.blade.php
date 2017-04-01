@@ -1,3 +1,5 @@
+@if (Auth::check()) App::setLocale(Auth::user()->locale);  @endif
+
 <meta property="og:title" content="{{trans('core.register_in_tournament').": ". $tournament->name }}"/>
 <meta name="description" content="{{trans('core.competitors_register') }}"/>
 <meta property="og:description" content="{{trans('core.register_in_tournament').": ". $tournament->name }}"/>
