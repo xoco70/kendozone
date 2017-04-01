@@ -315,6 +315,8 @@ return [
     'share' => 'Share',
     'share_link' => 'Share link',
     'share_tournament' => 'Share tournament',
+    'check_the_tournament' => 'Check the tournament:',
+
 
     'register_in_tournament' => 'Register in tournament',
     'about' => "About Kendozone",

@@ -118,7 +118,8 @@ if (Route::currentRouteName() != 'tournaments.edit') {
     <br/>
     <div class="panel panel-nav">
         <div class="panel-heading">
-            <h6 class="panel-title">{{ trans('core.share_tournament') }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+            <h6 class="panel-title">{{ trans('core.share_tournament') }}<a class="heading-elements-toggle"><i
+                            class="icon-more"></i></a></h6>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -130,17 +131,16 @@ if (Route::currentRouteName() != 'tournaments.edit') {
             <div class="row">
                 <div class="col-md-12 mb-20 text-center">
                     <a href="#" id="shareBtnShow" title="{{ trans('core.share_to_facebook') }}"
-                       alt="{{ trans('core.share_to_facebook') }}"><img src="/images/brands/facebook.png"
-                                                                        class="img-circle img-xs"
-                                                                        alt="{{ trans('core.share_to_facebook') }}"></a>
-                    <a href="#" title="{{ trans('core.share_to_twitter') }}"
-                       alt="{{ trans('core.share_to_twitter') }}"><img src="/images/brands/twitter.png"
-                                                                       class="img-circle img-xs"
-                                                                       alt="{{ trans('core.share_to_twitter') }}"></a>
+                       alt="{{ trans('core.share_to_facebook') }}">
+                        <img src="/images/brands/facebook.png" class="img-circle img-xs"
+                             alt="{{ trans('core.share_to_facebook') }}"/></a>
+                    <a href="https://twitter.com/intent/tweet?url={{ URL::action('TournamentController@show',$tournament->slug) }}&text={{trans('core.check_the_tournament')}}{{ $tournament->name }}" title="{{ trans('core.share_to_twitter') }}" alt="{{ trans('core.share_to_twitter') }}">
+                        <img src="/images/brands/twitter.png" class="img-circle img-xs twitter-share-button"
+                             alt="{{ trans('core.share_to_twitter') }}"/></a>
                     <a href="#" title="{{ trans('core.share_to_googleplus') }}"
-                       alt="{{ trans('core.share_to_googleplus') }}"><img
-                                src="/images/brands/googleplus.png" class="img-circle img-xs"
-                                alt="{{ trans('core.share_to_googleplus') }}"></a>
+                       alt="{{ trans('core.share_to_googleplus') }}">
+                        <img src="/images/brands/googleplus.png" class="img-circle img-xs"
+                             alt="{{ trans('core.share_to_googleplus') }}"></a>
                 </div>
             </div>
             <input value="{{ URL::action('TournamentController@show',$tournament->slug) }}"

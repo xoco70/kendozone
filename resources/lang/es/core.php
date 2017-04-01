@@ -316,6 +316,8 @@ return [
     'share' => 'Compartir',
     'share_link' => 'Compartir link',
     'share_tournament' => 'Compartir torneo',
+    'check_the_tournament' => 'Checa el torneo:',
+
 
     'register_in_tournament' => 'Registrate en el torneo',
     'about' => "Acerca de Kendozone",
