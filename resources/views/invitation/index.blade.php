@@ -18,7 +18,6 @@
                 <div class="col-md-12 col-lg-6 col-lg-offset-3">
 
 
-
                     <table class="table table-togglable table-hover">
                         <thead>
                         <tr>
@@ -31,7 +30,9 @@
                         </thead>
                         @foreach($invites as $invite)
                             <tr>
-                                <td align="center"><a href="{!!   URL::action('TournamentController@show',  $invite->object->slug) !!}">{{ $invite->object->name }}</a></td>
+                                <td align="center"><a
+                                            href="{!!   URL::action('TournamentController@show',  $invite->object->slug) !!}">{{ $invite->object->name }}</a>
+                                </td>
                                 <td align="center">{{ $invite->object->owner->name }}</td>
                                 <td align="center">{{ $invite->object->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
 
@@ -40,26 +41,16 @@
                         @endforeach
 
 
-
                     </table>
                 </div>
             </div>
         @endif
-
-
     </div>
-
     @include("errors.list")
 @stop
 @section('scripts_footer')
     {!! Html::script('js/pages/header/footable.js') !!}
-    <script>
-        $(function() {
-
-            // Initialize responsive functionality
+    <script>$(function () {
             $('.table-togglable').footable();
-
-        });
-    </script>
-
+        });</script>
 @stop

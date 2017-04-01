@@ -1,12 +1,33 @@
-
+$(document).ready(function () {
+});
 $(function () {
+    $.ajaxSetup({cache: true});
+    $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
+        FB.init({
+            appId: facebook_id,
+            version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+        });
+        $('#loginbutton,#feedbutton').removeAttr('disabled');
+        FB.getLoginStatus(function () {
+            // Your logic here
+        });
+    });
+    document.getElementById('shareBtn').onclick = function () {
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: url_register,
+        }, function (response) {
+        });
+    }
+
     var dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 
-    var currentTabId= '"#' + activeTab+'"';
-    $('.nav-tabs a[href='+currentTabId+']').tab('show');
+    var currentTabId = '"#' + activeTab + '"';
+    $('.nav-tabs a[href=' + currentTabId + ']').tab('show');
 
     $('.fightDuration').timepicker(('option', {
         'minTime': '2:00',
@@ -81,9 +102,6 @@ $(function () {
 
 
     });
-
-
-
 
 
     function updateControls(addressComponents) {

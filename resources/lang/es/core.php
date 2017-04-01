@@ -62,6 +62,8 @@ return [
     'broadcast' => 'Transmitir',
     'publish' => 'Publicar',
     'invite_competitors' => 'Invita competidores',
+    'invite_competitors_with_email' => 'Invita por Email',
+    'invite_competitors_with_fb' => 'Invita con Facebook',
     'generate_tree' => 'Generar Árbol|Generar Árboles',
     'admin_tournaments' => 'Administrar torneos',
     'eventDateIni' => 'Fecha Inicial',
@@ -291,7 +293,7 @@ return [
     'club.no_user_in_this_country' => 'No hay usuarios registrados en este país',
     'add_new_club' => 'Agregar un nuevo club',
 
-    'where_do_you_practice' => '¿Donde prácticas?',
+    'where_do_you_practice' => '¿En donde prácticas?',
     'select_field' => 'Selecciona un campo',
     'no_association_available' => 'No existen asociaciones en esta federación',
     'no_club_available' => 'No existen clubes en esta asociación',

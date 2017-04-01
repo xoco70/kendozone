@@ -99,17 +99,22 @@
         var dualList;
         var icon;
         var venue = "{!! addcslashes($venue, '"') !!}";
-        @if (isset($activeTab))
+        var facebook_id = "{{ env('FACEBOOK_CLIENT_ID') }}";
+        var url_register = '{{ URL::action('TournamentController@register',$tournament->slug) }}';
+                @if (isset($activeTab))
         var activeTab = "{{ $activeTab }}";
+
         @endif
             venue = JSON.parse(venue);
 
         $("a").on('click', function () {
 
             let href = $(this).attr('href');
-            let id = href.replace("#", "");
-            if ($("a[data-toggle='tab'][id='" + id + "']")) {
-                $("#" + id).click();
+            if (href != null) {
+                let id = href.replace("#", "");
+                if ($("a[data-toggle='tab'][id='" + id + "']")) {
+                    $("#" + id).click();
+                }
             }
 
         });
@@ -122,18 +127,17 @@
             console.log(icon);
             $(".see_more_{{ $championship->id }}")
                 .text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);
-
-
             $('.advanced_settings_{{ $championship->id }}').slideToggle("fast");
-
-
         });
         @endforeach
 
 
     </script>
+
+
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
     {!! Html::script('js/categoryCreate.js') !!}
+
 
 @stop

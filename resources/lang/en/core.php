@@ -61,6 +61,8 @@ return [
     'broadcast' => 'Transmit',
     'publish' => 'Publish',
     'invite_competitors' => 'Invite competitors',
+    'invite_competitors_with_email' => 'Invite by Email',
+    'invite_competitors_with_fb' => 'Invite competitors with Facebook',
     'generate_tree' => 'Generate Tree',
     'eventDateIni' => 'Initial Date',
     'eventDateFin' => 'Final Date',

@@ -102,7 +102,7 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                         {{--class="icon-certificate"></i>{{ trans('core.certificates') }}</a></li>--}}
                         {{--<li class="disabled"><a href="#"><i class="icon-user-lock"></i>{{ trans('core.acredit') }}</a>--}}
                         {{--</li>--}}
-                        <li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>
+                        {{--<li class="disabled"><a href="#"><i class="icon-feed"></i>{{ trans('core.broadcast') }}</a></li>--}}
                         {{--<li class="disabled"><a href="#"><i class="icon-share"></i>{{ trans('core.publish') }}</a></li>--}}
 
 
@@ -120,6 +120,7 @@ if (Route::currentRouteName() != 'tournaments.edit') {
         <div class="sidebar-category">
             <div class="category-title">
                 <span>{{ trans('core.share_link') }}</span>
+
                 <ul class="icons-list">
                     <li><a href="#" data-action="collapse"></a></li>
                 </ul>
@@ -128,7 +129,9 @@ if (Route::currentRouteName() != 'tournaments.edit') {
             <div class="category-content no-padding">
                 <input value="{{ URL::action('TournamentController@register',$tournament->slug) }}"
                        class="p-10 full-width">
+
             </div>
+
         </div>
         <br/>
     @endif
@@ -138,13 +141,25 @@ if (Route::currentRouteName() != 'tournaments.edit') {
     @can('edit',$tournament)
         <div class="row">
             <div class="col-md-12">
-                <p><a href="{!!   URL::action('InviteController@create',  $tournament->slug) !!}" type="button"
-                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b>
-                            <i class="icon-envelope"></i></b>{{ trans('core.invite_competitors') }}
+                <p><a id="shareBtn" type="button"
+                      class="btn btn-fb btn-labeled btn-xlg" style="width: 100%"><b>
+                            <i class="icon-facebook"></i></b>{{ trans('core.invite_competitors_with_fb') }}
                     </a>
                 </p>
 
             </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p><a href="{!!   URL::action('InviteController@create',  $tournament->slug) !!}" type="button"
+                      class="btn btn-primary btn-labeled btn-xlg" style="width: 100%"><b>
+                            <i class="icon-envelope"></i></b>{{ trans('core.invite_competitors_with_email') }}
+                    </a>
+                </p>
+
+            </div>
+
         </div>
     @endcan
     <br/>
