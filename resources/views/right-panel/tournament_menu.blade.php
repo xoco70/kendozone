@@ -134,17 +134,19 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                        alt="{{ trans('core.share_to_facebook') }}">
                         <img src="/images/brands/facebook.png" class="img-circle img-xs"
                              alt="{{ trans('core.share_to_facebook') }}"/></a>
-                    <a href="https://twitter.com/intent/tweet?url={{ URL::action('TournamentController@show',$tournament->slug) }}&text={{trans('core.check_the_tournament')}}{{ $tournament->name }}" title="{{ trans('core.share_to_twitter') }}" alt="{{ trans('core.share_to_twitter') }}">
+                    <a href="https://twitter.com/intent/tweet?url={{ URL::action('TournamentController@show',$tournament->slug) }}&text={{trans('core.check_the_tournament')}}{{ $tournament->name }}"
+                       title="{{ trans('core.share_to_twitter') }}" alt="{{ trans('core.share_to_twitter') }}">
                         <img src="/images/brands/twitter.png" class="img-circle img-xs twitter-share-button"
                              alt="{{ trans('core.share_to_twitter') }}"/></a>
-                    <a href="#" title="{{ trans('core.share_to_googleplus') }}"
-                       alt="{{ trans('core.share_to_googleplus') }}">
+                    <a href="https://plus.google.com/share?url={!! URL::action('TournamentController@show',$tournament->slug) !!}" title="{{ trans('core.share_to_googleplus') }}"
+                       alt="{{ trans('core.share_to_googleplus') }}"
+                       onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                         <img src="/images/brands/googleplus.png" class="img-circle img-xs"
                              alt="{{ trans('core.share_to_googleplus') }}"></a>
                 </div>
             </div>
-            <input value="{{ URL::action('TournamentController@show',$tournament->slug) }}"
-                   class="p-10 full-width">
+            <input value="{{ URL::action('TournamentController@show',$tournament->slug) }}" class="p-10 full-width">
         </div>
     </div>
 
