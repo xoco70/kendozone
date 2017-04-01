@@ -13,6 +13,7 @@ use App\Tournament;
 use App\TournamentLevel;
 use App\Venue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
@@ -221,11 +222,15 @@ class TournamentController extends Controller
             return redirect(URL::action('Auth\LoginController@login'));
         }
         if ($tournament->isOpen()) {
+            if (Auth::check()) {
+                App::setLocale(Auth::user()->locale);
+            }
+
             $grades = Grade::getAllPlucked();
             $tournament = Tournament::with('championships.category', 'championships.users')->find($tournament->id);
-//            dd($tournament);
             return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
         }
+
         throw new InvitationNeededException();
     }
 
