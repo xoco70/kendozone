@@ -32,12 +32,7 @@
                         </td>
                     </tr>
                 @endforeach
-
             </table>
-            <div align="right">
-                <a class="text-uppercase text-nav align-bottom-right-15"
-                   href="{!! URL::to('tournaments')!!}">+ {{trans('core.see_more')}}</a>
-            </div>
         @endif
     </div>
 </div>
