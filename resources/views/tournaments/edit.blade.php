@@ -112,7 +112,7 @@
         $("a").on('click', function () {
 
             let href = $(this).attr('href');
-            if (href != null) {
+            if (href.indexOf('#') != -1) {
                 let id = href.replace("#", "");
                 if ($("a[data-toggle='tab'][id='" + id + "']")) {
                     $("#" + id).click();
