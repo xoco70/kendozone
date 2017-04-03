@@ -4,27 +4,24 @@ namespace App;
 
 class Team extends \Xoco70\KendoTournaments\Models\Team
 {
-
-    protected $table = 'team';
-    public $timestamps = true;
-    protected $fillable = ['name', 'championship_id'];
-
-    /**
-     * A Team belongs to a Championship
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function championship()
+    protected static function boot()
     {
-        return $this->belongsTo(Championship::class);
+        parent::boot();
+        static::deleting(function ($team) {
+//            $championship = $team->championship;
+            // Select team that id > current deleted team and that belongs to championship
+            $teams = Team::where('championship_id', $team->championship_id)
+                ->where('id', '>', $team->id)->get();
+
+            foreach ($teams as $team){
+                $team->short_id--;
+                $team->save();
+            }
+
+        });
+
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function category()
-    {
-        return $this->hasManyThrough(Category::class, Championship::class);
-    }
     /**
      * Get all Invitations that belongs to a team
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
