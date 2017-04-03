@@ -36,13 +36,18 @@
             @include('layouts.scoresheets.header', ['championship'=>$championship, 'group'=> $group])
 
 
+            @if (sizeof($fighters) == 2)
+                @include('layouts.scoresheets.competitors_direct_elimination', ['fighters'=>$fighters, 'group'=> $group])
+                <hr/>
+            @else
+                @include('layouts.scoresheets.competitors', ['fighters'=>$fighters, 'group'=> $group])
+                <hr/>
+                @include('layouts.scoresheets.playoff', ['group'=> $group])
+            @endif
 
-            @include('layouts.scoresheets.competitors', ['fighters'=>$fighters, 'group'=> $group])
 
             {{--End Points--}}
-            <hr/>
 
-            @include('layouts.scoresheets.playoff', ['group'=> $group])
 
         </div>
     </div>

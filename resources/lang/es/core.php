@@ -331,6 +331,7 @@ return [
     // Score Sheet
     'scoresheet' => 'Hoja de combate | Hojas de combate',
     'championship' => 'Categoría',
+    'combat' => 'Shiai',
     'shiajo' => 'Shiajo',
     'group' => 'Grupo',
     'writer' => 'Escritor',
@@ -340,5 +341,10 @@ return [
     'clasify' => 'Clasifica',
     'time' => 'Tiempo',
     'table_leader' => 'Líder de mesa',
-    'still_no_scoresheet' => 'Aún no hay hojas de combates generadas'
+    'still_no_scoresheet' => 'Aún no hay hojas de combates generadas',
+    'penalization' => 'Hans.',
+    'point' => 'Point',
+    'red' => 'Rojo',
+    'white' => 'Blanco',
+    'winner' => 'Vencedor',
 ];
