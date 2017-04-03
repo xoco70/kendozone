@@ -36,7 +36,7 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable,HasApiTokens;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens;
 
 
     /**
@@ -429,10 +429,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * @param $firstname
+     * @param $lastname
+     */
+    public function updateUserFullName($firstname, $lastname)
+    {
+        Auth::user()->firstname = $firstname;
+        Auth::user()->lastname = $lastname;
+        Auth::user()->save();
+    }
+
+    /**
      * @param $attributes
      * @return static $user
      */
-    public static function registerUserToCategory($attributes)
+    public
+    static function registerUserToCategory($attributes)
     {
         $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
 
@@ -457,7 +469,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $user;
     }
 
-    public static function fillSelect()
+    public
+    static function fillSelect()
     {
 
         $users = new Collection();
@@ -473,7 +486,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $users;
     }
 
-    public static function getClubPresidentsList(){
+    public
+    static function getClubPresidentsList()
+    {
         $users = new Collection();
         if (Auth::user()->isSuperAdmin()) {
             $users = User::pluck('name', 'id');
@@ -482,22 +497,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
             $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $users = User::where('id',Auth::user()->id)->pluck('name', 'id')->prepend('-', 0);
+            $users = User::where('id', Auth::user()->id)->pluck('name', 'id')->prepend('-', 0);
         }
         return $users;
 
     }
-    public function isRegisteredTo(Tournament $tournament){
+
+    public
+    function isRegisteredTo(Tournament $tournament)
+    {
         $championships = $tournament->championships;
         $ids = $championships->map(function ($item, $key) {
             return $item->id;
         })->toArray();
 
-        $isRegistered = Competitor::where('user_id',$this->id)
-            ->whereIn('championship_id',$ids)
+        $isRegistered = Competitor::where('user_id', $this->id)
+            ->whereIn('championship_id', $ids)
             ->get();
 
-        return sizeof($isRegistered)>0;
+        return sizeof($isRegistered) > 0;
     }
 
 }

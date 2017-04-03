@@ -319,6 +319,7 @@ return [
 
 
     'register_in_tournament' => 'Register in tournament',
+    'confirm_name' => 'Confirm your full name',
     'about' => "About Kendozone",
 
     'share_to_facebook' => 'Share to Facebook',

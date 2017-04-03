@@ -321,6 +321,7 @@ return [
 
     'register_in_tournament' => 'Registrate en el torneo',
     'about' => "Acerca de Kendozone",
+    'confirm_name' => 'Confirma tu nombre completo',
 
     'share_to_facebook' => 'Compartir en Facebook',
     'share_to_twitter' => 'Compartir en Twitter',

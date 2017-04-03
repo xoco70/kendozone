@@ -24,6 +24,18 @@ $i = 0;
 
                 <div class="panel-body">
                     <div class="container-fluid">
+                        <legend class="text-semibold">{{trans('core.confirm_name')}}</legend>
+                        <div class="row mb-20">
+                            <div class="col-md-6">
+                                {!!  Form::label('firstname', trans('core.firstname')) !!}
+                                {!!  Form::input('text', 'firstname', Auth::user()->firstname, ['class' => 'form-control ', 'required']) !!}
+
+                            </div>
+                            <div class="col-md-6">
+                                {!!  Form::label('lastname', trans('core.lastname')) !!}
+                                {!!  Form::input('text', 'lastname', Auth::user()->lastname, ['class' => 'form-control', 'required']) !!}
+                            </div>
+                        </div>
                         <legend class="text-semibold">{{trans('core.select_categories_to_register')}}</legend>
 
 
@@ -38,7 +50,7 @@ $i = 0;
                                     {!!   Form::checkbox('cat['.$championship->id.']',
                                         $championship->id,
                                         $championship->users()->where('users.id',Auth::user()->id)->count(),
-                                         ['class' => 'switch', 'data-on-text'=>"Si", 'data-off-text'=>"No" ]) !!}
+                                         ['class' => 'switch', 'data-on-text'=> trans('core.yes'), 'data-off-text'=>trans('core.no') ]) !!}
 
                                 </div>
 

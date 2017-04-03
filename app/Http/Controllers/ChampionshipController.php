@@ -106,6 +106,8 @@ class ChampionshipController extends Controller
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
             if ($categories != null){
+                Auth::user()->updateUserFullName($request->firstname,$request->lastname);
+
                 $user->championships()->sync($categories);
                 $tournament->owner->notify(new RegisteredToChampionship($user, $tournament));
             }else{
