@@ -62,9 +62,9 @@ mix.combine([
 
 
 
-mix.combine([
-    'resources/assets/js/plugins/tables/footable/footable.min.js'
-], 'public/js/pages/header/footable.js');
+// mix.combine([
+//     'resources/assets/js/plugins/tables/footable/footable.min.js'
+// ], 'public/js/pages/header/footable.js');
 
 mix.combine([
     'resources/assets/js/components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
