@@ -231,6 +231,8 @@ return [
     'participations' => 'Participacions',
     'past' => 'Past',
     'next' => 'Next',
+    'red' => 'Red',
+    'white' => 'White',
 
 
     // Logs
@@ -331,6 +333,7 @@ return [
     'scoresheet' => 'Scoring Sheet | Scoring Sheets',
     'championship' => 'Championship',
     'shiajo' => 'Shiajo',
+    'combat' => 'Shiai',
     'group' => 'Group',
     'writer' => 'Writer',
     'playoff' => 'Play off',
@@ -339,5 +342,9 @@ return [
     'clasify' => 'Clasify',
     'time' => 'Time',
     'table_leader' => 'Table Leader',
-    'still_no_scoresheet' => 'Still no Score sheet generated'
+    'still_no_scoresheet' => 'Still no Score sheet generated',
+    'penalization' => 'Hans.',
+    'point' => 'Point',
+    'winner' => 'Winner',
+
 ];
