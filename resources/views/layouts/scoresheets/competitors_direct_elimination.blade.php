@@ -1,9 +1,9 @@
-<u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->id }}</strong></p></u>
+<br/><u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->id }}</strong></p></u>
 
 <table align="center" width="100%">
     <tr >
-        <td colspan="6" align="center" class="border-bottom m-10 p-20">{{trans('core.red')  }}</td>
-        <td colspan="6" align="center" class="border-bottom m-10 p-20">{{trans('core.white')  }}</td>
+        <td colspan="6" align="center" class="border-bottom">{{trans('core.red')  }}</td>
+        <td colspan="6" align="center" class="border-bottom">{{trans('core.white')  }}</td>
     </tr>
     <tr>
         <td colspan="12">&nbsp;</td>
@@ -36,17 +36,17 @@
             {!!  Form::text('hansoku_c1', '', ['class' => 'form-control']) !!}
         </td>
         <td align="center" width="5%">
-            {!!  Form::select('point1_c1', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}        </td>
+            {!!  Form::select('point1_c1', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control ']) !!}        </td>
         <td align="center" width="5%">
-            {!!  Form::select('point2_c1', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}        </td>
+            {!!  Form::select('point2_c1', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control ']) !!}        </td>
         <td align="center" width="5%">
             -
         </td>
         <td align="center" width="5%">
-            {!!  Form::select('point2_c2', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}        </td>
+            {!!  Form::select('point2_c2', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control ']) !!}        </td>
 
         <td align="center" width="5%">
-            {!!  Form::select('point1_c2', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control  sheet_point ', 'align' => 'left']) !!}
+            {!!  Form::select('point1_c2', ['' => '', 'K' => "Kote",'M'=> "Men",'D' => "Do",'T' => "Tsuki",'H'=> "Hansoku"], '', ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="10%">
             {!!  Form::text('hansoku_c2', '', ['class' => 'form-control']) !!}
@@ -69,13 +69,13 @@
     {{--@endforeach--}}
 </table>
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-xs-5">
         {!!  Form::text('winner','', ['class' => 'form-control']) !!}
         {!!  Form::label('winner',  trans('core.winner'),['class' => 'text-bold']) !!}
 
     </div>
 
-    <div class="col-sm-4 col-sm-offset-2">
+    <div class="col-xs-5 col-xs-offset-2">
         <div class="form-group">
             {!!  Form::text('leader','', ['class' => 'form-control']) !!}
             {!!  Form::label('leader',  trans('core.table_leader'),['class' => 'text-bold']) !!}

@@ -14,8 +14,7 @@
                 ?>
                 <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
 
-                <hr/>
-                <br/>
+                <hr/><br/>
 
                 @include('layouts.scoresheets.header', ['championship'=>$championship, 'group'=> $group])
 
@@ -37,21 +36,13 @@
                             @include('layouts.scoresheets.competitors_direct_elimination', ['fighters'=>$fighters, 'group'=> $group])
                         @endif
                     @endfor
-
-
-
                     <hr/>
                 @else
                     @include('layouts.scoresheets.competitors', ['fighters'=>$fighters, 'group'=> $group])
                     <hr/>
                     @include('layouts.scoresheets.playoff', ['group'=> $group])
                 @endif
-
-
-
                 {{--End Points--}}
-
-
             </div>
         </div>
     </div>

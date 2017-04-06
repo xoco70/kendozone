@@ -39,14 +39,28 @@ class PdfController extends Controller
     {
         $layout = 'pdf.scoresheets.sheet';
         // Get all data
-        $championship = Championship::with('fightersGroups', 'settings', 'category')->find($request->championship);
+        $championship = Championship::with('fightersGroups.championship.category',
+            'settings',
+            'category',
+            'fightersGroups.championship.category', // TODO This is not good
+            'fightersGroups.teams',
+            'fightersGroups.competitors',
+            'fightersGroups.fights.group.championship.category', // TODO This is not good
+            'fightersGroups.fights.competitor1',
+            'fightersGroups.fights.competitor2',
+            'fightersGroups.fights.team1',
+            'fightersGroups.fights.team2'
+        )->find($request->championship);
+
+
+
         $tournament = $championship->tournament;
 
         // Generate PDF
         $file = 'scoreSheet-' . $championship->buildName();
         $file = sanitize($file) . '.pdf';
 
-                return view($layout, compact('championship','tournament'));
+//                return view($layout, compact('championship','tournament'));
         $pdf = PDF::loadView($layout, ['championship' => $championship, 'tournament' => $tournament]);
         return $pdf->inline($file);
 
