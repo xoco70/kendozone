@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
@@ -36,7 +37,7 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens,Impersonate;
 
 
     /**
@@ -518,4 +519,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return sizeof($isRegistered) > 0;
     }
 
+    /**
+     * @return bool
+     */
+    public function canImpersonate()
+    {
+        return $this->isSuperAdmin();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        return $this->isSuperAdmin();
+    }
 }

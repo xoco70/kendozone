@@ -18,10 +18,22 @@
                 <i class="icon-lock5"></i>Tokens
             </a>
         </li>
+
+        <li><a href="{!! route('impersonate.create')!!}">
+                <i class="icon-user-plus"></i> {!! Lang::get('core.impersonate') !!}
+            </a>
+        </li>
+
+
     @endif
+    @impersonating
+    <li>
+        <a href="{{ route('impersonate.leave') }}"><i class="icon-user-cancel"></i>{{ trans('core.leave_impersonation') }}</a>
+    </li>
+    @endImpersonating
     {{--<li><a href="{!! URL::to('about')!!}">--}}
-            {{--<i class="icon-help"></i>{{trans('core.about')}}--}}
-        {{--</a>--}}
+    {{--<i class="icon-help"></i>{{trans('core.about')}}--}}
+    {{--</a>--}}
     {{--</li>--}}
     {{--====================================== Logout ======================================--}}
     <li class="divider"></li>

@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 //Auth::loginUsingId(3524); // 6 Admin, 5 User
 
 Auth::routes();
+Route::impersonate();
+Route::get('/impersonate/create', 'ImpersonateController@create')->name('impersonate.create');
+Route::post('/impersonate/store', 'ImpersonateController@store')->name('impersonate.store');
+
+
 Route::get('/test', function(){
     return view('test');
 });

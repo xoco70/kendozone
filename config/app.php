@@ -185,6 +185,8 @@ return [
         Laravolt\Avatar\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
+
 
 
         /*

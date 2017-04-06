@@ -246,6 +246,9 @@ return [
     'new_value' => 'New Value',
 
 
+    'impersonate' => 'Impersonate User',
+    'leave_impersonation' => 'Leave impersonation',
+
     // Teams
 
     'team' => 'Team|Teams',

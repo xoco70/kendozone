@@ -243,6 +243,8 @@ return [
     'old_value' => 'Antiguo',
     'new_value' => 'Nuevo',
 
+    'impersonate' => 'Asumir Usuario',
+    'leave_impersonation' => 'Dejar Usuario',
 
     // Teams
 

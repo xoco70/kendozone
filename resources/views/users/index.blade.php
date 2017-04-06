@@ -58,6 +58,12 @@
                         <td>{{ $user->federation != null ? trans($user->federation->name) : " - "}}</td>
                         <td>{{ $user->association != null ? trans($user->association->name) : " - " }}</td>
                         <td class="text-center">
+
+                            {!! Form::open(['method' => 'POST', 'action' => ['ImpersonateController@store', "id" => $user->id], 'style'=>"display: inline-block"]) !!}
+                            {!! Form::button( '<i class="icon icon-user-plus"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat'] ) !!}
+                            {!! Form::close() !!}
+
+
                             <a href="{{URL::action('UserController@edit', $user->slug)}}">
                                 <i class="icon icon-pencil7"></i></a>
                             {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteUser', 'action' => ['UserController@destroy', $user->slug], 'style'=>"display: inline-block"]) !!}
