@@ -1,6 +1,11 @@
-
+*{
+    margin:0!important;
+    padding: 0!important;
+}
 body {
     background-color: #FFF !important;
+    margin:0;
+    padding: 0;
 }
 
 .panel {
@@ -18,10 +23,10 @@ div.page_print {
     margin-top: 40px;
 }
 
-.sheet-header {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+/*.sheet-header {*/
+/*margin-top: 20px;*/
+/*margin-bottom: 20px;*/
+/*}*/
 
 .row-fighter {
     margin-bottom: 35px;
