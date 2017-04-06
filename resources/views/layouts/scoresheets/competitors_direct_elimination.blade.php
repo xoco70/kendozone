@@ -1,8 +1,12 @@
 <u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->id }}</strong></p></u>
+
 <table align="center" width="100%">
+    <tr >
+        <td colspan="6" align="center" class="border-bottom m-10 p-20">{{trans('core.red')  }}</td>
+        <td colspan="6" align="center" class="border-bottom m-10 p-20">{{trans('core.white')  }}</td>
+    </tr>
     <tr>
-        <td>{{trans('core.red')  }}</td>
-        <td>{{trans('core.white')  }}</td>
+        <td colspan="12">&nbsp;</td>
     </tr>
     <tr>
         {{--        <td align="center" width="5%">{{  trans('core.points_abrev') }} </td>--}}
@@ -23,10 +27,10 @@
     {{--@foreach($group->fights as $fight)--}}
     <tr>
         <td align="center" width="5%">
-            {!!  Form::text('id', $group->fights[0]->getFighter2ShortId($group), ['class' => 'form-control ']) !!}
+            {!!  Form::text('id', $group->fights[0]->getFighter1ShortId(), ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="20%">
-            {!!  Form::text('name', $group->fights[0]->getFighter1Name($group), ['class' => 'form-control']) !!}
+            {!!  Form::text('name', $group->fights[0]->getFighter1Name(), ['class' => 'form-control']) !!}
         </td>
         <td align="center" width="10%">
             {!!  Form::text('hansoku_c1', '', ['class' => 'form-control']) !!}
@@ -49,14 +53,14 @@
         </td>
 
         <td align="center" width="20%">
-            {!!  Form::text('name', $group->fights[0]->getFighter2Name($group), ['class' => 'form-control']) !!}
+            {!!  Form::text('name', $group->fights[0]->getFighter2Name(), ['class' => 'form-control']) !!}
         </td>
 
         <td align="center" width="5%">
             {!!  Form::text('time', '', ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="5%">
-            {!!  Form::text('id', $group->fights[0]->getFighter2ShortId($group), ['class' => 'form-control ']) !!}
+            {!!  Form::text('id', $group->fights[0]->getFighter2ShortId(), ['class' => 'form-control ']) !!}
         </td>
     </tr>
     <tr class="spacer">
@@ -78,3 +82,4 @@
         </div>
     </div>
 </div>
+<hr/>

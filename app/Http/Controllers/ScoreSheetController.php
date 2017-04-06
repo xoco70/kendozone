@@ -16,9 +16,18 @@ class ScoreSheetController extends Controller
     {
         $tournament = Tournament::with(
             'championships.category',
-                     'championships.fightersGroups',
-                     'championships.fightersGroups.teams',
-                     'championships.fightersGroups.competitors'
+//            'championships.teams',
+//            'championships.competitors',
+            'championships.settings',
+            'championships.fightersGroups.championship.category', // TODO This is not good
+            'championships.fightersGroups.teams',
+            'championships.fightersGroups.competitors',
+            'championships.fightersGroups.fights.group.championship.category', // TODO This is not good
+            'championships.fightersGroups.fights.competitor1',
+            'championships.fightersGroups.fights.competitor2',
+            'championships.fightersGroups.fights.team1',
+            'championships.fightersGroups.fights.team2'
+
         )->where('slug', $tournamentSlug)->first();
 
 

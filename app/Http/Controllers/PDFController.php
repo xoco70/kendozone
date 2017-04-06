@@ -46,7 +46,7 @@ class PdfController extends Controller
         $file = 'scoreSheet-' . $championship->buildName();
         $file = sanitize($file) . '.pdf';
 
-//                return view($layout, compact('championship','tournament'));
+                return view($layout, compact('championship','tournament'));
         $pdf = PDF::loadView($layout, ['championship' => $championship, 'tournament' => $tournament]);
         return $pdf->inline($file);
 
