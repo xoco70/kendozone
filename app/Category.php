@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
 class Category extends \Xoco70\KendoTournaments\Models\Category
 {
 
@@ -120,5 +123,26 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
     public function scopeIsTeam($query)
     {
         return $query->where('isTeam', 1);
+    }
+
+
+    public function buildName()
+    {
+
+        if (Auth::check()) {
+            App::setLocale(Auth::user()->locale);
+        }
+        $genders = [
+            'M' => trans('categories.male'),
+            'F' => trans('categories.female'),
+            'X' => trans('categories.mixt')
+        ];
+
+
+        $teamText = $this->isTeam() ? trans_choice('core.team', 1) : trans('categories.single');
+        $ageCategoryText = $this->getAgeString();
+        $gradeText = $this->getGradeString();
+
+        return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
     }
 }
