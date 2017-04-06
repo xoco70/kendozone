@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d8e2119ef9c870557f99db28a56959b",
+    "content-hash": "b632f28d6fc0635bf55b71aee44dab6e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1193,6 +1193,47 @@
                 "wkhtmltopdf"
             ],
             "time": "2015-11-17T13:16:27+00:00"
+        },
+        {
+            "name": "lab404/laravel-impersonate",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/404labfr/laravel-impersonate.git",
+                "reference": "c0480f3dec85db5ef74a8b32cf88fe62cdf514a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/c0480f3dec85db5ef74a8b32cf88fe62cdf514a8",
+                "reference": "c0480f3dec85db5ef74a8b32cf88fe62cdf514a8",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.4.*"
+            },
+            "require-dev": {
+                "orchestra/database": "~3.4.0",
+                "orchestra/testbench": "~3.4.0",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lab404\\Impersonate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "404lab",
+                    "email": "web@404lab.fr"
+                }
+            ],
+            "description": "Laravel Impersonate is a plugin that allows to you to authenticate as your users.",
+            "time": "2017-04-05T10:02:16+00:00"
         },
         {
             "name": "laravel/browser-kit-testing",
