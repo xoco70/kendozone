@@ -11,15 +11,19 @@
     </tr>
     @foreach($group->fights as $fight)
         <tr>
-            <td align="center"
-                width="5%">{!!  Form::text('point', '', ['class' => 'form-control ']) !!}</td>
-            <td align="center"
-                width="20%">{!!  Form::text('id', $fight->competitor1 != null ? $fight->competitor1->short_id : '', ['class' => 'form-control']) !!}</td>
+            <td align="center" width="5%">
+                {!!  Form::text('point', '', ['class' => 'form-control ']) !!}
+            </td>
+            <td align="center" width="20%">
+                {!!  Form::text('id', $fight->getFighter1ShortId() , ['class' => 'form-control']) !!}
+            </td>
             <td align="center" width="5%"><strong>x</strong></td>
-            <td align="center"
-                width="20%">{!!  Form::text('id', $fight->competitor2 != null ? $fight->competitor2->short_id : '', ['class' => 'form-control']) !!}</td>
-            <td align="center"
-                width="5%">{!!  Form::text('point', '', ['class' => 'form-control ']) !!}</td>
+            <td align="center" width="20%">
+                {!!  Form::text('id', $fight->getFighter2ShortId(), ['class' => 'form-control']) !!}
+            </td>
+            <td align="center" width="5%">
+                {!!  Form::text('point', '', ['class' => 'form-control ']) !!}
+            </td>
             <td align="center" width="5%">&nbsp;</td>
             <td align="center"
                 width="5%">{!!  Form::text('time', '', ['class' => 'form-control ']) !!}</td>
