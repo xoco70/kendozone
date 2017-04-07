@@ -16,9 +16,9 @@
 
                             @foreach($championship->firstRoundFights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered text-center">
-                                    <th class="p-10" >Id</th>
-                                    <th class="p-10" >{{trans_choice('core.competitor',1)}} 1</th>
-                                    <th class="p-10" >{{trans_choice('core.competitor',1)}} 2</th>
+                                    <th class="p-10">Id</th>
+                                    <th class="p-10">{{trans_choice('core.competitor',1)}} 1</th>
+                                    <th class="p-10">{{trans_choice('core.competitor',1)}} 2</th>
 
                                     @foreach($fightsByArea->sortBy('id') as $id => $fight)
 
@@ -35,13 +35,15 @@
 
                                         ?>
 
-
+                                        @if (!($fight->group->round == 1 && ($fighter1=="BYE" || $fighter2=="BYE" )))
                                         <tr>
                                             <td class="p-10">{{$id + 1}}</td>
                                             <td class="p-10">{{ $fighter1 }}</td>
                                             <td class="p-10">{{ $fighter2 }}</td>
                                         </tr>
+                                        @endif
                                     @endforeach
+
                                 </table>
                                 <br/>
                             @endforeach
