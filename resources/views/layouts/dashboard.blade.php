@@ -12,8 +12,8 @@
     $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
     $title = '
         <title> ' . $appName . ' </title>
-        <link rel="shortcut icon" href="/favicon_kz-01.png" />
-        <link rel="apple-touch-icon" href="/favicon_kz-01.png" />
+        <link rel="shortcut icon" href="{{ asset(\"favicon_kz-01.png\")}}" />
+        <link rel="apple-touch-icon" href="{{ asset(\"favicon_kz-01.png\")}}" />
 
         <meta property="og:title" content="Create Online Kendo Tournament in instants" />
         <meta name="twitter:title" content="Kendozone - Create Online Kendo Tournaments in instants" />
@@ -53,42 +53,29 @@
     @yield('styles')
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs  has-detached-right navbar-top">
+<body class="sidebar-xs has-detached-right navbar-top">
 @if (Auth::check())
     @include('layouts.headmenu')
 @endif
 <!-- Page container -->
 <div class="page-container">
-
     <!-- Page content -->
     <div class="page-content">
     @if (Auth::check())
         @include('layouts.sidemenu')
     @endif
-
     <!-- Main content -->
         <div class="content-wrapper">
-
-
             <!-- Content area -->
-
             <div class="content">
-                {{--<a href="{{ URL::action('TournamentController@create') }}"--}}
-                {{--class="create-tournament navbar-right btn border-primary text-primary btn-flat border-4">{{ trans('core.createTournament') }}--}}
-                {{--</a>--}}
-
                 @yield('content')
                 @include('layouts.footer')
             </div>
-
             <!-- /content area -->
-
         </div>
         <!-- /main content -->
-
     </div>
     <!-- /page content -->
-
 </div>
 <!-- /page container -->
 <script>

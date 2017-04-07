@@ -94,7 +94,7 @@ mix.combine([
 
 mix.combine([
     'resources/assets/js/plugins/ui/nicescroll.min.js',
-    'resources/assets/js/sidebar_detached_sticky_custom.js',
+    // 'resources/assets/js/sidebar_detached_sticky_custom.js',
     'resources/assets/js/plugins/forms/inputs/duallistbox.min.js',
     'resources/assets/js/components/jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js',
     'resources/assets/js/plugins/pickers/pickadate/picker.js',
