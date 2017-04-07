@@ -54,8 +54,9 @@
                                         <div class="content-divider text-muted form-group">
                                             <span>{{  trans('core.or') }}</span></div>
                                         <p align="center">
-                                            <strong> {{ trans('core.bulk_upload') }} - <a
-                                                        href="{{ url('layouts/invitations.csv') }}">{{ trans('core.download_layout') }}</a></strong><br/><br/>
+                                            <strong> {{ trans('core.bulk_upload') }} -
+                                                <a href="{{ url('layouts/invitations.csv') }}">{{ trans('core.download_layout') }}</a>
+                                            </strong><br/><br/>
 
 
                                             {!! Form::open(['url'=>URL::action('InviteController@upload'),'enctype' => 'multipart/form-data','id' => 'invites']) !!}
@@ -65,34 +66,29 @@
                                                 {{ trans('core.how_to_save_to_csv') }}<br></span>
                                             {!!  Form::hidden('tournamentSlug', $tournament->slug) !!}
                                             {!! Form::close()!!}
-
-
                                         </p>
-
-
                                     </div>
-
-
                                 </fieldset>
-
-
                             </div>
                         </div>
                         <!-- /detached content -->
-
                     </div>
                 </div>
-
             </div>
             <!-- /content area -->
-
-
         </div>
-
     </div>
 @stop
 @section('scripts_footer')
+    <script>
+        var registerDateLimit = "{{ $tournament->registerDateLimit }}";
+        var url_edit = "{{ URL::action('TournamentController@edit', $tournament->slug) }}";
+        var  tournament_date_is_in_the_past_title= "{{ trans('msg.tournament_date_is_in_the_past_title') }}"
+        var  tournament_date_is_in_the_past_text= "{{ trans('msg.tournament_date_is_in_the_past_text') }}"
+    </script>
     {!! Html::script('js/pages/header/tournamentInvite.js') !!}
+
+
     <script>
         $('#recipients').multiple_emails({
             position: 'top', // Display the added emails above the input

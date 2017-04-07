@@ -37,7 +37,7 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens,Impersonate;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens, Impersonate;
 
 
     /**
@@ -504,8 +504,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-    public
-    function isRegisteredTo(Tournament $tournament)
+    public function isRegisteredTo(Tournament $tournament)
     {
         $championships = $tournament->championships;
         $ids = $championships->map(function ($item, $key) {
@@ -533,5 +532,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function canBeImpersonated()
     {
         return $this->isSuperAdmin();
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->firstname ?? '' . " " . $this->lastname ?? '';
     }
 }

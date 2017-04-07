@@ -62,6 +62,9 @@ return [
     'email_not_valid' => 'El email :email no esta válido. Operación Cancelada',
     'tx_for_register_tournament' => 'Gracias por registrarte al torneo :tournament',
 
+    'tournament_date_is_in_the_past_title' => 'La Fecha Límite de Registro ya pasó',
+    'tournament_date_is_in_the_past_text' => 'Por favor, cambiala a un día futuro',
+
     // Permisos
     'access_denied' => 'No tiene acceso a esta secci&oacute;n',
 

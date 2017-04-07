@@ -63,6 +63,9 @@ return [
     'tx_for_register_tournament' => 'Thanks for register tournament :tournament',
     // Permisos
     'access_denied' => 'Access Denied',
+    'tournament_date_is_in_the_past_title' => 'The Deadline Registration Date is past due',
+    'tournament_date_is_in_the_past_text' => 'Please change the Deadline Registration Date to a future day',
+
 
 
     // Federation

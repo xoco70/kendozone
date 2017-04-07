@@ -141,6 +141,9 @@ mix.combine([
     'resources/assets/js/plugins/multiple-emails.js',
     'resources/assets/js/plugins/uploaders/fileinput.min.js',
     'resources/assets/js/pages/uploader_bootstrap.js',
+    'resources/assets/js/pages/footer/invites.js',
+    'resources/assets/js/components/sweetalert/dist/sweetalert.min.js',
+
 ], 'public/js/pages/header/tournamentInvite.js');
 
 mix.combine([
