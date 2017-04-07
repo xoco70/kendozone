@@ -4,24 +4,20 @@
     <div class="row">
         @if ($championship->category->isTeam)
             <div class="col-md-2">
-                {!!  Form::label('teamSize', trans('categories.teamSize'),['class' => 'text-bold ' ]) !!}<br/>
+                <strong>{{ trans('categories.teamSize') }}</strong>
                 {{ $setting->teamSize }}
             </div>
         @endif
         <div class="col-md-2">
-
-            {!!  Form::label('fightDuration', trans('categories.fightDuration'),['class' => 'text-bold ' ]) !!}
+            <strong>{{ trans('categories.fightDuration') }}</strong>
             <br/>
             {{ $setting->fightDuration }}
 
         </div>
         <div class="col-md-5">
-            <div class="">
-                {!!  Form::label('fightingAreas', trans_choice('categories.fightingArea',2),['class' => 'text-bold ' ]) !!}
-                <br/>
-                {{ $setting->fightingAreas }}
-
-            </div>
+            <strong>{{  trans_choice('categories.fightingArea',2) }}</strong>
+            <br/>
+            {{ $setting->fightingAreas }}
 
         </div>
     </div>
@@ -29,28 +25,18 @@
 
     <div class="row">
         <div class="col-md-2">
-
-            <label>
-
-                {!!  Form::label('hasEncho', trans('categories.hasEncho'),['class' => 'text-bold ' ]) !!} <br/>
-                {{ $setting->hasEncho ? trans('core.yes') : trans('core.no') }}
-
-            </label>
-
+            <strong>{{ trans('categories.hasEncho') }}</strong>
+            {{ $setting->hasEncho ? trans('core.yes') : trans('core.no') }}
         </div>
         <div class="col-md-5">
-            <div class="form-group">
-                {!!  Form::label('enchoQty', trans('categories.enchoQty'),['class' => 'text-bold ' ]) !!}
-                <br/>
-                {{ $setting->enchoQty }}
-            </div>
+            <strong>{{ trans('categories.enchoQty') }}</strong>
+            <br/>
+            {{ $setting->enchoQty }}
         </div>
         <div class="col-md-5">
+            <strong>{{ trans('categories.enchoDuration') }}</strong>
 
-            {!!  Form::label('enchoDuration', trans('categories.enchoDuration'),['class' => 'text-bold ' ]) !!}
-            <div class="input-group ">
-                {{ $setting->enchoDuration }}
-            </div>
+            {{ $setting->enchoDuration }}
 
 
         </div>
@@ -58,46 +44,26 @@
     <hr/>
     <div class="row">
         <div class="col-md-2">
-            <div class="form-group   ">
-                <label>
-
-                    {!!  Form::label('hasPreliminary', trans('categories.hasPreliminary'),['class' => 'text-bold ' ]) !!}
-                    <br/>
-                    {{ $setting->hasPreliminary ? trans('core.yes') : trans('core.no')}}
-
-
-                </label>
-            </div>
+            <strong>{{ trans('categories.hasPreliminary') }}</strong>
+            <br/>
+            {{ $setting->hasPreliminary ? trans('core.yes') : trans('core.no')}}
         </div>
         <div class="col-md-5">
-            <div class="form-group">
-                {!!  Form::label('preliminaryWinner', trans('categories.preliminaryWinner'),['class' => 'text-bold ' ]) !!}
-                <br/>
-                {{ $setting->preliminaryWinner }}
-
-            </div>
+            <strong>{{ trans('categories.preliminaryWinner') }}</strong>
+            <br/>
+            {{ $setting->preliminaryWinner }}
         </div>
         <div class="col-md-5">
-            <div class="form-group">
-                {!!  Form::label('cost', trans('categories.cost'). ' ('. $currency  .')' ) !!}
-                <br/>
-
-                {{ $setting->cost }}
-
-            </div>
+            <strong>{{ trans('categories.cost') }}</strong>
+            <br/>
+            {{ $setting->cost }}
         </div>
     </div>
     <hr/>
     <div class="row">
         <div class="col-md-2">
-            <div class="form-group  ">
-                <label>
-
-                    {!!  Form::label('hasHantei', trans('categories.hasHantei'),['class' => 'text-bold ' ]) !!} <br/>
-                    {{ $setting->hasHantei ? trans('core.yes') : trans('core.no')}}
-
-                </label>
-            </div>
+            <strong>{{ trans('categories.hasHantei') }}</strong>
+            {{ $setting->hasHantei ? trans('core.yes') : trans('core.no')}}
         </div>
 
     </div>
