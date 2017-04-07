@@ -11,47 +11,34 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!!  Form::label('name', trans('core.name'),['class' => 'text-bold ' ]) !!}
+                                <strong>{{ trans('core.name') }}</strong>
                                 <br/>
                                 {{ $tournament->name }}
-
-
                             </div>
 
                         </div>
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                {!!  Form::label('level_id', trans('core.level'),['class' => 'text-bold' ]) !!}
+                                <strong>{{ trans('core.level') }}</strong>
                                 <br/>
                                 {{ $tournament->level->name }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            {!!  Form::label('date', trans('core.eventDate'),['class' => 'text-bold' ]) !!}
-                            {{--<br/>--}}
-
-
-                            <div class="input-group">
-                                {{ $tournament->dateIni }} / {{ $tournament->dateFin }}
-                            </div>
-
-
+                        <div class="col-md-4">
+                            <strong>{{ trans('core.eventDate') }}</strong>
+                            <br/>
+                            {{ $tournament->dateIni }} / {{ $tournament->dateFin }}
                         </div>
 
 
                         <div class="col-md-3">
                             @if ($tournament->registerDateLimit!= null && $tournament->registerDateLimit!= '0000-00-00')
-                                {!!  Form::label('registerDateLimit', trans('core.limitDateRegistration'),['class' => 'text-bold' ]) !!}
+                                <strong>{{ trans('core.limitDateRegistration') }}</strong>
                                 <br/>
-
-                                <div class="input-group">
-
-                                    {{ $tournament->registerDateLimit }}
-
-                                </div>
+                                {{ $tournament->registerDateLimit }}
                                 <br/>
                             @endif
 
@@ -59,16 +46,10 @@
 
                         <div class="col-md-3">
 
-                            <div class="checkbox-switch">
-                                <label>
+                            <strong>{{ trans('core.tournamentType')  }}</strong>
+                            <br/>
+                            {{ $tournament->type == 1 ? trans('core.open') : trans_choice('core.invitation', 1) }}
 
-                                    {!!  Form::label('type', trans('core.tournamentType'),['class' => 'text-bold' ]) !!}
-
-                                    <br/>
-                                    {{ $tournament->type == 1 ? trans('core.open') : trans_choice('core.invitation', 1) }}
-
-                                </label>
-                            </div>
 
                         </div>
                     </div>
@@ -86,52 +67,39 @@
 
                 <fieldset title="{{Lang::get('core.venue')}}">
                     <a name="place">
-                        <legend class="text-semibold">{{Lang::get('core.venue')}}
-                            : {{ $tournament->venue != null ? $tournament->venue->venue_name : ""}}</legend>
+                        <legend class="text-semibold">
+                            {{trans('core.venue')}}:
+                        </legend>
                     </a>
                 </fieldset>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            {!!  Form::label('address', trans('core.address'),['class' => 'text-bold' ]) !!}
-                            <br/>
-                            {{ $tournament->venue != null ? $tournament->venue->address :""}}
 
-
-                        </div>
-
+                        <strong>{{ trans('core.address')  }}</strong>
+                        <br/>
+                        {{ $tournament->venue != null ? $tournament->venue->address :""}}
                     </div>
                     <div class="col-md-6">
-
-                        <div class="form-group">
-                            {!!  Form::label('details', trans('core.details'),['class' => 'text-bold' ]) !!}
-                            <br/>
-                            {{ $tournament->venue != null ? $tournament->venue->details : ""}}
-                        </div>
+                        <strong>{{ trans('core.details')  }}</strong>
+                        <br/>
+                        {{ $tournament->venue != null ? $tournament->venue->details : ""}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            {!!  Form::label('state', trans('core.state'),['class' => 'text-bold' ]) !!}
-                            <br/>
-                            {{ $tournament->venue != null ? $tournament->venue->state :""}}
-
-
-                        </div>
+                        <strong>{{ trans('core.state')  }}</strong>
+                        <br/>
+                        {{ $tournament->venue != null ? $tournament->venue->state :""}}
 
                     </div>
                     <div class="col-md-6">
-
-                        <div class="form-group">
-                            {!!  Form::label('country', trans('core.country'),['class' => 'text-bold' ]) !!}
-                            <br/>
-                            @if ($tournament->venue != null)
-                                {{ $tournament->venue->country->name }}&nbsp; <img
-                                        src="/images/flags/{{ $tournament->venue->country->flag }}"
-                                        alt="{{ $tournament->venue->country->name }}"/>
-                            @endif
-                        </div>
+                        <strong>{{ trans('core.country')  }}</strong>
+                        <br/>
+                        @if ($tournament->venue != null)
+                            {{ $tournament->venue->country->name }}&nbsp; <img
+                                    src="/images/flags/{{ $tournament->venue->country->flag }}"
+                                    alt="{{ $tournament->venue->country->name }}"/>
+                        @endif
                     </div>
                 </div>
 

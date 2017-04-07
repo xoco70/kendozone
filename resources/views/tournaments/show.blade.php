@@ -15,16 +15,14 @@
 
 
         <div class="tab-content">
-
-            <div class="tab-pane active" id="general">
+            <div class="tab-pane active" id="trees">
+                @include("layouts.tournament.show.trees")
+            </div>
+            <div class="tab-pane " id="general">
                 @include("layouts.tournament.show.general")
             </div>
             <div class="tab-pane" id="competitors">
                 @include("layouts.tournament.show.competitors")
-            </div>
-            <div class="tab-pane" id="trees">
-                @include("layouts.tournament.show.trees")
-
             </div>
             <div class="tab-pane" id="rules">
                 @include("layouts.tournament.show.rules")
