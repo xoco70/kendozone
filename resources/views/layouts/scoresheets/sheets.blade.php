@@ -14,7 +14,8 @@
                 ?>
                 <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
 
-                <hr/><br/>
+                <hr/>
+                <br/>
 
                 @include('layouts.scoresheets.header', ['championship'=>$championship, 'group'=> $group])
 

@@ -12,8 +12,8 @@
     $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
     $title = '
         <title> ' . $appName . ' </title>
-        <link rel="shortcut icon" href="{{ asset(\"favicon_kz-01.png\")}}" />
-        <link rel="apple-touch-icon" href="{{ asset(\"favicon_kz-01.png\")}}" />
+        <link rel="shortcut icon" href="favicon_kz-01.png" />
+        <link rel="apple-touch-icon" href="favicon_kz-01.png" />
 
         <meta property="og:title" content="Create Online Kendo Tournament in instants" />
         <meta name="twitter:title" content="Kendozone - Create Online Kendo Tournaments in instants" />

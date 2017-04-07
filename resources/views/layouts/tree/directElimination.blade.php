@@ -1,14 +1,8 @@
 <?php
-use App\Team;
 use Xoco70\KendoTournaments\TreeGen\DirectEliminationTreeGen;
 
-$directEliminationTree = $championship->fightersGroups->where('round', 1)->map(function ($item, $key) use ($championship) {
-    $fighters = $item->getFighters();
-        $fighter1 = $fighters->get(0);
-        $fighter2 = $fighters->get(1);
-    return [$fighter1, $fighter2];
-})->toArray();
-$directEliminationTree = array_flatten($directEliminationTree);
+$directEliminationTree = $championship->fightersGroups->groupBy('round');
+
 $treeGen = new DirectEliminationTreeGen($directEliminationTree, $championship);
 
 ?>
