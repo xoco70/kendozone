@@ -3,20 +3,13 @@ use App\Team;
 use Xoco70\KendoTournaments\TreeGen\DirectEliminationTreeGen;
 
 $directEliminationTree = $championship->fightersGroups->where('round', 1)->map(function ($item, $key) use ($championship) {
-    if ($championship->category->isTeam()) {
-
-        $fighter1 = $item->team1 != null ? $item->team1->name : "Bye";
-        $fighter2 = $item->team2 != null ? $item->team2->name : "Bye";
-    } else {
-        $fighter1 = $item->competitors->get(0) != null ? $item->competitors->get(0)->user->name : "Bye";
-        $fighter2 = $item->competitors->get(1) != null ? $item->competitors->get(1)->user->name : "Bye";
-
-    }
+    $fighters = $item->getFighters();
+        $fighter1 = $fighters->get(0);
+        $fighter2 = $fighters->get(1);
     return [$fighter1, $fighter2];
 })->toArray();
-
 $directEliminationTree = array_flatten($directEliminationTree);
-$treeGen = new DirectEliminationTreeGen($directEliminationTree);
+$treeGen = new DirectEliminationTreeGen($directEliminationTree, $championship);
 
 ?>
 @if (Request::is('championships/'.$championship->id.'/pdf'))
@@ -29,7 +22,6 @@ $treeGen = new DirectEliminationTreeGen($directEliminationTree);
 
     @foreach ($treeGen->brackets as $roundNumber => $round)
         @foreach ($round as $matchNumber => $match)
-
             <div class="match-wrapper"
                  style="top:  {{ $match['matchWrapperTop'] }}px; left:  {{ $match['matchWrapperLeft']  }}px; width: {{   $treeGen->matchWrapperWidth  }}px;">
                 <input type="text"
