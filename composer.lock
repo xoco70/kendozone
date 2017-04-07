@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.5",
+            "version": "3.25.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6874b16a262b4e368a25a6991461fce11cff4415"
+                "reference": "fe98140a4811abbe9104477b167dc3c7f9a8391b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6874b16a262b4e368a25a6991461fce11cff4415",
-                "reference": "6874b16a262b4e368a25a6991461fce11cff4415",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fe98140a4811abbe9104477b167dc3c7f9a8391b",
+                "reference": "fe98140a4811abbe9104477b167dc3c7f9a8391b",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-06T20:54:52+00:00"
+            "time": "2017-04-07T20:21:45+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -5837,16 +5837,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.9.7.14",
+            "version": "0.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "dda96aee153a904caaefde2f582d3c2311d0a512"
+                "reference": "874268c3a836b42d1bcd4b90231a32b26504df6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/dda96aee153a904caaefde2f582d3c2311d0a512",
-                "reference": "dda96aee153a904caaefde2f582d3c2311d0a512",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/874268c3a836b42d1bcd4b90231a32b26504df6a",
+                "reference": "874268c3a836b42d1bcd4b90231a32b26504df6a",
                 "shasum": ""
             },
             "require": {
@@ -5881,7 +5881,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-04-07T02:30:10+00:00"
+            "time": "2017-04-07T22:42:31+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
