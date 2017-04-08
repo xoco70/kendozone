@@ -1,21 +1,10 @@
-<?php
-$brackets = array_merge_recursive($treeGen->brackets);
-$brackets = array_collapse($brackets);
-
-?>
 <select name="fights[]">
     <option {{ $selected == '' ? ' selected' : '' }} ></option>
-    @foreach ($brackets as $bracket)
-        @if ($bracket['playerA'] != '')
-            <option {{ $selected == $bracket['playerA'] ? ' selected' : '' }}  value="{{$bracket['playerA']->id ?? null }}">
-                {{  $bracket['playerA']->getFullName() }}
+    @foreach ($treeGen->championship->competitors as $competitor)
+        @if ($competitor != null)
+            <option {{ $selected != null && $selected->id == $competitor->id ? ' selected' : '' }}  value="{{$competitor->id ?? null }}">
+                {{  $competitor->getFullName() }}
             </option>
-        @endif
-
-        @if (  $bracket['playerB'] != '')
-
-            <option {{  $selected ==   $bracket['playerB'] ? ' selected' : '' }} value="{{  $bracket['playerB']->id ?? null }}">
-                {{  $bracket['playerB']->getFullName() }} </option>
         @endif
     @endforeach
 </select>
