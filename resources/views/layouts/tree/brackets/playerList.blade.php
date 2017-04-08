@@ -1,5 +1,4 @@
 <?php
-
 $brackets = array_merge_recursive($treeGen->brackets);
 $brackets = array_collapse($brackets);
 
@@ -9,14 +8,14 @@ $brackets = array_collapse($brackets);
     @foreach ($brackets as $bracket)
         @if ($bracket['playerA'] != '')
             <option {{ $selected == $bracket['playerA'] ? ' selected' : '' }}  value="{{$bracket['playerA']->id ?? null }}">
-                {{  $bracket['playerA']->getName() }}
+                {{  $bracket['playerA']->getFullName() }}
             </option>
         @endif
 
         @if (  $bracket['playerB'] != '')
 
             <option {{  $selected ==   $bracket['playerB'] ? ' selected' : '' }} value="{{  $bracket['playerB']->id ?? null }}">
-                {{  $bracket['playerB']->getName() }} </option>
+                {{  $bracket['playerB']->getFullName() }} </option>
         @endif
     @endforeach
 </select>
