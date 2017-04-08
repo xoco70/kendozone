@@ -1,5 +1,7 @@
 <?php
-$brackets = array_merge($treeGen->brackets[1],$treeGen->brackets[2]);
+
+$brackets = array_merge_recursive($treeGen->brackets);
+$brackets = array_collapse($brackets);
 
 ?>
 <select name="fights[]">
