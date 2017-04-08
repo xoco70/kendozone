@@ -30,8 +30,7 @@
                         <div class="tab-content">
                             @foreach($tournament->championships as $championship)
 
-                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
-                                     @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
+                                <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
                                     <h1> {{$championship->buildName()}}
                                         <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
                                            target="_blank"

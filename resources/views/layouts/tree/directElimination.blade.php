@@ -11,7 +11,8 @@ $treeGen = new DirectEliminationTreeGen($directEliminationTree, $championship);
 {!! Form::model(null, ["action" => ["TreeController@update", $championship->id]]) !!}
 <input type="hidden" id="activeTreeTab" name="activeTreeTab" value="{{$championship->id}}"/>
 {{  $treeGen->printRoundTitles() }}
-<div id="brackets-wrapper">
+
+<div id="brackets-wrapper" style="padding-bottom: {{ ($championship->fightersGroups()->where('round',1)->count() * 205 / 2) +100 }}px">
 
     @foreach ($treeGen->brackets as $roundNumber => $round)
         @foreach ($round as $matchNumber => $match)
