@@ -2,6 +2,7 @@
 
 use App\TournamentLevel;
 use App\User;
+
 $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
     $users = User::all()->pluck('id')->toArray();
     $levels = TournamentLevel::all()->pluck('id')->toArray();

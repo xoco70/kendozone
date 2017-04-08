@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

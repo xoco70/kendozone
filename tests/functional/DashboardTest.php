@@ -5,7 +5,6 @@ use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class DashboardTest extends BrowserKitTest

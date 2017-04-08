@@ -12,7 +12,6 @@ use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Swift_TransportException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler

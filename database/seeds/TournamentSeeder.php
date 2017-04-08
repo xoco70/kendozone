@@ -1,7 +1,6 @@
 <?php
 
 use App\Championship;
-use App\Competitor;
 use App\Tournament;
 use App\Venue;
 use Illuminate\Database\QueryException;

@@ -1,6 +1,5 @@
 <?php
 use App\Country;
-use App\User;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     $countries = Country::pluck('id')->toArray();

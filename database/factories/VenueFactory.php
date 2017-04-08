@@ -1,7 +1,6 @@
 <?php
 
 use App\Country;
-use Webpatser\Countries\Countries;
 
 $factory->define(App\Venue::class, function (Faker\Generator $faker) {
     $countries = Country::pluck('id')->toArray();
