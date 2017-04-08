@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Championship;
 use App\Exceptions\InvitationExpiredException;
 use App\Exceptions\InvitationNeededException;
 use App\Exceptions\InvitationNotActiveException;
@@ -16,6 +17,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class ChampionshipController extends Controller
 {
@@ -108,7 +110,16 @@ class ChampionshipController extends Controller
             if ($categories != null){
                 Auth::user()->updateUserFullName($request->firstname,$request->lastname);
 
-                $user->championships()->sync($categories);
+                $user->championships()->detach();
+                foreach ($categories as $category){
+                    $championship = Championship::find($category);
+                    $user->championships()->attach($category, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
+                }
+
+
+
+//                $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
+
                 $tournament->owner->notify(new RegisteredToChampionship($user, $tournament));
             }else{
                 flash()->error(trans('msg.you_must_choose_at_least_one_championship'));

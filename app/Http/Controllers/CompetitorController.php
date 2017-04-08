@@ -72,7 +72,7 @@ class CompetitorController extends Controller
 
         $championship = Championship::findOrFail($championshipId);
 
-        $user = User::registerUserToCategory([
+        $user = User::registerToCategory([
             'name' => $request->username,
             'email' => $request->email
 

@@ -76,7 +76,7 @@ class InviteController extends Controller
         foreach ($recipients as $recipient) {
             // Mail to Recipients
             $invite = new Invite();
-            $code = $invite->generateTourn  amentInvite($recipient, $tournament);
+            $code = $invite->generateTournamentInvite($recipient, $tournament);
             $user = new User();
             $user->email = $recipient;
             $user->notify(new InviteCompetitor($user, $tournament, $code,null));
