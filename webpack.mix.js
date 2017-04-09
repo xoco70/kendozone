@@ -152,7 +152,6 @@ mix.combine([
 
 mix.combine([
     'resources/assets/js/plugins/ui/nicescroll.min.js',
-    'resources/assets/js/sidebar_detached_sticky_custom.js',
     'resources/assets/js/components/sweetalert/dist/sweetalert.min.js',
 ], 'public/js/pages/footer/trees.js');
 
