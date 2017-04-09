@@ -34,7 +34,7 @@ class CompetitorController extends Controller
      */
     public function index(Tournament $tournament)
     {
-        $tournament = Tournament::with('championships.users','championships.teams' , 'championships.category')->find($tournament->id);
+        $tournament = Tournament::with('championships.users', 'championships.teams', 'championships.category')->find($tournament->id);
         $settingSize = $tournament->championshipSettings()->count();
         $categorySize = $tournament->categories->count();
         $grades = Grade::getAllPlucked();
@@ -68,6 +68,7 @@ class CompetitorController extends Controller
      */
     public function store(CompetitorRequest $request, Tournament $tournament)
     {
+
         $championshipId = $request->championshipId;
 
         $championship = Championship::findOrFail($championshipId);
@@ -83,15 +84,23 @@ class CompetitorController extends Controller
             flash()->error(trans('msg.user_already_registered_in_category'));
             return redirect(URL::action('CompetitorController@index', $tournament->slug));
         } else {
-            $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
+            // Get Competitor Short ID
+            $categories = $championships->pluck('championship.id');
+            $existingCompetitor = Competitor::where('user_id', $user->id)
+                ->whereIn('championship_id', $categories)->first();
+
+            if ($existingCompetitor != null) {
+                $shortId = $existingCompetitor->short_id;
+            } else {
+                $shortId = $tournament->competitors()->count() + 1;
+            }
+            $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $shortId]);
         }
 
 
         // We send him an email with detail (and user /password if new)
         $invite = new Invite();
         $code = $invite->generateTournamentInvite($user->email, $tournament);
-
-//        $mailer->sendEmailInvitationTo($user->email, $tournament, $code, $championship->category->name, $user->clearPassword);
         $user->notify(new InviteCompetitor($user, $tournament, $code, $championship->category->name));
 
         flash()->success(trans('msg.user_registered_successful', ['tournament' => $tournament->name]));
@@ -108,7 +117,7 @@ class CompetitorController extends Controller
      */
     public function confirmUser($tournamentSlug, $tcId, $userSlug)
     {
-        $user = User::where('slug',$userSlug)->first();
+        $user = User::where('slug', $userSlug)->first();
         $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id)->first();
 
@@ -130,7 +139,7 @@ class CompetitorController extends Controller
     public function deleteUser($tournamentSlug, $tcId, $userSlug)
     {
 
-        $user = User::where('slug',$userSlug)->first();
+        $user = User::where('slug', $userSlug)->first();
         $ctu = Competitor::where('championship_id', $tcId)
             ->where('user_id', $user->id);
 

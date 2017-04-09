@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
+use App\Competitor;
 use App\Exceptions\InvitationExpiredException;
 use App\Exceptions\InvitationNeededException;
 use App\Exceptions\InvitationNotActiveException;
@@ -38,7 +39,7 @@ class ChampionshipController extends Controller
     public function create($tournamentSlug, $token)
     {
 
-        $tournament = Tournament::where('slug',$tournamentSlug)->first();
+        $tournament = Tournament::where('slug', $tournamentSlug)->first();
         $grades = Grade::getAllPlucked();
         $invite = Invite::getInviteFromToken($token);
 
@@ -68,7 +69,7 @@ class ChampionshipController extends Controller
                 // Redirect to register category Screen
 
                 Auth::loginUsingId($user->id);
-                return view("categories.register", compact('tournament', 'invite', 'currentModelName','grades'));
+                return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
 
 
             }
@@ -82,6 +83,7 @@ class ChampionshipController extends Controller
             }
         }
     }
+
     /**
      * Store a new championship
      *
@@ -91,37 +93,41 @@ class ChampionshipController extends Controller
     public function store(Request $request)
     {
         $tournamentSlug = $request->tournament;
-        $tournament = Tournament::where('slug',$tournamentSlug)->first();
+        $tournament = Tournament::where('slug', $tournamentSlug)->first();
 
         $categories = $request->get('cat');
         $inviteId = $request->invite;
         if ($inviteId != 0)
             $invite = Invite::findOrFail($inviteId);
         else
-            $invite = Invite::where('code','open')
-                            ->where('email', Auth::user()->email)
-                            ->where('object_type', 'App\Tournament')
-                            ->where('object_id', $tournament->id)
-                            ->get();
+            $invite = Invite::where('code', 'open')
+                ->where('email', Auth::user()->email)
+                ->where('object_type', 'App\Tournament')
+                ->where('object_id', $tournament->id)
+                ->get();
 
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
-            if ($categories != null){
-                Auth::user()->updateUserFullName($request->firstname,$request->lastname);
-
+            if ($categories != null) {
+                Auth::user()->updateUserFullName($request->firstname, $request->lastname);
                 $user->championships()->detach();
-                foreach ($categories as $category){
-                    $championship = Championship::find($category);
-                    $user->championships()->attach($category, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
+
+                $existingCompetitor = Competitor::where('user_id', $user->id)
+                    ->whereIn('championship_id', $categories)->first();
+
+                if ($existingCompetitor != null) {
+                    $shortId = $existingCompetitor->short_id;
+                } else {
+                    $shortId = $tournament->competitors()->count() + 1;
                 }
 
-
-
-//                $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $championship->competitors()->count() + 1]);
+                foreach ($categories as $category) {
+                    $user->championships()->attach($category, ['confirmed' => 0, 'short_id' => $shortId]);
+                }
 
                 $tournament->owner->notify(new RegisteredToChampionship($user, $tournament));
-            }else{
+            } else {
                 flash()->error(trans('msg.you_must_choose_at_least_one_championship'));
                 return redirect()->back();
 

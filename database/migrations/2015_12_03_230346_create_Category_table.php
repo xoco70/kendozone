@@ -29,7 +29,7 @@ class CreateCategoryTable extends Migration
 //            $table->foreign('gradeMax')
 //                ->references('id')
 //                ->on('grade');
-            $table->unique(['name','alias','gender','isTeam','ageCategory','ageMin','ageMax','gradeCategory','gradeMin','gradeMax'], 'category_fields_unique');
+            $table->unique(['name', 'alias', 'gender', 'isTeam', 'ageCategory', 'ageMin', 'ageMax', 'gradeCategory', 'gradeMin', 'gradeMax'], 'category_fields_unique');
             $table->timestamps();
             $table->engine = 'InnoDB';
 
@@ -78,7 +78,9 @@ class CreateCategoryTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->unique(array('championship_id', 'user_id'));
+
+            $table->unique(['championship_id', 'user_id']);
+            $table->unique(['championship_id', 'short_id']);
 
             $table->boolean('confirmed');
 
