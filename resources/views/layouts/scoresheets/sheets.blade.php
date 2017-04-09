@@ -1,5 +1,3 @@
-{{--TODO This Blade is one of the ugliest in system.... Should Refactor, but don't really know how--}}
-
 @if (sizeof($championship->fightersGroups)==0)
     {{ trans('core.still_no_scoresheet') }}
 @endif

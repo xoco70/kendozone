@@ -1,4 +1,4 @@
-<br/><u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->id }}</strong></p></u>
+<br/><u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->short_id }}</strong></p></u>
 
 <table align="center" width="100%">
     <tr >

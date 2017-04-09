@@ -11,12 +11,14 @@
             {!!  Form::text('shiajo', $group->area, ['class' => 'form-control sheet_shiajo']) !!}
         </div>
     </div>
-    <div class="col-xs-1">
-        <div class="form-group">
-            {!!  Form::label('group', trans('core.group'),['class' => 'text-bold' ]) !!}
-            {!!  Form::text('group', '1', ['class' => 'form-control sheet_group']) !!}
+    @if ($group->fights->count() >2)
+        <div class="col-xs-1">
+            <div class="form-group">
+                {!!  Form::label('group', trans('core.group'),['class' => 'text-bold' ]) !!}
+                {!!  Form::text('group', $group->order, ['class' => 'form-control sheet_group']) !!}
+            </div>
         </div>
-    </div>
+    @endif
     <div class="col-xs-5">
         <div class="form-group">
             {!!  Form::label('writer', trans('core.writer'),['class' => 'text-bold' ]) !!}
