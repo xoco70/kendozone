@@ -119,7 +119,7 @@ class ChampionshipController extends Controller
                 if ($existingCompetitor != null) {
                     $shortId = $existingCompetitor->short_id;
                 } else {
-                    $shortId = $tournament->competitors()->count() + 1;
+                    $shortId = $tournament->competitors()->max('short_id') + 1;
                 }
 
                 foreach ($categories as $category) {

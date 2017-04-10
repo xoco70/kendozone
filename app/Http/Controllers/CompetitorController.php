@@ -85,14 +85,13 @@ class CompetitorController extends Controller
             return redirect(URL::action('CompetitorController@index', $tournament->slug));
         } else {
             // Get Competitor Short ID
-            $categories = $championships->pluck('championship.id');
+            $categories = $tournament->championships->pluck('id');
             $existingCompetitor = Competitor::where('user_id', $user->id)
                 ->whereIn('championship_id', $categories)->first();
-
             if ($existingCompetitor != null) {
                 $shortId = $existingCompetitor->short_id;
             } else {
-                $shortId = $tournament->competitors()->count() + 1;
+                $shortId = $tournament->competitors()->max('short_id') + 1;
             }
             $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $shortId]);
         }
