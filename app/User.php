@@ -453,6 +453,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $password = null;
             $user = new User;
             $user->name = $attributes['name'];
+            $user->firstname = $attributes['firstname'];
+            $user->lastname = $attributes['lastname'];
             $user->email = $attributes['email'];
             $password = User::generatePassword();
             $user->password = bcrypt($password);

@@ -16,6 +16,7 @@ $treeGen = new DirectEliminationTreeGen($directEliminationTree, $championship);
 
     @foreach ($treeGen->brackets as $roundNumber => $round)
         @foreach ($round as $matchNumber => $match)
+
             <div class="match-wrapper"
                  style="top:  {{ $match['matchWrapperTop'] }}px; left:  {{ $match['matchWrapperLeft']  }}px; width: {{   $treeGen->matchWrapperWidth  }}px;">
                 <input type="text"

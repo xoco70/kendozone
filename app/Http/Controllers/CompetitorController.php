@@ -75,13 +75,17 @@ class CompetitorController extends Controller
         $championship = Championship::findOrFail($championshipId);
 
 
-        foreach ($request->names as $id => $name) {
+        foreach ($request->firstnames as $id => $firstname) {
 
             $email = $request->emails[$id] ??  sha1(rand(5, 25)) . "@kendozone.com";
+            $lastname = $request->lastnames[$id] ?? '';
+            $name = $firstname." ". $lastname;
 
             if ($name != null) {
 
                 $user = User::registerToCategory([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
                     'name' => $name,
                     'email' => $email
 

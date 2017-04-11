@@ -201,7 +201,7 @@
                     x++; //text box increment
 
 
-                    $(wrapper).append('<div class="form-group"><div class="col-sm-5"><input type="text" name="names[]" class="form-control" placeholder=\"{{ trans("core.competitor_name") }}\"/></div><div class="col-sm-5"><input type="text" name="emails[]" class="form-control" placeholder=\"{{ trans("core.email") }}\"/></div><div class="col-sm-2"><a href="#" class="remove_field" title=\"{{ trans("core.remove_competitor") }}\"><i class="glyphicon glyphicon-remove pt-10 m-3"></i></a></div></div>'); //add input box
+                    $(wrapper).append('<div class="form-group"><div class="col-sm-3"><input type="text" name="firstnames[]" class="form-control" placeholder=\"{{ trans("core.firstname") }}\"/></div><div class="col-sm-3"><input type="text" name="lastnames[]" class="form-control" placeholder=\"{{ trans("core.lastname") }}\"/></div><div class="col-sm-3"><input type="text" name="emails[]" class="form-control" placeholder=\"{{ trans("core.email") }}\"/></div><div class="col-sm-1"><a href="#" class="remove_field" title=\"{{ trans("core.remove_competitor") }}\"><i class="glyphicon glyphicon-remove pt-10 m-3"></i></a></div></div>'); //add input box
                 }
             });
 

@@ -13,22 +13,26 @@
                 <br/><small class="text-muted">{{ trans('core.add_competitor_text3') }} <a href="{!! URL::action('InviteController@create',  $tournament->slug) !!}">{{ trans('core.invite_competitors_with_email') }}</a></small>
                 <br/><br/>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
 
                         <div align="right"><a class="add_field_button btn-primary btn ">
                             <i class="icon-user-plus mr-10"></i>{{ trans('core.add_more_competitors') }}
                         </a></div>
                         <div class="input_fields_wrap">
                             <div class="form-group">
-                                <div class="col-sm-5">
-                                    <input type="text" name="names[]" class="form-control mt-20"
-                                           placeholder="{{ trans("core.competitor_name") }}"/>
+                                <div class="col-sm-3">
+                                    <input type="text" name="firstnames[]" class="form-control mt-20"
+                                           placeholder="{{ trans("core.firstname") }}"/>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-3">
+                                    <input type="text" name="lastnames[]" class="form-control mt-20"
+                                           placeholder="{{ trans("core.lastname") }}"/>
+                                </div>
+                                <div class="col-sm-3">
                                     <input type="text" name="emails[]" class="form-control mt-20"
                                            placeholder="{{ trans("core.email") }} ( {{ trans("core.optional") }} )"/>
                                 </div>
-                                <div class="col-sm-2"></div>
+                                <div class="col-sm-3"></div>
                             </div>
                         </div>
                     </div>
