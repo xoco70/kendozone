@@ -23,8 +23,9 @@
                                    data-target="#create_tournament_user"
                                    class="btn btn-primary btn-xs pull-right open-modal"
                                    data-id="{!! $championship->id !!}"
-                                   data-name="{!! $championship->buildName() !!}"><b><i
-                                                class="icon-plus22 mr-5"></i></b> @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',1)])
+                                   data-name="{!! $championship->buildName() !!}">
+                                    <b> <i class="icon-plus22 mr-5"></i></b>
+                                    @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
                                 </a>
 
 
@@ -39,7 +40,16 @@
 
 
                                 {!! Form::close() !!}
+                                <br/><br/>
+                                {{--<form class="form-horizontal">--}}
+                                    {{--<div class="form-group">--}}
 
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="email" class="form-control" id="inputEmail3" placeholder="Email">--}}
+                                        {{--</div>--}}
+                                        {{--<label for="inputEmail3" class="col-sm-2 control-label">Email</label>--}}
+                                    {{--</div>--}}
+                                {{--</form>--}}
 
 
                             @endcan
@@ -179,6 +189,27 @@
             $("#championshipId").val(championshipId);
         });
 
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap"); //Fields wrapper
+            var add_button = $(".add_field_button"); //Add button ID
 
+            var x = 1; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+
+
+                    $(wrapper).append('<div class="form-group"><div class="col-sm-5"><input type="text" name="names[]" class="form-control" placeholder=\"{{ trans("core.competitor_name") }}\"/></div><div class="col-sm-5"><input type="text" name="emails[]" class="form-control" placeholder=\"{{ trans("core.email") }}\"/></div><div class="col-sm-2"><a href="#" class="remove_field" title=\"{{ trans("core.remove_competitor") }}\"><i class="glyphicon glyphicon-remove pt-10 m-3"></i></a></div></div>'); //add input box
+                }
+            });
+
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault();
+                $(this).parent('div').parent('div').remove();
+                x--;
+            })
+        });
     </script>
 @stop

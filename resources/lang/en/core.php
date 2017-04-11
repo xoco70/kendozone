@@ -34,6 +34,7 @@ return [
     'export_excel' => 'Export to Excel',
     'letsgo' => 'Let\'s do it',
     'contact_us' => 'Contact Us',
+    'optional' => 'optional',
 
     //Tournament
     'tournament' => 'Tournament|Tournaments',
@@ -130,7 +131,12 @@ return [
     'select_competitor_categories' => 'Select the categories in which you want to register the competitor',
     'select_tournament_categories' => 'Select the open categories for the tournament',
     'paid' => 'Paid',
-
+    'add_more_competitors' => 'Add more competitors',
+    'competitor_name' => 'Competitor\' name',
+    'remove_competitor' => 'Remove Competitor',
+    'add_competitor_text1' => 'If you don\'t provide an email, Kendozone will generate a unique user automatically.',
+    'add_competitor_text2' => 'Notice that in this case, competitor will have a different ID for each championship in the tournament',
+    'add_competitor_text3' => 'To get Unique IDs, write the user email, or ',
 
 
     // Invitation

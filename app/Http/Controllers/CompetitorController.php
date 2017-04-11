@@ -11,7 +11,10 @@ use App\Invite;
 use App\Notifications\InviteCompetitor;
 use App\Tournament;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Response;
 use URL;
@@ -68,40 +71,47 @@ class CompetitorController extends Controller
      */
     public function store(CompetitorRequest $request, Tournament $tournament)
     {
-
         $championshipId = $request->championshipId;
-
         $championship = Championship::findOrFail($championshipId);
 
-        $user = User::registerToCategory([
-            'name' => $request->username,
-            'email' => $request->email
 
-        ]);
+        foreach ($request->names as $id => $name) {
 
-        $championships = $user->championships();
-        if ($championships->get()->contains($championship)) {
-            flash()->error(trans('msg.user_already_registered_in_category'));
-            return redirect(URL::action('CompetitorController@index', $tournament->slug));
-        } else {
-            // Get Competitor Short ID
-            $categories = $tournament->championships->pluck('id');
-            $existingCompetitor = Competitor::where('user_id', $user->id)
-                ->whereIn('championship_id', $categories)->first();
-            if ($existingCompetitor != null) {
-                $shortId = $existingCompetitor->short_id;
-            } else {
-                $shortId = $tournament->competitors()->max('short_id') + 1;
+            $email = $request->emails[$id] ??  sha1(rand(5, 25)) . "@kendozone.com";
+
+            if ($name != null) {
+
+                $user = User::registerToCategory([
+                    'name' => $name,
+                    'email' => $email
+
+                ]);
+
+
+                $championships = $user->championships();
+                if (!$championships->get()->contains($championship)) {
+
+                    // Get Competitor Short ID
+                    $categories = $tournament->championships->pluck('id');
+                    $existingCompetitor = Competitor::where('user_id', $user->id)
+                        ->whereIn('championship_id', $categories)->first();
+                    if ($existingCompetitor != null) {
+                        $shortId = $existingCompetitor->short_id;
+                    } else {
+                        $shortId = $tournament->competitors()->max('short_id') + 1;
+                    }
+                    $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $shortId]);
+                }
+
+                // We send him an email with detail (and user /password if new)
+
+                if (strpos($email, '@kendozone.com') == -1) { // It is not a generated email
+                    $invite = new Invite();
+                    $code = $invite->generateTournamentInvite($user->email, $tournament);
+                    $user->notify(new InviteCompetitor($user, $tournament, $code, $championship->category->name));
+                }
             }
-            $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $shortId]);
         }
-
-
-        // We send him an email with detail (and user /password if new)
-        $invite = new Invite();
-        $code = $invite->generateTournamentInvite($user->email, $tournament);
-        $user->notify(new InviteCompetitor($user, $tournament, $code, $championship->category->name));
-
         flash()->success(trans('msg.user_registered_successful', ['tournament' => $tournament->name]));
         return redirect(URL::action('CompetitorController@index', $tournament->slug));
 

@@ -112,7 +112,7 @@
         $("a").on('click', function () {
 
             let href = $(this).attr('href');
-            if (href != null &&  href.indexOf('#') != -1) {
+            if (href != null && href.indexOf('#') != -1) {
                 let id = href.replace("#", "");
                 if ($("a[data-toggle='tab'][id='" + id + "']")) {
                     $("#" + id).click();
@@ -154,7 +154,6 @@
 
     {!! Html::script('js/pages/header/tournamentEdit.js') !!}
     {!! Html::script('https://maps.google.com/maps/api/js?key=AIzaSyDMbCISDkoc5G1AP1mw8K76MsaN0pyF64k&libraries=places') !!}
-    {!! Html::script('js/categoryCreate.js') !!}
 
 
 @stop

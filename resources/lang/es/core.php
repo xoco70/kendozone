@@ -33,6 +33,7 @@ return [
     'export_excel' => 'Exportar a Excel',
     'letsgo' => '¡Comenzar!',
     'contact_us' => 'Contactanos',
+    'optional' => 'opcional',
 
     //Tournament
     'tournament' => 'Torneo|Torneos',
@@ -128,6 +129,12 @@ return [
     'select_competitor_categories' => 'Selecciona las categorías en las cuales deseas registrarte',
     'select_tournament_categories' => 'Selecciona las categorías abiertas para tu torneo',
     'paid' => 'Pagado',
+    'add_more_competitors' => 'Agregar más competidores',
+    'competitor_name' => 'Nombre del Competidor',
+    'remove_competitor' => 'Eliminar competidor',
+    'add_competitor_text1' => 'Si no ingresa el correo electrónico del competitor, Kendozone generará uno de forma automática',
+    'add_competitor_text2' => 'Nota que en este caso, el competitor tendrá un ID diferente ID para cada categoría del torneo',
+    'add_competitor_text3' => 'Para tener ID unicos, ingresa el email, o ',
 
 
     // Invitation

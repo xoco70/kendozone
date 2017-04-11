@@ -39,7 +39,9 @@ class TreeController extends Controller
      */
     public function store(Request $request)
     {
+
         $tournament = FightersGroup::getTournament($request);
+
         if (Auth::user()->cannot('store', [FightersGroup::class, $tournament])) {
             throw new AuthorizationException();
         }
@@ -56,8 +58,6 @@ class TreeController extends Controller
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
             } finally {
-//                    return redirect(route('tree.index', $tournament->slug));
-
             }
 
         }
