@@ -2,7 +2,6 @@
 use Xoco70\KendoTournaments\TreeGen\DirectEliminationTreeGen;
 
 $directEliminationTree = $championship->fightersGroups->groupBy('round');
-
 $treeGen = new DirectEliminationTreeGen($directEliminationTree, $championship);
 ?>
 @if (Request::is('championships/'.$championship->id.'/pdf'))

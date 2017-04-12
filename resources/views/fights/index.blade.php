@@ -25,17 +25,17 @@
                                         <?php
 
                                         if ($championship->category->isTeam) {
-                                            $fighter1 = $fight->team1 != null ? $fight->team1->name : "BYE";
-                                            $fighter2 = $fight->team2 != null ? $fight->team2->name : "BYE";
+                                            $fighter1 = $fight->team1 != null ? $fight->team1->name : "";
+                                            $fighter2 = $fight->team2 != null ? $fight->team2->name : "";
                                         } else {
-                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->user->name : "BYE";
-                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->user->name : "BYE";
+                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->user->name : "";
+                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->user->name : "";
                                         }
 
 
                                         ?>
 
-                                        @if (!($fight->group->round == 1 && ($fighter1=="BYE" || $fighter2=="BYE" )))
+                                        @if (!($fight->group->round == 1 && ($fighter1=="" || $fighter2=="" )))
                                         <tr>
                                             <td class="p-10">{{$id + 1}}</td>
                                             <td class="p-10">{{ $fighter1 }}</td>

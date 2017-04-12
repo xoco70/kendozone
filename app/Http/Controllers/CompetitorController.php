@@ -77,11 +77,11 @@ class CompetitorController extends Controller
 
         foreach ($request->firstnames as $id => $firstname) {
 
-            $email = $request->emails[$id] ??  sha1(rand(5, 25)) . "@kendozone.com";
+            $email = $request->emails[$id] ??  (User::count() +1) . "@kendozone.com";
             $lastname = $request->lastnames[$id] ?? '';
-            $name = $firstname." ". $lastname;
 
-            if ($name != null) {
+            $name = $firstname." ". $lastname;
+            if ($name != null && $name != '') {
 
                 $user = User::registerToCategory([
                     'firstname' => $firstname,
