@@ -444,8 +444,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $attributes
      * @return static $user
      */
-    public
-    static function registerToCategory($attributes)
+    public static function registerToCategory($attributes)
     {
         $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
 
@@ -466,7 +465,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->deleted_at = null;
             $user->save();
         }
-
         // Fire Events
 
         return $user;

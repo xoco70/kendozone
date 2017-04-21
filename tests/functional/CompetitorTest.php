@@ -1,5 +1,6 @@
 <?php
 use App\Championship;
+use App\Competitor;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -37,9 +38,7 @@ class CompetitorTest extends BrowserKitTest
     public function it_add_a_user_to_championship()
     {
         $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
-        factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 2]);
-
+        $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
 
         $existingUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $deletedUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER'), 'deleted_at' => "2015-01-01"]);
@@ -47,37 +46,44 @@ class CompetitorTest extends BrowserKitTest
         $newUser = clone $existingUser;
         $newUser->email = "new@email.com";
 
-
-        $usersToAdd = [$newUser, $existingUser, $deletedUser]; //
+        $usersToAdd = [ $existingUser, $deletedUser]; //
 
 
         foreach ($usersToAdd as $user) {
-            $this->addCompetitor($tournament, $user);
+            $this->addCompetitorToChampionship($championship, $user);
         }
         // It sends a mail...
 
     }
 
-    public function addCompetitor($tournament, $user)
+    public function addCompetitorToAllChampionship($tournament, $user)
     {
-
-        $championships = $tournament->championships;
-        foreach ($championships as $championship) {
-
-            $this->actingAs($this->root, 'api')
-                ->post('/tournaments/' . $tournament->slug . '/users/',
-                    ['championshipId' => $championship->id,
-                        'username' => $user->name,
-                        'email' => $user->email]);
-
-            $myUser = User::where('email', $user->email)->firstOrFail();
-
-            $this->seeInDatabase('competitor',
-                ['championship_id' => $championship->id,
-                    'user_id' => $myUser->id,
-                ]);
+        foreach ($tournament->championships as $championship) {
+            $this->addCompetitorToChampionship($championship, $user);
 
         }
+    }
+
+    public function addCompetitorToChampionship($championship, $user)
+    {
+        $tournament = $championship->tournament;
+        $firstnames[] = $user->firstname;
+        $lastnames[] = $user->lastname;
+        $emails[] = $user->email;
+        $this->actingAs($this->root, 'api')
+            ->post('/tournaments/' . $tournament->slug . '/users/',
+                ['firstnames' => $firstnames,
+                    'lastnames' => $lastnames,
+                    'emails' => $emails,
+                    'championshipId' => $championship->id]);
+
+        $myUser = User::where('email', $user->email)->firstOrFail();
+
+
+        $this->seeInDatabase('competitor',
+            ['championship_id' => $championship->id,
+                'user_id' => $myUser->id,
+            ]);
     }
 
     /** @test */
@@ -111,7 +117,7 @@ class CompetitorTest extends BrowserKitTest
     {
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+//        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
@@ -193,5 +199,25 @@ class CompetitorTest extends BrowserKitTest
 
     }
 
+    /** @test */
+    public function a_competitor_always_has_the_same_short_id_in_a_tournament()
+    {
+        $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
+        $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]); // Single
+        $championship2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]); // Single
+        $this->addCompetitorToChampionship($championship1, $this->root);
+        $this->addCompetitorToChampionship($championship2, $this->root);
 
+
+        $competitor1 = Competitor::where('championship_id', $championship1->id)
+            ->where('user_id', $this->root->id)->select('short_id')->first();
+
+
+        $competitor2 = Competitor::where('championship_id', $championship2->id)
+            ->where('user_id', $this->root->id)->select('short_id')->first();
+
+
+        $this->assertEquals($competitor1->short_id, $competitor2->short_id);
+
+    }
 }

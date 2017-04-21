@@ -71,16 +71,19 @@ class CompetitorController extends Controller
      */
     public function store(CompetitorRequest $request, Tournament $tournament)
     {
+
         $championshipId = $request->championshipId;
         $championship = Championship::findOrFail($championshipId);
 
 
         foreach ($request->firstnames as $id => $firstname) {
 
-            $email = $request->emails[$id] ??  (User::count() +1) . "@kendozone.com";
+            $email = $request->emails[$id] ??  Auth::user()->id . sha1(rand(1, 999999999999)) . (User::count() + 1) . "@kendozone.com";
             $lastname = $request->lastnames[$id] ?? '';
 
-            $name = $firstname." ". $lastname;
+
+            $name = $firstname . " " . $lastname;
+
             if ($name != null && $name != '') {
 
                 $user = User::registerToCategory([
@@ -106,6 +109,7 @@ class CompetitorController extends Controller
                     }
                     $championships->attach($championshipId, ['confirmed' => 0, 'short_id' => $shortId]);
                 }
+
 
                 // We send him an email with detail (and user /password if new)
 
