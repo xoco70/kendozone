@@ -55,7 +55,7 @@ class TeamPolicy
         return $user->isOwner($tournament);
     }
 
-    public function delete(User $user, Tournament $tournament)
+    public function delete(User $user, \Xoco70\KendoTournaments\Models\Tournament $tournament)
     {
         return $user->isOwner($tournament);
     }
