@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
         AuthenticationException::class,
         AuthorizationException::class,
         HttpException::class,
-        ModelNotFoundException::class,
+//        ModelNotFoundException::class,
         OwnTournament::class,
         AuthorizationException::class,
         MaintenanceModeException::class,
