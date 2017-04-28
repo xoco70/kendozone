@@ -85,6 +85,17 @@
     };
     var csrfToken = "{{csrf_token()}}";
 </script>
+@if(!empty(env('SENTRY_DSN_PUBLIC')))
+    <script src="https://cdn.ravenjs.com/3.14.2/raven.min.js"></script>
+    <script>
+        Raven.config("{{env('SENTRY_PUBLIC')}}").install();
+        Raven.setUserContext({
+            email: "{!!  Auth::user()->email !!}",
+            id: "{!!  Auth::user()->id !!}"
+        })
+    </script>
+@endif
+
 {!! Html::script('js/bootstrap.js')!!}
 <script>
 
