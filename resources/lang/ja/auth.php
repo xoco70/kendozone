@@ -54,5 +54,5 @@ return [
     'go_to_password_reset' => 'リンクをクリックしてパスワードを再設定してください',
     'password_reset_successfull' => 'パスワードが再設定されました!',
     'enter_new_passwords' => '新しいパスワードを入力してください',
-    'enter_new_passwords_description' => '新しいパスワードを確認してください'
+    'enter_new_passwords_description' => '新しいパスワードを確認してください',
 ];
