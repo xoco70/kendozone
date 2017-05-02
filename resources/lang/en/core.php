@@ -132,7 +132,7 @@ return [
     'select_tournament_categories' => 'Select the open categories for the tournament',
     'paid' => 'Paid',
     'add_more_competitors' => 'Add more competitors',
-    'competitor_name' => 'Competitor\' name',
+    'competitor_name' => 'Competitor\'s name',
     'remove_competitor' => 'Remove Competitor',
     'add_competitor_text1' => 'If you don\'t provide an email, Kendozone will generate a unique user automatically.',
     'add_competitor_text2' => 'Notice that in this case, competitor will have a different ID for each championship in the tournament',

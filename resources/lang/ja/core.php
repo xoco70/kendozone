@@ -127,8 +127,7 @@ return [
 
     // Invitation
 
-    'invitation' => '招待',
-    'Tournament_invitations' => '選手を招待する',
+    'tournament_invitations' => '選手を招待する',
     'invite_send' => '大会に選手を招待する:: tournament',
     'recipients' => '受取人',
     'invite_recipients' => '全ての受取人の名前を書いてコンマで分別してください',
@@ -146,7 +145,7 @@ return [
     'organizer' => '主催者',
     'select_categories_to_register' => '登録するカテゴリを選択する',
 
-    '2 _ choices_to_invite' => '選手を招待するのためには二つの仕方あります:',
+    '2_choices_to_invite' => '選手を招待するのためには二つの仕方あります:',
     'invite_by_commas' => 'メールで招待することができます',
     'invite_by_excel' => 'excelで招待することができます',
 
@@ -308,32 +307,27 @@ return [
 
 
     //Common
-    'contact_us' => 'contactanos',
-    'optional' => 'opcional',
+    'contact_us' => 'Contact Us',
+    'optional' => 'optional',
 
     //Tournament
-    'invite_competitors_with_email' => 'invita por Email',
-    'invite_competitors_with_fb' => 'invita con Facebook',
-    'admin_tournaments' => 'administrar torneos',
+    'invite_competitors_with_email' => 'Invite by Email',
+    'invite_competitors_with_fb' => 'Invite with Facebook',
 
 
     // Competitor
-    'add_more_competitors' => 'agregar más competidores',
-    'competitor_name' => 'nombre del Competidor',
-    'remove_competitor' => 'eliminar competidor',
-    'add_competitor_text1' => 'si no ingresa el correo electrónico del competitor, Kendozone generará uno de forma automática',
-    'add_competitor_text2' => 'nota que en este caso, el competitor tendrá un ID diferente ID para cada categoría del torneo',
-    'add_competitor_text3' => 'Para tener ID unicos, ingresa el email, o ',
+    'add_more_competitors' => 'Add more competitors',
+    'competitor_name' => 'Competitor\'s name',
+    'remove_competitor' => 'Remove Competitor',
+    'add_competitor_text1' => 'If you don\'t provide an email, Kendozone will generate a unique user automatically.',
+    'add_competitor_text2' => 'Notice that in this case, competitor will have a different ID for each championship in the tournament',
+    'add_competitor_text3' => 'To get Unique IDs, write the user email, or ',
 
 
     // Invitation
 
-    'invitaion' => 'invitación|Invitaciones',
-    'tournament_invitations' => 'invita competidores',
-    'latest_competitors' => 'Últimos registros',
-
-    '2_choices_to_invite' => 'Tienes 2 opciones para invitar competidores:',
-
+    'invitation' => 'Invitation|Invitations',
+    'latest_competitors' => 'Latest Competitors',
 
     // Dashboard
 
