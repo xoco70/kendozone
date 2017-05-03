@@ -8,6 +8,8 @@ use App\Http\Requests\AssociationRequest;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -21,7 +23,7 @@ class AssociationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
+     * @return Collection|View
      */
     public function index()
     {
@@ -45,12 +47,10 @@ class AssociationController extends Controller
      */
     public function create()
     {
+        // Assoc Policy
+
         $association = new Association;
         $federation = new Collection;
-
-//        if (Auth::user()->cannot('create', new Association)) {
-//            throw new AuthorizationException();
-//        }
 
         $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
@@ -62,15 +62,12 @@ class AssociationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AssociationRequest $request
-     * @return Response
+     * @return Response|RedirectResponse
      * @throws AuthorizationException
      */
     public function store(AssociationRequest $request)
     {
         // Assoc Policy
-//        if (!Auth::user()->isSuperAdmin() && !Auth::user()->isFederationPresident()) {
-//            throw new AuthorizationException();
-//        }
 
         try {
             if ($request->president_id == 0)
@@ -143,7 +140,7 @@ class AssociationController extends Controller
      *
      * @param AssociationRequest|Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return Response|RedirectResponse
      * @throws AuthorizationException
      */
     public function update(AssociationRequest $request, $id)
@@ -176,7 +173,7 @@ class AssociationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param $associationId
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy($associationId)
     {
@@ -191,7 +188,7 @@ class AssociationController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function restore($id)
 
@@ -213,11 +210,4 @@ class AssociationController extends Controller
         // Save
         // Close transaction
     }
-
-//    public static function myAssociations()
-//    {
-//        return Association::fillSelect();
-//    }
-
-
 }

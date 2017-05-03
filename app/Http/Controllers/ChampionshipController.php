@@ -44,7 +44,6 @@ class ChampionshipController extends Controller
         $invite = Invite::getInviteFromToken($token);
 
         // Check if invitation is expired
-        $quote = null;
 
         if (is_null($invite)) throw new InvitationNeededException();
         if ($invite->expiration < Carbon::now() && $invite->expiration != '0000-00-00') throw new InvitationExpiredException();

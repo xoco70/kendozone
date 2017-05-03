@@ -10,6 +10,8 @@ use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
@@ -33,7 +35,7 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection|View
      */
     public function index()
     {
@@ -62,9 +64,7 @@ class ClubController extends Controller
 
 
         $club = new Club;
-//        if (Auth::user()->cannot('create', $club)) {
-//            throw new AuthorizationException();
-//        }
+        // Authorization
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
@@ -82,7 +82,7 @@ class ClubController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ClubRequest $request
-     * @return JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function store(ClubRequest $request)
     {
@@ -133,8 +133,6 @@ class ClubController extends Controller
      */
     public function edit($id)
     {
-//        $federation = new Federation();
-//        $association = new Association();
 
         $defaultLng = Auth::user()->latitude ?? geoip()->lat;
         $defaultLat = Auth::user()->longitude ?? geoip()->lon;
@@ -148,13 +146,6 @@ class ClubController extends Controller
         $associations = Association::fillSelect();
         $users = User::getClubPresidentsList();
 
-//        $association = $club->association();
-//        if ($association->get() != null) {
-//            $federation = $association->federation;
-//        }
-
-
-//        $oldFederation =
 
         return view('clubs.form', compact('club', 'users', 'associations', 'federations','defaultLng','defaultLat')); //
     }
@@ -222,10 +213,10 @@ class ClubController extends Controller
         }
     }
 
-    public static function myClubs()
-    {
-        return Club::fillSelect();
-    }
+//    public static function myClubs()
+//    {
+//        return Club::fillSelect();
+//    }
 
 
 }
