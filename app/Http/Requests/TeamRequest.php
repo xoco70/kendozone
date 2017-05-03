@@ -23,7 +23,7 @@ class TeamRequest extends Request
     {
         return [
             'name' => 'required',
-            'championship_id' => 'required',
+            'championship_id' => 'required|exists:championships,id',
         ];
     }
 }
