@@ -21,11 +21,11 @@
                         <div class="input_fields_wrap">
                             <div class="form-group">
                                 <div class="col-sm-3">
-                                    <input type="text" name="firstnames[]" class="form-control mt-20"
+                                    <input type="text" name="firstnames[]" class="form-control mt-20" required
                                            placeholder="{{ trans("core.firstname") }}"/>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" name="lastnames[]" class="form-control mt-20"
+                                    <input type="text" name="lastnames[]" class="form-control mt-20" required
                                            placeholder="{{ trans("core.lastname") }}"/>
                                 </div>
                                 <div class="col-sm-3">

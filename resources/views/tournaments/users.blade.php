@@ -168,7 +168,7 @@
     </div>
 
     @include("right-panel.users_menu")
-    @include("modals.add_tournament_user")
+    @include("modals.add_competitor")
 @stop
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
