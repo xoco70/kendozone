@@ -90,8 +90,8 @@
     <script>
         Raven.config("{{env('SENTRY_PUBLIC')}}").install();
         Raven.setUserContext({
-            email: "{!!  Auth::user()->email !!}",
-            id: "{!!  Auth::user()->id !!}"
+            email: "{!!  Auth::check() ? Auth::user()->email :'' !!}",
+            id: "{!!     Auth::check() ? Auth::user()->id : '' !!}"
         })
     </script>
 @endif
