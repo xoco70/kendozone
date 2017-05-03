@@ -24,12 +24,6 @@ class Association extends Model
     protected static function boot()
     {
         parent::boot();
-        static::deleting(function ($association) {
-            //TODO Unlink all clubs/users from assoc
-
-        });
-        static::restoring(function ($tournament) {
-        });
 
     }
 

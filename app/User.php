@@ -47,7 +47,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-//    protected $appends = [''];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -62,11 +61,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ]
         ];
     }
-
-//    protected $sluggable = [
-//        'build_from' => 'email',
-//        'save_to' => 'slug',
-//    ];
 
     /**
      * The attributes that are mass assignable.
@@ -107,11 +101,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
 
         // If a User is deleted, you must delete:
-        // His tournaments, his tcus
+        // His tournaments, his competitors
 
         static::deleting(function ($user) {
-//            foreach
-//            $user->tournaments()->delete();
             foreach ($user->tournaments as $tournament) {
                 $tournament->delete();
             }
@@ -128,6 +120,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
+    /**
+     * Add geoData based on IP
+     */
     function addGeoData()
     {
         $ip = request()->ip();
@@ -168,6 +163,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Upload Pic
      * @param $data
      * @return array
      */
@@ -211,6 +207,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
+    /**
+     * @param $avatar
+     * @return string
+     */
     public function getAvatarAttribute($avatar)
     {
 
@@ -225,32 +225,41 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $avatar;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function grade()
     {
         return $this->belongsTo('App\Grade');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function role()
     {
         return $this->belongsTo('App\Role');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function settings()
     {
         return $this->hasOne('App\Settings');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function invites()
     {
         return $this->hasMany('App\Invite', 'email', 'email');
     }
 
-
-//    public function tournamentsInvited()
-//    {
-//        return $this->hasManyThrough('App\Invite', 'App\Tournament');
-//    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function country()
     {
         return $this->belongsTo('Webpatser\Countries\Countries');
@@ -276,62 +285,93 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Tournament')->onlyTrashed();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany('App\Category', 'competitor', 'user_id', 'championship_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function championships()
     {
         return $this->belongsToMany(Championship::class, 'competitor')
             ->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function federation()
     {
         return $this->belongsTo(Federation::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function association()
     {
         return $this->belongsTo(Association::class);
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function associations()
     {
         return $this->hasMany(Association::class, 'president_id');
     }
 
-
-    // A president of federation owns a federation
+    /**
+     * A president of federation owns a federation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function federationOwned()
     {
         return $this->belongsTo(Federation::class, 'id', 'president_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function associationOwned()
     {
-//        dd($this->belongsTo(Association::class, 'id', 'president_id')->getQuery()->toSql(),Auth::user()->id);
         return $this->belongsTo(Association::class, 'id', 'president_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function clubOwned()
     {
         return $this->belongsTo(Club::class, 'id', 'president_id');
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function club()
     {
         return $this->belongsTo(Club::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function competitors()
     {
         return $this->hasMany(Competitor::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function myTournaments()
     {
         return Tournament::leftJoin('championship', 'championship.tournament_id', '=', 'tournament.id')
@@ -342,6 +382,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
+    /**
+     * Generate random password
+     * @return string
+     */
     public static function generatePassword()
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -354,41 +398,66 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return implode($pass); //turn the array into a string
     }
 
+    /**
+     * @return bool
+     */
     public function isDeleted()
     {
         return $this->deleted_at != null;
     }
 
+    /**
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    /**
+     * @return bool
+     */
     public function isSuperAdmin()
     {
         return $this->role_id == config('constants.ROLE_SUPERADMIN');
     }
 
+    /**
+     * @return bool
+     */
     public function isFederationPresident()
     {
         return $this->role_id == config('constants.ROLE_FEDERATION_PRESIDENT');
     }
 
+    /**
+     * @return bool
+     */
     public function isAssociationPresident()
     {
         return $this->role_id == config('constants.ROLE_ASSOCIATION_PRESIDENT');
     }
 
+    /**
+     * @return bool
+     */
     public function isClubPresident()
     {
         return $this->role_id == config('constants.ROLE_CLUB_PRESIDENT');
     }
 
+    /**
+     * @return bool
+     */
     public function isUser()
     {
         return $this->role_id == config('constants.ROLE_USER');
     }
 
+    /**
+     * @param $tournament
+     * @return bool
+     */
     public function isOwner($tournament)
     {
         return $tournament->user_id == $this->id;
@@ -470,8 +539,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $user;
     }
 
-    public
-    static function fillSelect()
+    /**
+     * @return Collection
+     */
+    public static function fillSelect()
     {
 
         $users = new Collection();
@@ -487,8 +558,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $users;
     }
 
-    public
-    static function getClubPresidentsList()
+    /**
+     * @return Collection
+     */
+    public static function getClubPresidentsList()
     {
         $users = new Collection();
         if (Auth::user()->isSuperAdmin()) {
@@ -504,6 +577,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    /**
+     * Check if a user is registered to a tournament
+     * @param Tournament $tournament
+     * @return bool
+     */
     public function isRegisteredTo(Tournament $tournament)
     {
         $championships = $tournament->championships;
