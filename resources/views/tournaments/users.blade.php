@@ -173,7 +173,7 @@
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
 
-    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}
+{{--    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}--}}
     <script>
 
 
