@@ -24,9 +24,9 @@ class CompetitorRequest extends Request
     public function rules()
     {
         return [
-            '*.firstnames' => 'required',
-//            '*.lastnames' => 'required|max:255',
-            '*.emails' => 'email',
+            'person.*.firstnames' => 'required',
+            'person.*.lastnames' => 'required',
+            'person.*.emails' => 'email',
             'championshipId' => 'required',
 
         ];
