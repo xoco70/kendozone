@@ -28,8 +28,8 @@
                                             $fighter1 = $fight->team1 != null ? $fight->team1->name : "";
                                             $fighter2 = $fight->team2 != null ? $fight->team2->name : "";
                                         } else {
-                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->user->name : "";
-                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->user->name : "";
+                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->getFullName() : "";
+                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->getFullName() : "";
                                         }
 
 

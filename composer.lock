@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d5a8213f7920571a0a41b62b42e14b0a",
-    "content-hash": "d6e9ebdad7a7fc902461476e18d41e94",
+    "hash": "40cd89f40a42e8fd2e87185e99c0bb54",
+    "content-hash": "80ca4d36532d4057691bf6a623ba03dc",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1129,6 +1129,60 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "kalnoy/nestedset",
+            "version": "v4.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lazychaser/laravel-nestedset.git",
+                "reference": "16653f7e708fdd3f5c208877fe8a7b2272f1bd6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/16653f7e708fdd3f5c208877fe8a7b2272f1bd6c",
+                "reference": "16653f7e708fdd3f5c208877fe8a7b2272f1bd6c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.2.* | 5.3.* | 5.4.*",
+                "illuminate/events": "5.2.* | 5.3.* | 5.4.*",
+                "illuminate/support": "5.2.* | 5.3.* | 5.4.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v4.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kalnoy\\Nestedset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kalnoy",
+                    "email": "lazychaser@gmail.com"
+                }
+            ],
+            "description": "Nested Set Model for Laravel 4-5",
+            "keywords": [
+                "database",
+                "hierarchy",
+                "laravel",
+                "nested sets",
+                "nsm"
+            ],
+            "time": "2017-04-12 17:32:55"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -5840,20 +5894,21 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.9.11",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "72d07c4788451e67f2e7b8a60e16d7b37d645a72"
+                "reference": "8db9fa7fc343ecda58334b80ca0aaff69a45292c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/72d07c4788451e67f2e7b8a60e16d7b37d645a72",
-                "reference": "72d07c4788451e67f2e7b8a60e16d7b37d645a72",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/8db9fa7fc343ecda58334b80ca0aaff69a45292c",
+                "reference": "8db9fa7fc343ecda58334b80ca0aaff69a45292c",
                 "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "1.*",
+                "kalnoy/nestedset": "^4.2",
                 "laravel/browser-kit-testing": "^1.0",
                 "php": ">=7.0.0",
                 "phpunit/phpunit": "^5.7",
@@ -5884,7 +5939,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-05-03 03:25:30"
+            "time": "2017-05-05 18:28:35"
         },
         {
             "name": "zendframework/zend-diactoros",

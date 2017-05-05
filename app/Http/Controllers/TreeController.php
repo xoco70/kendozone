@@ -49,10 +49,8 @@ class TreeController extends Controller
             $settings = $championship->getSettings();
             $generation = new TreeGen($championship, null, $settings);
             try {
-
-                $tree = $generation->run();
-
-                FightersGroup::generateFights($tree, $settings, $championship);
+                $generation->run();
+                FightersGroup::generateFights($championship);
                 flash()->success(trans('msg.championships_tree_generation_success'));
 
             } catch (TreeGenerationException $e) {

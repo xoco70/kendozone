@@ -585,9 +585,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isRegisteredTo(Tournament $tournament)
     {
         $championships = $tournament->championships;
-        $ids = $championships->map(function ($item, $key) {
-            return $item->id;
-        })->toArray();
+        $ids = $championships->pluck('id');
 
         $isRegistered = Competitor::where('user_id', $this->id)
             ->whereIn('championship_id', $ids)

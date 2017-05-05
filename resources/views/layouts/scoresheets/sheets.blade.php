@@ -1,7 +1,7 @@
 @if (sizeof($championship->fightersGroups)==0)
     {{ trans('core.still_no_scoresheet') }}
 @endif
-@for ( $i=0; $i < sizeof($championship->fightersGroups); $i++ )
+@for ( $i=sizeof($championship->fightersGroups()->get())-1; $i >= 0; $i-- )
 
     <div class="panel panel-flat page_print">
         <div class="panel-body">
@@ -26,7 +26,7 @@
                             $fighters = $group->getFighters();
 
                             if ($j != 3) { // Cancel the last increment
-                                $i++;
+                                $i--;
                             }
 
                         }
