@@ -20,7 +20,6 @@ class FightController extends Controller
             $query->with(['competitor1.user', 'competitor2.user', 'team1', 'team2']);
         }])->where('slug', $request->tournament)
             ->first();
-
         return view('fights.index', compact('tournament', 'grades'));
 
     }

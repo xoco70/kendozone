@@ -13,7 +13,6 @@
                         @forelse($tournament->championships as $championship)
                             <h1> {{$championship->buildName()}}</h1>
 
-
                             @foreach($championship->firstRoundFights->groupBy('area') as $fightsByArea)
                                 <table class="table-bordered text-center">
                                     <th class="p-10">Id</th>
@@ -21,6 +20,7 @@
                                     <th class="p-10">{{trans_choice('core.competitor',1)}} 2</th>
 
                                     @foreach($fightsByArea->sortBy('id') as $id => $fight)
+
 
                                         <?php
 
