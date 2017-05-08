@@ -76,8 +76,7 @@ class TreeController extends Controller
         $numFight = 0;
         $championshipId = $request->championshipId;
         $championship = Championship::find($request->championshipId);
-        $groups = FightersGroup::with('fights')->where('championship_id', $championshipId)->get();
-
+        $groups = FightersGroup::with('fights')->where('championship_id', $championshipId)->orderByDesc('id')->get();
         $fights = $request->fights;
         foreach ($groups as $group) {
             foreach ($group->fights as $fight) {
