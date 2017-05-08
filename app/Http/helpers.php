@@ -42,6 +42,11 @@ function isJapanese($lang)
     return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $lang);
 }
 
+function isKorean($lang)
+{
+    return preg_match('/[\x{3130}-\x{318F}\x{AC00}-\x{D7AF}]/u', $lang);
+}
+
 /**
  * Returns a Random String
  * @param $length

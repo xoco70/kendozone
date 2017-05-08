@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "40cd89f40a42e8fd2e87185e99c0bb54",
-    "content-hash": "80ca4d36532d4057691bf6a623ba03dc",
+    "hash": "42d68c8e64566525705efbcb7e6823fd",
+    "content-hash": "6e0cf61bef93c4830c7a0ab7dcb59069",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2073,6 +2073,55 @@
             "time": "2016-10-12 14:08:15"
         },
         {
+            "name": "liopic/korean-romanizer",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liopic/php-Korean-romanizer.git",
+                "reference": "9ce66a02a5f222ee6b01ed7fa3ca9dff848348ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liopic/php-Korean-romanizer/zipball/9ce66a02a5f222ee6b01ed7fa3ca9dff848348ef",
+                "reference": "9ce66a02a5f222ee6b01ed7fa3ca9dff848348ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "KoreanRomanizer\\": "src/KoreanRomanizer"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julio Martinez",
+                    "email": "liopic@liopic.com",
+                    "homepage": "http://liopic.com"
+                }
+            ],
+            "description": "Library to romanize Korean in UTF-8 format",
+            "homepage": "https://github.com/liopic/php-Korean-romanizer",
+            "keywords": [
+                "hangeul",
+                "hangugeo",
+                "hangul",
+                "korean",
+                "romanization",
+                "romanize"
+            ],
+            "time": "2015-01-20 16:12:40"
+        },
+        {
             "name": "maatwebsite/excel",
             "version": "2.1.17",
             "source": {
@@ -2825,16 +2874,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "ab8028c93c03cc8d9c824efa75dc94f1db2369bf"
+                "reference": "f8dd0e18d2328c447dd4190fecd11ef52680d968"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ab8028c93c03cc8d9c824efa75dc94f1db2369bf",
-                "reference": "ab8028c93c03cc8d9c824efa75dc94f1db2369bf",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f8dd0e18d2328c447dd4190fecd11ef52680d968",
+                "reference": "f8dd0e18d2328c447dd4190fecd11ef52680d968",
                 "shasum": ""
             },
             "require": {
@@ -2913,7 +2962,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2016-10-04 00:57:04"
+            "time": "2017-05-08 05:58:35"
         },
         {
             "name": "phpspec/prophecy",
@@ -5894,16 +5943,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "376581ab4e7987276a1ed1c50d8a2defe576e4a0"
+                "reference": "14ed1b249aff14377e480ff95bb89f8f337ca13e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/376581ab4e7987276a1ed1c50d8a2defe576e4a0",
-                "reference": "376581ab4e7987276a1ed1c50d8a2defe576e4a0",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/14ed1b249aff14377e480ff95bb89f8f337ca13e",
+                "reference": "14ed1b249aff14377e480ff95bb89f8f337ca13e",
                 "shasum": ""
             },
             "require": {
@@ -5939,7 +5988,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-05-05 22:52:10"
+            "time": "2017-05-05 23:18:25"
         },
         {
             "name": "zendframework/zend-diactoros",

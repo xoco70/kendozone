@@ -47,8 +47,6 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        // Assoc Policy
-
         $association = new Association;
         $federation = new Collection;
 
