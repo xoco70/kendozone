@@ -103,8 +103,7 @@ class Tournament extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public
-    function owner()
+    public function owner()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
@@ -113,8 +112,7 @@ class Tournament extends Model
      * Get All Tournaments levels
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public
-    function level()
+    public function level()
     {
         return $this->belongsTo(TournamentLevel::class, 'level_id', 'id');
     }
@@ -123,8 +121,7 @@ class Tournament extends Model
      * Get Full venue object
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public
-    function venue()
+    public function venue()
     {
         return $this->belongsTo(Venue::class);
     }
@@ -135,8 +132,7 @@ class Tournament extends Model
      * Or         $tournament->categories()->sync([1, 2, 3]);
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public
-    function categories()
+    public function categories()
     {
         return $this->belongsToMany(Category::class, 'championship')
             ->withPivot('id')
@@ -148,8 +144,7 @@ class Tournament extends Model
      * Get All categoriesTournament that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public
-    function championships()
+    public function championships()
     {
         return $this->hasMany(Championship::class);
     }
@@ -159,8 +154,7 @@ class Tournament extends Model
      * Get All categoriesSettings that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public
-    function championshipSettings()
+    public function championshipSettings()
     {
         return $this->hasManyThrough(ChampionshipSettings::class, Championship::class);
     }
@@ -169,8 +163,7 @@ class Tournament extends Model
      * çGet All teams that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public
-    function teams()
+    public function teams()
     {
         return $this->hasManyThrough(Team::class, Championship::class);
     }
@@ -180,8 +173,7 @@ class Tournament extends Model
      * @param null $championshipId
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public
-    function competitors($championshipId = null)
+    public function competitors($championshipId = null)
     {
         return $this->hasManyThrough(Competitor::class, Championship::class);
     }
@@ -190,8 +182,7 @@ class Tournament extends Model
      * Get All trees that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public
-    function trees()
+    public function trees()
     {
         return $this->hasManyThrough(FightersGroup::class, Championship::class);
     }
@@ -201,8 +192,7 @@ class Tournament extends Model
      * Get all Invitations that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public
-    function invites()
+    public function invites()
     {
         return $this->morphMany(Invite::class, 'object');
     }
@@ -211,33 +201,28 @@ class Tournament extends Model
      * Get Category List with <Select> Format
      * @return mixed
      */
-    public
-    function getCategoryList()
+    public function getCategoryList()
     {
         return $this->categories->pluck('id')->all();
     }
 
 
-    public
-    function getDateAttribute($date)
+    public function getDateAttribute($date)
     {
         return $date;
     }
 
-    public
-    function getRegisterDateLimitAttribute($date)
+    public function getRegisterDateLimitAttribute($date)
     {
         return $date;
     }
 
-    public
-    function getDateIniAttribute($date)
+    public function getDateIniAttribute($date)
     {
         return $date;
     }
 
-    public
-    function getDateFinAttribute($date)
+    public function getDateFinAttribute($date)
     {
         return $date;
     }
@@ -246,8 +231,7 @@ class Tournament extends Model
      * Check if the tournament is Open
      * @return bool
      */
-    public
-    function isOpen()
+    public function isOpen()
     {
         return $this->type == 1;
     }
@@ -256,8 +240,7 @@ class Tournament extends Model
      * * Check if the tournament needs Invitation
      * @return bool
      */
-    public
-    function needsInvitation()
+    public function needsInvitation()
     {
         return $this->type == 0;
     }
@@ -265,8 +248,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isInternational()
+    public function isInternational()
     {
         return $this->level_id == 8;
     }
@@ -274,8 +256,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isNational()
+    public function isNational()
     {
         return $this->level_id == 7;
     }
@@ -283,8 +264,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isRegional()
+    public function isRegional()
     {
         return $this->level_id == 6;
     }
@@ -292,8 +272,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isEstate()
+    public function isEstate()
     {
         return $this->level_id == 5;
     }
@@ -301,8 +280,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isMunicipal()
+    public function isMunicipal()
     {
         return $this->level_id == 4;
     }
@@ -310,8 +288,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isDistrictal()
+    public function isDistrictal()
     {
         return $this->level_id == 3;
     }
@@ -319,8 +296,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isLocal()
+    public function isLocal()
     {
         return $this->level_id == 2;
     }
@@ -328,14 +304,12 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function hasNoLevel()
+    public function hasNoLevel()
     {
         return $this->level_id == 1;
     }
 
-    public
-    function getRouteKeyName()
+    public function getRouteKeyName()
     {
         return 'slug';
     }
@@ -343,8 +317,7 @@ class Tournament extends Model
     /**
      * @return bool
      */
-    public
-    function isDeleted()
+    public function isDeleted()
     {
         return $this->deleted_at != null;
     }
@@ -354,8 +327,7 @@ class Tournament extends Model
      * Create and Configure Championships depending the rule ( IKF, EKF, LAKF, etc )
      * @param $ruleId
      */
-    public
-    function setAndConfigureCategories($ruleId)
+    public function setAndConfigureCategories($ruleId)
     {
         if ($ruleId == 0) return; // No Rules Selected
 
@@ -400,8 +372,7 @@ class Tournament extends Model
      *
      * @return array
      */
-    public
-    function buildCategoryList()
+    public function buildCategoryList()
     {
         $cts = Championship::with('category', 'settings')
             ->whereHas('category', function ($query) {
@@ -429,8 +400,7 @@ class Tournament extends Model
      * Check if the tournament has a Team Championship
      * @return integer
      */
-    public
-    function hasTeamCategory()
+    public function hasTeamCategory()
     {
         return $this
             ->categories()
@@ -442,8 +412,7 @@ class Tournament extends Model
     /**
      * @return array
      */
-    public
-    function getCategoriesName()
+    public function getCategoriesName()
     {
         $baseCategories = Category::take(10)->pluck('name', 'id');
         foreach ($this->championships as $championship) {
@@ -455,6 +424,17 @@ class Tournament extends Model
 
         $categories = $baseCategories->sortBy('id')->toArray();
         return $categories;
+    }
+
+    /**
+     * Get All trees that belongs to a tournament
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function uniqueTrees()
+    {
+        return $this->hasManyThrough(FightersGroup::class, Championship::class)
+            ->select('championship_id')
+            ->distinct();
     }
 
 

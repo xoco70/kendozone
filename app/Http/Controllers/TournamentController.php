@@ -44,9 +44,9 @@ class TournamentController extends Controller
         $currentModelName = trans_choice('core.tournament', 2);
 
         if (Auth::user()->isSuperAdmin()) {
-            $tournaments = Tournament::with('owner')->orderBy('created_at', 'desc')->paginate(config('constants.PAGINATION'));
+            $tournaments = Tournament::with('owner')->withCount('competitors')->latest()->paginate(config('constants.PAGINATION')); // ,'uniqueTrees'
         } else {
-            $tournaments = Auth::user()->tournaments()->with('owner')->orderBy('created_at', 'desc')->paginate(config('constants.PAGINATION'));
+            $tournaments = Auth::user()->tournaments()->with('owner')->latest()->paginate(config('constants.PAGINATION'));
         }
         $title = trans('core.tournaments_created');
         return view('tournaments.index', compact('tournaments', 'currentModelName', 'title'));

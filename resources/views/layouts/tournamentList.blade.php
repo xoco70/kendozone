@@ -42,16 +42,14 @@
                     </div>
 
                 @endif
-
-
-
-
             @else
                 <table class="table table-togglable table-hover">
                     <thead>
                     <tr>
                         <th data-toggle="true" class="text-center">{{ trans('core.name') }}</th>
                         <th data-hide="phone" class="text-center">{{ trans('core.date') }}</th>
+                        <th data-hide="phone" class="text-center">{{ trans_choice('core.competitor',2) }}</th>
+{{--                        <th data-hide="phone" class="text-center">{{ trans_choice('core.tree',2) }}</th>--}}
                         <th data-hide="phone" class="text-center">{{ trans('core.owner') }}</th>
                         @if ($title == trans('core.tournaments_created') || $title == trans('core.tournaments_deleted') )
                             <th class="text-center">{{ trans('core.action') }}</th>
@@ -73,6 +71,8 @@
                                 @endif
                             </td>
                             <td>{{ $tournament->dateIni }}</td>
+                            <td>{{ $tournament->competitors_count }}</td>
+{{--                            <td>{{ $tournament->unique_trees_count }}</td>--}}
                             <td>{{ $tournament->owner->name}}</td>
                             <td class="text-center">
                                 @if ($title == trans('core.tournaments_created'))
