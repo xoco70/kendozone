@@ -1,7 +1,5 @@
 <?php
 $generatedTreeCount = $tournament->trees->groupBy('championship_id')->count();
-$numCompetitors = $tournament->competitors->groupBy('user_id')->count();
-$numTeams = $tournament->teams()->count();
 $settingSize = $tournament->championshipSettings->count();
 $categorySize = $tournament->championships->count();
 if (Route::currentRouteName() != 'tournaments.edit') {
@@ -56,10 +54,10 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                        id="competitors">
                         <i class="icon-users"></i>
                         {{trans_choice("core.competitor",2)}}
-                        @if($numCompetitors>8)
-                            <span class="badge badge-success">{{$numCompetitors }}</span>
+                        @if($tournament->competitors_count>8)
+                            <span class="badge badge-success">{{$tournament->competitors_count }}</span>
                         @else
-                            <span class="badge badge-primary">{{$numCompetitors}}</span>
+                            <span class="badge badge-primary">{{$tournament->competitors_count}}</span>
                         @endif
 
                     </a>
@@ -80,10 +78,10 @@ if (Route::currentRouteName() != 'tournaments.edit') {
                 @if ($tournament->hasTeamCategory())
                     <li><a href="{{ URL::action('TeamController@index',$tournament->slug) }}"><i
                                     class="icon-collaboration"></i>{{ trans_choice('core.team',2) }}
-                            @if($numTeams>2)
-                                <span class="badge badge-success">{{$numTeams }}</span>
+                            @if($tournament->teams_count>2)
+                                <span class="badge badge-success">{{$tournament->teams_count }}</span>
                             @else
-                                <span class="badge badge-primary">{{$numTeams}}</span>
+                                <span class="badge badge-primary">{{$tournament->teams_count}}</span>
                             @endif
                         </a></li>
                 @endif

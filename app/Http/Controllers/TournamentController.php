@@ -115,7 +115,9 @@ class TournamentController extends Controller
     public function edit(Tournament $tournament)
     {
 
-        $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')->find($tournament->id);
+        $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')
+            ->withCount('competitors', 'teams')
+            ->find($tournament->id);
         // Statistics for Right Panel
         $countries = Country::getAllPlucked();
         $settingSize = $tournament->championshipSettings->count();
@@ -256,7 +258,6 @@ class TournamentController extends Controller
         $title = trans('core.tournaments_deleted');
         return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
     }
-
 
 
 }
