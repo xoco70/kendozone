@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row text-center">
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 
             @if (sizeof($tournaments) == 0)
                 <br/><br/><br/><br/><br/><br/>
