@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.27.0",
+            "version": "3.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "23fd97c5bc4aaa923b994f8876c86574ed84f27d"
+                "reference": "9fc7aa9cad2e8cff8e49582f1be19cf92631153c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/23fd97c5bc4aaa923b994f8876c86574ed84f27d",
-                "reference": "23fd97c5bc4aaa923b994f8876c86574ed84f27d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9fc7aa9cad2e8cff8e49582f1be19cf92631153c",
+                "reference": "9fc7aa9cad2e8cff8e49582f1be19cf92631153c",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-05-04 22:43:46"
+            "time": "2017-05-09 17:51:04"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -4448,16 +4448,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.7",
+            "version": "v5.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4"
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
-                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/9a06dc570a0367850280eefd3f1dc2da45aef517",
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517",
                 "shasum": ""
             },
             "require": {
@@ -4498,7 +4498,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-04-20 17:32:18"
+            "time": "2017-05-01 15:54:03"
         },
         {
             "name": "symfony/class-loader",
@@ -5943,16 +5943,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.10.2",
+            "version": "0.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "14ed1b249aff14377e480ff95bb89f8f337ca13e"
+                "reference": "4261b03d61bda10f0abccf1c79b4531771ef4570"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/14ed1b249aff14377e480ff95bb89f8f337ca13e",
-                "reference": "14ed1b249aff14377e480ff95bb89f8f337ca13e",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/4261b03d61bda10f0abccf1c79b4531771ef4570",
+                "reference": "4261b03d61bda10f0abccf1c79b4531771ef4570",
                 "shasum": ""
             },
             "require": {
@@ -5988,7 +5988,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-05-05 23:18:25"
+            "time": "2017-05-10 05:28:45"
         },
         {
             "name": "zendframework/zend-diactoros",
