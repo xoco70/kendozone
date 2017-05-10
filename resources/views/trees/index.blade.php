@@ -62,8 +62,6 @@
                                         @elseif ($championship->isDirectEliminationType())
                                             @include('layouts.tree.directElimination')
                                         @elseif ($championship->isPlayOffType())
-                                            @include('layouts.tree.roundRobin')
-                                        @elseif ($championship->isPlayOffType())
                                             @include('layouts.tree.playOff')
                                         @endif
                                     @else
