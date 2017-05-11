@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TournamentRequest extends Request
 {
-
-//    public function __construct(\Illuminate\Http\Request $request){
-//        dd($request);
-//    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -86,21 +82,16 @@ class TournamentRequest extends Request
      */
     public function update(Tournament $tournament, Venue $venue)
     {
-
         $res = null;
         switch (true) {
-
             case $this->exists('dateIni'):
-
                 $res = $tournament->update($this->all());
-
                 break;
             case $this->exists('longitude'):
                 $tournament->venue_id = $venue->id;
                 $tournament->update();
                 $res = true;
                 break;
-
             case $this->has('category'):
                 $res = $tournament->categories()->sync($this->input('category'));
                 break;
@@ -108,7 +99,6 @@ class TournamentRequest extends Request
                 $tournament->setAndConfigureCategories($this->rule_id);
                 $res = $tournament->update($this->all());
                 break;
-
         }
         return $res;
     }

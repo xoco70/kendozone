@@ -341,8 +341,7 @@ class Tournament extends Model
 
     }
 
-    private
-    function loadRulesOptions($ruleId)
+    private function loadRulesOptions($ruleId)
     {
         switch ($ruleId) {
             case 0: // No preset selected
@@ -368,7 +367,7 @@ class Tournament extends Model
      */
     public function buildCategoryList()
     {
-        $cts = Championship::with('category', 'settings')
+        $championships = Championship::with('category', 'settings')
             ->whereHas('category', function ($query) {
                 return $query->where('isTeam', 1);
 
@@ -377,12 +376,11 @@ class Tournament extends Model
             ->get();
 
         $array = [];
-        foreach ($cts as $ct) {
+        foreach ($championships as $championship) {
 
-            $array[$ct->id] = $ct->settings->alias != ''
-                ? $ct->settings->alias
-                : trim($ct->buildName());
-
+            $array[$championship->id] = $championship->settings->alias != ''
+                ? $championship->settings->alias
+                : trim($championship->buildName());
         }
 
         return $array;
@@ -415,7 +413,6 @@ class Tournament extends Model
             $alias = $championship->buildName();
             $baseCategories->put($category->id, $alias);
         }
-
         $categories = $baseCategories->sortBy('id')->toArray();
         return $categories;
     }

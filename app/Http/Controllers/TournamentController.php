@@ -60,7 +60,7 @@ class TournamentController extends Controller
     public function create()
     {
         $currentModelName = trans_choice('core.tournament', 1);
-        $levels = TournamentLevel::pluck('name', 'id');
+        $levels = TournamentLevel::getAllPlucked();
         $categories = Category::take(10)->orderBy('id', 'asc')->pluck('name', 'id');
         $tournament = new Tournament();
         $rules = config('options.rules');
@@ -69,7 +69,7 @@ class TournamentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new Tournament
      *
      * @param TournamentRequest $form
      * @return \Illuminate\Http\Response
@@ -79,12 +79,11 @@ class TournamentController extends Controller
         $tournament = $form->persist();
         $msg = trans('msg.tournament_create_successful', ['name' => $tournament->name]);
         flash()->success($msg);
-//        else flash('error', 'operation_failed!');
         return redirect(URL::action('TournamentController@edit', $tournament->slug));
     }
 
     /**
-     * Display the specified resource.
+     * Display the Tournament.
      *
      * @param Request $request
      * @param $tournamentSlug
@@ -94,12 +93,8 @@ class TournamentController extends Controller
     {
         $teams = "";
         $grades = Grade::getAllPlucked();
-
-
-        // Competitors
         $tournamentWithTrees = FightersGroup::getTournament($request);
         $venue = $tournamentWithTrees->venue ?? new Venue;
-
         $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
         $countries = Country::getAll();
 
@@ -107,7 +102,7 @@ class TournamentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the Tournament.
      *
      * @param Tournament $tournament
      * @return \Illuminate\Http\Response
@@ -118,29 +113,22 @@ class TournamentController extends Controller
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')
             ->withCount('competitors', 'teams')
             ->find($tournament->id);
+
         // Statistics for Right Panel
         $countries = Country::getAllPlucked();
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
-
         $hanteiLimit = config('options.hanteiLimit');
-
         $categories = $tournament->getCategoriesName();
-
-
         $grades = Grade::getAllPlucked();
-
         $venue = $tournament->venue ?? new Venue;
-
-
-        //TODO PUT IN CACHE
-        $levels = TournamentLevel::pluck('name', 'id');
+        $levels = TournamentLevel::getAllPlucked();
 
         return view('tournaments.edit', compact('tournament', 'levels', 'categories', 'settingSize', 'categorySize', 'grades', 'numCompetitors', 'rules', 'hanteiLimit', 'numTeams', 'countries', 'venue'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the Tournament in storage.
      *
      * @param TournamentRequest $request
      * @param VenueRequest $venueRequest
@@ -155,7 +143,6 @@ class TournamentController extends Controller
             $venue = new Venue;
 
         if ($venueRequest->has('venue_name')) {
-
             $venue->fill($venueRequest->all());
             $venue->save();
         } else {
@@ -179,7 +166,7 @@ class TournamentController extends Controller
 
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the Tournament from storage.
      *
      * @param Tournament $tournament
      * @return \Illuminate\Http\JsonResponse
@@ -246,12 +233,12 @@ class TournamentController extends Controller
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
-                ->orderBy('tournament.created_at', 'desc')
+                ->latest()
                 ->paginate(config('constants.PAGINATION'));
         } else {
             $tournaments = Auth::user()->tournaments()->with('owner')
                 ->onlyTrashed()
-                ->orderBy('created_at', 'desc')
+                ->latest()
                 ->paginate(config('constants.PAGINATION'));
         }
 

@@ -33,7 +33,6 @@ class Championship extends \Xoco70\KendoTournaments\Models\Championship
         return $this->belongsTo(Tournament::class);
     }
 
-
     /**
      * Generate Round Titles
      * @param $numFighters
