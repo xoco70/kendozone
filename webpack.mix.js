@@ -108,6 +108,7 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
+    'public/js/categoryCreate.js'
 ], 'public/js/pages/header/tournamentEdit.js');
 
 

@@ -32,11 +32,11 @@ $day = $now->day;
 {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
 <script>
-        let ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
-        let ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
-        let lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
+        var ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
+        var ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
+        var lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
 
-        let dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
+        var dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
             showFilterInputs: false,
             infoTextEmpty: '',
             infoText: ''
@@ -44,22 +44,22 @@ $day = $now->day;
         $('.listbox-filter-disabled').on('change', function(){
             disableSubmit();
         });
-        let dualListIds = [];
+        var dualListIds = [];
 
 
-        let minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
+        var minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
         $(function () {
 
-            let $input = $('.dateFin').pickadate({
+            var $input = $('.dateFin').pickadate({
                 min: minDay,
                 format: 'yyyy-mm-dd',
                 today: '',
                 clear: '',
                 close: ''
             });
-            let pickerFin = $input.pickadate('picker');
+            var pickerFin = $input.pickadate('picker');
 
-            let $inputIni =$('.dateIni').pickadate({
+            var $inputIni =$('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
                 format: 'yyyy-mm-dd',
                 today: '',
@@ -71,7 +71,7 @@ $day = $now->day;
                         pickerFin.set('min', this.get('select'));
                 }
             });
-            let pickerIni = $inputIni.pickadate('picker');
+            var pickerIni = $inputIni.pickadate('picker');
 
             $(".listbox-filter-disabled > option").each(function () {
                 dualListIds.push(this.value);
