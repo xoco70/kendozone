@@ -15,31 +15,16 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
      */
     public function getCategorieslabelByRule($ruleId = null)
     {
-        //TODO Refactor Redundancy
-
-        $ikf_settings = null;
-        $ekf_settings = null;
-        $lakc_settings = null;
+        $result = [];
 
         if ($ruleId == null) {
-            $ikf_settings = static::whereIn('id', array_keys(config('options.ikf_settings')))->select('name')->get();
-            $ikf_settings = $multiplied = $ikf_settings->map(function ($item, $key) {
-                return $item->name;
-            })->toArray();
-
-            $ekf_settings = static::whereIn('id', array_keys(config('options.ekf_settings')))->select('name')->get();
-            $ekf_settings = $multiplied = $ekf_settings->map(function ($item, $key) {
-                return $item->name;
-            })->toArray();
-
-            $lakc_settings = static::whereIn('id', array_keys(config('options.lakc_settings')))->select('name')->get();
-            $lakc_settings = $multiplied = $lakc_settings->map(function ($item, $key) {
-                return $item->name;
-            })->toArray();
-        } else {
-
+            $rules = ['ikf', 'ekf', 'lakc'];
+            foreach ($rules as $rule) {
+                $result[] = static::whereIn('id', array_keys(config('options.' . $rule . '_settings')))
+                    ->select('name')->get()
+                    ->map->name->toArray();
+            }
         }
-        $result = [$ikf_settings, $ekf_settings, $lakc_settings];
         return $result;
     }
 
