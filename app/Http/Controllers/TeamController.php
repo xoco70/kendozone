@@ -49,12 +49,12 @@ class TeamController extends Controller
                 return ["id" => $competitor->id, "name" => $competitor->user->name];
             })->toArray();
             $teams = $championship->teams->map(function ($team) {
-                return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->competitorsWithUser];
+                return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->with('user')];
             })->toArray();
 
             $tempAssignCompatitors = new Collection();
             $assignedCompetitors = $championship->teams->reduce(function ($acc, $team) use ($tempAssignCompatitors) {
-                return $tempAssignCompatitors->push($team->competitorsWithUser)->collapse();
+                return $tempAssignCompatitors->push($team->competitors()->with('user')->get())->collapse();
             });
 
 
