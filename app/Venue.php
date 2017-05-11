@@ -39,16 +39,12 @@ class Venue extends Model
      */
     public function setDefaultLocation($tournament, $latitude, $longitude)
     {
-
         $userLat = $tournament != null ? $tournament->owner->latitude : null;
         $userLng = $tournament != null ? $tournament->owner->longitude : null;
 
-
         if ($latitude != null && $longitude != null) {
-
             $this->latitude = $latitude;
             $this->longitude = $longitude;
-
         } else if (!isNullOrEmptyString($userLat) && !isNullOrEmptyString($userLng)) {
             $this->latitude = $userLat;
             $this->longitude = $userLng;
@@ -58,7 +54,6 @@ class Venue extends Model
             $this->longitude = 0;
         }
         return $this;
-
     }
 
 }

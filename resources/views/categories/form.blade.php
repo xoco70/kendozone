@@ -1,7 +1,5 @@
 <div class="modal-body" id="modal">
-    <div class="col-xs-12" >
-
-
+    <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-12">
                 <div class=" form-group border-grey-700">
@@ -10,14 +8,6 @@
                 </div>
             </div>
         </div>
-        {{--<div class="row">--}}
-        {{--<div class="col-md-12">--}}
-        {{--{!!  Form::label('alias', trans('categories.alias'),['class' => 'text-bold' ]) !!}--}}
-        {{--<i class="icon-help" data-popup="tooltip" title="" data-placement="right" data-original-title="{{trans('categories.aliasTooltip')}}"></i>--}}
-        {{--{!!  Form::input('text', 'alias', null, ['class' => 'form-control',"v-model"=>"alias"]) !!}--}}
-
-        {{--</div>--}}
-        {{--</div><br/>--}}
         <div class="row">
             <div class="col-md-4">
                 {!!  Form::label('gender', trans('categories.gender'),['class' => 'text-bold' ]) !!}
@@ -50,7 +40,6 @@
 
         </div>
         <div class="row">
-
             <div class="col-md-4">
                 <div class=" form-group">
                     {!!  Form::label('ageCategory', trans('categories.ageCategory'),['class' => 'text-bold' ]) !!}
@@ -67,10 +56,7 @@
                     <select v-model="ageMin" class="form-control">
                         <option value="0">{{trans('categories.no_age_restriction')}}</option>
                         <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-
                     </select>
-
-
                 </div>
             </div>
             <div class="col-md-4" v-if='ageCategorySelect==5'>
@@ -79,17 +65,11 @@
                     <select v-model="ageMax" class="form-control">
                         <option value="0">{{trans('categories.no_age_restriction')}}</option>
                         <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-
                     </select>
                 </div>
             </div>
-
-
         </div>
-
-
         <div class="row">
-
             <div class="col-md-4">
                 <div class=" form-group">
                     {!!  Form::label('gradeSelect', trans('core.grade'),['class' => 'text-bold' ]) !!}
@@ -97,7 +77,6 @@
                     <select v-model="gradeSelect" class="form-control">
                         <option value="0">{{trans('categories.no_grade_restriction')}}</option>
                         <option value="3">{{trans('categories.custom')}}</option>
-
                     </select>
                 </div>
             </div>
@@ -106,10 +85,7 @@
                     {!!  Form::label('gradeMin', trans('categories.min_grade'),['class' => 'text-bold' ]) !!}
                     <select v-model="gradeMin" class="form-control" v-show="gradeSelect!=0">
                         <option v-for="(grade, val) in grades" :value="grade.value">@{{ grade.text | html }}</option>
-
                     </select>
-
-
                 </div>
             </div>
             <div class="col-md-4" v-if='gradeSelect==3'>
@@ -121,9 +97,7 @@
                     </select>
                 </div>
             </div>
-
         </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-primary" v-on:click="addCategory"

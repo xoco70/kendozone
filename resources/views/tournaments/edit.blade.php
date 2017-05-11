@@ -13,10 +13,7 @@
     @include("errors.list")
     <?php
     $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.url'));
-
     ?>
-
-
     <!-- Detached content -->
     <div class="container-detached">
         <div class="content-detached">
@@ -84,7 +81,7 @@
 
 @section('scripts_footer')
     <script>
-        let moreText = "{{trans('core.see_more') }}";
+        var moreText = "{{trans('core.see_more') }}";
         lessText = "{{trans('core.see_less') }}";
 
         var url_base = "{{ route('tournaments.index') }}";
@@ -111,9 +108,9 @@
 
         $("a").on('click', function () {
 
-            let href = $(this).attr('href');
+            var href = $(this).attr('href');
             if (href != null && href.indexOf('#') != -1) {
-                let id = href.replace("#", "");
+                var id = href.replace("#", "");
                 if ($("a[data-toggle='tab'][id='" + id + "']")) {
                     $("#" + id).click();
                 }
@@ -124,9 +121,7 @@
         $('.advanced_settings_{{ $championship->id }}').hide();
         $(".see_more_{{ $championship->id }}").click(function () {
             icon = $(this).find("i");
-            console.log(icon);
             icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-            console.log(icon);
             $(".see_more_{{ $championship->id }}")
                 .text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);
             $('.advanced_settings_{{ $championship->id }}').slideToggle("fast");
