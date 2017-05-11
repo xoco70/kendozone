@@ -70,18 +70,12 @@ class Tournament extends Model
     {
         parent::boot();
         static::deleting(function ($tournament) {
-            foreach ($tournament->championships as $ct) {
-                $ct->delete();
-            }
-            $tournament->invites()->delete();
+            $tournament->championships->each->delete();
+            $tournament->invites->each->delete();
 
         });
         static::restoring(function ($tournament) {
-
-            foreach ($tournament->championships()->withTrashed()->get() as $ct) {
-                $ct->restore();
-            }
-
+            $tournament->championships()->withTrashed()->get()->each->restore();
         });
 
     }

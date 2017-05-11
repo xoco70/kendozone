@@ -94,8 +94,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 if ($user->country_id == 0) {
                     $user->addGeoData();
                 }
-
-
             }
             return true;
         });
@@ -104,18 +102,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // His tournaments, his competitors
 
         static::deleting(function ($user) {
-            foreach ($user->tournaments as $tournament) {
-                $tournament->delete();
-            }
-            $user->competitors()->delete();
+            $user->tournaments->each->delete();
+            $user->competitors->each->delete();
 
         });
         static::restoring(function ($user) {
-            $user->competitors()->withTrashed()->restore();
-            foreach ($user->tournaments()->withTrashed()->get() as $tournament) {
-                $tournament->restore();
-            }
-
+            $user->competitors()->withTrashed()->get()->each->restore();
+            $user->tournaments()->withTrashed()->get()->each->restore();
         });
     }
 
