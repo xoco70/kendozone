@@ -35,6 +35,4 @@ class TournamentLevel extends Model
             return static::pluck('name', 'id');
         });
     }
-
-
 }

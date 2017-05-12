@@ -8,18 +8,13 @@ class Team extends \Xoco70\KendoTournaments\Models\Team
     {
         parent::boot();
         static::deleting(function ($team) {
-//            $championship = $team->championship;
-            // Select team that id > current deleted team and that belongs to championship
             $teams = Team::where('championship_id', $team->championship_id)
                 ->where('id', '>', $team->id)->get();
-
             foreach ($teams as $team){
                 $team->short_id--;
                 $team->save();
             }
-
         });
-
     }
 
     /**
@@ -29,8 +24,6 @@ class Team extends \Xoco70\KendoTournaments\Models\Team
     public function invites()
     {
         return $this->morphMany(Invite::class, 'object');
-
-
     }
 
     /**
@@ -40,9 +33,5 @@ class Team extends \Xoco70\KendoTournaments\Models\Team
     public function requests()
     {
         return $this->morphMany(Request::class, 'object');
-
-
     }
-
-
 }

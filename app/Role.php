@@ -28,10 +28,4 @@ class Role extends Model
     {
         return $query->where('id','>=', $userType);
     }
-
-
-
-
-
-
 }

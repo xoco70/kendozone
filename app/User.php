@@ -39,7 +39,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens, Impersonate;
 
-
     /**
      * The database table used by the model.
      *
@@ -138,10 +137,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->city = $city;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
-
-
     }
-
 
     /**
      * Confirm the user.
@@ -184,14 +180,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     $img->resize(200, null, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-
                 } else {
                     $img->resize(null, 200, function ($constraint) {
                         $constraint->aspectRatio();
                     });
                 }
                 $img->save($destinationPath . $fileName);
-
 
                 return $data;
             }
@@ -206,13 +200,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getAvatarAttribute($avatar)
     {
-
         if (!isset($avatar) && Gravatar::exists($this->email)) {
             $avatar = Gravatar::src($this->email);
         }
 
         if (!str_contains($avatar, 'http') && isset($avatar)) {
-
             $avatar = config('constants.AVATAR_PATH') . $avatar;
         }
         return $avatar;
@@ -363,6 +355,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Tournament where I have participated as competitor
      * @return mixed
      */
     public function myTournaments()
@@ -373,7 +366,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->select('tournament.*')
             ->distinct();
     }
-
 
     /**
      * Generate random password
@@ -488,7 +480,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             default:
                 throw new AuthorizationException();
         }
-
     }
 
     /**
@@ -528,7 +519,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->save();
         }
         // Fire Events
-
         return $user;
     }
 

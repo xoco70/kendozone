@@ -11,7 +11,6 @@ use OwenIt\Auditing\AuditingTrait;
 
 class Club extends Model
 {
-
     protected $table = 'club';
     public $timestamps = true;
     protected $guarded = ['id'];
@@ -19,19 +18,6 @@ class Club extends Model
     use AuditingTrait;
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::deleting(function ($club) {
-
-            //TODO Unlink all clubs/users from assoc
-        });
-        static::restoring(function ($club) {
-        });
-
-    }
 
     /**
      * A Club has only a President
@@ -70,7 +56,6 @@ class Club extends Model
             return $this->association->federation();
         else
             return $this->association(); //TODO THIS IS BAD :(
-
     }
 
 
@@ -99,8 +84,6 @@ class Club extends Model
             default:
                 throw new AuthorizationException();
         }
-
-
     }
 
     /**
@@ -113,7 +96,6 @@ class Club extends Model
         return
             $user->federationOwned != null &&
             $user->federationOwned->id == $this->federation_id;
-
     }
 
     /**
@@ -126,7 +108,6 @@ class Club extends Model
         return $user->associationOwned != null &&
             $this->association != null &&
             $user->associationOwned->id == $this->association->id;
-
     }
 
     /**
@@ -136,9 +117,9 @@ class Club extends Model
      */
     public function belongsToClubPresident(User $user)
     {
-        return $user->clubOwned != null &&
+        return
+            $user->clubOwned != null &&
             $user->clubOwned->id == $this->id;
-
     }
 
     /**
@@ -153,20 +134,8 @@ class Club extends Model
         } else if ($federationId != 0) {
             $clubs = Club::where('association_id', $associationId)->pluck('name', 'id');
         } else {
-            dd("you re fucked - v2");
+            $clubs = new Collection;
         }
-
-
-//        $clubs = new Collection();
-//        if (Auth::user()->isSuperAdmin()) {
-//            $clubs = Club::pluck('name', 'id');
-//        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-//            $clubs = Auth::user()->federationOwned->clubs;
-//        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
-//            $clubs = Auth::user()->associationOwned->clubs->pluck('name', 'id');
-//        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-//            $clubs = Auth::user()->clubOwned;
-//        }
         return $clubs;
     }
 
@@ -187,37 +156,8 @@ class Club extends Model
             $clubs = Club::where('association_id', $associationId)
                 ->get(['id as value', 'name as text']);
         } else {
-            dd("you re fucked");
+            $clubs = new Collection;
         }
-
-
-//        if ($user->isSuperAdmin()) {
-//
-//        } else if ($user->isFederationPresident() && $user->federationOwned != null) {
-//            $clubs = $user->federationOwned->clubs()
-//                ->where('association_id', $associationId)
-//                ->get(['club.id as value', 'club.name as text']);
-//        } else if ($user->isAssociationPresident() && $user->associationOwned != null) {
-//            $clubs = $user->associationOwned->clubs()
-//                ->where('association_id', $associationId)
-//                ->get(['club.id as value', 'club.name as text']);
-//        } else if ($user->isClubPresident() && $user->clubOwned != null) {
-//            $clubs = $user->clubOwned()
-//                ->where('association_id', $associationId)
-//                ->get(['club.id as value', 'club.name as text']);
-//        } else if ($user->isUser()) {
-//            $clubs = Club::where('association_id', $associationId)
-//                ->get(['id as value', 'name as text'])
-//                ->prepend(['value' => '0', 'text' => '-']);
-//        }
-
-//        if (sizeof($clubs) == 0) {
-//            $object = new stdClass;
-//            $object->value = 0;
-//            $object->text = trans('core.no_club_available');
-//            $clubs->push($object);
-//        };
-
         return $clubs;
     }
 

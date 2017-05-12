@@ -29,7 +29,6 @@ class Tournament extends Model
     use AuditingTrait;
     use SluggableScopeHelpers;
 
-
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -91,7 +90,6 @@ class Tournament extends Model
         return $engine;
     }
 
-
     /**
      * A tournament is owned by a user
      *
@@ -120,7 +118,6 @@ class Tournament extends Model
         return $this->belongsTo(Venue::class);
     }
 
-
     /**
      * We can use $tournament->categories()->attach(id);
      * Or         $tournament->categories()->sync([1, 2, 3]);
@@ -131,7 +128,6 @@ class Tournament extends Model
         return $this->belongsToMany(Category::class, 'championship')
             ->withPivot('id')
             ->withTimestamps();
-
     }
 
     /**
@@ -142,7 +138,6 @@ class Tournament extends Model
     {
         return $this->hasMany(Championship::class);
     }
-
 
     /**
      * Get All categoriesSettings that belongs to a tournament
@@ -181,7 +176,6 @@ class Tournament extends Model
         return $this->hasManyThrough(FightersGroup::class, Championship::class);
     }
 
-
     /**
      * Get all Invitations that belongs to a tournament
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -199,7 +193,6 @@ class Tournament extends Model
     {
         return $this->categories->pluck('id')->all();
     }
-
 
     public function getDateAttribute($date)
     {
@@ -316,7 +309,6 @@ class Tournament extends Model
         return $this->deleted_at != null;
     }
 
-
     /**
      * Create and Configure Championships depending the rule ( IKF, EKF, LAKF, etc )
      * @param $ruleId
@@ -338,7 +330,6 @@ class Tournament extends Model
             $rules['championship_id'] = $championship->id;
             ChampionshipSettings::create($rules);
         }
-
     }
 
     private function loadRulesOptions($ruleId)
@@ -370,24 +361,19 @@ class Tournament extends Model
         $championships = Championship::with('category', 'settings')
             ->whereHas('category', function ($query) {
                 return $query->where('isTeam', 1);
-
             })
             ->where('tournament_id', $this->id)
             ->get();
 
         $array = [];
         foreach ($championships as $championship) {
-
             $array[$championship->id] = $championship->settings->alias != ''
                 ? $championship->settings->alias
                 : trim($championship->buildName());
         }
-
         return $array;
-
     }
-
-
+    
     /**
      * Check if the tournament has a Team Championship
      * @return integer
@@ -399,7 +385,6 @@ class Tournament extends Model
             ->where('isTeam', '1')
             ->count();
     }
-
 
     /**
      * @return array
@@ -427,6 +412,4 @@ class Tournament extends Model
             ->select('championship_id')
             ->distinct();
     }
-
-
 }

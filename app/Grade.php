@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Cache;
 
 class Grade extends Model
 {
-
     protected $table = 'grade';
     public $timestamps = true;
 
@@ -19,7 +18,6 @@ class Grade extends Model
 
     public function getNameAttribute($name)
     {
-
         return trans($name);
     }
 

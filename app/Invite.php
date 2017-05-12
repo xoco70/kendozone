@@ -26,7 +26,7 @@ class Invite extends Model
     }
 
     /**
-     * Verify if it is in use - It should BE : An Invite has only 1 Tournament
+     * Verify if it is in use
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function tournament()
@@ -50,7 +50,6 @@ class Invite extends Model
         $invite->object_id = $tournament->id;
         $invite->expiration = $tournament->registerDateLimit;
         $invite->active = true;
-//        $invite->used = false;
 
         if ($invite->save())
             return $token;
@@ -58,14 +57,12 @@ class Invite extends Model
             return null;
     }
 
-
     /**
      * Consume the invitation
      */
     public function consume()
     {
         // Use the invitation
-
         $this->update(['used' => 1]);
     }
 
@@ -79,7 +76,6 @@ class Invite extends Model
         $invite = self::where('code', $token)
             ->where('active', 1)
             ->where('object_type', "App\Tournament")
-//            ->where('used', 0)
             ->first();
         return $invite;
     }
@@ -94,10 +90,4 @@ class Invite extends Model
         $output = str_split($hash, 8);
         return $output[rand(0, 1)];
     }
-
-//    protected function sql_timestamp()
-//    {
-//        return date(DB::connection()->grammar()->grammar->datetime);
-//    }
-
 }
