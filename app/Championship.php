@@ -44,7 +44,7 @@ class Championship extends \Xoco70\KendoTournaments\Models\Championship
             $this->noTeams = $numFighters / $this->getSettings()->preliminaryGroupSize;
         } else if ($this->isDirectEliminationType()) {
             $this->noTeams = $numFighters;
-        } else if ($this->isPlayOffType) {
+        } else if ($this->isPlayOffType()) {
             $this->noTeams = $numFighters;
         }
 
