@@ -28,7 +28,6 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
         return $result;
     }
 
-
     /**
      * Build Age String
      * @return string
@@ -100,10 +99,8 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
                 $gradeText = '';
             }
         }
-
         return $gradeText;
     }
-
 
     public function scopeIsTeam($query)
     {
@@ -122,7 +119,6 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
             'F' => trans('categories.female'),
             'X' => trans('categories.mixt')
         ];
-
 
         $teamText = $this->isTeam() ? trans_choice('core.team', 1) : trans('categories.single');
         $ageCategoryText = $this->getAgeString();

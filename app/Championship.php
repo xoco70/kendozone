@@ -13,14 +13,12 @@ class Championship extends \Xoco70\KendoTournaments\Models\Championship
         return $this->belongsTo(\App\Category::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function teams()
     {
         return $this->hasMany(\App\Team::class);
-    }
-
-    public function categoryTeams()
-    {
-        return $this->hasOne(Category::class)->isTeam();
     }
 
     /**

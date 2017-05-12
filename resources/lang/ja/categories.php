@@ -59,7 +59,7 @@ return [
     // CategorySetting
     'categorySettings' => '分類セッチング',
     'treeType' => 'とリータイプ',
-    'roundRobin' => 'ラウンドロビン',
+    'playOff' => 'ラウンドロビン',
     'direct_elimination' => '直接消去',
     'teamSize' => 'チームサイズ',
     'teamSizeReserve' => 'チーム予備費',

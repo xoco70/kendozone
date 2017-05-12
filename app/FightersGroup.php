@@ -23,7 +23,7 @@ class FightersGroup extends \Xoco70\KendoTournaments\Models\FightersGroup
                     'fightersGroups' => function ($query) {
                         return $query->with('teams', 'competitors', 'fights');
                     }]);
-            }])
+            }])->withCount('competitors', 'teams')
                 ->where('slug', $tournamentSlug)->first();
         } elseif (FightersGroup::hasChampionshipInRequest($request)) {
             $tournament = Tournament::whereHas('championships', function ($query) use ($request) {

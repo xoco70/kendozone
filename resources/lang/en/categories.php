@@ -60,6 +60,7 @@ return [
     'categorySettings' => 'Category Settings',
     'treeType' => 'Tree Type',
     'roundRobin' => 'Round Robin',
+    'playOff' => 'Play Off',
     'direct_elimination' => 'Direct Elimination',
     'teamSize' => 'Team size',
     'teamSizeReserve' => 'Team Reserve',

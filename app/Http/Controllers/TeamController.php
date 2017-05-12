@@ -36,12 +36,14 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
+
         $tournament = Tournament::with(['championships' => function ($query) {
             $query->with('teams')
                 ->whereHas('category', function ($subquery) {
                     $subquery->where('isTeam', '=', 1);
                 });
-        }])->find($tournament->id);
+        }])->withCount('competitors', 'teams')
+            ->find($tournament->id);
 
 
         $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {

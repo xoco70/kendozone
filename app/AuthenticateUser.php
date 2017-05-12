@@ -25,6 +25,12 @@ class AuthenticateUser
         $this->auth = $auth;
     }
 
+    /**
+     * @param $request
+     * @param $listener
+     * @param $provider
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function execute($request, $listener, $provider)
     {
 
@@ -32,7 +38,6 @@ class AuthenticateUser
 
             return $this->getAuthorizationFirst($provider);
         }
-//        dd("it passed");
         try {
             $user = $this->users->findByUserNameOrCreate($this->getSocialUser($provider), $provider);
         } catch (PDOException $e) {
@@ -48,16 +53,22 @@ class AuthenticateUser
             return redirect(URL::action('Auth\LoginController@login'))
                 ->with('message', Lang::get('auth.account_already_exists'));
         }
-
-
         return redirect(route('dashboard'));
     }
 
+    /**
+     * @param $provider
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     private function getAuthorizationFirst($provider)
     {
         return $this->socialite->driver($provider)->redirect();
     }
 
+    /**
+     * @param $provider
+     * @return \Laravel\Socialite\Contracts\User
+     */
     private function getSocialUser($provider)
     {
         return $this->socialite->driver($provider)->user();

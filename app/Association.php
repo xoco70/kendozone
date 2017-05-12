@@ -24,7 +24,6 @@ class Association extends Model
     protected static function boot()
     {
         parent::boot();
-
     }
 
     /**
@@ -131,28 +130,8 @@ class Association extends Model
      */
     public static function fillSelectForVueJs($user, $federationId)
     {
-//        $associations = new Collection();
-//        if ($user->isSuperAdmin()) {
-            $associations = Association::where('federation_id', $federationId)
-                ->get(['id as value', 'name as text']);
-//        } else if ($user->isFederationPresident()) {
-//            $associations = $user->federationOwned->associations()
-//                ->where('federation_id', $federationId)
-//                ->get(['id as value', 'name as text']);
-//        } else if ($user->isAssociationPresident()) {
-//            $associations = $user->associationOwned()
-//                ->where('federation_id', $federationId)
-//                ->get(['id as value', 'name as text']);;
-//        } else if ($user->isClubPresident()) {
-//            $associations = $user->clubOwned->association()
-//                ->where('federation_id', $federationId)
-//                ->get(['id as value', 'name as text']);
-//        } else if ($user->isUser()) {
-//            $associations = Association::where('federation_id', $federationId)
-//                ->get(['id as value', 'name as text'])
-//                ->prepend(['value' => '0', 'text' => '-']);
-
-//        }
+        $associations = Association::where('federation_id', $federationId)
+            ->get(['id as value', 'name as text']);
         if (sizeof($associations) == 0) {
             $object = new stdClass;
             $object->value = 0;
