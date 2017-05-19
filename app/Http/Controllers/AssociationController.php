@@ -65,8 +65,6 @@ class AssociationController extends Controller
      */
     public function store(AssociationRequest $request)
     {
-        // Assoc Policy
-
         try {
             if ($request->president_id == 0)
                 $request->merge(['president_id' => null]);
@@ -79,20 +77,15 @@ class AssociationController extends Controller
                 flash()->success($msg);
                 return redirect(route("associations.index"));
             }
-
-
         } catch (QueryException $e) {
             if (Request::ajax()) {
                 return Response::json(['msg' => $e], 500);
-
             } else {
                 $user = User::find($request->president_id);
                 $msg = trans('msg.association_president_already_exists', ['user' => $user->name]);
                 flash()->error($msg);
                 return redirect()->back();
             }
-
-
         }
     }
 
@@ -105,7 +98,6 @@ class AssociationController extends Controller
      */
     public function show($id)
     {
-
         $association = Association::findOrFail($id);
         return view('associations.show', compact('association'));
     }

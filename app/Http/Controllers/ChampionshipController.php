@@ -63,20 +63,15 @@ class ChampionshipController extends Controller
                     $user->verified = 1;
                     $user->save();
                 }
-
-
                 // Redirect to register category Screen
 
                 Auth::loginUsingId($user->id);
                 return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
-
-
             }
         } else {
             $invite = Invite::where('code', $token)->first();
             if (is_null($invite)) {
                 throw new InvitationNeededException();
-
             } else {
                 throw new AuthorizationException;
             }
@@ -91,20 +86,10 @@ class ChampionshipController extends Controller
      */
     public function store(Request $request)
     {
-        $tournamentSlug = $request->tournament;
-        $tournament = Tournament::where('slug', $tournamentSlug)->first();
-
         $categories = $request->get('cat');
-        $inviteId = $request->invite;
-        if ($inviteId != 0)
-            $invite = Invite::findOrFail($inviteId);
-        else
-            $invite = Invite::where('code', 'open')
-                ->where('email', Auth::user()->email)
-                ->where('object_type', 'App\Tournament')
-                ->where('object_id', $tournament->id)
-                ->get();
+        $tournament = Tournament::where('slug', $request->tournament)->first();
 
+        $invite = Invite::getInvite($request, $tournament);
 
         if ($tournament->isOpen() || $tournament->needsInvitation() || !is_null($invite)) {
             $user = User::find(Auth::user()->id);
@@ -131,23 +116,14 @@ class ChampionshipController extends Controller
                 return redirect()->back();
 
             }
-
-            if (is_null($invite)) {
-                $invite = new Invite();
-                $invite->code = 'open';
-                $invite->email = Auth::user()->email;
-                $invite->object_type = 'App\Tournament';
-                $invite->object_id = $tournament->id;
-                $invite->active = 1;
-                $invite->used = 1;
-                $invite->save();
+            if (is_null($this)) {
+                $invite->saveItem($tournament);
             }
+
         }
-
-
-//        if (isset($invite)) $invite->consume();
 
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' => $tournament->name]));
         return redirect(URL::action('UserController@getMyTournaments', Auth::user()));
     }
+
 }

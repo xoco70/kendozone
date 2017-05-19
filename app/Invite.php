@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
 
 class Invite extends Model
@@ -67,6 +69,25 @@ class Invite extends Model
     }
 
     /**
+     * @param Request $request
+     * @param $tournament
+     * @return mixed
+     */
+    public static function getInvite(Request $request, $tournament)
+    {
+        $inviteId = $request->invite;
+        if ($inviteId != 0)
+            $invite = Invite::findOrFail($inviteId);
+        else
+            $invite = Invite::where('code', 'open')
+                ->where('email', Auth::user()->email)
+                ->where('object_type', 'App\Tournament')
+                ->where('object_id', $tournament->id)
+                ->get();
+        return $invite;
+    }
+
+    /**
      * Get invite from Token
      * @param $token
      * @return Invite
@@ -79,6 +100,23 @@ class Invite extends Model
             ->first();
         return $invite;
     }
+
+    /**
+     * @param $tournament
+     */
+    public function saveItem($tournament)
+    {
+        $invite = new Invite();
+        $invite->code = 'open';
+        $invite->email = Auth::user()->email;
+        $invite->object_type = 'App\Tournament';
+        $invite->object_id = $tournament->id;
+        $invite->active = 1;
+        $invite->used = 1;
+        $invite->save();
+
+    }
+
 
     /**
      * Helper used to hash email into token
