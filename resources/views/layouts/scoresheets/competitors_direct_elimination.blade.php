@@ -27,10 +27,10 @@
     {{--@foreach($group->fights as $fight)--}}
     <tr>
         <td align="center" width="5%">
-            {!!  Form::text('id', $group->fights[0]->getFighterShortId(1), ['class' => 'form-control ']) !!}
+            {!!  Form::text('id', $group->fights[0]->getFighterAttr(1,'short_id'), ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="20%">
-            {!!  Form::text('name', $group->fights[0]->getFighterName(1), ['class' => 'form-control']) !!}
+            {!!  Form::text('name', $group->fights[0]->getFighterAttr(1, 'name), ['class' => 'form-control']) !!}
         </td>
         <td align="center" width="10%">
             {!!  Form::text('hansoku_c1', '', ['class' => 'form-control']) !!}
@@ -53,14 +53,14 @@
         </td>
 
         <td align="center" width="20%">
-            {!!  Form::text('name', $group->fights[0]->getFighterName(2), ['class' => 'form-control']) !!}
+            {!!  Form::text('name', $group->fights[0]->getFighterAttr(2,'name'), ['class' => 'form-control']) !!}
         </td>
 
         <td align="center" width="5%">
             {!!  Form::text('time', '', ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="5%">
-            {!!  Form::text('id', $group->fights[0]->getFighterShortId(2), ['class' => 'form-control ']) !!}
+            {!!  Form::text('id', $group->fights[0]->getFighterAttr(2, 'short_id'), ['class' => 'form-control ']) !!}
         </td>
     </tr>
     <tr class="spacer">

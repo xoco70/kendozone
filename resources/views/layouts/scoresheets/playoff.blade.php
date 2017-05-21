@@ -15,11 +15,11 @@
                 {!!  Form::text('point', '', ['class' => 'form-control ']) !!}
             </td>
             <td align="center" width="20%">
-                {!!  Form::text('id', $fight->getFighterShortId(1) , ['class' => 'form-control']) !!}
+                {!!  Form::text('id', $fight->getFighterAttr(1,'short_id') , ['class' => 'form-control']) !!}
             </td>
             <td align="center" width="5%"><strong>x</strong></td>
             <td align="center" width="20%">
-                {!!  Form::text('id', $fight->getFighterShortId(2), ['class' => 'form-control']) !!}
+                {!!  Form::text('id', $fight->getFighterAttr(2,'short_id'), ['class' => 'form-control']) !!}
             </td>
             <td align="center" width="5%">
                 {!!  Form::text('point', '', ['class' => 'form-control ']) !!}
