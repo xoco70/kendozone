@@ -5,6 +5,7 @@ namespace App;
 use App\Exceptions\NotOwningAssociationException;
 use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
+use App\Traits\RoleTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
@@ -33,7 +34,7 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens, Impersonate;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens, Impersonate, RoleTrait;
 
     /**
      * The database table used by the model.
@@ -116,21 +117,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $location = geoip($ip);
         $country = Country::where('name', '=', $location->country)->first();
         if (is_null($country)) {
-            $countryId = config('constants.COUNTRY_ID_DEFAULT');
-            $city = "Paris";
-            $latitude = 48.858222;
-            $longitude = 2.2945;
-        } else {
-            $countryId = $country->id;
-            $city = $location['city'];
-            $latitude = $location['lat'];
-            $longitude = $location['lon'];
-
+            $this->country_id = config('constants.COUNTRY_ID_DEFAULT');
+            $this->city = "Paris";
+            $this->latitude = 48.858222;
+            $this->longitude = 2.2945;
+            return;
         }
-        $this->country_id = $countryId;
-        $this->city = $city;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
+        $this->country_id = $country->id;
+        $this->city = $location['city'];
+        $this->latitude = $location['lat'];
+        $this->longitude = $location['lon'];
     }
 
     /**
@@ -217,14 +213,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function tournamentsDeleted()
     {
         return $this->hasMany('App\Tournament')->onlyTrashed();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function categories()
-    {
-        return $this->belongsToMany('App\Category', 'competitor', 'user_id', 'championship_id');
     }
 
     /**
@@ -333,54 +321,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-    /**
-     * @return bool
-     */
-    public function isSuperAdmin()
-    {
-        return $this->role_id == config('constants.ROLE_SUPERADMIN');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFederationPresident()
-    {
-        return $this->role_id == config('constants.ROLE_FEDERATION_PRESIDENT');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAssociationPresident()
-    {
-        return $this->role_id == config('constants.ROLE_ASSOCIATION_PRESIDENT');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isClubPresident()
-    {
-        return $this->role_id == config('constants.ROLE_CLUB_PRESIDENT');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isUser()
-    {
-        return $this->role_id == config('constants.ROLE_USER');
-    }
-
-    /**
-     * @param $tournament
-     * @return bool
-     */
-    public function isOwner($tournament)
-    {
-        return $tournament->user_id == $this->id;
-    }
 
     /**
      * @param $query
