@@ -2,17 +2,12 @@
 
 namespace App;
 
-use App\Exceptions\NotOwningAssociationException;
-use App\Exceptions\NotOwningClubException;
-use App\Exceptions\NotOwningFederationException;
 use App\Traits\RoleTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -321,40 +316,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return 'slug';
     }
 
-
-    /**
-     * @param $query
-     * @param User $user
-     * @return Builder
-     * @throws AuthorizationException
-     * @throws NotOwningAssociationException
-     * @throws NotOwningClubException
-     * @throws NotOwningFederationException
-     */
-    public function scopeForUser($query, User $user)
-    {
-        // If user manage a structure, he will be limited to see entity of this structure
-        // If user has the role but manage no structure --> AuthorizationException
-        switch (true) {
-            case $user->isSuperAdmin():
-                return $query;
-            case $user->isFederationPresident() && $user->federationOwned != null:
-                return $query->where('federation_id', '=', $user->federationOwned->id);
-            case $user->isAssociationPresident() && $user->associationOwned:
-                return $query->where('association_id', '=', $user->associationOwned->id);
-            case $user->isClubPresident() && $user->clubOwned != null:
-                return $query->where('club_id', '=', $user->clubOwned->id);
-            case $user->isFederationPresident() && !$user->federationOwned != null:
-                throw new NotOwningFederationException();
-            case $user->isAssociationPresident() && !$user->associationOwned:
-                throw new NotOwningAssociationException();
-            case $user->isClubPresident() && $user->clubOwned == null:
-                throw new NotOwningClubException();
-            default:
-                throw new AuthorizationException();
-        }
-    }
-
     /**
      * @param $firstname
      * @param $lastname
@@ -386,8 +347,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->verified = 1;
             $user->save();
             $user->clearPassword = $password;
+
         } // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
-        else if ($user->isDeleted()) {
+
+        if ($user->isDeleted()) {
             $user->deleted_at = null;
             $user->save();
         }
@@ -400,7 +363,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function fillSelect()
     {
-
         $users = new Collection();
         if (Auth::user()->isSuperAdmin()) {
             $users = User::pluck('name', 'id')->prepend('-', 0);
