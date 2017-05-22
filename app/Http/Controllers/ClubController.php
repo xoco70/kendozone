@@ -68,7 +68,7 @@ class ClubController extends Controller
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $users = User::fillSelect();
+        $users = Auth::user()->fillSelect();
 
 
         $defaultLng = Auth::user()->latitude ?? geoip()->lat;

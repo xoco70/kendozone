@@ -240,15 +240,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Association::class);
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function associations()
-    {
-        return $this->hasMany(Association::class, 'president_id');
-    }
-
     /**
      * A president of federation owns a federation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -327,9 +318,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function updateUserFullName($firstname, $lastname)
     {
-        Auth::user()->firstname = $firstname;
-        Auth::user()->lastname = $lastname;
-        Auth::user()->save();
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->save();
     }
 
     /**
@@ -366,18 +357,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * @return Collection
      */
-    public static function fillSelect()
+    public  function fillSelect()
     {
-
         $users = new Collection();
-        if (Auth::user()->isSuperAdmin()) {
+        if ($this->isSuperAdmin()) {
             $users = User::pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $users = User::where('federation_id', '=', Auth::user()->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isAssociationPresident() && Auth::user()->associationOwned != null) {
-            $users = User::where('association_id', '=', Auth::user()->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isClubPresident() && Auth::user()->clubOwned != null) {
-            $users = User::where('club_id', '=', Auth::user()->clubOwned->id)->pluck('name', 'id')->prepend('-', 0);
+        } else if ($this->isFederationPresident() && $this->federationOwned != null) {
+            $users = User::where('federation_id', '=', $this->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
+        } else if ($this->isAssociationPresident() && $this->associationOwned != null) {
+            $users = User::where('association_id', '=', $this->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
+        } else if ($this->isClubPresident() && $this->clubOwned != null) {
+            $users = User::where('club_id', '=', $this->clubOwned->id)->pluck('name', 'id')->prepend('-', 0);
         }
         return $users;
     }
@@ -408,9 +398,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isRegisteredTo(Tournament $tournament)
     {
-        $championships = $tournament->championships;
-        $ids = $championships->pluck('id');
-
+        $ids = $tournament->championships->pluck('id');
         $isRegistered = Competitor::where('user_id', $this->id)
             ->whereIn('championship_id', $ids)
             ->get();
