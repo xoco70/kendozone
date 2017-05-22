@@ -34,7 +34,6 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
      */
     public function getAgeString()
     {
-        $ageCategoryText = '';
         $ageCategories = [
             0 => trans('categories.no_age'),
             1 => trans('categories.children'),
@@ -44,28 +43,24 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
             5 => trans('categories.custom')
         ];
 
-        if ($this->ageCategory != 0) {
-            if ($this->ageCategory == 5) {
-                $ageCategoryText = ' - ' . trans('categories.age') . ' : ';
-                if ($this->ageMin != 0 && $this->ageMax != 0) {
-                    if ($this->ageMin == $this->ageMax) {
-                        $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
-                    } else {
-                        $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
-                    }
-
-                } else if ($this->ageMin == 0 && $this->ageMax != 0) {
-                    $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('categories.years');
-                } else if ($this->ageMin != 0 && $this->ageMax == 0) {
-                    $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('categories.years');
+        if ($this->ageCategory == 5) {
+            $ageCategoryText = ' - ' . trans('categories.age') . ' : ';
+            if ($this->ageMin != 0 && $this->ageMax != 0) {
+                if ($this->ageMin == $this->ageMax) {
+                    $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
                 } else {
-                    $ageCategoryText = '';
+                    $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
                 }
+            } else if ($this->ageMin == 0 && $this->ageMax != 0) {
+                $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('categories.years');
+            } else if ($this->ageMin != 0 && $this->ageMax == 0) {
+                $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('categories.years');
             } else {
-                $ageCategoryText = $ageCategories[$this->ageCategory];
+                $ageCategoryText = '';
             }
+            return $ageCategoryText;
         }
-        return $ageCategoryText;
+        return $ageCategories[$this->ageCategory];
     }
 
     /**

@@ -68,14 +68,8 @@ class ChampionshipController extends Controller
                 Auth::loginUsingId($user->id);
                 return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
             }
-        } else {
-            $invite = Invite::where('code', $token)->first();
-            if (is_null($invite)) {
-                throw new InvitationNeededException();
-            } else {
-                throw new AuthorizationException;
-            }
         }
+        throw new InvitationNeededException();
     }
 
     /**

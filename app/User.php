@@ -88,11 +88,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             if ($softDeletedUser != null) {
                 $softDeletedUser->restore();
                 return false;
-            } else {
-                $user->token = str_random(30);
-                if ($user->country_id == 0) {
-                    $user->addGeoData();
-                }
+            }
+            $user->token = str_random(30);
+            if ($user->country_id == 0) {
+                $user->addGeoData();
             }
             return true;
         });
@@ -125,7 +124,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $city = "Paris";
             $latitude = 48.858222;
             $longitude = 2.2945;
-
         } else {
             $countryId = $country->id;
             $city = $location['city'];
@@ -149,48 +147,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->verified = true;
         $this->token = null;
         $this->save();
-    }
-
-    /**
-     * Upload Pic
-     * @param $data
-     * @return array
-     */
-    public static function uploadPic($data)
-    {
-        $file = array_first(Input::file(), null);
-
-        if ($file != null && $file->isValid()) {
-
-            $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
-            $date = new DateTime();
-            $timestamp = $date->getTimestamp();
-            $ext = $file->getClientOriginalExtension();
-            $fileName = $timestamp . "_" . $file->getClientOriginalName();
-            $fileName = Str::slug($fileName, '-') . "." . $ext;
-
-            if (!$file->move($destinationPath, $fileName)) {
-                flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
-                return $data;
-            } else {
-                $data['avatar'] = $fileName;
-                // Redimension and pic
-                $img = Image::make($destinationPath . $fileName);
-                if ($img->width() > $img->height()) {
-                    $img->resize(200, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                } else {
-                    $img->resize(null, 200, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                }
-                $img->save($destinationPath . $fileName);
-
-                return $data;
-            }
-        }
-        return $data;
     }
 
 
@@ -367,21 +323,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->distinct();
     }
 
-    /**
-     * Generate random password
-     * @return string
-     */
-    public static function generatePassword()
-    {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array(); //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = $alphabet[$n];
-        }
-        return implode($pass); //turn the array into a string
-    }
+
 
     /**
      * @return bool
@@ -470,7 +412,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return $query->where('association_id', '=', $user->associationOwned->id);
             case $user->isClubPresident() && $user->clubOwned != null:
                 return $query->where('club_id', '=', $user->clubOwned->id);
-
             case $user->isFederationPresident() && !$user->federationOwned != null:
                 throw new NotOwningFederationException();
             case $user->isAssociationPresident() && !$user->associationOwned:
@@ -508,7 +449,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->firstname = $attributes['firstname'];
             $user->lastname = $attributes['lastname'];
             $user->email = $attributes['email'];
-            $password = User::generatePassword();
+            $password = generatePassword();
             $user->password = bcrypt($password);
             $user->verified = 1;
             $user->save();
