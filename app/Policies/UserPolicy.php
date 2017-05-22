@@ -46,14 +46,14 @@ class UserPolicy
 
     public function delete(User $user, User $userModel)
     {
-        if ($user->isFederationPresident()){
+        if ($user->isFederationPresident()) {
             return $user->federationOwned->id == $userModel->federation_id;
         }
 
-        if ($user->isAssociationPresident()){
+        if ($user->isAssociationPresident()) {
             return $user->associationOwned->id == $userModel->association_id;
         }
-        if ($user->isClubPresident()){
+        if ($user->isClubPresident()) {
             return $user->clubOwned->id == $userModel->club_id;
         }
 
@@ -61,34 +61,32 @@ class UserPolicy
 
     public function edit(User $user, User $userModel)
     {
-        if ($user->isFederationPresident()){
+        if ($user->isFederationPresident() && $user->federationOwned != null) {
             return $user->federationOwned->id == $userModel->federation_id;
         }
 
-        if ($user->isAssociationPresident()){
+        if ($user->isAssociationPresident() && $user->associationOwned != null) {
             return $user->associationOwned->id == $userModel->association_id;
         }
 
-        if ($user->isClubPresident()){
+        if ($user->isClubPresident() && $user->clubOwned != null) {
             return $user->clubOwned->id == $userModel->club_id;
         }
-        if ($user->isUser()){
+        if ($user->isUser()) {
             return $user->id == $userModel->id;
         }
-
-
     }
 
     public function update(User $user, User $userModel)
     {
-        if ($user->isFederationPresident()){
+        if ($user->isFederationPresident()) {
             return $user->federationOwned->id == $userModel->federation_id;
         }
 
-        if ($user->isAssociationPresident()){
+        if ($user->isAssociationPresident()) {
             return $user->associationOwned->id == $userModel->association_id;
         }
-        if ($user->isUser()){
+        if ($user->isUser()) {
             return $user->id == $userModel->id;
         }
     }

@@ -157,8 +157,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!isset($avatar) && Gravatar::exists($this->email)) {
             return Gravatar::src($this->email);
         }
-
-        return config('constants.AVATAR_PATH') . $avatar;
+        if (!str_contains($avatar, 'http') && isset($avatar)) {
+            return config('constants.AVATAR_PATH') . $avatar;
+        }
     }
 
     /**
@@ -363,7 +364,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * @return Collection
      */
-    public  function fillSelect()
+    public function fillSelect()
     {
         $users = new Collection();
         if ($this->isSuperAdmin()) {
@@ -387,11 +388,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($this->isSuperAdmin()) {
             $users = User::pluck('name', 'id');
         } else if ($this->isFederationPresident() && $this->federationOwned != null) {
-            $users = User::where('federation_id', '=', $this->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
+            $users = User::federationPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         } else if ($this->isAssociationPresident() && $this->associationOwned != null) {
-            $users = User::where('association_id', '=', $this->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
+            $users = User::associationPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         } else if ($this->isClubPresident() && $this->clubOwned != null) {
-            $users = User::where('id', $this->id)->pluck('name', 'id')->prepend('-', 0);
+            $users = User::clubPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         }
         return $users;
 
@@ -454,11 +455,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             case $user->isSuperAdmin():
                 return $query;
             case $user->isFederationPresident() && $user->federationOwned != null:
-                return $query->where('federation_id', '=', $user->federationOwned->id);
+                return $query->federationPresident($user);
             case $user->isAssociationPresident() && $user->associationOwned:
-                return $query->where('association_id', '=', $user->associationOwned->id);
+                return $query->associationPresident($user);
             case $user->isClubPresident() && $user->clubOwned != null:
-                return $query->where('club_id', '=', $user->clubOwned->id);
+                return $query->clubPresident($user);
             case $user->isFederationPresident() && !$user->federationOwned != null:
                 throw new NotOwningFederationException();
             case $user->isAssociationPresident() && !$user->associationOwned:
@@ -469,4 +470,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 throw new AuthorizationException();
         }
     }
+
+    public function scopeFederationPresident($query, User $user)
+    {
+        return $query->where('federation_id', '=', $user->federationOwned->id);
+    }
+
+    public function scopeAssociationPresident($query, User $user)
+    {
+        return $query->where('association_id', '=', $user->associationOwned->id);
+    }
+
+    public function scopeClubPresident($query, User $user)
+    {
+        return $query->where('club_id', '=', $user->clubOwned->id);
+    }
+
+
 }
