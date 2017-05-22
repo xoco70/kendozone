@@ -88,14 +88,14 @@ class ClubController extends Controller
     {
 
         try {
-            if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
-            if ($request->federation_id == 0) $request->merge([ 'federation_id' => null ]);
-            if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
+            if ($request->president_id == 0) $request->merge(['president_id' => null]);
+            if ($request->federation_id == 0) $request->merge(['federation_id' => null]);
+            if ($request->association_id == 0) $request->merge(['association_id' => null]);
             $club = Club::create($request->all());
 
             if (Request::ajax()) {
                 return Response::json(['msg' => trans('msg.club_create_successful', ['name' => $club->name]), 'status' => 'success', 'data' => $club], 200);
-            }else{
+            } else {
                 $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
                 flash()->success($msg);
 
@@ -138,16 +138,13 @@ class ClubController extends Controller
         $defaultLat = Auth::user()->longitude ?? geoip()->lon;
 
         $club = Club::findOrFail($id);
-        if (Auth::user()->cannot('edit', $club)) {
-            throw new AuthorizationException();
-        }
+        $this->authorize('edit', [$club, Auth::user()]);
 
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $users = User::getClubPresidentsList();
+        $users = Auth::user()->getClubPresidentsList();
 
-
-        return view('clubs.form', compact('club', 'users', 'associations', 'federations','defaultLng','defaultLat')); //
+        return view('clubs.form', compact('club', 'users', 'associations', 'federations', 'defaultLng', 'defaultLat')); //
     }
 
     /**
@@ -162,12 +159,11 @@ class ClubController extends Controller
     {
         $club = Club::findOrFail($id);
 
-        if (Auth::user()->cannot('update', $club)) {
-            throw new AuthorizationException();
-        }
+        $this->authorize('update', [$club, Auth::user()]);
+
         try {
-            if ($request->president_id == 0) $request->merge([ 'president_id' => null ]);
-            if ($request->association_id == 0) $request->merge([ 'association_id' => null ]);
+            if ($request->president_id == 0) $request->merge(['president_id' => null]);
+            if ($request->association_id == 0) $request->merge(['association_id' => null]);
 
             $club->update($request->all());
             $msg = trans('msg.club_edit_successful', ['name' => $club->name]);
@@ -212,11 +208,4 @@ class ClubController extends Controller
             return Response::json(['msg' => trans('msg.club_restored_error', ['name' => $club->name]), 'status' => 'error']);
         }
     }
-
-//    public static function myClubs()
-//    {
-//        return Club::fillSelect();
-//    }
-
-
 }
