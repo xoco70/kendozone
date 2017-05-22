@@ -31,6 +31,12 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  * @property bool verified
  * @property mixed token
  * @property  mixed clearPassword
+ * @property string firstname
+ * @property string lastname
+ * @property Federation federationOwned
+ * @property Association associationOwned
+ * @property Club clubOwned
+ * @property int id
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
