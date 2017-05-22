@@ -19,27 +19,21 @@ class OwnTournament
      */
     public function handle($request, Closure $next)
     {
+        // Check if user own tournament
 
-        if (Auth::check()) {
+        if (Auth::check() && ($request->tournament != null || $request->tournamentId != null)) {
             $userLogged = Auth::user();
-            // Check if user own tournament
-
-            if ($request->tournament != null || $request->tournamentId != null) {
-
-                $tournaments = $userLogged->tournaments;
-                $tournament = $request->tournament;
-                if (!$tournament instanceof Tournament){
-                    $tournament = Tournament::where('slug', $tournament)->first();
-                }
-                if ($tournament != null) {
-                    if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
-                        throw new AuthorizationException();
-                    }
+            $tournaments = $userLogged->tournaments;
+            $tournament = $request->tournament;
+            if (!$tournament instanceof Tournament) {
+                $tournament = Tournament::where('slug', $tournament)->first();
+            }
+            if ($tournament != null) {
+                if (!$tournaments->contains($tournament) && !$userLogged->isSuperAdmin()) {
+                    throw new AuthorizationException();
                 }
             }
         }
-
-
         return $next($request);
     }
 }
