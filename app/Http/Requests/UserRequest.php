@@ -73,6 +73,7 @@ class UserRequest extends Request
     }
 
     public function update(User $user){
+        $this->authorize('update', [$user, Auth::user()]);
 
         if (Auth::user()->cannot('update', $user)) {
             throw new AuthorizationException();

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Category extends \Xoco70\KendoTournaments\Models\Category
 {
-
+    const AGE_CUSTOM = 5;
     /**
      * Get All Presets for Categories
      * @param null $ruleId
@@ -43,7 +43,7 @@ class Category extends \Xoco70\KendoTournaments\Models\Category
             5 => trans('categories.custom')
         ];
 
-        if ($this->ageCategory == 5) {
+        if ($this->ageCategory == self::AGE_CUSTOM) {
             $ageCategoryText = ' - ' . trans('categories.age') . ' : ';
             if ($this->ageMin != 0 && $this->ageMax != 0) {
                 if ($this->ageMin == $this->ageMax) {
