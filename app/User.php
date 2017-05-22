@@ -6,7 +6,6 @@ use App\Exceptions\NotOwningAssociationException;
 use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
 use Cviebrock\EloquentSluggable\Sluggable;
-use DateTime;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -19,9 +18,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManagerStatic as Image;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
@@ -114,7 +110,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Add geoData based on IP
      */
-    function addGeoData()
+    public function addGeoData()
     {
         $ip = request()->ip();
         $location = geoip($ip);
@@ -157,13 +153,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getAvatarAttribute($avatar)
     {
         if (!isset($avatar) && Gravatar::exists($this->email)) {
-            $avatar = Gravatar::src($this->email);
+            return Gravatar::src($this->email);
         }
 
-        if (!str_contains($avatar, 'http') && isset($avatar)) {
-            $avatar = config('constants.AVATAR_PATH') . $avatar;
-        }
-        return $avatar;
+        return config('constants.AVATAR_PATH') . $avatar;
     }
 
     /**
@@ -322,7 +315,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->select('tournament.*')
             ->distinct();
     }
-
 
 
     /**
