@@ -31,7 +31,7 @@ class AssociationController extends Controller
             return Association::fillSelect();
         } else {
             $associations = Association::with('president', 'federation.country')
-//                ->forUser(Auth::user())
+                ->forUser(Auth::user())
                 ->where('id', '>', 1)
                 ->get();
             $currentModelName = trans_choice('core.association', 1);

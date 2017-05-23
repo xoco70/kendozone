@@ -440,6 +440,38 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->firstname ?? '' . " " . $this->lastname ?? '';
     }
 
+    /**
+     * @param $query
+     * @param User $user
+     * @return Builder
+     * @throws AuthorizationException
+     * @throws NotOwningAssociationException
+     * @throws NotOwningClubException
+     * @throws NotOwningFederationException
+     */
+    public function scopeForUser($query, User $user)
+    {
+        // If user manage a structure, he will be limited to see entity of this structure
+        // If user has the role but manage no structure --> AuthorizationException
+        switch (true) {
+            case $user->isSuperAdmin():
+                return $query;
+            case $user->isFederationPresident() && $user->federationOwned != null:
+                return $query->federationPresident($user);
+            case $user->isAssociationPresident() && $user->associationOwned:
+                return $query->associationPresident($user);
+            case $user->isClubPresident() && $user->clubOwned != null:
+                return $query->clubPresident($user);
+            case $user->isFederationPresident() && !$user->federationOwned != null:
+                throw new NotOwningFederationException();
+            case $user->isAssociationPresident() && !$user->associationOwned:
+                throw new NotOwningAssociationException();
+            case $user->isClubPresident() && $user->clubOwned == null:
+                throw new NotOwningClubException();
+            default:
+                throw new AuthorizationException();
+        }
+    }
 
     public function scopeFederationPresident($query, User $user)
     {
