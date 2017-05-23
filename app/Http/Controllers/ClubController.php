@@ -44,7 +44,7 @@ class ClubController extends Controller
             return Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
         } else {
             $clubs = Club::with('president', 'association.federation')
-                ->forUser(Auth::user())
+//                ->forUser(Auth::user())
                 ->where('id', '>', 1)
                 ->get();
 

@@ -45,7 +45,7 @@ class UserController extends Controller
 
 
         $users = User::with('country', 'role', 'association', 'federation')
-            ->forUser(Auth::user())
+//            ->forUser(Auth::user())
             ->where('id', '>', 1)
             ->paginate(config('constants.PAGINATION'));
 
