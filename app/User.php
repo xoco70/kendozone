@@ -21,7 +21,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManagerStatic;
+use Intervention\Image\ImageManagerStatic as Image;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
@@ -494,7 +494,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $data
      * @return array
      */
-    public static function uploadPic($data)
+    public function uploadPic($data)
     {
         $file = array_first($data, null);
         if ($file != null && $file->isValid()) {
@@ -511,25 +511,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             } else {
                 $data['avatar'] = $fileName;
                 // Redimension and pic
-                User::resizePic($destinationPath, $fileName);
-
+                User::resizePicAndSave($destinationPath, $fileName);
+                $this->avatar = $fileName;
+                $this->save();
                 return $data;
             }
 
         }
         echo "El archivo no es valido";
-        return $data;
+        return null;
     }
 
     /**
      * @param $destinationPath
      * @param $fileName
      */
-    public static function resizePic($destinationPath, $fileName)
+    public static function resizePicAndSave($destinationPath, $fileName)
     {
-        dump("2");
-        $img = ImageManagerStatic::make($destinationPath . $fileName);
-        dump("3");
+        $img = Image::make($destinationPath . $fileName);
         $width = null;
         $height = 200;
 
