@@ -226,7 +226,7 @@ class UserController extends Controller
     public function uploadAvatar(Request $request)
     {
         $data = $request->except('_token');
-        $data = uploadPic($data);
+        $data = User::uploadPic($data);
         return $data;
 
     }

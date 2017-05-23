@@ -494,7 +494,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $data
      * @return array
      */
-    public function uploadPic($data)
+    public static function uploadPic($data)
     {
         $file = array_first($data, null);
         if ($file != null && $file->isValid()) {
@@ -512,14 +512,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 $data['avatar'] = $fileName;
                 // Redimension and pic
                 User::resizePicAndSave($destinationPath, $fileName);
-                $this->avatar = $fileName;
-                $this->save();
+                Auth::user()->avatar = $fileName;
+                Auth::user()->save();
                 return $data;
             }
 
         }
         echo "El archivo no es valido";
-        return null;
+        return $data;
     }
 
     /**
