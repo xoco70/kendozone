@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         // Other Admin Routes
 
         Route::get('logs', 'LogsController@index')->name('logs.index');
-        Route::get('debug', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('debug.index');
+        Route::get('debug', '\Rap2hpoutre\LaravºelLogViewer\LogViewerController@index')->name('debug.index');
 
 
 //        Route::get('oauth', function(){

@@ -7,6 +7,7 @@ use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
 use App\Traits\RoleTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
+use DateTime;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -19,6 +20,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
@@ -148,19 +151,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    /**
-     * @param $avatar
-     * @return string
-     */
     public function getAvatarAttribute($avatar)
     {
         if (!isset($avatar) && Gravatar::exists($this->email)) {
             return Gravatar::src($this->email);
+
         }
         if (!str_contains($avatar, 'http') && isset($avatar)) {
             return config('constants.AVATAR_PATH') . $avatar;
         }
+        return null;
     }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -484,6 +486,63 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function scopeClubPresident($query, User $user)
     {
         return $query->where('club_id', '=', $user->clubOwned->id);
+    }
+
+
+    /**
+     * Upload Pic
+     * @param $data
+     * @return array
+     */
+    public static function uploadPic($data)
+    {
+        $file = array_first($data, null);
+        if ($file != null && $file->isValid()) {
+            $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
+            $date = new DateTime();
+            $timestamp = $date->getTimestamp();
+            $ext = $file->getClientOriginalExtension();
+            $fileName = $timestamp . "_" . $file->getClientOriginalName();
+            $fileName = Str::slug($fileName, '-') . "." . $ext;
+            if (!$file->move($destinationPath, $fileName)) {
+                echo "No se pudo mover";
+                flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
+                return $data;
+            } else {
+                $data['avatar'] = $fileName;
+                // Redimension and pic
+                User::resizePic($destinationPath, $fileName);
+
+                return $data;
+            }
+
+        }
+        echo "El archivo no es valido";
+        return $data;
+    }
+
+    /**
+     * @param $destinationPath
+     * @param $fileName
+     */
+    public static function resizePic($destinationPath, $fileName)
+    {
+        dump("2");
+        $img = ImageManagerStatic::make($destinationPath . $fileName);
+        dump("3");
+        $width = null;
+        $height = 200;
+
+        if ($img->width() > $img->height()) {
+            $width = 200;
+            $height = null;
+        }
+
+        $img->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $img->save($destinationPath . $fileName);
     }
 
 

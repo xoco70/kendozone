@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic;
 
 
 /**
@@ -73,47 +74,6 @@ function generatePassword()
         $pass[] = $alphabet[$n];
     }
     return implode($pass); //turn the array into a string
-}
-
-/**
- * Upload Pic
- * @param $data
- * @return array
- */
-function uploadPic($data)
-{
-    $file = array_first($data, null);
-    if ($file != null && $file->isValid()) {
-
-        $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
-        $date = new DateTime();
-        $timestamp = $date->getTimestamp();
-        $ext = $file->getClientOriginalExtension();
-        $fileName = $timestamp . "_" . $file->getClientOriginalName();
-        $fileName = Str::slug($fileName, '-') . "." . $ext;
-
-        if (!$file->move($destinationPath, $fileName)) {
-            flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
-            return $data;
-        } else {
-            $data['avatar'] = $fileName;
-            // Redimension and pic
-            $img = Image::make($destinationPath . $fileName);
-            if ($img->width() > $img->height()) {
-                $img->resize(200, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            } else {
-                $img->resize(null, 200, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-            $img->save($destinationPath . $fileName);
-
-            return $data;
-        }
-    }
-    return $data;
 }
 
 
