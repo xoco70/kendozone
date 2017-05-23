@@ -42,8 +42,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
-
         $users = User::with('country', 'role', 'association', 'federation')
             ->forUser(Auth::user())
             ->where('id', '>', 1)
@@ -66,9 +64,9 @@ class UserController extends Controller
 
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::getAllPlucked();
-        $countries = Country::pluck('name', 'id');
+        $countries = Country::getAllPlucked();
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
-        $federations = Federation::fillSelect(Auth::user());
+        $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
         $clubs = Club::fillSelect(Auth::user()->federation_id,Auth::user()->association_id);
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //

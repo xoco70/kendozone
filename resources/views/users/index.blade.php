@@ -34,15 +34,11 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-
                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">
-
                                 <img class="img-circle img-sm"
                                      src="{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}"/>
-
                             </a>
                         </td>
-
                         <td>
                             <a href="{!!   URL::action('UserController@edit',  $user->slug) !!}">{{ $user->id }}</a>
                         </td>
@@ -57,7 +53,7 @@
 
                         <td>{{ $user->federation != null ? trans($user->federation->name) : " - "}}</td>
                         <td>{{ $user->association != null ? trans($user->association->name) : " - " }}</td>
-                        <td class="text-center">
+                        <td class="text-center" width="200">
 
                             {!! Form::open(['method' => 'POST', 'action' => ['ImpersonateController@store', "id" => $user->id], 'style'=>"display: inline-block"]) !!}
                             {!! Form::button( '<i class="icon icon-user-plus"></i>', ['type' => 'submit','class' => 'btn text-warning-600 btn-flat'] ) !!}
