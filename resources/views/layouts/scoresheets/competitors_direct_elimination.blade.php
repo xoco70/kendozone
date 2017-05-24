@@ -30,7 +30,7 @@
             {!!  Form::text('id', $group->fights[0]->getFighterAttr(1,'short_id'), ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="20%">
-            {!!  Form::text('name', $group->fights[0]->getFighterAttr(1, 'name), ['class' => 'form-control']) !!}
+            {!!  Form::text('name', $group->fights[0]->getFighterAttr(1, 'name'), ['class' => 'form-control']) !!}
         </td>
         <td align="center" width="10%">
             {!!  Form::text('hansoku_c1', '', ['class' => 'form-control']) !!}
