@@ -1,2 +1,3 @@
-`git pull`
-`composer install`
+<?php
+`git pull`;
+`composer install`;
