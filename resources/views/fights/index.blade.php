@@ -19,31 +19,26 @@
                                     <th class="p-10">{{trans_choice('core.competitor',1)}} 1</th>
                                     <th class="p-10">{{trans_choice('core.competitor',1)}} 2</th>
 
-                                    @foreach($fightsByArea->sortBy('id') as $id => $fight)
+                                    @foreach($fightsByArea as $fight)
+                                        @if ($fight->shouldBeInFightList())
+                                            <?php
+                                            if ($championship->category->isTeam) {
+                                                $fighter1 = $fight->team1 != null ? $fight->team1->name : "BYE";
+                                                $fighter2 = $fight->team2 != null ? $fight->team2->name : "BYE";
+                                            } else {
+                                                $fighter1 = $fight->competitor1 != null ? $fight->competitor1->user->name : "BYE";
+                                                $fighter2 = $fight->competitor2 != null ? $fight->competitor2->user->name : "BYE";
+                                            }
 
-
-                                        <?php
-
-                                        if ($championship->category->isTeam) {
-                                            $fighter1 = $fight->team1 != null ? $fight->team1->name : "";
-                                            $fighter2 = $fight->team2 != null ? $fight->team2->name : "";
-                                        } else {
-                                            $fighter1 = $fight->competitor1 != null ? $fight->competitor1->getFullName() : "";
-                                            $fighter2 = $fight->competitor2 != null ? $fight->competitor2->getFullName() : "";
-                                        }
-
-
-                                        ?>
-
-                                        @if (!($fight->group->round == 1 && ($fighter1=="" || $fighter2=="" )))
-                                        <tr>
-                                            <td class="p-10">{{$id + 1}}</td>
-                                            <td class="p-10">{{ $fighter1 }}</td>
-                                            <td class="p-10">{{ $fighter2 }}</td>
-                                        </tr>
+                                            ?>
+                                        
+                                            <tr>
+                                                <td class="p-10">{{$fight->short_id}}</td>
+                                                <td class="p-10">{{ $fighter1 }}</td>
+                                                <td class="p-10">{{ $fighter2 }}</td>
+                                            </tr>
                                         @endif
                                     @endforeach
-
                                 </table>
                                 <br/>
                             @endforeach
