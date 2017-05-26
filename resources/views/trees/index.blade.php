@@ -29,7 +29,6 @@
                     <div class="container-fluid">
                         <div class="tab-content">
                             @foreach($tournament->championships as $championship)
-
                                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
                                     <h1> {{$championship->buildName()}}
                                         <a href="{{URL::action('PDFController@tree', ['championship'=> $championship->id]) }}"
@@ -56,6 +55,7 @@
                                         @endif
 
                                     </h1>
+
                                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                                         @if ($championship->hasPreliminary())
                                             @include('layouts.tree.preliminary')
@@ -67,7 +67,9 @@
                                     @else
                                         <div>{{trans('core.no_generated_tree')}}</div>
                                     @endif
+
                                 </div>
+
                             @endforeach
                         </div>
                         <br/>

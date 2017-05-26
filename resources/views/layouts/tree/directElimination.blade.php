@@ -6,10 +6,12 @@ foreach ($championship->fightersGroups as $group){
 }
 $directEliminationTree = $championship->fightersGroups->groupBy('round');
 $treeGen = new CreateDirectEliminationTree($directEliminationTree, $championship);
+
 ?>
 @if (Request::is('championships/'.$championship->id.'/pdf'))
     <h1> {{$championship->buildName()}}</h1>
 @endif
+
 {!! Form::model(null, ["action" => ["TreeController@update", $championship->id]]) !!}
 <input type="hidden" id="activeTreeTab" name="activeTreeTab" value="{{$championship->id}}"/>
 {{  $treeGen->printRoundTitles() }}
@@ -43,6 +45,7 @@ $treeGen = new CreateDirectEliminationTree($directEliminationTree, $championship
         @endforeach
 
     @endforeach
+
 </div>
 <button type="submit" class="btn bg-success btn-xs align-bottom-right m-20">
     {{ trans('core.updateModel', ['currentModelName' => trans_choice('core.tree',1)]) }}
