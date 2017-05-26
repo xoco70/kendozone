@@ -50,15 +50,7 @@ class TreeController extends Controller
 
             try {
                 $generation->run();
-
-                FightersGroup::generateFights($championship);
-
-                if ($championship->isDirectEliminationType() && !$championship->hasPreliminary()) {
-                    FightersGroup::generateNextRoundsFights($championship);
-                }
-
                 flash()->success(trans('msg.championships_tree_generation_success'));
-
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
             } finally {
