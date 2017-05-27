@@ -58,11 +58,11 @@
 
                                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                                         @if ($championship->hasPreliminary())
-                                            @include('layouts.tree.preliminary')
+                                            @include('kendo-tournaments::partials.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
-                                            @include('layouts.tree.directElimination')
+                                            @include('kendo-tournaments::partials.tree.directElimination')
                                         @elseif ($championship->isPlayOffType())
-                                            @include('layouts.tree.playOff')
+                                            @include('kendo-tournaments::partials.tree.playOff')
                                         @endif
                                     @else
                                         <div>{{trans('core.no_generated_tree')}}</div>
