@@ -62,8 +62,6 @@ class RegisterController extends Controller
         $invite = Invite::getInviteFromToken($token);
 
         if (!is_null($invite)) {
-//            dump($request->all());
-//            $user = User::create($request->all());
             $user = User::create(['name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
@@ -76,7 +74,7 @@ class RegisterController extends Controller
             }
             $tournament = Tournament::find($invite->object_id);
             $userId = $user->id;
-//            $invite->consume();
+            $invite->consume();
             $grades = Grade::getAllPlucked();
             flash()->success(Lang::get('auth.registration_completed'));
             return view("categories.register", compact('userId', 'tournament', 'invite','grades'));

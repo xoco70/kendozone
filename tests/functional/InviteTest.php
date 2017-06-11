@@ -34,7 +34,6 @@ class InviteTest extends BrowserKitTest
     {
         // FakeUs3
         $fakeUser1 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $fakeUser2 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         // Create a closed tournament with championships
         $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.INVITATION_TOURNAMENT')]);
@@ -49,18 +48,11 @@ class InviteTest extends BrowserKitTest
 
         // Invite a user
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
-            ->type('["' . $fakeUser1->email . '","' . $fakeUser2->email . '"]', 'recipients')// Must simulate js plugin
+            ->type('["' . $fakeUser1->email . '"]', 'recipients')// Must simulate js plugin
             ->press(trans('core.send_invites'))
             ->seePageIs('/tournaments/' . $tournament->slug . '/edit')
             ->seeInDatabase('invitation',
                 ['email' => $fakeUser1->email,
-                    'object_id' => $tournament->id,
-                    'expiration' => $tournament->registerDateLimit,
-                    'active' => 1,
-                    'used' => 0,
-                ])
-            ->seeInDatabase('invitation',
-                ['email' => $fakeUser2->email,
                     'object_id' => $tournament->id,
                     'expiration' => $tournament->registerDateLimit,
                     'active' => 1,
@@ -116,8 +108,8 @@ class InviteTest extends BrowserKitTest
         foreach ($championships as $championship) {
             $this->type($championship->id, 'cat[' . $championship->id . ']');
         }
-        $this->type($fakeUser1->firstname, 'firstname')
-            ->type($fakeUser1->lastname, 'lastname')
+        $this->type("aaaaaa", 'firstname')
+            ->type("bbbbbb", 'lastname')
             ->press(trans("core.save"));
 
         foreach ($championships as $key => $championship) {
