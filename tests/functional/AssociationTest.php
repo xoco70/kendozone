@@ -43,7 +43,7 @@ class AssociationTest extends BrowserKitTest
      */
     public function federationPresident_can_do_everything_in_his_own_federation()
     {
-        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+            $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
         $this->logWithUser($fmk);
 
         $this->crud();

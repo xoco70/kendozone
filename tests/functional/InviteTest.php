@@ -15,7 +15,7 @@ class InviteTest extends BrowserKitTest
     /**
      * Tests inside:
      * an_admin_may_invite_users_but_users_must_register_after
-     * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB 
+     * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
      */
 
     use DatabaseTransactions;
@@ -37,7 +37,7 @@ class InviteTest extends BrowserKitTest
         $fakeUser2 = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         // Create a closed tournament with championships
-        $tournament = factory(Tournament::class)->create(['type' => 0]);
+        $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.INVITATION_TOURNAMENT')]);
         $championships = new Collection;
         for ($i = 0; $i < 1; $i++) {
             try {
@@ -49,7 +49,7 @@ class InviteTest extends BrowserKitTest
 
         // Invite a user
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
-            ->type('["'.$fakeUser1->email.'","'.$fakeUser2->email.'"]', 'recipients')// Must simulate js plugin
+            ->type('["' . $fakeUser1->email . '","' . $fakeUser2->email . '"]', 'recipients')// Must simulate js plugin
             ->press(trans('core.send_invites'))
             ->seePageIs('/tournaments/' . $tournament->slug . '/edit')
             ->seeInDatabase('invitation',
@@ -81,18 +81,18 @@ class InviteTest extends BrowserKitTest
             ->see("403");
 
         // Invitation expired
-        if ($invitation->expiration < Carbon::now() && $invitation->expiration != '0000-00-00'){
+        if ($invitation->expiration < Carbon::now() && $invitation->expiration != '0000-00-00') {
             $this->see("403");
         }
 
-        if ($invitation->active == 0){
+        if ($invitation->active == 0) {
             $this->see("403");
         }
 
         // Logout root, and begin user registration
         Auth::logout();
 
-        $this->visit("/tournaments/" . $invitation->object->slug. "/invite/" . $invitation->code);
+        $this->visit("/tournaments/" . $invitation->object->slug . "/invite/" . $invitation->code);
 
         // If user didn't exit, check that it is created
         if (is_null($user)) {
@@ -106,8 +106,8 @@ class InviteTest extends BrowserKitTest
                 ->see(trans('auth.registration_completed'));
 
         } // Unconfirmed User
-        elseif ($user->verified == 0){
-            $user->verified  = 1;
+        elseif ($user->verified == 0) {
+            $user->verified = 1;
             $user->save();
         }
 
@@ -116,8 +116,9 @@ class InviteTest extends BrowserKitTest
         foreach ($championships as $championship) {
             $this->type($championship->id, 'cat[' . $championship->id . ']');
         }
-
-        $this->press(trans("core.save"));
+        $this->type($fakeUser1->firstname, 'firstname')
+            ->type($fakeUser1->lastname, 'lastname')
+            ->press(trans("core.save"));
 
         foreach ($championships as $key => $championship) {
             $this->seeInDatabase('competitor',
@@ -125,7 +126,7 @@ class InviteTest extends BrowserKitTest
                     'user_id' => Auth::user()->id,
                 ]);
         }
-        $this->seePageIs('/users/'.Auth::user()->slug.'/tournaments');
+        $this->seePageIs('/users/' . Auth::user()->slug . '/tournaments');
 
     }
 
@@ -174,6 +175,6 @@ class InviteTest extends BrowserKitTest
                     'user_id' => $user->id,
                 ]);
         }
-        $this->seePageIs('/users/'.Auth::user()->slug.'/tournaments');
+        $this->seePageIs('/users/' . Auth::user()->slug . '/tournaments');
     }
 }
