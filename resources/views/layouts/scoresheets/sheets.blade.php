@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <?php
                 $group = $championship->fightersGroups->get($i);
-                $fighters = $group->getFighters();
+                $fighters = $group->getFightersWithBye();
                 ?>
                 <h1 align="center">{{ $tournament->name }} - {{ $roundTitles[$group->round -1 ] }}</h1>
 
@@ -23,7 +23,7 @@
                         <?php
                         $group = $championship->fightersGroups->get($i);
                         if ($group != null) {
-                            $fighters = $group->getFighters();
+                            $fighters = $group->getFightersWithBye();
 
                             if ($j != 3) { // Cancel the last increment
                                 $i++;
