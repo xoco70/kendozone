@@ -60,7 +60,7 @@
                                         @if ($championship->hasPreliminary())
                                             @include('kendo-tournaments::partials.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
-                                            @include('kendo-tournaments::partials.tree.directElimination')
+                                            @include('kendo-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
                                         @elseif ($championship->isPlayOffType())
                                             @include('kendo-tournaments::partials.tree.playOff')
                                         @endif
