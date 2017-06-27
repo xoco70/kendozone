@@ -1,19 +1,46 @@
 <?php
 
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed'   => 'Ces identifiants ne correspondent pas à nos enregistrements',
-    'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
-
-];
+return array (
+  'failed' => 'Ces identifiants ne correspondent pas à nos enregistrements',
+  'throttle' => 'Trop de tentatives de connexion. Veuillez essayer à nouveau dans :seconds secondes.',
+  'account_already_exists' => 'Il existe déjà un utilisateur enregistré avec cet e-mail',
+  'account_not_activated' => 'Votre compte n\'est pas activé. Veuillez vérifier vos e-mails',
+  'back_to_login_form' => 'Connexion',
+  'check_your_email' => 'Nous vous avons envoyé un e-mail avec un lien d\'activation',
+  'choose_username' => 'Choisissez votre nom d\'utilisateur',
+  'create_account' => 'Créer un compte',
+  'create_password' => 'Créer votre mot de passe',
+  'credentials' => 'Veuillez remplir les champs',
+  'email_tip' => 'Veuillez entrer votre adresse e-mail',
+  'enter_new_passwords' => 'Entrez votre nouveau mot de passe',
+  'enter_new_passwords_description' => 'Confirmez votre nouveau mot de passe',
+  'go_to_password_reset' => 'Cliquez sur le lien afin de réinitialiser votre mot de passe',
+  'grade' => 'Grade',
+  'lost_password' => 'Mot de passe oublié ?',
+  'no_account' => 'Toujours pas de compte ?',
+  'password' => 'Mot de passe',
+  'password_confirmation' => 'Mot de passe (Confirmation)',
+  'password_confirmation2' => 'Confirmez votre mot de passe',
+  'password_recovery' => 'Récupérez votre mot de passe',
+  'password_reset_successfull' => 'Réinitialisez votre de passe',
+  'password_tip' => 'Le mot de passe doit être composé d\'au moins 6 caractères',
+  'register' => 'Inscription',
+  'registered' => 'Inscrit',
+  'registration_completed' => 'Inscription terminée',
+  'remember' => 'Se souvenir',
+  'repeat_email' => 'Confirmez l\'e-mail',
+  'repeat_password' => 'Confirmez le mot de passe',
+  'reset_password' => 'Réinitialiser le mot de passe',
+  'send_password' => 'Envoyer le mot de passe',
+  'signin' => 'Se connecter',
+  'signin_with' => 'Ou se connecter avec',
+  'signup' => 'S\'inscrire',
+  'title_login' => 'Connexion à Kendozone',
+  'title_register' => 'Inscription à Kendozone',
+  'tx_for_confirm' => 'Merci d\'avoir activé votre compte',
+  'user_dont_exist' => 'Hansoku nikkai !
+Il n\'y a pas d\'utilisateur enregistré avec cet e-mail',
+  'username_tip' => 'Le nom d\'utilisateur ne doit contenir que des lettres et chiffres sans espaces',
+  'we_will_send_instructions' => 'Nous allons vous envoyer des instructions dans un e-mail',
+  'your_email' => 'Votre e-mail',
+);
