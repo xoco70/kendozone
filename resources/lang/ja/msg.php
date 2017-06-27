@@ -79,7 +79,6 @@ return array (
   'min_competitor_required' => '「立ち合いの数を減らしたり,立ち合い数を減らしたり,より多くの競合相手を招待したりします。',
   'tournament_date_is_in_the_past_title' => 'the Deadline Registration Date is past due',
   'tournament_date_is_in_the_past_text' => 'please change the Deadline Registration Date to a future day',
-    'federation_edit_successful' => 'Federation <br/><b>:name</b><br/> updated',
   'team_create_error_already_exists' => 'team <br/><b>:name</b><br/> already exists',
   'success_to_all' => '¡Success to all!',
   'tree_edit_successful' => 'tree updated',

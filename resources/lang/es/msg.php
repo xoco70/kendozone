@@ -76,7 +76,7 @@ return array (
   'cancelled' => 'Cancelado',
   'operation_cancelled' => 'Operación cancelada',
   'championships_tree_generation_success' => 'Generación de arboles exitosa!',
-    'min_competitor_required' => "Se requiere un minimo de :number competitodres por area. Disminuya la cantidad de areas, o invita más competidores",
+  'min_competitor_required' => 'Se requiere un minimo de :number competitodres por area. Disminuya la cantidad de areas, o invita más competidores',
   'tournament_date_is_in_the_past_title' => 'La Fecha Límite de Registro ya pasó',
   'tournament_date_is_in_the_past_text' => 'Por favor, cambiala a un día futuro',
   'team_create_error_already_exists' => 'El equipo <br/><b>:name</b><br/> ya existe',
