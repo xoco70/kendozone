@@ -17,7 +17,7 @@ class LocaleMiddleware
          * @return mixed
          */
 
-        protected $languages = ['en', 'es','ja'];
+        protected $languages = ['en', 'es','ja','fr'];
 
 
         public function handle($request, Closure $next)
