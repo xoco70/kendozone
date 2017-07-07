@@ -157,10 +157,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return Gravatar::src($this->email);
 
         }
+
         if (!str_contains($avatar, 'http') && isset($avatar)) {
             return config('constants.AVATAR_PATH') . $avatar;
         }
-        return null;
+        return $avatar;
     }
 
 
