@@ -83,7 +83,7 @@ return [
      * If set to "true", then uniqueness is enforced across trashed and existing models.
      */
 
-    'includeTrashed' => false,
+    'includeTrashed' => true,
 
     /**
      * Whether to update the slug value when a model is being
