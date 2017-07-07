@@ -21,10 +21,10 @@
                 <tr>
 
                     <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.federation.president') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.federation.address') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.federation.phone') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.federation.president') }}</th>
+                    <th class="text-center" data-hide="all">{{ trans('structures.federation.address') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.email') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.federation.phone') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
                     @if (Auth::user()->isSuperAdmin())
                         <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>

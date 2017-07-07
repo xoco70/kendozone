@@ -40,20 +40,20 @@
                                 {!!  Form::text('name', old('name'), ['class' => 'form-control']) !!}
 
                             </div>
-                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('federation', trans_choice('structures.federation',1),['class' => 'text-bold' ]) !!}
                             {!!  Form::select('federation_id', $federations,$club->federation !=null ? $club->federation->id : null, ['class' => 'form-control']) !!}
 
 
                             <br/>
-                            {!!  Form::label('association', trans_choice('core.association',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('association', trans_choice('structures.association',1),['class' => 'text-bold' ]) !!}
                             {!!  Form::select('association_id', $associations,$club->association_id, ['class' => 'form-control']) !!}
 
 
                             <br/>
-                            {!!  Form::label('president', trans('core.club.president'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('president', trans('structures.club.president'),['class' => 'text-bold' ]) !!}
 
                             @if(sizeof($users)==0)
-                                {!!  Form::text('president_id', trans('core.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+                                {!!  Form::text('president_id', trans('structures.club.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
                                 {!!  Form::hidden('president_id', 1) !!}
 
                             @else
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
 
-                            {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('address', trans('structures.club.address'),['class' => 'text-bold' ]) !!}
                             <div class="input-group">
                                 {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                                 <span class="input-group-addon"><i class="icon-envelop3"></i></span>
@@ -77,7 +77,7 @@
                             </div>
 
                             <br/>
-                            {!!  Form::label('phone', trans('core.club.phone'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('phone', trans('structures.club.phone'),['class' => 'text-bold' ]) !!}
 
 
                             <div class="input-group">

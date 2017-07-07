@@ -1,8 +1,6 @@
 <?php
 
-return array (
-
-    
+return array(
 
 
     'add' => 'agregar',
@@ -114,7 +112,7 @@ return array (
     'recipients' => '受取人',
     'invite_recipients' => '全ての受取人の名前を書いてコンマで分別してください',
     'invite_message' => '招待のメッセージ',
-  'invite_template' => '大会を登録のためにリンクをクリックしてください:: tournament \n: link',
+    'invite_template' => '大会を登録のためにリンクをクリックしてください:: tournament \n: link',
     'send_invites' => '招待状を送る',
     'invite_with_link' => 'そのリンクの選手を招待する',
     'no_tournament_registered_yet' => 'まだ大会に登録されていません',
@@ -199,7 +197,6 @@ return array (
     'next' => '次の',
 
 
-
     'object_type' => 'オブジェクト',
     'operation_type' => '操作',
     'object_id' => 'オブジェクトID',
@@ -209,44 +206,12 @@ return array (
     'new_value' => '新しい値',
 
 
-
     'team' => 'チーム',
     'no_team_yet' => 'まだこの大会に登録されていないチーム',
     'add_new_team' => '大会を追加',
     'registered_team' => 'チーム登録済み',
 
-    'federation' => '連盟',
-    'federation.president' => '連盟長',
-    'federation.vicepresident' => '副長',
-    'federation.secretary' => '秘書',
-    'federation.treasurer' => '会計',
-    'federation.admin' => '管理者',
-    'federation.address' => '住所',
-    'federation.phone' => '電話',
-    'federation.no_user_in_this_country' => 'この国に登録されているユーザーはいません',
-    'no_federation' => '連盟なし ',
 
-    'association' => '付き合い',
-    'association.president' => '会長',
-    'association.address' => '住所',
-    'association.phone' => '電話',
-    'association.no_user_in_this_country' => 'この国に登録されているユーザーはいません',
-    'association.add' => '付き合いを足す',
-    'no_association_yet' => 'まだこの連合には関連がありません',
-    'add_new_association' => '新しい関連付けを追加する',
-    'no_association' => '関連付けなし ',
-
-    // Clubs
-    'club' => 'クラブ',
-    'club.president' => '会長',
-    'club.address' => '住所',
-    'club.phone' => '電話',
-    'club.no_user_in_this_country' => 'この国に登録されているユーザーはいません',
-
-
-    'select_field' => 'オプションを選択する',
-    'no_association_available' => 'この連合には関連はありません',
-    'no_club_available' => 'この協会にはクラブがありません',
 
 
     'import_excel' => 'excelからデータをインポートする',
@@ -310,7 +275,7 @@ return array (
 
 
     'confirm_name' => 'Confirm your full name',
-  'about' => 'About Kendozone',
+    'about' => 'About Kendozone',
 
     'share_to_facebook' => 'Share to Facebook',
     'share_to_twitter' => 'Share to Twitter',

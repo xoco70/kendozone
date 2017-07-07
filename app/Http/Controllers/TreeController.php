@@ -68,13 +68,17 @@ class TreeController extends Controller
         return view('pdf.tree', compact('championship', 'grades'));
     }
 
-    public function update(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $championshipId)
     {
-
         $numFight = 0;
-        $championshipId = $request->championshipId;
-        $championship = Championship::find($request->championshipId);
-        $groups = FightersGroup::with('fights')->where('championship_id', $championshipId)->get();
+        $groups = FightersGroup::with('fights')
+            ->where('championship_id', $championshipId)
+            ->where('round','>',1)
+            ->get();
         $fights = $request->fights;
         foreach ($groups as $group) {
             foreach ($group->fights as $fight) {
@@ -84,10 +88,7 @@ class TreeController extends Controller
                 $fight->save();
             }
         }
-
-
-        flash()->success(trans('msg.tree_edit_successful'));
-        return redirect(route('tree.index', $championship->tournament->slug))->with('activeTreeTab', $request->activeTreeTab);
+        return back();
     }
 
 }

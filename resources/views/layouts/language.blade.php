@@ -18,4 +18,11 @@
             <img src="/images/flags/GB.png" alt="English"> English</a></li>
     <li><a class="english" href="{{ URL::action('LanguageController@update', 'ja') }}">
             <img src="/images/flags/JP.png" alt="English"> Japonese</a></li>
+    <li>
+        <div align="center">
+            <a href="{{url('translations')}}">
+                {{ trans('help.help_translate') }}
+            </a>
+        </div>
+    </li>
 </ul>

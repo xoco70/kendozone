@@ -37,9 +37,9 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
                         </div>
 
-                        {!!  Form::label('president', trans('core.federation.president'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('president', trans('structures.federation.president'),['class' => 'text-bold' ]) !!}
                         @if(sizeof($users)==0)
-                            {!!  Form::text('president_id', trans('core.federation.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+                            {!!  Form::text('president_id', trans('structures.federation.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
 
                         @else
                             {!!  Form::select('president_id', $users,$federation->president_id, ['class' => 'form-control']) !!}
@@ -48,7 +48,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
 
 
                         <br/>
-                        {!!  Form::label('address', trans('core.federation.address'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('address', trans('structures.federation.address'),['class' => 'text-bold' ]) !!}
                         <div class="input-group">
 
                             {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
@@ -57,7 +57,7 @@ $appURL = (app()->environment() == 'local' ? getenv('URL_BASE') : config('app.ur
                         </div>
 
                         <br/>
-                        {!!  Form::label('phone', trans('core.federation.phone'),['class' => 'text-bold' ]) !!}
+                        {!!  Form::label('phone', trans('structures.federation.phone'),['class' => 'text-bold' ]) !!}
 
 
 

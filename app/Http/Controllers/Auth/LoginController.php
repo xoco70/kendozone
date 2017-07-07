@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
 use App\Http\Controllers\Controller;
+use File;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -23,6 +24,17 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+    public function showLoginForm()
+    {
+        $langStats = [
+            "en" => $this->getLangWordsCount('lang/en'),
+            "fr" => $this->getLangWordsCount('lang/fr'),
+            "es" => $this->getLangWordsCount('lang/es'),
+            "ja" => $this->getLangWordsCount('lang/ja'),
+        ];
+        return view('auth.login', compact('langStats'));
+    }
     /**
      * Where to redirect users after login / registration.
      *
@@ -49,6 +61,22 @@ class LoginController extends Controller
     {
 
         return $authenticateUser->execute($request->all(), $this, $provider);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getLangWordsCount($folder): int
+    {
+        $files = File::allFiles(resource_path($folder));
+        // Open English folder to get 100% reference
+        $completeCount = 0;
+        foreach ($files as $file) {
+            $content = File::get($file);
+            $completeCount += substr_count($content, '=>');
+
+        }
+        return $completeCount;
     }
 
 }

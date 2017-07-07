@@ -53,14 +53,14 @@
                             </div>
 
 
-                            {!!  Form::label('federation', trans_choice('core.federation',1),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('federation', trans_choice('structures.federation',1),['class' => 'text-bold' ]) !!}
                             {!!  Form::select('federation_id',$federations,old('federation_id'),['class' => 'form-control']) !!}
 
 
                             <br/>
-                            {!!  Form::label('president', trans('core.association.president'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('president', trans('structures.association.president'),['class' => 'text-bold' ]) !!}
                             @if(sizeof($users)==0)
-                                {!!  Form::text('president_id', trans('core.association.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
+                                {!!  Form::text('president_id', trans('structures.association.no_user_in_this_country'), ['class' => 'form-control ','disabled']) !!}
                                 {!!  Form::hidden('president_id', 1) !!}
 
                             @else
@@ -69,7 +69,7 @@
 
 
                             <br/>
-                            {!!  Form::label('address', trans('core.association.address'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('address', trans('structures.association.address'),['class' => 'text-bold' ]) !!}
                             <div class="input-group">
                                 {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address']) !!}
                                 <span class="input-group-addon"><i class="icon-envelop3"></i></span>
@@ -77,7 +77,7 @@
                             </div>
 
                             <br/>
-                            {!!  Form::label('phone', trans('core.association.phone'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('phone', trans('structures.association.phone'),['class' => 'text-bold' ]) !!}
 
 
                             <div class="input-group">

@@ -18,7 +18,7 @@
                         @if ($championship->hasPreliminary())
                             @include('layouts.tree.preliminary')
                         @elseif ($championship->isDirectEliminationType())
-                            @include('layouts.tree.directElimination')
+                            @include('kendo-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
                         @elseif ($championship->isPlayOffType())
                             @include('layouts.tree.roundRobin')
                         @elseif ($championship->isPlayOffType())

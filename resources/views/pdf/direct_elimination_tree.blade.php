@@ -1,6 +1,6 @@
 @extends('layouts.pdf')
 @section('content')
-    @include("layouts.tree.directElimination")
+    @include('kendo-tournaments::partials.tree.directElimination', ['hasPreliminary' => 1])
 @stop
 {{--@section('footer')--}}
     {{--@include('pdf.footer', ['championship' => $championship])--}}

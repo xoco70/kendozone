@@ -22,12 +22,12 @@
                 <tr>
 
                     <th data-toggle="true">{{ trans_choice('core.name',1) }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans_choice('core.federation',1) }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.association.president') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.association.address') }}</th>
-                    <th class="text-center" data-hide="all">{{ trans('core.association.phone') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('core.country') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans_choice('structures.federation',1) }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.association.president') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.email') }}</th>
+                    <th class="text-center" data-hide="all">{{ trans('structures.association.address') }}</th>
+                    <th class="text-center" data-hide="all">{{ trans('structures.association.phone') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('structures.country') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>
 
                 </tr>
