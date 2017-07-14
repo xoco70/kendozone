@@ -22,11 +22,11 @@
                         <td width="20%" align="right">
                             @if (Auth::user()->isRegisteredTo($openTournament))
                                 <a class="btn border-success bg-success border-3 pl-5 pr-5 "
-                                   href="{!! URL::action('TournamentController@show', $openTournament->slug) !!}"> {{  strtoupper(trans('auth.registered')) }}</a>
+                                   href="{!! URL::action('TournamentController@show', $openTournament->slug) !!}"> {{  mb_strtoupper(trans('auth.registered')) }}</a>
 
                             @else
                                 <a class="btn border-success text-success btn-flat border-3 seeall pl-5 pr-5 "
-                                   href="{!! URL::action('TournamentController@register', $openTournament->slug) !!}"> {{  strtoupper(trans('auth.register')) }}</a>
+                                   href="{!! URL::action('TournamentController@register', $openTournament->slug) !!}"> {{  mb_strtoupper(trans('auth.register')) }}</a>
 
                             @endif
                         </td>

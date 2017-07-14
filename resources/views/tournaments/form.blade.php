@@ -56,7 +56,7 @@
                     <div class="col-xs-2 col-md-1">
                         <span class="btn btn-flat border-grey-800 btn-rounded text-bold ">2</span>
                     </div>
-                    <div class="col-xs-10"><span class="text-bold">{{ strtoupper(trans('categories.configure_categories')) }}</span><BR/>
+                    <div class="col-xs-10"><span class="text-bold">{{ mb_strtoupper(trans('categories.configure_categories')) }}</span><BR/>
                         {{ trans('categories.configure_categories_text') }}
                         <br/>
                     </div>
@@ -64,7 +64,7 @@
                 <br/><br/>
                 <div class="row">
                     <div class="col-xs-1 col-md-offset-1">{{ Form::radio('config', '0',true, ['id' => 'c1']) }}</div>
-                    <div class="col-md-10"><span class="text-bold">{{ strtoupper(trans('categories.presettings')) }}</span><br/>
+                    <div class="col-md-10"><span class="text-bold">{{  mb_strtoupper(trans('categories.presettings')) }}</span><br/>
                         {{ trans('categories.presettings_text') }}
                         <br/><br/>
                     </div>
@@ -85,7 +85,7 @@
 
                 <div class="row">
                     <div class="col-xs-1 col-md-offset-1">{{ Form::radio('config', '1', false, ['id' => 'c2']) }}</div>
-                    <div class="col-md-10"><span class="text-bold">{{ strtoupper(trans('categories.manual')) }}</span><br/>
+                    <div class="col-md-10"><span class="text-bold">{{ mb_strtoupper(trans('categories.manual')) }}</span><br/>
                         {{trans('core.select_categories_to_register')}}<br/>
                     </div>
                 </div>
