@@ -246,4 +246,9 @@ return array (
   'penalization' => 'Hans.',
   'point' => 'Point',
   'winner' => 'Winner',
+  'english' => 'English',
+  'spanish' => 'Spanish',
+  'french' => 'French',
+  'japonese' => 'Japonese',
+
 );

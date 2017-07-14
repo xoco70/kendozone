@@ -87,14 +87,16 @@
                 <div class="panel-body">
 
                     <p>{{ trans('help.contribute_text_1') }}:
-                        <a href="https://github.com/xoco70/kendo-tournaments">Github</a></p>
-                    <p>{{ trans('help.translate_kz') }} </p>
+                        <a href="https://github.com/xoco70/kendo-tournaments" target="_blank">
+                            <div class="pb-10 " align="center"><img src="/images/brands/github.png" width=200"/></div>
+                        </a></p>
+                    <p><strong>{{ trans('help.translate_kz') }}</strong> </p>
                     <p>{{ trans('help.translate_kz_text_1') }}
                     <ul>
-                        <li>Anglais ({{ intval($langStats['en'] * 100 / $langStats['es']) }}%)</li>
-                        <li>Español ({{ intval($langStats['es'] * 100 / $langStats['es']) }}%)</li>
-                        <li>Français ({{intval($langStats['fr'] * 100 / $langStats['es']) }}%)</li>
-                        <li>Japonais ({{intval($langStats['ja'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.english') }} ({{ intval($langStats['en'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.spanish') }} ({{ intval($langStats['es'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.french') }}({{intval($langStats['fr'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.japonese') }}({{intval($langStats['ja'] * 100 / $langStats['es']) }}%)</li>
                     </ul>
                     <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}.
                     {{ trans('help.translate_kz_note2') }}</p>
