@@ -95,8 +95,8 @@
                     <ul>
                         <li>{{ trans('core.english') }} ({{ intval($langStats['en'] * 100 / $langStats['es']) }}%)</li>
                         <li>{{ trans('core.spanish') }} ({{ intval($langStats['es'] * 100 / $langStats['es']) }}%)</li>
-                        <li>{{ trans('core.french') }}({{intval($langStats['fr'] * 100 / $langStats['es']) }}%)</li>
-                        <li>{{ trans('core.japonese') }}({{intval($langStats['ja'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.french') }} ({{intval($langStats['fr'] * 100 / $langStats['es']) }}%)</li>
+                        <li>{{ trans('core.japonese') }} ({{intval($langStats['ja'] * 100 / $langStats['es']) }}%)</li>
                     </ul>
                     <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}.
                     {{ trans('help.translate_kz_note2') }}</p>
