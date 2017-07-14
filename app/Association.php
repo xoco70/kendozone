@@ -135,7 +135,7 @@ class Association extends Model
         if (sizeof($associations) == 0) {
             $object = new stdClass;
             $object->value = 0;
-            $object->text = trans('core.no_association_yet');
+            $object->text = trans('structures.no_association_yet');
             $associations->push($object);
         };
         return $associations;

@@ -24,8 +24,8 @@ $isActive = Request::is('federations*') || Request::is('associations*') || Reque
     </li>
 @elseif(Auth::user()->isSuperAdmin())
     <li {{ ($isActive ? 'class=active' : '') }}>
-        <a class="protip" data-pt-title="{{ trans_choice('core.federation',2)  }}"
+        <a class="protip" data-pt-title="{{ trans_choice('structures.federation',2)  }}"
            href="{{  route('federations.index') }}">
-            <i class="icon-address-book position-left sidemenu"></i><span>{{ trans_choice('core.federation',2)  }}</span>
+            <i class="icon-address-book position-left sidemenu"></i><span>{{ trans_choice('structures.federation',2)  }}</span>
         </a>
 @endif

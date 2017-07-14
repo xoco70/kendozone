@@ -2,16 +2,16 @@
     @include('layouts.displayMyEntityOnTop')
     <li {{ Request::is('federations*') ? 'class=active' : '' }}>
         <a href="{{ route('federations.index') }}">
-            <i class="position-left"></i> {{trans_choice('core.federation',2)}}
+            <i class="position-left"></i> {{trans_choice('structures.federation',2)}}
         </a>
     </li>
     <li {{ Request::is('associations*') ? 'class=active' : '' }}>
         <a href="{{ route('associations.index') }}">
-            <i class="position-left"></i> {{trans_choice('core.association',2)}}
+            <i class="position-left"></i> {{trans_choice('structures.association',2)}}
         </a>
     </li>
     <li {{ Request::is('clubs*') ? 'class=active' : '' }}>
-        <a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('core.club',2)}} </a>
+        <a href="{{ route('clubs.index') }}"><i class="position-left"></i> {{trans_choice('structures.club',2)}} </a>
     </li>
     <li {{ Request::is('users*') ? 'class=active' : '' }}>
         <a href="{{ route('users.index') }}"><i class="position-left"></i> {{trans_choice('core.user',2)}}</a>

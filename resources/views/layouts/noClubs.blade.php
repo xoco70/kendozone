@@ -3,9 +3,9 @@
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
             <br/><br/><br/><br/><br/><br/>
 
-            <h1 class="no-margin text-semibold">{{ trans_choice('core.clubs',2) }}</h1>
+            <h1 class="no-margin text-semibold">{{ trans_choice('structures.clubs',2) }}</h1>
 
-            <p class="text-muted text-size-large mt-20">{{ trans('core.no_clubs_yet') }}</p>
+            <p class="text-muted text-size-large mt-20">{{ trans('structures.no_clubs_yet') }}</p>
             <br/>
             <div align="center" class="mt-20 pt-20">
 

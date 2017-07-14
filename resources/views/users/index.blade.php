@@ -26,8 +26,8 @@
                     <th data-hide="phone">{{ trans('core.email') }}</th>
                     <th data-hide="phone">{{ trans('core.role') }}</th>
                     <th data-hide="phone">{{ trans('core.country') }}</th>
-                    <th data-hide="all">{{ trans_choice('core.federation',1) }}</th>
-                    <th data-hide="all">{{ trans_choice('core.association',1) }}</th>
+                    <th data-hide="all">{{ trans_choice('structures.federation',1) }}</th>
+                    <th data-hide="all">{{ trans_choice('structures.association',1) }}</th>
                     <th class="text-center">{{ trans('core.action') }}</th>
                 </tr>
                 </thead>

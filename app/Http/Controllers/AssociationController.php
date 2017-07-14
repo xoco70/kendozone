@@ -34,7 +34,7 @@ class AssociationController extends Controller
                 ->forUser(Auth::user())
                 ->where('id', '>', 1)
                 ->get();
-            $currentModelName = trans_choice('core.association', 1);
+            $currentModelName = trans_choice('structures.association', 1);
             return view('associations.index', compact('associations', 'currentModelName'));
         }
     }
@@ -52,7 +52,7 @@ class AssociationController extends Controller
 
         $users = User::forUser(Auth::user())->pluck('name', 'id')->prepend('-', 0);
         $federations = Federation::forUser(Auth::user())->pluck('name', 'id');
-        $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]);
+        $submitButton = trans('core.addModel', ['currentModelName' => trans_choice('structures.association', 1)]);
         return view('associations.form', compact('association', 'users', 'federation', 'federations', 'submitButton')); //
     }
 
@@ -111,7 +111,7 @@ class AssociationController extends Controller
      */
     public function edit($id)
     {
-        $currentModelName = trans_choice('core.association', 1);
+        $currentModelName = trans_choice('structures.association', 1);
         $association = Association::findOrFail($id);
         $federation = $association->federation;
 

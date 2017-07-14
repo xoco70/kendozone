@@ -10,7 +10,7 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
 // Home > Federations
 Breadcrumbs::register('federations.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('core.federation', 2), route('federations.index'));
+    $breadcrumbs->push(trans_choice('structures.federation', 2), route('federations.index'));
 });
 
 Breadcrumbs::register('federations.edit', function ($breadcrumbs, $federation) {
@@ -26,12 +26,12 @@ Breadcrumbs::register('federations.edit', function ($breadcrumbs, $federation) {
 // Home > Associations
 Breadcrumbs::register('associations.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('core.association', 2), route('associations.index'));
+    $breadcrumbs->push(trans_choice('structures.association', 2), route('associations.index'));
 });
 
 Breadcrumbs::register('associations.create', function ($breadcrumbs) {
     $breadcrumbs->parent('associations.index');
-    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => trans_choice('core.association', 1)]), route('associations.create'));
+    $breadcrumbs->push(trans('core.addModel', ['currentModelName' => trans_choice('structures.association', 1)]), route('associations.create'));
 
 });
 
@@ -50,7 +50,7 @@ Breadcrumbs::register('associations.edit', function ($breadcrumbs, $association)
 // Home > Clubs
 Breadcrumbs::register('clubs.index', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(trans_choice('core.club', 2), route('clubs.index'));
+    $breadcrumbs->push(trans_choice('structures.club', 2), route('clubs.index'));
 });
 
 Breadcrumbs::register('clubs.edit', function ($breadcrumbs, $club) {

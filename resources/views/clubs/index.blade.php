@@ -24,7 +24,7 @@
                     <th class="text-center" data-hide="phone">{{ trans_choice('structures.federation',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans_choice('structures.association',1) }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('structures.club.president') }}</th>
-                    <th class="text-center" data-hide="phone">{{ trans('structures.email') }}</th>
+                    <th class="text-center" data-hide="phone">{{ trans('core.email') }}</th>
                     <th class="text-center" data-hide="all">{{ trans('structures.club.address') }}</th>
                     <th class="text-center" data-hide="all">{{ trans('structures.club.phone') }}</th>
                     <th class="text-center" data-hide="phone">{{ trans('core.action') }}</th>

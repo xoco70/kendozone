@@ -139,7 +139,7 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="form-group">
-                                            {!!  Form::label('federation_id', trans_choice('core.federation',1),['class' => 'text-bold']) !!}
+                                            {!!  Form::label('federation_id', trans_choice('structures.federation',1),['class' => 'text-bold']) !!}
                                             <select name="federation_id" v-model="federationSelected" id="federation_id"
                                                     class="form-control" @change="getAssociations(federationSelected)" v-cloak>
                                             @if (Auth::user()->isSuperAdmin())
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-5">
-                                        <br/>{{trans('core.federation_not_in_list')}}<br/>
+                                        <br/>{{trans('structures.federation_not_in_list')}}<br/>
 
                                         <a href="mailto:contact@kendozone.com" class="text-semibold text-black">
                                             {{ trans('core.contact_us') }}</a>
@@ -164,13 +164,13 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="form-group">
-                                            {!!  Form::label('association_id', trans_choice('core.association',1),['class' => 'text-bold']) !!}
+                                            {!!  Form::label('association_id', trans_choice('structures.association',1),['class' => 'text-bold']) !!}
 
                                             <select name="association_id" v-model="associationSelected"
                                                     id="association_id" class="form-control"
                                             @change="getClubs(federationSelected, associationSelected)"
                                             v-cloak>
-                                            <option value="0"> {{ trans('core.no_association')  }}</option>
+                                            <option value="0"> {{ trans('structures.no_association')  }}</option>
                                             <option v-for="association in associations"
                                                     v-bind:value="association.value">
                                                 @{{ association.text }}
@@ -179,7 +179,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-5" v-if="federationSelected!=0" v-cloak>
-                                        <br/>{{trans('core.association_not_in_list')}}<br/>
+                                        <br/>{{trans('structures.association_not_in_list')}}<br/>
 
                                         <a href="#" data-toggle="modal" data-target="#create_association"
                                            class="text-semibold text-black">
@@ -189,7 +189,7 @@
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="form-group">
-                                            {!!  Form::label('club_id', trans_choice('core.club',1),['class' => 'text-bold']) !!}
+                                            {!!  Form::label('club_id', trans_choice('structures.club',1),['class' => 'text-bold']) !!}
 
                                             <select name="club_id" v-model="clubSelected" class="form-control"
                                                     id="club_id" v-cloak>
@@ -201,7 +201,7 @@
 
                                     </div>
                                     <div class="col-lg-4 mt-5" v-if="federationSelected!=0" v-cloak>
-                                        <br/>{{trans('core.club_not_in_list')}}<br/>
+                                        <br/>{{trans('structures.club_not_in_list')}}<br/>
                                         <a href="#" data-toggle="modal" data-target="#create_club"
                                            class="text-semibold text-black">
                                             {{ trans('core.add_new_club') }}</a>

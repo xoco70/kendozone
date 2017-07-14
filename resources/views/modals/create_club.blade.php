@@ -10,10 +10,10 @@
                 <div class="container-fluid">
                     <fieldset title="{{Lang::get('core.general_data')}}">
 
-                        <span class="text-bold">{{  trans_choice('core.federation',1)}}:</span>  @{{ federationSelectedText }}
+                        <span class="text-bold">{{  trans_choice('structures.federation',1)}}:</span>  @{{ federationSelectedText }}
                         <br/>
                         <br/>
-                        <span class="text-bold">{{  trans_choice('core.association',1)}}:</span>  @{{ associationSelectedText  }}
+                        <span class="text-bold">{{  trans_choice('structures.association',1)}}:</span>  @{{ associationSelectedText  }}
                         <br/>
                         <br/>
                         <div class="form-group">
@@ -24,7 +24,7 @@
                         </div>
                         <br/>
                         <div class="form-group">
-                            {!!  Form::label('address', trans('core.club.address'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('address', trans('structures.club.address'),['class' => 'text-bold' ]) !!}
                             <div class="input-group">
                                 {!!  Form::input('text', 'address', old('address'), ['class' => 'form-control address', 'v-model' => 'form.address']) !!}
                                 <span class="input-group-addon"><i class="icon-envelop3"></i></span>
@@ -34,7 +34,7 @@
 
                         <br/>
                         <div class="form-group">
-                            {!!  Form::label('phone', trans('core.club.phone'),['class' => 'text-bold' ]) !!}
+                            {!!  Form::label('phone', trans('structures.club.phone'),['class' => 'text-bold' ]) !!}
                             <div class="input-group">
                                 {!!  Form::input('text', 'phone', old('phone'), ['class' => 'form-control phone', 'v-model' => 'form.phone']) !!}
                                 <span class="input-group-addon"><i class="icon-phone"></i></span>

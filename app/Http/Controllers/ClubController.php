@@ -25,7 +25,7 @@ class ClubController extends Controller
 
     public function __construct()
     {
-        $this->currentModelName = trans_choice('core.club', 1);
+        $this->currentModelName = trans_choice('structures.club', 1);
         View::share('currentModelName', $this->currentModelName);
 
 
