@@ -36,9 +36,9 @@
     @yield('image')
     <meta property="og:locale" content="{{ App::getLocale() }}"/>
     <meta property="og:type" content="website"/>
-    @yield('title', $title)
-    @yield('description', $description)
-    @yield('image', $image)
+    @yield('title', new Illuminate\Support\HtmlString($title))
+    @yield('description', new Illuminate\Support\HtmlString($description))
+    @yield('image', new Illuminate\Support\HtmlString($image))
 
     <meta property="og:url" content="{{ Request::url() }}"/>
     <meta property="og:site_name" content="{{ $appName }}"/>
