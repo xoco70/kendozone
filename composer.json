@@ -34,8 +34,6 @@
         "xoco70/kendo-tournaments": "^0.11",
         "lab404/laravel-impersonate": "^1.1",
         "liopic/korean-romanizer": "~1.0"
-
-
     },
     "repositories": [
         {
