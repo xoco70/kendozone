@@ -80,6 +80,4 @@ return array (
   'tournament_date_is_in_the_past_title' => 'the Deadline Registration Date is past due',
   'tournament_date_is_in_the_past_text' => 'please change the Deadline Registration Date to a future day',
   'team_create_error_already_exists' => 'team <br/><b>:name</b><br/> already exists',
-  'success_to_all' => '¡Success to all!',
-  'tree_edit_successful' => 'tree updated',
 );
