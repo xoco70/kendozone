@@ -23,6 +23,8 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{{trans_choice('core.tournament',1). ": ".$tournament->name  }}"/>
 
+    <link rel="shortcut icon" href="{!! asset('/favicon_kz-01.png') !!}" />
+    <link rel="apple-touch-icon" href="{!! asset('/favicon_kz-01.png') !!}" />
 
     <!-- Global stylesheets -->
     {!! Html::style('css/app.css')!!}
