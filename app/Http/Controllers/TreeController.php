@@ -77,9 +77,9 @@ class TreeController extends Controller
         $numFight = 0;
         $groups = FightersGroup::with('fights')
             ->where('championship_id', $championshipId)
-            ->where('round','>',1)
+//            ->where('round','>',1)
             ->get();
-        $fights = $request->fights;
+        $fights = $request->directElimination_fighters;
         foreach ($groups as $group) {
             foreach ($group->fights as $fight) {
                 // Find the fight in array, and update order
