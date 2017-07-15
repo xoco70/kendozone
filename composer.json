@@ -25,7 +25,7 @@
         "laravolt/avatar": "^1.8",
         "aws/aws-sdk-php": "~3.0",
         "cviebrock/eloquent-sluggable": "^4.2.2",
-        "laravel/passport": "^2.0",
+        "laravel/passport": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "torann/geoip": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
