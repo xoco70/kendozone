@@ -107,7 +107,7 @@
             if (count != 0) {
                 let form = $(this).parents('form');
                 swal({
-                        title: "{{ trans('msg.are_you_sure') }}",
+                        title: "{{ htmlspecialchars (trans('msg.are_you_sure')) }}",
                         text: "{{ trans('msg.this_will_delete_previous_tree') }}",
                         type: "warning",
                         showCancelButton: true,

@@ -20,7 +20,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "mozjpeg": "^4.1.1",
-    "optipng-bin": "^4.0.0",
+    "optipng": "^4.0.0",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "vue-dragula": "^2.0.0-alpha"
