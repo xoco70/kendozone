@@ -37,21 +37,8 @@
                                     {{ trans_choice('core.generate_tree',1) }}
 
                                 </button>
-
-
                                 {!! Form::close() !!}
                                 <br/><br/>
-                                {{--<form class="form-horizontal">--}}
-                                    {{--<div class="form-group">--}}
-
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="email" class="form-control" id="inputEmail3" placeholder="Email">--}}
-                                        {{--</div>--}}
-                                        {{--<label for="inputEmail3" class="col-sm-2 control-label">Email</label>--}}
-                                    {{--</div>--}}
-                                {{--</form>--}}
-
-
                             @endcan
 
                             <a name="{{ str_slug($championship->buildName(), "-") }}">
@@ -95,7 +82,7 @@
 
 
                                         </td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ strpos($user->email, "@kendozone.com")!== false ? substr($user->email,-21) : $user->email }}</td>
                                         <td class="text-center">{{ $championship->buildName()}}</td>
 
                                         <td class="text-center">
