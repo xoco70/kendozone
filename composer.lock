@@ -6086,16 +6086,16 @@
         },
         {
             "name": "xoco70/kendo-tournaments",
-            "version": "0.11.7.3",
+            "version": "0.11.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/kendo-tournaments.git",
-                "reference": "38edb760895ce90d1bdb335c3473fe20571f0587"
+                "reference": "92760424ca4e34321a88a3fca0a2502b59507b25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/38edb760895ce90d1bdb335c3473fe20571f0587",
-                "reference": "38edb760895ce90d1bdb335c3473fe20571f0587",
+                "url": "https://api.github.com/repos/xoco70/kendo-tournaments/zipball/92760424ca4e34321a88a3fca0a2502b59507b25",
+                "reference": "92760424ca4e34321a88a3fca0a2502b59507b25",
                 "shasum": ""
             },
             "require": {
@@ -6138,7 +6138,7 @@
             ],
             "description": "A Laravel 5.3+ Package that allows you to generate Tournaments tree, Direct Elimination, Round Robin, or Mixed",
             "homepage": "https://github.com/xoco70/kendo-tournaments",
-            "time": "2017-07-16 21:27:39"
+            "time": "2017-07-17 14:41:43"
         },
         {
             "name": "zendframework/zend-diactoros",
