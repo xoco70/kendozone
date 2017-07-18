@@ -40,7 +40,7 @@ class TreeController extends Controller
     public function store(Request $request)
     {
 
-        $tournament = FightersGroup::getTournament($request);
+        $tournament = FightersGroup::getTournament($request); // Builder
 
         if (Auth::user()->cannot('store', [FightersGroup::class, $tournament])) {
             throw new AuthorizationException();
