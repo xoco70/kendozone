@@ -33,7 +33,8 @@
         "barryvdh/laravel-translation-manager": "^0.2.7",
         "xoco70/kendo-tournaments": "^0.11",
         "lab404/laravel-impersonate": "^1.1",
-        "liopic/korean-romanizer": "~1.0"
+        "liopic/korean-romanizer": "~1.0",
+        "doctrine/dbal": "v2.5.13"
     },
     "repositories": [
         {
