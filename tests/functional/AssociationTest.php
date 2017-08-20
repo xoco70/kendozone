@@ -3,6 +3,7 @@ use App\Association;
 use App\Federation;
 use App\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Config;
  */
 class AssociationTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
 
     /** @test

@@ -4,7 +4,7 @@ use App\Club;
 use App\Federation;
 use App\User;
 use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Config;
  */
 class ClubTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
 
     /** @test

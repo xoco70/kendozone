@@ -32,8 +32,8 @@ class CreateLogTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        setFKCheckOff();
         Schema::drop('logs');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        setFKCheckOn();
     }
 }

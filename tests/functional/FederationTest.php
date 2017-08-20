@@ -2,7 +2,7 @@
 use App\Federation;
 use App\User;
 use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Config;
  */
 class FederationTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
 
     protected $user, $users, $root, $simpleUser, $clubPresident, $associationPresident, $federationPresident; // $addUser,  $editUser,

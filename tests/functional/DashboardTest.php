@@ -4,7 +4,7 @@ use App\Championship;
 use App\Competitor;
 use App\Tournament;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class DashboardTest extends BrowserKitTest
@@ -15,7 +15,7 @@ class DashboardTest extends BrowserKitTest
      * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
      */
 
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected $user, $users, $addUser, $editUser, $root, $simpleUser;
 

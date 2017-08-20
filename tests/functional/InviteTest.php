@@ -5,7 +5,7 @@ use App\Invite;
 use App\Tournament;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -18,7 +18,7 @@ class InviteTest extends BrowserKitTest
      * a_user_may_register_an_open_tournament -  FAILING WHEN USING FB
      */
 
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected $root;
 

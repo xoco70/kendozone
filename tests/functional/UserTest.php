@@ -6,7 +6,7 @@ use App\Competitor;
 use App\Federation;
 use App\Tournament;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
@@ -14,7 +14,7 @@ use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
 class UserTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
 

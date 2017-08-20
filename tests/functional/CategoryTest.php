@@ -2,13 +2,13 @@
 
 use App\Category;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Config;
 
 
 class CategoryTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
 
     public function setUp()

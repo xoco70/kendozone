@@ -16,14 +16,7 @@ class DatabaseSeeder extends Seeder
         //Seed the countries
         $this->command->info('Seeded the countries!');
 
-        switch (DB::getDriverName()) {
-            case 'mysql':
-                DB::statement('SET FOREIGN_KEY_CHECKS=0');
-                break;
-            case 'sqlite':
-                DB::statement('PRAGMA foreign_keys = OFF');
-                break;
-        }
+        setFKCheckOff();
 
         DB::table('users')->truncate();
 
@@ -44,16 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompetitorSeeder::class);
 
         $this->command->info('All tables seeded!');
-
-
-        switch (DB::getDriverName()) {
-            case 'mysql':
-                DB::statement('SET FOREIGN_KEY_CHECKS=1');
-                break;
-            case 'sqlite':
-                DB::statement('PRAGMA foreign_keys = ON');
-                break;
-        }
+        setFKCheckOn();
         Model::reguard();
     }
 

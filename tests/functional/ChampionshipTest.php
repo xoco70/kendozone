@@ -2,7 +2,7 @@
 use App\Championship;
 use App\Tournament;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
 
@@ -13,7 +13,7 @@ use Xoco70\KendoTournaments\Models\ChampionshipSettings;
  */
 class ChampionshipTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected $root;
 

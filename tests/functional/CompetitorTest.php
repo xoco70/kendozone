@@ -3,7 +3,7 @@ use App\Championship;
 use App\Competitor;
 use App\Tournament;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Config;
  */
 class CompetitorTest extends BrowserKitTest
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected $user, $users, $addUser, $editUser, $root, $simpleUser;
 

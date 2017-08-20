@@ -14,7 +14,7 @@ class CreateFederationTable extends Migration {
 			$table->string('email')->nullable();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();
-			$table->integer('country_id')->unsigned();
+			$table->integer('country_id')->nullable()->unsigned();
 			$table->string('website')->nullable();
 
             // Direction, phone, contact
