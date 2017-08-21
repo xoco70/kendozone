@@ -51,6 +51,9 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function it_create_tournament_manually()
     {
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+
         $this->visit('/')
             ->click(trans('core.createTournament'))
             ->type('MyTournament', 'name')
@@ -74,6 +77,9 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function it_create_tournament_with_rules()
     {
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+
         $this->visit('/')
             ->click(trans('core.createTournament'))
             ->type('MyTournament', 'name')
@@ -115,6 +121,11 @@ class TournamentTest extends BrowserKitTest
      */
     public function it_edit_tournament($tournament = null)
     {
+
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+
         $tournament = $tournament ?? factory(Tournament::class)->create(['name' => 'MyTournament']);
 
         $this->visit('/tournaments/' . $tournament->slug . '/edit')
@@ -127,9 +138,9 @@ class TournamentTest extends BrowserKitTest
             ->press('saveTournament')
             ->seeInDatabase('tournament',
                 ['name' => 'MyTournamentXXX',
-                    'dateIni' => '2015-12-15',
-                    'dateFin' => '2015-12-15',
-                    'registerDateLimit' => '2015-12-16',
+                    'dateIni' => '2015-12-15 00:00:00',
+                    'dateFin' => '2015-12-15 00:00:00',
+                    'registerDateLimit' => '2015-12-16 00:00:00',
                     'type' => '1',
                     'level_id' => '2',
                 ]);
@@ -139,6 +150,8 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function you_must_own_tournament_or_be_superuser_to_edit_it()
     {
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $user = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $otherUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
@@ -163,6 +176,7 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function it_delete_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
 
         $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
         $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
@@ -185,6 +199,7 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function it_restore_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         $tournament = factory(Tournament::class)->create([
             'user_id' => Auth::user()->id,
             'deleted_at' => '2015-12-12']);
@@ -206,6 +221,7 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function update_general_info_in_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
 
         $tournament = factory(Tournament::class)->create();
         factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
@@ -220,6 +236,8 @@ class TournamentTest extends BrowserKitTest
     /** @test */
     public function update_venue_info_in_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         $tournament = factory(Tournament::class)->create();
         $venue = factory(Venue::class)->make();
         $arrVenue = json_decode(json_encode($venue), true);
@@ -232,6 +250,7 @@ class TournamentTest extends BrowserKitTest
      */
     public function user_can_see_tournament_info_but_cannot_edit_it()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         $owner = factory(User::class)->create(['name' => 'AnotherUser']);
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 

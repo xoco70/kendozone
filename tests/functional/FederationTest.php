@@ -66,6 +66,8 @@ class FederationTest extends BrowserKitTest
      */
     public function only_superadmin_can_edit_federation()
     {
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
@@ -73,15 +75,13 @@ class FederationTest extends BrowserKitTest
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $mortalUsers = [$simpleUser, $clubPresident, $associationPresident, $federationPresident];
 
-        $federation = User::find(2)
-            ?? factory(User::class)->create([
+        $federation = factory(User::class)->create([
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
                 'email' => 'superuser@kendozone.com'
             ]);
 
 
         $this->logWithUser($root);
-
 
         $this->visit("/federations")
             ->click($federation->name)
@@ -102,6 +102,8 @@ class FederationTest extends BrowserKitTest
      */
     public function a_federation_president_can_change_his_federation_data()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);

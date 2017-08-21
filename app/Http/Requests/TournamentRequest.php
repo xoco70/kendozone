@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Tournament;
 use App\Venue;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class TournamentRequest extends Request
@@ -66,7 +67,10 @@ class TournamentRequest extends Request
      */
     public function persist()
     {
-        $tournament = Auth::user()->tournaments()->create($this->except('category', 'config'));
+        $request = $this->except('category', 'config');
+        $request['registerDateLimit'] = Carbon::now()->addMonth(3);
+
+        $tournament = Auth::user()->tournaments()->create($request);
         if ($this->rule_id == 0) {
             $tournament->categories()->sync($this->input('category'));
 
@@ -100,6 +104,7 @@ class TournamentRequest extends Request
                 $res = $tournament->update($this->all());
                 break;
         }
+//        dd($tournament->toArray());
         return $res;
     }
 }

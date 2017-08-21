@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->boolean('verified')->default(false);
             $table->string('token')->nullable();
-            $table->string('provider');
+            $table->string('provider')->nullable();
             $table->string('provider_id')->unique()->nullable();
             $table->string('locale', 5)->default('en');
 

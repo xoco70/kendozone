@@ -154,6 +154,7 @@ class TournamentController extends Controller
             $venue = new Venue();
         }
         $res = $request->update($tournament, $venue);
+
         if ($request->ajax()) {
             $res == 0
                 ? $result = Response::json(['msg' => trans('msg.tournament_update_error', ['name' => $tournament->name]), 'status' => 'error'])

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -8,6 +9,7 @@ class CreateTournamentTable extends Migration {
 
 	public function up()
 	{
+
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
             $table->text('slug');
@@ -23,7 +25,7 @@ class CreateTournamentTable extends Migration {
 
 			$table->date('dateIni');
 			$table->date('dateFin');
-            $table->date('registerDateLimit')->nullable();
+            $table->date('registerDateLimit')->nullable()->default(Carbon::now()->addMonth(1));
             $table->integer('sport')->unsigned()->default(1); // Default is Kendo for now
 			$table->string('promoter')->nullable();
 			$table->string('host_organization')->nullable();

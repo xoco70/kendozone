@@ -32,6 +32,10 @@ class InviteTest extends BrowserKitTest
     /** @test */
     public function an_admin_invite_users_and_users_register()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
         // FakeUs3
         $fakeUser1 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
 
@@ -125,6 +129,10 @@ class InviteTest extends BrowserKitTest
     /** @test */
     public function a_user_may_register_an_open_tournament_with_existing_account()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
         Auth::logout();
         // Create an open tournament
         $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.OPEN_TOURNAMENT')]);

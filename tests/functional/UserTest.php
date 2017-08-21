@@ -155,7 +155,7 @@ class UserTest extends BrowserKitTest
         $this->logWithUser($this->simpleUser);
         Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
-        
+
         $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
         $arrNewUser = json_decode(json_encode($newUser), true);
 
