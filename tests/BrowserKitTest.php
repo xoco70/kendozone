@@ -26,16 +26,7 @@ abstract class BrowserKitTest extends BaseTestCase
         return $app;
     }
 
-    /**
-     * Migrates the database and set the mailer to 'pretend'.
-     * This will cause the tests to run quickly.
-     *
-     */
-    private function prepareForTests()
-    {
-        Artisan::call('migrate');
-        Mail::pretend(true);
-    }
+
 
     /**@param  string $table
      * @param  array $data
@@ -92,7 +83,20 @@ abstract class BrowserKitTest extends BaseTestCase
      * @param \App\User $newUser
      */
     public function logWithUser(App\User $newUser){
-        Auth::loginUsingId($newUser->id);
+        Auth::login($newUser);
         Lang::setLocale($newUser->locale);
+
+    }
+
+        /**
+     * Migrates the database and set the mailer to 'pretend'.
+     * This will cause the tests to run quickly.
+     *
+     */
+    private function prepareForTests()
+    {
+        Artisan::call('db:seed');
+        dump('seed');
+//        Mail::pretend(true);
     }
 }

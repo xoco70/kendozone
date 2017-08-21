@@ -23,7 +23,7 @@ class CreateTournamentTable extends Migration {
 
 			$table->date('dateIni');
 			$table->date('dateFin');
-            $table->date('registerDateLimit');
+            $table->date('registerDateLimit')->nullable();
             $table->integer('sport')->unsigned()->default(1); // Default is Kendo for now
 			$table->string('promoter')->nullable();
 			$table->string('host_organization')->nullable();
@@ -31,7 +31,7 @@ class CreateTournamentTable extends Migration {
 			$table->integer('rule_id')->default(1);
             $table->tinyInteger('type')->default(1); // 1= local, 2= state, 3= national, 4=continent, 5=world
             $table->integer("venue_id")->nullable()->unsigned();
-			$table->integer("level_id")->unsigned()->default(1);
+			$table->integer("level_id")->unsigned()->nullable()->default(1);
 			$table->foreign('level_id')
 					->references('id')
 					->on('tournamentLevel')

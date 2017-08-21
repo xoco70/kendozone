@@ -28,7 +28,11 @@ class ClubTest extends BrowserKitTest
      */
     public function superAdmin_can_crud_club()
     {
-        $root = User::findOrFail(2);
+        $root = User::find(2)
+            ?? factory(User::class)->create([
+                'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
+                'email' => 'superuser@kendozone.com'
+            ]);
 
         $this->logWithUser($root);
 
@@ -57,7 +61,12 @@ class ClubTest extends BrowserKitTest
      */
     public function federationPresident_can_do_everything_in_his_own_federation()
     {
-        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first()
+            ?? factory(User::class)->create([
+                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+                'email' => 'fmk@kendozone.com'
+            ]);
+
 
         $this->logWithUser($fmk);
 

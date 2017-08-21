@@ -117,7 +117,6 @@ class UserTest extends BrowserKitTest
     public function check_you_can_see_user_info()
     {
         $user2 = factory(User::class)->create(['name' => 'AnotherUser']);
-
         $this->logWithUser($this->simpleUser);
         $this->visit('/users/' . $this->simpleUser->slug)
             ->dontSee("403.png")

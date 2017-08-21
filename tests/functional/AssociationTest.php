@@ -1,4 +1,5 @@
 <?php
+
 use App\Association;
 use App\Federation;
 use App\User;
@@ -32,7 +33,12 @@ class AssociationTest extends BrowserKitTest
      */
     public function superAdmin_can_see_create_read_update_delete_association()
     {
-        $root = User::findOrFail(2);
+        $root = User::find(2)
+            ?? factory(User::class)->create([
+                'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
+                'email' => 'superuser@kendozone.com'
+            ]);
+
         $this->logWithUser($root);
         $this->crud();
 
@@ -44,7 +50,11 @@ class AssociationTest extends BrowserKitTest
      */
     public function federationPresident_can_do_everything_in_his_own_federation()
     {
-            $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first()
+            ?? factory(User::class)->create([
+                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+                'email' => 'fmk@kendozone.com'
+            ]);
         $this->logWithUser($fmk);
 
         $this->crud();
@@ -76,7 +86,8 @@ class AssociationTest extends BrowserKitTest
 
     /** @test
      */
-    public function a_federation_president_cannot_edit_an_association_that_doesnt_belongs_to_him(){ // Delete rule is the same, I don't do 2 tests
+    public function a_federation_president_cannot_edit_an_association_that_doesnt_belongs_to_him()
+    { // Delete rule is the same, I don't do 2 tests
         $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
 
         $this->visitEditAssociationPage($federationPresident);
@@ -84,31 +95,37 @@ class AssociationTest extends BrowserKitTest
 
 
     }
+
     /** @test
      */
-    public function a_association_president_cannot_edit_or_delete_an_association_that_doesnt_belongs_to_him(){
+    public function a_association_president_cannot_edit_or_delete_an_association_that_doesnt_belongs_to_him()
+    {
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
         $this->visitEditAssociationPage($associationPresident);
         $this->see("403.png");
     }
+
     /** @test
      *
      */
-    public function a_club_president_cannot_edit_or_delete_an_association(){
+    public function a_club_president_cannot_edit_or_delete_an_association()
+    {
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $this->visitEditAssociationPage($clubPresident);
         $this->see("403.png");
     }
+
     /** @test
      *
      */
-    public function only_root_and_fp_can_create_association(){
+    public function only_root_and_fp_can_create_association()
+    {
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
         $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
 
         $users = [$associationPresident, $clubPresident, $simpleUser];
-        foreach ($users as $user){
+        foreach ($users as $user) {
             $this->logWithUser($user);
             $this->visitCreateAssociationPage($clubPresident);
             $this->see("403.png");
@@ -196,20 +213,21 @@ class AssociationTest extends BrowserKitTest
     /**
      * @return true if User can create an association
      * @param Association $association
+     *
      */
     private function canCreate(Association $association)
     {
         $this->visit_addAssociation();
         $this->fillAssocAndSee($association);
-
     }
+
     /**
      * Create an association with the specified User
      * @param Association $association
      */
     private function canUpdate(Association $association)
     {
-        $this->visit("/associations/".$association->id."/edit");
+        $this->visit("/associations/" . $association->id . "/edit");
 
         $associationData = factory(Association::class)->make(['federation_id' => $association->federation_id]);
 
@@ -246,7 +264,7 @@ class AssociationTest extends BrowserKitTest
 
     }
 
-    /** @test  */
+    /** @test */
     public function an_association_president_cant_be_in_2_association()
     {
         $this->expectException(QueryException::class);

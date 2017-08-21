@@ -73,7 +73,11 @@ class FederationTest extends BrowserKitTest
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $mortalUsers = [$simpleUser, $clubPresident, $associationPresident, $federationPresident];
 
-        $federation = Federation::find(2);
+        $federation = User::find(2)
+            ?? factory(User::class)->create([
+                'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
+                'email' => 'superuser@kendozone.com'
+            ]);
 
 
         $this->logWithUser($root);
