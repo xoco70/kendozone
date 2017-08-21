@@ -96,7 +96,5 @@ abstract class BrowserKitTest extends BaseTestCase
     private function prepareForTests()
     {
         Artisan::call('db:seed');
-        dump('seed');
-//        Mail::pretend(true);
     }
 }

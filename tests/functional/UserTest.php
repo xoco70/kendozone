@@ -1,4 +1,5 @@
 <?php
+
 use App\Association;
 use App\Championship;
 use App\Club;
@@ -16,7 +17,7 @@ class UserTest extends BrowserKitTest
 {
     use DatabaseMigrations;
 
-    protected $user, $users, $root, $simpleUser; // $addUser,  $editUser,
+    protected $user, $users, $root, $simpleUser;
 
     public function setUp()
     {
@@ -73,12 +74,12 @@ class UserTest extends BrowserKitTest
         $this->logWithUser($this->root);
         // Given
 
-        $tournament = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id]);
+        $tournament = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id, 'level_id' => 1]);
         $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
         factory(Competitor::class)->create(['championship_id' => $championship1->id]);
 
-        $response = $this->actingAs($this->root,'api')->json('DELETE', '/users/' . $this->simpleUser->slug);
+        $response = $this->actingAs($this->root, 'api')->json('DELETE', '/users/' . $this->simpleUser->slug);
         $response->assertResponseStatus(200);
 
         $this->seeIsSoftDeletedInDatabase('users', ['name' => $this->simpleUser->name])
@@ -93,6 +94,9 @@ class UserTest extends BrowserKitTest
     /** @test */
     public function you_must_be_the_user_to_edit_your_info_or_be_superuser()
     {
+        // fill role table
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+
         $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 
         // User 2 can edit his info
@@ -116,6 +120,9 @@ class UserTest extends BrowserKitTest
      */
     public function check_you_can_see_user_info()
     {
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'GradeSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         $user2 = factory(User::class)->create(['name' => 'AnotherUser']);
         $this->logWithUser($this->simpleUser);
         $this->visit('/users/' . $this->simpleUser->slug)
@@ -129,6 +136,9 @@ class UserTest extends BrowserKitTest
     public function create_user()
     {
         $this->logWithUser($this->root);
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+
         $user = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
         $arrUser = json_decode(json_encode($user), true);
 
@@ -143,7 +153,9 @@ class UserTest extends BrowserKitTest
     {
 
         $this->logWithUser($this->simpleUser);
-
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        
         $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
         $arrNewUser = json_decode(json_encode($newUser), true);
 
@@ -155,20 +167,18 @@ class UserTest extends BrowserKitTest
     /** @test */
     public function it_changes_user_club()
     {
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
 
         $this->logWithUser($this->simpleUser);
         $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
 
-//        $federation = Federation::inRandomOrder()->first();
-        $federation = Federation::inRandomOrder()->find(36);
-//        $association = Association::inRandomOrder()->where('federation_id', $federation->id)->first();
-        $association = Association::find(8); // UNAM
-        $club = Club::find(13); // UNAM
+        $federation = factory(Federation::class)->create();
+        $association = factory(Association::class)->create(['federation_id' => $federation->id]);
+        $club = factory(Club::class)->create(['association_id' => $association->id]);
 
-        if ($association != null) $club = Club::inRandomOrder()->where('association_id', $association->id)->first();
+//        if ($association != null) $club = Club::inRandomOrder()->where('association_id', $association->id)->first();
 
-
-//        array_add($arrNewUser, 'federation_id',$federation->id);
         $newUser->federation_id = $federation->id;
 
         if ($association != null) $newUser->association_id = $association->id;
@@ -184,7 +194,7 @@ class UserTest extends BrowserKitTest
     public function it_allow_editing_user_without_password()
     {
         $this->logWithUser($this->root);
-
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
         $user = factory(User::class)->create(
             ['name' => 'MyUser',
                 'email' => 'MyUser@kendozone.com',
