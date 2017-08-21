@@ -37,6 +37,10 @@ class CompetitorTest extends BrowserKitTest
     /** @test */
     public function it_add_a_user_to_championship()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
         $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
         $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
 
@@ -89,6 +93,9 @@ class CompetitorTest extends BrowserKitTest
     /** @test */
     public function it_removes_a_user_or_a_team_from_tournament_category()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
         // Given
         $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
         $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]); // Single
@@ -115,6 +122,10 @@ class CompetitorTest extends BrowserKitTest
     /** @test */
     public function you_must_own_tournament_or_be_superuser_to_add_or_remove_user_from_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
 //        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
@@ -162,6 +173,10 @@ class CompetitorTest extends BrowserKitTest
     /** @test */
     public function you_must_own_tournament_or_be_superuser_to_confirm_a_user_in_a_category()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
         $root = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_SUPERADMIN')]);
         $owner = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
         $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
@@ -202,6 +217,9 @@ class CompetitorTest extends BrowserKitTest
     /** @test */
     public function a_competitor_always_has_the_same_short_id_in_a_tournament()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
         $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
         $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 3]); // Single
         $championship2 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 4]); // Single

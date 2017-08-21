@@ -1,4 +1,5 @@
 <?php
+
 use App\Association;
 use App\Club;
 use App\Federation;
@@ -61,11 +62,15 @@ class ClubTest extends BrowserKitTest
      */
     public function federationPresident_can_do_everything_in_his_own_federation()
     {
-        $fmk = User::where('email', '=', 'fmk@kendozone.com')->first()
-            ?? factory(User::class)->create([
-                'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
-                'email' => 'fmk@kendozone.com'
-            ]);
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        $federation = factory(Federation::class)->create(['president_id' => null]);
+        $fmk = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+            'email' => 'fmk@kendozone.com',
+            'federation_id' => $federation->id
+        ]);
 
 
         $this->logWithUser($fmk);
@@ -80,7 +85,11 @@ class ClubTest extends BrowserKitTest
             'federation_id' => $fmk->federation->id,
             'association_id' => $association->id]);
 
-        $clubData = factory(Club::class)->make(['federation_id' => $fmk->federation->id, 'association_id' => $association->id, 'president_id' => $clubPresident->id]);
+        $clubData = factory(Club::class)->make([
+            'federation_id' => $fmk->federation->id,
+            'association_id' => $association->id,
+            'president_id' => $clubPresident->id]);
+        
         $this->crud($clubData);
     }
 
@@ -117,8 +126,13 @@ class ClubTest extends BrowserKitTest
      */
     public function a_club_president_can_change_his_club_data() // But not to another club_president
     {
-//        $federation = factory(Federation::class)->create(['president_id' => null]);
-                $fmk = User::where('email', '=', 'fmk@kendozone.com')->first();
+        $federation = factory(Federation::class)->create(['president_id' => null]);
+
+        $fmk = factory(User::class)->create([
+            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+            'email' => 'fmk@kendozone.com',
+            'federation_id' => $federation->id
+        ]);
         $federation = $fmk->federation;
 
         $association = factory(Association::class)->create([
@@ -145,7 +159,7 @@ class ClubTest extends BrowserKitTest
         $club = factory(Club::class)->make([
             'federation_id' => $federation->id,
             'association_id' => $myClub->association_id,
-            'president_id' => $clubPresident->id ]);
+            'president_id' => $clubPresident->id]);
 
         $this->visit("/clubs/" . $myClub->id . "/edit")
             ->fillClubAndSee($club);

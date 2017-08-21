@@ -35,7 +35,9 @@ class DashboardTest extends BrowserKitTest
     /** @test */
     public function dashboard_check_initial_state()
     {
-
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
         // Given
         $this->logWithUser($this->simpleUser);
 

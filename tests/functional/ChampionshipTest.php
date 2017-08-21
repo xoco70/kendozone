@@ -28,6 +28,10 @@ class ChampionshipTest extends BrowserKitTest
     /** @test */
     public function it_create_custom_championship()
     {
+        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+
 //        category/create
         $category = factory(\App\Category::class)->make();
         $arrCat1 = json_decode(json_encode($category), true);
@@ -41,6 +45,8 @@ class ChampionshipTest extends BrowserKitTest
     /** @test */
     public function it_create_championship_settings()
     {
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+
         $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
@@ -55,6 +61,9 @@ class ChampionshipTest extends BrowserKitTest
     /** @test */
     public function it_edit_championship_settings()
     {
+
+        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+
         $tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
