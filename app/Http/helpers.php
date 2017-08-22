@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManagerStatic;
-
 
 /**
  * Set a flash message in the session.
