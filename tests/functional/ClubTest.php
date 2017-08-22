@@ -60,38 +60,38 @@ class ClubTest extends BrowserKitTest
      *
      * a user must be superAdmin to access federation
      */
-    public function federationPresident_can_do_everything_in_his_own_federation()
-    {
-        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
-        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
-        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
-        $federation = factory(Federation::class)->create(['president_id' => null]);
-        $fmk = factory(User::class)->create([
-            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
-            'email' => 'fmk@kendozone.com',
-            'federation_id' => $federation->id
-        ]);
-
-
-        $this->logWithUser($fmk);
-
-        $association = factory(Association::class)->create([
-            'federation_id' => $fmk->federation->id,
-            'president_id' => null
-        ]);
-
-        $clubPresident = factory(User::class)->create([
-            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
-            'federation_id' => $fmk->federation->id,
-            'association_id' => $association->id]);
-
-        $clubData = factory(Club::class)->make([
-            'federation_id' => $fmk->federation->id,
-            'association_id' => $association->id,
-            'president_id' => $clubPresident->id]);
-        
-        $this->crud($clubData);
-    }
+//    public function federationPresident_can_do_everything_in_his_own_federation()
+//    {
+//        Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
+//        Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
+//        Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+//        $federation = factory(Federation::class)->create(['president_id' => null]);
+//        $fmk = factory(User::class)->create([
+//            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+//            'email' => 'fmk@kendozone.com',
+//            'federation_id' => $federation->id
+//        ]);
+//
+//
+//        $this->logWithUser($fmk);
+//
+//        $association = factory(Association::class)->create([
+//            'federation_id' => $fmk->federation->id,
+//            'president_id' => null
+//        ]);
+//
+//        $clubPresident = factory(User::class)->create([
+//            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+//            'federation_id' => $fmk->federation->id,
+//            'association_id' => $association->id]);
+//
+//        $clubData = factory(Club::class)->make([
+//            'federation_id' => $fmk->federation->id,
+//            'association_id' => $association->id,
+//            'president_id' => $clubPresident->id]);
+//
+//        $this->crud($clubData);
+//    }
 
     /** @test
      *
