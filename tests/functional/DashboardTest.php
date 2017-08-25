@@ -49,9 +49,9 @@ class DashboardTest extends BrowserKitTest
 
         // Create 1 tournament
         $tournament0 = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id]);
-        dd($tournament0);
-        $this->visit('/')
-            ->dump();
+
+//        $this->visit('/')
+//            ->dump();
 
         // Now configure 2/2 categories
 
