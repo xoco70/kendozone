@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Team extends \Xoco70\KendoTournaments\Models\Team
+class Team extends \Xoco70\LaravelTournaments\Models\Team
 {
     protected static function boot()
     {

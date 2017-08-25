@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Championship extends \Xoco70\KendoTournaments\Models\Championship
+class Championship extends \Xoco70\LaravelTournaments\Models\Championship
 {
     /**
      * A championship belongs to a Category

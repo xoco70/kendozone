@@ -13,9 +13,9 @@
                         </td>
                         <td width="80%">
                             <div class="form-group form-group-sheets">
-                                @if ($fighter instanceOf \Xoco70\KendoTournaments\Models\Competitor)
+                                @if ($fighter instanceOf \Xoco70\LaravelTournaments\Models\Competitor)
                                     {!!  Form::text('name[]', $fighter->user != null ? $fighter->user->name : "", ['class' => 'form-control competitor_name']) !!}
-                                @elseif ($fighter instanceOf \Xoco70\KendoTournaments\Models\Team)
+                                @elseif ($fighter instanceOf \Xoco70\LaravelTournaments\Models\Team)
                                     {!!  Form::text('name[]', $fighter->name ?? "", ['class' => 'form-control competitor_name']) !!}
                                 @endif
 

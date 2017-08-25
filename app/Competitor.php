@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Competitor extends \Xoco70\KendoTournaments\Models\Competitor
+class Competitor extends \Xoco70\LaravelTournaments\Models\Competitor
 {
 
 }

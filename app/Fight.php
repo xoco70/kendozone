@@ -4,7 +4,7 @@
 namespace App;
 
 
-class Fight extends \Xoco70\KendoTournaments\Models\Fight
+class Fight extends \Xoco70\LaravelTournaments\Models\Fight
 {
 
 }

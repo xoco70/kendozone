@@ -3,7 +3,7 @@
 namespace App;
 
 
-class FighterGroupCompetitor extends \Xoco70\KendoTournaments\Models\FighterGroupCompetitor
+class FighterGroupCompetitor extends \Xoco70\LaravelTournaments\Models\FighterGroupCompetitor
 {
 
 }

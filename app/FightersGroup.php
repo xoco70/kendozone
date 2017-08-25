@@ -2,7 +2,7 @@
 
 namespace App;
 
-class FightersGroup extends \Xoco70\KendoTournaments\Models\FightersGroup
+class FightersGroup extends \Xoco70\LaravelTournaments\Models\FightersGroup
 {
     /**
      * Get tournament with a lot of stuff Inside - Should Change name

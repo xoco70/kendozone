@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
-class Category extends \Xoco70\KendoTournaments\Models\Category
+class Category extends \Xoco70\LaravelTournaments\Models\Category
 {
     const AGE_CUSTOM = 5;
     /**
