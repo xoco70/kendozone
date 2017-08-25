@@ -12,7 +12,7 @@
 
                         @forelse($tournament->championships as $championship)
                             <h1> {{$championship->buildName()}}</h1>
-                            @include('kendo-tournaments::partials.fights')
+                            @include('laravel-tournaments::partials.fights')
                         @empty
                             {{ trans('core.no_fight_list') }}
                         @endforelse

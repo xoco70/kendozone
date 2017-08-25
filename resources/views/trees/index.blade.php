@@ -58,11 +58,11 @@
 
                                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                                         @if ($championship->hasPreliminary())
-                                            @include('kendo-tournaments::partials.tree.preliminary')
+                                            @include('laravel-tournaments::partials.tree.preliminary')
                                         @elseif ($championship->isDirectEliminationType())
-                                            @include('kendo-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
+                                            @include('laravel-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
                                         @elseif ($championship->isPlayOffType())
-                                            @include('kendo-tournaments::partials.tree.playOff')
+                                            @include('laravel-tournaments::partials.tree.playOff')
                                         @endif
                                     @else
                                         <div>{{trans('core.no_generated_tree')}}</div>

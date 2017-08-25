@@ -87,7 +87,7 @@
                 <div class="panel-body">
 
                     <p>{{ trans('help.contribute_text_1') }}:
-                        <a href="https://github.com/xoco70/kendo-tournaments" target="_blank">
+                        <a href="https://github.com/xoco70/laravel-tournaments" target="_blank">
                             <div class="pb-10 " align="center"><img src="/images/brands/github.png" width=200"/></div>
                         </a></p>
                     <p><strong>{{ trans('help.translate_kz') }}</strong> </p>

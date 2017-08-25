@@ -21,7 +21,7 @@ mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 
 mix.copy('resources/assets/js/analytics.js', 'public/js/analytics.js');
 
-mix.copy('vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css', 'public/vendor/kendo-tournaments/css/brackets.css');
+mix.copy('vendor/xoco70/laravel-tournaments/resources/assets/css/brackets.css', 'public/vendor/laravel-tournaments/css/brackets.css');
 mix.copy('resources/assets/css/sheet.css', 'public/css/pages/sheet.css');
 mix.copy('resources/assets/css/icons/icomoon/fonts/icomoon.woff', 'public/css/icons/icomoon/fonts/icomoon.woff');
 mix.copy('resources/assets/css/icons/icomoon/fonts/icomoon.ttf', 'public/css/icons/icomoon/fonts/icomoon.ttf');
@@ -163,7 +163,7 @@ mix.combine([
 
 
 mix.combine([
-    'vendor/xoco70/kendo-tournaments/resources/assets/css/brackets.css',
+    'vendor/xoco70/laravel-tournaments/resources/assets/css/brackets.css',
 ], 'public/css/pages/trees.css');
 
 mix.combine([
