@@ -1,5 +1,5 @@
 <?php
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 $setting = $championship->getSettings();
 

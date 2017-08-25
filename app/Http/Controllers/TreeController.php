@@ -10,9 +10,9 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
-use Xoco70\KendoTournaments\Exceptions\TreeGenerationException;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
-use Xoco70\KendoTournaments\TreeGen\TreeGen;
+use Xoco70\LaravelTournaments\Exceptions\TreeGenerationException;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\TreeGen\TreeGen;
 
 class TreeController extends Controller
 {

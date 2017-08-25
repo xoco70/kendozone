@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <?php
-    use Xoco70\KendoTournaments\Models\ChampionshipSettings;$ok = '<span class=" text-success glyphicon glyphicon-ok"></span>';
+    use Xoco70\LaravelTournaments\Models\ChampionshipSettings;$ok = '<span class=" text-success glyphicon glyphicon-ok"></span>';
     $nok = '<span class=" text-warning glyphicon glyphicon-remove"></span>';
     ?>
 

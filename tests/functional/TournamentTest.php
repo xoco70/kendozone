@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 class TournamentTest extends BrowserKitTest
 {

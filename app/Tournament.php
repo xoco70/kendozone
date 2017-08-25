@@ -11,7 +11,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 
 /**

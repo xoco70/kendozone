@@ -2,7 +2,7 @@
 
 
 use App\Championship;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 $factory->define(ChampionshipSettings::class, function (Faker\Generator $faker) use ($factory) {
     $tcs = Championship::all()->pluck('id')->toArray();

@@ -7,7 +7,7 @@
     <div class="tabbable">
 
         <ul class="nav nav-tabs nav-tabs-bottom bottom-divided nav-justified">
-            <?php use Xoco70\KendoTournaments\Models\ChampionshipSettings;$first = true ?>
+            <?php use Xoco70\LaravelTournaments\Models\ChampionshipSettings;$first = true ?>
             @foreach($categories  as $category)
                 <li {{$first ? 'class=active':'' }}>
                     <?php $first = false ?>

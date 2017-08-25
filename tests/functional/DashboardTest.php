@@ -5,7 +5,7 @@ use App\Category;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 
 class DashboardTest extends BrowserKitTest
