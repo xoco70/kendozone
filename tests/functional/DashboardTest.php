@@ -1,11 +1,12 @@
 <?php
 
 use App\Championship;
-use App\Competitor;
+use App\Category;
 use App\Tournament;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Xoco70\KendoTournaments\Models\ChampionshipSettings;
+
 
 class DashboardTest extends BrowserKitTest
 {
@@ -46,20 +47,22 @@ class DashboardTest extends BrowserKitTest
             ->see(trans('core.create_new_tournament'))
             ->dontSee(trans('core.congigure_categories'));
 
-
         // Create 1 tournament
         $tournament0 = factory(Tournament::class)->create(['user_id' => $this->simpleUser->id]);
-
+        dd($tournament0);
         $this->visit('/')
-            ->seeInElement("p.text-muted", trans('core.no_tournament_created_yet'));
+            ->dump();
 
         // Now configure 2/2 categories
 
 //        $championship1 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>1]);
 //        $championship2 = factory(Championship::class)->create(['tournament_id' => $tournament0->id,'category_id'=>2]);
 //
-//        factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
-//        factory(ChampionshipSettings::class)->create(['championship_id' => $championship2->id]);
+//
+//        $cs1 = factory(ChampionshipSettings::class)->create(['championship_id' => $championship1->id]);
+//        $cs2 = factory(ChampionshipSettings::class)->create(['championship_id' => $championship2->id]);
+//
+
 //
 //        $this->visit('/')
 //            ->seeInElement("span.text-muted", trans('core.congigure_categories'));
