@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e13eef0de0c125461852515c0206188f",
-    "content-hash": "984d7c15cc6915a2d469a58a597db9a1",
+    "hash": "353844a4661136004eea0a97ea016456",
+    "content-hash": "7a7eaaaa9c71ba3bdd8be69a4294ba64",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -6491,7 +6491,7 @@
             "time": "2017-08-24 08:46:54"
         },
         {
-            "name": "xoco70/kendo-tournaments",
+            "name": "xoco70/laravel-tournaments",
             "version": "0.11.17",
             "source": {
                 "type": "git",
