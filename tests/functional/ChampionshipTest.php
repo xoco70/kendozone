@@ -31,11 +31,11 @@ class ChampionshipTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
+        Artisan::call('db:seed', ['--class' => 'GradeSeeder', '--database' => 'sqlite']);
 
-//        category/create
         $category = factory(\App\Category::class)->make();
-        $arrCat1 = json_decode(json_encode($category), true);
 
+        $arrCat1 = json_decode(json_encode($category), true);
         $this->actingAs($this->root, 'api')
             ->json('POST', '/api/v1/category/create', $arrCat1);
         unset($arrCat1['name']); // Remove category name that is translated and make test fail
