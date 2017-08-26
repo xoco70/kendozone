@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "353844a4661136004eea0a97ea016456",
-    "content-hash": "7a7eaaaa9c71ba3bdd8be69a4294ba64",
+    "hash": "0db6257a9aa57ca69f9f0c8eb260817d",
+    "content-hash": "5e06a8adef1d011f2d8d2c62e99352f8",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.34.2",
+            "version": "3.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "eee45c7189f6fe0b70aac86495718ccfdc067495"
+                "reference": "e9691180888d2679b24cbad1f805e48aadd1a346"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/eee45c7189f6fe0b70aac86495718ccfdc067495",
-                "reference": "eee45c7189f6fe0b70aac86495718ccfdc067495",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e9691180888d2679b24cbad1f805e48aadd1a346",
+                "reference": "e9691180888d2679b24cbad1f805e48aadd1a346",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-08-24 18:09:26"
+            "time": "2017-08-25 23:24:46"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -6492,16 +6492,16 @@
         },
         {
             "name": "xoco70/laravel-tournaments",
-            "version": "0.11.18",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "f1896323abe51ed6d149f9adefd36293b0e23ff2"
+                "reference": "b5d951700bb9e008c82d9051580828178656d77e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/f1896323abe51ed6d149f9adefd36293b0e23ff2",
-                "reference": "f1896323abe51ed6d149f9adefd36293b0e23ff2",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/b5d951700bb9e008c82d9051580828178656d77e",
+                "reference": "b5d951700bb9e008c82d9051580828178656d77e",
                 "shasum": ""
             },
             "require": {
@@ -6544,7 +6544,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2017-08-25 23:00:35"
+            "time": "2017-08-26 21:04:34"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -6715,7 +6715,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "laravelcollective/html": 20,
-        "webpatser/laravel-countries": 20
+        "webpatser/laravel-countries": 20,
+        "xoco70/laravel-tournaments": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
