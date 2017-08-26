@@ -11,11 +11,11 @@
 
 
         @if ($settingSize > 0 && $settingSize == $categorySize)
-            <br/>
-            <a href="{{ URL::action('InviteController@create',  $tournament->slug) }}" id="add_competitors"
-               type="button"
-               class="btn btn-success p-20 mr-10 pull-right"> @lang('core.invite_competitors') <i
-                        class="glyphicon glyphicon-chevron-right"></i></a>
+            {{--<br/>--}}
+            {{--<a href="{{ URL::action('InviteController@create',  $tournament->slug) }}" id="add_competitors"--}}
+               {{--type="button"--}}
+               {{--class="btn btn-success p-20 mr-10 pull-right"> @lang('core.invite_competitors') <i--}}
+                        {{--class="glyphicon glyphicon-chevron-right"></i></a>--}}
         @else
             <br/>
             <a href="{{ URL::action('InviteController@create',  $tournament->slug) }}" id="add_competitors"
