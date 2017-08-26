@@ -143,6 +143,7 @@ return array (
   'yes' => 'Yes',
   'no' => 'No',
   'forbidden' => 'Forbidden!',
+  'server_error' => 'Server Error!',
   'lastlogin' => 'Last Login',
   'sumary' => 'Summary',
   'see_trees' => 'Trees',

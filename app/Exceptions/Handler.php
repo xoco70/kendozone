@@ -61,6 +61,7 @@ class Handler extends ExceptionHandler
 //                    'tags' => array('Francia' => 'Campeon!!!')
                 ];
             }
+
             $this->sentryID = app('sentry')->captureException($exception, $params);
         }
 
@@ -153,7 +154,12 @@ class Handler extends ExceptionHandler
                 $source = "";
                 break;
             default:
-                return parent::render($request, $exception);
+                $code = "500";
+                $message = trans('core.server_error');
+                $quote = '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”';
+                $author = 'Tabitha Suzuma';
+                $source = trans('core.forbidden');
+                break;
         }
 
         if ($exception instanceof MaintenanceModeException)
