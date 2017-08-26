@@ -23,6 +23,7 @@ class CategoryTest extends BrowserKitTest
      */
     public function create_category()
     {
+        Artisan::call('db:seed', ['--class' => 'GradeSeeder', '--database' => 'sqlite']);
         $simpleUser = factory(User::class)->create(['locale' => 'en', 'role_id' => Config::get('constants.ROLE_USER')]);
 
         $category = factory(Category::class)->make();
