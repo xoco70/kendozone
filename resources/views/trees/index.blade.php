@@ -105,11 +105,12 @@
             let form = $(this).parents('form:first');
             inputData = form.serialize();
             let count = form.data('gen');
+            //JC2
             if (count != 0) {
                 let form = $(this).parents('form');
                 swal({
-                        title: "{{ htmlspecialchars (trans('msg.are_you_sure')) }}",
-                        text: "{{ trans('msg.this_will_delete_previous_tree') }}",
+                        title: "{!!   trans('msg.are_you_sure') !!}",
+                        text: "{!! trans('msg.this_will_delete_previous_tree') !!}",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
