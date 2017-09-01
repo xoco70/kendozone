@@ -82,5 +82,5 @@ return array (
   'treeType' => 'Type d\'arbre',
   'woman_first_force' => 'Femme 1er Dan et plus',
   'woman_second_force' => 'Femme Kyusha',
-  'years' => 'Années',
+  'years' => 'Ans',
 );

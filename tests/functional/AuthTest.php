@@ -114,8 +114,8 @@ class AuthTest extends BrowserKitTest
 //
 //    }
 
-    /** @test */
-    public function remember_me()
-    {
-    }
+//    /** @test */
+//    public function remember_me()
+//    {
+//    }
 }

@@ -221,7 +221,7 @@ class UserTest extends BrowserKitTest
 
         $user = User::where('email', '=', $newUser->email)->first();
         $newPass = $user->password;
-        assert($oldPass == $newPass, true);
+        $this->assertTrue($oldPass == $newPass);
 
     }
 
@@ -247,7 +247,7 @@ class UserTest extends BrowserKitTest
             'email' => $this->simpleUser->email,
             'password' => '222222']);
 
-        assert(Auth::check(), true);
+        $this->assertTrue(Auth::check());
 
     }
 }
