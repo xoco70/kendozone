@@ -18,7 +18,7 @@ class PdfController extends Controller
         // Get Tree Type
         if ($championship->hasPreliminary()) {
             $layout = 'pdf.preliminary_tree';
-        } else if ($championship->isDirectEliminationType()) {
+        } else if ($championship->isSingleEliminationType()) {
             $layout = 'pdf.direct_elimination_tree';
         } else if ($championship->isPlayOffType()) {
             $layout = 'pdf.round_robin_tree';

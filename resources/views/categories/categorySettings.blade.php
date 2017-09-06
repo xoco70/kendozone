@@ -159,7 +159,7 @@ $currency = Auth::user()->country->currency_code;
                         {!!  Form::label('treeType', trans('categories.treeType')) !!}
                         {!!  Form::select('treeType',
                                 [
-//                                 0 => trans('categories.playOff'),
+                                 0 => trans('categories.playOff'),
                                  1 => trans('categories.direct_elimination')]
                                  , $treeType ,['class' => 'form-control']) !!}
                     </div>

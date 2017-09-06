@@ -5,7 +5,7 @@
             <div class="container-fluid">
 
                 <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}"
-                     @if($championship->isDirectEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
+                     @if($championship->isSingleEliminationType()) style="padding-bottom: {{ $championship->fights->count() *2 *65}}px" @endif >
 
 
                 <h1> {{$championship->buildName()}}</h1>
@@ -17,8 +17,8 @@
                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                         @if ($championship->hasPreliminary())
                             @include('layouts.tree.preliminary')
-                        @elseif ($championship->isDirectEliminationType())
-                            @include('laravel-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
+                        @elseif ($championship->isSingleEliminationType())
+                            @include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 0])
                         @elseif ($championship->isPlayOffType())
                             @include('layouts.tree.roundRobin')
                         @elseif ($championship->isPlayOffType())

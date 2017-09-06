@@ -59,9 +59,9 @@
                                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
                                         @if ($championship->hasPreliminary())
                                             @include('laravel-tournaments::partials.tree.preliminary')
-                                            @include('laravel-tournaments::partials.tree.directElimination', ['hasPreliminary' => 1])
-                                        @elseif ($championship->isDirectEliminationType())
-                                            @include('laravel-tournaments::partials.tree.directElimination', ['hasPreliminary' => 0])
+                                            @include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 1])
+                                        @elseif ($championship->isSingleEliminationType())
+                                            @include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 0])
                                         @elseif ($championship->isPlayOffType())
                                             @include('laravel-tournaments::partials.tree.playOff')
                                         @endif

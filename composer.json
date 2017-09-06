@@ -24,7 +24,7 @@
         "sentry/sentry-laravel": "^0.3.0",
         "laravolt/avatar": "^1.8",
         "aws/aws-sdk-php": "~3.0",
-        "cviebrock/eloquent-sluggable": "^4.2.2",
+        "cviebrock/eloquent-sluggable": "4.2.4",
         "laravel/passport": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "torann/geoip": "^1.0",

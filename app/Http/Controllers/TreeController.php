@@ -74,17 +74,37 @@ class TreeController extends Controller
      */
     public function update(Request $request, $championshipId)
     {
-        $numFight = 0;
-        $groups = FightersGroup::with('fights')
-            ->where('championship_id', $championshipId)
-//            ->where('round','>',1)
-            ->get();
-        $fights = $request->directElimination_fighters;
+        $championship = Championship::find($championshipId);
+        $numFighter = 0;
+        $query = FightersGroup::with('fights')
+            ->where('championship_id', $championship->id);
+
+        $fighters = $request->singleElimination_fighters;
+        $scores = $request->score;
+        if ($championship->hasPreliminary()) {
+            $query = $query->where('round', '>', 1);
+            $fighters = $request->preliminary_fighters;
+        }
+        $groups = $query->get();
+
         foreach ($groups as $group) {
             foreach ($group->fights as $fight) {
                 // Find the fight in array, and update order
-                $fight->c1 = $fights[$numFight++];
-                $fight->c2 = $fights[$numFight++];
+                $fight->c1 = $fighters[$numFighter];
+                $scores[$numFighter] != null
+                    ?  $fight->winner_id = $fighters[$numFighter]
+                    : $fight->winner_id = null;
+                $numFighter++;
+
+                $fight->c2 = $fighters[$numFighter];
+                if ($fight->winner_id == null){
+                    $scores[$numFighter] != null
+                        ?  $fight->winner_id = $fighters[$numFighter]
+                        : $fight->winner_id = null;
+                }
+
+
+                $numFighter++;
                 $fight->save();
             }
         }

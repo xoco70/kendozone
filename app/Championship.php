@@ -42,7 +42,7 @@ class Championship extends \Xoco70\LaravelTournaments\Models\Championship
         if ($this->hasPreliminary()) {
             $roundTitles[] = 'Preliminary';
             $this->noTeams = $numFighters / $this->getSettings()->preliminaryGroupSize;
-        } else if ($this->isDirectEliminationType()) {
+        } else if ($this->isSingleEliminationType()) {
             $this->noTeams = $numFighters;
         } else if ($this->isPlayOffType()) {
             $this->noTeams = $numFighters;
