@@ -41,14 +41,7 @@ class InviteTest extends BrowserKitTest
 
         // Create a closed tournament with championships
         $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.INVITATION_TOURNAMENT')]);
-        $championships = new Collection;
-        for ($i = 0; $i < 1; $i++) {
-            try {
-                $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
-                $championships->push($championship);
-            } catch (Exception $e) {
-            }
-        }
+        $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id]);
 
         // Invite a user
         $this->visit('/tournaments/' . $tournament->slug . '/invite/')
@@ -67,9 +60,9 @@ class InviteTest extends BrowserKitTest
         $invitation = Invite::where('object_id', $tournament->id)
             ->where('object_type', 'App\Tournament')
             ->where('email', $fakeUser1->email)
-            ->first();
+            ->firstOrFail();
 
-        // Get Full user object
+        // Get Full Uuser object
         $user = User::where('email', $fakeUser1->email)->first();
 
         //Bad Code or no code
@@ -109,19 +102,17 @@ class InviteTest extends BrowserKitTest
 
         // Get all categories for this tournament
         // Now we are on category Selection page
-        foreach ($championships as $championship) {
-            $this->type($championship->id, 'cat[' . $championship->id . ']');
-        }
+        $this->type($championship->id, 'cat[' . $championship->id . ']');
+
         $this->type("aaaaaa", 'firstname')
             ->type("bbbbbb", 'lastname')
             ->press(trans("core.save"));
 
-        foreach ($championships as $key => $championship) {
-            $this->seeInDatabase('competitor',
-                ['championship_id' => $championship->id,
-                    'user_id' => Auth::user()->id,
-                ]);
-        }
+
+        $this->seeInDatabase('competitor',
+            ['championship_id' => $championship->id,
+                'user_id' => Auth::user()->id,
+            ]);
         $this->seePageIs('/users/' . Auth::user()->slug . '/tournaments');
 
     }
