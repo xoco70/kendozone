@@ -57,10 +57,10 @@
         </td>
 
         <td align="center" width="5%">
-            {!!  Form::text('time', '', ['class' => 'form-control ']) !!}
+            {!!  Form::text('id', $group->fights[0]->getFighterAttr(2, 'short_id'), ['class' => 'form-control ']) !!}
         </td>
         <td align="center" width="5%">
-            {!!  Form::text('id', $group->fights[0]->getFighterAttr(2, 'short_id'), ['class' => 'form-control ']) !!}
+            {!!  Form::text('time', '', ['class' => 'form-control ']) !!}
         </td>
     </tr>
     <tr class="spacer">
@@ -82,4 +82,3 @@
         </div>
     </div>
 </div>
-<hr/>
