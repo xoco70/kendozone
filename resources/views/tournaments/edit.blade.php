@@ -2,8 +2,13 @@
 @section('styles')
     {!! Html::style('css/pages/tournamentEdit.css')!!}
 @stop
+<?php
+$favicon = asset('/favicon_kz-01.png');
+?>
 @section('title')
     <title>{{ trans('core.editModel', ['currentModelName' => trans_choice('core.tournament',1)]) }}</title>
+    <link rel="shortcut icon" href="{{ $favicon }}"/>
+    <link rel="apple-touch-icon" href="{{  $favicon }}"/>
 @stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.edit',$tournament) !!}
