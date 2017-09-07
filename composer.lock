@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.36.1",
+            "version": "3.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "104d1895fa8c661d0ac5f99567b6831b1436ec90"
+                "reference": "98bff6b24863bb0da970449d18f6745b9270add9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/104d1895fa8c661d0ac5f99567b6831b1436ec90",
-                "reference": "104d1895fa8c661d0ac5f99567b6831b1436ec90",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/98bff6b24863bb0da970449d18f6745b9270add9",
+                "reference": "98bff6b24863bb0da970449d18f6745b9270add9",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-09-05 19:05:30"
+            "time": "2017-09-06 16:44:34"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -272,16 +272,16 @@
         },
         {
             "name": "barryvdh/laravel-translation-manager",
-            "version": "v0.4.0",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-translation-manager.git",
-                "reference": "da828948965da004cc8ba488ab9d9f7926d76f79"
+                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/da828948965da004cc8ba488ab9d9f7926d76f79",
-                "reference": "da828948965da004cc8ba488ab9d9f7926d76f79",
+                "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/c9939e6199e92d36301143f37a735fcf36d022f5",
+                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5",
                 "shasum": ""
             },
             "require": {
@@ -322,7 +322,7 @@
                 "translations",
                 "translator"
             ],
-            "time": "2017-08-30 11:55:42"
+            "time": "2017-09-02 16:02:44"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -1819,16 +1819,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.2",
+            "version": "v5.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c"
+                "reference": "779a98d3b2ebed2128db1a668dcc10a65c9b01be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/65da63c8ad4836e2bcddcff75becd49c71c5041c",
-                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/779a98d3b2ebed2128db1a668dcc10a65c9b01be",
+                "reference": "779a98d3b2ebed2128db1a668dcc10a65c9b01be",
                 "shasum": ""
             },
             "require": {
@@ -1947,7 +1947,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-09-04 14:09:04"
+            "time": "2017-09-07 13:50:21"
         },
         {
             "name": "laravel/passport",
@@ -5258,12 +5258,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "3dfec8d6bff8d42ee8d622396159e69a56fbecf0"
+                "reference": "55661d08915358041197e6c5b097989445613c27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/3dfec8d6bff8d42ee8d622396159e69a56fbecf0",
-                "reference": "3dfec8d6bff8d42ee8d622396159e69a56fbecf0",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/55661d08915358041197e6c5b097989445613c27",
+                "reference": "55661d08915358041197e6c5b097989445613c27",
                 "shasum": ""
             },
             "require": {
@@ -5306,7 +5306,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2017-09-05 22:10:15"
+            "time": "2017-09-07 20:12:42"
         },
         {
             "name": "zendframework/zend-diactoros",
