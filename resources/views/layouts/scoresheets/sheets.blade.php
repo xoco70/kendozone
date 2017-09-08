@@ -2,7 +2,7 @@
     {{ trans('core.still_no_scoresheet') }}
 @endif
 @foreach ($championship->fightersGroups as $group )
-    @if ($group->fights[0]->shouldBeInFightList(true) ) {{--if it has short_id, it must be in the list, otherwise remove it--}}
+
         <div class="panel panel-flat page_print">
             <div class="panel-body">
                 <div class="container-fluid">
@@ -18,7 +18,7 @@
 
                     {{--  Maybe we will have a problem with Cancelling the last increment --}}
                     @if (sizeof($fighters) == 2)
-                        @if ($group != null )
+                        @if ($group != null && $group->fights[0]->shouldBeInFightList(true) )
                             @include('layouts.scoresheets.competitors_direct_elimination', ['fighters'=>$fighters, 'group'=> $group])
                         @endif
                     @else
@@ -29,5 +29,4 @@
                 </div>
             </div>
         </div>
-    @endif
 @endforeach
