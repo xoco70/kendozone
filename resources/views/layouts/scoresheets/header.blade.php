@@ -2,7 +2,7 @@
     <div class="col-xs-5">
         <div class="form-group">
             {!!  Form::label('championship', trans('core.championship'),['class' => 'text-bold' ]) !!}
-            {!!  Form::text('championship', $championship->category->name , ['class' => 'form-control sheet_championship']) !!}
+            {!!  Form::text('championship', $championship->buildName(), ['class' => 'form-control sheet_championship']) !!}
         </div>
     </div>
     <div class="col-xs-1">
