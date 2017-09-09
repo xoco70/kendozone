@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bfa03e05c65264827cd815a611775bc3",
-    "content-hash": "7e9a0acbe21638d595687e2f5e0c5879",
+    "hash": "9d625e0b0a10cceea3a561c3d5099bce",
+    "content-hash": "fdb48c459dc984b8750e1e718eaad7ee",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -5258,12 +5258,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "32a0ce9d20d30d0504c8dd37543c1f0bbc3b6ebe"
+                "reference": "886ef9f46daf6440feccad5f26b1f5439bf2ad98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/32a0ce9d20d30d0504c8dd37543c1f0bbc3b6ebe",
-                "reference": "32a0ce9d20d30d0504c8dd37543c1f0bbc3b6ebe",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/886ef9f46daf6440feccad5f26b1f5439bf2ad98",
+                "reference": "886ef9f46daf6440feccad5f26b1f5439bf2ad98",
                 "shasum": ""
             },
             "require": {
@@ -5306,7 +5306,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2017-09-08 21:16:23"
+            "time": "2017-09-09 10:49:51"
         },
         {
             "name": "zendframework/zend-diactoros",
