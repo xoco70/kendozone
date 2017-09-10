@@ -1,7 +1,7 @@
 <br/><u><p><strong>{{ trans('core.combat') }} nº {{ $group->fights[0]->short_id }}</strong></p></u>
 
 <table align="center" width="100%">
-    <tr >
+    <tr>
         <td colspan="6" align="center" class="border-bottom">{{trans('core.red')  }}</td>
         <td colspan="6" align="center" class="border-bottom">{{trans('core.white')  }}</td>
     </tr>
@@ -9,7 +9,6 @@
         <td colspan="12">&nbsp;</td>
     </tr>
     <tr>
-        {{--        <td align="center" width="5%">{{  trans('core.points_abrev') }} </td>--}}
         <td align="center" width="5%">ID</td>
         <td align="center" width="20%">{{trans('core.name')  }}&nbsp;</td>
         <td align="center" width="10%">{{trans('core.penalization')  }}</td>
@@ -24,7 +23,6 @@
         <td align="center" width="5%">ID</td>
         <td align="center" width="10%">{{ trans('core.time') }}</td>
     </tr>
-    {{--@foreach($group->fights as $fight)--}}
     <tr>
         <td align="center" width="5%">
             {!!  Form::text('id', $group->fights[0]->getFighterAttr(1,'short_id'), ['class' => 'form-control ']) !!}
@@ -66,7 +64,6 @@
     <tr class="spacer">
         <td colspan="7">&nbsp;</td>
     </tr>
-    {{--@endforeach--}}
 </table>
 <div class="row">
     <div class="col-xs-5">
