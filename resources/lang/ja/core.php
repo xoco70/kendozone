@@ -170,7 +170,7 @@ return array(
 
 
     'welcome' => 'ようこそ',
-    'welcome_text1' => 'ほとんどそこに！あなたはまだAppを楽しむためにいくつかのステップが必要です',
+    'welcome_text1' => 'Appを楽しむためにいくつかのステップが必要です。',
     'welcome_text2' => '何をしたいですか?',
 
     'still_no_tournament' => 'まだ大会に登録されていません',
