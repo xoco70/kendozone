@@ -121,7 +121,6 @@ return array(
     'confirmed' => '確認した',
     'used' => '中古',
     'results' => '結果',
-    'latest_computers' => '最新の選手',
     'organizer' => '主催者',
     'select_categories_to_register' => '登録するカテゴリを選択する',
 
@@ -210,9 +209,6 @@ return array(
     'no_team_yet' => 'まだこの大会に登録されていないチーム',
     'add_new_team' => '大会を追加',
     'registered_team' => 'チーム登録済み',
-
-
-
 
     'import_excel' => 'excelからデータをインポートする',
     'upload_file_to_csv_format' => 'ファイルは.csv形式である必要があります。',

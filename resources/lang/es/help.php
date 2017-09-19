@@ -11,5 +11,5 @@ return array (
   'translate_kz_text_1' => 'Kendozone esta ahora traducido en 4 idiomas',
   'translate_kz_note' => 'Debe de estar conectado a su cuenta de Kendozone para poder traducir',
   'translate_kz_note2' => 'Una vez conectado, da clic en la bandera, y selecciona "Ayuda a traducir"',
-  'help_translate' => 'Ayuda a traducir'
+  'help_translate' => 'Ayuda a traducir',
 );

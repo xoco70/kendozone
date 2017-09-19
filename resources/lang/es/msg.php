@@ -1,8 +1,8 @@
 <?php
 
 return array (
-  'user_already_exists' => 'El usuario ya esta registrado en el sistema.',
-  'user_already_registered_in_category' => 'El usuario ya esta registrado en esta categoría.',
+  'user_already_exists' => 'El usuario ya está registrado en el sistema.',
+  'user_already_registered_in_category' => 'El usuario ya está registrado en esta categoría.',
   'tournament_create_successful' => 'Torneo <b>:name</b><br/> creado exitosamente',
   'tournament_update_successful' => 'Torneo <b>:name</b><br/> actualizado exitosamente',
   'tournament_delete_successful' => 'Torneo <b>:name</b><br/> borrado exitosamente',
@@ -40,9 +40,9 @@ return array (
   'federation_edit_successful' => 'Federación <br/><b>:name</b><br/> actualizada exitosamente',
   'you_dont_own_federation' => 'No tienes federación asociada a tu cuenta',
   'please_ask_superadmin' => 'Actualiza los registros oficiales de la FIK, y solicita al administrador (contact@kendozone.com)',
-  'association_create_successful' => 'Associación <br/><b>:name</b><br/> creada exitosamente',
-  'association_edit_successful' => 'Associación <br/><b>:name</b><br/> actualizada exitosamente',
-  'association_delete_successful' => 'Associación <br/><b>:name</b><br/> borrada exitosamente',
+  'association_create_successful' => 'Asociación <br/><b>:name</b><br/> creada exitosamente',
+  'association_edit_successful' => 'Asociación <br/><b>:name</b><br/> actualizada exitosamente',
+  'association_delete_successful' => 'Asociación <br/><b>:name</b><br/> borrada exitosamente',
   'association_delete_error' => 'Hubo un problema al borrar la asociación',
   'association_restored_successful' => 'Associación <br/><b>:name</b><br/> restaurada exitosamente',
   'association_restored_error' => 'Hubo un problema al restaurar la asociación',
@@ -80,5 +80,5 @@ return array (
   'tournament_date_is_in_the_past_title' => 'La Fecha Límite de Registro ya pasó',
   'tournament_date_is_in_the_past_text' => 'Por favor, cambiala a un día futuro',
   'team_create_error_already_exists' => 'El equipo <br/><b>:name</b><br/> ya existe',
-  'tree_edit_successful' => 'El arbol se ha actualizado exitosamente',
+  'tree_edit_successful' => 'El árbol se ha actualizado exitosamente',
 );

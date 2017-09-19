@@ -46,7 +46,7 @@ return array (
   'cost' => '値段',
   'categorySettings' => '分類セッチング',
   'treeType' => 'とリータイプ',
-  'playOff' => 'ラウンドロビン',
+  'roundRobin' => '',
   'direct_elimination' => '直接消去',
   'teamSize' => 'チームサイズ',
   'teamSizeReserve' => 'チーム予備費',
@@ -83,4 +83,5 @@ return array (
   'presettings' => 'プリセット',
   'presettings_text' => 'トーナメントのチャンピオンシップを作成するルールを選択します。カテゴリは自動的に作成され、設定されます ',
   'manual' => '手動',
+  'playOff' => 'ラウンドロビン',
 );

@@ -3,7 +3,6 @@
 return array (
   'failed' => 'Email o contraseña inválidos.',
   'throttle' => 'Demasiados intentos de inicio de sesión. Vuelve a intentarlo en :seconds segundos.',
-  'grade' => 'Grado',
   'signin' => 'Iniciar sesión',
   'signup' => 'Crea tu cuenta',
   'remember' => 'No cerrar sesión',
@@ -15,7 +14,6 @@ return array (
   'registered' => 'Registrado',
   'username_tip' => 'El nombre de usuario sólo puede contener letras y números sin espacios',
   'email_tip' => 'Por favor ingresa tu email',
-  'password' => 'Contraseña',
   'password_tip' => 'La contraseña debe tener al menos 6 caracteres',
   'password_confirmation' => 'Contraseña ( Confirmación )',
   'password_confirmation2' => 'Confirma la contraseña',

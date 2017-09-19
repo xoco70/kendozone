@@ -14,7 +14,7 @@ return array (
   'you_are_invited_to_tournament' => '大会に招待されました',
   'you_have_been_preregistered' => 'あなたは試合に事前登録されています：',
   'please_clic_confirmation_link' => '確認リンクをクリックしてください',
-  'Dont_forget_to_pay' => '大会の料金を払うことを忘れないでください',
-  'Before_day' => 'この日までに',
-  'Your_connection_data' => 'あなたのデータへ',
+  'dont_forget_to_pay' => '大会の料金を払うことを忘れないでください',
+  'before_day' => 'この日までに',
+  'your_connection_data' => 'あなたのデータへ',
 );

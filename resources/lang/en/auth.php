@@ -3,7 +3,6 @@
 return array (
   'failed' => 'These credentials do not match our records.',
   'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-  'grade' => 'Grade',
   'signin' => 'Sign in',
   'signup' => 'Sign up',
   'remember' => 'Remember',
@@ -15,7 +14,6 @@ return array (
   'registered' => 'Registered',
   'username_tip' => 'Username must only contains letters and numbers without spaces',
   'email_tip' => 'Please enter your email adress',
-  'password' => 'Password',
   'password_tip' => 'Password must have at least 6 characters length',
   'password_confirmation' => 'Password ( Confirmation )',
   'password_confirmation2' => 'Confirm your password',

@@ -10,6 +10,6 @@ return array (
   'translate_kz' => 'Translate Kendozone',
   'translate_kz_text_1' => 'Kendozone is now translated in 4 languages',
   'translate_kz_note' => 'You must be connected to your Kendozone account to be able to translate',
-  'translate_kz_note2' => 'Once logged, click on the flag and select "Help Translating"',
-  'help_translate' => 'Help Translating'
+  'translate_kz_note2' => 'Once logged, click on the flag and select "Help translating"',
+  'help_translate' => 'Help Translating',
 );

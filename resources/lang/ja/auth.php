@@ -51,76 +51,76 @@ return array(
 
 //Competitor
     'add_more_competitors' => '選手を増える',
-'competitor_name' => '選手の名前',
-'remove_competitor' => '選手を削除する',
-'add_competitor_text1' => '電子メールを提供しないと、Kendozoneは自動的に一意のユーザーを生成します。',
-'add_competitor_text2' => 'この場合、選手は大会で各選手権ごとに異なる身分証を持つことに注意してください。',
-'add_competitor_text3' => '一意の身分証を取得するには、ユーザーのメールアドレス',
+    'competitor_name' => '選手の名前',
+    'remove_competitor' => '選手を削除する',
+    'add_competitor_text1' => '電子メールを提供しないと、Kendozoneは自動的に一意のユーザーを生成します。',
+    'add_competitor_text2' => 'この場合、選手は大会で各選手権ごとに異なる身分証を持つことに注意してください。',
+    'add_competitor_text3' => '一意の身分証を取得するには、ユーザーのメールアドレス',
 
 
 // Invitation
 
-'invitation' => '招待',
-'latest_competitors' => '最新の選手',
+    'invitation' => '招待',
+    'latest_competitors' => '最新の選手',
 
 //　Dashboard
 
 
 //　Left menu
-'users' => 'ユーザー',
-'statistics' => '時計',
+    'users' => 'ユーザー',
+    'statistics' => '時計',
 
-'see_less' => '小さくする',
+    'see_less' => '小さくする',
 
-'impersonate' => '変わる',
-'leave_impersonation' => '変わらない',
+    'impersonate' => '変わる',
+    'leave_impersonation' => '変わらない',
 
 //　Team
 
-'team_name' => 'チーム名',
+    'team_name' => 'チーム名',
 
 //　Federation
-'federation_not_in_list' => 'あなたの連合はリストに含まれていませんか？',
+    'federation_not_in_list' => 'あなたの連合はリストに含まれていませんか？',
 
 
 //　Association
-'association_not_in_list' => 'あなたの関連はリストにありませんか？',
+    'association_not_in_list' => 'あなたの関連はリストにありませんか？',
 
 //　Club
-'add_new_club' => '新しいクラブを追加する',
+    'add_new_club' => '新しいクラブを追加する',
 
-'where_do_you_practice' => 'どこで稽古をしていますか',
-'club_not_in_list' => 'あなたのクラブはリストに載っていませんか？',
+    'where_do_you_practice' => 'どこで稽古をしていますか',
+    'club_not_in_list' => 'あなたのクラブはリストに載っていませんか？',
 
 
 // Share
-'share_tournament' => '大会を見せる',
-'check_the_tournament' => '大会をチェック：',
+    'share_tournament' => '大会を見せる',
+    'check_the_tournament' => '大会をチェック：',
 
 
-'confirm_name' => 'あなたの氏名を確認してください',
-'about' =>'KendoZoneについて」',
+    'confirm_name' => 'あなたの氏名を確認してください',
+    'about' => 'KendoZoneについて」',
 
-'share_to_facebook' => 'Facebookに共有する',
-'share_to_twitter' => 'Twitterに共有する',
-'share_to_googleplus' => 'Google + に共有する',
+    'share_to_facebook' => 'Facebookに共有する',
+    'share_to_twitter' => 'Twitterに共有する',
+    'share_to_googleplus' => 'Google + に共有する',
 
 
 //スコアシートScore Sheet
-'scoresheet' => 'スコアシート | スコアリングシート ',
-'championship' => '優勝',
-'shiajo' => '試合所',
-'combat' => '試合',
-'group' => 'グループ',
-'writer' => '書く人',
-'playoff' => '決戦',
-'points' => '点数',
-'points_abrev' => '点数',
-'clasify' => '分類する',
-'time' => '時期',
-'table_leader' => 'テーブルリーダー',
-'still_no_scoresheet' => 'スコアシートはまだ生成されていません',
-'penalization' => '販促',
-'point' => '一本',
-'勝者' => '優勝者',
+    'scoresheet' => 'スコアシート | スコアリングシート ',
+    'championship' => '優勝',
+    'shiajo' => '試合所',
+    'combat' => '試合',
+    'group' => 'グループ',
+    'writer' => '書く人',
+    'playoff' => '決戦',
+    'points' => '点数',
+    'points_abrev' => '点数',
+    'clasify' => '分類する',
+    'time' => '時期',
+    'table_leader' => 'テーブルリーダー',
+    'still_no_scoresheet' => 'スコアシートはまだ生成されていません',
+    'penalization' => '販促',
+    'point' => '一本',
+    'winner' => '優勝者',
 );
