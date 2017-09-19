@@ -123,6 +123,9 @@
                         </tbody>
                     </table>
                 </div>
+                <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}.
+
+
             </div>
         </div>
     </div>
