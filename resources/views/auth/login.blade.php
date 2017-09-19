@@ -123,7 +123,8 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}.
+                <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}
+                    <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/"> Translate with Lokalise</a>
 
 
             </div>

@@ -9,7 +9,7 @@ return array (
   'note' => 'Note',
   'translate_kz' => 'Translate Kendozone',
   'translate_kz_text_1' => 'Kendozone is now translated in 4 languages',
-  'translate_kz_note' => 'If you are interested in translating Kendozone, please send us an email to contact@kendozone.com and the language you want to translate',
+  'translate_kz_note' => 'If you are interested in translating Kendozone, please click the link:',
   'translate_kz_note2' => 'Once logged, click on the flag and select "Help translating"',
   'help_translate' => 'Help Translating',
 );
