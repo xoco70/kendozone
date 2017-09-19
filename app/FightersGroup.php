@@ -22,7 +22,7 @@ class FightersGroup extends \Xoco70\LaravelTournaments\Models\FightersGroup
                         return $query->with('teams', 'competitors', 'fights');
                     }]);
             }])->withCount('competitors', 'teams')
-                ->where('slug', $tournamentSlug)->first();
+                ->where('slug', $tournamentSlug)->firstOrFail();
         } elseif (FightersGroup::hasChampionshipInRequest($request)) {
             $tournament = Tournament::whereHas('championships', function ($query) use ($request) {
                 return $query->where('id', $request->championshipId);
@@ -36,7 +36,7 @@ class FightersGroup extends \Xoco70\LaravelTournaments\Models\FightersGroup
                                 return $query->with('teams', 'competitors', 'fights');
                             }]);
                 }])
-                ->first();
+                ->firstOrFail();
 
         }
         return $tournament;

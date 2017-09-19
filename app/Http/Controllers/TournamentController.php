@@ -100,7 +100,7 @@ class TournamentController extends Controller
         $grades = Grade::getAllPlucked();
         $tournamentWithTrees = FightersGroup::getTournament($request);
         $venue = $tournamentWithTrees->venue ?? new Venue;
-        $tournament = Tournament::with('championships.users', 'championships.category')->find($tournamentWithTrees->id);
+        $tournament = Tournament::with('championships.users', 'championships.category')->findOrFail($tournamentWithTrees->id);
         $countries = Country::getAll();
 
         return view('tournaments.show', compact('tournament', 'tournamentWithTrees', 'grades', 'teams', 'venue', 'countries'));
