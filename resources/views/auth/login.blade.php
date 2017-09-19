@@ -125,7 +125,7 @@
                 </div>
                 <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}.
                     {{ trans('help.translate_kz_note2') }}</p>
-                <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">Contribute</a>
+                
             </div>
         </div>
     </div>
