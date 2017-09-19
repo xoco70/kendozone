@@ -96,25 +96,25 @@
                     <table class="table table-striped" id="project-languages-table">
                         <tbody>
                         @include('layouts.language_status', [
-                        'code' => 'us',
+                        'code' => 'US',
                         'language' => 'english',
                         'percent' => '100'
                         ])
 
                         @include('layouts.language_status', [
-                        'code' => 'es',
+                        'code' => 'ES',
                         'language' => 'spanish',
                         'percent' => '100'
                         ])
 
                         @include('layouts.language_status', [
-                        'code' => 'fr',
+                        'code' => 'FR',
                         'language' => 'french',
                         'percent' => '100'
                         ])
 
                         @include('layouts.language_status', [
-                        'code' => 'jp',
+                        'code' => 'JP',
                         'language' => 'japonese',
                         'percent' => '95.7'
                         //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
