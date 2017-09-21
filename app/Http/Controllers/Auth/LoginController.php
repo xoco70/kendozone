@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticateUser;
 use App\Http\Controllers\Controller;
+use App\LocaliseAPI;
 use File;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -33,6 +34,10 @@ class LoginController extends Controller
             "es" => $this->getLangWordsCount('lang/es'),
             "ja" => $this->getLangWordsCount('lang/ja'),
         ];
+        $api = new LocaliseAPI(env('LOCALISE_API_KEY'), ENV('LOCALISE_PROJECT'));
+        $api->listLangsInProject();
+
+
         return view('auth.login', compact('langStats'));
     }
     /**

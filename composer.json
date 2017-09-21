@@ -26,7 +26,6 @@
         "torann/geoip": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "barryvdh/laravel-snappy": "^0.4",
-        "barryvdh/laravel-translation-manager": "^0.4",
         "xoco70/laravel-tournaments": "dev-master",
         "lab404/laravel-impersonate": "^1.1",
         "liopic/korean-romanizer": "~1.0",

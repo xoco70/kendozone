@@ -120,6 +120,30 @@
                         //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
                         ])
 
+                        @include('layouts.language_status', [
+                        'code' => 'KR',
+                        'language' => 'korean',
+                        'percent' => '0'
+                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
+                        ])
+
+                        @include('layouts.language_status', [
+                        'code' => 'DE',
+                        'language' => 'dutch',
+                        'percent' => '0'
+                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
+                        ])
+
+                        @include('layouts.language_status', [
+                        'code' => 'IT',
+                        'language' => 'italian',
+                        'percent' => '0'
+                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
+                        ])
+
+
+
+
                         </tbody>
                     </table>
                 </div>

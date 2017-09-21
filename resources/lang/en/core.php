@@ -238,4 +238,7 @@ return array (
   'personalinfo' => 'Personal informations',
   'users' => 'Users',
   'statistics' => 'Statistics',
+  'korean' => 'Korean',
+  'dutch' => 'Dutch',
+  'italian' => 'Italian'
 );
