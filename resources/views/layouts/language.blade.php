@@ -20,7 +20,7 @@
             <img src="/images/flags/JP.png" alt="English"> Japonese</a></li>
     <li>
         <div align="center">
-            <a href="{{url('translations')}}">
+            <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">
                 {{ trans('help.help_translate') }}
             </a>
         </div>
