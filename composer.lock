@@ -5258,12 +5258,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "753a4f076c106df196f4e26d83c6d814903b97f7"
+                "reference": "ea89cbbd36c177e6ce4117aec4e66186ec765d29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/753a4f076c106df196f4e26d83c6d814903b97f7",
-                "reference": "753a4f076c106df196f4e26d83c6d814903b97f7",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/ea89cbbd36c177e6ce4117aec4e66186ec765d29",
+                "reference": "ea89cbbd36c177e6ce4117aec4e66186ec765d29",
                 "shasum": ""
             },
             "require": {
@@ -5306,7 +5306,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2017-09-18 16:03:01"
+            "time": "2017-09-21 08:39:49"
         },
         {
             "name": "zendframework/zend-diactoros",
