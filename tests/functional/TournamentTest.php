@@ -31,10 +31,10 @@ class TournamentTest extends BrowserKitTest
             ->click(trans('core.createTournament'))
             ->press(trans('core.addModel', ['currentModelName' => trans_choice('core.tournament', 1)]))
             ->seePageIs('/tournaments/create')
-            ->see(trans('validation.filled', ['attribute' => "name"]))
+            ->see(trans('validation.required', ['attribute' => "name"]))
 //            ->see(trans('validation.filled', ['attribute' => "dateIni"])) // It's inserting spaces
 //            ->see(trans('validation.filled', ['attribute' => "dateFin"]))
-            ->see(trans('validation.filled', ['attribute' => "category"]))
+            ->see(trans('validation.required', ['attribute' => "category"]))
             ->notSeeInDatabase('tournament', ['name' => '']);
 
     }
