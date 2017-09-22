@@ -95,60 +95,66 @@
                 <div class="form-inline">
                     <table class="table table-striped" id="project-languages-table">
                         <tbody>
-                        @include('layouts.language_status', [
-                        'code' => 'US',
-                        'language' => 'english',
-                        'percent' => '100'
+                        @foreach($langs as $lang)
+                            @include('layouts.language_status', [
+                        'code' => strtoupper($lang->iso),
+                        'language' => $lang->name,
+                        'percent' => intval($langStats[substr($lang->iso,0,2)] * 100 / $langStats['fr'])
                         ])
+                        @endforeach
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'US',--}}
+                        {{--'language' => 'english',--}}
+                        {{--'percent' => '100'--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'ES',
-                        'language' => 'spanish',
-                        'percent' => '100'
-                        ])
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'ES',--}}
+                        {{--'language' => 'spanish',--}}
+                        {{--'percent' => '100'--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'FR',
-                        'language' => 'french',
-                        'percent' => '100'
-                        ])
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'FR',--}}
+                        {{--'language' => 'french',--}}
+                        {{--'percent' => '100'--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'JP',
-                        'language' => 'japonese',
-                        'percent' => '95.7'
-                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
-                        ])
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'JP',--}}
+                        {{--'language' => 'japonese',--}}
+                        {{--'percent' => '95.7'--}}
+                        {{--//  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'KR',
-                        'language' => 'korean',
-                        'percent' => '0'
-                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
-                        ])
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'KR',--}}
+                        {{--'language' => 'korean',--}}
+                        {{--'percent' => '0'--}}
+                        {{--//  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'DE',
-                        'language' => 'dutch',
-                        'percent' => '0'
-                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
-                        ])
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'DE',--}}
+                        {{--'language' => 'dutch',--}}
+                        {{--'percent' => '0'--}}
+                        {{--//  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])--}}
+                        {{--])--}}
 
-                        @include('layouts.language_status', [
-                        'code' => 'IT',
-                        'language' => 'italian',
-                        'percent' => '0'
-                        //  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])
-                        ])
-
-
+                        {{--@include('layouts.language_status', [--}}
+                        {{--'code' => 'IT',--}}
+                        {{--'language' => 'italian',--}}
+                        {{--'percent' => '0'--}}
+                        {{--//  'percent' => intval($langStats['ja'] * 100 / $langStats['es'])--}}
+                        {{--])--}}
 
 
                         </tbody>
                     </table>
                 </div>
                 <p class="text-muted"><strong>{{ trans('help.note') }}</strong>: {{ trans('help.translate_kz_note') }}
-                    <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/"> Translate with Lokalise</a>
+                    <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/"> Translate with
+                        Lokalise</a>
 
 
             </div>

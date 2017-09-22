@@ -33,12 +33,16 @@ class LoginController extends Controller
             "fr" => $this->getLangWordsCount('lang/fr'),
             "es" => $this->getLangWordsCount('lang/es'),
             "ja" => $this->getLangWordsCount('lang/ja'),
+            "it" => $this->getLangWordsCount('lang/it'),
+            "de" => $this->getLangWordsCount('lang/de'),
+            "ko" => $this->getLangWordsCount('lang/ko'),
         ];
         $api = new LocaliseAPI(env('LOCALISE_API_KEY'), ENV('LOCALISE_PROJECT'));
-        $api->listLangsInProject();
+
+        $langs = $api->listLangsInProject();
 
 
-        return view('auth.login', compact('langStats'));
+        return view('auth.login', compact('langs','langStats'));
     }
     /**
      * Where to redirect users after login / registration.

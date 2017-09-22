@@ -22,11 +22,20 @@ class LocaliseAPI
     }
 
 
+    /**
+     * Return all Langs in Localise
+     * @return array
+     */
     public function listLangsInProject()
     {
-        $body = (new Client())
-        ->request('GET', $this->urlBase . '/language/list?api_token=' . $this->apiKey . '&id=' . $this->projectId)
-        ->getBody();
-        return json_decode($body)->languages;
+        try {
+            $body = (new Client())
+                ->request('GET', $this->urlBase . '/language/list?api_token=' . $this->apiKey . '&id=' . $this->projectId)
+                ->getBody();
+            return json_decode($body)->languages;
+        } catch (\Exception $e) {
+            return [];
+        }
+
     }
 }

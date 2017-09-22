@@ -1,9 +1,9 @@
 <tr>
     <td nowrap="">
-        <img src="{{ asset('/images/flags/'.$code.'.png') }}" width="25"
+        <img src="{{ asset('/images/flags/'.substr($code,0,2).'.png') }}" width="25"
              style="padding: 0; margin-top: 0; margin-bottom: 0; margin-right: 3px;">
         <small>
-            <label>{{ trans('core.'.$language) }}</label>
+            <label>{{ $language }}</label>
         </small>
     </td>
     <td width="100%">
