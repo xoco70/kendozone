@@ -14,8 +14,8 @@ class LangPush extends Command
      */
     protected $signature = 'lang:push';
 
-    protected $apikey = 'ccc37fcb7d0b69e64a6e7c439cc14063d92f33e4';
-    protected $project = '9206592359c17cdcafd822.29517217';
+    protected $apikey;
+    protected $project;
 
     /**
      * The console command description.
@@ -43,9 +43,9 @@ class LangPush extends Command
      */
     public function handle()
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client(['verify' => false]);
         $file = file_get_contents('./resources/lang/en/app.php');
-        $response = $client->request('POST', 'https://lokali.se/api/project/import', [
+        $response = $client->request('POST', 'https://api.lokalise.co/api/project/import', [
             'multipart' => [
                 [
                     'name' => 'api_token',
@@ -68,9 +68,7 @@ class LangPush extends Command
                     'contents' => $file,
                     'filename' => 'app.php',
                 ]
-            ],
-            'verify' => './resources/assets/cacert.pem',
-        ]);
+            ]]);
         $body = $response->getBody();
 
         echo $body;

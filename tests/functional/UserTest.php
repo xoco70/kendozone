@@ -34,9 +34,9 @@ class UserTest extends BrowserKitTest
         $this->visit("/users/create")
             ->press(trans('core.save'))
             ->seePageIs('/users/create')
-            ->see(trans('validation.filled', ['attribute' => "name"]))
-            ->see(trans('validation.filled', ['attribute' => "email"]))
-            ->see(trans('validation.filled', ['attribute' => "password"]));
+            ->see(trans('validation.required', ['attribute' => "name"]))
+            ->see(trans('validation.required', ['attribute' => "E-mail"]))
+            ->see(trans('validation.required', ['attribute' => "password"]));
 
     }
 

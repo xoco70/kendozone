@@ -99,7 +99,7 @@
                             @include('layouts.language_status', [
                         'code' => strtoupper($lang->iso),
                         'language' => $lang->name,
-                        'percent' => intval($langStats[substr($lang->iso,0,2)] * 100 / $langStats['fr'])
+                        'percent' => intval($langStats[substr($lang->iso,0,2)] * 100 / $langStats['en'])
                         ])
                         @endforeach
                         {{--@include('layouts.language_status', [--}}

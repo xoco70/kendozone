@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\LangPush::class,
+        Commands\LangPull::class,
     ];
 
     /**

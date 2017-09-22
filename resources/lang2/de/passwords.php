@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'password' => 'A palavra-passe deverá conter pelo menos seis carateres e ser igual à confirmação.',
-    'reset'    => 'A palavra-passe foi redefinida!',
-    'sent'     => 'O lembrete para a palavra-passe foi enviado!',
-    'token'    => 'Este código de recuperação da palavra-passe é inválido.',
-    'user'     => 'Não existe nenhum utilizador com o endereço de correio eletrónico indicado.',
+    'password' => 'Passwörter müssen mindestens 6 Zeichen lang sein und korrekt bestätigt werden.',
+    'reset'    => 'Das Passwort wurde zurückgesetzt!',
+    'sent'     => 'Passworterinnerung wurde gesendet!',
+    'token'    => 'Der Passwort-Wiederherstellungs-Schlüssel ist ungültig oder abgelaufen.',
+    'user'     => 'Es konnte leider kein Nutzer mit dieser E-Mail-Adresse gefunden werden.',
 
 ];

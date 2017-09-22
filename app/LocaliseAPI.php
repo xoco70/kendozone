@@ -12,13 +12,11 @@ class LocaliseAPI
 
     /**
      * LocaliseAPI constructor.
-     * @param string $apiKey
-     * @param string $projectId
      */
-    public function __construct($apiKey, $projectId)
+    public function __construct()
     {
-        $this->apiKey = $apiKey;
-        $this->projectId = $projectId;
+        $this->apiKey = env('LOCALISE_API_KEY');
+        $this->projectId = env('LOCALISE_PROJECT');
     }
 
 
@@ -36,6 +34,42 @@ class LocaliseAPI
         } catch (\Exception $e) {
             return [];
         }
+    }
 
+    /**
+     * Send translations to to Localize.co
+     * @return mixed
+     */
+    public function pullLangs()
+    {
+        $client = new Client(['verify' => false]);
+        $response = $client->post('https://api.lokalise.co/api/project/export', [
+            'multipart' => [
+                [
+                    'name' => 'api_token',
+                    'contents' => $this->apiKey
+                ],
+                [
+                    'name' => 'id',
+                    'contents' => $this->projectId
+                ],
+                [
+                    'name' => 'type',
+                    'contents' => 'php'
+                ],
+                [
+                    'name' => 'use_original',
+                    'contents' => '1'
+                ],
+                [
+                    'name' => 'export_empty',
+                    'contents' => 'skip'
+                ],
+            ],
+        ]);
+
+        $body = $response->getBody();
+        $details = json_decode($body);
+        return $details->bundle->file;
     }
 }

@@ -37,8 +37,7 @@ class LoginController extends Controller
             "de" => $this->getLangWordsCount('lang/de'),
             "ko" => $this->getLangWordsCount('lang/ko'),
         ];
-        $api = new LocaliseAPI(env('LOCALISE_API_KEY'), ENV('LOCALISE_PROJECT'));
-
+        $api = new LocaliseAPI();
         $langs = $api->listLangsInProject();
 
 
