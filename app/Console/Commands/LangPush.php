@@ -22,7 +22,7 @@ class LangPush extends Command
      *
      * @var string
      */
-    protected $description = 'Send english translation to lokali.se';
+    protected $description = 'Send translations to lokalise.co';
 
     /**
      * Create a new command instance.

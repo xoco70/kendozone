@@ -9,7 +9,6 @@ return array (
   'note' => 'Note',
   'translate_kz' => 'Traduisez Kendozone',
   'translate_kz_text_1' => 'Kendozone est pour l\'instant traduit en 4 langues',
-  'translate_kz_note' => 'Vous devez être connecté à votre compte Kendozone pour pouvoir traduire',
-  'translate_kz_note2' => 'Une fois connecté, cliquez sur le drapeau et selectionnez "Aidez à la traduction"',
+  'translate_kz_note' => 'Cliquez ici pour contributer à la traduction de Kendozone',
   'help_translate' => 'Aidez à la traduction',
 );
