@@ -77,14 +77,7 @@ class ChampionshipController extends Controller
         Auth::user()->updateUserFullName($request->firstname, $request->lastname);
         Auth::user()->championships()->detach();
 
-        $existingCompetitor = Competitor::where('user_id', Auth::user()->id)
-            ->whereIn('championship_id', $categories)->first();
-
-        if ($existingCompetitor != null) {
-            $shortId = $existingCompetitor->short_id;
-        } else {
-            $shortId = $tournament->competitors()->max('short_id') + 1;
-        }
+        $shortId = Competitor::getShortId($categories, $tournament);
 
         foreach ($categories as $category) {
             Auth::user()->championships()->attach($category, ['confirmed' => 0, 'short_id' => $shortId]);
