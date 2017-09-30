@@ -69,7 +69,6 @@ class ChampionshipController extends Controller
     public function store(Tournament $tournament, ChampionshipRequest $request)
     {
         $categories = $request->get('cat');
-        $invite = $request->getInvite($tournament);
 
         if ($categories == null) {
             flash()->error(trans('msg.you_must_choose_at_least_one_championship'));
@@ -92,10 +91,6 @@ class ChampionshipController extends Controller
         }
 
         $tournament->owner->notify(new RegisteredToChampionship(Auth::user(), $tournament));
-
-        if (is_null($this)) {
-            $invite->saveItem($tournament);
-        }
 
         flash()->success(trans('msg.tx_for_register_tournament', ['tournament' => $tournament->name]));
         return redirect(URL::action('UserController@getMyTournaments', Auth::user()));

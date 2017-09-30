@@ -84,22 +84,6 @@ class Invite extends Model
         return $invite;
     }
 
-    /**
-     * @param $tournament
-     */
-    public function saveItem($tournament)
-    {
-        $invite = new Invite();
-        $invite->code = 'open';
-        $invite->email = Auth::user()->email;
-        $invite->object_type = 'App\Tournament';
-        $invite->object_id = $tournament->id;
-        $invite->active = 1;
-        $invite->used = 1;
-        $invite->save();
-
-    }
-
 
     /**
      * Helper used to hash email into token
