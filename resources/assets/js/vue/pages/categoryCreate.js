@@ -1,3 +1,7 @@
+$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
+});
+
 new Vue({
     el: '#modal',
     data: {
@@ -94,7 +98,7 @@ new Vue({
                     dualList.bootstrapDualListbox('refresh');
                 } else {
                     // Print message
-                    this.error = " Ya existe el elemento";
+                    this.error = " Element already exists";
                 }
             });
         },

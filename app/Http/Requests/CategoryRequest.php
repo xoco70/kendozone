@@ -6,8 +6,6 @@ use App\Category;
 
 class CategoryRequest extends Request
 {
-
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,7 +23,6 @@ class CategoryRequest extends Request
      */
     public function rules()
     {
-
         return [
             'name' => 'required|min:6'
         ];
@@ -42,10 +39,10 @@ class CategoryRequest extends Request
             ->where('gradeCategory', '=', $this->gradeCategory)
             ->where('ageCategory', '=', $this->ageCategory);
 
-        if ($this->ageMin != null) $category = $category->where('ageMin', $this->ageMin);
-        if ($this->ageMax != null) $category = $category->where('ageMax', $this->ageMax);
-        if ($this->gradeMin != null) $category = $category->where('gradeMin', $this->gradeMin);
-        if ($this->gradeMax != null) $category = $category->where('gradeMax', $this->gradeMax);
+        $this->has('ageMin') ? $category = $category->where('ageMin', $this->ageMin) : '';
+        $this->has('ageMax') ? $category = $category->where('ageMax', $this->ageMax) : '';
+        $this->has('gradeMin') ? $category = $category->where('gradeMin', $this->gradeMin) : '';
+        $this->has('gradeMax') ? $category = $category->where('gradeMax', $this->gradeMax) : '';
 
         return $category->select('name')->first() ?? new Category();
     }

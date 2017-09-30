@@ -6,7 +6,7 @@ use App\Invite;
 use App\Tournament;
 use Illuminate\Support\Facades\Auth;
 
-class InviteRequest extends Request
+class ChampionshipRequest extends Request
 {
 
     /**
@@ -26,9 +26,19 @@ class InviteRequest extends Request
      */
     public function rules()
     {
-
         return [
-            'recipients' => 'required',
         ];
+    }
+
+    public function getInvite(Tournament $tournament)
+    {
+        if ($this->invite != 0)
+            return Invite::findOrFail($this->invite);
+
+        return Invite::where('code', 'open')
+            ->where('email', Auth::user()->email)
+            ->where('object_type', 'App\Tournament')
+            ->where('object_id', $tournament->id)
+            ->get();
     }
 }

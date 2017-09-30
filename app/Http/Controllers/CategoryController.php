@@ -25,13 +25,12 @@ class CategoryController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Request|CategoryRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Model
      */
 
     public function store(CategoryRequest $request)
     {
         $category = $request->getCategoryByFilters();
-
 
         $category->isTeam = $request->isTeam;
         $category->gender = $request->gender;
@@ -42,7 +41,6 @@ class CategoryController extends Controller
         $category->gradeMin = $request->gradeMin;
         $category->gradeMax = $request->gradeMax;
         $category->name = $category->buildName();
-
 
         $newCategoryName = Category::firstOrCreate($category->toArray());
 

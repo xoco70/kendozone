@@ -31,6 +31,7 @@ $(function () {
 
     var dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        console.log(csrfToken);
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 

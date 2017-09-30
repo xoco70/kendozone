@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
 
@@ -68,24 +69,6 @@ class Invite extends Model
         $this->update(['used' => 1]);
     }
 
-    /**
-     * @param Request $request
-     * @param $tournament
-     * @return mixed
-     */
-    public static function getInvite(Request $request, $tournament)
-    {
-        $inviteId = $request->invite;
-        if ($inviteId != 0)
-            $invite = Invite::findOrFail($inviteId);
-        else
-            $invite = Invite::where('code', 'open')
-                ->where('email', Auth::user()->email)
-                ->where('object_type', 'App\Tournament')
-                ->where('object_id', $tournament->id)
-                ->get();
-        return $invite;
-    }
 
     /**
      * Get invite from Token
@@ -128,4 +111,8 @@ class Invite extends Model
         $output = str_split($hash, 8);
         return $output[rand(0, 1)];
     }
+    public function hasExpired(){
+        return $this->expiration < Carbon::now() && $this->expiration != '0000-00-00';
+    }
+
 }
