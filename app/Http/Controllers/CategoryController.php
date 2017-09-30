@@ -28,24 +28,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+        $category = $request->getCategoryByFilters();
 
-        $category = Category::where('isTeam', '=', $request->isTeam)
-            ->where('gender', '=', $request->gender)
-            ->where('gradeCategory', '=', $request->gradeCategory)
-            ->where('ageCategory', '=', $request->ageCategory);
-
-        if ($request->ageMin != null) $category = $category->where('ageMin', $request->ageMin);
-        if ($request->ageMax != null) $category = $category->where('ageMax', $request->ageMax);
-        if ($request->gradeMin != null) $category = $category->where('gradeMin', $request->gradeMin);
-        if ($request->gradeMax != null) $category = $category->where('gradeMax', $request->gradeMax);
-
-        $category = $category->select('name')->first();
-
-        if ($category == null) {
-            $category = new Category();
-        }
 
         $category->isTeam = $request->isTeam;
         $category->gender = $request->gender;
