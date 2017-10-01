@@ -3,9 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\AuditingTrait;
 
 class Invite extends Model
@@ -56,8 +54,8 @@ class Invite extends Model
 
         if ($invite->save())
             return $token;
-        else
-            return null;
+
+        return null;
     }
 
     /**
@@ -95,7 +93,9 @@ class Invite extends Model
         $output = str_split($hash, 8);
         return $output[rand(0, 1)];
     }
-    public function hasExpired(){
+
+    public function hasExpired()
+    {
         return $this->expiration < Carbon::now() && $this->expiration != '0000-00-00';
     }
 

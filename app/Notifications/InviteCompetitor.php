@@ -84,9 +84,9 @@ class InviteCompetitor extends Notification
                 ]));
         }
         if ($this->user->password != null) {
-            $message->line("<strong>".trans('mail.your_connection_data') . ":</strong>")
-                ->line("<strong>".trans('core.username') . ":</strong>" . $this->user->email)
-                ->line("<strong>".trans('core.password') . ":</strong>" . $this->user->clearPassword);
+            $message->line(trans('mail.your_connection_data') . ":")
+                ->line(trans('core.username') . ":" . $this->user->email)
+                ->line(trans('core.password') . ":" . $this->user->clearPassword);
         }
 
         $message->line(trans('core.thanks'));

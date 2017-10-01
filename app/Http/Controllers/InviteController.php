@@ -65,7 +65,6 @@ class InviteController extends Controller
      */
     public function store(Request $request)
     {
-
         //TODO check that recipient is list of emails
         $this->validate($request, [
             'recipients' => 'required'
@@ -75,8 +74,7 @@ class InviteController extends Controller
         $recipients = json_decode($request->get("recipients"));
         foreach ($recipients as $recipient) {
             // Mail to Recipients
-            $invite = new Invite();
-            $code = $invite->generateTournamentInvite($recipient, $tournament);
+            $code = resolve(Invite::class)->generateTournamentInvite($recipient, $tournament);
             $user = new User();
             $user->email = $recipient;
             $user->notify(new InviteCompetitor($user, $tournament, $code,null));
