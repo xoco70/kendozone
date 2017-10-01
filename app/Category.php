@@ -66,8 +66,9 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
      */
     public function getGradeString()
     {
+
         $grades = Grade::getAll();
-        if ($this->gradeCategory == 3)  // Custom
+        if ($this->gradeCategory == 3) {  // Custom
             $gradeText = ' - ' . trans('core.grade') . ' : ';
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 return $this->hasGradeMinAndMax($grades, $gradeText);
