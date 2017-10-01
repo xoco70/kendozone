@@ -1,7 +1,7 @@
 <?php
 return [
     'AVATAR_PATH' => '/images/avatar/',
-    'RELATIVE_AVATAR_PATH' => 'images/avatar',
+    'RELATIVE_AVATAR_PATH' => 'images/avatar/',
 
     'ROLE_SUPERADMIN' => '1',
     'ROLE_FEDERATION_PRESIDENT' => '2',
