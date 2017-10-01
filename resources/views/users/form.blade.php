@@ -359,7 +359,7 @@
 
             let onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
-            let uploadUrl = "{{ URL::action('UserController@uploadAvatar',$user->slug) }}";
+            let uploadUrl = "{{ URL::action('UserAvatarController@store',$user->slug) }}";
             let avatarHiddenField = $('input[name=avatar]');
 
             new Dropzone('#fileInput', {

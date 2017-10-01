@@ -7,7 +7,6 @@ use App\Exceptions\NotOwningClubException;
 use App\Exceptions\NotOwningFederationException;
 use App\Traits\RoleTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
-use DateTime;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -20,8 +19,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManagerStatic as Image;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\AuditingTrait;
@@ -151,18 +148,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    public function getAvatarAttribute($avatar)
-    {
-        if (!isset($avatar) && Gravatar::exists($this->email)) {
-            return Gravatar::src($this->email);
 
-        }
-
-        if (!str_contains($avatar, 'http') && isset($avatar)) {
-            return config('constants.AVATAR_PATH') . $avatar;
-        }
-        return $avatar;
-    }
 
 
     /**
@@ -334,7 +320,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-
     /**
      * @return Collection
      */
@@ -461,59 +446,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    /**
-     * Upload Pic
-     * @param $data
-     * @return array
-     */
-    public static function uploadPic($data)
+    public function getAvatarAttribute($avatar)
     {
-        $file = array_first($data, null);
-        if ($file != null && $file->isValid()) {
-            $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
-            $date = new DateTime();
-            $timestamp = $date->getTimestamp();
-            $ext = $file->getClientOriginalExtension();
-            $fileName = $timestamp . "_" . $file->getClientOriginalName();
-            $fileName = Str::slug($fileName, '-') . "." . $ext;
-            if (!$file->move($destinationPath, $fileName)) {
-                echo "No se pudo mover";
-                flash()->error("La subida del archivo ha fallado, vuelve a subir su foto por favor");
-                return $data;
-            } else {
-                $data['avatar'] = $fileName;
-                // Redimension and pic
-                User::resizePicAndSave($destinationPath, $fileName);
-                Auth::user()->avatar = $fileName;
-                Auth::user()->save();
-                return $data;
-            }
+        if (!isset($avatar) && Gravatar::exists($this->email)) {
+            return Gravatar::src($this->email);
 
         }
-        echo "El archivo no es valido";
-        return $data;
-    }
 
-    /**
-     * @param $destinationPath
-     * @param $fileName
-     */
-    public static function resizePicAndSave($destinationPath, $fileName)
-    {
-        $img = Image::make($destinationPath . $fileName);
-        $width = null;
-        $height = 200;
-
-        if ($img->width() > $img->height()) {
-            $width = 200;
-            $height = null;
+        if (!str_contains($avatar, 'http') && isset($avatar)) {
+            return config('constants.AVATAR_PATH') . $avatar;
         }
-
-        $img->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-
-        $img->save($destinationPath . $fileName);
+        return $avatar;
     }
 
 

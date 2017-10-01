@@ -220,15 +220,6 @@ class UserController extends Controller
 
     }
 
-
-    public function uploadAvatar(Request $request)
-    {
-        $data = $request->except('_token');
-        $data = User::uploadPic($data);
-        return $data;
-
-    }
-
     public function myFederations(User $user)
     {
         return Federation::fillSelectForVueJs($user);

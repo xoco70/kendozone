@@ -248,6 +248,7 @@ class UserTest extends BrowserKitTest
             'password' => '222222']);
 
         $this->assertTrue(Auth::check());
-
     }
+
+
 }

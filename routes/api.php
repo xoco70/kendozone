@@ -26,7 +26,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::get("users/{user}/federations/{id}/associations", 'UserController@myAssociations');
     Route::get("users/{user}/federations/{federationId?}/associations/{associationId?}/clubs", 'UserController@myClubs')->name('clubs.my');
 
-    Route::post('users/{user}/uploadAvatar', 'UserController@uploadAvatar');
+    Route::post('users/{user}/avatar', 'UserAvatarController@store')->name('avatar');
 
     // Restoring
 
