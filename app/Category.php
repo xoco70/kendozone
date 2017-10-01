@@ -69,29 +69,25 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
         $grades = Grade::getAll();
         $gradeText = '';
 
-
         if ($this->gradeCategory == 1) {
-            $gradeText = trans('categories.first_force');
-        } else if ($this->gradeCategory == 2) {
-            $gradeText = trans('categories.second_force');
-        } else if ($this->gradeCategory == 3) {
-
+            return trans('categories.first_force');
+        }
+        if ($this->gradeCategory == 2) {
+            return trans('categories.second_force');
+        }
+        if ($this->gradeCategory == 3) {
             $gradeText = ' - ' . trans('core.grade') . ' : ';
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
-                if ($this->gradeMin == $this->gradeMax) {
-                    $gradeText .= $grades[$this->gradeMin - 1]->name;
-                } else {
-                    $gradeText .= $grades[$this->gradeMin - 1]->name . ' - ' . $grades[$this->gradeMax - 1]->name;
-                }
-            } else if ($this->gradeMin == 0 && $this->gradeMax != 0) {
-                $gradeText .= ' < ' . $grades[$this->gradeMax - 1]->name;
-            } else if ($this->gradeMin != 0 && $this->gradeMax == 0) {
-                $gradeText .= ' > ' . $grades[$this->gradeMin - 1]->name;
-            } else {
-                $gradeText = '';
+                return $this->hasGradeMinAndMax($grades, $gradeText);
+            }
+            if ($this->gradeMin == 0 && $this->gradeMax != 0) {
+                return $gradeText .= ' < ' . $grades[$this->gradeMax - 1]->name;
+            }
+            if ($this->gradeMin != 0 && $this->gradeMax == 0) {
+                return $gradeText .= ' > ' . $grades[$this->gradeMin - 1]->name;
             }
         }
-        return $gradeText;
+        return '';
     }
 
     public function scopeIsTeam($query)
@@ -131,5 +127,20 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
             $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
         }
         return $ageCategoryText;
+    }
+
+    /**
+     * @param $grades
+     * @param $gradeText
+     * @return string
+     */
+    protected function hasGradeMinAndMax($grades, $gradeText): string
+    {
+        if ($this->gradeMin == $this->gradeMax) {
+            $gradeText .= $grades[$this->gradeMin - 1]->name;
+        } else {
+            $gradeText .= $grades[$this->gradeMin - 1]->name . ' - ' . $grades[$this->gradeMax - 1]->name;
+        }
+        return $gradeText;
     }
 }
