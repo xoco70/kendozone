@@ -324,7 +324,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->pluck('name', 'id')
             ->prepend('-', 0);
     }
-    
+
     /**
      * Check if a user is registered to a tournament
      * @param Tournament $tournament

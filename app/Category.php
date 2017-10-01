@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Category extends \Xoco70\LaravelTournaments\Models\Category
 {
     const AGE_CUSTOM = 5;
+
     /**
      * Get All Presets for Categories
      * @param null $ruleId
@@ -46,19 +47,15 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
         if ($this->ageCategory == self::AGE_CUSTOM) {
             $ageCategoryText = ' - ' . trans('categories.age') . ' : ';
             if ($this->ageMin != 0 && $this->ageMax != 0) {
-                if ($this->ageMin == $this->ageMax) {
-                    $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
-                } else {
-                    $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
-                }
-            } else if ($this->ageMin == 0 && $this->ageMax != 0) {
-                $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('categories.years');
-            } else if ($this->ageMin != 0 && $this->ageMax == 0) {
-                $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('categories.years');
-            } else {
-                $ageCategoryText = '';
+                return $this->hasAgeMinAndMax($ageCategoryText);
             }
-            return $ageCategoryText;
+            if ($this->ageMin == 0 && $this->ageMax != 0) {
+                return $ageCategoryText .= ' < ' . $this->ageMax . ' ' . trans('categories.years');
+            }
+            if ($this->ageMin != 0 && $this->ageMax == 0) {
+                return $ageCategoryText .= ' > ' . $this->ageMin . ' ' . trans('categories.years');
+            }
+            return '';
         }
         return $ageCategories[$this->ageCategory];
     }
@@ -120,5 +117,19 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
         $gradeText = $this->getGradeString();
 
         return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
+    }
+
+    /**
+     * @param $ageCategoryText
+     * @return string
+     */
+    protected function hasAgeMinAndMax($ageCategoryText): string
+    {
+        if ($this->ageMin == $this->ageMax) {
+            $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
+        } else {
+            $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
+        }
+        return $ageCategoryText;
     }
 }
