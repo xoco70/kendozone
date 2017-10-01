@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Championship;
 use App\Tournament;
-use Illuminate\Http\Request;
 
 class ScoreSheetController extends Controller
 {

@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\View;
 
 class AssociationController extends Controller
 {
-    // Only Super Admin and Association President can manage Associations
-
     /**
      * Display a listing of the resource.
      *

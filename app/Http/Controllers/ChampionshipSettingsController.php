@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Championship;
 use App\FightersGroup;
 use DaveJamesMiller\Breadcrumbs\Exception;
 use Illuminate\Http\Request;

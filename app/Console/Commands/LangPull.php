@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\LocaliseAPI;
 use File;
-use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use ZipArchive;
 

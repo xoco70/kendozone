@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Championship;
-use App\Fight;
-use App\Grade;
 use App\FightersGroup;
+use App\Grade;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\URL;
 use Xoco70\LaravelTournaments\Exceptions\TreeGenerationException;
-use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
-use Xoco70\LaravelTournaments\TreeGen\TreeGen;
 
 class TreeController extends Controller
 {
