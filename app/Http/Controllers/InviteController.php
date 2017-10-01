@@ -19,6 +19,7 @@ class InviteController extends Controller
     protected $currentModelName;
     protected $emailBadFormat;
     protected $wrongEmail;
+
     /**
      * InviteController constructor.
      */
@@ -77,7 +78,7 @@ class InviteController extends Controller
             $code = resolve(Invite::class)->generateTournamentInvite($recipient, $tournament);
             $user = new User();
             $user->email = $recipient;
-            $user->notify(new InviteCompetitor($user, $tournament, $code,null));
+            $user->notify(new InviteCompetitor($user, $tournament, $code, null));
 
         }
         flash()->success(trans('msg.invitation_sent'));
@@ -97,7 +98,7 @@ class InviteController extends Controller
     {
         $this->emailBadFormat = false;
         $file = $request->file('invites')->store('invites');
-        $tournament = Tournament::where('slug',$request->tournamentSlug)->first();
+        $tournament = Tournament::where('slug', $request->tournamentSlug)->first();
         // Parse Csv File
 
         $reader = Excel::load("storage/app/" . $file, function ($reader) {
@@ -139,6 +140,4 @@ class InviteController extends Controller
         }
 
     }
-
-
 }

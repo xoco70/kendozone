@@ -277,7 +277,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function competitors()
+    public function competitors() // Used to delete competitors when soft deleting
     {
         return $this->hasMany(Competitor::class);
     }
@@ -304,7 +304,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->deleted_at != null;
     }
 
-
     /**
      * @param $firstname
      * @param $lastname
@@ -316,44 +315,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->save();
     }
 
-
     /**
      * @return Collection
      */
     public function fillSelect()
     {
-        $users = new Collection();
-        if ($this->isSuperAdmin()) {
-            $users = User::pluck('name', 'id')->prepend('-', 0);
-        } else if ($this->isFederationPresident() && $this->federationOwned != null) {
-            $users = User::where('federation_id', '=', $this->federationOwned->id)->pluck('name', 'id')->prepend('-', 0);
-        } else if ($this->isAssociationPresident() && $this->associationOwned != null) {
-            $users = User::where('association_id', '=', $this->associationOwned->id)->pluck('name', 'id')->prepend('-', 0);
-        } else if ($this->isClubPresident() && $this->clubOwned != null) {
-            $users = User::where('club_id', '=', $this->clubOwned->id)->pluck('name', 'id')->prepend('-', 0);
-        }
-        return $users;
+        return User::forUser($this)
+            ->pluck('name', 'id')
+            ->prepend('-', 0);
     }
-
-    /**
-     * @return Collection
-     */
-    public function getClubPresidentsList()
-    {
-        $users = new Collection();
-        if ($this->isSuperAdmin()) {
-            $users = User::pluck('name', 'id');
-        } else if ($this->isFederationPresident() && $this->federationOwned != null) {
-            $users = User::federationPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
-        } else if ($this->isAssociationPresident() && $this->associationOwned != null) {
-            $users = User::associationPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
-        } else if ($this->isClubPresident() && $this->clubOwned != null) {
-            $users = User::clubPresident(Auth::user())->pluck('name', 'id')->prepend('-', 0);
-        }
-        return $users;
-
-    }
-
+    
     /**
      * Check if a user is registered to a tournament
      * @param Tournament $tournament

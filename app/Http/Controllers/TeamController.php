@@ -99,12 +99,10 @@ class TeamController extends Controller
         $this->authorize('store', [Team::class, $championship->tournament, Auth::user()]);
         try {
             $team = Team::where('championship_id', $championship->id)->orderBy('id', 'desc')->first();
+            $short_id = 1;
             if ($team != null) {
                 $short_id = $team->short_id + 1;
-            } else {
-                $short_id = 1;
             }
-
             $request->request->add(['short_id' => $short_id]);
             $team = Team::create($request->all());
             flash()->success(trans('msg.team_create_successful', ['name' => $team->name]));
