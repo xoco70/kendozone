@@ -179,11 +179,11 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-5" v-if="federationSelected!=0" v-cloak>
-                                        <br/>{{trans('structures.association_not_in_list')}}<br/>
+                                        <br/>{{trans('core.association_not_in_list')}}<br/>
 
                                         <a href="#" data-toggle="modal" data-target="#create_association"
                                            class="text-semibold text-black">
-                                            {{ trans('core.add_new_association') }}</a>
+                                            {{ trans('structures.add_new_association') }}</a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -201,7 +201,7 @@
 
                                     </div>
                                     <div class="col-lg-4 mt-5" v-if="federationSelected!=0" v-cloak>
-                                        <br/>{{trans('structures.club_not_in_list')}}<br/>
+                                        <br/>{{trans('core.club_not_in_list')}}<br/>
                                         <a href="#" data-toggle="modal" data-target="#create_club"
                                            class="text-semibold text-black">
                                             {{ trans('core.add_new_club') }}</a>
