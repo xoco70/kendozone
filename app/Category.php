@@ -67,24 +67,16 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
     public function getGradeString()
     {
         $grades = Grade::getAll();
-        $gradeText = '';
-
-        if ($this->gradeCategory == 1) {
-            return trans('categories.first_force');
-        }
-        if ($this->gradeCategory == 2) {
-            return trans('categories.second_force');
-        }
-        if ($this->gradeCategory == 3) {
+        if ($this->gradeCategory == 3)  // Custom
             $gradeText = ' - ' . trans('core.grade') . ' : ';
             if ($this->gradeMin != 0 && $this->gradeMax != 0) {
                 return $this->hasGradeMinAndMax($grades, $gradeText);
             }
             if ($this->gradeMin == 0 && $this->gradeMax != 0) {
-                return $gradeText .= ' < ' . $grades[$this->gradeMax - 1]->name;
+                return $gradeText . ' < ' . $grades[$this->gradeMax - 1]->name;
             }
             if ($this->gradeMin != 0 && $this->gradeMax == 0) {
-                return $gradeText .= ' > ' . $grades[$this->gradeMin - 1]->name;
+                return $gradeText . ' > ' . $grades[$this->gradeMin - 1]->name;
             }
         }
         return '';
