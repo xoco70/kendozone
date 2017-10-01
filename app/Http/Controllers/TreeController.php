@@ -49,9 +49,7 @@ class TreeController extends Controller
                 flash()->success(trans('msg.championships_tree_generation_success'));
             } catch (TreeGenerationException $e) {
                 flash()->error($e->message);
-            } finally {
             }
-
         }
 
         return redirect(route('tree.index', $tournament->slug))->with('activeTreeTab', $request->activeTreeTab);
@@ -88,14 +86,14 @@ class TreeController extends Controller
                 // Find the fight in array, and update order
                 $fight->c1 = $fighters[$numFighter];
                 $scores[$numFighter] != null
-                    ?  $fight->winner_id = $fighters[$numFighter]
+                    ? $fight->winner_id = $fighters[$numFighter]
                     : $fight->winner_id = null;
                 $numFighter++;
 
                 $fight->c2 = $fighters[$numFighter];
-                if ($fight->winner_id == null){
+                if ($fight->winner_id == null) {
                     $scores[$numFighter] != null
-                        ?  $fight->winner_id = $fighters[$numFighter]
+                        ? $fight->winner_id = $fighters[$numFighter]
                         : $fight->winner_id = null;
                 }
 

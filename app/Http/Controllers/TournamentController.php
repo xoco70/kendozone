@@ -166,10 +166,7 @@ class TournamentController extends Controller
                 : flash()->success(trans('msg.tournament_update_successful', ['name' => $tournament->name]));
             return redirect(URL::action('TournamentController@edit', $tournament->slug))->with('activeTab', $request->activeTab);
         }
-
-
     }
-
 
     /**
      * Remove the Tournament from storage.
@@ -184,7 +181,6 @@ class TournamentController extends Controller
             return Response::json(['msg' => Lang::get('msg.tournament_delete_successful', ['name' => $tournament->name]), 'status' => 'success']);
         }
         return Response::json(['msg' => Lang::get('msg.tournament_delete_error', ['name' => $tournament->name]), 'status' => 'error']);
-
     }
 
     /**

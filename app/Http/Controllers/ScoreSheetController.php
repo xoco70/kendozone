@@ -27,20 +27,8 @@ class ScoreSheetController extends Controller
             'championships.fightersGroups.fights.team2'
 
         )->where('slug', $tournamentSlug)->first();
-
-
+        
         $sheet = null;
         return view('scoresheets.index', compact('tournament', 'sheet'));
-    }
-
-    public function store()
-    {
-
-    }
-
-
-    public function update()
-    {
-
     }
 }

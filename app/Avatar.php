@@ -17,6 +17,7 @@ class Avatar
      */
     public static function uploadPic($data)
     {
+        //TODO Refactored in one line, but had issue with `php artisan storage:link`
         $file = array_first($data, null);
         if ($file != null && $file->isValid()) {
             $destinationPath = config('constants.RELATIVE_AVATAR_PATH');
