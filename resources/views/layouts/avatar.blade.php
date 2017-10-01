@@ -4,7 +4,7 @@ if (
     isset($user) &&
     $user != null &&
     $user->avatar != null) {
-    $img = asset($user->avatar);
+    $img = $user->avatar;
 } else {
     $img = Avatar::create($user->email)->toBase64();
 }
