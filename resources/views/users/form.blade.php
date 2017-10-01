@@ -133,7 +133,7 @@
                             <div class="container-fluid">
                                 <fieldset title="dojo">
                                     <a name="dojo">
-                                        <legend class="text-semibold">{{Lang::get('core.where_do_you_practice')}}</legend>
+                                        <legend class="text-semibold">{{Lang::get('structures.where_do_you_practice')}}</legend>
                                     </a>
                                 </fieldset>
                                 <div class="row">
