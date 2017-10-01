@@ -65,6 +65,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -146,10 +154,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->token = null;
         $this->save();
     }
-
-
-
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -300,13 +304,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->deleted_at != null;
     }
 
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 
     /**
      * @param $firstname
