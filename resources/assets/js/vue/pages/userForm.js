@@ -1,4 +1,5 @@
-let vm = new Vue({
+
+vm = new Vue({
         el: '#container',
         data: {
             federationId: federationId,
@@ -46,7 +47,7 @@ let vm = new Vue({
             storeAssociation: function () {
                 this.form.federation_id = this.federationSelected;
 
-                this.$http.post('/api/v1/associations/create', this.form)
+                axios.post('/api/v1/associations/create', this.form)
                     .then(response => {
                         let association = {
                             value: response.data.data.id,
@@ -94,7 +95,7 @@ let vm = new Vue({
                 this.form.association_id = this.associationSelected;
 
 
-                this.$http.post('/api/v1/club/create', this.form)
+                axios.post('/api/v1/club/create', this.form)
                     .then(response => {
                         let clubs = {
                             value: response.data.data.id,
@@ -140,7 +141,7 @@ let vm = new Vue({
 
             getFederations: function () {
                 let url = '/api/v1/users/' + user + '/federations/';
-                this.$http.get(url).then(response => {
+                axios.get(url).then(response => {
                     vm.federations = response.data;
                 });
 
@@ -150,7 +151,7 @@ let vm = new Vue({
             getAssociations: function (federationSelected) {
 
                 let url = '/api/v1/users/' + user + '/federations/' + federationSelected + '/associations';
-                this.$http.get(url).then(response => {
+                axios.get(url).then(response => {
                     vm.associations = response.data;
                 });
                 this.clubSelected = 0;
@@ -161,7 +162,7 @@ let vm = new Vue({
 
             getClubs: function (federationSelected, associationSelected) {
                 let url = '/api/v1/users/' + user + '/federations/' + federationSelected + '/associations/' + associationSelected + "/clubs/";
-                this.$http.get(url).then(response => {
+                axios.get(url).then(response => {
                     vm.clubs = response.data;
                 });
             },
@@ -179,5 +180,4 @@ let vm = new Vue({
             })
         }
         ,
-    })
-;
+    });

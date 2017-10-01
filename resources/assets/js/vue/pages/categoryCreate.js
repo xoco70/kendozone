@@ -1,7 +1,3 @@
-$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-    jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
-});
-
 new Vue({
     el: '#modal',
     data: {
@@ -53,13 +49,13 @@ new Vue({
 
     },
     computed: {
-        categoryFullName: function() {
+        categoryFullName: function () {
             let teamText = this.isTeam == 1 ? team : single;
             this.name = teamText + ' ' +
                 this.getSelectText(this.genders, this.genderSelect) + ' ' +
-                this.getAgeText()+ ' '+
-                this.getGradeText() ;
-            
+                this.getAgeText() + ' ' +
+                this.getGradeText();
+
             return this.name;
 
         }
@@ -86,7 +82,7 @@ new Vue({
             };
 
 
-            this.$http.post(this.url, categoryData).then(response => {
+            axios.post(this.url, categoryData).then(response => {
                 if (dualListIds.indexOf('' + response.data.id) == -1) {
                     let option;
                     console.log(this.categoryData);
@@ -174,7 +170,7 @@ new Vue({
         }
     },
     filters: {
-        html: function(html){
+        html: function (html) {
             let txt = document.createElement("textarea");
             txt.innerHTML = html;
             return txt.value;

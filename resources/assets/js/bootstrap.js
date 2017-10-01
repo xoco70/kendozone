@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -17,41 +16,14 @@ window._ = require('lodash');
  */
 
 window.Vue = require('vue');
-require('vue-resource');
+window.axios = require('axios');
 
-/**
- * We'll register a HTTP interceptor to attach the "CSRF" header to each of
- * the outgoing requests issued by this application. The CSRF middleware
- * included with Laravel will automatically verify the header's value.
- */
 
-Vue.http.interceptors.push((request, next) => {
-    request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-    next();
-});
-
-Vue.http.interceptors.push((request, next ) => {
-    next((response) => {
-        if( 'Content-Type' in response.headers
-            && response.headers['Content-Type'] == 'application/json' ){
-            if( typeof response.data != 'object' ){
-                response.data = JSON.parse( response.data );
-            }
-        }
-
-        if( 'content-type' in response.headers
-            && response.headers['content-type'] == 'application/json' ){
-            if( typeof response.data != 'object' ){
-                response.data = JSON.parse( response.data );
-            }
-        }
-    });
-});
-
-// window.axios.defaults.headers.common = {
-//     'X-Requested-With': 'XMLHttpRequest',
-// };
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.Laravel.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -15,9 +15,10 @@ const {mix} = require('laravel-mix');
 
 mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 mix.js('resources/assets/js/oauth.js', 'public/js/');
 mix.js('resources/assets/js/bootstrap.js', 'public/js/');
-mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
+
 
 mix.copy('resources/assets/js/analytics.js', 'public/js/analytics.js');
 

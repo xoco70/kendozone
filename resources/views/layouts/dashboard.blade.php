@@ -7,7 +7,11 @@
             email: ""
         };</script>
     <script data-cfasync="false" src="https://widget.userengage.io/widget.js"></script>
-
+    <script>
+        window.Laravel = {
+            csrfToken: "{{ csrf_token() }}"
+        };
+    </script>
     <?php
     $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
     $favicon = asset('/favicon_kz-01.png');
@@ -80,9 +84,6 @@
 </div>
 <!-- /page container -->
 <script>
-    window.Laravel = {
-        csrfToken: "{{ csrf_token() }}"
-    };
     var csrfToken = "{{csrf_token()}}";
 </script>
 @if(!empty(env('SENTRY_DSN_PUBLIC')))
@@ -97,9 +98,6 @@
 @endif
 
 {!! Html::script('js/bootstrap.js')!!}
-<script>
-
-</script>
 {!! Html::script('js/app.js')!!}
 {!! Html::script('js/analytics.js') !!}
 
