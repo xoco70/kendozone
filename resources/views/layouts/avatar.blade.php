@@ -9,7 +9,7 @@ if (
     $img = Avatar::create($user->email)->toBase64();
 }
 ?>
-<img src="{!! $img !!}" alt="kendozone_avatar">
+<img src="{!! asset('storage'.$img) !!}" alt="kendozone_avatar">
 
 
 

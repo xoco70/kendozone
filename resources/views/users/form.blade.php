@@ -351,11 +351,11 @@
 
     <script>
         let maxImageWidth = 100, maxImageHeight = 100;
-
+        let initialPic;
         Dropzone.autoDiscover = false;
         $(document).ready(function () {
 
-            let initialPic = "{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}";
+            initialPic = "{{ asset("storage".$user->avatar) ?? Avatar::create($user->email)->toBase64() }}";
 
             let onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
@@ -419,13 +419,6 @@
                     // callback, but I think that this is cleaner.
                 },
                 removedfile: function (file) {
-//                        let name = file.name;
-//                        $.ajax({
-//                            type: 'POST',
-//                            url: 'delete.php',
-//                            data: "id="+name,
-//                            dataType: 'html'
-//                        });
                     avatarHiddenField.val('');
                     let _ref;
                     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
