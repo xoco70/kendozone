@@ -1,7 +1,4 @@
 let VueDragula = require('../vue-dragula');
-$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-    jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
-});
 Vue.config.debug = true;
 
 Vue.use(VueDragula);
@@ -23,7 +20,7 @@ vm = new Vue({
     },
     methods: {
         deleteTeam(teamId){
-            $.post(url_root_api + "/teams/" + teamId + "/delete", function () {
+            axios.post(url_root_api + "/teams/" + teamId + "/delete", function () {
             })
                 .done(function (data) {
 
@@ -59,15 +56,15 @@ vm = new Vue({
                 });
         },
         addCompetitorToTeam(teamId, competitorId){
-            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");
+            axios.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");
             // Vue.vueDragula.find('third-bag').drake.cancel(true);
 
         },
         removeCompetitorFromTeam(teamId, competitorId){
-            $.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/remove");
+            axios.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/remove");
         },
         moveCompetitorToAnotherTeam(competitorId, old_team_id, new_team_id){
-            $.post(url_root_api + "/teams/" + old_team_id + "/" + new_team_id + "/competitors/" + competitorId + "/move");
+            axios.post(url_root_api + "/teams/" + old_team_id + "/" + new_team_id + "/competitors/" + competitorId + "/move");
         }
 
     },
