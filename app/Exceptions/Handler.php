@@ -57,17 +57,13 @@ class Handler extends ExceptionHandler
                         'id' => Auth::user()->id,
                         'email' => Auth::user()->email
                     ],
-//                    'extra' => ['foo' => 'bar'],
-//                    'tags' => array('Francia' => 'Campeon!!!')
                 ];
             }
 
             $this->sentryID = app('sentry')->captureException($exception, $params);
         }
-
         parent::report($exception);
     }
-
     /**
      * Render an exception into an HTTP response.
      *
@@ -84,6 +80,7 @@ class Handler extends ExceptionHandler
         switch ($exception) {
 
             case $exception instanceof NotFoundHttpException:
+
                 $code = "404";
                 $message = "Not Found";
                 $quote = "I will search for you through 1000 worlds and 10000 lifetimes!";
@@ -104,42 +101,6 @@ class Handler extends ExceptionHandler
                 $quote = '“And this is something I must accept - even if, like acid on metal, it is slowly corroding me inside.”';
                 $author = 'Tabitha Suzuma';
                 $source = trans('core.forbidden');
-                break;
-            case $exception instanceof InvitationNeededException:
-                $code = "403";
-                $message = trans('core.forbidden');
-                $quote = trans('msg.invitation_needed');
-                $author = "Admin";
-                $source = "";
-                break;
-
-            case $exception instanceof InvitationExpiredException:
-
-                break;
-
-
-            case $exception instanceof NotOwningFederationException:
-                $code = "403";
-                $message = trans('core.forbidden');
-                $quote = trans('msg.you_dont_own_federation');
-                $author = trans('msg.please_ask_superadmin');
-                $source = "";
-                break;
-
-            case $exception instanceof NotOwningAssociationException:
-                $code = "403";
-                $message = trans('core.forbidden');
-                $quote = trans('msg.you_dont_own_association');
-                $author = trans('msg.please_ask_federationPresident');
-                $source = "";
-                break;
-
-            case $exception instanceof NotOwningClubException:
-                $code = "403";
-                $message = trans('core.forbidden');
-                $quote = trans('msg.you_dont_own_club');
-                $author = trans('msg.please_ask_associationPresident');
-                $source = "";
                 break;
 
             case $exception instanceof Swift_TransportException:

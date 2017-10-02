@@ -59,18 +59,20 @@ class UserPolicy
 
     public function edit(User $user, User $userModel)
     {
-        if ($user->isFederationPresident() && $user->federationOwned != null) {
-            return $user->federationOwned->id == $userModel->federation_id;
-        }
 
-        if ($user->isAssociationPresident() && $user->associationOwned != null) {
-            return $user->associationOwned->id == $userModel->association_id;
-        }
+//        if ($user->isFederationPresident() && $user->federationOwned != null) {
+//            return $user->federationOwned->id == $userModel->federation_id;
+//        }
+//
+//        if ($user->isAssociationPresident() && $user->associationOwned != null) {
+//            return $user->associationOwned->id == $userModel->association_id;
+//        }
+//
+//        if ($user->isClubPresident() && $user->clubOwned != null) {
+//            return $user->clubOwned->id == $userModel->club_id;
+//        }
+        if ($user->isUserOrMore()) {
 
-        if ($user->isClubPresident() && $user->clubOwned != null) {
-            return $user->clubOwned->id == $userModel->club_id;
-        }
-        if ($user->isUser()) {
             return $user->id == $userModel->id;
         }
     }

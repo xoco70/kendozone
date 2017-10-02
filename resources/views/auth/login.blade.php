@@ -26,7 +26,7 @@
 
                 <div class="form-group has-feedback has-feedback-left">
                     <input type="password" name="password" id="password" class="form-control"
-                           placeholder="{{  trans('auth.password') }}" required>
+                           placeholder="{{  trans('core.password') }}" required>
 
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>

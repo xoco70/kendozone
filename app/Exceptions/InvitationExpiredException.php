@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-class InvitationExpiredException extends \Exception
+class InvitationExpiredException extends CustomException
 {
     public function render($request)
     {

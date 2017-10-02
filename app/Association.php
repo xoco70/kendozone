@@ -108,7 +108,7 @@ class Association extends Model
         $associations = new Collection();
         if (Auth::user()->isSuperAdmin()) {
             $associations = Association::pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isFederationPresident()) {
+        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
             $associations = Auth::user()->federationOwned->associations->pluck('name', 'id')->prepend('-', 0);
         } else if (Auth::user()->isAssociationPresident()) {
             $association = Auth::user()->associationOwned;

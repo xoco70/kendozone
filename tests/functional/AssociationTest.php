@@ -118,21 +118,21 @@ class AssociationTest extends BrowserKitTest
     /** @test
      *
      */
-    public function only_root_and_fp_can_create_association()
-    {
-        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
-        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
-        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+//    public function only_root_and_fp_can_create_association()
+//    {
+//        $simpleUser = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_USER')]);
+//        $clubPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT')]);
+//        $associationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT')]);
+//
+//        $users = [$associationPresident, $clubPresident, $simpleUser];
+//        foreach ($users as $user) {
+//            $this->logWithUser($user);
+//            $this->visitCreateAssociationPage($clubPresident);
+//            $this->see("403.png");
+//        }
 
-        $users = [$associationPresident, $clubPresident, $simpleUser];
-        foreach ($users as $user) {
-            $this->logWithUser($user);
-            $this->visitCreateAssociationPage($clubPresident);
-            $this->see("403.png");
-        }
 
-
-    }
+//    }
 
     /**
      * @param Association $association

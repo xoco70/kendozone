@@ -45,6 +45,14 @@ trait RoleTrait
     }
 
     /**
+     * @return bool
+     */
+    public function isUserOrMore()
+    {
+        return $this->role_id <= config('constants.ROLE_USER');
+    }
+
+    /**
      * @param $tournament
      * @return bool
      */
