@@ -114,11 +114,7 @@ class Handler extends ExceptionHandler
                 break;
 
             case $exception instanceof InvitationExpiredException:
-                $code = "403";
-                $message = trans('core.forbidden');
-                $quote = trans('msg.invitation_expired');
-                $author = "Admin";
-                $source = "";
+
                 break;
 
 

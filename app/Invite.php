@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\InviteCompetitor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use OwenIt\Auditing\AuditingTrait;
@@ -97,6 +98,39 @@ class Invite extends Model
     public function hasExpired()
     {
         return $this->expiration < Carbon::now() && $this->expiration != '0000-00-00';
+    }
+
+    /**
+     * @param $reader
+     * @param $tournament
+     */
+    public function checkBadEmailsInExcel($reader, $tournament)
+    {
+        $reader->each(function ($sheet) use ($tournament) {
+            // Loop through all rows
+            $sheet->each(function ($row) use ($tournament) {
+                // Check email
+                if (!filter_var($row, FILTER_VALIDATE_EMAIL)) {
+                    $this->emailBadFormat = true;
+                    $this->wrongEmail = $row;
+                }
+            });
+        });
+    }
+
+    public static function sendInvites($reader, $tournament)
+    {
+        $reader->each(function ($sheet) use ($tournament) {
+            // Loop through all rows of spreadsheet
+            $sheet->each(function ($row) use ($tournament) {
+                // Check email
+                $invite = new Invite();
+                $code = $invite->generateTournamentInvite($row, $tournament);
+                $user = new User();
+                $user->email = $row;
+                $user->notify(new InviteCompetitor($user, $tournament, $code));
+            });
+        });
     }
 
 }

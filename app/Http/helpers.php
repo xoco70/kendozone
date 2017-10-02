@@ -48,17 +48,6 @@ function isKorean($lang)
 }
 
 /**
- * Returns a Random String
- * @param $length
- * @return bool|string
- */
-function generateRandomString($length)
-{
-    $fullString = md5(uniqid(rand(), true));
-    return substr($fullString, 0, $length);
-}
-
-/**
  * Generate random password
  * @return string
  */
@@ -100,5 +89,7 @@ function setFKCheckOn()
             break;
     }
 }
+
+
 
 

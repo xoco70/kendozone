@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d625e0b0a10cceea3a561c3d5099bce",
-    "content-hash": "fdb48c459dc984b8750e1e718eaad7ee",
+    "hash": "dc31904128a749fd63bdb5a72a357470",
+    "content-hash": "ada0a048337efe1ecafd508785a1a9ad",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -269,60 +269,6 @@
                 "wkhtmltopdf"
             ],
             "time": "2017-08-14 06:48:50"
-        },
-        {
-            "name": "barryvdh/laravel-translation-manager",
-            "version": "v0.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-translation-manager.git",
-                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/c9939e6199e92d36301143f37a735fcf36d022f5",
-                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
-                "illuminate/translation": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
-                "php": ">=5.4.0",
-                "symfony/finder": "~2.3|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.4-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Barryvdh\\TranslationManager\\TranslationServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\TranslationManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Manage Laravel Translations",
-            "keywords": [
-                "laravel",
-                "translations",
-                "translator"
-            ],
-            "time": "2017-09-02 16:02:44"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -5258,12 +5204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "ea89cbbd36c177e6ce4117aec4e66186ec765d29"
+                "reference": "32dd24084f02172b9d40c1e5f6a6f1f1fc199800"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/ea89cbbd36c177e6ce4117aec4e66186ec765d29",
-                "reference": "ea89cbbd36c177e6ce4117aec4e66186ec765d29",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/32dd24084f02172b9d40c1e5f6a6f1f1fc199800",
+                "reference": "32dd24084f02172b9d40c1e5f6a6f1f1fc199800",
                 "shasum": ""
             },
             "require": {
@@ -5306,7 +5252,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2017-09-21 08:39:49"
+            "time": "2017-09-30 09:02:20"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -5362,6 +5308,60 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "barryvdh/laravel-translation-manager",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-translation-manager.git",
+                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/c9939e6199e92d36301143f37a735fcf36d022f5",
+                "reference": "c9939e6199e92d36301143f37a735fcf36d022f5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
+                "illuminate/translation": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
+                "php": ">=5.4.0",
+                "symfony/finder": "~2.3|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\TranslationManager\\TranslationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\TranslationManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Manage Laravel Translations",
+            "keywords": [
+                "laravel",
+                "translations",
+                "translator"
+            ],
+            "time": "2017-09-02 16:02:44"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.1.0",

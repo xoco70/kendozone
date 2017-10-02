@@ -79,12 +79,9 @@ class InviteController extends Controller
             $user = new User();
             $user->email = $recipient;
             $user->notify(new InviteCompetitor($user, $tournament, $code, null));
-
         }
         flash()->success(trans('msg.invitation_sent'));
-
         return redirect(URL::action('TournamentController@edit', $tournament->slug));
-
     }
 
 
@@ -101,43 +98,16 @@ class InviteController extends Controller
         $tournament = Tournament::where('slug', $request->tournamentSlug)->first();
         // Parse Csv File
 
-        $reader = Excel::load("storage/app/" . $file, function ($reader) {
-        })->get();
+        $reader = Excel::load("storage/app/" . $file, function ($reader) { })->get();
 
         // Checking if malformed email
-        $reader->each(function ($sheet) use ($tournament) {
-
-            // Loop through all rows
-            $sheet->each(function ($row) use ($tournament) {
-                // Check email
-                if (!filter_var($row, FILTER_VALIDATE_EMAIL)) {
-                    $this->emailBadFormat = true;
-                    $this->wrongEmail = $row;
-                }
-            });
-        });
-
+        resolve(Invite::class)->checkBadEmailsInExcel($reader, $tournament);
         if ($this->emailBadFormat == true) {
             flash()->error(trans('msg.email_not_valid', ['email' => $this->wrongEmail]));
             return redirect(URL::action('InviteController@create', $tournament->slug));
-        } else {
-//            Mass Invite
-            $reader->each(function ($sheet) use ($tournament) {
-
-                // Loop through all rows of spreadsheet
-                $sheet->each(function ($row) use ($tournament) {
-                    // Check email
-                    $invite = new Invite();
-                    $code = $invite->generateTournamentInvite($row, $tournament);
-                    $user = new User();
-                    $user->email = $row;
-                    $user->notify(new InviteCompetitor($user, $tournament, $code));
-                });
-            });
-            flash()->success(trans('msg.invitation_sent'));
-            return redirect(URL::action('InviteController@create', $tournament->slug));
-
         }
-
+        Invite::sendInvites($reader, $tournament);
+        flash()->success(trans('msg.invitation_sent'));
+        return redirect(URL::action('InviteController@create', $tournament->slug));
     }
 }
