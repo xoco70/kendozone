@@ -1,6 +1,6 @@
 <?php
 return [
-    'AVATAR_PATH' => '/images/avatar/',
+    'AVATAR_PATH' => '/storage/images/avatar/',
     'RELATIVE_AVATAR_PATH' => 'images/avatar',
 
     'ROLE_SUPERADMIN' => '1',

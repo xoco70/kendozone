@@ -422,7 +422,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         if (!str_contains($avatar, 'http') && isset($avatar)) {
-            return config('constants.AVATAR_PATH') . $avatar;
+            return asset(config('constants.AVATAR_PATH') . $avatar);
         }
         return $avatar;
     }

@@ -351,11 +351,11 @@
 
     <script>
         let maxImageWidth = 100, maxImageHeight = 100;
-        let initialPic;
+
         Dropzone.autoDiscover = false;
         $(document).ready(function () {
 
-            initialPic = "{{ asset("storage".$user->avatar) ?? Avatar::create($user->email)->toBase64() }}";
+            let initialPic = "{{ $user->avatar ?? Avatar::create($user->email)->toBase64() }}";
 
             let onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
