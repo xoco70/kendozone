@@ -4,12 +4,12 @@ if (
     isset($user) &&
     $user != null &&
     $user->avatar != null) {
-    $img = $user->avatar;
+    $img = asset('storage'.$user->avatar);
 } else {
     $img = Avatar::create($user->email)->toBase64();
 }
 ?>
-<img src="{!! asset('storage'.$img) !!}" alt="kendozone_avatar">
+<img src="{!! $img !!}" alt="kendozone_avatar">
 
 
 
