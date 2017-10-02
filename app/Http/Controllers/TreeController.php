@@ -97,7 +97,6 @@ class TreeController extends Controller
                         : $fight->winner_id = null;
                 }
 
-
                 $numFighter++;
                 $fight->save();
             }

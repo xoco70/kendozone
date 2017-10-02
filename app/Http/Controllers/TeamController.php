@@ -25,7 +25,6 @@ class TeamController extends Controller
     {
         $this->currentModelName = trans_choice('core.team', 1);
         View::share('currentModelName', $this->currentModelName);
-
     }
 
     /**
@@ -36,7 +35,6 @@ class TeamController extends Controller
      */
     public function index(Tournament $tournament)
     {
-
         $tournament = Tournament::with(['championships' => function ($query) {
             $query->with('teams')
                 ->whereHas('category', function ($subquery) {
@@ -57,16 +55,13 @@ class TeamController extends Controller
             $tempAssignCompatitors = new Collection();
             $assignedCompetitors = $this->getAssignedCompetitors($championship, $tempAssignCompatitors);
 
-
-            if ($assignedCompetitors == null) {
-                $freeCompetitors = $championship->competitors;
-            } else {
-                $freeCompetitors = $championship->competitors->diff($assignedCompetitors);
+            $freeCompetitors = $championship->competitors;
+            if ($assignedCompetitors != null) {
+                $freeCompetitors = $freeCompetitors->diff($assignedCompetitors);
             }
 
             return ['championship' => $championship->id, 'competitors' => $competitors, 'freeCompetitors' => $freeCompetitors, 'teams' => $teams];
         })->toArray();
-
 
         return view("teams.index", compact('tournament', 'arrChampionshipsWithTeamsAndCompetitors'));
 

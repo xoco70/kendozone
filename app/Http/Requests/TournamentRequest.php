@@ -73,10 +73,9 @@ class TournamentRequest extends Request
         $tournament = Auth::user()->tournaments()->create($request);
         if ($this->rule_id == 0) {
             $tournament->categories()->sync($this->input('category'));
-
-        } else {
-            $tournament->setAndConfigureCategories($this->rule_id);
+            return $tournament;
         }
+        $tournament->setAndConfigureCategories($this->rule_id);
         return $tournament;
     }
 
@@ -104,7 +103,6 @@ class TournamentRequest extends Request
                 $res = $tournament->update($this->all());
                 break;
         }
-//        dd($tournament->toArray());
         return $res;
     }
 }

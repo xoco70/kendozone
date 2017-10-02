@@ -31,8 +31,6 @@ class UserController extends Controller
         // Fetch the Site Settings object
         $this->currentModelName = trans_choice('core.user', 1);
         View::share('currentModelName', $this->currentModelName);
-
-
     }
 
     /**
