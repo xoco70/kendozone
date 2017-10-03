@@ -21,3 +21,4 @@ exclude_paths:
 - tests/
 - public/storage
 - vendor
+- resources/lang
