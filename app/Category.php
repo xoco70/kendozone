@@ -36,7 +36,7 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
     public function getAgeString()
     {
         $ageCategories = [
-            0 => trans('categories.no_age'),
+            0 => trans('categories.no_age_restriction'),
             1 => trans('categories.children'),
             2 => trans('categories.students'),
             3 => trans('categories.adults'),
