@@ -1,12 +1,15 @@
 <?php
+
 namespace App;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
     protected $table = 'roles';
 
-    protected $fillable = ['name','label'];
+    protected $fillable = ['name', 'label'];
+
     /**
      * A role may be given various permissions.
      *
@@ -26,6 +29,6 @@ class Role extends Model
      */
     public function scopeGrantedRoles($query, $userType)
     {
-        return $query->where('id','>=', $userType);
+        return $query->where('id', '>=', $userType);
     }
 }

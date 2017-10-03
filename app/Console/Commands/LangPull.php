@@ -60,20 +60,6 @@ class LangPull extends Command
         $this->unzipTranslations($newfile, $savepath);
     }
 
-
-    /**
-     * Delete a folder and his content
-     * @param $dir
-     */
-    private function rmdir_recursive($dir) {
-        foreach(scandir($dir) as $file) {
-            if ('.' === $file || '..' === $file) continue;
-            if (is_dir("$dir/$file")) $this->rmdir_recursive("$dir/$file");
-            else unlink("$dir/$file");
-        }
-        rmdir($dir);
-    }
-
     /**
      * @param $newfile
      * @param $savepath
@@ -91,5 +77,19 @@ class LangPull extends Command
             echo 'failed';
         }
         unlink($newfile);
+    }
+
+    /**
+     * Delete a folder and his content
+     * @param $dir
+     */
+    private function rmdir_recursive($dir)
+    {
+        foreach (scandir($dir) as $file) {
+            if ('.' === $file || '..' === $file) continue;
+            if (is_dir("$dir/$file")) $this->rmdir_recursive("$dir/$file");
+            else unlink("$dir/$file");
+        }
+        rmdir($dir);
     }
 }

@@ -48,36 +48,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'email'
-            ]
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $guarded = ['id', 'password_confirmation'];
-
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -120,6 +96,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
     }
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'email'
+            ]
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * Add geoData based on IP
@@ -425,6 +422,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $avatar;
     }
-
-
 }

@@ -108,7 +108,7 @@ Breadcrumbs::register('invites.index', function ($breadcrumbs) {
 
 // Home > Tournaments > MyTournament > Invite Competitors
 Breadcrumbs::register('invites.show', function ($breadcrumbs, $tournament) {
-    if ($tournament != null){
+    if ($tournament != null) {
         if (policy($tournament)->edit(Auth::user(), $tournament)) {
             $breadcrumbs->parent('tournaments.edit', $tournament);
         } else {
@@ -197,7 +197,7 @@ Breadcrumbs::register('teams.index', function ($breadcrumbs, $tournament) {
 
 // Home > Tournaments > MyTournament > List Trees
 Breadcrumbs::register('trees.index', function ($breadcrumbs, $tournament) {
-    if (policy($tournament)!= null && policy($tournament)->edit(Auth::user(), $tournament)) {
+    if (policy($tournament) != null && policy($tournament)->edit(Auth::user(), $tournament)) {
         $breadcrumbs->parent('tournaments.edit', $tournament);
         $breadcrumbs->push(trans_choice('core.tree', 2), route('tournaments.edit', $tournament->slug));
     } else {

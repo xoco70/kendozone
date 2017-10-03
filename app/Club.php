@@ -11,13 +11,52 @@ use OwenIt\Auditing\AuditingTrait;
 
 class Club extends Model
 {
-    protected $table = 'club';
     public $timestamps = true;
+    protected $table = 'club';
     protected $guarded = ['id'];
     use SoftDeletes;
     use AuditingTrait;
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * Fill Selects depending on the Logged user type
+     * @return Collection
+     */
+    public static function fillSelect($federationId, $associationId)
+    {
+        if ($associationId == 0 || $associationId == null) {
+            // Get list of associations in the federation
+            $clubs = Club::where('federation_id', $federationId)->pluck('name', 'id');
+        } else if ($federationId != 0) {
+            $clubs = Club::where('association_id', $associationId)->pluck('name', 'id');
+        } else {
+            $clubs = new Collection;
+        }
+        return $clubs;
+    }
+
+    /**
+     * Same than fillSelect, but with VueJS Format
+     * @param User $user
+     * @param $federationId
+     * @param $associationId
+     * @return Collection
+     */
+    public static function fillSelectForVueJs(User $user, $federationId, $associationId)
+    {
+        if ($associationId == 0) {
+            // Get list of associations in the federation
+            $clubs = Club::where('federation_id', $federationId)
+                ->get(['id as value', 'name as text']);
+        } else if ($federationId != 0) {
+            $clubs = Club::where('association_id', $associationId)
+                ->get(['id as value', 'name as text']);
+        } else {
+            $clubs = new Collection;
+        }
+        return $clubs;
+    }
 
     /**
      * A Club has only a President
@@ -38,15 +77,6 @@ class Club extends Model
     }
 
     /**
-     * A Club belongs to an Association
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function association()
-    {
-        return $this->belongsTo(Association::class);
-    }
-
-    /**
      * Get the Federation that federate the Club
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -58,6 +88,14 @@ class Club extends Model
             return $this->association(); //TODO THIS IS BAD :(
     }
 
+    /**
+     * A Club belongs to an Association
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function association()
+    {
+        return $this->belongsTo(Association::class);
+    }
 
     /**
      * Filter the Club List depending on the user type
@@ -120,45 +158,6 @@ class Club extends Model
         return
             $user->clubOwned != null &&
             $user->clubOwned->id == $this->id;
-    }
-
-    /**
-     * Fill Selects depending on the Logged user type
-     * @return Collection
-     */
-    public static function fillSelect($federationId, $associationId)
-    {
-        if ($associationId == 0 || $associationId == null ) {
-            // Get list of associations in the federation
-            $clubs = Club::where('federation_id', $federationId)->pluck('name', 'id');
-        } else if ($federationId != 0) {
-            $clubs = Club::where('association_id', $associationId)->pluck('name', 'id');
-        } else {
-            $clubs = new Collection;
-        }
-        return $clubs;
-    }
-
-    /**
-     * Same than fillSelect, but with VueJS Format
-     * @param User $user
-     * @param $federationId
-     * @param $associationId
-     * @return Collection
-     */
-    public static function fillSelectForVueJs(User $user, $federationId, $associationId)
-    {
-        if ($associationId == 0) {
-            // Get list of associations in the federation
-            $clubs = Club::where('federation_id', $federationId)
-                ->get(['id as value', 'name as text']);
-        } else if ($federationId != 0) {
-            $clubs = Club::where('association_id', $associationId)
-                ->get(['id as value', 'name as text']);
-        } else {
-            $clubs = new Collection;
-        }
-        return $clubs;
     }
 
 

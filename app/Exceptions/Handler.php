@@ -19,8 +19,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
-    private $sentryID;
-
     /**
      * A list of the exception types that should not be reported.
      *
@@ -38,6 +36,7 @@ class Handler extends ExceptionHandler
         TokenMismatchException::class,
         ValidationException::class,
     ];
+    private $sentryID;
 
     /**
      * Report or log an exception.
@@ -64,6 +63,7 @@ class Handler extends ExceptionHandler
         }
         parent::report($exception);
     }
+
     /**
      * Render an exception into an HTTP response.
      *

@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
-class Country extends Model {
+class Country extends Model
+{
 
-	protected $table = 'countries';
-	public $timestamps = true;
-
+    public $timestamps = true;
+    protected $table = 'countries';
 
     public static function getAll()
     {

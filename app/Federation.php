@@ -8,17 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Federation extends Model
 {
 
-    protected $table = 'federation';
     public $timestamps = true;
-
+    protected $table = 'federation';
     protected $guarded = ['id'];
 
+    public static function fillSelect()
+    {
+        // User is SuperAdmin
+        $federations = Federation::pluck('name', 'id')->prepend('-', 0);
+        return $federations;
+    }
+
+    public static function fillSelectForVueJs($user)
+    {
+        // User is SuperAdmin
+        $federations = Federation::get(['id as value', 'name as text']);
+        return $federations;
+    }
 
     public function president()
     {
         return $this->hasOne(User::class, 'id', 'president_id');
     }
-
 
     public function associations()
     {
@@ -58,20 +69,6 @@ class Federation extends Model
                 throw new AuthorizationException();
 
         }
-    }
-
-    public static function fillSelect()
-    {
-        // User is SuperAdmin
-        $federations = Federation::pluck('name', 'id')->prepend('-', 0);
-        return $federations;
-    }
-
-    public static function fillSelectForVueJs($user)
-    {
-        // User is SuperAdmin
-        $federations = Federation::get(['id as value', 'name as text']);
-        return $federations;
     }
 
 

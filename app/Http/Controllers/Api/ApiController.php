@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -16,31 +17,6 @@ class ApiController extends Controller
      * @var int Status Code.
      */
     protected $statusCode = 200;
-
-    /**
-     * Getter method to return stored status code.
-     *
-     * @return mixed
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
-
-    /**
-     * Setter method to set status code.
-     * It is returning current object
-     * for chaining purposes.
-     *
-     * @param mixed $statusCode
-     * @return current object.
-     */
-    public function setStatusCode($statusCode)
-    {
-        $this->statusCode = $statusCode;
-
-        return $this;
-    }
 
     /**
      * Function to return an unauthorized response.
@@ -85,7 +61,6 @@ class ApiController extends Controller
         return $this->setStatusCode(IlluminateResponse::HTTP_INTERNAL_SERVER_ERROR)->respondWithError($message);
     }
 
-
     /**
      * Function to return a service unavailable response.
      *
@@ -96,7 +71,6 @@ class ApiController extends Controller
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_SERVICE_UNAVAILABLE)->respondWithError($message);
     }
-
 
     /**
      * Function to return a generic response.
@@ -110,6 +84,30 @@ class ApiController extends Controller
         return response()->json($data, $this->getStatusCode(), $headers);
     }
 
+    /**
+     * Getter method to return stored status code.
+     *
+     * @return mixed
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
+
+    /**
+     * Setter method to set status code.
+     * It is returning current object
+     * for chaining purposes.
+     *
+     * @param mixed $statusCode
+     * @return current object.
+     */
+    public function setStatusCode($statusCode)
+    {
+        $this->statusCode = $statusCode;
+
+        return $this;
+    }
 
     /**
      * Function to return an error response.
@@ -158,7 +156,7 @@ class ApiController extends Controller
      * @param $data
      * @return mixed
      */
-    protected function respondWithPagination(LengthAwarePaginator  $tournaments, $data)
+    protected function respondWithPagination(LengthAwarePaginator $tournaments, $data)
     {
 
         $data = array_merge($data, [

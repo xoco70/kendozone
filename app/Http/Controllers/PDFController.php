@@ -53,7 +53,6 @@ class PdfController extends Controller
         )->find($request->championship);
 
 
-
         $tournament = $championship->tournament;
 
         // Generate PDF

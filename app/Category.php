@@ -29,6 +29,30 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
         return $result;
     }
 
+    public function scopeIsTeam($query)
+    {
+        return $query->where('isTeam', 1);
+    }
+
+    public function buildName()
+    {
+
+        if (Auth::check()) {
+            App::setLocale(Auth::user()->locale);
+        }
+        $genders = [
+            'M' => trans('categories.male'),
+            'F' => trans('categories.female'),
+            'X' => trans('categories.mixt')
+        ];
+
+        $teamText = $this->isTeam() ? trans_choice('core.team', 1) : trans('categories.single');
+        $ageCategoryText = $this->getAgeString();
+        $gradeText = $this->getGradeString();
+
+        return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
+    }
+
     /**
      * Build Age String
      * @return string
@@ -61,6 +85,20 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
     }
 
     /**
+     * @param $ageCategoryText
+     * @return string
+     */
+    protected function hasAgeMinAndMax($ageCategoryText): string
+    {
+        if ($this->ageMin == $this->ageMax) {
+            $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
+        } else {
+            $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
+        }
+        return $ageCategoryText;
+    }
+
+    /**
      * Build Grade String
      * @return string
      */
@@ -81,45 +119,6 @@ class Category extends \Xoco70\LaravelTournaments\Models\Category
             }
         }
         return '';
-    }
-
-    public function scopeIsTeam($query)
-    {
-        return $query->where('isTeam', 1);
-    }
-
-
-    public function buildName()
-    {
-
-        if (Auth::check()) {
-            App::setLocale(Auth::user()->locale);
-        }
-        $genders = [
-            'M' => trans('categories.male'),
-            'F' => trans('categories.female'),
-            'X' => trans('categories.mixt')
-        ];
-
-        $teamText = $this->isTeam() ? trans_choice('core.team', 1) : trans('categories.single');
-        $ageCategoryText = $this->getAgeString();
-        $gradeText = $this->getGradeString();
-
-        return $teamText . ' ' . $genders[$this->gender] . ' ' . $ageCategoryText . ' ' . $gradeText;
-    }
-
-    /**
-     * @param $ageCategoryText
-     * @return string
-     */
-    protected function hasAgeMinAndMax($ageCategoryText): string
-    {
-        if ($this->ageMin == $this->ageMax) {
-            $ageCategoryText .= $this->ageMax . ' ' . trans('categories.years');
-        } else {
-            $ageCategoryText .= $this->ageMin . ' - ' . $this->ageMax . ' ' . trans('categories.years');
-        }
-        return $ageCategoryText;
     }
 
     /**

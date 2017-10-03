@@ -10,9 +10,8 @@ use OwenIt\Auditing\AuditingTrait;
 class Invite extends Model
 {
     use AuditingTrait;
-    protected $table = 'invitation';
     public $timestamps = true;
-
+    protected $table = 'invitation';
     protected $fillable = [
         'code',
         'email',
@@ -22,18 +21,33 @@ class Invite extends Model
         'used',
     ];
 
-    public function object()
+    /**
+     * Get invite from Token
+     * @param $token
+     * @return Invite
+     */
+    public static function getInviteFromToken($token)
     {
-        return $this->morphTo();
+        $invite = self::where('code', $token)
+            ->where('active', 1)
+            ->where('object_type', "App\Tournament")
+            ->first();
+        return $invite;
     }
 
-    /**
-     * Verify if it is in use
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function tournament()
+    public static function sendInvites($reader, $tournament)
     {
-        return $this->belongsTo('App\Tournament');
+        $reader->each(function ($sheet) use ($tournament) {
+            // Loop through all rows of spreadsheet
+            $sheet->each(function ($row) use ($tournament) {
+                // Check email
+                $invite = new Invite();
+                $code = $invite->generateTournamentInvite($row, $tournament);
+                $user = new User();
+                $user->email = $row;
+                $user->notify(new InviteCompetitor($user, $tournament, $code));
+            });
+        });
     }
 
     /**
@@ -60,31 +74,6 @@ class Invite extends Model
     }
 
     /**
-     * Consume the invitation
-     */
-    public function consume()
-    {
-        // Use the invitation
-        $this->update(['used' => 1]);
-    }
-
-
-    /**
-     * Get invite from Token
-     * @param $token
-     * @return Invite
-     */
-    public static function getInviteFromToken($token)
-    {
-        $invite = self::where('code', $token)
-            ->where('active', 1)
-            ->where('object_type', "App\Tournament")
-            ->first();
-        return $invite;
-    }
-
-
-    /**
      * Helper used to hash email into token
      * @param $hash
      * @return mixed
@@ -93,6 +82,29 @@ class Invite extends Model
     {
         $output = str_split($hash, 8);
         return $output[rand(0, 1)];
+    }
+
+    public function object()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * Verify if it is in use
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tournament()
+    {
+        return $this->belongsTo('App\Tournament');
+    }
+
+    /**
+     * Consume the invitation
+     */
+    public function consume()
+    {
+        // Use the invitation
+        $this->update(['used' => 1]);
     }
 
     public function hasExpired()
@@ -114,21 +126,6 @@ class Invite extends Model
                     $this->emailBadFormat = true;
                     $this->wrongEmail = $row;
                 }
-            });
-        });
-    }
-
-    public static function sendInvites($reader, $tournament)
-    {
-        $reader->each(function ($sheet) use ($tournament) {
-            // Loop through all rows of spreadsheet
-            $sheet->each(function ($row) use ($tournament) {
-                // Check email
-                $invite = new Invite();
-                $code = $invite->generateTournamentInvite($row, $tournament);
-                $user = new User();
-                $user->email = $row;
-                $user->notify(new InviteCompetitor($user, $tournament, $code));
             });
         });
     }

@@ -8,13 +8,20 @@ use Illuminate\Support\Facades\Cache;
 class TournamentLevel extends Model
 {
 
-    protected $table = 'tournamentLevel';
     public $timestamps = false;
-
+    protected $table = 'tournamentLevel';
     protected $fillable = [
         'id',
         'name',
     ];
+
+    public static function getAllPlucked()
+    {
+        return Cache::remember('level_pluck', config('constants.GRADE_MINUTES'), function () {
+            return static::pluck('name', 'id');
+        });
+    }
+
     public function getNameAttribute($name)
     {
         return trans($name);
@@ -26,12 +33,5 @@ class TournamentLevel extends Model
     public function tournaments()
     {
         return $this->hasMany('App\Tournament', 'level_id', 'id');
-    }
-
-    public static function getAllPlucked()
-    {
-        return Cache::remember('level_pluck', config('constants.GRADE_MINUTES'), function () {
-            return static::pluck('name', 'id');
-        });
     }
 }

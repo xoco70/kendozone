@@ -68,6 +68,18 @@ class TeamController extends Controller
     }
 
     /**
+     * @param $championship
+     * @param $tempAssignCompatitors
+     * @return mixed
+     */
+    private function getAssignedCompetitors($championship, $tempAssignCompatitors)
+    {
+        return $championship->teams->reduce(function ($acc, $team) use ($tempAssignCompatitors) {
+            return $tempAssignCompatitors->push($team->competitors()->with('user')->get())->collapse();
+        });
+    }
+
+    /**
      * Show the form for creating a new competitor.
      *
      * @param Tournament $tournament
@@ -125,7 +137,6 @@ class TeamController extends Controller
         return view("teams.form", compact('tournament', 'team', 'cts'));
     }
 
-
     /**
      * Update a newly created resource in storage.
      *
@@ -146,7 +157,6 @@ class TeamController extends Controller
 
     }
 
-
     /**
      * Remove the Team from storage.
      *
@@ -163,17 +173,5 @@ class TeamController extends Controller
             return Response::json(['msg' => Lang::get('msg.team_delete_successful', ['name' => $team->name]), 'status' => 'success']);
         }
         return Response::json(['msg' => Lang::get('msg.team_delete_error', ['name' => $team->name]), 'status' => 'error']);
-    }
-
-    /**
-     * @param $championship
-     * @param $tempAssignCompatitors
-     * @return mixed
-     */
-    private function getAssignedCompetitors($championship, $tempAssignCompatitors)
-    {
-        return $championship->teams->reduce(function ($acc, $team) use ($tempAssignCompatitors) {
-            return $tempAssignCompatitors->push($team->competitors()->with('user')->get())->collapse();
-        });
     }
 }

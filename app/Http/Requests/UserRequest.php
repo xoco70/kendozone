@@ -47,7 +47,8 @@ class UserRequest extends Request
     }
 
 
-    public function store(){
+    public function store()
+    {
 
         $data = $this->except('_token');
 
@@ -72,7 +73,8 @@ class UserRequest extends Request
         return $user->save();
     }
 
-    public function update(User $user){
+    public function update(User $user)
+    {
 //        $this->authorize('update', [$user, Auth::user()]);
 
         if (Auth::user()->cannot('update', $user)) {
@@ -90,7 +92,7 @@ class UserRequest extends Request
         array_push($except, '_token');
 
         $req = $this->except($except);
-        if ($this->avatar == ""){
+        if ($this->avatar == "") {
             $req['avatar'] = null;
         }
 

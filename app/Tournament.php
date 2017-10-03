@@ -22,30 +22,15 @@ use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
  * @property mixed updated_at
  * @property mixed deleted_at
  */
-class Tournament extends Model
+class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament
 {
     use SoftDeletes;
     use Sluggable;
     use AuditingTrait;
     use SluggableScopeHelpers;
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
-
-    protected $table = 'tournament';
     public $timestamps = true;
-
+    protected $table = 'tournament';
     protected $fillable = [
         'name',
         'dateIni',
@@ -61,8 +46,6 @@ class Tournament extends Model
         'venue_id',
         'level_id'
     ];
-
-
     protected $dates = ['dateIni', 'dateFin', 'registerDateLimit', 'created_at', 'updated_at', 'deleted_at'];
 
     protected static function boot()
@@ -77,6 +60,20 @@ class Tournament extends Model
             $tournament->championships()->withTrashed()->get()->each->restore();
         });
 
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 
     public function customizeSlugEngine(Slugify $engine, $attribute)
@@ -116,18 +113,6 @@ class Tournament extends Model
     public function venue()
     {
         return $this->belongsTo(Venue::class);
-    }
-
-    /**
-     * We can use $tournament->categories()->attach(id);
-     * Or         $tournament->categories()->sync([1, 2, 3]);
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'championship')
-            ->withPivot('id')
-            ->withTimestamps();
     }
 
     /**
@@ -332,6 +317,11 @@ class Tournament extends Model
         }
     }
 
+    /**
+     * return correct presets rues
+     * @param $ruleId
+     * @return mixed|null
+     */
     private function loadRulesOptions($ruleId)
     {
         switch ($ruleId) {
@@ -349,6 +339,18 @@ class Tournament extends Model
             default:
                 return null;
         }
+    }
+
+    /**
+     * We can use $tournament->categories()->attach(id);
+     * Or         $tournament->categories()->sync([1, 2, 3]);
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'championship')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     /**
@@ -373,43 +375,19 @@ class Tournament extends Model
         }
         return $array;
     }
-    
-    /**
-     * Check if the tournament has a Team Championship
-     * @return integer
-     */
-    public function hasTeamCategory()
-    {
-        return $this
-            ->categories()
-            ->where('isTeam', '1')
-            ->count();
-    }
 
     /**
      * @return array
      */
-    public function getCategoriesName()
+    public function getCategoriesName() // Should take generic ones
     {
         $baseCategories = Category::take(10)->pluck('name', 'id');
         foreach ($this->championships as $championship) {
-            // get the champsionshipSetting
             $category = $championship->category;
             $alias = $championship->buildName();
             $baseCategories->put($category->id, $alias);
         }
         $categories = $baseCategories->sortBy('id')->toArray();
         return $categories;
-    }
-
-    /**
-     * Get All trees that belongs to a tournament
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function uniqueTrees()
-    {
-        return $this->hasManyThrough(FightersGroup::class, Championship::class)
-            ->select('championship_id')
-            ->distinct();
     }
 }

@@ -98,7 +98,8 @@ class InviteController extends Controller
         $tournament = Tournament::where('slug', $request->tournamentSlug)->first();
         // Parse Csv File
 
-        $reader = Excel::load("storage/app/" . $file, function ($reader) { })->get();
+        $reader = Excel::load("storage/app/" . $file, function ($reader) {
+        })->get();
 
         // Checking if malformed email
         resolve(Invite::class)->checkBadEmailsInExcel($reader, $tournament);

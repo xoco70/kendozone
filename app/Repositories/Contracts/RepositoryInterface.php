@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Contracts;
 
 use App\Repositories\Exceptions\ValidatorException;

@@ -66,7 +66,7 @@ class UserController extends Controller
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
-        $clubs = Club::fillSelect(Auth::user()->federation_id,Auth::user()->association_id);
+        $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //
     }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
         $federations = Federation::fillSelect();
         $associations = Association::fillSelect();
 
-        $clubs = Club::fillSelect(Auth::user()->federation_id,Auth::user()->association_id);
+        $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
 
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations', 'associations', 'clubs')); //
     }
@@ -140,7 +140,7 @@ class UserController extends Controller
         } else
             flash()->error(Lang::get('msg.user_update_error'));
 
-        if ($user->id == Auth::user()->id){
+        if ($user->id == Auth::user()->id) {
             return redirect(URL::action('UserController@edit', Auth::user()->slug));
         }
 

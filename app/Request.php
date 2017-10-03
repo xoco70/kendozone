@@ -8,9 +8,8 @@ use OwenIt\Auditing\AuditingTrait;
 class Request extends Model
 {
     use AuditingTrait;
-    protected $table = 'request';
     public $timestamps = true;
-
+    protected $table = 'request';
     protected $fillable = [
         'user_id',
         'object_type',

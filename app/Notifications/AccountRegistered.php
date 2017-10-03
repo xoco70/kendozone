@@ -21,6 +21,7 @@ class AccountRegistered extends Notification
     {
         $this->user = $user;
     }
+
     /**
      * Get the notification's delivery channels.
      *

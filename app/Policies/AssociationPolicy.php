@@ -21,6 +21,7 @@ class AssociationPolicy
     }
 
     // Only SuperAdmin And FederationPresident should be able to create Associations
+
     /**
      * @param User $user
      * @return bool
@@ -34,6 +35,7 @@ class AssociationPolicy
     }
 
     // Only SuperAdmin And FederationPresident should be able to create Associations
+
     /**
      * @param User $user
      * @param Association $association
@@ -42,12 +44,13 @@ class AssociationPolicy
     public function store(User $user, Association $association)
     {
 //        if ($user->isFederationPresident()) {
-            return true;
+        return true;
 //        }
 //        return false;
     }
 
     // Only SuperAdmin And FederationPresident should be able to delete Associations
+
     /**
      * @param User $user
      * @param Association $association

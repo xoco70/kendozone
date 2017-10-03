@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venue extends Model
 {
-    protected $table = 'venue';
     public $timestamps = true;
+    protected $table = 'venue';
     protected $fillable = [
         'venue_name',
         'address',

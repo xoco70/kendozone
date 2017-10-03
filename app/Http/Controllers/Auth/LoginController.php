@@ -26,23 +26,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
 
-    public function showLoginForm()
-    {
-        $langStats = [
-            "en" => $this->getLangWordsCount('lang/en'),
-            "fr" => $this->getLangWordsCount('lang/fr'),
-            "es" => $this->getLangWordsCount('lang/es'),
-            "ja" => $this->getLangWordsCount('lang/ja'),
-            "it" => $this->getLangWordsCount('lang/it'),
-            "de" => $this->getLangWordsCount('lang/de'),
-            "ko" => $this->getLangWordsCount('lang/ko'),
-        ];
-        $api = new LocaliseAPI();
-        $langs = $api->listLangsInProject();
-
-
-        return view('auth.login', compact('langs','langStats'));
-    }
     /**
      * Where to redirect users after login / registration.
      *
@@ -65,10 +48,22 @@ class LoginController extends Controller
         $this->socialite = $socialite;
     }
 
-    public function getSocialAuth(AuthenticateUser $authenticateUser, Request $request, $provider = null)
+    public function showLoginForm()
     {
+        $langStats = [
+            "en" => $this->getLangWordsCount('lang/en'),
+            "fr" => $this->getLangWordsCount('lang/fr'),
+            "es" => $this->getLangWordsCount('lang/es'),
+            "ja" => $this->getLangWordsCount('lang/ja'),
+            "it" => $this->getLangWordsCount('lang/it'),
+            "de" => $this->getLangWordsCount('lang/de'),
+            "ko" => $this->getLangWordsCount('lang/ko'),
+        ];
+        $api = new LocaliseAPI();
+        $langs = $api->listLangsInProject();
 
-        return $authenticateUser->execute($request->all(), $this, $provider);
+
+        return view('auth.login', compact('langs', 'langStats'));
     }
 
     /**
@@ -85,6 +80,12 @@ class LoginController extends Controller
 
         }
         return $completeCount;
+    }
+
+    public function getSocialAuth(AuthenticateUser $authenticateUser, Request $request, $provider = null)
+    {
+
+        return $authenticateUser->execute($request->all(), $this, $provider);
     }
 
 }

@@ -10,7 +10,7 @@ class Team extends \Xoco70\LaravelTournaments\Models\Team
         static::deleting(function ($team) {
             $teams = Team::where('championship_id', $team->championship_id)
                 ->where('id', '>', $team->id)->get();
-            foreach ($teams as $team){
+            foreach ($teams as $team) {
                 $team->short_id--;
                 $team->save();
             }

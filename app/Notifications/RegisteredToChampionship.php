@@ -45,9 +45,9 @@ class RegisteredToChampionship extends Notification
     public function toMail($notifiable)
     {
         $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
-        $subject = $appName." - ".trans('msg.user_has_registered_to_tournament',
-            ['user_name' => $this->user->name,
-                'tournament' => $this->tournament->name]);
+        $subject = $appName . " - " . trans('msg.user_has_registered_to_tournament',
+                ['user_name' => $this->user->name,
+                    'tournament' => $this->tournament->name]);
 
         $message = (new MailMessage)
             ->subject($subject)
@@ -56,7 +56,7 @@ class RegisteredToChampionship extends Notification
                 ['user_name' => $this->user->name]));
 
         foreach ($this->user->championships as $championship) {
-            $message->line(" <strong>- ".$championship->category->name."</strong>");
+            $message->line(" <strong>- " . $championship->category->name . "</strong>");
         }
         $message->line(trans('msg.success_to_all'));
         return $message;

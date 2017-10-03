@@ -59,22 +59,22 @@ class InviteCompetitor extends Notification
 
         if ($this->tournament->venue_id != null) {
             $message
-                ->line("<strong>".trans('core.venue') . ': </strong>' . $this->tournament->venue_name)
-                ->line("<strong>".trans('core.address') . ': </strong>' . $this->tournament->venue->address);
+                ->line("<strong>" . trans('core.venue') . ': </strong>' . $this->tournament->venue_name)
+                ->line("<strong>" . trans('core.address') . ': </strong>' . $this->tournament->venue->address);
         }
         $message
-            ->line(trans("<strong>".trans('core.eventDateIni') . ': </strong>' . $this->tournament->dateIni))
-            ->line(trans("<strong>".trans('core.eventDateFin') . ': </strong>' . $this->tournament->dateFin));
+            ->line(trans("<strong>" . trans('core.eventDateIni') . ': </strong>' . $this->tournament->dateIni))
+            ->line(trans("<strong>" . trans('core.eventDateFin') . ': </strong>' . $this->tournament->dateFin));
 
         if ($this->tournament->cost != null) {
-            $message->line("<strong>".trans('core.cost') . ': </strong>' . $this->tournament->cost);
+            $message->line("<strong>" . trans('core.cost') . ': </strong>' . $this->tournament->cost);
         }
 
         if ($this->tournament->registerDateLimit != null && $this->tournament->registerDateLimit != '0000-00-00') {
-            $message->line("<strong>".trans('core.limitDateRegistration') . ': </strong>' . $this->tournament->registerDateLimit);
+            $message->line("<strong>" . trans('core.limitDateRegistration') . ': </strong>' . $this->tournament->registerDateLimit);
         }
         if (isset($this->category)) {
-            $message->line("<strong>".trans('mail.you_have_been_preregistered')."</strong>")
+            $message->line("<strong>" . trans('mail.you_have_been_preregistered') . "</strong>")
                 ->line('- ' . $this->category);
         } else {
             $message->action(trans('mail.confirm_registration'),

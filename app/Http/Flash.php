@@ -11,17 +11,17 @@ namespace App\Http;
 
 class Flash
 {
+    public function success($message)
+    {
+        return $this->create($message, 'success');
+    }
+
     public function create($message, $level, $key = 'flash_message')
     {
         return session()->flash($key, [
             'message' => $message,
             'level' => $level
         ]);
-    }
-
-    public function success($message)
-    {
-        return $this->create($message, 'success');
     }
 
     public function error($message)

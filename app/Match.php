@@ -6,22 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
-    const WAITING       = 0;
-    const RUNNING       = 1;
-    const PAUSED        = 2;
-    const FINISHED      = 3;
+    const WAITING = 0;
+    const RUNNING = 1;
+    const PAUSED = 2;
+    const FINISHED = 3;
     const NEED_DECISION = 4;
-    const INVALID       = 5;
+    const INVALID = 5;
     const EMPTY_PLACE = -1;
 
     public function fight()
     {
         return $this->belongsTo(Fight::class);
-    }
-
-    public function referees()
-    {
-        return $this->hasMany(Referee::class);
     }
 
     public function winner()
@@ -38,5 +33,10 @@ class Match extends Model
             ]);
 
         }
+    }
+
+    public function referees()
+    {
+        return $this->hasMany(Referee::class);
     }
 }

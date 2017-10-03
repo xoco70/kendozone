@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Eloquent;
 
 
@@ -19,13 +20,6 @@ abstract class BaseRepository implements RepositoryInterface
     protected $model;
 
     /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    abstract public function model();
-
-    /**
      * @param Application $app
      */
     public function __construct(Application $app)
@@ -34,6 +28,7 @@ abstract class BaseRepository implements RepositoryInterface
         $this->makeModel();
 
     }
+
     /**
      * @return Model
      * @throws RepositoryException
@@ -47,6 +42,13 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->model = $model;
     }
 
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    abstract public function model();
+
     public function all($columns = array('*'))
     {
         return $this->model->get($columns);
@@ -56,6 +58,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->create($columns);
     }
+
     public function findByField($field = null, $value = null, $columns = ['*'])
     {
         return $this->model->where($field, '=', $value)->get($columns);
@@ -68,14 +71,14 @@ abstract class BaseRepository implements RepositoryInterface
 
     }
 
-/**
-* Retrieve data array for populate field select
-*
-* @param string      $column
-* @param string|null $key
-*
-* @return \Illuminate\Support\Collection|array
-*/
+    /**
+     * Retrieve data array for populate field select
+     *
+     * @param string $column
+     * @param string|null $key
+     *
+     * @return \Illuminate\Support\Collection|array
+     */
     public function pluck($column, $key = null)
     {
         return $this->model->pluck($column, $key);

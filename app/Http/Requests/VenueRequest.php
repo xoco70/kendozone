@@ -21,7 +21,7 @@ class VenueRequest extends Request
      */
     public function rules()
     {
-        if ($this->exists('venue_name')){
+        if ($this->exists('venue_name')) {
             return [
                 'venue_name' => 'required',
                 'country_id' => 'required|exists:countries,id'

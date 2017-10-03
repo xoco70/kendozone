@@ -12,92 +12,13 @@ use stdClass;
 class Association extends Model
 {
 
-    protected $table = 'association';
     public $timestamps = true;
+    protected $table = 'association';
     protected $guarded = ['id'];
     use SoftDeletes;
     use AuditingTrait;
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-
-    protected static function boot()
-    {
-        parent::boot();
-    }
-
-    /**
-     * An association has only 1 President
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function president()
-    {
-        return $this->hasOne(User::class, 'id', 'president_id');
-    }
-
-    /**
-     * An association has Many Clubs
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function clubs()
-    {
-        return $this->hasMany(Club::class);
-    }
-
-    /**
-     * An association belongs To a Federations
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function federation()
-    {
-        return $this->belongsTo(Federation::class);
-    }
-
-    /**
-     * Filter the assocation List depending on the user type
-     * Ex : SuperAdmin See all, Federation President only see his Associations, etc
-     * @param $query
-     * @param User $user
-     */
-    public function scopeForUser($query, User $user)
-    {
-        if (!$user->isSuperAdmin()) {
-            $query->whereHas('federation', function ($query) use ($user) {
-                $query->where('country_id', $user->country_id);
-            });
-        }
-    }
-
-    /**
-     * Check if an Association is in the same Federation than a Federation President
-     * @param User $user
-     * @return bool
-     */
-    public function belongsToFederationPresident(User $user)
-    {
-        if ($user->isFederationPresident() &&
-            $user->federationOwned != null &&
-            $this->federation->id == $user->federationOwned->id
-        )
-            return true;
-        return false;
-    }
-
-    /**
-     * Check if an Association is in the same Association than a Association President
-     * @param User $user
-     * @return bool
-     */
-    public function belongsToAssociationPresident(User $user)
-    {
-        if ($user->isAssociationPresident() &&
-            $user->associationOwned != null &&
-            $this->id == $user->associationOwned->id
-        ) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Fill Selects depending on the Logged user type
@@ -139,6 +60,85 @@ class Association extends Model
             $associations->push($object);
         };
         return $associations;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+    }
+
+    /**
+     * An association has only 1 President
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function president()
+    {
+        return $this->hasOne(User::class, 'id', 'president_id');
+    }
+
+    /**
+     * An association has Many Clubs
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clubs()
+    {
+        return $this->hasMany(Club::class);
+    }
+
+    /**
+     * An association belongs To a Federations
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function federation()
+    {
+        return $this->belongsTo(Federation::class);
+    }
+
+    /**
+     * Filter the assocation List depending on the user type
+     * Ex : SuperAdmin See all, Federation President only see his Associations, etc
+     * @param $query
+     * @param User $user
+     */
+    public function scopeForUser($query, User $user)
+    {
+
+        if (!$user->isSuperAdmin()) {
+            $query->whereHas('federation', function ($query) use ($user) {
+                $query->where('country_id', $user->country_id);
+            });
+        }
+    }
+
+    /**
+     * Check if an Association is in the same Federation than a Federation President
+     * @param User $user
+     * @return bool
+     */
+    public function belongsToFederationPresident(User $user)
+    {
+        if ($user->isFederationPresident() &&
+            $user->federationOwned != null &&
+            $this->federation->id == $user->federationOwned->id
+        )
+            return true;
+        return false;
+    }
+
+    /**
+     * Check if an Association is in the same Association than a Association President
+     * @param User $user
+     * @return bool
+     */
+    public function belongsToAssociationPresident(User $user)
+    {
+        if ($user->isAssociationPresident() &&
+            $user->associationOwned != null &&
+            $this->id == $user->associationOwned->id
+        ) {
+            return true;
+        }
+        return false;
     }
 
 }

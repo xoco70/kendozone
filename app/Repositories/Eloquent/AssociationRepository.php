@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Eloquent;
 
 use App\Association;
@@ -16,6 +17,7 @@ class AssociationRepository extends BaseRepository
     {
         return Association::class;
     }
+
     public function getAssociationWithPresidentAndCountry()
     {
         return Association::with('president', 'federation.country');

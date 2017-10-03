@@ -32,7 +32,7 @@ class DashboardController extends Controller
             ->where('type', config('constants.OPEN_TOURNAMENT'))
             ->where('dateFin', '>', Carbon::today()->toDateString())
             ->get();
-        return view('/dashboard',compact('openTournaments'));
+        return view('/dashboard', compact('openTournaments'));
 
     }
 

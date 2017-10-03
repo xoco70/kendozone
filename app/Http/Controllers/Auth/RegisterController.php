@@ -77,7 +77,7 @@ class RegisterController extends Controller
             $invite->consume();
             $grades = Grade::getAllPlucked();
             flash()->success(Lang::get('auth.registration_completed'));
-            return view("categories.register", compact('userId', 'tournament', 'invite','grades'));
+            return view("categories.register", compact('userId', 'tournament', 'invite', 'grades'));
 
         } else {
             flash()->error(Lang::get('auth.no_invite'));
@@ -117,6 +117,21 @@ class RegisterController extends Controller
 
     }
 
+    /**
+     * Confirm a user's email address.
+     *
+     * @param  string $token
+     * @return mixed
+     */
+    public function confirmEmail($token)
+    {
+        $user = User::where('token', $token)->firstOrFail();
+        $user->confirmEmail();
+
+        Auth::loginUsingId($user->id);
+        flash()->success(Lang::get('auth.tx_for_confirm'));
+        return redirect(route('dashboard'));
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -146,23 +161,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
-
-
-    /**
-     * Confirm a user's email address.
-     *
-     * @param  string $token
-     * @return mixed
-     */
-    public function confirmEmail($token)
-    {
-        $user = User::where('token', $token)->firstOrFail();
-        $user->confirmEmail();
-
-        Auth::loginUsingId($user->id);
-        flash()->success(Lang::get('auth.tx_for_confirm'));
-        return redirect(route('dashboard'));
     }
 
 }
