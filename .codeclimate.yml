@@ -15,7 +15,6 @@ engines:
     enabled: true
 ratings:
   paths:
-  - "**.css"
   - "**.php"
 exclude_paths:
 - config/
