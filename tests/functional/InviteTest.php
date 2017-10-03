@@ -19,7 +19,7 @@ class InviteTest extends BrowserKitTest
      */
 
     use DatabaseMigrations;
-
+    use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
     protected $root;
 
     public function setUp()
@@ -32,10 +32,13 @@ class InviteTest extends BrowserKitTest
     /** @test */
     public function an_admin_invite_users_and_users_register()
     {
+        $this->expectException(\App\Exceptions\InvitationNeededException::class);
+
         Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
 
+        $this->withoutExceptionHandling();
         // FakeUs3
         $fakeUser1 = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
 
@@ -66,17 +69,17 @@ class InviteTest extends BrowserKitTest
         $user = User::where('email', $fakeUser1->email)->first();
 
         //Bad Code or no code
-        $this->visit("/tournaments/" . $invitation->object->slug . "/invite/123456s");
-//            ->see("403"); // TODO Should be uncomment as soon as I have a response in github
+        $this->visit("/tournaments/" . $invitation->object->slug . "/invite/123456s")
+            ->expectException(\App\Exceptions\InvitationNeededException::class);
 
-        // Invitation expired
-        if ($invitation->expiration < Carbon::now() && $invitation->expiration != '0000-00-00') {
-            $this->see("403");
-        }
-
-        if ($invitation->active == 0) {
-            $this->see("403");
-        }
+//        // Invitation expired
+//        if ($invitation->expiration < Carbon::now() && $invitation->expiration != '0000-00-00') {
+//            $this->expectException(\App\Exceptions\InvitationExpiredException::class);
+//        }
+//
+//        if ($invitation->active == 0) {
+//            $this->expectException(\App\Exceptions\InvitationNotActiveException::class);
+//        }
 
         // Logout root, and begin user registration
         Auth::logout();
