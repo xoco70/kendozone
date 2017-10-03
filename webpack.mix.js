@@ -13,11 +13,12 @@ const {mix} = require('laravel-mix');
 
 // mix.options({ purifyCss: true });
 
-mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
+// mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 mix.js('resources/assets/js/oauth.js', 'public/js/');
 mix.js('resources/assets/js/bootstrap.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/createCategory.js', 'public/js/');
 
 
 mix.copy('resources/assets/js/analytics.js', 'public/js/analytics.js');
@@ -76,7 +77,8 @@ mix.combine([
     'resources/assets/js/components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
     'resources/assets/js/plugins/pickers/pickadate/picker.js',
     'resources/assets/js/plugins/pickers/pickadate/picker.date.js',
-    'resources/assets/js/plugins/notifications/bootbox.min.js'
+    'resources/assets/js/plugins/notifications/bootbox.min.js',
+    'public/js/createCategory.js'
 ], 'public/js/pages/header/tournamentCreate.js');
 
 mix.combine([
@@ -109,7 +111,7 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
-    'public/js/categoryCreate.js'
+    'public/js/createCategory.js'
 ], 'public/js/pages/header/tournamentEdit.js');
 
 

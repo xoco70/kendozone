@@ -1,129 +1,34 @@
 <div class="modal-body" id="modal">
-    <div class="col-xs-12">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class=" form-group border-grey-700">
-                    <p class="full-width border-lg p-20 text-bold text-size-large text-center text-uppercase">@{{ categoryFullName | html }} </p>
-                    <hr/>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {!!  Form::label('gender', trans('categories.gender'),['class' => 'text-bold' ]) !!}
+    <create-category
+            :team="{{ json_encode( trans_choice('core.team',1))}}"
+            :gender="{{ json_encode( trans('categories.gender'))}}"
+            :single="{{ json_encode( trans('categories.single'))}}"
 
-                <select v-model="genderSelect" class="form-control">
-                    <option v-for="gender in genders" v-bind:value="gender.value">
-                        @{{ gender.text }}
-                    </option>
-                </select>
+            :age="{{ json_encode( trans('categories.age'))}}"
+            :no_age="{{ json_encode( trans('categories.no_age_restriction'))}}"
+            :age_min="{{ json_encode( trans('categories.age_min'))}}"
+            :age_max="{{ json_encode( trans('categories.age_max'))}}"
+            :age_category="{{ json_encode( trans('categories.age_category'))}}"
 
-            </div>
-            <div class="col-md-4 col-md-offset-2">
+            :grade="{{ json_encode( trans('core.grade'))}}"
+            :no_grade="{{ json_encode( trans('categories.no_grade_restriction'))}}"
+            :grade_min="{{ json_encode( trans('categories.grade_min'))}}"
+            :grade_max="{{ json_encode( trans('categories.grade_max'))}}"
 
-                <div class=" form-group">
+            :childs="{{ json_encode( trans('categories.children'))}}"
+            :students="{{ json_encode( trans('categories.students'))}}"
+            :adults="{{ json_encode( trans('categories.adults'))}}"
+            :masters="{{ json_encode( trans('categories.masters'))}}"
+            :custom="{{ json_encode( trans('categories.custom'))}}"
 
-                    {!!     Form::label('isTeam', trans_choice('core.team',1),['class' => 'text-bold' ])  !!}
-                    <br/>
+            :male="{{ json_encode( trans('categories.male'))}}"
+            :female="{{ json_encode( trans('categories.female'))}}"
+            :mixt="{{ json_encode( trans('categories.mixt'))}}"
 
-                    <div>
-                        <input type="radio" name="isTeam" id='yes' value="1" v-model="isTeam"/>
-                        <label for="yes"> {{ trans('core.yes')  }}</label>
+            :years="{{ json_encode( trans('categories.years'))}}"
+            :add_and_close="{{ json_encode( trans('categories.add_and_close'))}}"
 
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="isTeam" id='no' value="0" v-model="isTeam"/>
-                        <label for="no">{{ trans('core.no')  }}</label>
-                    </div>
-                </div>
 
-            </div>
 
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class=" form-group">
-                    {!!  Form::label('ageCategory', trans('categories.ageCategory'),['class' => 'text-bold' ]) !!}
-                    <select v-model="ageCategorySelect" class="form-control">
-                        <option v-for="ageCategory in ageCategories" v-bind:value="ageCategory.value">
-                            @{{ decodeHtml(ageCategory.text) }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4" v-if='ageCategorySelect==5'>
-                <div class=" form-group">
-                    {!!  Form::label('ageMin', trans('categories.min_age'),['class' => 'text-bold' ]) !!}
-                    <select v-model="ageMin" class="form-control">
-                        <option value="0">{{trans('categories.no_age_restriction')}}</option>
-                        <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4" v-if='ageCategorySelect==5'>
-                <div class=" form-group">
-                    {!!  Form::label('ageMax', trans('categories.max_age'),['class' => 'text-bold' ]) !!}
-                    <select v-model="ageMax" class="form-control">
-                        <option value="0">{{trans('categories.no_age_restriction')}}</option>
-                        <option :value="n+6" v-for="n in 85">@{{n+6}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class=" form-group">
-                    {!!  Form::label('gradeSelect', trans('core.grade'),['class' => 'text-bold' ]) !!}
-
-                    <select v-model="gradeSelect" class="form-control">
-                        <option value="0">{{trans('categories.no_grade_restriction')}}</option>
-                        <option value="3">{{trans('categories.custom')}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4" v-if='gradeSelect==3'>
-                <div class=" form-group">
-                    {!!  Form::label('gradeMin', trans('categories.min_grade'),['class' => 'text-bold' ]) !!}
-                    <select v-model="gradeMin" class="form-control" v-show="gradeSelect!=0">
-                        <option v-for="(grade, val) in grades" :value="grade.value">@{{ grade.text | html }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4" v-if='gradeSelect==3'>
-                <div class=" form-group">
-                    {!!  Form::label('gradeMax', trans('categories.max_grade'),['class' => 'text-bold' ]) !!}
-                    <select v-model="gradeMax" class="form-control" v-show="gradeSelect!=0">
-                        <option v-for="(grade, val) in grades"
-                                v-bind:value="grade.value">@{{ grade.text | html }}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-primary" v-on:click="addCategory"
-        >{{ trans('categories.add_and_close') }}</button>
-
-    </div>
+    ></create-category>
 </div>
-<script>
-
-    var team = "{{trans_choice('core.team',1)}}";
-    var single = "{{trans('categories.single')}}";
-
-    var no_age = "{{trans('categories.no_age_restriction')}}";
-    var no_grade = "{{trans('categories.no_grade_restriction')}}";
-    var childs = "{{trans('categories.children')}}";
-    var students = "{{trans('categories.students')}}";
-    var adults = "{{trans('categories.adults')}}";
-    var masters = "{{trans('categories.masters')}}";
-    var custom = "{{trans('categories.custom')}}";
-
-    var male = "{{trans('categories.male')}}";
-    var female = "{{trans('categories.female')}}";
-    var mixt = "{{trans('categories.mixt')}}";
-
-    var grade = "{{trans('core.grade')}}";
-    var age = "{{trans('categories.age')}}";
-    var years = "{{trans('categories.years')}}";
-
-</script>

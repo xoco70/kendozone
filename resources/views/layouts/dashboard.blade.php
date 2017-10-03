@@ -58,12 +58,12 @@
     @yield('styles')
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs has-detached-right navbar-top">
+<body class="sidebar-xs has-detached-right navbar-top" >
 @if (Auth::check())
     @include('layouts.headmenu')
 @endif
 <!-- Page container -->
-<div class="page-container">
+<div class="page-container" >
     <!-- Page content -->
     <div class="page-content">
     @if (Auth::check())
@@ -72,7 +72,7 @@
     <!-- Main content -->
         <div class="content-wrapper">
             <!-- Content area -->
-            <div class="content">
+            <div class="content" id="app">
                 @yield('content')
                 @include('layouts.footer')
             </div>

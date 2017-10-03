@@ -35,7 +35,6 @@ class AuthenticateUser
     {
 
         if (!$request) {
-
             return $this->getAuthorizationFirst($provider);
         }
         try {
