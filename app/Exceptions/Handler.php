@@ -77,7 +77,7 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
 
-        switch ($exception) {
+        switch ($exception) { 
 
             case $exception instanceof NotFoundHttpException:
 
