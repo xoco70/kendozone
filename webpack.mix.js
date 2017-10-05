@@ -1,4 +1,5 @@
 const {mix} = require('laravel-mix');
+mix.disableSuccessNotifications();
 
 /*
  |--------------------------------------------------------------------------
@@ -13,12 +14,12 @@ const {mix} = require('laravel-mix');
 
 // mix.options({ purifyCss: true });
 
-// mix.js('resources/assets/js/vue/pages/categoryCreate.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/userForm.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/addFighterToTeam.js', 'public/js/');
 mix.js('resources/assets/js/oauth.js', 'public/js/');
 mix.js('resources/assets/js/bootstrap.js', 'public/js/');
 mix.js('resources/assets/js/vue/pages/createCategory.js', 'public/js/');
+mix.js('resources/assets/js/vue/pages/kendo-settings.js', 'public/js/');
 
 
 mix.copy('resources/assets/js/analytics.js', 'public/js/analytics.js');
@@ -111,7 +112,8 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
-    'public/js/createCategory.js'
+    'public/js/createCategory.js',
+    'public/js/kendo-settings.js',
 ], 'public/js/pages/header/tournamentEdit.js');
 
 

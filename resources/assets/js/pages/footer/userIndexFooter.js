@@ -25,16 +25,7 @@ $(function () {
                         $.noty.closeAll()
 
                     } else {
-                        console.log(data);
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
-                        });
+                        flash(data.msg,'error');
                         $('.btnDeleteUser').prop("disabled", false);
                         $('.btnDeleteUser').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
@@ -43,16 +34,8 @@ $(function () {
 
                 },
                 error: function (data) {
-                    console.log("error");
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
-                    });
+                    data = JSON.parse(data.responseText);
+                    flash(data.responseText, 'error');
                 }
             }
         )
@@ -95,16 +78,7 @@ $(function () {
                         $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-trash');
                         tr.hide();
                     } else {
-                        console.log(data);
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg
-                        });
+                        flash(data.msg, 'error');
                         $('.btnDeleteUser').prop("disabled", false);
                         $('.btnDeleteUser').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
@@ -113,15 +87,8 @@ $(function () {
 
                 },
                 error: function (data) {
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 3000,
-                        text: data.statusText
-                    });
+                    data = JSON.parse(data.responseText);
+                    flash(data.responseText, 'error');
                     $('.btnDeleteUser').prop("disabled", false);
                     $('.btnDeleteUser').find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 

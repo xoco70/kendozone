@@ -82,8 +82,8 @@ $favicon = asset('/favicon_kz-01.png');
 
 @section('scripts_footer')
     <script>
-        var moreText = "{{trans('core.see_more') }}";
-        lessText = "{{trans('core.see_less') }}";
+{{--        var moreText = "{{trans('core.see_more') }}";--}}
+{{--        lessText = "{{trans('core.see_less') }}";--}}
 
         var url_base = "{{ route('tournaments.index') }}";
         var url_api_base = "{{ route('api.tournaments.index') }}";

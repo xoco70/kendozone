@@ -19,9 +19,7 @@ $(function () {
                     if (data != null && data.status == 'success') {
                         tr.show();
                         $.noty.closeAll()
-
                     } else {
-                        // console.log(data);
                         noty({
                             layout: 'bottomLeft',
                             theme: 'kz',
@@ -41,7 +39,6 @@ $(function () {
 
                 },
                 error: function (data) {
-                    // console.log("error");
                     noty({
                         layout: 'bottomLeft',
                         theme: 'kz',
@@ -62,8 +59,6 @@ $(function () {
         e.preventDefault();
         var inputData = $('#formDeleteAssociation').serialize();
         var dataId = $(this).data('id');
-//                console.log(inputData);
-//         console.log(dataId);
         tr = $(this).closest('tr');
         $(this).find('i').removeClass();
         $(this).find('i').addClass('icon-spinner spinner');
@@ -96,18 +91,8 @@ $(function () {
                         $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-trash');
                         tr.hide();
                     } else {
-                        console.log(data);
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                        });
-                        var btnDelete = $('.btnDeleteAssociation');
+                        flash(data.responseText, 'error');
+                        btnDelete = $('.btnDeleteAssociation');
                         btnDelete.prop("disabled", false);
                         btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
@@ -116,24 +101,13 @@ $(function () {
 
                 },
                 error: function (data) {
-                    console.log(data);
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 3000,
-                        text: data.msg,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                    });
+                    data = JSON.parse(data.responseText);
+                    flash(data.responseText, 'error');
                     var btnDelete = $('.btnDeleteAssociation');
                     btnDelete.prop("disabled", false);
                     btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
-
                 }
             }
         )
-
     });
 });

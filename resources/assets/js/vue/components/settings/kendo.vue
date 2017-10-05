@@ -2,7 +2,8 @@
     <div>
         <div class="row">
             <div class="col-lg-7 col-xs-9 cat-title">
-                <a data-toggle="collapse" data-parent="#accordion-styled" href="#accordion-styled-group00">
+                <a data-toggle="collapse" data-parent="#accordion-styled" :href="'#accordion-styled-group'+num">
+
                     <div class="panel-heading">
                         <h6 class="panel-title">
                             <input class="form-control alias" type="text"
@@ -12,14 +13,15 @@
                     </div>
                 </a>
             </div>
+
             <div class="col-lg-5 col-xs-3 cat-status">
-                <a data-toggle="collapse" data-parent="#accordion-styled" href="#accordion-styled-group">
+                <a data-toggle="collapse" data-parent="#accordion-styled" :href="'#accordion-styled-group'+num">
                     <div class="panel-heading">
-                        <span class="text-orange-600" v-if="setting == null">
+                        <span class="text-orange-600" v-if="championship.settings == null">
                             <span class="cat-state"> {{ translations.configure }}</span>
                             <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i>
                         </span>
-                        <span class="text-success" v-else="setting == null">
+                        <span class="text-success" v-else>
                             <span class="cat-state"> {{ translations.configured_full }}</span>
                             <i class="glyphicon text-success glyphicon-ok  status-icon"></i>
                         </span>
@@ -29,8 +31,8 @@
         </div>
 
         <!--First Line-->
-        <!--{!! $key==0 ? "in" : "" !!}-->
-        <div id="accordion-styled-group00" class="panel-collapse collapse in">
+        <div :id="'accordion-styled-group'+num"
+             :class="num==0 ? 'panel-collapse collapse in' : 'panel-collapse collapse out'">
             <div class="panel-body">
                 <div class="tab-pane" id="category">
                     <div class="row">
@@ -84,8 +86,9 @@
 
 
                                 <br/>
-                                <!--<input id="hasPreliminary" name="hasPreliminary" type="hidden" value="0">-->
+                                <input id="hasPreliminary" name="hasPreliminary" type="hidden" value="0">
                                 <input class="switch"
+                                       v-on:change="console.log('change')"
                                        id="hasPreliminary"
                                        :checked=hasPreliminaryvalue
                                        name="hasPreliminary"
@@ -104,6 +107,7 @@
                                 ></i>
 
                                 <select class="form-control" id="preliminaryGroupSize" name="preliminaryGroupSize"
+                                        :disabled=!setting.hasPreliminary
                                         v-model="preliminaryGroupSizeSelected">
                                     <option v-for="option in preliminaryGroupSize" v-bind:value="option.id">
                                         {{ option.text }}
@@ -112,7 +116,7 @@
                             </div>
                         </div>
 
-                        <!--TODO This one is not liinked with VueJS for now-->
+                        <!--TODO This one is not linked with VueJS for now-->
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="preliminaryWinner">{{ translations.preliminaryWinner }}</label>
@@ -120,7 +124,8 @@
                                    :data-original-title=translations.preliminaryWinnerTooltip
                                 ></i>
 
-                                <select class="form-control" id="preliminaryWinner" name="preliminaryWinner">
+                                <select class="form-control" id="preliminaryWinner" name="preliminaryWinner"
+                                        :disabled=!setting.hasPreliminary>
                                     <option value="1" selected>1</option>
                                 </select></div>
                         </div>
@@ -131,7 +136,9 @@
                             <label for="treeType">{{ translations.treeType }}</label>
                             <select class="form-control" id="treeType" name="treeType">
                                 <option value="0" :selected="setting.treeType == 0">{{ translations.playOff }}</option>
-                                <option value="1" :selected="setting.treeType == 1">{{ translations.direct_elimination }}</option>
+                                <option value="1" :selected="setting.treeType == 1">{{ translations.direct_elimination
+                                    }}
+                                </option>
                             </select>
                         </div>
 
@@ -143,7 +150,7 @@
                                     v-model="fightingAreaSelected">
                                 <option v-for="option in fightingAreas"
                                         v-bind:value="option.id"
-                                        >
+                                >
                                     {{ option.text }}
                                 </option>
                             </select>
@@ -186,11 +193,12 @@
 <script>
     export default {
         props:
-            ['setting', 'translations', 'championship'],
+            ['setting', 'translations', 'championship', 'num'],
         computed: {
             // a computed getter
             alias: function () {
-                return this.setting.alias === null ? this.championship.category.name : this.setting.alias;
+                console.log('alias' in this.setting);
+                return (this.setting.alias === null || !this.setting.hasOwnProperty('alias')) ? this.championship.category.name : this.setting.alias;
             },
             hasPreliminaryvalue: function () {
                 return this.setting.hasPreliminary ? 'checked' : '';
@@ -238,7 +246,6 @@
         methods: {}
         ,
         mounted: function () {
-            console.log(this.setting.fightingAreas);
             this.preliminaryGroupSizeSelected = this.setting.preliminaryGroupSize;
             this.teamSizeSelected = this.setting.teamSize;
             this.preliminaryWinnerSelected = this.setting.preliminaryWinner;

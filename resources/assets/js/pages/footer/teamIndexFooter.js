@@ -44,36 +44,18 @@ $(function () {
                         $('.icon-spinner').removeClass().addClass('glyphicon glyphicon-trash');
                         tr.hide();
                     } else {
-                        console.log(data);
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                        });
-                        var btnDelete = $('.btnDeleteTeam');
+                        flash(data.msg, 'error');
+                        let btnDelete = $('.btnDeleteTeam');
                         btnDelete.prop("disabled", false);
                         btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
                     }
                 },
                 error: function (data) {
-                    console.log(data);
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 3000,
-                        text: data.msg,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                    });
-                    var btnDelete = $('.btnDeleteTeam');
+                    data = JSON.parse(data.responseText);
+                    flash(data.responseText, 'error');
+
+                    let btnDelete = $('.btnDeleteTeam');
                     btnDelete.prop("disabled", false);
                     btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 

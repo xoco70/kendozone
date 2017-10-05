@@ -45,28 +45,28 @@ fieldset > a > legend {
     font-weight: 400;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-title > a > .panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > div > .row > .cat-title > a > .panel-heading {
     vertical-align: middle;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-status > a > .panel-heading {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > div > .row > .cat-status > a > .panel-heading {
     text-align: right;
     letter-spacing: 2px;
     vertical-align: middle;
     text-transform: uppercase;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-title > a > .panel-heading > span {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > div > .row > .cat-title > a > .panel-heading > span {
     font-size: 18px;
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > .row > .cat-status > a > .panel-heading > span > i {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > form > div > .row > .cat-status > a > .panel-heading > span > i {
     font-size: 30px;
     margin-left: 10px;
 
 }
 
-.category-settings > .panel-body > .container-fluid > .panel-group > .panel > .row > .cat-title > a > .panel-heading > h6 {
+.category-settings > .panel-body > .container-fluid > .panel-group > .panel > div > .row > .cat-title > a > .panel-heading > h6 {
     padding-top: 8px;
 
 }

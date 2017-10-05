@@ -31,7 +31,6 @@ $(function () {
 
     var dateFin = $('#dateFin').val();
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        console.log(csrfToken);
         jqXHR.setRequestHeader('X-CSRF-Token', csrfToken);
     });
 
@@ -120,22 +119,22 @@ $(function () {
 
     }
 
-    $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
-        $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
-        $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
-        $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
-    });
+    // $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
+    //     var isChecked = $(this).is(':checked');
+    //     $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
+    //     $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
+    //     $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
+    // });
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
 
     });
-    $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        var isChecked = $(this).is(':checked');
-        $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
-    });
+    // $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
+    //     var isChecked = $(this).is(':checked');
+    //     $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
+    // });
 
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
@@ -159,20 +158,8 @@ $(function () {
                 data: inputData,
 
                 success: function (data) {
-
                     if (data != null && data.status == 'success') {
-
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'success',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 13000,
-                            text: data.msg,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-
-                        });
+                        flash(data.msg);
                         $('.btn-update-tour').prop("disabled", false);
                         $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
@@ -196,16 +183,9 @@ $(function () {
                     } else {
                         btnUpdateTour.prop("disabled", false);
                         btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'warning',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 5000,
-                            text: url_edit,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                        });
+                        console.log("1");
+                        console.log(data);
+                        flash(data.url_edit, 'error');
                     }
 
                 },
@@ -224,23 +204,10 @@ $(function () {
                     } catch (err) {
                         text = "Server Error";
                     }
-
                     btnUpdateTour.prop("disabled", false);
                     btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dataType: 'json',
-                        dismissQueue: true,
-                        timeout: 5000,
-                        text: text,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-
-                    });
-
-
+                    data = JSON.parse(data.responseText);
+                    flash(text, 'error');
                 }
             }
         );
@@ -254,7 +221,6 @@ $(function () {
         var inputData = $('.save_category').serialize();
         var form = $(this).parents('form:first');
         inputData = form.serialize();
-        // var tournamentId = form.data('tournament');
         var championshipId = form.data('championship');
         var settingId = form.data('setting');
 
@@ -273,6 +239,9 @@ $(function () {
             url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
 
         }
+
+
+
         $.ajax(
             {
                 type: method,
@@ -280,18 +249,7 @@ $(function () {
                 data: inputData,
                 success: function (data) {
                     if (data != null && data.status == 'success') {
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'success',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 3000,
-                            text: data.msg,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                        });
-                        // Change warning icon to success
-                        //$('#one span').text('Hi I am replace');
+                        flash(data.msg);
                         panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok  status-icon');
                         panel.find('.text-orange-600').removeClass().addClass('text-success');
                         panel.find('.cat-state').text(configured);
@@ -307,36 +265,15 @@ $(function () {
                             // Show Add Competitors Button
                             $('#add_competitors').removeClass('hide');
                         }
-
-
                     } else {
-                        noty({
-                            layout: 'bottomLeft',
-                            theme: 'kz',
-                            type: 'error',
-                            width: 200,
-                            dismissQueue: true,
-                            timeout: 5000,
-                            text: data.msg,
-                            template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                        });
+                        flash(data.msg, 'error');
                     }
                     $('.save_category').prop("disabled", false);
                     $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
-
-
                 },
                 error: function (data) {
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'error',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 5000,
-                        text: data.statusText,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                    });
+                    data = JSON.parse(data.responseText);
+                    flash(data.responseText, 'error');
                     $('.save_category').prop("disabled", false);
                     $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
                 }

@@ -23,37 +23,12 @@ vm = new Vue({
             axios.post(url_root_api + "/teams/" + teamId + "/delete", function () {
             })
                 .done(function (data) {
-
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'success',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 13000,
-                        text: data.msg,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-trophy2 "></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-
-                    });
+                    flash(data.msg)
                     // Get the assigned teams, and restore it to competitors
-
-
                 })
                 .fail(function (data) {
-                    noty({
-                        layout: 'bottomLeft',
-                        theme: 'kz',
-                        type: 'warning',
-                        width: 200,
-                        dismissQueue: true,
-                        timeout: 5000,
-                        text: url_edit,
-                        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon"><i class="icon-warning"></i> </div><div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
-                    });
+                    flash(data.msg, 'error')
                 })
-                .always(function () {
-
-                });
         },
         addCompetitorToTeam(teamId, competitorId){
             axios.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");

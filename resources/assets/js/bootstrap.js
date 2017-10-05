@@ -25,3 +25,20 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
+window.flash = function (text, type = 'success') {
+    let icon = "<i class='icon-trophy2'>";
+    if (type == 'error') {
+        icon = "<i class='icon-warning'>";
+    }
+    noty({
+        layout: 'bottomLeft',
+        theme: 'kz',
+        type: type,
+        width: 200,
+        dismissQueue: true,
+        timeout: 5000,
+        text: text,
+        template: '<div class="noty_message"><div class="row"><div class="col-xs-4 noty_icon">' + icon + '</i> </div>' +
+        '<div class="col-xs-8"><span class="noty_text"></span><div class="noty_close"></div></div></div>'
+    });
+};
