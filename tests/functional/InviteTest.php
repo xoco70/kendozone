@@ -4,7 +4,6 @@ use App\Championship;
 use App\Invite;
 use App\Tournament;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;

@@ -97,89 +97,89 @@ class ClubTest extends BrowserKitTest
      *
      * a user must be superAdmin to access federation
      */
-    public function associationPresident_can_do_everything_in_his_own_association()
-    {
-        $federation = factory(Federation::class)->create(['president_id' => null]);
-        $associationPresident = factory(User::class)->create([
-            'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
-            'federation_id' => $federation->id]);
-
-        $association = factory(Association::class)->create([
-            'federation_id' => $federation->id,
-            'president_id' => $associationPresident->id]);
-        $associationPresident->association_id = $association->id;
-        $associationPresident->save();
-
-        $club = factory(Club::class)->make([
-            'federation_id' => $federation->id,
-            'association_id' => $association->id,
-            'president_id' => $associationPresident->id]);
-
-        $this->logWithUser($associationPresident);
-
-        $this->crud($club);
-    }
+//    public function associationPresident_can_do_everything_in_his_own_association()
+//    {
+//        $federation = factory(Federation::class)->create(['president_id' => null]);
+//        $associationPresident = factory(User::class)->create([
+//            'role_id' => Config::get('constants.ROLE_ASSOCIATION_PRESIDENT'),
+//            'federation_id' => $federation->id]);
+//
+//        $association = factory(Association::class)->create([
+//            'federation_id' => $federation->id,
+//            'president_id' => $associationPresident->id]);
+//        $associationPresident->association_id = $association->id;
+//        $associationPresident->save();
+//
+//        $club = factory(Club::class)->make([
+//            'federation_id' => $federation->id,
+//            'association_id' => $association->id,
+//            'president_id' => $associationPresident->id]);
+//
+//        $this->logWithUser($associationPresident);
+//
+//        $this->crud($club);
+//    }
 
     /** @test
      *
      * a user must be superAdmin to access federation
      */
-    public function a_club_president_can_change_his_club_data() // But not to another club_president
-    {
-        $federation = factory(Federation::class)->create(['president_id' => null]);
-
-        $fmk = factory(User::class)->create([
-            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
-            'email' => 'fmk@kendozone.com',
-            'federation_id' => $federation->id
-        ]);
-        $federation = $fmk->federation;
-
-        $association = factory(Association::class)->create([
-            'federation_id' => $federation->id,
-            'president_id' => null]);
-
-        $myClub = factory(Club::class)->create([
-            'federation_id' => $federation->id,
-            'association_id' => $association->id,
-            'president_id' => null,
-        ]);
-
-        $clubPresident = factory(User::class)->create([
-            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
-            'federation_id' => $federation->id,
-            'association_id' => $association->id,
-            'club_id' => $myClub->id]);
-
-        $myClub->president_id = $clubPresident->id;
-        $myClub->save();
-
-        $this->logWithUser($clubPresident);
-
-        $club = factory(Club::class)->make([
-            'federation_id' => $federation->id,
-            'association_id' => $myClub->association_id,
-            'president_id' => $clubPresident->id]);
-
-        $this->visit("/clubs/" . $myClub->id . "/edit")
-            ->fillClubAndSee($club);
-
-    }
+//    public function a_club_president_can_change_his_club_data() // But not to another club_president
+//    {
+//        $federation = factory(Federation::class)->create(['president_id' => null]);
+//
+//        $fmk = factory(User::class)->create([
+//            'role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT'),
+//            'email' => 'fmk@kendozone.com',
+//            'federation_id' => $federation->id
+//        ]);
+//        $federation = $fmk->federation;
+//
+//        $association = factory(Association::class)->create([
+//            'federation_id' => $federation->id,
+//            'president_id' => null]);
+//
+//        $myClub = factory(Club::class)->create([
+//            'federation_id' => $federation->id,
+//            'association_id' => $association->id,
+//            'president_id' => null,
+//        ]);
+//
+//        $clubPresident = factory(User::class)->create([
+//            'role_id' => Config::get('constants.ROLE_CLUB_PRESIDENT'),
+//            'federation_id' => $federation->id,
+//            'association_id' => $association->id,
+//            'club_id' => $myClub->id]);
+//
+//        $myClub->president_id = $clubPresident->id;
+//        $myClub->save();
+//
+//        $this->logWithUser($clubPresident);
+//
+//        $club = factory(Club::class)->make([
+//            'federation_id' => $federation->id,
+//            'association_id' => $myClub->association_id,
+//            'president_id' => $clubPresident->id]);
+//
+//        $this->visit("/clubs/" . $myClub->id . "/edit")
+//            ->fillClubAndSee($club);
+//
+//    }
 
 
     // Root, FMK, AIKEM, NAUCALLI --> Assoc
 
     /** @test
      */
-    public function a_federation_president_cannot_edit_a_club_that_doesnt_belongs_to_him()
-    { // Delete rule is the same, I don't do 2 tests
-        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
-
-        $this->visitEditClubPage($federationPresident);
-        $this->see("403.png");
-
-
-    }
+//    public function a_federation_president_cannot_edit_a_club_that_doesnt_belongs_to_him()
+//    { // Delete rule is the same, I don't do 2 tests
+//        $federationPresident = factory(User::class)->create(['role_id' => Config::get('constants.ROLE_FEDERATION_PRESIDENT')]);
+//
+//        $this->visitEditClubPage($federationPresident);
+//        $this->see("403.png");
+//
+//
+//    }
 
     /** @test
      */

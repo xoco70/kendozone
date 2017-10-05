@@ -212,11 +212,6 @@ class TournamentTest extends BrowserKitTest
             ]);
     }
 
-    public function setTournamentRules(Tournament $tournament, $ruleId)
-    {
-
-
-    }
 
     /** @test */
     public function update_general_info_in_tournament()
