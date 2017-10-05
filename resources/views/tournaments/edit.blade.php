@@ -56,11 +56,7 @@ $favicon = asset('/favicon_kz-01.png');
                         </div>
                     </div>
                 </div>
-
-
                 <!-- /simple panel acordion -->
-
-
             </div>
         </div>
         <!-- /detached content -->
@@ -122,16 +118,16 @@ $favicon = asset('/favicon_kz-01.png');
             }
 
         });
-        @foreach ($tournament->championships as $championship)
-        $('.advanced_settings_{{ $championship->id }}').hide();
-        $(".see_more_{{ $championship->id }}").click(function () {
-            icon = $(this).find("i");
-            icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-            $(".see_more_{{ $championship->id }}")
-                .text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);
-            $('.advanced_settings_{{ $championship->id }}').slideToggle("fast");
-        });
-        @endforeach
+        {{--@foreach ($tournament->championships as $championship)--}}
+                {{--$('.advanced_settings_{{ $championship->id }}').hide();--}}
+                {{--$(".see_more_{{ $championship->id }}").click(function () {--}}
+                {{--icon = $(this).find("i");--}}
+                {{--icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');--}}
+                {{--$(".see_more_{{ $championship->id }}")--}}
+                {{--.text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);--}}
+                {{--$('.advanced_settings_{{ $championship->id }}').slideToggle("fast");--}}
+                {{--});--}}
+                {{--@endforeach--}}
 
             window.twttr = (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],

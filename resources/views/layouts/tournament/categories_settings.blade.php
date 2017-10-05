@@ -1,6 +1,6 @@
-<div class="panel panel-flat category-settings">
+<div class="panel panel-flat category-settings" >
     <div class="panel-body">
-        <div class="container-fluid">
+        <div class="container-fluid"  id="vue-settings">
             <div class="panel-group" id="accordion-styled">
 
                 @foreach($tournament->championships as $key => $championship)

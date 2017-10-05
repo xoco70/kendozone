@@ -1,0 +1,249 @@
+<template>
+    <div>
+        <div class="row">
+            <div class="col-lg-7 col-xs-9 cat-title">
+                <a data-toggle="collapse" data-parent="#accordion-styled" href="#accordion-styled-group00">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">
+                            <input class="form-control alias" type="text"
+                                   id="alias" name="alias"
+                                   :value=alias>
+                        </h6>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-5 col-xs-3 cat-status">
+                <a data-toggle="collapse" data-parent="#accordion-styled" href="#accordion-styled-group">
+                    <div class="panel-heading">
+                        <span class="text-orange-600" v-if="setting == null">
+                            <span class="cat-state"> {{ translations.configure }}</span>
+                            <i class="glyphicon  glyphicon-exclamation-sign  status-icon"></i>
+                        </span>
+                        <span class="text-success" v-else="setting == null">
+                            <span class="cat-state"> {{ translations.configured_full }}</span>
+                            <i class="glyphicon text-success glyphicon-ok  status-icon"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!--First Line-->
+        <!--{!! $key==0 ? "in" : "" !!}-->
+        <div id="accordion-styled-group00" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="tab-pane" id="category">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <label for="fightDuration">{{ translations.fightDuration }}</label>
+                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                               :data-original-title=translations.fightDurationTooltip></i>
+
+                            <div class="input-group">
+                                <input class="form-control fightDuration ui-timepicker-input"
+                                       id="fightDuration" name="fightDuration" type="text"
+                                       :value=setting.fightDuration
+                                       autocomplete="off">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="cost"> {{ translations.cost }} ( {{ translations.currency }} )</label>
+                                <i class="icon-help"
+                                   data-popup="tooltip"
+                                   title=""
+                                   :data-original-title=translations.costTooltip
+                                   data-placement="right"></i>
+                                <input class="form-control" name="cost" type="number" id="cost" :value=setting.cost>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" v-if="championship.category.isTeam">
+                            <label for="teamSize">{{ translations.teamSize }} </label>
+                            <select class="form-control" id="teamSize" name="teamSize">
+                                <option v-for="option in teamsize"
+                                        :key="option.id" :value="option"
+                                        v-model="teamSizeSelected">
+                                    {{ option.text }}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="checkbox-switch ">
+                                <label for="hasPreliminary">{{ translations.hasPreliminary }}</label>
+                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                   :data-original-title=translations.hasPreliminaryTooltip></i>
+
+
+                                <br/>
+                                <!--<input id="hasPreliminary" name="hasPreliminary" type="hidden" value="0">-->
+                                <input class="switch"
+                                       id="hasPreliminary"
+                                       :checked=hasPreliminaryvalue
+                                       name="hasPreliminary"
+                                       type="checkbox"
+                                       :data-on-text=translations.yes
+                                       :data-off-text=translations.no
+                                       :value=setting.hasPreliminary>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="preliminaryGroupSize">{{ translations.preliminaryGroupSize }}</label>
+                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                   :data-original-title=translations.preliminaryGroupSizeTooltip
+                                ></i>
+
+                                <select class="form-control" id="preliminaryGroupSize" name="preliminaryGroupSize"
+                                        v-model="preliminaryGroupSizeSelected">
+                                    <option v-for="option in preliminaryGroupSize" v-bind:value="option.id">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--TODO This one is not liinked with VueJS for now-->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="preliminaryWinner">{{ translations.preliminaryWinner }}</label>
+                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                   :data-original-title=translations.preliminaryWinnerTooltip
+                                ></i>
+
+                                <select class="form-control" id="preliminaryWinner" name="preliminaryWinner">
+                                    <option value="1" selected>1</option>
+                                </select></div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="treeType">{{ translations.treeType }}</label>
+                            <select class="form-control" id="treeType" name="treeType">
+                                <option value="0" :selected="setting.treeType == 0">{{ translations.playOff }}</option>
+                                <option value="1" :selected="setting.treeType == 1">{{ translations.direct_elimination }}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label for="fightingAreas">{{ translations.fightingAreas }}</label>
+                            <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                               :data-original-title=translations.fightingAreaTooltip></i>
+                            <select class=" form-control" id="fightingAreas" name="fightingAreas"
+                                    v-model="fightingAreaSelected">
+                                <option v-for="option in fightingAreas"
+                                        v-bind:value="option.id"
+                                        >
+                                    {{ option.text }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="limitByEntity">{{ translations.limitByEntity }}</label>
+                                <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
+                                   :data-original-title=translations.limitByEntityTooltip></i>
+
+                                <select class="form-control" disabled id="limitByEntity" name="limitByEntity">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div align="right">
+                        <button type="submit" class="btn btn-success save_category" id="save0">
+                            <i></i>{{ translations.save }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        props:
+            ['setting', 'translations', 'championship'],
+        computed: {
+            // a computed getter
+            alias: function () {
+                return this.setting.alias === null ? this.championship.category.name : this.setting.alias;
+            },
+            hasPreliminaryvalue: function () {
+                return this.setting.hasPreliminary ? 'checked' : '';
+            }
+        },
+
+        data() {
+            return {
+                preliminaryGroupSizeSelected: null,
+                teamSizeSelected: null,
+                preliminaryWinnerSelected: null,
+                fightingAreaSelected: null,
+                teamsize: [
+                    {id: 2, text: '2'},
+                    {id: 3, text: '3'},
+                    {id: 4, text: '4'},
+                    {id: 5, text: '5'},
+                    {id: 6, text: '6'},
+                    {id: 7, text: '7'},
+                    {id: 8, text: '8'},
+                    {id: 9, text: '9'},
+                    {id: 10, text: '10'},
+                ],
+                preliminaryGroupSize: [
+                    {id: 3, text: '3'},
+                    {id: 4, text: '4'},
+                    {id: 5, text: '5'},
+                ],
+
+                preliminaryWinner: [
+                    {id: 1, text: '1'},
+                ],
+
+                fightingAreas: [
+                    {id: 1, text: '1'},
+                    {id: 2, text: '2'},
+                    {id: 4, text: '4'},
+                    {id: 8, text: '8'},
+                ],
+
+            }
+        }
+        ,
+
+        methods: {}
+        ,
+        mounted: function () {
+            console.log(this.setting.fightingAreas);
+            this.preliminaryGroupSizeSelected = this.setting.preliminaryGroupSize;
+            this.teamSizeSelected = this.setting.teamSize;
+            this.preliminaryWinnerSelected = this.setting.preliminaryWinner;
+            this.fightingAreaSelected = this.setting.fightingAreas;
+        }
+
+    }
+</script>
