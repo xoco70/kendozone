@@ -27,14 +27,12 @@ class Competitor extends \Xoco70\LaravelTournaments\Models\Competitor
 
         if ($user == null) {
             $password = generatePassword();
-            $user = factory(\App\User::class, [
-                'name' => $attributes['name'],
+            $user = User::create([
                 'firstname' => $attributes['firstname'],
                 'lastname' => $attributes['lastname'],
-                'email' => $attributes['email'],
-                'password' => bcrypt($password),
-                'verified' => 1,
-            ])->create()->first();
+                'name' => $attributes['name'],
+                'email' => $attributes['email']
+            ]);
             $user->clearPassword = $password;
         }
         // If user is deleted, this is restoring the user only, but not his asset ( tournaments, categories, etc.)
