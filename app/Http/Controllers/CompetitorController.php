@@ -94,7 +94,7 @@ class CompetitorController extends Controller
             }
             //TODO Should add a test for this
             // We send him an email with detail (and user /password if new)
-            if (strpos($email, '@kendozone.com') !== -1) { // It is not a generated email
+            if (strpos($email, '@kendozone.com') === -1) { // Substring is not present
                 $code = resolve(Invite::class)->generateTournamentInvite($user->email, $tournament);
                 $user->notify(new InviteCompetitor($user, $tournament, $code, $championship->category->name));
             }
