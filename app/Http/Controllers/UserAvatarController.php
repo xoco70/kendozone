@@ -13,6 +13,9 @@ class UserAvatarController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'file' => ['required', 'image']
+        ]);
         $file = request()
             ->file('file')
             ->store(config('constants.RELATIVE_AVATAR_PATH'), 'public');
