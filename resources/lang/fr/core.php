@@ -158,7 +158,7 @@ return array (
   'see_open_tournaments' => 'Voir les tournois ouverts',
   'open_tournaments_in_your_country' => 'Tournois ouverts dans votre pays',
   'soon' => 'Bientôt',
-  'configured_full' => 'configuré',
+  'configured_full' => 'Configuré',
   'see_all' => 'Tout voir',
   'see_more' => 'Voir plus',
   'no_tournament_created_yet' => 'Vous ne vous êtes inscrit à aucun tournoi pour le moment',
