@@ -25,16 +25,14 @@ class AssociationController extends Controller
      */
     public function index()
     {
+        $associations = Association::forUser(auth()->user());
         if (Request::ajax()) {
-            return Association::fillSelect();
-        } else {
-            $associations = Association::with('president', 'federation.country')
-                ->forUser(Auth::user())
-                ->where('id', '>', 1)
-                ->get();
-            $currentModelName = trans_choice('structures.association', 1);
-            return view('associations.index', compact('associations', 'currentModelName'));
+            return $associations->pluck('name', 'id')->prepend('-', 0);
         }
+        $associations = $associations->where('id', '>', 1)->get();
+        $currentModelName = trans_choice('structures.association', 1);
+        return view('associations.index', compact('associations', 'currentModelName'));
+
     }
 
 

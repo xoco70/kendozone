@@ -21,29 +21,6 @@ class Association extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * Fill Selects depending on the Logged user type
-     * @return Collection
-     */
-    public static function fillSelect()
-    {
-        $associations = new Collection();
-        if (Auth::user()->isSuperAdmin()) {
-            $associations = Association::pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isFederationPresident() && Auth::user()->federationOwned != null) {
-            $associations = Auth::user()->federationOwned->associations->pluck('name', 'id')->prepend('-', 0);
-        } else if (Auth::user()->isAssociationPresident()) {
-            $association = Auth::user()->associationOwned;
-            $associations->push($association);
-            $associations = $associations->pluck('name', 'id');
-        } else if (Auth::user()->isClubPresident()) {
-            $association = Auth::user()->clubOwned->association;
-            $associations->push($association);
-            $associations = $associations->pluck('name', 'id')->prepend('-', 0);
-        }
-        return $associations;
-    }
-
-    /**
      * Same than fillSelect, but with VueJS Format
      * @param $user
      * @param $federationId
@@ -102,13 +79,15 @@ class Association extends Model
      */
     public function scopeForUser($query, User $user)
     {
-
+        // Limit association to the same country
         if (!$user->isSuperAdmin()) {
             $query->whereHas('federation', function ($query) use ($user) {
                 $query->where('country_id', $user->country_id);
             });
         }
     }
+
+
 
     /**
      * Check if an Association is in the same Federation than a Federation President

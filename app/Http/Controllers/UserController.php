@@ -65,7 +65,7 @@ class UserController extends Controller
         $countries = Country::getAllPlucked();
         $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
         $federations = Federation::fillSelect();
-        $associations = Association::fillSelect();
+        $associations = Association::forUser(auth()->user());
         $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //
     }
@@ -119,8 +119,7 @@ class UserController extends Controller
         $grades = Grade::orderBy('order')->pluck('name', 'id');
         $countries = Country::pluck('name', 'id');
         $federations = Federation::fillSelect();
-        $associations = Association::fillSelect();
-
+        $associations = Association::forUser(auth()->user());
         $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
 
         return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations', 'associations', 'clubs')); //

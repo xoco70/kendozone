@@ -67,7 +67,7 @@ class ClubController extends Controller
         // Authorization
 
         $federations = Federation::fillSelect();
-        $associations = Association::fillSelect();
+        $associations = Association::forUser(auth()->user())->pluck('name', 'id')->prepend('-', 0);
         $users = Auth::user()->fillSelect();
 
 
@@ -141,7 +141,7 @@ class ClubController extends Controller
         $this->authorize('edit', [$club, Auth::user()]);
 
         $federations = Federation::fillSelect();
-        $associations = Association::fillSelect();
+        $associations = Association::forUser(auth()->user())->pluck('name', 'id')->prepend('-', 0);
         $users = Auth::user()->fillSelect();
 
         return view('clubs.form', compact('club', 'users', 'associations', 'federations', 'defaultLng', 'defaultLat')); //
