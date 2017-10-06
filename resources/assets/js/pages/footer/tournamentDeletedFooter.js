@@ -12,7 +12,7 @@ $(function () {
         //e.stopPropagation();
 
         tr = $(this).closest('tr');
-        let dataRestore = tr.attr('id');
+        var dataRestore = tr.attr('id');
         console.log(dataRestore);
 
 
