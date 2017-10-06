@@ -5,27 +5,27 @@ $currency = Auth::user()->country->currency_code;
 ?>
 
 <div class="panel">
-    @if (is_null($championship->settings))
-        {!! Form::open([
-                     'action' => ['ChampionshipSettingsController@store',
-                                    $championship->id
-                                 ],
-                     'id' => 'form_'.$key,
-                     'data-championship' => $championship->id,
-                     'class' => 'form-settings',
+    {{--@if (is_null($championship->settings))--}}
+        {{--{!! Form::open([--}}
+                     {{--'action' => ['ChampionshipSettingsController@store',--}}
+                                    {{--$championship->id--}}
+                                 {{--],--}}
+                     {{--'id' => 'form_'.$key,--}}
+                     {{--'data-championship' => $championship->id,--}}
+                     {{--'class' => 'form-settings',--}}
 
-    ]) !!}
-    @else
-        {!! Form::model($setting,
-                    ['method'=>"PATCH",
-                    'class' => 'form-settings',
-                     'id' => 'form_'.$key,
-                     'data-championship' => $championship->id,
-                     'data-setting' => $setting->id,
-                     "action" => ["ChampionshipSettingsController@update",
-                                   'data-championship' => $championship->id,$setting->id]]) !!}
+    {{--]) !!}--}}
+    {{--@else--}}
+        {{--{!! Form::model($setting,--}}
+                    {{--['method'=>"PATCH",--}}
+                    {{--'class' => 'form-settings',--}}
+                     {{--'id' => 'form_'.$key,--}}
+                     {{--'data-championship' => $championship->id,--}}
+                     {{--'data-setting' => $setting->id,--}}
+                     {{--"action" => ["ChampionshipSettingsController@update",--}}
+                                   {{--'data-championship' => $championship->id,$setting->id]]) !!}--}}
 
-    @endif
+    {{--@endif--}}
     <?php
     $translations = [
         'see_more' => trans('core.see_more'),
@@ -62,7 +62,7 @@ $currency = Auth::user()->country->currency_code;
             :championship="{{ json_encode($championship) }}"
             :num="{{ $key }}"
     ></kendo-settings>
-    {!! Form::close()!!}
+    {{--{!! Form::close()!!}--}}
 </div>
 
 

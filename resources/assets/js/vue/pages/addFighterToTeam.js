@@ -12,7 +12,6 @@ vm = new Vue({
         teamsArea: [],
         team_id: 0,
         // championship_id: championshipId,
-        teams: [],
         competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
         championships: arrChampionshipsWithTeamsAndCompetitors,
         copyOne: [],
@@ -22,13 +21,13 @@ vm = new Vue({
         deleteTeam(teamId){
             axios.post(url_root_api + "/teams/" + teamId + "/delete", function () {
             })
-                .done(function (data) {
-                    flash(data.msg)
+                .then(function (data) {
+                    flash(data.data.msg)
                     // Get the assigned teams, and restore it to competitors
                 })
-                .fail(function (data) {
+                .catch(function (data) {
                     flash(data.msg, 'error')
-                })
+                });
         },
         addCompetitorToTeam(teamId, competitorId){
             axios.post(url_root_api + "/teams/" + teamId + "/competitors/" + competitorId + "/add");
@@ -47,9 +46,9 @@ vm = new Vue({
         championship(){
             return this.championships.find((elem) => elem.championship == this.championship_id);
         },
-        // competitors(){
-        //     return this.championships.find((elem) => elem.championship == this.championship_id).competitors;
-        // },
+        competitors(){
+            return this.championships.find((elem) => elem.championship == this.championship_id).competitors;
+        },
         teams(){
             return this.championships.find((elem) => elem.championship == this.championship_id).teams;
         },

@@ -40,7 +40,7 @@ class ChampionshipSettingsController extends Controller
             }
             $request->request->add(['championship_id' => $championshipId]);
             $setting = ChampionshipSettings::create($request->all());
-            return Response::json(['settingId' => $setting->id, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
+            return Response::json(['setting' => $setting, 'msg' => trans('msg.category_create_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_create_error'), 'status' => 'error']);
         }
@@ -62,14 +62,14 @@ class ChampionshipSettingsController extends Controller
             if (Auth::check()) {
                 App::setLocale(Auth::user()->locale);
             }
-            $cs = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->all());
+            $setting = ChampionshipSettings::findOrFail($championshipSettingsId)->fill($request->all());
 
             // If we changed one of those data, remove tree
-            if ($cs->isDirty('hasPreliminary') || $cs->isDirty('hasPreliminary') || $cs->isDirty('treeType')) {
+            if ($setting->isDirty('hasPreliminary') || $setting->isDirty('hasPreliminary') || $setting->isDirty('treeType')) {
                 FightersGroup::where('championship_id', $championshipId)->delete();
             }
-            $cs->save();
-            return Response::json(['msg' => trans('msg.category_update_successful'), 'status' => 'success']);
+            $setting->save();
+            return Response::json(['setting' => $setting, 'msg' => trans('msg.category_update_successful'), 'status' => 'success']);
         } catch (Exception $e) {
             return Response::json(['msg' => trans('msg.category_update_error'), 'status' => 'error']);
         }
