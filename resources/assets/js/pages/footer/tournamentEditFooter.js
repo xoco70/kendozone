@@ -119,22 +119,14 @@ $(function () {
 
     }
 
-    // $('input[name="hasEncho"]').on('switchChange.bootstrapSwitch', function (event, state) {
-    //     var isChecked = $(this).is(':checked');
-    //     $(this).closest('form').find('[name="enchoQty"]').prop('disabled', !isChecked);
-    //     $(this).closest('form').find('[name="enchoDuration"]').prop('disabled', !isChecked);
-    //     $(this).closest('form').find('[name="enchoTimeLimitless"]').prop('disabled', !isChecked);
-    // });
+
     $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', function (event, state) {
         var isChecked = $(this).is(':checked');
         $(this).closest('form').find('[name="preliminaryGroupSize"]').prop('disabled', !isChecked);
         $(this).closest('form').find('[name="preliminaryWinner"]').prop('disabled', !isChecked);
 
     });
-    // $('input[name="hasHantei"]').on('switchChange.bootstrapSwitch', function (event, state) {
-    //     var isChecked = $(this).is(':checked');
-    //     $(this).closest('form').find('[name="hanteiLimit"]').prop('disabled', !isChecked);
-    // });
+
 
 // EDIT TOURNAMENT
     $('.btn-update-tour').on('click', function (e) {
@@ -149,68 +141,44 @@ $(function () {
         }
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        var btnUpdateTour = $('.btn-update-tour');
+        let btnUpdateTour = $('.btn-update-tour');
+        axios.put(url_edit, inputData)
+            .then(function (response) {
+                console.log(response.data.msg);
+                if (response.data !== null && response.data.status === "success") {
+                    flash(response.data.msg);
+                    $('.btn-update-tour').prop("disabled", false);
+                    $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
 
-        $.ajax(
-            {
-                type: 'PUT',
-                url: url_edit,
-                data: inputData,
+                    // Show / Hide Share Tournament Link
+                    var tournamentType = $('[name="type"]').is(':checked');
+                    if (tournamentType) $('#share_tournament').show();
+                    else $('#share_tournament').hide();
 
-                success: function (data) {
-                    if (data != null && data.status == 'success') {
-                        flash(data.msg);
-                        $('.btn-update-tour').prop("disabled", false);
-                        $('.btn-update-tour').find('i').removeClass('icon-spinner spinner position-left');
+                    // Set Venue Badge
+                    var venueSize = $('[name="venue_name"]').val().length;
+                    var latSize = $('[name="latitude"]').val().length;
+                    var longSize = $('[name="longitude"]').val().length;
 
-                        // Show / Hide Share Tournament Link
-                        var tournamentType = $('[name="type"]').is(':checked');
-                        if (tournamentType) $('#share_tournament').show();
-                        else $('#share_tournament').hide();
-
-                        // Set Venue Badge
-                        var venueSize = $('[name="venue_name"]').val().length;
-                        var latSize = $('[name="latitude"]').val().length;
-                        var longSize = $('[name="longitude"]').val().length;
-
-                        if (venueSize > 0 && latSize > 0 && longSize > 0) {
-                            $('#venue-status').show();
-                        } else {
-                            $('#venue-status').hide();
-                        }
-
-
+                    if (venueSize > 0 && latSize > 0 && longSize > 0) {
+                        $('#venue-status').show();
                     } else {
-                        btnUpdateTour.prop("disabled", false);
-                        btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
-                        console.log("1");
-                        console.log(data);
-                        flash(data.url_edit, 'error');
+                        $('#venue-status').hide();
                     }
 
-                },
-                error: function (data) {
-                    var text = "";
-                    var json = data.responseText;
-                    var obj = null;
-                    try {
-                        obj = jQuery.parseJSON(json);
-                        if (obj.hasOwnProperty('venue_name')) {
-                            text += obj.venue_name[0] + "<br/>";
-                        }
-                        if (obj.hasOwnProperty('CP')) {
-                            text += obj.CP[0] + "<br/>";
-                        }
-                    } catch (err) {
-                        text = "Server Error";
-                    }
+
+                } else {
                     btnUpdateTour.prop("disabled", false);
                     btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
-                    data = JSON.parse(data.responseText);
-                    flash(text, 'error');
+                    flash(response.data.msg, 'error');
                 }
-            }
-        );
+            })
+            .catch(function (error) {
+                btnUpdateTour.prop("disabled", false);
+                btnUpdateTour.find('i').removeClass('icon-spinner spinner position-left');
+                flash("You must not leave venue name empty", 'error');
+            });
+
     });
 
 //EDIT CATEGORIES
@@ -239,7 +207,6 @@ $(function () {
             url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
 
         }
-
 
 
         $.ajax(
