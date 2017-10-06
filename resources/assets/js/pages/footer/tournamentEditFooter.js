@@ -259,8 +259,7 @@ $(function () {
 
     });
 
-    // $(".switch").bootstrapSwitch();
-    //
+    $(".switch").bootstrapSwitch();
 
     var $input = $('.dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],

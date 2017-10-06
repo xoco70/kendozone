@@ -290,7 +290,7 @@
         }
         ,
         mounted: function () {
-            $("[name='hasPreliminary']").bootstrapSwitch();
+//            $("[name='hasPreliminary']").bootstrapSwitch();
             $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', this.setHasPreliminary.bind(this));
             $('input[name="fightDuration"]').on('selectTime', this.setFightDuration.bind(this));
 
