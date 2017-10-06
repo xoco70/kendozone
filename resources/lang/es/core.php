@@ -234,7 +234,6 @@ return array (
   'french' => 'Francés',
   'japonese' => 'Japonés',
   'admin_tournaments' => 'Administrar torneos',
-  'invitaion' => 'Invitación|Invitaciones',
   'personalinfo' => 'Información personal',
   'users' => 'Usuarios',
   'statistics' => 'Estadísticas',
