@@ -182,73 +182,73 @@ $(function () {
     });
 
 //EDIT CATEGORIES
-    var categoriesSize = null;
+//     var categoriesSize = null;
 
-    $('.save_category').on('click', function (e) {
-        e.preventDefault();
-        var inputData = $('.save_category').serialize();
-        var form = $(this).parents('form:first');
-        inputData = form.serialize();
-        var championshipId = form.data('championship');
-        var settingId = form.data('setting');
-
-        $(this).find('i').removeClass();
-        $(this).find('i').addClass('icon-spinner spinner position-left');
-        $(this).prop("disabled", true);
-        var panel = $(this).closest('.panel');
-
-        var method = null;
-        var url = null;
-        if ((typeof settingId === "undefined")) {
-            method = 'POST';
-            url = url_api_root + '/championships/' + championshipId + '/settings';
-        } else {
-            method = 'PUT';
-            url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
-
-        }
-
-
-        $.ajax(
-            {
-                type: method,
-                url: url,
-                data: inputData,
-                success: function (data) {
-                    if (data != null && data.status == 'success') {
-                        flash(data.msg);
-                        panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok  status-icon');
-                        panel.find('.text-orange-600').removeClass().addClass('text-success');
-                        panel.find('.cat-state').text(configured);
-
-                        form.attr('data-setting', data.settingId);
-                        var catsize = $(".category-size");
-                        if (method == 'POST') {
-                            categoriesSize = parseInt(catsize.text(), 10) + 1;
-                            catsize.html(categoriesSize)
-                        }
-                        if (categoriesSize == allCategoriesSize) {
-                            $('#categories-status').removeClass().addClass('badge badge-success');
-                            // Show Add Competitors Button
-                            $('#add_competitors').removeClass('hide');
-                        }
-                    } else {
-                        flash(data.msg, 'error');
-                    }
-                    $('.save_category').prop("disabled", false);
-                    $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
-                },
-                error: function (data) {
-                    data = JSON.parse(data.responseText);
-                    flash(data.responseText, 'error');
-                    $('.save_category').prop("disabled", false);
-                    $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
-                }
-
-            }
-        )
-
-    });
+    // $('.save_category').on('click', function (e) {
+    //     e.preventDefault();
+    //     var inputData = $('.save_category').serialize();
+    //     var form = $(this).parents('form:first');
+    //     inputData = form.serialize();
+    //     var championshipId = form.data('championship');
+    //     var settingId = form.data('setting');
+    //
+    //     $(this).find('i').removeClass();
+    //     $(this).find('i').addClass('icon-spinner spinner position-left');
+    //     $(this).prop("disabled", true);
+    //     var panel = $(this).closest('.panel');
+    //
+    //     var method = null;
+    //     var url = null;
+    //     if ((typeof settingId === "undefined")) {
+    //         method = 'POST';
+    //         url = url_api_root + '/championships/' + championshipId + '/settings';
+    //     } else {
+    //         method = 'PUT';
+    //         url = url_api_root + '/championships/' + championshipId + '/settings/' + settingId;
+    //
+    //     }
+    //
+    //
+    //     $.ajax(
+    //         {
+    //             type: method,
+    //             url: url,
+    //             data: inputData,
+    //             success: function (data) {
+    //                 if (data != null && data.status == 'success') {
+    //                     flash(data.msg);
+    //                     panel.find('.status-icon').removeClass().addClass('glyphicon glyphicon-ok  status-icon');
+    //                     panel.find('.text-orange-600').removeClass().addClass('text-success');
+    //                     panel.find('.cat-state').text(configured);
+    //
+    //                     form.attr('data-setting', data.settingId);
+    //                     var catsize = $(".category-size");
+    //                     if (method == 'POST') {
+    //                         categoriesSize = parseInt(catsize.text(), 10) + 1;
+    //                         catsize.html(categoriesSize)
+    //                     }
+    //                     if (categoriesSize == allCategoriesSize) {
+    //                         $('#categories-status').removeClass().addClass('badge badge-success');
+    //                         // Show Add Competitors Button
+    //                         $('#add_competitors').removeClass('hide');
+    //                     }
+    //                 } else {
+    //                     flash(data.msg, 'error');
+    //                 }
+    //                 $('.save_category').prop("disabled", false);
+    //                 $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
+    //             },
+    //             error: function (data) {
+    //                 data = JSON.parse(data.responseText);
+    //                 flash(data.responseText, 'error');
+    //                 $('.save_category').prop("disabled", false);
+    //                 $('.save_category').find('i').removeClass('icon-spinner spinner position-left');
+    //             }
+    //
+    //         }
+    //     )
+    //
+    // });
 
     dualList = $('.listbox-filter-disabled').bootstrapDualListbox({
         showFilterInputs: false,
@@ -259,8 +259,8 @@ $(function () {
 
     });
 
-    $(".switch").bootstrapSwitch();
-
+    // $(".switch").bootstrapSwitch();
+    //
 
     var $input = $('.dateFin').pickadate({
         min: ['<?php echo e($year); ?>', '<?php echo e($month); ?>', '<?php echo e($day); ?>'],

@@ -9,7 +9,7 @@
                             <input class="form-control alias" type="text"
                                    id="alias" name="alias"
                                    :value=alias
-                                   v-model="info.alias">
+                                   v-model="data.alias">
                         </h6>
                     </div>
                 </a>
@@ -46,11 +46,13 @@
                             <div class="input-group">
                                 <input class="form-control fightDuration ui-timepicker-input"
                                        id="fightDuration" name="fightDuration" type="text"
+                                       @selectTime="setFightDuration"
                                        autocomplete="off"
-                                       v-model="info.fightDuration">
+                                       v-model="data.fightDuration">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
+
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -61,16 +63,15 @@
                                    :data-original-title=translations.costTooltip
                                    data-placement="right"></i>
                                 <input class="form-control" name="cost" type="number" id="cost"
-                                       :v-model="cost">
+                                       v-model="data.cost">
                             </div>
                         </div>
-
                         <div class="col-lg-3" v-if="championship.category.isTeam">
                             <label for="teamSize">{{ translations.teamSize }} </label>
                             <select class="form-control" id="teamSize" name="teamSize">
                                 <option v-for="option in teamsize"
                                         :key="option.id" :value="option"
-                                        v-model="info.teamSize">
+                                        v-model="data.teamSize">
                                     {{ option.text }}
                                 </option>
                             </select>
@@ -81,16 +82,12 @@
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="checkbox-switch ">
-                                <label for="hasPreliminary">{{ translations.hasPreliminary }}</label>
+                                <label>{{ translations.hasPreliminary }}</label>
                                 <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                    :data-original-title=translations.hasPreliminaryTooltip></i>
-
-
                                 <br/>
-                                <!--<input id="hasPreliminary" name="hasPreliminary" type="hidden" value="0">-->
                                 <input class="switch"
-                                       v-model="info.hasPreliminary"
-                                       @switchChange="log"
+                                       @switchChange="setHasPreliminary"
                                        :checked=hasPreliminaryValue
                                        name="hasPreliminary"
                                        type="checkbox"
@@ -108,7 +105,7 @@
 
                                 <select class="form-control" id="preliminaryGroupSize" name="preliminaryGroupSize"
                                         :disabled=!setting.hasPreliminary
-                                        v-model="info.preliminaryGroupSize">
+                                        v-model="data.preliminaryGroupSize">
                                     <option v-for="option in preliminaryGroupSize" v-bind:value="option.id">
                                         {{ option.text }}
                                     </option>
@@ -126,7 +123,7 @@
 
                                 <select class="form-control" id="preliminaryWinner" name="preliminaryWinner"
                                         :disabled=!setting.hasPreliminary
-                                        v-model="info.preliminaryWinner"
+                                        v-model="data.preliminaryWinner"
                                 >
                                     <option value="1" selected>1</option>
                                 </select></div>
@@ -136,7 +133,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label for="treeType">{{ translations.treeType }}</label>
-                            <select class="form-control" id="treeType" name="treeType" v-model="info.treeType">
+                            <select class="form-control" id="treeType" name="treeType" v-model="data.treeType">
                                 <option value="0" :selected="setting.treeType == 0">{{ translations.playOff }}</option>
                                 <option value="1" :selected="setting.treeType == 1">{{ translations.direct_elimination
                                     }}
@@ -149,7 +146,7 @@
                             <i class="icon-help" data-popup="tooltip" title="" data-placement="right"
                                :data-original-title=translations.fightingAreaTooltip></i>
                             <select class=" form-control" id="fightingAreas" name="fightingAreas"
-                                    v-model="info.fightingAreas">
+                                    v-model="data.fightingAreas">
                                 <option v-for="option in fightingAreas"
                                         v-bind:value="option.id"
                                 >
@@ -211,7 +208,7 @@
             return {
                 persisting: false,
                 cost: null,
-                info: {
+                data: {
                     alias: null,
                     fightDuration: null,
                     cost: null,
@@ -270,7 +267,7 @@
                 axios({
                     method: method,
                     url: url,
-                    data: this.info,
+                    data: this.data,
                 }).then(function (data) {
                     if (data.data !== null && data.data.status === 'success') {
                         vm.championship.settings = data.data.setting;
@@ -284,25 +281,32 @@
                     vm.persisting = false;
                 });
             },
-            log() {
-                console.log("clicked");
+            setHasPreliminary() {
+                let hasPrelim = !this.data.hasPreliminary;
+                this.data.hasPreliminary = hasPrelim;
+                console.log(hasPrelim);
+            },
+            setFightDuration() {
+                this.data.fightDuration =  $('#fightDuration').val();
             }
-
         }
         ,
         mounted: function () {
-            this.cost = this.setting.cost; // Not Binding
-            this.info.alias = this.alias; // Binding
-            this.info.fightDuration = this.setting.fightDuration; // Not Binding
-            this.info.cost = this.setting.cost; // Not Binding
-            this.info.hasPreliminary = this.setting.hasPreliminary; // Not Binding
-            this.info.preliminaryGroupSize = this.setting.preliminaryGroupSize; // Binding
-            this.info.preliminaryWinner = this.setting.preliminaryWinner; // Binding
+            $("[name='hasPreliminary']").bootstrapSwitch();
+            $('input[name="hasPreliminary"]').on('switchChange.bootstrapSwitch', this.setHasPreliminary.bind(this));
+            $('input[name="fightDuration"]').on('selectTime', this.setFightDuration.bind(this));
 
-            this.info.treeType = this.setting.treeType; // Binding
-            this.info.fightingAreas = this.setting.fightingAreas; // Binding
+            this.data.alias = this.alias; // Binding
+            this.data.fightDuration = this.setting.fightDuration; // Not Binding
+            this.data.cost = this.setting.cost; // Not Binding
+            this.data.hasPreliminary = this.setting.hasPreliminary; // Not Binding
+            this.data.preliminaryGroupSize = this.setting.preliminaryGroupSize; // Binding
+            this.data.preliminaryWinner = this.setting.preliminaryWinner; // Binding
+
+            this.data.treeType = this.setting.treeType; // Binding
+            this.data.fightingAreas = this.setting.fightingAreas; // Binding
             if (this.championship.category.isTeam) {
-                this.info.teamSize = this.setting.teamSize;
+                this.data.teamSize = this.setting.teamSize;
             }
 
 
