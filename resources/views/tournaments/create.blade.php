@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.create_new_tournament')  }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.create',$currentModelName) !!}
 @stop

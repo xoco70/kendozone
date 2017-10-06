@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title')
-    <title>{{ trans('core.edit') .' '.trans_choice('core.federation',1) }}</title>
+    <title>{{ trans('core.edit') .' '.trans_choice('structures.federation',1) }}</title>
 @stop
 
 @section('breadcrumbs')

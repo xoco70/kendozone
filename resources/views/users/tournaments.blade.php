@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.tournaments_registered')  }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('users.tournaments',Auth::user()) !!}
 
