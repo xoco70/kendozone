@@ -45,7 +45,7 @@ $(function () {
                         tr.hide();
                     } else {
                         flash(data.msg, 'error');
-                        let btnDelete = $('.btnDeleteTeam');
+                        var btnDelete = $('.btnDeleteTeam');
                         btnDelete.prop("disabled", false);
                         btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
@@ -55,7 +55,7 @@ $(function () {
                     data = JSON.parse(data.responseText);
                     flash(data.responseText, 'error');
 
-                    let btnDelete = $('.btnDeleteTeam');
+                    var btnDelete = $('.btnDeleteTeam');
                     btnDelete.prop("disabled", false);
                     btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
