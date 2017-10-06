@@ -76,7 +76,7 @@ $(function () {
                         tr.hide();
                     } else {
                         flash(data.msg, 'error')
-                        let btnDelete = $('.btnDeleteClub');
+                        var btnDelete = $('.btnDeleteClub');
                         btnDelete.prop("disabled", false);
                         btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
                     }
@@ -84,7 +84,7 @@ $(function () {
                 error: function (data) {
                     data = JSON.parse(data.responseText);
                     flash(data.responseText, 'error');
-                    let btnDelete = $('.btnDeleteClub');
+                    var btnDelete = $('.btnDeleteClub');
                     btnDelete.prop("disabled", false);
                     btnDelete.find('i').removeClass('icon-spinner spinner position-left').addClass('glyphicon glyphicon-trash');
 
