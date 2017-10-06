@@ -141,7 +141,7 @@ $(function () {
         }
         $(this).find('i').addClass('icon-spinner spinner position-left');
         $(this).prop("disabled", true);
-        let btnUpdateTour = $('.btn-update-tour');
+        var btnUpdateTour = $('.btn-update-tour');
         axios.put(url_edit, inputData)
             .then(function (response) {
                 console.log(response.data.msg);
