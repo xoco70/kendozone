@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
+@if (isset($association->id))
+    <title>{{ trans('core.edit') .' '.trans_choice('structures.club',1) }}</title>
+@else
+    <title>{{ trans('core.create') .' '.trans_choice('structures.club',1) }}</title>
+@endif
 @section('breadcrumbs')
     {!! Breadcrumbs::render('clubs.edit',$club) !!}
 

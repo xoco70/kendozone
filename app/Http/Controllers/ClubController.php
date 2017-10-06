@@ -21,17 +21,6 @@ class ClubController extends Controller
 {
     // Only Super Admin and Club President can manage Clubs
 
-    protected $currentModelName;
-
-    public function __construct()
-    {
-        $this->currentModelName = trans_choice('structures.club', 1);
-        View::share('currentModelName', $this->currentModelName);
-
-
-    }
-
-
     /**
      * Display a listing of the resource.
      *

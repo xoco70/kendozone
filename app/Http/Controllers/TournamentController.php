@@ -23,8 +23,6 @@ use Illuminate\Support\Facades\URL;
 
 class TournamentController extends Controller
 {
-    protected $currentModelName;
-
     public function __construct()
     {
         $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
@@ -54,7 +52,7 @@ class TournamentController extends Controller
                 ->paginate(config('constants.PAGINATION'));
         }
         $title = trans('core.tournaments_created');
-        return view('tournaments.index', compact('tournaments', 'currentModelName', 'title'));
+        return view('tournaments.index', compact('tournaments', 'title'));
     }
 
     /**

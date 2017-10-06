@@ -6,7 +6,6 @@ use OwenIt\Auditing\Log;
 
 class LogsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *

@@ -1,11 +1,10 @@
+{{--Don't think it is used too--}}
 @extends('layouts.dashboard')
 @section('content')
-
     @include("errors.list")
-
     <div class="container">
         <div class="row col-md-10 col-md-offset-2 custyle">
-
+            shadow
             {!! Form::model(null,
                 ['method'=>"PATCH",
                  "action" => ["CompetitorController@update",
@@ -33,13 +32,13 @@
 
                                                 <?php
                                                 $Championship = DB::table('championship')
-                                                        ->where('tournament_id', $tournament->id)
-                                                        ->where('category_id', $category->id)
-                                                        ->first();
+                                                    ->where('tournament_id', $tournament->id)
+                                                    ->where('category_id', $category->id)
+                                                    ->first();
                                                 $old = DB::table('competitor')
-                                                        ->where('championship_id', $Championship->id)
-                                                        ->where('user_id', $user->id)
-                                                        ->count();
+                                                    ->where('championship_id', $Championship->id)
+                                                    ->where('user_id', $user->id)
+                                                    ->count();
                                                 ?>
 
                                                 @if ($key % 3 == 0)
@@ -59,7 +58,6 @@
 
                                             @endforeach
                                         </div>
-
 
 
                                         <div align="right">

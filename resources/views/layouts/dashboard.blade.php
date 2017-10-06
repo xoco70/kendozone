@@ -12,17 +12,14 @@
             csrfToken: "{{ csrf_token() }}"
         };
     </script>
+    <link rel="shortcut icon" href="{{ asset('/favicon_kz-01.png')  }}"/>
+    <link rel="apple-touch-icon" href="{{ asset('/favicon_kz-01.png') }}"/>
+
+    <meta property="og:title" content="Create Online Kendo Tournament in instants"/>
+    <meta name="twitter:title" content="Kendozone - Create Online Kendo Tournaments in instants"/>
     <?php
     $appName = (app()->environment() == 'local' ? getenv('APP_NAME') : config('app.name'));
-    $favicon = asset('/favicon_kz-01.png');
-    $title = '
-        <title> ' . $appName . ' </title>
-        <link rel="shortcut icon" href="'.$favicon.'" />
-        <link rel="apple-touch-icon" href="'.$favicon.'" />
-
-        <meta property="og:title" content="Create Online Kendo Tournament in instants" />
-        <meta name="twitter:title" content="Kendozone - Create Online Kendo Tournaments in instants" />
-        ';
+    $title = ' <title> ' . $appName . ' </title>';
 
     $description = '
         <meta name="description" content="Kenzone is a responsive kendo tournaments system. Register the competitors, generate documentation, and begin to score live with your tablet"/>
@@ -58,12 +55,12 @@
     @yield('styles')
 </head>
 {{--sidebar-xs should be out--}}
-<body class="sidebar-xs has-detached-right navbar-top" >
+<body class="sidebar-xs has-detached-right navbar-top">
 @if (Auth::check())
     @include('layouts.headmenu')
 @endif
 <!-- Page container -->
-<div class="page-container" >
+<div class="page-container">
     <!-- Page content -->
     <div class="page-content">
     @if (Auth::check())

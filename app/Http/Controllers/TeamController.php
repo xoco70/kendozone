@@ -18,15 +18,6 @@ use Illuminate\Support\Facades\View;
 
 class TeamController extends Controller
 {
-
-    protected $currentModelName;
-
-    public function __construct()
-    {
-        $this->currentModelName = trans_choice('core.team', 1);
-        View::share('currentModelName', $this->currentModelName);
-    }
-
     /**
      * Display a listing of the teams for a tournament.
      *

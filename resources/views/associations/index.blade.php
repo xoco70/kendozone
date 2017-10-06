@@ -1,7 +1,13 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('structures.association',2) }}</title>
+@stop
+
+@section('title')
+
+@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('associations.index') !!}
-
 @stop
 
 @section('content')

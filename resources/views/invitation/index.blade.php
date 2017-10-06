@@ -1,27 +1,20 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('core.invitation',2) }}</title>
+@stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('invites.index') !!}
-
 @stop
-
 @section('content')
-
-
-
     <div class="container-fluid">
-
         @if (sizeof($invites)==0)
             @include('layouts.noInvites')
         @else
             <div class="row">
-
                 <div class="col-md-12 col-lg-6 col-lg-offset-3">
-
-
                     <table class="table table-togglable table-hover">
                         <thead>
                         <tr>
-
                             <th class="text-center" data-toggle="true">{{ trans_choice('core.tournament',1) }}</th>
                             <th class="text-center" data-hide="phone">{{ trans('core.organizer') }}</th>
                             <th class="text-center" data-hide="phone">{{ trans('core.type') }}</th>
@@ -37,10 +30,7 @@
                                 <td align="center">{{ $invite->object->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
 
                             </tr>
-
                         @endforeach
-
-
                     </table>
                 </div>
             </div>

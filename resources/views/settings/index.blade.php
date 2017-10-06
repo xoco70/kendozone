@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.setting') }}</title>
+@stop
 
 @section('content')
 
@@ -20,7 +23,7 @@
                             .bottom-divided</code>
                         classes.
                     </div>
-                    <div  class="tab-pane" id="category">
+                    <div class="tab-pane" id="category">
                         <!-- TAB CATEGORIES DEFAULT SETTING -->
                         @if (is_null($settings))
                             {!! Form::open(['action'=>"SettingsController@store"]) !!}

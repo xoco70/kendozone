@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.dashboard') }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('dashboard') !!}
 

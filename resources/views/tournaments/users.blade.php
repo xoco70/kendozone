@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('core.competitor',2) }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.users.index',$tournament) !!}
 @stop
@@ -25,7 +29,7 @@
                                    data-id="{!! $championship->id !!}"
                                    data-name="{!! $championship->buildName() !!}">
                                     <b> <i class="icon-plus22 mr-5"></i></b>
-                                    @lang('core.addModel', ['currentModelName' => trans_choice('core.competitor',2)])
+                                    @lang('core.add') {{  trans_choice('core.competitor',2) }}
                                 </a>
 
 

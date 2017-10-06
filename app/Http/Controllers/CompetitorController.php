@@ -19,14 +19,6 @@ use URL;
 
 class CompetitorController extends Controller
 {
-    protected $currentModelName;
-
-    public function __construct()
-    {
-        $this->currentModelName = trans_choice('core.tournament', 2);
-        View::share('currentModelName', $this->currentModelName);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +33,7 @@ class CompetitorController extends Controller
         $grades = Grade::getAllPlucked();
         $countries = Country::getAll();
         $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
-        return view("tournaments.users", compact('tournament', 'currentModelName', 'settingSize', 'categorySize', 'grades', 'countries'));
+        return view("tournaments.users", compact('tournament', 'settingSize', 'categorySize', 'grades', 'countries'));
 
     }
 
@@ -57,7 +49,7 @@ class CompetitorController extends Controller
         $championshipId = $request->get('categoryId');
         $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
 
-        return view("tournaments/users/create", compact('tournament', 'currentModelName', 'championshipId')); //, compact()
+        return view("tournaments/users/create", compact('tournament', 'championshipId')); //, compact()
     }
 
     /**

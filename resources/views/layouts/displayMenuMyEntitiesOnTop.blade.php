@@ -23,7 +23,7 @@
             <span class="pl-10 pull-right">
                     <a id="addAssociation" href="{!!   URL::action('AssociationController@create') !!}"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                        @lang('core.add') {{ trans('structures.association') }}
                     </a>
                 </span>
         @endcan
@@ -33,7 +33,7 @@
             <span class="pl-10 pull-right">
                     <a id="addClub" href="{!!   URL::action('ClubController@create') !!}"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                        @lang('core.add') {{ trans('structures.club') }}
                     </a>
                 </span>
         @endcan
@@ -42,7 +42,7 @@
         <span class="pl-10 pull-right">
                     <a href="{!!   URL::action('UserController@create') !!}" id="adduser"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.addModel', ['currentModelName' => $currentModelName])
+                        @lang('core.add') {{ trans('core.user') }}
                     </a>
                 </span>
         <a href="{!!   URL::action('UserController@export') !!}"

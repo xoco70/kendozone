@@ -24,15 +24,6 @@ use URL;
 
 class UserController extends Controller
 {
-    protected $currentModelName;
-
-    public function __construct()
-    {
-        // Fetch the Site Settings object
-        $this->currentModelName = trans_choice('core.user', 1);
-        View::share('currentModelName', $this->currentModelName);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -63,11 +54,11 @@ class UserController extends Controller
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::getAllPlucked();
         $countries = Country::getAllPlucked();
-        $submitButton = trans('core.addModel', ['currentModelName' => $this->currentModelName]);
+//        $submitButton = trans('core.add').' '.trans_choice('core.user', 1);
         $federations = Federation::fillSelect();
         $associations = Association::forUser(auth()->user());
         $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);
-        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'submitButton', 'federations', 'associations', 'clubs')); //
+        return view('users.form', compact('user', 'grades', 'countries', 'roles', 'federations', 'associations', 'clubs')); //
     }
 
     /**

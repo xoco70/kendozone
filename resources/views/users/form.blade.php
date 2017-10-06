@@ -1,13 +1,20 @@
 @extends('layouts.dashboard')
+@section('title')
+    @if (is_null($user->id))
+        <title>{{ trans('core.create') .' '.trans_choice('core.user',1) }}</title>
+    @else
+        <title>{{ trans('core.edit') .' '.trans_choice('core.user',1) }}</title>
+    @endif
+@stop
+
 @section('styles')
     {!! Html::style('css/pages/userCreate.css') !!}
 @stop
 @section('breadcrumbs')
-    @if (!is_null($user->id))
-        {!! Breadcrumbs::render('users.edit', $user) !!}
-    @else
+    @if (is_null($user->id))
         {!! Breadcrumbs::render('users.create') !!}
-
+    @else
+        {!! Breadcrumbs::render('users.edit', $user) !!}
     @endif
 @stop
 @section('content')
@@ -141,15 +148,16 @@
                                         <div class="form-group">
                                             {!!  Form::label('federation_id', trans_choice('structures.federation',1),['class' => 'text-bold']) !!}
                                             <select name="federation_id" v-model="federationSelected" id="federation_id"
-                                                    class="form-control" @change="getAssociations(federationSelected)" v-cloak>
-                                            @if (Auth::user()->isSuperAdmin())
-                                                <option value="0"> -</option>
-                                            @endif
-                                            <option v-for="federation in federations"
-                                                    v-bind:value="federation.value"
+                                                    class="form-control" @change="getAssociations(federationSelected)"
                                                     v-cloak>
-                                                @{{ federation.text }}
-                                            </option>
+                                                @if (Auth::user()->isSuperAdmin())
+                                                    <option value="0"> -</option>
+                                                @endif
+                                                <option v-for="federation in federations"
+                                                        v-bind:value="federation.value"
+                                                        v-cloak>
+                                                    @{{ federation.text }}
+                                                </option>
                                             </select>
 
                                         </div>
@@ -168,13 +176,13 @@
 
                                             <select name="association_id" v-model="associationSelected"
                                                     id="association_id" class="form-control"
-                                            @change="getClubs(federationSelected, associationSelected)"
-                                            v-cloak>
-                                            <option value="0"> {{ trans('structures.no_association')  }}</option>
-                                            <option v-for="association in associations"
-                                                    v-bind:value="association.value">
-                                                @{{ association.text }}
-                                            </option>
+                                                    @change="getClubs(federationSelected, associationSelected)"
+                                                    v-cloak>
+                                                <option value="0"> {{ trans('structures.no_association')  }}</option>
+                                                <option v-for="association in associations"
+                                                        v-bind:value="association.value">
+                                                    @{{ association.text }}
+                                                </option>
                                             </select>
                                         </div>
                                     </div>

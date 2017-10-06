@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.new') .' '.trans_choice('core.category',1) }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('categories.create',$currentModelName) !!}
 @stop
@@ -6,7 +10,8 @@
     @include("errors.list")
     <div class="container-fluid">
         {!! Form::open(['url'=>URL::action('CategoryController@index')]) !!}
-        @include("categories.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
+        $currentModelName = ;
+        @include("categories.form", ["submitButton" => trans('core.add').' '.trans_choice("core.category", 1) ])
         {!! Form::close()!!}
     </div>
 @stop

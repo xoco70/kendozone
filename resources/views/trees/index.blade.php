@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('core.tree',2) }}</title>
+@stop
 
 @section('styles')
     {!! Html::style('css/pages/trees.css')!!}

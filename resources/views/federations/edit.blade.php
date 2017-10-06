@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans('core.edit') .' '.trans_choice('core.federation',1) }}</title>
+@stop
+
 @section('breadcrumbs')
 {!! Breadcrumbs::render('federations.edit',$federation) !!}
 

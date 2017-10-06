@@ -17,8 +17,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $currentModelName = trans_choice('core.category', 1);
-        return view('categories.create', compact('currentModelName'));
+        return view('categories.create');
     }
 
     /**

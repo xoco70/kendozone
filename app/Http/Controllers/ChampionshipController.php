@@ -33,7 +33,6 @@ class ChampionshipController extends Controller
      */
     public function create($tournamentSlug, $token) //TODO Should not put token as part as URL, but as param
     {
-        $currentModelName = trans('core.select_categories_to_register');
         $tournament = Tournament::where('slug', $tournamentSlug)->first();
         $grades = Grade::getAllPlucked();
         $invite = Invite::getInviteFromToken($token);
@@ -55,7 +54,7 @@ class ChampionshipController extends Controller
         // Redirect to register category Screen
 
         Auth::loginUsingId($user->id);
-        return view("categories.register", compact('tournament', 'invite', 'currentModelName', 'grades'));
+        return view("categories.register", compact('tournament', 'invite', 'grades'));
     }
 
     /**

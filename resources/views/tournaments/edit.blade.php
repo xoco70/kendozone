@@ -6,9 +6,7 @@
 $favicon = asset('/favicon_kz-01.png');
 ?>
 @section('title')
-    <title>{{ trans('core.editModel', ['currentModelName' => trans_choice('core.tournament',1)]) }}</title>
-    <link rel="shortcut icon" href="{{ $favicon }}"/>
-    <link rel="apple-touch-icon" href="{{  $favicon }}"/>
+    <title>{{ trans('core.edit') .' '.trans_choice('core.tournament',1) }}</title>
 @stop
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.edit',$tournament) !!}
@@ -82,8 +80,8 @@ $favicon = asset('/favicon_kz-01.png');
 
 @section('scripts_footer')
     <script>
-{{--        var moreText = "{{trans('core.see_more') }}";--}}
-{{--        lessText = "{{trans('core.see_less') }}";--}}
+                {{--        var moreText = "{{trans('core.see_more') }}";--}}
+                {{--        lessText = "{{trans('core.see_less') }}";--}}
 
         var url_base = "{{ route('tournaments.index') }}";
         var url_api_base = "{{ route('api.tournaments.index') }}";

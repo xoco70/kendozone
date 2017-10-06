@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('core.tournament',2) }}</title>
+@stop
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.index') !!}
 

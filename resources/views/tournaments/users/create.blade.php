@@ -1,3 +1,4 @@
+{{--Doesn't seem to be use too--}}
 @extends('layouts.dashboard')
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.users.create',$tournament) !!}
@@ -8,7 +9,7 @@
 
     <div class="container">
         <div class="row col-md-10 col-md-offset-2 custyle">
-
+            Shadow
             <?php
             $championship = \App\Championship::findOrFail($championshipId);
             ?>

@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+@section('title')
+    <title>{{ trans_choice('structures.association',2) }}</title>
+@stop
+
 @section('breadcrumbs')
 @stop
 

@@ -15,20 +15,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class InviteController extends Controller
 {
-
-    protected $currentModelName;
     protected $emailBadFormat;
     protected $wrongEmail;
-
-    /**
-     * InviteController constructor.
-     */
-    public function __construct()
-    {
-
-        $this->currentModelName = trans_choice('core.tournament_invitations', 1);
-        View::share('currentModelName', $this->currentModelName);
-    }
 
 
     /**
