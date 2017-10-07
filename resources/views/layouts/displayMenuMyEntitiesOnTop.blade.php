@@ -23,7 +23,7 @@
             <span class="pl-10 pull-right">
                     <a id="addAssociation" href="{!!   URL::action('AssociationController@create') !!}"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.add') {{ trans('structures.association') }}
+                        @lang('core.add') {{ trans_choice('structures.association',1) }}
                     </a>
                 </span>
         @endcan

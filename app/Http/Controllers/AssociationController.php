@@ -177,7 +177,6 @@ class AssociationController extends Controller
      * @return JsonResponse
      */
     public function restore($id)
-
     {
         $association = Association::withTrashed()->find($id);
         if ($association->restore()) {

@@ -37,8 +37,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {// Pro
     Route::get('users', 'UserController@index')->name('users.index');
 
     // TODO Should be posting so nobody can restore tournament
-    Route::get('associations/{association}/restore', 'AssociationController@restore');
-    Route::get('clubs/{club}/restore', 'ClubController@restore');
+    Route::post('associations/{association}/restore', 'AssociationController@restore');
+    Route::post('clubs/{club}/restore', 'ClubController@restore');
 
 
     Route::resource('championships/{championship}/settings', 'ChampionshipSettingsController',

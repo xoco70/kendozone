@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::resource('clubs', 'ClubController', ['names' => ['index' => 'clubs.index', 'create' => 'clubs.create', 'edit' => 'clubs.edit', 'store' => 'clubs.store', 'update' => 'clubs.update']]);
 
         Route::resource('categories', 'CategoryController');
+
+        //TODO those routes should not exist -- removing
         Route::resource('/tournaments/{tournament}/teams', 'TeamController', ['names' => ['index' => 'teams.index', 'create' => 'teams.create', 'edit' => 'teams.edit', 'store' => 'teams.store', 'update' => 'teams.update']]);
 
         Route::resource('users', 'UserController', ['names' => [
@@ -93,7 +95,7 @@ Route::group(['middleware' => ['auth']], // 'throttle:100,1'
         Route::get('tournaments/{tournament}/invite', 'InviteController@create');
 
 
-        Route::post('championships/{championship}/teams', 'TeamController@store')->name('storeTeam');
+        Route::post('championships/{championship}/teams', 'TeamController@store')->name('team.store');
 
 
         // Other Admin Routes

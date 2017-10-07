@@ -32,15 +32,17 @@ class UserAvatarTest extends BrowserKitTest
 //    /** @test */
 //    public function a_user_may_add_an_avatar_to_their_profile()
 //    {
-//        $this->signIn();
+//        $user = factory(App\User::class)->create();
+//        $this->actingAs($user, 'api');
 //
 //        Storage::fake('public');
-//
-//        $this->json('POST', 'api/users/' . auth()->id() . '/avatar', [
+//        $file = UploadedFile::fake()->image('avatar.jpg');
+//        dump($file);
+//        $this->json('POST', 'api/v1/users/' . $user->slug . '/avatar', [
 //            'avatar' => $file = UploadedFile::fake()->image('avatar.jpg')
 //        ]);
 //
-//        $this->assertEquals('avatars/' . $file->hashName(), auth()->user()->avatar_path);
+//        $this->assertEquals($file->hashName(), auth()->user()->avatar);
 //
 //        Storage::disk('public')->assertExists('avatars/' . $file->hashName());
 //    }
