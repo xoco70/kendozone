@@ -308,9 +308,6 @@
             if (this.championship.category.isTeam) {
                 this.data.teamSize = this.setting.teamSize;
             }
-
-
         }
-
     }
 </script>

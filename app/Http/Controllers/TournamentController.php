@@ -25,10 +25,8 @@ class TournamentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('ownTournament', ['except' => ['index', 'show', 'register']]);
-        $this->middleware('auth')->except(
-            'show',
-            'register');
+        $this->middleware('ownTournament')->except('index', 'show', 'register');
+        $this->middleware('auth')->except('show', 'register');
     }
 
     /**
@@ -38,8 +36,6 @@ class TournamentController extends Controller
      */
     public function index()
     {
-
-        $currentModelName = trans_choice('core.tournament', 2);
 
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::with('owner')
@@ -62,13 +58,12 @@ class TournamentController extends Controller
      */
     public function create()
     {
-        $currentModelName = trans_choice('core.tournament', 1);
         $levels = TournamentLevel::getAllPlucked();
         $categories = Category::take(10)->orderBy('id', 'asc')->pluck('name', 'id');
         $tournament = new Tournament();
         $rules = config('options.rules');
         $rulesCategories = (new Category)->getCategorieslabelByRule();
-        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'currentModelName', 'rules', 'rulesCategories'));
+        return view('tournaments.create', compact('levels', 'categories', 'tournament', 'rules', 'rulesCategories'));
     }
 
     /**
@@ -228,8 +223,6 @@ class TournamentController extends Controller
      */
     public function getDeleted()
     {
-        $currentModelName = trans_choice('core.tournament', 2);
-
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
@@ -243,7 +236,7 @@ class TournamentController extends Controller
         }
 
         $title = trans('core.tournaments_deleted');
-        return view('tournaments.deleted', compact('tournaments', 'currentModelName', 'title'));
+        return view('tournaments.deleted', compact('tournaments', 'title'));
     }
 
 

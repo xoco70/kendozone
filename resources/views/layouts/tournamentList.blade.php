@@ -4,6 +4,7 @@
 
             @if (sizeof($tournaments) == 0)
                 <br/><br/><br/><br/><br/><br/>
+                {{--those if are a bit shitty :(--}}
                 @if ($title == trans('core.tournaments_registered'))
                     <?php
                     $noItemYet = trans('core.no_tournament_registered_yet');

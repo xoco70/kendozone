@@ -8,8 +8,6 @@ class UserAvatarTest extends BrowserKitTest
 {
     use DatabaseMigrations;
 
-//    use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
-
     /** @test */
     public function only_members_can_add_avatars()
     {
@@ -36,10 +34,8 @@ class UserAvatarTest extends BrowserKitTest
 //        $this->actingAs($user, 'api');
 //
 //        Storage::fake('public');
-//        $file = UploadedFile::fake()->image('avatar.jpg');
-//        dump($file);
 //        $this->json('POST', 'api/v1/users/' . $user->slug . '/avatar', [
-//            'avatar' => $file = UploadedFile::fake()->image('avatar.jpg')
+//            'file' => $file = UploadedFile::fake()->image('avatar.jpg')
 //        ]);
 //
 //        $this->assertEquals($file->hashName(), auth()->user()->avatar);

@@ -14,15 +14,7 @@ use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 class ChampionshipSettingsController extends Controller
 {
 
-    protected $currentModelName, $defaultSettings;
-
-    public function __construct()
-    {
-        // Fetch the Site Settings object
-        $this->currentModelName = trans_choice('core.categorySettings', 2);
-        View::share('currentModelName', $this->currentModelName);
-
-    }
+    protected $defaultSettings;
 
     /**
      * Store a newly created resource in storage.

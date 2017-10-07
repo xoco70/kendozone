@@ -4,7 +4,7 @@
 @stop
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('tournaments.create',$currentModelName) !!}
+    {!! Breadcrumbs::render('tournaments.create',trans_choice('core.tournament', 1)) !!}
 @stop
 @section('content')
 
@@ -14,7 +14,7 @@
 
         {!! Form::open(['url'=> URL::action('TournamentController@store') ]) !!}
 
-        @include("tournaments.form", ["submitButton" => trans('core.addModel',['currentModelName' => $currentModelName]) ])
+        @include("tournaments.form", ["submitButton" => trans('core.add').' '. trans_choice('core.tournament',1) ])
 
 
         {!! Form::close()!!}
@@ -25,16 +25,16 @@
 <?php
 $now = Carbon\Carbon::now();
 $year = $now->year;
-$month = $now->month-1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
+$month = $now->month - 1; // Javascript dates are zero-indexed https://github.com/amsul/pickadate.js/issues/768
 $day = $now->day;
 
 ?>
 
 @section('scripts_footer')
-{!! Html::script('js/pages/header/tournamentCreate.js') !!}
-{!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
+    {!! Html::script('js/pages/header/tournamentCreate.js') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\TournamentRequest') !!}
 
-<script>
+    <script>
         var ikf_categories = "{!!   trans_choice('categories.category',2) .": ". implode(', ',$rulesCategories[0]) !!}";
         var ekf_categories = "{!!   trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[1]) !!}";
         var lakc_categories = "{!!  trans_choice('categories.category',2) .": ".implode(', ',$rulesCategories[2]) !!}";
@@ -44,13 +44,13 @@ $day = $now->day;
             infoTextEmpty: '',
             infoText: ''
         });
-        $('.listbox-filter-disabled').on('change', function(){
+        $('.listbox-filter-disabled').on('change', function () {
             disableSubmit();
         });
         var dualListIds = [];
 
 
-        var minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0) ;
+        var minDay = new Date("{{$year}}", "{{$month}}", "{{$day}}", 0, 0, 0, 0);
         $(function () {
 
             var $input = $('.dateFin').pickadate({
@@ -62,7 +62,7 @@ $day = $now->day;
             });
             var pickerFin = $input.pickadate('picker');
 
-            var $inputIni =$('.dateIni').pickadate({
+            var $inputIni = $('.dateIni').pickadate({
                 min: [{{$year}}, {{$month}}, {{$day}}],
                 format: 'yyyy-mm-dd',
                 today: '',
@@ -125,13 +125,12 @@ $day = $now->day;
             });
 
 
-
         });
 
-        function disableSubmit(){
-            if ($('select[name="category[]_helper2"]').text() == ""){
+        function disableSubmit() {
+            if ($('select[name="category[]_helper2"]').text() == "") {
                 $('.btn-success').prop('disabled', true);
-            }else{
+            } else {
                 $('.btn-success').prop('disabled', false);
             }
         }

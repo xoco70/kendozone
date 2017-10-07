@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FederationController extends Controller
 {
-
-    protected $currentModelName;
-    // Only Super Admin can manage Federations
-
     /**
      * Display a listing of the resource.
      *

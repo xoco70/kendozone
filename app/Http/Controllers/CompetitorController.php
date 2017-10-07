@@ -32,7 +32,6 @@ class CompetitorController extends Controller
         $categorySize = $tournament->categories->count();
         $grades = Grade::getAllPlucked();
         $countries = Country::getAll();
-        $currentModelName = trans_choice('core.competitor', 2) . " - " . trans_choice('core.tournament', 1) . " : " . $tournament->name;
         return view("tournaments.users", compact('tournament', 'settingSize', 'categorySize', 'grades', 'countries'));
 
     }
@@ -47,7 +46,6 @@ class CompetitorController extends Controller
     public function create(Request $request, Tournament $tournament)
     {
         $championshipId = $request->get('categoryId');
-        $currentModelName = trans_choice('core.tournament', 1) . " : " . $tournament->name;
 
         return view("tournaments/users/create", compact('tournament', 'championshipId')); //, compact()
     }
