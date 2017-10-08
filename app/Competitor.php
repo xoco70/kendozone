@@ -26,7 +26,7 @@ class Competitor extends \Xoco70\LaravelTournaments\Models\Competitor
         $user = User::where(['email' => $attributes['email']])->withTrashed()->first();
 
         if ($user == null) {
-            $password = generatePassword();
+            $password = str_random(8);
             $user = User::create([
                 'firstname' => $attributes['firstname'],
                 'lastname' => $attributes['lastname'],
