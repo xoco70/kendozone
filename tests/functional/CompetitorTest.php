@@ -41,6 +41,7 @@ class CompetitorTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
 
+
         $tournament = factory(Tournament::class)->create(['user_id' => $this->root->id]);
         $championship = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
 
@@ -64,7 +65,6 @@ class CompetitorTest extends BrowserKitTest
     {
         foreach ($tournament->championships as $championship) {
             $this->addCompetitorToChampionship($championship, $user);
-
         }
     }
 

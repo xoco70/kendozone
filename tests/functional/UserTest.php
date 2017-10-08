@@ -135,6 +135,7 @@ class UserTest extends BrowserKitTest
     /** @test */
     public function create_user()
     {
+        Mail::fake();
         $this->logWithUser($this->root);
         Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);

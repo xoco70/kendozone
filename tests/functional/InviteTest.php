@@ -33,6 +33,8 @@ class InviteTest extends BrowserKitTest
     {
         $this->expectException(\App\Exceptions\InvitationNeededException::class);
 
+        Mail::fake();
+
         Artisan::call('db:seed', ['--class' => 'TournamentLevelSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
@@ -126,6 +128,7 @@ class InviteTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--database' => 'sqlite']);
 
+        Mail::fake();
         Auth::logout();
         // Create an open tournament
         $tournament = factory(Tournament::class)->create(['type' => Config::get('constants.OPEN_TOURNAMENT')]);
