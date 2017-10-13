@@ -11,11 +11,9 @@ vm = new Vue({
 
         teamsArea: [],
         team_id: 0,
-        // championship_id: championshipId,
         competitorsArea: arrChampionshipsWithTeamsAndCompetitors,
         championships: arrChampionshipsWithTeamsAndCompetitors,
         copyOne: [],
-        championship_id: 0,
     },
     methods: {
         deleteTeam(teamId){
@@ -41,17 +39,6 @@ vm = new Vue({
             axios.post(url_root_api + "/teams/" + old_team_id + "/" + new_team_id + "/competitors/" + competitorId + "/move");
         }
 
-    },
-    computed: {
-        championship(){
-            return this.championships.find((elem) => elem.championship == this.championship_id);
-        },
-        competitors(){
-            return this.championships.find((elem) => elem.championship == this.championship_id).competitors;
-        },
-        teams(){
-            return this.championships.find((elem) => elem.championship == this.championship_id).teams;
-        },
     },
 
     created: function () {

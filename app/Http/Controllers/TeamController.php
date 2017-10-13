@@ -36,24 +36,25 @@ class TeamController extends Controller
 
 
         $arrChampionshipsWithTeamsAndCompetitors = $tournament->championships->map(function ($championship) {
-            $competitors = $championship->competitors->map(function ($competitor) {
+            $competitors = $championship->competitors->load('user')->map(function ($competitor) {
                 return ["id" => $competitor->id, "name" => $competitor->user->name];
             })->toArray();
-            $teams = $championship->teams->map(function ($team) {
-                return ["id" => $team->id, "name" => $team->name, 'competitors' => $team->with('user')];
-            })->toArray();
-
+            $teams = $championship->teams()->with('competitors.user')->select('id','name')->get()->toArray();
             $tempAssignCompatitors = new Collection();
             $assignedCompetitors = $this->getAssignedCompetitors($championship, $tempAssignCompatitors);
-
             $freeCompetitors = $championship->competitors;
             if ($assignedCompetitors != null) {
                 $freeCompetitors = $freeCompetitors->diff($assignedCompetitors);
             }
 
-            return ['championship' => $championship->id, 'competitors' => $competitors, 'freeCompetitors' => $freeCompetitors, 'teams' => $teams];
+            return [
+                'championship' => $championship->id,
+                'competitors' => $competitors,
+                'assignedCompetitors' => $assignedCompetitors,
+                'freeCompetitors' => $freeCompetitors,
+                'teams' => $teams
+            ];
         })->toArray();
-
         return view("teams.index", compact('tournament', 'arrChampionshipsWithTeamsAndCompetitors'));
 
     }
