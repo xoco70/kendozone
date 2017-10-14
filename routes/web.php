@@ -149,8 +149,6 @@ Route::get('/auth/callback', function (Request $request) {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
 Route::get('/auth/oauth', function () {
     return view('auth.oauth');
 });
