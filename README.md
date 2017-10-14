@@ -1,12 +1,13 @@
 <h1 align="center">
 <br>
-<img src="https://my.kendozone.com/images/kz-stamp.png" alt="Kendozone">
-<br>
-Kendozone
-<br>
+    <img src="https://my.kendozone.com/images/kz-stamp.png" alt="Kendozone">
+    <br>
+    Kendozone
+    <br>
+    <h4 align="center">Create tournaments, configure championships, invite competitors, and generate trees</h4>
+
 </h1>
 
-<h4 align="center">Create tournaments, configure championships, invite competitors, and generate trees</h4>
 
 
 <p align="center">
@@ -19,8 +20,9 @@ Kendozone
 * [See Demo](#see-demo)
 * [Installation](#installation)
 * [Limitations](#limitations)
-* [Dependencies](#dependencies)
 * [Run Tests](#run-tests)
+* [Dependencies](#dependencies)
+
 
 ## Features
 
@@ -67,7 +69,9 @@ In order to be able to generate PDF, you must install wkhtmltopdf in your system
 
 ## Run Tests
 
+```php
 vendor/bin/phpunit
+```
 
 ## Limitations
 

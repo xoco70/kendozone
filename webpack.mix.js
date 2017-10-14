@@ -67,9 +67,6 @@ mix.combine([
     // 'resources/assets/css/google-fonts.css'
 ], 'public/css/app.css');
 
-
-
-
 // mix.combine([
 //     'resources/assets/js/plugins/tables/footable/footable.min.js'
 // ], 'public/js/pages/header/footable.js');
