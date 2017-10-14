@@ -20,22 +20,18 @@ Laravel Tournaments
 </h1>
 
 * [Features](#features)
+* [See Demo](#see-demo)
 * [Installation](#installation)
-* [Run the demo](#run-the-demo)
-* [Usage](#usage)
-* [Data Model](#data-model)
-* [Models](#models)
-* [Include views](#include-views)   
 * [Limitations](#limitations)
-* [Troubleshooting](#troubleshooting)
-* [Changelog](#changelog)
+* [Dependencies](#dependencies)
+* [Run Tests](#run-tests)
 
 ## Features
 
 - Tournament creation and configuration
 - Create and configure Championships based on Category 
 - Mass Invite or manually add competitors
-- Tree Generation( based on <a href="https://github.com/xoco70/laravel-tournaments>Laravel Tournaments</a> )
+- Tree Generation( based on <a href="https://github.com/xoco70/laravel-tournaments">Laravel Tournaments</a> )
 - Team management
 - Documentation Generation : Fight List, Scoresheets 
 - Manage Competitors / Clubs / Associations / Federations
@@ -73,7 +69,7 @@ To generate PDF, Kendozone use <a href="https://github.com/barryvdh/laravel-snap
 
 In order to be able to generate PDF, you must install wkhtmltopdf in your system.
 
-## Run Functional Tests
+## Run Tests
 
 vendor/bin/phpunit
 
@@ -83,7 +79,7 @@ This is a work in progress, and there is a bunch of stuff to achieve.
 
 I will not have much time to dedicate to grow Kendozone, I am looking for developpers that can help app grow. Please contact me at contact ( at ) kendozone.com if you are interested
 
-- Improve <a href="https://github.com/xoco70/laravel-tournaments>Laravel Tournaments</a> for more generation possibiilities
+- Improve <a href="https://github.com/xoco70/laravel-tournaments">Laravel Tournaments</a> for more generation possibiilities
 - Progressively migrate all JQuery stuff to VueJS 
 - Develop an hybrid app for live scoring
 - Clean front-end mess
