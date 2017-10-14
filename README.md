@@ -32,15 +32,18 @@ Laravel Tournaments
 
 ## Features
 
-- Tournament creation and configuration, 
+- Tournament creation and configuration
 - Create and configure Championships based on Category 
 - Mass Invite or manually add competitors
-- Tree Generation( based on <a href="https://github.com/xoco70/laravel-tournaments>Laravel Tournaments</a>)
+- Tree Generation( based on <a href="https://github.com/xoco70/laravel-tournaments>Laravel Tournaments</a> )
 - Team management
 - Documentation Generation : Fight List, Scoresheets 
 - Manage Competitors / Clubs / Associations / Federations
 - Multilanguage: Translated to 4 languages: English, French, Spanish, Japonese. <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">Help Translating</a>
  
+## See Demo
+
+You can check the hosted version <a href="https://my.kendozone.com">here</a>
 
 ## Installation
 
@@ -48,262 +51,45 @@ Clone the repository
 
 ```php
 $ git clone https://github.com/xoco70/kendozone.git
+$ cd kendozone/
 $ composer install
 $ npm install
 $ cp .env.example .env
 $ php artisan key:generate
-
+$ php artisan migrate 
+$ php artisan db:seed # Seed dummy data
+$ touch ./resources/assets/less/_main_full/main.less
+$ npm run dev
 ```
 
-You can now customize .env
+You can login as root with:
+user: superuser@kendozone.dev
+pass: superuser
 
-Note: Dependencies: 
+
+## Dependencies: 
 
 To generate PDF, Kendozone use <a href="https://github.com/barryvdh/laravel-snappy">laravel-snappy</a> that use behind the scene <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a>
 
-In order to be able to generate PDF, you must install wkhtmltopdf in your system
-     
-
-
-
-Finally, from the command line again, publish the default configuration file:
-
-```php
-php artisan vendor:publish --force --tag=laravel-tournaments
-```
-
-## Run the demo
-
-To run the demo, you need to generate Tournaments, Championships, Users, Competitors and Settings
-
-Run Migrations:
-```php
-php artisan migrate
-composer dump-autoload
-```
-
-Seed dummy data:
-```php
-php artisan db:seed --class=LaravelTournamentSeeder
-
-```
-> **WARNING**: Don't do this in production, it would wipe all your data. Use this line for demo purpose only
-
-You will be able to access the demo at `http://yourdomain.com/laravel-tournaments`
-
-## Usage
-```php
-// Create a tournament
-
-$tournament = factory(Tournament::class)->create(['user_id' => Auth::user()->id]);
-
-$championsip = factory(Championship::class)->create(['$tournament_id' => $tournament->id]);
-
-// Optional, if not defined, it will take default in ChampionshipSettings
-
-$settings = factory(ChampionshipSettings::class)->create(['championship_id' => $championship->id]);
-
-// Add competitors to championship
-
-$competitors = factory(\App\Competitor::class,10)->create([
-    'championship_id' => $championship->id,
-     'user_id' => factory(User::class)->create()->id
-]);
-
-// Define strategy to generate
-
-$generation = $championship->chooseGenerationStrategy();
-
-// Generate everything
-
-$generation->run();
-
-// Just generate Tree
-
-$this->generateAllTrees();
-
-// Just generate Fight List
-
-$this->generateAllFights();
-
-```
-## Data model
-![Database Model](https://raw.githubusercontent.com/xoco70/laravel-tournaments/master/resources/assets/images/laravel-tournaments-database-model.png)
-
-## Models
-### Tournament
-
-```php
-$tournament->owner; // get owner
-$tournament->venue; // get venue
-$tournament->championships; // get championships 
-```
-
-Check tournament type: 
-```php
-$tournament->isOpen()
-$tournament->needsInvitation()
-```
-
-Check tournament level:
-```php
-$tournament ->isInternational()
-$tournament->isNational() 
-$tournament->isRegional()
-$tournament->isEstate()
-$tournament->isMunicipal()
-$tournament->isDistrictal()
-$tournament->isLocal()
-$tournament->hasNoLevel()
-```
-## Championship
-
-```php
-$championship->competitors; // Get competitors
-$championship->teams; // Get teams
-$championship->fighters; // Get fighters
-$championship->category; // Get category
-$championship->tournament; // Get tournament
-$championship->users; // Get users
-$championship->settings; // Get settings
-$championship->fightersGroups; // Get groups 
-$championship->groupsByRound($numRound = 1); // Get groups for a specific round
-$championship->groupsFromRound($numRound = 1); // Get groups from a specific round
-$championship->fights; // Get fights
-$championship->firstRoundFights; // Get fights for the first round only ( Useful when has preliminary )
-$championship->fights($numRound = 1); // Get fights for a specific round
-```
-> **NOTE**: $fighter can be an instance of `Team` or `Competitor`
-
-
-Determine strategy:
-```php
-$championship->isPlayoffCompetitor()
-$championship->isPlayoffTeam()
-$championship->isSingleEliminationCompetitor()
-$championship->isSingleEliminationTeam()
-```
-
-Determine group size:
-```php
-$championship->getGroupSize()
-```
-
-Determine championship type: 
-```php
-$championship->hasPreliminary()
-$championship->isPlayOffType()
-$championship->isSingleEliminationType()
-```
-
-
-### FightersGroup
-
-```php
-$group->championship; // Get championship
-$group->fights; // Get fights
-$group->fighters; // Get fighters
-$group->teams; // Get teams
-$group->competitors; // Get competitors
-$group->users; // Get users
-```
-> **NOTE**: $fighter can be an instance of `Team` or `Competitor`
-
-To get the instance name:
-```php
-$group->getFighterType() // Should return Team::class or Competitor::class
-```
-
-> **NOTE**: This plugin use <a href="https://github.com/lazychaser/laravel-nestedset">laravel-nestedset</a>. 
-This means you can navigate with `$group->children()` or `$group->parent()` or use any methods available in this great plugin.  
-
-### Competitor
-
-```php
-$competitor->user; // Get user
-```
-
-### Team
-```php
-// Create a team
-
-$team = factory(Team::class)
-    ->create([ championship_id' => $championship->id]);
-```
-
-```php
-// Add competitor to team 
-
-$team->competitors()->attach($competitor->id);
-
-// Remove competitor from a team 
-
-$team->competitors()->detach($competitor->id);
-
-```
-
-### Fight 
-
-```php
-$fight->group; // Get group
-$fight->competitor1; // Get competitor1
-$fight->competitor2; // Get competitor2
-$fight->team1; // Get team1
-$fight->team2; // Get team2
-```
-
-## Views
-Preliminary tree
-```php
-@include('laravel-tournaments::partials.tree.preliminary') // Preliminary table
-```
-
-Single Elimination tree
-```php
-@include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 0]) 
-```
-
-Fight List
-```php
-@include('laravel-tournaments::partials.fights')
-```
+In order to be able to generate PDF, you must install wkhtmltopdf in your system.
 
 ## Run Functional Tests
 
-vendor/bin/phpunit tests
+vendor/bin/phpunit
 
 ## Limitations
 
-This is a work in progress, and tree creation might be very complex, so there is a bunch of things to achieve.  
+This is a work in progress, and there is a bunch of stuff to achieve.  
 
-- Seed fighter
-- Manage more than 1 fighter out of preliminary round
-- Modify Preliminary Round generation on the fly
-- Use any number of area ( restricted to 1,2,4,8)
-- Manage n+1 case : When for instance, there is 17 competitors in a direct elimination tree, there will have 15 BYES.
-We can improve that making the first match with 3 competitors.
-- Double elimination
- 
-## Troubleshooting
+I will not have much time to dedicate to grow Kendozone, I am looking for developpers that can help app grow. Please contact me at contact ( at ) kendozone.com if you are interested
 
-### Specified key was too long error
-For those running MariaDB or older versions of MySQL you may hit this error when trying to run migrations:
-As outlined in the <a href="https://laravel.com/docs/master/migrations#creating-indexes">Migrations guide</a> to fix this all you have to do is edit your AppServiceProvider.php file and inside the boot method set a default string length:
-```php
-use Illuminate\Support\Facades\Schema;
+- Improve <a href="https://github.com/xoco70/laravel-tournaments>Laravel Tournaments</a> for more generation possibiilities
+- Progressively migrate all JQuery stuff to VueJS 
+- Develop an hybrid app for live scoring
+- Clean front-end mess
+- Still a lot to optimize, like some n+1 queries
+- Create VueJS Unit Tests
 
-public function boot()
-{
-Schema::defaultStringLength(191);
-}
-```
-### With this configuration, you must have at least...
-This error means you don't have enough competitors / teams to create given tree
-Try to increase competitor number, decrease areas or preliminary group size, if preliminary round is active 
 
-## ChangeLog:
 
-- v0.13: Manage third place fight
-- v0.12: Laravel 5.5 version
-- v0.11: Initial Version
 
