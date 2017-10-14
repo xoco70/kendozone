@@ -57,7 +57,9 @@ $ npm run dev
 ```
 
 You can login as root with:
+
 user: superuser@kendozone.dev
+
 pass: superuser
 
 
