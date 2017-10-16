@@ -18,10 +18,12 @@
 
 * [Features](#features)
 * [See Demo](#see-demo)
+* [Requirements](#requirements)
 * [Installation](#installation)
 * [Limitations](#limitations)
 * [Run Tests](#run-tests)
 * [Dependencies](#dependencies)
+* [Security Vulnerabilities](security-vulnerabilities)
 
 
 ## Features
@@ -38,6 +40,13 @@
 ## See Demo
 
 You can check the hosted version <a href="https://my.kendozone.com">here</a>
+
+## Requirements
+
+- PHP 7 or newer
+- HTTP server with PHP support (eg: Apache, Nginx, Caddy)
+- Composer
+- A supported database: MySQL, PostgreSQL or SQLite
 
 ## Installation
 
@@ -89,5 +98,7 @@ I will not have much time to dedicate to grow Kendozone, I am looking for develo
 - Create VueJS Unit Tests
 
 
+## Security Vulnerabilities
 
+If you discover a security vulnerability within Kendozone, please send an e-mail to us at contact@kendozone.com. We handle all security vulnerabilities on a case-by-case basis.
 
