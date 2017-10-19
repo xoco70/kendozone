@@ -182,7 +182,7 @@ return array (
   'impersonate' => '変わる',
   'leave_impersonation' => '変わらない',
   'team' => 'チーム',
-  'no_team_yet' => 'まだこの大会に登録されていないチーム',
+  'still_no_team' => 'まだこの大会に登録されていないチーム',
   'add_new_team' => '大会を追加',
   'registered_team' => 'チーム登録済み',
   'team_name' => 'チーム名',

@@ -65,7 +65,7 @@ return array (
   'club_president_already_exists' => 'User :user is already president of another club',
   'association_president_already_exists' => 'User :user is already president of another association',
   'federation_president_already_exists' => 'User :user is already president of another federation',
-  'please_create_account_before_playing' => 'To register the tournament :tournament, you need to create a Kendozone Account. Gambate!!!',
+  'please_create_account_before_playing' => 'To register the tournament :tournament, you need to create a Kendozone Account. Do your best!!!',
   'user_has_registered_to_tournament' => ':user_name has registered to tournament :tournament',
   'user_has_registered_to_championships' => ':user_name has registered to championships:',
   'success_to_all' => '¡Success to all!',

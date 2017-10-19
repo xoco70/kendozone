@@ -185,7 +185,7 @@ return array (
   'impersonate' => 'Asumir Usuario',
   'leave_impersonation' => 'Dejar Usuario',
   'team' => 'Equipo|Equipos',
-  'no_team_yet' => 'Aún no tienes equipos registrados en este torneo',
+  'still_no_team' => 'Aún no tienes equipos registrados en este torneo',
   'add_new_team' => 'Agregar un equipo',
   'registered_team' => 'Equipos registrados',
   'team_name' => 'Nombre del equipo',
