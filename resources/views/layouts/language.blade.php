@@ -5,6 +5,8 @@
         <img src="/images/flags/JP.png" alt="Japonese">
     @elseif (App::getLocale() =='fr')
         <img src="/images/flags/FR.png" alt="Français">
+    @elseif (App::getLocale() =='de')
+        <img src="/images/flags/DE.png" alt="Deutch">
     @else
         <img src="/images/flags/GB.png" alt="English">
     @endif
@@ -16,13 +18,15 @@
             <img src="/images/flags/FR.png" alt="Français"> Français</a></li>
     <li><a class="english" href="{{ URL::action('LanguageController@update', 'en') }}">
             <img src="/images/flags/GB.png" alt="English"> English</a></li>
-    <li><a class="english" href="{{ URL::action('LanguageController@update', 'ja') }}">
-            <img src="/images/flags/JP.png" alt="English"> Japonese</a></li>
+    <li><a class="deutch" href="{{ URL::action('LanguageController@update', 'de') }}">
+            <img src="/images/flags/DE.png" alt="Deutch">Deutch</a></li>
     <li>
-        <div align="center">
-            <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">
-                {{ trans('help.help_translate') }}
-            </a>
-        </div>
+    <li><a class="japonese" href="{{ URL::action('LanguageController@update', 'ja') }}">
+            <img src="/images/flags/JP.png" alt="Japonese"> Japonese</a></li>
+    <div align="center">
+        <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">
+            {{ trans('help.help_translate') }}
+        </a>
+    </div>
     </li>
 </ul>

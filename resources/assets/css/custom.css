@@ -72,18 +72,18 @@ fieldset > a > legend {
 
 }
 
-.btn.text-primary.border-primary.border-3.seeall {
-    width: 107px;
+/*.btn.text-primary.border-primary.border-3.seeall {*/
+    /*width: 107px;*/
 
-}
+/*}*/
 
-.btn.text-success.border-success.border-3.seeall {
-    width: 107px;
-}
+/*.btn.text-success.border-success.border-3.seeall {*/
+    /*width: 107px;*/
+/*}*/
 
-.btn.border-success.bg-success.border-3 {
-    width: 107px;
-}
+/*.btn.border-success.bg-success.border-3 {*/
+    /*width: 107px;*/
+/*}*/
 
 .square {
     /* float: left; */
