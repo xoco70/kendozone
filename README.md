@@ -41,7 +41,7 @@
 
 You can check the hosted version <a href="https://my.kendozone.com">here</a>
 
-## Requirements
+## Requirements
 
 - PHP 7 or newer
 - HTTP server with PHP support (eg: Apache, Nginx, Caddy)
