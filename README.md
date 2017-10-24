@@ -35,7 +35,7 @@
 - Team management
 - Documentation Generation : Fight List, Scoresheets 
 - Manage Competitors / Clubs / Associations / Federations
-- Multilanguage: Translated to 4 languages: English, French, Spanish, Japonese. <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">Help Translating</a>
+- Multilanguage: Translated to 4 languages: English, French, Spanish, Japanese. <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">Help Translating</a>
  
 ## See Demo
 
@@ -88,11 +88,11 @@ vendor/bin/phpunit
 
 This is a work in progress, and there is a bunch of stuff to achieve.  
 
-I will not have much time to dedicate to grow Kendozone, I am looking for developpers that can help app grow. Please contact me at contact ( at ) kendozone.com if you are interested
+I will not have much time to dedicate to grow Kendozone, I am looking for developers that can help app grow. Please contact me at contact ( at ) kendozone.com if you are interested
 
-- Improve <a href="https://github.com/xoco70/laravel-tournaments">Laravel Tournaments</a> for more generation possibiilities
-- Progressively migrate all JQuery stuff to VueJS 
-- Develop an hybrid app for live scoring
+- Improve <a href="https://github.com/xoco70/laravel-tournaments">Laravel Tournaments</a> for more generation possibilities
+- Progressively migrate all jQuery stuff to VueJS 
+- Develop a hybrid app for live scoring
 - Clean front-end mess
 - Still a lot to optimize, like some n+1 queries
 - Create VueJS Unit Tests
