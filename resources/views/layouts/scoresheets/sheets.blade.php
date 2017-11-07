@@ -1,5 +1,11 @@
 @if (sizeof($championship->fightersGroups)==0)
-    {{ trans('core.still_no_scoresheet') }}
+    <div class="panel panel-flat page_print">
+        <div class="panel-body">
+            <div class="container-fluid">
+                <h1 align="center"> {{ trans('core.still_no_scoresheet') }}</h1>
+            </div>
+        </div>
+    </div>
 @endif
 @foreach ($championship->fightersGroups as $group )
     @if ($group->fights[0]->shouldBeInFightList(true))

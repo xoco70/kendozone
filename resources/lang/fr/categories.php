@@ -83,5 +83,5 @@ return array (
   'presettings' => 'Pré-configuration',
   'presettings_text' => 'Choisir les règles pour créer un tournoi. Les catégories seront créer et configurer automatiquement',
   'manual' => 'Manuel',
-  'playOff' => 'Éliminatoires',
+  'playOff' => 'Play Off',
 );

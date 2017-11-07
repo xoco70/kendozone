@@ -33,15 +33,25 @@
                     <div class="tab-pane {{ $loop->first ? "active" : "" }}" id="{{$championship->id}}">
 
                         <div style=" text-align: right; margin-bottom: 10px; ">
-
-                            <a href="{{URL::action('PDFController@scoresheets', ['championship'=> $championship->id]) }}"
-                               target="_blank"
-                               class="btn bg-teal btn-xs btnPrint rightButton">
-                                <i class="icon-printer"></i>
-                            </a>
+                            @if (! $championship->isPlayOffType() && sizeof($championship->fightersGroups)>0)
+                                <a href="{{URL::action('PDFController@scoresheets', ['championship'=> $championship->id]) }}"
+                                   target="_blank"
+                                   class="btn bg-teal btn-xs btnPrint rightButton">
+                                    <i class="icon-printer"></i>
+                                </a>
+                            @endif
                         </div>
-                        @include('layouts.scoresheets.sheets')
-
+                        @if (! $championship->isPlayOffType())
+                            @include('layouts.scoresheets.sheets')
+                        @else
+                            <div class="panel panel-flat page_print">
+                                <div class="panel-body">
+                                    <div class="container-fluid">
+                                        <h1 align="center">{{ trans('core.no_scoresheet_for_playoff') }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>

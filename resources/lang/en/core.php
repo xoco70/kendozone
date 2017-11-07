@@ -237,4 +237,5 @@ return array (
   'personalinfo' => 'Personal informations',
   'users' => 'Users',
   'statistics' => 'Statistics',
+  'no_scoresheet_for_playoff' => 'There is no scoresheet for playoff championships',
 );
