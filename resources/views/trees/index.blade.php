@@ -60,7 +60,7 @@
                                     </h1>
 
                                     @if ($championship->fightersGroups != null  && $championship->fightersGroups->count() != 0)
-                                        @if ($championship->hasPreliminary())
+                                        @if ($championship->hasPreliminary() && ! $championship->isPlayOffType())
                                             @include('laravel-tournaments::partials.tree.preliminary')
                                         @elseif ($championship->isSingleEliminationType())
                                             @include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 0])
