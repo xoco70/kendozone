@@ -20,8 +20,6 @@
                         @elseif ($championship->isSingleEliminationType())
                             @include('laravel-tournaments::partials.tree.singleElimination', ['hasPreliminary' => 0])
                         @elseif ($championship->isPlayOffType())
-                            @include('layouts.tree.roundRobin')
-                        @elseif ($championship->isPlayOffType())
                             @include('layouts.tree.playOff')
                         @else
                             <div>{{trans('core.no_generated_tree')}}</div>
