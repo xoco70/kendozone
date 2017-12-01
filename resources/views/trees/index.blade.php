@@ -88,6 +88,9 @@
 @section('scripts_footer')
     {!! Html::script('js/pages/footer/trees.js')!!}
     <script>
+        var facebook_id = "{{ env('FACEBOOK_CLIENT_ID') }}";
+        var url_register = '{{ URL::action('TournamentController@register',$tournament->slug) }}';
+
         <?php
 
         if (session()->has('activeTreeTab')) {
