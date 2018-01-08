@@ -179,7 +179,6 @@ return [
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
-        Barryvdh\TranslationManager\ManagerServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
