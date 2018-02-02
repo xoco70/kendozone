@@ -22,9 +22,9 @@
             <img src="/images/flags/DE.png" alt="Deutch">Deutch</a></li>
     <li>
     <li><a class="japonese" href="{{ URL::action('LanguageController@update', 'ja') }}">
-            <img src="/images/flags/JP.png" alt="Japonese"> Japonese</a></li>
+            <img src="/images/flags/JP.png" alt="Japonese">Japonese</a></li>
     <div align="center">
-        <a href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">
+        <a target="_blank" href="https://lokalise.co/signup/9206592359c17cdcafd822.29517217/all/">
             {{ trans('help.help_translate') }}
         </a>
     </div>
