@@ -23,6 +23,7 @@ return array (
   'digits_between' => 'Le champ :attribute doit avoir entre :min et :max chiffres.',
   'distinct' => 'Le champ :attribute a une valeur dupliquée.',
   'exists' => 'Le champ :attribute sélectionné est invalide.',
+  'file' => ':attribute doit être un fichier.',
   'filled' => 'Le champ :attribute est obligatoire.',
   'image' => 'Le champ :attribute doit être une image.',
   'in' => 'Le champ :attribute est invalide.',
@@ -67,6 +68,7 @@ return array (
   'string' => 'Le champ :attribute doit être une chaîne de caractères.',
   'timezone' => 'Le champ :attribute doit être un fuseau horaire valide.',
   'unique' => 'La valeur du champ :attribute est déjà utilisée.',
+  'uploaded' => 'Le :attribute n\'a pas pu être uploadé.',
   'url' => 'Le format de l\'URL de :attribute n\'est pas valide.',
   'custom' => 
   array (
