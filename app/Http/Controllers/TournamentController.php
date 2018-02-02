@@ -117,7 +117,7 @@ class TournamentController extends Controller
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
         $hanteiLimit = config('options.hanteiLimit');
-        $categories = $tournament->getCategoriesName();
+        $categories = $tournament->getDefaultCategoriesName();
         $grades = Grade::getAllPlucked();
         $venue = $tournament->venue ?? new Venue;
         $levels = TournamentLevel::getAllPlucked();
@@ -205,10 +205,8 @@ class TournamentController extends Controller
             Session::flash('message', trans('msg.please_create_account_before_playing', ['tournament' => $tournament->name]));
             return redirect(URL::action('Auth\LoginController@login'));
         }
-        if ($tournament->isOpen()) {
-            if (Auth::check()) {
-                App::setLocale(Auth::user()->locale);
-            }
+        if ($tournament->isOpen() && Auth::check()) {
+            App::setLocale(Auth::user()->locale);
 
             $grades = Grade::getAllPlucked();
             $tournament = Tournament::with('championships.category', 'championships.users')->find($tournament->id);
@@ -219,18 +217,20 @@ class TournamentController extends Controller
     }
 
     /**
+     * Get Deleted Tournaments
+     * 
      * @return mixed
      */
     public function getDeleted()
     {
+        $tournaments = Auth::user()->tournaments()->with('owner')
+        ->onlyTrashed()
+        ->latest()
+        ->paginate(config('constants.PAGINATION'));
+
         if (Auth::user()->isSuperAdmin()) {
             $tournaments = Tournament::onlyTrashed()->with('owner')
                 ->has('owner')
-                ->latest()
-                ->paginate(config('constants.PAGINATION'));
-        } else {
-            $tournaments = Auth::user()->tournaments()->with('owner')
-                ->onlyTrashed()
                 ->latest()
                 ->paginate(config('constants.PAGINATION'));
         }
