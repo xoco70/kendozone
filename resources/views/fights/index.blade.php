@@ -26,7 +26,12 @@
         </div>
     </div>
     @include("right-panel.tournament_menu")
-
 @stop
 @section('scripts_footer')
+    <script>
+        var facebook_id = "{{ env('FACEBOOK_CLIENT_ID') }}";
+        var url_register = '{{ URL::action('TournamentController@register',$tournament->slug) }}';
+        var url_show_tournament = '{{ URL::action('TournamentController@show',$tournament->slug) }}';
+    </script>
+    {!! Html::script('js/facebook.js') !!}
 @stop

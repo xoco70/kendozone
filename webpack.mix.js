@@ -94,8 +94,7 @@ mix.combine([
 mix.combine([
     'resources/assets/js/jquery.timepicker.css',
 
-    ], 'public/css/pages/tournamentEdit.css');
-
+], 'public/css/pages/tournamentEdit.css');
 
 
 mix.combine([
@@ -109,6 +108,7 @@ mix.combine([
     'resources/assets/js/jquery.timepicker.js',
     'resources/assets/js/plugins/jquery-dateFormat.min.js',
     'resources/assets/js/pages/footer/tournamentEditFooter.js',
+    'resources/assets/js/facebook.js',
     'public/js/createCategory.js',
     'public/js/kendo-settings.js',
 ], 'public/js/pages/header/tournamentEdit.js');
@@ -161,6 +161,7 @@ mix.combine([
 mix.combine([
     'resources/assets/js/plugins/ui/nicescroll.min.js',
     'resources/assets/js/components/sweetalert/dist/sweetalert.min.js',
+    'resources/assets/js/facebook.js',
 ], 'public/js/pages/footer/trees.js');
 
 
@@ -173,9 +174,9 @@ mix.combine([
 ], 'public/css/pages/preliminary_trees.css');
 
 
-
 mix.combine([
-    'resources/assets/js/pages/footer/tournamentEditFooter.js'
+    'resources/assets/js/pages/footer/tournamentEditFooter.js',
+    'resources/assets/js/facebook.js',
 ], 'public/js/pages/footer/tournamentEditFooter.js');
 
 
@@ -209,10 +210,14 @@ mix.combine([
 
 mix.combine([
     'resources/assets/js/pages/footer/teamIndexFooter.js',
+    'resources/assets/js/facebook.js',
 ], 'public/js/pages/footer/teamIndexFooter.js');
 
 mix.combine([
     'resources/assets/css/dragula.css',
 ], 'public/css/dragula.css');
 
+mix.copy([
+    'resources/assets/js/facebook.js',
+], 'public/js/facebook.js');
 

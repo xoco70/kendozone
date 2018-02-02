@@ -90,7 +90,7 @@
     <script>
         var facebook_id = "{{ env('FACEBOOK_CLIENT_ID') }}";
         var url_register = '{{ URL::action('TournamentController@register',$tournament->slug) }}';
-
+        var url_show_tournament = '{{ URL::action('TournamentController@show',$tournament->slug) }}';
         <?php
 
         if (session()->has('activeTreeTab')) {
@@ -134,10 +134,6 @@
             } else {
                 form.submit();
             }
-
         });
-
-
     </script>
-
 @stop

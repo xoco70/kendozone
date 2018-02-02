@@ -116,18 +116,9 @@ $favicon = asset('/favicon_kz-01.png');
             }
 
         });
-        {{--@foreach ($tournament->championships as $championship)--}}
-                {{--$('.advanced_settings_{{ $championship->id }}').hide();--}}
-                {{--$(".see_more_{{ $championship->id }}").click(function () {--}}
-                {{--icon = $(this).find("i");--}}
-                {{--icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');--}}
-                {{--$(".see_more_{{ $championship->id }}")--}}
-                {{--.text($(".see_more_{{ $championship->id }}").text().trim() == moreText ? lessText : moreText);--}}
-                {{--$('.advanced_settings_{{ $championship->id }}').slideToggle("fast");--}}
-                {{--});--}}
-                {{--@endforeach--}}
 
-            window.twttr = (function (d, s, id) {
+
+        window.twttr = (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
                 t = window.twttr || {};
             if (d.getElementById(id)) return t;

@@ -77,12 +77,17 @@
         var url = "{{ URL::action('TeamController@index', $tournament->slug) }}";
         var url_root_api = "{{ route("api.root")}}";
         var arrChampionshipsWithTeamsAndCompetitors = JSON.parse('{!!   json_encode($arrChampionshipsWithTeamsAndCompetitors) !!}');
+        var facebook_id = "{{ env('FACEBOOK_CLIENT_ID') }}";
+        var url_register = '{{ URL::action('TournamentController@register',$tournament->slug) }}';
+        var url_show_tournament = '{{ URL::action('TournamentController@show',$tournament->slug) }}';
 
                 @if (isset($activeTab))
         var activeTab = "{{ $activeTab }}";
         @endif
 
     </script>
+
     {!! Html::script('js/pages/footer/teamIndexFooter.js') !!}
+    {!! Html::script('js/facebook.js') !!}
     {!! Html::script('js/addFighterToTeam.js')!!}
 @stop
