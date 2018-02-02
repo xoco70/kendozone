@@ -8,7 +8,6 @@ use Cviebrock\EloquentSluggable\Engines\IdeographicEngine;
 use Cviebrock\EloquentSluggable\Engines\KoreanEngine;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\AuditingTrait;
 use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
@@ -377,17 +376,14 @@ class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament
     }
 
     /**
+     * Get predefined translatable categories for categories quick add in tournament editing
      * @return array
      */
-    public function getCategoriesName() // Should take generic ones
+    public function getDefaultCategoriesName()
     {
-        $baseCategories = Category::take(10)->pluck('name', 'id');
-        foreach ($this->championships as $championship) {
-            $category = $championship->category;
-            $alias = $championship->buildName();
-            $baseCategories->put($category->id, $alias);
-        }
-        $categories = $baseCategories->sortBy('id')->toArray();
-        return $categories;
+        return Category::take(7)
+            ->pluck('name', 'id')
+            ->sortBy('id')
+            ->toArray();
     }
 }
