@@ -25,16 +25,21 @@
                                     <b> <i class="icon-plus22 mr-5"></i></b>
                                     @lang('core.add') {{  trans_choice('core.competitor',2) }}
                                 </a>
+                                @if  ($championship->fights->isEmpty())
+                                    {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class' => 'pull-right',
+    'action' => ['TreeController@store', $championship->id]]) !!}
+                                    <button type="submit" class="btn bg-success btn-xs pull-right mr-10" id="generate">
+                                        {{ trans_choice('core.generate_tree',1) }}
+                                    </button>
+                                    {!! Form::close() !!}
+                                @else
 
-                                {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class' => 'pull-right',
-'action' => ['TreeController@store', $championship->id]]) !!}
-
-                                <button type="submit"
-                                        class="btn bg-success btn-xs pull-right mr-10" id="generate">
-                                    {{ trans_choice('core.generate_tree',1) }}
-
-                                </button>
-                                {!! Form::close() !!}
+                                    <a href="{{ URL::action('TreeController@index',$tournament->slug) }}" data-toggle="modal"
+                                       class="btn bg-success btn-xs pull-right mr-10">
+                                        <b> <i class="icon-tree7 mr-5"></i></b>
+                                        {{  trans('core.see_trees') }}
+                                    </a>
+                                @endif
                                 <br/><br/>
                             @endcan
 
@@ -68,7 +73,8 @@
                                     <tr>
                                         <td class="text-center">
                                             <a href="{!!   URL::action('UserController@show',  $user->slug) !!}">
-                                                <img src="{{ asset('/images/avatar/avatar.png') }}" class="img-circle img-sm"/></a>
+                                                <img src="{{ asset('/images/avatar/avatar.png') }}"
+                                                     class="img-circle img-sm"/></a>
                                         </td>
                                         <td>
                                             @can('edit',$user)
@@ -157,7 +163,7 @@
 @section("scripts_footer")
     {!! Html::script('js/pages/header/competitorIndex.js') !!}
 
-{{--    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}--}}
+    {{--    {!! JsValidator::formRequest('App\Http\Requests\CompetitorRequest') !!}--}}
     <script>
 
 
