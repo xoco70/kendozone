@@ -33,7 +33,7 @@
             <span class="pl-10 pull-right">
                     <a id="addClub" href="{!!   URL::action('ClubController@create') !!}"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.add') {{ trans('structures.club') }}
+                        @lang('core.add') {{ trans_choice('structures.club',1) }}
                     </a>
                 </span>
         @endcan
