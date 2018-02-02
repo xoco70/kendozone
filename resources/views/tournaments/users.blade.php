@@ -2,26 +2,20 @@
 @section('title')
     <title>{{ trans_choice('core.competitor',2) }}</title>
 @stop
-
 @section('breadcrumbs')
     {!! Breadcrumbs::render('tournaments.users.index',$tournament) !!}
 @stop
 @section('content')
     <?php
-
     $link = route('workingonit');
-
     ?>
     <!-- Detached content -->
     <div class="container-detached">
         <div class="content-detached">
             @foreach($tournament->championships as $championship)
                 <div class="panel panel-flat">
-
                     <div class="panel-body">
-
                         <div class="container-fluid">
-
                             @can('edit',$tournament)
                                 <a href="#championshipId={{$championship->id}}" data-toggle="modal"
                                    data-target="#create_tournament_user"
@@ -31,7 +25,6 @@
                                     <b> <i class="icon-plus22 mr-5"></i></b>
                                     @lang('core.add') {{  trans_choice('core.competitor',2) }}
                                 </a>
-
 
                                 {!! Form::model(null, ['method' => 'POST', 'id' => 'storeTree', 'class' => 'pull-right',
 'action' => ['TreeController@store', $championship->id]]) !!}
@@ -86,7 +79,7 @@
 
 
                                         </td>
-                                        <td>{{ strpos($user->email, "@kendozone.com")!== false ? substr($user->email,-21) : $user->email }}</td>
+                                        <td>{{ strpos($user->email, "@kendozone.com")!== false ? '' : $user->email }}</td>
                                         <td class="text-center">{{ $championship->buildName()}}</td>
 
                                         <td class="text-center">
