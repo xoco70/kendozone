@@ -10,7 +10,7 @@
             <div align="center" class="mt-20 pt-20">
 
                 <a href="{!! URL::action('AssociationController@create') !!}" type="button"
-                   class="btn btn-primary text-uppercase p-10 " id="addAssociation">{{ trans('core.add_new_association') }}
+                   class="btn btn-primary text-uppercase p-10 " id="addAssociation">{{ trans('structures.add_new_association') }}
                 </a>
             </div>
 

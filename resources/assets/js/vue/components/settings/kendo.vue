@@ -3,12 +3,11 @@
         <div class="row">
             <div class="col-lg-7 col-xs-9 cat-title">
                 <a data-toggle="collapse" data-parent="#accordion-styled" :href="'#accordion-styled-group'+num">
-
                     <div class="panel-heading">
                         <h6 class="panel-title">
+                            <!--:value=alias-->
                             <input class="form-control alias" type="text"
                                    id="alias" name="alias"
-                                   :value=alias
                                    v-model="data.alias">
                         </h6>
                     </div>
