@@ -16,9 +16,9 @@ Breadcrumbs::register('federations.index', function ($breadcrumbs) {
 Breadcrumbs::register('federations.edit', function ($breadcrumbs, $federation) {
     $breadcrumbs->parent('federations.index');
     if (Auth::user()->isFederationPresident($federation)) {
-        $breadcrumbs->push($federation->name, route('federations.edit', $federation->id));
+        $breadcrumbs->push(str_limit($federation->name,40), route('federations.edit', $federation->id));
     } else {
-        $breadcrumbs->push($federation->name, route('federations.show', $federation->id));
+        $breadcrumbs->push(str_limit($federation->name,40), route('federations.show', $federation->id));
     }
 
 });
@@ -39,9 +39,9 @@ Breadcrumbs::register('associations.create', function ($breadcrumbs) {
 Breadcrumbs::register('associations.edit', function ($breadcrumbs, $association) {
     $breadcrumbs->parent('associations.index');
     if (Auth::user()->isFederationPresident($association->federation) || Auth::user()->isAssociationPresident($association)) {
-        $breadcrumbs->push($association->name, route('associations.edit', $association->id));
+        $breadcrumbs->push(str_limit($association->name,40), route('associations.edit', $association->id));
     } else {
-        $breadcrumbs->push($association->name, route('associations.show', $association->id));
+        $breadcrumbs->push(str_limit($association->name,40), route('associations.show', $association->id));
     }
 
 });
@@ -56,9 +56,9 @@ Breadcrumbs::register('clubs.index', function ($breadcrumbs) {
 Breadcrumbs::register('clubs.edit', function ($breadcrumbs, $club) {
     $breadcrumbs->parent('clubs.index');
     if (Auth::user()->isFederationPresident($club->federation) || Auth::user()->isAssociationPresident($club) || Auth::user()->isClubPresident($club)) {
-        $breadcrumbs->push($club->name, route('clubs.edit', $club->id));
+        $breadcrumbs->push(str_limit($club->name,40), route('clubs.edit', $club->id));
     } else {
-        $breadcrumbs->push($club->name, route('clubs.show', $club->id));
+        $breadcrumbs->push(str_limit($club->name,40), route('clubs.show', $club->id));
     }
 
 });
@@ -86,15 +86,15 @@ Breadcrumbs::register('tournaments.create', function ($breadcrumbs, $currentMode
 Breadcrumbs::register('tournaments.edit', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
     if (policy($tournament)->edit(Auth::user(), $tournament)) {
-        $breadcrumbs->push($tournament->name, route('tournaments.edit', $tournament->slug));
+        $breadcrumbs->push(str_limit($tournament->name, 30), route('tournaments.edit', $tournament->slug));
     } else {
-        $breadcrumbs->push($tournament->name, route('tournaments.show', $tournament->slug));
+        $breadcrumbs->push(str_limit($tournament->name,30), route('tournaments.show', $tournament->slug));
     }
 
 });
 Breadcrumbs::register('tournaments.show', function ($breadcrumbs, $tournament) {
     $breadcrumbs->parent('tournaments.index');
-    $breadcrumbs->push($tournament->name, route('tournaments.show', $tournament->slug));
+    $breadcrumbs->push(str_limit($tournament->name,30), route('tournaments.show', $tournament->slug));
 
 });
 
