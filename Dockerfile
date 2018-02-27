@@ -3,11 +3,16 @@ RUN export HTTP_PROXY=http://10.31.255.65:8080 \
     && export HTTPS_PROXY=http://10.31.255.65:8080 \
     && export http_proxy=http://10.31.255.65:8080 \
     && export https_proxy=http://10.31.255.65:8080 \
-    && apt-get update -y && apt-get install -y openssl zip unzip git \
+    && apt-get update -y && apt-get install -y openssl zip unzip git apt-utils nodejs npm \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && docker-php-ext-install pdo mbstring \
     # && composer install \
-    && npm run dev
+    #&& php artisan key:generate \
+    # && php artisan migrate \
+    # && php artisan db:seed \
+    # && touch ./resources/assets/less/_main_full/main.less
+    && npm install && npm run dev
+
 WORKDIR /app
 COPY . /app
 
