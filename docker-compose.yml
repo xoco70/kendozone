@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: web.docker
+    volumes:
+      - ./:/var/www
+      - ./certs/:/var/certs
+    ports:
+      - "8080:80"
+    links:
+      - app
+  app:
+    build:
+      context: ./
+      dockerfile: app.docker
+    volumes:
+      - ./:/var/www
+    env_file:
+    - .env
