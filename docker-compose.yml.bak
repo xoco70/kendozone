@@ -1,0 +1,41 @@
+version: '2'
+services:
+  database:
+    image: mysql:5.7
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=kendozone"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD="
+      - "MYSQL_ROOT_PASSWORD=root"
+    ports:
+        - "33061:3306"
+
+  # The Application
+  app:
+    image: xoco/kendozone:1.0.0
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    environment:
+      - "DB_HOST=localhost"
+      - "DB_DATABASE=kendozone"
+      - "DB_USERNAME=root"
+      - "DB_PASSWORD=root"
+
+  # The Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    ports:
+      - 8080:80
+
+  # The Database
+
+volumes:
+  dbdata:
