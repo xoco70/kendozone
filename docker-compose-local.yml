@@ -17,8 +17,8 @@ services:
       context: ./
       dockerfile: nginx.dockerfile
     working_dir: /var/www
-    volumes_from:
-      - app
+    volumes:
+      - laravel:/var/www
     ports:
       - 8080:80
 
@@ -35,5 +35,5 @@ services:
 #    ports:
 #        - "33061:3306"
 #
-#volumes:
-#  dbdata:
+volumes:
+  laravel:
