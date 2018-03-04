@@ -20,6 +20,7 @@ public/images/avatar/
 public/js
 public/pdf
 public/css
+database.sqlite
 
 
 tests/_output/*

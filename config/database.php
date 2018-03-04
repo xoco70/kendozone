@@ -54,7 +54,7 @@ return [
 
         'sqlite-local' => [
             'driver' => 'sqlite',
-            'database' => '../database/kz-database.sqlite',
+            'database' => '../database.sqlite',
             'prefix' => '',
         ],
 

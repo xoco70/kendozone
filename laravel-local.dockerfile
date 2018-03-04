@@ -5,7 +5,7 @@ COPY . /app
 COPY ./entrypoint.sh /tmp
 
 RUN touch /app/resources/assets/less/_main_full/main.less \
-&& touch /app/database/kz-database.sqlite \
+&& touch /app/database.sqlite \
 && apt-get update -y && apt-get install -y openssl zip unzip git npm \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
