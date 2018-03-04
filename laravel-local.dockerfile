@@ -4,13 +4,15 @@ WORKDIR /app
 COPY . /app
 COPY ./entrypoint.sh /tmp
 
-RUN touch ./resources/assets/less/_main_full/main.less \
+RUN touch /app/resources/assets/less/_main_full/main.less \
+&& touch /app/database/kz-database.sqlite \
 && apt-get update -y && apt-get install -y openssl zip unzip git npm \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng12-dev \
         libmagickwand-dev --no-install-recommends \
+        sqlite3 libsqlite3-dev \
 && apt-get purge --auto-remove -y g++ \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
