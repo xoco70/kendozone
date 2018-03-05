@@ -7,9 +7,6 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-#    environment:
-#      - "DB_PORT=3306"
-#      - "DB_HOST=database"
 
   # The Web Server
   web:
