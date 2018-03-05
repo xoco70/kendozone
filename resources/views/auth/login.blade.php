@@ -41,14 +41,21 @@
                             class="btn bg-success btn-block p-10">{{  trans('auth.signin') }}
                         <i class="icon-arrow-right14 position-right"></i></button>
                 </div>
-                <div class="content-divider text-muted form-group"><span>{{  trans('auth.signin_with') }}</span> </div>
+                @if(empty(env('FACEBOOK_CLIENT_ID')) && empty(env('GOOGLE_CLIENT_ID')))
+                    <div class="content-divider text-muted form-group"><span>{{  trans('auth.signin_with') }}</span>
+                    </div>
+                @endif
                 <ul class="list-inline form-group list-inline-condensed text-center">
-                    <li><a href="{!! URL::action('Auth\LoginController@getSocialAuth','facebook') !!}"
-                           class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded" id="fb"><i
-                                    class="icon-facebook"></i></a></li>
-                    <li><a href="{!! URL::action('Auth\LoginController@getSocialAuth', 'google') !!}"
-                           class="btn border-danger text-danger btn-flat btn-icon btn-rounded" id="google"><i
-                                    class="icon-google"></i></a></li>
+                    @if(empty(env('FACEBOOK_CLIENT_ID')))
+                        <li><a href="{!! URL::action('Auth\LoginController@getSocialAuth','facebook') !!}"
+                               class="btn border-indigo text-indigo btn-flat btn-icon btn-rounded" id="fb"><i
+                                        class="icon-facebook"></i></a></li>
+                    @endif
+                    @if(empty(env('GOOGLE_CLIENT_ID')))
+                        <li><a href="{!! URL::action('Auth\LoginController@getSocialAuth', 'google') !!}"
+                               class="btn border-danger text-danger btn-flat btn-icon btn-rounded" id="google"><i
+                                        class="icon-google"></i></a></li>
+                    @endif
                 </ul>
 
                 <div class="content-divider text-muted form-group"><span>{{  trans('auth.no_account') }}</span>
