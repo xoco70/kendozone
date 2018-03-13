@@ -22,8 +22,9 @@ RUN  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.s
 && export NVM_DIR="$HOME/.nvm" \
 && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm \
 && nvm install node \
-&& npm cache clean -f && npm install -g n && n stable && npm install cross-env && npm install && npm run dev \
-&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+&& npm cache clean -f && npm install -g n && n stable && npm install cross-env && npm install && npm run dev
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 && composer install --no-interaction
 
 RUN chown -R www-data:www-data \
