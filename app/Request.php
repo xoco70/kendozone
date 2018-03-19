@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Request extends Model
+class Request extends Model implements Auditable
 {
-    use AuditingTrait;
+    use \OwenIt\Auditing\Auditable;
     public $timestamps = true;
     protected $table = 'request';
     protected $fillable = [

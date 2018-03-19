@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Club extends Model
+class Club extends Model implements Auditable
 {
     public $timestamps = true;
     protected $table = 'club';
     protected $guarded = ['id'];
-    use SoftDeletes;
-    use AuditingTrait;
+    use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

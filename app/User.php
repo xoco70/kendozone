@@ -20,7 +20,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
-use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 
 /**
@@ -37,9 +37,9 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
  * @property Club clubOwned
  * @property int id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, Auditable
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, AuditingTrait, Notifiable, HasApiTokens, Impersonate, RoleTrait;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Sluggable, Notifiable, HasApiTokens, Impersonate, RoleTrait, \OwenIt\Auditing\Auditable;
 
     /**
      * The database table used by the model.

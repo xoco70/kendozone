@@ -5,18 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 use stdClass;
 
-class Association extends Model
+class Association extends Model implements Auditable
 {
 
     public $timestamps = true;
     protected $table = 'association';
     protected $guarded = ['id'];
-    use SoftDeletes;
-    use AuditingTrait;
+    use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

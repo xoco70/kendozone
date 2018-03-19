@@ -4,12 +4,12 @@ namespace App;
 
 
 use Cocur\Slugify\Slugify;
-use Cviebrock\EloquentSluggable\Engines\IdeographicEngine;
-use Cviebrock\EloquentSluggable\Engines\KoreanEngine;
+//use Cviebrock\EloquentSluggable\Engines\IdeographicEngine;
+//use Cviebrock\EloquentSluggable\Engines\KoreanEngine;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
 
 
@@ -21,11 +21,10 @@ use Xoco70\LaravelTournaments\Models\ChampionshipSettings;
  * @property mixed updated_at
  * @property mixed deleted_at
  */
-class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament
+class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament implements Auditable
 {
-    use SoftDeletes;
+    use SoftDeletes, \OwenIt\Auditing\Auditable;
     use Sluggable;
-    use AuditingTrait;
     use SluggableScopeHelpers;
 
     public $timestamps = true;
@@ -75,16 +74,16 @@ class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament
         ];
     }
 
-    public function customizeSlugEngine(Slugify $engine, $attribute)
-    {
-        if (isJapanese($this->name)) { // Or Korean, or any unsupported language
-            return new IdeographicEngine();
-        }
-        if (isKorean($this->name)) { // Or Korean, or any unsupported language
-            return new KoreanEngine();
-        }
-        return $engine;
-    }
+//    public function customizeSlugEngine(Slugify $engine, $attribute)
+//    {
+//        if (isJapanese($this->name)) { // Or Korean, or any unsupported language
+//            return new IdeographicEngine();
+//        }
+//        if (isKorean($this->name)) { // Or Korean, or any unsupported language
+//            return new KoreanEngine();
+//        }
+//        return $engine;
+//    }
 
     /**
      * A tournament is owned by a user

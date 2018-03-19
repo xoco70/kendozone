@@ -12,7 +12,6 @@ class CreateTournamentTable extends Migration {
 
 		Schema::create('tournament', function(Blueprint $table) {
 			$table->increments('id');
-            $table->text('slug');
             $table->Integer('user_id')->unsigned()->index();
 			$table->foreign('user_id')
 					->references('id')

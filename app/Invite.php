@@ -5,11 +5,12 @@ namespace App;
 use App\Notifications\InviteCompetitor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use OwenIt\Auditing\AuditingTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Invite extends Model
+
+class Invite extends Model implements Auditable
 {
-    use AuditingTrait;
+    use \OwenIt\Auditing\Auditable;
     public $timestamps = true;
     protected $table = 'invitation';
     protected $fillable = [
