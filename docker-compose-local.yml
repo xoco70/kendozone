@@ -5,6 +5,8 @@ services:
   app:
     image: kendozone:local-1.0.0
     working_dir: /var/www
+    volumes:
+      - codevolume:/var/www
     environment:
       - "DB_DATABASE=homestead"
       - "DB_USERNAME=homestead"
@@ -20,10 +22,12 @@ services:
       context: ./
       dockerfile: nginx.dockerfile
     working_dir: /var/www
-    volumes_from:
-      - app
+    volumes:
+      - codevolume:/var/www
     ports:
       - 8090:80
+    depends_on:
+      - app
 
   # The Database
   database:
@@ -40,3 +44,4 @@ services:
 
 volumes:
   dbdata:
+  codevolume:
