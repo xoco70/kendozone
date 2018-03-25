@@ -5,14 +5,14 @@ services:
   app:
     image: kendozone:local-1.0.0
     working_dir: /var/www
-    volumes:
-      - ./:/var/www
     environment:
       - "DB_DATABASE=homestead"
       - "DB_USERNAME=homestead"
       - "DB_PASSWORD=secret"
       - "DB_PORT=3306"
       - "DB_HOST=database"
+    depends_on:
+      - database
 
   # The Web Server
   web:
