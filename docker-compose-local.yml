@@ -1,47 +1,6 @@
-version: '2'
+version: '3'
 services:
-
-  # The Application
   app:
     image: kendozone:local-1.0.0
-    working_dir: /var/www
-    volumes:
-      - codevolume:/var/www
-    environment:
-      - "DB_DATABASE=homestead"
-      - "DB_USERNAME=homestead"
-      - "DB_PASSWORD=secret"
-      - "DB_PORT=3306"
-      - "DB_HOST=database"
-    depends_on:
-      - database
-
-  # The Web Server
-  web:
-    build:
-      context: ./
-      dockerfile: nginx.dockerfile
-    working_dir: /var/www
-    volumes:
-      - codevolume:/var/www
     ports:
-      - 8090:80
-    depends_on:
-      - app
-
-  # The Database
-  database:
-    image: mysql:5.7
-    volumes:
-      - dbdata:/var/lib/mysql
-    environment:
-      - "MYSQL_DATABASE=homestead"
-      - "MYSQL_USER=homestead"
-      - "MYSQL_PASSWORD=secret"
-      - "MYSQL_ROOT_PASSWORD=root"
-    ports:
-        - "33061:3306"
-
-volumes:
-  dbdata:
-  codevolume:
+      - "8081:8081"

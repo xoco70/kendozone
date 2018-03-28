@@ -1,4 +1,6 @@
 # Laravel 5 & Lumen specific
+vendor
+nodes_modules
 public/storage
 storage/*.key
 storage/framework/cache/**
