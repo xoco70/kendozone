@@ -29,42 +29,15 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(TournamentLevelSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(TournamentSeeder::class);
+//        $this->call(TournamentSeeder::class);
 
         $this->call(FederationSeeder::class);
         $this->call(AssociationSeeder::class);
         $this->call(ClubSeeder::class);
-        $this->call(CompetitorSeeder::class);
+//        $this->call(CompetitorSeeder::class);
 
         $this->command->info('All tables seeded!');
         setFKCheckOn();
         Model::reguard();
     }
-
-
-//    public function confirmToProceed($warning = 'Application In Production!', $callback = null)
-//    {
-//        $shouldConfirm = $callback instanceof Closure ? call_user_func($callback) : $callback;
-//
-//        if ($shouldConfirm) {
-//            if ($this->option('force')) {
-//                return true;
-//            }
-//
-//            $this->comment(str_repeat('*', strlen($warning) + 12));
-//            $this->comment('*     '.$warning.'     *');
-//            $this->comment(str_repeat('*', strlen($warning) + 12));
-//            $this->output->writeln('');
-//
-//            $confirmed = Command::confirm('Do you really wish to run this command?');
-//
-//            if (! $confirmed) {
-//                $this->comment('Command Cancelled!');
-//
-//                return false;
-//            }
-//        }
-//
-//        return true;
-//    }
 }

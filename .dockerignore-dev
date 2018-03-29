@@ -1,0 +1,15 @@
+### Laravel template
+vendor/
+node_modules/
+
+# Laravel 5 & Lumen specific
+public/storage
+storage/*.key
+storage/framework/cache/**
+storage/framework/sessions/**
+storage/framework/views/**
+
+.env
+
+
+.idea
