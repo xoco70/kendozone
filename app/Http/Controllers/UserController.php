@@ -46,6 +46,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         $user = new User();
         if (Auth::user()->cannot('create', $user)) {
             throw new AuthorizationException();
@@ -54,7 +55,6 @@ class UserController extends Controller
         $roles = Role::grantedRoles(Auth::user()->role_id)->pluck('name', 'id');
         $grades = Grade::getAllPlucked();
         $countries = Country::getAllPlucked();
-//        $submitButton = trans('core.add').' '.trans_choice('core.user', 1);
         $federations = Federation::fillSelect();
         $associations = Association::forUser(auth()->user());
         $clubs = Club::fillSelect(Auth::user()->federation_id, Auth::user()->association_id);

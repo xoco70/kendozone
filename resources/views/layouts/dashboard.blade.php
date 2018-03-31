@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script data-cfasync="false">window.civchat = {
-            apiKey: "UqQXPuoajzcRnS4VrniDb1JfohA725XdaDtXW7zGThveM640NcmEkDWeXy7ZWHGo",
-            name: "",
-            email: ""
-        };</script>
-    <script data-cfasync="false" src="https://widget.userengage.io/widget.js"></script>
     <script>
         window.Laravel = {
             csrfToken: "{{ csrf_token() }}"
