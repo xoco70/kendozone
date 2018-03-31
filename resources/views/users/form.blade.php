@@ -34,9 +34,6 @@
 
         @endif
 
-
-
-
         <!-- Detached content -->
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12">
@@ -367,7 +364,8 @@
 
             let onlyPic = initialPic.substring(initialPic.lastIndexOf('/') + 1);
 
-            let uploadUrl = "{{ URL::action('UserAvatarController@store',$user->slug) }}";
+            // TODO if root is creating user, how should I upload an avatar in a still non created user
+            let uploadUrl = "{{ URL::action('UserAvatarController@store',$user->slug ?? 'tmp') }}";
             let avatarHiddenField = $('input[name=avatar]');
 
             new Dropzone('#fileInput', {

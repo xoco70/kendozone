@@ -42,7 +42,7 @@
         <span class="pl-10 pull-right">
                     <a href="{!!   URL::action('UserController@create') !!}" id="adduser"
                        class="btn btn-primary btn-xs "><b><i class="icon-plus22 mr-5"></i></b>
-                        @lang('core.add') {{ trans('core.user') }}
+                        @lang('core.add') {{ trans_choice('core.user',1) }}
                     </a>
                 </span>
         <a href="{!!   URL::action('UserController@export') !!}"
