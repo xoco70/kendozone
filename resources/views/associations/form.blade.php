@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 @section('title')
     @if (isset($association->id))
-        <title>{{ trans('core.edit') .' '.trans_choice('structures.association',1) }}</title>
+        <title>{{ trans('core.edit') .' '.$association->name }}</title>
     @else
-        <title>{{ trans('core.create') .' '.trans_choice('structures.association',1) }}</title>
+        <title>{{ trans('structures.association.add') }}</title>
     @endif
 @stop
 

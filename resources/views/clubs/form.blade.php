@@ -5,8 +5,9 @@
     <title>{{ trans('core.edit') .' '.trans_choice('structures.club',1) }}</title>
 @endif
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('clubs.edit',$club) !!}
-
+    @if (!is_null($club->id))
+        {!! Breadcrumbs::render('clubs.edit',$club) !!}
+    @endif
 @stop
 @section('content')
     @include("errors.list")
