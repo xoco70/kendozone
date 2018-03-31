@@ -38,8 +38,9 @@ class Authenticate
     public function handle($request, Closure $next, ...$guards)
     {
         if ($this->auth->user() != null && $this->auth->user()->verified == 0) {
+            auth()->logout();
             flash()->error(trans('auth.account_not_activated'));
-            return redirect()->guest('/login');
+            return redirect()->back();
         }
         $this->authenticate($guards);
         return $next($request);
