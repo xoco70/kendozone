@@ -21,15 +21,20 @@
 
                         </tr>
                         </thead>
+                        {{--TODO There is invites which tournament does not exist, this is bad :( --}}
                         @foreach($invites as $invite)
-                            <tr>
-                                <td align="center"><a
-                                            href="{!!   URL::action('TournamentController@show',  $invite->object->slug) !!}">{{ $invite->object->name }}</a>
-                                </td>
-                                <td align="center">{{ $invite->object->owner->name }}</td>
-                                <td align="center">{{ $invite->object->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
+                            @if ($invite->object !=null)
+                                <tr>
+                                    <td align="center">
 
-                            </tr>
+                                        <a href="{!!   URL::action('TournamentController@show',  $invite->object->slug) !!}">{{ $invite->object->name }}</a>
+
+                                    </td>
+                                    <td align="center">{{ $invite->object->owner->name }}</td>
+                                    <td align="center">{{ $invite->object->type == 1 ? trans('core.open') : trans_choice('core.invitation',1) }}</td>
+
+                                </tr>
+                            @endif
                         @endforeach
                     </table>
                 </div>
