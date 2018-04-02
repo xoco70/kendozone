@@ -31,12 +31,6 @@
         "webpatser/laravel-countries": "dev-develop",
         "xoco70/laravel-tournaments": "dev-master"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/reganjohnson/laravel-jsvalidation"
-        }
-    ],
     "require-dev": {
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "~1.4",
