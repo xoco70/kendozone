@@ -1,4 +1,4 @@
-Vue.component('create-category', require('../components/categoryCreate.vue'));
+Vue.component('create-category', require('../components/CategoryCreate.vue'));
 
 const app = new Vue({
     el: '#modal'
