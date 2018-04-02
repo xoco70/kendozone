@@ -24,7 +24,6 @@ mix.js('resources/assets/js/vue/pages/kendo-settings.js', 'public/js/');
 
 mix.copy('resources/assets/js/analytics.js', 'public/js/analytics.js');
 
-mix.copy('vendor/xoco70/laravel-tournaments/resources/assets/css/brackets.css', 'public/vendor/laravel-tournaments/css/brackets.css');
 mix.copy('resources/assets/css/sheet.css', 'public/css/pages/sheet.css');
 mix.copy('resources/assets/css/icons/icomoon/fonts/icomoon.woff', 'public/css/icons/icomoon/fonts/icomoon.woff');
 mix.copy('resources/assets/css/icons/icomoon/fonts/icomoon.ttf', 'public/css/icons/icomoon/fonts/icomoon.ttf');
