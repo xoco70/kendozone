@@ -28,7 +28,7 @@
         "sentry/sentry-laravel": "^0.8.0",
         "thomaswelton/laravel-gravatar": "1.*",
         "torann/geoip": "^1.0",
-        "webpatser/laravel-countries": "dev-master",
+        "webpatser/laravel-countries": "dev-develop",
         "xoco70/laravel-tournaments": "dev-master"
     },
     "repositories": [

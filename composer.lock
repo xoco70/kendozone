@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "188a90bee1415c3ff4a0f544d240b85b",
+    "content-hash": "55fe75f865df6135efa0ebc12b16e5aa",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3106,16 +3106,16 @@
         },
         {
             "name": "owen-it/laravel-auditing",
-            "version": "v6.0.1",
+            "version": "v6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owen-it/laravel-auditing.git",
-                "reference": "953f175307532cfd61d447229fd3fbb95d5a5e0d"
+                "reference": "8e6273d6bdef802e0efb51fe2005f1229f0c5f80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/953f175307532cfd61d447229fd3fbb95d5a5e0d",
-                "reference": "953f175307532cfd61d447229fd3fbb95d5a5e0d",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/8e6273d6bdef802e0efb51fe2005f1229f0c5f80",
+                "reference": "8e6273d6bdef802e0efb51fe2005f1229f0c5f80",
                 "shasum": ""
             },
             "require": {
@@ -3185,7 +3185,7 @@
                 "revision",
                 "tracking"
             ],
-            "time": "2018-02-15T16:23:28+00:00"
+            "time": "2018-04-02T11:58:04+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5292,32 +5292,22 @@
         },
         {
             "name": "webpatser/laravel-countries",
-            "version": "dev-master",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webpatser/laravel-countries.git",
-                "reference": "2568394dd6bcc983be190086576ff2715c236f42"
+                "reference": "cf29cdb93a27a25cae03ab6e205f32d40bca0d1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webpatser/laravel-countries/zipball/2568394dd6bcc983be190086576ff2715c236f42",
-                "reference": "2568394dd6bcc983be190086576ff2715c236f42",
+                "url": "https://api.github.com/repos/webpatser/laravel-countries/zipball/cf29cdb93a27a25cae03ab6e205f32d40bca0d1f",
+                "reference": "cf29cdb93a27a25cae03ab6e205f32d40bca0d1f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webpatser\\Countries\\CountriesServiceProvider"
-                    ],
-                    "aliases": {
-                        "Countries": "Webpatser\\Countries\\CountriesFacade"
-                    }
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Webpatser\\Countries": "src/"
@@ -5350,7 +5340,7 @@
                 "iso_3166_3",
                 "laravel"
             ],
-            "time": "2017-10-15T11:08:15+00:00"
+            "time": "2018-01-03T19:25:08+00:00"
         },
         {
             "name": "xoco70/laravel-tournaments",
@@ -5358,12 +5348,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xoco70/laravel-tournaments.git",
-                "reference": "2f5a596a990b3dfcafc227f92dbef773f233334f"
+                "reference": "4be76e8d4f23a40c63ec7799470c23baad5c4f4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/2f5a596a990b3dfcafc227f92dbef773f233334f",
-                "reference": "2f5a596a990b3dfcafc227f92dbef773f233334f",
+                "url": "https://api.github.com/repos/xoco70/laravel-tournaments/zipball/4be76e8d4f23a40c63ec7799470c23baad5c4f4a",
+                "reference": "4be76e8d4f23a40c63ec7799470c23baad5c4f4a",
                 "shasum": ""
             },
             "require": {
@@ -5406,7 +5396,7 @@
             ],
             "description": "A Laravel 5.4+ Package that allows you to generate Tournaments tree",
             "homepage": "https://github.com/xoco70/laravel-tournaments",
-            "time": "2018-04-02T09:22:37+00:00"
+            "time": "2018-04-02T09:32:51+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
