@@ -14,10 +14,9 @@ class TournamentLevelSeeder extends Seeder {
     public function run()
     {
         //Empty the Grade table
-//        DB::table('Grade')->delete();
         TournamentLevel::truncate();
         TournamentLevel::create(['id'=> '0','name' => "ND"]);
-        TournamentLevel::create(['id'=> '1','name' => "core.local"]);
+//        TournamentLevel::create(['id'=> '1','name' => "core.local"]);
         TournamentLevel::create(['id'=> '2','name' => "core.district"]);
         TournamentLevel::create(['id'=> '3','name' => "core.level_city"]);
         TournamentLevel::create(['id'=> '4','name' => "core.level_state"]);

@@ -207,6 +207,7 @@ class AssociationTest extends BrowserKitTest
     {
         $this->visit("/associations")
             ->dontSee('403.png');
+        return null;
     }
 
 
@@ -219,6 +220,7 @@ class AssociationTest extends BrowserKitTest
     {
         $this->visit_addAssociation();
         $this->fillAssocAndSee($association);
+        return null;
     }
 
     /**
@@ -237,6 +239,7 @@ class AssociationTest extends BrowserKitTest
 
     private function crud()
     {
+
         $this->canRead(); // R
 
 //        $associationData = factory(Association::class)->make(['federation_id' => Auth::user()->federation_id]);

@@ -12,16 +12,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('slug')->unique();
-            $table->integer('role_id')->unsigned()->default(Config::get('constants.ROLE_USER'));
-            $table->string('email')->unique();
+        Schema::table('users', function (Blueprint $table) {
 
-            $table->string('password', 60);
+            $table->string('slug')->unique()->default('');
+            $table->integer('role_id')->unsigned()->default(Config::get('constants.ROLE_USER'));
 
             // FK is definded in create_FK migration
             $table->integer('federation_id')->nullable()->unsigned();
@@ -32,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->integer('country_id')->unsigned()->index();
+            $table->integer('country_id')->nullable()->unsigned()->index();
 
             $table->string('gender')->nullable();
             $table->string('avatar')->nullable();
@@ -41,7 +35,6 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->unique()->nullable();
             $table->string('locale', 5)->default('en');
-
 
 
             $table->foreign('role_id')
@@ -59,8 +52,6 @@ class CreateUsersTable extends Migration
                 ->on('grade')
                 ->onUpdate('cascade');
 
-            $table->rememberToken();
-            $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';
 
@@ -74,8 +65,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        setFKCheckOff();
-        Schema::dropIfExists('users');
-        setFKCheckOn();
+        // Undo all fields
     }
 }
