@@ -10,18 +10,18 @@
   "devDependencies": {
     "axios": "^0.18",
     "cross-env": "^5.1",
+    "jquery": "^3.3.1",
+    "laravel-mix": "^2.1.11",
+    "lodash": "^4.17.5",
     "popper.js": "^1.12",
-    "jquery": "^3.1.0",
-    "laravel-mix": "^2.0",
-    "lodash": "^4.17.4",
-    "vue": "^2.5.13"
+    "vue": "^2.5.16"
   },
   "dependencies": {
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
+    "less": "^2.7.3",
+    "less-loader": "^4.1.0",
     "mozjpeg": "^4.1.1",
     "optipng": "^1.1.0",
-    "purify-css": "^1.2.5",
+    "purify-css": "^1.2.6",
     "purifycss-webpack": "^0.7.0",
     "vue-dragula": "^2.0.0-alpha"
   }
