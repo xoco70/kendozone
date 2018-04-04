@@ -1,6 +1,6 @@
 version: '3'
 services:
   app:
-    image: xoco/kendozone:local-1.0.0
+    image: xoco/kendozone:local-alpine-1.0.0
     ports:
       - "80:80"

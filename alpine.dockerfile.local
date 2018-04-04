@@ -1,39 +1,25 @@
-FROM php:7.1.15-fpm-alpine
+FROM php:7.2.3-fpm-alpine
 LABEL maintainer="contact@kendozone.com"
 LABEL version="1.0.0"
 LABEL description="Kendozone is a online tournament webapp coded with PHP / Laravel"
 
-ENV node_version 8.4.0
-ENV npm_version 5.7.1
-ENV NVM_DIR /.nvm
 ENV APP_DIR="/var/www"
 ENV APP_PORT="8081"
 
-
-RUN apk update 
-# RUN apk add openssl zip unzip git
-RUN apk add nodejs nodejs-npm
+RUN apk add --update nodejs nodejs-npm git && rm -rf /var/cache/apk/*
 
 WORKDIR $APP_DIR
 COPY . $APP_DIR
 
 RUN mkdir -p $APP_DIR/resources/assets/less/_main_full \
 && touch $APP_DIR/resources/assets/less/_main_full/main.less \
-&& touch $APP_DIR/sqlite.db \
+&& touch $APP_DIR/database/sqlite.db \
 && mv .env.local .env \
 && chown -R www-data:www-data $APP_DIR
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN composer install --no-interaction
-
-RUN mkdir -p $NVM_DIR && chown -R www-data:www-data $NVM_DIR
-RUN  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
-&& [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
-&& nvm install ${node_version}
-
-ENV NODE_PATH $NVM_DIR/v$node_version/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$node_version/bin:$PATH
 
 RUN npm install
 RUN npm run production
