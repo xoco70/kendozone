@@ -1,6 +1,6 @@
 @extends('layouts.pdf')
 @section('content')
-    @include("layouts.tree.preliminary")
+    @include('laravel-tournaments::partials.tree.preliminary', ['show_tree' => true])
 @stop
 @section('footer')
     @include('pdf.footer')
