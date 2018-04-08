@@ -13,14 +13,14 @@ class Country extends Model
 
     public static function getAll()
     {
-        return Cache::remember('countries', config('constants.GRADE_MINUTES'), function () {
+        return Cache::rememberForever('countries', function () {
             return static::all();
         });
     }
 
     public static function getAllPlucked()
     {
-        return Cache::remember('countries_pluck', config('constants.GRADE_MINUTES'), function () {
+        return Cache::rememberForever('countries_pluck', function () {
             return static::pluck('name', 'id');
         });
     }

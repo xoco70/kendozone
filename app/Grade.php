@@ -24,9 +24,10 @@ class Grade extends Model
 
     public static function getAllPlucked()
     {
-        return Cache::remember('grades_pluck', config('constants.GRADE_MINUTES'), function () {
+        return Cache::rememberForever('grades_pluck', function () {
             return static::pluck('name', 'id');
         });
+
     }
 
     public function getNameAttribute($name)
