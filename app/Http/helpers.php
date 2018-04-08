@@ -74,6 +74,17 @@ function setFKCheckOn()
     }
 }
 
+function internet_connected()
+{
+    $is_conn = false;
+    $connected = @fsockopen("www.google.com", 443);
+    if ($connected){
+        $is_conn = true;
+        fclose($connected);
+    }
+    return $is_conn;
+
+}
 
 
 

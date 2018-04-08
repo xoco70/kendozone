@@ -412,7 +412,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getAvatarAttribute($avatar)
     {
-        if (!isset($avatar) && Gravatar::exists($this->email)) {
+        
+        if (internet_connected() && !isset($avatar) && Gravatar::exists($this->email)) {
             return Gravatar::src($this->email);
 
         }
