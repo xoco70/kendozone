@@ -18,6 +18,7 @@ class FightersGroup extends \Xoco70\LaravelTournaments\Models\FightersGroup
                 $query->with([
                     'settings',
                     'category',
+                    'users',
                     'fightersGroups' => function ($query) {
                         return $query->with('teams', 'competitors', 'fights');
                     }]);
@@ -32,6 +33,7 @@ class FightersGroup extends \Xoco70\LaravelTournaments\Models\FightersGroup
                         ->with([
                             'settings',
                             'category',
+                            'users',
                             'fightersGroups' => function ($query) {
                                 return $query->with('teams', 'competitors', 'fights');
                             }]);
