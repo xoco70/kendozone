@@ -31,7 +31,7 @@
                             <tr>
                                 <td class="text-center">
                                     <a href="{!!   URL::action('UserController@show',  $user->slug) !!}">
-                                        <img src="/public/images/avatar/avatar.png" class="img-circle img-sm"/></a>
+                                        <img src="/images/avatar/avatar.png" class="img-circle img-sm"/></a>
                                 </td>
                                 <td>
                                     @can('edit',$user)
