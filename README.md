@@ -96,6 +96,8 @@ I will not have much time to dedicate to grow Kendozone, I am looking for develo
 - Clean front-end mess
 - Still a lot to optimize, like some n+1 queries
 - Create VueJS Unit Tests
+- Decouple Backend and Frontend
+- Improve Docker support
 
 
 ## Security Vulnerabilities
