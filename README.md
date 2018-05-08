@@ -13,7 +13,7 @@
 <p align="center">
     <a href="https://scrutinizer-ci.com/g/xoco70/kendozone/?branch=master">
     <img src="https://scrutinizer-ci.com/g/xoco70/kendozone/badges/quality-score.png?b=master" title="Scrutinizer Code Quality">
-    <a href="https://travis-ci.org/xoco70/kendozone"><img src="https://travis-ci.org/xoco70/kendozone.svg?branch=master" alt="Build Status" data-canonical-src="https://travis-ci.org/xoco70/kendozone.svg?branch=master" style="max-width:100%;"></a> [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+    <a href="https://travis-ci.org/xoco70/kendozone"><img src="https://travis-ci.org/xoco70/kendozone.svg?branch=master" alt="Build Status" data-canonical-src="https://travis-ci.org/xoco70/kendozone.svg?branch=master" style="max-width:100%;"></a>
 </p>
 
 * [Features](#features)
