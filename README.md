@@ -44,9 +44,9 @@ You can check the hosted version <a href="https://my.kendozone.com">here</a>
 ## Requirements
 
 - PHP 7 or newer
-- HTTP server with PHP support (eg: Apache, Nginx, Caddy)
+- MySQL or compatible
+- Nginx
 - Composer
-- A supported database: MySQL, PostgreSQL or SQLite
 
 ## Installation
 
