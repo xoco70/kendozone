@@ -8,4 +8,4 @@ phases:
 
 artifacts:
   files:
-    - outputFile
+    - './'
