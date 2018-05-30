@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - composer install
+      - npm install
+      - npm run dev
+
+artifacts:
+  files:
+    - outputFile
