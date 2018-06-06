@@ -26,7 +26,7 @@
             <p class="coutent-group">{{trans('core.select_categories_to_register')}}</p>
 
 
-            {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+            {!!  Form::select('category[]', $categories,$tournament->getCategoryIdArray(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
         </div>
 
         <div class="form-group">

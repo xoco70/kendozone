@@ -9,9 +9,6 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-//        if (! $this->confirmToProceed()) {
-//            return;
-//        }
         Model::unguard();
         //Seed the countries
         $this->command->info('Seeded the countries!');

@@ -94,7 +94,7 @@
                     <div class="col-md-offset-2">
 
                         <div class="form-group multiselect">
-                        {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!}
+                        {!!  Form::select('category[]', $categories,$tournament->getCategoryIdArray(), ['class' => 'form-group form-control listbox-filter-disabled', "multiple"]) !!}
                         </div>
 
                     </div>

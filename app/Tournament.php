@@ -172,7 +172,7 @@ class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament implements
      * Get Category List with <Select> Format
      * @return mixed
      */
-    public function getCategoryList()
+    public function getCategoryIdArray()
     {
         return $this->categories->pluck('id')->all();
     }
@@ -374,15 +374,4 @@ class Tournament extends \Xoco70\LaravelTournaments\Models\Tournament implements
         return $array;
     }
 
-    /**
-     * Get predefined translatable categories for categories quick add in tournament editing
-     * @return array
-     */
-    public function getDefaultCategoriesName()
-    {
-        return Category::take(7)
-            ->pluck('name', 'id')
-            ->sortBy('id')
-            ->toArray();
-    }
 }

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="coutent-group">{{trans('core.select_tournament_categories')}}</p>
-                    {!!  Form::select('category[]', $categories,$tournament->getCategoryList(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
+                    {!!  Form::select('category[]', $categories,$tournament->getCategoryIdArray(), ['class' => 'form-control listbox-filter-disabled', "multiple"]) !!} <!-- Default 1st Dan-->
                     </div>
                 </div>
                 <div class="row text-uppercase">

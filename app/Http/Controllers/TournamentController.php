@@ -110,13 +110,19 @@ class TournamentController extends Controller
         $tournament = Tournament::with('competitors', 'championshipSettings', 'championships.settings', 'championships.category')
             ->withCount('competitors', 'teams')
             ->find($tournament->id);
+        $selectedCategories = $tournament->categories->pluck('name','id'); // 3,4 ,240
+        $defaultCategories = Category::take(7)->get()->sortBy('id')->pluck('name','id'); // 1 2 3 4 5 6 7
+
+        $categories = $selectedCategories->union($defaultCategories)->toArray();
+
+
 
         // Statistics for Right Panel
         $countries = Country::getAllPlucked();
         $settingSize = $tournament->championshipSettings->count();
         $categorySize = $tournament->championships->count();
         $hanteiLimit = config('options.hanteiLimit');
-        $categories = $tournament->getDefaultCategoriesName();
+
         $grades = Grade::getAllPlucked();
         $venue = $tournament->venue ?? new Venue;
         $levels = TournamentLevel::getAllPlucked();
