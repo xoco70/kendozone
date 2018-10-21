@@ -52,17 +52,17 @@ You can check the hosted version <a href="https://my.kendozone.com">here</a>
 
 Clone the repository
 
-```php
-$ git clone https://github.com/xoco70/kendozone.git
-$ cd kendozone/
-$ composer install
-$ npm install
-$ cp .env.example .env
-$ php artisan key:generate
-$ php artisan migrate 
-$ php artisan db:seed # Seed dummy data
-$ touch ./resources/assets/less/_main_full/main.less
-$ npm run dev
+```bash
+git clone https://github.com/xoco70/kendozone.git
+cd kendozone/
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate 
+php artisan db:seed # Seed dummy data
+touch ./resources/assets/less/_main_full/main.less
+npm run dev
 ```
 
 You can login as root with:
