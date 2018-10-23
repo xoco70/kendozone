@@ -1033,7 +1033,7 @@
 }
 
 .layout-boxed {
-    background: url(../images/backgrounds/boxed_bg.png) repeat
+    /*background: url(../images/backgrounds/boxed_bg.png) repeat*/
 }
 
 .layout-boxed>.navbar {
@@ -1068,12 +1068,7 @@
     }
 }
 
-@media (-webkit-min-device-pixel-ratio:2),
-(min-resolution:192dpi) {
-    .layout-boxed {
-        background: url(../images/backgrounds/boxed_bg_retina.png) repeat
-    }
-}
+
 
 .footer {
     position: absolute;
