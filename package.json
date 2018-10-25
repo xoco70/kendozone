@@ -20,6 +20,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "mozjpeg": "^5.0.0",
+    "node-sass": "latest",
     "optipng": "^1.1.0",
     "purify-css": "^1.2.6",
     "purifycss-webpack": "^0.7.0",
