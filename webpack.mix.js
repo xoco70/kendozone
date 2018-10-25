@@ -52,10 +52,10 @@ mix.less('resources/assets/less/_main_full/bootstrap.less', 'css/bootstrap.css')
     .less('resources/assets/less/_main_full/components.less', 'css/components.css')
     .less('resources/assets/less/_main_full/colors.less', 'css/colors.css')
     .combine([
-        'css/bootstrap.css',
-        'css/core.css',
-        'css/components.css',
-        'css/colors.css',
+        'public/css/bootstrap.css',
+        'public/css/core.css',
+        'public/css/components.css',
+        'public/css/colors.css',
         'resources/assets/css/custom.css',
         'resources/assets/css/protip.css',
         'resources/assets/css/nunito.css',
