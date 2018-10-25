@@ -88,6 +88,11 @@ vendor/bin/phpunit
 
 This is a work in progress, and there is a bunch of stuff to achieve.  
 
+There is a current refactoring work in progress:
+
+- <a href="https://github.com/xoco70/kz-front">Front End made with Angular 6 / Boostrap 4</a>
+- <a href="https://github.com/xoco70/kz-api">API made with Lumen</a>
+
 I will not have much time to dedicate to grow Kendozone, I am looking for developers that can help app grow. Please contact me at contact ( at ) kendozone.com if you are interested
 
 - Improve <a href="https://github.com/xoco70/laravel-tournaments">Laravel Tournaments</a> for more generation possibilities
@@ -98,6 +103,7 @@ I will not have much time to dedicate to grow Kendozone, I am looking for develo
 - Create VueJS Unit Tests
 - Decouple Backend and Frontend
 - Improve Docker support
+
 
 
 ## Security Vulnerabilities
