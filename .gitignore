@@ -30,7 +30,6 @@ resources/assets/css/less.css.map
 public/vendor/kendo-tournaments/
 public/vendor/laravel-tournaments/
 public/mix-manifest.json
-resources/assets/less/_main_full/main.less
 
 
 !public/css/icons

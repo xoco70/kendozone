@@ -47,28 +47,20 @@ mix.combine([
     'resources/assets/js/core/app.js'
 ], 'public/js/guest_app.js');
 
-mix.combine([
-    'resources/assets/less/_main_full/bootstrap.less',
-    'resources/assets/less/_main_full/core.less',
-    'resources/assets/less/_main_full/components.less',
-    'resources/assets/less/_main_full/colors.less'
-], 'resources/assets/less/_main_full/main.less');
-
-
-mix.less('resources/assets/less/_main_full/main.less', 'css/main.css');
-
-mix.combine([
-    'public/css/main.css',
-    'resources/assets/css/custom.css',
-    'resources/assets/css/protip.css',
-    'resources/assets/css/nunito.css',
-    'resources/assets/css/icons/icomoon/styles.css',
-    // 'resources/assets/css/google-fonts.css'
-], 'public/css/app.css');
-
-// mix.combine([
-//     'resources/assets/js/plugins/tables/footable/footable.min.js'
-// ], 'public/js/pages/header/footable.js');
+mix.less('resources/assets/less/_main_full/bootstrap.less', 'css/bootstrap.css')
+    .less('resources/assets/less/_main_full/core.less', 'css/core.css')
+    .less('resources/assets/less/_main_full/components.less', 'css/components.css')
+    .less('resources/assets/less/_main_full/colors.less', 'css/colors.css')
+    .combine([
+        'css/bootstrap.css',
+        'css/core.css',
+        'css/components.css',
+        'css/colors.css',
+        'resources/assets/css/custom.css',
+        'resources/assets/css/protip.css',
+        'resources/assets/css/nunito.css',
+        'resources/assets/css/icons/icomoon/styles.css'
+    ], 'public/css/app.css');
 
 mix.combine([
     'resources/assets/js/components/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
