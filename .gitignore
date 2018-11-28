@@ -21,7 +21,6 @@ public/js
 public/pdf
 public/css
 
-
 tests/_output/*
 tests/_support/_generated/
 resources/assets/css/less.css
@@ -29,6 +28,7 @@ resources/assets/css/less.css.map
 /package/
 public/vendor/kendo-tournaments/
 public/vendor/laravel-tournaments/
+public/vendor/jsvalidation/js/
 public/mix-manifest.json
 
 
