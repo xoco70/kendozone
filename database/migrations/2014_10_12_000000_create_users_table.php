@@ -12,8 +12,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('slug')->unique()->default('');
             $table->integer('role_id')->unsigned()->default(Config::get('constants.ROLE_USER'));
 
@@ -35,7 +35,8 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->unique()->nullable();
             $table->string('locale', 5)->default('en');
-
+            $table->rememberToken();
+            $table->timestamps();
 
             $table->foreign('role_id')
                 ->references('id')
