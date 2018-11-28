@@ -11,10 +11,10 @@
     "axios": "^0.18",
     "cross-env": "^5.2",
     "jquery": "^3.3.1",
-    "laravel-mix": "^2.1.11",
+    "laravel-mix": "3.0.0",
     "lodash": "^4.17.10",
     "popper.js": "^1.14.3",
-    "vue": "^2.5.16"
+    "vue": "^2.5.17"
   },
   "dependencies": {
     "less": "^2.7.3",
