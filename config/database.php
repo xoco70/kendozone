@@ -48,7 +48,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => database_path('sqlite.db'),
+            'database' => ':memory:',
 
             'prefix' => 'ken_',
         ],
