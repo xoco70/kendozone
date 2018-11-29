@@ -1,7 +1,7 @@
-@servers(['web' => ['forge@kendozone']])
+@servers(['web' => ['forge@kendozone.com']])
 
 @task('deploy', ['on' => 'web'])
-    cd my.kendozone.cm
+    cd my.kendozone.com
     git pull origin master
     composer install
 @endtask
