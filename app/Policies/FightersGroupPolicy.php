@@ -29,7 +29,7 @@ class FightersGroupPolicy
     public function destroy(User $user, FightersGroup $tree)
     {
         $tournament = $tree->championship->tournament;
-        dd($tournament);
+//        dd($tournament);
         return ($tournament->user_id == $user->id);
 
     }
