@@ -35,7 +35,7 @@ class ChampionshipTest extends BrowserKitTest
 
         $category = factory(\App\Category::class)->make();
 
-        $arrCat1 = json_decode(json_encode($category), true);
+        $arrCat1 = $category->toArray();
         $this->actingAs($this->root, 'api')
             ->json('POST', '/api/v1/category/create', $arrCat1);
         unset($arrCat1['name']); // Remove category name that is translated and make test fail
@@ -51,7 +51,7 @@ class ChampionshipTest extends BrowserKitTest
 
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
-        $arrCs0 = json_decode(json_encode($cs0), true);
+        $arrCs0 = $cs0->toArray();
 
         $this->actingAs($this->root, 'api')
             ->json('POST', '/api/v1/championships/' . $champ0->id . '/settings', $arrCs0)
@@ -69,7 +69,7 @@ class ChampionshipTest extends BrowserKitTest
         $champ0 = factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $cs0 = factory(ChampionshipSettings::class)->create(['championship_id' => $champ0->id]);
         $cs1 = factory(ChampionshipSettings::class)->make(['championship_id' => $champ0->id]);
-        $arrCs1 = json_decode(json_encode($cs1), true);
+        $arrCs1 = $cs1->toArray();
 
 
         $this->actingAs($this->root, 'api')

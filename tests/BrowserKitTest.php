@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 

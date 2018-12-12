@@ -61,9 +61,7 @@ class UserTest extends BrowserKitTest
         $user->firstname = 'julien';
         $user->lastname = "cappiello";
 
-        $arrUser = json_decode(json_encode($user), true);
-
-        $this->json('POST', '/users/create', $arrUser);
+        $this->json('POST', '/users/create', $user->toArray());
 
         $this->notSeeInDatabase('users', ['name' => 'MyUser']);
 
@@ -142,10 +140,9 @@ class UserTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
 
         $user = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $arrUser = json_decode(json_encode($user), true);
 
-        $this->json('POST', '/users', $arrUser)
-            ->seeInDatabase('users', $arrUser);
+        $this->json('POST', '/users', $user->toArray())
+            ->seeInDatabase('users', $user->toArray());
 
     }
 
@@ -159,10 +156,10 @@ class UserTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
 
         $newUser = factory(User::class)->make(['role_id' => Config::get('constants.ROLE_USER')]);
-        $arrNewUser = json_decode(json_encode($newUser), true);
 
-        $this->json('PUT', '/users/' . $this->simpleUser->slug, $arrNewUser)
-            ->seeInDatabase('users', $arrNewUser);
+
+        $this->json('PUT', '/users/' . $this->simpleUser->slug, $newUser->toArray())
+            ->seeInDatabase('users', $newUser->toArray());
     }
 
 
@@ -186,9 +183,8 @@ class UserTest extends BrowserKitTest
         if ($association != null) $newUser->association_id = $association->id;
         if ($club != null) $newUser->club_id = $club->id;
 
-        $arrNewUser = json_decode(json_encode($newUser), true);
-        $this->json('PUT', '/users/' . $this->simpleUser->slug, $arrNewUser)
-            ->seeInDatabase('users', $arrNewUser);
+        $this->json('PUT', '/users/' . $this->simpleUser->slug, $newUser->toArray())
+            ->seeInDatabase('users', $newUser->toArray());
     }
 
 

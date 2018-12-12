@@ -221,10 +221,10 @@ class TournamentTest extends BrowserKitTest
         $tournament = factory(Tournament::class)->create();
         factory(Championship::class)->create(['tournament_id' => $tournament->id, 'category_id' => 1]);
         $newTournament = factory(Tournament::class)->make(['user_id' => $tournament->user_id]);
-        $arrNewTournament = json_decode(json_encode($newTournament), true);
 
-        $response = $this->json('PUT', '/tournaments/' . $tournament->slug, $arrNewTournament)
-            ->seeInDatabase('tournament', $arrNewTournament);
+
+        $response = $this->json('PUT', '/tournaments/' . $tournament->slug, $newTournament->toArray())
+            ->seeInDatabase('tournament', $newTournament->toArray());
 
     }
 
@@ -235,9 +235,8 @@ class TournamentTest extends BrowserKitTest
         Artisan::call('db:seed', ['--class' => 'CountriesSeeder', '--database' => 'sqlite']);
         $tournament = factory(Tournament::class)->create();
         $venue = factory(Venue::class)->make();
-        $arrVenue = json_decode(json_encode($venue), true);
-        $this->json('PUT', '/tournaments/' . $tournament->slug, $arrVenue)
-            ->seeInDatabase('venue', $arrVenue);
+        $this->json('PUT', '/tournaments/' . $tournament->slug, $venue->toArray())
+            ->seeInDatabase('venue', $venue->toArray());
     }
 
 

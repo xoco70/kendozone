@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'email' => 'superuser@kendozone.dev',
                 'country_id' => 484,
                 'role_id' => Config::get('constants.ROLE_SUPERADMIN'),
-                'password' => bcrypt('superuser'),
+                'password' => bcrypt('superuser@kendozone.dev'),
                 'verified' => 1,]); // Root UI
         factory(User::class)->create(
             ['name' => 'federation',
