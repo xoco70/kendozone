@@ -44,8 +44,14 @@ You can check the hosted version <a href="https://my.kendozone.com">here</a>
 You can also try it with docker with the command: 
 
 ```bash
-docker run -d -p 80:80 --name kz xoco/kendozone:local-1.0.3
+docker run -d -p 80:80 --rm --name kz xoco/kendozone:local-1.0.3
 ```
+You can login as root with:
+
+user: superuser@kendozone.dev
+
+pass: superuser
+
 > Warning: Dockerized version still not working 100%
 
 ## Requirements
