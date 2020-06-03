@@ -12,7 +12,7 @@
     "cross-env": "^5.2",
     "jquery": "^3.3.1",
     "laravel-mix": "3.0.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "popper.js": "^1.14.3",
     "vue": "^2.5.17"
   },
