@@ -117,9 +117,3 @@ I will not have much time to dedicate to grow Kendozone, I am looking for develo
 - Decouple Backend and Frontend
 - Improve Docker support
 
-
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Kendozone, please send an e-mail to us at contact@kendozone.com. We handle all security vulnerabilities on a case-by-case basis.
-
