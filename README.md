@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-    <img src="https://my.kendozone.com/images/kz-stamp.png" alt="Kendozone">
+    <img src="https://raw.githubusercontent.com/xoco70/kendozone/master/resources/assets/images/kz-stamp.png" alt="Kendozone">
     <br>
     Kendozone
     <br>
