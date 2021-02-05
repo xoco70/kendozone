@@ -50,7 +50,7 @@ You can login as root with:
 
 user: superuser@kendozone.dev
 
-pass: superuser
+pass: superuser@kendozone.dev
 
 > Warning: Dockerized version still not working 100%
 
