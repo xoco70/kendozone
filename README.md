@@ -1,3 +1,5 @@
+
+
 <h1 align="center">
 <br>
     <img src="https://raw.githubusercontent.com/xoco70/kendozone/master/resources/assets/images/kz-stamp.png" alt="Kendozone">
@@ -44,7 +46,7 @@ You can check the hosted version <a href="https://my.kendozone.com">here</a>
 You can also try it with docker with the command: 
 
 ```bash
-docker run -d -p 80:80 --rm --name kz xoco/kendozone:local-1.0.3
+docker run -d -p 80:80 --rm --name kz xoco/kendozone:local-1.0.1
 ```
 You can login as root with:
 
@@ -116,4 +118,3 @@ I will not have much time to dedicate to grow Kendozone, I am looking for develo
 - Create VueJS Unit Tests
 - Decouple Backend and Frontend
 - Improve Docker support
-
